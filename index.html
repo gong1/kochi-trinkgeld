@@ -74,7 +74,7 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .btn.warn{background:var(--copper)}
-.link{background:none;border:0;padding:4px 0;color:var(--celadon-deep);font-weight:600;font-size:14px}
+.link{white-space:nowrap;background:none;border:0;padding:4px 0;color:var(--celadon-deep);font-weight:600;font-size:14px}
 .link.danger{color:var(--neg)}
 
 /* the split — the one expressive element */
@@ -124,6 +124,15 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .login .input{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff;font-size:28px;letter-spacing:10px;text-align:center;height:60px}
 .login .btn{background:var(--celadon);margin-top:14px}
 .login .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.25)}
+.login .adminlink{margin-top:auto;align-self:flex-start;background:none;border:0;color:rgba(255,255,255,.55);padding:28px 0 0;font-size:15px;text-decoration:underline}
+.login label{display:block;margin-bottom:6px;opacity:.75;font-size:14px}
+.chip.none{border-style:dashed}
+.chip.none.on{background:var(--muted);border-color:var(--muted);border-style:solid;color:#fff}
+.seg.sm{overflow-x:auto}
+.seg.sm button{flex:1 0 auto;white-space:nowrap}
+tr.chg td:last-child{color:var(--copper);font-weight:700}
+.tag.pend{background:#FFF1C9;color:#8A6A00}
+.mv{background:var(--card);border:1px solid var(--line);border-radius:6px;width:34px;height:30px;padding:0}
 .login .err{color:#F2B39B;min-height:24px;margin-top:10px}
 
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);transform:translateX(-50%);
@@ -172,12 +181,23 @@ zh: {
   adj_added:'调整已记入', lock:'锁定本周，生成结算单', lock_confirm:'锁定后本周记录不能再改。确定吗？',
   lock_wait:'这周结束后（下周一起）才能锁定', pay_in:'交给小费管理员', pay_out:'从小费管理员领取', no_move:'无需交接',
   float:'小费管理员手里保管的零头', admin_staff:'员工', admin_rates:'比例', admin_report:'报表', admin_audit:'日志',
-  name:'姓名', new_pin:'PIN（4–6 位数字）', pin_keep:'不改 PIN 就留空', active:'在职', is_kitchen:'厨房账号',
+  name:'姓名', new_pin:'新 PIN（6 位数字）', active:'在职', is_kitchen:'厨房账号',
   is_manager:'小费管理员', is_admin:'超级管理员', add_staff:'添加员工', inactive:'已停用', new_staff:'新员工',
   valid_from:'生效日期', current_rate:'当前比例', new_rate:'设置新比例', rate_saved:'新比例已保存',
   from_date:'从', to_date:'到', all_stores:'两店合计', run:'查询', n_entries:'笔', as_server:'服务员留下',
-  change_pin:'修改我的 PIN', old_pin:'当前 PIN', logout:'退出登录', pin_changed:'PIN 已修改', lang:'Deutsch',
+  change_pin:'修改我的 PIN', old_pin:'当前 PIN', logout:'退出登录', pin_changed:'PIN 已修改', lang:'Deutsch', entries_n:'笔',
   need_amount:'请输入小费金额', bad_amount:'金额格式不对，例如 12,50', loading:'加载中…', nothing:'没有记录',
+  new_pin2:'再输一次新 PIN', pin_mismatch:'两次输入的 PIN 不一致', set_pin_title:'设置你自己的 PIN',
+  set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
+  admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
+  pick_runner:'请选择 Runner，没有就点「无 Runner」', pick_bar:'请选择吧台，没有就点「无吧台」', not_chosen:'未选择',
+  edit_reason:'修改理由', edit_reason_hint:'录入超过 10 分钟后的修改，需要老板批准', submit_request:'提交修改申请',
+  request_sent:'已提交，等老板批准', ask_del_reason:'删除理由（需要老板批准）', pending_tag:'待批准',
+  admin_requests:'审批', approve:'批准', reject:'拒绝', ask_reject:'拒绝理由（可不填）', approved:'已批准', rejected:'已拒绝',
+  req_update:'申请修改', req_delete:'申请删除', before:'原来', after:'改为', no_requests:'没有待审批的申请',
+  reset_pin:'重置 PIN 为 888888', pin_reset_done:'已重置，员工下次登录要重新设置 PIN', confirm_reset:'确定把 {n} 的 PIN 重置为 888888？',
+  initial_pin_hint:'初始 PIN 是 888888。员工第一次登录时，必须改成自己的 6 位 PIN。', needs_pin:'未设 PIN',
+  up:'上移', down:'下移', people:'人员', amount_total:'金额',
   role_server:'服务员', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
   week_of:'第 {w} 周', preview:'分配预览', from:'来自',
   err_AUTH_REQUIRED:'登录已过期，请重新登录', err_FORBIDDEN:'没有权限', err_WEEK_LOCKED:'这一周已锁定，不能再改',
@@ -185,7 +205,7 @@ zh: {
   err_INVALID_HELPER:'选择的同事无效', err_DUPLICATE_ENTRY:'这天这家店你已经录过了，请修改原来那条',
   err_FUTURE_DATE:'不能录入未来的日期', err_NO_RATE:'还没设置分配比例', err_NO_KITCHEN_ACCOUNT:'还没有厨房账号',
   err_OPEN_DISPUTES:'还有没处理的疑问，请先处理', err_WEEK_NOT_OVER:'这周还没结束', err_EARLIER_WEEK_OPEN:'更早的一周还没锁定，请按顺序周结',
-  err_INVALID_PIN:'PIN 必须是 4–6 位数字', err_WRONG_PIN:'当前 PIN 不对', err_PIN_REQUIRED:'新员工必须设 PIN',
+  err_INVALID_PIN:'PIN 必须是 6 位数字，不能用 888888、6 个相同数字、123456 或 654321', err_MUST_CHANGE_PIN:'请先设置你自己的 PIN', err_REQUEST_PENDING:'这条记录已有一个待批准的申请', err_STALE_REQUEST:'申请之后这条记录又被改过，请拒绝，让员工重新申请', err_PENDING_REQUESTS:'这周还有待老板批准的修改，请先处理', err_NAME_REQUIRED:'请填姓名', err_INVALID_STORE:'门店无效', err_WRONG_PIN:'当前 PIN 不对', err_PIN_REQUIRED:'新员工必须设 PIN',
   err_CANNOT_DEMOTE_SELF:'不能取消自己的管理员权限', err_NO_RETROACTIVE_RATE:'新比例最早今天生效',
   err_COMMENT_REQUIRED:'请写明问题', err_REASON_REQUIRED:'请写原因', err_NOT_FOUND:'记录不存在',
   err_LOGIN_FAILED:'PIN 不对', err_LOCKED:'输错太多次，15 分钟后再试', err_INVALID_SERVER:'服务员无效',
@@ -209,12 +229,23 @@ de: {
   adj_added:'Korrektur gebucht', lock:'Woche abschließen und Abrechnung erstellen', lock_confirm:'Danach kann diese Woche nicht mehr geändert werden. Fortfahren?',
   lock_wait:'Abschluss ab Montag nach Wochenende möglich', pay_in:'An Tip-Manager abgeben', pay_out:'Vom Tip-Manager erhalten', no_move:'Nichts zu übergeben',
   float:'Rest, den der Tip-Manager verwahrt', admin_staff:'Mitarbeiter', admin_rates:'Anteile', admin_report:'Bericht', admin_audit:'Protokoll',
-  name:'Name', new_pin:'PIN (4–6 Ziffern)', pin_keep:'Leer lassen, um die PIN zu behalten', active:'Aktiv', is_kitchen:'Küchenkonto',
+  name:'Name', new_pin:'Neue PIN (6 Ziffern)', active:'Aktiv', is_kitchen:'Küchenkonto',
   is_manager:'Tip-Manager', is_admin:'Admin', add_staff:'Mitarbeiter hinzufügen', inactive:'inaktiv', new_staff:'Neuer Mitarbeiter',
   valid_from:'Gültig ab', current_rate:'Aktuelle Anteile', new_rate:'Neue Anteile festlegen', rate_saved:'Neue Anteile gespeichert',
   from_date:'Von', to_date:'Bis', all_stores:'Beide Filialen', run:'Anzeigen', n_entries:'Einträge', as_server:'Service behalten',
   change_pin:'Meine PIN ändern', old_pin:'Aktuelle PIN', logout:'Abmelden', pin_changed:'PIN geändert', lang:'中文',
   need_amount:'Bitte Trinkgeld eingeben', bad_amount:'Ungültiger Betrag, z. B. 12,50', loading:'Lädt …', nothing:'Keine Einträge',
+  new_pin2:'Neue PIN wiederholen', pin_mismatch:'Die beiden PINs stimmen nicht überein', set_pin_title:'Eigene PIN festlegen',
+  set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
+  admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
+  pick_runner:'Bitte Runner wählen – oder „Kein Runner"', pick_bar:'Bitte Bar wählen – oder „Keine Bar"', not_chosen:'nicht gewählt',
+  edit_reason:'Grund der Änderung', edit_reason_hint:'Änderungen später als 10 Minuten nach dem Eintragen muss der Chef freigeben', submit_request:'Änderung beantragen',
+  request_sent:'Beantragt. Wartet auf Freigabe durch den Chef.', ask_del_reason:'Grund für das Löschen (Freigabe durch den Chef nötig)', pending_tag:'wartet auf Freigabe',
+  admin_requests:'Freigaben', approve:'Freigeben', reject:'Ablehnen', ask_reject:'Grund (optional)', approved:'Freigegeben', rejected:'Abgelehnt',
+  req_update:'Änderung beantragt', req_delete:'Löschung beantragt', before:'Vorher', after:'Nachher', no_requests:'Keine offenen Freigaben',
+  reset_pin:'PIN auf 888888 zurücksetzen', pin_reset_done:'Zurückgesetzt. Neue PIN bei der nächsten Anmeldung.', confirm_reset:'PIN von {n} auf 888888 zurücksetzen?',
+  initial_pin_hint:'Start-PIN ist 888888. Bei der ersten Anmeldung muss eine eigene 6-stellige PIN gesetzt werden.', needs_pin:'PIN offen',
+  up:'Nach oben', down:'Nach unten', people:'Personen', amount_total:'Betrag',
   role_server:'Service', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
   week_of:'KW {w}', preview:'Aufteilung', from:'von',
   err_AUTH_REQUIRED:'Sitzung abgelaufen. Bitte neu anmelden.', err_FORBIDDEN:'Keine Berechtigung', err_WEEK_LOCKED:'Diese Woche ist abgeschlossen.',
@@ -222,7 +253,7 @@ de: {
   err_INVALID_HELPER:'Ungültige Auswahl', err_DUPLICATE_ENTRY:'Für diesen Tag und diese Filiale gibt es schon einen Eintrag. Bitte den bestehenden bearbeiten.',
   err_FUTURE_DATE:'Datum liegt in der Zukunft', err_NO_RATE:'Noch keine Anteile festgelegt', err_NO_KITCHEN_ACCOUNT:'Kein Küchenkonto vorhanden',
   err_OPEN_DISPUTES:'Es gibt noch offene Fragen. Bitte zuerst klären.', err_WEEK_NOT_OVER:'Die Woche ist noch nicht vorbei.', err_EARLIER_WEEK_OPEN:'Eine frühere Woche ist noch offen. Bitte der Reihe nach abschließen.',
-  err_INVALID_PIN:'PIN muss 4–6 Ziffern haben', err_WRONG_PIN:'Aktuelle PIN falsch', err_PIN_REQUIRED:'Neue Mitarbeiter brauchen eine PIN',
+  err_INVALID_PIN:'PIN muss 6 Ziffern haben. Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321', err_MUST_CHANGE_PIN:'Bitte zuerst eigene PIN festlegen', err_REQUEST_PENDING:'Für diesen Eintrag liegt schon ein offener Antrag vor', err_STALE_REQUEST:'Der Eintrag wurde nach dem Antrag geändert. Bitte ablehnen und neu beantragen lassen.', err_PENDING_REQUESTS:'Diese Woche hat noch offene Freigaben. Bitte zuerst bearbeiten.', err_NAME_REQUIRED:'Bitte Namen eingeben', err_INVALID_STORE:'Ungültige Filiale', err_WRONG_PIN:'Aktuelle PIN falsch', err_PIN_REQUIRED:'Neue Mitarbeiter brauchen eine PIN',
   err_CANNOT_DEMOTE_SELF:'Eigene Admin-Rechte können nicht entzogen werden', err_NO_RETROACTIVE_RATE:'Neue Anteile frühestens ab heute',
   err_COMMENT_REQUIRED:'Bitte beschreiben', err_REASON_REQUIRED:'Bitte Grund angeben', err_NOT_FOUND:'Eintrag nicht gefunden',
   err_LOGIN_FAILED:'PIN falsch', err_LOCKED:'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.', err_INVALID_SERVER:'Ungültige Servicekraft',
@@ -280,6 +311,7 @@ async function rpc(fn, args){
   if (error){
     const code = String(error.message || '').trim();
     if (code === 'AUTH_REQUIRED'){ logoutLocal(); render(); }
+    if (code === 'MUST_CHANGE_PIN' && state.me){ state.me.must_change_pin = true; LS.set('me', state.me); render(); }
     throw new Error(code);
   }
   return data;
@@ -294,12 +326,12 @@ const state = {
   tab: LS.get('tab', 'entry'),
   week: mondayOf(today()),
   staff: [], rates: [],
-  loginStaff: null, loginPick: null, loginErr: '',
+  loginStaff: null, loginPick: null, loginErr: '', loginAdmin: false,
   form: null, entryCache: {}, menu: false,
-  adminSub: 'staff', staffEdit: null
+  adminSub: 'requests', staffEdit: null, staffList: []
 };
 function blankForm(){
-  return { date: today(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: [], bars: [], server: null, entryId: null };
+  return { date: today(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '' };
 }
 state.form = blankForm();
 
@@ -324,6 +356,7 @@ function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return
 function render(){
   document.documentElement.lang = state.lang === 'de' ? 'de' : 'zh';
   if (!state.token){ renderLogin(); return; }
+  if (state.me && state.me.must_change_pin){ renderSetPin(); return; }
   if (!tabs().includes(state.tab)) state.tab = tabs()[0];
   const m = state.me;
   $('#app').innerHTML = `
@@ -336,7 +369,7 @@ function render(){
         <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
     </header>
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
-    <nav>${tabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}</button>`).join('')}</nav>`;
+    <nav>${tabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
   ({ entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin })[state.tab]();
 }
 
@@ -358,8 +391,9 @@ async function renderLogin(){
         <button class="btn" type="submit">${esc(t('login'))}</button>
         <button class="btn ghost" type="button" data-act="login-back">${esc(t('back'))}</button>
       </form>` : `
-      <h1>${esc(t('who'))}</h1><p>${esc(t('who_sub'))}</p>
-      <div class="names">${state.loginStaff.map(s => `<button data-act="login-pick" data-id="${s.id}" data-name="${esc(s.name)}">${esc(s.name)}</button>`).join('')}</div>`}
+      <h1>${esc(state.loginAdmin ? t('admin_login') : t('who'))}</h1><p>${esc(t('who_sub'))}</p>
+      <div class="names">${state.loginStaff.filter(s => !!s.is_admin === state.loginAdmin).map(s => `<button data-act="login-pick" data-id="${s.id}" data-name="${esc(s.name)}">${esc(s.name)}</button>`).join('')}</div>
+      <button class="adminlink" data-act="login-admin">${esc(state.loginAdmin ? t('staff_login') : t('admin_login'))}</button>`}
   </div>`;
   const pin = $('#pin'); if (pin) pin.focus();
 }
@@ -368,8 +402,27 @@ async function doLogin(){
   const r = await rpc('login', { p_staff_id: state.loginPick.id, p_pin: pin }).catch(e => ({ ok:false, error: e.message }));
   if (!r || !r.ok){ state.loginErr = errText({ message: r && r.error }); renderLogin(); return; }
   state.token = r.token; state.me = r.me; LS.set('token', r.token); LS.set('me', r.me);
-  state.loginErr = ''; state.loginPick = null; state.form = blankForm(); state.tab = tabs()[0];
-  await loadCommon(); render();
+  state.loginErr = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
+  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today());
+  if (!r.me.must_change_pin){ try { state.me = await rpc('me', tok()); LS.set('me', state.me); } catch(e){} await loadCommon(); }
+  render();
+}
+
+function renderSetPin(){
+  $('#app').innerHTML = `<div class="login">
+    <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(state.me.name)}</strong><button class="hbtn" data-act="lang">${esc(t('lang'))}</button></div>
+    <h1>${esc(t('set_pin_title'))}</h1><p>${esc(t('set_pin_sub'))}</p>
+    <form class="pinbox" data-form="setpin">
+      <label for="sp1">${esc(t('new_pin'))}</label>
+      <input class="input num" id="sp1" type="password" inputmode="numeric" autocomplete="new-password" maxlength="6" pattern="[0-9]*">
+      <label for="sp2" style="margin-top:14px">${esc(t('new_pin2'))}</label>
+      <input class="input num" id="sp2" type="password" inputmode="numeric" autocomplete="new-password" maxlength="6" pattern="[0-9]*">
+      <div class="small" style="opacity:.6;margin-top:10px">${esc(t('pin_rule'))}</div>
+      <div class="err" role="alert" id="sp-err"></div>
+      <button class="btn" type="submit">${esc(t('save'))}</button>
+      <button class="btn ghost" type="button" data-act="logout">${esc(t('logout'))}</button>
+    </form></div>`;
+  $('#sp1').focus();
 }
 
 // ============ 录入 ============
@@ -384,7 +437,7 @@ function previewHTML(){
   const card = parseEur(f.card), cash = parseEur(f.cash);
   if (!rate) return `<div class="muted small">${esc(t('err_NO_RATE'))}</div>`;
   if (isNaN(card) || isNaN(cash)) return `<div class="negc small">${esc(t('bad_amount'))}</div>`;
-  const total = card + cash, nr = f.runners.length, nb = f.bars.length;
+  const total = card + cash, nr = (f.runners || []).length, nb = (f.bars || []).length;
   const x = splitCalc(total, rate, nr, nb);
   const w = v => total ? (v/total*100).toFixed(2) + '%' : '0';
   const bar = total ? `<span class="c-kitchen" style="width:${w(x.k)}"></span><span class="c-runner" style="width:${w(x.re*nr)}"></span><span class="c-bar" style="width:${w(x.be*nb)}"></span><span class="c-you" style="width:${w(x.s)}"></span>` : '';
@@ -393,19 +446,20 @@ function previewHTML(){
     <div class="bar" aria-hidden="true">${bar}</div>
     <div class="legend num">
       <div class="li"><span class="sw c-kitchen"></span><span class="lbl">${esc(t('kitchen'))} <span class="sub">${rate.kitchen_pct}%</span></span><span>${eur(x.k)}</span></div>
-      <div class="li"><span class="sw c-runner"></span><span class="lbl">${esc(t('runner'))} <span class="sub">${rate.runner_pct}% ${nr ? '· '+esc(f.runners.map(staffName).join(', ')) + (nr>1 ? ' · '+esc(t('each'))+' '+eur(x.re) : '') : '· '+esc(t('nobody'))+', '+esc(t('keeps'))}</span></span><span>${eur(x.re*nr)}</span></div>
-      <div class="li"><span class="sw c-bar"></span><span class="lbl">${esc(t('bar'))} <span class="sub">${rate.bar_pct}% ${nb ? '· '+esc(f.bars.map(staffName).join(', ')) + (nb>1 ? ' · '+esc(t('each'))+' '+eur(x.be) : '') : '· '+esc(t('nobody'))+', '+esc(t('keeps'))}</span></span><span>${eur(x.be*nb)}</span></div>
+      <div class="li"><span class="sw c-runner"></span><span class="lbl">${esc(t('runner'))} <span class="sub">${rate.runner_pct}% ${f.runners === null ? '· '+esc(t('not_chosen')) : nr ? '· '+esc(f.runners.map(staffName).join(', ')) + (nr>1 ? ' · '+esc(t('each'))+' '+eur(x.re) : '') : '· '+esc(t('nobody'))+', '+esc(t('keeps'))}</span></span><span>${eur(x.re*nr)}</span></div>
+      <div class="li"><span class="sw c-bar"></span><span class="lbl">${esc(t('bar'))} <span class="sub">${rate.bar_pct}% ${f.bars === null ? '· '+esc(t('not_chosen')) : nb ? '· '+esc(f.bars.map(staffName).join(', ')) + (nb>1 ? ' · '+esc(t('each'))+' '+eur(x.be) : '') : '· '+esc(t('nobody'))+', '+esc(t('keeps'))}</span></span><span>${eur(x.be*nb)}</span></div>
       <div class="li"><span class="sw c-you"></span><span class="lbl">${esc(who)}</span><span>${eur(x.s)}</span></div>
     </div></div>`;
 }
 function chipsHTML(role){
   const f = state.form, sel = role === 'runner' ? f.runners : f.bars;
-  const self = f.server || state.me.id;
-  return state.staff.filter(s => s.id !== self).map(s =>
-    `<button type="button" class="chip ${role==='bar'?'bar':''} ${sel.includes(s.id)?'on':''}" aria-pressed="${sel.includes(s.id)}" data-act="chip" data-role="${role}" data-id="${s.id}">${esc(s.name)}</button>`).join('');
+  const self = f.server || state.me.id, noneOn = Array.isArray(sel) && sel.length === 0, has = id => !!sel && sel.includes(id);
+  return `<button type="button" class="chip none ${noneOn?'on':''}" aria-pressed="${noneOn}" data-act="chip-none" data-role="${role}">${esc(t(role==='runner'?'no_runner':'no_bar'))}</button>` +
+    state.staff.filter(s => s.id !== self).map(s =>
+    `<button type="button" class="chip ${role==='bar'?'bar':''} ${has(s.id)?'on':''}" aria-pressed="${has(s.id)}" data-act="chip" data-role="${role}" data-id="${s.id}">${esc(s.name)}</button>`).join('');
 }
 async function viewEntry(){
-  const f = state.form, m = state.me, mgr = m.is_tip_manager || m.is_admin;
+  const f = state.form, m = state.me, mgr = m.is_admin;
   $('#main').innerHTML = `
     ${f.entryId ? `<div class="sheet" style="background:var(--copper-soft);border-color:transparent">
       <div class="row"><strong>${esc(t('editing', { d: dayLabel(f.date) }))}</strong>
@@ -424,8 +478,10 @@ async function viewEntry(){
     </div>
     <div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
     <div class="field"><label>${esc(t('bar'))}</label><div class="chips">${chipsHTML('bar')}</div></div>
+    ${f.entryId && !f.direct ? `<div class="field"><label for="f-reason">${esc(t('edit_reason'))}</label><input class="input" id="f-reason" value="${esc(f.reason)}">
+      <div class="small muted" style="margin-top:5px">${esc(t('edit_reason_hint'))}</div></div>` : ''}
     <div class="sheet"><div class="muted small" style="margin-bottom:6px">${esc(t('preview'))}</div><div id="preview">${previewHTML()}</div></div>
-    <button class="btn" data-act="entry-save">${esc(f.entryId ? t('update') : t('save'))}</button>
+    <button class="btn" data-act="entry-save">${esc(f.entryId ? (f.direct ? t('update') : t('submit_request')) : t('save'))}</button>
     <h2>${esc(t('my_entries'))}</h2><div id="mine"><div class="loading">${esc(t('loading'))}</div></div>`;
   loadMine();
 }
@@ -442,9 +498,9 @@ function entryItem(e, opts){
   const total = e.card_cents + e.cash_cents;
   const parts = (e.allocations || []).filter(a => a.role !== 'server')
     .map(a => `${esc(a.name)} ${eur(a.amount_cents)}`).join(' · ');
-  const canEdit = opts.manager || e.editable;
+  const canEdit = e.editable;
   return `<div class="item">
-    <div class="top"><div><strong>${esc(dayLabel(e.date))}</strong> <span class="muted">${esc(e.store)}${e.server ? ' · ' + esc(e.server) : ''}</span>${e.is_late ? `<span class="tag late">${esc(t('late'))}</span>` : ''}</div>
+    <div class="top"><div><strong>${esc(dayLabel(e.date))}</strong> <span class="muted">${esc(e.store)}${e.server ? ' · ' + esc(e.server) : ''}</span>${e.is_late ? `<span class="tag late">${esc(t('late'))}</span>` : ''}${e.pending ? `<span class="tag pend">${esc(t('pending_tag'))}</span>` : ''}</div>
       <div class="amt num">${eur(total)}</div></div>
     <div class="meta num">${esc(t('card'))} ${eur(e.card_cents)} · ${esc(t('cash'))} ${eur(e.cash_cents)}</div>
     <div class="meta num">${parts}</div>
@@ -457,21 +513,25 @@ function loadIntoForm(id){
   const helpers = r => (e.allocations || []).filter(a => a.role === r).map(a => staffIdByName(a.name)).filter(Boolean);
   const server = e.server ? staffIdByName(e.server) : null;
   state.form = { date: e.date, store: e.store, card: eurInput(e.card_cents), cash: eurInput(e.cash_cents),
-    runners: helpers('runner'), bars: helpers('bar'), server: server && server !== state.me.id ? server : null, entryId: id };
+    runners: helpers('runner'), bars: helpers('bar'), server: server && server !== state.me.id ? server : null, entryId: id,
+    direct: !!e.direct, reason: '' };
   state.tab = 'entry'; LS.set('tab', 'entry'); render(); window.scrollTo(0, 0);
 }
 async function saveEntry(){
   const f = state.form, card = parseEur(f.card), cash = parseEur(f.cash);
   if (isNaN(card) || isNaN(cash)) return toast(t('bad_amount'), true);
   if (card + cash <= 0) return toast(t('need_amount'), true);
+  if (f.runners === null) return toast(t('pick_runner'), true);
+  if (f.bars === null) return toast(t('pick_bar'), true);
+  if (f.entryId && !f.direct && !f.reason.trim()) return toast(t('err_REASON_REQUIRED'), true);
   const btn = document.querySelector('[data-act="entry-save"]'); if (btn) btn.disabled = true;
   try {
-    await rpc('submit_entry', { ...tok(), p_date: f.date, p_store: f.store, p_card_cents: card, p_cash_cents: cash,
-      p_runner_ids: f.runners, p_bar_ids: f.bars, p_server_id: f.server, p_entry_id: f.entryId });
+    const r = await rpc('submit_entry', { ...tok(), p_date: f.date, p_store: f.store, p_card_cents: card, p_cash_cents: cash,
+      p_runner_ids: f.runners, p_bar_ids: f.bars, p_server_id: f.server, p_entry_id: f.entryId, p_reason: f.reason.trim() || null });
     LS.set('store', f.store);
     const keep = { date: f.date, store: f.store };
     state.form = { ...blankForm(), ...keep };
-    toast(t('saved')); render();
+    toast(r && r.status === 'pending' ? t('request_sent') : t('saved')); render();
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
 }
 
@@ -502,7 +562,7 @@ async function viewLedger(){
       <div class="big num">${eur(Math.abs(n))}</div></div>`;
   }
   const rec = d.received.map(r => `<div class="item">
-      <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong> <span class="muted">${esc(r.store)}</span>${r.is_late?`<span class="tag late">${esc(t('late'))}</span>`:''}</div>
+      <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong> <span class="muted">${esc(r.store)}</span>${r.is_late?`<span class="tag late">${esc(t('late'))}</span>`:''}${r.pending?`<span class="tag pend">${esc(t('pending_tag'))}</span>`:''}</div>
       <div class="amt num pos">+${eur(r.amount_cents)}</div></div>
       <div class="meta">${esc(t('role_'+r.role))} · ${esc(t('from'))} ${esc(r.from)}</div>
       ${!d.locked ? `<div class="acts"><button class="link" data-act="dispute" data-id="${r.entry_id}">${esc(t('question'))}</button></div>` : ''}
@@ -527,7 +587,7 @@ async function viewWeek(){
     else disp = await rpc('list_disputes', { ...tok(), p_status: 'open' });
   } catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
 
-  const entries = ov.entries.map(e => entryItem(e, { manager: true, locked: ov.locked })).join('');
+  const entries = ov.entries.map(e => entryItem(e, { locked: ov.locked })).join('');
   let html = weekNav();
 
   if (ov.locked){
@@ -555,7 +615,7 @@ async function viewWeek(){
         <div>${esc(x.comment)}</div>
         <div class="acts"><button class="link" data-act="resolve" data-id="${x.id}">${esc(t('resolve'))}</button></div></div>`).join('')}</div>` : ''}
       <h3>${esc(t('entries'))}</h3><div class="list">${entries || `<div class="empty">${esc(t('empty'))}</div>`}</div>
-      <h3>${esc(t('adj_title'))}</h3>
+      ${state.me.is_admin ? `<h3>${esc(t('adj_title'))}</h3>
       <div class="sheet">
         <div class="row">
           <div class="field"><label for="a-from">${esc(t('adj_from'))}</label><select class="input" id="a-from">${staffOptions(true)}</select></div>
@@ -564,7 +624,8 @@ async function viewWeek(){
         <div class="field"><label for="a-amt">${esc(t('amount'))}</label><div class="money"><input class="input num" id="a-amt" inputmode="decimal" placeholder="0,00"></div></div>
         <div class="field"><label for="a-reason">${esc(t('reason'))}</label><input class="input" id="a-reason"></div>
         <button class="btn ghost" data-act="adj-add">${esc(t('add'))}</button>
-      </div>
+      </div>` : ''}
+      ${ov.pending_requests ? `<div class="small" style="margin:0 0 10px;color:#8A6A00">${esc(t('err_PENDING_REQUESTS'))}</div>` : ''}
       <button class="btn warn" data-act="lock" ${canLock?'':'disabled'}>${esc(t('lock'))}</button>
       ${canLock ? '' : `<div class="small muted" style="margin-top:8px;text-align:center">${esc(t('lock_wait'))}</div>`}`;
   }
@@ -578,17 +639,24 @@ function staffOptions(withKitchen){
 
 // ============ 管理（超级管理员）============
 async function viewAdmin(){
-  const subs = ['staff','rates','report','audit'];
+  const subs = ['requests','staff','rates','report','audit'];
   $('#main').innerHTML = `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}</button>`).join('')}</div><div id="asub"><div class="loading">${esc(t('loading'))}</div></div>`;
   const el = () => $('#asub');
   try {
-    if (state.adminSub === 'staff'){
+    if (state.adminSub === 'requests'){
+      const list = await rpc('list_requests', { ...tok(), p_status: 'pending' });
+      refreshBadge(list.length);
+      el().innerHTML = list.length ? list.map(requestCard).join('') : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`;
+    } else if (state.adminSub === 'staff'){
       const list = await rpc('admin_list_staff', tok());
+      state.staffList = list;
       const e = state.staffEdit;
       el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
-        `<div class="list">${list.map(s => `<div class="item"><div class="top"><div><strong>${esc(s.name)}</strong>
-          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:''}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}</div>
-          <button class="link" style="flex:0" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button></div></div>`).join('')}</div>`;
+        `<div class="list">${list.map((s, i) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(s.name)}</strong>
+          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:''}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}</div>
+          <button class="mv" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
+          <button class="mv" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
+          <button class="link" style="flex:0;margin-left:6px" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button></div></div>`).join('')}</div>`;
     } else if (state.adminSub === 'rates'){
       const rates = await rpc('list_rates', tok()); state.rates = rates;
       const cur = rateFor(today());
@@ -624,10 +692,42 @@ function staffForm(s){
   const cb = (id, label, on) => `<label class="check"><input type="checkbox" id="${id}" ${on?'checked':''}> ${esc(label)}</label>`;
   return `<div class="sheet"><h2 style="margin-top:0">${esc(isNew ? t('new_staff') : s.name)}</h2>
     <div class="field"><label for="s-name">${esc(t('name'))}</label><input class="input" id="s-name" value="${esc(s.name||'')}"></div>
-    <div class="field"><label for="s-pin">${esc(t('new_pin'))}</label><input class="input num" id="s-pin" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="${isNew ? '' : esc(t('pin_keep'))}"></div>
     ${cb('s-active', t('active'), isNew || s.is_active)}${cb('s-mgr', t('is_manager'), s.is_tip_manager)}
     ${cb('s-kitchen', t('is_kitchen'), s.is_kitchen)}${cb('s-admin', t('is_admin'), s.is_admin)}
+    ${isNew ? `<div class="small muted" style="margin-top:8px">${esc(t('initial_pin_hint'))}</div>`
+            : s.id !== state.me.id ? `<button class="link" style="margin-top:8px" data-act="staff-reset">${esc(t('reset_pin'))}</button>` : ''}
     <div class="row" style="margin-top:12px"><button class="btn ghost" data-act="staff-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="staff-save">${esc(t('save'))}</button></div></div>`;
+}
+function requestCard(r){
+  const b = r.before || {}, a = r.after;
+  const names = x => (x && x.length) ? x.join(', ') : '–';
+  const rows = [
+    [t('date'), b.date, a && a.date, v => v ? dayLabel(v) : '–'],
+    [t('store'), b.store, a && a.store, v => v || '–'],
+    [t('role_server'), b.server, a && a.server, v => v || '–'],
+    [t('card'), b.card_cents, a && a.card_cents, v => eur(v)],
+    [t('cash'), b.cash_cents, a && a.cash_cents, v => eur(v)],
+    [t('runner'), b.runners, a && a.runners, names],
+    [t('bar'), b.bars, a && a.bars, names]
+  ];
+  const tr = ([label, bv, av, fmt]) => {
+    const changed = a && JSON.stringify(bv) !== JSON.stringify(av);
+    return `<tr class="${changed?'chg':''}"><th>${esc(label)}</th><td>${esc(fmt(bv))}</td>${a ? `<td>${esc(fmt(av))}</td>` : ''}</tr>`;
+  };
+  const when = new Date(r.created_at).toLocaleString(state.lang==='de'?'de-DE':'zh-CN', {dateStyle:'short', timeStyle:'short'});
+  return `<div class="sheet">
+    <div class="top" style="display:flex;justify-content:space-between;gap:8px"><div><strong>${esc(r.requested_by)}</strong> · ${esc(t(r.kind==='update'?'req_update':'req_delete'))}</div><div class="meta small muted num">${esc(when)}</div></div>
+    <div style="margin:8px 0 10px;padding:8px 10px;background:var(--paper);border-radius:6px">${esc(t('reason'))}: ${esc(r.reason)}</div>
+    <div class="scroll"><table class="num"><tr><th></th><th>${esc(t('before'))}</th>${a ? `<th>${esc(t('after'))}</th>` : ''}</tr>${rows.map(tr).join('')}</table></div>
+    <div class="row" style="margin-top:12px"><button class="btn ghost" data-act="req-reject" data-id="${r.id}">${esc(t('reject'))}</button><button class="btn" data-act="req-approve" data-id="${r.id}">${esc(t('approve'))}</button></div>
+  </div>`;
+}
+function refreshBadge(n){
+  if (!state.me || !state.me.is_admin) return;
+  if (state.me.pending_requests !== n){ state.me.pending_requests = n; LS.set('me', state.me);
+    const b = document.querySelector('nav [data-tab="admin"]');
+    if (b) b.innerHTML = esc(t('tab_admin')) + (n ? ` <span class="tag pend">${n}</span>` : '');
+  }
 }
 async function runReport(){
   const out = $('#rep'); out.innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
@@ -648,7 +748,9 @@ function openPinDialog(){
   dlg.innerHTML = `<form method="dialog" data-form="pin">
     <h2 style="margin-top:0">${esc(t('change_pin'))}</h2>
     <div class="field"><label for="p-old">${esc(t('old_pin'))}</label><input class="input num" id="p-old" type="password" inputmode="numeric" maxlength="6" autocomplete="off"></div>
-    <div class="field"><label for="p-new">${esc(t('new_pin'))}</label><input class="input num" id="p-new" type="password" inputmode="numeric" maxlength="6" autocomplete="off"></div>
+    <div class="field"><label for="p-new">${esc(t('new_pin'))}</label><input class="input num" id="p-new" type="password" inputmode="numeric" maxlength="6" autocomplete="new-password"></div>
+    <div class="field"><label for="p-new2">${esc(t('new_pin2'))}</label><input class="input num" id="p-new2" type="password" inputmode="numeric" maxlength="6" autocomplete="new-password"></div>
+    <div class="small muted" style="margin:-4px 0 14px">${esc(t('pin_rule'))}</div>
     <div class="row"><button class="btn ghost" type="button" data-act="pin-cancel">${esc(t('cancel'))}</button><button class="btn" type="submit">${esc(t('save'))}</button></div></form>`;
   dlg.showModal();
 }
@@ -668,17 +770,44 @@ document.addEventListener('click', async ev => {
     case 'tab': state.tab = el.dataset.tab; LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
-      const arr = el.dataset.role === 'runner' ? f.runners : f.bars, id = el.dataset.id, i = arr.indexOf(id);
+      const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
       if (i >= 0) arr.splice(i, 1); else arr.push(id);
-      render(); break;
+      f[key] = arr.length ? arr : null; render(); break;
     }
+    case 'chip-none': f[el.dataset.role === 'runner' ? 'runners' : 'bars'] = []; render(); break;
+    case 'login-admin': state.loginAdmin = !state.loginAdmin; state.loginErr = ''; renderLogin(); break;
     case 'entry-save': saveEntry(); break;
     case 'edit-cancel': state.form = blankForm(); render(); break;
     case 'entry-edit': loadIntoForm(el.dataset.id); break;
-    case 'entry-del':
-      if (!confirm(t('confirm_del'))) break;
-      try { await rpc('delete_entry', { ...tok(), p_entry_id: el.dataset.id }); toast(t('deleted')); render(); } catch(e){ toast(errText(e), true); }
+    case 'entry-del': {
+      const e = state.entryCache[el.dataset.id]; let reason = null;
+      if (e && e.direct){ if (!confirm(t('confirm_del'))) break; }
+      else { reason = prompt(t('ask_del_reason')); if (!reason || !reason.trim()) break; }
+      try { const r = await rpc('delete_entry', { ...tok(), p_entry_id: el.dataset.id, p_reason: reason });
+        toast(r && r.status === 'pending' ? t('request_sent') : t('deleted')); render(); } catch(e){ toast(errText(e), true); }
       break;
+    }
+    case 'req-approve':
+      el.disabled = true;
+      try { await rpc('approve_request', { ...tok(), p_request_id: el.dataset.id }); toast(t('approved')); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    case 'req-reject': {
+      const note = prompt(t('ask_reject')); if (note === null) break;
+      try { await rpc('reject_request', { ...tok(), p_request_id: el.dataset.id, p_note: note.trim() || null }); toast(t('rejected')); render(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'staff-move': {
+      const list = state.staffList.slice(), i = +el.dataset.i, j = i + (+el.dataset.dir);
+      if (j < 0 || j >= list.length) break;
+      [list[i], list[j]] = [list[j], list[i]];
+      try { await rpc('admin_set_order', { ...tok(), p_ids: list.map(x => x.id) }); state.loginStaff = null; await loadCommon(); render(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'staff-reset': {
+      const s = state.staffEdit; if (!confirm(t('confirm_reset', { n: s.name }))) break;
+      try { await rpc('admin_reset_pin', { ...tok(), p_id: s.id }); toast(t('pin_reset_done')); state.staffEdit = null; render(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'week-prev': state.week = addDays(state.week, -7); render(); break;
     case 'week-next': if (addDays(state.week, 7) <= today()) { state.week = addDays(state.week, 7); render(); } break;
     case 'dispute': {
@@ -708,9 +837,9 @@ document.addEventListener('click', async ev => {
     case 'staff-edit': state.staffEdit = JSON.parse(el.dataset.json); render(); window.scrollTo(0, 0); break;
     case 'staff-cancel': state.staffEdit = null; render(); break;
     case 'staff-save': {
-      const s = state.staffEdit, pin = $('#s-pin').value.trim();
+      const s = state.staffEdit;
       try {
-        await rpc('admin_upsert_staff', { ...tok(), p_id: s.id || null, p_name: $('#s-name').value.trim(), p_pin: pin || null,
+        await rpc('admin_upsert_staff', { ...tok(), p_id: s.id || null, p_name: $('#s-name').value.trim(),
           p_is_active: $('#s-active').checked, p_is_kitchen: $('#s-kitchen').checked, p_is_tip_manager: $('#s-mgr').checked, p_is_admin: $('#s-admin').checked });
         state.staffEdit = null; toast(t('saved')); await loadCommon(); state.loginStaff = null;
         if (s.id === state.me.id){ try { state.me = await rpc('me', tok()); LS.set('me', state.me); } catch(e){} }
@@ -734,7 +863,8 @@ document.addEventListener('change', async ev => {
   if (el.id === 'f-server'){
     state.form.server = el.value || null;
     const self = state.form.server || state.me.id;
-    state.form.runners = state.form.runners.filter(x => x !== self); state.form.bars = state.form.bars.filter(x => x !== self);
+    const flt = a => { if (!a) return a; const r = a.filter(x => x !== self); return (a.length && !r.length) ? null : r; };
+    state.form.runners = flt(state.form.runners); state.form.bars = flt(state.form.bars);
     render();
   }
   if (el.dataset && el.dataset.act === 'settled'){
@@ -744,6 +874,7 @@ document.addEventListener('change', async ev => {
 });
 document.addEventListener('input', ev => {
   const id = ev.target.id;
+  if (id === 'f-reason') state.form.reason = ev.target.value;
   if (id === 'f-card' || id === 'f-cash'){
     state.form[id === 'f-card' ? 'card' : 'cash'] = ev.target.value;
     const p = $('#preview'); if (p) p.innerHTML = previewHTML();
@@ -753,7 +884,17 @@ document.addEventListener('submit', async ev => {
   const form = ev.target.dataset.form; if (!form) return;
   ev.preventDefault();
   if (form === 'login') doLogin();
+  if (form === 'setpin'){
+    const a = $('#sp1').value.trim(), b = $('#sp2').value.trim(), err = $('#sp-err');
+    if (a !== b){ err.textContent = t('pin_mismatch'); return; }
+    try {
+      await rpc('set_initial_pin', { ...tok(), p_new: a });
+      state.me = await rpc('me', tok()); LS.set('me', state.me);
+      await loadCommon(); toast(t('pin_changed')); render();
+    } catch(e){ err.textContent = errText(e); }
+  }
   if (form === 'pin'){
+    if ($('#p-new').value !== $('#p-new2').value) return toast(t('pin_mismatch'), true);
     try { await rpc('change_my_pin', { ...tok(), p_old: $('#p-old').value, p_new: $('#p-new').value }); $('#pinDlg').close(); toast(t('pin_changed')); }
     catch(e){ toast(errText(e), true); }
   }
