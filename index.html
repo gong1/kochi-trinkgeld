@@ -166,6 +166,31 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .toast.err{background:var(--neg)}
 dialog{border:0;border-radius:var(--r-m);padding:20px;width:min(360px,92vw)}
 dialog::backdrop{background:rgba(31,42,39,.5)}
+#shiftDlg{width:min(540px,94vw);max-height:90vh;overflow:auto}
+.dayh{font-weight:700;font-size:17px;margin-bottom:6px}
+.avrow{padding:10px 0;border-top:1px solid var(--line)}
+.avrow:first-of-type{border-top:0}
+.avrow .avtop{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.avrow .avl{flex:1;min-width:120px}
+.avb{display:flex;gap:6px}
+.avbtn{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-weight:600;min-width:74px}
+.avbtn.yes.on{background:var(--celadon-deep);border-color:var(--celadon-deep);color:#fff}
+.avbtn.no.on{background:var(--neg);border-color:var(--neg);color:#fff}
+.avbtn:disabled{opacity:.55}
+.avnote{height:42px;margin-top:8px;font-size:15px}
+.slotblk{padding:10px 0;border-top:1px solid var(--line)}
+.slotblk:first-of-type{border-top:0;padding-top:2px}
+.slotblk .sh{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}
+.shiftrow{display:flex;width:100%;align-items:center;gap:8px;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-s);padding:9px 12px;margin-bottom:6px}
+.shiftrow .nm{font-weight:600;flex:1}
+.addbtn{background:none;border:1.5px dashed var(--line);border-radius:var(--r-s);padding:8px 12px;width:100%;color:var(--celadon-deep);font-weight:600}
+.sdgrp{font-size:14px;color:var(--muted);margin:10px 0 6px}
+.sdchips{display:flex;flex-wrap:wrap;gap:6px}
+.sdchip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-weight:600}
+.sdchip small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.sdchip.on{background:var(--celadon-deep);border-color:var(--celadon-deep);color:#fff}
+.sdchip.on small{color:#fff}
+.sdchip:disabled{opacity:.45}
 table{width:100%;border-collapse:collapse;font-size:15px}
 td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
 th{color:var(--muted);font-weight:600}
@@ -179,6 +204,7 @@ td.r,th.r{text-align:right}
 <div id="app"></div>
 <dialog id="pinDlg"></dialog>
 <dialog id="photoDlg"></dialog>
+<dialog id="shiftDlg"></dialog>
 
 <script>
 // ============ 配置 ============
@@ -192,7 +218,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   app:'Kochi 小费', who:'你是谁？', who_sub:'选择你的名字，然后输入 PIN', login:'登录', back:'返回',
-  tab_entry:'录入', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理',
+  tab_entry:'录入', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
   date:'日期', store:'门店', card:'刷卡小费', cash:'现金小费', runner:'Runner', bar:'吧台', kitchen:'厨房', you:'你',
   for_whom:'代谁录入', myself:'我自己', nobody:'今天没有', keeps:'归你', each:'每人',
   save:'保存', saved:'已保存', update:'保存修改', cancel:'取消', editing:'正在修改 {d} 的记录',
@@ -217,7 +243,17 @@ zh: {
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
   admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'Runner 和吧台登录后只看账本，不能录入。主岗位也决定登录页分组和选人顺序，不影响分账。',
-  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
+  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效',
+  plan_mine:'我的', plan_edit:'排班', slot_lunch:'午班', slot_dinner:'晚班', only_store:'仅 {s}',
+  my_shifts:'我的班', not_published:'这周的排班还没有发布。', no_shifts:'这周没有排你的班', changed:'有变更',
+  avail_title:'可上班时间', avail_deadline:'请在 {d} 前填写，之后不能再改。', avail_closed:'已截止。需要修改请找排班员。', avail_closed_sched:'已截止（排班员仍可修改自己的）。',
+  avail_all_yes:'还没填的全部设为「能上」', av_yes:'能上', av_no:'不能', av_note:'备注（例如：最晚到 22 点）',
+  team_plan:'全部排班', pub_state_no:'未发布', pub_state_yes:'已发布（{t}）', publish:'发布排班', republish:'重新发布（{n} 处变更）',
+  publish_confirm:'发布后所有员工都能看到这周的排班，确定发布？', published_toast:'已发布', unfilled:'还没填写可上班时间：{n}',
+  add_shift:'＋ 添加', hours_title:'本周计划工时', hours_line:'{h} 小时 · {n} 个班', sd_staff:'员工', sd_role:'岗位',
+  sd_start:'开始', sd_end:'结束', sd_note:'备注', av_group_yes:'能上', av_group_none:'没填', av_group_no:'不能上',
+  already_in:'已排在 {s}', shift_del_confirm:'删除这个班？', is_scheduler:'排班员',
+  err_AVAIL_CLOSED:'已截止，不能再修改', err_SHIFT_CONFLICT:'这个人这个时段已经排在另一家店了', err_INVALID_SLOT:'这家店这天没有这个班次', err_INVALID_TIME:'时间不对：结束要晚于开始', show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
   checks_retake:'单据上的数字前后对不上，请点上面的照片重拍（已识别 {n} 次）。', checks_review:'已经重拍 2 次，还是对不上。可以直接提交，老板会看照片核对并更正。',
   wait_read:'正在识别单据，请稍等', need_retake:'请先重拍单据', retake_all:'全部重拍', bon_numbers:'单据数字（自动识别，不能修改）',
   done_review:'这张单据识别有疑问，老板会看照片核对。信封照常放。', review_title:'待核对的 Bon（识别未通过）', review_save:'核对完毕，保存',
@@ -262,7 +298,7 @@ zh: {
 },
 de: {
   app:'Kochi Trinkgeld', who:'Wer bist du?', who_sub:'Namen wählen, dann PIN eingeben', login:'Anmelden', back:'Zurück',
-  tab_entry:'Eintragen', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung',
+  tab_entry:'Eintragen', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
   date:'Datum', store:'Filiale', card:'Trinkgeld Karte', cash:'Trinkgeld bar', runner:'Runner', bar:'Bar', kitchen:'Küche', you:'Du',
   for_whom:'Eintrag für', myself:'Mich selbst', nobody:'Heute niemand', keeps:'bleibt bei dir', each:'je',
   save:'Speichern', saved:'Gespeichert', update:'Änderung speichern', cancel:'Abbrechen', editing:'Eintrag vom {d} bearbeiten',
@@ -287,7 +323,17 @@ de: {
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
   admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Runner und Bar sehen nach der Anmeldung nur ihr Konto und können nichts eintragen. Die Hauptposition bestimmt auch die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung.',
-  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
+  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position',
+  plan_mine:'Meins', plan_edit:'Planen', slot_lunch:'Mittag', slot_dinner:'Abend', only_store:'nur {s}',
+  my_shifts:'Meine Schichten', not_published:'Der Dienstplan für diese Woche ist noch nicht veröffentlicht.', no_shifts:'Diese Woche keine Schichten für dich', changed:'Geändert',
+  avail_title:'Verfügbarkeit', avail_deadline:'Bitte bis {d} eintragen, danach keine Änderung mehr.', avail_closed:'Frist abgelaufen. Änderungen bitte über die Dienstplanung.', avail_closed_sched:'Frist abgelaufen (Dienstplanung kann die eigenen Angaben noch ändern).',
+  avail_all_yes:'Alles noch Offene auf „Kann“ setzen', av_yes:'Kann', av_no:'Kann nicht', av_note:'Notiz (z. B. nur bis 22 Uhr)',
+  team_plan:'Gesamter Dienstplan', pub_state_no:'Nicht veröffentlicht', pub_state_yes:'Veröffentlicht ({t})', publish:'Dienstplan veröffentlichen', republish:'Erneut veröffentlichen ({n} Änderungen)',
+  publish_confirm:'Nach dem Veröffentlichen sehen alle den Dienstplan dieser Woche. Veröffentlichen?', published_toast:'Veröffentlicht', unfilled:'Noch keine Verfügbarkeit eingetragen: {n}',
+  add_shift:'＋ Hinzufügen', hours_title:'Geplante Stunden diese Woche', hours_line:'{h} Std. · {n} Schichten', sd_staff:'Mitarbeiter', sd_role:'Position',
+  sd_start:'Beginn', sd_end:'Ende', sd_note:'Notiz', av_group_yes:'Kann', av_group_none:'Nicht eingetragen', av_group_no:'Kann nicht',
+  already_in:'Schon in {s}', shift_del_confirm:'Diese Schicht löschen?', is_scheduler:'Dienstplanung',
+  err_AVAIL_CLOSED:'Frist abgelaufen, keine Änderung möglich', err_SHIFT_CONFLICT:'Diese Person ist in dieser Zeit schon im anderen Restaurant eingeplant', err_INVALID_SLOT:'Diese Schicht gibt es an diesem Tag in diesem Restaurant nicht', err_INVALID_TIME:'Zeit ungültig: Ende muss nach Beginn liegen', show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
   checks_retake:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte oben auf das Foto tippen und neu fotografieren ({n}. Versuch).', checks_review:'Nach 2 neuen Fotos passt es immer noch nicht. Du kannst trotzdem absenden – der Chef prüft das Foto und korrigiert.',
   wait_read:'Bon wird noch ausgelesen, bitte kurz warten', need_retake:'Bitte zuerst den Bon neu fotografieren', retake_all:'Alles neu fotografieren', bon_numbers:'Zahlen vom Bon (automatisch erkannt, nicht änderbar)',
   done_review:'Bei diesem Bon gab es Unklarheiten – der Chef prüft das Foto. Umschlag bitte wie immer abgeben.', review_title:'Zu prüfende Bons (Auslesen nicht bestanden)', review_save:'Geprüft, speichern',
@@ -441,7 +487,7 @@ const state = {
   loginStaff: null, loginPick: null, loginErr: '', loginAdmin: false,
   form: null, entryCache: {}, menu: false,
   adminSub: 'requests', staffEdit: null, staffList: [],
-  entryMode: 'bon', bon: blankBon(), viewAs: null
+  entryMode: 'bon', bon: blankBon(), viewAs: null, planWeek: addDays(mondayOf(today()), 7), planSub: 'edit', plan: null, shiftEdit: null
 };
 function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null }; }
 function blankForm(){
@@ -455,6 +501,7 @@ function tabs(){
   const helperOnly = !m.is_admin && !m.is_tip_manager && ['runner', 'bar'].includes(mainRoleOf(m.id));
   if (!m.is_kitchen && !helperOnly) r.push('entry');
   r.push('ledger');
+  if (!m.is_kitchen) r.push('plan');
   if (m.is_tip_manager || m.is_admin) r.push('week');
   if (m.is_admin) r.push('admin');
   return r;
@@ -501,7 +548,7 @@ function render(){
     </header>
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
     <nav>${tabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
-  ({ entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin })[state.tab]();
+  ({ entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();
 }
 
 // ============ 登录 ============
@@ -553,7 +600,7 @@ async function doLogin(){
   }
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   state.loginErr = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
-  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon();
+  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit';
   if (!r.me.must_change_pin){
     try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} await loadCommon();
     if (state.me.is_admin || state.me.is_tip_manager){
@@ -1080,7 +1127,7 @@ async function viewAdmin(){
       const e = state.staffEdit;
       el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
         `<div class="list">${list.map((s, i) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(s.name)}</strong>
-          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${s.lightspeed_id ? `<div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>` : ''}</div>
+          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${s.lightspeed_id ? `<div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>` : ''}</div>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
           <button class="link" style="flex:0;margin-left:6px" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button>
@@ -1121,7 +1168,7 @@ function staffForm(s){
   return `<div class="sheet"><h2 style="margin-top:0">${esc(isNew ? t('new_staff') : s.name)}</h2>
     <div class="field"><label for="s-name">${esc(t('name'))}</label><input class="input" id="s-name" value="${esc(s.name||'')}"></div>
     ${cb('s-active', t('active'), isNew || s.is_active)}${cb('s-mgr', t('is_manager'), s.is_tip_manager)}
-    ${cb('s-kitchen', t('is_kitchen'), s.is_kitchen)}${cb('s-admin', t('is_admin'), s.is_admin)}
+    ${cb('s-kitchen', t('is_kitchen'), s.is_kitchen)}${cb('s-admin', t('is_admin'), s.is_admin)}${cb('s-sched', t('is_scheduler'), s.is_scheduler)}
     <div class="field" style="margin-top:14px"><label>${esc(t('main_role'))}</label>
       <div class="seg" id="s-role">${['service', 'runner', 'bar'].map(r => `<button type="button" data-act="role-pick" data-r="${r}" class="${(s.main_role || 'service') === r ? 'on' : ''}" aria-pressed="${(s.main_role || 'service') === r}">${esc(t('grp_' + r))}</button>`).join('')}</div>
       <div class="small muted" style="margin-top:6px">${esc(t('main_role_hint'))}</div></div>
@@ -1197,6 +1244,149 @@ async function runReport(){
       <h3>${esc(t('by_staff'))}</h3><div class="sheet scroll"><table class="num"><tr><th>${esc(t('name'))}</th><th class="r">${esc(t('as_server'))}</th><th class="r">${esc(t('runner'))}</th><th class="r">${esc(t('bar'))}</th><th class="r">${esc(t('kitchen'))}</th></tr>
       ${Object.entries(people).map(([n,p]) => `<tr><td>${esc(n)}</td><td class="r">${eur(p.server)}</td><td class="r">${eur(p.runner)}</td><td class="r">${eur(p.bar)}</td><td class="r">${eur(p.kitchen)}</td></tr>`).join('')}</table></div>`;
   } catch(e){ out.innerHTML = `<div class="empty">${esc(errText(e))}</div>`; }
+}
+
+// ============ 排班 ============
+const SLOTS = ['lunch', 'dinner'];
+const isSched = () => !!(state.me && (state.me.is_admin || state.me.is_scheduler));
+const slotLabel = k => t('slot_' + k);
+const hm2min = x => { const [h, m] = String(x).split(':').map(Number); return h * 60 + m; };
+function fmtDateTime(iso){
+  const d = new Date(iso);
+  const ds = d.toLocaleDateString(state.lang === 'de' ? 'de-DE' : 'zh-CN', { weekday: 'short', month: 'numeric', day: 'numeric', timeZone: 'Europe/Berlin' });
+  const ts = d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' });
+  return ds + ' ' + ts;
+}
+function planNav(){
+  const w = state.planWeek;
+  return `<div class="weeknav"><button data-act="plan-prev" aria-label="prev">‹</button>
+    <div class="wl">${esc(dm(w))} – ${esc(dm(addDays(w,6)))}<small>${esc(t('week_of', { w: isoWeek(w) }))}</small></div>
+    <button data-act="plan-next" aria-label="next">›</button></div>`;
+}
+function planDays(d){ return [...new Set(d.slots.map(x => x.date))]; }
+function slotsOn(d, date){ return d.slots.filter(x => x.date === date); }
+async function viewPlan(){
+  if (!isSched()) state.planSub = 'mine';
+  $('#main').innerHTML = planHead() + `<div class="loading">${esc(t('loading'))}</div>`;
+  try { state.plan = await rpc('sched_week', { ...tok(), p_week_start: state.planWeek }); }
+  catch(e){ $('#main').innerHTML = planHead() + `<div class="empty">${esc(errText(e))}</div>`; return; }
+  planRender();
+}
+function planHead(){
+  const sub = isSched() ? `<div class="seg" style="margin-bottom:12px">${['edit', 'mine'].map(k =>
+    `<button data-act="plan-sub" data-k="${k}" class="${state.planSub === k ? 'on' : ''}">${esc(t('plan_' + k))}</button>`).join('')}</div>` : '';
+  return sub + planNav();
+}
+function planRender(){
+  const d = state.plan; if (!d || state.tab !== 'plan') return;
+  const y = window.scrollY;
+  $('#main').innerHTML = planHead() + (state.planSub === 'edit' && isSched() ? planEditHTML(d) : planMineHTML(d));
+  window.scrollTo(0, y);
+}
+// 员工：我的班 + 填可上班时间
+function planMineHTML(d){
+  const me = state.me.id;
+  let h = `<h3>${esc(t('my_shifts'))}</h3>`;
+  if (!d.published) h += `<div class="infobox">${esc(t('not_published'))}</div>`;
+  else {
+    const mine = d.shifts.filter(x => x.staff_id === me);
+    h += `<div class="list">${mine.length ? mine.map(x => `<div class="item"><div class="top">
+        <div><strong>${esc(dayLabel(x.date))}</strong> <span class="muted">${esc(x.store)} · ${esc(slotLabel(x.slot))}</span>${x.changed ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}</div>
+        <div class="amt num">${esc(x.start)}–${esc(x.end)}</div></div>
+        <div class="meta">${esc(t('grp_' + x.role))}${x.note ? ' · ' + esc(x.note) : ''}</div></div>`).join('')
+      : `<div class="empty">${esc(t('no_shifts'))}</div>`}</div>`;
+  }
+  const closed = d.deadline_passed && !d.is_sched;
+  h += `<h3>${esc(t('avail_title'))}</h3>
+    <div class="small muted" style="margin:-4px 0 10px">${esc(closed ? t('avail_closed') : d.deadline_passed ? t('avail_closed_sched') : t('avail_deadline', { d: fmtDateTime(d.deadline) }))}</div>`;
+  if (!closed) h += `<button class="btn ghost" style="margin-bottom:12px" data-act="avail-all">${esc(t('avail_all_yes'))}</button>`;
+  h += planDays(d).map(date => {
+    const rows = SLOTS.map(slot => {
+      const ts = slotsOn(d, date).filter(x => x.slot === slot); if (!ts.length) return '';
+      const times = [...new Set(ts.map(x => x.start + '–' + x.end))].join(' / ');
+      const only = ts.length === 1 ? ' · ' + t('only_store', { s: ts[0].store }) : '';
+      const a = d.my_avail.find(x => x.date === date && x.slot === slot) || {};
+      const btn = v => `<button class="avbtn ${v} ${a.status === v ? 'on' : ''}" aria-pressed="${a.status === v}" data-act="avail" data-date="${date}" data-slot="${slot}" data-v="${v}" ${closed ? 'disabled' : ''}>${esc(t(v === 'yes' ? 'av_yes' : 'av_no'))}</button>`;
+      return `<div class="avrow"><div class="avtop"><div class="avl"><strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(times + only)}</span></div>
+        <div class="avb">${btn('yes')}${btn('no')}</div></div>
+        ${a.status ? `<input class="input avnote" data-date="${date}" data-slot="${slot}" placeholder="${esc(t('av_note'))}" value="${esc(a.note || '')}" ${closed ? 'disabled' : ''}>` : ''}</div>`;
+    }).join('');
+    return `<div class="sheet"><div class="dayh">${esc(dayLabel(date))}</div>${rows}</div>`;
+  }).join('');
+  if (d.published && d.shifts.length) h += `<h3>${esc(t('team_plan'))}</h3>` + planGridHTML(d, false);
+  return h;
+}
+// 每天 × 门店 × 班次 的排班表（edit = 排班员可编辑）
+function planGridHTML(d, edit){
+  return planDays(d).map(date => {
+    const blocks = SLOTS.flatMap(slot => STORES.map(store => {
+      const tpl = d.slots.find(x => x.date === date && x.store === store && x.slot === slot); if (!tpl) return '';
+      const list = d.shifts.filter(x => x.date === date && x.store === store && x.slot === slot);
+      const cnt = ['service', 'runner', 'bar'].map(r => { const n = list.filter(x => x.role === r).length; return n ? `${t('grp_' + r)} ${n}` : ''; }).filter(Boolean).join(' · ');
+      if (!edit && !list.length) return '';
+      return `<div class="slotblk"><div class="sh"><div><strong>${esc(store)} · ${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span></div><div class="small muted">${esc(cnt)}</div></div>
+        ${list.map(x => {
+          const off = x.start !== tpl.start || x.end !== tpl.end;
+          const inner = `<span class="nm">${esc(x.name)}</span><span class="tag">${esc(t('grp_' + x.role))}</span>
+            <span class="small num ${off ? '' : 'muted'}" style="${off ? 'font-weight:700' : ''}">${esc(x.start)}–${esc(x.end)}</span>${x.changed ? `<span class="tag pend">${esc(t('changed'))}</span>` : ''}`;
+          return edit ? `<button class="shiftrow" data-act="shift-edit" data-id="${x.id}">${inner}</button>${x.note ? `<div class="small muted" style="margin:-3px 0 6px 12px">${esc(x.note)}</div>` : ''}`
+                      : `<div class="shiftrow">${inner}</div>`;
+        }).join('')}
+        ${edit ? `<button class="addbtn" data-act="shift-add" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('add_shift'))}</button>` : ''}</div>`;
+    })).join('');
+    return blocks ? `<div class="sheet"><div class="dayh">${esc(dayLabel(date))}</div>${blocks}</div>` : '';
+  }).join('');
+}
+function planEditHTML(d){
+  const changed = d.shifts.filter(x => x.changed).length;
+  const unfilled = d.staff.filter(x => !x.filled).map(x => x.name);
+  let h = `<div class="hero"><div class="row" style="justify-content:space-between"><strong>${esc(d.published ? t('pub_state_yes', { t: fmtDateTime(d.published_at) }) : t('pub_state_no'))}</strong></div>
+    ${unfilled.length ? `<div class="small muted" style="margin-top:6px">${esc(t('unfilled', { n: unfilled.join('、') }))}</div>` : ''}
+    ${!d.published || changed ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(d.published ? t('republish', { n: changed }) : t('publish'))}</button>` : ''}</div>`;
+  h += planGridHTML(d, true);
+  const hrs = {};
+  d.shifts.forEach(x => { const o = hrs[x.staff_id] || (hrs[x.staff_id] = { name: x.name, m: 0, n: 0 }); o.m += hm2min(x.end) - hm2min(x.start); o.n++; });
+  const hl = Object.values(hrs).sort((a, b) => b.m - a.m);
+  if (hl.length) h += `<h3>${esc(t('hours_title'))}</h3><div class="list">${hl.map(o => `<div class="item"><div class="top"><div>${esc(o.name)}</div>
+    <div class="num">${esc(t('hours_line', { h: (o.m / 60).toLocaleString('de-DE', { maximumFractionDigits: 1 }), n: o.n }))}</div></div></div>`).join('')}</div>`;
+  return h;
+}
+// 排班弹窗
+function openShiftDlg(se){ state.shiftEdit = se; shiftDlgRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal(); }
+function shiftDlgKeep(){
+  const se = state.shiftEdit; if (!se) return;
+  const g = id => { const el = $(id); return el ? el.value : undefined; };
+  if (g('#sd-start') !== undefined){ se.start = g('#sd-start'); se.end = g('#sd-end'); se.note = g('#sd-note'); }
+}
+function shiftDlgRender(){
+  const se = state.shiftEdit, d = state.plan;
+  const avail = id => (d.avail.find(a => a.staff_id === id && a.date === se.date && a.slot === se.slot) || {});
+  const elsewhere = id => d.shifts.find(x => x.staff_id === id && x.date === se.date && x.slot === se.slot && x.id !== se.id);
+  const chip = s => {
+    const a = avail(s.id), other = elsewhere(s.id), on = se.staff_id === s.id;
+    const sub = other ? t('already_in', { s: other.store }) : (a.note || t('grp_' + (s.main_role || 'service')));
+    return `<button type="button" class="sdchip ${on ? 'on' : ''}" aria-pressed="${on}" data-act="sd-staff" data-id="${s.id}" ${other ? 'disabled' : ''}>${esc(s.name)}<small>${esc(sub)}</small></button>`;
+  };
+  const grp = (k, list) => list.length ? `<div class="sdgrp">${esc(t(k))}</div><div class="sdchips">${list.map(chip).join('')}</div>` : '';
+  const yes = d.staff.filter(s => avail(s.id).status === 'yes'), no = d.staff.filter(s => avail(s.id).status === 'no'), none = d.staff.filter(s => !avail(s.id).status);
+  $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(se.date))} · ${esc(se.store)} · ${esc(slotLabel(se.slot))}</h2>
+    <label>${esc(t('sd_staff'))}</label>
+    ${grp('av_group_yes', yes)}${grp('av_group_none', none)}${grp('av_group_no', no)}
+    <div class="field" style="margin-top:14px"><label>${esc(t('sd_role'))}</label>
+      <div class="seg">${['service', 'runner', 'bar'].map(r => `<button type="button" data-act="sd-role" data-r="${r}" class="${se.role === r ? 'on' : ''}" aria-pressed="${se.role === r}">${esc(t('grp_' + r))}</button>`).join('')}</div></div>
+    <div class="row">
+      <div class="field" style="flex:1"><label for="sd-start">${esc(t('sd_start'))}</label><input class="input num" type="time" id="sd-start" value="${esc(se.start)}"></div>
+      <div class="field" style="flex:1"><label for="sd-end">${esc(t('sd_end'))}</label><input class="input num" type="time" id="sd-end" value="${esc(se.end)}"></div>
+    </div>
+    <div class="field"><label for="sd-note">${esc(t('sd_note'))}</label><input class="input" id="sd-note" value="${esc(se.note || '')}"></div>
+    <div class="row" style="margin-top:6px"><button class="btn ghost" type="button" data-act="sd-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="sd-save">${esc(t('save'))}</button></div>
+    ${se.id ? `<button class="link danger" type="button" style="margin-top:14px" data-act="sd-del">${esc(t('del'))}</button>` : ''}`;
+}
+async function availSet(date, slot, status, note){
+  const d = state.plan, i = d.my_avail.findIndex(x => x.date === date && x.slot === slot);
+  await rpc('set_availability', { ...tok(), p_staff_id: null, p_date: date, p_slot: slot, p_status: status, p_note: note || null });
+  if (status){ const row = { date, slot, status, note: (note || '').trim() || null }; if (i >= 0) d.my_avail[i] = row; else d.my_avail.push(row); }
+  else if (i >= 0) d.my_avail.splice(i, 1);
 }
 
 // ============ PIN 修改 ============
@@ -1305,6 +1495,7 @@ document.addEventListener('click', async ev => {
           p_is_active: $('#s-active').checked, p_is_kitchen: $('#s-kitchen').checked, p_is_tip_manager: $('#s-mgr').checked, p_is_admin: $('#s-admin').checked });
         const rb = document.querySelector('#s-role button.on');
         if (!$('#s-kitchen').checked && rb) await rpc('admin_set_main_role', { ...tok(), p_id: newId || s.id, p_role: rb.dataset.r });
+        if ($('#s-sched').checked !== !!s.is_scheduler) await rpc('admin_set_scheduler', { ...tok(), p_id: newId || s.id, p_on: $('#s-sched').checked });
         state.staffEdit = null; toast(t('saved')); state.loginStaff = null; await loadCommon();
         if (s.id === state.me.id){ try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} }
         render();
@@ -1334,6 +1525,61 @@ document.addEventListener('click', async ev => {
     }
     case 'bon-submit': submitBon(); break;
     case 'bon-edit-save': saveBonEdit(); break;
+    case 'plan-prev': state.planWeek = addDays(state.planWeek, -7); viewPlan(); break;
+    case 'plan-next': state.planWeek = addDays(state.planWeek, 7); viewPlan(); break;
+    case 'plan-sub': state.planSub = el.dataset.k; planRender(); break;
+    case 'avail': {
+      const d = state.plan, date = el.dataset.date, slot = el.dataset.slot, v = el.dataset.v;
+      const cur = d.my_avail.find(x => x.date === date && x.slot === slot) || {};
+      try { await availSet(date, slot, cur.status === v ? null : v, cur.status === v ? null : cur.note); planRender(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'avail-all': {
+      const d = state.plan; el.disabled = true;
+      try { for (const x of d.slots){
+          if (d.my_avail.some(a => a.date === x.date && a.slot === x.slot)) continue;
+          await availSet(x.date, x.slot, 'yes', null); }
+        planRender(); } catch(e){ toast(errText(e), true); planRender(); }
+      break;
+    }
+    case 'plan-publish':
+      if (!confirm(t('publish_confirm'))) break;
+      try { await rpc('sched_publish', { ...tok(), p_week_start: state.planWeek }); toast(t('published_toast')); viewPlan(); } catch(e){ toast(errText(e), true); }
+      break;
+    case 'shift-add': {
+      const tpl = state.plan.slots.find(x => x.date === el.dataset.date && x.store === el.dataset.store && x.slot === el.dataset.slot);
+      openShiftDlg({ id: null, date: tpl.date, store: tpl.store, slot: tpl.slot, staff_id: null, role: 'service', roleTouched: false, start: tpl.start, end: tpl.end, note: '' });
+      break;
+    }
+    case 'shift-edit': {
+      const x = state.plan.shifts.find(s => s.id === el.dataset.id); if (!x) break;
+      openShiftDlg({ id: x.id, date: x.date, store: x.store, slot: x.slot, staff_id: x.staff_id, role: x.role, roleTouched: true, start: x.start, end: x.end, note: x.note || '' });
+      break;
+    }
+    case 'sd-staff': {
+      shiftDlgKeep(); const se = state.shiftEdit; se.staff_id = el.dataset.id;
+      if (!se.roleTouched){ const st = state.plan.staff.find(s => s.id === se.staff_id); se.role = (st && st.main_role) || 'service'; }
+      shiftDlgRender(); break;
+    }
+    case 'sd-role': shiftDlgKeep(); state.shiftEdit.role = el.dataset.r; state.shiftEdit.roleTouched = true; shiftDlgRender(); break;
+    case 'sd-close': $('#shiftDlg').close(); state.shiftEdit = null; break;
+    case 'sd-save': {
+      shiftDlgKeep(); const se = state.shiftEdit;
+      if (!se.staff_id) return toast(t('sd_staff') + '?', true);
+      if (!se.start || !se.end || se.end <= se.start) return toast(t('err_INVALID_TIME'), true);
+      el.disabled = true;
+      try { await rpc('sched_assign', { ...tok(), p_id: se.id, p_date: se.date, p_store: se.store, p_slot: se.slot, p_staff_id: se.staff_id,
+              p_role: se.role, p_start: se.start, p_end: se.end, p_note: se.note || null });
+        $('#shiftDlg').close(); state.shiftEdit = null; toast(t('saved')); viewPlan(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'sd-del': {
+      const se = state.shiftEdit; if (!confirm(t('shift_del_confirm'))) break;
+      try { await rpc('sched_remove', { ...tok(), p_id: se.id }); $('#shiftDlg').close(); state.shiftEdit = null; viewPlan(); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'photos': {
       try {
         const r = await callFn({ action: 'photo', entry_id: el.dataset.id });
@@ -1369,6 +1615,11 @@ document.addEventListener('click', async ev => {
 });
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur(); });
 document.addEventListener('change', async ev => {
+  if (ev.target.classList && ev.target.classList.contains('avnote')){
+    const el = ev.target, d = state.plan, cur = d.my_avail.find(x => x.date === el.dataset.date && x.slot === el.dataset.slot);
+    if (cur) try { await availSet(el.dataset.date, el.dataset.slot, cur.status, el.value); } catch(e){ toast(errText(e), true); }
+    return;
+  }
   if (ev.target.id === 'b-wallet'){
     const b = state.bon, v = ev.target.value.trim();
     if (v !== '' && isNaN(parseEur(v))) return toast(t('bad_amount'), true);
@@ -1438,12 +1689,12 @@ async function signOut(){
   const tk = state.token;
   logoutLocal(); state.loginStaff = null; state.loginAdmin = false; state.loginErr = '';
   state.bon = blankBon(); state.form = blankForm(); state.done = null; state.staffEdit = null;
-  const dlg = $('#pinDlg'); if (dlg && dlg.open) dlg.close();
+  ['#pinDlg', '#shiftDlg', '#photoDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
   hideIdleBar(); render();
   if (tk) try { await sb.rpc('logout', { p_token: tk }); } catch(e){}
 }
 // 员工 90 秒无操作自动退出；管理员和小费管理员 5 分钟
-const idleLimit = () => { const m = state.me || {}; return (m.is_admin || m.is_tip_manager) ? 300 : 90; };
+const idleLimit = () => { const m = state.me || {}; return (m.is_admin || m.is_tip_manager || m.is_scheduler) ? 300 : 90; };
 let lastAct = Date.now(), hiddenAt = null;
 function hideIdleBar(){ document.querySelectorAll('.idlebar').forEach(n => n.remove()); }
 function showIdleBar(n){
