@@ -216,7 +216,7 @@ zh: {
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
   admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'只影响登录页分组和选人顺序，不影响分账',
-  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
+  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', same_today:'同今天其他人：{n}', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
   pick_runner:'请选择 Runner，没有就点「无 Runner」', pick_bar:'请选择吧台，没有就点「无吧台」', not_chosen:'未选择',
   edit_reason:'修改理由', edit_reason_hint:'录入超过 10 分钟后的修改，需要老板批准', submit_request:'提交修改申请',
   request_sent:'已提交，等老板批准', ask_del_reason:'删除理由（需要老板批准）', pending_tag:'待批准',
@@ -281,7 +281,7 @@ de: {
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
   admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Nur für die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung',
-  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
+  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', same_today:'Wie die anderen heute: {n}', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
   pick_runner:'Bitte Runner wählen – oder „Kein Runner"', pick_bar:'Bitte Bar wählen – oder „Keine Bar"', not_chosen:'nicht gewählt',
   edit_reason:'Grund der Änderung', edit_reason_hint:'Änderungen später als 10 Minuten nach dem Eintragen muss der Chef freigeben', submit_request:'Änderung beantragen',
   request_sent:'Beantragt. Wartet auf Freigabe durch den Chef.', ask_del_reason:'Grund für das Löschen (Freigabe durch den Chef nötig)', pending_tag:'wartet auf Freigabe',
@@ -451,6 +451,10 @@ async function loadCommon(){
   try { state.staff = await rpc('list_staff', tok()) || []; } catch(e){}
   try { state.rates = await rpc('list_rates', tok()) || []; } catch(e){}
   try { state.loginStaff = await rpc('list_login_staff'); } catch(e){}
+  try {
+    const st = await rpc('helper_stats', tok()) || []; state.hstats = { runner: {}, bar: {} };
+    st.forEach(x => { if (state.hstats[x.role]) state.hstats[x.role][x.id] = x.n; });
+  } catch(e){}
 }
 function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
@@ -582,14 +586,25 @@ function previewHTML(){
 }
 function mainRoleOf(id){ const s = (state.loginStaff || []).find(x => x.id === id); return (s && s.main_role) || 'service'; }
 // 选 Runner 时 Runner 组在前、服务其次；选吧台时吧台组在前；组内保持管理员设定的顺序
+function dayPicks(role){
+  const f = state.form, b = state.bon;
+  if (f.entryId || !b.read || !b.dayHelp) return [];
+  return (b.dayHelp[role === 'runner' ? 'runners' : 'bars'] || []).filter(id => id !== state.me.id && state.staff.some(s => s.id === id));
+}
+// 排序：今天同事已选的 > 近 30 天被选天数多的 > 主岗位 > 管理员设定的顺序
 function orderedFor(role, list){
   const pri = role === 'runner' ? { runner: 0, service: 1, bar: 2 } : { bar: 0, service: 1, runner: 2 };
-  return list.map((s, i) => ({ s, i })).sort((a, b) => (pri[mainRoleOf(a.s.id)] - pri[mainRoleOf(b.s.id)]) || (a.i - b.i)).map(x => x.s);
+  const freq = (state.hstats && state.hstats[role]) || {}, today = dayPicks(role);
+  const key = s => [today.includes(s.id) ? 0 : 1, -(freq[s.id] || 0), pri[mainRoleOf(s.id)]];
+  return list.map((s, i) => ({ s, i, k: key(s) })).sort((a, b) =>
+    (a.k[0] - b.k[0]) || (a.k[1] - b.k[1]) || (a.k[2] - b.k[2]) || (a.i - b.i)).map(x => x.s);
 }
 function chipsHTML(role){
   const f = state.form, sel = role === 'runner' ? f.runners : f.bars;
   const self = f.server || state.me.id, noneOn = Array.isArray(sel) && sel.length === 0, has = id => !!sel && sel.includes(id);
-  return `<button type="button" class="chip none ${noneOn?'on':''}" aria-pressed="${noneOn}" data-act="chip-none" data-role="${role}">${esc(t(role==='runner'?'no_runner':'no_bar'))}</button>` +
+  const today = dayPicks(role), sameOn = today.length && !!sel && sel.length === today.length && today.every(has);
+  const sameBtn = today.length ? `<button type="button" class="chip ${role==='bar'?'bar':''} ${sameOn?'on':''}" aria-pressed="${!!sameOn}" data-act="chip-day" data-role="${role}" style="flex-basis:100%;text-align:left">${esc(t('same_today', { n: today.map(staffName).join('、') }))}</button>` : '';
+  return sameBtn + `<button type="button" class="chip none ${noneOn?'on':''}" aria-pressed="${noneOn}" data-act="chip-none" data-role="${role}">${esc(t(role==='runner'?'no_runner':'no_bar'))}</button>` +
     orderedFor(role, state.staff.filter(s => s.id !== self)).map(s =>
     `<button type="button" class="chip ${role==='bar'?'bar':''} ${has(s.id)?'on':''}" aria-pressed="${has(s.id)}" data-act="chip" data-role="${role}" data-id="${s.id}">${esc(s.name)}</button>`).join('');
 }
@@ -688,6 +703,7 @@ async function readBon(){
     const d = r.result.derived || {};
     Object.assign(b, { read: r, card: money(d.card_cents || 0), schluss: money(d.schluss_cents || 0), wallet: '', ack: false });
     if (d.work_date) state.form.date = d.work_date;
+    if (d.work_date && d.store){ try { b.dayHelp = await rpc('day_helpers', { ...tok(), p_date: d.work_date, p_store: d.store }); } catch(e){} }
   } catch(e){ toast(errText(e), true); }
   b.busy = false; render();
 }
@@ -1127,6 +1143,7 @@ document.addEventListener('click', async ev => {
       if (i >= 0) arr.splice(i, 1); else arr.push(id);
       f[key] = arr.length ? arr : null; render(); break;
     }
+    case 'chip-day': { const r = el.dataset.role; f[r === 'runner' ? 'runners' : 'bars'] = dayPicks(r).slice(); render(); break; }
     case 'chip-none': f[el.dataset.role === 'runner' ? 'runners' : 'bars'] = []; render(); break;
     case 'login-admin': state.loginAdmin = !state.loginAdmin; state.loginErr = ''; renderLogin(); break;
     case 'entry-save': saveEntry(); break;
