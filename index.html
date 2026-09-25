@@ -118,14 +118,25 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
   padding:calc(env(safe-area-inset-top,0px) + 28px) 20px calc(env(safe-area-inset-bottom,0px) + 28px)}
 .login h1{font-size:30px;margin:28px 0 4px}
 .login p{opacity:.7;margin:0 0 22px}
-.login .names{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-.login .names button{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:var(--r-m);padding:16px 10px;font-weight:600;font-size:17px}
+.login .names{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.login h2.grp{font-size:15px;font-weight:600;opacity:.6;margin:18px 0 8px}
+.login h2.grp:first-of-type{margin-top:4px}
+.idlebar{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--copper);color:#fff;border-radius:var(--r-m);padding:12px 16px;font-weight:600;text-align:center;box-shadow:0 4px 14px rgba(31,42,39,.25)}
+.done{text-align:center;padding-top:12px}
+.done .done-mark{width:64px;height:64px;margin:0 auto 6px;border-radius:50%;background:var(--celadon-deep);color:#fff;font-size:34px;line-height:64px}
+.done p{margin:6px 0 16px}
+.done .sheet{text-align:left}
+.done .btn{margin-top:10px}
+.login .names button{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:var(--r-m);padding:14px 8px;font-weight:600;font-size:17px}
 .login .pinbox{max-width:320px}
 .login .input{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff;font-size:28px;letter-spacing:10px;text-align:center;height:60px}
 .login .btn{background:var(--celadon);margin-top:14px}
 .login .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.25)}
 .login .adminlink{margin-top:auto;align-self:flex-start;background:none;border:0;color:rgba(255,255,255,.55);padding:28px 0 0;font-size:15px;text-decoration:underline}
 .login label{display:block;margin-bottom:6px;opacity:.75;font-size:14px}
+.login label.own{display:flex;gap:12px;align-items:flex-start;opacity:1;font-size:16px;margin:16px 0 0;cursor:pointer}
+.login label.own input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--celadon)}
+.login label.own small{display:block;opacity:.6;font-size:14px;margin-top:2px}
 .chip.none{border-style:dashed}
 .chip.none.on{background:var(--muted);border-color:var(--muted);border-style:solid;color:#fff}
 .seg.sm{overflow-x:auto}
@@ -204,6 +215,8 @@ zh: {
   new_pin2:'再输一次新 PIN', pin_mismatch:'两次输入的 PIN 不一致', set_pin_title:'设置你自己的 PIN',
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
   admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
+  grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'只影响登录页分组和选人顺序，不影响分账',
+  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
   pick_runner:'请选择 Runner，没有就点「无 Runner」', pick_bar:'请选择吧台，没有就点「无吧台」', not_chosen:'未选择',
   edit_reason:'修改理由', edit_reason_hint:'录入超过 10 分钟后的修改，需要老板批准', submit_request:'提交修改申请',
   request_sent:'已提交，等老板批准', ask_del_reason:'删除理由（需要老板批准）', pending_tag:'待批准',
@@ -267,6 +280,8 @@ de: {
   new_pin2:'Neue PIN wiederholen', pin_mismatch:'Die beiden PINs stimmen nicht überein', set_pin_title:'Eigene PIN festlegen',
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
   admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
+  grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Nur für die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung',
+  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
   pick_runner:'Bitte Runner wählen – oder „Kein Runner"', pick_bar:'Bitte Bar wählen – oder „Keine Bar"', not_chosen:'nicht gewählt',
   edit_reason:'Grund der Änderung', edit_reason_hint:'Änderungen später als 10 Minuten nach dem Eintragen muss der Chef freigeben', submit_request:'Änderung beantragen',
   request_sent:'Beantragt. Wartet auf Freigabe durch den Chef.', ask_del_reason:'Grund für das Löschen (Freigabe durch den Chef nötig)', pending_tag:'wartet auf Freigabe',
@@ -311,6 +326,15 @@ const LS = {
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
   del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
+// 登录信息只存在本次浏览器会话里（共用设备上关掉页面即失效）
+const SS = {
+  get(k, d){ try{ const v = sessionStorage.getItem(k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
+  set(k, v){ try{ sessionStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ sessionStorage.removeItem(k); }catch(e){} }
+};
+// 个人设备：登录保存在 localStorage，一直有效；店里设备：只存在本次会话里
+if (!LS.get('personal', false)){ LS.del('token'); LS.del('me'); } // 清除旧版本长期保存的登录
+const authStore = () => state.personal ? LS : SS;
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function t(k, vars){ let s = (I18N[state.lang] || I18N.zh)[k]; if (s === undefined) s = k; if (vars) for (const [a,b] of Object.entries(vars)) s = s.replace('{'+a+'}', b); return s; }
@@ -387,7 +411,7 @@ async function rpc(fn, args){
   if (error){
     const code = String(error.message || '').trim();
     if (code === 'AUTH_REQUIRED'){ logoutLocal(); render(); }
-    if (code === 'MUST_CHANGE_PIN' && state.me){ state.me.must_change_pin = true; LS.set('me', state.me); render(); }
+    if (code === 'MUST_CHANGE_PIN' && state.me){ state.me.must_change_pin = true; authStore().set('me', state.me); render(); }
     throw new Error(code);
   }
   return data;
@@ -397,8 +421,9 @@ const tok = () => ({ p_token: state.token });
 // ============ 状态 ============
 const state = {
   lang: LS.get('lang', (navigator.language||'').startsWith('de') ? 'de' : 'zh'),
-  token: LS.get('token', null),
-  me: LS.get('me', null),
+  personal: LS.get('personal', false),
+  token: LS.get('personal', false) ? LS.get('token', null) : SS.get('token', null),
+  me: LS.get('personal', false) ? LS.get('me', null) : SS.get('me', null),
   tab: LS.get('tab', 'entry'),
   week: mondayOf(today()),
   staff: [], rates: [],
@@ -421,10 +446,11 @@ function tabs(){
   if (m.is_admin) r.push('admin');
   return r;
 }
-function logoutLocal(){ state.viewAs = null; state.token = null; state.me = null; LS.del('token'); LS.del('me'); state.loginPick = null; state.menu = false; }
+function logoutLocal(){ state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false; }
 async function loadCommon(){
   try { state.staff = await rpc('list_staff', tok()) || []; } catch(e){}
   try { state.rates = await rpc('list_rates', tok()) || []; } catch(e){}
+  try { state.loginStaff = await rpc('list_login_staff'); } catch(e){}
 }
 function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
@@ -449,7 +475,7 @@ function render(){
   const m = state.me;
   $('#app').innerHTML = `
     <header>
-      <div class="brand">${esc(t('app'))}<small>${esc(m.name)}</small></div>
+      <div class="brand">${esc(t('app'))}<small>${esc(m.name)}${state.personal ? ' · ' + esc(t('own_short')) : ''}</small></div>
       <button class="hbtn" data-act="lang">${esc(t('lang'))}</button>
       <button class="hbtn" data-act="menu" aria-label="Menu" aria-expanded="${state.menu}">⋯</button>
       ${state.menu ? `<div class="menu">
@@ -475,24 +501,39 @@ async function renderLogin(){
       <h1>${esc(p.name)}</h1><p>PIN</p>
       <form class="pinbox" data-form="login">
         <input class="input num" id="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]*" autofocus>
+        <label class="own"><input type="checkbox" id="own"><span>${esc(t('own_device'))}<small>${esc(t('own_device_hint'))}</small></span></label>
         <div class="err" role="alert">${esc(state.loginErr)}</div>
         <button class="btn" type="submit">${esc(t('login'))}</button>
         <button class="btn ghost" type="button" data-act="login-back">${esc(t('back'))}</button>
       </form>` : `
       <h1>${esc(state.loginAdmin ? t('admin_login') : t('who'))}</h1><p>${esc(t('who_sub'))}</p>
-      <div class="names">${state.loginStaff.filter(s => !!s.is_admin === state.loginAdmin).map(s => `<button data-act="login-pick" data-id="${s.id}" data-name="${esc(s.name)}">${esc(s.name)}</button>`).join('')}</div>
+      ${loginNames()}
       <button class="adminlink" data-act="login-admin">${esc(state.loginAdmin ? t('staff_login') : t('admin_login'))}</button>`}
   </div>`;
   const pin = $('#pin'); if (pin) pin.focus();
 }
+function loginNames(){
+  const list = state.loginStaff.filter(s => !!s.is_admin === state.loginAdmin);
+  const btns = g => `<div class="names">${g.map(s => `<button data-act="login-pick" data-id="${s.id}" data-name="${esc(s.name)}">${esc(s.name)}</button>`).join('')}</div>`;
+  if (state.loginAdmin) return btns(list);
+  const role = s => s.is_kitchen ? 'kitchen' : (s.main_role || 'service');
+  return ['service', 'runner', 'bar', 'kitchen'].map(k => {
+    const g = list.filter(s => role(s) === k);
+    return g.length ? `<h2 class="grp">${esc(t('grp_' + k))}</h2>` + btns(g) : '';
+  }).join('');
+}
 async function doLogin(){
-  const pin = $('#pin').value.trim();
+  const pin = $('#pin').value.trim(), own = !!($('#own') && $('#own').checked);
   const r = await rpc('login', { p_staff_id: state.loginPick.id, p_pin: pin }).catch(e => ({ ok:false, error: e.message }));
   if (!r || !r.ok){ state.loginErr = errText({ message: r && r.error }); renderLogin(); return; }
-  state.token = r.token; state.me = r.me; LS.set('token', r.token); LS.set('me', r.me);
+  state.personal = false;
+  if (own){
+    try { await rpc('mark_session_personal', { p_token: r.token }); state.personal = true; LS.set('personal', true); } catch(e){}
+  }
+  state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   state.loginErr = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
-  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today());
-  if (!r.me.must_change_pin){ try { state.me = await rpc('me', tok()); LS.set('me', state.me); } catch(e){} await loadCommon(); }
+  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon();
+  if (!r.me.must_change_pin){ try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} await loadCommon(); }
   render();
 }
 
@@ -539,11 +580,17 @@ function previewHTML(){
       <div class="li"><span class="sw c-you"></span><span class="lbl">${esc(who)}</span><span>${eur(x.s)}</span></div>
     </div></div>`;
 }
+function mainRoleOf(id){ const s = (state.loginStaff || []).find(x => x.id === id); return (s && s.main_role) || 'service'; }
+// 选 Runner 时 Runner 组在前、服务其次；选吧台时吧台组在前；组内保持管理员设定的顺序
+function orderedFor(role, list){
+  const pri = role === 'runner' ? { runner: 0, service: 1, bar: 2 } : { bar: 0, service: 1, runner: 2 };
+  return list.map((s, i) => ({ s, i })).sort((a, b) => (pri[mainRoleOf(a.s.id)] - pri[mainRoleOf(b.s.id)]) || (a.i - b.i)).map(x => x.s);
+}
 function chipsHTML(role){
   const f = state.form, sel = role === 'runner' ? f.runners : f.bars;
   const self = f.server || state.me.id, noneOn = Array.isArray(sel) && sel.length === 0, has = id => !!sel && sel.includes(id);
   return `<button type="button" class="chip none ${noneOn?'on':''}" aria-pressed="${noneOn}" data-act="chip-none" data-role="${role}">${esc(t(role==='runner'?'no_runner':'no_bar'))}</button>` +
-    state.staff.filter(s => s.id !== self).map(s =>
+    orderedFor(role, state.staff.filter(s => s.id !== self)).map(s =>
     `<button type="button" class="chip ${role==='bar'?'bar':''} ${has(s.id)?'on':''}" aria-pressed="${has(s.id)}" data-act="chip" data-role="${role}" data-id="${s.id}">${esc(s.name)}</button>`).join('');
 }
 function modeSeg(){
@@ -657,7 +704,8 @@ async function submitBon(){
   try {
     await rpc('submit_bon_entry', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
       p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack });
-    state.bon = blankBon(); state.form = blankForm(); toast(t('saved')); render();
+    state.done = { wallet: w, date: f.date };
+    state.bon = blankBon(); state.form = blankForm(); render(); window.scrollTo(0, 0);
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
 }
 async function saveBonEdit(){
@@ -674,7 +722,24 @@ async function saveBonEdit(){
     state.form = blankForm(); toast(r && r.status === 'pending' ? t('request_sent') : t('saved')); render();
   } catch(e){ toast(errText(e), true); }
 }
+function viewDone(){
+  const d = state.done;
+  $('#main').innerHTML = `<div class="done">
+    <div class="done-mark" aria-hidden="true">✓</div>
+    <h2>${esc(t('done_title'))}</h2>
+    <p>${esc(t('done_env', { n: eur(d.wallet) }))}</p>
+    <div class="sheet"><div class="sum num">
+      <div class="li big"><span>${esc(t('envelope'))}</span><span>${eur(d.wallet)}</span></div>
+      <div class="li"><span>${esc(t('date'))}</span><span>${esc(dayLabel(d.date))}</span></div>
+    </div></div>
+    <p class="muted small">${esc(t('done_steps'))}</p>
+    ${state.personal ? `<button class="btn" data-act="done-more">${esc(t('done_ok'))}</button>`
+      : `<button class="btn" data-act="done-logout">${esc(t('done_logout'))}</button>
+    <button class="btn ghost" data-act="done-more">${esc(t('done_more'))}</button>`}
+  </div>`;
+}
 async function viewEntry(){
+  if (state.done) return viewDone();
   const f0 = state.form, m0 = state.me;
   if (f0.entryId && f0.isBon) return viewBonEdit();
   if (!f0.entryId && (!m0.is_admin || state.entryMode === 'bon')) return viewBonNew();
@@ -924,7 +989,7 @@ async function viewAdmin(){
       const e = state.staffEdit;
       el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
         `<div class="list">${list.map((s, i) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(s.name)}</strong>
-          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:''}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${s.lightspeed_id ? `<div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>` : ''}</div>
+          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${s.lightspeed_id ? `<div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>` : ''}</div>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
           <button class="link" style="flex:0;margin-left:6px" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button>
@@ -966,6 +1031,9 @@ function staffForm(s){
     <div class="field"><label for="s-name">${esc(t('name'))}</label><input class="input" id="s-name" value="${esc(s.name||'')}"></div>
     ${cb('s-active', t('active'), isNew || s.is_active)}${cb('s-mgr', t('is_manager'), s.is_tip_manager)}
     ${cb('s-kitchen', t('is_kitchen'), s.is_kitchen)}${cb('s-admin', t('is_admin'), s.is_admin)}
+    <div class="field" style="margin-top:14px"><label>${esc(t('main_role'))}</label>
+      <div class="seg" id="s-role">${['service', 'runner', 'bar'].map(r => `<button type="button" data-act="role-pick" data-r="${r}" class="${(s.main_role || 'service') === r ? 'on' : ''}" aria-pressed="${(s.main_role || 'service') === r}">${esc(t('grp_' + r))}</button>`).join('')}</div>
+      <div class="small muted" style="margin-top:6px">${esc(t('main_role_hint'))}</div></div>
     ${isNew ? `<div class="small muted" style="margin-top:8px">${esc(t('initial_pin_hint'))}</div>`
             : s.id !== state.me.id ? `<button class="link" style="margin-top:8px" data-act="staff-reset">${esc(t('reset_pin'))}</button>` : ''}
     <div class="row" style="margin-top:12px"><button class="btn ghost" data-act="staff-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="staff-save">${esc(t('save'))}</button></div></div>`;
@@ -1003,7 +1071,7 @@ function lsRow(s){
 }
 function refreshBadge(n){
   if (!state.me || !state.me.is_admin) return;
-  if (state.me.pending_requests !== n){ state.me.pending_requests = n; LS.set('me', state.me);
+  if (state.me.pending_requests !== n){ state.me.pending_requests = n; authStore().set('me', state.me);
     const b = document.querySelector('nav [data-tab="admin"]');
     if (b) b.innerHTML = esc(t('tab_admin')) + (n ? ` <span class="tag pend">${n}</span>` : '');
   }
@@ -1041,12 +1109,14 @@ document.addEventListener('click', async ev => {
   switch (act){
     case 'lang': state.lang = state.lang === 'zh' ? 'de' : 'zh'; LS.set('lang', state.lang); state.menu = false; render(); break;
     case 'menu': state.menu = !state.menu; render(); break;
-    case 'logout': try { await rpc('logout', tok()); } catch(e){} logoutLocal(); state.loginStaff = null; render(); break;
+    case 'logout': case 'done-logout': signOut(); break;
+    case 'done-more': state.done = null; render(); break;
+    case 'role-pick': el.parentNode.querySelectorAll('button').forEach(b => { b.classList.toggle('on', b === el); b.setAttribute('aria-pressed', b === el); }); break;
     case 'pin-open': state.menu = false; render(); openPinDialog(); break;
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; renderLogin(); break;
-    case 'tab': state.tab = el.dataset.tab; LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+    case 'tab': state.done = null; state.tab = el.dataset.tab; LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -1118,10 +1188,12 @@ document.addEventListener('click', async ev => {
     case 'staff-save': {
       const s = state.staffEdit;
       try {
-        await rpc('admin_upsert_staff', { ...tok(), p_id: s.id || null, p_name: $('#s-name').value.trim(),
+        const newId = await rpc('admin_upsert_staff', { ...tok(), p_id: s.id || null, p_name: $('#s-name').value.trim(),
           p_is_active: $('#s-active').checked, p_is_kitchen: $('#s-kitchen').checked, p_is_tip_manager: $('#s-mgr').checked, p_is_admin: $('#s-admin').checked });
-        state.staffEdit = null; toast(t('saved')); await loadCommon(); state.loginStaff = null;
-        if (s.id === state.me.id){ try { state.me = await rpc('me', tok()); LS.set('me', state.me); } catch(e){} }
+        const rb = document.querySelector('#s-role button.on');
+        if (!$('#s-kitchen').checked && rb) await rpc('admin_set_main_role', { ...tok(), p_id: newId || s.id, p_role: rb.dataset.r });
+        state.staffEdit = null; toast(t('saved')); state.loginStaff = null; await loadCommon();
+        if (s.id === state.me.id){ try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} }
         render();
       } catch(e){ toast(errText(e), true); }
       break;
@@ -1164,7 +1236,7 @@ document.addEventListener('click', async ev => {
       break;
     case 'ls-confirm': case 'ls-unbind':
       try { await rpc('admin_confirm_lightspeed', { ...tok(), p_staff_id: el.dataset.id, p_confirm: act === 'ls-confirm' });
-        state.me = await rpc('me', tok()); LS.set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
+        state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
   }
 });
@@ -1210,7 +1282,7 @@ document.addEventListener('submit', async ev => {
     if (a !== b){ err.textContent = t('pin_mismatch'); return; }
     try {
       await rpc('set_initial_pin', { ...tok(), p_new: a });
-      state.me = await rpc('me', tok()); LS.set('me', state.me);
+      state.me = await rpc('me', tok()); authStore().set('me', state.me);
       await loadCommon(); toast(t('pin_changed')); render();
     } catch(e){ err.textContent = errText(e); }
   }
@@ -1221,10 +1293,48 @@ document.addEventListener('submit', async ev => {
   }
 });
 
+// ============ 共用设备：退出与空闲自动退出 ============
+async function signOut(){
+  const tk = state.token;
+  logoutLocal(); state.loginStaff = null; state.loginAdmin = false; state.loginErr = '';
+  state.bon = blankBon(); state.form = blankForm(); state.done = null; state.staffEdit = null;
+  const dlg = $('#pinDlg'); if (dlg && dlg.open) dlg.close();
+  hideIdleBar(); render();
+  if (tk) try { await sb.rpc('logout', { p_token: tk }); } catch(e){}
+}
+// 员工 90 秒无操作自动退出；管理员和小费管理员 5 分钟
+const idleLimit = () => { const m = state.me || {}; return (m.is_admin || m.is_tip_manager) ? 300 : 90; };
+let lastAct = Date.now(), hiddenAt = null;
+function hideIdleBar(){ document.querySelectorAll('.idlebar').forEach(n => n.remove()); }
+function showIdleBar(n){
+  let bar = document.querySelector('.idlebar');
+  if (!bar){ bar = document.createElement('div'); bar.className = 'idlebar'; bar.setAttribute('role', 'status'); document.body.appendChild(bar); }
+  bar.textContent = t('idle_warn', { n });
+}
+['pointerdown', 'keydown', 'input', 'change', 'scroll', 'touchstart'].forEach(ev =>
+  document.addEventListener(ev, () => { lastAct = Date.now(); hideIdleBar(); }, { passive: true, capture: true }));
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden){ hiddenAt = Date.now(); return; }
+  const away = hiddenAt ? (Date.now() - hiddenAt) / 1000 : 0; hiddenAt = null;
+  if (state.token && !state.personal && away > idleLimit()) signOut(); else lastAct = Date.now();
+});
+setInterval(() => {
+  if (document.hidden) return;
+  const idle = (Date.now() - lastAct) / 1000;
+  if (!state.token){
+    // 选了名字却没输 PIN：60 秒后回到名单
+    if ((state.loginPick || state.loginAdmin) && idle > 60){ state.loginPick = null; state.loginAdmin = false; state.loginErr = ''; renderLogin(); }
+    return;
+  }
+  if (state.personal || (state.bon && state.bon.busy)){ lastAct = Date.now(); return; } // 正在识别单据时不计时
+  const left = idleLimit() - idle;
+  if (left <= 0) signOut(); else if (left <= 15) showIdleBar(Math.ceil(left));
+}, 1000);
+
 // ============ 启动 ============
 (async () => {
   if (state.token){
-    try { state.me = await rpc('me', tok()); LS.set('me', state.me); } catch(e){}
+    try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){}
     if (state.token){
       await loadCommon();
       try { state.loginStaff = await rpc('list_login_staff'); } catch(e){}
