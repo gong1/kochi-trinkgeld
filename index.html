@@ -226,6 +226,7 @@ zh: {
   handover:'每日交接', envelope_total:'信封合计', kasse_in:'放入 Kasse', kasse_out:'从 Kasse 取出', pool:'小费池', status:'状态',
   ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
   shortage_note:'本周你承担的差额', read_again:'换照片后请重新识别',
+  view_as:'查看', viewing_as:'正在以 {n} 的视角查看（只读）', exit_view:'退出查看',
   role_server:'服务员', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
   week_of:'第 {w} 周', preview:'分配预览', from:'来自',
   err_AUTH_REQUIRED:'登录已过期，请重新登录', err_FORBIDDEN:'没有权限', err_WEEK_LOCKED:'这一周已锁定，不能再改',
@@ -288,6 +289,7 @@ de: {
   handover:'Tägliche Übergabe', envelope_total:'Umschläge', kasse_in:'In die Kasse', kasse_out:'Aus der Kasse', pool:'Trinkgeldtopf', status:'Status',
   ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
   shortage_note:'Von dir getragene Fehlbeträge diese Woche', read_again:'Neue Fotos bitte erneut auslesen',
+  view_as:'Ansehen', viewing_as:'Ansicht als {n} (nur lesen)', exit_view:'Ansicht beenden',
   role_server:'Service', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
   week_of:'KW {w}', preview:'Aufteilung', from:'von',
   err_AUTH_REQUIRED:'Sitzung abgelaufen. Bitte neu anmelden.', err_FORBIDDEN:'Keine Berechtigung', err_WEEK_LOCKED:'Diese Woche ist abgeschlossen.',
@@ -403,7 +405,7 @@ const state = {
   loginStaff: null, loginPick: null, loginErr: '', loginAdmin: false,
   form: null, entryCache: {}, menu: false,
   adminSub: 'requests', staffEdit: null, staffList: [],
-  entryMode: 'bon', bon: blankBon()
+  entryMode: 'bon', bon: blankBon(), viewAs: null
 };
 function blankBon(){ return { top: null, bottom: null, read: null, card: '', schluss: '', wallet: '', ack: false, busy: false }; }
 function blankForm(){
@@ -419,7 +421,7 @@ function tabs(){
   if (m.is_admin) r.push('admin');
   return r;
 }
-function logoutLocal(){ state.token = null; state.me = null; LS.del('token'); LS.del('me'); state.loginPick = null; state.menu = false; }
+function logoutLocal(){ state.viewAs = null; state.token = null; state.me = null; LS.del('token'); LS.del('me'); state.loginPick = null; state.menu = false; }
 async function loadCommon(){
   try { state.staff = await rpc('list_staff', tok()) || []; } catch(e){}
   try { state.rates = await rpc('list_rates', tok()) || []; } catch(e){}
@@ -433,6 +435,16 @@ function render(){
   document.documentElement.lang = state.lang === 'de' ? 'de' : 'zh';
   if (!state.token){ renderLogin(); return; }
   if (state.me && state.me.must_change_pin){ renderSetPin(); return; }
+  if (state.viewAs && state.me.is_admin){
+    $('#app').innerHTML = `
+      <header style="background:var(--copper)">
+        <div class="brand">${esc(t('viewing_as', { n: state.viewAs.name }))}<small>${esc(state.me.name)}</small></div>
+        <button class="hbtn" data-act="lang">${esc(t('lang'))}</button>
+      </header>
+      <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
+      <nav><button class="on" data-act="view-exit">${esc(t('exit_view'))}</button></nav>`;
+    viewLedger(); return;
+  }
   if (!tabs().includes(state.tab)) state.tab = tabs()[0];
   const m = state.me;
   $('#app').innerHTML = `
@@ -724,9 +736,9 @@ function entryItem(e, opts){
     acts.push(`<button class="link danger" data-act="entry-del" data-id="${e.entry_id}">${esc(t('del'))}</button>`);
   }
   if (e.has_photo) acts.push(`<button class="link" data-act="photos" data-id="${e.entry_id}">${esc(t('photos'))}</button>`);
-  if (m.is_admin && e.shortage_cents && !opts.locked)
+  if (m.is_admin && e.shortage_cents && !opts.locked && !opts.readonly)
     acts.push(`<button class="link" data-act="bearer" data-id="${e.entry_id}" data-b="${e.shortage_bearer === 'store' ? 'staff' : 'store'}">${esc(t(e.shortage_bearer === 'store' ? 'bearer_staff' : 'bearer_store'))}</button>`);
-  const showCount = opts.count && e.is_bon && !opts.locked && (m.is_admin || m.is_tip_manager) && e.counted_cents !== e.wallet_cents;
+  const showCount = !opts.readonly && opts.count && e.is_bon && !opts.locked && (m.is_admin || m.is_tip_manager) && e.counted_cents !== e.wallet_cents;
   return `<div class="item">
     <div class="top"><div><strong>${esc(dayLabel(e.date))}</strong> <span class="muted">${esc(e.store)}${e.server ? ' · ' + esc(e.server) : ''}</span>${tags}</div>
       <div class="amt num">${eur(total)}</div></div>
@@ -796,7 +808,8 @@ function weekNav(){
 async function viewLedger(){
   $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
   let d;
-  try { d = await rpc('my_week', { ...tok(), p_week_start: state.week }); }
+  try { d = state.viewAs ? await rpc('admin_view_week', { ...tok(), p_staff_id: state.viewAs.id, p_week_start: state.week })
+                         : await rpc('my_week', { ...tok(), p_week_start: state.week }); }
   catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   const n = d.net_cents, s = d.settlement;
   let hero;
@@ -816,9 +829,9 @@ async function viewLedger(){
       <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong> <span class="muted">${esc(r.store)}</span>${r.is_late?`<span class="tag late">${esc(t('late'))}</span>`:''}${r.pending?`<span class="tag pend">${esc(t('pending_tag'))}</span>`:''}</div>
       <div class="amt num pos">+${eur(r.amount_cents)}</div></div>
       <div class="meta">${esc(t('role_'+r.role))} · ${esc(t('from'))} ${esc(r.from)}</div>
-      ${!d.locked ? `<div class="acts"><button class="link" data-act="dispute" data-id="${r.entry_id}">${esc(t('question'))}</button></div>` : ''}
+      ${!d.locked && !state.viewAs ? `<div class="acts"><button class="link" data-act="dispute" data-id="${r.entry_id}">${esc(t('question'))}</button></div>` : ''}
     </div>`).join('');
-  const mine = d.my_entries.map(e => entryItem(e, { locked: d.locked })).join('');
+  const mine = d.my_entries.map(e => entryItem(e, { locked: d.locked, readonly: !!state.viewAs })).join('');
   const adj = d.adjustments.map(a => `<div class="item"><div class="top"><div>${esc(a.from)} → ${esc(a.to)}</div>
       <div class="amt num">${eur(a.amount_cents)}</div></div><div class="meta">${esc(a.reason)}</div></div>`).join('');
   if (d.shortage_cents) hero += `<div class="warnbox">${esc(t('shortage_note'))}: ${eur(d.shortage_cents)}</div>`;
@@ -914,6 +927,7 @@ async function viewAdmin(){
           ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:''}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${s.lightspeed_id ? `<div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>` : ''}</div>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
+          <button class="link" style="flex:0;margin-left:6px" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button>
           <button class="link" style="flex:0;margin-left:6px" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button></div></div>`).join('')}</div>`;
     } else if (state.adminSub === 'rates'){
       const rates = await rpc('list_rates', tok()); state.rates = rates;
@@ -1120,6 +1134,8 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'report-run': runReport(); break;
+    case 'view-as': state.viewAs = { id: el.dataset.id, name: el.dataset.name }; state.week = mondayOf(today()); render(); window.scrollTo(0, 0); break;
+    case 'view-exit': state.viewAs = null; state.tab = 'admin'; render(); break;
     case 'entry-mode': state.entryMode = el.dataset.mode; render(); break;
     case 'bon-read': readBon(); break;
     case 'bon-reset': state.bon = blankBon(); render(); break;
