@@ -133,6 +133,19 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 tr.chg td:last-child{color:var(--copper);font-weight:700}
 .tag.pend{background:#FFF1C9;color:#8A6A00}
 .mv{background:var(--card);border:1px solid var(--line);border-radius:6px;width:34px;height:30px;padding:0}
+label.photo{display:flex;align-items:center;justify-content:center;min-height:110px;border:2px dashed var(--line);border-radius:var(--r-m);background:#fff;color:var(--celadon-deep);font-weight:600;cursor:pointer;overflow:hidden}
+label.photo.has{border-style:solid;min-height:0}
+label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain}
+.warnbox{background:#FFF1C9;color:#6B5200;border-radius:var(--r-s);padding:10px 12px;margin-bottom:12px;font-size:15px}
+.errbox{background:#F8E1DA;color:var(--neg);border-radius:var(--r-s);padding:10px 12px;margin:10px 0;font-size:15px}
+.sum .li{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}
+.sum .li:last-child{border-bottom:0}
+.sum .li.big{font-weight:700;font-size:19px}
+.cnt{margin-top:8px}
+.cnt .btn{height:50px}
+.tag.bad{background:#F8E1DA;color:var(--neg)}
+.tag.ok{background:var(--celadon-soft);color:var(--celadon-deep)}
+#photoDlg img{display:block;width:100%;margin-bottom:10px;border-radius:6px}
 .login .err{color:#F2B39B;min-height:24px;margin-top:10px}
 
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);transform:translateX(-50%);
@@ -153,6 +166,7 @@ td.r,th.r{text-align:right}
 <body>
 <div id="app"></div>
 <dialog id="pinDlg"></dialog>
+<dialog id="photoDlg"></dialog>
 
 <script>
 // ============ 配置 ============
@@ -198,6 +212,20 @@ zh: {
   reset_pin:'重置 PIN 为 888888', pin_reset_done:'已重置，员工下次登录要重新设置 PIN', confirm_reset:'确定把 {n} 的 PIN 重置为 888888？',
   initial_pin_hint:'初始 PIN 是 888888。员工第一次登录时，必须改成自己的 6 位 PIN。', needs_pin:'未设 PIN',
   up:'上移', down:'下移', people:'人员', amount_total:'金额',
+  photo_top:'① 拍单据顶部（名字、日期）', photo_bottom:'② 拍单据底部（Einnahmen 部分）', take_photo:'📷 点这里拍照',
+  read_bon:'识别单据', reading:'正在识别，请稍等…', bon_result:'识别结果，请核对', employee:'员工',
+  schluss:'交店里（Schlussbestand Bar）', card_tip:'刷卡小费', edit_flag_hint:'识别有误可以直接改，改过的记录会被标记，照片会存档。',
+  checks_bad:'单据上的数字前后对不上，请仔细核对，必要时重拍。', store_unknown:'识别不出门店或员工，请重拍顶部。',
+  wallet:'钱包现金合计', wallet_hint:'把钱包里所有现金点清楚，输入总数。', envelope:'全部放入信封', of_which_store:'其中交店里',
+  store_adds:'店里要补进小费', tips_total:'小费合计', cash_tip:'现金小费',
+  shortage_msg:'钱包比应有的少 {n}。请重新清点一遍，或找找钱是不是放在别处了。', shortage_ack:'我已重新清点，确认差额（默认从我的小费里扣）',
+  enter_wallet:'请输入钱包现金合计', submit_bon:'提交', retake:'重拍', manual_mode:'手动录入', bon_mode:'拍照录入',
+  tag_manual:'手改', tag_short:'差 {n}', tag_counted:'已点收', tag_uncounted:'未点收', tag_mismatch:'点收 {a}，应为 {b}',
+  count:'点收', counted_ok:'点收一致', counted_bad:'点收金额不一致，已标红', photos:'照片', close:'关闭',
+  bearer_store:'改为店里承担', bearer_staff:'改为员工承担', bearer_is_store:'店里承担',
+  handover:'每日交接', envelope_total:'信封合计', kasse_in:'放入 Kasse', kasse_out:'从 Kasse 取出', pool:'小费池', status:'状态',
+  ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
+  shortage_note:'本周你承担的差额', read_again:'换照片后请重新识别',
   role_server:'服务员', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
   week_of:'第 {w} 周', preview:'分配预览', from:'来自',
   err_AUTH_REQUIRED:'登录已过期，请重新登录', err_FORBIDDEN:'没有权限', err_WEEK_LOCKED:'这一周已锁定，不能再改',
@@ -205,7 +233,7 @@ zh: {
   err_INVALID_HELPER:'选择的同事无效', err_DUPLICATE_ENTRY:'这天这家店你已经录过了，请修改原来那条',
   err_FUTURE_DATE:'不能录入未来的日期', err_NO_RATE:'还没设置分配比例', err_NO_KITCHEN_ACCOUNT:'还没有厨房账号',
   err_OPEN_DISPUTES:'还有没处理的疑问，请先处理', err_WEEK_NOT_OVER:'这周还没结束', err_EARLIER_WEEK_OPEN:'更早的一周还没锁定，请按顺序周结',
-  err_INVALID_PIN:'PIN 必须是 6 位数字，不能用 888888、6 个相同数字、123456 或 654321', err_MUST_CHANGE_PIN:'请先设置你自己的 PIN', err_REQUEST_PENDING:'这条记录已有一个待批准的申请', err_STALE_REQUEST:'申请之后这条记录又被改过，请拒绝，让员工重新申请', err_PENDING_REQUESTS:'这周还有待老板批准的修改，请先处理', err_NAME_REQUIRED:'请填姓名', err_INVALID_STORE:'门店无效', err_WRONG_PIN:'当前 PIN 不对', err_PIN_REQUIRED:'新员工必须设 PIN',
+  err_INVALID_PIN:'PIN 必须是 6 位数字，不能用 888888、6 个相同数字、123456 或 654321', err_MUST_CHANGE_PIN:'请先设置你自己的 PIN', err_SHORTAGE:'钱包现金不够，请重新清点', err_DUPLICATE_BON:'这张单据已经上传过了', err_BON_OTHER_STAFF:'这张单据不是你的（Lightspeed 员工编号不符）', err_BON_UNREADABLE:'单据识别失败，请重拍：顶部要拍到名字和日期，底部要拍到 Einnahmen', err_STORE_UNKNOWN:'识别不出门店，请重拍顶部', err_READ_USED:'这次识别已经提交过了，请重新拍照', err_NOT_BON_ENTRY:'这条不是拍照录入的记录', err_ALREADY_COUNTED:'信封已点收，只能由老板修改', err_USE_BON:'请用拍照方式录入', err_UNCOUNTED_ENTRIES:'这周还有信封没点收', err_PHOTOS_REQUIRED:'请先拍两张照片', err_PHOTO_TOO_LARGE:'照片太大，请重拍', err_BON_FAILED:'识别服务暂时不可用，请稍后再试', err_TOO_MANY_READS:'今天识别次数太多了，请联系管理员', err_UPLOAD_FAILED:'照片上传失败，请重试', err_INVALID_AMOUNT:'金额无效', err_REQUEST_PENDING:'这条记录已有一个待批准的申请', err_STALE_REQUEST:'申请之后这条记录又被改过，请拒绝，让员工重新申请', err_PENDING_REQUESTS:'这周还有待老板批准的修改，请先处理', err_NAME_REQUIRED:'请填姓名', err_INVALID_STORE:'门店无效', err_WRONG_PIN:'当前 PIN 不对', err_PIN_REQUIRED:'新员工必须设 PIN',
   err_CANNOT_DEMOTE_SELF:'不能取消自己的管理员权限', err_NO_RETROACTIVE_RATE:'新比例最早今天生效',
   err_COMMENT_REQUIRED:'请写明问题', err_REASON_REQUIRED:'请写原因', err_NOT_FOUND:'记录不存在',
   err_LOGIN_FAILED:'PIN 不对', err_LOCKED:'输错太多次，15 分钟后再试', err_INVALID_SERVER:'服务员无效',
@@ -246,6 +274,20 @@ de: {
   reset_pin:'PIN auf 888888 zurücksetzen', pin_reset_done:'Zurückgesetzt. Neue PIN bei der nächsten Anmeldung.', confirm_reset:'PIN von {n} auf 888888 zurücksetzen?',
   initial_pin_hint:'Start-PIN ist 888888. Bei der ersten Anmeldung muss eine eigene 6-stellige PIN gesetzt werden.', needs_pin:'PIN offen',
   up:'Nach oben', down:'Nach unten', people:'Personen', amount_total:'Betrag',
+  photo_top:'① Oberen Teil fotografieren (Name, Datum)', photo_bottom:'② Unteren Teil fotografieren (Einnahmen)', take_photo:'📷 Hier tippen für Foto',
+  read_bon:'Bon auslesen', reading:'Wird ausgelesen, bitte warten …', bon_result:'Erkannt – bitte prüfen', employee:'Mitarbeiter',
+  schluss:'An den Laden (Schlussbestand Bar)', card_tip:'Kartentrinkgeld', edit_flag_hint:'Falls falsch erkannt, bitte korrigieren. Korrekturen werden markiert, das Foto wird gespeichert.',
+  checks_bad:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte genau prüfen oder neu fotografieren.', store_unknown:'Filiale oder Mitarbeiter nicht erkannt. Bitte den oberen Teil neu fotografieren.',
+  wallet:'Bargeld im Portemonnaie gesamt', wallet_hint:'Alles Bargeld im Portemonnaie zählen und die Summe eingeben.', envelope:'Alles in den Umschlag', of_which_store:'davon an den Laden',
+  store_adds:'Laden zahlt ins Trinkgeld', tips_total:'Trinkgeld gesamt', cash_tip:'Bartrinkgeld',
+  shortage_msg:'Im Portemonnaie fehlen {n}. Bitte nochmal zählen oder nachsehen, ob Geld woanders liegt.', shortage_ack:'Ich habe nachgezählt und bestätige die Differenz (wird standardmäßig von meinem Trinkgeld abgezogen)',
+  enter_wallet:'Bitte Bargeld im Portemonnaie eingeben', submit_bon:'Absenden', retake:'Neu fotografieren', manual_mode:'Manuell', bon_mode:'Mit Foto',
+  tag_manual:'korrigiert', tag_short:'Fehlbetrag {n}', tag_counted:'gezählt', tag_uncounted:'nicht gezählt', tag_mismatch:'gezählt {a}, Soll {b}',
+  count:'Zählen', counted_ok:'Stimmt', counted_bad:'Betrag weicht ab – markiert', photos:'Fotos', close:'Schließen',
+  bearer_store:'Laden übernimmt', bearer_staff:'Mitarbeiter trägt', bearer_is_store:'Laden trägt',
+  handover:'Tägliche Übergabe', envelope_total:'Umschläge', kasse_in:'In die Kasse', kasse_out:'Aus der Kasse', pool:'Trinkgeldtopf', status:'Status',
+  ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
+  shortage_note:'Von dir getragene Fehlbeträge diese Woche', read_again:'Neue Fotos bitte erneut auslesen',
   role_server:'Service', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
   week_of:'KW {w}', preview:'Aufteilung', from:'von',
   err_AUTH_REQUIRED:'Sitzung abgelaufen. Bitte neu anmelden.', err_FORBIDDEN:'Keine Berechtigung', err_WEEK_LOCKED:'Diese Woche ist abgeschlossen.',
@@ -253,7 +295,7 @@ de: {
   err_INVALID_HELPER:'Ungültige Auswahl', err_DUPLICATE_ENTRY:'Für diesen Tag und diese Filiale gibt es schon einen Eintrag. Bitte den bestehenden bearbeiten.',
   err_FUTURE_DATE:'Datum liegt in der Zukunft', err_NO_RATE:'Noch keine Anteile festgelegt', err_NO_KITCHEN_ACCOUNT:'Kein Küchenkonto vorhanden',
   err_OPEN_DISPUTES:'Es gibt noch offene Fragen. Bitte zuerst klären.', err_WEEK_NOT_OVER:'Die Woche ist noch nicht vorbei.', err_EARLIER_WEEK_OPEN:'Eine frühere Woche ist noch offen. Bitte der Reihe nach abschließen.',
-  err_INVALID_PIN:'PIN muss 6 Ziffern haben. Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321', err_MUST_CHANGE_PIN:'Bitte zuerst eigene PIN festlegen', err_REQUEST_PENDING:'Für diesen Eintrag liegt schon ein offener Antrag vor', err_STALE_REQUEST:'Der Eintrag wurde nach dem Antrag geändert. Bitte ablehnen und neu beantragen lassen.', err_PENDING_REQUESTS:'Diese Woche hat noch offene Freigaben. Bitte zuerst bearbeiten.', err_NAME_REQUIRED:'Bitte Namen eingeben', err_INVALID_STORE:'Ungültige Filiale', err_WRONG_PIN:'Aktuelle PIN falsch', err_PIN_REQUIRED:'Neue Mitarbeiter brauchen eine PIN',
+  err_INVALID_PIN:'PIN muss 6 Ziffern haben. Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321', err_MUST_CHANGE_PIN:'Bitte zuerst eigene PIN festlegen', err_SHORTAGE:'Zu wenig Bargeld – bitte nachzählen', err_DUPLICATE_BON:'Dieser Bon wurde schon hochgeladen', err_BON_OTHER_STAFF:'Das ist nicht dein Bon (Lightspeed-Nummer passt nicht)', err_BON_UNREADABLE:'Bon nicht lesbar. Bitte neu fotografieren: oben Name und Datum, unten Einnahmen.', err_STORE_UNKNOWN:'Filiale nicht erkannt. Bitte oberen Teil neu fotografieren.', err_READ_USED:'Schon abgeschickt. Bitte neu fotografieren.', err_NOT_BON_ENTRY:'Kein Foto-Eintrag', err_ALREADY_COUNTED:'Umschlag schon gezählt – nur der Chef kann ändern', err_USE_BON:'Bitte mit Foto eintragen', err_UNCOUNTED_ENTRIES:'Diese Woche sind noch Umschläge nicht gezählt', err_PHOTOS_REQUIRED:'Bitte zuerst beide Fotos machen', err_PHOTO_TOO_LARGE:'Foto zu groß, bitte neu', err_BON_FAILED:'Auslesen gerade nicht möglich, bitte später erneut', err_TOO_MANY_READS:'Heute zu viele Versuche – bitte Admin fragen', err_UPLOAD_FAILED:'Foto-Upload fehlgeschlagen', err_INVALID_AMOUNT:'Ungültiger Betrag', err_REQUEST_PENDING:'Für diesen Eintrag liegt schon ein offener Antrag vor', err_STALE_REQUEST:'Der Eintrag wurde nach dem Antrag geändert. Bitte ablehnen und neu beantragen lassen.', err_PENDING_REQUESTS:'Diese Woche hat noch offene Freigaben. Bitte zuerst bearbeiten.', err_NAME_REQUIRED:'Bitte Namen eingeben', err_INVALID_STORE:'Ungültige Filiale', err_WRONG_PIN:'Aktuelle PIN falsch', err_PIN_REQUIRED:'Neue Mitarbeiter brauchen eine PIN',
   err_CANNOT_DEMOTE_SELF:'Eigene Admin-Rechte können nicht entzogen werden', err_NO_RETROACTIVE_RATE:'Neue Anteile frühestens ab heute',
   err_COMMENT_REQUIRED:'Bitte beschreiben', err_REASON_REQUIRED:'Bitte Grund angeben', err_NOT_FOUND:'Eintrag nicht gefunden',
   err_LOGIN_FAILED:'PIN falsch', err_LOCKED:'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.', err_INVALID_SERVER:'Ungültige Servicekraft',
@@ -288,6 +330,38 @@ function parseEur(s){
   if (s.includes(',')) s = s.replace(/\./g,'').replace(',', '.');
   if (!/^\d+(\.\d{1,2})?$/.test(s)) return NaN;
   return Math.round(parseFloat(s)*100);
+}
+
+function parseSigned(s){
+  s = String(s || '').trim();
+  const neg = /^-|-$/.test(s);
+  const v = parseEur(s.replace(/-/g, ''));
+  return isNaN(v) ? NaN : (neg ? -v : v);
+}
+function money(c){ return (c < 0 ? '-' : '') + (Math.abs(c || 0) / 100).toFixed(2).replace('.', ','); }
+function compressImage(file){
+  return new Promise((resolve, reject) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const max = 1568, s = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url); resolve(c.toDataURL('image/jpeg', 0.85));
+    };
+    img.onerror = e => { URL.revokeObjectURL(url); reject(e); };
+    img.src = url;
+  });
+}
+async function callFn(body){
+  const { data, error } = await sb.functions.invoke('bon', { body: { ...body, token: state.token } });
+  if (error){
+    let code = 'BON_FAILED';
+    try { const j = await error.context.json(); if (j && j.error) code = j.error; } catch(e){}
+    if (code === 'AUTH_REQUIRED'){ logoutLocal(); render(); }
+    throw new Error(code);
+  }
+  if (data && data.error) throw new Error(data.error);
+  return data;
 }
 
 let toastTimer;
@@ -328,8 +402,10 @@ const state = {
   staff: [], rates: [],
   loginStaff: null, loginPick: null, loginErr: '', loginAdmin: false,
   form: null, entryCache: {}, menu: false,
-  adminSub: 'requests', staffEdit: null, staffList: []
+  adminSub: 'requests', staffEdit: null, staffList: [],
+  entryMode: 'bon', bon: blankBon()
 };
+function blankBon(){ return { top: null, bottom: null, read: null, card: '', schluss: '', wallet: '', ack: false, busy: false }; }
 function blankForm(){
   return { date: today(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '' };
 }
@@ -458,9 +534,140 @@ function chipsHTML(role){
     state.staff.filter(s => s.id !== self).map(s =>
     `<button type="button" class="chip ${role==='bar'?'bar':''} ${has(s.id)?'on':''}" aria-pressed="${has(s.id)}" data-act="chip" data-role="${role}" data-id="${s.id}">${esc(s.name)}</button>`).join('');
 }
-async function viewEntry(){
-  const f = state.form, m = state.me, mgr = m.is_admin;
+function modeSeg(){
+  if (!state.me.is_admin || state.form.entryId) return '';
+  return `<div class="seg" style="margin-bottom:16px">${['bon','manual'].map(k => `<button data-act="entry-mode" data-mode="${k}" class="${state.entryMode===k?'on':''}">${esc(t(k+'_mode'))}</button>`).join('')}</div>`;
+}
+function bonSummary(schluss, card, walletStr, runners, bars){
+  if (String(walletStr).trim() === '') return `<div class="muted small">${esc(t('enter_wallet'))}</div>`;
+  const w = parseEur(walletStr);
+  if (isNaN(w) || isNaN(schluss) || isNaN(card)) return `<div class="negc small">${esc(t('bad_amount'))}</div>`;
+  const tips = w - schluss, cash = tips - card, short = Math.max(-cash, 0), pool = card + Math.max(cash, 0);
+  const rate = rateFor(state.form.date || today());
+  let split = '';
+  if (rate){
+    const nr = (runners || []).length, nb = (bars || []).length, x = splitCalc(pool, rate, nr, nb);
+    split = `<div class="small muted" style="margin-top:8px">${esc(t('kitchen'))} ${eur(x.k)} · ${esc(t('runner'))} ${eur(x.re*nr)} · ${esc(t('bar'))} ${eur(x.be*nb)} · ${esc(t('role_server'))} ${eur(x.s)}</div>`;
+  }
+  return `<div class="sum num">
+      <div class="li big"><span>${esc(t('envelope'))}</span><span>${eur(w)}</span></div>
+      ${schluss >= 0 ? `<div class="li"><span>${esc(t('of_which_store'))}</span><span>${eur(schluss)}</span></div>`
+                     : `<div class="li"><span>${esc(t('store_adds'))}</span><span>${eur(-schluss)}</span></div>`}
+      <div class="li big"><span>${esc(t('tips_total'))}</span><span>${eur(pool)}</span></div>
+      <div class="li"><span>${esc(t('card_tip'))}</span><span>${eur(card)}</span></div>
+      <div class="li"><span>${esc(t('cash_tip'))}</span><span class="${cash<0?'negc':''}">${eur(cash)}</span></div>
+    </div>${split}
+    ${short ? `<div class="errbox">${esc(t('shortage_msg', { n: eur(short) }))}
+      <label class="check" style="margin-top:6px"><input type="checkbox" id="b-ack" ${state.bon.ack || state.form.ack ? 'checked' : ''}> ${esc(t('shortage_ack'))}</label></div>` : ''}`;
+}
+function bonNewSummary(){
+  const b = state.bon, f = state.form;
+  return bonSummary(parseSigned(b.schluss), parseEur(b.card), b.wallet, f.runners, f.bars);
+}
+function viewBonNew(){
+  const b = state.bon, f = state.form;
+  const ph = (k, label) => `<div class="field"><label>${esc(label)}</label>
+    <label class="photo ${b[k]?'has':''}">${b[k] ? `<img src="${b[k]}" alt="">` : `<span>${esc(t('take_photo'))}</span>`}
+    <input type="file" accept="image/*" capture="environment" data-photo="${k}" hidden></label></div>`;
+  let html = modeSeg() + ph('top', t('photo_top')) + ph('bottom', t('photo_bottom'));
+  if (!b.read){
+    html += `<button class="btn" data-act="bon-read" ${b.top && b.bottom && !b.busy ? '' : 'disabled'}>${esc(b.busy ? t('reading') : t('read_bon'))}</button>`;
+  } else {
+    const d = b.read.result.derived || {}, ok = b.read.checks && b.read.checks.ok;
+    html += `<h2>${esc(t('bon_result'))}</h2>
+      ${!d.store || !d.user_id ? `<div class="errbox">${esc(t('store_unknown'))}</div>` : !ok ? `<div class="warnbox">${esc(t('checks_bad'))}</div>` : ''}
+      <div class="sheet"><div class="sum">
+        <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(d.store || '?')}</strong></div>
+        <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(dayLabel(d.work_date)) : '?'}</strong></div>
+        <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
+      </div></div>
+      <div class="row">
+        <div class="field"><label for="b-schluss">${esc(t('schluss'))}</label><div class="money"><input class="input num" id="b-schluss" inputmode="text" autocomplete="off" value="${esc(b.schluss)}"></div></div>
+        <div class="field"><label for="b-card">${esc(t('card_tip'))}</label><div class="money"><input class="input num" id="b-card" inputmode="decimal" autocomplete="off" value="${esc(b.card)}"></div></div>
+      </div>
+      <div class="small muted" style="margin:-6px 0 14px">${esc(t('edit_flag_hint'))}</div>
+      <div class="field"><label for="b-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="b-wallet" inputmode="decimal" autocomplete="off" placeholder="0,00" value="${esc(b.wallet)}"></div>
+        <div class="small muted" style="margin-top:5px">${esc(t('wallet_hint'))}</div></div>
+      <div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
+      <div class="field"><label>${esc(t('bar'))}</label><div class="chips">${chipsHTML('bar')}</div></div>
+      <div class="sheet" id="bon-sum">${bonNewSummary()}</div>
+      <button class="btn" data-act="bon-submit">${esc(t('submit_bon'))}</button>
+      <button class="btn ghost" style="margin-top:10px" data-act="bon-reset">${esc(t('retake'))}</button>`;
+  }
+  html += `<h2>${esc(t('my_entries'))}</h2><div id="mine"><div class="loading">${esc(t('loading'))}</div></div>`;
+  $('#main').innerHTML = html;
+  loadMine();
+}
+function viewBonEdit(){
+  const f = state.form;
   $('#main').innerHTML = `
+    <div class="sheet" style="background:var(--copper-soft);border-color:transparent">
+      <div class="row"><strong>${esc(t('editing', { d: dayLabel(f.date) }))}</strong>
+      <button class="link" style="flex:0" data-act="edit-cancel">${esc(t('cancel'))}</button></div></div>
+    <div class="sheet"><div class="sum num">
+      <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(f.store)}</strong></div>
+      <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(f.schluss)}</strong></div>
+      <div class="li"><span class="muted">${esc(t('card_tip'))}</span><strong>${eur(f.card)}</strong></div>
+    </div></div>
+    <div class="field"><label for="e-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="e-wallet" inputmode="decimal" value="${esc(f.wallet)}"></div></div>
+    <div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
+    <div class="field"><label>${esc(t('bar'))}</label><div class="chips">${chipsHTML('bar')}</div></div>
+    ${!f.direct ? `<div class="field"><label for="f-reason">${esc(t('edit_reason'))}</label><input class="input" id="f-reason" value="${esc(f.reason)}">
+      <div class="small muted" style="margin-top:5px">${esc(t('edit_reason_hint'))}</div></div>` : ''}
+    <div class="sheet" id="bon-sum">${bonSummary(f.schluss, f.card, f.wallet, f.runners, f.bars)}</div>
+    <button class="btn" data-act="bon-edit-save">${esc(f.direct ? t('update') : t('submit_request'))}</button>`;
+}
+function refreshBonSum(){
+  const el = $('#bon-sum'); if (!el) return;
+  const f = state.form;
+  el.innerHTML = f.isBon ? bonSummary(f.schluss, f.card, f.wallet, f.runners, f.bars) : bonNewSummary();
+}
+async function readBon(){
+  const b = state.bon; b.busy = true; render();
+  try {
+    const r = await callFn({ action: 'read', top: b.top.split(',')[1], bottom: b.bottom.split(',')[1] });
+    const d = r.result.derived || {};
+    Object.assign(b, { read: r, card: money(d.card_cents || 0), schluss: money(d.schluss_cents || 0), wallet: '', ack: false });
+    if (d.work_date) state.form.date = d.work_date;
+  } catch(e){ toast(errText(e), true); }
+  b.busy = false; render();
+}
+async function submitBon(){
+  const b = state.bon, f = state.form;
+  const card = parseEur(b.card), schluss = parseSigned(b.schluss), w = parseEur(b.wallet);
+  if (String(b.wallet).trim() === '') return toast(t('enter_wallet'), true);
+  if ([card, schluss, w].some(isNaN)) return toast(t('bad_amount'), true);
+  if (f.runners === null) return toast(t('pick_runner'), true);
+  if (f.bars === null) return toast(t('pick_bar'), true);
+  const short = card - (w - schluss) > 0;
+  if (short && !b.ack) return toast(t('shortage_msg', { n: eur(card - (w - schluss)) }), true);
+  const btn = document.querySelector('[data-act="bon-submit"]'); if (btn) btn.disabled = true;
+  try {
+    await rpc('submit_bon_entry', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
+      p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack });
+    state.bon = blankBon(); state.form = blankForm(); toast(t('saved')); render();
+  } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
+}
+async function saveBonEdit(){
+  const f = state.form, w = parseEur(f.wallet);
+  if (String(f.wallet).trim() === '' || isNaN(w)) return toast(t('bad_amount'), true);
+  if (f.runners === null) return toast(t('pick_runner'), true);
+  if (f.bars === null) return toast(t('pick_bar'), true);
+  if (!f.direct && !f.reason.trim()) return toast(t('err_REASON_REQUIRED'), true);
+  const short = f.card - (w - f.schluss) > 0;
+  if (short && !f.ack) return toast(t('shortage_msg', { n: eur(f.card - (w - f.schluss)) }), true);
+  try {
+    const r = await rpc('edit_bon_entry', { ...tok(), p_entry_id: f.entryId, p_wallet_cents: w, p_runner_ids: f.runners,
+      p_bar_ids: f.bars, p_reason: f.reason.trim() || null, p_shortage_ack: !!f.ack });
+    state.form = blankForm(); toast(r && r.status === 'pending' ? t('request_sent') : t('saved')); render();
+  } catch(e){ toast(errText(e), true); }
+}
+async function viewEntry(){
+  const f0 = state.form, m0 = state.me;
+  if (f0.entryId && f0.isBon) return viewBonEdit();
+  if (!f0.entryId && (!m0.is_admin || state.entryMode === 'bon')) return viewBonNew();
+  const f = state.form, m = state.me, mgr = m.is_admin;
+  $('#main').innerHTML = modeSeg() + `
     ${f.entryId ? `<div class="sheet" style="background:var(--copper-soft);border-color:transparent">
       <div class="row"><strong>${esc(t('editing', { d: dayLabel(f.date) }))}</strong>
       <button class="link" style="flex:0;white-space:nowrap" data-act="edit-cancel">${esc(t('cancel'))}</button></div></div>` : ''}
@@ -495,23 +702,67 @@ async function loadMine(){
 function entryItem(e, opts){
   opts = opts || {};
   state.entryCache[e.entry_id] = e;
-  const total = e.card_cents + e.cash_cents;
-  const parts = (e.allocations || []).filter(a => a.role !== 'server')
-    .map(a => `${esc(a.name)} ${eur(a.amount_cents)}`).join(' · ');
-  const canEdit = e.editable;
+  const m = state.me, total = e.card_cents + e.cash_cents;
+  const parts = (e.allocations || []).map(a => `${esc(a.name)} ${eur(a.amount_cents)}`).join(' · ');
+  let countTag = '';
+  if (e.is_bon){
+    if (e.counted_cents === null || e.counted_cents === undefined) countTag = `<span class="tag pend">${esc(t('tag_uncounted'))}</span>`;
+    else if (e.counted_cents === e.wallet_cents) countTag = `<span class="tag ok">${esc(t('tag_counted'))}</span>`;
+    else countTag = `<span class="tag bad">${esc(t('tag_mismatch', { a: eur(e.counted_cents), b: eur(e.wallet_cents) }))}</span>`;
+  }
+  const tags = (e.is_late ? `<span class="tag late">${esc(t('late'))}</span>` : '')
+    + (e.pending ? `<span class="tag pend">${esc(t('pending_tag'))}</span>` : '')
+    + (e.manual_edit ? `<span class="tag bad">${esc(t('tag_manual'))}</span>` : '')
+    + (e.shortage_cents ? `<span class="tag bad">${esc(t('tag_short', { n: eur(e.shortage_cents) }))}${e.shortage_bearer === 'store' ? ' · ' + esc(t('bearer_is_store')) : ''}</span>` : '')
+    + countTag;
+  const meta = e.is_bon
+    ? `${esc(t('lbl_wallet'))} ${eur(e.wallet_cents)} · ${esc(t('of_which_store'))} ${eur(e.schluss_cents)} · ${esc(t('card_tip'))} ${eur(e.card_cents)} · ${esc(t('cash_tip'))} ${eur(e.cash_cents)}`
+    : `${esc(t('card'))} ${eur(e.card_cents)} · ${esc(t('cash'))} ${eur(e.cash_cents)}`;
+  const acts = [];
+  if (e.editable && !opts.locked){
+    acts.push(`<button class="link" data-act="entry-edit" data-id="${e.entry_id}">${esc(t('edit'))}</button>`);
+    acts.push(`<button class="link danger" data-act="entry-del" data-id="${e.entry_id}">${esc(t('del'))}</button>`);
+  }
+  if (e.has_photo) acts.push(`<button class="link" data-act="photos" data-id="${e.entry_id}">${esc(t('photos'))}</button>`);
+  if (m.is_admin && e.shortage_cents && !opts.locked)
+    acts.push(`<button class="link" data-act="bearer" data-id="${e.entry_id}" data-b="${e.shortage_bearer === 'store' ? 'staff' : 'store'}">${esc(t(e.shortage_bearer === 'store' ? 'bearer_staff' : 'bearer_store'))}</button>`);
+  const showCount = opts.count && e.is_bon && !opts.locked && (m.is_admin || m.is_tip_manager) && e.counted_cents !== e.wallet_cents;
   return `<div class="item">
-    <div class="top"><div><strong>${esc(dayLabel(e.date))}</strong> <span class="muted">${esc(e.store)}${e.server ? ' · ' + esc(e.server) : ''}</span>${e.is_late ? `<span class="tag late">${esc(t('late'))}</span>` : ''}${e.pending ? `<span class="tag pend">${esc(t('pending_tag'))}</span>` : ''}</div>
+    <div class="top"><div><strong>${esc(dayLabel(e.date))}</strong> <span class="muted">${esc(e.store)}${e.server ? ' · ' + esc(e.server) : ''}</span>${tags}</div>
       <div class="amt num">${eur(total)}</div></div>
-    <div class="meta num">${esc(t('card'))} ${eur(e.card_cents)} · ${esc(t('cash'))} ${eur(e.cash_cents)}</div>
+    <div class="meta num">${meta}</div>
     <div class="meta num">${parts}</div>
-    ${canEdit && !opts.locked ? `<div class="acts"><button class="link" data-act="entry-edit" data-id="${e.entry_id}">${esc(t('edit'))}</button>
-      <button class="link danger" data-act="entry-del" data-id="${e.entry_id}">${esc(t('del'))}</button></div>` : ''}
+    ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}
+    ${showCount ? `<div class="row cnt"><div class="money"><input class="input num" id="cnt-${e.entry_id}" inputmode="decimal" placeholder="${money(e.wallet_cents)}"></div>
+      <button class="btn ghost" style="flex:0 0 110px" data-act="count" data-id="${e.entry_id}">${esc(t('count'))}</button></div>` : ''}
   </div>`;
+}
+function handoverHTML(entries){
+  const g = {};
+  entries.filter(e => e.is_bon).forEach(e => {
+    const k = e.date + '|' + e.store, x = g[k] = g[k] || { date: e.date, store: e.store, w: 0, k: 0, u: 0, mm: 0 };
+    x.w += e.wallet_cents; x.k += e.schluss_cents - (e.shortage_bearer === 'store' ? e.shortage_cents : 0);
+    if (e.counted_cents === null || e.counted_cents === undefined) x.u++; else if (e.counted_cents !== e.wallet_cents) x.mm++;
+  });
+  const rows = Object.values(g).sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : a.store.localeCompare(b.store));
+  if (!rows.length) return '';
+  return `<h3>${esc(t('handover'))}</h3><div class="sheet scroll"><table class="num">
+    <tr><th></th><th class="r">${esc(t('envelope_total'))}</th><th class="r">Kasse</th><th class="r">${esc(t('pool'))}</th></tr>
+    ${rows.map(x => `<tr><td>${esc(dayLabel(x.date))}<br><span class="muted small">${esc(x.store)}</span><br>${x.u ? `<span class="tag pend" style="margin:2px 0 0">${x.u} ${esc(t('tag_uncounted'))}</span>` : x.mm ? `<span class="tag bad" style="margin:2px 0 0">${x.mm} ≠</span>` : `<span class="tag ok" style="margin:2px 0 0">✓</span>`}</td>
+      <td class="r">${eur(x.w)}</td>
+      <td class="r">${x.k >= 0 ? esc(t('kasse_in')) : esc(t('kasse_out'))}<br><strong>${eur(Math.abs(x.k))}</strong></td><td class="r"><strong>${eur(x.w - x.k)}</strong></td></tr>`).join('')}
+  </table></div>`;
 }
 function loadIntoForm(id){
   const e = state.entryCache[id]; if (!e) return;
   const helpers = r => (e.allocations || []).filter(a => a.role === r).map(a => staffIdByName(a.name)).filter(Boolean);
   const server = e.server ? staffIdByName(e.server) : null;
+  if (e.is_bon){
+    state.form = { date: e.date, store: e.store, isBon: true, schluss: e.schluss_cents, card: e.card_cents,
+      wallet: money(e.wallet_cents), runners: helpers('runner'), bars: helpers('bar'), entryId: id,
+      direct: !!e.direct, reason: '', ack: false, server: null };
+    state.tab = 'entry'; LS.set('tab', 'entry'); render(); window.scrollTo(0, 0); return;
+  }
   state.form = { date: e.date, store: e.store, card: eurInput(e.card_cents), cash: eurInput(e.cash_cents),
     runners: helpers('runner'), bars: helpers('bar'), server: server && server !== state.me.id ? server : null, entryId: id,
     direct: !!e.direct, reason: '' };
@@ -570,6 +821,7 @@ async function viewLedger(){
   const mine = d.my_entries.map(e => entryItem(e, { locked: d.locked })).join('');
   const adj = d.adjustments.map(a => `<div class="item"><div class="top"><div>${esc(a.from)} → ${esc(a.to)}</div>
       <div class="amt num">${eur(a.amount_cents)}</div></div><div class="meta">${esc(a.reason)}</div></div>`).join('');
+  if (d.shortage_cents) hero += `<div class="warnbox">${esc(t('shortage_note'))}: ${eur(d.shortage_cents)}</div>`;
   $('#main').innerHTML = weekNav() + hero +
     (rec ? `<h3>${esc(t('received'))}</h3><div class="list">${rec}</div>` : '') +
     (mine ? `<h3>${esc(t('my_list'))}</h3><div class="list">${mine}</div>` : '') +
@@ -587,7 +839,8 @@ async function viewWeek(){
     else disp = await rpc('list_disputes', { ...tok(), p_status: 'open' });
   } catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
 
-  const entries = ov.entries.map(e => entryItem(e, { locked: ov.locked })).join('');
+  const entries = ov.entries.map(e => entryItem(e, { locked: ov.locked, count: true })).join('');
+  const handover = handoverHTML(ov.entries);
   let html = weekNav();
 
   if (ov.locked){
@@ -602,6 +855,7 @@ async function viewWeek(){
       <h3>${esc(t('pay_in'))}</h3><div class="list">${ins.map(line).join('') || `<div class="empty">–</div>`}</div>
       <h3>${esc(t('pay_out'))}</h3><div class="list">${outs.map(line).join('') || `<div class="empty">–</div>`}</div>
       ${zero.length ? `<h3>${esc(t('no_move'))}</h3><div class="list">${zero.map(line).join('')}</div>` : ''}
+      ${handover}
       <h3>${esc(t('entries'))}</h3><div class="list">${entries || `<div class="empty">${esc(t('empty'))}</div>`}</div>`;
   } else {
     const weekDisputes = (disp || []);
@@ -614,6 +868,7 @@ async function viewWeek(){
         <div class="top"><div><strong>${esc(x.raised_by)}</strong> <span class="muted">${x.date ? esc(dayLabel(x.date)) + ' · ' + esc(x.store) + ' · ' + esc(x.server) : ''}</span></div></div>
         <div>${esc(x.comment)}</div>
         <div class="acts"><button class="link" data-act="resolve" data-id="${x.id}">${esc(t('resolve'))}</button></div></div>`).join('')}</div>` : ''}
+      ${handover}
       <h3>${esc(t('entries'))}</h3><div class="list">${entries || `<div class="empty">${esc(t('empty'))}</div>`}</div>
       ${state.me.is_admin ? `<h3>${esc(t('adj_title'))}</h3>
       <div class="sheet">
@@ -645,15 +900,18 @@ async function viewAdmin(){
   try {
     if (state.adminSub === 'requests'){
       const list = await rpc('list_requests', { ...tok(), p_status: 'pending' });
-      refreshBadge(list.length);
-      el().innerHTML = list.length ? list.map(requestCard).join('') : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`;
+      const staff = await rpc('admin_list_staff', tok());
+      const binds = staff.filter(s => s.lightspeed_id && !s.lightspeed_confirmed);
+      refreshBadge(list.length + binds.length);
+      el().innerHTML = (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
+        + (list.length ? list.map(requestCard).join('') : (binds.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`));
     } else if (state.adminSub === 'staff'){
       const list = await rpc('admin_list_staff', tok());
       state.staffList = list;
       const e = state.staffEdit;
       el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
         `<div class="list">${list.map((s, i) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(s.name)}</strong>
-          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:''}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}</div>
+          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:''}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${s.lightspeed_id ? `<div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>` : ''}</div>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
           <button class="link" style="flex:0;margin-left:6px" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button></div></div>`).join('')}</div>`;
@@ -707,6 +965,7 @@ function requestCard(r){
     [t('role_server'), b.server, a && a.server, v => v || '–'],
     [t('card'), b.card_cents, a && a.card_cents, v => eur(v)],
     [t('cash'), b.cash_cents, a && a.cash_cents, v => eur(v)],
+    [t('lbl_wallet'), b.wallet_cents, a && a.wallet_cents, v => v === null || v === undefined ? '–' : eur(v)],
     [t('runner'), b.runners, a && a.runners, names],
     [t('bar'), b.bars, a && a.bars, names]
   ];
@@ -721,6 +980,12 @@ function requestCard(r){
     <div class="scroll"><table class="num"><tr><th></th><th>${esc(t('before'))}</th>${a ? `<th>${esc(t('after'))}</th>` : ''}</tr>${rows.map(tr).join('')}</table></div>
     <div class="row" style="margin-top:12px"><button class="btn ghost" data-act="req-reject" data-id="${r.id}">${esc(t('reject'))}</button><button class="btn" data-act="req-approve" data-id="${r.id}">${esc(t('approve'))}</button></div>
   </div>`;
+}
+function lsRow(s){
+  return `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(s.name)}</strong>
+    <div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})</div></div>
+    <button class="link" style="flex:0" data-act="ls-confirm" data-id="${s.id}">${esc(t('ls_confirm'))}</button>
+    <button class="link danger" style="flex:0;margin-left:12px" data-act="ls-unbind" data-id="${s.id}">${esc(t('ls_unbind'))}</button></div></div>`;
 }
 function refreshBadge(n){
   if (!state.me || !state.me.is_admin) return;
@@ -855,10 +1120,46 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'report-run': runReport(); break;
+    case 'entry-mode': state.entryMode = el.dataset.mode; render(); break;
+    case 'bon-read': readBon(); break;
+    case 'bon-reset': state.bon = blankBon(); render(); break;
+    case 'bon-submit': submitBon(); break;
+    case 'bon-edit-save': saveBonEdit(); break;
+    case 'photos': {
+      try {
+        const r = await callFn({ action: 'photo', entry_id: el.dataset.id });
+        const dlg = $('#photoDlg');
+        dlg.innerHTML = [r.photo_top, r.photo_bottom].filter(Boolean).map(u => `<img src="${esc(u)}" alt="">`).join('')
+          + `<button class="btn" data-act="photo-close">${esc(t('close'))}</button>`;
+        dlg.showModal();
+      } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'photo-close': $('#photoDlg').close(); break;
+    case 'count': {
+      const inp = document.getElementById('cnt-' + el.dataset.id), v = parseEur(inp && inp.value);
+      if (!inp || inp.value.trim() === '' || isNaN(v)) return toast(t('bad_amount'), true);
+      try { const r = await rpc('count_entry', { ...tok(), p_entry_id: el.dataset.id, p_counted_cents: v });
+        toast(r.match ? t('counted_ok') : t('counted_bad'), !r.match); render(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'bearer':
+      try { await rpc('admin_set_shortage_bearer', { ...tok(), p_entry_id: el.dataset.id, p_bearer: el.dataset.b }); render(); } catch(e){ toast(errText(e), true); }
+      break;
+    case 'ls-confirm': case 'ls-unbind':
+      try { await rpc('admin_confirm_lightspeed', { ...tok(), p_staff_id: el.dataset.id, p_confirm: act === 'ls-confirm' });
+        state.me = await rpc('me', tok()); LS.set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
+      break;
   }
 });
 document.addEventListener('change', async ev => {
   const el = ev.target;
+  if (el.dataset && el.dataset.photo && el.files && el.files[0]){
+    try { state.bon[el.dataset.photo] = await compressImage(el.files[0]); state.bon.read = null; render(); }
+    catch(e){ toast(t('err_GENERIC'), true); }
+    return;
+  }
+  if (el.id === 'b-ack'){ if (state.form.isBon) state.form.ack = el.checked; else state.bon.ack = el.checked; return; }
   if (el.id === 'f-date'){ state.form.date = el.value || today(); const p = $('#preview'); if (p) p.innerHTML = previewHTML(); }
   if (el.id === 'f-server'){
     state.form.server = el.value || null;
@@ -875,6 +1176,10 @@ document.addEventListener('change', async ev => {
 document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'f-reason') state.form.reason = ev.target.value;
+  if (id === 'b-schluss' || id === 'b-card' || id === 'b-wallet'){
+    state.bon[id.slice(2)] = ev.target.value; state.bon.ack = false; refreshBonSum();
+  }
+  if (id === 'e-wallet'){ state.form.wallet = ev.target.value; state.form.ack = false; refreshBonSum(); }
   if (id === 'f-card' || id === 'f-cash'){
     state.form[id === 'f-card' ? 'card' : 'cash'] = ev.target.value;
     const p = $('#preview'); if (p) p.innerHTML = previewHTML();
