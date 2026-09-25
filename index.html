@@ -127,6 +127,7 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .done p{margin:6px 0 16px}
 .done .sheet{text-align:left}
 .done .btn{margin-top:10px}
+.infobox{background:var(--celadon-soft);color:var(--celadon-deep);border-radius:var(--r-s);padding:10px 12px;margin:10px 0;font-size:15px}
 .login .names button{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:var(--r-m);padding:14px 8px;font-weight:600;font-size:17px}
 .login .pinbox{max-width:320px}
 .login .input{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff;font-size:28px;letter-spacing:10px;text-align:center;height:60px}
@@ -216,7 +217,12 @@ zh: {
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
   admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'只影响登录页分组和选人顺序，不影响分账',
-  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', same_today:'同今天其他人：{n}', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
+  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
+  checks_retake:'单据上的数字前后对不上，请点上面的照片重拍（已识别 {n} 次）。', checks_review:'已经重拍 2 次，还是对不上。可以直接提交，老板会看照片核对并更正。',
+  wait_read:'正在识别单据，请稍等', need_retake:'请先重拍单据', retake_all:'全部重拍', bon_numbers:'单据数字（自动识别，不能修改）',
+  done_review:'这张单据识别有疑问，老板会看照片核对。信封照常放。', review_title:'待核对的 Bon（识别未通过）', review_save:'核对完毕，保存',
+  reviewed:'已保存，分成已重新计算', review_first:'这周还有待核对的 Bon，请老板先在「审批」里处理', review_hint:'看照片后改正下面两个数字，分成和差额会按原来的钱包金额重新计算。',
+  prob_CARD_TIP_MISMATCH:'刷卡小费在单据上几处不一致', prob_CLOSING_MISMATCH:'Schlussbestand 验算不符', prob_NO_CLOSING:'没有读到 Schlussbestand', prob_UNREADABLE:'有看不清的项目', err_WEEK_LOCKED:'这周已锁定，不能再改', same_today:'同今天其他人：{n}', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
   pick_runner:'请选择 Runner，没有就点「无 Runner」', pick_bar:'请选择吧台，没有就点「无吧台」', not_chosen:'未选择',
   edit_reason:'修改理由', edit_reason_hint:'录入超过 10 分钟后的修改，需要老板批准', submit_request:'提交修改申请',
   request_sent:'已提交，等老板批准', ask_del_reason:'删除理由（需要老板批准）', pending_tag:'待批准',
@@ -281,7 +287,12 @@ de: {
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
   admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Nur für die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung',
-  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', same_today:'Wie die anderen heute: {n}', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
+  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
+  checks_retake:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte oben auf das Foto tippen und neu fotografieren ({n}. Versuch).', checks_review:'Nach 2 neuen Fotos passt es immer noch nicht. Du kannst trotzdem absenden – der Chef prüft das Foto und korrigiert.',
+  wait_read:'Bon wird noch ausgelesen, bitte kurz warten', need_retake:'Bitte zuerst den Bon neu fotografieren', retake_all:'Alles neu fotografieren', bon_numbers:'Zahlen vom Bon (automatisch erkannt, nicht änderbar)',
+  done_review:'Bei diesem Bon gab es Unklarheiten – der Chef prüft das Foto. Umschlag bitte wie immer abgeben.', review_title:'Zu prüfende Bons (Auslesen nicht bestanden)', review_save:'Geprüft, speichern',
+  reviewed:'Gespeichert, Verteilung neu berechnet', review_first:'Diese Woche gibt es noch zu prüfende Bons – bitte zuerst unter „Freigaben“ erledigen', review_hint:'Foto ansehen und die beiden Zahlen korrigieren. Verteilung und Fehlbetrag werden mit dem ursprünglichen Portemonnaie-Betrag neu berechnet.',
+  prob_CARD_TIP_MISMATCH:'Kartentrinkgeld an mehreren Stellen unterschiedlich', prob_CLOSING_MISMATCH:'Schlussbestand rechnerisch falsch', prob_NO_CLOSING:'Schlussbestand nicht gelesen', prob_UNREADABLE:'Unleserliche Felder', err_WEEK_LOCKED:'Woche ist abgeschlossen', same_today:'Wie die anderen heute: {n}', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
   pick_runner:'Bitte Runner wählen – oder „Kein Runner"', pick_bar:'Bitte Bar wählen – oder „Keine Bar"', not_chosen:'nicht gewählt',
   edit_reason:'Grund der Änderung', edit_reason_hint:'Änderungen später als 10 Minuten nach dem Eintragen muss der Chef freigeben', submit_request:'Änderung beantragen',
   request_sent:'Beantragt. Wartet auf Freigabe durch den Chef.', ask_del_reason:'Grund für das Löschen (Freigabe durch den Chef nötig)', pending_tag:'wartet auf Freigabe',
@@ -432,7 +443,7 @@ const state = {
   adminSub: 'requests', staffEdit: null, staffList: [],
   entryMode: 'bon', bon: blankBon(), viewAs: null
 };
-function blankBon(){ return { top: null, bottom: null, read: null, card: '', schluss: '', wallet: '', ack: false, busy: false }; }
+function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null }; }
 function blankForm(){
   return { date: today(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '' };
 }
@@ -634,43 +645,70 @@ function bonSummary(schluss, card, walletStr, runners, bars){
     ${short ? `<div class="errbox">${esc(t('shortage_msg', { n: eur(short) }))}
       <label class="check" style="margin-top:6px"><input type="checkbox" id="b-ack" ${state.bon.ack || state.form.ack ? 'checked' : ''}> ${esc(t('shortage_ack'))}</label></div>` : ''}`;
 }
+function bonDerived(){ const b = state.bon; return (b.read && b.read.result && b.read.result.derived) || null; }
+function bonState(){
+  // 'reading' | 'error' | 'unknown' | 'retake' | 'review' | 'ok' | 'none'
+  const b = state.bon, d = bonDerived();
+  if (b.busy) return 'reading';
+  if (b.readErr) return 'error';
+  if (!b.read) return 'none';
+  if (!d || !d.store || !d.user_id) return 'unknown';
+  if (b.read.checks && b.read.checks.ok) return 'ok';
+  return b.fails >= 3 ? 'review' : 'retake';
+}
 function bonNewSummary(){
-  const b = state.bon, f = state.form;
-  return bonSummary(parseSigned(b.schluss), parseEur(b.card), b.wallet, f.runners, f.bars);
+  const b = state.bon, f = state.form, d = bonDerived(), st = bonState();
+  if (!d || st === 'unknown') return String(b.wallet).trim() === '' ? `<div class="muted small">${esc(t('enter_wallet'))}</div>`
+    : `<div class="sum num"><div class="li big"><span>${esc(t('envelope'))}</span><span>${isNaN(parseEur(b.wallet)) ? '–' : eur(parseEur(b.wallet))}</span></div></div>`;
+  return bonSummary(d.schluss_cents || 0, d.card_cents || 0, b.wallet, f.runners, f.bars);
+}
+function bonStatusHTML(){
+  const b = state.bon, d = bonDerived(), st = bonState();
+  let h = '';
+  if (st === 'reading') h += `<div class="infobox">${esc(t('reading_bg'))}</div>`;
+  if (st === 'error') h += `<div class="errbox">${esc(b.readErr)}<div style="margin-top:8px"><button class="btn ghost" data-act="bon-read">${esc(t('read_retry'))}</button></div></div>`;
+  if (st === 'unknown') h += `<div class="errbox">${esc(t('store_unknown'))}</div>`;
+  if (st === 'retake') h += `<div class="warnbox">${esc(t('checks_retake', { n: b.fails }))}</div>`;
+  if (st === 'review') h += `<div class="warnbox">${esc(t('checks_review'))}</div>`;
+  if (d && st !== 'unknown') h += `<div class="sheet"><div class="muted small" style="margin-bottom:4px">${esc(t('bon_numbers'))}</div><div class="sum num">
+      <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(d.store || '?')}</strong></div>
+      <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(dayLabel(d.work_date)) : '?'}</strong></div>
+      <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
+      <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(d.schluss_cents || 0)}</strong></div>
+      <div class="li"><span class="muted">${esc(t('card_tip'))}</span><strong>${eur(d.card_cents || 0)}</strong></div>
+    </div></div>`;
+  return h;
+}
+function bonChipsBlock(){
+  return `<div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
+    <div class="field"><label>${esc(t('bar'))}</label><div class="chips">${chipsHTML('bar')}</div></div>`;
 }
 function viewBonNew(){
-  const b = state.bon, f = state.form;
+  const b = state.bon;
   const ph = (k, label) => `<div class="field"><label>${esc(label)}</label>
     <label class="photo ${b[k]?'has':''}">${b[k] ? `<img src="${b[k]}" alt="">` : `<span>${esc(t('take_photo'))}</span>`}
     <input type="file" accept="image/*" capture="environment" data-photo="${k}" hidden></label></div>`;
   let html = modeSeg() + ph('top', t('photo_top')) + ph('bottom', t('photo_bottom'));
-  if (!b.read){
-    html += `<button class="btn" data-act="bon-read" ${b.top && b.bottom && !b.busy ? '' : 'disabled'}>${esc(b.busy ? t('reading') : t('read_bon'))}</button>`;
-  } else {
-    const d = b.read.result.derived || {}, ok = b.read.checks && b.read.checks.ok;
-    html += `<h2>${esc(t('bon_result'))}</h2>
-      ${!d.store || !d.user_id ? `<div class="errbox">${esc(t('store_unknown'))}</div>` : !ok ? `<div class="warnbox">${esc(t('checks_bad'))}</div>` : ''}
-      <div class="sheet"><div class="sum">
-        <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(d.store || '?')}</strong></div>
-        <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(dayLabel(d.work_date)) : '?'}</strong></div>
-        <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
-      </div></div>
-      <div class="row">
-        <div class="field"><label for="b-schluss">${esc(t('schluss'))}</label><div class="money"><input class="input num" id="b-schluss" inputmode="text" autocomplete="off" value="${esc(b.schluss)}"></div></div>
-        <div class="field"><label for="b-card">${esc(t('card_tip'))}</label><div class="money"><input class="input num" id="b-card" inputmode="decimal" autocomplete="off" value="${esc(b.card)}"></div></div>
-      </div>
-      <div class="small muted" style="margin:-6px 0 14px">${esc(t('edit_flag_hint'))}</div>
+  if (b.top && b.bottom){
+    html += `<div id="bon-status">${bonStatusHTML()}</div>
       <div class="field"><label for="b-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="b-wallet" inputmode="decimal" autocomplete="off" placeholder="0,00" value="${esc(b.wallet)}"></div>
         <div class="small muted" style="margin-top:5px">${esc(t('wallet_hint'))}</div></div>
-      <div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
-      <div class="field"><label>${esc(t('bar'))}</label><div class="chips">${chipsHTML('bar')}</div></div>
+      <div id="bon-chips">${bonChipsBlock()}</div>
       <div class="sheet" id="bon-sum">${bonNewSummary()}</div>
       <button class="btn" data-act="bon-submit">${esc(t('submit_bon'))}</button>
-      <button class="btn ghost" style="margin-top:10px" data-act="bon-reset">${esc(t('retake'))}</button>`;
+      <button class="btn ghost" style="margin-top:10px" data-act="bon-retake">${esc(t('retake_all'))}</button>`;
   }
   html += `<h2>${esc(t('my_entries'))}</h2><div id="mine"><div class="loading">${esc(t('loading'))}</div></div>`;
   $('#main').innerHTML = html;
   loadMine();
+}
+// 识别完成时只更新结果区域，不打断正在输入的钱包金额
+function refreshBonParts(){
+  const st = $('#bon-status');
+  if (!st){ render(); return; }
+  st.innerHTML = bonStatusHTML();
+  const c = $('#bon-chips'); if (c) c.innerHTML = bonChipsBlock();
+  refreshBonSum();
 }
 function viewBonEdit(){
   const f = state.form;
@@ -697,21 +735,31 @@ function refreshBonSum(){
   el.innerHTML = f.isBon ? bonSummary(f.schluss, f.card, f.wallet, f.runners, f.bars) : bonNewSummary();
 }
 async function readBon(){
-  const b = state.bon; b.busy = true; render();
-  try {
-    const r = await callFn({ action: 'read', top: b.top.split(',')[1], bottom: b.bottom.split(',')[1] });
+  const b = state.bon; if (!b.top || !b.bottom) return;
+  const my = ++b.seq;
+  b.busy = true; b.readErr = null; b.read = null; b.dayHelp = null; b.ack = false; refreshBonParts();
+  let r = null, err = null;
+  try { r = await callFn({ action: 'read', top: b.top.split(',')[1], bottom: b.bottom.split(',')[1] }); }
+  catch(e){ err = errText(e); }
+  if (state.bon !== b || my !== b.seq) return;   // 照片已更换，丢弃旧结果
+  if (r){
     const d = r.result.derived || {};
-    Object.assign(b, { read: r, card: money(d.card_cents || 0), schluss: money(d.schluss_cents || 0), wallet: '', ack: false });
+    b.read = r;
+    if (!(r.checks && r.checks.ok) && d.store && d.user_id) b.fails++;
     if (d.work_date) state.form.date = d.work_date;
     if (d.work_date && d.store){ try { b.dayHelp = await rpc('day_helpers', { ...tok(), p_date: d.work_date, p_store: d.store }); } catch(e){} }
-  } catch(e){ toast(errText(e), true); }
-  b.busy = false; render();
+    if (state.bon !== b || my !== b.seq) return;
+  } else b.readErr = err;
+  b.busy = false; refreshBonParts();
 }
 async function submitBon(){
-  const b = state.bon, f = state.form;
-  const card = parseEur(b.card), schluss = parseSigned(b.schluss), w = parseEur(b.wallet);
+  const b = state.bon, f = state.form, st = bonState(), d = bonDerived();
+  if (st === 'reading') return toast(t('wait_read'), true);
+  if (st === 'error' || st === 'none') return toast(t('wait_read'), true);
+  if (st === 'unknown' || st === 'retake') return toast(t('need_retake'), true);
+  const card = d.card_cents || 0, schluss = d.schluss_cents || 0, w = parseEur(b.wallet);
   if (String(b.wallet).trim() === '') return toast(t('enter_wallet'), true);
-  if ([card, schluss, w].some(isNaN)) return toast(t('bad_amount'), true);
+  if (isNaN(w)) return toast(t('bad_amount'), true);
   if (f.runners === null) return toast(t('pick_runner'), true);
   if (f.bars === null) return toast(t('pick_bar'), true);
   const short = card - (w - schluss) > 0;
@@ -720,7 +768,7 @@ async function submitBon(){
   try {
     await rpc('submit_bon_entry', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
       p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack });
-    state.done = { wallet: w, date: f.date };
+    state.done = { wallet: w, date: f.date, review: st === 'review' };
     state.bon = blankBon(); state.form = blankForm(); render(); window.scrollTo(0, 0);
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
 }
@@ -748,6 +796,7 @@ function viewDone(){
       <div class="li big"><span>${esc(t('envelope'))}</span><span>${eur(d.wallet)}</span></div>
       <div class="li"><span>${esc(t('date'))}</span><span>${esc(dayLabel(d.date))}</span></div>
     </div></div>
+    ${d.review ? `<div class="warnbox" style="text-align:left">${esc(t('done_review'))}</div>` : ''}
     <p class="muted small">${esc(t('done_steps'))}</p>
     ${state.personal ? `<button class="btn" data-act="done-more">${esc(t('done_ok'))}</button>`
       : `<button class="btn" data-act="done-logout">${esc(t('done_logout'))}</button>
@@ -996,9 +1045,11 @@ async function viewAdmin(){
       const list = await rpc('list_requests', { ...tok(), p_status: 'pending' });
       const staff = await rpc('admin_list_staff', tok());
       const binds = staff.filter(s => s.lightspeed_id && !s.lightspeed_confirmed);
-      refreshBadge(list.length + binds.length);
-      el().innerHTML = (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
-        + (list.length ? list.map(requestCard).join('') : (binds.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`));
+      let reviews = []; try { reviews = (await rpc('admin_review_list', tok()) || []).filter(r => !r.locked); } catch(e){}
+      refreshBadge(list.length + binds.length + reviews.length);
+      el().innerHTML = (reviews.length ? `<h3>${esc(t('review_title'))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('review_hint'))}</div><div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
+        + (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
+        + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`));
     } else if (state.adminSub === 'staff'){
       const list = await rpc('admin_list_staff', tok());
       state.staffList = list;
@@ -1081,6 +1132,21 @@ function requestCard(r){
     <div style="margin:8px 0 10px;padding:8px 10px;background:var(--paper);border-radius:6px">${esc(t('reason'))}: ${esc(r.reason)}</div>
     <div class="scroll"><table class="num"><tr><th></th><th>${esc(t('before'))}</th>${a ? `<th>${esc(t('after'))}</th>` : ''}</tr>${rows.map(tr).join('')}</table></div>
     <div class="row" style="margin-top:12px"><button class="btn ghost" data-act="req-reject" data-id="${r.id}">${esc(t('reject'))}</button><button class="btn" data-act="req-approve" data-id="${r.id}">${esc(t('approve'))}</button></div>
+  </div>`;
+}
+function reviewCard(r){
+  const id = r.entry_id;
+  const probs = (r.problems || []).map(p => { const k = String(p).split(':')[0]; const x = t('prob_' + k); return x === 'prob_' + k ? p : x; }).join('；');
+  return `<div class="item">
+    <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong> <span class="muted">${esc(r.store)} · ${esc(r.server)}</span></div>
+      <div class="amt num">${esc(t('lbl_wallet'))} ${eur(r.wallet_cents)}</div></div>
+    ${probs ? `<div class="meta">${esc(probs)}</div>` : ''}
+    ${r.has_photo ? `<div class="acts"><button class="link" data-act="photos" data-id="${id}">${esc(t('photos'))}</button></div>` : ''}
+    <div class="row" style="margin-top:8px">
+      <div class="field"><label for="rv-s-${id}">${esc(t('schluss'))}</label><div class="money"><input class="input num" id="rv-s-${id}" inputmode="text" autocomplete="off" value="${money(r.schluss_cents)}"></div></div>
+      <div class="field"><label for="rv-c-${id}">${esc(t('card_tip'))}</label><div class="money"><input class="input num" id="rv-c-${id}" inputmode="decimal" autocomplete="off" value="${money(r.card_cents)}"></div></div>
+    </div>
+    ${state.me.is_admin ? `<button class="btn" data-act="review-save" data-id="${id}">${esc(t('review_save'))}</button>` : ''}
   </div>`;
 }
 function lsRow(s){
@@ -1198,6 +1264,8 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'lock':
+      try { const rv = await rpc('admin_review_list', tok()) || [];
+        if (rv.some(r => mondayOf(r.date) === state.week)) { toast(t('review_first'), true); break; } } catch(e){}
       if (!confirm(t('lock_confirm'))) break;
       el.disabled = true;
       try { await rpc('lock_week', { ...tok(), p_week_start: state.week }); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
@@ -1231,7 +1299,15 @@ document.addEventListener('click', async ev => {
     case 'view-exit': state.viewAs = null; state.tab = 'admin'; render(); break;
     case 'entry-mode': state.entryMode = el.dataset.mode; render(); break;
     case 'bon-read': readBon(); break;
-    case 'bon-reset': state.bon = blankBon(); render(); break;
+    case 'bon-retake': { const b = state.bon; b.top = null; b.bottom = null; b.read = null; b.readErr = null; b.busy = false; b.seq++; render(); window.scrollTo(0, 0); break; }
+    case 'review-save': {
+      const id = el.dataset.id, sv = parseSigned($('#rv-s-' + id).value), cv = parseEur($('#rv-c-' + id).value);
+      if (isNaN(sv) || isNaN(cv)) return toast(t('bad_amount'), true);
+      el.disabled = true;
+      try { await rpc('admin_review_bon', { ...tok(), p_entry_id: id, p_schluss_cents: sv, p_card_cents: cv }); toast(t('reviewed')); render(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
     case 'bon-submit': submitBon(); break;
     case 'bon-edit-save': saveBonEdit(); break;
     case 'photos': {
@@ -1270,8 +1346,16 @@ document.addEventListener('click', async ev => {
 document.addEventListener('change', async ev => {
   const el = ev.target;
   if (el.dataset && el.dataset.photo && el.files && el.files[0]){
-    try { state.bon[el.dataset.photo] = await compressImage(el.files[0]); state.bon.read = null; render(); }
-    catch(e){ toast(t('err_GENERIC'), true); }
+    const b = state.bon, firstPair = !(b.top && b.bottom);
+    try { b[el.dataset.photo] = await compressImage(el.files[0]); }
+    catch(e){ toast(t('err_GENERIC'), true); return; }
+    b.read = null; b.readErr = null; b.seq++; b.busy = false;
+    render();
+    if (b.top && b.bottom){
+      readBon();   // 自动开始识别
+      const w = $('#b-wallet');
+      if (w && firstPair && !b.wallet){ w.scrollIntoView({ block: 'center' }); w.focus(); }
+    }
     return;
   }
   if (el.id === 'b-ack'){ if (state.form.isBon) state.form.ack = el.checked; else state.bon.ack = el.checked; return; }
@@ -1291,9 +1375,7 @@ document.addEventListener('change', async ev => {
 document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'f-reason') state.form.reason = ev.target.value;
-  if (id === 'b-schluss' || id === 'b-card' || id === 'b-wallet'){
-    state.bon[id.slice(2)] = ev.target.value; state.bon.ack = false; refreshBonSum();
-  }
+  if (id === 'b-wallet'){ state.bon.wallet = ev.target.value; state.bon.ack = false; refreshBonSum(); }
   if (id === 'e-wallet'){ state.form.wallet = ev.target.value; state.form.ack = false; refreshBonSum(); }
   if (id === 'f-card' || id === 'f-cash'){
     state.form[id === 'f-card' ? 'card' : 'cash'] = ev.target.value;
