@@ -177,6 +177,10 @@ dialog::backdrop{background:rgba(31,42,39,.5)}
 .avbtn.yes.on{background:var(--celadon-deep);border-color:var(--celadon-deep);color:#fff}
 .avbtn.no.on{background:var(--neg);border-color:var(--neg);color:#fff}
 .avbtn:disabled{opacity:.55}
+.avgrid .avday{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.avgrid .avday:first-child{border-top:0}
+.avgrid .avday .dl{flex:1;font-weight:600}
+.avgrid .avbtn{min-width:96px}
 .avnote{height:42px;margin-top:8px;font-size:15px}
 .slotblk{padding:10px 0;border-top:1px solid var(--line)}
 .slotblk:first-of-type{border-top:0;padding-top:2px}
@@ -249,10 +253,12 @@ zh: {
   avail_title:'可上班时间', avail_deadline:'请在 {d} 前填写，之后不能再改。', avail_closed:'已截止。需要修改请找排班员。', avail_closed_sched:'已截止（排班员仍可修改自己的）。',
   avail_all_yes:'还没填的全部设为「能上」', av_yes:'能上', av_no:'不能', av_note:'备注（例如：最晚到 22 点）',
   team_plan:'全部排班', pub_state_no:'未发布', pub_state_yes:'已发布（{t}）', publish:'发布排班', republish:'重新发布（{n} 处变更）',
-  publish_confirm:'发布后所有员工都能看到这周的排班，确定发布？', published_toast:'已发布', unfilled:'还没填写可上班时间：{n}',
+  publish_confirm:'发布后所有员工都能看到这周的排班，确定发布？', published_toast:'已发布', unfilled:'还没回复下周能不能上：{n}',
   add_shift:'＋ 添加', hours_title:'本周计划工时', hours_line:'{h} 小时 · {n} 个班', sd_staff:'员工', sd_role:'岗位',
-  sd_start:'开始', sd_end:'结束', sd_note:'备注', av_group_yes:'能上', av_group_none:'没填', av_group_no:'不能上',
-  already_in:'已排在 {s}', shift_del_confirm:'删除这个班？', is_scheduler:'排班员',
+  sd_start:'开始', sd_end:'结束', sd_note:'备注', av_group_yes:'能上', av_group_none:'没回复', av_group_no:'不能上',
+  already_in:'已排在 {s}', shift_del_confirm:'删除这个班？', is_scheduler:'排班员', avail_hint:'点一下你不能上的班，再点一下取消。没标的都算能上，具体时间由排班员安排。',
+  avail_not_submitted:'还没提交。标好不能上的班后点「确认提交」；下周都能上也要点一下。', avail_submitted:'已提交：{n} 个班不能上。截止前可以随时修改。',
+  avail_submitted0:'已提交：下周都能上。截止前可以随时修改。', avail_submit:'确认提交', av_x:'不能上',
   err_AVAIL_CLOSED:'已截止，不能再修改', err_SHIFT_CONFLICT:'这个人这个时段已经排在另一家店了', err_INVALID_SLOT:'这家店这天没有这个班次', err_INVALID_TIME:'时间不对：结束要晚于开始', show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
   checks_retake:'单据上的数字前后对不上，请点上面的照片重拍（已识别 {n} 次）。', checks_review:'已经重拍 2 次，还是对不上。可以直接提交，老板会看照片核对并更正。',
   wait_read:'正在识别单据，请稍等', need_retake:'请先重拍单据', retake_all:'全部重拍', bon_numbers:'单据数字（自动识别，不能修改）',
@@ -329,10 +335,12 @@ de: {
   avail_title:'Verfügbarkeit', avail_deadline:'Bitte bis {d} eintragen, danach keine Änderung mehr.', avail_closed:'Frist abgelaufen. Änderungen bitte über die Dienstplanung.', avail_closed_sched:'Frist abgelaufen (Dienstplanung kann die eigenen Angaben noch ändern).',
   avail_all_yes:'Alles noch Offene auf „Kann“ setzen', av_yes:'Kann', av_no:'Kann nicht', av_note:'Notiz (z. B. nur bis 22 Uhr)',
   team_plan:'Gesamter Dienstplan', pub_state_no:'Nicht veröffentlicht', pub_state_yes:'Veröffentlicht ({t})', publish:'Dienstplan veröffentlichen', republish:'Erneut veröffentlichen ({n} Änderungen)',
-  publish_confirm:'Nach dem Veröffentlichen sehen alle den Dienstplan dieser Woche. Veröffentlichen?', published_toast:'Veröffentlicht', unfilled:'Noch keine Verfügbarkeit eingetragen: {n}',
+  publish_confirm:'Nach dem Veröffentlichen sehen alle den Dienstplan dieser Woche. Veröffentlichen?', published_toast:'Veröffentlicht', unfilled:'Noch keine Rückmeldung zur Verfügbarkeit: {n}',
   add_shift:'＋ Hinzufügen', hours_title:'Geplante Stunden diese Woche', hours_line:'{h} Std. · {n} Schichten', sd_staff:'Mitarbeiter', sd_role:'Position',
-  sd_start:'Beginn', sd_end:'Ende', sd_note:'Notiz', av_group_yes:'Kann', av_group_none:'Nicht eingetragen', av_group_no:'Kann nicht',
-  already_in:'Schon in {s}', shift_del_confirm:'Diese Schicht löschen?', is_scheduler:'Dienstplanung',
+  sd_start:'Beginn', sd_end:'Ende', sd_note:'Notiz', av_group_yes:'Kann', av_group_none:'Keine Rückmeldung', av_group_no:'Kann nicht',
+  already_in:'Schon in {s}', shift_del_confirm:'Diese Schicht löschen?', is_scheduler:'Dienstplanung', avail_hint:'Tippe auf die Schichten, an denen du nicht kannst – nochmal tippen zum Aufheben. Alles andere gilt als verfügbar, die genauen Zeiten legt die Dienstplanung fest.',
+  avail_not_submitted:'Noch nicht abgeschickt. Schichten markieren, an denen du nicht kannst, und „Abschicken“ tippen – auch wenn du die ganze Woche kannst.', avail_submitted:'Abgeschickt: {n} Schichten nicht verfügbar. Änderungen bis zur Frist möglich.',
+  avail_submitted0:'Abgeschickt: die ganze Woche verfügbar. Änderungen bis zur Frist möglich.', avail_submit:'Abschicken', av_x:'kann nicht',
   err_AVAIL_CLOSED:'Frist abgelaufen, keine Änderung möglich', err_SHIFT_CONFLICT:'Diese Person ist in dieser Zeit schon im anderen Restaurant eingeplant', err_INVALID_SLOT:'Diese Schicht gibt es an diesem Tag in diesem Restaurant nicht', err_INVALID_TIME:'Zeit ungültig: Ende muss nach Beginn liegen', show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
   checks_retake:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte oben auf das Foto tippen und neu fotografieren ({n}. Versuch).', checks_review:'Nach 2 neuen Fotos passt es immer noch nicht. Du kannst trotzdem absenden – der Chef prüft das Foto und korrigiert.',
   wait_read:'Bon wird noch ausgelesen, bitte kurz warten', need_retake:'Bitte zuerst den Bon neu fotografieren', retake_all:'Alles neu fotografieren', bon_numbers:'Zahlen vom Bon (automatisch erkannt, nicht änderbar)',
@@ -1297,22 +1305,17 @@ function planMineHTML(d){
       : `<div class="empty">${esc(t('no_shifts'))}</div>`}</div>`;
   }
   const closed = d.deadline_passed && !d.is_sched;
+  const nNo = d.my_avail.filter(x => x.status === 'no').length;
   h += `<h3>${esc(t('avail_title'))}</h3>
-    <div class="small muted" style="margin:-4px 0 10px">${esc(closed ? t('avail_closed') : d.deadline_passed ? t('avail_closed_sched') : t('avail_deadline', { d: fmtDateTime(d.deadline) }))}</div>`;
-  if (!closed) h += `<button class="btn ghost" style="margin-bottom:12px" data-act="avail-all">${esc(t('avail_all_yes'))}</button>`;
-  h += planDays(d).map(date => {
-    const rows = SLOTS.map(slot => {
-      const ts = slotsOn(d, date).filter(x => x.slot === slot); if (!ts.length) return '';
-      const times = [...new Set(ts.map(x => x.start + '–' + x.end))].join(' / ');
-      const only = ts.length === 1 ? ' · ' + t('only_store', { s: ts[0].store }) : '';
-      const a = d.my_avail.find(x => x.date === date && x.slot === slot) || {};
-      const btn = v => `<button class="avbtn ${v} ${a.status === v ? 'on' : ''}" aria-pressed="${a.status === v}" data-act="avail" data-date="${date}" data-slot="${slot}" data-v="${v}" ${closed ? 'disabled' : ''}>${esc(t(v === 'yes' ? 'av_yes' : 'av_no'))}</button>`;
-      return `<div class="avrow"><div class="avtop"><div class="avl"><strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(times + only)}</span></div>
-        <div class="avb">${btn('yes')}${btn('no')}</div></div>
-        ${a.status ? `<input class="input avnote" data-date="${date}" data-slot="${slot}" placeholder="${esc(t('av_note'))}" value="${esc(a.note || '')}" ${closed ? 'disabled' : ''}>` : ''}</div>`;
-    }).join('');
-    return `<div class="sheet"><div class="dayh">${esc(dayLabel(date))}</div>${rows}</div>`;
-  }).join('');
+    <div class="small muted" style="margin:-4px 0 10px">${esc(closed ? t('avail_closed') : d.deadline_passed ? t('avail_closed_sched') : t('avail_deadline', { d: fmtDateTime(d.deadline) }))}</div>
+    ${d.my_submitted ? `<div class="infobox">${esc(nNo ? t('avail_submitted', { n: nNo }) : t('avail_submitted0'))}</div>` : `<div class="warnbox">${esc(t('avail_not_submitted'))}</div>`}
+    ${closed ? '' : `<div class="small muted" style="margin-bottom:8px">${esc(t('avail_hint'))}</div>`}
+    <div class="sheet avgrid">${planDays(d).map(date => `<div class="avday"><div class="dl">${esc(dayLabel(date))}</div>${SLOTS.map(slot => {
+      if (!slotsOn(d, date).some(x => x.slot === slot)) return `<span style="min-width:96px"></span>`;
+      const no = d.my_avail.some(x => x.date === date && x.slot === slot && x.status === 'no');
+      return `<button class="avbtn no ${no ? 'on' : ''}" aria-pressed="${no}" data-act="avail" data-date="${date}" data-slot="${slot}" ${closed ? 'disabled' : ''}>${no ? '✕ ' : ''}${esc(slotLabel(slot))}</button>`;
+    }).join('')}</div>`).join('')}</div>
+    ${!closed && !d.my_submitted ? `<button class="btn" style="margin-bottom:14px" data-act="avail-submit">${esc(t('avail_submit'))}</button>` : ''}`;
   if (d.published && d.shifts.length) h += `<h3>${esc(t('team_plan'))}</h3>` + planGridHTML(d, false);
   return h;
 }
@@ -1368,7 +1371,8 @@ function shiftDlgRender(){
     return `<button type="button" class="sdchip ${on ? 'on' : ''}" aria-pressed="${on}" data-act="sd-staff" data-id="${s.id}" ${other ? 'disabled' : ''}>${esc(s.name)}<small>${esc(sub)}</small></button>`;
   };
   const grp = (k, list) => list.length ? `<div class="sdgrp">${esc(t(k))}</div><div class="sdchips">${list.map(chip).join('')}</div>` : '';
-  const yes = d.staff.filter(s => avail(s.id).status === 'yes'), no = d.staff.filter(s => avail(s.id).status === 'no'), none = d.staff.filter(s => !avail(s.id).status);
+  const no = d.staff.filter(s => avail(s.id).status === 'no'), yes = d.staff.filter(s => s.filled && avail(s.id).status !== 'no'),
+        none = d.staff.filter(s => !s.filled && avail(s.id).status !== 'no');
   $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(se.date))} · ${esc(se.store)} · ${esc(slotLabel(se.slot))}</h2>
     <label>${esc(t('sd_staff'))}</label>
     ${grp('av_group_yes', yes)}${grp('av_group_none', none)}${grp('av_group_no', no)}
@@ -1529,19 +1533,15 @@ document.addEventListener('click', async ev => {
     case 'plan-next': state.planWeek = addDays(state.planWeek, 7); viewPlan(); break;
     case 'plan-sub': state.planSub = el.dataset.k; planRender(); break;
     case 'avail': {
-      const d = state.plan, date = el.dataset.date, slot = el.dataset.slot, v = el.dataset.v;
-      const cur = d.my_avail.find(x => x.date === date && x.slot === slot) || {};
-      try { await availSet(date, slot, cur.status === v ? null : v, cur.status === v ? null : cur.note); planRender(); } catch(e){ toast(errText(e), true); }
+      const d = state.plan, date = el.dataset.date, slot = el.dataset.slot;
+      const no = d.my_avail.some(x => x.date === date && x.slot === slot && x.status === 'no');
+      try { await availSet(date, slot, no ? null : 'no', null); d.my_submitted = true; planRender(); } catch(e){ toast(errText(e), true); }
       break;
     }
-    case 'avail-all': {
-      const d = state.plan; el.disabled = true;
-      try { for (const x of d.slots){
-          if (d.my_avail.some(a => a.date === x.date && a.slot === x.slot)) continue;
-          await availSet(x.date, x.slot, 'yes', null); }
-        planRender(); } catch(e){ toast(errText(e), true); planRender(); }
+    case 'avail-submit':
+      try { await rpc('submit_availability', { ...tok(), p_week_start: state.planWeek }); state.plan.my_submitted = true; toast(t('saved')); planRender(); }
+      catch(e){ toast(errText(e), true); }
       break;
-    }
     case 'plan-publish':
       if (!confirm(t('publish_confirm'))) break;
       try { await rpc('sched_publish', { ...tok(), p_week_start: state.planWeek }); toast(t('published_toast')); viewPlan(); } catch(e){ toast(errText(e), true); }
