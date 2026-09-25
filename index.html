@@ -217,7 +217,7 @@ zh: {
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
   admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'只影响登录页分组和选人顺序，不影响分账',
-  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
+  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
   checks_retake:'单据上的数字前后对不上，请点上面的照片重拍（已识别 {n} 次）。', checks_review:'已经重拍 2 次，还是对不上。可以直接提交，老板会看照片核对并更正。',
   wait_read:'正在识别单据，请稍等', need_retake:'请先重拍单据', retake_all:'全部重拍', bon_numbers:'单据数字（自动识别，不能修改）',
   done_review:'这张单据识别有疑问，老板会看照片核对。信封照常放。', review_title:'待核对的 Bon（识别未通过）', review_save:'核对完毕，保存',
@@ -287,7 +287,7 @@ de: {
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
   admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Nur für die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung',
-  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
+  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
   checks_retake:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte oben auf das Foto tippen und neu fotografieren ({n}. Versuch).', checks_review:'Nach 2 neuen Fotos passt es immer noch nicht. Du kannst trotzdem absenden – der Chef prüft das Foto und korrigiert.',
   wait_read:'Bon wird noch ausgelesen, bitte kurz warten', need_retake:'Bitte zuerst den Bon neu fotografieren', retake_all:'Alles neu fotografieren', bon_numbers:'Zahlen vom Bon (automatisch erkannt, nicht änderbar)',
   done_review:'Bei diesem Bon gab es Unklarheiten – der Chef prüft das Foto. Umschlag bitte wie immer abgeben.', review_title:'Zu prüfende Bons (Auslesen nicht bestanden)', review_save:'Geprüft, speichern',
@@ -443,7 +443,7 @@ const state = {
   adminSub: 'requests', staffEdit: null, staffList: [],
   entryMode: 'bon', bon: blankBon(), viewAs: null
 };
-function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null }; }
+function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null }; }
 function blankForm(){
   return { date: today(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '' };
 }
@@ -668,11 +668,20 @@ function bonState(){
   if (b.read.checks && b.read.checks.ok) return 'ok';
   return b.fails >= 3 ? 'review' : 'retake';
 }
+function bonNumbersHTML(d){
+  return `<div style="margin-bottom:12px"><div class="muted small" style="margin-bottom:4px">${esc(t('bon_numbers'))}</div><div class="sum num">
+      <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(d.store || '?')}</strong></div>
+      <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(dayLabel(d.work_date)) : '?'}</strong></div>
+      <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
+      <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(d.schluss_cents || 0)}</strong></div>
+      <div class="li"><span class="muted">${esc(t('card_tip'))}</span><strong>${eur(d.card_cents || 0)}</strong></div>
+    </div></div>`;
+}
 function bonNewSummary(){
   const b = state.bon, f = state.form, d = bonDerived(), st = bonState();
-  if (!d || st === 'unknown') return String(b.wallet).trim() === '' ? `<div class="muted small">${esc(t('enter_wallet'))}</div>`
-    : `<div class="sum num"><div class="li big"><span>${esc(t('envelope'))}</span><span>${isNaN(parseEur(b.wallet)) ? '–' : eur(parseEur(b.wallet))}</span></div></div>`;
-  return bonSummary(d.schluss_cents || 0, d.card_cents || 0, b.wallet, f.runners, f.bars);
+  if (!b.walletDone || String(b.wallet).trim() === '') return `<div class="muted small">${esc(t('show_after_wallet'))}</div>`;
+  if (!d || st === 'unknown') return `<div class="sum num"><div class="li big"><span>${esc(t('envelope'))}</span><span>${isNaN(parseEur(b.wallet)) ? '–' : eur(parseEur(b.wallet))}</span></div></div>`;
+  return bonNumbersHTML(d) + bonSummary(d.schluss_cents || 0, d.card_cents || 0, b.wallet, f.runners, f.bars);
 }
 function bonStatusHTML(){
   const b = state.bon, d = bonDerived(), st = bonState();
@@ -682,13 +691,6 @@ function bonStatusHTML(){
   if (st === 'unknown') h += `<div class="errbox">${esc(t('store_unknown'))}</div>`;
   if (st === 'retake') h += `<div class="warnbox">${esc(t('checks_retake', { n: b.fails }))}</div>`;
   if (st === 'review') h += `<div class="warnbox">${esc(t('checks_review'))}</div>`;
-  if (d && st !== 'unknown') h += `<div class="sheet"><div class="muted small" style="margin-bottom:4px">${esc(t('bon_numbers'))}</div><div class="sum num">
-      <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(d.store || '?')}</strong></div>
-      <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(dayLabel(d.work_date)) : '?'}</strong></div>
-      <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
-      <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(d.schluss_cents || 0)}</strong></div>
-      <div class="li"><span class="muted">${esc(t('card_tip'))}</span><strong>${eur(d.card_cents || 0)}</strong></div>
-    </div></div>`;
   return h;
 }
 function bonChipsBlock(){
@@ -772,6 +774,8 @@ async function submitBon(){
   const card = d.card_cents || 0, schluss = d.schluss_cents || 0, w = parseEur(b.wallet);
   if (String(b.wallet).trim() === '') return toast(t('enter_wallet'), true);
   if (isNaN(w)) return toast(t('bad_amount'), true);
+  // 明细刚显示出来时先让员工看一眼，不直接提交
+  if (!b.walletDone || Date.now() - b.shownAt < 800){ b.walletDone = true; b.shownAt = b.shownAt || Date.now(); refreshBonSum(); const el = $('#bon-sum'); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
   if (f.runners === null) return toast(t('pick_runner'), true);
   if (f.bars === null) return toast(t('pick_bar'), true);
   const short = card - (w - schluss) > 0;
@@ -1361,7 +1365,14 @@ document.addEventListener('click', async ev => {
       break;
   }
 });
+document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur(); });
 document.addEventListener('change', async ev => {
+  if (ev.target.id === 'b-wallet'){
+    const b = state.bon, v = ev.target.value.trim();
+    if (v !== '' && isNaN(parseEur(v))) return toast(t('bad_amount'), true);
+    b.walletDone = v !== ''; b.shownAt = Date.now(); refreshBonSum();
+    return;
+  }
   const el = ev.target;
   if (el.dataset && el.dataset.photo && el.files && el.files[0]){
     const b = state.bon, firstPair = !(b.top && b.bottom);
@@ -1393,7 +1404,7 @@ document.addEventListener('change', async ev => {
 document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'f-reason') state.form.reason = ev.target.value;
-  if (id === 'b-wallet'){ state.bon.wallet = ev.target.value; state.bon.ack = false; refreshBonSum(); }
+  if (id === 'b-wallet'){ const b = state.bon; b.wallet = ev.target.value; b.ack = false; if (b.walletDone){ b.walletDone = false; refreshBonSum(); } }
   if (id === 'e-wallet'){ state.form.wallet = ev.target.value; state.form.ack = false; refreshBonSum(); }
   if (id === 'f-card' || id === 'f-cash'){
     state.form[id === 'f-card' ? 'card' : 'cash'] = ev.target.value;
