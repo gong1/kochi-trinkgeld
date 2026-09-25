@@ -217,7 +217,7 @@ zh: {
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
   admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'只影响登录页分组和选人顺序，不影响分账',
-  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
+  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
   checks_retake:'单据上的数字前后对不上，请点上面的照片重拍（已识别 {n} 次）。', checks_review:'已经重拍 2 次，还是对不上。可以直接提交，老板会看照片核对并更正。',
   wait_read:'正在识别单据，请稍等', need_retake:'请先重拍单据', retake_all:'全部重拍', bon_numbers:'单据数字（自动识别，不能修改）',
   done_review:'这张单据识别有疑问，老板会看照片核对。信封照常放。', review_title:'待核对的 Bon（识别未通过）', review_save:'核对完毕，保存',
@@ -287,7 +287,7 @@ de: {
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
   admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Nur für die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung',
-  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
+  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
   checks_retake:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte oben auf das Foto tippen und neu fotografieren ({n}. Versuch).', checks_review:'Nach 2 neuen Fotos passt es immer noch nicht. Du kannst trotzdem absenden – der Chef prüft das Foto und korrigiert.',
   wait_read:'Bon wird noch ausgelesen, bitte kurz warten', need_retake:'Bitte zuerst den Bon neu fotografieren', retake_all:'Alles neu fotografieren', bon_numbers:'Zahlen vom Bon (automatisch erkannt, nicht änderbar)',
   done_review:'Bei diesem Bon gab es Unklarheiten – der Chef prüft das Foto. Umschlag bitte wie immer abgeben.', review_title:'Zu prüfende Bons (Auslesen nicht bestanden)', review_save:'Geprüft, speichern',
@@ -552,7 +552,15 @@ async function doLogin(){
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   state.loginErr = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
   state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon();
-  if (!r.me.must_change_pin){ try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} await loadCommon(); }
+  if (!r.me.must_change_pin){
+    try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} await loadCommon();
+    if (state.me.is_admin || state.me.is_tip_manager){
+      // 登录后直接进入点收信封；上周还有没点收的就先显示上周
+      state.tab = 'week';
+      try { const prev = addDays(mondayOf(today()), -7), ov = await rpc('week_overview', { ...tok(), p_week_start: prev });
+        if (!ov.locked && ov.entries.some(e => e.is_bon && e.counted_cents !== e.wallet_cents)) state.week = prev; } catch(e){}
+    }
+  }
   render();
 }
 
@@ -986,7 +994,13 @@ async function viewWeek(){
     else disp = await rpc('list_disputes', { ...tok(), p_status: 'open' });
   } catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
 
-  const entries = ov.entries.map(e => entryItem(e, { locked: ov.locked, count: true })).join('');
+  const entries = ov.entries.map(e => entryItem(e, { locked: ov.locked })).join('');
+  const todo = ov.locked ? [] : ov.entries.filter(e => e.is_bon && e.counted_cents !== e.wallet_cents)
+    .sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : a.store.localeCompare(b.store));
+  const countBlock = ov.locked || !ov.entries.some(e => e.is_bon) ? ''
+    : todo.length ? `<h3>${esc(t('to_count', { n: todo.length }))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('to_count_hint'))}</div>
+        <div class="list">${todo.map(e => entryItem(e, { count: true })).join('')}</div>`
+      : `<div class="infobox">${esc(t('all_counted'))}</div>`;
   const handover = handoverHTML(ov.entries);
   let html = weekNav();
 
@@ -1007,7 +1021,7 @@ async function viewWeek(){
   } else {
     const weekDisputes = (disp || []);
     const canLock = addDays(state.week, 7) <= today();
-    html += `
+    html += `${countBlock}
       <h3>${esc(t('nets'))}</h3>
       <div class="list">${ov.nets.length ? ov.nets.map(n => `<div class="item"><div class="top"><div>${esc(n.name)}</div>
         <div class="amt num ${n.net_cents>0?'pos':'negc'}">${n.net_cents>0?'+':''}${eur(n.net_cents)}</div></div></div>`).join('') : `<div class="empty">${esc(t('empty'))}</div>`}</div>
