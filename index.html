@@ -237,7 +237,7 @@ zh: {
   count:'点收', counted_ok:'点收一致', counted_bad:'点收金额不一致，已标红', photos:'照片', close:'关闭',
   bearer_store:'改为店里承担', bearer_staff:'改为员工承担', bearer_is_store:'店里承担',
   handover:'每日交接', envelope_total:'信封合计', kasse_in:'放入 Kasse', kasse_out:'从 Kasse 取出', pool:'小费池', status:'状态',
-  ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
+  ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_unbind_full:'解除绑定', ls_none:'还没有绑定。此人第一次上传 Bon 时会自动绑定，需要你确认。', ls_unbind_q:'解除 {n} 的 Lightspeed 绑定？此人下次上传 Bon 时会重新绑定，需要你确认。', ls_unbound:'已解除绑定', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
   shortage_note:'本周你承担的差额', read_again:'换照片后请重新识别',
   view_as:'查看', viewing_as:'正在以 {n} 的视角查看（只读）', exit_view:'退出查看',
   role_server:'服务员', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
@@ -302,7 +302,7 @@ de: {
   count:'Zählen', counted_ok:'Stimmt', counted_bad:'Betrag weicht ab – markiert', photos:'Fotos', close:'Schließen',
   bearer_store:'Laden übernimmt', bearer_staff:'Mitarbeiter trägt', bearer_is_store:'Laden trägt',
   handover:'Tägliche Übergabe', envelope_total:'Umschläge', kasse_in:'In die Kasse', kasse_out:'Aus der Kasse', pool:'Trinkgeldtopf', status:'Status',
-  ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
+  ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_unbind_full:'Verknüpfung lösen', ls_none:'Noch nicht verknüpft. Wird beim ersten Bon-Upload automatisch verknüpft und muss bestätigt werden.', ls_unbind_q:'Lightspeed-Verknüpfung von {n} lösen? Beim nächsten Bon-Upload wird neu verknüpft und muss bestätigt werden.', ls_unbound:'Verknüpfung gelöst', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
   shortage_note:'Von dir getragene Fehlbeträge diese Woche', read_again:'Neue Fotos bitte erneut auslesen',
   view_as:'Ansehen', viewing_as:'Ansicht als {n} (nur lesen)', exit_view:'Ansicht beenden',
   role_server:'Service', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
@@ -1034,6 +1034,10 @@ function staffForm(s){
     <div class="field" style="margin-top:14px"><label>${esc(t('main_role'))}</label>
       <div class="seg" id="s-role">${['service', 'runner', 'bar'].map(r => `<button type="button" data-act="role-pick" data-r="${r}" class="${(s.main_role || 'service') === r ? 'on' : ''}" aria-pressed="${(s.main_role || 'service') === r}">${esc(t('grp_' + r))}</button>`).join('')}</div>
       <div class="small muted" style="margin-top:6px">${esc(t('main_role_hint'))}</div></div>
+    ${isNew ? '' : `<div class="field" style="margin-top:14px"><label>Lightspeed</label>
+      ${s.lightspeed_id ? `<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;min-width:0"><strong>${esc(s.lightspeed_name || '?')}</strong> <span class="muted">(${esc(s.lightspeed_id)})</span>${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>
+        <button class="link danger" style="flex:none;width:auto;white-space:nowrap" data-act="staff-ls-unbind">${esc(t('ls_unbind_full'))}</button></div>`
+      : `<div class="small muted">${esc(t('ls_none'))}</div>`}</div>`}
     ${isNew ? `<div class="small muted" style="margin-top:8px">${esc(t('initial_pin_hint'))}</div>`
             : s.id !== state.me.id ? `<button class="link" style="margin-top:8px" data-act="staff-reset">${esc(t('reset_pin'))}</button>` : ''}
     <div class="row" style="margin-top:12px"><button class="btn ghost" data-act="staff-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="staff-save">${esc(t('save'))}</button></div></div>`;
@@ -1234,6 +1238,12 @@ document.addEventListener('click', async ev => {
     case 'bearer':
       try { await rpc('admin_set_shortage_bearer', { ...tok(), p_entry_id: el.dataset.id, p_bearer: el.dataset.b }); render(); } catch(e){ toast(errText(e), true); }
       break;
+    case 'staff-ls-unbind': {
+      const s = state.staffEdit; if (!confirm(t('ls_unbind_q', { n: s.name }))) break;
+      try { await rpc('admin_confirm_lightspeed', { ...tok(), p_staff_id: s.id, p_confirm: false });
+        toast(t('ls_unbound')); state.staffEdit = null; state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'ls-confirm': case 'ls-unbind':
       try { await rpc('admin_confirm_lightspeed', { ...tok(), p_staff_id: el.dataset.id, p_confirm: act === 'ls-confirm' });
         state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
