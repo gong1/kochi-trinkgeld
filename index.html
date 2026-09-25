@@ -528,11 +528,15 @@ async function renderLogin(){
   const pin = $('#pin'); if (pin) pin.focus();
 }
 function loginNames(){
-  const list = state.loginStaff.filter(s => !!s.is_admin === state.loginAdmin);
   const btns = g => `<div class="names">${g.map(s => `<button data-act="login-pick" data-id="${s.id}" data-name="${esc(s.name)}">${esc(s.name)}</button>`).join('')}</div>`;
-  if (state.loginAdmin) return btns(list);
+  // 厨房账号放在管理员登录页，员工名单里不显示
+  if (state.loginAdmin){
+    const admins = state.loginStaff.filter(s => s.is_admin), kitchen = state.loginStaff.filter(s => s.is_kitchen && !s.is_admin);
+    return btns(admins) + (kitchen.length ? `<h2 class="grp" style="margin-top:18px">${esc(t('grp_kitchen'))}</h2>` + btns(kitchen) : '');
+  }
+  const list = state.loginStaff.filter(s => !s.is_admin && !s.is_kitchen);
   const role = s => s.is_kitchen ? 'kitchen' : (s.main_role || 'service');
-  return ['service', 'runner', 'bar', 'kitchen'].map(k => {
+  return ['service', 'runner', 'bar'].map(k => {
     const g = list.filter(s => role(s) === k);
     return g.length ? `<h2 class="grp">${esc(t('grp_' + k))}</h2>` + btns(g) : '';
   }).join('');
