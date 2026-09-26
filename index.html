@@ -181,6 +181,7 @@ dialog::backdrop{background:rgba(31,42,39,.5)}
 .avgrid .avday:first-child{border-top:0}
 .avgrid .avday .dl{flex:1;font-weight:600}
 .avgrid .avbtn{min-width:96px}
+.avgrid .avbtn.no:not(.on){background:#DDF1E4;border-color:#8FCBA6;color:#1E6B45}
 .avnote{height:42px;margin-top:8px;font-size:15px}
 .slotblk{padding:10px 0;border-top:1px solid var(--line)}
 .slotblk:first-of-type{border-top:0;padding-top:2px}
@@ -285,7 +286,7 @@ zh: {
   count:'点收', counted_ok:'点收一致', counted_bad:'点收金额不一致，已标红', photos:'照片', close:'关闭',
   bearer_store:'改为店里承担', bearer_staff:'改为员工承担', bearer_is_store:'店里承担',
   handover:'每日交接', envelope_total:'信封合计', kasse_in:'放入 Kasse', kasse_out:'从 Kasse 取出', pool:'小费池', status:'状态',
-  ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_unbind_full:'解除绑定', ls_none:'还没有绑定。此人第一次上传 Bon 时会自动绑定，需要你确认。', ls_unbind_q:'解除 {n} 的 Lightspeed 绑定？此人下次上传 Bon 时会重新绑定，需要你确认。', ls_unbound:'已解除绑定', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
+  ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_unbind_full:'解除绑定', ls_none:'还没有绑定。此人第一次上传 Bon 时会自动绑定，需要你确认。', ls_none_store:'还没绑定（在这家店第一次上传 Bon 时自动绑定）', ls_unbind_q:'解除 {n} 的 Lightspeed 绑定？此人下次上传 Bon 时会重新绑定，需要你确认。', ls_unbound:'已解除绑定', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
   shortage_note:'本周你承担的差额', read_again:'换照片后请重新识别',
   view_as:'查看', viewing_as:'正在以 {n} 的视角查看（只读）', exit_view:'退出查看',
   role_server:'服务员', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
@@ -367,7 +368,7 @@ de: {
   count:'Zählen', counted_ok:'Stimmt', counted_bad:'Betrag weicht ab – markiert', photos:'Fotos', close:'Schließen',
   bearer_store:'Laden übernimmt', bearer_staff:'Mitarbeiter trägt', bearer_is_store:'Laden trägt',
   handover:'Tägliche Übergabe', envelope_total:'Umschläge', kasse_in:'In die Kasse', kasse_out:'Aus der Kasse', pool:'Trinkgeldtopf', status:'Status',
-  ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_unbind_full:'Verknüpfung lösen', ls_none:'Noch nicht verknüpft. Wird beim ersten Bon-Upload automatisch verknüpft und muss bestätigt werden.', ls_unbind_q:'Lightspeed-Verknüpfung von {n} lösen? Beim nächsten Bon-Upload wird neu verknüpft und muss bestätigt werden.', ls_unbound:'Verknüpfung gelöst', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
+  ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_unbind_full:'Verknüpfung lösen', ls_none:'Noch nicht verknüpft. Wird beim ersten Bon-Upload automatisch verknüpft und muss bestätigt werden.', ls_none_store:'Noch nicht verknüpft (beim ersten Bon-Upload in diesem Restaurant)', ls_unbind_q:'Lightspeed-Verknüpfung von {n} lösen? Beim nächsten Bon-Upload wird neu verknüpft und muss bestätigt werden.', ls_unbound:'Verknüpfung gelöst', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
   shortage_note:'Von dir getragene Fehlbeträge diese Woche', read_again:'Neue Fotos bitte erneut auslesen',
   view_as:'Ansehen', viewing_as:'Ansicht als {n} (nur lesen)', exit_view:'Ansicht beenden',
   role_server:'Service', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
@@ -1123,7 +1124,7 @@ async function viewAdmin(){
     if (state.adminSub === 'requests'){
       const list = await rpc('list_requests', { ...tok(), p_status: 'pending' });
       const staff = await rpc('admin_list_staff', tok());
-      const binds = staff.filter(s => s.lightspeed_id && !s.lightspeed_confirmed);
+      const binds = staff.flatMap(s => (s.ls_ids || []).filter(b => !b.confirmed).map(b => ({ ...b, sid: s.id, sname: s.name })));
       let reviews = []; try { reviews = (await rpc('admin_review_list', tok()) || []).filter(r => !r.locked); } catch(e){}
       refreshBadge(list.length + binds.length + reviews.length);
       el().innerHTML = (reviews.length ? `<h3>${esc(t('review_title'))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('review_hint'))}</div><div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
@@ -1135,7 +1136,7 @@ async function viewAdmin(){
       const e = state.staffEdit;
       el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
         `<div class="list">${list.map((s, i) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(s.name)}</strong>
-          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${s.lightspeed_id ? `<div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>` : ''}</div>
+          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
           <button class="mv" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
           <button class="link" style="flex:0;margin-left:6px" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button>
@@ -1181,9 +1182,10 @@ function staffForm(s){
       <div class="seg" id="s-role">${['service', 'runner', 'bar'].map(r => `<button type="button" data-act="role-pick" data-r="${r}" class="${(s.main_role || 'service') === r ? 'on' : ''}" aria-pressed="${(s.main_role || 'service') === r}">${esc(t('grp_' + r))}</button>`).join('')}</div>
       <div class="small muted" style="margin-top:6px">${esc(t('main_role_hint'))}</div></div>
     ${isNew ? '' : `<div class="field" style="margin-top:14px"><label>Lightspeed</label>
-      ${s.lightspeed_id ? `<div style="display:flex;align-items:center;gap:12px"><div style="flex:1;min-width:0"><strong>${esc(s.lightspeed_name || '?')}</strong> <span class="muted">(${esc(s.lightspeed_id)})</span>${s.lightspeed_confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}</div>
-        <button class="link danger" style="flex:none;width:auto;white-space:nowrap" data-act="staff-ls-unbind">${esc(t('ls_unbind_full'))}</button></div>`
-      : `<div class="small muted">${esc(t('ls_none'))}</div>`}</div>`}
+      ${STORES.map(st => { const b = (s.ls_ids || []).find(x => x.store === st);
+        return `<div style="display:flex;align-items:center;gap:12px;padding:6px 0"><div style="flex:1;min-width:0"><span class="muted">${esc(st)}:</span>
+          ${b ? `<strong>${esc(b.name || '?')}</strong> <span class="muted">(${esc(b.id)})</span>${b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`}` : `<span class="small muted">${esc(t('ls_none_store'))}</span>`}</div>
+          ${b ? `<button class="link danger" style="flex:none;width:auto;white-space:nowrap" data-act="staff-ls-unbind" data-store="${st}">${esc(t('ls_unbind_full'))}</button>` : ''}</div>`; }).join('')}</div>`}
     ${isNew ? `<div class="small muted" style="margin-top:8px">${esc(t('initial_pin_hint'))}</div>`
             : s.id !== state.me.id ? `<button class="link" style="margin-top:8px" data-act="staff-reset">${esc(t('reset_pin'))}</button>` : ''}
     <div class="row" style="margin-top:12px"><button class="btn ghost" data-act="staff-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="staff-save">${esc(t('save'))}</button></div></div>`;
@@ -1228,11 +1230,12 @@ function reviewCard(r){
     ${state.me.is_admin ? `<button class="btn" data-act="review-save" data-id="${id}">${esc(t('review_save'))}</button>` : ''}
   </div>`;
 }
-function lsRow(s){
-  return `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(s.name)}</strong>
-    <div class="meta">Lightspeed: ${esc(s.lightspeed_name || '')} (${esc(s.lightspeed_id)})</div></div>
-    <button class="link" style="flex:0" data-act="ls-confirm" data-id="${s.id}">${esc(t('ls_confirm'))}</button>
-    <button class="link danger" style="flex:0;margin-left:12px" data-act="ls-unbind" data-id="${s.id}">${esc(t('ls_unbind'))}</button></div></div>`;
+function lsText(b){ return `${b.store}: ${b.name || ''} (${b.id})`; }
+function lsRow(b){
+  return `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(b.sname)}</strong>
+    <div class="meta">Lightspeed ${esc(lsText(b))}</div></div>
+    <button class="link" style="flex:0" data-act="ls-confirm" data-id="${b.sid}" data-store="${b.store}">${esc(t('ls_confirm'))}</button>
+    <button class="link danger" style="flex:0;margin-left:12px" data-act="ls-unbind" data-id="${b.sid}" data-store="${b.store}">${esc(t('ls_unbind'))}</button></div></div>`;
 }
 function refreshBadge(n){
   if (!state.me || !state.me.is_admin) return;
@@ -1313,7 +1316,7 @@ function planMineHTML(d){
     <div class="sheet avgrid">${planDays(d).map(date => `<div class="avday"><div class="dl">${esc(dayLabel(date))}</div>${SLOTS.map(slot => {
       if (!slotsOn(d, date).some(x => x.slot === slot)) return `<span style="min-width:96px"></span>`;
       const no = d.my_avail.some(x => x.date === date && x.slot === slot && x.status === 'no');
-      return `<button class="avbtn no ${no ? 'on' : ''}" aria-pressed="${no}" data-act="avail" data-date="${date}" data-slot="${slot}" ${closed ? 'disabled' : ''}>${no ? '✕ ' : ''}${esc(slotLabel(slot))}</button>`;
+      return `<button class="avbtn no ${no ? 'on' : ''}" aria-pressed="${no}" data-act="avail" data-date="${date}" data-slot="${slot}" ${closed ? 'disabled' : ''}>${no ? '✕' : '✓'} ${esc(slotLabel(slot))}</button>`;
     }).join('')}</div>`).join('')}</div>
     ${!closed && !d.my_submitted ? `<button class="btn" style="margin-bottom:14px" data-act="avail-submit">${esc(t('avail_submit'))}</button>` : ''}`;
   if (d.published && d.shifts.length) h += `<h3>${esc(t('team_plan'))}</h3>` + planGridHTML(d, false);
@@ -1602,13 +1605,13 @@ document.addEventListener('click', async ev => {
       try { await rpc('admin_set_shortage_bearer', { ...tok(), p_entry_id: el.dataset.id, p_bearer: el.dataset.b }); render(); } catch(e){ toast(errText(e), true); }
       break;
     case 'staff-ls-unbind': {
-      const s = state.staffEdit; if (!confirm(t('ls_unbind_q', { n: s.name }))) break;
-      try { await rpc('admin_confirm_lightspeed', { ...tok(), p_staff_id: s.id, p_confirm: false });
+      const s = state.staffEdit; if (!confirm(t('ls_unbind_q', { n: s.name + ' · ' + el.dataset.store }))) break;
+      try { await rpc('admin_ls_set', { ...tok(), p_staff_id: s.id, p_store: el.dataset.store, p_confirm: false });
         toast(t('ls_unbound')); state.staffEdit = null; state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
     }
     case 'ls-confirm': case 'ls-unbind':
-      try { await rpc('admin_confirm_lightspeed', { ...tok(), p_staff_id: el.dataset.id, p_confirm: act === 'ls-confirm' });
+      try { await rpc('admin_ls_set', { ...tok(), p_staff_id: el.dataset.id, p_store: el.dataset.store, p_confirm: act === 'ls-confirm' });
         state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
   }
