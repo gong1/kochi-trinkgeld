@@ -121,7 +121,7 @@
 
 ## 5. 数据库版本记录
 
-执行顺序 v1 → v12，每个脚本都可重复执行（schema v1 除外，它只在新项目执行一次）。
+全部脚本在私有仓库 `gong1/kochi-backup` 的 `migrations/` 文件夹里。执行顺序 v01 → v12，每个脚本都可重复执行（v01 schema 除外，它只在新项目执行一次）。
 
 | 版本 | 内容 |
 |---|---|
@@ -177,7 +177,7 @@
 
 地基整理（不加新功能、不改数据库、不动数据）：
 1. ~~自己的域名 `app.kochide.com`~~ 已完成（2026-09-27）
-2. 仓库建 `migrations/` 文件夹，放入 v1–v12 SQL 和 `edge_function_bon.ts`
+2. ~~`migrations/` 文件夹~~ 已完成：放在私有仓库 `gong1/kochi-backup`（v01–v12 SQL、`edge_function_bon.ts`、README）
 3. ~~数据库自动备份~~ 已完成（方案 B：GitHub Actions）
 4. 测试环境（第二个 Supabase 项目 + 测试网页）
 5. 拆分网页文件：公共部分 + 各模块
