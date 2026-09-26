@@ -179,6 +179,10 @@ dialog::backdrop{background:rgba(31,42,39,.5)}
 .avbtn:disabled{opacity:.55}
 .avgrid .avday{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
 .avgrid .avday:first-child{border-top:0}
+.banner{max-width:560px;margin:12px auto 0;padding:0 16px}
+.banner .infobox{display:flex;align-items:center;gap:12px;margin:0}
+.banner .infobox span{flex:1}
+.banner .infobox button{flex:none;width:auto;height:40px;padding:0 16px;font-size:15px}
 .avgrid .avday .dl{flex:1;font-weight:600}
 .avgrid .avbtn{min-width:96px}
 .avgrid .avbtn.no:not(.on){background:#DDF1E4;border-color:#8FCBA6;color:#1E6B45}
@@ -257,7 +261,7 @@ zh: {
   publish_confirm:'发布后所有员工都能看到这周的排班，确定发布？', published_toast:'已发布', unfilled:'还没回复下周能不能上：{n}',
   add_shift:'＋ 添加', hours_title:'本周计划工时', hours_line:'{h} 小时 · {n} 个班', sd_staff:'员工', sd_role:'岗位',
   sd_start:'开始', sd_end:'结束', sd_note:'备注', av_group_yes:'能上', av_group_none:'没回复', av_group_no:'不能上',
-  already_in:'已排在 {s}', shift_del_confirm:'删除这个班？', is_scheduler:'排班员', avail_hint:'点一下你不能上的班，再点一下取消。没标的都算能上，具体时间由排班员安排。',
+  already_in:'已排在 {s}', shift_del_confirm:'删除这个班？', is_scheduler:'排班员', avail_hint:'点一下你不能上的班，再点一下取消。没标的都算能上，具体时间由排班员安排。可以用 › 往后翻，提前标出假期或考试周。', avail_rule:'没标的班都算能上。排了你的班就要来；来不了请自己找人换，并提前告诉排班员。', avail_count:'你已标出 {n} 个班不能上。', banner_avail:'下周默认都能上。有不能上的班，请在周四 20:00 前到「排班」里标出。', banner_go:'去标出',
   avail_not_submitted:'还没提交。标好不能上的班后点「确认提交」；下周都能上也要点一下。', avail_submitted:'已提交：{n} 个班不能上。截止前可以随时修改。',
   avail_submitted0:'已提交：下周都能上。截止前可以随时修改。', avail_submit:'确认提交', av_x:'不能上',
   err_AVAIL_CLOSED:'已截止，不能再修改', err_SHIFT_CONFLICT:'这个人这个时段已经排在另一家店了', err_INVALID_SLOT:'这家店这天没有这个班次', err_INVALID_TIME:'时间不对：结束要晚于开始', show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
@@ -339,7 +343,7 @@ de: {
   publish_confirm:'Nach dem Veröffentlichen sehen alle den Dienstplan dieser Woche. Veröffentlichen?', published_toast:'Veröffentlicht', unfilled:'Noch keine Rückmeldung zur Verfügbarkeit: {n}',
   add_shift:'＋ Hinzufügen', hours_title:'Geplante Stunden diese Woche', hours_line:'{h} Std. · {n} Schichten', sd_staff:'Mitarbeiter', sd_role:'Position',
   sd_start:'Beginn', sd_end:'Ende', sd_note:'Notiz', av_group_yes:'Kann', av_group_none:'Keine Rückmeldung', av_group_no:'Kann nicht',
-  already_in:'Schon in {s}', shift_del_confirm:'Diese Schicht löschen?', is_scheduler:'Dienstplanung', avail_hint:'Tippe auf die Schichten, an denen du nicht kannst – nochmal tippen zum Aufheben. Alles andere gilt als verfügbar, die genauen Zeiten legt die Dienstplanung fest.',
+  already_in:'Schon in {s}', shift_del_confirm:'Diese Schicht löschen?', is_scheduler:'Dienstplanung', avail_hint:'Tippe auf die Schichten, an denen du nicht kannst – nochmal tippen zum Aufheben. Alles andere gilt als verfügbar, die genauen Zeiten legt die Dienstplanung fest. Mit › kannst du auch Urlaub oder Prüfungswochen im Voraus eintragen.', avail_rule:'Nicht markierte Schichten gelten als verfügbar. Wenn du eingeplant bist, kommst du; wenn nicht, such dir selbst Ersatz und sag der Dienstplanung rechtzeitig Bescheid.', avail_count:'Du hast {n} Schichten als „kann nicht“ markiert.', banner_avail:'Für nächste Woche giltst du als verfügbar. Schichten, an denen du nicht kannst, bitte bis Donnerstag 20:00 Uhr unter „Dienstplan“ markieren.', banner_go:'Markieren',
   avail_not_submitted:'Noch nicht abgeschickt. Schichten markieren, an denen du nicht kannst, und „Abschicken“ tippen – auch wenn du die ganze Woche kannst.', avail_submitted:'Abgeschickt: {n} Schichten nicht verfügbar. Änderungen bis zur Frist möglich.',
   avail_submitted0:'Abgeschickt: die ganze Woche verfügbar. Änderungen bis zur Frist möglich.', avail_submit:'Abschicken', av_x:'kann nicht',
   err_AVAIL_CLOSED:'Frist abgelaufen, keine Änderung möglich', err_SHIFT_CONFLICT:'Diese Person ist in dieser Zeit schon im anderen Restaurant eingeplant', err_INVALID_SLOT:'Diese Schicht gibt es an diesem Tag in diesem Restaurant nicht', err_INVALID_TIME:'Zeit ungültig: Ende muss nach Beginn liegen', show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
@@ -555,6 +559,7 @@ function render(){
         <button data-act="pin-open">${esc(t('change_pin'))}</button>
         <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
     </header>
+    ${state.banner && tabs().includes('plan') && state.tab !== 'plan' ? `<div class="banner"><div class="infobox"><span>${esc(t('banner_avail'))}</span><button class="btn" data-act="banner-go">${esc(t('banner_go'))}</button></div></div>` : ''}
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
     <nav>${tabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
   ({ entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();
@@ -612,6 +617,9 @@ async function doLogin(){
   state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit';
   if (!r.me.must_change_pin){
     try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} await loadCommon();
+    // 周一到周四登录时提醒标出下周不能上的班
+    const wd = ['Mon','Tue','Wed','Thu'].includes(new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Berlin', weekday: 'short' }).format(new Date()));
+    state.banner = !!wd && !state.me.is_kitchen;
     if (state.me.is_admin || state.me.is_tip_manager){
       // 登录后直接进入点收信封；上周还有没点收的就先显示上周
       state.tab = 'week';
@@ -1311,14 +1319,14 @@ function planMineHTML(d){
   const nNo = d.my_avail.filter(x => x.status === 'no').length;
   h += `<h3>${esc(t('avail_title'))}</h3>
     <div class="small muted" style="margin:-4px 0 10px">${esc(closed ? t('avail_closed') : d.deadline_passed ? t('avail_closed_sched') : t('avail_deadline', { d: fmtDateTime(d.deadline) }))}</div>
-    ${d.my_submitted ? `<div class="infobox">${esc(nNo ? t('avail_submitted', { n: nNo }) : t('avail_submitted0'))}</div>` : `<div class="warnbox">${esc(t('avail_not_submitted'))}</div>`}
+    <div class="infobox">${esc(t('avail_rule'))}${nNo ? ' ' + esc(t('avail_count', { n: nNo })) : ''}</div>
     ${closed ? '' : `<div class="small muted" style="margin-bottom:8px">${esc(t('avail_hint'))}</div>`}
     <div class="sheet avgrid">${planDays(d).map(date => `<div class="avday"><div class="dl">${esc(dayLabel(date))}</div>${SLOTS.map(slot => {
       if (!slotsOn(d, date).some(x => x.slot === slot)) return `<span style="min-width:96px"></span>`;
       const no = d.my_avail.some(x => x.date === date && x.slot === slot && x.status === 'no');
       return `<button class="avbtn no ${no ? 'on' : ''}" aria-pressed="${no}" data-act="avail" data-date="${date}" data-slot="${slot}" ${closed ? 'disabled' : ''}>${no ? '✕' : '✓'} ${esc(slotLabel(slot))}</button>`;
     }).join('')}</div>`).join('')}</div>
-    ${!closed && !d.my_submitted ? `<button class="btn" style="margin-bottom:14px" data-act="avail-submit">${esc(t('avail_submit'))}</button>` : ''}`;
+`;
   if (d.published && d.shifts.length) h += `<h3>${esc(t('team_plan'))}</h3>` + planGridHTML(d, false);
   return h;
 }
@@ -1345,9 +1353,7 @@ function planGridHTML(d, edit){
 }
 function planEditHTML(d){
   const changed = d.shifts.filter(x => x.changed).length;
-  const unfilled = d.staff.filter(x => !x.filled).map(x => x.name);
   let h = `<div class="hero"><div class="row" style="justify-content:space-between"><strong>${esc(d.published ? t('pub_state_yes', { t: fmtDateTime(d.published_at) }) : t('pub_state_no'))}</strong></div>
-    ${unfilled.length ? `<div class="small muted" style="margin-top:6px">${esc(t('unfilled', { n: unfilled.join('、') }))}</div>` : ''}
     ${!d.published || changed ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(d.published ? t('republish', { n: changed }) : t('publish'))}</button>` : ''}</div>`;
   h += planGridHTML(d, true);
   const hrs = {};
@@ -1374,8 +1380,7 @@ function shiftDlgRender(){
     return `<button type="button" class="sdchip ${on ? 'on' : ''}" aria-pressed="${on}" data-act="sd-staff" data-id="${s.id}" ${other ? 'disabled' : ''}>${esc(s.name)}<small>${esc(sub)}</small></button>`;
   };
   const grp = (k, list) => list.length ? `<div class="sdgrp">${esc(t(k))}</div><div class="sdchips">${list.map(chip).join('')}</div>` : '';
-  const no = d.staff.filter(s => avail(s.id).status === 'no'), yes = d.staff.filter(s => s.filled && avail(s.id).status !== 'no'),
-        none = d.staff.filter(s => !s.filled && avail(s.id).status !== 'no');
+  const no = d.staff.filter(s => avail(s.id).status === 'no'), yes = d.staff.filter(s => avail(s.id).status !== 'no'), none = [];
   $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(se.date))} · ${esc(se.store)} · ${esc(slotLabel(se.slot))}</h2>
     <label>${esc(t('sd_staff'))}</label>
     ${grp('av_group_yes', yes)}${grp('av_group_none', none)}${grp('av_group_no', no)}
@@ -1423,7 +1428,7 @@ document.addEventListener('click', async ev => {
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; renderLogin(); break;
-    case 'tab': state.done = null; state.tab = el.dataset.tab; LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+    case 'tab': state.done = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -1532,6 +1537,7 @@ document.addEventListener('click', async ev => {
     }
     case 'bon-submit': submitBon(); break;
     case 'bon-edit-save': saveBonEdit(); break;
+    case 'banner-go': state.banner = false; state.tab = 'plan'; state.planSub = 'mine'; state.planWeek = addDays(mondayOf(today()), 7); render(); break;
     case 'plan-prev': state.planWeek = addDays(state.planWeek, -7); viewPlan(); break;
     case 'plan-next': state.planWeek = addDays(state.planWeek, 7); viewPlan(); break;
     case 'plan-sub': state.planSub = el.dataset.k; planRender(); break;
