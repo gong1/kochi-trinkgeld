@@ -148,7 +148,15 @@
 - 「有待核对的 Bon 不能锁周结」目前只在网页检查，数据库的 `lock_week()` 还没加这条。
 - 门店名称 `'Flingern'`、`'Bismarck'` 写死在表的检查约束里。
 
-## 6. 上线流程
+## 6. 数据库备份
+
+- 私有仓库 `gong1/kochi-backup` 里的 GitHub Actions（`.github/workflows/backup.yml`）每天 02:30 UTC 自动导出数据库（public 结构 + 数据，不含登录会话），压缩后用 AES-256 加密，存为当次运行的 Artifact，保留 90 天。
+- Secrets：`SUPABASE_DB_URL`（Session pooler 连接字符串）、`BACKUP_PASSPHRASE`（加密密码，老板保管在密码管理器 + 保险柜纸质备份）。
+- 运行失败时 GitHub 会发邮件通知。
+- **未备份**：存储桶 `bons` 里的 Bon 照片（只在 Supabase）。
+- 恢复：下载 Artifact → 解密 `openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in 文件.enc -out backup.sql.gz` → `gunzip` → 导入新的 Supabase 项目（找 Claude 协助）。
+
+## 7. 上线流程
 
 1. **数据库**：Supabase → SQL Editor → New query → 粘贴新版本 SQL → Run，看到 Success。
 2. **识别服务**（有改动时）：Edge Functions → `bon` → 粘贴新代码 → Deploy；确认 Verify JWT 仍关闭。
@@ -156,7 +164,7 @@
 4. 顺序：**先数据库，再网页**。
 5. 上线后用真实数据走一遍对应功能。
 
-## 7. 合作约定
+## 8. 合作约定
 
 - 每次更新都附 **GitHub 提交日志**（纯文本块，可直接复制）。
 - 每次更新都写明**对现有数据的影响**。加功能不能导致已有数据丢失；涉及修改或删除数据的改动，先问老板。
@@ -165,12 +173,12 @@
 - 沟通用中文；员工看到的界面中德双语；对外德语信件用正式德语。
 - 每个新模块开一个新对话，先读本文件。
 
-## 8. 接下来
+## 9. 接下来
 
 地基整理（不加新功能、不改数据库、不动数据）：
 1. ~~自己的域名 `app.kochide.com`~~ 已完成（2026-09-27）
 2. 仓库建 `migrations/` 文件夹，放入 v1–v12 SQL 和 `edge_function_bon.ts`
-3. 数据库自动备份
+3. ~~数据库自动备份~~ 已完成（方案 B：GitHub Actions）
 4. 测试环境（第二个 Supabase 项目 + 测试网页）
 5. 拆分网页文件：公共部分 + 各模块
 6. 检查所有报错提示，每条写清原因和解决办法
