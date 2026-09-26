@@ -24,7 +24,7 @@
 
 | 部分 | 位置 | 说明 |
 |---|---|---|
-| 网页（前端） | GitHub 仓库 `kochi-trinkgeld`，GitHub Pages | 目前是一个 `index.html`（CSS + JS 都在里面），中德双语 |
+| 网页（前端） | **https://app.kochide.com**（GitHub 仓库 `gong1/kochi-trinkgeld`，GitHub Pages；域名在 GoDaddy，CNAME `app` → `gong1.github.io`，已开启 HTTPS） | 目前是一个 `index.html`（CSS + JS 都在里面），中德双语 |
 | 数据库 + 接口 | Supabase 项目 `hxegfkyviumkdbxcuokw`（单独项目，不和电费 App 共用） | PostgreSQL，所有读写都通过 RPC 函数 |
 | 识别服务 | Supabase Edge Function `bon` | 调 Claude 读 Bon 照片（先 Haiku，检查不通过再用 Sonnet）；照片存在私有存储桶 `bons` |
 | 密钥 | Supabase → Edge Functions → Secrets | `ANTHROPIC_API_KEY` |
@@ -168,7 +168,7 @@
 ## 8. 接下来
 
 地基整理（不加新功能、不改数据库、不动数据）：
-1. 自己的域名：`app.kochide.com`（域名在 GoDaddy）
+1. ~~自己的域名 `app.kochide.com`~~ 已完成（2026-09-27）
 2. 仓库建 `migrations/` 文件夹，放入 v1–v12 SQL 和 `edge_function_bon.ts`
 3. 数据库自动备份
 4. 测试环境（第二个 Supabase 项目 + 测试网页）
