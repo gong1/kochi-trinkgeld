@@ -167,6 +167,9 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 dialog{border:0;border-radius:var(--r-m);padding:20px;width:min(360px,92vw)}
 dialog::backdrop{background:rgba(31,42,39,.5)}
 #shiftDlg{width:min(540px,94vw);max-height:90vh;overflow:auto}
+#fbDlg{width:min(480px,94vw);max-height:92vh;overflow:auto}
+#fbDlg .shot{display:block;width:100%;max-height:260px;object-fit:contain;object-position:top;border:1px solid var(--line);border-radius:var(--r-s);background:var(--paper)}
+#fbDlg textarea{width:100%;min-height:110px;resize:vertical;font:inherit;padding:10px 12px}
 .dayh{font-weight:700;font-size:17px;margin-bottom:6px}
 .avrow{padding:10px 0;border-top:1px solid var(--line)}
 .avrow:first-of-type{border-top:0}
@@ -214,6 +217,7 @@ td.r,th.r{text-align:right}
 <dialog id="pinDlg"></dialog>
 <dialog id="photoDlg"></dialog>
 <dialog id="shiftDlg"></dialog>
+<dialog id="fbDlg"></dialog>
 
 <script>
 // ============ 配置 ============
@@ -253,6 +257,11 @@ zh: {
   admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'Runner 和吧台登录后只看账本，不能录入。主岗位也决定登录页分组和选人顺序，不影响分账。',
   idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', report_open:'这张单据没有报告编号，报告还没有关闭（单据上写着「Der Bericht ist noch offen」），金额可能不完整。请先在收银机上 Entstempeln（打卡下班），然后打印 Abschlussbericht，再用新打印的单据拍照。如果单据已经是 Entstempeln 后打印的，请重拍顶部，确保拍到「Identifikationsnummer für Bericht」。',
+  cash_hint:'今天你的现金收款占 {p}%，超过 10%。以后请多鼓励客人刷卡付款，并用大的刷卡机收款，方便入账。谢谢！',
+  fb_menu:'反馈问题', fb_title:'反馈问题 / 建议', fb_desc:'哪里不好用、出了什么问题，或者有什么建议？', fb_desc_ph:'例如：我点提交后一直在转圈……',
+  fb_shot:'当前页面截图（会一起发给老板）', fb_shot_none:'没能自动截图。可以从相册选一张截图。', fb_shot_pick:'换一张 / 从相册选截图', fb_shot_remove:'不附截图',
+  fb_send:'发送', fb_sent:'已发送，谢谢你的反馈！', fb_capturing:'正在截图……', admin_feedback:'反馈', fb_open:'未处理', fb_done_btn:'标记已处理', fb_reopen:'重新打开', fb_view:'看截图', fb_none:'还没有反馈',
+  err_FEEDBACK_TOO_LONG:'描述太长了（最多 2000 字）。请精简一下。', err_TOO_MANY_FEEDBACK:'今天已经发了 20 条反馈，明天再发吧；紧急的请直接找老板。',
   plan_mine:'我的', plan_edit:'排班', slot_lunch:'午班', slot_dinner:'晚班', only_store:'仅 {s}',
   my_shifts:'我的班', not_published:'这周的排班还没有发布。', no_shifts:'这周没有排你的班', changed:'有变更',
   avail_title:'可上班时间', avail_deadline:'请在 {d} 前填写，之后不能再改。', avail_closed:'已截止。需要修改请找排班员。', avail_closed_sched:'已截止（排班员仍可修改自己的）。',
@@ -335,6 +344,11 @@ de: {
   admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Runner und Bar sehen nach der Anmeldung nur ihr Konto und können nichts eintragen. Die Hauptposition bestimmt auch die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung.',
   idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', report_open:'Auf diesem Bon fehlt die Berichtsnummer – der Bericht ist noch offen („Der Bericht ist noch offen“) und die Beträge können unvollständig sein. Bitte zuerst an der Kasse ausstempeln, dann den Abschlussbericht drucken und den neuen Bon fotografieren. Wurde der Bon schon nach dem Ausstempeln gedruckt, bitte das obere Foto neu machen, sodass die „Identifikationsnummer für Bericht“ zu sehen ist.',
+  cash_hint:'Heute lag dein Baranteil bei {p} % – mehr als 10 %. Bitte Gäste künftig zur Kartenzahlung ermutigen und dafür das große Kartenterminal nutzen, das erleichtert die Buchhaltung. Danke!',
+  fb_menu:'Feedback', fb_title:'Feedback / Vorschlag', fb_desc:'Was funktioniert nicht gut, welches Problem gab es, oder was schlägst du vor?', fb_desc_ph:'z. B.: Nach „Absenden“ dreht sich nur der Kreis …',
+  fb_shot:'Screenshot der aktuellen Seite (wird mitgeschickt)', fb_shot_none:'Automatischer Screenshot hat nicht geklappt. Du kannst einen Screenshot aus der Galerie wählen.', fb_shot_pick:'Anderen Screenshot wählen', fb_shot_remove:'Ohne Screenshot',
+  fb_send:'Senden', fb_sent:'Gesendet – danke für dein Feedback!', fb_capturing:'Screenshot wird erstellt …', admin_feedback:'Feedback', fb_open:'Offen', fb_done_btn:'Als erledigt markieren', fb_reopen:'Wieder öffnen', fb_view:'Screenshot', fb_none:'Noch kein Feedback',
+  err_FEEDBACK_TOO_LONG:'Die Beschreibung ist zu lang (max. 2000 Zeichen). Bitte kürzen.', err_TOO_MANY_FEEDBACK:'Heute wurden schon 20 Rückmeldungen geschickt – bitte morgen wieder; Dringendes direkt an den Chef.',
   plan_mine:'Meins', plan_edit:'Planen', slot_lunch:'Mittag', slot_dinner:'Abend', only_store:'nur {s}',
   my_shifts:'Meine Schichten', not_published:'Der Dienstplan für diese Woche ist noch nicht veröffentlicht.', no_shifts:'Diese Woche keine Schichten für dich', changed:'Geändert',
   avail_title:'Verfügbarkeit', avail_deadline:'Bitte bis {d} eintragen, danach keine Änderung mehr.', avail_closed:'Frist abgelaufen. Änderungen bitte über die Dienstplanung.', avail_closed_sched:'Frist abgelaufen (Dienstplanung kann die eigenen Angaben noch ändern).',
@@ -677,6 +691,7 @@ function render(){
       <button class="hbtn" data-act="lang">${esc(t('lang'))}</button>
       <button class="hbtn" data-act="menu" aria-label="Menu" aria-expanded="${state.menu}">⋯</button>
       ${state.menu ? `<div class="menu">
+        <button data-act="fb-open">${esc(t('fb_menu'))}</button>
         <button data-act="pin-open">${esc(t('change_pin'))}</button>
         <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
     </header>
@@ -974,7 +989,7 @@ async function submitBon(){
   try {
     await rpc('submit_bon_entry', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
       p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack });
-    state.done = { wallet: w, date: f.date, review: st === 'review' };
+    state.done = { wallet: w, date: f.date, review: st === 'review', cash: d.cash_share };
     state.bon = blankBon(); state.form = blankForm(); render(); window.scrollTo(0, 0);
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
 }
@@ -1003,6 +1018,7 @@ function viewDone(){
       <div class="li"><span>${esc(t('date'))}</span><span>${esc(dayLabel(d.date))}</span></div>
     </div></div>
     ${d.review ? `<div class="warnbox" style="text-align:left">${esc(t('done_review'))}</div>` : ''}
+    ${d.cash != null && d.cash > 0.10 ? `<div class="infobox" style="text-align:left">${esc(t('cash_hint', { p: Math.round(d.cash * 100) }))}</div>` : ''}
     <p class="muted small">${esc(t('done_steps'))}</p>
     ${state.personal ? `<button class="btn" data-act="done-more">${esc(t('done_ok'))}</button>`
       : `<button class="btn" data-act="done-logout">${esc(t('done_logout'))}</button>
@@ -1249,7 +1265,7 @@ function staffOptions(withKitchen){
 
 // ============ 管理（超级管理员）============
 async function viewAdmin(){
-  const subs = ['requests','staff','rates','report','audit'];
+  const subs = ['requests','feedback','staff','rates','report','audit'];
   $('#main').innerHTML = `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}</button>`).join('')}</div><div id="asub"><div class="loading">${esc(t('loading'))}</div></div>`;
   const el = () => $('#asub');
   try {
@@ -1288,6 +1304,9 @@ async function viewAdmin(){
           <button class="btn" data-act="rate-save">${esc(t('save'))}</button></div>
         <div class="list">${rates.map(r => `<div class="item"><div class="top"><div>${esc(t('valid_from'))} ${esc(r.valid_from)}</div>
           <div class="num">${r.kitchen_pct} / ${r.runner_pct} / ${r.bar_pct}</div></div></div>`).join('')}</div>`;
+    } else if (state.adminSub === 'feedback'){
+      const list = await rpc('admin_feedback_list', tok()) || [];
+      el().innerHTML = `<div class="list">${list.map(fbItem).join('') || `<div class="empty">${esc(t('fb_none'))}</div>`}</div>`;
     } else if (state.adminSub === 'report'){
       const d = new Date(); const first = ymd(new Date(d.getFullYear(), d.getMonth(), 1));
       el().innerHTML = `<div class="sheet"><div class="row">
@@ -1387,6 +1406,71 @@ async function runReport(){
       <h3>${esc(t('by_staff'))}</h3><div class="sheet scroll"><table class="num"><tr><th>${esc(t('name'))}</th><th class="r">${esc(t('as_server'))}</th><th class="r">${esc(t('runner'))}</th><th class="r">${esc(t('bar'))}</th><th class="r">${esc(t('kitchen'))}</th></tr>
       ${Object.entries(people).map(([n,p]) => `<tr><td>${esc(n)}</td><td class="r">${eur(p.server)}</td><td class="r">${eur(p.runner)}</td><td class="r">${eur(p.bar)}</td><td class="r">${eur(p.kitchen)}</td></tr>`).join('')}</table></div>`;
   } catch(e){ out.innerHTML = `<div class="empty">${esc(errText(e))}</div>`; }
+}
+
+// ============ 反馈（截图 + 描述）============
+function fbPage(){
+  const x = [state.tab];
+  if (state.tab === 'admin') x.push(state.adminSub);
+  if (state.tab === 'plan') x.push(state.planSub, state.planWeek);
+  if (state.tab === 'week') x.push(state.week);
+  return x.join(':');
+}
+function loadScript(src){
+  return new Promise((ok, bad) => { if (document.querySelector(`script[src="${src}"]`) && window.html2canvas) return ok();
+    const el = document.createElement('script'); el.src = src; el.onload = ok; el.onerror = bad; document.head.appendChild(el); });
+}
+async function fbCapture(){
+  // 截当前屏幕可见区域，压缩成宽度不超过 900px 的 JPEG
+  await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+  const c = await window.html2canvas(document.body, { x: window.scrollX, y: window.scrollY, width: window.innerWidth,
+    height: window.innerHeight, windowWidth: document.documentElement.clientWidth, scale: 1, useCORS: true, logging: false, ignoreElements: n => n.classList && (n.classList.contains('toast') || n.classList.contains('idlebar')),
+    backgroundColor: getComputedStyle(document.body).backgroundColor || '#fff' });
+  const k = Math.min(1, 900 / c.width), out = document.createElement('canvas');
+  out.width = Math.round(c.width * k); out.height = Math.round(c.height * k);
+  out.getContext('2d').drawImage(c, 0, 0, out.width, out.height);
+  return out.toDataURL('image/jpeg', 0.7);
+}
+async function fbOpen(){
+  // 先关菜单（不重画页面），截下员工正在看的页面，再打开反馈窗口
+  state.menu = false; document.querySelectorAll('header .menu').forEach(n => n.remove());
+  state.fb = { page: fbPage(), shot: null, desc: '', busy: false };
+  toast(t('fb_capturing'));
+  try { state.fb.shot = await fbCapture(); } catch(e){ state.fb.shot = null; }
+  document.querySelectorAll('.toast').forEach(n => n.remove());
+  fbRender(); $('#fbDlg').showModal();
+}
+function fbRender(){
+  const f = state.fb, d = $('#fbDlg'); if (!f) return;
+  const keep = $('#fb-desc'); if (keep) f.desc = keep.value;
+  d.innerHTML = `<h2 style="margin-top:0">${esc(t('fb_title'))}</h2>
+    <div class="field"><label for="fb-desc">${esc(t('fb_desc'))}</label>
+      <textarea class="input" id="fb-desc" maxlength="2000" placeholder="${esc(t('fb_desc_ph'))}">${esc(f.desc)}</textarea></div>
+    <div class="field"><label>${esc(t('fb_shot'))}</label>
+      ${f.busy ? `<div class="muted small">${esc(t('fb_capturing'))}</div>`
+        : f.shot ? `<img class="shot" src="${f.shot}" alt="">` : `<div class="small muted">${esc(t('fb_shot_none'))}</div>`}
+      <div class="row" style="margin-top:8px;gap:14px">
+        <label class="link" style="cursor:pointer">${esc(t('fb_shot_pick'))}<input type="file" accept="image/*" id="fb-file" hidden></label>
+        ${f.shot ? `<button class="link danger" type="button" data-act="fb-noshot">${esc(t('fb_shot_remove'))}</button>` : ''}</div></div>
+    <div class="row" style="margin-top:8px"><button class="btn ghost" type="button" data-act="fb-close">${esc(t('cancel'))}</button>
+      <button class="btn" type="button" data-act="fb-send" ${f.busy ? 'disabled' : ''}>${esc(t('fb_send'))}</button></div>`;
+}
+async function fbSend(btn){
+  const f = state.fb; f.desc = $('#fb-desc').value.trim();
+  if (!f.desc) return toast(t('err_COMMENT_REQUIRED'), true);
+  btn.disabled = true;
+  try {
+    await rpc('submit_feedback', { ...tok(), p_page: f.page, p_description: f.desc, p_screenshot: f.shot, p_user_agent: navigator.userAgent });
+    $('#fbDlg').close(); state.fb = null; toast(t('fb_sent'));
+  } catch(e){ toast(errText(e), true); btn.disabled = false; }
+}
+function fbItem(x){
+  const when = new Date(x.created_at).toLocaleString(state.lang === 'de' ? 'de-DE' : 'zh-CN', { dateStyle: 'short', timeStyle: 'short' });
+  return `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong> <span class="muted small">${esc(when)} · ${esc(x.page || '')}</span></div>
+      ${x.status === 'open' ? `<span class="tag pend">${esc(t('fb_open'))}</span>` : ''}</div>
+    <div style="white-space:pre-wrap;margin:6px 0">${esc(x.description)}</div>
+    <div class="acts">${x.has_screenshot ? `<button class="link" data-act="fb-shot" data-id="${x.id}">${esc(t('fb_view'))}</button>` : ''}
+      <button class="link" data-act="fb-status" data-id="${x.id}" data-s="${x.status === 'open' ? 'done' : 'open'}">${esc(t(x.status === 'open' ? 'fb_done_btn' : 'fb_reopen'))}</button></div></div>`;
 }
 
 // ============ 排班 ============
@@ -1662,6 +1746,22 @@ document.addEventListener('click', async ev => {
     case 'bon-submit': submitBon(); break;
     case 'bon-edit-save': saveBonEdit(); break;
     case 'banner-go': state.banner = false; state.tab = 'plan'; state.planSub = 'mine'; state.planWeek = addDays(mondayOf(today()), 7); render(); break;
+    case 'fb-open': fbOpen(); break;
+    case 'fb-close': $('#fbDlg').close(); state.fb = null; break;
+    case 'fb-noshot': state.fb.shot = null; fbRender(); break;
+    case 'fb-send': fbSend(el); break;
+    case 'fb-shot': {
+      try { const img = await rpc('admin_feedback_screenshot', { ...tok(), p_id: el.dataset.id });
+        const dlg = $('#photoDlg');
+        dlg.innerHTML = (img && /^data:image\//.test(img) ? `<img src="${esc(img)}" alt="">` : '') + `<button class="btn" data-act="photo-close">${esc(t('close'))}</button>`;
+        dlg.showModal(); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'fb-status':
+      try { await rpc('admin_feedback_set', { ...tok(), p_id: el.dataset.id, p_status: el.dataset.s });
+        state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
+      break;
     case 'plan-prev': state.planWeek = addDays(state.planWeek, -7); viewPlan(); break;
     case 'plan-next': state.planWeek = addDays(state.planWeek, 7); viewPlan(); break;
     case 'plan-sub': state.planSub = el.dataset.k; planRender(); break;
@@ -1748,6 +1848,11 @@ document.addEventListener('click', async ev => {
 });
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur(); });
 document.addEventListener('change', async ev => {
+  if (ev.target.id === 'fb-file' && ev.target.files && ev.target.files[0]){
+    try { const f = state.fb; const keep = $('#fb-desc'); if (keep) f.desc = keep.value; f.shot = await compressImage(ev.target.files[0]); fbRender(); }
+    catch(e){ toast(t('err_GENERIC'), true); }
+    return;
+  }
   if (ev.target.classList && ev.target.classList.contains('avnote')){
     const el = ev.target, d = state.plan, cur = d.my_avail.find(x => x.date === el.dataset.date && x.slot === el.dataset.slot);
     if (cur) try { await availSet(el.dataset.date, el.dataset.slot, cur.status, el.value); } catch(e){ toast(errText(e), true); }
@@ -1822,7 +1927,7 @@ async function signOut(){
   const tk = state.token;
   logoutLocal(); state.loginStaff = null; state.loginAdmin = false; state.loginErr = '';
   state.bon = blankBon(); state.form = blankForm(); state.done = null; state.staffEdit = null;
-  ['#pinDlg', '#shiftDlg', '#photoDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
+  ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
   hideIdleBar(); render();
   if (tk) try { await sb.rpc('logout', { p_token: tk }); } catch(e){}
 }
