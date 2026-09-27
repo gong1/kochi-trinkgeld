@@ -304,6 +304,11 @@ zh: {
   view_as:'查看', viewing_as:'正在以 {n} 的视角查看（只读）', exit_view:'退出查看',
   role_server:'服务员', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
   week_of:'第 {w} 周', preview:'分配预览', from:'来自',
+  sched_line:'按排班（{s}）：Runner {r} · 吧台 {b}', sched_auto:'已按排班自动选好，和实际不一样请直接点名字增减。', sched_empty:'排班里这个班没有排{r}，请自己选；确实没有就点「{none}」。', and_word:'和',
+  miss_banner:'你有 {n} 个班还没交 Bon：{list}。请尽快拍照交上；如果那天没有上班，请告诉排班员把班删掉。', miss_go:'去交 Bon',
+  chk_missing:'排了班、还没交 Bon（{n}）', chk_missing_hint:'到第二天 12:00 还没有录入。请提醒本人尽快交；如果那天没上班，请排班员在「排班」里删掉这个班，提醒就会消失。',
+  chk_unpicked:'排了班、但没人选的 Runner / 吧台（{n}）', chk_unpicked_hint:'当天这家店的 Bon 里没有人选他。确实上了班的，请当天的服务员在「账本」里申请修改把他加上；没上班的，请排班员删掉这个班。',
+  chk_lock_warn:'这周还有 {n} 条排班提醒（漏交 Bon 或没被选的 Runner / 吧台）没有处理。锁定后就不能再改了。仍然锁定吗？',
   
   
   
@@ -391,6 +396,11 @@ de: {
   view_as:'Ansehen', viewing_as:'Ansicht als {n} (nur lesen)', exit_view:'Ansicht beenden',
   role_server:'Service', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
   week_of:'KW {w}', preview:'Aufteilung', from:'von',
+  sched_line:'Laut Dienstplan ({s}): Runner {r} · Bar {b}', sched_auto:'Automatisch nach Dienstplan ausgewählt. Wenn es anders war, einfach Namen an- oder abwählen.', sched_empty:'Für diese Schicht ist im Dienstplan niemand als {r} eingeplant – bitte selbst wählen; wenn wirklich niemand da war, „{none}“ tippen.', and_word:' und ',
+  miss_banner:'Dein Bon fehlt noch ({n}): {list}. Bitte so bald wie möglich einreichen. Falls du an dem Tag nicht gearbeitet hast, sag bitte der Dienstplanung Bescheid, damit die Schicht gelöscht wird.', miss_go:'Bon eintragen',
+  chk_missing:'Eingeplant, aber noch kein Bon ({n})', chk_missing_hint:'Bis 12:00 Uhr am Folgetag kein Eintrag. Bitte die Person erinnern. Falls sie nicht gearbeitet hat, die Schicht unter „Dienstplan“ löschen – dann verschwindet der Hinweis.',
+  chk_unpicked:'Eingeplante Runner / Bar, die niemand ausgewählt hat ({n})', chk_unpicked_hint:'In keinem Bon dieses Tages in diesem Restaurant ausgewählt. Hat die Person gearbeitet, bitte die Servicekraft, im „Konto“ eine Änderung zu beantragen und sie hinzuzufügen; sonst die Schicht im Dienstplan löschen.',
+  chk_lock_warn:'Für diese Woche sind noch {n} Dienstplan-Hinweise offen (fehlender Bon oder nicht ausgewählte Runner/Bar). Nach dem Abschluss ist keine Änderung mehr möglich. Trotzdem abschließen?',
   
   
   
@@ -637,7 +647,7 @@ const state = {
   adminSub: 'requests', staffEdit: null, staffList: [],
   entryMode: 'bon', bon: blankBon(), viewAs: null, planWeek: addDays(mondayOf(today()), 7), planSub: 'edit', plan: null, shiftEdit: null
 };
-function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null }; }
+function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null, sched: null }; }
 function blankForm(){
   return { date: today(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '' };
 }
@@ -646,7 +656,9 @@ state.form = blankForm();
 function tabs(){
   const m = state.me || {}; const r = [];
   // Runner 和吧台（非管理员/小费管理员）不录入，登录后直接看账本
-  const helperOnly = !m.is_admin && !m.is_tip_manager && ['runner', 'bar'].includes(mainRoleOf(m.id));
+  const mb = state.myBon || {};
+  const helperOnly = !m.is_admin && !m.is_tip_manager && ['runner', 'bar'].includes(mainRoleOf(m.id))
+    && !mb.service_duty && !(mb.missing || []).length;   // 被排成服务员（今天 / 昨天）或有漏交的 Bon 时，也显示「录入」
   if (!m.is_kitchen && !helperOnly) r.push('entry');
   r.push('ledger');
   if (!m.is_kitchen) r.push('plan');
@@ -659,10 +671,22 @@ async function loadCommon(){
   try { state.staff = await rpc('list_staff', tok()) || []; } catch(e){}
   try { state.rates = await rpc('list_rates', tok()) || []; } catch(e){}
   try { state.loginStaff = await rpc('list_login_staff'); } catch(e){}
+  await loadMyBon();
   try {
     const st = await rpc('helper_stats', tok()) || []; state.hstats = { runner: {}, bar: {} };
     st.forEach(x => { if (state.hstats[x.role]) state.hstats[x.role][x.id] = x.n; });
   } catch(e){}
+}
+// 自己排了服务班、到第二天 12:00 还没交的 Bon
+async function loadMyBon(){
+  if (!state.me || state.me.is_kitchen){ state.myBon = null; return; }
+  try { state.myBon = await rpc('my_bon_status', tok()); } catch(e){ state.myBon = null; }
+}
+function slotsText(sl){ return (sl || []).slice().sort().reverse().map(slotLabel).join('+'); }
+function missBannerHTML(){
+  const mb = state.myBon; if (!mb || !(mb.missing || []).length || !tabs().includes('entry')) return '';
+  const list = mb.missing.map(x => dayLabel(x.date) + ' ' + x.store + ' ' + slotsText(x.slots)).join('、');
+  return `<div class="banner"><div class="warnbox" style="display:flex;align-items:center;gap:12px;margin:0"><span style="flex:1">${esc(t('miss_banner', { n: mb.missing.length, list }))}</span>${state.tab !== 'entry' ? `<button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="miss-go">${esc(t('miss_go'))}</button>` : ''}</div></div>`;
 }
 function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
@@ -695,6 +719,7 @@ function render(){
         <button data-act="pin-open">${esc(t('change_pin'))}</button>
         <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
     </header>
+    ${missBannerHTML()}
     ${state.banner && tabs().includes('plan') && state.tab !== 'plan' ? `<div class="banner"><div class="infobox"><span>${esc(t('banner_avail'))}</span><button class="btn" data-act="banner-go">${esc(t('banner_go'))}</button></div></div>` : ''}
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
     <nav>${tabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
@@ -811,6 +836,12 @@ function previewHTML(){
 }
 function mainRoleOf(id){ const s = (state.loginStaff || []).find(x => x.id === id); return (s && s.main_role) || 'service'; }
 // 选 Runner 时 Runner 组在前、服务其次；选吧台时吧台组在前；组内保持管理员设定的顺序
+// 当天已发布排班里，这个班次的 Runner / 吧台（不含自己、只含在职的）
+function schedPicks(role){
+  const f = state.form, sc = state.bon.sched;
+  if (f.entryId || !sc || !sc.published) return [];
+  return (sc[role === 'runner' ? 'runners' : 'bars'] || []).filter(id => id !== state.me.id && state.staff.some(s => s.id === id));
+}
 function dayPicks(role){
   const f = state.form, b = state.bon;
   if (f.entryId || !b.read || !b.dayHelp) return [];
@@ -819,8 +850,8 @@ function dayPicks(role){
 // 排序：今天同事已选的 > 近 30 天被选天数多的 > 主岗位 > 管理员设定的顺序
 function orderedFor(role, list){
   const pri = role === 'runner' ? { runner: 0, service: 1, bar: 2 } : { bar: 0, service: 1, runner: 2 };
-  const freq = (state.hstats && state.hstats[role]) || {}, today = dayPicks(role);
-  const key = s => [today.includes(s.id) ? 0 : 1, -(freq[s.id] || 0), pri[mainRoleOf(s.id)]];
+  const freq = (state.hstats && state.hstats[role]) || {}, today = dayPicks(role), plan = schedPicks(role);
+  const key = s => [plan.includes(s.id) ? 0 : today.includes(s.id) ? 1 : 2, -(freq[s.id] || 0), pri[mainRoleOf(s.id)]];
   return list.map((s, i) => ({ s, i, k: key(s) })).sort((a, b) =>
     (a.k[0] - b.k[0]) || (a.k[1] - b.k[1]) || (a.k[2] - b.k[2]) || (a.i - b.i)).map(x => x.s);
 }
@@ -897,8 +928,17 @@ function bonStatusHTML(){
   if (st === 'review') h += `<div class="warnbox">${esc(t('checks_review'))}</div>`;
   return h;
 }
+function schedInfoHTML(){
+  const sc = state.bon.sched, f = state.form;
+  if (f.entryId || !sc || !sc.published) return '';
+  const r = schedPicks('runner'), b = schedPicks('bar'), names = a => a.length ? a.map(staffName).join('、') : '—';
+  const auto = f.autoRunners || f.autoBars;
+  return `<div class="infobox">${esc(t('sched_line', { s: slotLabel(sc.slot), r: names(r), b: names(b) }))}<br><span class="small">${esc(auto ? t('sched_auto') : '')}${(!r.length || !b.length) ? (auto ? ' ' : '') + esc(t('sched_empty', {
+      r: [!r.length && t('runner'), !b.length && t('bar')].filter(Boolean).join(t('and_word')),
+      none: [!r.length && t('no_runner'), !b.length && t('no_bar')].filter(Boolean).join(' / ') })) : ''}</span></div>`;
+}
 function bonChipsBlock(){
-  return `<div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
+  return schedInfoHTML() + `<div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
     <div class="field"><label>${esc(t('bar'))}</label><div class="chips">${chipsHTML('bar')}</div></div>`;
 }
 function viewBonNew(){
@@ -955,7 +995,7 @@ function refreshBonSum(){
 async function readBon(){
   const b = state.bon; if (!b.top || !b.bottom) return;
   const my = ++b.seq;
-  b.busy = true; b.readErr = null; b.read = null; b.dayHelp = null; b.ack = false; refreshBonParts();
+  b.busy = true; b.readErr = null; b.read = null; b.dayHelp = null; b.sched = null; b.ack = false; refreshBonParts();
   let r = null, err = null;
   try { r = await callFn({ action: 'read', top: b.top.split(',')[1], bottom: b.bottom.split(',')[1] }); }
   catch(e){ err = errText(e); }
@@ -966,7 +1006,15 @@ async function readBon(){
     if (!(r.checks && r.checks.ok) && d.store && d.user_id && d.report_id) b.fails++;
     if (d.work_date) state.form.date = d.work_date;
     if (d.work_date && d.store){ try { b.dayHelp = await rpc('day_helpers', { ...tok(), p_date: d.work_date, p_store: d.store }); } catch(e){} }
+    // 当天有已发布的排班：自动选上这个班次的 Runner / 吧台（员工还没自己选过时才填；排班里没排的岗位不自动填）
+    if (d.work_date && d.store){ try { b.sched = await rpc('sched_bon_helpers', { ...tok(), p_date: d.work_date, p_store: d.store }); } catch(e){ b.sched = null; } }
     if (state.bon !== b || my !== b.seq) return;
+    const f = state.form;
+    [['runner', 'runners', 'autoRunners'], ['bar', 'bars', 'autoBars']].forEach(([role, key, flag]) => {
+      if (f[key] !== null && !f[flag]) return;
+      const ids = schedPicks(role);
+      if (ids.length){ f[key] = ids.slice(); f[flag] = true; } else if (f[flag]){ f[key] = null; f[flag] = false; }
+    });
   } else b.readErr = err;
   b.busy = false; refreshBonParts();
 }
@@ -990,7 +1038,7 @@ async function submitBon(){
     await rpc('submit_bon_entry', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
       p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack });
     state.done = { wallet: w, date: f.date, review: st === 'review', cash: d.cash_share };
-    state.bon = blankBon(); state.form = blankForm(); render(); window.scrollTo(0, 0);
+    state.bon = blankBon(); state.form = blankForm(); await loadMyBon(); render(); window.scrollTo(0, 0);
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
 }
 async function saveBonEdit(){
@@ -1145,7 +1193,7 @@ async function saveEntry(){
       p_runner_ids: f.runners, p_bar_ids: f.bars, p_server_id: f.server, p_entry_id: f.entryId, p_reason: f.reason.trim() || null });
     LS.set('store', f.store);
     const keep = { date: f.date, store: f.store };
-    state.form = { ...blankForm(), ...keep };
+    state.form = { ...blankForm(), ...keep }; await loadMyBon();
     toast(r && r.status === 'pending' ? t('request_sent') : t('saved')); render();
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
 }
@@ -1198,6 +1246,7 @@ async function viewLedger(){
 async function viewWeek(){
   $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
   let ov, st, disp;
+  try { state.schedCheck = await rpc('sched_tip_check', tok()); } catch(e){ state.schedCheck = null; }
   try {
     ov = await rpc('week_overview', { ...tok(), p_week_start: state.week });
     if (ov.locked) st = await rpc('settlement', { ...tok(), p_week_start: state.week });
@@ -1212,7 +1261,7 @@ async function viewWeek(){
         <div class="list">${todo.map(e => entryItem(e, { count: true })).join('')}</div>`
       : `<div class="infobox">${esc(t('all_counted'))}</div>`;
   const handover = handoverHTML(ov.entries);
-  let html = weekNav();
+  let html = weekNav() + schedCheckHTML();
 
   if (ov.locked){
     const line = l => `<div class="item"><div class="top">
@@ -1256,6 +1305,18 @@ async function viewWeek(){
       ${canLock ? '' : `<div class="small muted" style="margin-top:8px;text-align:center">${esc(t('lock_wait'))}</div>`}`;
   }
   $('#main').innerHTML = html;
+}
+// 排班提醒：漏交 Bon、排了班没被选的 Runner / 吧台（所有未锁定的周，最近 35 天）
+function schedCheckHTML(){
+  const c = state.schedCheck; if (!c) return '';
+  const row = (x, extra) => `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong>${extra || ''}</div></div>
+    <div class="meta">${esc(dayLabel(x.date))} · ${esc(x.store)} · ${esc(slotsText(x.slots))}</div></div>`;
+  let h = '';
+  if (c.missing.length) h += `<h3 class="negc">${esc(t('chk_missing', { n: c.missing.length }))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('chk_missing_hint'))}</div>
+    <div class="list">${c.missing.map(x => row(x)).join('')}</div>`;
+  if (c.unpicked.length) h += `<h3 class="negc">${esc(t('chk_unpicked', { n: c.unpicked.length }))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('chk_unpicked_hint'))}</div>
+    <div class="list">${c.unpicked.map(x => row(x, ` <span class="tag">${esc(t('grp_' + x.role))}</span>`)).join('')}</div>`;
+  return h;
 }
 function staffOptions(withKitchen){
   let list = state.staff.slice();
@@ -1640,11 +1701,13 @@ document.addEventListener('click', async ev => {
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
+      f[el.dataset.role === 'runner' ? 'autoRunners' : 'autoBars'] = false;
       if (i >= 0) arr.splice(i, 1); else arr.push(id);
       f[key] = arr.length ? arr : null; render(); break;
     }
-    case 'chip-day': { const r = el.dataset.role; f[r === 'runner' ? 'runners' : 'bars'] = dayPicks(r).slice(); render(); break; }
-    case 'chip-none': f[el.dataset.role === 'runner' ? 'runners' : 'bars'] = []; render(); break;
+    case 'chip-day': { const r = el.dataset.role; f[r === 'runner' ? 'runners' : 'bars'] = dayPicks(r).slice(); f[r === 'runner' ? 'autoRunners' : 'autoBars'] = false; render(); break; }
+    case 'chip-none': f[el.dataset.role === 'runner' ? 'runners' : 'bars'] = []; f[el.dataset.role === 'runner' ? 'autoRunners' : 'autoBars'] = false; render(); break;
+    case 'miss-go': state.done = null; state.tab = 'entry'; LS.set('tab', 'entry'); state.menu = false; render(); window.scrollTo(0, 0); break;
     case 'login-admin': state.loginAdmin = !state.loginAdmin; state.loginErr = ''; renderLogin(); break;
     case 'entry-save': saveEntry(); break;
     case 'edit-cancel': state.form = blankForm(); render(); break;
@@ -1700,6 +1763,8 @@ document.addEventListener('click', async ev => {
     case 'lock':
       try { const rv = await rpc('admin_review_list', tok()) || [];
         if (rv.some(r => mondayOf(r.date) === state.week)) { toast(t('review_first'), true); break; } } catch(e){}
+      { const c = state.schedCheck, n = c ? [...c.missing, ...c.unpicked].filter(x => mondayOf(x.date) === state.week).length : 0;
+        if (n && !confirm(t('chk_lock_warn', { n }))) break; }
       if (!confirm(t('lock_confirm'))) break;
       el.disabled = true;
       try { await rpc('lock_week', { ...tok(), p_week_start: state.week }); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
