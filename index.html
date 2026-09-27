@@ -245,7 +245,10 @@ zh: {
   entries:'本周全部录入', adj_title:'记一笔调整', adj_from:'谁付', adj_to:'付给谁', amount:'金额', reason:'原因', add:'记入',
   adj_added:'调整已记入', lock:'锁定本周，生成结算单', lock_confirm:'锁定后本周记录不能再改。确定吗？',
   lock_wait:'这周结束后（下周一起）才能锁定', pay_in:'交给小费管理员', pay_out:'从小费管理员领取', no_move:'无需交接',
-  float:'小费管理员手里保管的零头', admin_staff:'员工', admin_rates:'比例', admin_report:'报表', admin_audit:'日志',
+  float:'小费管理员手里保管的零头', admin_staff:'员工', admin_rates:'比例', admin_report:'报表', admin_audit:'日志', admin_deleted:'已删除',
+  del_all:'全部', del_self:'员工自己删的', del_none:'没有删除记录', del_tag_self:'员工自己删除', del_tag_self_min:'员工自己删除 · 录入后 {m} 分钟',
+  del_tag_approved:'申请后批准', del_tag_admin:'管理员删除', del_tag_resub:'已重新录入', del_by:'{n} 删除 · {t}',
+  del_req:'{n} 申请删除 · {t}', del_appr:'{n} 批准 · {t}', del_reason:'理由：{r}', del_hint:'所有被删除的录入，最近的在前（最多 200 条）。员工录入后 10 分钟内可以不经批准删掉自己的，这类标红。「已重新录入」表示同一人同一天同一家店现在还有录入，可以和删掉的对比。',
   name:'姓名', new_pin:'新 PIN（6 位数字）', active:'在职', is_kitchen:'厨房账号',
   is_manager:'小费管理员', is_admin:'超级管理员', add_staff:'添加员工', inactive:'已停用', new_staff:'新员工',
   valid_from:'生效日期', current_rate:'当前比例', new_rate:'设置新比例', rate_saved:'新比例已保存',
@@ -337,7 +340,10 @@ de: {
   entries:'Alle Einträge dieser Woche', adj_title:'Korrektur buchen', adj_from:'Wer zahlt', adj_to:'An wen', amount:'Betrag', reason:'Grund', add:'Buchen',
   adj_added:'Korrektur gebucht', lock:'Woche abschließen und Abrechnung erstellen', lock_confirm:'Danach kann diese Woche nicht mehr geändert werden. Fortfahren?',
   lock_wait:'Abschluss ab Montag nach Wochenende möglich', pay_in:'An Tip-Manager abgeben', pay_out:'Vom Tip-Manager erhalten', no_move:'Nichts zu übergeben',
-  float:'Rest, den der Tip-Manager verwahrt', admin_staff:'Mitarbeiter', admin_rates:'Anteile', admin_report:'Bericht', admin_audit:'Protokoll',
+  float:'Rest, den der Tip-Manager verwahrt', admin_staff:'Mitarbeiter', admin_rates:'Anteile', admin_report:'Bericht', admin_audit:'Protokoll', admin_deleted:'Gelöscht',
+  del_all:'Alle', del_self:'Selbst gelöscht', del_none:'Keine gelöschten Einträge', del_tag_self:'Selbst gelöscht', del_tag_self_min:'Selbst gelöscht · {m} Min. nach Eintrag',
+  del_tag_approved:'Nach Antrag freigegeben', del_tag_admin:'Vom Admin gelöscht', del_tag_resub:'Neu eingetragen', del_by:'Gelöscht von {n} · {t}',
+  del_req:'Löschung beantragt von {n} · {t}', del_appr:'Freigegeben von {n} · {t}', del_reason:'Grund: {r}', del_hint:'Alle gelöschten Einträge, neueste zuerst (max. 200). Innerhalb von 10 Minuten nach dem Eintragen können Mitarbeiter ihren eigenen Eintrag ohne Freigabe löschen – diese sind rot markiert. „Neu eingetragen“: Für dieselbe Person, denselben Tag und dasselbe Restaurant gibt es jetzt einen Eintrag – zum Vergleichen.',
   name:'Name', new_pin:'Neue PIN (6 Ziffern)', active:'Aktiv', is_kitchen:'Küchenkonto',
   is_manager:'Tip-Manager', is_admin:'Admin', add_staff:'Mitarbeiter hinzufügen', inactive:'inaktiv', new_staff:'Neuer Mitarbeiter',
   valid_from:'Gültig ab', current_rate:'Aktuelle Anteile', new_rate:'Neue Anteile festlegen', rate_saved:'Neue Anteile gespeichert',
@@ -1326,7 +1332,7 @@ function staffOptions(withKitchen){
 
 // ============ 管理（超级管理员）============
 async function viewAdmin(){
-  const subs = ['requests','feedback','staff','rates','report','audit'];
+  const subs = ['requests','feedback','staff','rates','report','deleted','audit'];
   $('#main').innerHTML = `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}</button>`).join('')}</div><div id="asub"><div class="loading">${esc(t('loading'))}</div></div>`;
   const el = () => $('#asub');
   try {
@@ -1339,6 +1345,12 @@ async function viewAdmin(){
       el().innerHTML = (reviews.length ? `<h3>${esc(t('review_title'))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('review_hint'))}</div><div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
         + (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
         + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`));
+    } else if (state.adminSub === 'deleted'){
+      const all = await rpc('admin_deleted_list', { ...tok(), p_limit: 200 }) || [];
+      const f = state.delFilter || 'all', list = f === 'self' ? all.filter(x => x.self) : all;
+      el().innerHTML = `<div class="small muted" style="margin:-4px 0 10px">${esc(t('del_hint'))}</div>
+        <div class="seg" style="margin-bottom:12px">${['all', 'self'].map(k => `<button data-act="del-filter" data-k="${k}" class="${f === k ? 'on' : ''}">${esc(t('del_' + k))} (${k === 'self' ? all.filter(x => x.self).length : all.length})</button>`).join('')}</div>
+        <div class="list">${list.map(deletedCard).join('') || `<div class="empty">${esc(t('del_none'))}</div>`}</div>`;
     } else if (state.adminSub === 'staff'){
       const list = await rpc('admin_list_staff', tok());
       state.staffList = list;
@@ -1382,6 +1394,29 @@ async function viewAdmin(){
         ${l.detail ? `<div class="meta" style="word-break:break-all">${esc(JSON.stringify(l.detail).slice(0,220))}</div>` : ''}</div>`).join('') || `<div class="empty">${esc(t('nothing'))}</div>`}</div>`;
     }
   } catch(e){ el().innerHTML = `<div class="empty">${esc(errText(e))}</div>`; }
+}
+function deletedCard(x){
+  const b = x.before || {}, when = iso => fmtDateTime(iso);
+  const total = b.wallet_cents != null ? b.wallet_cents : (b.card_cents || 0) + (b.cash_cents || 0);
+  const mins = x.self && x.created_at ? Math.max(0, Math.round((new Date(x.at) - new Date(x.created_at)) / 60000)) : null;
+  const tags = (x.self ? `<span class="tag bad">${esc(mins !== null ? t('del_tag_self_min', { m: mins }) : t('del_tag_self'))}</span>`
+      : x.kind === 'approved' ? `<span class="tag pend">${esc(t('del_tag_approved'))}</span>`
+      : x.by_admin ? `<span class="tag">${esc(t('del_tag_admin'))}</span>` : '')
+    + (x.resubmitted ? `<span class="tag ok">${esc(t('del_tag_resub'))}</span>` : '');
+  const money = [b.wallet_cents != null ? `${t('lbl_wallet')} ${eur(b.wallet_cents)}` : '',
+    x.schluss_cents != null ? `${t('of_which_store')} ${eur(x.schluss_cents)}` : '',
+    `${t('card_tip')} ${eur(b.card_cents || 0)}`, `${t('cash_tip')} ${eur(b.cash_cents || 0)}`].filter(Boolean).join(' · ');
+  const names = a => (a || []).length ? a.join('、') : '—';
+  const helpers = (b.runners || b.bars) ? `${t('runner')} ${names(b.runners)} · ${t('bar')} ${names(b.bars)}` : '';
+  const who = x.kind === 'approved'
+    ? (x.requested_by ? esc(t('del_req', { n: x.requested_by, t: x.requested_at ? when(x.requested_at) : '?' })) + '<br>' : '') + esc(t('del_appr', { n: x.by || '?', t: when(x.at) }))
+    : esc(t('del_by', { n: x.by || '?', t: when(x.at) }));
+  return `<div class="item">
+    <div class="top"><div><strong>${b.date ? esc(dayLabel(String(b.date).slice(0, 10))) : '?'}</strong> <span class="muted">${esc(b.store || '')}${b.server ? ' · ' + esc(b.server) : ''}</span>${tags}</div>
+      <div class="amt num">${eur(total)}</div></div>
+    <div class="meta num">${esc(money)}</div>
+    ${helpers ? `<div class="meta">${esc(helpers)}</div>` : ''}
+    <div class="meta">${who}${x.reason ? '<br>' + esc(t('del_reason', { r: x.reason })) : ''}</div></div>`;
 }
 function staffForm(s){
   const isNew = !s.id;
@@ -1770,6 +1805,7 @@ document.addEventListener('click', async ev => {
       try { await rpc('lock_week', { ...tok(), p_week_start: state.week }); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     case 'admin-sub': state.adminSub = el.dataset.sub; state.staffEdit = null; render(); break;
+    case 'del-filter': state.delFilter = el.dataset.k; render(); break;
     case 'staff-new': state.staffEdit = {}; render(); break;
     case 'staff-edit': state.staffEdit = JSON.parse(el.dataset.json); render(); window.scrollTo(0, 0); break;
     case 'staff-cancel': state.staffEdit = null; render(); break;
