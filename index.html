@@ -163,7 +163,7 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);transform:translateX(-50%);
   background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-weight:600;z-index:50;max-width:90vw;text-align:center;
   box-shadow:0 6px 20px rgba(0,0,0,.2)}
-.toast.err{background:var(--neg)}
+.toast.err{background:var(--neg);text-align:left;line-height:1.45;border-radius:14px;width:min(460px,90vw)}
 dialog{border:0;border-radius:var(--r-m);padding:20px;width:min(360px,92vw)}
 dialog::backdrop{background:rgba(31,42,39,.5)}
 #shiftDlg{width:min(540px,94vw);max-height:90vh;overflow:auto}
@@ -252,7 +252,7 @@ zh: {
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
   admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'Runner 和吧台登录后只看账本，不能录入。主岗位也决定登录页分组和选人顺序，不影响分账。',
-  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', err_INVALID_ROLE:'岗位无效', report_open:'这张单据没有报告编号，报告还没有关闭（单据上写着「Der Bericht ist noch offen」），金额可能不完整。请先在收银机上 Entstempeln（打卡下班），然后打印 Abschlussbericht，再用新打印的单据拍照。如果单据已经是 Entstempeln 后打印的，请重拍顶部，确保拍到「Identifikationsnummer für Bericht」。',
+  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', report_open:'这张单据没有报告编号，报告还没有关闭（单据上写着「Der Bericht ist noch offen」），金额可能不完整。请先在收银机上 Entstempeln（打卡下班），然后打印 Abschlussbericht，再用新打印的单据拍照。如果单据已经是 Entstempeln 后打印的，请重拍顶部，确保拍到「Identifikationsnummer für Bericht」。',
   plan_mine:'我的', plan_edit:'排班', slot_lunch:'午班', slot_dinner:'晚班', only_store:'仅 {s}',
   my_shifts:'我的班', not_published:'这周的排班还没有发布。', no_shifts:'这周没有排你的班', changed:'有变更',
   avail_title:'可上班时间', avail_deadline:'请在 {d} 前填写，之后不能再改。', avail_closed:'已截止。需要修改请找排班员。', avail_closed_sched:'已截止（排班员仍可修改自己的）。',
@@ -264,12 +264,12 @@ zh: {
   already_in:'已排在 {s}', shift_del_confirm:'删除这个班？', is_scheduler:'排班员', avail_hint:'点一下你不能上的班，再点一下取消。没标的都算能上，具体时间由排班员安排。可以用 › 往后翻，提前标出假期或考试周。', avail_rule:'没标的班都算能上。排了你的班就要来；来不了请自己找人换，并提前告诉排班员。', avail_count:'你已标出 {n} 个班不能上。', banner_avail:'下周默认都能上。有不能上的班，请在周四 20:00 前到「排班」里标出。', banner_go:'去标出',
   avail_not_submitted:'还没提交。标好不能上的班后点「确认提交」；下周都能上也要点一下。', avail_submitted:'已提交：{n} 个班不能上。截止前可以随时修改。',
   avail_submitted0:'已提交：下周都能上。截止前可以随时修改。', avail_submit:'确认提交', av_x:'不能上',
-  err_AVAIL_CLOSED:'已截止，不能再修改', err_SHIFT_CONFLICT:'这个人这个时段已经排在另一家店了', err_INVALID_SLOT:'这家店这天没有这个班次', err_INVALID_TIME:'时间不对：结束要晚于开始', show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
+  show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
   checks_retake:'单据上的数字前后对不上，请点上面的照片重拍（已识别 {n} 次）。', checks_review:'已经重拍 2 次，还是对不上。可以直接提交，老板会看照片核对并更正。',
   wait_read:'正在识别单据，请稍等', need_retake:'请先重拍单据', retake_all:'全部重拍', bon_numbers:'单据数字（自动识别，不能修改）',
   done_review:'这张单据识别有疑问，老板会看照片核对。信封照常放。', review_title:'待核对的 Bon（识别未通过）', review_save:'核对完毕，保存',
   reviewed:'已保存，分成已重新计算', review_first:'这周还有待核对的 Bon，请老板先在「审批」里处理', review_hint:'看照片后改正下面两个数字，分成和差额会按原来的钱包金额重新计算。',
-  prob_CARD_TIP_MISMATCH:'刷卡小费在单据上几处不一致', prob_CLOSING_MISMATCH:'Schlussbestand 验算不符', prob_NO_CLOSING:'没有读到 Schlussbestand', prob_UNREADABLE:'有看不清的项目', err_WEEK_LOCKED:'这周已锁定，不能再改', same_today:'同今天其他人：{n}', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
+  prob_CARD_TIP_MISMATCH:'刷卡小费在单据上几处不一致', prob_CLOSING_MISMATCH:'Schlussbestand 验算不符', prob_NO_CLOSING:'没有读到 Schlussbestand', prob_UNREADABLE:'有看不清的项目', same_today:'同今天其他人：{n}', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
   pick_runner:'请选择 Runner，没有就点「无 Runner」', pick_bar:'请选择吧台，没有就点「无吧台」', not_chosen:'未选择',
   edit_reason:'修改理由', edit_reason_hint:'录入超过 10 分钟后的修改，需要老板批准', submit_request:'提交修改申请',
   request_sent:'已提交，等老板批准', ask_del_reason:'删除理由（需要老板批准）', pending_tag:'待批准',
@@ -295,16 +295,16 @@ zh: {
   view_as:'查看', viewing_as:'正在以 {n} 的视角查看（只读）', exit_view:'退出查看',
   role_server:'服务员', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
   week_of:'第 {w} 周', preview:'分配预览', from:'来自',
-  err_AUTH_REQUIRED:'登录已过期，请重新登录', err_FORBIDDEN:'没有权限', err_WEEK_LOCKED:'这一周已锁定，不能再改',
-  err_EDIT_WINDOW_CLOSED:'已过修改时间（次日 12:00），请找小费管理员', err_SELF_AS_HELPER:'不能选自己',
-  err_INVALID_HELPER:'选择的同事无效', err_DUPLICATE_ENTRY:'这天这家店你已经录过了，请修改原来那条',
-  err_FUTURE_DATE:'不能录入未来的日期', err_NO_RATE:'还没设置分配比例', err_NO_KITCHEN_ACCOUNT:'还没有厨房账号',
-  err_OPEN_DISPUTES:'还有没处理的疑问，请先处理', err_WEEK_NOT_OVER:'这周还没结束', err_EARLIER_WEEK_OPEN:'更早的一周还没锁定，请按顺序周结',
-  err_INVALID_PIN:'PIN 必须是 6 位数字，不能用 888888、6 个相同数字、123456 或 654321', err_MUST_CHANGE_PIN:'请先设置你自己的 PIN', err_SHORTAGE:'钱包现金不够，请重新清点', err_DUPLICATE_BON:'这张单据已经上传过了', err_BON_OTHER_STAFF:'这张单据不是你的（Lightspeed 员工编号不符）', err_BON_UNREADABLE:'单据识别失败，请重拍：顶部要拍到名字和日期，底部要拍到 Einnahmen', err_STORE_UNKNOWN:'识别不出门店，请重拍顶部', err_READ_USED:'这次识别已经提交过了，请重新拍照', err_NOT_BON_ENTRY:'这条不是拍照录入的记录', err_ALREADY_COUNTED:'信封已点收，只能由老板修改', err_USE_BON:'请用拍照方式录入', err_UNCOUNTED_ENTRIES:'这周还有信封没点收', err_PHOTOS_REQUIRED:'请先拍两张照片', err_PHOTO_TOO_LARGE:'照片太大，请重拍', err_BON_FAILED:'识别服务暂时不可用，请稍后再试', err_TOO_MANY_READS:'今天识别次数太多了，请联系管理员', err_UPLOAD_FAILED:'照片上传失败，请重试', err_INVALID_AMOUNT:'金额无效', err_REQUEST_PENDING:'这条记录已有一个待批准的申请', err_STALE_REQUEST:'申请之后这条记录又被改过，请拒绝，让员工重新申请', err_PENDING_REQUESTS:'这周还有待老板批准的修改，请先处理', err_NAME_REQUIRED:'请填姓名', err_INVALID_STORE:'门店无效', err_WRONG_PIN:'当前 PIN 不对', err_PIN_REQUIRED:'新员工必须设 PIN',
-  err_CANNOT_DEMOTE_SELF:'不能取消自己的管理员权限', err_NO_RETROACTIVE_RATE:'新比例最早今天生效',
-  err_COMMENT_REQUIRED:'请写明问题', err_REASON_REQUIRED:'请写原因', err_NOT_FOUND:'记录不存在',
-  err_LOGIN_FAILED:'PIN 不对', err_LOCKED:'输错太多次，15 分钟后再试', err_INVALID_SERVER:'服务员无效',
-  err_NAME_TAKEN:'这个名字已经有了', err_ONE_KITCHEN:'只能有一个在用的厨房账号', err_NETWORK:'连不上服务器，请检查网络', err_GENERIC:'出错了',
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
@@ -334,7 +334,7 @@ de: {
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
   admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Runner und Bar sehen nach der Anmeldung nur ihr Konto und können nichts eintragen. Die Hauptposition bestimmt auch die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung.',
-  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', err_INVALID_ROLE:'Ungültige Position', report_open:'Auf diesem Bon fehlt die Berichtsnummer – der Bericht ist noch offen („Der Bericht ist noch offen“) und die Beträge können unvollständig sein. Bitte zuerst an der Kasse ausstempeln, dann den Abschlussbericht drucken und den neuen Bon fotografieren. Wurde der Bon schon nach dem Ausstempeln gedruckt, bitte das obere Foto neu machen, sodass die „Identifikationsnummer für Bericht“ zu sehen ist.',
+  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', report_open:'Auf diesem Bon fehlt die Berichtsnummer – der Bericht ist noch offen („Der Bericht ist noch offen“) und die Beträge können unvollständig sein. Bitte zuerst an der Kasse ausstempeln, dann den Abschlussbericht drucken und den neuen Bon fotografieren. Wurde der Bon schon nach dem Ausstempeln gedruckt, bitte das obere Foto neu machen, sodass die „Identifikationsnummer für Bericht“ zu sehen ist.',
   plan_mine:'Meins', plan_edit:'Planen', slot_lunch:'Mittag', slot_dinner:'Abend', only_store:'nur {s}',
   my_shifts:'Meine Schichten', not_published:'Der Dienstplan für diese Woche ist noch nicht veröffentlicht.', no_shifts:'Diese Woche keine Schichten für dich', changed:'Geändert',
   avail_title:'Verfügbarkeit', avail_deadline:'Bitte bis {d} eintragen, danach keine Änderung mehr.', avail_closed:'Frist abgelaufen. Änderungen bitte über die Dienstplanung.', avail_closed_sched:'Frist abgelaufen (Dienstplanung kann die eigenen Angaben noch ändern).',
@@ -346,12 +346,12 @@ de: {
   already_in:'Schon in {s}', shift_del_confirm:'Diese Schicht löschen?', is_scheduler:'Dienstplanung', avail_hint:'Tippe auf die Schichten, an denen du nicht kannst – nochmal tippen zum Aufheben. Alles andere gilt als verfügbar, die genauen Zeiten legt die Dienstplanung fest. Mit › kannst du auch Urlaub oder Prüfungswochen im Voraus eintragen.', avail_rule:'Nicht markierte Schichten gelten als verfügbar. Wenn du eingeplant bist, kommst du; wenn nicht, such dir selbst Ersatz und sag der Dienstplanung rechtzeitig Bescheid.', avail_count:'Du hast {n} Schichten als „kann nicht“ markiert.', banner_avail:'Für nächste Woche giltst du als verfügbar. Schichten, an denen du nicht kannst, bitte bis Donnerstag 20:00 Uhr unter „Dienstplan“ markieren.', banner_go:'Markieren',
   avail_not_submitted:'Noch nicht abgeschickt. Schichten markieren, an denen du nicht kannst, und „Abschicken“ tippen – auch wenn du die ganze Woche kannst.', avail_submitted:'Abgeschickt: {n} Schichten nicht verfügbar. Änderungen bis zur Frist möglich.',
   avail_submitted0:'Abgeschickt: die ganze Woche verfügbar. Änderungen bis zur Frist möglich.', avail_submit:'Abschicken', av_x:'kann nicht',
-  err_AVAIL_CLOSED:'Frist abgelaufen, keine Änderung möglich', err_SHIFT_CONFLICT:'Diese Person ist in dieser Zeit schon im anderen Restaurant eingeplant', err_INVALID_SLOT:'Diese Schicht gibt es an diesem Tag in diesem Restaurant nicht', err_INVALID_TIME:'Zeit ungültig: Ende muss nach Beginn liegen', show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
+  show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
   checks_retake:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte oben auf das Foto tippen und neu fotografieren ({n}. Versuch).', checks_review:'Nach 2 neuen Fotos passt es immer noch nicht. Du kannst trotzdem absenden – der Chef prüft das Foto und korrigiert.',
   wait_read:'Bon wird noch ausgelesen, bitte kurz warten', need_retake:'Bitte zuerst den Bon neu fotografieren', retake_all:'Alles neu fotografieren', bon_numbers:'Zahlen vom Bon (automatisch erkannt, nicht änderbar)',
   done_review:'Bei diesem Bon gab es Unklarheiten – der Chef prüft das Foto. Umschlag bitte wie immer abgeben.', review_title:'Zu prüfende Bons (Auslesen nicht bestanden)', review_save:'Geprüft, speichern',
   reviewed:'Gespeichert, Verteilung neu berechnet', review_first:'Diese Woche gibt es noch zu prüfende Bons – bitte zuerst unter „Freigaben“ erledigen', review_hint:'Foto ansehen und die beiden Zahlen korrigieren. Verteilung und Fehlbetrag werden mit dem ursprünglichen Portemonnaie-Betrag neu berechnet.',
-  prob_CARD_TIP_MISMATCH:'Kartentrinkgeld an mehreren Stellen unterschiedlich', prob_CLOSING_MISMATCH:'Schlussbestand rechnerisch falsch', prob_NO_CLOSING:'Schlussbestand nicht gelesen', prob_UNREADABLE:'Unleserliche Felder', err_WEEK_LOCKED:'Woche ist abgeschlossen', same_today:'Wie die anderen heute: {n}', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
+  prob_CARD_TIP_MISMATCH:'Kartentrinkgeld an mehreren Stellen unterschiedlich', prob_CLOSING_MISMATCH:'Schlussbestand rechnerisch falsch', prob_NO_CLOSING:'Schlussbestand nicht gelesen', prob_UNREADABLE:'Unleserliche Felder', same_today:'Wie die anderen heute: {n}', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
   pick_runner:'Bitte Runner wählen – oder „Kein Runner"', pick_bar:'Bitte Bar wählen – oder „Keine Bar"', not_chosen:'nicht gewählt',
   edit_reason:'Grund der Änderung', edit_reason_hint:'Änderungen später als 10 Minuten nach dem Eintragen muss der Chef freigeben', submit_request:'Änderung beantragen',
   request_sent:'Beantragt. Wartet auf Freigabe durch den Chef.', ask_del_reason:'Grund für das Löschen (Freigabe durch den Chef nötig)', pending_tag:'wartet auf Freigabe',
@@ -377,16 +377,16 @@ de: {
   view_as:'Ansehen', viewing_as:'Ansicht als {n} (nur lesen)', exit_view:'Ansicht beenden',
   role_server:'Service', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
   week_of:'KW {w}', preview:'Aufteilung', from:'von',
-  err_AUTH_REQUIRED:'Sitzung abgelaufen. Bitte neu anmelden.', err_FORBIDDEN:'Keine Berechtigung', err_WEEK_LOCKED:'Diese Woche ist abgeschlossen.',
-  err_EDIT_WINDOW_CLOSED:'Ändern nur bis 12 Uhr am Folgetag. Bitte an den Tip-Manager wenden.', err_SELF_AS_HELPER:'Du kannst dich nicht selbst auswählen.',
-  err_INVALID_HELPER:'Ungültige Auswahl', err_DUPLICATE_ENTRY:'Für diesen Tag und diese Filiale gibt es schon einen Eintrag. Bitte den bestehenden bearbeiten.',
-  err_FUTURE_DATE:'Datum liegt in der Zukunft', err_NO_RATE:'Noch keine Anteile festgelegt', err_NO_KITCHEN_ACCOUNT:'Kein Küchenkonto vorhanden',
-  err_OPEN_DISPUTES:'Es gibt noch offene Fragen. Bitte zuerst klären.', err_WEEK_NOT_OVER:'Die Woche ist noch nicht vorbei.', err_EARLIER_WEEK_OPEN:'Eine frühere Woche ist noch offen. Bitte der Reihe nach abschließen.',
-  err_INVALID_PIN:'PIN muss 6 Ziffern haben. Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321', err_MUST_CHANGE_PIN:'Bitte zuerst eigene PIN festlegen', err_SHORTAGE:'Zu wenig Bargeld – bitte nachzählen', err_DUPLICATE_BON:'Dieser Bon wurde schon hochgeladen', err_BON_OTHER_STAFF:'Das ist nicht dein Bon (Lightspeed-Nummer passt nicht)', err_BON_UNREADABLE:'Bon nicht lesbar. Bitte neu fotografieren: oben Name und Datum, unten Einnahmen.', err_STORE_UNKNOWN:'Filiale nicht erkannt. Bitte oberen Teil neu fotografieren.', err_READ_USED:'Schon abgeschickt. Bitte neu fotografieren.', err_NOT_BON_ENTRY:'Kein Foto-Eintrag', err_ALREADY_COUNTED:'Umschlag schon gezählt – nur der Chef kann ändern', err_USE_BON:'Bitte mit Foto eintragen', err_UNCOUNTED_ENTRIES:'Diese Woche sind noch Umschläge nicht gezählt', err_PHOTOS_REQUIRED:'Bitte zuerst beide Fotos machen', err_PHOTO_TOO_LARGE:'Foto zu groß, bitte neu', err_BON_FAILED:'Auslesen gerade nicht möglich, bitte später erneut', err_TOO_MANY_READS:'Heute zu viele Versuche – bitte Admin fragen', err_UPLOAD_FAILED:'Foto-Upload fehlgeschlagen', err_INVALID_AMOUNT:'Ungültiger Betrag', err_REQUEST_PENDING:'Für diesen Eintrag liegt schon ein offener Antrag vor', err_STALE_REQUEST:'Der Eintrag wurde nach dem Antrag geändert. Bitte ablehnen und neu beantragen lassen.', err_PENDING_REQUESTS:'Diese Woche hat noch offene Freigaben. Bitte zuerst bearbeiten.', err_NAME_REQUIRED:'Bitte Namen eingeben', err_INVALID_STORE:'Ungültige Filiale', err_WRONG_PIN:'Aktuelle PIN falsch', err_PIN_REQUIRED:'Neue Mitarbeiter brauchen eine PIN',
-  err_CANNOT_DEMOTE_SELF:'Eigene Admin-Rechte können nicht entzogen werden', err_NO_RETROACTIVE_RATE:'Neue Anteile frühestens ab heute',
-  err_COMMENT_REQUIRED:'Bitte beschreiben', err_REASON_REQUIRED:'Bitte Grund angeben', err_NOT_FOUND:'Eintrag nicht gefunden',
-  err_LOGIN_FAILED:'PIN falsch', err_LOCKED:'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.', err_INVALID_SERVER:'Ungültige Servicekraft',
-  err_NAME_TAKEN:'Dieser Name existiert schon', err_ONE_KITCHEN:'Es darf nur ein aktives Küchenkonto geben', err_NETWORK:'Keine Verbindung zum Server', err_GENERIC:'Fehler',
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   wd:['Mo','Di','Mi','Do','Fr','Sa','So']
 }};
 
@@ -465,15 +465,136 @@ function toast(msg, isErr){
   document.querySelectorAll('.toast').forEach(n => n.remove());
   const n = document.createElement('div'); n.className = 'toast' + (isErr ? ' err' : ''); n.textContent = msg;
   n.setAttribute('role', 'status'); document.body.appendChild(n);
-  clearTimeout(toastTimer); toastTimer = setTimeout(() => n.remove(), 3200);
+  // 报错提示较长：按字数延长显示时间（至少 6 秒），点一下即可关闭
+  n.addEventListener('click', () => n.remove());
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => n.remove(), isErr ? Math.max(6000, String(msg).length * 110) : 3200);
 }
+// 报错提示：每条都写清原因和下一步怎么做
+const ERR_ZH = {
+  AUTH_REQUIRED: '登录已过期（超过有效时间，或已在别处退出）。请重新登录。',
+  FORBIDDEN: '你的账号没有这个操作的权限。如果你认为应该有，请找老板在「员工」里调整。',
+  EDIT_WINDOW_CLOSED: '已经过了可以直接修改的时间。请用「申请修改」写明原因，由老板批准。',
+  SELF_AS_HELPER: '不能把自己选成 Runner 或吧台。请取消选中自己的名字。',
+  INVALID_HELPER: '选的 Runner / 吧台里有人已不在职或不能被选。请重新选择；如果名单不对，请告诉老板。',
+  DUPLICATE_ENTRY: '这天在这家店已经有你的一条手动录入。请修改原来那条，不要重复录入。',
+  FUTURE_DATE: '识别出的日期在未来，多半是日期没读对。请重拍顶部，让日期清楚可见。',
+  NO_RATE: '系统里还没有设置分配比例，暂时不能录入。请通知老板在「管理 → 比例」里设置。',
+  NO_KITCHEN_ACCOUNT: '系统里还没有厨房账号，没法分配厨房份额。请通知老板在「员工」里建一个厨房账号。',
+  OPEN_DISPUTES: '这周还有员工提出的疑问没有处理，不能周结。请先在「审批」里处理完。',
+  WEEK_NOT_OVER: '这周还没结束，要到周一才能周结。',
+  EARLIER_WEEK_OPEN: '前面还有没锁定的周。周结要按顺序：请先切到更早的那一周完成周结。',
+  INVALID_PIN: 'PIN 必须是 6 位数字。为了安全，不能用 888888、6 个相同的数字、123456 或 654321。',
+  MUST_CHANGE_PIN: '你还在用初始 PIN。请先设置你自己的 6 位 PIN，才能继续使用。',
+  SHORTAGE: '钱包里的现金比应交的少。请重新点一遍钱，找找有没有漏掉的；确实少了的话，勾选确认后再提交，差额默认从你的小费里扣。',
+  DUPLICATE_BON: '这张单据（同一个报告编号）已经上传过了，不能重复提交。如果你之前没交过，可能有人误用了你的单据，请告诉老板。',
+  BON_OTHER_STAFF: '这张单据上的 Lightspeed 员工编号和你的账号对不上。请确认拍的是你自己的 Nutzerbericht；如果确实是你的，可能工号绑错了，请找老板在「员工」里解除绑定。',
+  BON_UNREADABLE: '单据上的名字、工号、日期或报告编号没有读到。请重拍顶部，让这几项清楚可见（避免反光、不要折起来）。',
+  STORE_UNKNOWN: '识别不出是哪家店。请重拍顶部，拍到店名和地址（邮编 40233 或 40210）。',
+  READ_USED: '这组照片已经提交过了。如果还要交另一张 Bon，请重新拍照。',
+  NOT_BON_ENTRY: '这条记录是手动录入的，不能按拍照录入的方式修改。请联系老板。',
+  ALREADY_COUNTED: '这个信封已经点收了，只有老板能修改。请联系老板。',
+  USE_BON: '请用拍照方式录入：拍下 Abschlussbericht 的顶部和底部。',
+  UNCOUNTED_ENTRIES: '这周还有信封没点收，不能周结。请先在上方「待点收的信封」里点完。',
+  PHOTOS_REQUIRED: '还缺照片：顶部和底部两张都要拍。',
+  PHOTO_TOO_LARGE: '照片文件太大，上传不了。请重拍一次（不要用全景或超高分辨率模式）。',
+  BON_FAILED: '识别服务暂时没有响应（可能是网络或服务繁忙）。请等一分钟后点「重新识别」；一直不行请告诉老板。',
+  TOO_MANY_READS: '24 小时内识别次数已达上限（30 次），为防止滥用暂时停止。请联系老板。',
+  UPLOAD_FAILED: '照片上传失败，多半是网络不稳定。请检查网络后重拍。',
+  DB_ERROR: '保存识别结果时出错。请点「重新识别」；一直不行请告诉老板。',
+  INVALID_AMOUNT: '金额格式不对，或超出合理范围。请只输入数字，例如 123,45。',
+  REQUEST_PENDING: '这条记录已经有一个修改申请在等老板批准。请等老板处理后，再提交新的申请。',
+  STALE_REQUEST: '员工提交申请后，这条记录又被改过，申请内容已经过时。请拒绝这个申请，让员工按最新内容重新申请。',
+  PENDING_REQUESTS: '这周还有待批准的修改申请，不能周结。请先在「审批」里处理。',
+  NAME_REQUIRED: '请填写员工姓名。',
+  INVALID_STORE: '门店无效，只能是 Flingern 或 Bismarck。',
+  WRONG_PIN: '当前 PIN 输错了。请输入你现在正在使用的 PIN。',
+  PIN_REQUIRED: '新员工必须设置一个 PIN。',
+  CANNOT_DEMOTE_SELF: '不能取消你自己的管理员权限，以免系统里没有管理员。',
+  NO_RETROACTIVE_RATE: '新比例不能追溯，最早从今天开始生效。请把生效日期改成今天或以后。',
+  COMMENT_REQUIRED: '请写明你的疑问是什么，老板才能处理。',
+  REASON_REQUIRED: '请写明修改原因，老板审批时需要看。',
+  NOT_FOUND: '找不到这条记录，可能已被删除或修改。请刷新页面后再试。',
+  LOGIN_FAILED: 'PIN 不对。连续输错 5 次会锁定 15 分钟。忘记 PIN 请找老板重置。',
+  LOCKED: '连续输错太多次，账号已锁定 15 分钟。请稍后再试，或找老板重置 PIN。',
+  INVALID_SERVER: '选择的服务员无效（已不在职或不存在）。请重新选择。',
+  NAME_TAKEN: '已经有员工叫这个名字。请换一个，比如加上姓氏首字母。',
+  ONE_KITCHEN: '只能有一个在用的厨房账号。请先把旧的厨房账号设为不在职。',
+  NETWORK: '连不上服务器。请检查网络（Wi-Fi 或移动数据）后再试。',
+  GENERIC: '出错了。请截图发给老板。',
+  WEEK_LOCKED: '这一周已经周结锁定，不能再修改。需要更正请让老板记一笔调整。',
+  INVALID_ROLE: '岗位无效，只能是服务、Runner 或吧台。',
+  AVAIL_CLOSED: '已过截止时间（周四 20:00），不能再改。请直接联系排班员。',
+  SHIFT_CONFLICT: '这个人在这个时段已经排在另一家店了。请先把那边的班删掉或改掉。',
+  INVALID_SLOT: '这家店这一天没有这个班次，不能排人。',
+  INVALID_TIME: '时间不对：结束时间要晚于开始时间。',
+};
+const ERR_DE = {
+  AUTH_REQUIRED: 'Deine Anmeldung ist abgelaufen. Bitte neu anmelden.',
+  FORBIDDEN: 'Dafür hat dein Konto keine Berechtigung. Falls nötig, bitte den Chef bitten, deine Rechte anzupassen.',
+  EDIT_WINDOW_CLOSED: 'Die Zeit für direkte Änderungen ist vorbei. Bitte über „Änderung beantragen“ mit Begründung einreichen – der Chef gibt frei.',
+  SELF_AS_HELPER: 'Du kannst dich nicht selbst als Runner oder Bar auswählen. Bitte deinen Namen abwählen.',
+  INVALID_HELPER: 'Unter den gewählten Runnern/Bar ist jemand, der nicht (mehr) auswählbar ist. Bitte neu auswählen; falls die Liste falsch ist, bitte dem Chef Bescheid geben.',
+  DUPLICATE_ENTRY: 'Für diesen Tag und dieses Restaurant gibt es schon einen manuellen Eintrag von dir. Bitte den bestehenden Eintrag ändern.',
+  FUTURE_DATE: 'Das erkannte Datum liegt in der Zukunft – wahrscheinlich falsch gelesen. Bitte das obere Foto neu machen, sodass das Datum gut lesbar ist.',
+  NO_RATE: 'Es sind noch keine Anteile festgelegt, daher ist kein Eintrag möglich. Bitte den Chef informieren (Verwaltung → Anteile).',
+  NO_KITCHEN_ACCOUNT: 'Es gibt noch kein Küchenkonto, daher kann der Küchenanteil nicht verteilt werden. Bitte den Chef informieren.',
+  OPEN_DISPUTES: 'Diese Woche gibt es noch offene Rückfragen von Mitarbeitern. Bitte zuerst unter „Freigaben“ klären.',
+  WEEK_NOT_OVER: 'Die Woche ist noch nicht vorbei – der Abschluss ist erst ab Montag möglich.',
+  EARLIER_WEEK_OPEN: 'Eine frühere Woche ist noch nicht abgeschlossen. Bitte der Reihe nach vorgehen und zuerst die frühere Woche abschließen.',
+  INVALID_PIN: 'Die PIN muss aus 6 Ziffern bestehen. Aus Sicherheitsgründen nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321.',
+  MUST_CHANGE_PIN: 'Du nutzt noch die Start-PIN. Bitte zuerst eine eigene 6-stellige PIN festlegen.',
+  SHORTAGE: 'Im Portemonnaie ist weniger Bargeld als abzugeben. Bitte nochmal zählen und nachsehen. Fehlt wirklich Geld, bestätigen und absenden – der Fehlbetrag wird standardmäßig von deinem Trinkgeld abgezogen.',
+  DUPLICATE_BON: 'Dieser Bon (gleiche Berichtsnummer) wurde schon hochgeladen und kann nicht doppelt abgeschickt werden. Falls du ihn noch nicht eingereicht hast, bitte dem Chef Bescheid geben.',
+  BON_OTHER_STAFF: 'Die Lightspeed-Nummer auf diesem Bon passt nicht zu deinem Konto. Bitte prüfen, ob es dein eigener Nutzerbericht ist. Wenn ja, ist die Nummer evtl. falsch verknüpft – bitte den Chef bitten, die Verknüpfung zu lösen.',
+  BON_UNREADABLE: 'Name, Mitarbeiternummer, Datum oder Berichtsnummer konnten nicht gelesen werden. Bitte das obere Foto neu machen (ohne Spiegelung, Bon nicht knicken).',
+  STORE_UNKNOWN: 'Das Restaurant wurde nicht erkannt. Bitte das obere Foto neu machen, mit Name und Adresse (PLZ 40233 oder 40210).',
+  READ_USED: 'Diese Fotos wurden schon abgeschickt. Für einen weiteren Bon bitte neu fotografieren.',
+  NOT_BON_ENTRY: 'Dieser Eintrag wurde manuell erstellt und kann nicht wie ein Foto-Eintrag geändert werden. Bitte den Chef fragen.',
+  ALREADY_COUNTED: 'Dieser Umschlag ist schon gezählt – ändern kann nur der Chef.',
+  USE_BON: 'Bitte mit Foto eintragen: oberen und unteren Teil des Abschlussberichts fotografieren.',
+  UNCOUNTED_ENTRIES: 'Diese Woche sind noch Umschläge nicht gezählt. Bitte zuerst oben unter „Zu zählende Umschläge“ erledigen.',
+  PHOTOS_REQUIRED: 'Es fehlt ein Foto: bitte oberen und unteren Teil fotografieren.',
+  PHOTO_TOO_LARGE: 'Das Foto ist zu groß. Bitte neu fotografieren (ohne Panorama-/Hochauflösungsmodus).',
+  BON_FAILED: 'Das Auslesen reagiert gerade nicht (Netzwerk oder Dienst ausgelastet). Bitte in einer Minute „Erneut auslesen“ tippen; klappt es weiterhin nicht, bitte dem Chef Bescheid geben.',
+  TOO_MANY_READS: 'Die Höchstzahl an Auslesevorgängen in 24 Stunden (30) ist erreicht. Bitte den Chef kontaktieren.',
+  UPLOAD_FAILED: 'Foto-Upload fehlgeschlagen, meist wegen schwacher Verbindung. Bitte Netzwerk prüfen und neu fotografieren.',
+  DB_ERROR: 'Fehler beim Speichern des Ergebnisses. Bitte „Erneut auslesen“ tippen; klappt es weiterhin nicht, bitte dem Chef Bescheid geben.',
+  INVALID_AMOUNT: 'Der Betrag ist ungültig oder außerhalb des sinnvollen Bereichs. Bitte nur Zahlen eingeben, z. B. 123,45.',
+  REQUEST_PENDING: 'Für diesen Eintrag wartet schon ein Änderungsantrag auf Freigabe. Bitte warten, bis der Chef ihn bearbeitet hat.',
+  STALE_REQUEST: 'Der Eintrag wurde nach dem Antrag geändert, der Antrag ist veraltet. Bitte ablehnen und neu beantragen lassen.',
+  PENDING_REQUESTS: 'Diese Woche gibt es noch offene Änderungsanträge. Bitte zuerst unter „Freigaben“ bearbeiten.',
+  NAME_REQUIRED: 'Bitte einen Namen eingeben.',
+  INVALID_STORE: 'Ungültiges Restaurant – nur Flingern oder Bismarck.',
+  WRONG_PIN: 'Die aktuelle PIN ist falsch. Bitte die PIN eingeben, die du gerade benutzt.',
+  PIN_REQUIRED: 'Neue Mitarbeiter brauchen eine PIN.',
+  CANNOT_DEMOTE_SELF: 'Du kannst dir selbst die Admin-Rechte nicht entziehen, damit immer ein Admin vorhanden ist.',
+  NO_RETROACTIVE_RATE: 'Neue Anteile gelten nicht rückwirkend. Bitte als Startdatum heute oder später wählen.',
+  COMMENT_REQUIRED: 'Bitte beschreibe deine Frage, damit der Chef sie bearbeiten kann.',
+  REASON_REQUIRED: 'Bitte einen Grund angeben – der Chef braucht ihn für die Freigabe.',
+  NOT_FOUND: 'Eintrag nicht gefunden – evtl. gelöscht oder geändert. Bitte Seite neu laden und erneut versuchen.',
+  LOGIN_FAILED: 'PIN falsch. Nach 5 Fehlversuchen wird für 15 Minuten gesperrt. PIN vergessen? Bitte den Chef zum Zurücksetzen fragen.',
+  LOCKED: 'Zu viele Fehlversuche – das Konto ist 15 Minuten gesperrt. Bitte später erneut versuchen oder den Chef um Zurücksetzen der PIN bitten.',
+  INVALID_SERVER: 'Ungültige Servicekraft (nicht mehr aktiv oder nicht vorhanden). Bitte neu auswählen.',
+  NAME_TAKEN: 'Diesen Namen gibt es schon. Bitte einen anderen wählen, z. B. mit Anfangsbuchstaben des Nachnamens.',
+  ONE_KITCHEN: 'Es darf nur ein aktives Küchenkonto geben. Bitte das alte zuerst deaktivieren.',
+  NETWORK: 'Keine Verbindung zum Server. Bitte WLAN oder mobile Daten prüfen und erneut versuchen.',
+  GENERIC: 'Ein Fehler ist aufgetreten. Bitte einen Screenshot an den Chef schicken.',
+  WEEK_LOCKED: 'Diese Woche ist abgeschlossen und kann nicht mehr geändert werden. Korrekturen bitte als Ausgleichsbuchung durch den Chef.',
+  INVALID_ROLE: 'Ungültige Position – nur Service, Runner oder Bar.',
+  AVAIL_CLOSED: 'Die Frist (Donnerstag 20:00 Uhr) ist abgelaufen. Bitte direkt an die Dienstplanung wenden.',
+  SHIFT_CONFLICT: 'Diese Person ist in dieser Zeit schon im anderen Restaurant eingeplant. Bitte dort zuerst löschen oder ändern.',
+  INVALID_SLOT: 'Diese Schicht gibt es an diesem Tag in diesem Restaurant nicht.',
+  INVALID_TIME: 'Ungültige Zeit: Das Ende muss nach dem Beginn liegen.',
+};
+Object.keys(ERR_ZH).forEach(k => { I18N.zh['err_' + k] = ERR_ZH[k]; I18N.de['err_' + k] = ERR_DE[k]; });
+
 function errText(e){
   const m = String(e && e.message || '');
   if (I18N.zh['err_'+m]) return t('err_'+m);
   if (m.includes('staff_name_key')) return t('err_NAME_TAKEN');
   if (m.includes('one_active_kitchen')) return t('err_ONE_KITCHEN');
   if (/fetch|network|Failed/i.test(m)) return t('err_NETWORK');
-  return t('err_GENERIC') + (m ? ' (' + m + ')' : '');
+  return t('err_GENERIC') + (m ? ' [' + m + ']' : '');
 }
 
 async function rpc(fn, args){
