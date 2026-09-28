@@ -270,6 +270,12 @@ zh: {
   avail_title:'可上班时间', avail_deadline:'请在 {d} 前填写，之后不能再改。', avail_closed:'已截止。需要修改请找排班员。', avail_closed_sched:'已截止（排班员仍可修改自己的）。',
   avail_all_yes:'还没填的全部设为「能上」', av_yes:'能上', av_no:'不能', av_note:'备注（例如：最晚到 22 点）',
   team_plan:'全部排班', pub_state_no:'未发布', pub_state_yes:'已发布（{t}）', publish:'发布排班', republish:'重新发布（{n} 处变更）',
+  plan_this:'回到本周', today_word:'今天', tomorrow_word:'明天',
+  pub_live:'已发布的排班可以随时加人、删人、改时间，改动马上就显示给员工，不需要重新发布。「重新发布」只是把「有变更」标记清掉。',
+  ntf_title:'通知被改动的员工', ntf_hint:'员工不会自动收到通知。点「WhatsApp」选择这个人发送，或复制后自己发。', ntf_wa:'WhatsApp', ntf_copy:'复制', ntf_copied:'已复制', ntf_done:'完成',
+  ntf_add:'{n}你好，排班有变动：{d} {s} {sl} {a}–{b}（{r}），给你加了班。请回复确认，谢谢！',
+  ntf_remove:'{n}你好，排班有变动：{d} {s} {sl} {a}–{b} 的班取消了，不用来了。请回复确认，谢谢！',
+  ntf_change:'{n}你好，排班有变动：{d} {s} {sl} 你的班改为 {a}–{b}（{r}）。请回复确认，谢谢！',
   publish_confirm:'发布后所有员工都能看到这周的排班，确定发布？', published_toast:'已发布', unfilled:'还没回复下周能不能上：{n}',
   add_shift:'＋ 添加', hours_title:'本周计划工时', hours_line:'{h} 小时 · {n} 个班', sd_staff:'员工', sd_role:'岗位',
   sd_start:'开始', sd_end:'结束', sd_note:'备注', av_group_yes:'能上', av_group_none:'没回复', av_group_no:'不能上',
@@ -365,6 +371,12 @@ de: {
   avail_title:'Verfügbarkeit', avail_deadline:'Bitte bis {d} eintragen, danach keine Änderung mehr.', avail_closed:'Frist abgelaufen. Änderungen bitte über die Dienstplanung.', avail_closed_sched:'Frist abgelaufen (Dienstplanung kann die eigenen Angaben noch ändern).',
   avail_all_yes:'Alles noch Offene auf „Kann“ setzen', av_yes:'Kann', av_no:'Kann nicht', av_note:'Notiz (z. B. nur bis 22 Uhr)',
   team_plan:'Gesamter Dienstplan', pub_state_no:'Nicht veröffentlicht', pub_state_yes:'Veröffentlicht ({t})', publish:'Dienstplan veröffentlichen', republish:'Erneut veröffentlichen ({n} Änderungen)',
+  plan_this:'Zur aktuellen Woche', today_word:'heute', tomorrow_word:'morgen',
+  pub_live:'Im veröffentlichten Dienstplan kannst du jederzeit Personen hinzufügen, entfernen oder Zeiten ändern – die Mitarbeiter sehen es sofort, ohne erneutes Veröffentlichen. „Erneut veröffentlichen“ entfernt nur die Markierung „Geändert“.',
+  ntf_title:'Betroffene Mitarbeiter benachrichtigen', ntf_hint:'Mitarbeiter bekommen keine automatische Nachricht. Tippe auf „WhatsApp“ und wähle die Person, oder kopiere den Text.', ntf_wa:'WhatsApp', ntf_copy:'Kopieren', ntf_copied:'Kopiert', ntf_done:'Fertig',
+  ntf_add:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} {a}–{b} ({r}) – du bist zusätzlich eingeplant. Bitte kurz bestätigen, danke!',
+  ntf_remove:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} {a}–{b} – deine Schicht entfällt, du musst nicht kommen. Bitte kurz bestätigen, danke!',
+  ntf_change:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} – deine Schicht ist jetzt {a}–{b} ({r}). Bitte kurz bestätigen, danke!',
   publish_confirm:'Nach dem Veröffentlichen sehen alle den Dienstplan dieser Woche. Veröffentlichen?', published_toast:'Veröffentlicht', unfilled:'Noch keine Rückmeldung zur Verfügbarkeit: {n}',
   add_shift:'＋ Hinzufügen', hours_title:'Geplante Stunden diese Woche', hours_line:'{h} Std. · {n} Schichten', sd_staff:'Mitarbeiter', sd_role:'Position',
   sd_start:'Beginn', sd_end:'Ende', sd_note:'Notiz', av_group_yes:'Kann', av_group_none:'Keine Rückmeldung', av_group_no:'Kann nicht',
@@ -1584,7 +1596,8 @@ function planNav(){
   const w = state.planWeek;
   return `<div class="weeknav"><button data-act="plan-prev" aria-label="prev">‹</button>
     <div class="wl">${esc(dm(w))} – ${esc(dm(addDays(w,6)))}<small>${esc(t('week_of', { w: isoWeek(w) }))}</small></div>
-    <button data-act="plan-next" aria-label="next">›</button></div>`;
+    <button data-act="plan-next" aria-label="next">›</button></div>
+    ${w !== mondayOf(today()) ? `<div style="text-align:center;margin:-6px 0 12px"><button class="link" data-act="plan-this">${esc(t('plan_this'))}</button></div>` : ''}`;
 }
 function planDays(d){ return [...new Set(d.slots.map(x => x.date))]; }
 function slotsOn(d, date){ return d.slots.filter(x => x.date === date); }
@@ -1605,6 +1618,11 @@ function planRender(){
   const y = window.scrollY;
   $('#main').innerHTML = planHead() + (state.planSub === 'edit' && isSched() ? planEditHTML(d) : planMineHTML(d));
   window.scrollTo(0, y);
+  // 刚切到本周时，自动滚到今天（保存后刷新不再跳）
+  if (state.planScrollWeek !== state.planWeek + state.planSub){
+    state.planScrollWeek = state.planWeek + state.planSub;
+    const td = $('#plan-today'); if (td) td.scrollIntoView({ block: 'start' });
+  }
 }
 // 员工：我的班 + 填可上班时间
 function planMineHTML(d){
@@ -1652,12 +1670,14 @@ function planGridHTML(d, edit){
         }).join('')}
         ${edit ? `<button class="addbtn" data-act="shift-add" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('add_shift'))}</button>` : ''}</div>`;
     })).join('');
-    return blocks ? `<div class="sheet"><div class="dayh">${esc(dayLabel(date))}</div>${blocks}</div>` : '';
+    const isToday = date === today();
+    return blocks ? `<div class="sheet" ${isToday ? 'id="plan-today" style="border:2px solid var(--celadon)"' : ''}><div class="dayh">${esc(dayLabel(date))}${isToday ? ` <span class="tag ok">${esc(t('today_word'))}</span>` : ''}</div>${blocks}</div>` : '';
   }).join('');
 }
 function planEditHTML(d){
   const changed = d.shifts.filter(x => x.changed).length;
   let h = `<div class="hero"><div class="row" style="justify-content:space-between"><strong>${esc(d.published ? t('pub_state_yes', { t: fmtDateTime(d.published_at) }) : t('pub_state_no'))}</strong></div>
+    ${d.published ? `<div class="small muted" style="margin-top:8px">${esc(t('pub_live'))}</div>` : ''}
     ${!d.published || changed ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(d.published ? t('republish', { n: changed }) : t('publish'))}</button>` : ''}</div>`;
   h += planGridHTML(d, true);
   const hrs = {};
@@ -1666,6 +1686,38 @@ function planEditHTML(d){
   if (hl.length) h += `<h3>${esc(t('hours_title'))}</h3><div class="list">${hl.map(o => `<div class="item"><div class="top"><div>${esc(o.name)}</div>
     <div class="num">${esc(t('hours_line', { h: (o.m / 60).toLocaleString('de-DE', { maximumFractionDigits: 1 }), n: o.n }))}</div></div></div>`).join('')}</div>`;
   return h;
+}
+// 已发布的排班改动后，生成给员工的通知（WhatsApp / 复制）
+function ntfText(lang, kind, x){
+  const L = I18N[lang] || I18N.zh, f = (k, v) => { let s = L[k]; for (const [a, b] of Object.entries(v)) s = s.split('{' + a + '}').join(b); return s; };
+  const dd = parseD(x.date), dstr = lang === 'de' ? `${L.wd[wdIdx(x.date)]} ${dd.getDate()}.${dd.getMonth() + 1}.` : `${dd.getMonth() + 1}月${dd.getDate()}日${L.wd[wdIdx(x.date)]}`;
+  const rel = x.date === today() ? L.today_word : x.date === addDays(today(), 1) ? L.tomorrow_word : '';
+  const d = rel ? (lang === 'de' ? `${rel} (${dstr})` : `${rel}（${dstr}）`) : dstr;
+  return f('ntf_' + kind, { n: x.name, d, s: x.store, sl: L['slot_' + x.slot], a: x.start, b: x.end, r: L['grp_' + x.role] });
+}
+function ntfMsg(kind, x){ return ntfText('de', kind, x) + '\n\n' + ntfText('zh', kind, x); }
+// before：改之前的班（新增时为空）；after：改之后的班（删除时为空）
+function openNotify(before, after){
+  const w = before || after;
+  if (!state.plan || !state.plan.published || w.date < today()) return;   // 没发布或过去的日子（补录）不用通知
+  const staffName = id => ((state.plan.staff || []).find(s => s.id === id) || {}).name || '';
+  const msgs = [];
+  if (before && after && before.staff_id === after.staff_id){
+    if (before.start !== after.start || before.end !== after.end || before.role !== after.role || before.date !== after.date || before.slot !== after.slot || before.store !== after.store)
+      msgs.push(ntfMsg('change', { ...after, name: staffName(after.staff_id) || before.name }));
+  } else {
+    if (before) msgs.push(ntfMsg('remove', { ...before, name: before.name || staffName(before.staff_id) }));
+    if (after) msgs.push(ntfMsg('add', { ...after, name: staffName(after.staff_id) }));
+  }
+  if (!msgs.length) return;
+  state.ntfMsgs = msgs;
+  const dlg = $('#shiftDlg');
+  dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('ntf_title'))}</h2><div class="small muted" style="margin-bottom:12px">${esc(t('ntf_hint'))}</div>
+    ${msgs.map((m, i) => `<div class="item" style="margin-bottom:10px"><div class="meta" style="white-space:pre-wrap;color:var(--ink)">${esc(m)}</div>
+      <div class="row" style="margin-top:8px"><a class="btn" style="text-decoration:none;display:flex;align-items:center;justify-content:center" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(m)}">${esc(t('ntf_wa'))}</a>
+      <button class="btn ghost" type="button" data-act="ntf-copy" data-i="${i}">${esc(t('ntf_copy'))}</button></div></div>`).join('')}
+    <button class="btn ghost" type="button" style="margin-top:6px" data-act="sd-close">${esc(t('ntf_done'))}</button>`;
+  if (!dlg.open) dlg.showModal();
 }
 // 排班弹窗
 function openShiftDlg(se){ state.shiftEdit = se; shiftDlgRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal(); }
@@ -1864,6 +1916,7 @@ document.addEventListener('click', async ev => {
         state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
     case 'plan-prev': state.planWeek = addDays(state.planWeek, -7); viewPlan(); break;
+    case 'plan-this': state.planWeek = mondayOf(today()); viewPlan(); break;
     case 'plan-next': state.planWeek = addDays(state.planWeek, 7); viewPlan(); break;
     case 'plan-sub': state.planSub = el.dataset.k; planRender(); break;
     case 'avail': {
@@ -1897,20 +1950,31 @@ document.addEventListener('click', async ev => {
     }
     case 'sd-role': shiftDlgKeep(); state.shiftEdit.role = el.dataset.r; state.shiftEdit.roleTouched = true; shiftDlgRender(); break;
     case 'sd-close': $('#shiftDlg').close(); state.shiftEdit = null; break;
+    case 'ntf-copy': {
+      const m = (state.ntfMsgs || [])[+el.dataset.i]; if (!m) break;
+      try { await navigator.clipboard.writeText(m); toast(t('ntf_copied')); } catch(e){ prompt(t('ntf_copy'), m); }
+      break;
+    }
     case 'sd-save': {
       shiftDlgKeep(); const se = state.shiftEdit;
       if (!se.staff_id) return toast(t('sd_staff') + '?', true);
       if (!se.start || !se.end || se.end <= se.start) return toast(t('err_INVALID_TIME'), true);
       el.disabled = true;
+      const b0 = se.id ? state.plan.shifts.find(x => x.id === se.id) : null, before = b0 ? { ...b0 } : null;
       try { await rpc('sched_assign', { ...tok(), p_id: se.id, p_date: se.date, p_store: se.store, p_slot: se.slot, p_staff_id: se.staff_id,
               p_role: se.role, p_start: se.start, p_end: se.end, p_note: se.note || null });
-        $('#shiftDlg').close(); state.shiftEdit = null; toast(t('saved')); viewPlan(); }
+        $('#shiftDlg').close(); state.shiftEdit = null; toast(t('saved'));
+        openNotify(before, { date: se.date, store: se.store, slot: se.slot, staff_id: se.staff_id, role: se.role, start: se.start, end: se.end });
+        viewPlan(); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
     case 'sd-del': {
       const se = state.shiftEdit; if (!confirm(t('shift_del_confirm'))) break;
-      try { await rpc('sched_remove', { ...tok(), p_id: se.id }); $('#shiftDlg').close(); state.shiftEdit = null; viewPlan(); }
+      const before = state.plan.shifts.find(x => x.id === se.id);
+      try { await rpc('sched_remove', { ...tok(), p_id: se.id }); $('#shiftDlg').close(); state.shiftEdit = null;
+        if (before) openNotify({ ...before }, null);
+        viewPlan(); }
       catch(e){ toast(errText(e), true); }
       break;
     }
