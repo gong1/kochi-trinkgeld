@@ -114,6 +114,10 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .grp .grp-t{font-weight:700;font-size:16px;color:var(--ink)}
 .grp .grp-s{font-size:14px;color:var(--muted);margin-top:2px}
 .grp .grp-m{font-size:14px;margin-top:2px}
+.sig{display:block;width:100%;height:180px;background:#fff;border:1.5px dashed var(--line);border-radius:var(--r-s);touch-action:none}
+.rc-text{white-space:pre-line;background:var(--paper);border-radius:var(--r-s);padding:10px 12px;font-size:15px;margin:6px 0 12px}
+.rc-parts .row{margin-bottom:6px}
+.tag.bad a,.tag.ok a{color:inherit}
 .item.env .who{font-size:18px;font-weight:700}
 .item.env .amt{font-size:18px}
 .pos{color:var(--celadon-deep)} .negc{color:var(--neg)}
@@ -325,6 +329,19 @@ zh: {
   env_line:'排班 {s} 个班 · 已交 {c} 个班（{n} 个信封）', env_line_nosched:'这天没有发布排班 · 已交 {n} 个信封', env_line_noshift:'这家店这天没有排服务班 · 已交 {n} 个信封',
   env_missing:'还没交：{list}', env_missing_late:'逾期没交：{list}', env_elsewhere:'在别的店交了：{list}', env_elsewhere_one:'{n}（已在 {s} 交）',
   env_should:'信封应有', env_unsched:'未排班', env_shift_at:'排在 {s}', env_guess:'班次按提交先后推断', env_bon_time:'Bon {a}–{b}', env_counted_all:'这组的信封都已点收 ✓',
+  rc_banner:'KW {w} 小费 {x}，请签收', rc_banner_pay:'KW {w} 你交给小费管理员 {x}，请签字确认', rc_banner_resign:'（结算有变动，需要重新签收）', rc_go:'去签收',
+  rc_title:'KW {w} 小费签收', rc_amount_get:'收到现金', rc_amount_pay:'交出现金', rc_detail:'这一周的明细', rc_received:'分到的小费', rc_shortage:'本人承担的短款',
+  rc_adj:'调整', rc_carry_in:'上周零头', rc_total:'合计', rc_carry_out:'零头结转下周', rc_paid_by:'发放人：{n} · {t}', rc_text:'收据（德文为准）',
+  rc_signer:'主厨姓名（代表厨房签收）', rc_parts:'厨房内部分配（可选；填了合计必须等于 {x}）', rc_parts_add:'+ 加一人', rc_parts_sum:'已填合计 {x}', rc_part_name:'姓名', rc_part_amt:'金额',
+  rc_sign:'请在下面框里用手指签名', rc_clear:'重签', rc_pin:'再输入一次你的 PIN 确认是本人签收', rc_confirm:'确认签收', rc_wrong:'金额不对',
+  rc_wrong_q:'哪里不对？请写清楚，老板会处理。处理完之前不用签收。', rc_wrong_sent:'已提交。老板处理后，再回来签收。', rc_done:'已签收，谢谢！', rc_need_sig:'请先在框里签名。',
+  rc_back:'返回', rc_disputed_note:'你对这一周提了疑问，老板处理完后再签收。', rc_done_note:'这一周已经签收过了。', rc_ledger_todo:'这周的小费还没签收', rc_ledger_signed:'已签收',
+  rs_none:'无需签收', rs_unpaid:'还没发放', rs_need_admin:'等老板发放', rs_todo:'未签收', rs_resign:'失效，需重新签收', rs_disputed:'争议中', rs_signed:'已签收 {t}', rs_paper:'纸质收据 {t}',
+  dist_title:'周分配表', dist_complete:'已完成 ✓ 所有人都已签收', dist_open:'还有 {n} 人没完成发放 / 签收', dist_print:'打印 / 存为 PDF', dist_paid:'已发放',
+  dist_self_hint:'自己的份额由老板勾选发放', dist_paper:'上传纸质收据', dist_paper_q:'说明（例如：已离职，已在纸上签收）', dist_view:'查看签名', dist_view_paper:'查看收据照片',
+  dist_before:'这一周在签收功能上线前锁定，不需要签收。', dist_lbl_get:'实发', dist_lbl_pay:'交给小费管理员', dist_recv:'应得', dist_short:'扣款', dist_adj:'调整',
+  dist_cin:'上周零头', dist_cout:'结转下周', dist_by:'发放：{n} · {t}', dist_pay_hint:'「交给小费管理员」= 本人承担的短款超过本周应得，要把差额交回小费池。',
+  dist_paper_done:'纸质收据已保存', dist_admin_pay:'改为由我（老板）发放', rc_open_title:'发放 / 签收还没完成（{n}）', rc_open_hint:'所有周。勾「已发放」后，本人登录时会收到签收提醒。',
   xfer_lbl:'转入现金 / 转出', xfer_in:'{n} 转入现金 +{a}', xfer_out:'转出到 {n} −{a}', xfer_hint:'不是餐费收款，已算进交店里的金额；信封里的现金包括这笔钱。',
   tip_total_lbl:'小费合计', handover_hint:'按日期从早到晚。小费池 = 信封合计 − 交店里（放入 Kasse）；交店里是负数时，从 Kasse 取出补进小费池。',
   nets_hint:'正数：周结后从小费池领取；负数：要交给小费管理员（例如差钱由本人承担）。',
@@ -439,6 +456,19 @@ de: {
   env_line:'Geplant {s} Schichten · abgegeben {c} ({n} Umschläge)', env_line_nosched:'Kein veröffentlichter Dienstplan · {n} Umschläge abgegeben', env_line_noshift:'Kein Service eingeplant · {n} Umschläge abgegeben',
   env_missing:'Fehlt noch: {list}', env_missing_late:'Überfällig: {list}', env_elsewhere:'Im anderen Restaurant abgegeben: {list}', env_elsewhere_one:'{n} (in {s} abgegeben)',
   env_should:'Soll im Umschlag', env_unsched:'nicht eingeplant', env_shift_at:'eingeplant in {s}', env_guess:'Schicht nach Abgabe-Reihenfolge geschätzt', env_bon_time:'Bon {a}–{b}', env_counted_all:'Alle Umschläge dieser Gruppe gezählt ✓',
+  rc_banner:'Trinkgeld KW {w}: {x} – bitte quittieren', rc_banner_pay:'KW {w}: {x} an den Tip-Manager abgegeben – bitte bestätigen', rc_banner_resign:' (Abrechnung geändert – bitte neu quittieren)', rc_go:'Quittieren',
+  rc_title:'Trinkgeld-Quittung KW {w}', rc_amount_get:'Bar erhalten', rc_amount_pay:'Bar abgegeben', rc_detail:'Aufstellung dieser Woche', rc_received:'Trinkgeldanteile', rc_shortage:'Selbst getragener Fehlbetrag',
+  rc_adj:'Korrekturen', rc_carry_in:'Rest aus Vorwoche', rc_total:'Summe', rc_carry_out:'Rest in die nächste Woche', rc_paid_by:'Ausgezahlt von {n} · {t}', rc_text:'Quittung',
+  rc_signer:'Name Küchenchef (quittiert für die Küche)', rc_parts:'Interne Aufteilung Küche (optional; Summe muss {x} ergeben)', rc_parts_add:'+ Person', rc_parts_sum:'Summe {x}', rc_part_name:'Name', rc_part_amt:'Betrag',
+  rc_sign:'Bitte unten mit dem Finger unterschreiben', rc_clear:'Löschen', rc_pin:'PIN zur Bestätigung erneut eingeben', rc_confirm:'Quittieren', rc_wrong:'Betrag stimmt nicht',
+  rc_wrong_q:'Was stimmt nicht? Bitte genau beschreiben, der Chef klärt es. Bis dahin nicht quittieren.', rc_wrong_sent:'Gesendet. Nach der Klärung bitte quittieren.', rc_done:'Quittiert – danke!', rc_need_sig:'Bitte zuerst im Feld unterschreiben.',
+  rc_back:'Zurück', rc_disputed_note:'Du hast eine Frage zu dieser Woche gestellt. Nach der Klärung bitte quittieren.', rc_done_note:'Diese Woche ist bereits quittiert.', rc_ledger_todo:'Trinkgeld dieser Woche noch nicht quittiert', rc_ledger_signed:'Quittiert',
+  rs_none:'Keine Quittung nötig', rs_unpaid:'Noch nicht ausgezahlt', rs_need_admin:'Auszahlung durch Chef', rs_todo:'Nicht quittiert', rs_resign:'Ungültig – neu quittieren', rs_disputed:'Frage offen', rs_signed:'Quittiert {t}', rs_paper:'Papierquittung {t}',
+  dist_title:'Wöchentliche Trinkgeldverteilung', dist_complete:'Abgeschlossen ✓ Alle haben quittiert', dist_open:'Noch {n} Auszahlungen / Quittungen offen', dist_print:'Drucken / als PDF speichern', dist_paid:'Ausgezahlt',
+  dist_self_hint:'Eigener Anteil: Auszahlung markiert der Chef', dist_paper:'Papierquittung hochladen', dist_paper_q:'Hinweis (z. B. ausgeschieden, auf Papier quittiert)', dist_view:'Unterschrift ansehen', dist_view_paper:'Quittungsfoto ansehen',
+  dist_before:'Diese Woche wurde vor Einführung der Quittungen abgeschlossen – keine Quittung nötig.', dist_lbl_get:'Auszahlung', dist_lbl_pay:'An Tip-Manager', dist_recv:'Anteil', dist_short:'Abzug', dist_adj:'Korr.',
+  dist_cin:'Vortrag', dist_cout:'Rest', dist_by:'Ausgezahlt: {n} · {t}', dist_pay_hint:'„An Tip-Manager“ = selbst getragener Fehlbetrag ist höher als der Anteil dieser Woche; die Differenz geht zurück in den Trinkgeldtopf.',
+  dist_paper_done:'Papierquittung gespeichert', dist_admin_pay:'Als Chef auszahlen', rc_open_title:'Auszahlung / Quittung offen ({n})', rc_open_hint:'Alle Wochen. Nach „Ausgezahlt“ erhält die Person beim Login eine Erinnerung zum Quittieren.',
   xfer_lbl:'Umbuchung Bargeld', xfer_in:'Bargeld von {n} +{a}', xfer_out:'an {n} −{a}', xfer_hint:'Kein Umsatz aus Speisen/Getränken, ist im Betrag an den Laden enthalten; das Bargeld im Umschlag enthält diesen Betrag.',
   tip_total_lbl:'Trinkgeld gesamt', handover_hint:'Vom ältesten zum neuesten Tag. Trinkgeldtopf = Umschläge − an den Laden (in die Kasse); ist der Betrag an den Laden negativ, wird er aus der Kasse in den Topf gelegt.',
   nets_hint:'Plus: nach dem Abschluss aus dem Trinkgeldtopf erhalten. Minus: an den Tip-Manager abgeben (z. B. Fehlbetrag, den die Person trägt).',
@@ -589,6 +619,18 @@ const ERR_ZH = {
   COMMENT_REQUIRED: '请写明你的疑问是什么，老板才能处理。',
   REASON_REQUIRED: '请写明修改原因，老板审批时需要看。',
   NOT_FOUND: '找不到这条记录，可能已被删除或修改。请刷新页面后再试。',
+  RECEIPT_DONE: '这一周已经签收过了，不需要再签。',
+  RECEIPT_NOT_NEEDED: '这一周你不需要签收（实发为 0，或这周在签收功能上线前已锁定）。',
+  RECEIPT_NOT_PAID: '小费管理员还没勾「已发放」，现在还不能签收。拿到钱、他勾选之后再签。',
+  RECEIPT_NEED_ADMIN: '你自己的份额要由老板勾「已发放」后才能签收。请找老板。',
+  RECEIPT_DISPUTED: '你对这一周提的疑问还没处理完。老板处理后再签收。',
+  SIGNATURE_REQUIRED: '请先在框里用手指签名，再点「确认签收」。',
+  SIGNER_REQUIRED: '请填写主厨姓名（代表厨房签收的人）。',
+  PARTS_INVALID: '厨房内部分配填得不完整：每一行都要有姓名和大于 0 的金额。不需要的行请删掉。',
+  PARTS_SUM: '厨房内部分配的合计必须等于整份金额。请检查每人的金额。',
+  RECEIPT_IMMUTABLE: '签收记录不能修改或删除。',
+  PHOTO_REQUIRED: '请选择纸质收据的照片。',
+  NOTE_REQUIRED: '请写一句说明（例如：已离职，已在纸上签收），存档时需要。',
   LOGIN_FAILED: 'PIN 不对。连续输错 5 次会锁定 15 分钟。忘记 PIN 请找老板重置。',
   LOCKED: '连续输错太多次，账号已锁定 15 分钟。请稍后再试，或找老板重置 PIN。',
   INVALID_SERVER: '选择的服务员无效（已不在职或不存在）。请重新选择。',
@@ -647,6 +689,18 @@ const ERR_DE = {
   COMMENT_REQUIRED: 'Bitte beschreibe deine Frage, damit der Chef sie bearbeiten kann.',
   REASON_REQUIRED: 'Bitte einen Grund angeben – der Chef braucht ihn für die Freigabe.',
   NOT_FOUND: 'Eintrag nicht gefunden – evtl. gelöscht oder geändert. Bitte Seite neu laden und erneut versuchen.',
+  RECEIPT_DONE: 'Diese Woche ist bereits quittiert.',
+  RECEIPT_NOT_NEEDED: 'Für diese Woche ist keine Quittung nötig (Auszahlung 0 oder vor Einführung der Quittungen abgeschlossen).',
+  RECEIPT_NOT_PAID: 'Der Tip-Manager hat die Auszahlung noch nicht markiert. Bitte erst nach Erhalt des Geldes quittieren.',
+  RECEIPT_NEED_ADMIN: 'Deinen eigenen Anteil muss der Chef als ausgezahlt markieren. Bitte den Chef ansprechen.',
+  RECEIPT_DISPUTED: 'Deine Frage zu dieser Woche ist noch offen. Nach der Klärung bitte quittieren.',
+  SIGNATURE_REQUIRED: 'Bitte zuerst im Feld mit dem Finger unterschreiben, dann „Quittieren“ tippen.',
+  SIGNER_REQUIRED: 'Bitte den Namen des Küchenchefs eintragen (wer für die Küche quittiert).',
+  PARTS_INVALID: 'Aufteilung unvollständig: Jede Zeile braucht Name und Betrag über 0. Leere Zeilen bitte löschen.',
+  PARTS_SUM: 'Die Summe der Aufteilung muss dem Küchenanteil entsprechen. Bitte Beträge prüfen.',
+  RECEIPT_IMMUTABLE: 'Quittungen können nicht geändert oder gelöscht werden.',
+  PHOTO_REQUIRED: 'Bitte ein Foto der Papierquittung auswählen.',
+  NOTE_REQUIRED: 'Bitte einen kurzen Hinweis eingeben (z. B. ausgeschieden, auf Papier quittiert) – nötig für die Ablage.',
   LOGIN_FAILED: 'PIN falsch. Nach 5 Fehlversuchen wird für 15 Minuten gesperrt. PIN vergessen? Bitte den Chef zum Zurücksetzen fragen.',
   LOCKED: 'Zu viele Fehlversuche – das Konto ist 15 Minuten gesperrt. Bitte später erneut versuchen oder den Chef um Zurücksetzen der PIN bitten.',
   INVALID_SERVER: 'Ungültige Servicekraft (nicht mehr aktiv oder nicht vorhanden). Bitte neu auswählen.',
@@ -723,6 +777,7 @@ async function loadCommon(){
   try { state.rates = await rpc('list_rates', tok()) || []; } catch(e){}
   try { state.loginStaff = await rpc('list_login_staff'); } catch(e){}
   await loadMyBon();
+  await loadReceipts();
   try {
     const st = await rpc('helper_stats', tok()) || []; state.hstats = { runner: {}, bar: {} };
     st.forEach(x => { if (state.hstats[x.role]) state.hstats[x.role][x.id] = x.n; });
@@ -771,9 +826,11 @@ function render(){
         <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
     </header>
     ${missBannerHTML()}
+    ${rcBannerHTML()}
     ${state.banner && tabs().includes('plan') && state.tab !== 'plan' ? `<div class="banner"><div class="infobox"><span>${esc(t('banner_avail'))}</span><button class="btn" data-act="banner-go">${esc(t('banner_go'))}</button></div></div>` : ''}
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
     <nav>${tabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
+  if (state.rcWeek){ viewReceipt(); return; }
   ({ entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();
 }
 
@@ -1385,6 +1442,9 @@ async function viewLedger(){
   const adj = d.adjustments.map(a => `<div class="item"><div class="top"><div>${esc(a.from)} → ${esc(a.to)}</div>
       <div class="amt num">${eur(a.amount_cents)}</div></div><div class="meta">${esc(a.reason)}</div></div>`).join('');
   if (d.shortage_cents) hero += `<div class="warnbox">${esc(t('shortage_note'))}: ${eur(d.shortage_cents)}</div>`;
+  const rl = !state.viewAs && (state.receipts || []).find(x => x.week_start === state.week);
+  if (rl && rl.receipt.status === 'todo') hero += `<div class="warnbox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(t('rc_ledger_todo'))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="rc-go" data-week="${rl.week_start}">${esc(t('rc_go'))}</button></div>`;
+  else if (rl && ['signed', 'paper', 'disputed'].includes(rl.receipt.status)) hero += `<div style="margin:-6px 0 12px">${rsLabel(rl.receipt)}</div>`;
   $('#main').innerHTML = weekNav() + hero +
     (rec ? `<h3>${esc(t('received'))}</h3><div class="list">${rec}</div>` : '') +
     (mine ? `<h3>${esc(t('my_list'))}</h3><div class="list">${mine}</div>` : '') +
@@ -1392,14 +1452,201 @@ async function viewLedger(){
     (!rec && !mine && !adj ? `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>` : '');
 }
 
+// ============ 小费签收（v18）============
+// 我需要签收的周（数据库还没升级到 v18 时为空，不影响其他功能）
+async function loadReceipts(){
+  if (!state.me || state.viewAs){ state.receipts = []; return; }
+  try { state.receipts = await rpc('my_receipts', tok()) || []; } catch(e){ state.receipts = []; }
+}
+function rcTodo(){ return (state.receipts || []).filter(l => l.receipt && l.receipt.status === 'todo'); }
+function rcBannerHTML(){
+  if (state.rcWeek) return '';
+  return rcTodo().map(l => `<div class="banner"><div class="warnbox" style="display:flex;align-items:center;gap:12px;margin:0"><span style="flex:1">${esc(t(l.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: l.kw, x: eur(Math.abs(l.payout_euros) * 100) }) + (l.receipt.resign ? t('rc_banner_resign') : ''))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="rc-go" data-week="${l.week_start}">${esc(t('rc_go'))}</button></div></div>`).join('');
+}
+// 签收状态标签
+function rsLabel(r){
+  const st = r && r.status, when = r && r.at ? fmtDateTime(r.at) : '';
+  if (st === 'signed' || st === 'paper') return `<span class="tag ok">${esc(t('rs_' + st, { t: when }))}</span>`;
+  if (st === 'todo') return `<span class="tag bad">${esc(t(r.resign ? 'rs_resign' : 'rs_todo'))}</span>`;
+  if (st === 'disputed') return `<span class="tag bad">${esc(t('rs_disputed'))}</span>`;
+  if (st === 'unpaid' || st === 'need_admin') return `<span class="tag pend">${esc(t('rs_' + st))}</span>`;
+  return `<span class="tag off">${esc(t('rs_none'))}</span>`;
+}
+// 签收页
+async function viewReceipt(){
+  const w = state.rcWeek, main = $('#main');
+  main.innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  await loadReceipts();
+  const l = (state.receipts || []).find(x => x.week_start === w);
+  if (!l){ main.innerHTML = `<div class="empty">${esc(t('err_NOT_FOUND'))}</div><button class="btn ghost" data-act="rc-back">${esc(t('rc_back'))}</button>`; return; }
+  let d = null; try { d = await rpc('my_week', { ...tok(), p_week_start: w }); } catch(e){}
+  const st = l.receipt.status, pay = l.payout_euros < 0;
+  const li = (a, b, cls) => `<div class="li${cls ? ' ' + cls : ''}"><span class="muted">${esc(a)}</span><span>${esc(b)}</span></div>`;
+  const days = d ? d.received.map(r => li(`${dayLabel(r.date)} · ${r.store} · ${t('role_' + r.role)}${r.from && r.role !== 'server' ? ' · ' + r.from : ''}`, eur(r.amount_cents))).join('') : '';
+  const adj = d ? d.adjustments.map(a => li(`${t('rc_adj')}: ${a.from} → ${a.to} · ${a.reason}`, (a.to === state.me.name ? '+' : '−') + eur(a.amount_cents))).join('') : '';
+  let form = '';
+  if (st === 'todo'){
+    form = (state.me.is_kitchen ? `<div class="field"><label for="rc-signer">${esc(t('rc_signer'))}</label><input class="input" id="rc-signer" autocomplete="off"></div>
+        <div class="field rc-parts"><label>${esc(t('rc_parts', { x: eur(l.payout_euros * 100) }))}</label><div id="rc-parts">${rcPartsHTML([{ name: '', amt: '' }])}</div>
+          <button class="link" data-act="rc-part-add">${esc(t('rc_parts_add'))}</button> <span class="small muted num" id="rp-sum"></span></div>` : '')
+      + `<div class="field"><label>${esc(t('rc_sign'))}</label><canvas class="sig" id="sig"></canvas>
+          <button class="link" data-act="rc-clear" style="margin-top:4px">${esc(t('rc_clear'))}</button></div>
+        <div class="field"><label for="rc-pin">${esc(t('rc_pin'))}</label><input class="input num" id="rc-pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off"></div>
+        <button class="btn" data-act="rc-sign">${esc(t('rc_confirm'))}</button>
+        <button class="btn ghost" data-act="rc-wrong" style="margin-top:10px">${esc(t('rc_wrong'))}</button>`;
+  } else if (st === 'signed' || st === 'paper'){
+    form = `<div class="infobox">${esc(t('rc_done_note'))} ${rsLabel(l.receipt)}</div>`;
+  } else if (st === 'disputed'){
+    form = `<div class="warnbox">${esc(t('rc_disputed_note'))}</div>`;
+  } else if (st === 'unpaid' || st === 'need_admin'){
+    form = `<div class="warnbox">${esc(t(st === 'unpaid' ? 'err_RECEIPT_NOT_PAID' : 'err_RECEIPT_NEED_ADMIN'))}</div>`;
+  }
+  main.innerHTML = `<button class="link" data-act="rc-back" style="margin-bottom:10px">‹ ${esc(t('rc_back'))}</button>
+    <h2 style="margin:0 0 10px">${esc(t('rc_title', { w: l.kw }))}</h2>
+    <div class="hero ${pay ? 'neg' : 'pos'}"><div class="muted small">${esc(t(pay ? 'rc_amount_pay' : 'rc_amount_get'))}</div>
+      <div class="big num">${eur(Math.abs(l.payout_euros) * 100)}</div>
+      ${l.done ? `<div class="small muted" style="margin-top:6px">${esc(t('rc_paid_by', { n: l.done_by || '?', t: fmtDateTime(l.done_at) }))}</div>` : ''}</div>
+    <h3>${esc(t('rc_detail'))}</h3>
+    <div class="sheet"><div class="sum num">
+      ${days}${li(t('rc_received'), eur(l.received_cents), 'big')}
+      ${l.shortage_cents ? li(t('rc_shortage'), '−' + eur(l.shortage_cents)) : ''}${adj}
+      ${l.carry_in_cents ? li(t('rc_carry_in'), '+' + eur(l.carry_in_cents)) : ''}
+      ${li(t('rc_total'), eur(l.total_cents), 'big')}
+      ${li(t(pay ? 'rc_amount_pay' : 'rc_amount_get'), eur(Math.abs(l.payout_euros) * 100), 'big')}
+      ${li(t('rc_carry_out'), eur(l.carry_out_cents))}
+    </div></div>
+    ${l.done ? `<h3>${esc(t('rc_text'))}</h3><div class="rc-text">${esc(l.text)}</div>` : ''}
+    ${form}`;
+  if (st === 'todo') sigInit();
+}
+function rcPartsHTML(list){
+  return list.map((p, i) => `<div class="row"><input class="input" id="rp-n-${i}" placeholder="${esc(t('rc_part_name'))}" value="${esc(p.name)}" autocomplete="off">
+    <div class="money"><input class="input num" id="rp-a-${i}" inputmode="decimal" placeholder="${esc(t('rc_part_amt'))}" value="${esc(p.amt)}"></div>
+    <button class="link danger" style="flex:0 0 auto" data-act="rc-part-del" data-i="${i}" aria-label="${esc(t('del'))}">✕</button></div>`).join('');
+}
+function rcPartsRead(){ return [...document.querySelectorAll('[id^="rp-n-"]')].map((n, i) => ({ name: n.value, amt: ($('#rp-a-' + i) || {}).value || '' })); }
+// 厨房内部分配：没填 → null；有半填的行 → false
+function rcPartsValue(){
+  const rows = rcPartsRead().filter(p => p.name.trim() || String(p.amt).trim());
+  if (!rows.length) return null;
+  const out = rows.map(p => ({ name: p.name.trim(), cents: parseEur(p.amt) }));
+  return out.some(p => !p.name || isNaN(p.cents) || p.cents <= 0) ? false : out;
+}
+function rcPartsSum(){ const el = $('#rp-sum'); if (!el) return; const v = rcPartsRead().reduce((a, p) => a + (parseEur(p.amt) || 0), 0); el.textContent = v ? t('rc_parts_sum', { x: eur(v) }) : ''; }
+// 手指签名
+function sigInit(){
+  const c = $('#sig'); if (!c) return;
+  const dpr = window.devicePixelRatio || 1, r = c.getBoundingClientRect();
+  c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr);
+  const g = c.getContext('2d'); g.scale(dpr, dpr); g.lineWidth = 2.4; g.lineCap = 'round'; g.lineJoin = 'round'; g.strokeStyle = g.fillStyle = '#111';
+  state.sigInk = 0; let last = null;
+  const pt = e => { const b = c.getBoundingClientRect(); return { x: e.clientX - b.left, y: e.clientY - b.top }; };
+  c.onpointerdown = e => { e.preventDefault(); c.setPointerCapture(e.pointerId); last = pt(e); g.beginPath(); g.arc(last.x, last.y, 1.2, 0, 7); g.fill(); };
+  c.onpointermove = e => { if (!last) return; const p = pt(e); g.beginPath(); g.moveTo(last.x, last.y); g.lineTo(p.x, p.y); g.stroke(); last = p; state.sigInk++; };
+  c.onpointerup = c.onpointercancel = () => { last = null; };
+}
+function sigExport(){
+  const c = $('#sig'), out = document.createElement('canvas');
+  out.width = 600; out.height = Math.round(600 * c.height / c.width);
+  const g = out.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, out.width, out.height); g.drawImage(c, 0, 0, out.width, out.height);
+  return out.toDataURL('image/png');
+}
+// 周结页：周分配表（已锁定的周）
+function distHTML(dist){
+  const me = state.me, lines = dist.lines;
+  const open = lines.filter(l => !['none', 'signed', 'paper'].includes(l.receipt.status)).length;
+  const row = l => {
+    const r = l.receipt, selfLock = l.staff_id === me.id && !me.is_admin, acts = [];
+    const roles = (l.roles || []).map(x => `<span class="tag">${esc(t('role_' + x))}</span>`).join('');
+    const nums = [`${t('dist_recv')} ${eur(l.received_cents)}`, l.shortage_cents ? `${t('dist_short')} −${eur(l.shortage_cents)}` : '',
+      l.adj_cents ? `${t('dist_adj')} ${l.adj_cents > 0 ? '+' : '−'}${eur(Math.abs(l.adj_cents))}` : '', l.carry_in_cents ? `${t('dist_cin')} +${eur(l.carry_in_cents)}` : '',
+      `${t('dist_cout')} ${eur(l.carry_out_cents)}`].filter(Boolean).join(' · ');
+    if (r.receipt_id) acts.push(`<button class="link" data-act="rc-view" data-id="${r.receipt_id}">${esc(t(r.status === 'paper' ? 'dist_view_paper' : 'dist_view'))}</button>`);
+    if (me.is_admin && r.status === 'need_admin') acts.push(`<button class="link" data-act="rc-admin-pay" data-staff="${l.staff_id}">${esc(t('dist_admin_pay'))}</button>`);
+    if (me.is_admin && ['todo', 'disputed'].includes(r.status)) acts.push(`<button class="link" data-act="rc-paper" data-staff="${l.staff_id}">${esc(t('dist_paper'))}</button>`);
+    return `<div class="item"><div class="top" style="align-items:center">
+        <label class="check" style="flex:1"><input type="checkbox" data-act="settled" data-staff="${l.staff_id}" ${l.done ? 'checked' : ''} ${selfLock ? 'disabled' : ''} aria-label="${esc(t('dist_paid'))}">
+        <span><strong>${esc(l.name)}</strong>${l.is_kitchen ? '' : roles}${l.is_kitchen ? `<span class="tag k">${esc(t('kitchen'))}</span>` : ''}</span></label>
+        <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div>
+      <div class="meta num">${esc(nums)}</div>
+      <div class="meta">${l.done ? esc(t('dist_by', { n: l.done_by || '?', t: fmtDateTime(l.done_at) })) : ''}${dist.required && l.payout_euros !== 0 ? rsLabel(r) : ''}${selfLock ? ` <span class="small muted">${esc(t('dist_self_hint'))}</span>` : ''}</div>
+      ${(r.parts || []).length ? `<div class="meta">${esc((r.signer_name || '') + ': ' + r.parts.map(p => p.name + ' ' + eur(p.cents)).join(' · '))}</div>` : ''}
+      ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}</div>`;
+  };
+  return `<div class="hero"><div class="muted small">${esc(t('locked'))} · KW ${dist.kw}</div>
+      <div class="small num">${esc(t('float'))}: <strong>${eur(dist.float_cents)}</strong></div>
+      <div style="margin-top:8px">${!dist.required ? `<span class="small muted">${esc(t('dist_before'))}</span>`
+        : open ? `<span class="tag pend" style="margin:0">${esc(t('dist_open', { n: open }))}</span>` : `<span class="tag ok" style="margin:0">${esc(t('dist_complete'))}</span>`}</div>
+      <button class="btn ghost" style="margin-top:12px" data-act="dist-print">${esc(t('dist_print'))}</button></div>
+    <h3>${esc(t('dist_title'))}</h3>
+    ${lines.some(l => l.payout_euros < 0) ? `<div class="small muted" style="margin:-4px 0 10px">${esc(t('dist_pay_hint'))}</div>` : ''}
+    <div class="list">${lines.map(row).join('') || `<div class="empty">–</div>`}</div>`;
+}
+// 所有周里还没完成发放 / 签收的人（老板、小费管理员）
+async function rcOpenHTML(){
+  let list = []; try { list = await rpc('receipts_open', tok()) || []; } catch(e){ return ''; }
+  if (!list.length) return '';
+  return `<h3>${esc(t('rc_open_title', { n: list.length }))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('rc_open_hint'))}</div>
+    <div class="list">${list.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.name)}</strong>${rsLabel(l.receipt)}</div>
+      <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div>
+      <div class="meta">KW ${l.kw} · ${esc(dm(l.week_start))}–${esc(dm(addDays(l.week_start, 6)))}</div></div>`).join('')}</div>`;
+}
+// 打印 / 存为 PDF：德文为主，附中文
+async function distPrint(){
+  const win = window.open('', '_blank');
+  if (!win) return toast(t('err_GENERIC'), true);
+  win.document.write('<p style="font-family:sans-serif;padding:20px">…</p>');
+  let d; try { d = await rpc('week_receipts', { ...tok(), p_week_start: state.week, p_images: true }); }
+  catch(e){ win.close(); return toast(errText(e), true); }
+  win.document.open(); win.document.write(distPrintHTML(d)); win.document.close();
+  win.onload = () => setTimeout(() => win.print(), 300);
+}
+function distPrintHTML(d){
+  const b = k => `${esc(I18N.de[k])}<br><small>${esc(I18N.zh[k])}</small>`;
+  const dt = iso => iso ? new Date(iso).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Berlin' }) : '–';
+  const dd = s => { const [y, m, x] = s.split('-'); return `${x}.${m}.${y}`; };
+  const e2 = c => eur(c);
+  const stat = l => { const r = l.receipt; if (!d.required || l.payout_euros === 0) return '–';
+    const k = r.status === 'todo' && r.resign ? 'rs_resign' : 'rs_' + r.status;
+    return `${esc(I18N.de[k].replace('{t}', dt(r.at)))}<br><small>${esc(I18N.zh[k].replace('{t}', dt(r.at)))}</small>`; };
+  const rows = d.lines.map(l => `<tr>
+      <td><b>${esc(l.name)}</b></td>
+      <td>${(l.is_kitchen ? ['kitchen'] : l.roles || []).map(r => esc(I18N.de['role_' + r]) + ' / ' + esc(I18N.zh['role_' + r])).join('<br>')}</td>
+      <td class="r">${e2(l.received_cents)}</td><td class="r">${l.shortage_cents ? '−' + e2(l.shortage_cents) : ''}</td>
+      <td class="r">${l.adj_cents ? (l.adj_cents > 0 ? '+' : '−') + e2(Math.abs(l.adj_cents)) : ''}</td><td class="r">${l.carry_in_cents ? e2(l.carry_in_cents) : ''}</td>
+      <td class="r"><b>${l.payout_euros < 0 ? '−' : ''}${e2(Math.abs(l.payout_euros) * 100)}</b></td><td class="r">${e2(l.carry_out_cents)}</td>
+      <td>${l.done ? esc(l.done_by || '?') + '<br>' + dt(l.done_at) : '–'}</td>
+      <td>${stat(l)}</td>
+      <td>${l.image ? `<img src="${esc(l.image)}" alt="">` : ''}</td></tr>
+    ${l.payout_euros !== 0 && d.required && l.done ? `<tr class="txt"><td></td><td colspan="10">${esc(l.text).replace(/\n/g, '<br>')}${(l.receipt.parts || []).length ? '<br>Aufteilung Küche / 厨房内部分配: ' + esc(l.receipt.parts.map(p => p.name + ' ' + e2(p.cents)).join(' · ')) : ''}${l.receipt.signer_name ? '<br>Unterzeichnet von / 签收人: ' + esc(l.receipt.signer_name) : ''}</td></tr>` : ''}`).join('');
+  const open = d.lines.filter(l => !['none', 'signed', 'paper'].includes(l.receipt.status)).length;
+  return `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Trinkgeldverteilung KW ${d.kw}-${d.year}</title>
+<style>body{font-family:"Helvetica Neue",Arial,"PingFang SC","Noto Sans SC",sans-serif;font-size:11px;color:#111;margin:18px}
+h1{font-size:18px;margin:0 0 2px} .sub{color:#555;margin-bottom:10px} table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #bbb;padding:4px 5px;vertical-align:top;text-align:left} th{background:#f0f0f0;font-size:10px} td.r{text-align:right;white-space:nowrap}
+small{color:#666} img{height:42px;max-width:150px} tr.txt td{border-top:0;color:#444;font-size:9.5px} tr{page-break-inside:avoid}
+.foot{margin-top:12px;color:#555} @page{size:A4 landscape;margin:12mm}</style></head><body>
+<h1>Trinkgeldverteilung KW ${d.kw}/${d.year} · 小费周分配表</h1>
+<div class="sub">GLL International GmbH · Kochi Restaurant Flingern &amp; Bismarck · ${dd(d.week_start)} – ${dd(addDays(d.week_start, 6))}<br>
+Abgeschlossen am / 周结锁定：${dt(d.locked_at)} · ${esc(d.locked_by || '')} ·
+Status: ${!d.required ? esc(I18N.de.dist_before) + ' / ' + esc(I18N.zh.dist_before) : open ? `Offen / 未完成: ${open}` : 'Abgeschlossen – alle quittiert / 已完成，全部签收'}<br>
+Beim Tip-Manager verwahrte Reste / 小费管理员保管的零头：${e2(d.float_cents)}</div>
+<table><tr><th>Name<br><small>姓名</small></th><th>Rolle<br><small>岗位</small></th><th>${b('dist_recv')}</th><th>${b('dist_short')}</th><th>${b('dist_adj')}</th><th>${b('dist_cin')}</th>
+<th>Auszahlung (−: Abgabe)<br><small>实发（−：交给小费管理员）</small></th><th>${b('dist_cout')}</th><th>Ausgezahlt von · am<br><small>发放人 · 时间</small></th><th>Quittung<br><small>签收</small></th><th>Unterschrift<br><small>签名</small></th></tr>
+${rows}</table>
+<div class="foot">Erstellt am / 生成时间：${dt(new Date().toISOString())} · ${esc(state.me.name)} · app.kochide.com</div></body></html>`;
+}
 // ============ 周结（小费管理员）============
 async function viewWeek(){
   $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
-  let ov, st, disp, env = null;
+  let ov, st, disp, env = null, dist = null;
   try { state.schedCheck = await rpc('sched_tip_check', tok()); } catch(e){ state.schedCheck = null; }
   try {
     ov = await rpc('week_overview', { ...tok(), p_week_start: state.week });
-    if (ov.locked) st = await rpc('settlement', { ...tok(), p_week_start: state.week });
+    if (ov.locked){
+      st = await rpc('settlement', { ...tok(), p_week_start: state.week });
+      try { dist = await rpc('week_receipts', { ...tok(), p_week_start: state.week }); } catch(e){ dist = null; }   // v18 之前：旧的结算列表
+    }
     else disp = await rpc('list_disputes', { ...tok(), p_status: 'open' });
   } catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   // v16：按排班显示谁还没交；数据库还没升级时不影响其他功能
@@ -1410,7 +1657,7 @@ async function viewWeek(){
   const countBlock = ov.locked ? ''
     : ov.entries.some(e => e.is_bon) || (env && env.groups.length) ? envelopeBlockHTML(ov.entries, env) : '';
   const handover = handoverHTML(ov.entries);
-  let html = weekNav() + schedCheckHTML();
+  let html = weekNav() + schedCheckHTML() + await rcOpenHTML();
 
   if (ov.locked){
     const line = l => `<div class="item"><div class="top">
@@ -1419,7 +1666,8 @@ async function viewWeek(){
         <div class="amt num">${eur(Math.abs(l.payout_euros)*100)}</div></div>
         <div class="meta num">${esc(t('net'))} ${eur(l.net_cents)}${l.carry_in_cents?' · '+esc(t('carry_in',{c:eur(l.carry_in_cents)})):''} · ${esc(t('carry',{c:eur(l.carry_out_cents)}))}</div></div>`;
     const ins = st.lines.filter(l => l.payout_euros < 0), outs = st.lines.filter(l => l.payout_euros > 0), zero = st.lines.filter(l => l.payout_euros === 0);
-    html += `<div class="hero"><div class="muted small">${esc(t('locked'))}</div>
+    if (dist) html += distHTML(dist) + handover + `<h3>${esc(t('entries'))}</h3>${entries || `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`}`;
+    else html += `<div class="hero"><div class="muted small">${esc(t('locked'))}</div>
       <div class="small num">${esc(t('float'))}: <strong>${eur(st.float_cents)}</strong></div></div>
       <h3>${esc(t('pay_in'))}</h3><div class="list">${ins.map(line).join('') || `<div class="empty">–</div>`}</div>
       <h3>${esc(t('pay_out'))}</h3><div class="list">${outs.map(line).join('') || `<div class="empty">–</div>`}</div>
@@ -1919,7 +2167,7 @@ document.addEventListener('click', async ev => {
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; renderLogin(); break;
-    case 'tab': state.done = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+    case 'tab': state.done = null; state.rcWeek = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -2124,6 +2372,57 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'photo-close': $('#photoDlg').close(); break;
+    case 'rc-go': state.rcWeek = el.dataset.week; state.menu = false; render(); window.scrollTo(0, 0); break;
+    case 'rc-back': state.rcWeek = null; render(); break;
+    case 'rc-clear': sigInit(); break;
+    case 'rc-part-add': { const l = rcPartsRead(); l.push({ name: '', amt: '' }); $('#rc-parts').innerHTML = rcPartsHTML(l); rcPartsSum(); break; }
+    case 'rc-part-del': { const l = rcPartsRead(); l.splice(+el.dataset.i, 1); $('#rc-parts').innerHTML = rcPartsHTML(l.length ? l : [{ name: '', amt: '' }]); rcPartsSum(); break; }
+    case 'rc-sign': {
+      if ((state.sigInk || 0) < 5) return toast(t('rc_need_sig'), true);
+      let signer = null, parts = null;
+      if (state.me.is_kitchen){
+        signer = ($('#rc-signer').value || '').trim(); if (!signer) return toast(t('err_SIGNER_REQUIRED'), true);
+        parts = rcPartsValue(); if (parts === false) return toast(t('err_PARTS_INVALID'), true);
+      }
+      el.disabled = true;
+      try {
+        const r = await rpc('sign_receipt', { ...tok(), p_pin: $('#rc-pin').value.trim(), p_week_start: state.rcWeek, p_image: sigExport(), p_signer_name: signer, p_parts: parts });
+        if (!r.ok){ toast(t('err_' + r.error), true); $('#rc-pin').value = ''; el.disabled = false; break; }
+        toast(t('rc_done')); state.rcWeek = null; await loadReceipts(); render();
+      } catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'rc-wrong': {
+      const c = prompt(t('rc_wrong_q')); if (!c || !c.trim()) break;
+      try { await rpc('raise_week_dispute', { ...tok(), p_week_start: state.rcWeek, p_comment: c.trim() }); toast(t('rc_wrong_sent')); state.rcWeek = null; await loadReceipts(); render(); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'rc-view': {
+      try {
+        const r = await rpc('receipt_image', { ...tok(), p_receipt_id: el.dataset.id }), dlg = $('#photoDlg');
+        dlg.innerHTML = `<img src="${esc(r.image)}" alt="" style="background:#fff">
+          <div class="rc-text">${esc(r.text)}${r.note ? '\n' + esc(r.note) : ''}\n${esc(fmtDateTime(r.at))}</div>
+          <button class="btn" data-act="photo-close">${esc(t('close'))}</button>`;
+        dlg.showModal();
+      } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'rc-admin-pay':
+      try { await rpc('mark_settled', { ...tok(), p_week_start: state.week, p_staff_id: el.dataset.staff, p_done: true }); viewWeek(); } catch(e){ toast(errText(e), true); }
+      break;
+    case 'rc-paper': {
+      const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
+      inp.onchange = async () => {
+        const f = inp.files && inp.files[0]; if (!f) return;
+        const note = prompt(t('dist_paper_q')); if (note === null) return;
+        try { const img = await compressImage(f);
+          await rpc('admin_paper_receipt', { ...tok(), p_week_start: state.week, p_staff_id: el.dataset.staff, p_image: img, p_note: note.trim() });
+          toast(t('dist_paper_done')); viewWeek(); } catch(e){ toast(errText(e), true); }
+      };
+      inp.click(); break;
+    }
+    case 'dist-print': distPrint(); break;
     case 'count': {
       const inp = document.getElementById('cnt-' + el.dataset.id), v = parseEur(inp && inp.value);
       if (!inp || inp.value.trim() === '' || isNaN(v)) return toast(t('bad_amount'), true);
@@ -2188,12 +2487,13 @@ document.addEventListener('change', async ev => {
     render();
   }
   if (el.dataset && el.dataset.act === 'settled'){
-    try { await rpc('mark_settled', { ...tok(), p_week_start: state.week, p_staff_id: el.dataset.staff, p_done: el.checked }); }
+    try { await rpc('mark_settled', { ...tok(), p_week_start: state.week, p_staff_id: el.dataset.staff, p_done: el.checked }); if (state.tab === 'week') viewWeek(); }
     catch(e){ el.checked = !el.checked; toast(errText(e), true); }
   }
 });
 document.addEventListener('input', ev => {
   const id = ev.target.id;
+  if (id && id.startsWith('rp-')) rcPartsSum();
   if (id === 'f-reason') state.form.reason = ev.target.value;
   if (id === 'b-wallet'){ const b = state.bon; b.wallet = ev.target.value; b.ack = false; if (b.walletDone){ b.walletDone = false; refreshBonSum(); } }
   if (id === 'e-wallet'){ state.form.wallet = ev.target.value; state.form.ack = false; refreshBonSum(); }
