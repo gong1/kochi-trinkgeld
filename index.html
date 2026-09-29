@@ -325,6 +325,7 @@ zh: {
   env_line:'排班 {s} 个班 · 已交 {c} 个班（{n} 个信封）', env_line_nosched:'这天没有发布排班 · 已交 {n} 个信封', env_line_noshift:'这家店这天没有排服务班 · 已交 {n} 个信封',
   env_missing:'还没交：{list}', env_missing_late:'逾期没交：{list}', env_elsewhere:'在别的店交了：{list}', env_elsewhere_one:'{n}（已在 {s} 交）',
   env_should:'信封应有', env_unsched:'未排班', env_shift_at:'排在 {s}', env_guess:'班次按提交先后推断', env_bon_time:'Bon {a}–{b}', env_counted_all:'这组的信封都已点收 ✓',
+  xfer_lbl:'转入现金 / 转出', xfer_in:'{n} 转入现金 +{a}', xfer_out:'转出到 {n} −{a}', xfer_hint:'不是餐费收款，已算进交店里的金额；信封里的现金包括这笔钱。',
   tip_total_lbl:'小费合计', handover_hint:'按日期从早到晚。小费池 = 信封合计 − 交店里（放入 Kasse）；交店里是负数时，从 Kasse 取出补进小费池。',
   nets_hint:'正数：周结后从小费池领取；负数：要交给小费管理员（例如差钱由本人承担）。',
   act_adjustment_add:'记调整', act_avail_set:'标不能上的班', act_bon_entry_create:'拍照录入', act_bon_entry_update:'修改拍照录入', act_bon_review:'核对 Bon',
@@ -438,6 +439,7 @@ de: {
   env_line:'Geplant {s} Schichten · abgegeben {c} ({n} Umschläge)', env_line_nosched:'Kein veröffentlichter Dienstplan · {n} Umschläge abgegeben', env_line_noshift:'Kein Service eingeplant · {n} Umschläge abgegeben',
   env_missing:'Fehlt noch: {list}', env_missing_late:'Überfällig: {list}', env_elsewhere:'Im anderen Restaurant abgegeben: {list}', env_elsewhere_one:'{n} (in {s} abgegeben)',
   env_should:'Soll im Umschlag', env_unsched:'nicht eingeplant', env_shift_at:'eingeplant in {s}', env_guess:'Schicht nach Abgabe-Reihenfolge geschätzt', env_bon_time:'Bon {a}–{b}', env_counted_all:'Alle Umschläge dieser Gruppe gezählt ✓',
+  xfer_lbl:'Umbuchung Bargeld', xfer_in:'Bargeld von {n} +{a}', xfer_out:'an {n} −{a}', xfer_hint:'Kein Umsatz aus Speisen/Getränken, ist im Betrag an den Laden enthalten; das Bargeld im Umschlag enthält diesen Betrag.',
   tip_total_lbl:'Trinkgeld gesamt', handover_hint:'Vom ältesten zum neuesten Tag. Trinkgeldtopf = Umschläge − an den Laden (in die Kasse); ist der Betrag an den Laden negativ, wird er aus der Kasse in den Topf gelegt.',
   nets_hint:'Plus: nach dem Abschluss aus dem Trinkgeldtopf erhalten. Minus: an den Tip-Manager abgeben (z. B. Fehlbetrag, den die Person trägt).',
   act_adjustment_add:'Korrektur erfasst', act_avail_set:'Nicht verfügbar markiert', act_bon_entry_create:'Bon eingereicht', act_bon_entry_update:'Bon-Eintrag geändert', act_bon_review:'Bon geprüft',
@@ -957,6 +959,8 @@ function bonNumbersHTML(d){
       <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(dayLabel(d.work_date)) : '?'}</strong></div>
       <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
       <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(d.schluss_cents || 0)}</strong></div>
+      ${(d.bar_transfers || []).length ? `<div class="li"><span class="muted">${esc(t('xfer_lbl'))}</span><strong>${esc(d.bar_transfers.map(x => x.name + ' ' + (x.dir === 'out' ? '−' : '+') + (x.cents == null ? '?' : eur(x.cents))).join(' · '))}</strong></div>
+        <div class="muted small" style="margin:-2px 0 6px">${esc(t('xfer_hint'))}</div>` : ''}
       <div class="li"><span class="muted">${esc(t('card_tip'))}</span><strong>${eur(d.card_cents || 0)}</strong></div>
     </div></div>`;
 }
@@ -1156,9 +1160,19 @@ async function viewEntry(){
 async function loadMine(){
   try {
     const d = await rpc('my_week', { ...tok(), p_week_start: mondayOf(today()) });
+    await loadXfer(d.my_entries.filter(e => e.is_bon).map(e => e.entry_id));
     const el = $('#mine'); if (!el) return;
     el.innerHTML = d.my_entries.length ? `<div class="list">${d.my_entries.map(entryItem).join('')}</div>` : `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`;
   } catch(e){ const el = $('#mine'); if (el) el.innerHTML = `<div class="empty">${esc(errText(e))}</div>`; }
+}
+// Bon 上 Bar 区块的转入 / 转出（bon v5，例如卖充值卡收现金）
+function xferText(list){ return (list || []).map(x => t(x.dir === 'out' ? 'xfer_out' : 'xfer_in', { n: x.name, a: x.cents == null ? '?' : eur(x.cents) })).join(' · '); }
+function xferOf(id){ return (state.xfer || {})[id]; }
+// 数据库还没升级到 v17 时不影响其他功能，只是不显示这一行
+async function loadXfer(ids){
+  state.xfer = state.xfer || {};
+  ids = (ids || []).filter(Boolean); if (!ids.length) return;
+  try { (await rpc('bon_extras', { ...tok(), p_entry_ids: ids }) || []).forEach(x => state.xfer[x.entry_id] = x.transfers); } catch(e){}
 }
 function entryTags(e){
   let countTag = '';
@@ -1199,6 +1213,7 @@ function entryItem(e, opts){
         : `<strong>${esc(dayLabel(e.date))}</strong> <span class="muted">${esc(e.store)}${e.server ? ' · ' + esc(e.server) : ''}</span>`}${tags}</div>
       <div class="amt num">${eur(total)}<span class="lbl">${esc(t('tip_total_lbl'))}</span></div></div>
     <div class="meta num">${meta}</div>
+    ${xferOf(e.entry_id) ? `<div class="meta num">${esc(xferText(xferOf(e.entry_id)))}</div>` : ''}
     <div class="meta num">${parts}</div>
     ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}
     ${showCount ? `<div class="row cnt"><div class="money"><input class="input num" id="cnt-${e.entry_id}" inputmode="decimal" placeholder="${money(e.wallet_cents)}"></div>
@@ -1271,7 +1286,8 @@ function envelopeCard(e, i, store){
     else if (i.scheduled === false) shift = t('env_unsched');
   }
   const detail = [i && i.bon_start ? t('env_bon_time', { a: i.bon_start, b: i.bon_end }) : null,
-    `${t('tip_total_lbl')} ${eur(e.card_cents + e.cash_cents)}`, `${t('of_which_store')} ${eur(e.schluss_cents)}`].filter(x => x);
+    `${t('tip_total_lbl')} ${eur(e.card_cents + e.cash_cents)}`, `${t('of_which_store')} ${eur(e.schluss_cents)}`,
+    xferOf(e.entry_id) ? xferText(xferOf(e.entry_id)) : null].filter(x => x);
   const acts = e.has_photo ? `<div class="acts"><button class="link" data-act="photos" data-id="${e.entry_id}">${esc(t('photos'))}</button></div>` : '';
   return `<div class="item env">
     <div class="top"><div><span class="who">${esc(e.server || '?')}</span>${shift ? `<span class="tag${i && i.scheduled === false ? ' late' : ' m'}"${i && i.guess ? ` title="${esc(t('env_guess'))}"` : ''}>${esc(shift)}</span>` : ''}${entryTags(e)}</div>
@@ -1344,6 +1360,7 @@ async function viewLedger(){
   try { d = state.viewAs ? await rpc('admin_view_week', { ...tok(), p_staff_id: state.viewAs.id, p_week_start: state.week })
                          : await rpc('my_week', { ...tok(), p_week_start: state.week }); }
   catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
+  await loadXfer(d.my_entries.filter(e => e.is_bon).map(e => e.entry_id));
   const n = d.net_cents, s = d.settlement;
   let hero;
   if (s){
@@ -1387,6 +1404,7 @@ async function viewWeek(){
   } catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   // v16：按排班显示谁还没交；数据库还没升级时不影响其他功能
   if (!ov.locked) try { env = await rpc('week_envelopes', { ...tok(), p_week_start: state.week }); } catch(e){ env = null; }
+  await loadXfer(ov.entries.filter(e => e.is_bon).map(e => e.entry_id));
 
   const entries = entriesByGroupHTML(ov.entries, { locked: ov.locked });
   const countBlock = ov.locked ? ''
@@ -1466,6 +1484,7 @@ async function viewAdmin(){
       const staff = await rpc('admin_list_staff', tok());
       const binds = staff.flatMap(s => (s.ls_ids || []).filter(b => !b.confirmed).map(b => ({ ...b, sid: s.id, sname: s.name })));
       let reviews = []; try { reviews = (await rpc('admin_review_list', tok()) || []).filter(r => !r.locked); } catch(e){}
+      await loadXfer(reviews.map(r => r.entry_id));
       refreshBadge(list.length + binds.length + reviews.length);
       el().innerHTML = (reviews.length ? `<h3>${esc(t('review_title'))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('review_hint'))}</div><div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
         + (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
@@ -1596,6 +1615,7 @@ function reviewCard(r){
     <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong> <span class="muted">${esc(r.store)} · ${esc(r.server)}</span></div>
       <div class="amt num">${esc(t('lbl_wallet'))} ${eur(r.wallet_cents)}</div></div>
     ${probs ? `<div class="meta">${esc(probs)}</div>` : ''}
+    ${xferOf(id) ? `<div class="meta num">${esc(xferText(xferOf(id)))}</div>` : ''}
     ${r.has_photo ? `<div class="acts"><button class="link" data-act="photos" data-id="${id}">${esc(t('photos'))}</button></div>` : ''}
     <div class="row" style="margin-top:8px">
       <div class="field"><label for="rv-s-${id}">${esc(t('schluss'))}</label><div class="money"><input class="input num" id="rv-s-${id}" inputmode="text" autocomplete="off" value="${money(r.schluss_cents)}"></div></div>
