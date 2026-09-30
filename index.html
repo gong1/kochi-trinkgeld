@@ -114,6 +114,24 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .grp .grp-t{font-weight:700;font-size:16px;color:var(--ink)}
 .grp .grp-s{font-size:14px;color:var(--muted);margin-top:2px}
 .grp .grp-m{font-size:14px;margin-top:2px}
+.st{display:inline-block;font-size:12px;font-weight:700;border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:1px;white-space:nowrap}
+.st-f{background:#DDEFE6;color:#23624E} .st-b{background:#DCE8F3;color:#24557A}
+h3 .ib{border:0;background:none;color:var(--muted);font-size:15px;padding:0 4px;cursor:pointer;vertical-align:0}
+.hint{font-size:14px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:var(--r-s);padding:8px 10px;margin:-2px 0 10px}
+h3 .done{font-size:13px;font-weight:700;color:var(--celadon-deep);margin-left:6px}
+details.fold{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);margin-bottom:8px}
+details.fold>summary{list-style:none;cursor:pointer;padding:12px 14px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:8px}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:'›';color:var(--muted);transition:transform .15s}
+details.fold[open]>summary::after{transform:rotate(90deg)}
+details.fold>summary .muted{font-weight:400;font-size:14px;margin-left:auto}
+details.fold>.inner{padding:0 10px 10px}
+details.fold .list{margin-bottom:8px}
+.ho{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:10px 14px;margin-bottom:8px}
+.ho .ho-t{font-weight:700;margin-bottom:4px}
+.ho .li{display:flex;justify-content:space-between;padding:4px 0;border-top:1px solid var(--line)}
+.ho .li:first-of-type{border-top:0}
+.cnt-diff[hidden]{display:none}
 .sig{display:block;width:100%;height:180px;background:#fff;border:1.5px dashed var(--line);border-radius:var(--r-s);touch-action:none}
 .rc-text{white-space:pre-line;background:var(--paper);border-radius:var(--r-s);padding:10px 12px;font-size:15px;margin:6px 0 12px}
 .rc-parts .row{margin-bottom:6px}
@@ -293,7 +311,7 @@ zh: {
   already_in:'已排在 {s}', shift_del_confirm:'删除这个班？', is_scheduler:'排班员', avail_hint:'点一下你不能上的班，再点一下取消。没标的都算能上，具体时间由排班员安排。可以用 › 往后翻，提前标出假期或考试周。', avail_rule:'没标的班都算能上。排了你的班就要来；来不了请自己找人换，并提前告诉排班员。', avail_count:'你已标出 {n} 个班不能上。', banner_avail:'下周默认都能上。有不能上的班，请在周四 20:00 前到「排班」里标出。', banner_go:'去标出',
   avail_not_submitted:'还没提交。标好不能上的班后点「确认提交」；下周都能上也要点一下。', avail_submitted:'已提交：{n} 个班不能上。截止前可以随时修改。',
   avail_submitted0:'已提交：下周都能上。截止前可以随时修改。', avail_submit:'确认提交', av_x:'不能上',
-  show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金，输入实际金额，点「点收」。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
+  show_after_wallet:'输入钱包金额后，这里显示单据数字和分配明细。', to_count:'待点收的信封（{n}）', to_count_hint:'打开信封点清现金。和员工申报的金额一致，点「数过了」；不一致，点「金额不一致」，填实际点出的金额。', all_counted:'这周的信封已全部点收 ✓', reading_bg:'正在识别单据……可以先点钱，输入钱包金额。', read_retry:'重新识别',
   checks_retake:'单据上的数字前后对不上，请点上面的照片重拍（已识别 {n} 次）。', checks_review:'已经重拍 2 次，还是对不上。可以直接提交，老板会看照片核对并更正。',
   wait_read:'正在识别单据，请稍等', need_retake:'请先重拍单据', retake_all:'全部重拍', bon_numbers:'单据数字（自动识别，不能修改）',
   done_review:'这张单据识别有疑问，老板会看照片核对。信封照常放。', review_title:'待核对的 Bon（识别未通过）', review_save:'核对完毕，保存',
@@ -329,6 +347,13 @@ zh: {
   env_line:'排班 {s} 个班 · 已交 {c} 个班（{n} 个信封）', env_line_nosched:'这天没有发布排班 · 已交 {n} 个信封', env_line_noshift:'这家店这天没有排服务班 · 已交 {n} 个信封',
   env_missing:'还没交：{list}', env_missing_late:'逾期没交：{list}', env_elsewhere:'在别的店交了：{list}', env_elsewhere_one:'{n}（已在 {s} 交）',
   env_should:'信封应有', env_unsched:'未排班', env_shift_at:'排在 {s}', env_guess:'班次按提交先后推断', env_bon_time:'Bon {a}–{b}', env_counted_all:'这组的信封都已点收 ✓',
+  hint_lbl:'说明', env_declared:'员工申报', cnt_ok:'数过了，是 {x}', cnt_diff:'金额不一致', cnt_diff_lbl:'实际点出的金额',
+  tag_counted_confirm:'已点收 · 一致确认', tag_counted_manual:'已点收 · 手填',
+  nets_fold:'预计净额（{n} 人）', entries_day:'{n} 条', rc_open_week:'KW {w} · 还有 {n} 人未完成',
+  ad_counted:'点收', ad_expected:'应为', ad_amount_cents:'金额', ad_reason:'原因', ad_comment:'内容', ad_week:'周', ad_payout_euros:'实发',
+  ad_done:'已发放', ad_yes:'是', ad_no:'否', ad_before:'修改前', ad_after:'修改后', ad_resolution:'处理结果', ad_role:'岗位', ad_method:'方式',
+  ad_wallet_cents:'钱包', ad_card_cents:'刷卡小费', ad_cash_cents:'现金小费', ad_schluss_cents:'交店里', ad_shortage_cents:'差额', ad_bearer:'承担方',
+  ad_name:'姓名', ad_valid_from:'生效日期', ad_kitchen:'厨房 %', ad_runner:'Runner %', ad_bar:'吧台 %', ad_date:'日期', ad_store:'门店', ad_slot:'班次', ad_where:'位置', ad_server:'服务员', ad_runners:'Runner', ad_bars:'吧台', ad_from:'谁付', ad_to:'付给谁',
   rc_banner:'KW {w} 小费 {x}，请签收', rc_banner_pay:'KW {w} 你交给小费管理员 {x}，请签字确认', rc_banner_resign:'（结算有变动，需要重新签收）', rc_go:'去签收',
   rc_title:'KW {w} 小费签收', rc_amount_get:'收到现金', rc_amount_pay:'交出现金', rc_detail:'这一周的明细', rc_received:'分到的小费', rc_shortage:'本人承担的短款',
   rc_adj:'调整', rc_carry_in:'上周零头', rc_total:'合计', rc_carry_out:'零头结转下周', rc_paid_by:'发放人：{n} · {t}', rc_text:'收据（德文为准）',
@@ -351,7 +376,7 @@ zh: {
   act_personal_device:'个人设备保持登录', act_pin_reset:'重置 PIN', act_rate_set:'改分配比例', act_request_approve:'批准修改申请', act_request_delete:'申请删除',
   act_request_reject:'拒绝修改申请', act_request_update:'申请修改', act_sched_publish:'发布排班', act_set_initial_pin:'设置自己的 PIN', act_settle_mark:'标记已发放',
   act_shift_change:'改排班', act_shift_remove:'删排班', act_shortage_bearer:'改差额承担方', act_staff_main_role:'改主岗位', act_staff_reorder:'调整员工顺序',
-  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结',
+  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据',
   chk_missing:'排了班、还没交 Bon（{n}）', chk_missing_hint:'到第二天 12:00 还没有录入。请提醒本人尽快交；如果那天没上班，请排班员在「排班」里删掉这个班，提醒就会消失。',
   chk_unpicked:'排了班、但没人选的 Runner / 吧台（{n}）', chk_unpicked_hint:'当天这家店的 Bon 里没有人选他。确实上了班的，请当天的服务员在「账本」里申请修改把他加上；没上班的，请排班员删掉这个班。',
   chk_lock_warn:'这周还有 {n} 条排班提醒（漏交 Bon 或没被选的 Runner / 吧台）没有处理。锁定后就不能再改了。仍然锁定吗？',
@@ -420,7 +445,7 @@ de: {
   already_in:'Schon in {s}', shift_del_confirm:'Diese Schicht löschen?', is_scheduler:'Dienstplanung', avail_hint:'Tippe auf die Schichten, an denen du nicht kannst – nochmal tippen zum Aufheben. Alles andere gilt als verfügbar, die genauen Zeiten legt die Dienstplanung fest. Mit › kannst du auch Urlaub oder Prüfungswochen im Voraus eintragen.', avail_rule:'Nicht markierte Schichten gelten als verfügbar. Wenn du eingeplant bist, kommst du; wenn nicht, such dir selbst Ersatz und sag der Dienstplanung rechtzeitig Bescheid.', avail_count:'Du hast {n} Schichten als „kann nicht“ markiert.', banner_avail:'Für nächste Woche giltst du als verfügbar. Schichten, an denen du nicht kannst, bitte bis Donnerstag 20:00 Uhr unter „Dienstplan“ markieren.', banner_go:'Markieren',
   avail_not_submitted:'Noch nicht abgeschickt. Schichten markieren, an denen du nicht kannst, und „Abschicken“ tippen – auch wenn du die ganze Woche kannst.', avail_submitted:'Abgeschickt: {n} Schichten nicht verfügbar. Änderungen bis zur Frist möglich.',
   avail_submitted0:'Abgeschickt: die ganze Woche verfügbar. Änderungen bis zur Frist möglich.', avail_submit:'Abschicken', av_x:'kann nicht',
-  show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen, Bargeld zählen, tatsächlichen Betrag eingeben und „Zählen“ tippen.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
+  show_after_wallet:'Nach Eingabe des Portemonnaie-Betrags erscheinen hier die Bon-Zahlen und die Verteilung.', to_count:'Zu zählende Umschläge ({n})', to_count_hint:'Umschlag öffnen und Bargeld zählen. Stimmt es mit dem Betrag laut Mitarbeiter, „Gezählt – stimmt“ tippen; sonst „Betrag weicht ab“ tippen und den tatsächlichen Betrag eingeben.', all_counted:'Alle Umschläge dieser Woche gezählt ✓', reading_bg:'Bon wird ausgelesen … Du kannst schon das Bargeld zählen und eingeben.', read_retry:'Erneut auslesen',
   checks_retake:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte oben auf das Foto tippen und neu fotografieren ({n}. Versuch).', checks_review:'Nach 2 neuen Fotos passt es immer noch nicht. Du kannst trotzdem absenden – der Chef prüft das Foto und korrigiert.',
   wait_read:'Bon wird noch ausgelesen, bitte kurz warten', need_retake:'Bitte zuerst den Bon neu fotografieren', retake_all:'Alles neu fotografieren', bon_numbers:'Zahlen vom Bon (automatisch erkannt, nicht änderbar)',
   done_review:'Bei diesem Bon gab es Unklarheiten – der Chef prüft das Foto. Umschlag bitte wie immer abgeben.', review_title:'Zu prüfende Bons (Auslesen nicht bestanden)', review_save:'Geprüft, speichern',
@@ -456,6 +481,13 @@ de: {
   env_line:'Geplant {s} Schichten · abgegeben {c} ({n} Umschläge)', env_line_nosched:'Kein veröffentlichter Dienstplan · {n} Umschläge abgegeben', env_line_noshift:'Kein Service eingeplant · {n} Umschläge abgegeben',
   env_missing:'Fehlt noch: {list}', env_missing_late:'Überfällig: {list}', env_elsewhere:'Im anderen Restaurant abgegeben: {list}', env_elsewhere_one:'{n} (in {s} abgegeben)',
   env_should:'Soll im Umschlag', env_unsched:'nicht eingeplant', env_shift_at:'eingeplant in {s}', env_guess:'Schicht nach Abgabe-Reihenfolge geschätzt', env_bon_time:'Bon {a}–{b}', env_counted_all:'Alle Umschläge dieser Gruppe gezählt ✓',
+  hint_lbl:'Erklärung', env_declared:'Laut Mitarbeiter', cnt_ok:'Stimmt – {x}', cnt_diff:'Betrag weicht ab', cnt_diff_lbl:'Tatsächlich gezählter Betrag',
+  tag_counted_confirm:'Gezählt · bestätigt', tag_counted_manual:'Gezählt · eingegeben',
+  nets_fold:'Voraussichtlicher Saldo ({n})', entries_day:'{n} Einträge', rc_open_week:'KW {w} · noch {n} offen',
+  ad_counted:'Gezählt', ad_expected:'Soll', ad_amount_cents:'Betrag', ad_reason:'Grund', ad_comment:'Text', ad_week:'Woche', ad_payout_euros:'Auszahlung',
+  ad_done:'Ausgezahlt', ad_yes:'ja', ad_no:'nein', ad_before:'Vorher', ad_after:'Nachher', ad_resolution:'Klärung', ad_role:'Rolle', ad_method:'Art',
+  ad_wallet_cents:'Portemonnaie', ad_card_cents:'Kartentrinkgeld', ad_cash_cents:'Bartrinkgeld', ad_schluss_cents:'An den Laden', ad_shortage_cents:'Fehlbetrag', ad_bearer:'Träger',
+  ad_name:'Name', ad_valid_from:'Gültig ab', ad_kitchen:'Küche %', ad_runner:'Runner %', ad_bar:'Bar %', ad_date:'Datum', ad_store:'Filiale', ad_slot:'Schicht', ad_where:'Ort', ad_server:'Service', ad_runners:'Runner', ad_bars:'Bar', ad_from:'Von', ad_to:'An',
   rc_banner:'Trinkgeld KW {w}: {x} – bitte quittieren', rc_banner_pay:'KW {w}: {x} an den Tip-Manager abgegeben – bitte bestätigen', rc_banner_resign:' (Abrechnung geändert – bitte neu quittieren)', rc_go:'Quittieren',
   rc_title:'Trinkgeld-Quittung KW {w}', rc_amount_get:'Bar erhalten', rc_amount_pay:'Bar abgegeben', rc_detail:'Aufstellung dieser Woche', rc_received:'Trinkgeldanteile', rc_shortage:'Selbst getragener Fehlbetrag',
   rc_adj:'Korrekturen', rc_carry_in:'Rest aus Vorwoche', rc_total:'Summe', rc_carry_out:'Rest in die nächste Woche', rc_paid_by:'Ausgezahlt von {n} · {t}', rc_text:'Quittung',
@@ -478,7 +510,7 @@ de: {
   act_personal_device:'Auf eigenem Gerät angemeldet bleiben', act_pin_reset:'PIN zurückgesetzt', act_rate_set:'Anteile geändert', act_request_approve:'Änderungsantrag genehmigt', act_request_delete:'Löschung beantragt',
   act_request_reject:'Änderungsantrag abgelehnt', act_request_update:'Änderung beantragt', act_sched_publish:'Dienstplan veröffentlicht', act_set_initial_pin:'Eigene PIN gesetzt', act_settle_mark:'Als ausgezahlt markiert',
   act_shift_change:'Schicht geändert', act_shift_remove:'Schicht gelöscht', act_shortage_bearer:'Fehlbetrag-Träger geändert', act_staff_main_role:'Hauptrolle geändert', act_staff_reorder:'Reihenfolge geändert',
-  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen',
+  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen',
   chk_missing:'Eingeplant, aber noch kein Bon ({n})', chk_missing_hint:'Bis 12:00 Uhr am Folgetag kein Eintrag. Bitte die Person erinnern. Falls sie nicht gearbeitet hat, die Schicht unter „Dienstplan“ löschen – dann verschwindet der Hinweis.',
   chk_unpicked:'Eingeplante Runner / Bar, die niemand ausgewählt hat ({n})', chk_unpicked_hint:'In keinem Bon dieses Tages in diesem Restaurant ausgewählt. Hat die Person gearbeitet, bitte die Servicekraft, im „Konto“ eine Änderung zu beantragen und sie hinzuzufügen; sonst die Schicht im Dienstplan löschen.',
   chk_lock_warn:'Für diese Woche sind noch {n} Dienstplan-Hinweise offen (fehlender Bon oder nicht ausgewählte Runner/Bar). Nach dem Abschluss ist keine Änderung mehr möglich. Trotzdem abschließen?',
@@ -520,7 +552,7 @@ function parseD(s){ const [y,m,d] = s.split('-').map(Number); return new Date(y,
 function addDays(s, n){ const d = parseD(s); d.setDate(d.getDate()+n); return ymd(d); }
 function mondayOf(s){ const d = parseD(s); d.setDate(d.getDate() - ((d.getDay()+6)%7)); return ymd(d); }
 function wdIdx(s){ return (parseD(s).getDay()+6)%7; }
-function dm(s){ const d = parseD(s); return state.lang==='de' ? d.getDate()+'.'+(d.getMonth()+1)+'.' : (d.getMonth()+1)+'月'+d.getDate()+'日'; }
+function dm(s){ const d = parseD(s), p = n => String(n).padStart(2, '0'); return state.lang==='de' ? p(d.getDate())+'.'+p(d.getMonth()+1)+'.' : (d.getMonth()+1)+'月'+d.getDate()+'日'; }
 function dayLabel(s){ return t('wd')[wdIdx(s)] + ' ' + dm(s); }
 function isoWeek(s){ const d = parseD(s); d.setDate(d.getDate()+3-((d.getDay()+6)%7)); const w1 = new Date(d.getFullYear(),0,4); return 1+Math.round(((d-w1)/864e5-3+((w1.getDay()+6)%7))/7); }
 function eur(c){ return ((c||0)/100).toLocaleString('de-DE', {style:'currency', currency:'EUR'}); }
@@ -629,6 +661,8 @@ const ERR_ZH = {
   PARTS_INVALID: '厨房内部分配填得不完整：每一行都要有姓名和大于 0 的金额。不需要的行请删掉。',
   PARTS_SUM: '厨房内部分配的合计必须等于整份金额。请检查每人的金额。',
   RECEIPT_IMMUTABLE: '签收记录不能修改或删除。',
+  APPEND_ONLY: '这类记录只能新增，不能修改或删除。',
+  BAD_METHOD: '点收方式不对。请刷新页面后重试。',
   PHOTO_REQUIRED: '请选择纸质收据的照片。',
   NOTE_REQUIRED: '请写一句说明（例如：已离职，已在纸上签收），存档时需要。',
   LOGIN_FAILED: 'PIN 不对。连续输错 5 次会锁定 15 分钟。忘记 PIN 请找老板重置。',
@@ -699,6 +733,8 @@ const ERR_DE = {
   PARTS_INVALID: 'Aufteilung unvollständig: Jede Zeile braucht Name und Betrag über 0. Leere Zeilen bitte löschen.',
   PARTS_SUM: 'Die Summe der Aufteilung muss dem Küchenanteil entsprechen. Bitte Beträge prüfen.',
   RECEIPT_IMMUTABLE: 'Quittungen können nicht geändert oder gelöscht werden.',
+  APPEND_ONLY: 'Diese Einträge können nur ergänzt, nicht geändert oder gelöscht werden.',
+  BAD_METHOD: 'Ungültige Zählart. Bitte Seite neu laden und erneut versuchen.',
   PHOTO_REQUIRED: 'Bitte ein Foto der Papierquittung auswählen.',
   NOTE_REQUIRED: 'Bitte einen kurzen Hinweis eingeben (z. B. ausgeschieden, auf Papier quittiert) – nötig für die Ablage.',
   LOGIN_FAILED: 'PIN falsch. Nach 5 Fehlversuchen wird für 15 Minuten gesperrt. PIN vergessen? Bitte den Chef zum Zurücksetzen fragen.',
@@ -771,6 +807,8 @@ function tabs(){
   if (m.is_admin) r.push('admin');
   return r;
 }
+// 底部导航：超级管理员只放 周结 / 排班 / 管理；录入和账本在「⋯」菜单里（tabs() 仍然是能进的全部页面）
+function navTabs(){ return state.me && state.me.is_admin ? ['week', 'plan', 'admin'].filter(k => tabs().includes(k)) : tabs(); }
 function logoutLocal(){ state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false; }
 async function loadCommon(){
   try { state.staff = await rpc('list_staff', tok()) || []; } catch(e){}
@@ -821,6 +859,7 @@ function render(){
       <button class="hbtn" data-act="lang">${esc(t('lang'))}</button>
       <button class="hbtn" data-act="menu" aria-label="Menu" aria-expanded="${state.menu}">⋯</button>
       ${state.menu ? `<div class="menu">
+        ${tabs().filter(k => !navTabs().includes(k)).map(k => `<button data-act="tab" data-tab="${k}">${esc(t('tab_' + k))}</button>`).join('')}
         <button data-act="fb-open">${esc(t('fb_menu'))}</button>
         <button data-act="pin-open">${esc(t('change_pin'))}</button>
         <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
@@ -829,7 +868,7 @@ function render(){
     ${rcBannerHTML()}
     ${state.banner && tabs().includes('plan') && state.tab !== 'plan' ? `<div class="banner"><div class="infobox"><span>${esc(t('banner_avail'))}</span><button class="btn" data-act="banner-go">${esc(t('banner_go'))}</button></div></div>` : ''}
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
-    <nav>${tabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
+    <nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
   if (state.rcWeek){ viewReceipt(); return; }
   ({ entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();
 }
@@ -1012,7 +1051,7 @@ function bonState(){
 }
 function bonNumbersHTML(d){
   return `<div style="margin-bottom:12px"><div class="muted small" style="margin-bottom:4px">${esc(t('bon_numbers'))}</div><div class="sum num">
-      <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(d.store || '?')}</strong></div>
+      <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${d.store ? storeTag(d.store) : '?'}</strong></div>
       <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(dayLabel(d.work_date)) : '?'}</strong></div>
       <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
       <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(d.schluss_cents || 0)}</strong></div>
@@ -1235,7 +1274,8 @@ function entryTags(e){
   let countTag = '';
   if (e.is_bon){
     if (e.counted_cents === null || e.counted_cents === undefined) countTag = `<span class="tag pend">${esc(t('tag_uncounted'))}</span>`;
-    else if (e.counted_cents === e.wallet_cents) countTag = `<span class="tag ok">${esc(t('tag_counted'))}</span>`;
+    else if (e.counted_cents === e.wallet_cents){ const cm = (state.cntMethod || {})[e.entry_id];
+      countTag = `<span class="tag ok">${esc(t(cm ? 'tag_counted_' + cm.method : 'tag_counted'))}</span>`; }
     else countTag = `<span class="tag bad">${esc(t('tag_mismatch', { a: eur(e.counted_cents), b: eur(e.wallet_cents) }))}</span>`;
   }
   const tags = (e.is_late ? `<span class="tag late">${esc(t('late'))}</span>` : '')
@@ -1267,7 +1307,7 @@ function entryItem(e, opts){
   return `<div class="item">
     <div class="top"><div>${opts.head === 'server'
         ? `<strong>${esc(e.server || '?')}</strong>`
-        : `<strong>${esc(dayLabel(e.date))}</strong> <span class="muted">${esc(e.store)}${e.server ? ' · ' + esc(e.server) : ''}</span>`}${tags}</div>
+        : `<strong>${esc(dayLabel(e.date))}</strong>${storeTag(e.store)}${e.server ? ` <span class="muted">${esc(e.server)}</span>` : ''}`}${tags}</div>
       <div class="amt num">${eur(total)}<span class="lbl">${esc(t('tip_total_lbl'))}</span></div></div>
     <div class="meta num">${meta}</div>
     ${xferOf(e.entry_id) ? `<div class="meta num">${esc(xferText(xferOf(e.entry_id)))}</div>` : ''}
@@ -1281,10 +1321,13 @@ function entryItem(e, opts){
 function byDateStore(a, b){ return a.date < b.date ? -1 : a.date > b.date ? 1 : a.store.localeCompare(b.store); }
 // 按「日期 × 门店」分组的录入列表（周结页「本周全部录入」）
 function entriesByGroupHTML(entries, opts){
-  const g = {};
-  entries.forEach(e => { const k = e.date + '|' + e.store; (g[k] = g[k] || { date: e.date, store: e.store, list: [] }).list.push(e); });
-  return Object.values(g).sort(byDateStore).map(x => `<div class="grp"><div class="grp-t">${esc(dayLabel(x.date))} · ${esc(x.store)}</div></div>
-    <div class="list">${x.list.map(e => entryItem(e, { ...opts, head: 'server' })).join('')}</div>`).join('');
+  const days = {};
+  entries.forEach(e => { const d = days[e.date] = days[e.date] || {}; (d[e.store] = d[e.store] || []).push(e); });
+  // 默认折叠，按天展开
+  return Object.keys(days).sort().map(date => { const st = days[date], n = Object.values(st).reduce((a, l) => a + l.length, 0);
+    return `<details class="fold"><summary>${esc(dayLabel(date))}<span class="muted">${esc(t('entries_day', { n }))}</span></summary><div class="inner">
+      ${Object.keys(st).sort().map(store => `<div class="grp">${storeTag(store)}</div>
+        <div class="list">${st[store].map(e => entryItem(e, { ...opts, head: 'server' })).join('')}</div>`).join('')}</div></details>`; }).join('');
 }
 // ---------- 待点收的信封：按日期 × 门店分组，显示按排班谁还没交 ----------
 // env = week_envelopes 的结果（数据库还没升级到 v16 时为 null，只按录入分组，不显示排班）
@@ -1323,14 +1366,12 @@ function envelopeBlockHTML(entries, env){
       if (!todo.length) return '';
       if (sc) line = t('env_line_nosched', { n: bons.length });
     }
-    return `<div class="grp"><div class="grp-t">${esc(dayLabel(g.date))} · ${esc(g.store)}</div>
+    return `<div class="grp"><div class="grp-t">${esc(dayLabel(g.date))}${storeTag(g.store)}${!todo.length && bons.length ? ` <span class="tag ok" title="${esc(t('env_counted_all'))}">✓</span>` : ''}</div>
         ${line ? `<div class="grp-s">${esc(line)}</div>` : ''}${miss}${other}</div>
-      ${todo.length ? `<div class="list">${todo.map(e => envelopeCard(e, info[e.entry_id], g.store)).join('')}</div>`
-        : bons.length ? `<div class="list"><div class="empty small">${esc(t('env_counted_all'))}</div></div>` : ''}`;
+      ${todo.length ? `<div class="list">${todo.map(e => envelopeCard(e, info[e.entry_id], g.store)).join('')}</div>` : ''}`;
   }).join('');
-  return `<h3>${esc(t('to_count', { n: nTodo }))}</h3>`
-    + (nTodo ? `<div class="small muted" style="margin:-4px 0 10px">${esc(t('to_count_hint'))}</div>`
-        : entries.some(e => e.is_bon) ? `<div class="infobox">${esc(t('all_counted'))}</div>` : '')
+  const allDone = !nTodo && entries.some(e => e.is_bon);
+  return h3i(esc(t('to_count', { n: nTodo })) + (allDone ? `<span class="done" title="${esc(t('all_counted'))}">✓</span>` : ''), nTodo ? t('to_count_hint') : '')
     + html;
 }
 // 信封卡片：名字最醒目 → 信封应有金额（钱包）→ 班次；点收输入框
@@ -1348,12 +1389,28 @@ function envelopeCard(e, i, store){
   const acts = e.has_photo ? `<div class="acts"><button class="link" data-act="photos" data-id="${e.entry_id}">${esc(t('photos'))}</button></div>` : '';
   return `<div class="item env">
     <div class="top"><div><span class="who">${esc(e.server || '?')}</span>${shift ? `<span class="tag${i && i.scheduled === false ? ' late' : ' m'}"${i && i.guess ? ` title="${esc(t('env_guess'))}"` : ''}>${esc(shift)}</span>` : ''}${entryTags(e)}</div>
-      <div class="amt num">${eur(e.wallet_cents)}<span class="lbl">${esc(t('env_should'))}</span></div></div>
+      <div class="amt num">${eur(e.wallet_cents)}<span class="lbl">${esc(t('env_declared'))}</span></div></div>
     <div class="meta num">${esc(detail.join(' · '))}</div>
     ${acts}
-    <div class="row cnt"><div class="money"><input class="input num" id="cnt-${e.entry_id}" inputmode="decimal" placeholder="${money(e.wallet_cents)}"></div>
-      <button class="btn ghost" style="flex:0 0 110px" data-act="count" data-id="${e.entry_id}">${esc(t('count'))}</button></div>
+    <div class="row cnt"><button class="btn" data-act="cnt-ok" data-id="${e.entry_id}">${esc(t('cnt_ok', { x: eur(e.wallet_cents) }))}</button>
+      <button class="btn ghost" style="flex:0 0 auto;width:auto;padding:0 14px" data-act="cnt-diff" data-id="${e.entry_id}" aria-expanded="false">${esc(t('cnt_diff'))}</button></div>
+    <div class="cnt-diff" id="cd-${e.entry_id}" hidden><label class="small muted" for="cnt-${e.entry_id}" style="display:block;margin-top:8px">${esc(t('cnt_diff_lbl'))}</label>
+      <div class="row cnt" style="margin-top:4px"><div class="money"><input class="input num" id="cnt-${e.entry_id}" inputmode="decimal" autocomplete="off"></div>
+      <button class="btn ghost" style="flex:0 0 110px" data-act="count" data-id="${e.entry_id}">${esc(t('count'))}</button></div></div>
   </div>`;
+}
+// 点收：v19 记录方式（一致确认 / 手填）；数据库还没升级时用原来的 count_entry
+async function countEnvelope(id, method, cents){
+  try { return await rpc('count_envelope', { ...tok(), p_entry_id: id, p_method: method, p_counted_cents: cents == null ? null : cents }); }
+  catch(e){
+    if (!/count_envelope|PGRST202|Could not find/i.test(String(e.message))) throw e;
+    const x = state.entryCache[id];
+    return rpc('count_entry', { ...tok(), p_entry_id: id, p_counted_cents: method === 'confirm' ? x.wallet_cents : cents });
+  }
+}
+async function loadCntMethods(ids){
+  state.cntMethod = {}; ids = (ids || []).filter(Boolean); if (!ids.length) return;
+  try { (await rpc('count_methods', { ...tok(), p_entry_ids: ids }) || []).forEach(x => state.cntMethod[x.entry_id] = x); } catch(e){}
 }
 function handoverHTML(entries){
   const g = {};
@@ -1364,12 +1421,12 @@ function handoverHTML(entries){
   });
   const rows = Object.values(g).sort(byDateStore);
   if (!rows.length) return '';
-  return `<h3>${esc(t('handover'))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('handover_hint'))}</div><div class="sheet scroll"><table class="num">
-    <tr><th></th><th class="r">${esc(t('envelope_total'))}</th><th class="r">Kasse</th><th class="r">${esc(t('pool'))}</th></tr>
-    ${rows.map(x => `<tr><td>${esc(dayLabel(x.date))}<br><span class="muted small">${esc(x.store)}</span><br>${x.u ? `<span class="tag pend" style="margin:2px 0 0">${x.u} ${esc(t('tag_uncounted'))}</span>` : x.mm ? `<span class="tag bad" style="margin:2px 0 0">${x.mm} ≠</span>` : `<span class="tag ok" style="margin:2px 0 0">✓</span>`}</td>
-      <td class="r">${eur(x.w)}</td>
-      <td class="r">${x.k >= 0 ? esc(t('kasse_in')) : esc(t('kasse_out'))}<br><strong>${eur(Math.abs(x.k))}</strong></td><td class="r"><strong>${eur(x.w - x.k)}</strong></td></tr>`).join('')}
-  </table></div>`;
+  // 每天每店一张卡片：信封合计 / 放入 Kasse（或从 Kasse 取出）/ 小费池
+  return h3i(esc(t('handover')), t('handover_hint')) + rows.map(x => `<div class="ho">
+      <div class="ho-t">${esc(dayLabel(x.date))}${storeTag(x.store)}${x.u ? `<span class="tag pend">${x.u} ${esc(t('tag_uncounted'))}</span>` : x.mm ? `<span class="tag bad">${x.mm} ≠</span>` : `<span class="tag ok">✓</span>`}</div>
+      <div class="li num"><span class="muted">${esc(t('envelope_total'))}</span><span>${eur(x.w)}</span></div>
+      <div class="li num"><span class="muted">${esc(t(x.k >= 0 ? 'kasse_in' : 'kasse_out'))}</span><span>${eur(Math.abs(x.k))}</span></div>
+      <div class="li num"><span class="muted">${esc(t('pool'))}</span><strong>${eur(x.w - x.k)}</strong></div></div>`).join('');
 }
 function loadIntoForm(id){
   const e = state.entryCache[id]; if (!e) return;
@@ -1433,7 +1490,7 @@ async function viewLedger(){
       <div class="big num">${eur(Math.abs(n))}</div></div>`;
   }
   const rec = d.received.map(r => `<div class="item">
-      <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong> <span class="muted">${esc(r.store)}</span>${r.is_late?`<span class="tag late">${esc(t('late'))}</span>`:''}${r.pending?`<span class="tag pend">${esc(t('pending_tag'))}</span>`:''}</div>
+      <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong>${storeTag(r.store)}${r.is_late?`<span class="tag late">${esc(t('late'))}</span>`:''}${r.pending?`<span class="tag pend">${esc(t('pending_tag'))}</span>`:''}</div>
       <div class="amt num pos">+${eur(r.amount_cents)}</div></div>
       <div class="meta">${esc(t('role_'+r.role))} · ${esc(t('from'))} ${esc(r.from)}</div>
       ${!d.locked && !state.viewAs ? `<div class="acts"><button class="link" data-act="dispute" data-id="${r.entry_id}">${esc(t('question'))}</button></div>` : ''}
@@ -1578,18 +1635,20 @@ function distHTML(dist){
       <div style="margin-top:8px">${!dist.required ? `<span class="small muted">${esc(t('dist_before'))}</span>`
         : open ? `<span class="tag pend" style="margin:0">${esc(t('dist_open', { n: open }))}</span>` : `<span class="tag ok" style="margin:0">${esc(t('dist_complete'))}</span>`}</div>
       <button class="btn ghost" style="margin-top:12px" data-act="dist-print">${esc(t('dist_print'))}</button></div>
-    <h3>${esc(t('dist_title'))}</h3>
-    ${lines.some(l => l.payout_euros < 0) ? `<div class="small muted" style="margin:-4px 0 10px">${esc(t('dist_pay_hint'))}</div>` : ''}
+    ${h3i(esc(t('dist_title')), lines.some(l => l.payout_euros < 0) ? t('dist_pay_hint') : '')}
     <div class="list">${lines.map(row).join('') || `<div class="empty">–</div>`}</div>`;
 }
 // 所有周里还没完成发放 / 签收的人（老板、小费管理员）
 async function rcOpenHTML(){
   let list = []; try { list = await rpc('receipts_open', tok()) || []; } catch(e){ return ''; }
   if (!list.length) return '';
-  return `<h3>${esc(t('rc_open_title', { n: list.length }))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('rc_open_hint'))}</div>
-    <div class="list">${list.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.name)}</strong>${rsLabel(l.receipt)}</div>
-      <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div>
-      <div class="meta">KW ${l.kw} · ${esc(dm(l.week_start))}–${esc(dm(addDays(l.week_start, 6)))}</div></div>`).join('')}</div>`;
+  const weeks = {}; list.forEach(l => (weeks[l.week_start] = weeks[l.week_start] || []).push(l));
+  return h3i(esc(t('rc_open_title', { n: list.length })), t('rc_open_hint')) + Object.keys(weeks).sort().map(w => {
+    const ls = weeks[w];
+    return `<details class="fold"><summary>${esc(t('rc_open_week', { w: ls[0].kw, n: ls.length }))}<span class="muted">${esc(dm(w))}–${esc(dm(addDays(w, 6)))}</span></summary><div class="inner"><div class="list">
+      ${ls.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.name)}</strong>${rsLabel(l.receipt)}</div>
+        <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div></div>`).join('')}
+      </div><button class="link" data-act="week-go" data-week="${w}">${esc(t('dist_title'))} ›</button></div></details>`; }).join('');
 }
 // 打印 / 存为 PDF：德文为主，附中文
 async function distPrint(){
@@ -1647,17 +1706,24 @@ async function viewWeek(){
       st = await rpc('settlement', { ...tok(), p_week_start: state.week });
       try { dist = await rpc('week_receipts', { ...tok(), p_week_start: state.week }); } catch(e){ dist = null; }   // v18 之前：旧的结算列表
     }
-    else disp = await rpc('list_disputes', { ...tok(), p_status: 'open' });
+    disp = await rpc('list_disputes', { ...tok(), p_status: 'open' });
   } catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   // v16：按排班显示谁还没交；数据库还没升级时不影响其他功能
   if (!ov.locked) try { env = await rpc('week_envelopes', { ...tok(), p_week_start: state.week }); } catch(e){ env = null; }
   await loadXfer(ov.entries.filter(e => e.is_bon).map(e => e.entry_id));
+  await loadCntMethods(ov.entries.filter(e => e.is_bon && e.counted_cents != null).map(e => e.entry_id));
 
   const entries = entriesByGroupHTML(ov.entries, { locked: ov.locked });
   const countBlock = ov.locked ? ''
     : ov.entries.some(e => e.is_bon) || (env && env.groups.length) ? envelopeBlockHTML(ov.entries, env) : '';
   const handover = handoverHTML(ov.entries);
-  let html = weekNav() + schedCheckHTML() + await rcOpenHTML();
+  // 顺序按待办：提醒（漏交 Bon、疑问、发放 / 签收）→ 待点收的信封 → 每日交接 → 净额（折叠）→ 全部明细（按天折叠）
+  const disputes = (disp || []).length ? h3i(esc(t('disputes')) + ` (${disp.length})`, '', 'negc') + `<div class="list">${disp.map(x => `<div class="item">
+      <div class="top"><div><strong>${esc(x.raised_by)}</strong>${x.date ? ` <span class="muted">${esc(dayLabel(x.date))}</span>${storeTag(x.store)} <span class="muted">${esc(x.server || '')}</span>` : ''}</div></div>
+      <div>${esc(x.comment)}</div>
+      <div class="acts"><button class="link" data-act="resolve" data-id="${x.id}">${esc(t('resolve'))}</button></div></div>`).join('')}</div>` : '';
+  const entriesBlock = h3i(esc(t('entries')), '') + (entries || `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`);
+  let html = weekNav() + schedCheckHTML() + disputes + await rcOpenHTML();
 
   if (ov.locked){
     const line = l => `<div class="item"><div class="top">
@@ -1666,27 +1732,23 @@ async function viewWeek(){
         <div class="amt num">${eur(Math.abs(l.payout_euros)*100)}</div></div>
         <div class="meta num">${esc(t('net'))} ${eur(l.net_cents)}${l.carry_in_cents?' · '+esc(t('carry_in',{c:eur(l.carry_in_cents)})):''} · ${esc(t('carry',{c:eur(l.carry_out_cents)}))}</div></div>`;
     const ins = st.lines.filter(l => l.payout_euros < 0), outs = st.lines.filter(l => l.payout_euros > 0), zero = st.lines.filter(l => l.payout_euros === 0);
-    if (dist) html += distHTML(dist) + handover + `<h3>${esc(t('entries'))}</h3>${entries || `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`}`;
+    if (dist) html += distHTML(dist) + handover + entriesBlock;
     else html += `<div class="hero"><div class="muted small">${esc(t('locked'))}</div>
       <div class="small num">${esc(t('float'))}: <strong>${eur(st.float_cents)}</strong></div></div>
       <h3>${esc(t('pay_in'))}</h3><div class="list">${ins.map(line).join('') || `<div class="empty">–</div>`}</div>
       <h3>${esc(t('pay_out'))}</h3><div class="list">${outs.map(line).join('') || `<div class="empty">–</div>`}</div>
       ${zero.length ? `<h3>${esc(t('no_move'))}</h3><div class="list">${zero.map(line).join('')}</div>` : ''}
-      ${handover}
-      <h3>${esc(t('entries'))}</h3>${entries || `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`}`;
+      ${handover}${entriesBlock}`;
   } else {
-    const weekDisputes = (disp || []);
     const canLock = addDays(state.week, 7) <= today();
+    const nets = ov.nets.length ? `<details class="fold" style="margin-top:18px"><summary>${esc(t('nets_fold', { n: ov.nets.length }))}</summary><div class="inner">
+        <div class="hint">${esc(t('nets_hint'))}</div>
+        <div class="list">${ov.nets.map(n => `<div class="item"><div class="top"><div>${esc(n.name)}</div>
+          <div class="amt num ${n.net_cents>0?'pos':'negc'}">${n.net_cents>0?'+':''}${eur(n.net_cents)}</div></div></div>`).join('')}</div></div></details>` : '';
     html += `${countBlock}
-      <h3>${esc(t('nets'))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('nets_hint'))}</div>
-      <div class="list">${ov.nets.length ? ov.nets.map(n => `<div class="item"><div class="top"><div>${esc(n.name)}</div>
-        <div class="amt num ${n.net_cents>0?'pos':'negc'}">${n.net_cents>0?'+':''}${eur(n.net_cents)}</div></div></div>`).join('') : `<div class="empty">${esc(t('empty'))}</div>`}</div>
-      ${weekDisputes.length ? `<h3>${esc(t('disputes'))}</h3><div class="list">${weekDisputes.map(x => `<div class="item">
-        <div class="top"><div><strong>${esc(x.raised_by)}</strong> <span class="muted">${x.date ? esc(dayLabel(x.date)) + ' · ' + esc(x.store) + ' · ' + esc(x.server) : ''}</span></div></div>
-        <div>${esc(x.comment)}</div>
-        <div class="acts"><button class="link" data-act="resolve" data-id="${x.id}">${esc(t('resolve'))}</button></div></div>`).join('')}</div>` : ''}
       ${handover}
-      <h3>${esc(t('entries'))}</h3>${entries || `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`}
+      ${nets}
+      ${entriesBlock}
       ${state.me.is_admin ? `<h3>${esc(t('adj_title'))}</h3>
       <div class="sheet">
         <div class="row">
@@ -1707,11 +1769,11 @@ async function viewWeek(){
 function schedCheckHTML(){
   const c = state.schedCheck; if (!c) return '';
   const row = (x, extra) => `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong>${extra || ''}</div></div>
-    <div class="meta">${esc(dayLabel(x.date))} · ${esc(x.store)} · ${esc(slotsText(x.slots))}</div></div>`;
+    <div class="meta">${esc(dayLabel(x.date))}${storeTag(x.store)} · ${esc(slotsText(x.slots))}</div></div>`;
   let h = '';
-  if (c.missing.length) h += `<h3 class="negc">${esc(t('chk_missing', { n: c.missing.length }))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('chk_missing_hint'))}</div>
+  if (c.missing.length) h += h3i(esc(t('chk_missing', { n: c.missing.length })), t('chk_missing_hint'), 'negc') + `
     <div class="list">${c.missing.map(x => row(x)).join('')}</div>`;
-  if (c.unpicked.length) h += `<h3 class="negc">${esc(t('chk_unpicked', { n: c.unpicked.length }))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('chk_unpicked_hint'))}</div>
+  if (c.unpicked.length) h += h3i(esc(t('chk_unpicked', { n: c.unpicked.length })), t('chk_unpicked_hint'), 'negc') + `
     <div class="list">${c.unpicked.map(x => row(x, ` <span class="tag">${esc(t('grp_' + x.role))}</span>`)).join('')}</div>`;
   return h;
 }
@@ -1734,13 +1796,13 @@ async function viewAdmin(){
       let reviews = []; try { reviews = (await rpc('admin_review_list', tok()) || []).filter(r => !r.locked); } catch(e){}
       await loadXfer(reviews.map(r => r.entry_id));
       refreshBadge(list.length + binds.length + reviews.length);
-      el().innerHTML = (reviews.length ? `<h3>${esc(t('review_title'))}</h3><div class="small muted" style="margin:-4px 0 10px">${esc(t('review_hint'))}</div><div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
+      el().innerHTML = (reviews.length ? h3i(esc(t('review_title')), t('review_hint')) + `<div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
         + (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
         + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`));
     } else if (state.adminSub === 'deleted'){
       const all = await rpc('admin_deleted_list', { ...tok(), p_limit: 200 }) || [];
       const f = state.delFilter || 'all', list = f === 'self' ? all.filter(x => x.self) : all;
-      el().innerHTML = `<div class="small muted" style="margin:-4px 0 10px">${esc(t('del_hint'))}</div>
+      el().innerHTML = `${h3i(esc(t('admin_deleted')), t('del_hint'))}
         <div class="seg" style="margin-bottom:12px">${['all', 'self'].map(k => `<button data-act="del-filter" data-k="${k}" class="${f === k ? 'on' : ''}">${esc(t('del_' + k))} (${k === 'self' ? all.filter(x => x.self).length : all.length})</button>`).join('')}</div>
         <div class="list">${list.map(deletedCard).join('') || `<div class="empty">${esc(t('del_none'))}</div>`}</div>`;
     } else if (state.adminSub === 'staff'){
@@ -1748,12 +1810,12 @@ async function viewAdmin(){
       state.staffList = list;
       const e = state.staffEdit;
       el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
-        `<div class="list">${list.map((s, i) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong>${esc(s.name)}</strong>
-          ${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div>
-          <button class="mv" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
-          <button class="mv" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
-          <button class="link" style="flex:0;margin-left:6px" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button>
-          <button class="link" style="flex:0;margin-left:6px" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button></div></div>`).join('')}</div>`;
+        `<div class="list">${list.map((s, i) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong style="font-size:17px">${esc(s.name)}</strong>
+          <button class="mv" style="float:right" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
+          <button class="mv" style="float:right;margin-right:6px" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
+          <div style="margin:4px 0 0 -6px">${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}</div>${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div></div>
+          <div class="acts"><button class="link" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button>
+          <button class="link" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button></div></div>`).join('')}</div>`;
     } else if (state.adminSub === 'rates'){
       const rates = await rpc('list_rates', tok()); state.rates = rates;
       const cur = rateFor(today());
@@ -1782,11 +1844,43 @@ async function viewAdmin(){
     } else {
       const log = await rpc('admin_audit', { ...tok(), p_limit: 150 });
       el().innerHTML = `<div class="list">${log.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.actor || '–')}</strong> <span class="muted">${esc(actionLabel(l.action))}</span></div>
-        <div class="meta num">${esc(new Date(l.at).toLocaleString(state.lang==='de'?'de-DE':'zh-CN',{dateStyle:'short',timeStyle:'short'}))}</div></div>
-        ${l.detail ? `<div class="meta" style="word-break:break-all">${esc(JSON.stringify(l.detail).slice(0,220))}</div>` : ''}</div>`).join('') || `<div class="empty">${esc(t('nothing'))}</div>`}</div>`;
+        <div class="meta num">${esc(fmtDateTime(l.at))}</div></div>
+        ${l.detail ? `<div class="meta">${esc(auditDetail(l.detail))}</div>` : ''}</div>`).join('') || `<div class="empty">${esc(t('nothing'))}</div>`}</div>`;
     }
   } catch(e){ el().innerHTML = `<div class="empty">${esc(errText(e))}</div>`; }
 }
+// 日志详情：写成看得懂的一行（金额按欧元、周按 KW、日期统一格式），不显示内部编号
+function auditDetail(d){
+  if (!d || typeof d !== 'object') return '';
+  const isId = v => typeof v === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-/i.test(v);
+  const skip = (k, v) => k === 'id' || /_ids?$/.test(k) || isId(v);
+  const lbl = k => { const x = t('ad_' + k); return x === 'ad_' + k ? k : x; };
+  const day = v => /^\d{4}-\d{2}-\d{2}/.test(String(v)) ? String(v).slice(0, 10) : null;
+  const val = (k, v) => {
+    if (v === null || v === undefined || v === '') return '–';
+    if (typeof v === 'boolean') return t(v ? 'ad_yes' : 'ad_no');
+    if (/_cents$/.test(k) || k === 'counted' || k === 'expected') return eur(v);
+    if (k === 'payout_euros') return eur(v * 100);
+    if (k === 'week' && day(v)) return 'KW ' + isoWeek(day(v));
+    if ((k === 'date' || k === 'valid_from') && day(v)) return dayLabel(day(v));
+    if (k === 'role') return t('role_' + v);
+    if (k === 'slot') return slotLabel(v);
+    if (k === 'method') return t('tag_counted_' + v);
+    if (Array.isArray(v)) return v.filter(x => typeof x !== 'object' && !isId(x)).join('、') || '–';
+    if (typeof v === 'object') return '(' + Object.entries(v).filter(([kk, vv]) => !skip(kk, vv) && typeof vv !== 'object').map(([kk, vv]) => lbl(kk) + ' ' + val(kk, vv)).join(' · ') + ')';
+    return String(v);
+  };
+  const out = Object.entries(d).filter(([k, v]) => !skip(k, v)).map(([k, v]) => lbl(k) + ': ' + val(k, v)).join(' · ');
+  return out.length > 300 ? out.slice(0, 300) + '…' : out;
+}
+// 反馈里记录的页面：「周结 · KW 39」而不是内部代码
+function fbPageLabel(p){
+  const [tab, a, b] = String(p || '').split(':'); const x = t('tab_' + tab);
+  if (!tab || x === 'tab_' + tab) return p || '';
+  return x + (tab === 'admin' && a ? ' · ' + t('admin_' + a) : '') + (tab === 'week' && day10(a) ? ' · KW ' + isoWeek(a) : '')
+    + (tab === 'plan' && day10(b) ? ' · KW ' + isoWeek(b) : '');
+}
+function day10(v){ return /^\d{4}-\d{2}-\d{2}$/.test(String(v || '')); }
 // 日志操作名：有翻译用翻译，没有就显示原代码
 function actionLabel(a){ const x = t('act_' + a); return x === 'act_' + a ? a : x; }
 function deletedCard(x){
@@ -1806,7 +1900,7 @@ function deletedCard(x){
     ? (x.requested_by ? esc(t('del_req', { n: x.requested_by, t: x.requested_at ? when(x.requested_at) : '?' })) + '<br>' : '') + esc(t('del_appr', { n: x.by || '?', t: when(x.at) }))
     : esc(t('del_by', { n: x.by || '?', t: when(x.at) }));
   return `<div class="item">
-    <div class="top"><div><strong>${esc(b.server || '?')}</strong>${tags}<div class="meta">${b.date ? esc(dayLabel(String(b.date).slice(0, 10))) : '?'} · ${esc(b.store || '')}</div></div>
+    <div class="top"><div><strong>${esc(b.server || '?')}</strong>${tags}<div class="meta">${b.date ? esc(dayLabel(String(b.date).slice(0, 10))) : '?'}${storeTag(b.store)}</div></div>
       <div class="amt num">${eur(total)}<span class="lbl">${esc(t('tip_total_lbl'))}</span></div></div>
     <div class="meta num">${esc(money)}</div>
     ${helpers ? `<div class="meta">${esc(helpers)}</div>` : ''}
@@ -1848,7 +1942,7 @@ function requestCard(r){
     const changed = a && JSON.stringify(bv) !== JSON.stringify(av);
     return `<tr class="${changed?'chg':''}"><th>${esc(label)}</th><td>${esc(fmt(bv))}</td>${a ? `<td>${esc(fmt(av))}</td>` : ''}</tr>`;
   };
-  const when = new Date(r.created_at).toLocaleString(state.lang==='de'?'de-DE':'zh-CN', {dateStyle:'short', timeStyle:'short'});
+  const when = fmtDateTime(r.created_at);
   return `<div class="sheet">
     <div class="top" style="display:flex;justify-content:space-between;gap:8px"><div><strong>${esc(r.requested_by)}</strong> · ${esc(t(r.kind==='update'?'req_update':'req_delete'))}</div><div class="meta small muted num">${esc(when)}</div></div>
     <div style="margin:8px 0 10px;padding:8px 10px;background:var(--paper);border-radius:6px">${esc(t('reason'))}: ${esc(r.reason)}</div>
@@ -1860,7 +1954,7 @@ function reviewCard(r){
   const id = r.entry_id;
   const probs = (r.problems || []).map(p => { const k = String(p).split(':')[0]; const x = t('prob_' + k); return x === 'prob_' + k ? p : x; }).join('；');
   return `<div class="item">
-    <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong> <span class="muted">${esc(r.store)} · ${esc(r.server)}</span></div>
+    <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong>${storeTag(r.store)} <span class="muted">${esc(r.server)}</span></div>
       <div class="amt num">${esc(t('lbl_wallet'))} ${eur(r.wallet_cents)}</div></div>
     ${probs ? `<div class="meta">${esc(probs)}</div>` : ''}
     ${xferOf(id) ? `<div class="meta num">${esc(xferText(xferOf(id)))}</div>` : ''}
@@ -1893,7 +1987,7 @@ async function runReport(){
     const people = {};
     r.by_staff.forEach(x => { (people[x.name] = people[x.name] || { server:0, runner:0, bar:0, kitchen:0 })[x.role] = x.amount_cents; });
     out.innerHTML = `<h3>${esc(t('by_store'))}</h3><div class="sheet scroll"><table class="num"><tr><th>${esc(t('store'))}</th><th class="r">${esc(t('n_entries'))}</th><th class="r">${esc(t('card'))}</th><th class="r">${esc(t('cash'))}</th></tr>
-      ${r.by_store.map(s => `<tr><td>${esc(s.store)}</td><td class="r">${s.entries}</td><td class="r">${eur(s.card_cents)}</td><td class="r">${eur(s.cash_cents)}</td></tr>`).join('')}</table></div>
+      ${r.by_store.map(s => `<tr><td>${storeTag(s.store)}</td><td class="r">${s.entries}</td><td class="r">${eur(s.card_cents)}</td><td class="r">${eur(s.cash_cents)}</td></tr>`).join('')}</table></div>
       <h3>${esc(t('by_staff'))}</h3><div class="sheet scroll"><table class="num"><tr><th>${esc(t('name'))}</th><th class="r">${esc(t('as_server'))}</th><th class="r">${esc(t('runner'))}</th><th class="r">${esc(t('bar'))}</th><th class="r">${esc(t('kitchen'))}</th></tr>
       ${Object.entries(people).map(([n,p]) => `<tr><td>${esc(n)}</td><td class="r">${eur(p.server)}</td><td class="r">${eur(p.runner)}</td><td class="r">${eur(p.bar)}</td><td class="r">${eur(p.kitchen)}</td></tr>`).join('')}</table></div>`;
   } catch(e){ out.innerHTML = `<div class="empty">${esc(errText(e))}</div>`; }
@@ -1956,8 +2050,8 @@ async function fbSend(btn){
   } catch(e){ toast(errText(e), true); btn.disabled = false; }
 }
 function fbItem(x){
-  const when = new Date(x.created_at).toLocaleString(state.lang === 'de' ? 'de-DE' : 'zh-CN', { dateStyle: 'short', timeStyle: 'short' });
-  return `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong> <span class="muted small">${esc(when)} · ${esc(x.page || '')}</span></div>
+  const when = fmtDateTime(x.created_at);
+  return `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong> <span class="muted small">${esc(when)} · ${esc(fbPageLabel(x.page))}</span></div>
       ${x.status === 'open' ? `<span class="tag pend">${esc(t('fb_open'))}</span>` : ''}</div>
     <div style="white-space:pre-wrap;margin:6px 0">${esc(x.description)}</div>
     <div class="acts">${x.has_screenshot ? `<button class="link" data-act="fb-shot" data-id="${x.id}">${esc(t('fb_view'))}</button>` : ''}
@@ -1969,11 +2063,21 @@ const SLOTS = ['lunch', 'dinner'];
 const isSched = () => !!(state.me && (state.me.is_admin || state.me.is_scheduler));
 const slotLabel = k => t('slot_' + k);
 const hm2min = x => { const [h, m] = String(x).split(':').map(Number); return h * 60 + m; };
+// 全系统统一：「周一 9月28日 23:10」/「Mo 28.09. 23:10」（柏林时间），不是今年的前面加年份
 function fmtDateTime(iso){
+  if (!iso) return '';
   const d = new Date(iso);
-  const ds = d.toLocaleDateString(state.lang === 'de' ? 'de-DE' : 'zh-CN', { weekday: 'short', month: 'numeric', day: 'numeric', timeZone: 'Europe/Berlin' });
+  const day = d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' });   // YYYY-MM-DD
   const ts = d.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' });
-  return ds + ' ' + ts;
+  const y = day.slice(0, 4), yr = y !== today().slice(0, 4) ? (state.lang === 'de' ? y + ' ' : y + '年 ') : '';
+  return yr + dayLabel(day) + ' ' + ts;
+}
+// 门店小标签：全系统统一颜色（Flingern 绿、Bismarck 蓝）
+function storeTag(st){ return st ? `<span class="st st-${esc(String(st).slice(0, 1).toLowerCase())}">${esc(st)}</span>` : ''; }
+// 区块标题 + ⓘ：说明文字点开才显示
+function h3i(title, hint, cls){
+  return `<h3 class="${cls || ''}">${title}${hint ? ` <button class="ib" data-act="hint" aria-label="${esc(t('hint_lbl'))}" aria-expanded="false">ⓘ</button>` : ''}</h3>`
+    + (hint ? `<div class="hint" hidden>${esc(hint)}</div>` : '');
 }
 function planNav(){
   const w = state.planWeek;
@@ -2015,7 +2119,7 @@ function planMineHTML(d){
   else {
     const mine = d.shifts.filter(x => x.staff_id === me);
     h += `<div class="list">${mine.length ? mine.map(x => `<div class="item"><div class="top">
-        <div><strong>${esc(dayLabel(x.date))}</strong> <span class="muted">${esc(x.store)} · ${esc(slotLabel(x.slot))}</span>${x.changed ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}</div>
+        <div><strong>${esc(dayLabel(x.date))}</strong>${storeTag(x.store)} <span class="muted">${esc(slotLabel(x.slot))}</span>${x.changed ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}</div>
         <div class="amt num">${esc(x.start)}–${esc(x.end)}</div></div>
         <div class="meta">${esc(t('grp_' + x.role))}${x.note ? ' · ' + esc(x.note) : ''}</div></div>`).join('')
       : `<div class="empty">${esc(t('no_shifts'))}</div>`}</div>`;
@@ -2043,7 +2147,7 @@ function planGridHTML(d, edit){
       const list = d.shifts.filter(x => x.date === date && x.store === store && x.slot === slot);
       const cnt = ['service', 'runner', 'bar'].map(r => { const n = list.filter(x => x.role === r).length; return n ? `${t('grp_' + r)} ${n}` : ''; }).filter(Boolean).join(' · ');
       if (!edit && !list.length) return '';
-      return `<div class="slotblk"><div class="sh"><div><strong>${esc(store)} · ${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span></div><div class="small muted">${esc(cnt)}</div></div>
+      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span></div><div class="small muted">${esc(cnt)}</div></div>
         ${list.map(x => {
           const off = x.start !== tpl.start || x.end !== tpl.end;
           const inner = `<span class="nm">${esc(x.name)}</span><span class="tag">${esc(t('grp_' + x.role))}</span>
@@ -2120,7 +2224,7 @@ function shiftDlgRender(){
   };
   const grp = (k, list) => list.length ? `<div class="sdgrp">${esc(t(k))}</div><div class="sdchips">${list.map(chip).join('')}</div>` : '';
   const no = d.staff.filter(s => avail(s.id).status === 'no'), yes = d.staff.filter(s => avail(s.id).status !== 'no'), none = [];
-  $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(se.date))} · ${esc(se.store)} · ${esc(slotLabel(se.slot))}</h2>
+  $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(se.date))}${storeTag(se.store)} ${esc(slotLabel(se.slot))}</h2>
     <label>${esc(t('sd_staff'))}</label>
     ${grp('av_group_yes', yes)}${grp('av_group_none', none)}${grp('av_group_no', no)}
     <div class="field" style="margin-top:14px"><label>${esc(t('sd_role'))}</label>
@@ -2159,7 +2263,7 @@ document.addEventListener('click', async ev => {
   const act = el.dataset.act, f = state.form;
   switch (act){
     case 'lang': state.lang = state.lang === 'zh' ? 'de' : 'zh'; LS.set('lang', state.lang); state.menu = false; render(); break;
-    case 'menu': state.menu = !state.menu; render(); break;
+    case 'menu': state.menu = !state.menu; render(); if (state.menu) window.scrollTo(0, 0); break;
     case 'logout': case 'done-logout': signOut(); break;
     case 'done-more': state.done = null; render(); break;
     case 'role-pick': el.parentNode.querySelectorAll('button').forEach(b => { b.classList.toggle('on', b === el); b.setAttribute('aria-pressed', b === el); }); break;
@@ -2167,7 +2271,7 @@ document.addEventListener('click', async ev => {
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; renderLogin(); break;
-    case 'tab': state.done = null; state.rcWeek = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+    case 'tab': state.done = null; state.rcWeek = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -2423,11 +2527,29 @@ document.addEventListener('click', async ev => {
       inp.click(); break;
     }
     case 'dist-print': distPrint(); break;
+    case 'week-go': state.week = el.dataset.week; render(); window.scrollTo(0, 0); break;
     case 'count': {
       const inp = document.getElementById('cnt-' + el.dataset.id), v = parseEur(inp && inp.value);
       if (!inp || inp.value.trim() === '' || isNaN(v)) return toast(t('bad_amount'), true);
-      try { const r = await rpc('count_entry', { ...tok(), p_entry_id: el.dataset.id, p_counted_cents: v });
-        toast(r.match ? t('counted_ok') : t('counted_bad'), !r.match); render(); } catch(e){ toast(errText(e), true); }
+      el.disabled = true;
+      try { const r = await countEnvelope(el.dataset.id, 'manual', v);
+        toast(r.match ? t('counted_ok') : t('counted_bad'), !r.match); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'cnt-ok': {
+      el.disabled = true;
+      try { await countEnvelope(el.dataset.id, 'confirm'); toast(t('counted_ok')); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'cnt-diff': {
+      const box = document.getElementById('cd-' + el.dataset.id); if (!box) break;
+      box.hidden = !box.hidden; el.setAttribute('aria-expanded', String(!box.hidden));
+      if (!box.hidden){ const inp = document.getElementById('cnt-' + el.dataset.id); if (inp) inp.focus(); }
+      break;
+    }
+    case 'hint': {
+      const h = el.closest('h3') && el.closest('h3').nextElementSibling;
+      if (h && h.classList.contains('hint')){ h.hidden = !h.hidden; el.setAttribute('aria-expanded', String(!h.hidden)); }
       break;
     }
     case 'bearer':
