@@ -347,13 +347,18 @@ zh: {
   env_line:'排班 {s} 个班 · 已交 {c} 个班（{n} 个信封）', env_line_nosched:'这天没有发布排班 · 已交 {n} 个信封', env_line_noshift:'这家店这天没有排服务班 · 已交 {n} 个信封',
   env_missing:'还没交：{list}', env_missing_late:'逾期没交：{list}', env_elsewhere:'在别的店交了：{list}', env_elsewhere_one:'{n}（已在 {s} 交）',
   env_should:'信封应有', env_unsched:'未排班', env_shift_at:'排在 {s}', env_guess:'班次按提交先后推断', env_bon_time:'Bon {a}–{b}', env_counted_all:'这组的信封都已点收 ✓',
+  arc_first:'{m}的周分配表还没存档', arc_open_note:'（还有 {n} 人未完成发放 / 签收）', arc_final:'{m}已全部签收，建议重新下载最终版',
+  arc_changed:'{m}存档后有变动，建议重新下载', arc_btn:'下载 {m} PDF', arc_q:'{m}的 PDF 存好了吗？存好后点「已存好」，系统会记下这次存档。',
+  arc_saved:'已存好', arc_later:'还没有', arc_recorded:'已记录存档', admin_archive:'存档', arc_none:'还没有存档', arc_final_tag:'最终版',
+  arc_open_tag:'当时还有 {n} 人未完成', arc_not_ready:'这个月还有周没锁定，全部锁定后才能存档。', arc_all_done:'全部签收', arc_open_now:'还有 {n} 人未完成',
+  arc_hint:'每个月的周分配表（按周一所在月份归属）。所有周锁定后，在周结页顶部提醒下载。PDF 存好后请另外存档（云盘 + 纸质），数据库备份只保留 90 天。',
   hint_lbl:'说明', env_declared:'员工申报', cnt_ok:'数过了，是 {x}', cnt_diff:'金额不一致', cnt_diff_lbl:'实际点出的金额',
   tag_counted_confirm:'已点收 · 一致确认', tag_counted_manual:'已点收 · 手填',
   nets_fold:'预计净额（{n} 人）', entries_day:'{n} 条', rc_open_week:'KW {w} · 还有 {n} 人未完成',
   ad_counted:'点收', ad_expected:'应为', ad_amount_cents:'金额', ad_reason:'原因', ad_comment:'内容', ad_week:'周', ad_payout_euros:'实发',
   ad_done:'已发放', ad_yes:'是', ad_no:'否', ad_before:'修改前', ad_after:'修改后', ad_resolution:'处理结果', ad_role:'岗位', ad_method:'方式',
   ad_wallet_cents:'钱包', ad_card_cents:'刷卡小费', ad_cash_cents:'现金小费', ad_schluss_cents:'交店里', ad_shortage_cents:'差额', ad_bearer:'承担方',
-  ad_name:'姓名', ad_valid_from:'生效日期', ad_kitchen:'厨房 %', ad_runner:'Runner %', ad_bar:'吧台 %', ad_date:'日期', ad_store:'门店', ad_slot:'班次', ad_where:'位置', ad_server:'服务员', ad_runners:'Runner', ad_bars:'吧台', ad_from:'谁付', ad_to:'付给谁',
+  ad_name:'姓名', ad_valid_from:'生效日期', ad_kitchen:'厨房 %', ad_runner:'Runner %', ad_bar:'吧台 %', ad_date:'日期', ad_store:'门店', ad_slot:'班次', ad_where:'位置', ad_month:'月份', ad_open_count:'未完成', ad_server:'服务员', ad_runners:'Runner', ad_bars:'吧台', ad_from:'谁付', ad_to:'付给谁',
   rc_banner:'KW {w} 小费 {x}，请签收', rc_banner_pay:'KW {w} 你交给小费管理员 {x}，请签字确认', rc_banner_resign:'（结算有变动，需要重新签收）', rc_go:'去签收',
   rc_title:'KW {w} 小费签收', rc_amount_get:'收到现金', rc_amount_pay:'交出现金', rc_detail:'这一周的明细', rc_received:'分到的小费', rc_shortage:'本人承担的短款',
   rc_adj:'调整', rc_carry_in:'上周零头', rc_total:'合计', rc_carry_out:'零头结转下周', rc_paid_by:'发放人：{n} · {t}', rc_text:'收据（德文为准）',
@@ -376,7 +381,7 @@ zh: {
   act_personal_device:'个人设备保持登录', act_pin_reset:'重置 PIN', act_rate_set:'改分配比例', act_request_approve:'批准修改申请', act_request_delete:'申请删除',
   act_request_reject:'拒绝修改申请', act_request_update:'申请修改', act_sched_publish:'发布排班', act_set_initial_pin:'设置自己的 PIN', act_settle_mark:'标记已发放',
   act_shift_change:'改排班', act_shift_remove:'删排班', act_shortage_bearer:'改差额承担方', act_staff_main_role:'改主岗位', act_staff_reorder:'调整员工顺序',
-  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据',
+  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据', act_month_archive:'月度存档',
   chk_missing:'排了班、还没交 Bon（{n}）', chk_missing_hint:'到第二天 12:00 还没有录入。请提醒本人尽快交；如果那天没上班，请排班员在「排班」里删掉这个班，提醒就会消失。',
   chk_unpicked:'排了班、但没人选的 Runner / 吧台（{n}）', chk_unpicked_hint:'当天这家店的 Bon 里没有人选他。确实上了班的，请当天的服务员在「账本」里申请修改把他加上；没上班的，请排班员删掉这个班。',
   chk_lock_warn:'这周还有 {n} 条排班提醒（漏交 Bon 或没被选的 Runner / 吧台）没有处理。锁定后就不能再改了。仍然锁定吗？',
@@ -481,13 +486,18 @@ de: {
   env_line:'Geplant {s} Schichten · abgegeben {c} ({n} Umschläge)', env_line_nosched:'Kein veröffentlichter Dienstplan · {n} Umschläge abgegeben', env_line_noshift:'Kein Service eingeplant · {n} Umschläge abgegeben',
   env_missing:'Fehlt noch: {list}', env_missing_late:'Überfällig: {list}', env_elsewhere:'Im anderen Restaurant abgegeben: {list}', env_elsewhere_one:'{n} (in {s} abgegeben)',
   env_should:'Soll im Umschlag', env_unsched:'nicht eingeplant', env_shift_at:'eingeplant in {s}', env_guess:'Schicht nach Abgabe-Reihenfolge geschätzt', env_bon_time:'Bon {a}–{b}', env_counted_all:'Alle Umschläge dieser Gruppe gezählt ✓',
+  arc_first:'Wochenverteilung {m} noch nicht archiviert', arc_open_note:' (noch {n} Auszahlungen/Quittungen offen)', arc_final:'{m} vollständig quittiert – bitte Endfassung neu herunterladen',
+  arc_changed:'{m} nach der Archivierung geändert – bitte neu herunterladen', arc_btn:'PDF {m}', arc_q:'Ist das PDF für {m} gespeichert? Dann „Gespeichert“ tippen – die Archivierung wird vermerkt.',
+  arc_saved:'Gespeichert', arc_later:'Noch nicht', arc_recorded:'Archivierung vermerkt', admin_archive:'Archiv', arc_none:'Noch nicht archiviert', arc_final_tag:'Endfassung',
+  arc_open_tag:'damals {n} offen', arc_not_ready:'Noch nicht alle Wochen dieses Monats abgeschlossen – Archivierung erst danach möglich.', arc_all_done:'Vollständig quittiert', arc_open_now:'Noch {n} offen',
+  arc_hint:'Monatliche Wochenverteilungen (Woche zählt zum Monat ihres Montags). Nach Abschluss aller Wochen erscheint oben im Abschluss eine Erinnerung. Das PDF bitte zusätzlich ablegen (Cloud + Papier) – die Datenbank-Sicherung wird nur 90 Tage aufbewahrt.',
   hint_lbl:'Erklärung', env_declared:'Laut Mitarbeiter', cnt_ok:'Stimmt – {x}', cnt_diff:'Betrag weicht ab', cnt_diff_lbl:'Tatsächlich gezählter Betrag',
   tag_counted_confirm:'Gezählt · bestätigt', tag_counted_manual:'Gezählt · eingegeben',
   nets_fold:'Voraussichtlicher Saldo ({n})', entries_day:'{n} Einträge', rc_open_week:'KW {w} · noch {n} offen',
   ad_counted:'Gezählt', ad_expected:'Soll', ad_amount_cents:'Betrag', ad_reason:'Grund', ad_comment:'Text', ad_week:'Woche', ad_payout_euros:'Auszahlung',
   ad_done:'Ausgezahlt', ad_yes:'ja', ad_no:'nein', ad_before:'Vorher', ad_after:'Nachher', ad_resolution:'Klärung', ad_role:'Rolle', ad_method:'Art',
   ad_wallet_cents:'Portemonnaie', ad_card_cents:'Kartentrinkgeld', ad_cash_cents:'Bartrinkgeld', ad_schluss_cents:'An den Laden', ad_shortage_cents:'Fehlbetrag', ad_bearer:'Träger',
-  ad_name:'Name', ad_valid_from:'Gültig ab', ad_kitchen:'Küche %', ad_runner:'Runner %', ad_bar:'Bar %', ad_date:'Datum', ad_store:'Filiale', ad_slot:'Schicht', ad_where:'Ort', ad_server:'Service', ad_runners:'Runner', ad_bars:'Bar', ad_from:'Von', ad_to:'An',
+  ad_name:'Name', ad_valid_from:'Gültig ab', ad_kitchen:'Küche %', ad_runner:'Runner %', ad_bar:'Bar %', ad_date:'Datum', ad_store:'Filiale', ad_slot:'Schicht', ad_where:'Ort', ad_month:'Monat', ad_open_count:'Offen', ad_server:'Service', ad_runners:'Runner', ad_bars:'Bar', ad_from:'Von', ad_to:'An',
   rc_banner:'Trinkgeld KW {w}: {x} – bitte quittieren', rc_banner_pay:'KW {w}: {x} an den Tip-Manager abgegeben – bitte bestätigen', rc_banner_resign:' (Abrechnung geändert – bitte neu quittieren)', rc_go:'Quittieren',
   rc_title:'Trinkgeld-Quittung KW {w}', rc_amount_get:'Bar erhalten', rc_amount_pay:'Bar abgegeben', rc_detail:'Aufstellung dieser Woche', rc_received:'Trinkgeldanteile', rc_shortage:'Selbst getragener Fehlbetrag',
   rc_adj:'Korrekturen', rc_carry_in:'Rest aus Vorwoche', rc_total:'Summe', rc_carry_out:'Rest in die nächste Woche', rc_paid_by:'Ausgezahlt von {n} · {t}', rc_text:'Quittung',
@@ -510,7 +520,7 @@ de: {
   act_personal_device:'Auf eigenem Gerät angemeldet bleiben', act_pin_reset:'PIN zurückgesetzt', act_rate_set:'Anteile geändert', act_request_approve:'Änderungsantrag genehmigt', act_request_delete:'Löschung beantragt',
   act_request_reject:'Änderungsantrag abgelehnt', act_request_update:'Änderung beantragt', act_sched_publish:'Dienstplan veröffentlicht', act_set_initial_pin:'Eigene PIN gesetzt', act_settle_mark:'Als ausgezahlt markiert',
   act_shift_change:'Schicht geändert', act_shift_remove:'Schicht gelöscht', act_shortage_bearer:'Fehlbetrag-Träger geändert', act_staff_main_role:'Hauptrolle geändert', act_staff_reorder:'Reihenfolge geändert',
-  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen',
+  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen', act_month_archive:'Monat archiviert',
   chk_missing:'Eingeplant, aber noch kein Bon ({n})', chk_missing_hint:'Bis 12:00 Uhr am Folgetag kein Eintrag. Bitte die Person erinnern. Falls sie nicht gearbeitet hat, die Schicht unter „Dienstplan“ löschen – dann verschwindet der Hinweis.',
   chk_unpicked:'Eingeplante Runner / Bar, die niemand ausgewählt hat ({n})', chk_unpicked_hint:'In keinem Bon dieses Tages in diesem Restaurant ausgewählt. Hat die Person gearbeitet, bitte die Servicekraft, im „Konto“ eine Änderung zu beantragen und sie hinzuzufügen; sonst die Schicht im Dienstplan löschen.',
   chk_lock_warn:'Für diese Woche sind noch {n} Dienstplan-Hinweise offen (fehlender Bon oder nicht ausgewählte Runner/Bar). Nach dem Abschluss ist keine Änderung mehr möglich. Trotzdem abschließen?',
@@ -662,6 +672,7 @@ const ERR_ZH = {
   PARTS_SUM: '厨房内部分配的合计必须等于整份金额。请检查每人的金额。',
   RECEIPT_IMMUTABLE: '签收记录不能修改或删除。',
   APPEND_ONLY: '这类记录只能新增，不能修改或删除。',
+  MONTH_NOT_READY: '这个月还有周没锁定周结，全部锁定后才能存档。',
   BAD_METHOD: '点收方式不对。请刷新页面后重试。',
   PHOTO_REQUIRED: '请选择纸质收据的照片。',
   NOTE_REQUIRED: '请写一句说明（例如：已离职，已在纸上签收），存档时需要。',
@@ -734,6 +745,7 @@ const ERR_DE = {
   PARTS_SUM: 'Die Summe der Aufteilung muss dem Küchenanteil entsprechen. Bitte Beträge prüfen.',
   RECEIPT_IMMUTABLE: 'Quittungen können nicht geändert oder gelöscht werden.',
   APPEND_ONLY: 'Diese Einträge können nur ergänzt, nicht geändert oder gelöscht werden.',
+  MONTH_NOT_READY: 'Noch nicht alle Wochen dieses Monats abgeschlossen – Archivierung erst danach möglich.',
   BAD_METHOD: 'Ungültige Zählart. Bitte Seite neu laden und erneut versuchen.',
   PHOTO_REQUIRED: 'Bitte ein Foto der Papierquittung auswählen.',
   NOTE_REQUIRED: 'Bitte einen kurzen Hinweis eingeben (z. B. ausgeschieden, auf Papier quittiert) – nötig für die Ablage.',
@@ -1660,7 +1672,19 @@ async function distPrint(){
   win.document.open(); win.document.write(distPrintHTML(d)); win.document.close();
   win.onload = () => setTimeout(() => win.print(), 300);
 }
-function distPrintHTML(d){
+// 打印页外壳：A4 横向，德文为主附中文（每周 PDF、整月 PDF 共用）
+const PRINT_CSS = `body{font-family:"Helvetica Neue",Arial,"PingFang SC","Noto Sans SC",sans-serif;font-size:11px;color:#111;margin:18px}
+h1{font-size:18px;margin:0 0 2px} .sub{color:#555;margin-bottom:10px} table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #bbb;padding:4px 5px;vertical-align:top;text-align:left} th{background:#f0f0f0;font-size:10px} td.r{text-align:right;white-space:nowrap}
+small{color:#666} img{height:42px;max-width:150px} tr.txt td{border-top:0;color:#444;font-size:9.5px} tr{page-break-inside:avoid}
+.foot{margin-top:12px;color:#555} .pb{page-break-before:always} .big{font-size:15px;font-weight:700;margin:10px 0}
+.warn{color:#A2432A} .ok{color:#2F5E52} @page{size:A4 landscape;margin:12mm}`;
+function printDoc(title, body){
+  return `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>${esc(title)}</title><style>${PRINT_CSS}</style></head><body>${body}
+<div class="foot">Erstellt am / 生成时间：${new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Berlin' })} · ${esc(state.me.name)} · app.kochide.com</div></body></html>`;
+}
+// bare = 只要这一周的内容（整月 PDF 里用）
+function distPrintHTML(d, bare){
   const b = k => `${esc(I18N.de[k])}<br><small>${esc(I18N.zh[k])}</small>`;
   const dt = iso => iso ? new Date(iso).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Berlin' }) : '–';
   const dd = s => { const [y, m, x] = s.split('-'); return `${x}.${m}.${y}`; };
@@ -1679,21 +1703,86 @@ function distPrintHTML(d){
       <td>${l.image ? `<img src="${esc(l.image)}" alt="">` : ''}</td></tr>
     ${l.payout_euros !== 0 && d.required && l.done ? `<tr class="txt"><td></td><td colspan="10">${esc(l.text).replace(/\n/g, '<br>')}${(l.receipt.parts || []).length ? '<br>Aufteilung Küche / 厨房内部分配: ' + esc(l.receipt.parts.map(p => p.name + ' ' + e2(p.cents)).join(' · ')) : ''}${l.receipt.signer_name ? '<br>Unterzeichnet von / 签收人: ' + esc(l.receipt.signer_name) : ''}</td></tr>` : ''}`).join('');
   const open = d.lines.filter(l => !['none', 'signed', 'paper'].includes(l.receipt.status)).length;
-  return `<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Trinkgeldverteilung KW ${d.kw}-${d.year}</title>
-<style>body{font-family:"Helvetica Neue",Arial,"PingFang SC","Noto Sans SC",sans-serif;font-size:11px;color:#111;margin:18px}
-h1{font-size:18px;margin:0 0 2px} .sub{color:#555;margin-bottom:10px} table{border-collapse:collapse;width:100%}
-th,td{border:1px solid #bbb;padding:4px 5px;vertical-align:top;text-align:left} th{background:#f0f0f0;font-size:10px} td.r{text-align:right;white-space:nowrap}
-small{color:#666} img{height:42px;max-width:150px} tr.txt td{border-top:0;color:#444;font-size:9.5px} tr{page-break-inside:avoid}
-.foot{margin-top:12px;color:#555} @page{size:A4 landscape;margin:12mm}</style></head><body>
-<h1>Trinkgeldverteilung KW ${d.kw}/${d.year} · 小费周分配表</h1>
+  const body = `<h1>Trinkgeldverteilung KW ${d.kw}/${d.year} · 小费周分配表</h1>
 <div class="sub">GLL International GmbH · Kochi Restaurant Flingern &amp; Bismarck · ${dd(d.week_start)} – ${dd(addDays(d.week_start, 6))}<br>
 Abgeschlossen am / 周结锁定：${dt(d.locked_at)} · ${esc(d.locked_by || '')} ·
 Status: ${!d.required ? esc(I18N.de.dist_before) + ' / ' + esc(I18N.zh.dist_before) : open ? `Offen / 未完成: ${open}` : 'Abgeschlossen – alle quittiert / 已完成，全部签收'}<br>
 Beim Tip-Manager verwahrte Reste / 小费管理员保管的零头：${e2(d.float_cents)}</div>
 <table><tr><th>Name<br><small>姓名</small></th><th>Rolle<br><small>岗位</small></th><th>${b('dist_recv')}</th><th>${b('dist_short')}</th><th>${b('dist_adj')}</th><th>${b('dist_cin')}</th>
 <th>Auszahlung (−: Abgabe)<br><small>实发（−：交给小费管理员）</small></th><th>${b('dist_cout')}</th><th>Ausgezahlt von · am<br><small>发放人 · 时间</small></th><th>Quittung<br><small>签收</small></th><th>Unterschrift<br><small>签名</small></th></tr>
-${rows}</table>
-<div class="foot">Erstellt am / 生成时间：${dt(new Date().toISOString())} · ${esc(state.me.name)} · app.kochide.com</div></body></html>`;
+${rows}</table>`;
+  return bare ? body : printDoc(`Trinkgeldverteilung KW ${d.kw}-${d.year}`, body);
+}
+// ============ 月度存档（v20）============
+function monthLabel(m, lang){ const [y, mo] = String(m).split('-').map(Number);
+  return (lang || state.lang) === 'de' ? new Date(y, mo - 1, 1).toLocaleDateString('de-DE', { month: 'long', year: 'numeric' }) : `${y}年${mo}月`; }
+async function loadArchives(){ try { return await rpc('month_archive_state', tok()) || []; } catch(e){ return null; } }   // v20 之前：null
+function arcRemindText(a){
+  const m = monthLabel(a.month), note = a.open ? t('arc_open_note', { n: a.open }) : '';
+  return a.remind === 'final' ? t('arc_final', { m }) : a.remind === 'changed' ? t('arc_changed', { m }) + note : t('arc_first', { m }) + note;
+}
+// 周结页顶部：需要存档的月份
+async function arcReminderHTML(){
+  const list = (await loadArchives() || []).filter(a => a.remind);
+  return list.map(a => `<div class="warnbox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(arcRemindText(a))}</span>
+    <button class="btn" style="flex:none;width:auto;height:40px;padding:0 14px;font-size:15px" data-act="arc-dl" data-month="${a.month}">${esc(t('arc_btn', { m: monthLabel(a.month) }))}</button></div>`).join('');
+}
+// 管理 → 存档：每个月的状态和存档记录
+function arcAdminHTML(list){
+  if (!list) return `<div class="empty">${esc(t('err_GENERIC'))}</div>`;
+  const card = a => `<div class="item">
+      <div class="top"><div><strong>${esc(monthLabel(a.month))}</strong>${a.open ? `<span class="tag pend">${esc(t('arc_open_now', { n: a.open }))}</span>` : `<span class="tag ok">${esc(t('arc_all_done'))}</span>`}</div></div>
+      ${a.remind ? `<div class="meta negc">${esc(arcRemindText(a))}</div>` : ''}
+      ${a.history.map(h => `<div class="meta">${esc(h.by)} · ${esc(fmtDateTime(h.at))} · ${esc(h.open_count ? t('arc_open_tag', { n: h.open_count }) : t('arc_final_tag'))}</div>`).join('') || `<div class="meta">${esc(t('arc_none'))}</div>`}
+      <div class="acts">${a.locked_all ? `<button class="link" data-act="arc-dl" data-month="${a.month}">${esc(t('arc_btn', { m: monthLabel(a.month) }))}</button>` : `<span class="small muted">${esc(t('arc_not_ready'))}</span>`}</div>
+    </div>`;
+  return h3i(esc(t('admin_archive')), t('arc_hint')) + `<div class="list">${list.map(card).join('') || `<div class="empty">${esc(t('arc_none'))}</div>`}</div>`;
+}
+// 整月 PDF：首页汇总 + 每周一页（和每周的周分配表同一排版）
+async function monthPrint(m){
+  const win = window.open('', '_blank');
+  if (!win) return toast(t('err_GENERIC'), true);
+  win.document.write('<p style="font-family:sans-serif;padding:20px">…</p>');
+  let a, weeks = [];
+  try {
+    a = (await loadArchives() || []).find(x => x.month === m);
+    if (!a) throw new Error('MONTH_NOT_READY');
+    for (const w of a.weeks) weeks.push(await rpc('week_receipts', { ...tok(), p_week_start: w, p_images: true }));
+  } catch(e){ win.close(); return toast(errText(e), true); }
+  win.document.open(); win.document.write(monthPrintHTML(a, weeks)); win.document.close();
+  win.onload = () => setTimeout(() => win.print(), 300);
+  arcAsk(m);
+}
+function monthPrintHTML(a, weeks){
+  const dd = s => { const [y, mo, x] = s.split('-'); return `${x}.${mo}.${y}`; };
+  const openOf = d => d.required ? d.lines.filter(l => l.payout_euros !== 0 && !['none', 'signed', 'paper'].includes(l.receipt.status)).length : 0;
+  const sum = (d, f) => d.lines.filter(f).reduce((x, l) => x + Math.abs(l.payout_euros) * 100, 0);
+  const rows = weeks.map(d => { const o = openOf(d), has = d.lines.length;
+    return `<tr><td>KW ${d.kw}</td><td>${dd(d.week_start)} – ${dd(addDays(d.week_start, 6))}</td>
+      <td>${d.locked_at ? new Date(d.locked_at).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Berlin' }) + ' · ' + esc(d.locked_by || '') : 'Keine Einträge<br><small>没有录入</small>'}</td>
+      <td class="r">${has}</td><td class="r">${eur(sum(d, l => l.payout_euros > 0))}</td><td class="r">${eur(sum(d, l => l.payout_euros < 0))}</td>
+      <td class="r">${eur(d.float_cents || 0)}</td>
+      <td class="${o ? 'warn' : 'ok'}">${!has ? '–' : !d.required ? esc(I18N.de.dist_before) + '<br><small>' + esc(I18N.zh.dist_before) + '</small>' : o ? `Noch ${o} offen<br><small>还有 ${o} 人未完成</small>` : 'Vollständig quittiert<br><small>全部签收</small>'}</td></tr>`; }).join('');
+  const total = weeks.reduce((x, d) => x + sum(d, l => l.payout_euros > 0), 0), totalIn = weeks.reduce((x, d) => x + sum(d, l => l.payout_euros < 0), 0);
+  const prev = a.history.map(h => `${esc(h.by)} · ${new Date(h.at).toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short', timeZone: 'Europe/Berlin' })} · ${h.open_count ? `damals ${h.open_count} offen / 当时 ${h.open_count} 人未完成` : 'Endfassung / 最终版'}`).join('<br>');
+  const cover = `<h1>Trinkgeldverteilung ${esc(monthLabel(a.month, 'de'))} · 小费月度分配表 ${esc(monthLabel(a.month, 'zh'))}</h1>
+<div class="sub">GLL International GmbH · Kochi Restaurant Flingern &amp; Bismarck<br>
+Wochen, deren Montag in diesem Monat liegt / 按周一所在月份归属的周：${a.weeks.map(w => 'KW ' + isoWeek(w)).join(', ')}</div>
+<div class="big ${a.open ? 'warn' : 'ok'}">${a.open ? `Noch ${a.open} Auszahlungen/Quittungen offen · 还有 ${a.open} 人未完成发放 / 签收` : 'Alle Auszahlungen vollständig quittiert · 全部签收'}</div>
+<table><tr><th>KW</th><th>Zeitraum<br><small>日期</small></th><th>Abgeschlossen am · von<br><small>周结锁定</small></th><th>Personen<br><small>人数</small></th>
+<th>Auszahlungen<br><small>实发合计</small></th><th>Abgaben<br><small>交入合计</small></th><th>Reste beim Tip-Manager<br><small>管理员保管零头</small></th><th>Status<br><small>状态</small></th></tr>${rows}
+<tr><td colspan="4"><b>Summe / 合计</b></td><td class="r"><b>${eur(total)}</b></td><td class="r"><b>${eur(totalIn)}</b></td><td colspan="2"></td></tr></table>
+${prev ? `<div class="sub" style="margin-top:10px">Frühere Archivierungen / 以前的存档：<br>${prev}</div>` : ''}`;
+  const pages = weeks.filter(d => d.lines.length).map(d => `<div class="pb">${distPrintHTML(d, true)}</div>`).join('');
+  return printDoc(`Trinkgeldverteilung ${monthLabel(a.month, 'de')}`, cover + pages);
+}
+// 打印页打开后问一句：存好了才记存档
+function arcAsk(m){
+  const dlg = $('#photoDlg');
+  dlg.innerHTML = `<div style="padding:4px 2px 12px;font-size:17px">${esc(t('arc_q', { m: monthLabel(m) }))}</div>
+    <button class="btn" data-act="arc-saved" data-month="${m}">${esc(t('arc_saved'))}</button>
+    <button class="btn ghost" style="margin-top:10px" data-act="photo-close">${esc(t('arc_later'))}</button>`;
+  dlg.showModal();
 }
 // ============ 周结（小费管理员）============
 async function viewWeek(){
@@ -1723,7 +1812,7 @@ async function viewWeek(){
       <div>${esc(x.comment)}</div>
       <div class="acts"><button class="link" data-act="resolve" data-id="${x.id}">${esc(t('resolve'))}</button></div></div>`).join('')}</div>` : '';
   const entriesBlock = h3i(esc(t('entries')), '') + (entries || `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`);
-  let html = weekNav() + schedCheckHTML() + disputes + await rcOpenHTML();
+  let html = weekNav() + await arcReminderHTML() + schedCheckHTML() + disputes + await rcOpenHTML();
 
   if (ov.locked){
     const line = l => `<div class="item"><div class="top">
@@ -1785,7 +1874,7 @@ function staffOptions(withKitchen){
 
 // ============ 管理（超级管理员）============
 async function viewAdmin(){
-  const subs = ['requests','feedback','staff','rates','report','deleted','audit'];
+  const subs = ['requests','feedback','staff','rates','report','deleted','archive','audit'];
   $('#main').innerHTML = `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}</button>`).join('')}</div><div id="asub"><div class="loading">${esc(t('loading'))}</div></div>`;
   const el = () => $('#asub');
   try {
@@ -1799,6 +1888,8 @@ async function viewAdmin(){
       el().innerHTML = (reviews.length ? h3i(esc(t('review_title')), t('review_hint')) + `<div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
         + (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
         + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`));
+    } else if (state.adminSub === 'archive'){
+      el().innerHTML = arcAdminHTML(await loadArchives());
     } else if (state.adminSub === 'deleted'){
       const all = await rpc('admin_deleted_list', { ...tok(), p_limit: 200 }) || [];
       const f = state.delFilter || 'all', list = f === 'self' ? all.filter(x => x.self) : all;
@@ -2527,6 +2618,12 @@ document.addEventListener('click', async ev => {
       inp.click(); break;
     }
     case 'dist-print': distPrint(); break;
+    case 'arc-dl': monthPrint(el.dataset.month); break;
+    case 'arc-saved':
+      el.disabled = true;
+      try { await rpc('record_month_archive', { ...tok(), p_month: el.dataset.month }); $('#photoDlg').close(); toast(t('arc_recorded')); render(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
     case 'week-go': state.week = el.dataset.week; render(); window.scrollTo(0, 0); break;
     case 'count': {
       const inp = document.getElementById('cnt-' + el.dataset.id), v = parseEur(inp && inp.value);
