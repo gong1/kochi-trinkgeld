@@ -114,6 +114,9 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .grp .grp-t{font-weight:700;font-size:16px;color:var(--ink)}
 .grp .grp-s{font-size:14px;color:var(--muted);margin-top:2px}
 .grp .grp-m{font-size:14px;margin-top:2px}
+.viewbar{position:sticky;top:0;z-index:11;background:var(--copper);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700}
+.viewbar span{flex:1}
+.viewbar button{background:#fff;color:var(--copper);border:0;border-radius:999px;padding:6px 14px;font-weight:700;flex:none}
 .rolerow{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--line)}
 .rolerow .rl{flex:0 0 58px;font-size:14px;font-weight:700;color:var(--muted);padding-top:5px}
 .rolerow .rp{flex:1;display:flex;flex-wrap:wrap;gap:6px}
@@ -355,6 +358,8 @@ zh: {
   env_line:'排班 {s} 个班 · 已交 {c} 个班（{n} 个信封）', env_line_nosched:'这天没有发布排班 · 已交 {n} 个信封', env_line_noshift:'这家店这天没有排服务班 · 已交 {n} 个信封',
   env_missing:'还没交：{list}', env_missing_late:'逾期没交：{list}', env_elsewhere:'在别的店交了：{list}', env_elsewhere_one:'{n}（已在 {s} 交）',
   env_should:'信封应有', env_unsched:'未排班', env_shift_at:'排在 {s}', env_guess:'班次按提交先后推断', env_bon_time:'Bon {a}–{b}', env_counted_all:'这组的信封都已点收 ✓',
+  se_edit:'编辑', se_sum:'这个班：', se_dual:'兼岗：{n}（{r}）· 同一班次做服务，不拿别人的 Runner / 吧台份额', se_none:'（没人）',
+  se_removed:'{n} 从这个班去掉', se_hint:'点名字选中，再点取消。同一个人在两栏都选 = 兼岗。窗口里没选的人保存后会从这个班去掉。',
   pk_title:'选{r}', pk_main:'主岗位是{r}', pk_skill:'会做{r}', pk_other:'其他人（{n}）', pk_all:'显示全部（包括不参与排班的 {n} 人）',
   pk_elsewhere:'已排在 {s}', pk_no:'标了不能上', pk_save:'保存（{n} 人）', pk_none_sel:'请至少选一个人。', pk_already:'已排',
   pk_skipped:'{n} 已排在 {s} 同一时段，没有加上。', pk_same:'{n} 已经是这个岗位。', pk_time_hint:'所有人先用这个时间；个别人不同，保存后点他的名字单独改。',
@@ -399,7 +404,7 @@ zh: {
   act_personal_device:'个人设备保持登录', act_pin_reset:'重置 PIN', act_rate_set:'改分配比例', act_request_approve:'批准修改申请', act_request_delete:'申请删除',
   act_request_reject:'拒绝修改申请', act_request_update:'申请修改', act_sched_publish:'发布排班', act_set_initial_pin:'设置自己的 PIN', act_settle_mark:'标记已发放',
   act_shift_change:'改排班', act_shift_remove:'删排班', act_shortage_bearer:'改差额承担方', act_staff_main_role:'改主岗位', act_staff_reorder:'调整员工顺序',
-  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据', act_month_archive:'月度存档',
+  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据', act_month_archive:'月度存档', act_view_end:'结束员工视角查看', act_staff_sched_profile:'改员工排班设置',
   chk_missing:'排了班、还没交 Bon（{n}）', chk_missing_hint:'到第二天 12:00 还没有录入。请提醒本人尽快交；如果那天没上班，请排班员在「排班」里删掉这个班，提醒就会消失。',
   chk_unpicked:'排了班、但没人选的 Runner / 吧台（{n}）', chk_unpicked_hint:'当天这家店的 Bon 里没有人选他。确实上了班的，请当天的服务员在「账本」里申请修改把他加上；没上班的，请排班员删掉这个班。',
   chk_lock_warn:'这周还有 {n} 条排班提醒（漏交 Bon 或没被选的 Runner / 吧台）没有处理。锁定后就不能再改了。仍然锁定吗？',
@@ -504,6 +509,8 @@ de: {
   env_line:'Geplant {s} Schichten · abgegeben {c} ({n} Umschläge)', env_line_nosched:'Kein veröffentlichter Dienstplan · {n} Umschläge abgegeben', env_line_noshift:'Kein Service eingeplant · {n} Umschläge abgegeben',
   env_missing:'Fehlt noch: {list}', env_missing_late:'Überfällig: {list}', env_elsewhere:'Im anderen Restaurant abgegeben: {list}', env_elsewhere_one:'{n} (in {s} abgegeben)',
   env_should:'Soll im Umschlag', env_unsched:'nicht eingeplant', env_shift_at:'eingeplant in {s}', env_guess:'Schicht nach Abgabe-Reihenfolge geschätzt', env_bon_time:'Bon {a}–{b}', env_counted_all:'Alle Umschläge dieser Gruppe gezählt ✓',
+  se_edit:'Bearbeiten', se_sum:'Diese Schicht:', se_dual:'Doppelrolle: {n} ({r}) · Service in derselben Schicht, kein Runner-/Bar-Anteil anderer', se_none:'(niemand)',
+  se_removed:'{n} aus der Schicht entfernt', se_hint:'Namen antippen zum Auswählen, nochmal zum Abwählen. In zwei Spalten gewählt = Doppelrolle. Nicht gewählte Personen werden beim Speichern aus der Schicht entfernt.',
   pk_title:'{r} wählen', pk_main:'Hauptrolle {r}', pk_skill:'Kann {r}', pk_other:'Weitere ({n})', pk_all:'Alle anzeigen (inkl. {n} nicht eingeplante)',
   pk_elsewhere:'schon in {s}', pk_no:'nicht verfügbar', pk_save:'Speichern ({n})', pk_none_sel:'Bitte mindestens eine Person wählen.', pk_already:'schon eingeplant',
   pk_skipped:'{n} ist zur gleichen Zeit schon in {s} eingeplant – nicht hinzugefügt.', pk_same:'{n} hat diese Position schon.', pk_time_hint:'Diese Zeit gilt für alle; abweichende Zeiten danach per Tipp auf den Namen ändern.',
@@ -548,7 +555,7 @@ de: {
   act_personal_device:'Auf eigenem Gerät angemeldet bleiben', act_pin_reset:'PIN zurückgesetzt', act_rate_set:'Anteile geändert', act_request_approve:'Änderungsantrag genehmigt', act_request_delete:'Löschung beantragt',
   act_request_reject:'Änderungsantrag abgelehnt', act_request_update:'Änderung beantragt', act_sched_publish:'Dienstplan veröffentlicht', act_set_initial_pin:'Eigene PIN gesetzt', act_settle_mark:'Als ausgezahlt markiert',
   act_shift_change:'Schicht geändert', act_shift_remove:'Schicht gelöscht', act_shortage_bearer:'Fehlbetrag-Träger geändert', act_staff_main_role:'Hauptrolle geändert', act_staff_reorder:'Reihenfolge geändert',
-  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen', act_month_archive:'Monat archiviert',
+  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen', act_month_archive:'Monat archiviert', act_view_end:'Mitarbeiter-Ansicht beendet', act_staff_sched_profile:'Dienstplan-Einstellungen geändert',
   chk_missing:'Eingeplant, aber noch kein Bon ({n})', chk_missing_hint:'Bis 12:00 Uhr am Folgetag kein Eintrag. Bitte die Person erinnern. Falls sie nicht gearbeitet hat, die Schicht unter „Dienstplan“ löschen – dann verschwindet der Hinweis.',
   chk_unpicked:'Eingeplante Runner / Bar, die niemand ausgewählt hat ({n})', chk_unpicked_hint:'In keinem Bon dieses Tages in diesem Restaurant ausgewählt. Hat die Person gearbeitet, bitte die Servicekraft, im „Konto“ eine Änderung zu beantragen und sie hinzuzufügen; sonst die Schicht im Dienstplan löschen.',
   chk_lock_warn:'Für diese Woche sind noch {n} Dienstplan-Hinweise offen (fehlender Bon oder nicht ausgewählte Runner/Bar). Nach dem Abschluss ist keine Änderung mehr möglich. Trotzdem abschließen?',
@@ -628,7 +635,7 @@ async function callFn(body){
   if (error){
     let code = 'BON_FAILED';
     try { const j = await error.context.json(); if (j && j.error) code = j.error; } catch(e){}
-    if (code === 'AUTH_REQUIRED'){ logoutLocal(); render(); }
+    if (code === 'AUTH_REQUIRED'){ if (state.viewAs && state.token === state.viewAs.token){ exitView(); throw new Error(code); } logoutLocal(); render(); }
     throw new Error(code);
   }
   if (data && data.error) throw new Error(data.error);
@@ -701,6 +708,7 @@ const ERR_ZH = {
   RECEIPT_IMMUTABLE: '签收记录不能修改或删除。',
   APPEND_ONLY: '这类记录只能新增，不能修改或删除。',
   MONTH_NOT_READY: '这个月还有周没锁定周结，全部锁定后才能存档。',
+  VIEW_ONLY: '正在以员工视角查看（只读），不能修改。要操作请先点顶部「退出查看」。',
   REVIEW_PENDING: '这周还有待核对的 Bon（识别未通过），不能锁定。请老板先在「管理 → 审批」里核对。',
   BAD_METHOD: '点收方式不对。请刷新页面后重试。',
   PHOTO_REQUIRED: '请选择纸质收据的照片。',
@@ -775,6 +783,7 @@ const ERR_DE = {
   RECEIPT_IMMUTABLE: 'Quittungen können nicht geändert oder gelöscht werden.',
   APPEND_ONLY: 'Diese Einträge können nur ergänzt, nicht geändert oder gelöscht werden.',
   MONTH_NOT_READY: 'Noch nicht alle Wochen dieses Monats abgeschlossen – Archivierung erst danach möglich.',
+  VIEW_ONLY: 'Ansicht als Mitarbeiter (nur lesen) – keine Änderungen möglich. Zum Bearbeiten oben „Ansicht beenden“ tippen.',
   REVIEW_PENDING: 'Diese Woche hat noch zu prüfende Bons (Erkennung fehlgeschlagen) – Abschluss nicht möglich. Bitte zuerst unter „Verwaltung → Freigaben“ prüfen.',
   BAD_METHOD: 'Ungültige Zählart. Bitte Seite neu laden und erneut versuchen.',
   PHOTO_REQUIRED: 'Bitte ein Foto der Papierquittung auswählen.',
@@ -808,7 +817,7 @@ async function rpc(fn, args){
   const { data, error } = await sb.rpc(fn, args || {});
   if (error){
     const code = String(error.message || '').trim();
-    if (code === 'AUTH_REQUIRED'){ logoutLocal(); render(); }
+    if (code === 'AUTH_REQUIRED'){ if (state.viewAs && state.token === state.viewAs.token){ exitView(); throw new Error(code); } logoutLocal(); render(); }
     if (code === 'MUST_CHANGE_PIN' && state.me){ state.me.must_change_pin = true; authStore().set('me', state.me); render(); }
     throw new Error(code);
   }
@@ -882,20 +891,10 @@ function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return
 function render(){
   document.documentElement.lang = state.lang === 'de' ? 'de' : 'zh';
   if (!state.token){ renderLogin(); return; }
-  if (state.me && state.me.must_change_pin){ renderSetPin(); return; }
-  if (state.viewAs && state.me.is_admin){
-    $('#app').innerHTML = `
-      <header style="background:var(--copper)">
-        <div class="brand">${esc(t('viewing_as', { n: state.viewAs.name }))}<small>${esc(state.me.name)}</small></div>
-        <button class="hbtn" data-act="lang">${esc(t('lang'))}</button>
-      </header>
-      <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
-      <nav><button class="on" data-act="view-exit">${esc(t('exit_view'))}</button></nav>`;
-    viewLedger(); return;
-  }
+  if (state.me && state.me.must_change_pin && !state.viewAs){ renderSetPin(); return; }
   if (!tabs().includes(state.tab)) state.tab = tabs()[0];
   const m = state.me;
-  $('#app').innerHTML = `
+  $('#app').innerHTML = (state.viewAs ? `<div class="viewbar" role="status"><span>${esc(t('viewing_as', { n: state.viewAs.name }))}</span><button data-act="view-exit">${esc(t('exit_view'))}</button></div>` : '') + `
     <header>
       <div class="brand">${esc(t('app'))}<small>${esc(m.name)}${state.personal ? ' · ' + esc(t('own_short')) : ''}</small></div>
       <button class="hbtn" data-act="lang">${esc(t('lang'))}</button>
@@ -1520,7 +1519,7 @@ function weekNav(){
 }
 // 要交回钱时写明原因：短款、调整
 function whyPayHTML(d){
-  const myName = state.viewAs ? state.viewAs.name : state.me.name;
+  const myName = state.me.name;
   const why = [d.shortage_cents ? t('why_short', { x: eur(d.shortage_cents) }) : '',
     ...d.adjustments.filter(a => a.from === myName).map(a => t('why_adj', { x: eur(a.amount_cents), r: a.reason }))].filter(Boolean);
   return why.length ? `<div class="small" style="margin-top:6px">${why.map(esc).join('<br>')}</div>` : '';
@@ -1528,8 +1527,7 @@ function whyPayHTML(d){
 async function viewLedger(){
   $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
   let d;
-  try { d = state.viewAs ? await rpc('admin_view_week', { ...tok(), p_staff_id: state.viewAs.id, p_week_start: state.week })
-                         : await rpc('my_week', { ...tok(), p_week_start: state.week }); }
+  try { d = await rpc('my_week', { ...tok(), p_week_start: state.week }); }
   catch(e){ $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   await loadXfer(d.my_entries.filter(e => e.is_bon).map(e => e.entry_id));
   const n = d.net_cents, s = d.settlement;
@@ -1546,12 +1544,12 @@ async function viewLedger(){
       <div class="muted small">${esc(n>0?t('net_pos'):n<0?t('net_neg'):t('net_zero'))} · ${esc(t('open'))}</div>
       <div class="big num">${eur(Math.abs(n))}</div>${n < 0 ? whyPayHTML(d) : ''}</div>`;
   }
-  const myName = state.viewAs ? state.viewAs.name : state.me.name;
+  const myName = state.me.name;
   const recItem = r => `<div class="item">
       <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong>${storeTag(r.store)}${r.is_late?`<span class="tag late">${esc(t('late'))}</span>`:''}${r.pending?`<span class="tag pend">${esc(t('pending_tag'))}</span>`:''}</div>
       <div class="amt num pos">+${eur(r.amount_cents)}</div></div>
       <div class="meta">${r.role === 'server' && r.from === myName ? esc(t('own_bon')) : esc(t('role_'+r.role)) + ' · ' + esc(t('from')) + ' ' + esc(r.from)}</div>
-      ${!d.locked && !state.viewAs ? `<div class="acts"><button class="link" data-act="dispute" data-id="${r.entry_id}">${esc(t('question'))}</button></div>` : ''}
+      ${!d.locked ? `<div class="acts"><button class="link" data-act="dispute" data-id="${r.entry_id}">${esc(t('question'))}</button></div>` : ''}
     </div>`;
   // 条数多（例如厨房）时按天合计，点开看明细
   let rec;
@@ -1561,11 +1559,11 @@ async function viewLedger(){
         <span class="num pos" style="margin-left:8px">+${eur(days[day].reduce((a, r) => a + r.amount_cents, 0))}</span></summary>
       <div class="inner"><div class="list">${days[day].map(recItem).join('')}</div></div></details>`).join('');
   } else rec = d.received.length ? `<div class="list">${d.received.map(recItem).join('')}</div>` : '';
-  const mine = d.my_entries.map(e => entryItem(e, { locked: d.locked, readonly: !!state.viewAs })).join('');
+  const mine = d.my_entries.map(e => entryItem(e, { locked: d.locked })).join('');
   const adj = d.adjustments.map(a => `<div class="item"><div class="top"><div>${esc(a.from)} → ${esc(a.to)}</div>
       <div class="amt num">${eur(a.amount_cents)}</div></div><div class="meta">${esc(a.reason)}</div></div>`).join('');
   if (d.shortage_cents) hero += `<div class="warnbox">${esc(t('shortage_note'))}: ${eur(d.shortage_cents)}</div>`;
-  const rl = !state.viewAs && (state.receipts || []).find(x => x.week_start === state.week);
+  const rl = (state.receipts || []).find(x => x.week_start === state.week);
   if (rl && rl.receipt.status === 'todo') hero += `<div class="warnbox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(t('rc_ledger_todo'))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="rc-go" data-week="${rl.week_start}">${esc(t('rc_go'))}</button></div>`;
   else if (rl && ['signed', 'paper', 'disputed'].includes(rl.receipt.status)) hero += `<div style="margin:-6px 0 12px">${rsLabel(rl.receipt)}</div>`;
   $('#main').innerHTML = weekNav() + hero +
@@ -1578,7 +1576,7 @@ async function viewLedger(){
 // ============ 小费签收（v18）============
 // 我需要签收的周（数据库还没升级到 v18 时为空，不影响其他功能）
 async function loadReceipts(){
-  if (!state.me || state.viewAs){ state.receipts = []; return; }
+  if (!state.me){ state.receipts = []; return; }
   try { state.receipts = await rpc('my_receipts', tok()) || []; } catch(e){ state.receipts = []; }
 }
 function rcTodo(){ return (state.receipts || []).filter(l => l.receipt && l.receipt.status === 'todo'); }
@@ -2303,9 +2301,6 @@ function planGridHTML(d, edit){
       const tpl = d.slots.find(x => x.date === date && x.store === store && x.slot === slot); if (!tpl) return '';
       const list = d.shifts.filter(x => x.date === date && x.store === store && x.slot === slot);
       if (!edit && !list.length) return '';
-      // 排班员：有人的岗位各占一行；没人的岗位收成一行「＋ 服务 · ＋ Runner …」
-      const empty = edit ? ROLES.filter(r => !list.some(x => rolesOf(x).includes(r))) : [];
-      const addBtn = (r, label) => `<button class="pchip add" data-act="pk-open" data-date="${date}" data-store="${store}" data-slot="${slot}" data-role="${r}" aria-label="${esc(t('add_shift'))} ${esc(t('grp_' + r))}">${label}</button>`;
       const rows = ROLES.map(r => {
         const ppl = list.filter(x => rolesOf(x).includes(r));
         if (!ppl.length) return '';
@@ -2313,50 +2308,76 @@ function planGridHTML(d, edit){
           const inner = `${esc(x.name)}${rs.length > 1 ? ` <span class="small muted">${esc(rs.map(k => t('grp_' + k)).join(' + '))}</span>` : ''}${off ? ` <span class="small num" style="font-weight:700">${esc(x.start)}–${esc(x.end)}</span>` : ''}${x.changed && (edit || x.staff_id === state.me.id) ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}`;
           return edit ? `<button class="pchip" data-act="pe-open" data-id="${x.id}">${inner}</button>` : `<span class="pchip">${inner}</span>`; };
         return `<div class="rolerow"><div class="rl">${esc(t('grp_' + r))}</div><div class="rp">${ppl.map(chip).join('')}
-          ${edit ? addBtn(r, '＋') : ''}</div></div>`;
-      }).join('') + (empty.length ? `<div class="rolerow"><div class="rp">${empty.map(r => addBtn(r, '＋ ' + esc(t('grp_' + r)))).join('')}</div></div>` : '');
+          </div></div>`;
+      }).join('');
       const noSvc = edit && !list.some(x => rolesOf(x).includes('service'));
-      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}</div></div>${rows}</div>`;
+      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}</div>
+        ${edit ? `<button class="pchip add" style="flex:none" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('se_edit'))}</button>` : ''}</div>${rows}</div>`;
     })).join('');
     const isToday = date === today();
     return blocks ? `<div class="sheet" ${isToday ? 'id="plan-today" style="border:2px solid var(--celadon)"' : ''}><div class="dayh">${esc(dayLabel(date))}${isToday ? ` <span class="tag ok">${esc(t('today_word'))}</span>` : ''}</div>${blocks}</div>` : '';
   }).join('');
 }
-// 选人窗口：岗位已定，可多选
-function pkOpen(p){ state.pick = { ...p, sel: [], showAll: false }; pkRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal(); }
-function pkRender(){
-  const pk = state.pick, d = state.plan, r = pk.role;
+// 一个窗口排完一个班次：服务 / Runner / 吧台 三栏
+function seOpen(p){
+  const d = state.plan, cur = d.shifts.filter(x => x.date === p.date && x.store === p.store && x.slot === p.slot);
+  const sel = {}; ROLES.forEach(r => sel[r] = cur.filter(x => rolesOf(x).includes(r)).map(x => x.staff_id));
+  state.slotEd = { ...p, sel, showAll: false }; seRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal();
+}
+function seRolesOf(id){ const e = state.slotEd; return ROLES.filter(r => e.sel[r].includes(id)); }
+function seRender(){
+  const e = state.slotEd, d = state.plan;
   const g = id => { const el = $(id); return el ? el.value : undefined; };
-  if (g('#pk-start') !== undefined){ pk.start = g('#pk-start'); pk.end = g('#pk-end'); }
-  const here = d.shifts.filter(x => x.date === pk.date && x.slot === pk.slot);
-  const already = id => here.some(x => x.staff_id === id && x.store === pk.store && rolesOf(x).includes(r));
-  const elsewhere = id => here.find(x => x.staff_id === id && x.store !== pk.store);
-  const no = id => d.avail.some(a => a.staff_id === id && a.date === pk.date && a.slot === pk.slot && a.status === 'no');
-  const cnt = s => (s.counts || {})[pk.store + ':' + r] || 0;
-  const hidden = d.staff.filter(s => !s.in_schedule).length;
-  const pool = d.staff.filter(s => (pk.showAll || s.in_schedule) && !already(s.id));
-  // 每组内：能上（包括没回复）在前、标了不能上在后；再按过去 30 天在这家店这个岗位的次数，最后按名字
-  const sortFn = (a, b) => (no(a.id) - no(b.id)) || (cnt(b) - cnt(a)) || a.name.localeCompare(b.name);
-  const free = pool.filter(s => !elsewhere(s.id)), away = pool.filter(s => elsewhere(s.id));
-  const main = free.filter(s => (s.main_role || 'service') === r).sort(sortFn);
-  const skill = free.filter(s => (s.main_role || 'service') !== r && (s.skills || []).includes(r)).sort(sortFn);
-  const other = free.filter(s => (s.main_role || 'service') !== r && !(s.skills || []).includes(r)).sort(sortFn);
-  const chip = s => { const on = pk.sel.includes(s.id), e = elsewhere(s.id), a = d.avail.find(x => x.staff_id === s.id && x.date === pk.date && x.slot === pk.slot);
-    const sub = e ? t('pk_elsewhere', { s: e.store }) : no(s.id) ? t('pk_no') + (a && a.note ? ' · ' + a.note : '') : t('grp_' + (s.main_role || 'service'));
-    return `<button type="button" class="sdchip pkchip ${on ? 'on' : ''} ${no(s.id) ? 'no' : ''}" aria-pressed="${on}" data-act="pk-toggle" data-id="${s.id}" ${e ? 'disabled' : ''}>${esc(s.name)}<small>${esc(sub)}</small></button>`; };
-  const grp = (title, list) => list.length ? `<div class="sdgrp">${esc(title)}</div><div class="sdchips">${list.map(chip).join('')}</div>` : '';
-  const done = here.filter(x => x.store === pk.store && rolesOf(x).includes(r));
-  $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(pk.date))}${storeTag(pk.store)} ${esc(slotLabel(pk.slot))} · ${esc(t('pk_title', { r: t('grp_' + r) }))}</h2>
-    ${done.length ? `<div class="small muted" style="margin-bottom:6px">${esc(t('pk_already'))}：${esc(done.map(x => x.name).join('、'))}</div>` : ''}
-    ${grp(t('pk_main', { r: t('grp_' + r) }), main)}${grp(t('pk_skill', { r: t('grp_' + r) }), skill)}
-    ${other.length ? `<details class="fold" style="margin-top:10px"><summary>${esc(t('pk_other', { n: other.length }))}</summary><div class="inner"><div class="sdchips">${other.map(chip).join('')}</div></div></details>` : ''}
-    ${away.length ? `<div class="sdchips" style="margin-top:8px">${away.map(chip).join('')}</div>` : ''}
-    ${hidden && !pk.showAll ? `<button class="link" type="button" style="margin-top:8px" data-act="pk-all">${esc(t('pk_all', { n: hidden }))}</button>` : ''}
-    <div class="row" style="margin-top:12px">
-      <div class="field" style="flex:1"><label for="pk-start">${esc(t('sd_start'))}</label><input class="input num" type="time" id="pk-start" value="${esc(pk.start)}"></div>
-      <div class="field" style="flex:1"><label for="pk-end">${esc(t('sd_end'))}</label><input class="input num" type="time" id="pk-end" value="${esc(pk.end)}"></div>
+  if (g('#se-start') !== undefined){ e.start = g('#se-start'); e.end = g('#se-end'); }
+  const here = d.shifts.filter(x => x.date === e.date && x.slot === e.slot);
+  const elsewhere = id => here.find(x => x.staff_id === id && x.store !== e.store);
+  const no = id => d.avail.some(a => a.staff_id === id && a.date === e.date && a.slot === e.slot && a.status === 'no');
+  const picked = id => ROLES.some(r => e.sel[r].includes(id));
+  const hidden = d.staff.filter(s => !s.in_schedule && !picked(s.id)).length;
+  const pool = d.staff.filter(s => e.showAll || s.in_schedule || picked(s.id));
+  const col = r => {
+    const cnt = s => (s.counts || {})[e.store + ':' + r] || 0;
+    // 每组内：能上（包括没回复）在前、标了不能上在后；再按过去 30 天在这家店这个岗位的次数；最后按名字
+    const sortFn = (a, b) => (no(a.id) - no(b.id)) || (cnt(b) - cnt(a)) || a.name.localeCompare(b.name);
+    const free = pool.filter(s => !elsewhere(s.id)), away = pool.filter(s => elsewhere(s.id));
+    const main = free.filter(s => (s.main_role || 'service') === r).sort(sortFn);
+    const skill = free.filter(s => (s.main_role || 'service') !== r && (s.skills || []).includes(r)).sort(sortFn);
+    const other = free.filter(s => (s.main_role || 'service') !== r && !(s.skills || []).includes(r)).sort(sortFn);
+    const chip = s => { const on = e.sel[r].includes(s.id), x = elsewhere(s.id), a = d.avail.find(v => v.staff_id === s.id && v.date === e.date && v.slot === e.slot);
+      const sub = x ? t('pk_elsewhere', { s: x.store }) : no(s.id) ? t('pk_no') + (a && a.note ? ' · ' + a.note : '') : t('grp_' + (s.main_role || 'service'));
+      return `<button type="button" class="sdchip pkchip ${on ? 'on' : ''} ${no(s.id) ? 'no' : ''}" aria-pressed="${on}" data-act="se-toggle" data-role="${r}" data-id="${s.id}" ${x ? 'disabled' : ''}>${esc(s.name)}<small data-sub="${esc(sub)}">${esc(sub)}</small></button>`; };
+    const grp = (title, list) => list.length ? `<div class="sdgrp">${esc(title)}</div><div class="sdchips">${list.map(chip).join('')}</div>` : '';
+    return `<h3 style="margin:14px 0 4px">${esc(t('grp_' + r))}（<span id="se-n-${r}">${e.sel[r].length}</span>）</h3>
+      ${grp(t('pk_main', { r: t('grp_' + r) }), main)}${grp(t('pk_skill', { r: t('grp_' + r) }), skill)}
+      ${other.length ? `<details class="fold" style="margin-top:8px" ${other.some(s => e.sel[r].includes(s.id)) ? 'open' : ''}><summary>${esc(t('pk_other', { n: other.length }))}</summary><div class="inner"><div class="sdchips">${other.map(chip).join('')}</div></div></details>` : ''}
+      ${away.length ? `<div class="sdchips" style="margin-top:6px">${away.map(chip).join('')}</div>` : ''}`;
+  };
+  $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(e.date))}${storeTag(e.store)} ${esc(slotLabel(e.slot))}</h2>
+    <div class="small muted">${esc(t('se_hint'))}</div>
+    ${ROLES.map(col).join('')}
+    ${hidden && !e.showAll ? `<button class="link" type="button" style="margin-top:10px" data-act="se-all">${esc(t('pk_all', { n: hidden }))}</button>` : ''}
+    <div class="sheet" style="margin-top:14px" id="se-sum"></div>
+    <div class="row" style="margin-top:4px">
+      <div class="field" style="flex:1"><label for="se-start">${esc(t('sd_start'))}</label><input class="input num" type="time" id="se-start" value="${esc(e.start)}"></div>
+      <div class="field" style="flex:1"><label for="se-end">${esc(t('sd_end'))}</label><input class="input num" type="time" id="se-end" value="${esc(e.end)}"></div>
     </div><div class="small muted" style="margin:-6px 0 10px">${esc(t('pk_time_hint'))}</div>
-    <div class="row"><button class="btn ghost" type="button" data-act="sd-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="pk-save" id="pk-save">${esc(t('pk_save', { n: pk.sel.length }))}</button></div>`;
+    <div class="row"><button class="btn ghost" type="button" data-act="sd-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="se-save">${esc(t('save'))}</button></div>`;
+  seRefresh();
+}
+// 选中 / 取消后只更新人数、兼岗标记和汇总，不整个重画（保留折叠和滚动位置）
+function seRefresh(){
+  const e = state.slotEd, d = state.plan, name = id => ((d.staff.find(s => s.id === id) || {}).name || '?');
+  ROLES.forEach(r => { const n = $('#se-n-' + r); if (n) n.textContent = e.sel[r].length; });
+  document.querySelectorAll('#shiftDlg [data-act="se-toggle"]').forEach(b => {
+    const on = e.sel[b.dataset.role].includes(b.dataset.id), rs = seRolesOf(b.dataset.id), sm = b.querySelector('small');
+    b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
+    if (sm) sm.textContent = rs.length > 1 ? rs.map(k => t('grp_' + k)).join(' + ') : sm.dataset.sub;
+  });
+  const ids = [...new Set(ROLES.flatMap(r => e.sel[r]))], dual = ids.filter(id => { const rs = seRolesOf(id); return rs.length > 1 && rs.includes('service'); });
+  const sum = $('#se-sum'); if (!sum) return;
+  sum.innerHTML = `<div class="small" style="font-weight:700;margin-bottom:4px">${esc(t('se_sum'))}</div>`
+    + ROLES.map(r => `<div class="small">${esc(t('grp_' + r))}：${esc(e.sel[r].map(name).join('、') || t('se_none'))}</div>`).join('')
+    + dual.map(id => `<div class="small negc" style="margin-top:4px">${esc(t('se_dual', { n: name(id), r: seRolesOf(id).map(k => t('grp_' + k)).join(' + ') }))}</div>`).join('');
 }
 // 点某人的名字：改时间 / 备注，去掉某个岗位
 function peOpen(x){ state.shiftEdit = { ...x }; peRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal(); }
@@ -2585,8 +2606,18 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'report-run': runReport(); break;
-    case 'view-as': state.viewAs = { id: el.dataset.id, name: el.dataset.name }; state.week = mondayOf(today()); render(); window.scrollTo(0, 0); break;
-    case 'view-exit': state.viewAs = null; state.tab = 'admin'; render(); break;
+    case 'view-as': {
+      try {
+        const r = await rpc('admin_view_start', { ...tok(), p_staff_id: el.dataset.id });
+        state.viewAs = { id: el.dataset.id, name: r.name, token: r.token, adminToken: state.token, adminMe: state.me };
+        state.token = r.token; state.me = await rpc('me', tok());
+        state.receipts = []; state.rcWeek = null; state.menu = false; state.staffEdit = null;
+        state.week = mondayOf(today()); state.planWeek = addDays(mondayOf(today()), 7); state.bon = blankBon(); state.form = blankForm();
+        await loadCommon(); state.tab = navTabs()[0]; render(); window.scrollTo(0, 0);
+      } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'view-exit': exitView(); break;
     case 'entry-mode': state.entryMode = el.dataset.mode; render(); break;
     case 'bon-read': readBon(); break;
     case 'bon-retake': { const b = state.bon; b.top = null; b.bottom = null; b.read = null; b.readErr = null; b.busy = false; b.seq++; render(); window.scrollTo(0, 0); break; }
@@ -2651,30 +2682,33 @@ document.addEventListener('click', async ev => {
       shiftDlgRender(); break;
     }
     case 'sd-role': shiftDlgKeep(); state.shiftEdit.role = el.dataset.r; state.shiftEdit.roleTouched = true; shiftDlgRender(); break;
-    case 'sd-close': $('#shiftDlg').close(); state.shiftEdit = null; state.pick = null; break;
-    case 'pk-open': {
+    case 'sd-close': $('#shiftDlg').close(); state.shiftEdit = null; state.slotEd = null; break;
+    case 'se-open': {
       const tpl = state.plan.slots.find(x => x.date === el.dataset.date && x.store === el.dataset.store && x.slot === el.dataset.slot); if (!tpl) break;
-      pkOpen({ date: tpl.date, store: tpl.store, slot: tpl.slot, role: el.dataset.role, start: tpl.start, end: tpl.end }); break;
+      seOpen({ date: tpl.date, store: tpl.store, slot: tpl.slot, start: tpl.start, end: tpl.end }); break;
     }
-    case 'pk-toggle': {   // 不整个重画，保留折叠状态和时间输入
-      const pk = state.pick, i = pk.sel.indexOf(el.dataset.id);
-      if (i >= 0) pk.sel.splice(i, 1); else pk.sel.push(el.dataset.id);
-      el.classList.toggle('on', i < 0); el.setAttribute('aria-pressed', String(i < 0));
-      $('#pk-save').textContent = t('pk_save', { n: pk.sel.length }); break;
+    case 'se-toggle': {
+      const e = state.slotEd, arr = e.sel[el.dataset.role], i = arr.indexOf(el.dataset.id);
+      if (i >= 0) arr.splice(i, 1); else arr.push(el.dataset.id);
+      seRefresh(); break;
     }
-    case 'pk-all': state.pick.showAll = true; pkRender(); break;
-    case 'pk-save': {
-      const pk = state.pick; pk.start = $('#pk-start').value; pk.end = $('#pk-end').value;
-      if (!pk.sel.length) return toast(t('pk_none_sel'), true);
-      if (!pk.start || !pk.end || pk.end <= pk.start) return toast(t('err_INVALID_TIME'), true);
+    case 'se-all': state.slotEd.showAll = true; seRender(); break;
+    case 'se-save': {
+      const e = state.slotEd; e.start = $('#se-start').value; e.end = $('#se-end').value;
+      if (!e.start || !e.end || e.end <= e.start) return toast(t('err_INVALID_TIME'), true);
       el.disabled = true;
       try {
-        const r = await rpc('sched_assign_many', { ...tok(), p_date: pk.date, p_store: pk.store, p_slot: pk.slot, p_role: pk.role, p_staff_ids: pk.sel, p_start: pk.start, p_end: pk.end });
-        $('#shiftDlg').close(); state.pick = null;
-        const warn = [...r.skipped.map(x => t('pk_skipped', { n: x.name, s: x.store })), ...r.already.map(x => t('pk_same', { n: x.name }))];
-        toast(warn.length ? warn.join(' ') : t('saved'), !!warn.length);
-        if (state.plan.published && pk.date >= today())
-          showNtf(r.added.map(x => ntfMsg('add', { date: pk.date, store: pk.store, slot: pk.slot, role: pk.role, start: pk.start, end: pk.end, name: x.name })));
+        const r = await rpc('sched_set_slot', { ...tok(), p_date: e.date, p_store: e.store, p_slot: e.slot,
+          p_service: e.sel.service, p_runner: e.sel.runner, p_bar: e.sel.bar, p_start: e.start, p_end: e.end });
+        $('#shiftDlg').close(); state.slotEd = null;
+        toast(r.skipped.length ? r.skipped.map(x => t('pk_skipped', { n: x.name, s: x.store })).join(' ') : t('saved'), !!r.skipped.length);
+        // 已发布的周、今天或以后：给被改动的人生成通知
+        if (state.plan.published && e.date >= today()){
+          const base = { date: e.date, store: e.store, slot: e.slot };
+          showNtf([...r.added.map(x => ntfMsg('add', { ...base, ...x, role: x.roles[0] })),
+                   ...r.changed.map(x => ntfMsg('change', { ...base, ...x, role: x.roles[0] })),
+                   ...r.removed.map(x => ntfMsg('remove', { ...base, ...x, role: x.roles[0] }))]);
+        }
         viewPlan();
       } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
@@ -2905,7 +2939,17 @@ document.addEventListener('submit', async ev => {
 });
 
 // ============ 共用设备：退出与空闲自动退出 ============
+// 结束「以员工视角查看」：作废只读会话，回到管理员自己的账号
+async function exitView(){
+  const v = state.viewAs; if (!v) return;
+  state.viewAs = null; state.token = v.adminToken; state.me = v.adminMe;
+  try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
+  state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
+  ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
+  await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
+}
 async function signOut(){
+  if (state.viewAs){ const v = state.viewAs; state.viewAs = null; try { await sb.rpc('logout', { p_token: v.token }); } catch(e){} state.token = v.adminToken; state.me = v.adminMe; }
   const tk = state.token;
   logoutLocal(); state.loginStaff = null; state.loginAdmin = false; state.loginErr = '';
   state.bon = blankBon(); state.form = blankForm(); state.done = null; state.staffEdit = null;
@@ -2914,7 +2958,7 @@ async function signOut(){
   if (tk) try { await sb.rpc('logout', { p_token: tk }); } catch(e){}
 }
 // 员工 90 秒无操作自动退出；管理员和小费管理员 5 分钟
-const idleLimit = () => { const m = state.me || {}; return (m.is_admin || m.is_tip_manager || m.is_scheduler) ? 300 : 90; };
+const idleLimit = () => { const m = state.viewAs ? state.viewAs.adminMe : (state.me || {}); return (m.is_admin || m.is_tip_manager || m.is_scheduler) ? 300 : 90; };
 let lastAct = Date.now(), hiddenAt = null;
 function hideIdleBar(){ document.querySelectorAll('.idlebar').forEach(n => n.remove()); }
 function showIdleBar(n){
