@@ -273,11 +273,11 @@ zh: {
   for_whom:'代谁录入', myself:'我自己', nobody:'今天没有', keeps:'归你', each:'每人',
   save:'保存', saved:'已保存', update:'保存修改', cancel:'取消', editing:'正在修改 {d} 的记录',
   my_entries:'本周我的录入', edit:'修改', del:'删除', confirm_del:'确定删除这条记录？', deleted:'已删除', late:'迟录',
-  total:'合计', net_pos:'本周应领', net_neg:'本周应交', net_zero:'本周不用交接',
+  total:'合计', net_pos:'本周目前分到（周结后发放）', net_neg:'本周目前需交回', net_zero:'本周目前还没有分到小费',
   received:'分给我的', my_list:'我录入的', adjustments:'调整', question:'有疑问',
   ask_comment:'哪里不对？（例如：我那天不在）', dispute_sent:'已提交，小费管理员会处理',
   settle_pay:'交给小费管理员 {n}', settle_get:'从小费管理员领取 {n}', carry:'零头 {c} 记到下周', carry_in:'含上周零头 {c}',
-  done:'已交接', pending:'未交接', locked:'已锁定', open:'进行中', empty:'这周还没有记录',
+  done:'已发放', pending:'还没发放', locked:'已锁定', open:'进行中', empty:'这周还没有记录',
   nets:'预计净额', net:'本周净额', disputes:'待处理的疑问', resolve:'处理', ask_resolution:'怎么处理的？', resolved:'已处理',
   entries:'本周全部录入', adj_title:'记一笔调整', adj_from:'谁付', adj_to:'付给谁', amount:'金额', reason:'原因', add:'记入',
   adj_added:'调整已记入', lock:'锁定本周，生成结算单', lock_confirm:'锁定后本周记录不能再改。确定吗？',
@@ -294,7 +294,7 @@ zh: {
   need_amount:'请输入小费金额', bad_amount:'金额格式不对，例如 12,50', loading:'加载中…', nothing:'没有记录',
   new_pin2:'再输一次新 PIN', pin_mismatch:'两次输入的 PIN 不一致', set_pin_title:'设置你自己的 PIN',
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
-  admin_login:'管理员登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
+  admin_login:'管理员 / 厨房登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房', main_role:'主岗位', main_role_hint:'Runner 和吧台登录后只看账本，不能录入。主岗位也决定登录页分组和选人顺序，不影响分账。',
   idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', report_open:'这张单据没有报告编号，报告还没有关闭（单据上写着「Der Bericht ist noch offen」），金额可能不完整。请先在收银机上 Entstempeln（打卡下班），然后打印 Abschlussbericht，再用新打印的单据拍照。如果单据已经是 Entstempeln 后打印的，请重拍顶部，确保拍到「Identifikationsnummer für Bericht」。',
   cash_hint:'今天你的现金收款占 {p}%，超过 10%。以后请多鼓励客人刷卡付款，并用大的刷卡机收款，方便入账。谢谢！',
@@ -368,6 +368,8 @@ zh: {
   arc_saved:'已存好', arc_later:'还没有', arc_recorded:'已记录存档', admin_archive:'存档', arc_none:'还没有存档', arc_final_tag:'最终版',
   arc_open_tag:'当时还有 {n} 人未完成', arc_not_ready:'这个月还有周没锁定，全部锁定后才能存档。', arc_all_done:'全部签收', arc_open_now:'还有 {n} 人未完成',
   arc_hint:'每个月的周分配表（按周一所在月份归属）。所有周锁定后，在周结页顶部提醒下载。PDF 存好后请另外存档（云盘 + 纸质），数据库备份只保留 90 天。',
+  why_short:'原因：本周你承担的短款 {x}', why_adj:'原因：调整 −{x}（{r}）', bon_steps:'先在收银机上 Entstempeln（打卡下班），再打印 Abschlussbericht，然后拍下面两张照片。',
+  own_bon:'自己的 Bon', alloc_lbl:'分配', no_service:'没排服务员', day_sum:'{n} 笔',
   hint_lbl:'说明', env_declared:'员工申报', cnt_ok:'数过了，是 {x}', cnt_diff:'金额不一致', cnt_diff_lbl:'实际点出的金额',
   tag_counted_confirm:'已点收 · 一致确认', tag_counted_manual:'已点收 · 手填',
   nets_fold:'预计净额（{n} 人）', entries_day:'{n} 条', rc_open_week:'KW {w} · 还有 {n} 人未完成',
@@ -420,11 +422,11 @@ de: {
   for_whom:'Eintrag für', myself:'Mich selbst', nobody:'Heute niemand', keeps:'bleibt bei dir', each:'je',
   save:'Speichern', saved:'Gespeichert', update:'Änderung speichern', cancel:'Abbrechen', editing:'Eintrag vom {d} bearbeiten',
   my_entries:'Meine Einträge diese Woche', edit:'Bearbeiten', del:'Löschen', confirm_del:'Diesen Eintrag löschen?', deleted:'Gelöscht', late:'nachgetragen',
-  total:'Summe', net_pos:'Du bekommst diese Woche', net_neg:'Du gibst diese Woche ab', net_zero:'Diese Woche nichts zu übergeben',
+  total:'Summe', net_pos:'Bisher diese Woche (Auszahlung nach Abschluss)', net_neg:'Bisher diese Woche abzugeben', net_zero:'Diese Woche bisher kein Trinkgeld',
   received:'An mich', my_list:'Meine Einträge', adjustments:'Korrekturen', question:'Frage melden',
   ask_comment:'Was stimmt nicht? (z. B. „Ich war an dem Tag nicht da")', dispute_sent:'Gemeldet. Der Tip-Manager klärt das.',
   settle_pay:'An Tip-Manager abgeben: {n}', settle_get:'Vom Tip-Manager erhalten: {n}', carry:'Rest {c} geht in die nächste Woche', carry_in:'inkl. Rest Vorwoche {c}',
-  done:'Erledigt', pending:'Offen', locked:'Abgeschlossen', open:'Laufend', empty:'Diese Woche noch keine Einträge',
+  done:'Ausgezahlt', pending:'Noch nicht ausgezahlt', locked:'Abgeschlossen', open:'Laufend', empty:'Diese Woche noch keine Einträge',
   nets:'Voraussichtlicher Saldo', net:'Saldo', disputes:'Offene Fragen', resolve:'Klären', ask_resolution:'Wie wurde es geklärt?', resolved:'Geklärt',
   entries:'Alle Einträge dieser Woche', adj_title:'Korrektur buchen', adj_from:'Wer zahlt', adj_to:'An wen', amount:'Betrag', reason:'Grund', add:'Buchen',
   adj_added:'Korrektur gebucht', lock:'Woche abschließen und Abrechnung erstellen', lock_confirm:'Danach kann diese Woche nicht mehr geändert werden. Fortfahren?',
@@ -441,7 +443,7 @@ de: {
   need_amount:'Bitte Trinkgeld eingeben', bad_amount:'Ungültiger Betrag, z. B. 12,50', loading:'Lädt …', nothing:'Keine Einträge',
   new_pin2:'Neue PIN wiederholen', pin_mismatch:'Die beiden PINs stimmen nicht überein', set_pin_title:'Eigene PIN festlegen',
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
-  admin_login:'Admin-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
+  admin_login:'Admin- / Küchen-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Runner und Bar sehen nach der Anmeldung nur ihr Konto und können nichts eintragen. Die Hauptposition bestimmt auch die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung.',
   idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', report_open:'Auf diesem Bon fehlt die Berichtsnummer – der Bericht ist noch offen („Der Bericht ist noch offen“) und die Beträge können unvollständig sein. Bitte zuerst an der Kasse ausstempeln, dann den Abschlussbericht drucken und den neuen Bon fotografieren. Wurde der Bon schon nach dem Ausstempeln gedruckt, bitte das obere Foto neu machen, sodass die „Identifikationsnummer für Bericht“ zu sehen ist.',
   cash_hint:'Heute lag dein Baranteil bei {p} % – mehr als 10 %. Bitte Gäste künftig zur Kartenzahlung ermutigen und dafür das große Kartenterminal nutzen, das erleichtert die Buchhaltung. Danke!',
@@ -515,6 +517,8 @@ de: {
   arc_saved:'Gespeichert', arc_later:'Noch nicht', arc_recorded:'Archivierung vermerkt', admin_archive:'Archiv', arc_none:'Noch nicht archiviert', arc_final_tag:'Endfassung',
   arc_open_tag:'damals {n} offen', arc_not_ready:'Noch nicht alle Wochen dieses Monats abgeschlossen – Archivierung erst danach möglich.', arc_all_done:'Vollständig quittiert', arc_open_now:'Noch {n} offen',
   arc_hint:'Monatliche Wochenverteilungen (Woche zählt zum Monat ihres Montags). Nach Abschluss aller Wochen erscheint oben im Abschluss eine Erinnerung. Das PDF bitte zusätzlich ablegen (Cloud + Papier) – die Datenbank-Sicherung wird nur 90 Tage aufbewahrt.',
+  why_short:'Grund: von dir getragener Fehlbetrag {x}', why_adj:'Grund: Korrektur −{x} ({r})', bon_steps:'Zuerst an der Kasse ausstempeln, dann den Abschlussbericht drucken und die beiden Fotos unten aufnehmen.',
+  own_bon:'Eigener Bon', alloc_lbl:'Verteilung', no_service:'Kein Service eingeplant', day_sum:'{n} Anteile',
   hint_lbl:'Erklärung', env_declared:'Laut Mitarbeiter', cnt_ok:'Stimmt – {x}', cnt_diff:'Betrag weicht ab', cnt_diff_lbl:'Tatsächlich gezählter Betrag',
   tag_counted_confirm:'Gezählt · bestätigt', tag_counted_manual:'Gezählt · eingegeben',
   nets_fold:'Voraussichtlicher Saldo ({n})', entries_day:'{n} Einträge', rc_open_week:'KW {w} · noch {n} offen',
@@ -697,6 +701,7 @@ const ERR_ZH = {
   RECEIPT_IMMUTABLE: '签收记录不能修改或删除。',
   APPEND_ONLY: '这类记录只能新增，不能修改或删除。',
   MONTH_NOT_READY: '这个月还有周没锁定周结，全部锁定后才能存档。',
+  REVIEW_PENDING: '这周还有待核对的 Bon（识别未通过），不能锁定。请老板先在「管理 → 审批」里核对。',
   BAD_METHOD: '点收方式不对。请刷新页面后重试。',
   PHOTO_REQUIRED: '请选择纸质收据的照片。',
   NOTE_REQUIRED: '请写一句说明（例如：已离职，已在纸上签收），存档时需要。',
@@ -770,6 +775,7 @@ const ERR_DE = {
   RECEIPT_IMMUTABLE: 'Quittungen können nicht geändert oder gelöscht werden.',
   APPEND_ONLY: 'Diese Einträge können nur ergänzt, nicht geändert oder gelöscht werden.',
   MONTH_NOT_READY: 'Noch nicht alle Wochen dieses Monats abgeschlossen – Archivierung erst danach möglich.',
+  REVIEW_PENDING: 'Diese Woche hat noch zu prüfende Bons (Erkennung fehlgeschlagen) – Abschluss nicht möglich. Bitte zuerst unter „Verwaltung → Freigaben“ prüfen.',
   BAD_METHOD: 'Ungültige Zählart. Bitte Seite neu laden und erneut versuchen.',
   PHOTO_REQUIRED: 'Bitte ein Foto der Papierquittung auswählen.',
   NOTE_REQUIRED: 'Bitte einen kurzen Hinweis eingeben (z. B. ausgeschieden, auf Papier quittiert) – nötig für die Ablage.',
@@ -1135,7 +1141,7 @@ function viewBonNew(){
   const ph = (k, label) => `<div class="field"><label>${esc(label)}</label>
     <label class="photo ${b[k]?'has':''}">${b[k] ? `<img src="${b[k]}" alt="">` : `<span>${esc(t('take_photo'))}</span>`}
     <input type="file" accept="image/*" capture="environment" data-photo="${k}" hidden></label></div>`;
-  let html = modeSeg() + ph('top', t('photo_top')) + ph('bottom', t('photo_bottom'));
+  let html = modeSeg() + (!b.top && !b.bottom ? `<div class="infobox" style="margin-top:0">${esc(t('bon_steps'))}</div>` : '') + ph('top', t('photo_top')) + ph('bottom', t('photo_bottom'));
   if (b.top && b.bottom){
     html += `<div id="bon-status">${bonStatusHTML()}</div>
       <div class="field"><label for="b-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="b-wallet" inputmode="decimal" autocomplete="off" placeholder="0,00" value="${esc(b.wallet)}"></div>
@@ -1353,7 +1359,7 @@ function entryItem(e, opts){
       <div class="amt num">${eur(total)}<span class="lbl">${esc(t('tip_total_lbl'))}</span></div></div>
     <div class="meta num">${meta}</div>
     ${xferOf(e.entry_id) ? `<div class="meta num">${esc(xferText(xferOf(e.entry_id)))}</div>` : ''}
-    <div class="meta num">${parts}</div>
+    ${parts ? `<div class="meta num">${esc(t('alloc_lbl'))}: ${parts}</div>` : ''}
     ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}
     ${showCount ? `<div class="row cnt"><div class="money"><input class="input num" id="cnt-${e.entry_id}" inputmode="decimal" placeholder="${money(e.wallet_cents)}"></div>
       <button class="btn ghost" style="flex:0 0 110px" data-act="count" data-id="${e.entry_id}">${esc(t('count'))}</button></div>` : ''}
@@ -1395,6 +1401,7 @@ function envelopeBlockHTML(entries, env){
     return pa - pb || firstSlot(ia) - firstSlot(ib) || String(ia && ia.created_at).localeCompare(String(ib && ib.created_at)); };
   const html = Object.values(groups).sort(byDateStore).map(g => {
     const todo = g.entries.filter(isTodo).sort(cardOrder), bons = g.entries.filter(e => e.is_bon), sc = g.sched;
+    if (!todo.length) return '';   // 没有信封要点的组不列（还没交的人在页面顶部的提醒里）
     let line = '', miss = '', other = '';
     if (sc && sc.published){
       const sh = sc.shifts || [], missing = sh.filter(x => !x.covered);
@@ -1413,6 +1420,7 @@ function envelopeBlockHTML(entries, env){
       ${todo.length ? `<div class="list">${todo.map(e => envelopeCard(e, info[e.entry_id], g.store)).join('')}</div>` : ''}`;
   }).join('');
   const allDone = !nTodo && entries.some(e => e.is_bon);
+  if (!nTodo && !allDone) return '';
   return h3i(esc(t('to_count', { n: nTodo })) + (allDone ? `<span class="done" title="${esc(t('all_counted'))}">✓</span>` : ''), nTodo ? t('to_count_hint') : '')
     + html;
 }
@@ -1510,6 +1518,13 @@ function weekNav(){
     <div class="wl">${esc(dm(w))} – ${esc(dm(addDays(w,6)))}<small>${esc(t('week_of', { w: isoWeek(w) }))}</small></div>
     <button data-act="week-next" aria-label="next" ${addDays(w,7) > today() ? 'disabled style="opacity:.3"' : ''}>›</button></div>`;
 }
+// 要交回钱时写明原因：短款、调整
+function whyPayHTML(d){
+  const myName = state.viewAs ? state.viewAs.name : state.me.name;
+  const why = [d.shortage_cents ? t('why_short', { x: eur(d.shortage_cents) }) : '',
+    ...d.adjustments.filter(a => a.from === myName).map(a => t('why_adj', { x: eur(a.amount_cents), r: a.reason }))].filter(Boolean);
+  return why.length ? `<div class="small" style="margin-top:6px">${why.map(esc).join('<br>')}</div>` : '';
+}
 async function viewLedger(){
   $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
   let d;
@@ -1525,18 +1540,27 @@ async function viewLedger(){
       <div class="muted small">${esc(t('locked'))}</div>
       <div class="big num">${p>0 ? esc(t('settle_get',{n:eur(p*100)})) : p<0 ? esc(t('settle_pay',{n:eur(-p*100)})) : esc(t('no_move'))}</div>
       <div class="small muted num" style="margin-top:6px">${s.carry_in_cents ? esc(t('carry_in',{c:eur(s.carry_in_cents)}))+' · ' : ''}${esc(t('carry',{c:eur(s.carry_out_cents)}))}</div>
-      <div class="small" style="margin-top:6px">${s.done ? `<span class="tag m">${esc(t('done'))}</span>` : `<span class="tag late">${esc(t('pending'))}</span>`}</div></div>`;
+      <div class="small" style="margin-top:6px">${s.done ? `<span class="tag m">${esc(t('done'))}</span>` : `<span class="tag late">${esc(t('pending'))}</span>`}</div>${p < 0 ? whyPayHTML(d) : ''}</div>`;
   } else {
     hero = `<div class="hero ${n>0?'pos':n<0?'neg':''}">
       <div class="muted small">${esc(n>0?t('net_pos'):n<0?t('net_neg'):t('net_zero'))} · ${esc(t('open'))}</div>
-      <div class="big num">${eur(Math.abs(n))}</div></div>`;
+      <div class="big num">${eur(Math.abs(n))}</div>${n < 0 ? whyPayHTML(d) : ''}</div>`;
   }
-  const rec = d.received.map(r => `<div class="item">
+  const myName = state.viewAs ? state.viewAs.name : state.me.name;
+  const recItem = r => `<div class="item">
       <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong>${storeTag(r.store)}${r.is_late?`<span class="tag late">${esc(t('late'))}</span>`:''}${r.pending?`<span class="tag pend">${esc(t('pending_tag'))}</span>`:''}</div>
       <div class="amt num pos">+${eur(r.amount_cents)}</div></div>
-      <div class="meta">${esc(t('role_'+r.role))} · ${esc(t('from'))} ${esc(r.from)}</div>
+      <div class="meta">${r.role === 'server' && r.from === myName ? esc(t('own_bon')) : esc(t('role_'+r.role)) + ' · ' + esc(t('from')) + ' ' + esc(r.from)}</div>
       ${!d.locked && !state.viewAs ? `<div class="acts"><button class="link" data-act="dispute" data-id="${r.entry_id}">${esc(t('question'))}</button></div>` : ''}
-    </div>`).join('');
+    </div>`;
+  // 条数多（例如厨房）时按天合计，点开看明细
+  let rec;
+  if (d.received.length > 10){
+    const days = {}; d.received.forEach(r => (days[r.date] = days[r.date] || []).push(r));
+    rec = Object.keys(days).sort().map(day => `<details class="fold"><summary>${esc(dayLabel(day))}<span class="muted">${esc(t('day_sum', { n: days[day].length }))}</span>
+        <span class="num pos" style="margin-left:8px">+${eur(days[day].reduce((a, r) => a + r.amount_cents, 0))}</span></summary>
+      <div class="inner"><div class="list">${days[day].map(recItem).join('')}</div></div></details>`).join('');
+  } else rec = d.received.length ? `<div class="list">${d.received.map(recItem).join('')}</div>` : '';
   const mine = d.my_entries.map(e => entryItem(e, { locked: d.locked, readonly: !!state.viewAs })).join('');
   const adj = d.adjustments.map(a => `<div class="item"><div class="top"><div>${esc(a.from)} → ${esc(a.to)}</div>
       <div class="amt num">${eur(a.amount_cents)}</div></div><div class="meta">${esc(a.reason)}</div></div>`).join('');
@@ -1545,7 +1569,7 @@ async function viewLedger(){
   if (rl && rl.receipt.status === 'todo') hero += `<div class="warnbox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(t('rc_ledger_todo'))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="rc-go" data-week="${rl.week_start}">${esc(t('rc_go'))}</button></div>`;
   else if (rl && ['signed', 'paper', 'disputed'].includes(rl.receipt.status)) hero += `<div style="margin:-6px 0 12px">${rsLabel(rl.receipt)}</div>`;
   $('#main').innerHTML = weekNav() + hero +
-    (rec ? `<h3>${esc(t('received'))}</h3><div class="list">${rec}</div>` : '') +
+    (rec ? `<h3>${esc(t('received'))}</h3>${rec}` : '') +
     (mine ? `<h3>${esc(t('my_list'))}</h3><div class="list">${mine}</div>` : '') +
     (adj ? `<h3>${esc(t('adjustments'))}</h3><div class="list">${adj}</div>` : '') +
     (!rec && !mine && !adj ? `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>` : '');
@@ -1917,7 +1941,7 @@ async function viewAdmin(){
       const binds = staff.flatMap(s => (s.ls_ids || []).filter(b => !b.confirmed).map(b => ({ ...b, sid: s.id, sname: s.name })));
       let reviews = []; try { reviews = (await rpc('admin_review_list', tok()) || []).filter(r => !r.locked); } catch(e){}
       await loadXfer(reviews.map(r => r.entry_id));
-      refreshBadge(list.length + binds.length + reviews.length);
+      try { const m2 = await rpc('me', tok()); refreshBadge(m2.pending_requests); } catch(e){}
       el().innerHTML = (reviews.length ? h3i(esc(t('review_title')), t('review_hint')) + `<div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
         + (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
         + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`));
@@ -1954,8 +1978,8 @@ async function viewAdmin(){
           </div>
           <div class="field"><label for="r-from">${esc(t('valid_from'))}</label><input class="input" type="date" id="r-from" min="${today()}" value="${today()}"></div>
           <button class="btn" data-act="rate-save">${esc(t('save'))}</button></div>
-        <div class="list">${rates.map(r => `<div class="item"><div class="top"><div>${esc(t('valid_from'))} ${esc(r.valid_from)}</div>
-          <div class="num">${r.kitchen_pct} / ${r.runner_pct} / ${r.bar_pct}</div></div></div>`).join('')}</div>`;
+        <div class="list">${rates.map(r => `<div class="item"><div class="top"><div>${esc(t('valid_from'))} ${esc(fullDate(r.valid_from))}</div></div>
+          <div class="meta num">${esc(t('kitchen'))} ${r.kitchen_pct}% · ${esc(t('runner'))} ${r.runner_pct}% · ${esc(t('bar'))} ${r.bar_pct}%</div></div>`).join('')}</div>`;
     } else if (state.adminSub === 'feedback'){
       const list = await rpc('admin_feedback_list', tok()) || [];
       el().innerHTML = `<div class="list">${list.map(fbItem).join('') || `<div class="empty">${esc(t('fb_none'))}</div>`}</div>`;
@@ -2201,6 +2225,8 @@ function fmtDateTime(iso){
   const y = day.slice(0, 4), yr = y !== today().slice(0, 4) ? (state.lang === 'de' ? y + ' ' : y + '年 ') : '';
   return yr + dayLabel(day) + ' ' + ts;
 }
+// 带年份的日期：「2026年1月1日」/「01.01.2026」
+function fullDate(s){ const [y, m, d] = String(s).slice(0, 10).split('-'); return state.lang === 'de' ? `${d}.${m}.${y}` : `${y}年${+m}月${+d}日`; }
 // 门店小标签：全系统统一颜色（Flingern 绿、Bismarck 蓝）
 function storeTag(st){ return st ? `<span class="st st-${esc(String(st).slice(0, 1).toLowerCase())}">${esc(st)}</span>` : ''; }
 // 区块标题 + ⓘ：说明文字点开才显示
@@ -2277,16 +2303,20 @@ function planGridHTML(d, edit){
       const tpl = d.slots.find(x => x.date === date && x.store === store && x.slot === slot); if (!tpl) return '';
       const list = d.shifts.filter(x => x.date === date && x.store === store && x.slot === slot);
       if (!edit && !list.length) return '';
+      // 排班员：有人的岗位各占一行；没人的岗位收成一行「＋ 服务 · ＋ Runner …」
+      const empty = edit ? ROLES.filter(r => !list.some(x => rolesOf(x).includes(r))) : [];
+      const addBtn = (r, label) => `<button class="pchip add" data-act="pk-open" data-date="${date}" data-store="${store}" data-slot="${slot}" data-role="${r}" aria-label="${esc(t('add_shift'))} ${esc(t('grp_' + r))}">${label}</button>`;
       const rows = ROLES.map(r => {
         const ppl = list.filter(x => rolesOf(x).includes(r));
-        if (!edit && !ppl.length) return '';
+        if (!ppl.length) return '';
         const chip = x => { const off = x.start !== tpl.start || x.end !== tpl.end, rs = rolesOf(x);
-          const inner = `${esc(x.name)}${rs.length > 1 ? ` <span class="small muted">${esc(rs.map(k => t('grp_' + k)).join(' + '))}</span>` : ''}${off ? ` <span class="small num" style="font-weight:700">${esc(x.start)}–${esc(x.end)}</span>` : ''}${x.changed ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}`;
+          const inner = `${esc(x.name)}${rs.length > 1 ? ` <span class="small muted">${esc(rs.map(k => t('grp_' + k)).join(' + '))}</span>` : ''}${off ? ` <span class="small num" style="font-weight:700">${esc(x.start)}–${esc(x.end)}</span>` : ''}${x.changed && (edit || x.staff_id === state.me.id) ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}`;
           return edit ? `<button class="pchip" data-act="pe-open" data-id="${x.id}">${inner}</button>` : `<span class="pchip">${inner}</span>`; };
         return `<div class="rolerow"><div class="rl">${esc(t('grp_' + r))}</div><div class="rp">${ppl.map(chip).join('')}
-          ${edit ? `<button class="pchip add" data-act="pk-open" data-date="${date}" data-store="${store}" data-slot="${slot}" data-role="${r}" aria-label="${esc(t('add_shift'))} ${esc(t('grp_' + r))}">＋</button>` : ''}</div></div>`;
-      }).join('');
-      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span></div></div>${rows}</div>`;
+          ${edit ? addBtn(r, '＋') : ''}</div></div>`;
+      }).join('') + (empty.length ? `<div class="rolerow"><div class="rp">${empty.map(r => addBtn(r, '＋ ' + esc(t('grp_' + r)))).join('')}</div></div>` : '');
+      const noSvc = edit && !list.some(x => rolesOf(x).includes('service'));
+      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}</div></div>${rows}</div>`;
     })).join('');
     const isToday = date === today();
     return blocks ? `<div class="sheet" ${isToday ? 'id="plan-today" style="border:2px solid var(--celadon)"' : ''}><div class="dayh">${esc(dayLabel(date))}${isToday ? ` <span class="tag ok">${esc(t('today_word'))}</span>` : ''}</div>${blocks}</div>` : '';
