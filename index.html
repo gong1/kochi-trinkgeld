@@ -116,6 +116,15 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .grp .grp-t{font-weight:700;font-size:16px;color:var(--ink)}
 .grp .grp-s{font-size:14px;color:var(--muted);margin-top:2px}
 .grp .grp-m{font-size:14px;margin-top:2px}
+.item.fading{opacity:.25;transition:opacity .9s}
+.grp-sum{font-weight:700;margin:6px 0 10px}
+.todo-card{background:var(--copper-soft);border-radius:var(--r-m);padding:10px 12px;margin:0}
+.todo-card .todo-t{font-weight:700;color:var(--copper);margin-bottom:4px}
+.todo-card .todo-i{display:flex;align-items:center;gap:10px;padding:6px 0;border-top:1px solid rgba(176,106,44,.2)}
+.todo-card .todo-i:first-of-type{border-top:0}
+.todo-card .todo-i span{flex:1}
+.todo-card .btn{flex:none;width:auto;height:38px;padding:0 14px;font-size:15px}
+.toast .tbtn{margin-left:12px;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:4px 12px;font-weight:700}
 .viewbar{position:sticky;top:0;z-index:11;background:var(--copper);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700}
 .viewbar span{flex:1}
 .viewbar button{background:#fff;color:var(--copper);border:0;border-radius:999px;padding:6px 14px;font-weight:700;flex:none}
@@ -360,6 +369,12 @@ zh: {
   env_line:'排班 {s} 个班 · 已交 {c} 个班（{n} 个信封）', env_line_nosched:'这天没有发布排班 · 已交 {n} 个信封', env_line_noshift:'这家店这天没有排服务班 · 已交 {n} 个信封',
   env_missing:'还没交：{list}', env_missing_late:'逾期没交：{list}', env_elsewhere:'在别的店交了：{list}', env_elsewhere_one:'{n}（已在 {s} 交）',
   env_should:'信封应有', env_unsched:'未排班', env_shift_at:'排在 {s}', env_guess:'班次按提交先后推断', env_bon_time:'Bon {a}–{b}', env_counted_all:'这组的信封都已点收 ✓',
+  pay_sum:'待发放 {n} 人 · 共 {x}', pay_sum_in:'待收回 {n} 人 · 共 {x}', pay_all_done:'这周都发完了 ✓',
+  grp_todo_pay:'待发放（{n}）', grp_wait_sign:'已发放、等签收（{n}）', grp_done:'已完成（{n}）', grp_zero:'无需发放（{n}）',
+  waited:'已等 {n} 天', waited_0:'今天发放', paid_undo:'已发放：{n}', undo:'撤销', undone:'已撤销',
+  env_sum:'待点收 {n} 个 · 合计 {x}', env_done_grp:'已点收（{n}）', miss_multi:'{n} 个班没交',
+  req_done_grp:'已处理（{n}）', req_approved:'已批准', req_rejected:'已拒绝', staff_off_grp:'已停用（{n}）',
+  fb_done_grp:'已处理（{n}）', arc_done_grp:'已存档（{n}）', todo_title:'我的待办（{n}）', rc_wait_max:'最久已等 {n} 天',
   se_edit:'编辑', se_sum:'这个班：', se_dual:'兼岗：{n}（{r}）· 同一班次做服务，不拿别人的 Runner / 吧台份额', se_none:'（没人）',
   se_removed:'{n} 从这个班去掉', se_hint:'点名字选中，再点取消。同一个人在两栏都选 = 兼岗。窗口里没选的人保存后会从这个班去掉。',
   pk_title:'选{r}', pk_main:'主岗位是{r}', pk_skill:'会做{r}', pk_other:'其他人（{n}）', pk_all:'显示全部（包括不参与排班的 {n} 人）',
@@ -511,6 +526,12 @@ de: {
   env_line:'Geplant {s} Schichten · abgegeben {c} ({n} Umschläge)', env_line_nosched:'Kein veröffentlichter Dienstplan · {n} Umschläge abgegeben', env_line_noshift:'Kein Service eingeplant · {n} Umschläge abgegeben',
   env_missing:'Fehlt noch: {list}', env_missing_late:'Überfällig: {list}', env_elsewhere:'Im anderen Restaurant abgegeben: {list}', env_elsewhere_one:'{n} (in {s} abgegeben)',
   env_should:'Soll im Umschlag', env_unsched:'nicht eingeplant', env_shift_at:'eingeplant in {s}', env_guess:'Schicht nach Abgabe-Reihenfolge geschätzt', env_bon_time:'Bon {a}–{b}', env_counted_all:'Alle Umschläge dieser Gruppe gezählt ✓',
+  pay_sum:'Auszuzahlen: {n} · {x}', pay_sum_in:'Einzusammeln: {n} · {x}', pay_all_done:'Diese Woche alles ausgezahlt ✓',
+  grp_todo_pay:'Auszuzahlen ({n})', grp_wait_sign:'Ausgezahlt, Quittung offen ({n})', grp_done:'Erledigt ({n})', grp_zero:'Keine Auszahlung ({n})',
+  waited:'wartet seit {n} Tagen', waited_0:'heute ausgezahlt', paid_undo:'Ausgezahlt: {n}', undo:'Rückgängig', undone:'Rückgängig gemacht',
+  env_sum:'Zu zählen: {n} · {x}', env_done_grp:'Gezählt ({n})', miss_multi:'{n} Schichten ohne Bon',
+  req_done_grp:'Erledigt ({n})', req_approved:'Genehmigt', req_rejected:'Abgelehnt', staff_off_grp:'Inaktiv ({n})',
+  fb_done_grp:'Erledigt ({n})', arc_done_grp:'Archiviert ({n})', todo_title:'Meine Aufgaben ({n})', rc_wait_max:'längste Wartezeit {n} Tage',
   se_edit:'Bearbeiten', se_sum:'Diese Schicht:', se_dual:'Doppelrolle: {n} ({r}) · Service in derselben Schicht, kein Runner-/Bar-Anteil anderer', se_none:'(niemand)',
   se_removed:'{n} aus der Schicht entfernt', se_hint:'Namen antippen zum Auswählen, nochmal zum Abwählen. In zwei Spalten gewählt = Doppelrolle. Nicht gewählte Personen werden beim Speichern aus der Schicht entfernt.',
   pk_title:'{r} wählen', pk_main:'Hauptrolle {r}', pk_skill:'Kann {r}', pk_other:'Weitere ({n})', pk_all:'Alle anzeigen (inkl. {n} nicht eingeplante)',
@@ -645,6 +666,15 @@ async function callFn(body){
 }
 
 let toastTimer;
+// 刷新页面内容时保持滚动位置（例如连续勾选「已发放」）
+async function keepScroll(fn){ const y = window.scrollY; await fn(); window.scrollTo(0, y); }
+// 带一个按钮的提示（例如「已发放：Anna · 撤销」），5 秒后消失
+function toastAction(msg, label, data){
+  document.querySelectorAll('.toast').forEach(n => n.remove());
+  const n = document.createElement('div'); n.className = 'toast'; n.setAttribute('role', 'status');
+  n.innerHTML = `${esc(msg)}<button class="tbtn" data-act="${esc(data.act)}" data-staff="${esc(data.staff || '')}" data-week="${esc(data.week || '')}">${esc(label)}</button>`;
+  document.body.appendChild(n); clearTimeout(toastTimer); toastTimer = setTimeout(() => n.remove(), 5000);
+}
 function toast(msg, isErr){
   document.querySelectorAll('.toast').forEach(n => n.remove());
   const n = document.createElement('div'); n.className = 'toast' + (isErr ? ' err' : ''); n.textContent = msg;
@@ -710,6 +740,7 @@ const ERR_ZH = {
   RECEIPT_IMMUTABLE: '签收记录不能修改或删除。',
   APPEND_ONLY: '这类记录只能新增，不能修改或删除。',
   MONTH_NOT_READY: '这个月还有周没锁定周结，全部锁定后才能存档。',
+  RECEIPT_SIGNED: '这个人这周已经签收，「已发放」不能再取消或修改。如果发错了，请在后面还开着的周记一笔调整。',
   VIEW_ONLY: '正在以员工视角查看（只读），不能修改。要操作请先点顶部「退出查看」。',
   REVIEW_PENDING: '这周还有待核对的 Bon（识别未通过），不能锁定。请老板先在「管理 → 审批」里核对。',
   BAD_METHOD: '点收方式不对。请刷新页面后重试。',
@@ -785,6 +816,7 @@ const ERR_DE = {
   RECEIPT_IMMUTABLE: 'Quittungen können nicht geändert oder gelöscht werden.',
   APPEND_ONLY: 'Diese Einträge können nur ergänzt, nicht geändert oder gelöscht werden.',
   MONTH_NOT_READY: 'Noch nicht alle Wochen dieses Monats abgeschlossen – Archivierung erst danach möglich.',
+  RECEIPT_SIGNED: 'Für diese Woche bereits quittiert – „Ausgezahlt“ kann nicht mehr zurückgenommen oder geändert werden. Bei einem Fehler bitte in einer offenen Woche eine Korrektur buchen.',
   VIEW_ONLY: 'Ansicht als Mitarbeiter (nur lesen) – keine Änderungen möglich. Zum Bearbeiten oben „Ansicht beenden“ tippen.',
   REVIEW_PENDING: 'Diese Woche hat noch zu prüfende Bons (Erkennung fehlgeschlagen) – Abschluss nicht möglich. Bitte zuerst unter „Verwaltung → Freigaben“ prüfen.',
   BAD_METHOD: 'Ungültige Zählart. Bitte Seite neu laden und erneut versuchen.',
@@ -880,10 +912,20 @@ async function loadMyBon(){
   try { state.myBon = await rpc('my_bon_status', tok()); } catch(e){ state.myBon = null; }
 }
 function slotsText(sl){ return (sl || []).slice().sort().reverse().map(slotLabel).join('+'); }
-function missBannerHTML(){
-  const mb = state.myBon; if (!mb || !(mb.missing || []).length || !tabs().includes('entry')) return '';
-  const list = mb.missing.map(x => dayLabel(x.date) + ' ' + x.store + ' ' + slotsText(x.slots)).join('、');
-  return `<div class="banner"><div class="warnbox" style="display:flex;align-items:center;gap:12px;margin:0"><span style="flex:1">${esc(t('miss_banner', { n: mb.missing.length, list }))}</span>${state.tab !== 'entry' ? `<button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="miss-go">${esc(t('miss_go'))}</button>` : ''}</div></div>`;
+// 员工自己的待办，统一放在最上面：待签收 → 漏交 Bon → 填能不能上
+function todoCardHTML(){
+  if (state.rcWeek) return '';
+  const items = [];
+  rcTodo().forEach(l => items.push([t(l.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: l.kw, x: eur(Math.abs(l.payout_euros) * 100) }) + (l.receipt.resign ? t('rc_banner_resign') : ''),
+    `<button class="btn" data-act="rc-go" data-week="${l.week_start}">${esc(t('rc_go'))}</button>`]));
+  const mb = state.myBon;
+  if (mb && (mb.missing || []).length && tabs().includes('entry'))
+    items.push([t('miss_banner', { n: mb.missing.length, list: mb.missing.map(x => dayLabel(x.date) + ' ' + x.store + ' ' + slotsText(x.slots)).join('、') }),
+      state.tab !== 'entry' ? `<button class="btn" data-act="miss-go">${esc(t('miss_go'))}</button>` : '']);
+  if (state.banner && tabs().includes('plan') && state.tab !== 'plan') items.push([t('banner_avail'), `<button class="btn" data-act="banner-go">${esc(t('banner_go'))}</button>`]);
+  if (!items.length) return '';
+  return `<div class="banner"><div class="todo-card" role="status"><div class="todo-t">${esc(t('todo_title', { n: items.length }))}</div>
+    ${items.map(([txt, btn]) => `<div class="todo-i"><span>${esc(txt)}</span>${btn}</div>`).join('')}</div></div>`;
 }
 function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
@@ -907,9 +949,7 @@ function render(){
         <button data-act="pin-open">${esc(t('change_pin'))}</button>
         <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
     </header>
-    ${missBannerHTML()}
-    ${rcBannerHTML()}
-    ${state.banner && tabs().includes('plan') && state.tab !== 'plan' ? `<div class="banner"><div class="infobox"><span>${esc(t('banner_avail'))}</span><button class="btn" data-act="banner-go">${esc(t('banner_go'))}</button></div></div>` : ''}
+    ${todoCardHTML()}
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
     <nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
   if (state.rcWeek){ viewReceipt(); return; }
@@ -1422,8 +1462,11 @@ function envelopeBlockHTML(entries, env){
   }).join('');
   const allDone = !nTodo && entries.some(e => e.is_bon);
   if (!nTodo && !allDone) return '';
+  const todoAll = entries.filter(isTodo), counted = entries.filter(e => e.is_bon && !isTodo(e)).sort(byDateStore);
   return h3i(esc(t('to_count', { n: nTodo })) + (allDone ? `<span class="done" title="${esc(t('all_counted'))}">✓</span>` : ''), nTodo ? t('to_count_hint') : '')
-    + html;
+    + (nTodo ? `<div class="grp-sum">${esc(t('env_sum', { n: nTodo, x: eur(todoAll.reduce((a, e) => a + e.wallet_cents, 0)) }))}</div>` : '')
+    + html
+    + (counted.length ? `<details class="fold"><summary>${esc(t('env_done_grp', { n: counted.length }))}</summary><div class="inner"><div class="list">${counted.map(e => entryItem(e, { head: 'server' })).join('')}</div></div></details>` : '');
 }
 // 信封卡片：名字最醒目 → 信封应有金额（钱包）→ 班次；点收输入框
 function envelopeCard(e, i, store){
@@ -1582,10 +1625,6 @@ async function loadReceipts(){
   try { state.receipts = await rpc('my_receipts', tok()) || []; } catch(e){ state.receipts = []; }
 }
 function rcTodo(){ return (state.receipts || []).filter(l => l.receipt && l.receipt.status === 'todo'); }
-function rcBannerHTML(){
-  if (state.rcWeek) return '';
-  return rcTodo().map(l => `<div class="banner"><div class="warnbox" style="display:flex;align-items:center;gap:12px;margin:0"><span style="flex:1">${esc(t(l.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: l.kw, x: eur(Math.abs(l.payout_euros) * 100) }) + (l.receipt.resign ? t('rc_banner_resign') : ''))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="rc-go" data-week="${l.week_start}">${esc(t('rc_go'))}</button></div></div>`).join('');
-}
 // 签收状态标签
 function rsLabel(r){
   const st = r && r.status, when = r && r.at ? fmtDateTime(r.at) : '';
@@ -1678,8 +1717,12 @@ function sigExport(){
 function distHTML(dist){
   const me = state.me, lines = dist.lines;
   const open = lines.filter(l => !['none', 'signed', 'paper'].includes(l.receipt.status)).length;
+  const signed = l => ['signed', 'paper'].includes(l.receipt.status);
+  const days = l => l.done_at ? Math.max(0, Math.floor((Date.now() - new Date(l.done_at)) / 864e5)) : 0;
   const row = l => {
-    const r = l.receipt, selfLock = l.staff_id === me.id && !me.is_admin, acts = [];
+    const r = l.receipt, selfLock = l.staff_id === me.id && !me.is_admin, lockSigned = signed(l), acts = [];
+    const waitTag = l.done && dist.required && ['todo', 'disputed', 'need_admin'].includes(r.status)
+      ? `<span class="tag ${days(l) > 3 ? 'bad' : 'pend'}">${esc(days(l) ? t('waited', { n: days(l) }) : t('waited_0'))}</span>` : '';
     const roles = (l.roles || []).map(x => `<span class="tag">${esc(t('role_' + x))}</span>`).join('');
     const nums = [`${t('dist_recv')} ${eur(l.received_cents)}`, l.shortage_cents ? `${t('dist_short')} −${eur(l.shortage_cents)}` : '',
       l.adj_cents ? `${t('dist_adj')} ${l.adj_cents > 0 ? '+' : '−'}${eur(Math.abs(l.adj_cents))}` : '', l.carry_in_cents ? `${t('dist_cin')} +${eur(l.carry_in_cents)}` : '',
@@ -1688,11 +1731,11 @@ function distHTML(dist){
     if (me.is_admin && r.status === 'need_admin') acts.push(`<button class="link" data-act="rc-admin-pay" data-staff="${l.staff_id}">${esc(t('dist_admin_pay'))}</button>`);
     if (me.is_admin && ['todo', 'disputed'].includes(r.status)) acts.push(`<button class="link" data-act="rc-paper" data-staff="${l.staff_id}">${esc(t('dist_paper'))}</button>`);
     return `<div class="item"><div class="top" style="align-items:center">
-        <label class="check" style="flex:1"><input type="checkbox" data-act="settled" data-staff="${l.staff_id}" ${l.done ? 'checked' : ''} ${selfLock ? 'disabled' : ''} aria-label="${esc(t('dist_paid'))}">
+        <label class="check" style="flex:1"><input type="checkbox" data-act="settled" data-staff="${l.staff_id}" data-name="${esc(l.name)}" ${l.done ? 'checked' : ''} ${selfLock || lockSigned ? 'disabled' : ''} aria-label="${esc(t('dist_paid'))}" ${lockSigned ? `title="${esc(t('err_RECEIPT_SIGNED'))}"` : ''}>
         <span><strong>${esc(l.name)}</strong>${l.is_kitchen ? '' : roles}${l.is_kitchen ? `<span class="tag k">${esc(t('kitchen'))}</span>` : ''}</span></label>
         <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div>
       <div class="meta num">${esc(nums)}</div>
-      <div class="meta">${l.done ? esc(t('dist_by', { n: l.done_by || '?', t: fmtDateTime(l.done_at) })) : ''}${dist.required && l.payout_euros !== 0 ? rsLabel(r) : ''}${selfLock ? ` <span class="small muted">${esc(t('dist_self_hint'))}</span>` : ''}</div>
+      <div class="meta">${l.done ? esc(t('dist_by', { n: l.done_by || '?', t: fmtDateTime(l.done_at) })) : ''}${dist.required && l.payout_euros !== 0 ? rsLabel(r) : ''}${waitTag}${selfLock ? ` <span class="small muted">${esc(t('dist_self_hint'))}</span>` : ''}</div>
       ${(r.parts || []).length ? `<div class="meta">${esc((r.signer_name || '') + ': ' + r.parts.map(p => p.name + ' ' + eur(p.cents)).join(' · '))}</div>` : ''}
       ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}</div>`;
   };
@@ -1701,8 +1744,24 @@ function distHTML(dist){
       <div style="margin-top:8px">${!dist.required ? `<span class="small muted">${esc(t('dist_before'))}</span>`
         : open ? `<span class="tag pend" style="margin:0">${esc(t('dist_open', { n: open }))}</span>` : `<span class="tag ok" style="margin:0">${esc(t('dist_complete'))}</span>`}</div>
       <button class="btn ghost" style="margin-top:12px" data-act="dist-print">${esc(t('dist_print'))}</button></div>
-    ${h3i(esc(t('dist_title')), lines.some(l => l.payout_euros < 0) ? t('dist_pay_hint') : '')}
-    <div class="list">${lines.map(row).join('') || `<div class="empty">–</div>`}</div>`;
+    ${h3i(esc(t('dist_title')), lines.some(l => l.payout_euros < 0) ? t('dist_pay_hint') : '')}${distGroupsHTML(dist, row, signed, days)}`;
+}
+// 发放列表分组：待发放（金额大在前）→ 已发放等签收（等得久在前）→ 已完成（折叠）→ 无需发放（折叠）
+function distGroupsHTML(dist, row, signed, days){
+  const L = dist.lines, abs = l => Math.abs(l.payout_euros), byPaid = (a, b) => String(a.done_at).localeCompare(String(b.done_at));
+  const pend = L.filter(l => l.payout_euros !== 0 && !l.done).sort((a, b) => abs(b) - abs(a));
+  const isDone = l => !dist.required || signed(l);
+  const wait = L.filter(l => l.payout_euros !== 0 && l.done && !isDone(l)).sort(byPaid);
+  const done = L.filter(l => l.payout_euros !== 0 && l.done && isDone(l)).sort(byPaid);
+  const zero = L.filter(l => l.payout_euros === 0);
+  const outs = pend.filter(l => l.payout_euros > 0), ins = pend.filter(l => l.payout_euros < 0), sum = a => eur(a.reduce((x, l) => x + abs(l) * 100, 0));
+  const head = pend.length ? [outs.length ? t('pay_sum', { n: outs.length, x: sum(outs) }) : '', ins.length ? t('pay_sum_in', { n: ins.length, x: sum(ins) }) : ''].filter(Boolean).join(' · ') : t('pay_all_done');
+  const list = a => `<div class="list">${a.map(row).join('')}</div>`;
+  const fold = (title, a) => a.length ? `<details class="fold"><summary>${esc(title)}</summary><div class="inner">${list(a)}</div></details>` : '';
+  return `<div class="grp-sum ${pend.length ? '' : 'pos'}">${esc(head)}</div>`
+    + (pend.length ? `<div class="grp"><div class="grp-t">${esc(t('grp_todo_pay', { n: pend.length }))}</div></div>${list(pend)}` : '')
+    + (wait.length ? `<div class="grp"><div class="grp-t">${esc(t('grp_wait_sign', { n: wait.length }))}</div></div>${list(wait)}` : '')
+    + fold(t('grp_done', { n: done.length }), done) + fold(t('grp_zero', { n: zero.length }), zero);
 }
 // 所有周里还没完成发放 / 签收的人（老板、小费管理员）
 async function rcOpenHTML(){
@@ -1710,9 +1769,10 @@ async function rcOpenHTML(){
   if (!list.length) return '';
   const weeks = {}; list.forEach(l => (weeks[l.week_start] = weeks[l.week_start] || []).push(l));
   return h3i(esc(t('rc_open_title', { n: list.length })), t('rc_open_hint')) + Object.keys(weeks).sort().map(w => {
-    const ls = weeks[w];
-    return `<details class="fold"><summary>${esc(t('rc_open_week', { w: ls[0].kw, n: ls.length }))}<span class="muted">${esc(dm(w))}–${esc(dm(addDays(w, 6)))}</span></summary><div class="inner"><div class="list">
-      ${ls.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.name)}</strong>${rsLabel(l.receipt)}</div>
+    const dd = l => l.done && l.done_at ? Math.max(0, Math.floor((Date.now() - new Date(l.done_at)) / 864e5)) : -1;
+    const ls = weeks[w].slice().sort((a, b) => dd(b) - dd(a) || Math.abs(b.payout_euros) - Math.abs(a.payout_euros)), mx = Math.max(...ls.map(dd));
+    return `<details class="fold"><summary>${esc(t('rc_open_week', { w: ls[0].kw, n: ls.length }))}${mx >= 0 ? ` <span class="tag ${mx > 3 ? 'bad' : 'pend'}">${esc(t('rc_wait_max', { n: mx }))}</span>` : ''}<span class="muted">${esc(dm(w))}–${esc(dm(addDays(w, 6)))}</span></summary><div class="inner"><div class="list">
+      ${ls.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.name)}</strong>${rsLabel(l.receipt)}${dd(l) >= 0 ? `<span class="tag ${dd(l) > 3 ? 'bad' : 'pend'}">${esc(dd(l) ? t('waited', { n: dd(l) }) : t('waited_0'))}</span>` : ''}</div>
         <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div></div>`).join('')}
       </div><button class="link" data-act="week-go" data-week="${w}">${esc(t('dist_title'))} ›</button></div></details>`; }).join('');
 }
@@ -1790,7 +1850,9 @@ function arcAdminHTML(list){
       ${a.history.map(h => `<div class="meta">${esc(h.by)} · ${esc(fmtDateTime(h.at))} · ${esc(h.open_count ? t('arc_open_tag', { n: h.open_count }) : t('arc_final_tag'))}</div>`).join('') || `<div class="meta">${esc(t('arc_none'))}</div>`}
       <div class="acts">${a.locked_all ? `<button class="link" data-act="arc-dl" data-month="${a.month}">${esc(t('arc_btn', { m: monthLabel(a.month) }))}</button>` : `<span class="small muted">${esc(t('arc_not_ready'))}</span>`}</div>
     </div>`;
-  return h3i(esc(t('admin_archive')), t('arc_hint')) + `<div class="list">${list.map(card).join('') || `<div class="empty">${esc(t('arc_none'))}</div>`}</div>`;
+  const todo = list.filter(a => a.remind || !a.history.length), done = list.filter(a => !(a.remind || !a.history.length));
+  return h3i(esc(t('admin_archive')), t('arc_hint')) + `<div class="list">${todo.map(card).join('') || `<div class="empty">${esc(t('arc_none'))}</div>`}</div>`
+    + (done.length ? `<details class="fold"><summary>${esc(t('arc_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(card).join('')}</div></div></details>` : '');
 }
 // 整月 PDF：首页汇总 + 每周一页（和每周的周分配表同一排版）
 async function monthPrint(m){
@@ -1914,8 +1976,12 @@ function schedCheckHTML(){
   const row = (x, extra) => `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong>${extra || ''}</div></div>
     <div class="meta">${esc(dayLabel(x.date))}${storeTag(x.store)} · ${esc(slotsText(x.slots))}</div></div>`;
   let h = '';
-  if (c.missing.length) h += h3i(esc(t('chk_missing', { n: c.missing.length })), t('chk_missing_hint'), 'negc') + `
-    <div class="list">${c.missing.map(x => row(x)).join('')}</div>`;
+  if (c.missing.length){
+    const per = {}; c.missing.forEach(x => (per[x.staff_id] = per[x.staff_id] || []).push(x));
+    const groups = Object.values(per).map(a => a.sort((x, y) => x.date.localeCompare(y.date))).sort((a, b) => a[0].date.localeCompare(b[0].date));
+    h += h3i(esc(t('chk_missing', { n: c.missing.length })), t('chk_missing_hint'), 'negc') + groups.map(a => a.length === 1 ? `<div class="list">${row(a[0])}</div>`
+      : `<details class="fold"><summary>${esc(a[0].name)} · ${esc(t('miss_multi', { n: a.length }))}</summary><div class="inner"><div class="list">${a.map(x => `<div class="item"><div class="meta">${esc(dayLabel(x.date))}${storeTag(x.store)} · ${esc(slotsText(x.slots))}</div></div>`).join('')}</div></div></details>`).join('');
+  }
   if (c.unpicked.length) h += h3i(esc(t('chk_unpicked', { n: c.unpicked.length })), t('chk_unpicked_hint'), 'negc') + `
     <div class="list">${c.unpicked.map(x => row(x, ` <span class="tag">${esc(t('grp_' + x.role))}</span>`)).join('')}</div>`;
   if ((c.dual_picked || []).length) h += h3i(esc(t('chk_dual', { n: c.dual_picked.length })), t('chk_dual_hint'), 'negc') + `
@@ -1936,7 +2002,9 @@ async function viewAdmin(){
   const el = () => $('#asub');
   try {
     if (state.adminSub === 'requests'){
-      const list = await rpc('list_requests', { ...tok(), p_status: 'pending' });
+      const all = await rpc('list_requests', { ...tok(), p_status: null }) || [];
+      const list = all.filter(r => r.status === 'pending').sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+      const doneReq = all.filter(r => r.status !== 'pending');
       const staff = await rpc('admin_list_staff', tok());
       const binds = staff.flatMap(s => (s.ls_ids || []).filter(b => !b.confirmed).map(b => ({ ...b, sid: s.id, sname: s.name })));
       let reviews = []; try { reviews = (await rpc('admin_review_list', tok()) || []).filter(r => !r.locked); } catch(e){}
@@ -1944,7 +2012,12 @@ async function viewAdmin(){
       try { const m2 = await rpc('me', tok()); refreshBadge(m2.pending_requests); } catch(e){}
       el().innerHTML = (reviews.length ? h3i(esc(t('review_title')), t('review_hint')) + `<div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
         + (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
-        + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`));
+        + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`))
+        + (doneReq.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('req_done_grp', { n: doneReq.length }))}</summary><div class="inner"><div class="list">${doneReq.map(r => `<div class="item">
+            <div class="top"><div><strong>${esc(r.requested_by)}</strong> <span class="muted">${esc(t(r.kind === 'update' ? 'req_update' : 'req_delete'))}</span>
+              <span class="tag ${r.status === 'approved' ? 'ok' : 'off'}">${esc(t(r.status === 'approved' ? 'req_approved' : 'req_rejected'))}</span></div></div>
+            <div class="meta">${esc(r.reason || '')}${r.decision_note ? ' · ' + esc(r.decision_note) : ''}</div>
+            <div class="meta num">${esc(fmtDateTime(r.decided_at || r.created_at))}</div></div>`).join('')}</div></div></details>` : '');
     } else if (state.adminSub === 'archive'){
       el().innerHTML = arcAdminHTML(await loadArchives());
     } else if (state.adminSub === 'deleted'){
@@ -1959,12 +2032,15 @@ async function viewAdmin(){
       state.staffList = list;
       const e = state.staffEdit;
       el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
-        `<div class="list">${list.map((s, i) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong style="font-size:17px">${esc(s.name)}</strong>
+        `<div class="list">${list.map((s, i) => !s.is_active ? '' : `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong style="font-size:17px">${esc(s.name)}</strong>
           <button class="mv" style="float:right" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
           <button class="mv" style="float:right;margin-right:6px" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
           <div style="margin:4px 0 0 -6px">${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}</div>${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div></div>
           <div class="acts"><button class="link" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button>
-          <button class="link" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button></div></div>`).join('')}</div>`;
+          <button class="link" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button></div></div>`).join('')}</div>`
+        + (list.some(s => !s.is_active) ? `<details class="fold"><summary>${esc(t('staff_off_grp', { n: list.filter(s => !s.is_active).length }))}</summary><div class="inner"><div class="list">${list.filter(s => !s.is_active).map(s => `<div class="item">
+            <div class="top"><div><strong>${esc(s.name)}</strong> <span class="tag off">${esc(t('inactive'))}</span></div></div>
+            <div class="acts"><button class="link" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button></div></div>`).join('')}</div></div></details>` : '');
     } else if (state.adminSub === 'rates'){
       const rates = await rpc('list_rates', tok()); state.rates = rates;
       const cur = rateFor(today());
@@ -1982,7 +2058,9 @@ async function viewAdmin(){
           <div class="meta num">${esc(t('kitchen'))} ${r.kitchen_pct}% · ${esc(t('runner'))} ${r.runner_pct}% · ${esc(t('bar'))} ${r.bar_pct}%</div></div>`).join('')}</div>`;
     } else if (state.adminSub === 'feedback'){
       const list = await rpc('admin_feedback_list', tok()) || [];
-      el().innerHTML = `<div class="list">${list.map(fbItem).join('') || `<div class="empty">${esc(t('fb_none'))}</div>`}</div>`;
+      const open = list.filter(x => x.status === 'open'), done = list.filter(x => x.status !== 'open');
+      el().innerHTML = `<div class="list">${open.map(fbItem).join('') || `<div class="empty">${esc(t('fb_none'))}</div>`}</div>`
+        + (done.length ? `<details class="fold"><summary>${esc(t('fb_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(fbItem).join('')}</div></div></details>` : '');
     } else if (state.adminSub === 'report'){
       const d = new Date(); const first = ymd(new Date(d.getFullYear(), d.getMonth(), 1));
       el().innerHTML = `<div class="sheet"><div class="row">
@@ -2539,7 +2617,8 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'staff-move': {
-      const list = state.staffList.slice(), i = +el.dataset.i, j = i + (+el.dataset.dir);
+      const list = state.staffList.slice(), i = +el.dataset.i, d = +el.dataset.dir;
+      let j = i + d; while (j >= 0 && j < list.length && !list[j].is_active) j += d;   // 跳过折叠起来的停用员工
       if (j < 0 || j >= list.length) break;
       [list[i], list[j]] = [list[j], list[i]];
       try { await rpc('admin_set_order', { ...tok(), p_ids: list.map(x => x.id) }); state.loginStaff = null; await loadCommon(); render(); } catch(e){ toast(errText(e), true); }
@@ -2817,6 +2896,12 @@ document.addEventListener('click', async ev => {
       inp.click(); break;
     }
     case 'dist-print': distPrint(); break;
+    case 'settle-undo': {
+      document.querySelectorAll('.toast').forEach(n => n.remove());
+      try { await rpc('mark_settled', { ...tok(), p_week_start: el.dataset.week, p_staff_id: el.dataset.staff, p_done: false }); toast(t('undone')); if (state.tab === 'week') keepScroll(viewWeek); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'arc-dl': monthPrint(el.dataset.month); break;
     case 'arc-saved':
       el.disabled = true;
@@ -2905,7 +2990,15 @@ document.addEventListener('change', async ev => {
     render();
   }
   if (el.dataset && el.dataset.act === 'settled'){
-    try { await rpc('mark_settled', { ...tok(), p_week_start: state.week, p_staff_id: el.dataset.staff, p_done: el.checked }); if (state.tab === 'week') viewWeek(); }
+    const on = el.checked, sid = el.dataset.staff, wk = state.week, item = el.closest('.item');
+    try {
+      await rpc('mark_settled', { ...tok(), p_week_start: wk, p_staff_id: sid, p_done: on });
+      if (on){
+        if (item) item.classList.add('fading');
+        toastAction(t('paid_undo', { n: el.dataset.name || '' }), t('undo'), { act: 'settle-undo', staff: sid, week: wk });
+        setTimeout(() => { if (state.tab === 'week') keepScroll(viewWeek); }, 1000);
+      } else if (state.tab === 'week') keepScroll(viewWeek);
+    }
     catch(e){ el.checked = !el.checked; toast(errText(e), true); }
   }
 });
