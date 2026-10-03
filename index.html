@@ -137,6 +137,11 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .todo-n .nt-r.cx .nt-t{color:var(--neg);font-weight:700}
 .todo-n .nt-rel{display:inline-block;background:var(--copper);color:#fff;border-radius:6px;padding:0 6px;margin-left:6px;font-size:13px;font-weight:700}
 .todo-n .btn{display:block;width:100%;margin-top:8px}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:2px 18px;margin-top:6px;font-size:14px;color:var(--muted)}
+.kv>div{display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-width:0}
+.kv>div>span:first-child{min-width:0;overflow-wrap:anywhere;line-height:1.25}
+.kv>div>span.num{color:var(--ink);white-space:nowrap}
+.kv-h{margin-top:8px;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px}
 .toast .tbtn{margin-left:12px;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:4px 12px;font-weight:700}
 .viewbar{position:sticky;top:0;z-index:11;background:var(--copper);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700}
 .viewbar span{flex:1}
@@ -1468,15 +1473,17 @@ function entryTags(e){
   return tags;
 }
 // opts.head: 'server' = 名字加粗在前（周结页按日期 × 门店分组时用），默认 = 日期 + 门店
+// 一组「名称 — 数字」排成两列的小格子（网页 v33）；pairs = [[名称, 已格式化的数字], …]，空的跳过
+function kvHTML(pairs){ const p = pairs.filter(x => x && x[1] !== '' && x[1] != null); return p.length ? `<div class="kv">${p.map(([k, v]) => `<div><span>${esc(k)}</span><span class="num">${esc(v)}</span></div>`).join('')}</div>` : ''; }
 function entryItem(e, opts){
   opts = opts || {};
   state.entryCache[e.entry_id] = e;
   const m = state.me, total = e.card_cents + e.cash_cents;
-  const parts = (e.allocations || []).map(a => `${esc(a.name)} ${eur(a.amount_cents)}`).join(' · ');
+  const parts = kvHTML((e.allocations || []).map(a => [a.name, eur(a.amount_cents)]));
   const tags = entryTags(e);
-  const meta = e.is_bon
-    ? `${esc(t('lbl_wallet'))} ${eur(e.wallet_cents)} · ${esc(t('of_which_store'))} ${eur(e.schluss_cents)} · ${esc(t('card_tip'))} ${eur(e.card_cents)} · ${esc(t('cash_tip'))} ${eur(e.cash_cents)}`
-    : `${esc(t('card'))} ${eur(e.card_cents)} · ${esc(t('cash'))} ${eur(e.cash_cents)}`;
+  const meta = kvHTML(e.is_bon
+    ? [[t('lbl_wallet'), eur(e.wallet_cents)], [t('of_which_store'), eur(e.schluss_cents)], [t('card_tip'), eur(e.card_cents)], [t('cash_tip'), eur(e.cash_cents)]]
+    : [[t('card'), eur(e.card_cents)], [t('cash'), eur(e.cash_cents)]]);
   const acts = [];
   if (e.editable && !opts.locked){
     acts.push(`<button class="link" data-act="entry-edit" data-id="${e.entry_id}">${esc(t('edit'))}</button>`);
@@ -1491,9 +1498,9 @@ function entryItem(e, opts){
         ? `<strong>${esc(e.server || '?')}</strong>`
         : `<strong>${esc(dayLabel(e.date))}</strong>${storeTag(e.store)}${e.server ? ` <span class="muted">${esc(e.server)}</span>` : ''}`}${tags}</div>
       <div class="amt num">${eur(total)}<span class="lbl">${esc(t('tip_total_lbl'))}</span></div></div>
-    <div class="meta num">${meta}</div>
+    ${meta}
     ${xferOf(e.entry_id) ? `<div class="meta num">${esc(xferText(xferOf(e.entry_id)))}</div>` : ''}
-    ${parts ? `<div class="meta num">${esc(t('alloc_lbl'))}: ${parts}</div>` : ''}
+    ${parts ? `<div class="kv-h">${esc(t('alloc_lbl'))}</div>${parts}` : ''}
     ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}
     ${showCount ? `<div class="row cnt"><div class="money"><input class="input num" id="cnt-${e.entry_id}" inputmode="decimal" placeholder="${money(e.wallet_cents)}"></div>
       <button class="btn ghost" style="flex:0 0 110px" data-act="count" data-id="${e.entry_id}">${esc(t('count'))}</button></div>` : ''}
@@ -1570,14 +1577,13 @@ function envelopeCard(e, i, store){
     if (sl.length) shift = slotsText(sl.map(x => x.slot)) + (i.guess ? '?' : '') + (at.length ? ' · ' + t('env_shift_at', { s: at.join(' / ') }) : '');
     else if (i.scheduled === false) shift = t('env_unsched');
   }
-  const detail = [i && i.bon_start ? t('env_bon_time', { a: i.bon_start, b: i.bon_end }) : null,
-    `${t('tip_total_lbl')} ${eur(e.card_cents + e.cash_cents)}`, `${t('of_which_store')} ${eur(e.schluss_cents)}`,
-    xferOf(e.entry_id) ? xferText(xferOf(e.entry_id)) : null].filter(x => x);
+  const detail = kvHTML([[t('tip_total_lbl'), eur(e.card_cents + e.cash_cents)], [t('of_which_store'), eur(e.schluss_cents)]]);
   const acts = e.has_photo ? `<div class="acts"><button class="link" data-act="photos" data-id="${e.entry_id}">${esc(t('photos'))}</button></div>` : '';
   return `<div class="item env">
     <div class="top"><div><span class="who">${esc(e.server || '?')}</span>${shift ? `<span class="tag${i && i.scheduled === false ? ' late' : ' m'}"${i && i.guess ? ` title="${esc(t('env_guess'))}"` : ''}>${esc(shift)}</span>` : ''}${entryTags(e)}</div>
       <div class="amt num">${eur(e.wallet_cents)}<span class="lbl">${esc(t('env_declared'))}</span></div></div>
-    <div class="meta num">${esc(detail.join(' · '))}</div>
+    ${i && i.bon_start ? `<div class="meta num">${esc(t('env_bon_time', { a: i.bon_start, b: i.bon_end }))}</div>` : ''}${detail}
+    ${xferOf(e.entry_id) ? `<div class="meta num">${esc(xferText(xferOf(e.entry_id)))}</div>` : ''}
     ${acts}
     <div class="row cnt"><button class="btn" data-act="cnt-ok" data-id="${e.entry_id}">${esc(t('cnt_ok', { x: eur(e.wallet_cents) }))}</button>
       <button class="btn ghost" style="flex:0 0 auto;width:auto;padding:0 14px" data-act="cnt-diff" data-id="${e.entry_id}" aria-expanded="false">${esc(t('cnt_diff'))}</button></div>
@@ -1817,9 +1823,9 @@ function distHTML(dist){
     const waitTag = l.done && dist.required && ['todo', 'disputed', 'need_admin'].includes(r.status)
       ? `<span class="tag ${days(l) > 3 ? 'bad' : 'pend'}">${esc(days(l) ? t('waited', { n: days(l) }) : t('waited_0'))}</span>` : '';
     const roles = (l.roles || []).map(x => `<span class="tag">${esc(t('role_' + x))}</span>`).join('');
-    const nums = [`${t('dist_recv')} ${eur(l.received_cents)}`, l.shortage_cents ? `${t('dist_short')} −${eur(l.shortage_cents)}` : '',
-      l.adj_cents ? `${t('dist_adj')} ${l.adj_cents > 0 ? '+' : '−'}${eur(Math.abs(l.adj_cents))}` : '', l.carry_in_cents ? `${t('dist_cin')} +${eur(l.carry_in_cents)}` : '',
-      `${t('dist_cout')} ${eur(l.carry_out_cents)}`].filter(Boolean).join(' · ');
+    const nums = kvHTML([[t('dist_recv'), eur(l.received_cents)], l.shortage_cents ? [t('dist_short'), '−' + eur(l.shortage_cents)] : null,
+      l.adj_cents ? [t('dist_adj'), (l.adj_cents > 0 ? '+' : '−') + eur(Math.abs(l.adj_cents))] : null, l.carry_in_cents ? [t('dist_cin'), '+' + eur(l.carry_in_cents)] : null,
+      [t('dist_cout'), eur(l.carry_out_cents)]]);
     if (r.receipt_id) acts.push(`<button class="link" data-act="rc-view" data-id="${r.receipt_id}">${esc(t(r.status === 'paper' ? 'dist_view_paper' : 'dist_view'))}</button>`);
     if (me.is_admin && r.status === 'need_admin') acts.push(`<button class="link" data-act="rc-admin-pay" data-staff="${l.staff_id}">${esc(t('dist_admin_pay'))}</button>`);
     if (me.is_admin && ['todo', 'disputed'].includes(r.status)) acts.push(`<button class="link" data-act="rc-paper" data-staff="${l.staff_id}">${esc(t('dist_paper'))}</button>`);
@@ -1827,7 +1833,7 @@ function distHTML(dist){
         <label class="check" style="flex:1"><input type="checkbox" data-act="settled" data-staff="${l.staff_id}" data-name="${esc(l.name)}" ${l.done ? 'checked' : ''} ${selfLock || lockSigned ? 'disabled' : ''} aria-label="${esc(t('dist_paid'))}" ${lockSigned ? `title="${esc(t('err_RECEIPT_SIGNED'))}"` : ''}>
         <span><strong>${esc(l.name)}</strong>${l.is_kitchen ? '' : roles}${l.is_kitchen ? `<span class="tag k">${esc(t('kitchen'))}</span>` : ''}</span></label>
         <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div>
-      <div class="meta num">${esc(nums)}</div>
+      ${nums}
       <div class="meta">${l.done ? esc(t('dist_by', { n: l.done_by || '?', t: fmtDateTime(l.done_at) })) : ''}${dist.required && l.payout_euros !== 0 ? rsLabel(r) : ''}${waitTag}${selfLock ? ` <span class="small muted">${esc(t('dist_self_hint'))}</span>` : ''}</div>
       ${(r.parts || []).length ? `<div class="meta">${esc((r.signer_name || '') + ': ' + r.parts.map(p => p.name + ' ' + eur(p.cents)).join(' · '))}</div>` : ''}
       ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}</div>`;
@@ -2216,9 +2222,8 @@ function deletedCard(x){
       : x.kind === 'approved' ? `<span class="tag pend">${esc(t('del_tag_approved'))}</span>`
       : x.by_admin ? `<span class="tag">${esc(t('del_tag_admin'))}</span>` : '')
     + (x.resubmitted ? `<span class="tag ok">${esc(t('del_tag_resub'))}</span>` : '');
-  const money = [b.wallet_cents != null ? `${t('lbl_wallet')} ${eur(b.wallet_cents)}` : '',
-    x.schluss_cents != null ? `${t('of_which_store')} ${eur(x.schluss_cents)}` : '',
-    `${t('card_tip')} ${eur(b.card_cents || 0)}`, `${t('cash_tip')} ${eur(b.cash_cents || 0)}`].filter(Boolean).join(' · ');
+  const money = kvHTML([b.wallet_cents != null ? [t('lbl_wallet'), eur(b.wallet_cents)] : null, x.schluss_cents != null ? [t('of_which_store'), eur(x.schluss_cents)] : null,
+    [t('card_tip'), eur(b.card_cents || 0)], [t('cash_tip'), eur(b.cash_cents || 0)]]);
   const names = a => (a || []).length ? a.join('、') : '—';
   const helpers = (b.runners || b.bars) ? `${t('runner')} ${names(b.runners)} · ${t('bar')} ${names(b.bars)}` : '';
   const who = x.kind === 'approved'
@@ -2227,7 +2232,7 @@ function deletedCard(x){
   return `<div class="item">
     <div class="top"><div><strong>${esc(b.server || '?')}</strong>${tags}<div class="meta">${b.date ? esc(dayLabel(String(b.date).slice(0, 10))) : '?'}${storeTag(b.store)}</div></div>
       <div class="amt num">${eur(total)}<span class="lbl">${esc(t('tip_total_lbl'))}</span></div></div>
-    <div class="meta num">${esc(money)}</div>
+    ${money}
     ${helpers ? `<div class="meta">${esc(helpers)}</div>` : ''}
     <div class="meta">${who}${x.reason ? '<br>' + esc(t('del_reason', { r: x.reason })) : ''}</div></div>`;
 }
