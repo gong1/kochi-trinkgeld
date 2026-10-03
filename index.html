@@ -128,6 +128,15 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .todo-card .todo-i:first-of-type{border-top:0}
 .todo-card .todo-i span{flex:1}
 .todo-card .btn{flex:none;width:auto;height:38px;padding:0 14px;font-size:15px}
+.todo-card .todo-n{display:block;padding:8px 0;border-top:1px solid rgba(176,106,44,.2)}
+.todo-card .todo-n:first-of-type{border-top:0}
+.todo-n .nt-h{font-weight:700;margin-bottom:6px}
+.todo-n .nt-r{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding:6px 0;border-top:1px dashed rgba(176,106,44,.25)}
+.todo-n .nt-r .nt-d{font-weight:700}
+.todo-n .nt-r .nt-t{flex-basis:100%}
+.todo-n .nt-r.cx .nt-t{color:var(--neg);font-weight:700}
+.todo-n .nt-rel{display:inline-block;background:var(--copper);color:#fff;border-radius:6px;padding:0 6px;margin-left:6px;font-size:13px;font-weight:700}
+.todo-n .btn{display:block;width:100%;margin-top:8px}
 .toast .tbtn{margin-left:12px;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:4px 12px;font-weight:700}
 .viewbar{position:sticky;top:0;z-index:11;background:var(--copper);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700}
 .viewbar span{flex:1}
@@ -333,7 +342,7 @@ zh: {
   ntf_short:'{n}你好，你的排班有变动，请打开 Kochi Team 查看并点「确认收到」：https://app.kochide.com',
   ntf_short_pub:'{n}你好，第 {w} 周的排班已发布，请打开 Kochi Team 查看你的班并点「确认收到」：https://app.kochide.com',
   ntf_group_pub:'大家好，第 {w} 周的排班已发布。请打开 Kochi Team 查看自己的班，并在「我的待办」里点「确认收到」：https://app.kochide.com',
-  nt_pub:'第 {w} 周排班已发布，你的班：{list}', nt_change:'你的排班有变动：{list}', nt_ok:'确认收到', nt_done:'已确认，谢谢',
+  nt_pub:'第 {w} 周排班已发布，你的班：{list}', nt_change:'你的排班有变动：{list}', nt_ok:'确认收到', nt_pub_h:'第 {w} 周排班已发布，你的班：', nt_change_h:'你的排班有变动：', nt_cancel:'取消了，不用来', nt_done:'已确认，谢谢',
   nt_title:'变动通知（{n} 人未确认）', nt_title_ok:'变动通知', nt_conf_grp:'已确认（{n}）', nt_sent:'{t} 发出', nt_conf_at:'{t} 确认', nt_remind:'WhatsApp 提醒',
   nt_hint:'发布或改动排班后，系统给本人发通知，本人在「我的待办」里点「确认收到」。没确认的可以用 WhatsApp 提醒一下。',
   ntf_batch:'{n}你好，排班有变动：{list}。请打开 Kochi Team 点「确认收到」，谢谢！ https://app.kochide.com', ntf_item:'{d} {s} {sl} {a}–{b}（{r}）', ntf_item_cancel:'{d} {s} {sl}取消了，不用来了',
@@ -503,7 +512,7 @@ de: {
   ntf_short:'Hallo {n}, dein Dienstplan hat sich geändert. Bitte in Kochi Team ansehen und „Erhalten“ bestätigen: https://app.kochide.com',
   ntf_short_pub:'Hallo {n}, der Dienstplan für KW {w} ist veröffentlicht. Bitte in Kochi Team deine Schichten ansehen und „Erhalten“ bestätigen: https://app.kochide.com',
   ntf_group_pub:'Hallo zusammen, der Dienstplan für KW {w} ist veröffentlicht. Bitte in Kochi Team die eigenen Schichten ansehen und unter „Meine Aufgaben“ „Erhalten“ bestätigen: https://app.kochide.com',
-  nt_pub:'Dienstplan KW {w} veröffentlicht, deine Schichten: {list}', nt_change:'Dein Dienstplan hat sich geändert: {list}', nt_ok:'Erhalten', nt_done:'Bestätigt – danke',
+  nt_pub:'Dienstplan KW {w} veröffentlicht, deine Schichten: {list}', nt_change:'Dein Dienstplan hat sich geändert: {list}', nt_ok:'Erhalten', nt_pub_h:'Dienstplan KW {w} veröffentlicht, deine Schichten:', nt_change_h:'Dein Dienstplan hat sich geändert:', nt_cancel:'Entfällt – nicht kommen', nt_done:'Bestätigt – danke',
   nt_title:'Benachrichtigungen ({n} unbestätigt)', nt_title_ok:'Benachrichtigungen', nt_conf_grp:'Bestätigt ({n})', nt_sent:'gesendet {t}', nt_conf_at:'bestätigt {t}', nt_remind:'WhatsApp-Erinnerung',
   nt_hint:'Nach Veröffentlichung oder Änderung bekommt die Person eine Benachrichtigung und bestätigt unter „Meine Aufgaben“ mit „Erhalten“. Wer noch nicht bestätigt hat, kann per WhatsApp erinnert werden.',
   ntf_batch:'Hallo {n}, Änderungen im Dienstplan: {list}. Bitte in Kochi Team „Erhalten“ bestätigen, danke! https://app.kochide.com', ntf_item:'{d} {s}, {sl} {a}–{b} ({r})', ntf_item_cancel:'{d} {s}, {sl}: entfällt, du musst nicht kommen',
@@ -987,7 +996,7 @@ function slotsText(sl){ return (sl || []).slice().sort().reverse().map(slotLabel
 function todoCardHTML(){
   if (state.rcWeek) return '';
   const items = [];
-  (state.notices || []).forEach(n => items.push([noticeText(n), `<button class="btn" data-act="notice-ok" data-id="${n.id}">${esc(t('nt_ok'))}</button>`]));
+  (state.notices || []).forEach(n => items.push([null, noticeHTML(n)]));
   rcTodo().forEach(l => items.push([t(l.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: l.kw, x: eur(Math.abs(l.payout_euros) * 100) }) + (l.receipt.resign ? t('rc_banner_resign') : ''),
     `<button class="btn" data-act="rc-go" data-week="${l.week_start}">${esc(t('rc_go'))}</button>`]));
   const mb = state.myBon;
@@ -997,7 +1006,17 @@ function todoCardHTML(){
   if (state.banner && tabs().includes('plan') && state.tab !== 'plan') items.push([t('banner_avail'), `<button class="btn" data-act="banner-go">${esc(t('banner_go'))}</button>`]);
   if (!items.length) return '';
   return `<div class="banner"><div class="todo-card" role="status"><div class="todo-t">${esc(t('todo_title', { n: items.length }))}</div>
-    ${items.map(([txt, btn]) => `<div class="todo-i"><span>${esc(txt)}</span>${btn}</div>`).join('')}</div></div>`;
+    ${items.map(([txt, btn]) => txt === null ? btn : `<div class="todo-i"><span>${esc(txt)}</span>${btn}</div>`).join('')}</div></div>`;
+}
+// 排班变动通知：标题一行，每个班一行（日期 · 门店 · 时段和时间 · 岗位），取消的标红；按钮在下面（网页 v32）
+function noticeHTML(n){
+  const rows = (n.items || []).slice().sort((a, b) => String(a.date).localeCompare(String(b.date)) || (a.slot === 'dinner') - (b.slot === 'dinner')).map(i => {
+    const rel = i.date === today() ? t('today_word') : i.date === addDays(today(), 1) ? t('tomorrow_word') : '';
+    const what = i.cancelled ? t('nt_cancel') : `${slotLabel(i.slot)} ${i.start || ''}–${i.end || ''}` + ((i.roles || []).length ? ' · ' + i.roles.map(k => t('grp_' + k)).join(' + ') : '');
+    return `<div class="nt-r${i.cancelled ? ' cx' : ''}"><span class="nt-d">${esc(dayLabel(i.date))}${rel ? `<span class="nt-rel">${esc(rel)}</span>` : ''}</span>${storeTag(i.store)}<span class="nt-t num">${esc(what)}</span></div>`;
+  }).join('');
+  const head = n.kind === 'publish' ? t('nt_pub_h', { w: isoWeek(n.week_start || today()) }) : t('nt_change_h');
+  return `<div class="todo-n"><div class="nt-h">${esc(head)}</div>${rows}<button class="btn" data-act="notice-ok" data-id="${n.id}">${esc(t('nt_ok'))}</button></div>`;
 }
 function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
