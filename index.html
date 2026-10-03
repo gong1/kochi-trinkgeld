@@ -2415,9 +2415,11 @@ function h3i(title, hint, cls){
   return `<h3 class="${cls || ''}">${title}${hint ? ` <button class="ib" data-act="hint" aria-label="${esc(t('hint_lbl'))}" aria-expanded="false">ⓘ</button>` : ''}</h3>`
     + (hint ? `<div class="hint" hidden>${esc(hint)}</div>` : '');
 }
+// 员工最早能看的日期（v28：30 天前；老板、排班员不限）。数据库同样限制，这里只是让「‹」停住
+function planMin(){ return isSched() ? null : (state.plan && state.plan.min_date) || addDays(today(), -30); }
 function planNav(){
-  const w = state.planWeek;
-  return `<div class="weeknav"><button data-act="plan-prev" aria-label="prev">‹</button>
+  const w = state.planWeek, min = planMin();
+  return `<div class="weeknav"><button data-act="plan-prev" aria-label="prev" ${min && addDays(w, -1) < min ? 'disabled' : ''}>‹</button>
     <div class="wl">${esc(dm(w))} – ${esc(dm(addDays(w,6)))}<small>${esc(t('week_of', { w: isoWeek(w) }))}</small></div>
     <button data-act="plan-next" aria-label="next">›</button></div>
     ${w !== mondayOf(today()) ? `<div style="text-align:center;margin:-6px 0 12px"><button class="link" data-act="plan-this">${esc(t('plan_this'))}</button></div>` : ''}`;
@@ -2876,7 +2878,7 @@ document.addEventListener('click', async ev => {
       try { await rpc('admin_feedback_set', { ...tok(), p_id: el.dataset.id, p_status: el.dataset.s });
         state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
-    case 'plan-prev': state.planWeek = addDays(state.planWeek, -7); viewPlan(); break;
+    case 'plan-prev': { const min = planMin(); if (min && addDays(state.planWeek, -1) < min) break; state.planWeek = addDays(state.planWeek, -7); viewPlan(); break; }
     case 'plan-this': state.planWeek = mondayOf(today()); viewPlan(); break;
     case 'plan-next': state.planWeek = addDays(state.planWeek, 7); viewPlan(); break;
     case 'plan-sub': state.planSub = el.dataset.k; planRender(); break;
