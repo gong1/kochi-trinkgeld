@@ -410,7 +410,7 @@ zh: {
   push_denied:'通知权限被拒绝了。请在手机「设置」里允许 Kochi Team 发通知，然后再点一次「开启手机通知」。', push_how_title:'开启手机通知',
   push_how_ios:'iPhone 需要先把 Kochi Team 添加到主屏幕：在 Safari 里点下方「分享」按钮 →「添加到主屏幕」。然后从主屏幕打开 Kochi Team，重新登录（勾选「这是我自己的手机」），再在右上角「⋯」里点「开启手机通知」。需要 iOS 16.4 或更新版本。',
   push_how_personal:'只有在自己的手机上才能开启通知：请退出登录，重新登录时勾选「这是我自己的手机，保持登录」，再来开启。',
-  push_how_unsupported:'这个浏览器不支持手机通知。安卓请用 Chrome；iPhone 请先添加到主屏幕（iOS 16.4 以上）。', push_tag:'📱 有手机通知',
+  push_how_unsupported:'这个浏览器不支持手机通知。安卓请用 Chrome；iPhone 请先添加到主屏幕（iOS 16.4 以上）。', push_tag:'📱 有手机通知', push_sum:'手机通知：已开 {a} 人 · 未开 {b} 人', push_on_tag:'📱 已开通知', push_on_n:'📱 {n} 台', push_off_tag:'未开通知',
   hint_lbl:'说明', env_declared:'员工申报', cnt_ok:'数过了，是 {x}', cnt_diff:'金额不一致', cnt_diff_lbl:'实际点出的金额',
   tag_counted_confirm:'已点收 · 一致确认', tag_counted_manual:'已点收 · 手填',
   nets_fold:'预计净额（{n} 人）', entries_day:'{n} 条', rc_open_week:'KW {w} · 还有 {n} 人未完成',
@@ -580,7 +580,7 @@ de: {
   push_denied:'Benachrichtigungen wurden abgelehnt. Bitte in den Handy-Einstellungen für Kochi Team erlauben und dann erneut „Handy-Benachrichtigungen an“ tippen.', push_how_title:'Handy-Benachrichtigungen',
   push_how_ios:'Auf dem iPhone zuerst Kochi Team zum Home-Bildschirm hinzufügen: in Safari unten auf „Teilen“ →„Zum Home-Bildschirm“. Dann Kochi Team vom Home-Bildschirm öffnen, neu anmelden („Das ist mein eigenes Handy“ ankreuzen) und oben rechts unter „⋯“ „Handy-Benachrichtigungen an“ tippen. Ab iOS 16.4.',
   push_how_personal:'Benachrichtigungen gehen nur auf dem eigenen Handy: Bitte abmelden und beim Anmelden „Das ist mein eigenes Handy“ ankreuzen.',
-  push_how_unsupported:'Dieser Browser unterstützt keine Benachrichtigungen. Android: bitte Chrome nutzen; iPhone: zuerst zum Home-Bildschirm hinzufügen (ab iOS 16.4).', push_tag:'📱 Benachrichtigungen an',
+  push_how_unsupported:'Dieser Browser unterstützt keine Benachrichtigungen. Android: bitte Chrome nutzen; iPhone: zuerst zum Home-Bildschirm hinzufügen (ab iOS 16.4).', push_tag:'📱 Benachrichtigungen an', push_sum:'Handy-Benachrichtigungen: {a} an · {b} aus', push_on_tag:'📱 Benachrichtigungen an', push_on_n:'📱 {n} Geräte', push_off_tag:'Benachrichtigungen aus',
   hint_lbl:'Erklärung', env_declared:'Laut Mitarbeiter', cnt_ok:'Stimmt – {x}', cnt_diff:'Betrag weicht ab', cnt_diff_lbl:'Tatsächlich gezählter Betrag',
   tag_counted_confirm:'Gezählt · bestätigt', tag_counted_manual:'Gezählt · eingegeben',
   nets_fold:'Voraussichtlicher Saldo ({n})', entries_day:'{n} Einträge', rc_open_week:'KW {w} · noch {n} offen',
@@ -2103,12 +2103,16 @@ async function viewAdmin(){
       const list = await rpc('admin_list_staff', tok());
       try { const pr = await rpc('admin_sched_profiles', tok()) || []; list.forEach(s => { const x = pr.find(y => y.id === s.id); if (x){ s.in_schedule = x.in_schedule; s.skills = x.skills; } }); } catch(e){}   // v21 之前没有
       state.staffList = list;
+      let pm = null; try { pm = await rpc('push_status', tok()) || {}; } catch(e){}   // v27 之前没有
+      const pushTag = s => !pm ? '' : pm[s.id] ? `<span class="tag ok">${esc(pm[s.id] > 1 ? t('push_on_n', { n: pm[s.id] }) : t('push_on_tag'))}</span>` : `<span class="tag off">${esc(t('push_off_tag'))}</span>`;
+      const act = list.filter(s => s.is_active), pOn = pm ? act.filter(s => pm[s.id]).length : 0;
       const e = state.staffEdit;
       el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
+        (pm ? `<div class="muted small" style="margin:0 0 10px">${esc(t('push_sum', { a: pOn, b: act.length - pOn }))}</div>` : '') +
         `<div class="list">${list.map((s, i) => !s.is_active ? '' : `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong style="font-size:17px">${esc(s.name)}</strong>
           <button class="mv" style="float:right" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
           <button class="mv" style="float:right;margin-right:6px" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
-          <div style="margin:4px 0 0 -6px">${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}</div>${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div></div>
+          <div style="margin:4px 0 0 -6px">${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${pushTag(s)}</div>${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div></div>
           <div class="acts"><button class="link" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button>
           <button class="link" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button></div></div>`).join('')}</div>`
         + (list.some(s => !s.is_active) ? `<details class="fold"><summary>${esc(t('staff_off_grp', { n: list.filter(s => !s.is_active).length }))}</summary><div class="inner"><div class="list">${list.filter(s => !s.is_active).map(s => `<div class="item">
