@@ -7,6 +7,10 @@
 <title>Kochi Team</title>
 <meta name="application-name" content="Kochi Team">
 <meta name="apple-mobile-web-app-title" content="Kochi Team">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1F2A27">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪙</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -273,6 +277,8 @@ td.r,th.r{text-align:right}
 <script>
 // ============ 配置 ============
 const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
+// 手机推送（Web Push）的公钥：公开的，私钥只在 Supabase Secrets 里
+const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 
@@ -399,6 +405,12 @@ zh: {
   arc_hint:'每个月的周分配表（按周一所在月份归属）。所有周锁定后，在周结页顶部提醒下载。PDF 存好后请另外存档（云盘 + 纸质），数据库备份只保留 90 天。',
   why_short:'原因：本周你承担的短款 {x}', why_adj:'原因：调整 −{x}（{r}）', bon_steps:'先在收银机上 Entstempeln（打卡下班），再打印 Abschlussbericht，然后拍下面两张照片。',
   own_bon:'自己的 Bon', alloc_lbl:'分配', no_service:'没排服务员', day_sum:'{n} 笔',
+  push_on:'开启手机通知', push_off:'关闭手机通知', push_test:'发一条测试通知', push_on_ok:'手机通知已开启。排班变动、待签收会直接提醒你。',
+  push_off_ok:'这台手机的通知已关闭', push_test_sent:'测试通知已发出，几秒内应该收到', push_test_none:'没有发出去：这台手机的通知没有登记成功。请关闭后重新开启。',
+  push_denied:'通知权限被拒绝了。请在手机「设置」里允许 Kochi Team 发通知，然后再点一次「开启手机通知」。', push_how_title:'开启手机通知',
+  push_how_ios:'iPhone 需要先把 Kochi Team 添加到主屏幕：在 Safari 里点下方「分享」按钮 →「添加到主屏幕」。然后从主屏幕打开 Kochi Team，重新登录（勾选「这是我自己的手机」），再在右上角「⋯」里点「开启手机通知」。需要 iOS 16.4 或更新版本。',
+  push_how_personal:'只有在自己的手机上才能开启通知：请退出登录，重新登录时勾选「这是我自己的手机，保持登录」，再来开启。',
+  push_how_unsupported:'这个浏览器不支持手机通知。安卓请用 Chrome；iPhone 请先添加到主屏幕（iOS 16.4 以上）。', push_tag:'📱 有手机通知',
   hint_lbl:'说明', env_declared:'员工申报', cnt_ok:'数过了，是 {x}', cnt_diff:'金额不一致', cnt_diff_lbl:'实际点出的金额',
   tag_counted_confirm:'已点收 · 一致确认', tag_counted_manual:'已点收 · 手填',
   nets_fold:'预计净额（{n} 人）', entries_day:'{n} 条', rc_open_week:'KW {w} · 还有 {n} 人未完成',
@@ -428,7 +440,7 @@ zh: {
   act_personal_device:'个人设备保持登录', act_pin_reset:'重置 PIN', act_rate_set:'改分配比例', act_request_approve:'批准修改申请', act_request_delete:'申请删除',
   act_request_reject:'拒绝修改申请', act_request_update:'申请修改', act_sched_publish:'发布排班', act_set_initial_pin:'设置自己的 PIN', act_settle_mark:'标记已发放',
   act_shift_change:'改排班', act_shift_remove:'删排班', act_shortage_bearer:'改差额承担方', act_staff_main_role:'改主岗位', act_staff_reorder:'调整员工顺序',
-  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据', act_month_archive:'月度存档', act_view_end:'结束员工视角查看', act_notice_confirm:'确认排班变动', act_staff_sched_profile:'改员工排班设置',
+  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据', act_month_archive:'月度存档', act_view_end:'结束员工视角查看', act_notice_confirm:'确认排班变动', act_push_on:'开启手机通知', act_staff_sched_profile:'改员工排班设置',
   chk_missing:'排了班、还没交 Bon（{n}）', chk_missing_hint:'到第二天 12:00 还没有录入。请提醒本人尽快交；如果那天没上班，请排班员在「排班」里删掉这个班，提醒就会消失。',
   chk_unpicked:'排了班、但没人选的 Runner / 吧台（{n}）', chk_unpicked_hint:'当天这家店的 Bon 里没有人选他。确实上了班的，请当天的服务员在「账本」里申请修改把他加上；没上班的，请排班员删掉这个班。',
   chk_lock_warn:'这周还有 {n} 条排班提醒（漏交 Bon 或没被选的 Runner / 吧台）没有处理。锁定后就不能再改了。仍然锁定吗？',
@@ -563,6 +575,12 @@ de: {
   arc_hint:'Monatliche Wochenverteilungen (Woche zählt zum Monat ihres Montags). Nach Abschluss aller Wochen erscheint oben im Abschluss eine Erinnerung. Das PDF bitte zusätzlich ablegen (Cloud + Papier) – die Datenbank-Sicherung wird nur 90 Tage aufbewahrt.',
   why_short:'Grund: von dir getragener Fehlbetrag {x}', why_adj:'Grund: Korrektur −{x} ({r})', bon_steps:'Zuerst an der Kasse ausstempeln, dann den Abschlussbericht drucken und die beiden Fotos unten aufnehmen.',
   own_bon:'Eigener Bon', alloc_lbl:'Verteilung', no_service:'Kein Service eingeplant', day_sum:'{n} Anteile',
+  push_on:'Handy-Benachrichtigungen an', push_off:'Handy-Benachrichtigungen aus', push_test:'Test-Benachrichtigung senden', push_on_ok:'Benachrichtigungen sind an. Dienstplanänderungen und offene Quittungen erscheinen direkt auf dem Handy.',
+  push_off_ok:'Benachrichtigungen auf diesem Handy ausgeschaltet', push_test_sent:'Test gesendet – sollte in wenigen Sekunden ankommen', push_test_none:'Nicht gesendet: Dieses Handy ist nicht richtig angemeldet. Bitte aus- und wieder einschalten.',
+  push_denied:'Benachrichtigungen wurden abgelehnt. Bitte in den Handy-Einstellungen für Kochi Team erlauben und dann erneut „Handy-Benachrichtigungen an“ tippen.', push_how_title:'Handy-Benachrichtigungen',
+  push_how_ios:'Auf dem iPhone zuerst Kochi Team zum Home-Bildschirm hinzufügen: in Safari unten auf „Teilen“ →„Zum Home-Bildschirm“. Dann Kochi Team vom Home-Bildschirm öffnen, neu anmelden („Das ist mein eigenes Handy“ ankreuzen) und oben rechts unter „⋯“ „Handy-Benachrichtigungen an“ tippen. Ab iOS 16.4.',
+  push_how_personal:'Benachrichtigungen gehen nur auf dem eigenen Handy: Bitte abmelden und beim Anmelden „Das ist mein eigenes Handy“ ankreuzen.',
+  push_how_unsupported:'Dieser Browser unterstützt keine Benachrichtigungen. Android: bitte Chrome nutzen; iPhone: zuerst zum Home-Bildschirm hinzufügen (ab iOS 16.4).', push_tag:'📱 Benachrichtigungen an',
   hint_lbl:'Erklärung', env_declared:'Laut Mitarbeiter', cnt_ok:'Stimmt – {x}', cnt_diff:'Betrag weicht ab', cnt_diff_lbl:'Tatsächlich gezählter Betrag',
   tag_counted_confirm:'Gezählt · bestätigt', tag_counted_manual:'Gezählt · eingegeben',
   nets_fold:'Voraussichtlicher Saldo ({n})', entries_day:'{n} Einträge', rc_open_week:'KW {w} · noch {n} offen',
@@ -592,7 +610,7 @@ de: {
   act_personal_device:'Auf eigenem Gerät angemeldet bleiben', act_pin_reset:'PIN zurückgesetzt', act_rate_set:'Anteile geändert', act_request_approve:'Änderungsantrag genehmigt', act_request_delete:'Löschung beantragt',
   act_request_reject:'Änderungsantrag abgelehnt', act_request_update:'Änderung beantragt', act_sched_publish:'Dienstplan veröffentlicht', act_set_initial_pin:'Eigene PIN gesetzt', act_settle_mark:'Als ausgezahlt markiert',
   act_shift_change:'Schicht geändert', act_shift_remove:'Schicht gelöscht', act_shortage_bearer:'Fehlbetrag-Träger geändert', act_staff_main_role:'Hauptrolle geändert', act_staff_reorder:'Reihenfolge geändert',
-  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen', act_month_archive:'Monat archiviert', act_view_end:'Mitarbeiter-Ansicht beendet', act_notice_confirm:'Dienstplanänderung bestätigt', act_staff_sched_profile:'Dienstplan-Einstellungen geändert',
+  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen', act_month_archive:'Monat archiviert', act_view_end:'Mitarbeiter-Ansicht beendet', act_notice_confirm:'Dienstplanänderung bestätigt', act_push_on:'Handy-Benachrichtigungen an', act_staff_sched_profile:'Dienstplan-Einstellungen geändert',
   chk_missing:'Eingeplant, aber noch kein Bon ({n})', chk_missing_hint:'Bis 12:00 Uhr am Folgetag kein Eintrag. Bitte die Person erinnern. Falls sie nicht gearbeitet hat, die Schicht unter „Dienstplan“ löschen – dann verschwindet der Hinweis.',
   chk_unpicked:'Eingeplante Runner / Bar, die niemand ausgewählt hat ({n})', chk_unpicked_hint:'In keinem Bon dieses Tages in diesem Restaurant ausgewählt. Hat die Person gearbeitet, bitte die Servicekraft, im „Konto“ eine Änderung zu beantragen und sie hinzuzufügen; sonst die Schicht im Dienstplan löschen.',
   chk_lock_warn:'Für diese Woche sind noch {n} Dienstplan-Hinweise offen (fehlender Bon oder nicht ausgewählte Runner/Bar). Nach dem Abschluss ist keine Änderung mehr möglich. Trotzdem abschließen?',
@@ -753,6 +771,9 @@ const ERR_ZH = {
   PARTS_SUM: '厨房内部分配的合计必须等于整份金额。请检查每人的金额。',
   RECEIPT_IMMUTABLE: '签收记录不能修改或删除。',
   APPEND_ONLY: '这类记录只能新增，不能修改或删除。',
+  PUSH_PERSONAL_ONLY: '只有在自己的手机上（登录时勾选「这是我自己的手机」）才能开启通知。',
+  PUSH_INVALID: '这台手机的通知登记不完整。请关闭后重新开启。',
+  PUSH_NOT_CONFIGURED: '手机通知还没有配置好（推送密钥还没设置）。请联系老板。',
   INVALID_DATE: '日期不对：只有今天和明天的改动需要立即通知，之后的改动在「重新发布并通知」时统一通知。',
   MONTH_NOT_READY: '这个月还有周没锁定周结，全部锁定后才能存档。',
   RECEIPT_SIGNED: '这个人这周已经签收，「已发放」不能再取消或修改。如果发错了，请在后面还开着的周记一笔调整。',
@@ -830,6 +851,9 @@ const ERR_DE = {
   PARTS_SUM: 'Die Summe der Aufteilung muss dem Küchenanteil entsprechen. Bitte Beträge prüfen.',
   RECEIPT_IMMUTABLE: 'Quittungen können nicht geändert oder gelöscht werden.',
   APPEND_ONLY: 'Diese Einträge können nur ergänzt, nicht geändert oder gelöscht werden.',
+  PUSH_PERSONAL_ONLY: 'Benachrichtigungen nur auf dem eigenen Handy (beim Anmelden „Das ist mein eigenes Handy“ ankreuzen).',
+  PUSH_INVALID: 'Die Anmeldung dieses Handys ist unvollständig. Bitte aus- und wieder einschalten.',
+  PUSH_NOT_CONFIGURED: 'Handy-Benachrichtigungen sind noch nicht eingerichtet (Schlüssel fehlen). Bitte den Chef informieren.',
   INVALID_DATE: 'Ungültiges Datum: Sofort benachrichtigt werden nur Änderungen für heute und morgen; spätere gesammelt mit „Veröffentlichen & benachrichtigen“.',
   MONTH_NOT_READY: 'Noch nicht alle Wochen dieses Monats abgeschlossen – Archivierung erst danach möglich.',
   RECEIPT_SIGNED: 'Für diese Woche bereits quittiert – „Ausgezahlt“ kann nicht mehr zurückgenommen oder geändert werden. Bei einem Fehler bitte in einer offenen Woche eine Korrektur buchen.',
@@ -911,12 +935,42 @@ function tabs(){
 // 底部导航：超级管理员只放 周结 / 排班 / 管理；录入和账本在「⋯」菜单里（tabs() 仍然是能进的全部页面）
 function navTabs(){ return state.me && state.me.is_admin ? ['week', 'plan', 'admin'].filter(k => tabs().includes(k)) : tabs(); }
 function logoutLocal(){ state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false; }
+// ============ 手机推送（v27）============
+const pushSupported = () => 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+const isIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent);
+const isStandalone = () => window.navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+function b64uToBytes(s){ const p = '='.repeat((4 - s.length % 4) % 4), b = atob((s + p).replace(/-/g, '+').replace(/_/g, '/')); return Uint8Array.from(b, c => c.charCodeAt(0)); }
+async function pushSub(){ if (!pushSupported()) return null; const reg = await navigator.serviceWorker.getRegistration(); return reg ? reg.pushManager.getSubscription() : null; }
+async function refreshPushState(){ try { state.pushOn = !!(await pushSub()) && !!state.personal; } catch(e){ state.pushOn = false; } }
+// 调用推送服务（失败不影响其他功能）
+async function callPush(action, extra){
+  try { const { data } = await sb.functions.invoke('push', { body: { action, token: state.token, ...(extra || {}) } }); return data; } catch(e){ return null; }
+}
+async function pushOn(){
+  const how = k => { const dlg = $('#photoDlg'); dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('push_how_title'))}</h2><div style="margin-bottom:14px">${esc(t(k))}</div><button class="btn" data-act="photo-close">${esc(t('close'))}</button>`; dlg.showModal(); };
+  if (!pushSupported()) return how(isIOS() && !isStandalone() ? 'push_how_ios' : 'push_how_unsupported');
+  if (!state.personal) return how('push_how_personal');
+  const perm = await Notification.requestPermission();
+  if (perm !== 'granted') return toast(t('push_denied'), true);
+  try {
+    const reg = await navigator.serviceWorker.register('sw.js'); await navigator.serviceWorker.ready;
+    const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uToBytes(VAPID_PUBLIC) });
+    const j = sub.toJSON();
+    await rpc('push_subscribe', { ...tok(), p_endpoint: j.endpoint, p_p256dh: j.keys.p256dh, p_auth: j.keys.auth, p_user_agent: navigator.userAgent });
+    state.pushOn = true; state.menu = false; render(); toast(t('push_on_ok'));
+  } catch(e){ toast(errText(e), true); }
+}
+async function pushOff(silent){
+  try { const sub = await pushSub(); if (sub){ try { await rpc('push_unsubscribe', { ...tok(), p_endpoint: sub.endpoint }); } catch(e){} await sub.unsubscribe(); } } catch(e){}
+  state.pushOn = false; if (!silent){ state.menu = false; render(); toast(t('push_off_ok')); }
+}
 async function loadCommon(){
   try { state.staff = await rpc('list_staff', tok()) || []; } catch(e){}
   try { state.rates = await rpc('list_rates', tok()) || []; } catch(e){}
   try { state.loginStaff = await rpc('list_login_staff'); } catch(e){}
   await loadMyBon();
   await loadReceipts();
+  await refreshPushState();
   try { state.notices = state.me && !state.me.is_kitchen ? (await rpc('my_notices', tok()) || []) : []; } catch(e){ state.notices = []; }   // v26 之前没有
   try {
     const st = await rpc('helper_stats', tok()) || []; state.hstats = { runner: {}, bar: {} };
@@ -963,6 +1017,7 @@ function render(){
       <button class="hbtn" data-act="menu" aria-label="Menu" aria-expanded="${state.menu}">⋯</button>
       ${state.menu ? `<div class="menu">
         ${tabs().filter(k => !navTabs().includes(k)).map(k => `<button data-act="tab" data-tab="${k}">${esc(t('tab_' + k))}</button>`).join('')}
+        ${state.viewAs ? '' : state.pushOn ? `<button data-act="push-test">${esc(t('push_test'))}</button><button data-act="push-off">${esc(t('push_off'))}</button>` : `<button data-act="push-on">${esc(t('push_on'))}</button>`}
         <button data-act="fb-open">${esc(t('fb_menu'))}</button>
         <button data-act="pin-open">${esc(t('change_pin'))}</button>
         <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
@@ -2348,6 +2403,7 @@ async function viewPlan(){
   if (isSched() && state.plan.published) try { state.planPending = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v25 之前没有
   state.planNotices = null;
   if (isSched()) try { state.planNotices = await rpc('sched_notices', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v26 之前没有
+  state.pushMap = {}; if (isSched()) try { state.pushMap = await rpc('push_status', tok()) || {}; } catch(e){}   // v27 之前没有
   planRender();
 }
 function planHead(){
@@ -2510,7 +2566,7 @@ function planEditHTML(d){
 function noticesHTML(list){
   if (!list || !list.length) return '';
   const open = list.filter(n => !n.confirmed_at), done = list.filter(n => n.confirmed_at), kw = isoWeek(state.planWeek);
-  const row = n => `<div class="item"><div class="top"><div><strong>${esc(n.name)}</strong>${n.confirmed_at ? `<span class="tag ok">${esc(t('nt_conf_at', { t: fmtDateTime(n.confirmed_at) }))}</span>` : ''}</div>
+  const row = n => `<div class="item"><div class="top"><div><strong>${esc(n.name)}</strong>${(state.pushMap || {})[n.staff_id] ? `<span class="tag m">${esc(t('push_tag'))}</span>` : ''}${n.confirmed_at ? `<span class="tag ok">${esc(t('nt_conf_at', { t: fmtDateTime(n.confirmed_at) }))}</span>` : ''}</div>
       ${n.confirmed_at ? '' : `<a class="link" style="flex:none" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(ntfShortMsg(n, kw))}">${esc(t('nt_remind'))}</a>`}</div>
     <div class="meta">${esc(noticeText(n))}</div><div class="meta small">${esc(t('nt_sent', { t: fmtDateTime(n.created_at) }))}</div></div>`;
   return h3i(esc(open.length ? t('nt_title', { n: open.length }) : t('nt_title_ok')), t('nt_hint'), open.length ? 'negc' : '')
@@ -2564,7 +2620,7 @@ function openNotify(before, after){
 // 今天、明天的改动：在 App 里给本人发确认通知（v26；之前的版本没有这个函数，不影响 WhatsApp）
 function notifyNow(date, store, slot, ids){
   if (!ids.length) return;
-  rpc('sched_notify_now', { ...tok(), p_date: date, p_store: store, p_slot: slot, p_staff_ids: ids }).then(() => { if (state.tab === 'plan' && !$('#shiftDlg').open) viewPlan(); }).catch(() => {});
+  rpc('sched_notify_now', { ...tok(), p_date: date, p_store: store, p_slot: slot, p_staff_ids: ids }).then(() => { callPush('notices'); if (state.tab === 'plan' && !$('#shiftDlg').open) viewPlan(); }).catch(() => {});
 }
 function showNtf(msgs){
   if (!msgs.length) return;
@@ -2812,7 +2868,7 @@ document.addEventListener('click', async ev => {
         if (r){
           toast(t('published_toast')); await viewPlan();
           const kw = isoWeek(state.planWeek), group = r.first && r.people.length ? [I18N.de.ntf_group_pub.split('{w}').join(kw) + '\n\n' + I18N.zh.ntf_group_pub.split('{w}').join(kw)] : [];
-          if (r.people.length) showNtf([...group, ...r.people.map(p => ntfShortMsg(p, kw))]);
+          if (r.people.length){ showNtf([...group, ...r.people.map(p => ntfShortMsg(p, kw))]); callPush('notices'); }
         } else {   // 数据库还没升级到 v26：照旧
           let pd = null;
           if (state.plan && state.plan.published) try { pd = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}
@@ -2971,6 +3027,9 @@ document.addEventListener('click', async ev => {
       inp.click(); break;
     }
     case 'dist-print': distPrint(); break;
+    case 'push-on': state.menu = false; pushOn(); break;
+    case 'push-off': pushOff(); break;
+    case 'push-test': { state.menu = false; render(); const r = await callPush('test'); toast(r && r.ok ? t('push_test_sent') : t('push_test_none'), !(r && r.ok)); break; }
     case 'notice-ok': {
       el.disabled = true;
       try { await rpc('confirm_notice', { ...tok(), p_id: el.dataset.id }); state.notices = (state.notices || []).filter(n => n.id !== el.dataset.id); toast(t('nt_done')); render(); }
@@ -3075,6 +3134,7 @@ document.addEventListener('change', async ev => {
     try {
       await rpc('mark_settled', { ...tok(), p_week_start: wk, p_staff_id: sid, p_done: on });
       if (on){
+        callPush('receipt', { week: wk, staff_id: sid });
         if (item) item.classList.add('fading');
         toastAction(t('paid_undo', { n: el.dataset.name || '' }), t('undo'), { act: 'settle-undo', staff: sid, week: wk });
         setTimeout(() => { if (state.tab === 'week') keepScroll(viewWeek); }, 1000);
@@ -3124,7 +3184,9 @@ async function exitView(){
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
   await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 async function signOut(){
+  if (state.pushOn && !state.viewAs) await pushOff(true);   // 退出登录：关闭这台手机的通知
   if (state.viewAs){ const v = state.viewAs; state.viewAs = null; try { await sb.rpc('logout', { p_token: v.token }); } catch(e){} state.token = v.adminToken; state.me = v.adminMe; }
   const tk = state.token;
   logoutLocal(); state.loginStaff = null; state.loginAdmin = false; state.loginErr = '';
