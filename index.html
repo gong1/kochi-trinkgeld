@@ -1017,6 +1017,7 @@ function render(){
       <button class="hbtn" data-act="menu" aria-label="Menu" aria-expanded="${state.menu}">⋯</button>
       ${state.menu ? `<div class="menu">
         ${tabs().filter(k => !navTabs().includes(k)).map(k => `<button data-act="tab" data-tab="${k}">${esc(t('tab_' + k))}</button>`).join('')}
+        ${m.is_admin && !state.viewAs ? ADMIN_MORE.map(s => `<button data-act="admin-more" data-sub="${s}">${esc(t('admin_' + s))}</button>`).join('') : ''}
         ${state.viewAs ? '' : state.pushOn ? `<button data-act="push-test">${esc(t('push_test'))}</button><button data-act="push-off">${esc(t('push_off'))}</button>` : `<button data-act="push-on">${esc(t('push_on'))}</button>`}
         <button data-act="fb-open">${esc(t('fb_menu'))}</button>
         <button data-act="pin-open">${esc(t('change_pin'))}</button>
@@ -2069,8 +2070,9 @@ function staffOptions(withKitchen){
 }
 
 // ============ 管理（超级管理员）============
+const ADMIN_MORE = ['rates', 'report', 'deleted', 'audit'];
 async function viewAdmin(){
-  const subs = ['requests','feedback','staff','rates','report','deleted','archive','audit'];
+  const subs = ['requests', 'feedback', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
   $('#main').innerHTML = `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}</button>`).join('')}</div><div id="asub"><div class="loading">${esc(t('loading'))}</div></div>`;
   const el = () => $('#asub');
   try {
@@ -2778,6 +2780,7 @@ document.addEventListener('click', async ev => {
       try { await rpc('lock_week', { ...tok(), p_week_start: state.week }); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     case 'admin-sub': state.adminSub = el.dataset.sub; state.staffEdit = null; render(); break;
+    case 'admin-more': state.done = null; state.rcWeek = null; state.tab = 'admin'; state.adminSub = el.dataset.sub; state.staffEdit = null; state.menu = false; render(); break;
     case 'del-filter': state.delFilter = el.dataset.k; render(); break;
     case 'staff-new': state.staffEdit = {}; render(); break;
     case 'staff-edit': state.staffEdit = JSON.parse(el.dataset.json); render(); window.scrollTo(0, 0); break;
