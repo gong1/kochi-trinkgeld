@@ -324,10 +324,16 @@ zh: {
   plan_this:'回到本周', today_word:'今天', tomorrow_word:'明天',
   pub_live:'已发布的排班可以随时改，改动保存后马上显示给员工。今天、明天的改动，保存时就提示通知本人；后天及以后的改动，点「重新发布并通知」统一通知，每人一条消息。',
   ntf_title:'通知被改动的员工', ntf_hint:'员工不会自动收到通知。点「WhatsApp」选择这个人发送，或复制后自己发。', ntf_wa:'WhatsApp', ntf_copy:'复制', ntf_copied:'已复制', ntf_done:'完成',
-  ntf_batch:'{n}你好，排班有变动：{list}。请回复确认，谢谢！', ntf_item:'{d} {s} {sl} {a}–{b}（{r}）', ntf_item_cancel:'{d} {s} {sl}取消了，不用来了',
-  ntf_add:'{n}你好，排班有变动：{d} {s} {sl} {a}–{b}（{r}），给你加了班。请回复确认，谢谢！',
-  ntf_remove:'{n}你好，排班有变动：{d} {s} {sl} {a}–{b} 的班取消了，不用来了。请回复确认，谢谢！',
-  ntf_change:'{n}你好，排班有变动：{d} {s} {sl} 你的班改为 {a}–{b}（{r}）。请回复确认，谢谢！',
+  ntf_short:'{n}你好，你的排班有变动，请打开 Kochi Team 查看并点「确认收到」：https://app.kochide.com',
+  ntf_short_pub:'{n}你好，第 {w} 周的排班已发布，请打开 Kochi Team 查看你的班并点「确认收到」：https://app.kochide.com',
+  ntf_group_pub:'大家好，第 {w} 周的排班已发布。请打开 Kochi Team 查看自己的班，并在「我的待办」里点「确认收到」：https://app.kochide.com',
+  nt_pub:'第 {w} 周排班已发布，你的班：{list}', nt_change:'你的排班有变动：{list}', nt_ok:'确认收到', nt_done:'已确认，谢谢',
+  nt_title:'变动通知（{n} 人未确认）', nt_title_ok:'变动通知', nt_conf_grp:'已确认（{n}）', nt_sent:'{t} 发出', nt_conf_at:'{t} 确认', nt_remind:'WhatsApp 提醒',
+  nt_hint:'发布或改动排班后，系统给本人发通知，本人在「我的待办」里点「确认收到」。没确认的可以用 WhatsApp 提醒一下。',
+  ntf_batch:'{n}你好，排班有变动：{list}。请打开 Kochi Team 点「确认收到」，谢谢！ https://app.kochide.com', ntf_item:'{d} {s} {sl} {a}–{b}（{r}）', ntf_item_cancel:'{d} {s} {sl}取消了，不用来了',
+  ntf_add:'{n}你好，排班有变动：{d} {s} {sl} {a}–{b}（{r}），给你加了班。请打开 Kochi Team 点「确认收到」，谢谢！ https://app.kochide.com',
+  ntf_remove:'{n}你好，排班有变动：{d} {s} {sl} {a}–{b} 的班取消了，不用来了。请打开 Kochi Team 点「确认收到」，谢谢！ https://app.kochide.com',
+  ntf_change:'{n}你好，排班有变动：{d} {s} {sl} 你的班改为 {a}–{b}（{r}）。请打开 Kochi Team 点「确认收到」，谢谢！ https://app.kochide.com',
   publish_confirm:'发布后所有员工都能看到这周的排班，确定发布？', published_toast:'已发布', unfilled:'还没回复下周能不能上：{n}',
   add_shift:'＋ 添加', hours_title:'本周计划工时', hours_line:'{h} 小时 · {n} 个班', sd_staff:'员工', sd_role:'岗位',
   sd_start:'开始', sd_end:'结束', sd_note:'备注', av_group_yes:'能上', av_group_none:'没回复', av_group_no:'不能上',
@@ -422,7 +428,7 @@ zh: {
   act_personal_device:'个人设备保持登录', act_pin_reset:'重置 PIN', act_rate_set:'改分配比例', act_request_approve:'批准修改申请', act_request_delete:'申请删除',
   act_request_reject:'拒绝修改申请', act_request_update:'申请修改', act_sched_publish:'发布排班', act_set_initial_pin:'设置自己的 PIN', act_settle_mark:'标记已发放',
   act_shift_change:'改排班', act_shift_remove:'删排班', act_shortage_bearer:'改差额承担方', act_staff_main_role:'改主岗位', act_staff_reorder:'调整员工顺序',
-  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据', act_month_archive:'月度存档', act_view_end:'结束员工视角查看', act_staff_sched_profile:'改员工排班设置',
+  act_staff_scheduler:'改排班员权限', act_staff_upsert:'新增 / 修改员工', act_view_as:'以员工视角查看', act_week_lock:'锁定周结', act_receipt_sign:'小费签收', act_receipt_paper:'上传纸质收据', act_month_archive:'月度存档', act_view_end:'结束员工视角查看', act_notice_confirm:'确认排班变动', act_staff_sched_profile:'改员工排班设置',
   chk_missing:'排了班、还没交 Bon（{n}）', chk_missing_hint:'到第二天 12:00 还没有录入。请提醒本人尽快交；如果那天没上班，请排班员在「排班」里删掉这个班，提醒就会消失。',
   chk_unpicked:'排了班、但没人选的 Runner / 吧台（{n}）', chk_unpicked_hint:'当天这家店的 Bon 里没有人选他。确实上了班的，请当天的服务员在「账本」里申请修改把他加上；没上班的，请排班员删掉这个班。',
   chk_lock_warn:'这周还有 {n} 条排班提醒（漏交 Bon 或没被选的 Runner / 吧台）没有处理。锁定后就不能再改了。仍然锁定吗？',
@@ -482,10 +488,16 @@ de: {
   plan_this:'Zur aktuellen Woche', today_word:'heute', tomorrow_word:'morgen',
   pub_live:'Der veröffentlichte Plan kann jederzeit geändert werden – Änderungen sind sofort für die Mitarbeiter sichtbar. Für heute und morgen erscheint die Benachrichtigung direkt beim Speichern; spätere Änderungen werden mit „Veröffentlichen & benachrichtigen“ gesammelt mitgeteilt, eine Nachricht pro Person.',
   ntf_title:'Betroffene Mitarbeiter benachrichtigen', ntf_hint:'Mitarbeiter bekommen keine automatische Nachricht. Tippe auf „WhatsApp“ und wähle die Person, oder kopiere den Text.', ntf_wa:'WhatsApp', ntf_copy:'Kopieren', ntf_copied:'Kopiert', ntf_done:'Fertig',
-  ntf_batch:'Hallo {n}, Änderungen im Dienstplan: {list}. Bitte kurz bestätigen, danke!', ntf_item:'{d} {s}, {sl} {a}–{b} ({r})', ntf_item_cancel:'{d} {s}, {sl}: entfällt, du musst nicht kommen',
-  ntf_add:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} {a}–{b} ({r}) – du bist zusätzlich eingeplant. Bitte kurz bestätigen, danke!',
-  ntf_remove:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} {a}–{b} – deine Schicht entfällt, du musst nicht kommen. Bitte kurz bestätigen, danke!',
-  ntf_change:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} – deine Schicht ist jetzt {a}–{b} ({r}). Bitte kurz bestätigen, danke!',
+  ntf_short:'Hallo {n}, dein Dienstplan hat sich geändert. Bitte in Kochi Team ansehen und „Erhalten“ bestätigen: https://app.kochide.com',
+  ntf_short_pub:'Hallo {n}, der Dienstplan für KW {w} ist veröffentlicht. Bitte in Kochi Team deine Schichten ansehen und „Erhalten“ bestätigen: https://app.kochide.com',
+  ntf_group_pub:'Hallo zusammen, der Dienstplan für KW {w} ist veröffentlicht. Bitte in Kochi Team die eigenen Schichten ansehen und unter „Meine Aufgaben“ „Erhalten“ bestätigen: https://app.kochide.com',
+  nt_pub:'Dienstplan KW {w} veröffentlicht, deine Schichten: {list}', nt_change:'Dein Dienstplan hat sich geändert: {list}', nt_ok:'Erhalten', nt_done:'Bestätigt – danke',
+  nt_title:'Benachrichtigungen ({n} unbestätigt)', nt_title_ok:'Benachrichtigungen', nt_conf_grp:'Bestätigt ({n})', nt_sent:'gesendet {t}', nt_conf_at:'bestätigt {t}', nt_remind:'WhatsApp-Erinnerung',
+  nt_hint:'Nach Veröffentlichung oder Änderung bekommt die Person eine Benachrichtigung und bestätigt unter „Meine Aufgaben“ mit „Erhalten“. Wer noch nicht bestätigt hat, kann per WhatsApp erinnert werden.',
+  ntf_batch:'Hallo {n}, Änderungen im Dienstplan: {list}. Bitte in Kochi Team „Erhalten“ bestätigen, danke! https://app.kochide.com', ntf_item:'{d} {s}, {sl} {a}–{b} ({r})', ntf_item_cancel:'{d} {s}, {sl}: entfällt, du musst nicht kommen',
+  ntf_add:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} {a}–{b} ({r}) – du bist zusätzlich eingeplant. Bitte in Kochi Team „Erhalten“ bestätigen, danke! https://app.kochide.com',
+  ntf_remove:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} {a}–{b} – deine Schicht entfällt, du musst nicht kommen. Bitte in Kochi Team „Erhalten“ bestätigen, danke! https://app.kochide.com',
+  ntf_change:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} – deine Schicht ist jetzt {a}–{b} ({r}). Bitte in Kochi Team „Erhalten“ bestätigen, danke! https://app.kochide.com',
   publish_confirm:'Nach dem Veröffentlichen sehen alle den Dienstplan dieser Woche. Veröffentlichen?', published_toast:'Veröffentlicht', unfilled:'Noch keine Rückmeldung zur Verfügbarkeit: {n}',
   add_shift:'＋ Hinzufügen', hours_title:'Geplante Stunden diese Woche', hours_line:'{h} Std. · {n} Schichten', sd_staff:'Mitarbeiter', sd_role:'Position',
   sd_start:'Beginn', sd_end:'Ende', sd_note:'Notiz', av_group_yes:'Kann', av_group_none:'Keine Rückmeldung', av_group_no:'Kann nicht',
@@ -580,7 +592,7 @@ de: {
   act_personal_device:'Auf eigenem Gerät angemeldet bleiben', act_pin_reset:'PIN zurückgesetzt', act_rate_set:'Anteile geändert', act_request_approve:'Änderungsantrag genehmigt', act_request_delete:'Löschung beantragt',
   act_request_reject:'Änderungsantrag abgelehnt', act_request_update:'Änderung beantragt', act_sched_publish:'Dienstplan veröffentlicht', act_set_initial_pin:'Eigene PIN gesetzt', act_settle_mark:'Als ausgezahlt markiert',
   act_shift_change:'Schicht geändert', act_shift_remove:'Schicht gelöscht', act_shortage_bearer:'Fehlbetrag-Träger geändert', act_staff_main_role:'Hauptrolle geändert', act_staff_reorder:'Reihenfolge geändert',
-  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen', act_month_archive:'Monat archiviert', act_view_end:'Mitarbeiter-Ansicht beendet', act_staff_sched_profile:'Dienstplan-Einstellungen geändert',
+  act_staff_scheduler:'Dienstplan-Recht geändert', act_staff_upsert:'Mitarbeiter angelegt / geändert', act_view_as:'Als Mitarbeiter angesehen', act_week_lock:'Woche abgeschlossen', act_receipt_sign:'Trinkgeld quittiert', act_receipt_paper:'Papierquittung hochgeladen', act_month_archive:'Monat archiviert', act_view_end:'Mitarbeiter-Ansicht beendet', act_notice_confirm:'Dienstplanänderung bestätigt', act_staff_sched_profile:'Dienstplan-Einstellungen geändert',
   chk_missing:'Eingeplant, aber noch kein Bon ({n})', chk_missing_hint:'Bis 12:00 Uhr am Folgetag kein Eintrag. Bitte die Person erinnern. Falls sie nicht gearbeitet hat, die Schicht unter „Dienstplan“ löschen – dann verschwindet der Hinweis.',
   chk_unpicked:'Eingeplante Runner / Bar, die niemand ausgewählt hat ({n})', chk_unpicked_hint:'In keinem Bon dieses Tages in diesem Restaurant ausgewählt. Hat die Person gearbeitet, bitte die Servicekraft, im „Konto“ eine Änderung zu beantragen und sie hinzuzufügen; sonst die Schicht im Dienstplan löschen.',
   chk_lock_warn:'Für diese Woche sind noch {n} Dienstplan-Hinweise offen (fehlender Bon oder nicht ausgewählte Runner/Bar). Nach dem Abschluss ist keine Änderung mehr möglich. Trotzdem abschließen?',
@@ -741,6 +753,7 @@ const ERR_ZH = {
   PARTS_SUM: '厨房内部分配的合计必须等于整份金额。请检查每人的金额。',
   RECEIPT_IMMUTABLE: '签收记录不能修改或删除。',
   APPEND_ONLY: '这类记录只能新增，不能修改或删除。',
+  INVALID_DATE: '日期不对：只有今天和明天的改动需要立即通知，之后的改动在「重新发布并通知」时统一通知。',
   MONTH_NOT_READY: '这个月还有周没锁定周结，全部锁定后才能存档。',
   RECEIPT_SIGNED: '这个人这周已经签收，「已发放」不能再取消或修改。如果发错了，请在后面还开着的周记一笔调整。',
   VIEW_ONLY: '正在以员工视角查看（只读），不能修改。要操作请先点顶部「退出查看」。',
@@ -817,6 +830,7 @@ const ERR_DE = {
   PARTS_SUM: 'Die Summe der Aufteilung muss dem Küchenanteil entsprechen. Bitte Beträge prüfen.',
   RECEIPT_IMMUTABLE: 'Quittungen können nicht geändert oder gelöscht werden.',
   APPEND_ONLY: 'Diese Einträge können nur ergänzt, nicht geändert oder gelöscht werden.',
+  INVALID_DATE: 'Ungültiges Datum: Sofort benachrichtigt werden nur Änderungen für heute und morgen; spätere gesammelt mit „Veröffentlichen & benachrichtigen“.',
   MONTH_NOT_READY: 'Noch nicht alle Wochen dieses Monats abgeschlossen – Archivierung erst danach möglich.',
   RECEIPT_SIGNED: 'Für diese Woche bereits quittiert – „Ausgezahlt“ kann nicht mehr zurückgenommen oder geändert werden. Bei einem Fehler bitte in einer offenen Woche eine Korrektur buchen.',
   VIEW_ONLY: 'Ansicht als Mitarbeiter (nur lesen) – keine Änderungen möglich. Zum Bearbeiten oben „Ansicht beenden“ tippen.',
@@ -903,6 +917,7 @@ async function loadCommon(){
   try { state.loginStaff = await rpc('list_login_staff'); } catch(e){}
   await loadMyBon();
   await loadReceipts();
+  try { state.notices = state.me && !state.me.is_kitchen ? (await rpc('my_notices', tok()) || []) : []; } catch(e){ state.notices = []; }   // v26 之前没有
   try {
     const st = await rpc('helper_stats', tok()) || []; state.hstats = { runner: {}, bar: {} };
     st.forEach(x => { if (state.hstats[x.role]) state.hstats[x.role][x.id] = x.n; });
@@ -918,6 +933,7 @@ function slotsText(sl){ return (sl || []).slice().sort().reverse().map(slotLabel
 function todoCardHTML(){
   if (state.rcWeek) return '';
   const items = [];
+  (state.notices || []).forEach(n => items.push([noticeText(n), `<button class="btn" data-act="notice-ok" data-id="${n.id}">${esc(t('nt_ok'))}</button>`]));
   rcTodo().forEach(l => items.push([t(l.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: l.kw, x: eur(Math.abs(l.payout_euros) * 100) }) + (l.receipt.resign ? t('rc_banner_resign') : ''),
     `<button class="btn" data-act="rc-go" data-week="${l.week_start}">${esc(t('rc_go'))}</button>`]));
   const mb = state.myBon;
@@ -2330,6 +2346,8 @@ async function viewPlan(){
   catch(e){ $('#main').innerHTML = planHead() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   state.planPending = null;
   if (isSched() && state.plan.published) try { state.planPending = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v25 之前没有
+  state.planNotices = null;
+  if (isSched()) try { state.planNotices = await rpc('sched_notices', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v26 之前没有
   planRender();
 }
 function planHead(){
@@ -2484,8 +2502,20 @@ function planEditHTML(d){
     ${d.published ? `<div class="small muted" style="margin-top:8px">${esc(t('pub_live'))}</div>` : ''}
     ${pn ? `<div class="warnbox" style="margin:10px 0 0">${esc(t('pending_banner', { n: pn, m: pm }))}</div>` : ''}
     ${!d.published || changed || pn ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(!d.published ? t('publish') : pn ? t('republish_ntf', { n: pn, m: pm }) : t('republish', { n: changed }))}</button>` : ''}</div>`;
+  h += noticesHTML(state.planNotices);
   h += planGridHTML(d, true);
   return h;
+}
+// 排班员：变动通知的确认情况——没确认的在上（早发的在前），已确认的折叠
+function noticesHTML(list){
+  if (!list || !list.length) return '';
+  const open = list.filter(n => !n.confirmed_at), done = list.filter(n => n.confirmed_at), kw = isoWeek(state.planWeek);
+  const row = n => `<div class="item"><div class="top"><div><strong>${esc(n.name)}</strong>${n.confirmed_at ? `<span class="tag ok">${esc(t('nt_conf_at', { t: fmtDateTime(n.confirmed_at) }))}</span>` : ''}</div>
+      ${n.confirmed_at ? '' : `<a class="link" style="flex:none" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(ntfShortMsg(n, kw))}">${esc(t('nt_remind'))}</a>`}</div>
+    <div class="meta">${esc(noticeText(n))}</div><div class="meta small">${esc(t('nt_sent', { t: fmtDateTime(n.created_at) }))}</div></div>`;
+  return h3i(esc(open.length ? t('nt_title', { n: open.length }) : t('nt_title_ok')), t('nt_hint'), open.length ? 'negc' : '')
+    + (open.length ? `<div class="list">${open.map(row).join('')}</div>` : '')
+    + (done.length ? `<details class="fold"><summary>${esc(t('nt_conf_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(row).join('')}</div></div></details>` : '');
 }
 // 已发布的排班改动后，生成给员工的通知（WhatsApp / 复制）
 function ntfText(lang, kind, x){
@@ -2497,19 +2527,29 @@ function ntfText(lang, kind, x){
 }
 function ntfMsg(kind, x){ return ntfText('de', kind, x) + '\n\n' + ntfText('zh', kind, x); }
 // 重新发布时：把这个人上次发布以来的所有改动合成一条消息（v25 sched_pending_changes）
-function ntfBatchText(lang, p){
+function ntfItemsText(lang, items){
   const L = I18N[lang] || I18N.zh, f = (k, v) => { let s = L[k]; for (const [a, b] of Object.entries(v)) s = s.split('{' + a + '}').join(b); return s; };
   const day = x => { const dd = parseD(x); return lang === 'de' ? `${L.wd[wdIdx(x)]} ${dd.getDate()}.${dd.getMonth() + 1}.` : `${dd.getMonth() + 1}月${dd.getDate()}日${L.wd[wdIdx(x)]}`; };
-  const list = p.items.map(i => i.cancelled ? f('ntf_item_cancel', { d: day(i.date), s: i.store || '', sl: L['slot_' + i.slot] })
-    : f('ntf_item', { d: day(i.date), s: i.store, sl: L['slot_' + i.slot], a: i.start, b: i.end, r: (i.roles || []).map(k => L['grp_' + k]).join(' + ') }));
-  return f('ntf_batch', { n: p.name, list: list.join(lang === 'de' ? '; ' : '；') });
+  return (items || []).map(i => i.cancelled ? f('ntf_item_cancel', { d: day(i.date), s: i.store || '', sl: L['slot_' + i.slot] })
+    : f('ntf_item', { d: day(i.date), s: i.store, sl: L['slot_' + i.slot], a: i.start, b: i.end, r: (i.roles || []).map(k => L['grp_' + k]).join(' + ') })).join(lang === 'de' ? '; ' : '；');
 }
+function ntfBatchText(lang, p){
+  const L = I18N[lang] || I18N.zh;
+  return L.ntf_batch.split('{n}').join(p.name).split('{list}').join(ntfItemsText(lang, p.items));
+}
+// 发布 / 重新发布后的 WhatsApp 提醒：只请对方打开 App 确认（详细内容在 App 里）
+function ntfShortMsg(p, kw){
+  const one = lang => { const L = I18N[lang]; return (p.kind === 'publish' ? L.ntf_short_pub : L.ntf_short).split('{n}').join(p.name).split('{w}').join(kw); };
+  return one('de') + '\n\n' + one('zh');
+}
+function noticeText(n){ return t(n.kind === 'publish' ? 'nt_pub' : 'nt_change', { w: isoWeek(n.week_start || state.planWeek || today()), list: ntfItemsText(state.lang, n.items) }); }
 function ntfBatchMsg(p){ return ntfBatchText('de', p) + '\n\n' + ntfBatchText('zh', p); }
 // before：改之前的班（新增时为空）；after：改之后的班（删除时为空）
 function openNotify(before, after){
   const w = before || after;
   // 没发布、过去的日子（补录）不用通知；后天及以后的改动等「重新发布」时统一通知（v25）
   if (!state.plan || !state.plan.published || w.date < today() || w.date > addDays(today(), 1)) return;
+  notifyNow(w.date, w.store, w.slot, [...new Set([before && before.staff_id, after && after.staff_id].filter(Boolean))]);
   const staffName = id => ((state.plan.staff || []).find(s => s.id === id) || {}).name || '';
   const msgs = [];
   if (before && after && before.staff_id === after.staff_id){
@@ -2520,6 +2560,11 @@ function openNotify(before, after){
     if (after) msgs.push(ntfMsg('add', { ...after, name: staffName(after.staff_id) }));
   }
   showNtf(msgs);
+}
+// 今天、明天的改动：在 App 里给本人发确认通知（v26；之前的版本没有这个函数，不影响 WhatsApp）
+function notifyNow(date, store, slot, ids){
+  if (!ids.length) return;
+  rpc('sched_notify_now', { ...tok(), p_date: date, p_store: store, p_slot: slot, p_staff_ids: ids }).then(() => { if (state.tab === 'plan' && !$('#shiftDlg').open) viewPlan(); }).catch(() => {});
 }
 function showNtf(msgs){
   if (!msgs.length) return;
@@ -2761,10 +2806,19 @@ document.addEventListener('click', async ev => {
     case 'plan-publish':
       if (!confirm(t('publish_confirm'))) break;
       try {
-        let pd = null;
-        if (state.plan && state.plan.published) try { pd = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}
-        await rpc('sched_publish', { ...tok(), p_week_start: state.planWeek }); toast(t('published_toast')); await viewPlan();
-        if (pd && pd.people.length) showNtf(pd.people.map(ntfBatchMsg));
+        let r = null;
+        try { r = await rpc('sched_publish_and_notify', { ...tok(), p_week_start: state.planWeek }); }
+        catch(e){ if (!/sched_publish_and_notify|PGRST202|Could not find/i.test(String(e.message))) throw e; }
+        if (r){
+          toast(t('published_toast')); await viewPlan();
+          const kw = isoWeek(state.planWeek), group = r.first && r.people.length ? [I18N.de.ntf_group_pub.split('{w}').join(kw) + '\n\n' + I18N.zh.ntf_group_pub.split('{w}').join(kw)] : [];
+          if (r.people.length) showNtf([...group, ...r.people.map(p => ntfShortMsg(p, kw))]);
+        } else {   // 数据库还没升级到 v26：照旧
+          let pd = null;
+          if (state.plan && state.plan.published) try { pd = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}
+          await rpc('sched_publish', { ...tok(), p_week_start: state.planWeek }); toast(t('published_toast')); await viewPlan();
+          if (pd && pd.people.length) showNtf(pd.people.map(ntfBatchMsg));
+        }
       } catch(e){ toast(errText(e), true); }
       break;
     case 'shift-add': {
@@ -2805,6 +2859,7 @@ document.addEventListener('click', async ev => {
         toast(r.skipped.length ? r.skipped.map(x => t('pk_skipped', { n: x.name, s: x.store })).join(' ') : t('saved'), !!r.skipped.length);
         // 已发布的周、今天或以后：给被改动的人生成通知
         if (state.plan.published && e.date >= today() && e.date <= addDays(today(), 1)){   // 今天、明天的班立即通知
+          notifyNow(e.date, e.store, e.slot, [...r.added, ...r.changed, ...r.removed].map(x => x.staff_id));
           const base = { date: e.date, store: e.store, slot: e.slot };
           showNtf([...r.added.map(x => ntfMsg('add', { ...base, ...x, role: x.roles[0] })),
                    ...r.changed.map(x => ntfMsg('change', { ...base, ...x, role: x.roles[0] })),
@@ -2916,6 +2971,12 @@ document.addEventListener('click', async ev => {
       inp.click(); break;
     }
     case 'dist-print': distPrint(); break;
+    case 'notice-ok': {
+      el.disabled = true;
+      try { await rpc('confirm_notice', { ...tok(), p_id: el.dataset.id }); state.notices = (state.notices || []).filter(n => n.id !== el.dataset.id); toast(t('nt_done')); render(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
     case 'settle-undo': {
       document.querySelectorAll('.toast').forEach(n => n.remove());
       try { await rpc('mark_settled', { ...tok(), p_week_start: el.dataset.week, p_staff_id: el.dataset.staff, p_done: false }); toast(t('undone')); if (state.tab === 'week') keepScroll(viewWeek); }
