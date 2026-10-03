@@ -320,10 +320,11 @@ zh: {
   my_shifts:'我的班', not_published:'这周的排班还没有发布。', no_shifts:'这周没有排你的班', changed:'有变更',
   avail_title:'可上班时间', avail_deadline:'请在 {d} 前填写，之后不能再改。', avail_closed:'已截止。需要修改请找排班员。', avail_closed_sched:'已截止（排班员仍可修改自己的）。',
   avail_all_yes:'还没填的全部设为「能上」', av_yes:'能上', av_no:'不能', av_note:'备注（例如：最晚到 22 点）',
-  team_plan:'全部排班', pub_state_no:'未发布', pub_state_yes:'已发布（{t}）', publish:'发布排班', republish:'重新发布（{n} 处变更）',
+  team_plan:'全部排班', pub_state_no:'未发布', pub_state_yes:'已发布（{t}）', publish:'发布排班', republish:'重新发布（{n} 处变更）', republish_ntf:'重新发布并通知（{n} 处变更 · {m} 人）', pending_banner:'有 {n} 处变更还没通知员工（{m} 人）。点下面「重新发布并通知」，会给每人生成一条合并的消息。',
   plan_this:'回到本周', today_word:'今天', tomorrow_word:'明天',
-  pub_live:'已发布的排班可以随时加人、删人、改时间，改动马上就显示给员工，不需要重新发布。「重新发布」只是把「有变更」标记清掉。',
+  pub_live:'已发布的排班可以随时改，改动保存后马上显示给员工。今天、明天的改动，保存时就提示通知本人；后天及以后的改动，点「重新发布并通知」统一通知，每人一条消息。',
   ntf_title:'通知被改动的员工', ntf_hint:'员工不会自动收到通知。点「WhatsApp」选择这个人发送，或复制后自己发。', ntf_wa:'WhatsApp', ntf_copy:'复制', ntf_copied:'已复制', ntf_done:'完成',
+  ntf_batch:'{n}你好，排班有变动：{list}。请回复确认，谢谢！', ntf_item:'{d} {s} {sl} {a}–{b}（{r}）', ntf_item_cancel:'{d} {s} {sl}取消了，不用来了',
   ntf_add:'{n}你好，排班有变动：{d} {s} {sl} {a}–{b}（{r}），给你加了班。请回复确认，谢谢！',
   ntf_remove:'{n}你好，排班有变动：{d} {s} {sl} {a}–{b} 的班取消了，不用来了。请回复确认，谢谢！',
   ntf_change:'{n}你好，排班有变动：{d} {s} {sl} 你的班改为 {a}–{b}（{r}）。请回复确认，谢谢！',
@@ -477,10 +478,11 @@ de: {
   my_shifts:'Meine Schichten', not_published:'Der Dienstplan für diese Woche ist noch nicht veröffentlicht.', no_shifts:'Diese Woche keine Schichten für dich', changed:'Geändert',
   avail_title:'Verfügbarkeit', avail_deadline:'Bitte bis {d} eintragen, danach keine Änderung mehr.', avail_closed:'Frist abgelaufen. Änderungen bitte über die Dienstplanung.', avail_closed_sched:'Frist abgelaufen (Dienstplanung kann die eigenen Angaben noch ändern).',
   avail_all_yes:'Alles noch Offene auf „Kann“ setzen', av_yes:'Kann', av_no:'Kann nicht', av_note:'Notiz (z. B. nur bis 22 Uhr)',
-  team_plan:'Gesamter Dienstplan', pub_state_no:'Nicht veröffentlicht', pub_state_yes:'Veröffentlicht ({t})', publish:'Dienstplan veröffentlichen', republish:'Erneut veröffentlichen ({n} Änderungen)',
+  team_plan:'Gesamter Dienstplan', pub_state_no:'Nicht veröffentlicht', pub_state_yes:'Veröffentlicht ({t})', publish:'Dienstplan veröffentlichen', republish:'Erneut veröffentlichen ({n} Änderungen)', republish_ntf:'Veröffentlichen & benachrichtigen ({n} Änderungen · {m} Personen)', pending_banner:'{n} Änderungen ({m} Personen) noch nicht mitgeteilt. Unten „Veröffentlichen & benachrichtigen“ tippen – pro Person entsteht eine zusammengefasste Nachricht.',
   plan_this:'Zur aktuellen Woche', today_word:'heute', tomorrow_word:'morgen',
-  pub_live:'Im veröffentlichten Dienstplan kannst du jederzeit Personen hinzufügen, entfernen oder Zeiten ändern – die Mitarbeiter sehen es sofort, ohne erneutes Veröffentlichen. „Erneut veröffentlichen“ entfernt nur die Markierung „Geändert“.',
+  pub_live:'Der veröffentlichte Plan kann jederzeit geändert werden – Änderungen sind sofort für die Mitarbeiter sichtbar. Für heute und morgen erscheint die Benachrichtigung direkt beim Speichern; spätere Änderungen werden mit „Veröffentlichen & benachrichtigen“ gesammelt mitgeteilt, eine Nachricht pro Person.',
   ntf_title:'Betroffene Mitarbeiter benachrichtigen', ntf_hint:'Mitarbeiter bekommen keine automatische Nachricht. Tippe auf „WhatsApp“ und wähle die Person, oder kopiere den Text.', ntf_wa:'WhatsApp', ntf_copy:'Kopieren', ntf_copied:'Kopiert', ntf_done:'Fertig',
+  ntf_batch:'Hallo {n}, Änderungen im Dienstplan: {list}. Bitte kurz bestätigen, danke!', ntf_item:'{d} {s}, {sl} {a}–{b} ({r})', ntf_item_cancel:'{d} {s}, {sl}: entfällt, du musst nicht kommen',
   ntf_add:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} {a}–{b} ({r}) – du bist zusätzlich eingeplant. Bitte kurz bestätigen, danke!',
   ntf_remove:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} {a}–{b} – deine Schicht entfällt, du musst nicht kommen. Bitte kurz bestätigen, danke!',
   ntf_change:'Hallo {n}, Änderung im Dienstplan: {d} {s}, {sl} – deine Schicht ist jetzt {a}–{b} ({r}). Bitte kurz bestätigen, danke!',
@@ -2326,6 +2328,8 @@ async function viewPlan(){
   $('#main').innerHTML = planHead() + `<div class="loading">${esc(t('loading'))}</div>`;
   try { state.plan = await rpc('sched_week', { ...tok(), p_week_start: state.planWeek }); }
   catch(e){ $('#main').innerHTML = planHead() + `<div class="empty">${esc(errText(e))}</div>`; return; }
+  state.planPending = null;
+  if (isSched() && state.plan.published) try { state.planPending = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v25 之前没有
   planRender();
 }
 function planHead(){
@@ -2475,10 +2479,11 @@ function peRender(){
       ${rs.length > 1 ? `<button class="link danger" type="button" data-act="sd-del">${esc(t('pe_del_all'))}</button>` : ''}</div>`;
 }
 function planEditHTML(d){
-  const changed = d.shifts.filter(x => x.changed).length;
+  const changed = d.shifts.filter(x => x.changed).length, pd = state.planPending, pn = pd ? pd.changes : 0, pm = pd ? pd.people.length : 0;
   let h = `<div class="hero"><div class="row" style="justify-content:space-between"><strong>${esc(d.published ? t('pub_state_yes', { t: fmtDateTime(d.published_at) }) : t('pub_state_no'))}</strong></div>
     ${d.published ? `<div class="small muted" style="margin-top:8px">${esc(t('pub_live'))}</div>` : ''}
-    ${!d.published || changed ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(d.published ? t('republish', { n: changed }) : t('publish'))}</button>` : ''}</div>`;
+    ${pn ? `<div class="warnbox" style="margin:10px 0 0">${esc(t('pending_banner', { n: pn, m: pm }))}</div>` : ''}
+    ${!d.published || changed || pn ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(!d.published ? t('publish') : pn ? t('republish_ntf', { n: pn, m: pm }) : t('republish', { n: changed }))}</button>` : ''}</div>`;
   h += planGridHTML(d, true);
   return h;
 }
@@ -2491,10 +2496,20 @@ function ntfText(lang, kind, x){
   return f('ntf_' + kind, { n: x.name, d, s: x.store, sl: L['slot_' + x.slot], a: x.start, b: x.end, r: (x.roles && x.roles.length ? x.roles : [x.role]).map(k => L['grp_' + k]).join(' + ') });
 }
 function ntfMsg(kind, x){ return ntfText('de', kind, x) + '\n\n' + ntfText('zh', kind, x); }
+// 重新发布时：把这个人上次发布以来的所有改动合成一条消息（v25 sched_pending_changes）
+function ntfBatchText(lang, p){
+  const L = I18N[lang] || I18N.zh, f = (k, v) => { let s = L[k]; for (const [a, b] of Object.entries(v)) s = s.split('{' + a + '}').join(b); return s; };
+  const day = x => { const dd = parseD(x); return lang === 'de' ? `${L.wd[wdIdx(x)]} ${dd.getDate()}.${dd.getMonth() + 1}.` : `${dd.getMonth() + 1}月${dd.getDate()}日${L.wd[wdIdx(x)]}`; };
+  const list = p.items.map(i => i.cancelled ? f('ntf_item_cancel', { d: day(i.date), s: i.store || '', sl: L['slot_' + i.slot] })
+    : f('ntf_item', { d: day(i.date), s: i.store, sl: L['slot_' + i.slot], a: i.start, b: i.end, r: (i.roles || []).map(k => L['grp_' + k]).join(' + ') }));
+  return f('ntf_batch', { n: p.name, list: list.join(lang === 'de' ? '; ' : '；') });
+}
+function ntfBatchMsg(p){ return ntfBatchText('de', p) + '\n\n' + ntfBatchText('zh', p); }
 // before：改之前的班（新增时为空）；after：改之后的班（删除时为空）
 function openNotify(before, after){
   const w = before || after;
-  if (!state.plan || !state.plan.published || w.date < today()) return;   // 没发布或过去的日子（补录）不用通知
+  // 没发布、过去的日子（补录）不用通知；后天及以后的改动等「重新发布」时统一通知（v25）
+  if (!state.plan || !state.plan.published || w.date < today() || w.date > addDays(today(), 1)) return;
   const staffName = id => ((state.plan.staff || []).find(s => s.id === id) || {}).name || '';
   const msgs = [];
   if (before && after && before.staff_id === after.staff_id){
@@ -2745,7 +2760,12 @@ document.addEventListener('click', async ev => {
       break;
     case 'plan-publish':
       if (!confirm(t('publish_confirm'))) break;
-      try { await rpc('sched_publish', { ...tok(), p_week_start: state.planWeek }); toast(t('published_toast')); viewPlan(); } catch(e){ toast(errText(e), true); }
+      try {
+        let pd = null;
+        if (state.plan && state.plan.published) try { pd = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}
+        await rpc('sched_publish', { ...tok(), p_week_start: state.planWeek }); toast(t('published_toast')); await viewPlan();
+        if (pd && pd.people.length) showNtf(pd.people.map(ntfBatchMsg));
+      } catch(e){ toast(errText(e), true); }
       break;
     case 'shift-add': {
       const tpl = state.plan.slots.find(x => x.date === el.dataset.date && x.store === el.dataset.store && x.slot === el.dataset.slot);
@@ -2784,7 +2804,7 @@ document.addEventListener('click', async ev => {
         $('#shiftDlg').close(); state.slotEd = null;
         toast(r.skipped.length ? r.skipped.map(x => t('pk_skipped', { n: x.name, s: x.store })).join(' ') : t('saved'), !!r.skipped.length);
         // 已发布的周、今天或以后：给被改动的人生成通知
-        if (state.plan.published && e.date >= today()){
+        if (state.plan.published && e.date >= today() && e.date <= addDays(today(), 1)){   // 今天、明天的班立即通知
           const base = { date: e.date, store: e.store, slot: e.slot };
           showNtf([...r.added.map(x => ntfMsg('add', { ...base, ...x, role: x.roles[0] })),
                    ...r.changed.map(x => ntfMsg('change', { ...base, ...x, role: x.roles[0] })),
