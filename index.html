@@ -379,8 +379,8 @@ zh: {
   request_sent:'已提交，等老板批准', ask_del_reason:'删除理由（需要老板批准）', pending_tag:'待批准',
   admin_requests:'审批', approve:'批准', reject:'拒绝', ask_reject:'拒绝理由（可不填）', approved:'已批准', rejected:'已拒绝',
   req_update:'申请修改', req_delete:'申请删除', before:'原来', after:'改为', no_requests:'没有待审批的申请',
-  reset_pin:'重置 PIN 为 888888', pin_reset_done:'已重置，员工下次登录要重新设置 PIN', confirm_reset:'确定把 {n} 的 PIN 重置为 888888？',
-  initial_pin_hint:'初始 PIN 是 888888。员工第一次登录时，必须改成自己的 6 位 PIN。', needs_pin:'未设 PIN',
+  reset_pin:'重置 PIN 为 888888（1 小时内有效）', pin_reset_done:'已重置。请告诉 {n}：用 888888 在 {t} 前登录（1 小时内有效），登录后马上设置自己的 PIN。', pin_forgot:'忘记 PIN？', pin_forgot_confirm:'向老板申请重置 {n} 的 PIN？老板重置后，用 888888 在 1 小时内登录。', pin_forgot_sent:'已发给老板。老板重置后，用 888888 在 1 小时内登录。', pin_forgot_again:'已经申请过了，正在等老板处理。', pinreq_title:'重置 PIN 申请（{n}）', pinreq_hint:'员工在登录页点了「忘记 PIN？」。确认是本人后点「重置」，告诉他用 888888 在 1 小时内登录。不是本人申请的，点「忽略」。', pinreq_reset:'重置为 888888', pinreq_dismiss:'忽略', pinreq_at:'{t} 申请', new_staff_pin:'已添加。请告诉 {n}：用 888888 在 {t} 前登录（1 小时内有效）。', confirm_reset:'确定把 {n} 的 PIN 重置为 888888？只在 1 小时内有效，请在 {n} 马上要登录时再重置。',
+  initial_pin_hint:'初始 PIN 是 888888，只在 1 小时内有效：建好后请让员工马上登录，改成自己的 6 位 PIN。', needs_pin:'未设 PIN',
   up:'上移', down:'下移', people:'人员', amount_total:'金额',
   photo_top:'① 拍单据顶部（名字、日期）', photo_bottom:'② 拍单据底部（Einnahmen 部分）', take_photo:'📷 点这里拍照',
   read_bon:'识别单据', reading:'正在识别，请稍等…', bon_result:'识别结果，请核对', employee:'员工',
@@ -549,8 +549,8 @@ de: {
   request_sent:'Beantragt. Wartet auf Freigabe durch den Chef.', ask_del_reason:'Grund für das Löschen (Freigabe durch den Chef nötig)', pending_tag:'wartet auf Freigabe',
   admin_requests:'Freigaben', approve:'Freigeben', reject:'Ablehnen', ask_reject:'Grund (optional)', approved:'Freigegeben', rejected:'Abgelehnt',
   req_update:'Änderung beantragt', req_delete:'Löschung beantragt', before:'Vorher', after:'Nachher', no_requests:'Keine offenen Freigaben',
-  reset_pin:'PIN auf 888888 zurücksetzen', pin_reset_done:'Zurückgesetzt. Neue PIN bei der nächsten Anmeldung.', confirm_reset:'PIN von {n} auf 888888 zurücksetzen?',
-  initial_pin_hint:'Start-PIN ist 888888. Bei der ersten Anmeldung muss eine eigene 6-stellige PIN gesetzt werden.', needs_pin:'PIN offen',
+  reset_pin:'PIN auf 888888 zurücksetzen (1 Stunde gültig)', pin_reset_done:'Zurückgesetzt. Bitte {n} sagen: bis {t} mit 888888 anmelden (1 Stunde gültig) und sofort eine eigene PIN festlegen.', pin_forgot:'PIN vergessen?', pin_forgot_confirm:'Den Chef bitten, die PIN von {n} zurückzusetzen? Danach innerhalb 1 Stunde mit 888888 anmelden.', pin_forgot_sent:'An den Chef geschickt. Nach dem Zurücksetzen innerhalb 1 Stunde mit 888888 anmelden.', pin_forgot_again:'Bereits angefragt – der Chef kümmert sich darum.', pinreq_title:'PIN zurücksetzen ({n})', pinreq_hint:'Die Person hat auf der Anmeldeseite „PIN vergessen?“ getippt. Wenn sie es wirklich war: „Zurücksetzen“ tippen und ihr sagen, sich innerhalb 1 Stunde mit 888888 anzumelden. Sonst „Ignorieren“.', pinreq_reset:'Auf 888888 zurücksetzen', pinreq_dismiss:'Ignorieren', pinreq_at:'angefragt {t}', new_staff_pin:'Angelegt. Bitte {n} sagen: bis {t} mit 888888 anmelden (1 Stunde gültig).', confirm_reset:'PIN von {n} auf 888888 zurücksetzen? Nur 1 Stunde gültig – am besten erst, wenn {n} sich gleich anmeldet.',
+  initial_pin_hint:'Start-PIN ist 888888, nur 1 Stunde gültig: Bitte gleich anmelden lassen und eine eigene 6-stellige PIN festlegen.', needs_pin:'PIN offen',
   up:'Nach oben', down:'Nach unten', people:'Personen', amount_total:'Betrag',
   photo_top:'① Oberen Teil fotografieren (Name, Datum)', photo_bottom:'② Unteren Teil fotografieren (Einnahmen)', take_photo:'📷 Hier tippen für Foto',
   read_bon:'Bon auslesen', reading:'Wird ausgelesen, bitte warten …', bon_result:'Erkannt – bitte prüfen', employee:'Mitarbeiter',
@@ -804,7 +804,9 @@ const ERR_ZH = {
   BAD_METHOD: '点收方式不对。请刷新页面后重试。',
   PHOTO_REQUIRED: '请选择纸质收据的照片。',
   NOTE_REQUIRED: '请写一句说明（例如：已离职，已在纸上签收），存档时需要。',
-  LOGIN_FAILED: 'PIN 不对。连续输错 5 次会锁定 15 分钟。忘记 PIN 请找老板重置。',
+  LOGIN_FAILED: 'PIN 不对。连续输错 5 次会锁定 15 分钟。忘记 PIN 请点下面「忘记 PIN？」。',
+  PIN_EXPIRED: '888888 已过期（重置后只在 1 小时内有效）。请点下面「忘记 PIN？」，或直接找老板重新重置。',
+  PIN_REQ_LIMIT: '今天已经申请太多次了。请直接找老板。',
   LOCKED: '连续输错太多次，账号已锁定 15 分钟。请稍后再试，或找老板重置 PIN。',
   INVALID_SERVER: '选择的服务员无效（已不在职或不存在）。请重新选择。',
   NAME_TAKEN: '已经有员工叫这个名字。请换一个，比如加上姓氏首字母。',
@@ -884,7 +886,9 @@ const ERR_DE = {
   BAD_METHOD: 'Ungültige Zählart. Bitte Seite neu laden und erneut versuchen.',
   PHOTO_REQUIRED: 'Bitte ein Foto der Papierquittung auswählen.',
   NOTE_REQUIRED: 'Bitte einen kurzen Hinweis eingeben (z. B. ausgeschieden, auf Papier quittiert) – nötig für die Ablage.',
-  LOGIN_FAILED: 'PIN falsch. Nach 5 Fehlversuchen wird für 15 Minuten gesperrt. PIN vergessen? Bitte den Chef zum Zurücksetzen fragen.',
+  LOGIN_FAILED: 'PIN falsch. Nach 5 Fehlversuchen wird für 15 Minuten gesperrt. PIN vergessen? Unten auf „PIN vergessen?“ tippen.',
+  PIN_EXPIRED: '888888 ist abgelaufen (nach dem Zurücksetzen nur 1 Stunde gültig). Bitte unten „PIN vergessen?“ tippen oder den Chef direkt fragen.',
+  PIN_REQ_LIMIT: 'Heute schon zu oft angefragt. Bitte direkt den Chef fragen.',
   LOCKED: 'Zu viele Fehlversuche – das Konto ist 15 Minuten gesperrt. Bitte später erneut versuchen oder den Chef um Zurücksetzen der PIN bitten.',
   INVALID_SERVER: 'Ungültige Servicekraft (nicht mehr aktiv oder nicht vorhanden). Bitte neu auswählen.',
   NAME_TAKEN: 'Diesen Namen gibt es schon. Bitte einen anderen wählen, z. B. mit Anfangsbuchstaben des Nachnamens.',
@@ -965,6 +969,8 @@ function b64uToBytes(s){ const p = '='.repeat((4 - s.length % 4) % 4), b = atob(
 async function pushSub(){ if (!pushSupported()) return null; const reg = await navigator.serviceWorker.getRegistration(); return reg ? reg.pushManager.getSubscription() : null; }
 async function refreshPushState(){ try { state.pushOn = !!(await pushSub()) && !!state.personal; } catch(e){ state.pushOn = false; } }
 // 调用推送服务（失败不影响其他功能）
+// 重置 PIN / 新员工后的说明：内容重要（几点前登录），用弹窗，点「关闭」才消失
+function pinInfo(msg){ const dlg = $('#photoDlg'); dlg.innerHTML = `<h2 style="margin-top:0">PIN</h2><div style="margin-bottom:14px;font-size:17px;line-height:1.5">${esc(msg)}</div><button class="btn" data-act="photo-close">${esc(t('close'))}</button>`; dlg.showModal(); }
 async function callPush(action, extra){
   try { const { data } = await sb.functions.invoke('push', { body: { action, token: state.token, ...(extra || {}) } }); return data; } catch(e){ return null; }
 }
@@ -1078,8 +1084,10 @@ async function renderLogin(){
         <input class="input num" id="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="6" pattern="[0-9]*" autofocus>
         <label class="own"><input type="checkbox" id="own"><span>${esc(t('own_device'))}<small>${esc(t('own_device_hint'))}</small></span></label>
         <div class="err" role="alert">${esc(state.loginErr)}</div>
+        ${state.loginInfo ? `<div class="small" role="status" style="background:rgba(255,255,255,.1);border-radius:10px;padding:8px 10px;margin:4px 0 10px">${esc(state.loginInfo)}</div>` : ''}
         <button class="btn" type="submit">${esc(t('login'))}</button>
         <button class="btn ghost" type="button" data-act="login-back">${esc(t('back'))}</button>
+        <button class="adminlink" type="button" data-act="pin-forgot" style="margin-top:14px">${esc(t('pin_forgot'))}</button>
       </form>` : `
       <h1>${esc(state.loginAdmin ? t('admin_login') : t('who'))}</h1><p>${esc(t('who_sub'))}</p>
       ${loginNames()}
@@ -1104,13 +1112,13 @@ function loginNames(){
 async function doLogin(){
   const pin = $('#pin').value.trim(), own = !!($('#own') && $('#own').checked);
   const r = await rpc('login', { p_staff_id: state.loginPick.id, p_pin: pin }).catch(e => ({ ok:false, error: e.message }));
-  if (!r || !r.ok){ state.loginErr = errText({ message: r && r.error }); renderLogin(); return; }
+  if (!r || !r.ok){ state.loginInfo = ''; state.loginErr = errText({ message: r && r.error }); renderLogin(); return; }
   state.personal = false;
   if (own){
     try { await rpc('mark_session_personal', { p_token: r.token }); state.personal = true; LS.set('personal', true); } catch(e){}
   }
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
-  state.loginErr = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
+  state.loginErr = ''; state.loginInfo = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
   state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit';
   if (!r.me.must_change_pin){
     try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} await loadCommon();
@@ -2118,10 +2126,15 @@ async function viewAdmin(){
       const binds = staff.flatMap(s => (s.ls_ids || []).filter(b => !b.confirmed).map(b => ({ ...b, sid: s.id, sname: s.name })));
       let reviews = []; try { reviews = (await rpc('admin_review_list', tok()) || []).filter(r => !r.locked); } catch(e){}
       await loadXfer(reviews.map(r => r.entry_id));
+      let pinReqs = []; try { pinReqs = await rpc('admin_pin_requests', tok()) || []; } catch(e){}   // v29 之前没有
       try { const m2 = await rpc('me', tok()); refreshBadge(m2.pending_requests); } catch(e){}
-      el().innerHTML = (reviews.length ? h3i(esc(t('review_title')), t('review_hint')) + `<div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
+      el().innerHTML = (pinReqs.length ? h3i(esc(t('pinreq_title', { n: pinReqs.length })), t('pinreq_hint')) + `<div class="list">${pinReqs.map(r => `<div class="item">
+            <div class="top"><div><strong>${esc(r.name)}</strong></div><div class="meta small muted num">${esc(t('pinreq_at', { t: fmtDateTime(r.created_at) }))}</div></div>
+            <div class="acts"><button class="link" data-act="pinreq-reset" data-staff="${r.staff_id}" data-name="${esc(r.name)}">${esc(t('pinreq_reset'))}</button>
+              <button class="link danger" data-act="pinreq-dismiss" data-id="${r.id}">${esc(t('pinreq_dismiss'))}</button></div></div>`).join('')}</div>` : '')
+        + (reviews.length ? h3i(esc(t('review_title')), t('review_hint')) + `<div class="list">${reviews.map(reviewCard).join('')}</div>` : '')
         + (binds.length ? `<h3>${esc(t('ls_bind_title'))}</h3><div class="list">${binds.map(lsRow).join('')}</div>` : '')
-        + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`))
+        + (list.length ? list.map(requestCard).join('') : (binds.length || reviews.length || pinReqs.length ? '' : `<div class="list"><div class="empty">${esc(t('no_requests'))}</div></div>`))
         + (doneReq.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('req_done_grp', { n: doneReq.length }))}</summary><div class="inner"><div class="list">${doneReq.map(r => `<div class="item">
             <div class="top"><div><strong>${esc(r.requested_by)}</strong> <span class="muted">${esc(t(r.kind === 'update' ? 'req_update' : 'req_delete'))}</span>
               <span class="tag ${r.status === 'approved' ? 'ok' : 'off'}">${esc(t(r.status === 'approved' ? 'req_approved' : 'req_rejected'))}</span></div></div>
@@ -2752,6 +2765,24 @@ document.addEventListener('click', async ev => {
       if (next === 'main') el.parentNode.querySelectorAll('[data-st=main]').forEach(b => setSt(b, 'can'));
       setSt(el, next); break;
     }
+    case 'pin-forgot': {   // v29：登录页申请重置 PIN（不需要登录）；有手机通知的老板会收到推送
+      const p = state.loginPick; if (!p || !confirm(t('pin_forgot_confirm', { n: p.name }))) break;
+      try {
+        const r = await rpc('request_pin_reset', { p_staff_id: p.id });
+        state.loginErr = ''; state.loginInfo = t(r && r.already ? 'pin_forgot_again' : 'pin_forgot_sent'); renderLogin();
+        if (r && !r.already) sb.functions.invoke('push', { body: { action: 'pin_request', staff_id: p.id } }).catch(() => {});
+      } catch(e){ state.loginInfo = ''; state.loginErr = errText(e); renderLogin(); }
+      break;
+    }
+    case 'pinreq-reset': {
+      if (!confirm(t('confirm_reset', { n: el.dataset.name }))) break;
+      try { await rpc('admin_reset_pin', { ...tok(), p_id: el.dataset.staff }); pinInfo(t('pin_reset_done', { n: el.dataset.name, t: new Date(Date.now() + 3600e3).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }) })); render(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'pinreq-dismiss': {
+      try { await rpc('admin_pin_request_dismiss', { ...tok(), p_id: el.dataset.id }); render(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'staff-toggle-active': {
       const cbx = $('#s-active'), orig = el.dataset.orig === '1', turnOff = cbx.checked;
       if (turnOff && turnOff === orig && !confirm(t('confirm_deact', { n: el.dataset.name }))) break;
@@ -2762,8 +2793,8 @@ document.addEventListener('click', async ev => {
     }
     case 'pin-open': state.menu = false; render(); openPinDialog(); break;
     case 'pin-cancel': $('#pinDlg').close(); break;
-    case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; renderLogin(); break;
-    case 'login-back': state.loginPick = null; state.loginErr = ''; renderLogin(); break;
+    case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
+    case 'login-back': state.loginPick = null; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'tab': state.done = null; state.rcWeek = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
@@ -2777,7 +2808,7 @@ document.addEventListener('click', async ev => {
     case 'chip-day': { const r = el.dataset.role; f[r === 'runner' ? 'runners' : 'bars'] = dayPicks(r).slice(); f[r === 'runner' ? 'autoRunners' : 'autoBars'] = false; render(); break; }
     case 'chip-none': f[el.dataset.role === 'runner' ? 'runners' : 'bars'] = []; f[el.dataset.role === 'runner' ? 'autoRunners' : 'autoBars'] = false; render(); break;
     case 'miss-go': state.done = null; state.tab = 'entry'; LS.set('tab', 'entry'); state.menu = false; render(); window.scrollTo(0, 0); break;
-    case 'login-admin': state.loginAdmin = !state.loginAdmin; state.loginErr = ''; renderLogin(); break;
+    case 'login-admin': state.loginAdmin = !state.loginAdmin; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'entry-save': saveEntry(); break;
     case 'edit-cancel': state.form = blankForm(); render(); break;
     case 'entry-edit': loadIntoForm(el.dataset.id); break;
@@ -2808,7 +2839,7 @@ document.addEventListener('click', async ev => {
     }
     case 'staff-reset': {
       const s = state.staffEdit; if (!confirm(t('confirm_reset', { n: s.name }))) break;
-      try { await rpc('admin_reset_pin', { ...tok(), p_id: s.id }); toast(t('pin_reset_done')); state.staffEdit = null; render(); } catch(e){ toast(errText(e), true); }
+      try { await rpc('admin_reset_pin', { ...tok(), p_id: s.id }); pinInfo(t('pin_reset_done', { n: s.name, t: new Date(Date.now() + 3600e3).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }) })); state.staffEdit = null; render(); } catch(e){ toast(errText(e), true); }
       break;
     }
     case 'week-prev': state.week = addDays(state.week, -7); render(); break;
@@ -2857,7 +2888,7 @@ document.addEventListener('click', async ev => {
         if ($('#s-insched')){ const main = rb ? rb.dataset.r : null;
           await rpc('admin_set_sched_profile', { ...tok(), p_staff_id: newId || s.id, p_in_schedule: $('#s-insched').checked,
             p_skills: [...document.querySelectorAll('#s-role [data-st=can]')].map(x => x.dataset.r).filter(r => r !== main) }); }
-        state.staffEdit = null; toast(t('saved')); state.loginStaff = null; await loadCommon();
+        state.staffEdit = null; (s.id ? toast(t('saved')) : pinInfo(t('new_staff_pin', { n: $('#s-name').value.trim(), t: new Date(Date.now() + 3600e3).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }) }))); state.loginStaff = null; await loadCommon();
         if (s.id === state.me.id){ try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} }
         render();
       } catch(e){ toast(errText(e), true); }
