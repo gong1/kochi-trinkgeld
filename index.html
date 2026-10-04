@@ -325,7 +325,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   app:'Kochi Team', who:'你是谁？', who_sub:'选择你的名字，然后输入 PIN', login:'登录', back:'返回',
-  tab_entry:'录入', tab_today:'今天', tab_more:'更多', td_shift:'今天的班', td_noshift:'今天没有班', td_next:'下一个班：{x}', td_nonext:'还没有排到你的下一个班', td_mine:'我要做的（{n}）', td_mine_ok:'我要做的', td_alldone:'今天的事都做完了 ✓', td_done_grp:'已完成（{n}）', tk_bon_missing:'补交 Bon：{d} {s} {sl}', tk_bon_missing_sub:'已过期（第二天 12:00 前要交）。交了这个提醒自动消失。', tk_bon_shift:'交{sl} Bon · {s} {a}–{b}', tk_bon_now:'下班后交，第二天 12:00 前。', tk_bon_later:'今天稍后：下班后再交。', tk_bon_done:'已交 {sl} Bon · {s}', tk_bon_btn:'交 Bon', tk_notice:'排班变动待确认', tk_avail:'填第 {w} 周哪些班不能上', tk_avail_sub:'没标的班都算能上。截止 {t}。', tk_avail_go:'去标', tk_avail_all:'下周都能上', tk_avail_done:'第 {w} 周能不能上：已填', tk_avail_ok:'已记下：第 {w} 周都能上。', more_bon:'交 Bon（今天另交一张）', more_title:'更多', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
+  tab_entry:'录入', tab_today:'今天', tab_more:'更多', td_shift:'今天的班', td_noshift:'今天没有班', td_next:'下一个班：{x}', td_nonext:'还没有排到你的下一个班', td_mine:'我要做的（{n}）', td_mine_ok:'我要做的', td_alldone:'今天的事都做完了 ✓', td_done_grp:'已完成（{n}）', tk_bon_missing:'补交 Bon：{d} {s} {sl}', tk_bon_missing_sub:'已过期（第二天 12:00 前要交）。交了这个提醒自动消失。', tk_bon_shift:'交{sl} Bon · {s} {a}–{b}', tk_bon_now:'下班后交，第二天 12:00 前。', tk_bon_later:'今天稍后：下班后再交。', tk_bon_done:'已交 {sl} Bon · {s}', tk_bon_btn:'交 Bon', tk_bon_day:'交今天的 Bon · {s} {sl}', tk_bon_day_sub:'可以每个班各交一张，也可以下班时一张交一整天。', tk_bon_part:'{a}已交 ✓，还差{b}。', tk_bon_day_done:'已交今天的 Bon · {s} {sl}', tk_notice:'排班变动待确认', tk_avail:'填第 {w} 周哪些班不能上', tk_avail_sub:'没标的班都算能上。截止 {t}。', tk_avail_go:'去标', tk_avail_all:'下周都能上', tk_avail_done:'第 {w} 周能不能上：已填', tk_avail_ok:'已记下：第 {w} 周都能上。', more_bon:'交 Bon（今天另交一张）', more_title:'更多', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
   date:'日期', store:'门店', card:'刷卡小费', cash:'现金小费', runner:'Runner', bar:'吧台', kitchen:'厨房', you:'你',
   for_whom:'代谁录入', myself:'我自己', nobody:'今天没有', keeps:'归你', each:'每人',
   save:'保存', saved:'已保存', update:'保存修改', cancel:'取消', editing:'正在修改 {d} 的记录',
@@ -495,7 +495,7 @@ zh: {
 },
 de: {
   app:'Kochi Team', who:'Wer bist du?', who_sub:'Namen wählen, dann PIN eingeben', login:'Anmelden', back:'Zurück',
-  tab_entry:'Eintragen', tab_today:'Heute', tab_more:'Mehr', td_shift:'Heute', td_noshift:'Heute keine Schicht', td_next:'Nächste Schicht: {x}', td_nonext:'Noch keine nächste Schicht geplant', td_mine:'Meine Aufgaben ({n})', td_mine_ok:'Meine Aufgaben', td_alldone:'Alles für heute erledigt ✓', td_done_grp:'Erledigt ({n})', tk_bon_missing:'Bon nachreichen: {d} {s} {sl}', tk_bon_missing_sub:'Überfällig (bis 12:00 am Folgetag). Nach dem Einreichen verschwindet die Erinnerung.', tk_bon_shift:'Bon {sl} einreichen · {s} {a}–{b}', tk_bon_now:'Nach Schichtende, bis 12:00 am Folgetag.', tk_bon_later:'Später: erst nach Schichtende.', tk_bon_done:'Bon {sl} eingereicht · {s}', tk_bon_btn:'Bon einreichen', tk_notice:'Dienstplan-Änderung bestätigen', tk_avail:'KW {w}: Wann kannst du nicht?', tk_avail_sub:'Nicht markierte Schichten zählen als verfügbar. Frist {t}.', tk_avail_go:'Markieren', tk_avail_all:'Nächste Woche alles ok', tk_avail_done:'KW {w} Verfügbarkeit: erledigt', tk_avail_ok:'Gespeichert: KW {w} alles verfügbar.', more_bon:'Bon einreichen (heute noch einer)', more_title:'Mehr', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
+  tab_entry:'Eintragen', tab_today:'Heute', tab_more:'Mehr', td_shift:'Heute', td_noshift:'Heute keine Schicht', td_next:'Nächste Schicht: {x}', td_nonext:'Noch keine nächste Schicht geplant', td_mine:'Meine Aufgaben ({n})', td_mine_ok:'Meine Aufgaben', td_alldone:'Alles für heute erledigt ✓', td_done_grp:'Erledigt ({n})', tk_bon_missing:'Bon nachreichen: {d} {s} {sl}', tk_bon_missing_sub:'Überfällig (bis 12:00 am Folgetag). Nach dem Einreichen verschwindet die Erinnerung.', tk_bon_shift:'Bon {sl} einreichen · {s} {a}–{b}', tk_bon_now:'Nach Schichtende, bis 12:00 am Folgetag.', tk_bon_later:'Später: erst nach Schichtende.', tk_bon_done:'Bon {sl} eingereicht · {s}', tk_bon_btn:'Bon einreichen', tk_bon_day:'Heutigen Bon einreichen · {s} {sl}', tk_bon_day_sub:'Pro Schicht ein Bon oder am Ende ein Bon für den ganzen Tag – beides geht.', tk_bon_part:'{a} eingereicht ✓, {b} fehlt noch.', tk_bon_day_done:'Bon eingereicht · {s} {sl}', tk_notice:'Dienstplan-Änderung bestätigen', tk_avail:'KW {w}: Wann kannst du nicht?', tk_avail_sub:'Nicht markierte Schichten zählen als verfügbar. Frist {t}.', tk_avail_go:'Markieren', tk_avail_all:'Nächste Woche alles ok', tk_avail_done:'KW {w} Verfügbarkeit: erledigt', tk_avail_ok:'Gespeichert: KW {w} alles verfügbar.', more_bon:'Bon einreichen (heute noch einer)', more_title:'Mehr', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
   date:'Datum', store:'Filiale', card:'Trinkgeld Karte', cash:'Trinkgeld bar', runner:'Runner', bar:'Bar', kitchen:'Küche', you:'Du',
   for_whom:'Eintrag für', myself:'Mich selbst', nobody:'Heute niemand', keeps:'bleibt bei dir', each:'je',
   save:'Speichern', saved:'Gespeichert', update:'Änderung speichern', cancel:'Abbrechen', editing:'Eintrag vom {d} bearbeiten',
@@ -1075,7 +1075,23 @@ async function loadTasks(){
   if (!state.me || state.me.is_kitchen){ state.tasks = null; return; }
   try { state.tasks = await rpc('my_tasks', tok()); } catch(e){ state.tasks = null; }   // v31 之前没有
 }
-function taskCount(st){ const ts = (state.tasks && state.tasks.tasks) || []; return ts.filter(x => st ? x.status === st : ['overdue', 'now'].includes(x.status)).length; }
+// v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
+function viewTasks(){
+  const ts = (state.tasks && state.tasks.tasks) || [], out = [], groups = {};
+  ts.forEach(k => { if (k.kind === 'bon_shift'){ const g = k.data.date + '|' + k.data.store; (groups[g] = groups[g] || []).push(k); } });
+  const order = { overdue: 0, now: 1, later: 2 };
+  ts.forEach(k => {
+    if (k.kind !== 'bon_shift'){ out.push(k); return; }
+    const g = groups[k.data.date + '|' + k.data.store];
+    if (g.length === 1){ out.push(k); return; }
+    if (g[0] !== k) return;
+    const open = g.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status]);
+    out.push({ kind: 'bon_day', scope: 'personal', day: k.day, due: k.due, status: open.length ? open[0].status : 'done',
+      data: { date: k.data.date, store: k.data.store, shifts: g.map(x => ({ ...x.data, done: x.status === 'done' })) } });
+  });
+  return out;
+}
+function taskCount(st){ const ts = viewTasks(); return ts.filter(x => st ? x.status === st : ['overdue', 'now'].includes(x.status)).length; }
 function shiftLine(x){ return `${storeTag(x.store)} <strong>${esc(slotLabel(x.slot))}</strong> <span class="num">${esc(x.start)}–${esc(x.end)}</span>${(x.roles || []).length ? ` <span class="muted">${esc(x.roles.map(r => t('grp_' + r)).join(' + '))}</span>` : ''}`; }
 function taskCardHTML(k){
   const d = k.data || {}, card = (cls, title, sub, btns) => `<div class="task ${cls}"><div class="task-t">${title}</div>${sub ? `<div class="task-s">${esc(sub)}</div>` : ''}${btns ? `<div class="task-b">${btns}</div>` : ''}</div>`;
@@ -1086,6 +1102,12 @@ function taskCardHTML(k){
   if (k.kind === 'bon_shift')
     return card(cls, esc(t('tk_bon_shift', { sl: slotLabel(d.slot), s: d.store, a: d.start, b: d.end })), t(k.status === 'later' ? 'tk_bon_later' : 'tk_bon_now'),
       `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="miss-go">${esc(t('tk_bon_btn'))}</button>`);
+  if (k.kind === 'bon_day'){
+    const sl = d.shifts.map(x => slotLabel(x.slot)).join(' + '), dn = d.shifts.filter(x => x.done), left = d.shifts.filter(x => !x.done);
+    return card(cls, esc(t('tk_bon_day', { s: d.store, sl })),
+      dn.length ? t('tk_bon_part', { a: dn.map(x => slotLabel(x.slot)).join(' + '), b: left.map(x => slotLabel(x.slot)).join(' + ') }) : t('tk_bon_day_sub'),
+      `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="miss-go">${esc(t('tk_bon_btn'))}</button>`);
+  }
   if (k.kind === 'notice') return `<div class="task"><div class="task-t">${esc(t('tk_notice'))}</div>${noticeHTML(d)}</div>`;
   if (k.kind === 'receipt')
     return card(cls, esc(t(d.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: d.kw, x: eur(Math.abs(d.payout_euros) * 100) }) + (d.receipt && d.receipt.resign ? t('rc_banner_resign') : '')), '',
@@ -1097,7 +1119,7 @@ function taskCardHTML(k){
 }
 function taskDoneLine(k){
   const d = k.data || {};
-  const txt = k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
+  const txt = k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'bon_day' ? t('tk_bon_day_done', { s: d.store, sl: d.shifts.map(x => slotLabel(x.slot)).join(' + ') }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
   return `<div class="item"><div class="top"><div><span class="pos">✓</span> ${esc(txt)}</div></div></div>`;
 }
 async function viewToday(){
@@ -1108,8 +1130,8 @@ function renderToday(){
   const T = state.tasks;
   if (!T){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
   const order = { overdue: 0, now: 1, later: 2 };
-  const open = T.tasks.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status] || String(a.due || '').localeCompare(String(b.due || '')));
-  const done = T.tasks.filter(x => x.status === 'done');
+  const all = viewTasks(), open = all.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status] || String(a.due || '').localeCompare(String(b.due || '')));
+  const done = all.filter(x => x.status === 'done');
   const shifts = (T.shifts || []).length
     ? `<div class="sheet today-shift"><div class="muted small">${esc(t('td_shift'))} · ${esc(dayLabel(T.day))}</div>${T.shifts.map(x => `<div class="ts-row">${shiftLine(x)}</div>`).join('')}</div>`
     : `<div class="sheet today-shift"><div class="muted small">${esc(dayLabel(T.day))}</div><div><strong>${esc(t('td_noshift'))}</strong></div>
