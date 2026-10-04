@@ -164,6 +164,13 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .task .task-b .btn{flex:1}
 .task .todo-n{border-top:0;padding-top:4px}
 .more{display:flex;flex-direction:column;gap:10px}
+.lk-n{display:inline-block;min-width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:var(--paper);font-size:13px;font-weight:700}
+.lk-row.next{border-left:4px solid var(--copper)}
+.lk-row.wait{opacity:.55}
+.lk-row.done .lk-n{background:var(--celadon-soft);color:var(--celadon-deep)}
+.lk-cam{display:inline-flex;align-items:center;justify-content:center;width:auto;padding:0 18px;cursor:pointer}
+.lk-cam.sm{height:34px;padding:0 12px;font-size:14px}
+.lk-cam.busy{opacity:.5;pointer-events:none}
 .kv-h{margin-top:8px;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px}
 .toast .tbtn{margin-left:12px;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:4px 12px;font-weight:700}
 .viewbar{position:sticky;top:0;z-index:11;background:var(--copper);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700}
@@ -325,7 +332,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   app:'Kochi Team', who:'你是谁？', who_sub:'选择你的名字，然后输入 PIN', login:'登录', back:'返回',
-  tab_entry:'录入', tab_today:'今天', tab_more:'更多', td_shift:'今天的班', td_noshift:'今天没有班', td_next:'下一个班：{x}', td_nonext:'还没有排到你的下一个班', td_mine:'我要做的（{n}）', td_mine_ok:'我要做的', td_alldone:'今天的事都做完了 ✓', td_done_grp:'已完成（{n}）', tk_bon_missing:'补交 Bon：{d} {s} {sl}', tk_bon_missing_sub:'已过期（第二天 12:00 前要交）。交了这个提醒自动消失。', tk_bon_shift:'交{sl} Bon · {s} {a}–{b}', tk_bon_now:'下班后交，第二天 12:00 前。', tk_bon_later:'今天稍后：下班后再交。', tk_bon_done:'已交 {sl} Bon · {s}', tk_bon_btn:'交 Bon', tk_bon_day:'交今天的 Bon · {s} {sl}', tk_bon_day_sub:'可以每个班各交一张，也可以下班时一张交一整天。', tk_bon_part:'{a}已交 ✓，还差{b}。', tk_bon_day_done:'已交今天的 Bon · {s} {sl}', tk_notice:'排班变动待确认', tk_avail:'填第 {w} 周哪些班不能上', tk_avail_sub:'没标的班都算能上。截止 {t}。', tk_avail_go:'去标', tk_avail_all:'下周都能上', tk_avail_done:'第 {w} 周能不能上：已填', tk_avail_ok:'已记下：第 {w} 周都能上。', more_bon:'交 Bon（今天另交一张）', more_title:'更多', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
+  tab_entry:'录入', td_store:'本店今天', lk_title:'收店锁门巡查 · {s}', lk_sub:'按顺序逐个拍照，截止 {t}。', lk_sub_over:'已过截止（{t}），请尽快补做。', lk_start:'开始巡查', lk_cont:'继续巡查（{a}/{b}）', lk_done_line:'收店锁门巡查 · {s} 已完成', lk_back:'← 返回今天', lk_head:'收店锁门巡查 · {s}', lk_hint:'按路线顺序，一个一个拍：门要拍到门已关好、锁已锁上。只拍门窗，不拍人。', lk_who:'你是谁？（厨房账号要选自己的名字）', lk_photo:'📷 拍照', lk_retake:'重拍', lk_view:'照片', lk_wait:'先拍前面的', lk_by:'{t} · {n}', lk_uploading:'正在上传照片……', lk_saved:'已记录：{n}', lk_all_done:'锁门巡查完成 ✓ 谢谢！', lk_kind_door:'门', lk_kind_window:'窗户组', lk_open_title:'锁门巡查没完成（{n}）', lk_open_hint:'过了截止（最晚下班 + 2 小时）还没拍完的门店，以及缺少的检查点。最近 7 天。', lk_open_row:'已拍 {a}/{b}，缺：{m}', admin_lock:'锁门检查点', lk_adm_hint:'每家店收店时按这个顺序逐个拍照。用 ↑↓ 按实际巡查路线排好；不用的检查点停用（以前的记录保留）。', lk_adm_add:'＋ 新增检查点', lk_adm_zh:'中文名', lk_adm_de:'德文名', lk_adm_kind:'类型', lk_adm_off:'已停用', lk_adm_disable:'停用', lk_adm_enable:'启用', tab_today:'今天', tab_more:'更多', td_shift:'今天的班', td_noshift:'今天没有班', td_next:'下一个班：{x}', td_nonext:'还没有排到你的下一个班', td_mine:'我要做的（{n}）', td_mine_ok:'我要做的', td_alldone:'今天的事都做完了 ✓', td_done_grp:'已完成（{n}）', tk_bon_missing:'补交 Bon：{d} {s} {sl}', tk_bon_missing_sub:'已过期（第二天 12:00 前要交）。交了这个提醒自动消失。', tk_bon_shift:'交{sl} Bon · {s} {a}–{b}', tk_bon_now:'下班后交，第二天 12:00 前。', tk_bon_later:'今天稍后：下班后再交。', tk_bon_done:'已交 {sl} Bon · {s}', tk_bon_btn:'交 Bon', tk_bon_day:'交今天的 Bon · {s} {sl}', tk_bon_day_sub:'可以每个班各交一张，也可以下班时一张交一整天。', tk_bon_part:'{a}已交 ✓，还差{b}。', tk_bon_day_done:'已交今天的 Bon · {s} {sl}', tk_notice:'排班变动待确认', tk_avail:'填第 {w} 周哪些班不能上', tk_avail_sub:'没标的班都算能上。截止 {t}。', tk_avail_go:'去标', tk_avail_all:'下周都能上', tk_avail_done:'第 {w} 周能不能上：已填', tk_avail_ok:'已记下：第 {w} 周都能上。', more_bon:'交 Bon（今天另交一张）', more_title:'更多', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
   date:'日期', store:'门店', card:'刷卡小费', cash:'现金小费', runner:'Runner', bar:'吧台', kitchen:'厨房', you:'你',
   for_whom:'代谁录入', myself:'我自己', nobody:'今天没有', keeps:'归你', each:'每人',
   save:'保存', saved:'已保存', update:'保存修改', cancel:'取消', editing:'正在修改 {d} 的记录',
@@ -495,7 +502,7 @@ zh: {
 },
 de: {
   app:'Kochi Team', who:'Wer bist du?', who_sub:'Namen wählen, dann PIN eingeben', login:'Anmelden', back:'Zurück',
-  tab_entry:'Eintragen', tab_today:'Heute', tab_more:'Mehr', td_shift:'Heute', td_noshift:'Heute keine Schicht', td_next:'Nächste Schicht: {x}', td_nonext:'Noch keine nächste Schicht geplant', td_mine:'Meine Aufgaben ({n})', td_mine_ok:'Meine Aufgaben', td_alldone:'Alles für heute erledigt ✓', td_done_grp:'Erledigt ({n})', tk_bon_missing:'Bon nachreichen: {d} {s} {sl}', tk_bon_missing_sub:'Überfällig (bis 12:00 am Folgetag). Nach dem Einreichen verschwindet die Erinnerung.', tk_bon_shift:'Bon {sl} einreichen · {s} {a}–{b}', tk_bon_now:'Nach Schichtende, bis 12:00 am Folgetag.', tk_bon_later:'Später: erst nach Schichtende.', tk_bon_done:'Bon {sl} eingereicht · {s}', tk_bon_btn:'Bon einreichen', tk_bon_day:'Heutigen Bon einreichen · {s} {sl}', tk_bon_day_sub:'Pro Schicht ein Bon oder am Ende ein Bon für den ganzen Tag – beides geht.', tk_bon_part:'{a} eingereicht ✓, {b} fehlt noch.', tk_bon_day_done:'Bon eingereicht · {s} {sl}', tk_notice:'Dienstplan-Änderung bestätigen', tk_avail:'KW {w}: Wann kannst du nicht?', tk_avail_sub:'Nicht markierte Schichten zählen als verfügbar. Frist {t}.', tk_avail_go:'Markieren', tk_avail_all:'Nächste Woche alles ok', tk_avail_done:'KW {w} Verfügbarkeit: erledigt', tk_avail_ok:'Gespeichert: KW {w} alles verfügbar.', more_bon:'Bon einreichen (heute noch einer)', more_title:'Mehr', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
+  tab_entry:'Eintragen', td_store:'Laden heute', lk_title:'Abschluss-Rundgang · {s}', lk_sub:'Der Reihe nach fotografieren, bis {t}.', lk_sub_over:'Frist ({t}) vorbei – bitte schnell nachholen.', lk_start:'Rundgang starten', lk_cont:'Rundgang fortsetzen ({a}/{b})', lk_done_line:'Abschluss-Rundgang · {s} erledigt', lk_back:'← Zurück zu Heute', lk_head:'Abschluss-Rundgang · {s}', lk_hint:'Der Route nach, einen nach dem anderen: Die Tür muss sichtbar zu und abgeschlossen sein. Nur Türen/Fenster fotografieren, keine Personen.', lk_who:'Wer bist du? (Küchenkonto: eigenen Namen wählen)', lk_photo:'📷 Foto', lk_retake:'Neu', lk_view:'Foto', lk_wait:'Zuerst die vorherigen', lk_by:'{t} · {n}', lk_uploading:'Foto wird hochgeladen …', lk_saved:'Gespeichert: {n}', lk_all_done:'Rundgang erledigt ✓ Danke!', lk_kind_door:'Tür', lk_kind_window:'Fenstergruppe', lk_open_title:'Abschluss-Rundgang nicht erledigt ({n})', lk_open_hint:'Läden, bei denen nach der Frist (letztes Schichtende + 2 Std.) noch Fotos fehlen, und welche Punkte fehlen. Letzte 7 Tage.', lk_open_row:'{a}/{b} fotografiert, fehlt: {m}', admin_lock:'Abschluss-Punkte', lk_adm_hint:'Beim Abschluss wird in dieser Reihenfolge fotografiert. Mit ↑↓ nach der echten Route sortieren; nicht mehr benötigte Punkte deaktivieren (alte Einträge bleiben).', lk_adm_add:'＋ Neuer Punkt', lk_adm_zh:'Name Chinesisch', lk_adm_de:'Name Deutsch', lk_adm_kind:'Art', lk_adm_off:'deaktiviert', lk_adm_disable:'Deaktivieren', lk_adm_enable:'Aktivieren', tab_today:'Heute', tab_more:'Mehr', td_shift:'Heute', td_noshift:'Heute keine Schicht', td_next:'Nächste Schicht: {x}', td_nonext:'Noch keine nächste Schicht geplant', td_mine:'Meine Aufgaben ({n})', td_mine_ok:'Meine Aufgaben', td_alldone:'Alles für heute erledigt ✓', td_done_grp:'Erledigt ({n})', tk_bon_missing:'Bon nachreichen: {d} {s} {sl}', tk_bon_missing_sub:'Überfällig (bis 12:00 am Folgetag). Nach dem Einreichen verschwindet die Erinnerung.', tk_bon_shift:'Bon {sl} einreichen · {s} {a}–{b}', tk_bon_now:'Nach Schichtende, bis 12:00 am Folgetag.', tk_bon_later:'Später: erst nach Schichtende.', tk_bon_done:'Bon {sl} eingereicht · {s}', tk_bon_btn:'Bon einreichen', tk_bon_day:'Heutigen Bon einreichen · {s} {sl}', tk_bon_day_sub:'Pro Schicht ein Bon oder am Ende ein Bon für den ganzen Tag – beides geht.', tk_bon_part:'{a} eingereicht ✓, {b} fehlt noch.', tk_bon_day_done:'Bon eingereicht · {s} {sl}', tk_notice:'Dienstplan-Änderung bestätigen', tk_avail:'KW {w}: Wann kannst du nicht?', tk_avail_sub:'Nicht markierte Schichten zählen als verfügbar. Frist {t}.', tk_avail_go:'Markieren', tk_avail_all:'Nächste Woche alles ok', tk_avail_done:'KW {w} Verfügbarkeit: erledigt', tk_avail_ok:'Gespeichert: KW {w} alles verfügbar.', more_bon:'Bon einreichen (heute noch einer)', more_title:'Mehr', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
   date:'Datum', store:'Filiale', card:'Trinkgeld Karte', cash:'Trinkgeld bar', runner:'Runner', bar:'Bar', kitchen:'Küche', you:'Du',
   for_whom:'Eintrag für', myself:'Mich selbst', nobody:'Heute niemand', keeps:'bleibt bei dir', each:'je',
   save:'Speichern', saved:'Gespeichert', update:'Änderung speichern', cancel:'Abbrechen', editing:'Eintrag vom {d} bearbeiten',
@@ -709,18 +716,29 @@ function parseSigned(s){
   return isNaN(v) ? NaN : (neg ? -v : v);
 }
 function money(c){ return (c < 0 ? '-' : '') + (Math.abs(c || 0) / 100).toFixed(2).replace('.', ','); }
-function compressImage(file){
+function compressImage(file, maxSide, quality){
   return new Promise((resolve, reject) => {
     const img = new Image(), url = URL.createObjectURL(file);
     img.onload = () => {
-      const max = 1568, s = Math.min(1, max / Math.max(img.width, img.height));
+      const max = maxSide || 1568, s = Math.min(1, max / Math.max(img.width, img.height));
       const c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
       c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      URL.revokeObjectURL(url); resolve(c.toDataURL('image/jpeg', 0.85));
+      URL.revokeObjectURL(url); resolve(c.toDataURL('image/jpeg', quality || 0.85));
     };
     img.onerror = e => { URL.revokeObjectURL(url); reject(e); };
     img.src = url;
   });
+}
+// v40：门店清单任务的照片服务（Edge Function「tasks」）
+async function callTasks(body){
+  const { data, error } = await sb.functions.invoke('tasks', { body: { ...body, token: state.token } });
+  if (error){
+    let code = 'TASK_FAILED';
+    try { const j = await error.context.json(); if (j && j.error) code = j.error; } catch(e){}
+    throw new Error(code);
+  }
+  if (data && data.error) throw new Error(data.error);
+  return data;
 }
 async function callFn(body){
   const { data, error } = await sb.functions.invoke('bon', { body: { ...body, token: state.token } });
@@ -822,6 +840,17 @@ const ERR_ZH = {
   EXTRA_TOO_MUCH: '多给的总数超过了你自己那份小费。请往左拉一点再提交。',
   EXTRA_NOT_HELPER: '只能多给这张 Bon 上选了的 Runner 或吧台。请重新选择后再提交。',
   EXTRA_LOCKED: '交 Bon 已超过 10 分钟，多给的金额不能再改。需要更正，请找老板记一笔调整。',
+  LOCK_NO_SHIFT: '这家店今天没有已发布的排班，不需要锁门巡查。',
+  LOCK_TOO_EARLY: '还没到巡查时间（最晚下班前 1 小时才开始）。请稍后再拍。',
+  LOCK_PICK_NAME: '用厨房账号巡查，要先在上面选自己的名字。',
+  LOCK_NOT_SCHEDULED: '你今天没有排在这家店，不能做这家店的巡查。用厨房账号时请选今天在这家店上班的人。',
+  LOCK_ORDER: '请按顺序拍：先拍前面还没拍的检查点。',
+  LOCK_PHOTO_BAD: '照片没收到或格式不对。请重新拍一张。',
+  PHOTO_DUPLICATE: '这张照片已经用过了。请现场重新拍一张。',
+  PHOTO_TOO_BIG: '照片太大，上传不了。请重新拍一张。',
+  PHOTO_UPLOAD_FAILED: '照片保存失败（网络或服务器问题）。请稍后重拍；还不行请截图发给老板。',
+  TASK_FAILED: '记录失败。请稍后再试；还不行请截图发给老板。',
+  INVALID_KIND: '类型不对，请选「门」或「窗户组」。',
   LOGIN_FAILED: 'PIN 不对。连续输错 5 次会锁定 15 分钟。忘记 PIN 请点下面「忘记 PIN？」。',
   PIN_EXPIRED: '888888 已过期（重置后只在 1 小时内有效）。请点下面「忘记 PIN？」，或直接找老板重新重置。',
   PIN_REQ_LIMIT: '今天已经申请太多次了。请直接找老板。',
@@ -907,6 +936,17 @@ const ERR_DE = {
   EXTRA_TOO_MUCH: 'Zusammen mehr als dein eigener Anteil. Bitte etwas nach links ziehen und erneut einreichen.',
   EXTRA_NOT_HELPER: 'Mehr geben geht nur an Runner / Bar, die auf diesem Bon ausgewählt sind. Bitte neu auswählen.',
   EXTRA_LOCKED: 'Mehr als 10 Minuten seit dem Einreichen – der Zusatzbetrag ist nicht mehr änderbar. Für eine Korrektur bitte den Chef (Korrektur erfassen).',
+  LOCK_NO_SHIFT: 'Heute kein veröffentlichter Dienstplan in diesem Laden – kein Rundgang nötig.',
+  LOCK_TOO_EARLY: 'Noch zu früh (erst 1 Stunde vor dem letzten Schichtende). Bitte später fotografieren.',
+  LOCK_PICK_NAME: 'Mit dem Küchenkonto bitte oben zuerst den eigenen Namen wählen.',
+  LOCK_NOT_SCHEDULED: 'Du bist heute nicht in diesem Laden eingeplant. Beim Küchenkonto bitte jemanden wählen, der heute hier arbeitet.',
+  LOCK_ORDER: 'Bitte der Reihe nach: zuerst den vorherigen Punkt fotografieren.',
+  LOCK_PHOTO_BAD: 'Foto nicht angekommen oder falsches Format. Bitte neu fotografieren.',
+  PHOTO_DUPLICATE: 'Dieses Foto wurde schon verwendet. Bitte vor Ort neu fotografieren.',
+  PHOTO_TOO_BIG: 'Foto zu groß. Bitte neu fotografieren.',
+  PHOTO_UPLOAD_FAILED: 'Foto konnte nicht gespeichert werden (Netz oder Server). Bitte gleich nochmal; sonst Screenshot an den Chef.',
+  TASK_FAILED: 'Speichern fehlgeschlagen. Bitte gleich nochmal; sonst Screenshot an den Chef.',
+  INVALID_KIND: 'Falsche Art – bitte „Tür“ oder „Fenstergruppe“ wählen.',
   LOGIN_FAILED: 'PIN falsch. Nach 5 Fehlversuchen wird für 15 Minuten gesperrt. PIN vergessen? Unten auf „PIN vergessen?“ tippen.',
   PIN_EXPIRED: '888888 ist abgelaufen (nach dem Zurücksetzen nur 1 Stunde gültig). Bitte unten „PIN vergessen?“ tippen oder den Chef direkt fragen.',
   PIN_REQ_LIMIT: 'Heute schon zu oft angefragt. Bitte direkt den Chef fragen.',
@@ -1108,6 +1148,12 @@ function taskCardHTML(k){
       dn.length ? t('tk_bon_part', { a: dn.map(x => slotLabel(x.slot)).join(' + '), b: left.map(x => slotLabel(x.slot)).join(' + ') }) : t('tk_bon_day_sub'),
       `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="miss-go">${esc(t('tk_bon_btn'))}</button>`);
   }
+  if (k.kind === 'lock_round'){
+    const due = (k.due || '').slice(11, 16);
+    return card(cls, esc(t('lk_title', { s: d.store })) + ` <span class="muted small num">${d.done_count}/${d.total}</span>`,
+      t(k.status === 'overdue' ? 'lk_sub_over' : 'lk_sub', { t: due }),
+      `<button class="btn" data-act="lock-open" data-store="${esc(d.store)}">${esc(+d.done_count ? t('lk_cont', { a: d.done_count, b: d.total }) : t('lk_start'))}</button>`);
+  }
   if (k.kind === 'notice') return `<div class="task"><div class="task-t">${esc(t('tk_notice'))}</div>${noticeHTML(d)}</div>`;
   if (k.kind === 'receipt')
     return card(cls, esc(t(d.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: d.kw, x: eur(Math.abs(d.payout_euros) * 100) }) + (d.receipt && d.receipt.resign ? t('rc_banner_resign') : '')), '',
@@ -1119,7 +1165,7 @@ function taskCardHTML(k){
 }
 function taskDoneLine(k){
   const d = k.data || {};
-  const txt = k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'bon_day' ? t('tk_bon_day_done', { s: d.store, sl: d.shifts.map(x => slotLabel(x.slot)).join(' + ') }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
+  const txt = k.kind === 'lock_round' ? t('lk_done_line', { s: d.store }) : k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'bon_day' ? t('tk_bon_day_done', { s: d.store, sl: d.shifts.map(x => slotLabel(x.slot)).join(' + ') }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
   return `<div class="item"><div class="top"><div><span class="pos">✓</span> ${esc(txt)}</div></div></div>`;
 }
 async function viewToday(){
@@ -1130,7 +1176,8 @@ function renderToday(){
   const T = state.tasks;
   if (!T){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
   const order = { overdue: 0, now: 1, later: 2 };
-  const all = viewTasks(), open = all.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status] || String(a.due || '').localeCompare(String(b.due || '')));
+  if (state.lockOpen){ renderLock(); return; }
+  const all = viewTasks().filter(x => x.scope !== 'store'), store = viewTasks().filter(x => x.scope === 'store'), open = all.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status] || String(a.due || '').localeCompare(String(b.due || '')));
   const done = all.filter(x => x.status === 'done');
   const shifts = (T.shifts || []).length
     ? `<div class="sheet today-shift"><div class="muted small">${esc(t('td_shift'))} · ${esc(dayLabel(T.day))}</div>${T.shifts.map(x => `<div class="ts-row">${shiftLine(x)}</div>`).join('')}</div>`
@@ -1140,7 +1187,45 @@ function renderToday(){
   $('#main').innerHTML = shifts
     + `<h3>${esc(nOpen ? t('td_mine', { n: nOpen }) : t('td_mine_ok'))}</h3>`
     + (open.length ? open.map(taskCardHTML).join('') : `<div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
-    + (done.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(taskDoneLine).join('')}</div></div></details>` : '');
+    + (done.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(taskDoneLine).join('')}</div></div></details>` : '')
+    + (store.length ? `<h3>${esc(t('td_store'))}</h3>` + store.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status]).map(taskCardHTML).join('')
+        + (store.some(x => x.status === 'done') ? `<div class="list">${store.filter(x => x.status === 'done').map(taskDoneLine).join('')}</div>` : '') : '');
+}
+// 收店锁门巡查：按顺序逐个检查点拍照（v40）
+function renderLock(){
+  const k = viewTasks().find(x => x.kind === 'lock_round' && x.data.store === state.lockOpen);
+  if (!k){ state.lockOpen = null; renderToday(); return; }
+  const d = k.data, nm = c => state.lang === 'de' ? c.name_de : c.name_zh;
+  const next = d.checkpoints.find(c => !c.done), kitchen = state.me.is_kitchen;
+  const camera = (c, label, cls) => `<label class="btn ${cls || ''} lk-cam">${esc(label)}<input type="file" accept="image/*" capture="environment" data-lockcp="${c.id}" hidden></label>`;
+  $('#main').innerHTML = `<button class="link" data-act="lock-close" style="margin:2px 0 10px">${esc(t('lk_back'))}</button>
+    <h2 style="margin-top:0">${esc(t('lk_head', { s: d.store }))} <span class="muted small num">${d.done_count}/${d.total}</span></h2>
+    <div class="infobox">${esc(t('lk_hint'))}</div>
+    ${kitchen ? `<div class="field"><label for="lk-who">${esc(t('lk_who'))}</label><select class="input" id="lk-who"><option value="">–</option>${(d.people || []).map(x => `<option value="${x.id}" ${state.lockWho === x.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</select></div>` : ''}
+    <div class="list">${d.checkpoints.map((c, i) => `<div class="item lk-row ${c.done ? 'done' : c === next ? 'next' : 'wait'}">
+      <div class="top" style="align-items:center"><div><span class="lk-n num">${i + 1}</span> <strong>${esc(nm(c))}</strong> <span class="tag">${esc(t('lk_kind_' + c.kind))}</span>
+        ${c.done ? `<div class="meta num"><span class="pos">✓</span> ${esc(t('lk_by', { t: fmtDateTime(c.done_at), n: c.done_by || '' }))}</div>` : ''}</div></div>
+      <div class="acts">${c.done ? `<button class="link" data-act="lock-view" data-id="${c.item_id}">${esc(t('lk_view'))}</button>` + camera(c, t('lk_retake'), 'ghost sm')
+        : c === next ? camera(c, t('lk_photo')) : `<span class="muted small">${esc(t('lk_wait'))}</span>`}</div></div>`).join('')}</div>`;
+}
+async function lockUpload(input){
+  const f = input.files && input.files[0]; if (!f) return;
+  const k = viewTasks().find(x => x.kind === 'lock_round' && x.data.store === state.lockOpen); if (!k) return;
+  const cp = k.data.checkpoints.find(c => c.id === input.dataset.lockcp);
+  const who = $('#lk-who') ? $('#lk-who').value : null;
+  if (state.me.is_kitchen && !who){ input.value = ''; return toast(t('err_LOCK_PICK_NAME'), true); }
+  state.lockWho = who;
+  document.querySelectorAll('.lk-cam').forEach(b => b.classList.add('busy'));
+  toast(t('lk_uploading'));
+  try {
+    const img = await compressImage(f, 1280, 0.75);
+    const r = await callTasks({ action: 'lock_photo', store: k.data.store, checkpoint_id: cp.id, done_by: who || null, image: img });
+    await loadTasks();
+    const st = r && r.state;
+    if (st && +st.done_count >= +st.total){ state.lockOpen = null; toast(t('lk_all_done')); }
+    else toast(t('lk_saved', { n: state.lang === 'de' ? cp.name_de : cp.name_zh }));
+    render();
+  } catch(e){ toast(errText(e), true); render(); }
 }
 function viewMore(){
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
@@ -2177,6 +2262,7 @@ async function viewWeek(){
   $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
   let ov, st, disp, env = null, dist = null;
   try { state.schedCheck = await rpc('sched_tip_check', tok()); } catch(e){ state.schedCheck = null; }
+  try { state.lockOpenList = await rpc('lock_rounds_open', tok()) || []; } catch(e){ state.lockOpenList = []; }   // v32 之前没有
   try {
     ov = await rpc('week_overview', { ...tok(), p_week_start: state.week });
     if (ov.locked){
@@ -2247,8 +2333,15 @@ async function viewWeek(){
   $('#main').innerHTML = html;
 }
 // 排班提醒：漏交 Bon、排了班没被选的 Runner / 吧台（所有未锁定的周，最近 35 天）
+function lockOpenHTML(){
+  const l = state.lockOpenList || []; if (!l.length) return '';
+  const nm = c => state.lang === 'de' ? c.name_de : c.name_zh;
+  return h3i(esc(t('lk_open_title', { n: l.length })), t('lk_open_hint'), 'negc') + `<div class="list">${l.map(x => `<div class="item">
+    <div class="top"><div><strong>${esc(dayLabel(x.day))}</strong>${storeTag(x.store)}</div></div>
+    <div class="meta">${esc(t('lk_open_row', { a: x.done_count, b: x.total, m: x.checkpoints.filter(c => !c.done).map(nm).join('、') }))}</div></div>`).join('')}</div>`;
+}
 function schedCheckHTML(){
-  const c = state.schedCheck; if (!c) return '';
+  const c = state.schedCheck; if (!c) return lockOpenHTML();
   const row = (x, extra) => `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong>${extra || ''}</div></div>
     <div class="meta">${esc(dayLabel(x.date))}${storeTag(x.store)} · ${esc(slotsText(x.slots))}</div></div>`;
   let h = '';
@@ -2263,7 +2356,7 @@ function schedCheckHTML(){
   if ((c.dual_picked || []).length) h += h3i(esc(t('chk_dual', { n: c.dual_picked.length })), t('chk_dual_hint'), 'negc') + `
     <div class="list">${c.dual_picked.map(x => `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong> <span class="muted">${esc(t('chk_dual_row', { s: x.server, r: t('grp_' + x.role) }))}</span></div></div>
       <div class="meta">${esc(dayLabel(x.date))}${storeTag(x.store)}</div></div>`).join('')}</div>`;
-  return h;
+  return lockOpenHTML() + h;
 }
 function staffOptions(withKitchen){
   let list = state.staff.slice();
@@ -2272,7 +2365,7 @@ function staffOptions(withKitchen){
 }
 
 // ============ 管理（超级管理员）============
-const ADMIN_MORE = ['rates', 'report', 'deleted', 'audit'];
+const ADMIN_MORE = ['lock', 'rates', 'report', 'deleted', 'audit'];
 async function viewAdmin(){
   const subs = ['requests', 'feedback', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
   $('#main').innerHTML = `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}</button>`).join('')}</div><div id="asub"><div class="loading">${esc(t('loading'))}</div></div>`;
@@ -2300,6 +2393,22 @@ async function viewAdmin(){
               <span class="tag ${r.status === 'approved' ? 'ok' : 'off'}">${esc(t(r.status === 'approved' ? 'req_approved' : 'req_rejected'))}</span></div></div>
             <div class="meta">${esc(r.reason || '')}${r.decision_note ? ' · ' + esc(r.decision_note) : ''}</div>
             <div class="meta num">${esc(fmtDateTime(r.decided_at || r.created_at))}</div></div>`).join('')}</div></div></details>` : '');
+    } else if (state.adminSub === 'lock'){
+      state.lockCps = await rpc('admin_lock_checkpoints', tok()) || [];
+      const e = state.lockEdit;
+      const form = e ? `<div class="sheet"><h3 style="margin-top:0">${storeTag(e.store)}</h3>
+          <div class="field"><label for="lk-zh">${esc(t('lk_adm_zh'))}</label><input class="input" id="lk-zh" value="${esc(e.name_zh || '')}"></div>
+          <div class="field"><label for="lk-de">${esc(t('lk_adm_de'))}</label><input class="input" id="lk-de" value="${esc(e.name_de || '')}"></div>
+          <div class="field"><label for="lk-kind">${esc(t('lk_adm_kind'))}</label><select class="input" id="lk-kind">${['door', 'window'].map(k => `<option value="${k}" ${e.kind === k ? 'selected' : ''}>${esc(t('lk_kind_' + k))}</option>`).join('')}</select></div>
+          <div class="row"><button class="btn ghost" data-act="lkadm-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="lkadm-save">${esc(t('save'))}</button></div></div>` : '';
+      el().innerHTML = h3i(esc(t('admin_lock')), t('lk_adm_hint')) + form + STORES.map(st => {
+        const act = state.lockCps.filter(c => c.store === st && c.active), off = state.lockCps.filter(c => c.store === st && !c.active);
+        const row = (c, i, n) => `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><span class="lk-n num">${c.active ? i + 1 : '–'}</span> <strong>${esc(c.name_zh)}</strong> <span class="muted">${esc(c.name_de)}</span> <span class="tag">${esc(t('lk_kind_' + c.kind))}</span>${c.active ? '' : ` <span class="tag off">${esc(t('lk_adm_off'))}</span>`}</div>
+            ${c.active ? `<button class="mv" data-act="lkadm-move" data-store="${st}" data-id="${c.id}" data-dir="-1" ${i === 0 ? 'disabled' : ''}>↑</button><button class="mv" style="margin-left:6px" data-act="lkadm-move" data-store="${st}" data-id="${c.id}" data-dir="1" ${i === n - 1 ? 'disabled' : ''}>↓</button>` : ''}</div>
+            <div class="acts"><button class="link" data-act="lkadm-edit" data-id="${c.id}">${esc(t('edit'))}</button><button class="link ${c.active ? 'danger' : ''}" data-act="lkadm-active" data-id="${c.id}">${esc(t(c.active ? 'lk_adm_disable' : 'lk_adm_enable'))}</button></div></div>`;
+        return `<h3>${storeTag(st)}</h3><div class="list">${act.map((c, i) => row(c, i, act.length)).join('')}${off.map(c => row(c, 0, 0)).join('')}</div>
+          <button class="btn ghost" style="margin:8px 0 6px" data-act="lkadm-edit" data-store="${st}">${esc(t('lk_adm_add'))}</button>`;
+      }).join('');
     } else if (state.adminSub === 'archive'){
       el().innerHTML = arcAdminHTML(await loadArchives());
     } else if (state.adminSub === 'deleted'){
@@ -2959,7 +3068,7 @@ document.addEventListener('click', async ev => {
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
-    case 'tab': state.done = null; state.rcWeek = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+    case 'tab': state.done = null; state.rcWeek = null; state.lockOpen = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -2972,6 +3081,36 @@ document.addEventListener('click', async ev => {
     case 'chip-day': { const r = el.dataset.role; f[r === 'runner' ? 'runners' : 'bars'] = dayPicks(r).slice(); f[r === 'runner' ? 'autoRunners' : 'autoBars'] = false; render(); break; }
     case 'chip-none': f[el.dataset.role === 'runner' ? 'runners' : 'bars'] = []; f[el.dataset.role === 'runner' ? 'autoRunners' : 'autoBars'] = false; render(); break;
     case 'miss-go': state.done = null; state.tab = 'entry'; state.menu = false; render(); window.scrollTo(0, 0); break;
+    case 'lock-open': state.lockOpen = el.dataset.store; renderToday(); window.scrollTo(0, 0); break;
+    case 'lock-close': state.lockOpen = null; renderToday(); break;
+    case 'lock-view': {
+      try { const r = await callTasks({ action: 'photo', item_id: el.dataset.id });
+        const dlg = $('#photoDlg'); dlg.innerHTML = `<img src="${esc(r.url)}" alt="" style="max-width:100%;border-radius:8px"><button class="btn" style="margin-top:12px" data-act="photo-close">${esc(t('close'))}</button>`; dlg.showModal(); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'lkadm-move': {
+      const st = el.dataset.store, list = (state.lockCps || []).filter(c => c.store === st && c.active), i = list.findIndex(c => c.id === el.dataset.id), j = i + +el.dataset.dir;
+      if (i < 0 || j < 0 || j >= list.length) break;
+      [list[i], list[j]] = [list[j], list[i]];
+      try { await rpc('admin_lock_checkpoint_order', { ...tok(), p_store: st, p_ids: list.map(c => c.id) }); render(); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'lkadm-edit': state.lockEdit = el.dataset.id ? (state.lockCps || []).find(c => c.id === el.dataset.id) : { store: el.dataset.store, kind: 'door', active: true }; render(); break;
+    case 'lkadm-cancel': state.lockEdit = null; render(); break;
+    case 'lkadm-save': {
+      const e = state.lockEdit;
+      try { await rpc('admin_lock_checkpoint_save', { ...tok(), p_id: e.id || null, p_store: e.store, p_name_de: $('#lk-de').value, p_name_zh: $('#lk-zh').value,
+              p_kind: $('#lk-kind').value, p_active: e.active !== false }); state.lockEdit = null; toast(t('saved')); render(); }
+      catch(err){ toast(errText(err), true); }
+      break;
+    }
+    case 'lkadm-active': {
+      const c = (state.lockCps || []).find(x => x.id === el.dataset.id); if (!c) break;
+      try { await rpc('admin_lock_checkpoint_save', { ...tok(), p_id: c.id, p_store: c.store, p_name_de: c.name_de, p_name_zh: c.name_zh, p_kind: c.kind, p_active: !c.active }); render(); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'more-bon': state.done = null; state.tab = 'entry'; render(); window.scrollTo(0, 0); break;
     case 'avail-all': {   // v38：下周都能上（记一条 avail_submits，任务完成）
       el.disabled = true;
@@ -3041,7 +3180,7 @@ document.addEventListener('click', async ev => {
       el.disabled = true;
       try { await rpc('lock_week', { ...tok(), p_week_start: state.week }); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
-    case 'admin-sub': state.adminSub = el.dataset.sub; state.staffEdit = null; render(); break;
+    case 'admin-sub': state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; render(); break;
     case 'admin-more': state.done = null; state.rcWeek = null; state.tab = 'admin'; state.adminSub = el.dataset.sub; state.staffEdit = null; state.menu = false; render(); break;
     case 'del-filter': state.delFilter = el.dataset.k; render(); break;
     case 'staff-new': state.staffEdit = {}; render(); break;
@@ -3360,6 +3499,7 @@ document.addEventListener('click', async ev => {
 });
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur(); });
 document.addEventListener('change', async ev => {
+  if (ev.target.dataset && ev.target.dataset.lockcp){ lockUpload(ev.target); return; }
   if (ev.target.id === 's-kitchen'){ const r = $('#s-rolesec'); if (r) r.hidden = ev.target.checked; return; }   // 厨房账号不需要岗位
   if (ev.target.id === 'fb-file' && ev.target.files && ev.target.files[0]){
     try { const f = state.fb; const keep = $('#fb-desc'); if (keep) f.desc = keep.value; f.shot = await compressImage(ev.target.files[0]); fbRender(); }
