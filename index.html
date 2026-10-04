@@ -153,6 +153,17 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .xctl{display:flex;align-items:center;gap:10px;margin:2px 0 6px}
 .xctl input[type=range]{flex:1;min-width:0;accent-color:var(--celadon-deep);height:28px}
 .xb{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);font-size:20px;line-height:1;color:var(--ink);cursor:pointer}
+.today-shift .ts-row{padding:6px 0;border-top:1px solid var(--line)}
+.today-shift .ts-row:first-of-type{border-top:0}
+.task{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--copper);border-radius:var(--r-m);padding:12px 14px;margin-bottom:10px}
+.task.bad{border-left-color:var(--neg);background:#FBF0EC}
+.task.later{border-left-color:var(--line)}
+.task .task-t{font-weight:700;font-size:16px}
+.task .task-s{color:var(--muted);font-size:14px;margin-top:3px}
+.task .task-b{display:flex;gap:8px;margin-top:10px}
+.task .task-b .btn{flex:1}
+.task .todo-n{border-top:0;padding-top:4px}
+.more{display:flex;flex-direction:column;gap:10px}
 .kv-h{margin-top:8px;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px}
 .toast .tbtn{margin-left:12px;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:4px 12px;font-weight:700}
 .viewbar{position:sticky;top:0;z-index:11;background:var(--copper);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700}
@@ -314,7 +325,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   app:'Kochi Team', who:'你是谁？', who_sub:'选择你的名字，然后输入 PIN', login:'登录', back:'返回',
-  tab_entry:'录入', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
+  tab_entry:'录入', tab_today:'今天', tab_more:'更多', td_shift:'今天的班', td_noshift:'今天没有班', td_next:'下一个班：{x}', td_nonext:'还没有排到你的下一个班', td_mine:'我要做的（{n}）', td_mine_ok:'我要做的', td_alldone:'今天的事都做完了 ✓', td_done_grp:'已完成（{n}）', tk_bon_missing:'补交 Bon：{d} {s} {sl}', tk_bon_missing_sub:'已过期（第二天 12:00 前要交）。交了这个提醒自动消失。', tk_bon_shift:'交{sl} Bon · {s} {a}–{b}', tk_bon_now:'下班后交，第二天 12:00 前。', tk_bon_later:'今天稍后：下班后再交。', tk_bon_done:'已交 {sl} Bon · {s}', tk_bon_btn:'交 Bon', tk_notice:'排班变动待确认', tk_avail:'填第 {w} 周哪些班不能上', tk_avail_sub:'没标的班都算能上。截止 {t}。', tk_avail_go:'去标', tk_avail_all:'下周都能上', tk_avail_done:'第 {w} 周能不能上：已填', tk_avail_ok:'已记下：第 {w} 周都能上。', more_bon:'交 Bon（今天另交一张）', more_title:'更多', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
   date:'日期', store:'门店', card:'刷卡小费', cash:'现金小费', runner:'Runner', bar:'吧台', kitchen:'厨房', you:'你',
   for_whom:'代谁录入', myself:'我自己', nobody:'今天没有', keeps:'归你', each:'每人',
   save:'保存', saved:'已保存', update:'保存修改', cancel:'取消', editing:'正在修改 {d} 的记录',
@@ -484,7 +495,7 @@ zh: {
 },
 de: {
   app:'Kochi Team', who:'Wer bist du?', who_sub:'Namen wählen, dann PIN eingeben', login:'Anmelden', back:'Zurück',
-  tab_entry:'Eintragen', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
+  tab_entry:'Eintragen', tab_today:'Heute', tab_more:'Mehr', td_shift:'Heute', td_noshift:'Heute keine Schicht', td_next:'Nächste Schicht: {x}', td_nonext:'Noch keine nächste Schicht geplant', td_mine:'Meine Aufgaben ({n})', td_mine_ok:'Meine Aufgaben', td_alldone:'Alles für heute erledigt ✓', td_done_grp:'Erledigt ({n})', tk_bon_missing:'Bon nachreichen: {d} {s} {sl}', tk_bon_missing_sub:'Überfällig (bis 12:00 am Folgetag). Nach dem Einreichen verschwindet die Erinnerung.', tk_bon_shift:'Bon {sl} einreichen · {s} {a}–{b}', tk_bon_now:'Nach Schichtende, bis 12:00 am Folgetag.', tk_bon_later:'Später: erst nach Schichtende.', tk_bon_done:'Bon {sl} eingereicht · {s}', tk_bon_btn:'Bon einreichen', tk_notice:'Dienstplan-Änderung bestätigen', tk_avail:'KW {w}: Wann kannst du nicht?', tk_avail_sub:'Nicht markierte Schichten zählen als verfügbar. Frist {t}.', tk_avail_go:'Markieren', tk_avail_all:'Nächste Woche alles ok', tk_avail_done:'KW {w} Verfügbarkeit: erledigt', tk_avail_ok:'Gespeichert: KW {w} alles verfügbar.', more_bon:'Bon einreichen (heute noch einer)', more_title:'Mehr', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
   date:'Datum', store:'Filiale', card:'Trinkgeld Karte', cash:'Trinkgeld bar', runner:'Runner', bar:'Bar', kitchen:'Küche', you:'Du',
   for_whom:'Eintrag für', myself:'Mich selbst', nobody:'Heute niemand', keeps:'bleibt bei dir', each:'je',
   save:'Speichern', saved:'Gespeichert', update:'Änderung speichern', cancel:'Abbrechen', editing:'Eintrag vom {d} bearbeiten',
@@ -941,7 +952,7 @@ const state = {
   personal: LS.get('personal', false),
   token: LS.get('personal', false) ? LS.get('token', null) : SS.get('token', null),
   me: LS.get('personal', false) ? LS.get('me', null) : SS.get('me', null),
-  tab: LS.get('tab', 'entry'),
+  tab: LS.get('tab', 'today'),
   week: mondayOf(today()),
   staff: [], rates: [],
   loginStaff: null, loginPick: null, loginErr: '', loginAdmin: false,
@@ -961,15 +972,24 @@ function tabs(){
   const mb = state.myBon || {};
   const helperOnly = !m.is_admin && !m.is_tip_manager && ['runner', 'bar'].includes(mainRoleOf(m.id))
     && !mb.service_duty && !(mb.missing || []).length;   // 被排成服务员（今天 / 昨天）或有漏交的 Bon 时，也显示「录入」
+  if (!m.is_kitchen) r.push('today');   // v38：员工首页「今天」
   if (!m.is_kitchen && !helperOnly) r.push('entry');
   r.push('ledger');
+  if (!m.is_kitchen && !m.is_admin) r.push('more');
   if (!m.is_kitchen) r.push('plan');
   if (m.is_tip_manager || m.is_admin) r.push('week');
   if (m.is_admin) r.push('admin');
   return r;
 }
 // 底部导航：超级管理员只放 周结 / 排班 / 管理；录入和账本在「⋯」菜单里（tabs() 仍然是能进的全部页面）
-function navTabs(){ return state.me && state.me.is_admin ? ['week', 'plan', 'admin'].filter(k => tabs().includes(k)) : tabs(); }
+// 底部导航（v38）：员工 今天 / 排班 / 账本 / 更多；小费管理员 今天 / 排班 / 账本 / 周结 / 更多；老板 今天 / 周结 / 排班 / 管理；厨房账号不变
+function navTabs(){
+  const m = state.me || {}, ok = k => tabs().includes(k);
+  if (m.is_kitchen) return tabs().filter(k => k !== 'more');
+  if (m.is_admin) return ['today', 'week', 'plan', 'admin'].filter(ok);
+  if (m.is_tip_manager) return ['today', 'plan', 'ledger', 'week', 'more'].filter(ok);
+  return ['today', 'plan', 'ledger', 'more'].filter(ok);
+}
 function logoutLocal(){ state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false; }
 // ============ 手机推送（v27）============
 const pushSupported = () => 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
@@ -1010,6 +1030,7 @@ async function loadCommon(){
   await loadReceipts();
   await refreshPushState();
   try { state.notices = state.me && !state.me.is_kitchen ? (await rpc('my_notices', tok()) || []) : []; } catch(e){ state.notices = []; }   // v26 之前没有
+  await loadTasks();
   try {
     const st = await rpc('helper_stats', tok()) || []; state.hstats = { runner: {}, bar: {} };
     st.forEach(x => { if (state.hstats[x.role]) state.hstats[x.role][x.id] = x.n; });
@@ -1023,7 +1044,7 @@ async function loadMyBon(){
 function slotsText(sl){ return (sl || []).slice().sort().reverse().map(slotLabel).join('+'); }
 // 员工自己的待办，统一放在最上面：待签收 → 漏交 Bon → 填能不能上
 function todoCardHTML(){
-  if (state.rcWeek) return '';
+  if (state.rcWeek || tabs().includes('today')) return '';
   const items = [];
   (state.notices || []).forEach(n => items.push([null, noticeHTML(n)]));
   rcTodo().forEach(l => items.push([t(l.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: l.kw, x: eur(Math.abs(l.payout_euros) * 100) }) + (l.receipt.resign ? t('rc_banner_resign') : ''),
@@ -1048,6 +1069,64 @@ function noticeHTML(n){
   return `<div class="todo-n"><div class="nt-h">${esc(head)}</div>${rows}<button class="btn" data-act="notice-ok" data-id="${n.id}">${esc(t('nt_ok'))}</button></div>`;
 }
 function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
+
+// ============ 今天（v38）============
+async function loadTasks(){
+  if (!state.me || state.me.is_kitchen){ state.tasks = null; return; }
+  try { state.tasks = await rpc('my_tasks', tok()); } catch(e){ state.tasks = null; }   // v31 之前没有
+}
+function taskCount(st){ const ts = (state.tasks && state.tasks.tasks) || []; return ts.filter(x => st ? x.status === st : ['overdue', 'now'].includes(x.status)).length; }
+function shiftLine(x){ return `${storeTag(x.store)} <strong>${esc(slotLabel(x.slot))}</strong> <span class="num">${esc(x.start)}–${esc(x.end)}</span>${(x.roles || []).length ? ` <span class="muted">${esc(x.roles.map(r => t('grp_' + r)).join(' + '))}</span>` : ''}`; }
+function taskCardHTML(k){
+  const d = k.data || {}, card = (cls, title, sub, btns) => `<div class="task ${cls}"><div class="task-t">${title}</div>${sub ? `<div class="task-s">${esc(sub)}</div>` : ''}${btns ? `<div class="task-b">${btns}</div>` : ''}</div>`;
+  const cls = k.status === 'overdue' ? 'bad' : k.status === 'later' ? 'later' : '';
+  if (k.kind === 'bon_missing')
+    return card('bad', esc(t('tk_bon_missing', { d: dayLabel(d.date), s: d.store, sl: slotsText(d.slots) })), t('tk_bon_missing_sub'),
+      `<button class="btn" data-act="miss-go">${esc(t('tk_bon_btn'))}</button>`);
+  if (k.kind === 'bon_shift')
+    return card(cls, esc(t('tk_bon_shift', { sl: slotLabel(d.slot), s: d.store, a: d.start, b: d.end })), t(k.status === 'later' ? 'tk_bon_later' : 'tk_bon_now'),
+      `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="miss-go">${esc(t('tk_bon_btn'))}</button>`);
+  if (k.kind === 'notice') return `<div class="task"><div class="task-t">${esc(t('tk_notice'))}</div>${noticeHTML(d)}</div>`;
+  if (k.kind === 'receipt')
+    return card(cls, esc(t(d.payout_euros < 0 ? 'rc_banner_pay' : 'rc_banner', { w: d.kw, x: eur(Math.abs(d.payout_euros) * 100) }) + (d.receipt && d.receipt.resign ? t('rc_banner_resign') : '')), '',
+      `<button class="btn" data-act="rc-go" data-week="${d.week_start}">${esc(t('rc_go'))}</button>`);
+  if (k.kind === 'avail')
+    return card(cls, esc(t('tk_avail', { w: isoWeek(d.week_start) })), t('tk_avail_sub', { t: fmtDateTime(k.due) }),
+      `<button class="btn" data-act="banner-go">${esc(t('tk_avail_go'))}</button><button class="btn ghost" data-act="avail-all" data-week="${d.week_start}">${esc(t('tk_avail_all'))}</button>`);
+  return '';
+}
+function taskDoneLine(k){
+  const d = k.data || {};
+  const txt = k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
+  return `<div class="item"><div class="top"><div><span class="pos">✓</span> ${esc(txt)}</div></div></div>`;
+}
+async function viewToday(){
+  if (!state.tasks) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  await loadTasks(); renderToday();
+}
+function renderToday(){
+  const T = state.tasks;
+  if (!T){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
+  const order = { overdue: 0, now: 1, later: 2 };
+  const open = T.tasks.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status] || String(a.due || '').localeCompare(String(b.due || '')));
+  const done = T.tasks.filter(x => x.status === 'done');
+  const shifts = (T.shifts || []).length
+    ? `<div class="sheet today-shift"><div class="muted small">${esc(t('td_shift'))} · ${esc(dayLabel(T.day))}</div>${T.shifts.map(x => `<div class="ts-row">${shiftLine(x)}</div>`).join('')}</div>`
+    : `<div class="sheet today-shift"><div class="muted small">${esc(dayLabel(T.day))}</div><div><strong>${esc(t('td_noshift'))}</strong></div>
+        <div class="small muted" style="margin-top:4px">${T.next_shift ? `${esc(t('td_next', { x: dayLabel(T.next_shift.date) }))} ${shiftLine(T.next_shift)}` : esc(t('td_nonext'))}</div></div>`;
+  const nOpen = open.filter(x => x.status !== 'later').length;
+  $('#main').innerHTML = shifts
+    + `<h3>${esc(nOpen ? t('td_mine', { n: nOpen }) : t('td_mine_ok'))}</h3>`
+    + (open.length ? open.map(taskCardHTML).join('') : `<div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
+    + (done.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(taskDoneLine).join('')}</div></div></details>` : '');
+}
+function viewMore(){
+  const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
+  $('#main').innerHTML = `<h2 style="margin-top:4px">${esc(t('more_title'))}</h2><div class="more">
+    ${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
+    ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
+    ${b('fb-open', t('fb_menu'))}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
+}
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
 
@@ -1056,7 +1135,7 @@ function render(){
   document.documentElement.lang = state.lang === 'de' ? 'de' : 'zh';
   if (!state.token){ renderLogin(); return; }
   if (state.me && state.me.must_change_pin && !state.viewAs){ renderSetPin(); return; }
-  if (!tabs().includes(state.tab)) state.tab = tabs()[0];
+  if (!tabs().includes(state.tab)) state.tab = navTabs()[0];
   const m = state.me;
   $('#app').innerHTML = (state.viewAs ? `<div class="viewbar" role="status"><span>${esc(t('viewing_as', { n: state.viewAs.name }))}</span><button data-act="view-exit">${esc(t('exit_view'))}</button></div>` : '') + `
     <header>
@@ -1064,7 +1143,7 @@ function render(){
       <button class="hbtn" data-act="lang">${esc(t('lang'))}</button>
       <button class="hbtn" data-act="menu" aria-label="Menu" aria-expanded="${state.menu}">⋯</button>
       ${state.menu ? `<div class="menu">
-        ${tabs().filter(k => !navTabs().includes(k)).map(k => `<button data-act="tab" data-tab="${k}">${esc(t('tab_' + k))}</button>`).join('')}
+        ${tabs().filter(k => !navTabs().includes(k) && k !== 'more').map(k => `<button data-act="tab" data-tab="${k}">${esc(t('tab_' + k))}</button>`).join('')}
         ${m.is_admin && !state.viewAs ? ADMIN_MORE.map(s => `<button data-act="admin-more" data-sub="${s}">${esc(t('admin_' + s))}</button>`).join('') : ''}
         ${state.viewAs ? '' : state.pushOn ? `<button data-act="push-test">${esc(t('push_test'))}</button><button data-act="push-off">${esc(t('push_off'))}</button>` : `<button data-act="push-on">${esc(t('push_on'))}</button>`}
         <button data-act="fb-open">${esc(t('fb_menu'))}</button>
@@ -1073,9 +1152,9 @@ function render(){
     </header>
     ${todoCardHTML()}
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
-    <nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}</button>`).join('')}</nav>`;
+    <nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}${k==='today' && taskCount() ? ` <span class="tag ${taskCount('overdue') ? 'bad' : 'pend'}">${taskCount()}</span>` : ''}</button>`).join('')}</nav>`;
   if (state.rcWeek){ viewReceipt(); return; }
-  ({ entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();
+  ({ today: viewToday, more: viewMore, entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();
 }
 
 // ============ 登录 ============
@@ -1135,9 +1214,10 @@ async function doLogin(){
     // 周一到周四登录时提醒标出下周不能上的班
     const wd = ['Mon','Tue','Wed','Thu'].includes(new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Berlin', weekday: 'short' }).format(new Date()));
     state.banner = !!wd && !state.me.is_kitchen;
+    if (tabs().includes('today')) state.tab = 'today';
     if (state.me.is_admin || state.me.is_tip_manager){
-      // 登录后直接进入点收信封；上周还有没点收的就先显示上周
-      state.tab = 'week';
+      // 老板登录后直接进入点收信封（小费管理员 v38 起先进「今天」）；上周还有没点收的就先显示上周
+      if (state.me.is_admin) state.tab = 'week';
       try { const prev = addDays(mondayOf(today()), -7), ov = await rpc('week_overview', { ...tok(), p_week_start: prev });
         if (!ov.locked && ov.entries.some(e => e.is_bon && e.counted_cents !== e.wallet_cents)) state.week = prev; } catch(e){}
     }
@@ -2869,7 +2949,14 @@ document.addEventListener('click', async ev => {
     }
     case 'chip-day': { const r = el.dataset.role; f[r === 'runner' ? 'runners' : 'bars'] = dayPicks(r).slice(); f[r === 'runner' ? 'autoRunners' : 'autoBars'] = false; render(); break; }
     case 'chip-none': f[el.dataset.role === 'runner' ? 'runners' : 'bars'] = []; f[el.dataset.role === 'runner' ? 'autoRunners' : 'autoBars'] = false; render(); break;
-    case 'miss-go': state.done = null; state.tab = 'entry'; LS.set('tab', 'entry'); state.menu = false; render(); window.scrollTo(0, 0); break;
+    case 'miss-go': state.done = null; state.tab = 'entry'; state.menu = false; render(); window.scrollTo(0, 0); break;
+    case 'more-bon': state.done = null; state.tab = 'entry'; render(); window.scrollTo(0, 0); break;
+    case 'avail-all': {   // v38：下周都能上（记一条 avail_submits，任务完成）
+      el.disabled = true;
+      try { await rpc('submit_availability', { ...tok(), p_week_start: el.dataset.week }); toast(t('tk_avail_ok', { w: isoWeek(el.dataset.week) })); await viewToday(); render(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
     case 'login-admin': state.loginAdmin = !state.loginAdmin; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'entry-save': saveEntry(); break;
     case 'edit-cancel': state.form = blankForm(); render(); break;
@@ -3193,7 +3280,7 @@ document.addEventListener('click', async ev => {
     case 'push-test': { state.menu = false; render(); const r = await callPush('test'); toast(r && r.ok ? t('push_test_sent') : t('push_test_none'), !(r && r.ok)); break; }
     case 'notice-ok': {
       el.disabled = true;
-      try { await rpc('confirm_notice', { ...tok(), p_id: el.dataset.id }); state.notices = (state.notices || []).filter(n => n.id !== el.dataset.id); toast(t('nt_done')); render(); }
+      try { await rpc('confirm_notice', { ...tok(), p_id: el.dataset.id }); state.notices = (state.notices || []).filter(n => n.id !== el.dataset.id); toast(t('nt_done')); await loadTasks(); render(); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
