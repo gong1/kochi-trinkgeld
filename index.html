@@ -149,6 +149,10 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .rtri button[data-st=main]{border-color:var(--celadon-deep);background:var(--celadon-deep);color:#fff}
 .btn.ghost.danger{color:var(--neg);border-color:var(--neg)}
 .tag[hidden]{display:none}
+.xrow{padding:2px 0}
+.xctl{display:flex;align-items:center;gap:10px;margin:2px 0 6px}
+.xctl input[type=range]{flex:1;min-width:0;accent-color:var(--celadon-deep);height:28px}
+.xb{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);font-size:20px;line-height:1;color:var(--ink);cursor:pointer}
 .kv-h{margin-top:8px;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px}
 .toast .tbtn{margin-left:12px;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:4px 12px;font-weight:700}
 .viewbar{position:sticky;top:0;z-index:11;background:var(--copper);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700}
@@ -397,7 +401,7 @@ zh: {
   ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_unbind_full:'解除绑定', ls_none:'还没有绑定。此人第一次上传 Bon 时会自动绑定，需要你确认。', ls_none_store:'还没绑定（在这家店第一次上传 Bon 时自动绑定）', ls_unbind_q:'解除 {n} 的 Lightspeed 绑定？此人下次上传 Bon 时会重新绑定，需要你确认。', ls_unbound:'已解除绑定', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
   shortage_note:'本周你承担的差额', read_again:'换照片后请重新识别',
   view_as:'查看', viewing_as:'正在以 {n} 的视角查看（只读）', exit_view:'退出查看',
-  role_server:'服务员', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
+  role_server:'服务员', ex_title:'分配（可以多给同事）', ex_hint:'觉得 Runner / 吧台今天特别辛苦，可以把他那一行往右拉：每格多 1 €，从你自己那份扣。不能往左拉，厨房不能改。', ex_self:'你自己', ex_none:'你自己这份不够，不能多给。', ex_locked:'交 Bon 已超过 10 分钟，多给的金额不能再改。', ex_note:'多给：{list}（已含在上面的金额里）', ex_wk_title:'多给的小费（{n} 笔 · 合计 {x}）', ex_wk_hint:'服务员交 Bon 时自愿多给 Runner / 吧台的小费，从自己那份扣，已经算进分配里。留意有没有人经常被要求多给。', ex_wk_row:'{g} → {r}（{role}）：{b} + 多给 {x}', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
   week_of:'第 {w} 周', preview:'分配预览', from:'来自',
   sched_line:'按排班（{s}）：Runner {r} · 吧台 {b}', sched_auto:'已按排班自动选好，和实际不一样请直接点名字增减。', sched_empty:'排班里这个班没有排{r}，请自己选；确实没有就点「{none}」。', and_word:'和',
   miss_banner:'你有 {n} 个班还没交 Bon：{list}。请尽快拍照交上；如果那天没有上班，请告诉排班员把班删掉。', miss_go:'去交 Bon',
@@ -567,7 +571,7 @@ de: {
   ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_unbind_full:'Verknüpfung lösen', ls_none:'Noch nicht verknüpft. Wird beim ersten Bon-Upload automatisch verknüpft und muss bestätigt werden.', ls_none_store:'Noch nicht verknüpft (beim ersten Bon-Upload in diesem Restaurant)', ls_unbind_q:'Lightspeed-Verknüpfung von {n} lösen? Beim nächsten Bon-Upload wird neu verknüpft und muss bestätigt werden.', ls_unbound:'Verknüpfung gelöst', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
   shortage_note:'Von dir getragene Fehlbeträge diese Woche', read_again:'Neue Fotos bitte erneut auslesen',
   view_as:'Ansehen', viewing_as:'Ansicht als {n} (nur lesen)', exit_view:'Ansicht beenden',
-  role_server:'Service', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
+  role_server:'Service', ex_title:'Verteilung (du kannst mehr geben)', ex_hint:'War Runner / Bar heute besonders fleißig? Zeile nach rechts ziehen: pro Schritt 1 € mehr, wird von deinem Anteil abgezogen. Nach links geht nicht, Küche nicht änderbar.', ex_self:'Du selbst', ex_none:'Dein Anteil reicht nicht, um mehr zu geben.', ex_locked:'Mehr als 10 Minuten seit dem Einreichen – der Zusatzbetrag ist nicht mehr änderbar.', ex_note:'Mehr gegeben: {list} (in den Beträgen oben enthalten)', ex_wk_title:'Freiwillig mehr gegeben ({n} · gesamt {x})', ex_wk_hint:'Service hat Runner / Bar beim Einreichen freiwillig mehr gegeben, vom eigenen Anteil abgezogen und schon in der Verteilung enthalten. Achte darauf, ob jemand oft dazu gedrängt wird.', ex_wk_row:'{g} → {r} ({role}): {b} + {x} mehr', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
   week_of:'KW {w}', preview:'Aufteilung', from:'von',
   sched_line:'Laut Dienstplan ({s}): Runner {r} · Bar {b}', sched_auto:'Automatisch nach Dienstplan ausgewählt. Wenn es anders war, einfach Namen an- oder abwählen.', sched_empty:'Für diese Schicht ist im Dienstplan niemand als {r} eingeplant – bitte selbst wählen; wenn wirklich niemand da war, „{none}“ tippen.', and_word:' und ',
   miss_banner:'Dein Bon fehlt noch ({n}): {list}. Bitte so bald wie möglich einreichen. Falls du an dem Tag nicht gearbeitet hast, sag bitte der Dienstplanung Bescheid, damit die Schicht gelöscht wird.', miss_go:'Bon eintragen',
@@ -804,6 +808,9 @@ const ERR_ZH = {
   BAD_METHOD: '点收方式不对。请刷新页面后重试。',
   PHOTO_REQUIRED: '请选择纸质收据的照片。',
   NOTE_REQUIRED: '请写一句说明（例如：已离职，已在纸上签收），存档时需要。',
+  EXTRA_TOO_MUCH: '多给的总数超过了你自己那份小费。请往左拉一点再提交。',
+  EXTRA_NOT_HELPER: '只能多给这张 Bon 上选了的 Runner 或吧台。请重新选择后再提交。',
+  EXTRA_LOCKED: '交 Bon 已超过 10 分钟，多给的金额不能再改。需要更正，请找老板记一笔调整。',
   LOGIN_FAILED: 'PIN 不对。连续输错 5 次会锁定 15 分钟。忘记 PIN 请点下面「忘记 PIN？」。',
   PIN_EXPIRED: '888888 已过期（重置后只在 1 小时内有效）。请点下面「忘记 PIN？」，或直接找老板重新重置。',
   PIN_REQ_LIMIT: '今天已经申请太多次了。请直接找老板。',
@@ -886,6 +893,9 @@ const ERR_DE = {
   BAD_METHOD: 'Ungültige Zählart. Bitte Seite neu laden und erneut versuchen.',
   PHOTO_REQUIRED: 'Bitte ein Foto der Papierquittung auswählen.',
   NOTE_REQUIRED: 'Bitte einen kurzen Hinweis eingeben (z. B. ausgeschieden, auf Papier quittiert) – nötig für die Ablage.',
+  EXTRA_TOO_MUCH: 'Zusammen mehr als dein eigener Anteil. Bitte etwas nach links ziehen und erneut einreichen.',
+  EXTRA_NOT_HELPER: 'Mehr geben geht nur an Runner / Bar, die auf diesem Bon ausgewählt sind. Bitte neu auswählen.',
+  EXTRA_LOCKED: 'Mehr als 10 Minuten seit dem Einreichen – der Zusatzbetrag ist nicht mehr änderbar. Für eine Korrektur bitte den Chef (Korrektur erfassen).',
   LOGIN_FAILED: 'PIN falsch. Nach 5 Fehlversuchen wird für 15 Minuten gesperrt. PIN vergessen? Unten auf „PIN vergessen?“ tippen.',
   PIN_EXPIRED: '888888 ist abgelaufen (nach dem Zurücksetzen nur 1 Stunde gültig). Bitte unten „PIN vergessen?“ tippen oder den Chef direkt fragen.',
   PIN_REQ_LIMIT: 'Heute schon zu oft angefragt. Bitte direkt den Chef fragen.',
@@ -941,7 +951,7 @@ const state = {
 };
 function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null, sched: null }; }
 function blankForm(){
-  return { date: today(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '' };
+  return { date: today(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '', extras: {} };
 }
 state.form = blankForm();
 
@@ -1220,10 +1230,7 @@ function bonSummary(schluss, card, walletStr, runners, bars){
   const tips = w - schluss, cash = tips - card, short = Math.max(-cash, 0), pool = card + Math.max(cash, 0);
   const rate = rateFor(state.form.date || today());
   let split = '';
-  if (rate){
-    const nr = (runners || []).length, nb = (bars || []).length, x = splitCalc(pool, rate, nr, nb);
-    split = `<div class="small muted" style="margin-top:8px">${esc(t('kitchen'))} ${eur(x.k)} · ${esc(t('runner'))} ${eur(x.re*nr)} · ${esc(t('bar'))} ${eur(x.be*nb)} · ${esc(t('role_server'))} ${eur(x.s)}</div>`;
-  }
+  if (rate) split = extrasHTML(splitCalc(pool, rate, (runners || []).length, (bars || []).length), runners || [], bars || [], short);
   return `<div class="sum num">
       <div class="li big"><span>${esc(t('envelope'))}</span><span>${eur(w)}</span></div>
       ${schluss >= 0 ? `<div class="li"><span>${esc(t('of_which_store'))}</span><span>${eur(schluss)}</span></div>`
@@ -1234,6 +1241,43 @@ function bonSummary(schluss, card, walletStr, runners, bars){
     </div>${split}
     ${short ? `<div class="errbox">${esc(t('shortage_msg', { n: eur(short) }))}
       <label class="check" style="margin-top:6px"><input type="checkbox" id="b-ack" ${state.bon.ack || state.form.ack ? 'checked' : ''}> ${esc(t('shortage_ack'))}</label></div>` : ''}`;
+}
+// v30：分配明细，Runner / 吧台每人一行，可以往右拉多给（每格 1 €，从服务员自己那份扣，最多到自己那份 − 短款）
+function extrasEditable(){ const f = state.form; return !f.entryId || !!f.selfEdit; }
+function extrasHTML(x, runners, bars, short){
+  const f = state.form, ex = f.extras = f.extras || {};
+  const helpers = [...runners.map(id => ({ id, role: 'runner', base: x.re })), ...bars.map(id => ({ id, role: 'bar', base: x.be }))];
+  Object.keys(ex).forEach(id => { if (!helpers.some(h => h.id === id)) delete ex[id]; });
+  const cap = Math.max(x.s - short, 0), edit = extrasEditable();
+  let sum = helpers.reduce((a, h) => a + (ex[h.id] || 0), 0);
+  helpers.slice().reverse().forEach(h => { const over = sum - cap; if (over > 0 && ex[h.id]){ const cut = Math.min(ex[h.id], Math.ceil(over / 100) * 100); ex[h.id] -= cut; sum -= cut; } });
+  state.xcalc = { cap, self: x.s, helpers };
+  const free = Math.floor((cap - sum) / 100) * 100;
+  const rows = helpers.map(h => `<div class="xrow"><div class="li"><span>${esc(staffName(h.id))} <span class="muted small">${esc(t(h.role))}</span></span>
+      <span class="num" id="xa-${h.id}">${eur(h.base + (ex[h.id] || 0))}${ex[h.id] ? ` <small class="pos">+${eur(ex[h.id])}</small>` : ''}</span></div>
+      ${edit && cap >= 100 ? `<div class="xctl"><button type="button" class="xb" data-act="ex-step" data-xid="${h.id}" data-d="-100" aria-label="−1 €">−</button>
+        <input type="range" class="xr" data-xid="${h.id}" min="0" max="${(ex[h.id] || 0) + free}" step="100" value="${ex[h.id] || 0}" aria-label="${esc(staffName(h.id))}">
+        <button type="button" class="xb" data-act="ex-step" data-xid="${h.id}" data-d="100" aria-label="+1 €">＋</button></div>` : ''}</div>`).join('');
+  return `<div style="margin-top:12px"><div class="muted small" style="margin-bottom:4px">${esc(t('ex_title'))}</div><div class="sum num">
+      <div class="li"><span>${esc(t('kitchen'))}</span><span>${eur(x.k)}</span></div>${rows}
+      <div class="li big"><span>${esc(t('ex_self'))}</span><span id="xa-self">${eur(x.s - sum)}</span></div></div>
+    ${helpers.length ? `<div class="small muted" style="margin-top:6px">${esc(!edit ? t('ex_locked') : cap >= 100 ? t('ex_hint') : t('ex_none'))}</div>` : ''}</div>`;
+}
+// 拉动时只更新数字和其他滑动条的上限，不重画（重画会打断拖动）
+function extrasSlide(el){
+  const f = state.form, ex = f.extras = f.extras || {}, c = state.xcalc; if (!c) return;
+  ex[el.dataset.xid] = +el.value;
+  const sum = c.helpers.reduce((a, h) => a + (ex[h.id] || 0), 0), free = Math.floor((c.cap - sum) / 100) * 100;
+  c.helpers.forEach(h => {
+    const a = $('#xa-' + h.id); if (a) a.innerHTML = eur(h.base + (ex[h.id] || 0)) + (ex[h.id] ? ` <small class="pos">+${eur(ex[h.id])}</small>` : '');
+    const r = document.querySelector(`.xr[data-xid="${h.id}"]`); if (r && r !== el) r.max = (ex[h.id] || 0) + free;
+  });
+  el.max = (ex[el.dataset.xid] || 0) + free;
+  const me = $('#xa-self'); if (me) me.textContent = eur(c.self - sum);
+}
+function extrasPayload(){
+  const f = state.form, ex = f.extras || {};
+  return [...(f.runners || []), ...(f.bars || [])].filter((id, i, a) => a.indexOf(id) === i).map(id => ({ staff_id: id, cents: ex[id] || 0 }));
 }
 function bonDerived(){ const b = state.bon; return (b.read && b.read.result && b.read.result.derived) || null; }
 function bonState(){
@@ -1388,8 +1432,8 @@ async function submitBon(){
   if (short && !b.ack) return toast(t('shortage_msg', { n: eur(card - (w - schluss)) }), true);
   const btn = document.querySelector('[data-act="bon-submit"]'); if (btn) btn.disabled = true;
   try {
-    await rpc('submit_bon_entry', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
-      p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack });
+    await rpc('submit_bon_entry_x', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
+      p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack, p_extras: extrasPayload() });
     state.done = { wallet: w, date: f.date, review: st === 'review', cash: d.cash_share };
     state.bon = blankBon(); state.form = blankForm(); await loadMyBon(); render(); window.scrollTo(0, 0);
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
@@ -1403,8 +1447,12 @@ async function saveBonEdit(){
   const short = f.card - (w - f.schluss) > 0;
   if (short && !f.ack) return toast(t('shortage_msg', { n: eur(f.card - (w - f.schluss)) }), true);
   try {
-    const r = await rpc('edit_bon_entry', { ...tok(), p_entry_id: f.entryId, p_wallet_cents: w, p_runner_ids: f.runners,
-      p_bar_ids: f.bars, p_reason: f.reason.trim() || null, p_shortage_ack: !!f.ack });
+    // 本人 10 分钟内：连同多给一起改；其他情况用原来的函数（多给保持不变，由数据库按新的分配重新核对）
+    const r = f.selfEdit
+      ? await rpc('edit_bon_entry_x', { ...tok(), p_entry_id: f.entryId, p_wallet_cents: w, p_runner_ids: f.runners,
+          p_bar_ids: f.bars, p_reason: f.reason.trim() || null, p_shortage_ack: !!f.ack, p_extras: extrasPayload() })
+      : await rpc('edit_bon_entry', { ...tok(), p_entry_id: f.entryId, p_wallet_cents: w, p_runner_ids: f.runners,
+          p_bar_ids: f.bars, p_reason: f.reason.trim() || null, p_shortage_ack: !!f.ack });
     state.form = blankForm(); toast(r && r.status === 'pending' ? t('request_sent') : t('saved')); render();
   } catch(e){ toast(errText(e), true); }
 }
@@ -1473,7 +1521,10 @@ async function loadXfer(ids){
   state.xfer = state.xfer || {};
   ids = (ids || []).filter(Boolean); if (!ids.length) return;
   try { (await rpc('bon_extras', { ...tok(), p_entry_ids: ids }) || []).forEach(x => state.xfer[x.entry_id] = x.transfers); } catch(e){}
+  state.extraMap = state.extraMap || {}; ids.forEach(id => delete state.extraMap[id]);
+  try { (await rpc('entry_extras_list', { ...tok(), p_entry_ids: ids }) || []).forEach(x => (state.extraMap[x.entry_id] = state.extraMap[x.entry_id] || []).push(x)); } catch(e){}   // v30 之前没有
 }
+function extrasOf(id){ return (state.extraMap || {})[id] || []; }
 function entryTags(e){
   let countTag = '';
   if (e.is_bon){
@@ -1518,6 +1569,7 @@ function entryItem(e, opts){
     ${meta}
     ${xferOf(e.entry_id) ? `<div class="meta num">${esc(xferText(xferOf(e.entry_id)))}</div>` : ''}
     ${parts ? `<div class="kv-h">${esc(t('alloc_lbl'))}</div>${parts}` : ''}
+    ${extrasOf(e.entry_id).length ? `<div class="meta num" style="margin-top:4px">${esc(t('ex_note', { list: extrasOf(e.entry_id).map(x => x.name + ' +' + eur(x.extra_cents)).join('、') }))}</div>` : ''}
     ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}
     ${showCount ? `<div class="row cnt"><div class="money"><input class="input num" id="cnt-${e.entry_id}" inputmode="decimal" placeholder="${money(e.wallet_cents)}"></div>
       <button class="btn ghost" style="flex:0 0 110px" data-act="count" data-id="${e.entry_id}">${esc(t('count'))}</button></div>` : ''}
@@ -1645,7 +1697,9 @@ function loadIntoForm(id){
   if (e.is_bon){
     state.form = { date: e.date, store: e.store, isBon: true, schluss: e.schluss_cents, card: e.card_cents,
       wallet: money(e.wallet_cents), runners: helpers('runner'), bars: helpers('bar'), entryId: id,
-      direct: !!e.direct, reason: '', ack: false, server: null };
+      direct: !!e.direct, reason: '', ack: false, server: null,
+      selfEdit: !!e.direct && (!e.server || e.server === state.me.name),
+      extras: Object.fromEntries(extrasOf(id).map(x => [x.staff_id, x.extra_cents])) };
     state.tab = 'entry'; LS.set('tab', 'entry'); render(); window.scrollTo(0, 0); return;
   }
   state.form = { date: e.date, store: e.store, card: eurInput(e.card_cents), cash: eurInput(e.cash_cents),
@@ -2032,6 +2086,7 @@ async function viewWeek(){
   // v16：按排班显示谁还没交；数据库还没升级时不影响其他功能
   if (!ov.locked) try { env = await rpc('week_envelopes', { ...tok(), p_week_start: state.week }); } catch(e){ env = null; }
   await loadXfer(ov.entries.filter(e => e.is_bon).map(e => e.entry_id));
+  let wex = []; try { wex = await rpc('week_extras', { ...tok(), p_week_start: state.week }) || []; } catch(e){}   // v30 之前没有
   await loadCntMethods(ov.entries.filter(e => e.is_bon && e.counted_cents != null).map(e => e.entry_id));
 
   const entries = entriesByGroupHTML(ov.entries, { locked: ov.locked });
@@ -2043,7 +2098,10 @@ async function viewWeek(){
       <div class="top"><div><strong>${esc(x.raised_by)}</strong>${x.date ? ` <span class="muted">${esc(dayLabel(x.date))}</span>${storeTag(x.store)} <span class="muted">${esc(x.server || '')}</span>` : ''}</div></div>
       <div>${esc(x.comment)}</div>
       <div class="acts"><button class="link" data-act="resolve" data-id="${x.id}">${esc(t('resolve'))}</button></div></div>`).join('')}</div>` : '';
-  const entriesBlock = h3i(esc(t('entries')), '') + (entries || `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`);
+  const extrasBlock = wex.length ? `<details class="fold" style="margin-top:18px"><summary>${esc(t('ex_wk_title', { n: wex.length, x: eur(wex.reduce((a, x) => a + x.extra_cents, 0)) }))}</summary><div class="inner">
+      <div class="hint">${esc(t('ex_wk_hint'))}</div><div class="list">${wex.map(x => `<div class="item"><div class="top"><div><strong>${esc(dayLabel(x.date))}</strong>${storeTag(x.store)}</div></div>
+        <div class="meta num">${esc(t('ex_wk_row', { g: x.giver, r: x.recipient, role: t(x.role), b: eur(x.base_cents), x: eur(x.extra_cents) }))}</div></div>`).join('')}</div></div></details>` : '';
+  const entriesBlock = extrasBlock + h3i(esc(t('entries')), '') + (entries || `<div class="list"><div class="empty">${esc(t('empty'))}</div></div>`);
   let html = weekNav() + await arcReminderHTML() + schedCheckHTML() + disputes + await rcOpenHTML();
 
   if (ov.locked){
@@ -2783,6 +2841,10 @@ document.addEventListener('click', async ev => {
       try { await rpc('admin_pin_request_dismiss', { ...tok(), p_id: el.dataset.id }); render(); } catch(e){ toast(errText(e), true); }
       break;
     }
+    case 'ex-step': {   // v30：多给 ±1 €
+      const r = document.querySelector(`.xr[data-xid="${el.dataset.xid}"]`); if (!r) break;
+      r.value = Math.max(0, Math.min(+r.max, +r.value + +el.dataset.d)); extrasSlide(r); break;
+    }
     case 'staff-toggle-active': {
       const cbx = $('#s-active'), orig = el.dataset.orig === '1', turnOff = cbx.checked;
       if (turnOff && turnOff === orig && !confirm(t('confirm_deact', { n: el.dataset.name }))) break;
@@ -3246,6 +3308,7 @@ document.addEventListener('change', async ev => {
 document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id && id.startsWith('rp-')) rcPartsSum();
+  if (ev.target.classList && ev.target.classList.contains('xr')) extrasSlide(ev.target);
   if (id === 'f-reason') state.form.reason = ev.target.value;
   if (id === 'b-wallet'){ const b = state.bon; b.wallet = ev.target.value; b.ack = false; if (b.walletDone){ b.walletDone = false; refreshBonSum(); } }
   if (id === 'e-wallet'){ state.form.wallet = ev.target.value; state.form.ack = false; refreshBonSum(); }
