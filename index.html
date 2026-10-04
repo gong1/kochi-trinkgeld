@@ -342,7 +342,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   app:'Kochi Team', who:'你是谁？', who_sub:'选择你的名字，然后输入 PIN', login:'登录', back:'返回',
-  tab_entry:'录入', rk_home:'每日核对', rk_step1:'第一步：点信封（打开保险柜，逐个点）', rk_step2:'第二步：录入全天报告（照打印的 Schichtbericht 抄）', rk_step3:'第三步：核对结果', rk_prev:'前一天', rk_next:'后一天', rk_cash:'现金核对', rk_env:'信封', rk_lock:'锁门巡查', rk_bon:'Bon', rks_ok:'✓ 三项都对上', rks_noted:'有差额 · 已写说明', rks_diff:'有差额：{x}', rks_no_report:'待录入全天报告', rks_before:'—（核对从 {d} 开始）', rks_idle:'没有营业数据', rks_open:'营业中，收店后再录报告', rk_env_todo:'待点收 {n} 个', rk_env_done:'✓ 已点完（{n} 个）', rk_env_none:'没有信封', rk_env_diff:'其中 {n} 个金额不一致', rk_lock_none:'没有排班', rk_lock_ok:'✓ {t} · {n}', rk_lock_miss:'✗ 缺：{m}', rk_bon_line:'已交 {a} / 应交 {b}', rk_bon_miss:'没交：{m}', rk_done:'✓ 已核对（{n} · {t}）', rk_changed:'核对后录入有改动，请重新核对', rk_open:'打开核对', rk_older:'更早还没点完的信封', rk_older_row:'{d} · 待点收 {n} 个', rk_my_tasks:'我自己的待办', rk_back:'← 返回', rk_cmp:'全天报告 × 已交 Bon', rk_col_rep:'报告', rk_col_sys:'系统', rk_col_diff:'差', rk_schluss:'Schlussbestand (Bar)', rk_card:'刷卡小费', rk_pay:'收款合计', rk_sales:'Umsatzsumme（只作参考）', rk_na:'无法比较', rk_pay_missing:'{n} 条录入没有收款数据（手动录入或旧 Bon），收款合计不参与判断。', rk_short:'其中店里承担的短款：{x}（信封的事，不参与比较）', rk_reports:'全天报告（{n}）', rk_rep_add:'＋ 录入全天报告', rk_rep_fix:'修正', rk_rep_void:'作废', rk_rep_void_q:'确定作废这张报告（{id}）？记录会保留。', rk_rep_id:'报告编号（Identifikationsnummer für Bericht）', rk_rep_schluss:'Schlussbestand (Bar)', rk_rep_card:'刷卡小费（Lightspeed Payments 的 Summe Trinkgeld，有几个刷卡区块就相加）', rk_rep_pay:'收款合计（Eingegangene Zahlungen）', rk_rep_sales:'Umsatzsumme（可不填）', rk_rep_start:'开始（Anfangsdatum）', rk_rep_end:'结束（Enddatum）', rk_rep_hint:'按打印出来的全天报告（Schichtbericht）照抄。Schlussbestand 可以是负数。', rk_rep_by:'{n} · {t}', rk_why:'可能的原因', rk_why_missing:'排了班还没交 Bon：{m}', rk_why_xfer:'有转入 / 转出的 Bon：{m}', rk_why_late:'报告结束时间（{a}）晚于第二天第一张 Bon 的开始（{b}）：打印报告时已经开始营业，可能混入了第二天的数据。', rk_note:'说明（有差额时必填；漏做锁门巡查等也可以写在这里）', rk_note_ph:'写清楚差在哪里、怎么处理的', rk_note_save:'保存说明', rk_note_saved:'说明已保存', rk_bons:'已交的 Bon（{n}）', rk_bon_row:'Schlussbestand {a} · 刷卡小费 {b} · 收款 {c}', rk_envelopes:'信封', rk_complete:'核对完成', rk_complete_ok:'核对完成 ✓', rk_complete_hint:'信封都点完、三项对上（或写了说明）后才能点。', rk_tm_hint:'你可以在这里点信封；报告录入和核对完成由老板做。', rk_env_tm:'待点收的信封', rk_env_tm_hint:'按天、按店。点进去点信封。', pay_by:'这周的钱是谁发的', pay_by_me:'我（老板）', pay_by_tm:'{n}（小费管理员）', pay_by_hint:'选小费管理员：你点「已发放」，签收单和周分配表上的发放人写他（他自己那一份仍写你）。只有钱确实是他发的才选他。', td_store:'本店今天', lk_title:'收店锁门巡查 · {s}', lk_sub:'按顺序逐个拍照，截止 {t}。', lk_sub_over:'已过截止（{t}），请尽快补做。', lk_start:'开始巡查', lk_cont:'继续巡查（{a}/{b}）', lk_done_line:'收店锁门巡查 · {s} 已完成', lk_back:'← 返回今天', lk_head:'收店锁门巡查 · {s}', lk_hint:'按路线顺序，一个一个拍：门要拍到门已关好、锁已锁上。只拍门窗，不拍人。', lk_who:'你是谁？（厨房账号要选自己的名字）', lk_photo:'📷 拍照', lk_retake:'重拍', lk_view:'照片', lk_wait:'先拍前面的', lk_by:'{t} · {n}', lk_uploading:'正在上传照片……', lk_saved:'已记录：{n}', lk_all_done:'锁门巡查完成 ✓ 谢谢！', lk_kind_door:'门', lk_kind_window:'窗户组', lk_open_title:'锁门巡查没完成（{n}）', lk_open_hint:'过了截止（最晚下班 + 2 小时）还没拍完的门店和缺少的检查点（最近 7 天，从锁门功能上线那天算）。点一条打开那天的核对页；那天点了「核对完成」就从这里消失，需要的话在说明里写一句。', lk_open_row:'已拍 {a}/{b}，缺：{m}', admin_lock:'锁门检查点', lk_adm_hint:'每家店收店时按这个顺序逐个拍照。用 ↑↓ 按实际巡查路线排好；不用的检查点停用（以前的记录保留）。', lk_adm_add:'＋ 新增检查点', lk_adm_zh:'中文名', lk_adm_de:'德文名', lk_adm_kind:'类型', lk_adm_off:'已停用', lk_adm_disable:'停用', lk_adm_enable:'启用', tab_today:'今天', tab_more:'更多', td_shift:'今天的班', td_noshift:'今天没有班', td_next:'下一个班：{x}', td_nonext:'还没有排到你的下一个班', td_mine:'我要做的（{n}）', td_mine_ok:'我要做的', td_alldone:'今天的事都做完了 ✓', td_done_grp:'已完成（{n}）', tk_bon_missing:'补交 Bon：{d} {s} {sl}', tk_bon_missing_sub:'已过期（第二天 12:00 前要交）。交了这个提醒自动消失。', tk_bon_shift:'交{sl} Bon · {s} {a}–{b}', tk_bon_now:'下班后交，第二天 12:00 前。', tk_bon_later:'今天稍后：下班后再交。', tk_bon_done:'已交 {sl} Bon · {s}', tk_bon_btn:'交 Bon', tk_bon_day:'交今天的 Bon · {s} {sl}', tk_bon_day_sub:'可以每个班各交一张，也可以下班时一张交一整天。', tk_bon_part:'{a}已交 ✓，还差{b}。', tk_bon_day_done:'已交今天的 Bon · {s} {sl}', tk_notice:'排班变动待确认', tk_avail:'填第 {w} 周哪些班不能上', tk_avail_sub:'没标的班都算能上。截止 {t}。', tk_avail_go:'去标', tk_avail_all:'下周都能上', tk_avail_done:'第 {w} 周能不能上：已填', tk_avail_ok:'已记下：第 {w} 周都能上。', more_bon:'交 Bon（今天另交一张）', more_title:'更多', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
+  tab_entry:'录入', slot_day:'全天', area_front:'前场', area_kitchen:'厨房', kp_state_yes:'厨房排班已发布（{t}）', kp_state_no:'厨房排班还没发布，厨房员工看不到', kp_publish:'发布厨房排班', kp_republish:'重新发布（{n} 处有变更）', kp_republish_ntf:'重新发布并通知（{n} 处变更 · {m} 人）', kp_pending:'有 {n} 处变更还没通知厨房员工（{m} 人）', kp_confirm:'发布厨房排班？厨房员工会收到通知。', kp_done:'厨房排班已发布，已通知 {n} 人。', kp_none:'还没排', ke_title:'厨房 · 全天', ke_hint:'每个人只能选一个岗位，再点一下取消；同一天只能在一家店。', ke_other:'其他厨房员工（{n}）', ke_no:'这天不能上', ke_elsewhere:'已排在 {s}', kp_ro:'只能查看（你没有排这一边的权限）', kav_title:'哪天不能上（厨房是全天班）', ntf_item_day:'{d} {s} {sl}（{r}）', rk_home:'每日核对', rk_step1:'第一步：点信封（打开保险柜，逐个点）', rk_step2:'第二步：录入全天报告（照打印的 Schichtbericht 抄）', rk_step3:'第三步：核对结果', rk_prev:'前一天', rk_next:'后一天', rk_cash:'现金核对', rk_env:'信封', rk_lock:'锁门巡查', rk_bon:'Bon', rks_ok:'✓ 三项都对上', rks_noted:'有差额 · 已写说明', rks_diff:'有差额：{x}', rks_no_report:'待录入全天报告', rks_before:'—（核对从 {d} 开始）', rks_idle:'没有营业数据', rks_open:'营业中，收店后再录报告', rk_env_todo:'待点收 {n} 个', rk_env_done:'✓ 已点完（{n} 个）', rk_env_none:'没有信封', rk_env_diff:'其中 {n} 个金额不一致', rk_lock_none:'没有排班', rk_lock_ok:'✓ {t} · {n}', rk_lock_miss:'✗ 缺：{m}', rk_bon_line:'已交 {a} / 应交 {b}', rk_bon_miss:'没交：{m}', rk_done:'✓ 已核对（{n} · {t}）', rk_changed:'核对后录入有改动，请重新核对', rk_open:'打开核对', rk_older:'更早还没点完的信封', rk_older_row:'{d} · 待点收 {n} 个', rk_my_tasks:'我自己的待办', rk_back:'← 返回', rk_cmp:'全天报告 × 已交 Bon', rk_col_rep:'报告', rk_col_sys:'系统', rk_col_diff:'差', rk_schluss:'Schlussbestand (Bar)', rk_card:'刷卡小费', rk_pay:'收款合计', rk_sales:'Umsatzsumme（只作参考）', rk_na:'无法比较', rk_pay_missing:'{n} 条录入没有收款数据（手动录入或旧 Bon），收款合计不参与判断。', rk_short:'其中店里承担的短款：{x}（信封的事，不参与比较）', rk_reports:'全天报告（{n}）', rk_rep_add:'＋ 录入全天报告', rk_rep_fix:'修正', rk_rep_void:'作废', rk_rep_void_q:'确定作废这张报告（{id}）？记录会保留。', rk_rep_id:'报告编号（Identifikationsnummer für Bericht）', rk_rep_schluss:'Schlussbestand (Bar)', rk_rep_card:'刷卡小费（Lightspeed Payments 的 Summe Trinkgeld，有几个刷卡区块就相加）', rk_rep_pay:'收款合计（Eingegangene Zahlungen）', rk_rep_sales:'Umsatzsumme（可不填）', rk_rep_start:'开始（Anfangsdatum）', rk_rep_end:'结束（Enddatum）', rk_rep_hint:'按打印出来的全天报告（Schichtbericht）照抄。Schlussbestand 可以是负数。', rk_rep_by:'{n} · {t}', rk_why:'可能的原因', rk_why_missing:'排了班还没交 Bon：{m}', rk_why_xfer:'有转入 / 转出的 Bon：{m}', rk_why_late:'报告结束时间（{a}）晚于第二天第一张 Bon 的开始（{b}）：打印报告时已经开始营业，可能混入了第二天的数据。', rk_note:'说明（有差额时必填；漏做锁门巡查等也可以写在这里）', rk_note_ph:'写清楚差在哪里、怎么处理的', rk_note_save:'保存说明', rk_note_saved:'说明已保存', rk_bons:'已交的 Bon（{n}）', rk_bon_row:'Schlussbestand {a} · 刷卡小费 {b} · 收款 {c}', rk_envelopes:'信封', rk_complete:'核对完成', rk_complete_ok:'核对完成 ✓', rk_complete_hint:'信封都点完、三项对上（或写了说明）后才能点。', rk_tm_hint:'你可以在这里点信封；报告录入和核对完成由老板做。', rk_env_tm:'待点收的信封', rk_env_tm_hint:'按天、按店。点进去点信封。', pay_by:'这周的钱是谁发的', pay_by_me:'我（老板）', pay_by_tm:'{n}（小费管理员）', pay_by_hint:'选小费管理员：你点「已发放」，签收单和周分配表上的发放人写他（他自己那一份仍写你）。只有钱确实是他发的才选他。', td_store:'本店今天', lk_title:'收店锁门巡查 · {s}', lk_sub:'按顺序逐个拍照，截止 {t}。', lk_sub_over:'已过截止（{t}），请尽快补做。', lk_start:'开始巡查', lk_cont:'继续巡查（{a}/{b}）', lk_done_line:'收店锁门巡查 · {s} 已完成', lk_back:'← 返回今天', lk_head:'收店锁门巡查 · {s}', lk_hint:'按路线顺序，一个一个拍：门要拍到门已关好、锁已锁上。只拍门窗，不拍人。', lk_who:'你是谁？（厨房账号要选自己的名字）', lk_photo:'📷 拍照', lk_retake:'重拍', lk_view:'照片', lk_wait:'先拍前面的', lk_by:'{t} · {n}', lk_uploading:'正在上传照片……', lk_saved:'已记录：{n}', lk_all_done:'锁门巡查完成 ✓ 谢谢！', lk_kind_door:'门', lk_kind_window:'窗户组', lk_open_title:'锁门巡查没完成（{n}）', lk_open_hint:'过了截止（最晚下班 + 2 小时）还没拍完的门店和缺少的检查点（最近 7 天，从锁门功能上线那天算）。点一条打开那天的核对页；那天点了「核对完成」就从这里消失，需要的话在说明里写一句。', lk_open_row:'已拍 {a}/{b}，缺：{m}', admin_lock:'锁门检查点', lk_adm_hint:'每家店收店时按这个顺序逐个拍照。用 ↑↓ 按实际巡查路线排好；不用的检查点停用（以前的记录保留）。', lk_adm_add:'＋ 新增检查点', lk_adm_zh:'中文名', lk_adm_de:'德文名', lk_adm_kind:'类型', lk_adm_off:'已停用', lk_adm_disable:'停用', lk_adm_enable:'启用', tab_today:'今天', tab_more:'更多', td_shift:'今天的班', td_noshift:'今天没有班', td_next:'下一个班：{x}', td_nonext:'还没有排到你的下一个班', td_mine:'我要做的（{n}）', td_mine_ok:'我要做的', td_alldone:'今天的事都做完了 ✓', td_done_grp:'已完成（{n}）', tk_bon_missing:'补交 Bon：{d} {s} {sl}', tk_bon_missing_sub:'已过期（第二天 12:00 前要交）。交了这个提醒自动消失。', tk_bon_shift:'交{sl} Bon · {s} {a}–{b}', tk_bon_now:'下班后交，第二天 12:00 前。', tk_bon_later:'今天稍后：下班后再交。', tk_bon_done:'已交 {sl} Bon · {s}', tk_bon_btn:'交 Bon', tk_bon_day:'交今天的 Bon · {s} {sl}', tk_bon_day_sub:'可以每个班各交一张，也可以下班时一张交一整天。', tk_bon_part:'{a}已交 ✓，还差{b}。', tk_bon_day_done:'已交今天的 Bon · {s} {sl}', tk_notice:'排班变动待确认', tk_avail:'填第 {w} 周哪些班不能上', tk_avail_sub:'没标的班都算能上。截止 {t}。', tk_avail_go:'去标', tk_avail_all:'下周都能上', tk_avail_done:'第 {w} 周能不能上：已填', tk_avail_ok:'已记下：第 {w} 周都能上。', more_bon:'交 Bon（今天另交一张）', more_title:'更多', tab_ledger:'账本', tab_week:'周结', tab_admin:'管理', tab_plan:'排班',
   date:'日期', store:'门店', card:'刷卡小费', cash:'现金小费', runner:'Runner', bar:'吧台', kitchen:'厨房', you:'你',
   for_whom:'代谁录入', myself:'我自己', nobody:'今天没有', keeps:'归你', each:'每人',
   save:'保存', saved:'已保存', update:'保存修改', cancel:'取消', editing:'正在修改 {d} 的记录',
@@ -512,7 +512,7 @@ zh: {
 },
 de: {
   app:'Kochi Team', who:'Wer bist du?', who_sub:'Namen wählen, dann PIN eingeben', login:'Anmelden', back:'Zurück',
-  tab_entry:'Eintragen', rk_home:'Tagesabgleich', rk_step1:'Schritt 1: Umschläge zählen (Tresor öffnen, einzeln zählen)', rk_step2:'Schritt 2: Schichtbericht erfassen (vom Ausdruck abschreiben)', rk_step3:'Schritt 3: Ergebnis', rk_prev:'Vortag', rk_next:'Folgetag', rk_cash:'Bargeldabgleich', rk_env:'Umschläge', rk_lock:'Abschluss-Rundgang', rk_bon:'Bons', rks_ok:'✓ Alle drei stimmen', rks_noted:'Differenz · erklärt', rks_diff:'Differenz: {x}', rks_no_report:'Schichtbericht fehlt noch', rks_before:'– (Abgleich ab {d})', rks_idle:'Keine Geschäftsdaten', rks_open:'Geöffnet – Bericht nach Ladenschluss erfassen', rk_env_todo:'{n} zu zählen', rk_env_done:'✓ alle gezählt ({n})', rk_env_none:'keine Umschläge', rk_env_diff:'davon {n} mit Abweichung', rk_lock_none:'kein Dienstplan', rk_lock_ok:'✓ {t} · {n}', rk_lock_miss:'✗ fehlt: {m}', rk_bon_line:'{a} von {b} eingereicht', rk_bon_miss:'fehlt: {m}', rk_done:'✓ abgeglichen ({n} · {t})', rk_changed:'Nach dem Abgleich geändert – bitte neu abgleichen', rk_open:'Abgleich öffnen', rk_older:'Ältere, noch nicht gezählte Umschläge', rk_older_row:'{d} · {n} zu zählen', rk_my_tasks:'Meine eigenen Aufgaben', rk_back:'← Zurück', rk_cmp:'Schichtbericht × eingereichte Bons', rk_col_rep:'Bericht', rk_col_sys:'System', rk_col_diff:'Diff.', rk_schluss:'Schlussbestand (Bar)', rk_card:'Kartentrinkgeld', rk_pay:'Zahlungen gesamt', rk_sales:'Umsatzsumme (nur zur Info)', rk_na:'nicht vergleichbar', rk_pay_missing:'{n} Einträge ohne Zahlungsdaten (manuell oder alter Bon) – Zahlungen gesamt zählt nicht.', rk_short:'Davon vom Laden getragener Fehlbetrag: {x} (Umschlag-Sache, nicht verglichen)', rk_reports:'Schichtberichte ({n})', rk_rep_add:'＋ Schichtbericht erfassen', rk_rep_fix:'Korrigieren', rk_rep_void:'Ungültig', rk_rep_void_q:'Diesen Bericht ({id}) ungültig machen? Der Eintrag bleibt gespeichert.', rk_rep_id:'Berichtsnummer (Identifikationsnummer für Bericht)', rk_rep_schluss:'Schlussbestand (Bar)', rk_rep_card:'Kartentrinkgeld (Summe Trinkgeld Lightspeed Payments; mehrere Kartenblöcke addieren)', rk_rep_pay:'Zahlungen gesamt (Eingegangene Zahlungen)', rk_rep_sales:'Umsatzsumme (optional)', rk_rep_start:'Beginn (Anfangsdatum)', rk_rep_end:'Ende (Enddatum)', rk_rep_hint:'Vom gedruckten Schichtbericht abschreiben. Schlussbestand darf negativ sein.', rk_rep_by:'{n} · {t}', rk_why:'Mögliche Gründe', rk_why_missing:'Eingeplant, Bon fehlt: {m}', rk_why_xfer:'Bons mit Ein-/Auszahlung: {m}', rk_why_late:'Berichtsende ({a}) liegt nach dem Beginn des ersten Bons am Folgetag ({b}): beim Drucken lief schon der nächste Tag, Daten können vermischt sein.', rk_note:'Erklärung (bei Differenz Pflicht; auch z. B. vergessener Rundgang)', rk_note_ph:'Was fehlt und wie es geklärt wurde', rk_note_save:'Erklärung speichern', rk_note_saved:'Erklärung gespeichert', rk_bons:'Eingereichte Bons ({n})', rk_bon_row:'Schlussbestand {a} · Kartentrinkgeld {b} · Zahlungen {c}', rk_envelopes:'Umschläge', rk_complete:'Abgleich abschließen', rk_complete_ok:'Abgleich abgeschlossen ✓', rk_complete_hint:'Erst möglich, wenn alle Umschläge gezählt sind und alle drei stimmen (oder erklärt sind).', rk_tm_hint:'Hier kannst du Umschläge zählen; Bericht und Abschluss macht der Chef.', rk_env_tm:'Zu zählende Umschläge', rk_env_tm_hint:'Nach Tag und Laden. Antippen zum Zählen.', pay_by:'Wer hat diese Woche ausgezahlt?', pay_by_me:'Ich (Chef)', pay_by_tm:'{n} (Tip-Manager)', pay_by_hint:'Tip-Manager gewählt: Du tippst „Ausgezahlt“, auf Quittung und Verteilungsliste steht er als Auszahler (sein eigener Anteil weiterhin du). Nur wählen, wenn er das Geld wirklich übergeben hat.', td_store:'Laden heute', lk_title:'Abschluss-Rundgang · {s}', lk_sub:'Der Reihe nach fotografieren, bis {t}.', lk_sub_over:'Frist ({t}) vorbei – bitte schnell nachholen.', lk_start:'Rundgang starten', lk_cont:'Rundgang fortsetzen ({a}/{b})', lk_done_line:'Abschluss-Rundgang · {s} erledigt', lk_back:'← Zurück zu Heute', lk_head:'Abschluss-Rundgang · {s}', lk_hint:'Der Route nach, einen nach dem anderen: Die Tür muss sichtbar zu und abgeschlossen sein. Nur Türen/Fenster fotografieren, keine Personen.', lk_who:'Wer bist du? (Küchenkonto: eigenen Namen wählen)', lk_photo:'📷 Foto', lk_retake:'Neu', lk_view:'Foto', lk_wait:'Zuerst die vorherigen', lk_by:'{t} · {n}', lk_uploading:'Foto wird hochgeladen …', lk_saved:'Gespeichert: {n}', lk_all_done:'Rundgang erledigt ✓ Danke!', lk_kind_door:'Tür', lk_kind_window:'Fenstergruppe', lk_open_title:'Abschluss-Rundgang nicht erledigt ({n})', lk_open_hint:'Läden, bei denen nach der Frist (letztes Schichtende + 2 Std.) noch Fotos fehlen, und welche Punkte fehlen (letzte 7 Tage, ab Start der Funktion). Antippen öffnet den Tagesabgleich; nach „Abgleich abschließen“ verschwindet der Eintrag – bei Bedarf kurz in der Erklärung vermerken.', lk_open_row:'{a}/{b} fotografiert, fehlt: {m}', admin_lock:'Abschluss-Punkte', lk_adm_hint:'Beim Abschluss wird in dieser Reihenfolge fotografiert. Mit ↑↓ nach der echten Route sortieren; nicht mehr benötigte Punkte deaktivieren (alte Einträge bleiben).', lk_adm_add:'＋ Neuer Punkt', lk_adm_zh:'Name Chinesisch', lk_adm_de:'Name Deutsch', lk_adm_kind:'Art', lk_adm_off:'deaktiviert', lk_adm_disable:'Deaktivieren', lk_adm_enable:'Aktivieren', tab_today:'Heute', tab_more:'Mehr', td_shift:'Heute', td_noshift:'Heute keine Schicht', td_next:'Nächste Schicht: {x}', td_nonext:'Noch keine nächste Schicht geplant', td_mine:'Meine Aufgaben ({n})', td_mine_ok:'Meine Aufgaben', td_alldone:'Alles für heute erledigt ✓', td_done_grp:'Erledigt ({n})', tk_bon_missing:'Bon nachreichen: {d} {s} {sl}', tk_bon_missing_sub:'Überfällig (bis 12:00 am Folgetag). Nach dem Einreichen verschwindet die Erinnerung.', tk_bon_shift:'Bon {sl} einreichen · {s} {a}–{b}', tk_bon_now:'Nach Schichtende, bis 12:00 am Folgetag.', tk_bon_later:'Später: erst nach Schichtende.', tk_bon_done:'Bon {sl} eingereicht · {s}', tk_bon_btn:'Bon einreichen', tk_bon_day:'Heutigen Bon einreichen · {s} {sl}', tk_bon_day_sub:'Pro Schicht ein Bon oder am Ende ein Bon für den ganzen Tag – beides geht.', tk_bon_part:'{a} eingereicht ✓, {b} fehlt noch.', tk_bon_day_done:'Bon eingereicht · {s} {sl}', tk_notice:'Dienstplan-Änderung bestätigen', tk_avail:'KW {w}: Wann kannst du nicht?', tk_avail_sub:'Nicht markierte Schichten zählen als verfügbar. Frist {t}.', tk_avail_go:'Markieren', tk_avail_all:'Nächste Woche alles ok', tk_avail_done:'KW {w} Verfügbarkeit: erledigt', tk_avail_ok:'Gespeichert: KW {w} alles verfügbar.', more_bon:'Bon einreichen (heute noch einer)', more_title:'Mehr', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
+  tab_entry:'Eintragen', slot_day:'ganztags', area_front:'Service', area_kitchen:'Küche', kp_state_yes:'Küchenplan veröffentlicht ({t})', kp_state_no:'Küchenplan noch nicht veröffentlicht – die Küche sieht ihn nicht', kp_publish:'Küchenplan veröffentlichen', kp_republish:'Erneut veröffentlichen ({n} Änderungen)', kp_republish_ntf:'Erneut veröffentlichen und benachrichtigen ({n} Änderungen · {m} Pers.)', kp_pending:'{n} Änderungen noch nicht an die Küche gemeldet ({m} Pers.)', kp_confirm:'Küchenplan veröffentlichen? Die Küche wird benachrichtigt.', kp_done:'Küchenplan veröffentlicht, {n} Personen benachrichtigt.', kp_none:'noch niemand', ke_title:'Küche · ganztags', ke_hint:'Jede Person nur eine Position; nochmal tippen zum Entfernen. Pro Tag nur in einem Laden.', ke_other:'Weitere Küchenmitarbeiter ({n})', ke_no:'kann an dem Tag nicht', ke_elsewhere:'schon in {s}', kp_ro:'Nur ansehen (keine Rechte für diesen Bereich)', kav_title:'An welchen Tagen kannst du nicht? (Küche: ganztags)', ntf_item_day:'{d} {s}, {sl} ({r})', rk_home:'Tagesabgleich', rk_step1:'Schritt 1: Umschläge zählen (Tresor öffnen, einzeln zählen)', rk_step2:'Schritt 2: Schichtbericht erfassen (vom Ausdruck abschreiben)', rk_step3:'Schritt 3: Ergebnis', rk_prev:'Vortag', rk_next:'Folgetag', rk_cash:'Bargeldabgleich', rk_env:'Umschläge', rk_lock:'Abschluss-Rundgang', rk_bon:'Bons', rks_ok:'✓ Alle drei stimmen', rks_noted:'Differenz · erklärt', rks_diff:'Differenz: {x}', rks_no_report:'Schichtbericht fehlt noch', rks_before:'– (Abgleich ab {d})', rks_idle:'Keine Geschäftsdaten', rks_open:'Geöffnet – Bericht nach Ladenschluss erfassen', rk_env_todo:'{n} zu zählen', rk_env_done:'✓ alle gezählt ({n})', rk_env_none:'keine Umschläge', rk_env_diff:'davon {n} mit Abweichung', rk_lock_none:'kein Dienstplan', rk_lock_ok:'✓ {t} · {n}', rk_lock_miss:'✗ fehlt: {m}', rk_bon_line:'{a} von {b} eingereicht', rk_bon_miss:'fehlt: {m}', rk_done:'✓ abgeglichen ({n} · {t})', rk_changed:'Nach dem Abgleich geändert – bitte neu abgleichen', rk_open:'Abgleich öffnen', rk_older:'Ältere, noch nicht gezählte Umschläge', rk_older_row:'{d} · {n} zu zählen', rk_my_tasks:'Meine eigenen Aufgaben', rk_back:'← Zurück', rk_cmp:'Schichtbericht × eingereichte Bons', rk_col_rep:'Bericht', rk_col_sys:'System', rk_col_diff:'Diff.', rk_schluss:'Schlussbestand (Bar)', rk_card:'Kartentrinkgeld', rk_pay:'Zahlungen gesamt', rk_sales:'Umsatzsumme (nur zur Info)', rk_na:'nicht vergleichbar', rk_pay_missing:'{n} Einträge ohne Zahlungsdaten (manuell oder alter Bon) – Zahlungen gesamt zählt nicht.', rk_short:'Davon vom Laden getragener Fehlbetrag: {x} (Umschlag-Sache, nicht verglichen)', rk_reports:'Schichtberichte ({n})', rk_rep_add:'＋ Schichtbericht erfassen', rk_rep_fix:'Korrigieren', rk_rep_void:'Ungültig', rk_rep_void_q:'Diesen Bericht ({id}) ungültig machen? Der Eintrag bleibt gespeichert.', rk_rep_id:'Berichtsnummer (Identifikationsnummer für Bericht)', rk_rep_schluss:'Schlussbestand (Bar)', rk_rep_card:'Kartentrinkgeld (Summe Trinkgeld Lightspeed Payments; mehrere Kartenblöcke addieren)', rk_rep_pay:'Zahlungen gesamt (Eingegangene Zahlungen)', rk_rep_sales:'Umsatzsumme (optional)', rk_rep_start:'Beginn (Anfangsdatum)', rk_rep_end:'Ende (Enddatum)', rk_rep_hint:'Vom gedruckten Schichtbericht abschreiben. Schlussbestand darf negativ sein.', rk_rep_by:'{n} · {t}', rk_why:'Mögliche Gründe', rk_why_missing:'Eingeplant, Bon fehlt: {m}', rk_why_xfer:'Bons mit Ein-/Auszahlung: {m}', rk_why_late:'Berichtsende ({a}) liegt nach dem Beginn des ersten Bons am Folgetag ({b}): beim Drucken lief schon der nächste Tag, Daten können vermischt sein.', rk_note:'Erklärung (bei Differenz Pflicht; auch z. B. vergessener Rundgang)', rk_note_ph:'Was fehlt und wie es geklärt wurde', rk_note_save:'Erklärung speichern', rk_note_saved:'Erklärung gespeichert', rk_bons:'Eingereichte Bons ({n})', rk_bon_row:'Schlussbestand {a} · Kartentrinkgeld {b} · Zahlungen {c}', rk_envelopes:'Umschläge', rk_complete:'Abgleich abschließen', rk_complete_ok:'Abgleich abgeschlossen ✓', rk_complete_hint:'Erst möglich, wenn alle Umschläge gezählt sind und alle drei stimmen (oder erklärt sind).', rk_tm_hint:'Hier kannst du Umschläge zählen; Bericht und Abschluss macht der Chef.', rk_env_tm:'Zu zählende Umschläge', rk_env_tm_hint:'Nach Tag und Laden. Antippen zum Zählen.', pay_by:'Wer hat diese Woche ausgezahlt?', pay_by_me:'Ich (Chef)', pay_by_tm:'{n} (Tip-Manager)', pay_by_hint:'Tip-Manager gewählt: Du tippst „Ausgezahlt“, auf Quittung und Verteilungsliste steht er als Auszahler (sein eigener Anteil weiterhin du). Nur wählen, wenn er das Geld wirklich übergeben hat.', td_store:'Laden heute', lk_title:'Abschluss-Rundgang · {s}', lk_sub:'Der Reihe nach fotografieren, bis {t}.', lk_sub_over:'Frist ({t}) vorbei – bitte schnell nachholen.', lk_start:'Rundgang starten', lk_cont:'Rundgang fortsetzen ({a}/{b})', lk_done_line:'Abschluss-Rundgang · {s} erledigt', lk_back:'← Zurück zu Heute', lk_head:'Abschluss-Rundgang · {s}', lk_hint:'Der Route nach, einen nach dem anderen: Die Tür muss sichtbar zu und abgeschlossen sein. Nur Türen/Fenster fotografieren, keine Personen.', lk_who:'Wer bist du? (Küchenkonto: eigenen Namen wählen)', lk_photo:'📷 Foto', lk_retake:'Neu', lk_view:'Foto', lk_wait:'Zuerst die vorherigen', lk_by:'{t} · {n}', lk_uploading:'Foto wird hochgeladen …', lk_saved:'Gespeichert: {n}', lk_all_done:'Rundgang erledigt ✓ Danke!', lk_kind_door:'Tür', lk_kind_window:'Fenstergruppe', lk_open_title:'Abschluss-Rundgang nicht erledigt ({n})', lk_open_hint:'Läden, bei denen nach der Frist (letztes Schichtende + 2 Std.) noch Fotos fehlen, und welche Punkte fehlen (letzte 7 Tage, ab Start der Funktion). Antippen öffnet den Tagesabgleich; nach „Abgleich abschließen“ verschwindet der Eintrag – bei Bedarf kurz in der Erklärung vermerken.', lk_open_row:'{a}/{b} fotografiert, fehlt: {m}', admin_lock:'Abschluss-Punkte', lk_adm_hint:'Beim Abschluss wird in dieser Reihenfolge fotografiert. Mit ↑↓ nach der echten Route sortieren; nicht mehr benötigte Punkte deaktivieren (alte Einträge bleiben).', lk_adm_add:'＋ Neuer Punkt', lk_adm_zh:'Name Chinesisch', lk_adm_de:'Name Deutsch', lk_adm_kind:'Art', lk_adm_off:'deaktiviert', lk_adm_disable:'Deaktivieren', lk_adm_enable:'Aktivieren', tab_today:'Heute', tab_more:'Mehr', td_shift:'Heute', td_noshift:'Heute keine Schicht', td_next:'Nächste Schicht: {x}', td_nonext:'Noch keine nächste Schicht geplant', td_mine:'Meine Aufgaben ({n})', td_mine_ok:'Meine Aufgaben', td_alldone:'Alles für heute erledigt ✓', td_done_grp:'Erledigt ({n})', tk_bon_missing:'Bon nachreichen: {d} {s} {sl}', tk_bon_missing_sub:'Überfällig (bis 12:00 am Folgetag). Nach dem Einreichen verschwindet die Erinnerung.', tk_bon_shift:'Bon {sl} einreichen · {s} {a}–{b}', tk_bon_now:'Nach Schichtende, bis 12:00 am Folgetag.', tk_bon_later:'Später: erst nach Schichtende.', tk_bon_done:'Bon {sl} eingereicht · {s}', tk_bon_btn:'Bon einreichen', tk_bon_day:'Heutigen Bon einreichen · {s} {sl}', tk_bon_day_sub:'Pro Schicht ein Bon oder am Ende ein Bon für den ganzen Tag – beides geht.', tk_bon_part:'{a} eingereicht ✓, {b} fehlt noch.', tk_bon_day_done:'Bon eingereicht · {s} {sl}', tk_notice:'Dienstplan-Änderung bestätigen', tk_avail:'KW {w}: Wann kannst du nicht?', tk_avail_sub:'Nicht markierte Schichten zählen als verfügbar. Frist {t}.', tk_avail_go:'Markieren', tk_avail_all:'Nächste Woche alles ok', tk_avail_done:'KW {w} Verfügbarkeit: erledigt', tk_avail_ok:'Gespeichert: KW {w} alles verfügbar.', more_bon:'Bon einreichen (heute noch einer)', more_title:'Mehr', tab_ledger:'Konto', tab_week:'Abschluss', tab_admin:'Verwaltung', tab_plan:'Dienstplan',
   date:'Datum', store:'Filiale', card:'Trinkgeld Karte', cash:'Trinkgeld bar', runner:'Runner', bar:'Bar', kitchen:'Küche', you:'Du',
   for_whom:'Eintrag für', myself:'Mich selbst', nobody:'Heute niemand', keeps:'bleibt bei dir', each:'je',
   save:'Speichern', saved:'Gespeichert', update:'Änderung speichern', cancel:'Abbrechen', editing:'Eintrag vom {d} bearbeiten',
@@ -1125,7 +1125,7 @@ function todoCardHTML(){
 function noticeHTML(n){
   const rows = (n.items || []).slice().sort((a, b) => String(a.date).localeCompare(String(b.date)) || (a.slot === 'dinner') - (b.slot === 'dinner')).map(i => {
     const rel = i.date === today() ? t('today_word') : i.date === addDays(today(), 1) ? t('tomorrow_word') : '';
-    const what = i.cancelled ? t('nt_cancel') : `${slotLabel(i.slot)} ${i.start || ''}–${i.end || ''}` + ((i.roles || []).length ? ' · ' + i.roles.map(k => t('grp_' + k)).join(' + ') : '');
+    const what = i.cancelled ? t('nt_cancel') : (i.slot === 'day' ? slotLabel(i.slot) : `${slotLabel(i.slot)} ${i.start || ''}–${i.end || ''}`) + ((i.roles || []).length ? ' · ' + i.roles.map(k => t('grp_' + k)).join(' + ') : '');
     return `<div class="nt-r${i.cancelled ? ' cx' : ''}"><span class="nt-d">${esc(dayLabel(i.date))}${rel ? `<span class="nt-rel">${esc(rel)}</span>` : ''}</span>${storeTag(i.store)}<span class="nt-t num">${esc(what)}</span></div>`;
   }).join('');
   const head = n.kind === 'publish' ? t('nt_pub_h', { w: isoWeek(n.week_start || today()) }) : t('nt_change_h');
@@ -1140,7 +1140,7 @@ async function loadTasks(){
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
 function viewTasks(){
-  const ts = ((state.tasks && state.tasks.tasks) || []).filter(k => !(k.kind === 'avail' && state.me && isKRole(state.me.main_role))), out = [], groups = {};
+  const ts = (state.tasks && state.tasks.tasks) || [], out = [], groups = {};
   ts.forEach(k => { if (k.kind === 'bon_shift'){ const g = k.data.date + '|' + k.data.store; (groups[g] = groups[g] || []).push(k); } });
   const order = { overdue: 0, now: 1, later: 2 };
   ts.forEach(k => {
@@ -1155,7 +1155,7 @@ function viewTasks(){
   return out;
 }
 function taskCount(st){ const ts = viewTasks(); return ts.filter(x => st ? x.status === st : ['overdue', 'now'].includes(x.status)).length; }
-function shiftLine(x){ return `${storeTag(x.store)} <strong>${esc(slotLabel(x.slot))}</strong> <span class="num">${esc(x.start)}–${esc(x.end)}</span>${(x.roles || []).length ? ` <span class="muted">${esc(x.roles.map(r => t('grp_' + r)).join(' + '))}</span>` : ''}`; }
+function shiftLine(x){ return `${storeTag(x.store)} <strong>${esc(slotLabel(x.slot))}</strong> ${x.slot === 'day' ? '' : `<span class="num">${esc(x.start)}–${esc(x.end)}</span>`}${(x.roles || []).length ? ` <span class="muted">${esc(x.roles.map(r => t('grp_' + r)).join(' + '))}</span>` : ''}`; }
 function taskCardHTML(k){
   const d = k.data || {}, card = (cls, title, sub, btns) => `<div class="task ${cls}"><div class="task-t">${title}</div>${sub ? `<div class="task-s">${esc(sub)}</div>` : ''}${btns ? `<div class="task-b">${btns}</div>` : ''}</div>`;
   const cls = k.status === 'overdue' ? 'bad' : k.status === 'later' ? 'later' : '';
@@ -2868,7 +2868,15 @@ function fbItem(x){
 
 // ============ 排班 ============
 const SLOTS = ['lunch', 'dinner'];
-const isSched = () => !!(state.me && (state.me.is_admin || state.me.is_scheduler));
+const isSched = () => !!(state.me && (state.me.is_admin || state.me.is_scheduler || state.me.is_kitchen_scheduler));   // v47：两边的排班员都能看完整排班
+const canFront = () => !!(state.me && (state.me.is_admin || state.me.is_scheduler));
+const canKitchen = () => !!(state.me && (state.me.is_admin || state.me.is_kitchen_scheduler));
+// 排班页看哪一边：厨房员工 / 只有后厨排班权限的人默认看厨房
+function planArea(){
+  if (!state.planArea) state.planArea = (isKRole(state.me.main_role) || (state.me.is_kitchen_scheduler && !canFront())) ? 'kitchen' : 'front';
+  if (!isSched()) state.planArea = isKRole(state.me.main_role) ? 'kitchen' : 'front';
+  return state.planArea;
+}
 const slotLabel = k => t('slot_' + k);
 const hm2min = x => { const [h, m] = String(x).split(':').map(Number); return h * 60 + m; };
 // 全系统统一：「周一 9月28日 23:10」/「Mo 28.09. 23:10」（柏林时间），不是今年的前面加年份
@@ -2905,22 +2913,29 @@ async function viewPlan(){
   $('#main').innerHTML = planHead() + `<div class="loading">${esc(t('loading'))}</div>`;
   try { state.plan = await rpc('sched_week', { ...tok(), p_week_start: state.planWeek }); }
   catch(e){ $('#main').innerHTML = planHead() + `<div class="empty">${esc(errText(e))}</div>`; return; }
-  state.planPending = null;
-  if (isSched() && state.plan.published) try { state.planPending = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v25 之前没有
+  state.planPending = null; state.kPending = null;
+  if (canFront() && state.plan.published) try { state.planPending = await rpc('sched_pending_changes', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v25 之前没有
+  if (canKitchen() && state.plan.kitchen_published) try { state.kPending = await rpc('ksched_pending', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v37 之前没有
   state.planNotices = null;
   if (isSched()) try { state.planNotices = await rpc('sched_notices', { ...tok(), p_week_start: state.planWeek }); } catch(e){}   // v26 之前没有
   state.pushMap = {}; if (isSched()) try { state.pushMap = await rpc('push_status', tok()) || {}; } catch(e){}   // v27 之前没有
   planRender();
 }
 function planHead(){
-  const sub = isSched() ? `<div class="seg" style="margin-bottom:12px">${['edit', 'mine'].map(k =>
+  const area = isSched() ? `<div class="seg" style="margin-bottom:8px">${['front', 'kitchen'].map(k =>
+    `<button data-act="plan-area" data-k="${k}" class="${planArea() === k ? 'on' : ''}">${esc(t('area_' + k))}</button>`).join('')}</div>` : '';
+  const sub = isSched() ? `<div class="seg sm" style="margin-bottom:12px">${['edit', 'mine'].map(k =>
     `<button data-act="plan-sub" data-k="${k}" class="${state.planSub === k ? 'on' : ''}">${esc(t('plan_' + k))}</button>`).join('')}</div>` : '';
-  return sub + planNav();
+  return area + sub + planNav();
 }
 function planRender(){
   const d = state.plan; if (!d || state.tab !== 'plan') return;
   const y = window.scrollY;
-  $('#main').innerHTML = planHead() + (state.planSub === 'edit' && isSched() ? planEditHTML(d) : planMineHTML(d));
+  const k = planArea() === 'kitchen';
+  $('#main').innerHTML = planHead() + (state.planSub === 'edit' && isSched()
+    ? (k ? (canKitchen() ? kEditHTML(d) : `<div class="infobox">${esc(t('kp_ro'))}</div>` + kGridHTML(d, false))
+         : (canFront() ? planEditHTML(d) : `<div class="infobox">${esc(t('kp_ro'))}</div>` + planGridHTML(d, false)))
+    : (k ? kMineHTML(d) : planMineHTML(d)));
   window.scrollTo(0, y);
   // 刚切到本周时，自动滚到今天（保存后刷新不再跳）
   if (state.planScrollWeek !== state.planWeek + state.planSub){
@@ -2934,7 +2949,7 @@ function planMineHTML(d){
   let h = `<h3>${esc(t('my_shifts'))}</h3>`;
   if (!d.published) h += `<div class="infobox">${esc(t('not_published'))}</div>`;
   else {
-    const mine = d.shifts.filter(x => x.staff_id === me);
+    const mine = d.shifts.filter(x => x.staff_id === me && x.slot !== 'day');
     h += `<div class="list">${mine.length ? mine.map(x => `<div class="item"><div class="top">
         <div><strong>${esc(dayLabel(x.date))}</strong>${storeTag(x.store)} <span class="muted">${esc(slotLabel(x.slot))}</span>${x.changed ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}</div>
         <div class="amt num">${esc(x.start)}–${esc(x.end)}</div></div>
@@ -2982,6 +2997,74 @@ function planGridHTML(d, edit){
     return blocks ? `<div class="sheet" ${isToday ? 'id="plan-today" style="border:2px solid var(--celadon)"' : ''}><div class="dayh">${esc(dayLabel(date))}${isToday ? ` <span class="tag ok">${esc(t('today_word'))}</span>` : ''}</div>${blocks}</div>` : '';
   }).join('');
 }
+// ============ 厨房排班（v47）：每家店每天一个「全天」班，四个岗位 ============
+function weekDates(){ return [0, 1, 2, 3, 4, 5, 6].map(i => addDays(state.planWeek, i)); }
+function kGridHTML(d, edit){
+  return weekDates().map(date => {
+    const blocks = STORES.map(store => {
+      const list = d.shifts.filter(x => x.slot === 'day' && x.date === date && x.store === store);
+      if (!edit && !list.length) return '';
+      const rows = KROLES.map(r => { const ppl = list.filter(x => x.role === r); if (!ppl.length) return '';
+        return `<div class="rolerow"><div class="rl">${esc(t('grp_' + r))}</div><div class="rp">${ppl.map(x => `<span class="pchip">${esc(x.name)}${x.changed && (edit || x.staff_id === state.me.id) ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}</span>`).join('')}</div></div>`; }).join('');
+      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(t('ke_title'))}</strong></div>
+        ${edit ? `<button class="pchip add" style="flex:none" data-act="ke-open" data-date="${date}" data-store="${store}">${esc(t('se_edit'))}</button>` : ''}</div>
+        ${rows || `<div class="small muted" style="padding:4px 0">${esc(t('kp_none'))}</div>`}</div>`;
+    }).join('');
+    const isToday = date === today();
+    return blocks ? `<div class="sheet" ${isToday ? 'id="plan-today" style="border:2px solid var(--celadon)"' : ''}><div class="dayh">${esc(dayLabel(date))}${isToday ? ` <span class="tag ok">${esc(t('today_word'))}</span>` : ''}</div>${blocks}</div>` : '';
+  }).join('');
+}
+function kEditHTML(d){
+  const changed = d.shifts.filter(x => x.changed && x.slot === 'day').length, pd = state.kPending, pn = pd ? pd.changes : 0, pm = pd ? pd.people.length : 0;
+  return `<div class="hero"><strong>${esc(d.kitchen_published ? t('kp_state_yes', { t: fmtDateTime(d.kitchen_published_at) }) : t('kp_state_no'))}</strong>
+      ${pn ? `<div class="warnbox" style="margin:10px 0 0">${esc(t('kp_pending', { n: pn, m: pm }))}</div>` : ''}
+      ${!d.kitchen_published || changed || pn ? `<button class="btn" style="margin-top:12px" data-act="kplan-publish">${esc(!d.kitchen_published ? t('kp_publish') : pn ? t('kp_republish_ntf', { n: pn, m: pm }) : t('kp_republish', { n: changed }))}</button>` : ''}</div>`
+    + noticesHTML((state.planNotices || []).filter(n => (n.items || []).some(i => i.slot === 'day')))
+    + kGridHTML(d, true);
+}
+// 厨房员工：我的班 + 按天标不能上 + 同一天同店的厨房同事
+function kMineHTML(d){
+  const me = state.me.id, mine = d.shifts.filter(x => x.staff_id === me && x.slot === 'day');
+  let h = `<h3>${esc(t('my_shifts'))}</h3>`;
+  if (!d.kitchen_published && !d.is_sched) h += `<div class="infobox">${esc(t('not_published'))}</div>`;
+  else h += `<div class="list">${mine.length ? mine.map(x => `<div class="item"><div class="top"><div><strong>${esc(dayLabel(x.date))}</strong>${storeTag(x.store)} <span class="muted">${esc(t('slot_day'))}</span>${x.changed ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}</div>
+      <div class="amt">${esc(t('grp_' + x.role))}</div></div></div>`).join('') : `<div class="empty">${esc(t('no_shifts'))}</div>`}</div>`;
+  const closed = d.deadline_passed && !d.is_sched, nNo = d.my_avail.filter(x => x.slot === 'day' && x.status === 'no').length;
+  h += `<h3>${esc(t('kav_title'))}</h3>
+    <div class="small muted" style="margin:-4px 0 10px">${esc(closed ? t('avail_closed') : d.deadline_passed ? t('avail_closed_sched') : t('avail_deadline', { d: fmtDateTime(d.deadline) }))}</div>
+    <div class="infobox">${esc(t('avail_rule'))}${nNo ? ' ' + esc(t('avail_count', { n: nNo })) : ''}</div>
+    <div class="sheet avgrid">${weekDates().map(date => { const no = d.my_avail.some(x => x.date === date && x.slot === 'day' && x.status === 'no');
+      return `<div class="avday"><div class="dl">${esc(dayLabel(date))}</div><button class="avbtn no ${no ? 'on' : ''}" aria-pressed="${no}" data-act="avail" data-date="${date}" data-slot="day" ${closed ? 'disabled' : ''}>${no ? '✕' : '✓'} ${esc(t('slot_day'))}</button></div>`; }).join('')}</div>`;
+  if ((d.kitchen_published || d.is_sched) && d.shifts.some(x => x.slot === 'day')) h += `<h3>${esc(t('my_team'))}</h3>` + kGridHTML(d, false);
+  return h;
+}
+function keOpen(p){
+  const d = state.plan, cur = d.shifts.filter(x => x.slot === 'day' && x.date === p.date && x.store === p.store);
+  const sel = {}; KROLES.forEach(r => sel[r] = cur.filter(x => x.role === r).map(x => x.staff_id));
+  state.kEd = { ...p, sel }; keRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal();
+}
+function keRender(){
+  const e = state.kEd, d = state.plan;
+  const elsewhere = id => d.shifts.find(x => x.slot === 'day' && x.date === e.date && x.store !== e.store && x.staff_id === id);
+  const no = id => d.avail.some(a => a.staff_id === id && a.date === e.date && a.slot === 'day' && a.status === 'no');
+  const pool = d.staff.filter(s => isKRole(s.main_role) || (s.skills || []).some(isKRole));
+  const col = r => {
+    const sortFn = (a, b) => (no(a.id) - no(b.id)) || a.name.localeCompare(b.name);
+    const main = pool.filter(s => s.main_role === r).sort(sortFn), skill = pool.filter(s => s.main_role !== r && (s.skills || []).includes(r)).sort(sortFn);
+    const other = pool.filter(s => s.main_role !== r && !(s.skills || []).includes(r)).sort(sortFn);
+    const chip = s => { const on = e.sel[r].includes(s.id), x = elsewhere(s.id);
+      const sub = x ? t('ke_elsewhere', { s: x.store }) : no(s.id) ? t('ke_no') : t('grp_' + s.main_role);
+      return `<button type="button" class="sdchip pkchip ${on ? 'on' : ''} ${no(s.id) ? 'no' : ''}" aria-pressed="${on}" data-act="ke-toggle" data-role="${r}" data-id="${s.id}" ${x ? 'disabled' : ''}>${esc(s.name)}<small>${esc(sub)}</small></button>`; };
+    return `<h3 style="margin:14px 0 4px">${esc(t('grp_' + r))}（${e.sel[r].length}）</h3>
+      <div class="sdchips">${[...main, ...skill].map(chip).join('')}</div>
+      ${other.length ? `<details class="fold" style="margin-top:6px" ${other.some(s => e.sel[r].includes(s.id)) ? 'open' : ''}><summary>${esc(t('ke_other', { n: other.length }))}</summary><div class="inner"><div class="sdchips">${other.map(chip).join('')}</div></div></details>` : ''}`;
+  };
+  $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(e.date))}${storeTag(e.store)} ${esc(t('ke_title'))}</h2>
+    <div class="small muted">${esc(t('ke_hint'))}</div>
+    ${KROLES.map(col).join('')}
+    <div class="row" style="margin-top:16px"><button class="btn ghost" type="button" data-act="sd-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="ke-save">${esc(t('save'))}</button></div>`;
+}
+
 // 一个窗口排完一个班次：服务 / Runner / 吧台 三栏
 function seOpen(p){
   const d = state.plan, cur = d.shifts.filter(x => x.date === p.date && x.store === p.store && x.slot === p.slot);
@@ -3059,12 +3142,12 @@ function peRender(){
       ${rs.length > 1 ? `<button class="link danger" type="button" data-act="sd-del">${esc(t('pe_del_all'))}</button>` : ''}</div>`;
 }
 function planEditHTML(d){
-  const changed = d.shifts.filter(x => x.changed).length, pd = state.planPending, pn = pd ? pd.changes : 0, pm = pd ? pd.people.length : 0;
+  const changed = d.shifts.filter(x => x.changed && x.slot !== 'day').length, pd = state.planPending, pn = pd ? pd.changes : 0, pm = pd ? pd.people.length : 0;
   let h = `<div class="hero"><div class="row" style="justify-content:space-between"><strong>${esc(d.published ? t('pub_state_yes', { t: fmtDateTime(d.published_at) }) : t('pub_state_no'))}</strong></div>
     ${d.published ? `<div class="small muted" style="margin-top:8px">${esc(t('pub_live'))}</div>` : ''}
     ${pn ? `<div class="warnbox" style="margin:10px 0 0">${esc(t('pending_banner', { n: pn, m: pm }))}</div>` : ''}
     ${!d.published || changed || pn ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(!d.published ? t('publish') : pn ? t('republish_ntf', { n: pn, m: pm }) : t('republish', { n: changed }))}</button>` : ''}</div>`;
-  h += noticesHTML(state.planNotices);
+  h += noticesHTML((state.planNotices || []).filter(n => !(n.items || []).some(i => i.slot === 'day')));
   h += planGridHTML(d, true);
   return h;
 }
@@ -3093,7 +3176,7 @@ function ntfItemsText(lang, items){
   const L = I18N[lang] || I18N.zh, f = (k, v) => { let s = L[k]; for (const [a, b] of Object.entries(v)) s = s.split('{' + a + '}').join(b); return s; };
   const day = x => { const dd = parseD(x); return lang === 'de' ? `${L.wd[wdIdx(x)]} ${dd.getDate()}.${dd.getMonth() + 1}.` : `${dd.getMonth() + 1}月${dd.getDate()}日${L.wd[wdIdx(x)]}`; };
   return (items || []).map(i => i.cancelled ? f('ntf_item_cancel', { d: day(i.date), s: i.store || '', sl: L['slot_' + i.slot] })
-    : f('ntf_item', { d: day(i.date), s: i.store, sl: L['slot_' + i.slot], a: i.start, b: i.end, r: (i.roles || []).map(k => L['grp_' + k]).join(' + ') })).join(lang === 'de' ? '; ' : '；');
+    : f(i.slot === 'day' ? 'ntf_item_day' : 'ntf_item', { d: day(i.date), s: i.store, sl: L['slot_' + i.slot], a: i.start, b: i.end, r: (i.roles || []).map(k => L['grp_' + k]).join(' + ') })).join(lang === 'de' ? '; ' : '；');
 }
 function ntfBatchText(lang, p){
   const L = I18N[lang] || I18N.zh;
@@ -3471,6 +3554,33 @@ document.addEventListener('click', async ev => {
     case 'plan-this': state.planWeek = mondayOf(today()); viewPlan(); break;
     case 'plan-next': state.planWeek = addDays(state.planWeek, 7); viewPlan(); break;
     case 'plan-sub': state.planSub = el.dataset.k; planRender(); break;
+    case 'plan-area': state.planArea = el.dataset.k; viewPlan(); break;
+    case 'ke-open': keOpen({ date: el.dataset.date, store: el.dataset.store }); break;
+    case 'ke-toggle': {   // 一个人只能一个岗位：选了这一栏就从别的栏去掉
+      const e = state.kEd, id = el.dataset.id, r = el.dataset.role, on = e.sel[r].includes(id);
+      KROLES.forEach(k => e.sel[k] = e.sel[k].filter(x => x !== id));
+      if (!on) e.sel[r].push(id);
+      keRender(); break;
+    }
+    case 'ke-save': {
+      const e = state.kEd; el.disabled = true;
+      try {
+        const r = await rpc('ksched_set_day', { ...tok(), p_date: e.date, p_store: e.store, p_hot: e.sel.hot, p_cold: e.sel.cold, p_skewer: e.sel.skewer, p_clean: e.sel.clean });
+        $('#shiftDlg').close(); state.kEd = null;
+        toast(r.skipped.length ? r.skipped.map(x => t('pk_skipped', { n: x.name, s: x.store })).join(' ') : t('saved'), !!r.skipped.length);
+        if (r.published && e.date >= today() && e.date <= addDays(today(), 1))   // 今天、明天的厨房班立即通知
+          notifyNow(e.date, e.store, 'day', [...r.added, ...r.changed, ...r.removed].map(x => x.staff_id));
+        viewPlan();
+      } catch(err){ toast(errText(err), true); el.disabled = false; }
+      break;
+    }
+    case 'kplan-publish': {
+      if (!confirm(t('kp_confirm'))) break;
+      try { const r = await rpc('ksched_publish_and_notify', { ...tok(), p_week_start: state.planWeek });
+        toast(t('kp_done', { n: r.people.length })); if (r.people.length) callPush('notices'); await viewPlan(); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'avail': {
       const d = state.plan, date = el.dataset.date, slot = el.dataset.slot;
       const no = d.my_avail.some(x => x.date === date && x.slot === slot && x.status === 'no');
