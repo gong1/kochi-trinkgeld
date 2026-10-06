@@ -1237,7 +1237,7 @@ async function loadWeekTodo(){
 function weekToOpen(w){ const xs = [w && w.pay, w && w.lock].filter(Boolean).sort(); return xs[0] || mondayOf(today()); }
 function weekTodoHTML(){
   const w = state.weekTodo; if (!w) return '';
-  const box = (txt, act, wk) => `<div class="warnbox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(txt)}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="week-open" data-week="${wk}">${esc(t(act))}</button></div>`;
+  const box = (txt, act, wk) => `<div class="warnbox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(txt)}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="week-open" data-week="${wk}" data-focus="${act === 'wk_pay_go' ? 'wk-dist' : 'wk-lock'}">${esc(t(act))}</button></div>`;
   return (w.pay ? box(t('wk_pay_todo', { w: isoWeek(w.pay), n: w.payN }), 'wk_pay_go', w.pay) : '')
     + (w.lock ? box(t('wk_lock_todo', { w: isoWeek(w.lock), a: dm(w.lock), b: dm(addDays(w.lock, 6)) }), 'wk_lock_go', w.lock) : '');
 }
@@ -1267,7 +1267,7 @@ function bizToday(){ return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe
 function eurSigned(c){ return c == null ? '–' : (c < 0 ? '−' : '') + eur(Math.abs(c)); }
 function parseEurSigned(v){ const s = String(v || '').trim(), neg = /^[-−]/.test(s), x = parseEur(s.replace(/^[-−]/, '')); return isNaN(x) ? NaN : neg ? -x : x; }
 function envPendHTML(list){
-  return `<div class="list">${list.map(x => `<div class="item" data-act="recon-open" data-store="${esc(x.store)}" data-day="${x.day}" style="cursor:pointer">
+  return `<div class="list">${list.map(x => `<div class="item" data-act="recon-open" data-focus="rk-env-step" data-store="${esc(x.store)}" data-day="${x.day}" style="cursor:pointer">
     <div class="top"><div><strong>${esc(dayLabel(x.day))}</strong>${storeTag(x.store)}</div><div class="negc num">${esc(t('rk_env_todo', { n: x.n }))}</div></div></div>`).join('')}</div>`;
 }
 // v50：全天报告识别的问题 → 中德文说明
@@ -1482,13 +1482,15 @@ async function viewReconDay(){
     ${edit ? '' : `<div class="infobox">${esc(t('rk_tm_hint'))}</div>`}
     ${allDone ? `<div class="infobox" style="border-color:var(--celadon)">${esc(t('rk_complete_all'))}</div>` : ''}
     ${edit ? `<div id="rk-rep">${repBlock()}</div>` : ''}
-    ${step(edit ? 2 : 1, t(edit ? 'rk_s_env' : 'rk_step1'), envDone)}${envSum}<div class="rk-env">${envHTML}</div>${repReady}
+    <div id="rk-env-step" style="scroll-margin-top:70px"></div>${step(edit ? 2 : 1, t(edit ? 'rk_s_env' : 'rk_step1'), envDone)}${envSum}<div class="rk-env">${envHTML}</div>${repReady}
     ${edit ? step(3, t('rk_step3'), resDone && r.completed_at && !r.changed_after) + resHTML : ''}
     <details class="fold" style="margin-top:18px"><summary>${esc(t('rk_bons', { n: r.entries.length }))}</summary><div class="inner"><div class="list">
       ${r.entries.slice().sort((a, b) => String(b.start || '').localeCompare(String(a.start || ''))).map(e => `<div class="item"><div class="top"><div><strong>${esc(e.name)}</strong>${e.transfers ? ' <span class="tag pend">⇄</span>' : ''}${e.auto_fix ? ` <span class="tag pend" title="${esc(t('rk_autofix_hint'))}">${esc(t('rk_autofix'))}</span>` : ''}
         ${whenWhere({ date: R.day, store: R.store, bon_start: e.start, bon_end: e.end })}</div></div>
         ${kvHTML([[t('rk_schluss'), eurSigned(e.schluss_cents)], [t('rk_card'), eur(e.card_cents)], [t('rk_pay'), e.payments_cents == null ? '–' : eur(e.payments_cents)]])}</div>`).join('')}
     </div></div></details>`;
+  // v58：从「还没点完的信封」进来，直接跳到点信封那一步
+  if (state.reconFocus){ const f = document.getElementById(state.reconFocus); state.reconFocus = null; if (f) setTimeout(() => f.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); }
 }
 
 // 收店锁门巡查：按顺序逐个检查点拍照（v40）
@@ -2444,7 +2446,7 @@ function distHTML(dist){
       <div style="margin-top:8px">${!dist.required ? `<span class="small muted">${esc(t('dist_before'))}</span>`
         : open ? `<span class="tag pend" style="margin:0">${esc(t('dist_open', { n: open }))}</span>` : `<span class="tag ok" style="margin:0">${esc(t('dist_complete'))}</span>`}</div>
       <button class="btn ghost" style="margin-top:12px" data-act="dist-print">${esc(t('dist_print'))}</button></div>
-    ${h3i(esc(t('dist_title')), lines.some(l => l.payout_euros < 0) ? t('dist_pay_hint') : '')}${distGroupsHTML(dist, row, signed, days)}`;
+    <div id="wk-dist" style="scroll-margin-top:70px"></div>${h3i(esc(t('dist_title')), lines.some(l => l.payout_euros < 0) ? t('dist_pay_hint') : '')}${distGroupsHTML(dist, row, signed, days)}`;
 }
 // 发放列表分组：待发放（金额大在前）→ 已发放等签收（等得久在前）→ 已完成（折叠）→ 无需发放（折叠）
 function distGroupsHTML(dist, row, signed, days){
@@ -2471,6 +2473,7 @@ function distGroupsHTML(dist, row, signed, days){
 // 所有周里还没完成发放 / 签收的人（老板、小费管理员）
 async function rcOpenHTML(){
   let list = []; try { list = await rpc('receipts_open', tok()) || []; } catch(e){ return ''; }
+  list = list.filter(l => l.week_start !== state.week);   // v58：正在看的这一周不重复列（下面的周分配表就是它）
   if (!list.length) return '';
   const weeks = {}; list.forEach(l => (weeks[l.week_start] = weeks[l.week_start] || []).push(l));
   return h3i(esc(t('rc_open_title', { n: list.length })), t('rc_open_hint')) + Object.keys(weeks).sort().map(w => {
@@ -2849,10 +2852,12 @@ async function viewWeek(){
         <button class="btn ghost" data-act="adj-add">${esc(t('add'))}</button>
       </div>` : ''}
       ${ov.pending_requests ? `<div class="small" style="margin:0 0 10px;color:#8A6A00">${esc(t('err_PENDING_REQUESTS'))}</div>` : ''}
-      <button class="btn warn" data-act="lock" ${canLock?'':'disabled'}>${esc(t('lock'))}</button>
+      <button class="btn warn" id="wk-lock" style="scroll-margin-top:90px" data-act="lock" ${canLock?'':'disabled'}>${esc(t('lock'))}</button>
       ${canLock ? '' : `<div class="small muted" style="margin-top:8px;text-align:center">${esc(t('lock_wait'))}</div>`}`;
   }
   $('#main').innerHTML = html;
+  // v58：从「去发放 / 去锁定」进来，直接跳到周分配表 / 锁定按钮
+  if (state.weekFocus){ const f = document.getElementById(state.weekFocus); state.weekFocus = null; if (f) setTimeout(() => f.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); }
 }
 // 排班提醒：漏交 Bon、排了班没被选的 Runner / 吧台（所有未锁定的周，最近 35 天）
 function lockOpenHTML(){
@@ -3724,7 +3729,7 @@ document.addEventListener('click', async ev => {
       catch(e){ toast(errText(e), true); }
       break;
     }
-    case 'recon-open': state.recon = { store: el.dataset.store, day: el.dataset.day }; state.repForm = null; state.tab = 'today'; render(); window.scrollTo(0, 0); break;
+    case 'recon-open': state.recon = { store: el.dataset.store, day: el.dataset.day }; state.repForm = null; state.tab = 'today'; state.reconFocus = el.dataset.focus || null; window.scrollTo(0, 0); render(); break;
     case 'recon-back': repKeep(); state.recon = null; state.repForm = null; render(); break;
     case 'recon-day': repKeep(); state.recon.day = addDays(state.recon.day, +el.dataset.d); state.repForm = null; render(); break;
     case 'recon-home-day': state.reconDay = addDays(state.reconDay, +el.dataset.d); render(); break;
@@ -4178,8 +4183,8 @@ document.addEventListener('click', async ev => {
       try { await rpc('record_month_archive', { ...tok(), p_month: el.dataset.month }); $('#photoDlg').close(); toast(t('arc_recorded')); render(); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
-    case 'week-go': state.week = el.dataset.week; render(); window.scrollTo(0, 0); break;
-    case 'week-open': state.recon = null; state.repForm = null; state.tab = 'week'; state.week = el.dataset.week; render(); window.scrollTo(0, 0); break;
+    case 'week-go': state.week = el.dataset.week; state.weekFocus = 'wk-dist'; window.scrollTo(0, 0); render(); break;
+    case 'week-open': state.recon = null; state.repForm = null; state.tab = 'week'; state.week = el.dataset.week; state.weekFocus = el.dataset.focus || null; window.scrollTo(0, 0); render(); break;
     case 'count': {
       const inp = document.getElementById('cnt-' + el.dataset.id), v = parseEur(inp && inp.value);
       if (!inp || inp.value.trim() === '' || isNaN(v)) return toast(t('bad_amount'), true);
