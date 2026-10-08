@@ -2947,9 +2947,21 @@ function staffOptions(withKitchen){
 
 // ============ 管理（超级管理员）============
 const ADMIN_MORE = ['lock', 'rates', 'report', 'deleted', 'audit'];
+// v61：「管理」上的待办数字分到「审批」「反馈」两个按钮上（反馈 = 未处理的反馈，审批 = 其余：修改申请、待核对的 Bon、工号绑定、忘记 PIN）
+async function adminCounts(){
+  let total = state.me.pending_requests || 0, fb = 0;
+  try { const m2 = await rpc('me', tok()); total = m2.pending_requests || 0; refreshBadge(total); } catch(e){}
+  try { fb = (await rpc('admin_feedback_list', tok()) || []).filter(x => x.status === 'open').length; } catch(e){}
+  return { requests: Math.max(0, total - fb), feedback: fb };
+}
 async function viewAdmin(){
   const subs = ['requests', 'feedback', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
-  $('#main').innerHTML = `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}</button>`).join('')}</div><div id="asub"><div class="loading">${esc(t('loading'))}</div></div>`;
+  const segHTML = c => `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}${c && c[s] ? ` <span class="tag pend" style="margin:0 0 0 4px">${c[s]}</span>` : ''}</button>`).join('')}</div>`;
+  $('#main').innerHTML = segHTML(state.adminCounts) + `<div id="asub"><div class="loading">${esc(t('loading'))}</div></div>`;
+  const c = state.adminCounts = await adminCounts();
+  // 从别的页点「管理」进来：审批没有待办、反馈有 → 直接打开反馈
+  if (state.adminPick){ state.adminPick = false; if (!c.requests && c.feedback && state.adminSub === 'requests') state.adminSub = 'feedback'; }
+  $('#main').querySelector('.seg').outerHTML = segHTML(c);
   const el = () => $('#asub');
   try {
     if (state.adminSub === 'requests'){
@@ -3739,6 +3751,7 @@ document.addEventListener('click', async ev => {
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'tab': if (el.dataset.tab === 'today' && state.tab !== 'today') state.reconDay = null;   // v57
+      if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(await loadWeekTodo());   // v56
       state.done = null; state.rcWeek = null; state.lockOpen = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
