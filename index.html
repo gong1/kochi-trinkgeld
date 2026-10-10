@@ -207,6 +207,9 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .lk-cam{display:inline-flex;align-items:center;justify-content:center;width:auto;padding:0 18px;cursor:pointer}
 .lk-cam.sm{height:34px;padding:0 12px;font-size:14px}
 .lk-cam.busy{opacity:.5;pointer-events:none}
+.tk-cam{display:inline-flex;align-items:center;justify-content:center;cursor:pointer}   /* v71：收店任务拍照按钮 */
+.tk-cam.sm{height:34px;padding:0 12px;font-size:14px;flex:0 0 auto !important}
+.tk-cam.busy{opacity:.5;pointer-events:none}
 .kv-h{margin-top:8px;font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px}
 .toast .tbtn{margin-left:12px;background:#fff;color:var(--ink);border:0;border-radius:999px;padding:4px 12px;font-weight:700}
 .viewbar{position:sticky;top:0;z-index:11;background:var(--copper);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;font-weight:700}
@@ -381,6 +384,17 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
+  // v71：收店任务
+  tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
+  tk_close_photo_learning:'要拍照（前 {b} 次每次都拍，已做 {a} 次）', tk_close_photo_again:'要拍照（漏做过或点过「AI 看错了」，重新拍 {b} 次，已做 {a} 次）',
+  tk_close_photo_random:'今天抽到要拍照', tk_close_photo_important:'要拍照（重要任务每次都拍）', tk_close_check:'今天只要打勾',
+  tk_close_go:'开始', tk_close_cont:'继续', tk_close_done:'{n} · {s} 做完了', tk_gone:'这个任务已经没有了。点「今天」回去。',
+  tk_item_by:'{t} · {n}', tk_item_checked:'打勾', tk_item_override:'说 AI 看错了', tk_retake:'📷 重拍', tk_photo:'📷 拍照', tk_check:'✓ 做好了',
+  tk_override:'AI 看错了，继续', tk_override_q:'确定是 AI 看错了吗？老板会看到你点了这个。', tk_run_done:'做完了（{t} · {n}）',
+  tk_uploading_ai:'照片上传中，AI 在看…', tk_ai_problem:'AI 看出问题了，请看提示', tk_all_done:'收店任务做完了 ✓ 谢谢！', tk_before_leave:'走之前还有：{x}',
+  tk_adm_title:'收店任务', tk_adm_done:'{n}（{b} · {t}）', tk_adm_nobody:'{n}：没排{r}', tk_adm_missed:'{n} 没做（{p}）', tk_adm_open:'{n}：还没做（{p}）',
+  tk_adm_override:'员工说 AI 看错了', tk_adm_ai_bad:'AI 看出问题', rk_tasks:'收店任务', no_role_task:'没排{r}（有收店任务）',
+  act_task_item:'收店任务', act_task_override:'收店任务：说 AI 看错了',
   // v68：界面简化
   hdr_fb:'反馈', bn_head:'交 Bon：{d} {s} {sl}', co_with:'同班：{x}', avail_sum_all:'已截止 · 全部能上', avail_sum_no:'已截止 · 你标了 {n} 个不能上',
   net_pos_w:'第 {w} 周目前分到（周结后发放）', net_neg_w:'第 {w} 周目前需交回', net_zero_w:'第 {w} 周还没有分到小费',
@@ -560,6 +574,17 @@ zh: {
 },
 de: {
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
+  // v71：Feierabend-Aufgaben
+  tk_close:'Feierabend: {n} · {s}', tk_close_later:'Vor Feierabend erledigen', tk_close_now:'Bald Feierabend – jetzt erledigen', tk_close_over:'Gestern nicht erledigt – heute nachholen',
+  tk_close_photo_learning:'Mit Foto (die ersten {b} Male immer, {a} erledigt)', tk_close_photo_again:'Mit Foto (vergessen oder „KI irrt sich“ gewählt – wieder {b} Male, {a} erledigt)',
+  tk_close_photo_random:'Heute mit Foto (Stichprobe)', tk_close_photo_important:'Mit Foto (wichtige Aufgabe, immer)', tk_close_check:'Heute nur abhaken',
+  tk_close_go:'Starten', tk_close_cont:'Weiter', tk_close_done:'{n} · {s} erledigt', tk_gone:'Diese Aufgabe gibt es nicht mehr. Zurück zu „Heute“.',
+  tk_item_by:'{t} · {n}', tk_item_checked:'abgehakt', tk_item_override:'„KI irrt sich“', tk_retake:'📷 Neu fotografieren', tk_photo:'📷 Foto', tk_check:'✓ Erledigt',
+  tk_override:'KI irrt sich – weiter', tk_override_q:'Sicher, dass die KI sich irrt? Der Chef sieht, dass du das gewählt hast.', tk_run_done:'Erledigt ({t} · {n})',
+  tk_uploading_ai:'Foto wird hochgeladen, die KI schaut…', tk_ai_problem:'Die KI sieht ein Problem – bitte Hinweis lesen', tk_all_done:'Feierabend-Aufgabe erledigt ✓ Danke!', tk_before_leave:'Vor dem Gehen noch: {x}',
+  tk_adm_title:'Feierabend-Aufgaben', tk_adm_done:'{n} ({b} · {t})', tk_adm_nobody:'{n}: kein(e) {r} eingeplant', tk_adm_missed:'{n} nicht erledigt ({p})', tk_adm_open:'{n}: noch offen ({p})',
+  tk_adm_override:'Mitarbeiter: KI irrt sich', tk_adm_ai_bad:'KI sieht Problem', rk_tasks:'Feierabend', no_role_task:'Kein(e) {r} (Feierabend-Aufgabe)',
+  act_task_item:'Feierabend-Aufgabe', act_task_override:'Feierabend-Aufgabe: KI irrt sich',
   // v68：Oberfläche vereinfacht
   hdr_fb:'Feedback', bn_head:'Bon einreichen: {d} {s} {sl}', co_with:'Mit dir: {x}', avail_sum_all:'Frist vorbei · alle Schichten möglich', avail_sum_no:'Frist vorbei · {n} × „kann nicht“ markiert',
   net_pos_w:'KW {w} bisher (Auszahlung nach Abschluss)', net_neg_w:'KW {w} bisher abzugeben', net_zero_w:'KW {w} bisher kein Trinkgeld',
@@ -917,6 +942,11 @@ const ERR_ZH = {
   PHOTO_TOO_BIG: '照片太大，上传不了。请重新拍一张。',
   PHOTO_UPLOAD_FAILED: '照片保存失败（网络或服务器问题）。请稍后重拍；还不行请截图发给老板。',
   TASK_FAILED: '记录失败。请稍后再试；还不行请截图发给老板。',
+  TASK_NOT_YOURS: '这个任务今天不是你负责（你没有排这个岗位）。如果排班有错，请找排班员改。',
+  TASK_TOO_EARLY: '你的班还没开始，还不能做这个任务。',
+  TASK_PHOTO_REQUIRED: '今天这个任务要拍照，不能只打勾。请拍照。',
+  TASK_DAY_CLOSED: '这一天已经过了，不能再补做。',
+  TASK_PHOTO_BAD: '照片没收到或格式不对。请重新拍一张。',
   INVALID_KIND: '类型不对，请选「门」或「窗户组」。',
   PAYER_INVALID: '选的发放人不是在职的小费管理员。请刷新页面后重新选择。',
   REPORT_DUPLICATE: '这个报告编号已经录过了。如果数字录错了，请在已录的报告上点「修正」。',
@@ -1033,6 +1063,11 @@ const ERR_DE = {
   PHOTO_TOO_BIG: 'Foto zu groß. Bitte neu fotografieren.',
   PHOTO_UPLOAD_FAILED: 'Foto konnte nicht gespeichert werden (Netz oder Server). Bitte gleich nochmal; sonst Screenshot an den Chef.',
   TASK_FAILED: 'Speichern fehlgeschlagen. Bitte gleich nochmal; sonst Screenshot an den Chef.',
+  TASK_NOT_YOURS: 'Diese Aufgabe ist heute nicht deine (du bist nicht für diese Rolle eingeplant). Bei Fehlern im Plan bitte die Dienstplanung fragen.',
+  TASK_TOO_EARLY: 'Deine Schicht hat noch nicht begonnen – die Aufgabe geht erst danach.',
+  TASK_PHOTO_REQUIRED: 'Heute ist ein Foto nötig, Abhaken reicht nicht. Bitte fotografieren.',
+  TASK_DAY_CLOSED: 'Dieser Tag ist vorbei, nachholen geht nicht mehr.',
+  TASK_PHOTO_BAD: 'Foto nicht angekommen oder falsches Format. Bitte neu fotografieren.',
   INVALID_KIND: 'Falsche Art – bitte „Tür“ oder „Fenstergruppe“ wählen.',
   PAYER_INVALID: 'Der gewählte Auszahler ist kein aktiver Tip-Manager. Bitte Seite neu laden und neu wählen.',
   REPORT_DUPLICATE: 'Diese Berichtsnummer ist schon erfasst. Bei falschen Zahlen bitte beim erfassten Bericht „Korrigieren“ tippen.',
@@ -1226,8 +1261,11 @@ function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 
 // ============ 今天（v38）============
 async function loadTasks(){
-  if (!state.me || state.me.is_kitchen){ state.tasks = null; return; }
-  try { state.tasks = await rpc('my_tasks', tok()); state.tasksAt = Date.now(); } catch(e){ state.tasks = null; }   // v31 之前没有
+  if (!state.me || state.me.is_kitchen){ state.tasks = null; state.closing = null; return; }
+  const NO = Symbol();
+  const [tk, cl] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null)]);   // v31 之前没有；v71：收店任务
+  if (tk === NO) state.tasks = null; else { state.tasks = tk; state.tasksAt = Date.now(); }
+  state.closing = cl || [];
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
 function viewTasks(){
@@ -1254,6 +1292,8 @@ function viewTasks(){
     out.push({ kind: 'bon_day', scope: 'personal', day: k.day, due: k.due, status: open.length ? open[0].status : 'done',
       data: { date: k.data.date, store: k.data.store, shifts: g.map(x => ({ ...x.data, done: x.status === 'done' })) } });
   });
+  // v71：收店任务（my_store_tasks）
+  (state.closing || []).forEach(c => out.push({ kind: 'closing', scope: 'personal', day: c.day, due: c.due, status: c.status, data: c }));
   return out;
 }
 function taskCount(st){ const ts = viewTasks(); return ts.filter(x => st ? x.status === st : ['overdue', 'now'].includes(x.status)).length; }
@@ -1273,6 +1313,13 @@ function taskCardHTML(k){
     return card(cls, esc(d.date !== (state.tasks || {}).day ? t('tk_bon_day_d', { d: dayLabel(d.date), s: d.store, sl }) : t('tk_bon_day', { s: d.store, sl })),   // v69
       dn.length ? t('tk_bon_part', { a: dn.map(x => slotLabel(x.slot)).join(' + '), b: left.map(x => slotLabel(x.slot)).join(' + ') }) : t('tk_bon_day_sub'),
       `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="miss-go" data-title="${esc(t('bn_head', { d: dayLabel(d.date), s: d.store, sl }))}">${esc(t('tk_bon_btn'))}</button>`);
+  }
+  if (k.kind === 'closing'){   // v71：收店任务
+    const nd = d.need || {}, n = d.items.length, got = d.items.filter(i => i.done).length;
+    const title = t('tk_close', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store }) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
+    const sub = t(k.status === 'overdue' ? 'tk_close_over' : k.status === 'now' ? 'tk_close_now' : 'tk_close_later') + ' · ' + tkHow(nd);
+    return card(cls, esc(title) + (got ? ` <span class="muted small num">${got}/${n}</span>` : ''), sub,
+      `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="task-open" data-def="${d.def_id}" data-day="${d.day}">${esc(t(got ? 'tk_close_cont' : 'tk_close_go'))}</button>`);
   }
   if (k.kind === 'lock_round'){
     const due = (k.due || '').slice(11, 16);
@@ -1304,10 +1351,11 @@ function taskCardHTML(k){
 }
 function taskDoneLine(k){
   const d = k.data || {};
-  const txt = k.kind === 'lock_round' ? t('lk_done_line', { s: d.store }) : k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'bon_day' ? t('tk_bon_day_done', { s: d.store, sl: d.shifts.map(x => slotLabel(x.slot)).join(' + ') }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
+  const txt = k.kind === 'closing' ? t('tk_close_done', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store }) : k.kind === 'lock_round' ? t('lk_done_line', { s: d.store }) : k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'bon_day' ? t('tk_bon_day_done', { s: d.store, sl: d.shifts.map(x => slotLabel(x.slot)).join(' + ') }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
   return `<div class="item"><div class="top"><div><span class="pos">✓</span> ${esc(txt)}</div></div></div>`;
 }
 async function viewToday(){
+  if (state.taskOpen) return renderTaskRun();      // v71：正在做收店任务
   if (state.recon) return viewReconDay();          // v42：核对页（门店 × 日期）
   if (state.me.is_admin) return viewReconHome();   // v42：老板首页 = 每日核对
   // v68：有上次的内容就先显示，同时向服务器要新的（一起要，不再一个接一个）；内容变了再重画
@@ -1367,6 +1415,7 @@ function renderToday(){
   if (!T){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
   const order = { overdue: 0, now: 1, later: 2 };
   if (state.lockOpen){ renderLock(); return; }
+  if (state.taskOpen){ renderTaskRun(); return; }   // v71
   const all = viewTasks().filter(x => x.scope !== 'store'), store = viewTasks().filter(x => x.scope === 'store'), open = all.filter(x => x.status !== 'done').sort((a, b) => (b.kind === 'message') - (a.kind === 'message') || order[a.status] - order[b.status] || String(a.due || '').localeCompare(String(b.due || '')));
   const done = all.filter(x => x.status === 'done');
   const shifts = (T.shifts || []).length
@@ -1496,8 +1545,9 @@ function rcLockText(r){
 }
 function rcCardHTML(r){
   const bad = rcProblem(r) > 0, done = r.completed_at && !r.changed_after;
+  const tks = (state.reconTasks || []).filter(x => x.store === r.store && x.day === r.day && x.status !== 'closed');   // v71：收店任务（不算问题、不挡自动核对完成）
   // v68：这家店这天没营业（没数据、没信封、没排班、不用交 Bon）→ 收成一行
-  if (['before', 'idle'].includes(r.status) && !bad && !r.envelopes && !(LOCK_ON && r.lock) && !r.expected_bons && !(r.missing_bons || []).length && !r.changed_after)
+  if (['before', 'idle'].includes(r.status) && !bad && !r.envelopes && !(LOCK_ON && r.lock) && !r.expected_bons && !(r.missing_bons || []).length && !r.changed_after && !tks.length)
     return `<div class="task later" data-act="recon-open" data-store="${esc(r.store)}" data-day="${r.day}" style="cursor:pointer"><div class="task-t">${storeTag(r.store)} ${esc(dayLabel(r.day))} <span class="muted small" style="font-weight:400">· ${esc(r.status === 'before' ? rcStatusText(r) : t('rk_closed'))}</span></div></div>`;
   const line = (k, v, red) => `<div class="li"><span class="muted">${esc(t(k))}</span><span class="${red ? 'negc' : ''}">${esc(v)}</span></div>`;
   const nb = r.expected_bons, miss = r.missing_bons || [];
@@ -1509,6 +1559,7 @@ function rcCardHTML(r){
       ${line('rk_env', (r.envelopes_todo ? t('rk_env_todo', { n: r.envelopes_todo }) : r.envelopes ? t('rk_env_done', { n: r.envelopes }) : t('rk_env_none')) + (r.envelopes_diff ? ' · ' + t('rk_env_diff', { n: r.envelopes_diff }) : ''), !!(r.envelopes_todo || r.envelopes_diff))}
       ${LOCK_ON ? line('rk_lock', rcLockText(r) + (done && r.lock && +r.lock.done_count < +r.lock.total ? t('rk_lock_done') : ''), !done && r.lock && +r.lock.done_count < +r.lock.total) : ''}
       ${line('rk_bon', t('rk_bon_line', { a: nb - miss.length, b: nb }) + (miss.length ? ' · ' + t('rk_bon_miss', { m: miss.map(m => m.name).join('、') }) : ''), !!miss.length)}
+      ${tks.length ? line('rk_tasks', tks.map(tkAdminLine).join('；'), tks.some(x => ['missed', 'nobody'].includes(x.status))) : ''}
     </div></div>`;
 }
 // v57：这一天两家店都处理完了吗（没营业 / 上线前 / 核对完成且之后没改动）
@@ -1538,9 +1589,11 @@ async function viewReconHome(){
   $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
   let o, S;
   try {
-    [S] = await Promise.all([reconStrip(), loadTasks(), loadWeekTodo()]);   // v68：一起要
+    const known = state.reconDay; let tk;
+    [S, , , tk] = await Promise.all([reconStrip(), loadTasks(), loadWeekTodo(), known ? soft(rpc('admin_tasks_day', { ...tok(), p_day: known }), []) : null]);   // v68：一起要；v71：收店任务
     const day = state.reconDay || S.def;
     o = S.m[day] || await rpc('recon_overview', { ...tok(), p_day: day });
+    state.reconTasks = known === o.day ? tk || [] : await soft(rpc('admin_tasks_day', { ...tok(), p_day: o.day }), []);
   }
   catch(e){ $('#main').innerHTML = `<div class="empty">${esc(errText(e))}</div>`; return; }
   if (state.tab !== 'today' || state.recon) return;   // 等的时候已经换了页
@@ -1561,15 +1614,14 @@ async function viewReconHome(){
 async function viewReconDay(){
   const R = state.recon;
   $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
-  let r, ov = null, env = null;
-  try {
-    r = await rpc('recon_day', { ...tok(), p_store: R.store, p_day: R.day });
-    ov = await rpc('week_overview', { ...tok(), p_week_start: mondayOf(R.day) });
-    try { env = await rpc('week_envelopes', { ...tok(), p_week_start: mondayOf(R.day) }); } catch(e){ env = null; }
+  let r, ov = null, env = null, tks = [];
+  try {   // v71：一起要；加上这一天的收店任务
+    [r, ov, env, tks] = await Promise.all([rpc('recon_day', { ...tok(), p_store: R.store, p_day: R.day }), rpc('week_overview', { ...tok(), p_week_start: mondayOf(R.day) }),
+      soft(rpc('week_envelopes', { ...tok(), p_week_start: mondayOf(R.day) }), null), soft(rpc('admin_tasks_day', { ...tok(), p_day: R.day }), [])]);
   } catch(e){ $('#main').innerHTML = `<button class="link" data-act="recon-back">${esc(t('rk_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
   const entries = (ov.entries || []).filter(e => e.date === R.day && e.store === R.store);
-  await loadXfer(entries.filter(e => e.is_bon).map(e => e.entry_id));
-  await loadCntMethods(entries.filter(e => e.is_bon && e.counted_cents != null).map(e => e.entry_id));
+  await Promise.all([loadXfer(entries.filter(e => e.is_bon).map(e => e.entry_id)), loadCntMethods(entries.filter(e => e.is_bon && e.counted_cents != null).map(e => e.entry_id))]);
+  const tkHTML = tkAdminHTML((tks || []).filter(x => x.store === R.store && x.status !== 'closed'));   // v71
   const envG = env ? { ...env, groups: (env.groups || []).filter(g => g.date === R.day && g.store === R.store) } : null;
   const edit = r.can_edit, rp = r.report, sy = r.system, df = r.diff || {};
   const row = (k, a, b, d, na) => `<tr><th>${esc(t(k))}</th><td>${rp ? eurSigned(a) : '–'}</td><td>${eurSigned(b)}</td>
@@ -1673,6 +1725,7 @@ async function viewReconDay(){
     ${edit ? `<div id="rk-rep">${repBlock()}</div>` : ''}
     <div id="rk-env-step" style="scroll-margin-top:70px"></div>${step(edit ? 2 : 1, t(edit ? 'rk_s_env' : 'rk_step1'), envDone)}${envSum}<div class="rk-env">${envHTML}</div>${repReady}
     ${edit ? step(3, t('rk_step3'), resDone && r.completed_at && !r.changed_after) + resHTML : ''}
+    ${tkHTML}
     <details class="fold" style="margin-top:18px"><summary>${esc(t('rk_bons', { n: r.entries.length }))}</summary><div class="inner"><div class="list">
       ${r.entries.slice().sort((a, b) => String(b.start || '').localeCompare(String(a.start || ''))).map(e => `<div class="item"><div class="top"><div><strong>${esc(e.name)}</strong>${e.transfers ? ' <span class="tag pend">⇄</span>' : ''}${e.auto_fix ? ` <span class="tag pend" title="${esc(t('rk_autofix_hint'))}">${esc(t('rk_autofix'))}</span>` : ''}
         ${whenWhere({ date: R.day, store: R.store, bon_start: e.start, bon_end: e.end })}</div></div>
@@ -1698,6 +1751,67 @@ function renderLock(){
         ${c.done ? `<div class="meta num"><span class="pos">✓</span> ${esc(t('lk_by', { t: fmtDateTime(c.done_at), n: c.done_by || '' }))}</div>` : ''}</div></div>
       <div class="acts">${c.done ? `<button class="link" data-act="lock-view" data-id="${c.item_id}">${esc(t('lk_view'))}</button>` + camera(c, t('lk_retake'), 'ghost sm')
         : c === next ? camera(c, t('lk_photo')) : `<span class="muted small">${esc(t('lk_wait'))}</span>`}</div></div>`).join('')}</div>`;
+}
+// ============ 收店任务（v71）============
+// 今天要不要拍照、为什么
+function tkHow(nd){ return nd && nd.mode === 'photo' ? t('tk_close_photo_' + (nd.reason || 'learning'), { a: nd.done || 0, b: nd.need || 0 }) : t('tk_close_check'); }
+function tkOpenRun(){ const o = state.taskOpen; return o && (state.closing || []).find(x => x.def_id === o.def && x.day === o.day); }
+function renderTaskRun(){
+  const c = tkOpenRun();
+  if (!c){ state.taskOpen = null; $('#main').innerHTML = `<div class="empty">${esc(t('tk_gone'))}</div>`; return; }
+  const nm = x => state.lang === 'de' ? x.name_de : x.name_zh, hint = x => state.lang === 'de' ? x.hint_de : x.hint_zh;
+  const photo = c.need && c.need.mode === 'photo';
+  const cam = (it, label, cls) => `<label class="btn ${cls || ''} tk-cam" style="flex:1 1 45%">${esc(label)}<input type="file" accept="image/*" capture="environment" data-taskitem="${it.id}" hidden></label>`;
+  const rows = c.items.map((it, i) => {
+    const l = it.last, flagged = l && l.ai && l.ai.ok === false && !l.override;
+    const st = it.done ? `<div class="meta num"><span class="pos">✓</span> ${esc(t('tk_item_by', { t: fmtDateTime(l.done_at), n: l.by || '' }))}${l.evidence === 'check' ? ' · ' + esc(t('tk_item_checked')) : ''}${l.override ? ' · ' + esc(t('tk_item_override')) : ''}</div>` : '';
+    const msgs = flagged ? (l.ai.msgs || []).map(m => `<div>⚠ ${esc(state.lang === 'de' ? m.de : m.zh)}</div>`).join('') : '';
+    const acts = flagged ? cam(it, t('tk_retake')) + `<button class="btn ghost" style="flex:1 1 45%" data-act="task-override" data-id="${l.row_id}">${esc(t('tk_override'))}</button>`
+      : it.done ? (l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') + (photo ? cam(it, t('tk_retake'), 'ghost sm') : '')
+      : photo ? cam(it, t('tk_photo')) : `<button class="btn" data-act="task-check" data-item="${it.id}">${esc(t('tk_check'))}</button>`;
+    return `<div class="item"><div><span class="lk-n num">${i + 1}</span> <strong>${esc(nm(it))}</strong>${it.ai && photo ? ' <span class="tag m">AI</span>' : ''}</div>
+      ${hint(it) ? `<div class="meta">${esc(hint(it))}</div>` : ''}${st}${msgs ? `<div class="warnbox" style="margin:8px 0 0">${msgs}</div>` : ''}
+      <div class="acts" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px">${acts}</div></div>`;
+  }).join('');
+  $('#main').innerHTML = `<button class="link" data-act="task-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>
+    <h2 style="margin-top:0">${esc(nm(c))}${storeTag(c.store)}</h2>
+    <div class="infobox">${esc(tkHow(c.need))}${c.day !== (state.tasks || {}).day ? ' · ' + esc(dayLabel(c.day)) : ''}</div>
+    ${c.completed_at ? `<div class="infobox" style="border-color:var(--celadon)">✓ ${esc(t('tk_run_done', { t: fmtDateTime(c.completed_at), n: c.completed_by || '' }))}</div>` : ''}
+    <div class="list">${rows}</div>`;
+}
+async function taskUpload(input){
+  const f = input.files && input.files[0]; if (!f) return;
+  const c = tkOpenRun(); if (!c) return;
+  const it = c.items.find(x => x.id === input.dataset.taskitem); if (!it) return;
+  document.querySelectorAll('.tk-cam').forEach(b => b.classList.add('busy'));
+  toast(t(it.ai ? 'tk_uploading_ai' : 'lk_uploading'));
+  try {
+    const img = await compressImage(f, 1280, 0.75);
+    const r = await callTasks({ action: 'task_photo', def_id: c.def_id, item_id: it.id, day: c.day, image: img });
+    await loadTasks();
+    if (r && r.ai && r.ai.ok === false) toast(t('tk_ai_problem'), true);
+    else if (r && r.state && r.state.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); }
+    else toast(t('lk_saved', { n: state.lang === 'de' ? it.name_de : it.name_zh }));
+    render();
+  } catch(e){ toast(errText(e), true); render(); }
+}
+// 老板：一个任务一天的情况（每日核对页）
+function tkAdminLine(x){
+  const nm = state.lang === 'de' ? x.name_de : x.name_zh, ppl = (x.people || []).map(p => p.name).join('、');
+  if (x.status === 'done') return '✓ ' + t('tk_adm_done', { n: nm, b: x.completed_by || '', t: fmtDateTime(x.completed_at) });
+  if (x.status === 'nobody') return '✗ ' + t('tk_adm_nobody', { n: nm, r: t('grp_' + x.role) });
+  if (x.status === 'missed') return '✗ ' + t('tk_adm_missed', { n: nm, p: ppl || '–' });
+  return t('tk_adm_open', { n: nm, p: ppl || '–' });
+}
+function tkAdminHTML(list){
+  if (!(list || []).length) return '';
+  return `<h3>${esc(t('tk_adm_title'))}</h3><div class="list">${list.map(x => `<div class="item">
+    <div class="top"><div><strong>${esc(state.lang === 'de' ? x.name_de : x.name_zh)}</strong>${storeTag(x.store)}</div></div>
+    <div class="meta ${['missed', 'nobody'].includes(x.status) ? 'negc' : ''}">${esc(tkAdminLine(x))}</div>
+    ${x.items.map(it => { const l = it.last; return `<div class="meta">${esc(state.lang === 'de' ? it.name_de : it.name_zh)}：${l ? esc((l.evidence === 'photo' ? '📷 ' : '✓ ') + (l.by || '') + ' · ' + fmtDateTime(l.done_at))
+        + (l.ai && l.ai.ok === false ? ` <span class="${l.override ? 'negc' : ''}">· ${esc(l.override ? t('tk_adm_override') : t('tk_adm_ai_bad'))}：${esc((l.ai.msgs || []).map(m => state.lang === 'de' ? m.de : m.zh).join(' '))}</span>` : '')
+        + (l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') : '–'}</div>`; }).join('')}
+  </div>`).join('')}</div>`;
 }
 async function lockUpload(input){
   const f = input.files && input.files[0]; if (!f) return;
@@ -1806,7 +1920,7 @@ async function doLogin(){
   }
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   state.loginErr = ''; state.loginInfo = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
-  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null;   // v70：planArea 也按这个人重新算
+  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
   if (!r.me.must_change_pin){
     splash();   // v68
     try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} state.planWeek = planWeekDefault(); await loadCommon();
@@ -2146,7 +2260,7 @@ async function submitBon(){
     await rpc('submit_bon_entry_x', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
       p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack, p_extras: extrasPayload() });
     state.done = { wallet: w, date: f.date, review: st === 'review', cash: d.cash_share };
-    state.bon = blankBon(); state.form = blankForm(); await loadMyBon(); render(); window.scrollTo(0, 0);
+    state.bon = blankBon(); state.form = blankForm(); await Promise.all([loadMyBon(), loadTasks()]); render(); window.scrollTo(0, 0);   // v71：也刷新收店任务
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
 }
 async function saveBonEdit(){
@@ -2180,6 +2294,9 @@ function viewDone(){
     ${d.review ? `<div class="warnbox" style="text-align:left">${esc(t('done_review'))}</div>` : ''}
     ${d.cash != null && d.cash > 0.10 ? `<div class="infobox" style="text-align:left">${esc(t('cash_hint', { p: Math.round(d.cash * 100) }))}</div>` : ''}
     <p class="muted small">${esc(t('done_steps'))}</p>
+    ${(() => { const left = (state.closing || []).filter(c => c.status !== 'done' && !state.viewAs);   // v71：走之前还有收店任务
+      return left.length ? `<div class="warnbox" style="text-align:left">${esc(t('tk_before_leave', { x: left.map(c => state.lang === 'de' ? c.name_de : c.name_zh).join('、') }))}
+        <button class="btn" style="margin-top:10px" data-act="task-open" data-def="${left[0].def_id}" data-day="${left[0].day}">${esc(t('tk_close_go'))}</button></div>` : ''; })()}
     ${state.personal ? `<button class="btn" data-act="entry-back">${esc(t('done_ok'))}</button>`
       : `<button class="btn" data-act="done-logout">${esc(t('done_logout'))}</button>
     <button class="btn ghost" data-act="done-more">${esc(t('done_more'))}</button>`}
@@ -3694,12 +3811,13 @@ async function viewPlan(){
   catch(e){ $('#main').innerHTML = planHead() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   // v68：排班员要的 4 份数据一起要
   const P = { ...tok(), p_week_start: state.planWeek };
-  const [pp, kp, nt, pm] = await Promise.all([
+  const [pp, kp, nt, pm, tr] = await Promise.all([
     canFront() && state.plan.published ? soft(rpc('sched_pending_changes', P), null) : null,   // v25 之前没有
     canKitchen() && state.plan.kitchen_published ? soft(rpc('ksched_pending', P), null) : null,   // v37 之前没有
     isSched() ? soft(rpc('sched_notices', P), null) : null,   // v26 之前没有
-    isSched() ? soft(rpc('push_status', tok()), {}) : {}]);   // v27 之前没有
-  state.planPending = pp; state.kPending = kp; state.planNotices = nt; state.pushMap = pm || {};
+    isSched() ? soft(rpc('push_status', tok()), {}) : {},   // v27 之前没有
+    isSched() ? soft(rpc('task_roles', tok()), []) : []]);   // v71：哪些岗位有收店任务
+  state.planPending = pp; state.kPending = kp; state.planNotices = nt; state.pushMap = pm || {}; state.taskRoles = tr || [];
   planRender();
 }
 function planHead(){
@@ -3772,8 +3890,13 @@ const ROLES = ['service', 'runner', 'bar'];
 function rolesOf(x){ return x.roles && x.roles.length ? x.roles : [x.role]; }
 function planGridHTML(d, edit){
   return planDays(d).map(date => {
+    // v71：有收店任务的岗位，这家店这天一个人都没排 → 在这天这家店最后一个班上标出来
+    const lastSlot = st => SLOTS.filter(sl => d.slots.some(x => x.date === date && x.store === st && x.slot === sl)).pop();
+    const noRole = st => edit ? [...new Set((state.taskRoles || []).filter(x => x.store === st && !['hot', 'cold', 'skewer', 'clean'].includes(x.role)).map(x => x.role))]
+      .filter(r => !d.shifts.some(x => x.date === date && x.store === st && rolesOf(x).includes(r))) : [];
     const blocks = SLOTS.flatMap(slot => STORES.map(store => {
       const tpl = d.slots.find(x => x.date === date && x.store === store && x.slot === slot); if (!tpl) return '';
+      const miss = slot === lastSlot(store) ? noRole(store) : [];
       const list = d.shifts.filter(x => x.date === date && x.store === store && x.slot === slot);
       if (!edit && !list.length) return '';
       const rows = ROLES.map(r => {
@@ -3786,7 +3909,7 @@ function planGridHTML(d, edit){
           </div></div>`;
       }).join('');
       const noSvc = edit && !list.some(x => rolesOf(x).includes('service'));
-      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}</div>
+      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}${miss.map(r => `<span class="tag bad">${esc(t('no_role_task', { r: t('grp_' + r) }))}</span>`).join('')}</div>
         ${edit ? `<button class="pchip add" style="flex:none" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('se_edit'))}</button>` : ''}</div>${rows}</div>`;
     })).join('');
     const isToday = date === bizToday();   // v68：按营业日
@@ -4138,7 +4261,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(await loadWeekTodo());   // v56
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -4157,6 +4280,29 @@ document.addEventListener('click', async ev => {
       if (navTabs().includes(state.tab)) LS.set('tab', state.tab); render(); window.scrollTo(0, 0); break;
     }
     case 'lock-open': state.lockOpen = el.dataset.store; renderToday(); window.scrollTo(0, 0); break;
+    // v71：收店任务
+    case 'task-open': state.taskOpen = { def: el.dataset.def, day: el.dataset.day }; state.done = null; state.recon = null; state.tab = 'today'; render(); window.scrollTo(0, 0); break;
+    case 'task-close': state.taskOpen = null; render(); window.scrollTo(0, 0); break;
+    case 'task-check': {
+      const c = tkOpenRun(); if (!c) break; el.disabled = true;
+      try { const st = await rpc('task_item_check', { ...tok(), p_def: c.def_id, p_item: el.dataset.item, p_day: c.day }); await loadTasks();
+        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); } else toast(t('saved')); render(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'task-override': {
+      if (!confirm(t('tk_override_q'))) break; el.disabled = true;
+      try { const st = await rpc('task_item_override', { ...tok(), p_row: el.dataset.id }); await loadTasks();
+        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); } render(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'task-photo': {
+      try { const r = await callTasks({ action: 'task_photo_view', row_id: el.dataset.id });
+        const dlg = $('#photoDlg'); dlg.innerHTML = `<img src="${esc(r.url)}" alt="" style="max-width:100%;border-radius:8px"><button class="btn" style="margin-top:12px" data-act="photo-close">${esc(t('close'))}</button>`; dlg.showModal(); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'lock-close': state.lockOpen = null; renderToday(); break;
     case 'lock-view': {
       try { const r = await callTasks({ action: 'photo', item_id: el.dataset.id });
@@ -4484,7 +4630,7 @@ document.addEventListener('click', async ev => {
         state.token = r.token; state.me = await rpc('me', tok());
         state.receipts = []; state.rcWeek = null; state.menu = false; state.staffEdit = null;
         state.week = mondayOf(today()); state.planWeek = planWeekDefault(); state.bon = blankBon(); state.form = blankForm();
-        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null;   // v70：和员工本人登录时一样
+        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null;   // v70：和员工本人登录时一样
         await loadCommon(); state.tab = navTabs()[0]; render(); window.scrollTo(0, 0);
       } catch(e){ toast(errText(e), true); }
       break;
@@ -4809,6 +4955,7 @@ document.addEventListener('click', async ev => {
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur(); });
 document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.lockcp){ lockUpload(ev.target); return; }
+  if (ev.target.dataset && ev.target.dataset.taskitem){ taskUpload(ev.target); return; }   // v71
   if (ev.target.dataset && ev.target.dataset.expimg && ev.target.files && ev.target.files[0]){   // v67：垫付照片
     let photo; try { photo = await compressImage(ev.target.files[0], 1400, 0.8); } catch(e){ toast(t('err_GENERIC'), true); return; }
     const N = state.expNew = { photo, busy: true, day: bizToday(), store: LS.get('exStore') || null };
@@ -4920,7 +5067,7 @@ async function exitView(){
   try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
-  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null;   // v70
+  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null;   // v70
   await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
