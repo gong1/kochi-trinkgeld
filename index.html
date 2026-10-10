@@ -1806,7 +1806,7 @@ async function doLogin(){
   }
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   state.loginErr = ''; state.loginInfo = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
-  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit';
+  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null;   // v70：planArea 也按这个人重新算
   if (!r.me.must_change_pin){
     splash();   // v68
     try { state.me = await rpc('me', tok()); authStore().set('me', state.me); } catch(e){} state.planWeek = planWeekDefault(); await loadCommon();
@@ -3472,7 +3472,7 @@ function fbItem(x){
 }
 // ============ 垫付小账本（v67，老板 2026-10-10 决定）============
 async function loadExpense(){
-  state.exp = null; if (!state.me || state.me.is_admin || state.viewAs) return;
+  state.exp = null; if (!state.me || state.me.is_admin) return;   // v70：查看模式也读（和员工本人看到的一样；记账、确认收到由数据库拒绝）
   try { state.exp = await rpc('expense_mine', tok()); } catch(e){}   // v45 之前没有
 }
 function expTodayHTML(){
@@ -3602,7 +3602,7 @@ function annKeep(){
 // 员工：打开 App 时还没确认的公告（全屏，确认后才能用）
 async function loadAnnouncements(){
   state.annPending = []; state.annAll = [];
-  if (!state.me || state.me.is_admin || state.viewAs) return;
+  if (!state.me || state.me.is_admin) return;   // v70：查看模式也读「更多 → 公告」；全屏确认在 render() 里仍只给员工本人
   try { const r = await rpc('my_announcements', tok()) || {}; state.annPending = r.pending || []; state.annAll = r.all || []; } catch(e){}   // v44 之前没有
 }
 function renderAnnounce(){
@@ -4484,6 +4484,7 @@ document.addEventListener('click', async ev => {
         state.token = r.token; state.me = await rpc('me', tok());
         state.receipts = []; state.rcWeek = null; state.menu = false; state.staffEdit = null;
         state.week = mondayOf(today()); state.planWeek = planWeekDefault(); state.bon = blankBon(); state.form = blankForm();
+        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null;   // v70：和员工本人登录时一样
         await loadCommon(); state.tab = navTabs()[0]; render(); window.scrollTo(0, 0);
       } catch(e){ toast(errText(e), true); }
       break;
@@ -4919,7 +4920,8 @@ async function exitView(){
   try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
-  state.planWeek = planWeekDefault(); await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
+  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null;   // v70
+  await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 async function signOut(){
@@ -4947,7 +4949,7 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden){ hiddenAt = Date.now(); return; }
   const away = hiddenAt ? (Date.now() - hiddenAt) / 1000 : 0; hiddenAt = null;
   if (state.token && !state.personal && away > idleLimit()) signOut(); else lastAct = Date.now();
-  if (state.token && state.me && !state.me.is_admin && away > 30) loadAnnouncements().then(() => { if ((state.annPending || []).length) render(); });   // v64
+  if (state.token && state.me && !state.me.is_admin && !state.viewAs && away > 30) loadAnnouncements().then(() => { if ((state.annPending || []).length) render(); });   // v64
 });
 setInterval(() => {
   if (document.hidden) return;
