@@ -380,6 +380,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
   // v68：界面简化
   hdr_fb:'反馈', bn_head:'交 Bon：{d} {s} {sl}', co_with:'同班：{x}', avail_sum_all:'已截止 · 全部能上', avail_sum_no:'已截止 · 你标了 {n} 个不能上',
   net_pos_w:'第 {w} 周目前分到（周结后发放）', net_neg_w:'第 {w} 周目前需交回', net_zero_w:'第 {w} 周还没有分到小费',
@@ -558,6 +559,7 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
   // v68：Oberfläche vereinfacht
   hdr_fb:'Feedback', bn_head:'Bon einreichen: {d} {s} {sl}', co_with:'Mit dir: {x}', avail_sum_all:'Frist vorbei · alle Schichten möglich', avail_sum_no:'Frist vorbei · {n} × „kann nicht“ markiert',
   net_pos_w:'KW {w} bisher (Auszahlung nach Abschluss)', net_neg_w:'KW {w} bisher abzugeben', net_zero_w:'KW {w} bisher kein Trinkgeld',
@@ -1170,6 +1172,9 @@ async function pushOff(silent){
   try { const sub = await pushSub(); if (sub){ try { await rpc('push_unsubscribe', { ...tok(), p_endpoint: sub.endpoint }); } catch(e){} await sub.unsubscribe(); } } catch(e){}
   state.pushOn = false; if (!silent){ state.menu = false; render(); toast(t('push_off_ok')); }
 }
+// v69（老板 2026-10-10 决定）：收店锁门巡查暂停，以后改成任务模块里的一个任务（负责人改成当天的清洁）。
+// 关掉时：员工「今天」不显示、不计数；每日核对不显示、不算问题、不挡自动核对完成；周结页不提醒；管理里隐藏检查点设置。数据库和已有记录、照片都不动。
+const LOCK_ON = false;
 // v68：启动时的数据同时向服务器要（以前一个接一个，要等 12 次来回）
 const soft = (p, d) => Promise.resolve(p).then(x => x, () => d);   // 出错时用默认值，不影响其他
 async function loadCommon(){
@@ -1226,7 +1231,7 @@ async function loadTasks(){
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
 function viewTasks(){
-  const ts = (state.tasks && state.tasks.tasks) || [], out = [], groups = {};
+  const ts = ((state.tasks && state.tasks.tasks) || []).filter(k => LOCK_ON || k.kind !== 'lock_round'), out = [], groups = {};   // v69
   ts.forEach(k => { if (k.kind === 'bon_shift'){ const g = k.data.date + '|' + k.data.store; (groups[g] = groups[g] || []).push(k); } });
   const order = { overdue: 0, now: 1, later: 2 };
   // v68：几条排班变动合成一张卡，同一个班只显示最后的结果；已经过去的班（按营业日）不用再确认，不显示
@@ -1260,11 +1265,12 @@ function taskCardHTML(k){
     return card('bad', esc(t('tk_bon_missing', { d: dayLabel(d.date), s: d.store, sl: slotsText(d.slots) })), t('tk_bon_missing_sub'),
       `<button class="btn" data-act="miss-go" data-title="${esc(t('tk_bon_missing', { d: dayLabel(d.date), s: d.store, sl: slotsText(d.slots) }))}">${esc(t('tk_bon_btn'))}</button>`);
   if (k.kind === 'bon_shift')
-    return card(cls, esc(t('tk_bon_shift', { sl: slotLabel(d.slot), s: d.store, a: d.start, b: d.end })), t(k.status === 'later' ? 'tk_bon_later' : 'tk_bon_now'),
+    return card(cls, esc(d.date !== (state.tasks || {}).day ? t('tk_bon_shift_d', { sl: slotLabel(d.slot), d: dayLabel(d.date), s: d.store, a: d.start, b: d.end })   // v69：不是今天的班写上日期
+        : t('tk_bon_shift', { sl: slotLabel(d.slot), s: d.store, a: d.start, b: d.end })), t(k.status === 'later' ? 'tk_bon_later' : 'tk_bon_now'),
       `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="miss-go" data-title="${esc(t('bn_head', { d: dayLabel(d.date), s: d.store, sl: slotLabel(d.slot) }))}">${esc(t('tk_bon_btn'))}</button>`);
   if (k.kind === 'bon_day'){
     const sl = d.shifts.map(x => slotLabel(x.slot)).join(' + '), dn = d.shifts.filter(x => x.done), left = d.shifts.filter(x => !x.done);
-    return card(cls, esc(t('tk_bon_day', { s: d.store, sl })),
+    return card(cls, esc(d.date !== (state.tasks || {}).day ? t('tk_bon_day_d', { d: dayLabel(d.date), s: d.store, sl }) : t('tk_bon_day', { s: d.store, sl })),   // v69
       dn.length ? t('tk_bon_part', { a: dn.map(x => slotLabel(x.slot)).join(' + '), b: left.map(x => slotLabel(x.slot)).join(' + ') }) : t('tk_bon_day_sub'),
       `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="miss-go" data-title="${esc(t('bn_head', { d: dayLabel(d.date), s: d.store, sl }))}">${esc(t('tk_bon_btn'))}</button>`);
   }
@@ -1418,7 +1424,7 @@ function refreshRep(){
 // 排了班的人都交了 Bon、锁门巡查拍完了。任何一项不对就停下来，由老板看、写说明、自己点「核对完成」。
 function reconAllOk(r){
   return r.status === 'ok' && (r.reports || []).length > 0 && !r.envelopes_todo && !r.envelopes_diff && !(r.missing_bons || []).length
-    && !(r.lock && +r.lock.done_count < +r.lock.total) && !(r.completed_at && !r.changed_after);
+    && !(LOCK_ON && r.lock && +r.lock.done_count < +r.lock.total) && !(r.completed_at && !r.changed_after);   // v69
 }
 // v60：核对完成后离开核对页，回到每日核对首页（停在这一天，能看到另一家店还剩什么）
 function reconLeave(){ const d = state.recon && state.recon.day; state.recon = null; state.repForm = null; if (d) state.reconDay = d; window.scrollTo(0, 0); render(); }
@@ -1481,7 +1487,7 @@ function rcProblem(r){
   if (r.completed_at && !r.changed_after) return 0;
   if (r.day >= bizToday() && r.status === 'no_report') return 0;   // 今天还在营业：不算问题
   return (['diff', 'no_report'].includes(r.status) ? 2 : 0) + (r.envelopes_todo || r.envelopes_diff ? 1 : 0) + (r.changed_after ? 2 : 0)
-    + (r.lock && +r.lock.done_count < +r.lock.total ? 1 : 0) + ((r.missing_bons || []).length ? 1 : 0);
+    + (LOCK_ON && r.lock && +r.lock.done_count < +r.lock.total ? 1 : 0) + ((r.missing_bons || []).length ? 1 : 0);   // v69
 }
 function rcLockText(r){
   const l = r.lock; if (!l) return t('rk_lock_none');
@@ -1491,7 +1497,7 @@ function rcLockText(r){
 function rcCardHTML(r){
   const bad = rcProblem(r) > 0, done = r.completed_at && !r.changed_after;
   // v68：这家店这天没营业（没数据、没信封、没排班、不用交 Bon）→ 收成一行
-  if (['before', 'idle'].includes(r.status) && !bad && !r.envelopes && !r.lock && !r.expected_bons && !(r.missing_bons || []).length && !r.changed_after)
+  if (['before', 'idle'].includes(r.status) && !bad && !r.envelopes && !(LOCK_ON && r.lock) && !r.expected_bons && !(r.missing_bons || []).length && !r.changed_after)
     return `<div class="task later" data-act="recon-open" data-store="${esc(r.store)}" data-day="${r.day}" style="cursor:pointer"><div class="task-t">${storeTag(r.store)} ${esc(dayLabel(r.day))} <span class="muted small" style="font-weight:400">· ${esc(r.status === 'before' ? rcStatusText(r) : t('rk_closed'))}</span></div></div>`;
   const line = (k, v, red) => `<div class="li"><span class="muted">${esc(t(k))}</span><span class="${red ? 'negc' : ''}">${esc(v)}</span></div>`;
   const nb = r.expected_bons, miss = r.missing_bons || [];
@@ -1501,7 +1507,7 @@ function rcCardHTML(r){
     <div class="sum" style="margin-top:6px">
       ${line('rk_cash', rcStatusText(r), r.status === 'diff' || (r.status === 'no_report' && r.day < bizToday()))}
       ${line('rk_env', (r.envelopes_todo ? t('rk_env_todo', { n: r.envelopes_todo }) : r.envelopes ? t('rk_env_done', { n: r.envelopes }) : t('rk_env_none')) + (r.envelopes_diff ? ' · ' + t('rk_env_diff', { n: r.envelopes_diff }) : ''), !!(r.envelopes_todo || r.envelopes_diff))}
-      ${line('rk_lock', rcLockText(r) + (done && r.lock && +r.lock.done_count < +r.lock.total ? t('rk_lock_done') : ''), !done && r.lock && +r.lock.done_count < +r.lock.total)}
+      ${LOCK_ON ? line('rk_lock', rcLockText(r) + (done && r.lock && +r.lock.done_count < +r.lock.total ? t('rk_lock_done') : ''), !done && r.lock && +r.lock.done_count < +r.lock.total) : ''}
       ${line('rk_bon', t('rk_bon_line', { a: nb - miss.length, b: nb }) + (miss.length ? ' · ' + t('rk_bon_miss', { m: miss.map(m => m.name).join('、') }) : ''), !!miss.length)}
     </div></div>`;
 }
@@ -1630,7 +1636,7 @@ async function viewReconDay(){
     if (df.card_cents) stops.push(t('rk_stop_card', { x: eurSigned(df.card_cents) }));
     if (r.envelopes_diff) stops.push(t('rk_stop_envdiff', { n: r.envelopes_diff }));
     if ((r.missing_bons || []).length) stops.push(t('rk_stop_missing', { m: r.missing_bons.map(m => m.name).join('、') }));
-    if (r.lock && +r.lock.done_count < +r.lock.total) stops.push(t('rk_stop_lock', { m: r.lock.missing.map(c => state.lang === 'de' ? c.name_de : c.name_zh).join('、') }));
+    if (LOCK_ON && r.lock && +r.lock.done_count < +r.lock.total) stops.push(t('rk_stop_lock', { m: r.lock.missing.map(c => state.lang === 'de' ? c.name_de : c.name_zh).join('、') }));
   }
   const stopHTML = stops.length ? `<div class="errbox"><strong>${esc(t('rk_stop_title'))}</strong>${stops.map(x => `<div style="margin-top:4px">· ${esc(x)}</div>`).join('')}<div style="margin-top:6px">${esc(t('rk_stop_end'))}</div></div>` : '';
   const allDone = edit && r.status === 'ok' && !r.envelopes_todo && !r.envelopes_diff && !(r.missing_bons || []).length && !(r.completed_at && !r.changed_after);
@@ -2994,7 +3000,7 @@ async function viewWeek(){
   try {
     let sc, lo, pay;
     [sc, lo, pay, ov, disp, wex, prevOv, arcH, rcH] = await Promise.all([
-      soft(rpc('sched_tip_check', tok()), null), soft(rpc('lock_rounds_open', tok()), []),   // v32 之前没有
+      soft(rpc('sched_tip_check', tok()), null), LOCK_ON ? soft(rpc('lock_rounds_open', tok()), []) : [],   // v32 之前没有；v69 暂停
       state.me.is_admin && !state.payers ? soft(rpc('settle_payers', tok()), []) : null,   // v33 之前没有
       rpc('week_overview', P), rpc('list_disputes', { ...tok(), p_status: 'open' }),
       soft(rpc('week_extras', P), []),   // v30 之前没有
@@ -3101,7 +3107,7 @@ function staffOptions(withKitchen){
 }
 
 // ============ 管理（超级管理员）============
-const ADMIN_MORE = ['lock', 'rates', 'report', 'deleted', 'audit'];
+const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['rates', 'report', 'deleted', 'audit']);   // v69：锁门检查点暂时隐藏
 // v61：「管理」上的待办数字分到「审批」「反馈」两个按钮上（反馈 = 未处理的反馈，审批 = 其余：修改申请、待核对的 Bon、工号绑定、忘记 PIN）
 async function adminCounts(){
   let total = state.me.pending_requests || 0;
