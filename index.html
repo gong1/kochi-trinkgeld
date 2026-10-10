@@ -384,6 +384,8 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
+  // v72：收店任务谁负责
+  task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
   tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
   tk_close_photo_learning:'要拍照（前 {b} 次每次都拍，已做 {a} 次）', tk_close_photo_again:'要拍照（漏做过或点过「AI 看错了」，重新拍 {b} 次，已做 {a} 次）',
@@ -392,7 +394,7 @@ zh: {
   tk_item_by:'{t} · {n}', tk_item_checked:'打勾', tk_item_override:'说 AI 看错了', tk_retake:'📷 重拍', tk_photo:'📷 拍照', tk_check:'✓ 做好了',
   tk_override:'AI 看错了，继续', tk_override_q:'确定是 AI 看错了吗？老板会看到你点了这个。', tk_run_done:'做完了（{t} · {n}）',
   tk_uploading_ai:'照片上传中，AI 在看…', tk_ai_problem:'AI 看出问题了，请看提示', tk_all_done:'收店任务做完了 ✓ 谢谢！', tk_before_leave:'走之前还有：{x}',
-  tk_adm_title:'收店任务', tk_adm_done:'{n}（{b} · {t}）', tk_adm_nobody:'{n}：没排{r}', tk_adm_missed:'{n} 没做（{p}）', tk_adm_open:'{n}：还没做（{p}）',
+  tk_adm_title:'收店任务', tk_adm_done:'{n}（{b} · {t}）', tk_adm_nobody:'{n}：没人负责（没排{r}，或者排了 Runner 但没定谁做{r}）', tk_adm_missed:'{n} 没做（{p}）', tk_adm_open:'{n}：还没做（{p}）',
   tk_adm_override:'员工说 AI 看错了', tk_adm_ai_bad:'AI 看出问题', rk_tasks:'收店任务', no_role_task:'没排{r}（有收店任务）',
   act_task_item:'收店任务', act_task_override:'收店任务：说 AI 看错了',
   // v68：界面简化
@@ -574,6 +576,8 @@ zh: {
 },
 de: {
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
+  // v72：Wer erledigt die Feierabend-Aufgabe
+  task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
   tk_close:'Feierabend: {n} · {s}', tk_close_later:'Vor Feierabend erledigen', tk_close_now:'Bald Feierabend – jetzt erledigen', tk_close_over:'Gestern nicht erledigt – heute nachholen',
   tk_close_photo_learning:'Mit Foto (die ersten {b} Male immer, {a} erledigt)', tk_close_photo_again:'Mit Foto (vergessen oder „KI irrt sich“ gewählt – wieder {b} Male, {a} erledigt)',
@@ -582,7 +586,7 @@ de: {
   tk_item_by:'{t} · {n}', tk_item_checked:'abgehakt', tk_item_override:'„KI irrt sich“', tk_retake:'📷 Neu fotografieren', tk_photo:'📷 Foto', tk_check:'✓ Erledigt',
   tk_override:'KI irrt sich – weiter', tk_override_q:'Sicher, dass die KI sich irrt? Der Chef sieht, dass du das gewählt hast.', tk_run_done:'Erledigt ({t} · {n})',
   tk_uploading_ai:'Foto wird hochgeladen, die KI schaut…', tk_ai_problem:'Die KI sieht ein Problem – bitte Hinweis lesen', tk_all_done:'Feierabend-Aufgabe erledigt ✓ Danke!', tk_before_leave:'Vor dem Gehen noch: {x}',
-  tk_adm_title:'Feierabend-Aufgaben', tk_adm_done:'{n} ({b} · {t})', tk_adm_nobody:'{n}: kein(e) {r} eingeplant', tk_adm_missed:'{n} nicht erledigt ({p})', tk_adm_open:'{n}: noch offen ({p})',
+  tk_adm_title:'Feierabend-Aufgaben', tk_adm_done:'{n} ({b} · {t})', tk_adm_nobody:'{n}: niemand zuständig (kein(e) {r} eingeplant oder nicht festgelegt, wer {r} übernimmt)', tk_adm_missed:'{n} nicht erledigt ({p})', tk_adm_open:'{n}: noch offen ({p})',
   tk_adm_override:'Mitarbeiter: KI irrt sich', tk_adm_ai_bad:'KI sieht Problem', rk_tasks:'Feierabend', no_role_task:'Kein(e) {r} (Feierabend-Aufgabe)',
   act_task_item:'Feierabend-Aufgabe', act_task_override:'Feierabend-Aufgabe: KI irrt sich',
   // v68：Oberfläche vereinfacht
@@ -3890,13 +3894,11 @@ const ROLES = ['service', 'runner', 'bar'];
 function rolesOf(x){ return x.roles && x.roles.length ? x.roles : [x.role]; }
 function planGridHTML(d, edit){
   return planDays(d).map(date => {
-    // v71：有收店任务的岗位，这家店这天一个人都没排 → 在这天这家店最后一个班上标出来
-    const lastSlot = st => SLOTS.filter(sl => d.slots.some(x => x.date === date && x.store === st && x.slot === sl)).pop();
-    const noRole = st => edit ? [...new Set((state.taskRoles || []).filter(x => x.store === st && !['hot', 'cold', 'skewer', 'clean'].includes(x.role)).map(x => x.role))]
-      .filter(r => !d.shifts.some(x => x.date === date && x.store === st && rolesOf(x).includes(r))) : [];
+    // v72：有收店任务的岗位，看这家店这天最后一个班（规则同数据库 _task_people）
+    const issues = edit ? taskRoleIssues(d, date) : [];
     const blocks = SLOTS.flatMap(slot => STORES.map(store => {
       const tpl = d.slots.find(x => x.date === date && x.store === store && x.slot === slot); if (!tpl) return '';
-      const miss = slot === lastSlot(store) ? noRole(store) : [];
+      const miss = issues.filter(x => x.store === store && x.slot === slot);
       const list = d.shifts.filter(x => x.date === date && x.store === store && x.slot === slot);
       if (!edit && !list.length) return '';
       const rows = ROLES.map(r => {
@@ -3909,7 +3911,8 @@ function planGridHTML(d, edit){
           </div></div>`;
       }).join('');
       const noSvc = edit && !list.some(x => rolesOf(x).includes('service'));
-      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}${miss.map(r => `<span class="tag bad">${esc(t('no_role_task', { r: t('grp_' + r) }))}</span>`).join('')}</div>
+      return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}${miss.map(x => x.kind === 'decide' ? `<button class="tag bad" style="border:0;cursor:pointer" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('task_decide', { r: t('grp_' + x.role) }))}</button>`
+        : `<span class="tag ${x.kind === 'none' ? 'bad' : 'off'}">${esc(t(x.kind === 'none' ? 'no_role_task' : x.kind === 'one' ? 'task_one_all' : 'task_svc_all', { r: t('grp_' + x.role) }))}</span>`).join('')}</div>
         ${edit ? `<button class="pchip add" style="flex:none" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('se_edit'))}</button>` : ''}</div>${rows}</div>`;
     })).join('');
     const isToday = date === bizToday();   // v68：按营业日
@@ -4061,10 +4064,30 @@ function peRender(){
     <div class="acts" style="margin-top:14px;flex-wrap:wrap">${rs.map(k => `<button class="link danger" type="button" data-act="pe-rm" data-role="${k}">${esc(t('pe_remove', { r: t('grp_' + k) }))}</button>`).join('')}
       ${rs.length > 1 ? `<button class="link danger" type="button" data-act="sd-del">${esc(t('pe_del_all'))}</button>` : ''}</div>`;
 }
+// v72（老板 2026-10-10）：有收店任务的前场岗位（吧台 / Runner），这家店这天最后一个班谁负责：
+//   排了这个岗位 → 没事；没排、这个班也没有 Runner / 吧台 → 服务员负责（one：一人三岗 / many：服务员一起负责）；
+//   有 Runner 或吧台但没这个岗位 → decide：要排班员定谁兼；一个服务员都没有 → none
+function taskRoleIssues(d, date){
+  const out = [];
+  STORES.forEach(store => {
+    const roles = [...new Set((state.taskRoles || []).filter(x => x.store === store && ['bar', 'runner'].includes(x.role)).map(x => x.role))];
+    if (!roles.length) return;
+    const slot = SLOTS.filter(sl => d.slots.some(x => x.date === date && x.store === store && x.slot === sl)).pop(); if (!slot) return;
+    const list = d.shifts.filter(x => x.date === date && x.store === store && x.slot === slot);
+    if (!list.length) return;   // 这个班没排人：「没排服务员」已经提示
+    roles.forEach(r => {
+      if (list.some(x => rolesOf(x).includes(r))) return;
+      const helpers = list.some(x => rolesOf(x).some(k => k === 'runner' || k === 'bar')), svc = list.filter(x => rolesOf(x).includes('service')).length;
+      out.push({ store, slot, role: r, kind: helpers ? 'decide' : svc === 1 ? 'one' : svc > 1 ? 'many' : 'none' });
+    });
+  });
+  return out;
+}
 // v68：这一周排了多少班、几个班没排服务员（排班员页顶部 + 发布前提醒）
 function planGaps(d){
   const sl = d.slots.filter(x => x.slot !== 'day'), on = x => d.shifts.filter(y => y.date === x.date && y.store === x.store && y.slot === x.slot);
-  return { n: sl.length, a: sl.filter(x => on(x).length).length, m: sl.filter(x => !on(x).some(y => rolesOf(y).includes('service'))).length };
+  return { n: sl.length, a: sl.filter(x => on(x).length).length, m: sl.filter(x => !on(x).some(y => rolesOf(y).includes('service'))).length,
+    k: planDays(d).reduce((c, date) => c + taskRoleIssues(d, date).filter(x => x.kind === 'decide').length, 0) };   // v72
 }
 function kGaps(d){
   const days = weekDates(), n = days.length * STORES.length;
@@ -4718,7 +4741,7 @@ document.addEventListener('click', async ev => {
       catch(e){ toast(errText(e), true); }
       break;
     case 'plan-publish':
-      { const g = planGaps(state.plan); if (!confirm((g.m ? t('pl_pub_gap', g) + '\n\n' : '') + t('publish_confirm'))) break; }   // v68
+      { const g = planGaps(state.plan); if (!confirm((g.m ? t('pl_pub_gap', g) + '\n\n' : '') + (g.k ? t('pl_pub_decide', g) + '\n\n' : '') + t('publish_confirm'))) break; }   // v68；v72：没定谁兼吧台
       try {
         let r = null;
         try { r = await rpc('sched_publish_and_notify', { ...tok(), p_week_start: state.planWeek }); }
