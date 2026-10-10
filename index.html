@@ -384,6 +384,8 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
+  // v73：公告认真读、推送情况
+  an_wait:'请先读完 · {s}', an_scroll:'请滑到最下面', an_push_pub:'已发布。推送到了 {a} 人的手机（共 {b} 人要确认）。', an_push_remind:'已再提醒。推送到了 {a} 人的手机（还有 {b} 人没确认）。', an_push_off:'{n} 人没开手机通知，收不到推送，请当面提醒，或者让他们在「更多」里开启通知：{m}', an_nopush:'（没开通知）',
   // v72：收店任务谁负责
   task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
@@ -576,6 +578,8 @@ zh: {
 },
 de: {
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
+  // v73：Mitteilungen gründlich lesen, Push-Status
+  an_wait:'Bitte zuerst lesen · {s}', an_scroll:'Bitte bis ganz unten scrollen', an_push_pub:'Veröffentlicht. Push an {a} Handys gesendet ({b} müssen bestätigen).', an_push_remind:'Erinnerung gesendet. Push an {a} Handys ({b} noch nicht bestätigt).', an_push_off:'{n} haben keine Benachrichtigungen aktiviert und bekommen keinen Push – bitte persönlich ansprechen oder unter „Mehr“ aktivieren lassen: {m}', an_nopush:' (keine Benachrichtigungen)',
   // v72：Wer erledigt die Feierabend-Aufgabe
   task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
@@ -3686,12 +3690,22 @@ function annAdminHTML(){
         <span class="tag ${a.replaced ? 'off' : +a.acked >= +a.targets ? 'ok' : 'pend'}">${esc(a.replaced ? t('an_replaced') : t('an_acked', { a: a.acked, b: a.targets }))}</span></div>
       ${D ? `<div style="white-space:pre-wrap;margin:8px 0">${esc(annT(D, 'body'))}</div>
         ${D.image ? `<img src="${esc(D.image)}" alt="" style="max-width:100%;border-radius:8px;margin:4px 0">` : ''}
-        <div class="small ${wait.length ? 'negc' : 'pos'}" style="margin:6px 0">${esc(wait.length ? t('an_waiting', { m: wait.map(p => p.name).join('、') }) : t('an_all_acked'))}</div>
+        <div class="small ${wait.length ? 'negc' : 'pos'}" style="margin:6px 0">${esc(wait.length ? t('an_waiting', { m: wait.map(p => p.name + (state.pushMap && !state.pushMap[p.id] ? t('an_nopush') : '')).join('、') }) : t('an_all_acked'))}</div>
         ${ppl.filter(p => p.acked_at).length ? `<div class="small muted">${ppl.filter(p => p.acked_at).map(p => esc(p.name) + ' ✓ ' + esc(fmtDateTime(p.acked_at))).join('<br>')}</div>` : ''}` : ''}
       <div class="acts"><button class="link" data-act="an-detail" data-id="${a.id}">${esc(t('an_detail'))}</button>
         ${!a.replaced && +a.acked < +a.targets ? `<button class="link" data-act="an-remind" data-id="${a.id}">${esc(t('an_remind'))}</button>` : ''}</div></div>`; };
   return `<button class="btn ghost" data-act="an-new" style="margin-bottom:14px">${esc(t('an_new'))}</button>`
     + `<div class="list">${L.map(card).join('') || `<div class="empty">${esc(t('an_none'))}</div>`}</div>`;
+}
+// v73：推送公告，然后告诉老板：推到了几个人的手机、谁没开手机通知（这些人要当面提醒）
+async function annPushReport(id, remind){
+  const [r, D, pm] = await Promise.all([callPush('announce', { announcement_id: id, remind }), soft(rpc('admin_announce_detail', { ...tok(), p_id: id }), null), soft(rpc('push_status', tok()), null)]);
+  if (pm) state.pushMap = pm;
+  const wait = D ? (D.people || []).filter(p => !p.acked_at) : [], off = pm ? wait.filter(p => !pm[p.id]) : [];
+  if (!D || !pm){ toast(t(remind ? 'an_reminded' : 'an_published', { n: (r && r.people) || 0 })); return; }
+  const msg = t(remind ? 'an_push_remind' : 'an_push_pub', { a: wait.length - off.length, b: wait.length })
+    + (off.length ? '\n\n' + t('an_push_off', { n: off.length, m: off.map(p => p.name).join('、') }) : '');
+  const dlg = $('#photoDlg'); dlg.innerHTML = `<h2 style="margin-top:0">📢</h2><div style="margin-bottom:14px;font-size:17px;line-height:1.5;white-space:pre-wrap">${esc(msg)}</div><button class="btn" data-act="photo-close">${esc(t('close'))}</button>`; dlg.showModal();
 }
 function annFormHTML(F){
   const v = k => esc(F[k] || ''), front = (state.loginStaff || []).filter(x => !x.is_kitchen);
@@ -3725,16 +3739,32 @@ async function loadAnnouncements(){
   state.annPending = []; state.annAll = [];
   if (!state.me || state.me.is_admin) return;   // v70：查看模式也读「更多 → 公告」；全屏确认在 render() 里仍只给员工本人
   try { const r = await rpc('my_announcements', tok()) || {}; state.annPending = r.pending || []; state.annAll = r.all || []; } catch(e){}   // v44 之前没有
+  state.annTotal = state.annPending.length;   // v73：「第 2 / 3 条」
 }
+// v73（老板 2026-10-10）：一条一条认真读——「我已阅读并知晓」要滑到最下面、并且停留一会儿（按字数，3–15 秒）才能点
+function annGuardCheck(){
+  const g = state.annGuard, b = document.getElementById('an-ack-btn'); if (!g || !b) return;
+  if (!g.scrolled && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 30) g.scrolled = true;
+  const left = Math.ceil((g.until - Date.now()) / 1000);
+  b.disabled = left > 0 || !g.scrolled;
+  b.textContent = left > 0 ? t('an_wait', { s: left }) : !g.scrolled ? t('an_scroll') : t('an_ack');
+}
+window.addEventListener('scroll', annGuardCheck, { passive: true });
+setInterval(annGuardCheck, 500);
 function renderAnnounce(){
-  const a = state.annPending[0], n = state.annPending.length;
+  const a = state.annPending[0], n = state.annPending.length, total = Math.max(state.annTotal || 0, n);
+  if (!state.annGuard || state.annGuard.id !== a.id){   // 换了一条才重新计时（切换语言不重新计时）
+    const len = (annT(a, 'title') + annT(a, 'body')).length;
+    state.annGuard = { id: a.id, until: Date.now() + 1000 * Math.min(15, Math.max(3, Math.round(len / 25))), scrolled: false };
+  }
   $('#app').innerHTML = `<div class="login" style="max-width:640px">
-    <div style="display:flex;justify-content:space-between;align-items:center"><strong>📢 ${esc(t('an_title'))}${n > 1 ? ' · ' + esc(t('an_of', { a: 1, b: n })) : ''}</strong><button class="hbtn" data-act="lang">${esc(t('lang'))}</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center"><strong>📢 ${esc(t('an_title'))}${total > 1 ? ' · ' + esc(t('an_of', { a: total - n + 1, b: total })) : ''}</strong><button class="hbtn" data-act="lang">${esc(t('lang'))}</button></div>
     <h1 style="margin-top:14px">${esc(annT(a, 'title'))}</h1>
     <div style="white-space:pre-wrap;font-size:17px;line-height:1.6;margin:12px 0">${esc(annT(a, 'body'))}</div>
-    ${a.image ? `<img src="${esc(a.image)}" alt="" style="max-width:100%;border-radius:10px;margin:8px 0;background:#fff">` : ''}
+    ${a.image ? `<img src="${esc(a.image)}" alt="" style="max-width:100%;border-radius:10px;margin:8px 0;background:#fff" onload="annGuardCheck()">` : ''}
     <div class="small" style="opacity:.75;margin:6px 0 14px">${esc(fmtDateTime(a.created_at))}</div>
-    <button class="btn" data-act="an-ack" data-id="${a.id}">${esc(t('an_ack'))}</button></div>`;
+    <button class="btn" id="an-ack-btn" data-act="an-ack" data-id="${a.id}" disabled>${esc(t('an_ack'))}</button></div>`;
+  annGuardCheck();
 }
 // 员工：更多 → 公告
 async function viewAnnounceList(){
@@ -4494,6 +4524,7 @@ document.addEventListener('click', async ev => {
     // v64：公告
     case 'more-ann': viewAnnounceList(); window.scrollTo(0, 0); break;
     case 'an-ack': {
+      if (state.annGuard && (Date.now() < state.annGuard.until || !state.annGuard.scrolled)) break;   // v73：还没读完
       el.disabled = true;
       try { await rpc('announce_ack', { ...tok(), p_id: el.dataset.id }); state.annPending.shift(); window.scrollTo(0, 0); render(); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
@@ -4510,13 +4541,12 @@ document.addEventListener('click', async ev => {
     case 'an-detail': {
       const id = el.dataset.id; state.annDetail = state.annDetail || {};
       if (state.annDetail[id]) delete state.annDetail[id];
-      else try { state.annDetail[id] = await rpc('admin_announce_detail', { ...tok(), p_id: id }); } catch(e){ toast(errText(e), true); }
+      else try { const [D, pm] = await Promise.all([rpc('admin_announce_detail', { ...tok(), p_id: id }), soft(rpc('push_status', tok()), null)]); state.annDetail[id] = D; if (pm) state.pushMap = pm; } catch(e){ toast(errText(e), true); }   // v73：标出谁没开通知
       keepScroll(render); break;
     }
     case 'an-remind': {
       el.disabled = true;
-      try { const r = await callPush('announce', { announcement_id: el.dataset.id, remind: true }); toast(t('an_reminded', { n: (r && r.people) || 0 })); }
-      catch(e){ toast(errText(e), true); } el.disabled = false; break;
+      await annPushReport(el.dataset.id, true); el.disabled = false; break;   // v73
     }
     case 'an-draft': {
       annKeep(); const F = state.annForm;
@@ -4533,7 +4563,7 @@ document.addEventListener('click', async ev => {
       el.disabled = true;
       try { const id = await rpc('admin_announce_create', { ...tok(), p_title_zh: F.title_zh || null, p_title_de: F.title_de || null, p_body_zh: F.body_zh || null, p_body_de: F.body_de || null,
               p_image: F.image && F.keep !== false ? F.image : null, p_audience: F.audience, p_staff_ids: F.audience === 'custom' ? (F.ids || []) : null, p_replaces: F.replaces || null });
-        callPush('announce', { announcement_id: id }); state.annForm = null; toast(t('an_published')); keepScroll(render); }
+        state.annForm = null; keepScroll(render); annPushReport(id, false); }   // v73：推送后告诉老板推到几个人
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
