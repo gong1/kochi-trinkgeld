@@ -304,6 +304,8 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .toast.err{background:var(--neg);text-align:left;line-height:1.45;border-radius:14px;width:min(460px,90vw)}
 dialog{border:0;border-radius:var(--r-m);padding:20px;width:min(360px,92vw)}
 dialog::backdrop{background:rgba(31,42,39,.5)}
+/* v74：弹出窗口右上角的「反馈」（滚动时也留在顶上，不占位置） */
+.dlg-fb{position:sticky;top:-16px;z-index:5;display:block;width:fit-content;margin:-10px -8px -22px auto;background:var(--card);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;line-height:1.3;cursor:pointer}
 /* v56：本周小费统计的横条 */
 .wsb{display:inline-block;width:56px;height:8px;background:var(--line);border-radius:4px;vertical-align:middle;overflow:hidden}
 .wsb i{display:block;height:100%;background:var(--celadon)}
@@ -384,6 +386,9 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
+  // v74：反馈截图
+  fb_shot_hint:'截图不对？用手机自己截屏，再点「换一张 / 从相册选截图」。', fb_dlg_shiftDlg:'排班编辑窗口', fb_dlg_photoDlg:'弹出窗口', fb_dlg_pinDlg:'PIN 窗口',
+  fb_view_note:'（查看 {n} 时）', fb_view_hint:'以你自己的名义发送，注明是查看 {n} 时看到的。',
   // v73：公告认真读、推送情况
   an_wait:'请先读完 · {s}', an_scroll:'请滑到最下面', an_push_pub:'已发布。推送到了 {a} 人的手机（共 {b} 人要确认）。', an_push_remind:'已再提醒。推送到了 {a} 人的手机（还有 {b} 人没确认）。', an_push_off:'{n} 人没开手机通知，收不到推送，请当面提醒，或者让他们在「更多」里开启通知：{m}', an_nopush:'（没开通知）',
   // v72：收店任务谁负责
@@ -578,6 +583,9 @@ zh: {
 },
 de: {
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
+  // v74：Feedback-Screenshot
+  fb_shot_hint:'Screenshot stimmt nicht? Mach mit dem Handy selbst einen Screenshot und tippe auf „Anderen Screenshot wählen“.', fb_dlg_shiftDlg:'Dienstplan-Fenster', fb_dlg_photoDlg:'Pop-up-Fenster', fb_dlg_pinDlg:'PIN-Fenster',
+  fb_view_note:'(in der Ansicht als {n})', fb_view_hint:'Wird in deinem Namen gesendet, mit Hinweis „Ansicht als {n}“.',
   // v73：Mitteilungen gründlich lesen, Push-Status
   an_wait:'Bitte zuerst lesen · {s}', an_scroll:'Bitte bis ganz unten scrollen', an_push_pub:'Veröffentlicht. Push an {a} Handys gesendet ({b} müssen bestätigen).', an_push_remind:'Erinnerung gesendet. Push an {a} Handys ({b} noch nicht bestätigt).', an_push_off:'{n} haben keine Benachrichtigungen aktiviert und bekommen keinen Push – bitte persönlich ansprechen oder unter „Mehr“ aktivieren lassen: {m}', an_nopush:' (keine Benachrichtigungen)',
   // v72：Wer erledigt die Feierabend-Aufgabe
@@ -854,7 +862,21 @@ async function callFn(body){
 
 let toastTimer;
 // 刷新页面内容时保持滚动位置（例如连续勾选「已发放」）
-async function keepScroll(fn){ const y = window.scrollY; await fn(); window.scrollTo(0, y); }
+// 原地刷新这一页，回到原来的位置。v74：以前 render() 不等数据就回来了，页面先变成「加载中」变短、跳回最上面；
+// 现在 render() 返回这一页的加载过程，等它画完再回去；中间先留着旧内容，页面不变短、不闪。
+async function keepScroll(fn){
+  const y = window.scrollY, m0 = $('#main'), h = m0 ? m0.offsetHeight : 0, old = m0 ? m0.innerHTML : null;
+  const p = fn();
+  const m = $('#main');
+  if (m && old !== null){
+    const onlyLoading = n => n.children.length === 1 && n.firstElementChild.classList.contains('loading');
+    if (onlyLoading(m)) m.innerHTML = old;   // 整页还在加载：先放旧内容
+    else { const tpl = document.createElement('template'); tpl.innerHTML = old;   // 某一块还在加载（如管理页的子页）：这一块先放旧内容
+      m.querySelectorAll('[id]').forEach(n => { if (onlyLoading(n)){ const o = tpl.content.getElementById(n.id); if (o) n.innerHTML = o.innerHTML; } }); }
+    m.style.minHeight = h + 'px';   // 新内容出来之前页面不变短
+  }
+  try { await p; } finally { const m2 = $('#main'); if (m2) m2.style.minHeight = ''; window.scrollTo(0, y); }
+}
 // 带一个按钮的提示（例如「已发放：Anna · 撤销」），5 秒后消失
 function toastAction(msg, label, data){
   document.querySelectorAll('.toast').forEach(n => n.remove());
@@ -1181,6 +1203,21 @@ function navTabs(){
   if (m.is_tip_manager) return ['today', 'plan', 'ledger', 'week', 'more'].filter(ok);
   return ['today', 'plan', 'ledger', 'more'].filter(ok);   // 厨房员工没有账本：今天 / 排班 / 更多
 }
+// 页头「⋯」菜单（没有「更多」页的人用：老板、厨房小费账户）
+function menuHTML(){
+  if (!state.menu || navTabs().includes('more')) return '';
+  return `<div class="menu">
+        ${state.viewAs ? '' : state.pushOn ? `<button data-act="push-test">${esc(t('push_test'))}</button><button data-act="push-off">${esc(t('push_off'))}</button>` : `<button data-act="push-on">${esc(t('push_on'))}</button>`}
+        <button data-act="fb-open">${esc(t('fb_menu'))}</button>
+        <button data-act="pin-open">${esc(t('change_pin'))}</button>
+        <button data-act="logout">${esc(t('logout'))}</button></div>`;
+}
+// v74：菜单开关只改页头，不重画整页（以前整页重新加载、跳回最上面，反馈就截不到下面的内容）
+function setMenu(on){
+  state.menu = !!on; const h = document.querySelector('#app header'); if (!h) return;
+  h.querySelectorAll('.menu').forEach(n => n.remove()); if (state.menu) h.insertAdjacentHTML('beforeend', menuHTML());
+  const b = h.querySelector('[data-act="menu"]'); if (b) b.setAttribute('aria-expanded', String(state.menu));
+}
 // v68：启动 / 登录后等数据时显示，不再白屏
 function splash(){ $('#app').innerHTML = `<div class="splash" role="status"><b>${esc(t('app'))}</b><span class="muted">${esc(t('loading'))}</span></div>`; }
 function logoutLocal(){ state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false; }
@@ -1208,12 +1245,12 @@ async function pushOn(){
     const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uToBytes(VAPID_PUBLIC) });
     const j = sub.toJSON();
     await rpc('push_subscribe', { ...tok(), p_endpoint: j.endpoint, p_p256dh: j.keys.p256dh, p_auth: j.keys.auth, p_user_agent: navigator.userAgent });
-    state.pushOn = true; state.menu = false; render(); toast(t('push_on_ok'));
+    state.pushOn = true; if (state.tab === 'more') { state.menu = false; render(); } else setMenu(false); toast(t('push_on_ok'));   // v74：不重画整页
   } catch(e){ toast(errText(e), true); }
 }
 async function pushOff(silent){
   try { const sub = await pushSub(); if (sub){ try { await rpc('push_unsubscribe', { ...tok(), p_endpoint: sub.endpoint }); } catch(e){} await sub.unsubscribe(); } } catch(e){}
-  state.pushOn = false; if (!silent){ state.menu = false; render(); toast(t('push_off_ok')); }
+  state.pushOn = false; if (!silent){ if (state.tab === 'more') { state.menu = false; render(); } else setMenu(false); toast(t('push_off_ok')); }   // v74
 }
 // v69（老板 2026-10-10 决定）：收店锁门巡查暂停，以后改成任务模块里的一个任务（负责人改成当天的清洁）。
 // 关掉时：员工「今天」不显示、不计数；每日核对不显示、不算问题、不挡自动核对完成；周结页不提醒；管理里隐藏检查点设置。数据库和已有记录、照片都不动。
@@ -1864,17 +1901,13 @@ function render(){
       ${navTabs().includes('more') ? `<button class="hbtn" data-act="fb-open">${esc(t('hdr_fb'))}</button>`   // v68：有「更多」页的人，页头只留「反馈」（截当前这一页）
       : `<button class="hbtn" data-act="lang">${esc(t('lang'))}</button>
       <button class="hbtn" data-act="menu" aria-label="Menu" aria-expanded="${state.menu}">⋯</button>`}
-      ${state.menu && !navTabs().includes('more') ? `<div class="menu">
-        ${state.viewAs ? '' : state.pushOn ? `<button data-act="push-test">${esc(t('push_test'))}</button><button data-act="push-off">${esc(t('push_off'))}</button>` : `<button data-act="push-on">${esc(t('push_on'))}</button>`}
-        <button data-act="fb-open">${esc(t('fb_menu'))}</button>
-        <button data-act="pin-open">${esc(t('change_pin'))}</button>
-        <button data-act="logout">${esc(t('logout'))}</button></div>` : ''}
+      ${menuHTML()}
     </header>
     ${todoCardHTML()}
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
     ${navTabs().length < 2 ? '' : `<nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}${k==='today' ? todayBadgeHTML() : ''}</button>`).join('')}</nav>`}`;   // v68：只有一页（厨房小费账户）时不要底部导航
-  if (state.rcWeek){ viewReceipt(); return; }
-  ({ today: viewToday, more: viewMore, entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();
+  if (state.rcWeek) return viewReceipt();
+  return ({ today: viewToday, more: viewMore, entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();   // v74：返回加载过程，keepScroll 等它
 }
 
 // ============ 登录 ============
@@ -3391,10 +3424,11 @@ function auditDetail(d){
 }
 // 反馈里记录的页面：「周结 · KW 39」而不是内部代码
 function fbPageLabel(p){
-  const [tab, a, b] = String(p || '').split(':'); const x = t('tab_' + tab);
+  const [page, dlg] = String(p || '').split('#');   // v74：#窗口
+  const [tab, a, b] = page.split(':'); const x = t('tab_' + tab);
   if (!tab || x === 'tab_' + tab) return p || '';
   return x + (tab === 'admin' && a ? ' · ' + t('admin_' + a) : '') + (tab === 'week' && day10(a) ? ' · KW ' + isoWeek(a) : '')
-    + (tab === 'plan' && day10(b) ? ' · KW ' + isoWeek(b) : '');
+    + (tab === 'plan' && day10(b) ? ' · KW ' + isoWeek(b) : '') + (dlg ? ' · ' + t('fb_dlg_' + dlg) : '');
 }
 function day10(v){ return /^\d{4}-\d{2}-\d{2}$/.test(String(v || '')); }
 // 日志操作名：有翻译用翻译，没有就显示原代码
@@ -3532,8 +3566,11 @@ function fbPage(){
   if (state.tab === 'admin') x.push(state.adminSub);
   if (state.tab === 'plan') x.push(state.planSub, state.planWeek);
   if (state.tab === 'week') x.push(state.week);
-  return x.join(':');
+  const d = fbDialog();
+  return x.join(':') + (d ? '#' + d.id : '');   // v74：在弹出窗口里反馈，记下是哪个窗口
 }
+// v74：现在开着的弹出窗口（反馈窗口自己除外）
+function fbDialog(){ return [...document.querySelectorAll('dialog[open]')].filter(d => d.id !== 'fbDlg').pop() || null; }
 function loadScript(src, ready){
   ready = ready || (() => window.html2canvas);
   return new Promise((ok, bad) => { if (ready()) return ok();
@@ -3541,18 +3578,31 @@ function loadScript(src, ready){
 }
 async function fbCapture(){
   // 截当前屏幕可见区域，压缩成宽度不超过 900px 的 JPEG
+  // v74：开着弹出窗口时，后面的页面变暗、窗口画在屏幕上的位置（窗口里滚到哪截到哪）；按屏幕 2 倍清晰度截
   await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+  const dlg = fbDialog(), rc = dlg && dlg.getBoundingClientRect(), st = dlg ? dlg.scrollTop : 0;
   const c = await window.html2canvas(document.body, { x: window.scrollX, y: window.scrollY, width: window.innerWidth,
-    height: window.innerHeight, windowWidth: document.documentElement.clientWidth, scale: 1, useCORS: true, logging: false, ignoreElements: n => n.classList && (n.classList.contains('toast') || n.classList.contains('idlebar')),
-    backgroundColor: getComputedStyle(document.body).backgroundColor || '#fff' });
+    height: window.innerHeight, windowWidth: document.documentElement.clientWidth, scale: Math.min(2, Math.max(1, window.devicePixelRatio || 1)), useCORS: true, logging: false,
+    ignoreElements: n => n.classList && (n.classList.contains('toast') || n.classList.contains('idlebar')),
+    backgroundColor: getComputedStyle(document.body).backgroundColor || '#fff',
+    onclone: doc => {
+      doc.querySelectorAll('details:not([open]) > :not(summary)').forEach(n => { n.style.display = 'none'; });   // 截图工具不认收起的折叠块
+      doc.querySelectorAll('.dlg-fb').forEach(n => { n.style.visibility = 'hidden'; });   // 窗口里的「反馈」不截进去（留着位置，内容不错位）
+      const cd = dlg && doc.getElementById(dlg.id); if (!cd) return;
+      const bd = doc.createElement('div'); bd.style.cssText = 'position:fixed;inset:0;background:rgba(31,42,39,.5);z-index:2147483646'; doc.body.appendChild(bd);
+      cd.style.cssText += `;display:block;position:fixed;inset:auto;left:${rc.left}px;top:${rc.top}px;width:${rc.width}px;height:${rc.height}px;max-width:none;max-height:none;margin:0;overflow:hidden;z-index:2147483647;box-sizing:border-box`;
+      const inner = doc.createElement('div'); inner.style.cssText = `display:flow-root;margin-top:${-st}px`;   // flow-root：里面的负边距不和它合并，内容不错位
+      while (cd.firstChild) inner.appendChild(cd.firstChild);
+      cd.appendChild(inner); doc.body.appendChild(cd);
+    } });
   const k = Math.min(1, 900 / c.width), out = document.createElement('canvas');
   out.width = Math.round(c.width * k); out.height = Math.round(c.height * k);
   out.getContext('2d').drawImage(c, 0, 0, out.width, out.height);
   return out.toDataURL('image/jpeg', 0.7);
 }
 async function fbOpen(){
-  // 先关菜单（不重画页面），截下员工正在看的页面，再打开反馈窗口
-  state.menu = false; document.querySelectorAll('header .menu').forEach(n => n.remove());
+  // 先关菜单（不重画页面），截下员工正在看的页面（或开着的弹出窗口），再打开反馈窗口；关掉反馈窗口后回到原来的弹出窗口
+  setMenu(false);
   state.fb = { page: fbPage(), shot: null, desc: '', busy: false };
   toast(t('fb_capturing'));
   try { state.fb.shot = await fbCapture(); } catch(e){ state.fb.shot = null; }
@@ -3570,7 +3620,9 @@ function fbRender(){
         : f.shot ? `<img class="shot" src="${f.shot}" alt="">` : `<div class="small muted">${esc(t('fb_shot_none'))}</div>`}
       <div class="row" style="margin-top:8px;gap:14px">
         <label class="link" style="cursor:pointer">${esc(t('fb_shot_pick'))}<input type="file" accept="image/*" id="fb-file" hidden></label>
-        ${f.shot ? `<button class="link danger" type="button" data-act="fb-noshot">${esc(t('fb_shot_remove'))}</button>` : ''}</div></div>
+        ${f.shot ? `<button class="link danger" type="button" data-act="fb-noshot">${esc(t('fb_shot_remove'))}</button>` : ''}</div>
+      <div class="small muted" style="margin-top:6px">${esc(t('fb_shot_hint'))}</div></div>
+    ${state.viewAs ? `<div class="small muted" style="margin-bottom:8px">${esc(t('fb_view_hint', { n: state.viewAs.name }))}</div>` : ''}
     <div class="row" style="margin-top:8px"><button class="btn ghost" type="button" data-act="fb-close">${esc(t('cancel'))}</button>
       <button class="btn" type="button" data-act="fb-send" ${f.busy ? 'disabled' : ''}>${esc(t('fb_send'))}</button></div>`;
 }
@@ -3579,7 +3631,10 @@ async function fbSend(btn){
   if (!f.desc) return toast(t('err_COMMENT_REQUIRED'), true);
   btn.disabled = true;
   try {
-    await rpc('submit_feedback', { ...tok(), p_page: f.page, p_description: f.desc, p_screenshot: f.shot, p_user_agent: navigator.userAgent });
+    // v74：「查看」员工视角时用老板自己的账号发（查看会话只读），注明查看的是谁
+    const v = state.viewAs;
+    await rpc('submit_feedback', { p_token: v ? v.adminToken : state.token, p_page: f.page,
+      p_description: v ? t('fb_view_note', { n: v.name }) + ' ' + f.desc : f.desc, p_screenshot: f.shot, p_user_agent: navigator.userAgent });
     $('#fbDlg').close(); state.fb = null; toast(t('fb_sent'));
   } catch(e){ toast(errText(e), true); btn.disabled = false; }
 }
@@ -3595,6 +3650,13 @@ function fbItem(x){
       <button class="link" data-act="fb-compose" data-id="${x.id}" data-mode="ask">${esc(t('fb_ask'))}</button>` : ''}
       <button class="link" data-act="fb-status" data-id="${x.id}" data-s="${x.status === 'open' ? 'done' : 'open'}">${esc(t(x.status === 'open' ? 'fb_done_btn' : 'fb_reopen'))}</button></div></div>`;
 }
+// v74：每个弹出窗口右上角放一个小「反馈」，点了截下这个窗口；反馈发完或取消后回到这个窗口，填了一半的内容不丢
+function dlgFbAdd(d){
+  if (!d.open || !state.token || !state.me || (state.me.must_change_pin && !state.viewAs) || d.querySelector(':scope > .dlg-fb')) return;
+  d.insertAdjacentHTML('afterbegin', `<button type="button" class="dlg-fb" data-act="fb-open">${esc(t('hdr_fb'))}</button>`);
+}
+['pinDlg', 'photoDlg', 'shiftDlg'].forEach(id => { const d = document.getElementById(id); if (!d) return;
+  new MutationObserver(() => dlgFbAdd(d)).observe(d, { childList: true, attributes: true, attributeFilter: ['open'] }); });
 // ============ 垫付小账本（v67，老板 2026-10-10 决定）============
 async function loadExpense(){
   state.exp = null; if (!state.me || state.me.is_admin) return;   // v70：查看模式也读（和员工本人看到的一样；记账、确认收到由数据库拒绝）
@@ -4262,11 +4324,11 @@ function openPinDialog(){
 
 // ============ 事件 ============
 document.addEventListener('click', async ev => {
-  const el = ev.target.closest('[data-act]'); if (!el) { if (state.menu && !ev.target.closest('.menu')) { state.menu = false; render(); } return; }
+  const el = ev.target.closest('[data-act]'); if (!el) { if (state.menu && !ev.target.closest('.menu')) setMenu(false); return; }   // v74：不重画整页
   const act = el.dataset.act, f = state.form;
   switch (act){
     case 'lang': state.lang = state.lang === 'zh' ? 'de' : 'zh'; LS.set('lang', state.lang); state.menu = false; render(); break;
-    case 'menu': state.menu = !state.menu; render(); if (state.menu) window.scrollTo(0, 0); break;
+    case 'menu': setMenu(!state.menu); break;   // v74：页头固定在顶上，菜单在原地打开，不跳
     case 'logout': case 'done-logout': signOut(); break;
     case 'done-more': state.done = null; render(); break;
     case 'role-pick': el.parentNode.querySelectorAll('button').forEach(b => { b.classList.toggle('on', b === el); b.setAttribute('aria-pressed', b === el); }); break;
@@ -4291,7 +4353,7 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'pinreq-dismiss': {
-      try { await rpc('admin_pin_request_dismiss', { ...tok(), p_id: el.dataset.id }); render(); } catch(e){ toast(errText(e), true); }
+      try { await rpc('admin_pin_request_dismiss', { ...tok(), p_id: el.dataset.id }); keepScroll(render); } catch(e){ toast(errText(e), true); }
       break;
     }
     case 'ex-step': {   // v30：多给 ±1 €
@@ -4306,7 +4368,7 @@ document.addEventListener('click', async ev => {
       const pend = $('#s-act-pend'); pend.hidden = cbx.checked === orig; pend.textContent = t(cbx.checked ? 'react_pending' : 'deact_pending');
       break;
     }
-    case 'pin-open': state.menu = false; render(); openPinDialog(); break;
+    case 'pin-open': setMenu(false); openPinDialog(); break;
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
@@ -4339,14 +4401,14 @@ document.addEventListener('click', async ev => {
     case 'task-check': {
       const c = tkOpenRun(); if (!c) break; el.disabled = true;
       try { const st = await rpc('task_item_check', { ...tok(), p_def: c.def_id, p_item: el.dataset.item, p_day: c.day }); await loadTasks();
-        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); } else toast(t('saved')); render(); }
+        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); render(); window.scrollTo(0, 0); } else { toast(t('saved')); keepScroll(render); } }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
     case 'task-override': {
       if (!confirm(t('tk_override_q'))) break; el.disabled = true;
       try { const st = await rpc('task_item_override', { ...tok(), p_row: el.dataset.id }); await loadTasks();
-        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); } render(); }
+        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); render(); window.scrollTo(0, 0); } else keepScroll(render); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
@@ -4588,16 +4650,16 @@ document.addEventListener('click', async ev => {
       if (e && e.direct){ if (!confirm(t('confirm_del'))) break; }
       else { reason = prompt(t('ask_del_reason')); if (!reason || !reason.trim()) break; }
       try { const r = await rpc('delete_entry', { ...tok(), p_entry_id: el.dataset.id, p_reason: reason });
-        toast(r && r.status === 'pending' ? t('request_sent') : t('deleted')); render(); } catch(e){ toast(errText(e), true); }
+        toast(r && r.status === 'pending' ? t('request_sent') : t('deleted')); keepScroll(render); } catch(e){ toast(errText(e), true); }
       break;
     }
     case 'req-approve':
       el.disabled = true;
-      try { await rpc('approve_request', { ...tok(), p_request_id: el.dataset.id }); toast(t('approved')); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
+      try { await rpc('approve_request', { ...tok(), p_request_id: el.dataset.id }); toast(t('approved')); keepScroll(render); } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     case 'req-reject': {
       const note = prompt(t('ask_reject')); if (note === null) break;
-      try { await rpc('reject_request', { ...tok(), p_request_id: el.dataset.id, p_note: note.trim() || null }); toast(t('rejected')); render(); } catch(e){ toast(errText(e), true); }
+      try { await rpc('reject_request', { ...tok(), p_request_id: el.dataset.id, p_note: note.trim() || null }); toast(t('rejected')); keepScroll(render); } catch(e){ toast(errText(e), true); }
       break;
     }
     case 'staff-move': {
@@ -4605,7 +4667,7 @@ document.addEventListener('click', async ev => {
       let j = i + d; while (j >= 0 && j < list.length && !list[j].is_active) j += d;   // 跳过折叠起来的停用员工
       if (j < 0 || j >= list.length) break;
       [list[i], list[j]] = [list[j], list[i]];
-      try { await rpc('admin_set_order', { ...tok(), p_ids: list.map(x => x.id) }); state.loginStaff = null; await loadCommon(); render(); } catch(e){ toast(errText(e), true); }
+      try { await rpc('admin_set_order', { ...tok(), p_ids: list.map(x => x.id) }); state.loginStaff = null; await loadCommon(); keepScroll(render); } catch(e){ toast(errText(e), true); }
       break;
     }
     case 'staff-reset': {
@@ -4623,7 +4685,7 @@ document.addEventListener('click', async ev => {
     }
     case 'resolve': {
       const r = prompt(t('ask_resolution')); if (r === null) break;
-      try { await rpc('resolve_dispute', { ...tok(), p_dispute_id: el.dataset.id, p_resolution: r.trim() }); toast(t('resolved')); render(); } catch(e){ toast(errText(e), true); }
+      try { await rpc('resolve_dispute', { ...tok(), p_dispute_id: el.dataset.id, p_resolution: r.trim() }); toast(t('resolved')); keepScroll(render); } catch(e){ toast(errText(e), true); }
       break;
     }
     case 'adj-add': {
@@ -4705,7 +4767,7 @@ document.addEventListener('click', async ev => {
           const mid = await rpc('admin_send_message', { ...tok(), p_staff_id: null, p_entry_id: id, p_text_zh: txt('zh'), p_text_de: txt('de') });
           callPush('message', { message_id: mid }); delete state.rvMsg[id]; toast(t('msg_sent', { n: el.dataset.name || '' }));
         } else toast(t('reviewed'));
-        render();
+        keepScroll(render);   // v74：核对完一张留在原地，接着看下一张
       }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
@@ -4727,7 +4789,7 @@ document.addEventListener('click', async ev => {
     }
     case 'fb-status':
       try { await rpc('admin_feedback_set', { ...tok(), p_id: el.dataset.id, p_status: el.dataset.s });
-        state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
+        state.me = await rpc('me', tok()); authStore().set('me', state.me); keepScroll(render); } catch(e){ toast(errText(e), true); }   // v74：处理完一条留在原地
       break;
     case 'plan-prev': { const min = planMin(); if (min && addDays(state.planWeek, -1) < min) break; state.planWeek = addDays(state.planWeek, -7); viewPlan(); break; }
     case 'plan-this': state.planWeek = mondayOf(today()); viewPlan(); break;
@@ -4928,7 +4990,7 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'rc-admin-pay':
-      try { await rpc('mark_settled', { ...tok(), p_week_start: state.week, p_staff_id: el.dataset.staff, p_done: true }); viewWeek(); } catch(e){ toast(errText(e), true); }
+      try { await rpc('mark_settled', { ...tok(), p_week_start: state.week, p_staff_id: el.dataset.staff, p_done: true }); keepScroll(viewWeek); } catch(e){ toast(errText(e), true); }
       break;
     case 'rc-paper': {
       const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
@@ -4937,14 +4999,14 @@ document.addEventListener('click', async ev => {
         const note = prompt(t('dist_paper_q')); if (note === null) return;
         try { const img = await compressImage(f);
           await rpc('admin_paper_receipt', { ...tok(), p_week_start: state.week, p_staff_id: el.dataset.staff, p_image: img, p_note: note.trim() });
-          toast(t('dist_paper_done')); viewWeek(); } catch(e){ toast(errText(e), true); }
+          toast(t('dist_paper_done')); keepScroll(viewWeek); } catch(e){ toast(errText(e), true); }
       };
       inp.click(); break;
     }
     case 'dist-print': distPrint(); break;
-    case 'push-on': state.menu = false; pushOn(); break;
+    case 'push-on': setMenu(false); pushOn(); break;
     case 'push-off': pushOff(); break;
-    case 'push-test': { state.menu = false; render(); const r = await callPush('test'); toast(r && r.ok ? t('push_test_sent') : t('push_test_none'), !(r && r.ok)); break; }
+    case 'push-test': { setMenu(false); const r = await callPush('test'); toast(r && r.ok ? t('push_test_sent') : t('push_test_none'), !(r && r.ok)); break; }
     case 'notice-ok': {
       el.disabled = true;
       const ids = el.dataset.id.split(',');   // v68：「全部确认收到」一次确认几条
@@ -4991,7 +5053,7 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'bearer':
-      try { await rpc('admin_set_shortage_bearer', { ...tok(), p_entry_id: el.dataset.id, p_bearer: el.dataset.b }); render(); } catch(e){ toast(errText(e), true); }
+      try { await rpc('admin_set_shortage_bearer', { ...tok(), p_entry_id: el.dataset.id, p_bearer: el.dataset.b }); keepScroll(render); } catch(e){ toast(errText(e), true); }
       break;
     case 'staff-ls-unbind': {
       const s = state.staffEdit; if (!confirm(t('ls_unbind_q', { n: s.name + ' · ' + el.dataset.store }))) break;
