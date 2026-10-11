@@ -405,6 +405,7 @@ zh: {
   tkm_draft:'✨ AI 起草', tkm_drafting:'AI 正在起草……', tkm_zh:'中文', tkm_de:'Deutsch', tkm_hint:'AI 只按你写的那句起草，发之前可以改；也可以不用 AI，直接写。',
   tkm_send:'发送', tkm_sent:'已发给 {n}', tkm_line:'💬 {t} 提醒了 {n}', tkm_read:'已读 {t}', tkm_unread:'还没看',
   msg_task_title:'老板的提醒 · 收店任务', msg_ok_task:'知道了，下次按要求做',
+  tkm_st_wait:'💬 已提醒，等 {n} 确认', tkm_st_done:'✓ 已处理：{n} 已确认（{t}）',   // v78
   // v75：班次时间
   stt_btn:'⏰ 班次时间', stt_title:'班次时间', stt_back:'← 返回排班', stt_edit:'改', stt_days:'哪几天用这组时间（点一下选中 / 取消）',
   stt_hint:'新排进班的人用这里的时间；兼岗取最早开始、最晚结束。改了以后：还没发布的周里、时间还是旧的班会跟着改；已发布的周不动（要改就点名字单独改）。',
@@ -613,6 +614,7 @@ de: {
   tkm_draft:'✨ KI-Entwurf', tkm_drafting:'KI schreibt den Entwurf …', tkm_zh:'中文', tkm_de:'Deutsch', tkm_hint:'Die KI schreibt nur nach deinem Satz; vor dem Senden änderbar. Du kannst auch ohne KI direkt schreiben.',
   tkm_send:'Senden', tkm_sent:'An {n} gesendet', tkm_line:'💬 {t} Nachricht an {n}', tkm_read:'gelesen {t}', tkm_unread:'noch nicht gelesen',
   msg_task_title:'Hinweis vom Chef · Feierabend-Aufgabe', msg_ok_task:'Verstanden, nächstes Mal mache ich es richtig',
+  tkm_st_wait:'💬 Hinweis gesendet, wartet auf Bestätigung von {n}', tkm_st_done:'✓ Erledigt: {n} hat bestätigt ({t})',   // v78
   // v75：Schichtzeiten
   stt_btn:'⏰ Schichtzeiten', stt_title:'Schichtzeiten', stt_back:'← Zurück zum Dienstplan', stt_edit:'Ändern', stt_days:'An welchen Tagen gelten diese Zeiten? (antippen = wählen / abwählen)',
   stt_hint:'Neu eingeplante Personen bekommen diese Zeiten; bei Doppelrolle frühester Beginn bis spätestes Ende. Nach einer Änderung werden in noch nicht veröffentlichten Wochen die Schichten mit der alten Zeit angepasst; veröffentlichte Wochen bleiben unverändert (dort per Tipp auf den Namen ändern).',
@@ -1639,7 +1641,7 @@ function rcCardHTML(r){
       ${line('rk_env', (r.envelopes_todo ? t('rk_env_todo', { n: r.envelopes_todo }) : r.envelopes ? t('rk_env_done', { n: r.envelopes }) : t('rk_env_none')) + (r.envelopes_diff ? ' · ' + t('rk_env_diff', { n: r.envelopes_diff }) : ''), !!(r.envelopes_todo || r.envelopes_diff))}
       ${LOCK_ON ? line('rk_lock', rcLockText(r) + (done && r.lock && +r.lock.done_count < +r.lock.total ? t('rk_lock_done') : ''), !done && r.lock && +r.lock.done_count < +r.lock.total) : ''}
       ${line('rk_bon', t('rk_bon_line', { a: nb - miss.length, b: nb }) + (miss.length ? ' · ' + t('rk_bon_miss', { m: miss.map(m => m.name).join('、') }) : ''), !!miss.length)}
-      ${tks.length ? line('rk_tasks', tks.map(tkAdminLine).join('；'), tks.some(x => ['missed', 'nobody'].includes(x.status))) : ''}
+      ${tks.length ? line('rk_tasks', tks.map(tkAdminLine).join('；'), tks.some(tkRed)) : ''}
     </div></div>`;
 }
 // v57：这一天两家店都处理完了吗（没营业 / 上线前 / 核对完成且之后没改动）
@@ -1877,12 +1879,19 @@ async function taskUpload(input){
   } catch(e){ toast(errText(e), true); render(); }
 }
 // 老板：一个任务一天的情况（每日核对页）
+// v78（老板 2026-10-11）：老板就这个任务这一天给员工留了言 → 等员工确认（wait）；都点了「知道了」→ 已处理（done）。这两种都不标红、不算待办
+function tkHandled(x){ const ms = x.messages || []; return !ms.length ? null : ms.every(m => m.read_at) ? 'done' : 'wait'; }
+const tkRed = x => ['missed', 'nobody'].includes(x.status) && !tkHandled(x);
 function tkAdminLine(x){
   const nm = state.lang === 'de' ? x.name_de : x.name_zh, ppl = (x.people || []).map(p => p.name).join('、');
-  if (x.status === 'done') return '✓ ' + t('tk_adm_done', { n: nm, b: x.completed_by || '', t: fmtDateTime(x.completed_at) });
-  if (x.status === 'nobody') return '✗ ' + t('tk_adm_nobody', { n: nm, r: t('grp_' + x.role) });
-  if (x.status === 'missed') return '✗ ' + t('tk_adm_missed', { n: nm, p: ppl || '–' });
-  return t('tk_adm_open', { n: nm, p: ppl || '–' });
+  const h = tkHandled(x), ms = x.messages || [], who = list => [...new Set(list.map(m => m.to))].join('、');
+  const st = h === 'done' ? ' · ' + t('tkm_st_done', { n: who(ms), t: fmtDateTime(ms.map(m => m.read_at).sort().pop()) })
+    : h === 'wait' ? ' · ' + t('tkm_st_wait', { n: who(ms.filter(m => !m.read_at)) }) : '';
+  const x0 = h ? '' : '✗ ';   // 已经留言处理的，不再打 ✗
+  if (x.status === 'done') return '✓ ' + t('tk_adm_done', { n: nm, b: x.completed_by || '', t: fmtDateTime(x.completed_at) }) + st;
+  if (x.status === 'nobody') return x0 + t('tk_adm_nobody', { n: nm, r: t('grp_' + x.role) }) + st;
+  if (x.status === 'missed') return x0 + t('tk_adm_missed', { n: nm, p: ppl || '–' }) + st;
+  return t('tk_adm_open', { n: nm, p: ppl || '–' }) + st;
 }
 // v76：可以留言给谁：这天负责的人 + 做了某一项的人
 function tkMsgPeople(x){
@@ -1909,7 +1918,7 @@ function tkAdminHTML(list){
   if (!(list || []).length) return '';
   return `<h3>${esc(t('tk_adm_title'))}</h3><div class="list">${list.map(x => `<div class="item">
     <div class="top"><div><strong>${esc(state.lang === 'de' ? x.name_de : x.name_zh)}</strong>${storeTag(x.store)}</div></div>
-    <div class="meta ${['missed', 'nobody'].includes(x.status) ? 'negc' : ''}">${esc(tkAdminLine(x))}</div>
+    <div class="meta ${tkRed(x) ? 'negc' : tkHandled(x) === 'done' ? 'pos' : ''}">${esc(tkAdminLine(x))}</div>
     ${x.items.map(it => { const l = it.last; return `<div class="meta">${esc(state.lang === 'de' ? it.name_de : it.name_zh)}：${l ? esc((l.evidence === 'photo' ? '📷 ' : '✓ ') + (l.by || '') + ' · ' + fmtDateTime(l.done_at))
         + (l.ai && l.ai.ok === false ? ` <span class="${l.override ? 'negc' : ''}">· ${esc(l.override ? t('tk_adm_override') : t('tk_adm_ai_bad'))}：${esc((l.ai.msgs || []).map(m => state.lang === 'de' ? m.de : m.zh).join(' '))}</span>` : '')
         + (l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') : '–'}</div>`; }).join('')}
