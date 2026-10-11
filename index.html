@@ -304,6 +304,16 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .toast.err{background:var(--neg);text-align:left;line-height:1.45;border-radius:14px;width:min(460px,90vw)}
 dialog{border:0;border-radius:var(--r-m);padding:20px;width:min(360px,92vw)}
 dialog::backdrop{background:rgba(31,42,39,.5)}
+/* v75：班次时间 */
+.stt-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.stt-t{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:14px;color:var(--muted);margin-top:2px}
+.stt-t b{color:var(--ink);font-weight:600}
+.stt-role{display:flex;align-items:center;gap:6px;margin:10px 0}
+.stt-role .rl{flex:0 0 56px;font-weight:700;color:var(--muted);font-size:14px}
+.stt-role input{flex:1;min-width:0;padding-left:8px;padding-right:4px}
+.se-time{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:13px;color:var(--muted)}
+.se-time input{flex:0 1 120px;min-width:0;padding:6px 4px 6px 8px}
+.rolerow .rl small{display:block;font-weight:400;font-size:11px}
 /* v74：弹出窗口右上角的「反馈」（滚动时也留在顶上，不占位置） */
 .dlg-fb{position:sticky;top:-16px;z-index:5;display:block;width:fit-content;margin:-10px -8px -22px auto;background:var(--card);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:12px;line-height:1.3;cursor:pointer}
 /* v56：本周小费统计的横条 */
@@ -386,6 +396,11 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
+  // v75：班次时间
+  stt_btn:'⏰ 班次时间', stt_title:'班次时间', stt_back:'← 返回排班', stt_edit:'改', stt_days:'哪几天用这组时间（点一下选中 / 取消）',
+  stt_hint:'新排进班的人用这里的时间；兼岗取最早开始、最晚结束。改了以后：还没发布的周里、时间还是旧的班会跟着改；已发布的周不动（要改就点名字单独改）。',
+  stt_last:'最后修改：{n} · {t}', stt_saved:'已保存。', stt_saved_n:'已保存。还没发布的周里 {n} 个班改成了新时间。', stt_no_day:'请至少选一天。',
+  stt_late:'下班时间最晚 23:59（不过 0 点）。', se_time:'时间',
   // v74：反馈截图
   fb_shot_hint:'截图不对？用手机自己截屏，再点「换一张 / 从相册选截图」。', fb_dlg_shiftDlg:'排班编辑窗口', fb_dlg_photoDlg:'弹出窗口', fb_dlg_pinDlg:'PIN 窗口',
   fb_view_note:'（查看 {n} 时）', fb_view_hint:'以你自己的名义发送，注明是查看 {n} 时看到的。',
@@ -517,7 +532,7 @@ zh: {
   se_removed:'{n} 从这个班去掉', se_hint:'点名字选中，再点取消。同一个人在两栏都选 = 兼岗。窗口里没选的人保存后会从这个班去掉。',
   pk_title:'选{r}', pk_main:'主岗位是{r}', pk_skill:'会做{r}', pk_other:'其他人（{n}）', pk_all:'显示全部（包括不参与排班的 {n} 人）',
   pk_elsewhere:'已排在 {s}', pk_no:'标了不能上', pk_save:'保存（{n} 人）', pk_none_sel:'请至少选一个人。', pk_already:'已排',
-  pk_skipped:'{n} 已排在 {s} 同一时段，没有加上。', pk_same:'{n} 已经是这个岗位。', pk_time_hint:'所有人先用这个时间；个别人不同，保存后点他的名字单独改。',
+  pk_skipped:'{n} 已排在 {s} 同一时段，没有加上。', pk_same:'{n} 已经是这个岗位。', pk_time_hint:'新加进来的人用他那一栏的时间（兼岗取最早开始、最晚结束），可以只改这一天的。原来就在班上的人时间不变，要改点他的名字。',
   pe_remove:'去掉「{r}」', pe_remove_confirm:'确定把 {n} 从「{r}」去掉？', pe_del_all:'整个班删掉', my_team:'我和同班同事',
   sp_in:'排班时出现在选人名单里', sp_in_hint:'关掉后不出现在选人窗口（窗口底部「显示全部」仍然可以选）。', sp_skills:'会做的岗位', sp_skills_hint:'主岗位自动算会做，这里勾额外会做的。',
   sched_dual:'{n} 今天在这个班做服务（兼{r}），按规定不分{r}份额，没有自动选。', sched_none_dual:'这个班的{r}都是兼岗的服务员，按规定自动选了「{none}」。',
@@ -583,6 +598,11 @@ zh: {
 },
 de: {
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
+  // v75：Schichtzeiten
+  stt_btn:'⏰ Schichtzeiten', stt_title:'Schichtzeiten', stt_back:'← Zurück zum Dienstplan', stt_edit:'Ändern', stt_days:'An welchen Tagen gelten diese Zeiten? (antippen = wählen / abwählen)',
+  stt_hint:'Neu eingeplante Personen bekommen diese Zeiten; bei Doppelrolle frühester Beginn bis spätestes Ende. Nach einer Änderung werden in noch nicht veröffentlichten Wochen die Schichten mit der alten Zeit angepasst; veröffentlichte Wochen bleiben unverändert (dort per Tipp auf den Namen ändern).',
+  stt_last:'Zuletzt geändert: {n} · {t}', stt_saved:'Gespeichert.', stt_saved_n:'Gespeichert. In noch nicht veröffentlichten Wochen wurden {n} Schichten auf die neue Zeit gesetzt.', stt_no_day:'Bitte mindestens einen Tag wählen.',
+  stt_late:'Ende spätestens 23:59 (nicht über Mitternacht).', se_time:'Zeit',
   // v74：Feedback-Screenshot
   fb_shot_hint:'Screenshot stimmt nicht? Mach mit dem Handy selbst einen Screenshot und tippe auf „Anderen Screenshot wählen“.', fb_dlg_shiftDlg:'Dienstplan-Fenster', fb_dlg_photoDlg:'Pop-up-Fenster', fb_dlg_pinDlg:'PIN-Fenster',
   fb_view_note:'(in der Ansicht als {n})', fb_view_hint:'Wird in deinem Namen gesendet, mit Hinweis „Ansicht als {n}“.',
@@ -714,7 +734,7 @@ de: {
   se_removed:'{n} aus der Schicht entfernt', se_hint:'Namen antippen zum Auswählen, nochmal zum Abwählen. In zwei Spalten gewählt = Doppelrolle. Nicht gewählte Personen werden beim Speichern aus der Schicht entfernt.',
   pk_title:'{r} wählen', pk_main:'Hauptrolle {r}', pk_skill:'Kann {r}', pk_other:'Weitere ({n})', pk_all:'Alle anzeigen (inkl. {n} nicht eingeplante)',
   pk_elsewhere:'schon in {s}', pk_no:'nicht verfügbar', pk_save:'Speichern ({n})', pk_none_sel:'Bitte mindestens eine Person wählen.', pk_already:'schon eingeplant',
-  pk_skipped:'{n} ist zur gleichen Zeit schon in {s} eingeplant – nicht hinzugefügt.', pk_same:'{n} hat diese Position schon.', pk_time_hint:'Diese Zeit gilt für alle; abweichende Zeiten danach per Tipp auf den Namen ändern.',
+  pk_skipped:'{n} ist zur gleichen Zeit schon in {s} eingeplant – nicht hinzugefügt.', pk_same:'{n} hat diese Position schon.', pk_time_hint:'Neu hinzugefügte Personen bekommen die Zeit ihrer Spalte (Doppelrolle: frühester Beginn bis spätestes Ende); hier nur für diesen Tag änderbar. Wer schon eingeplant ist, behält seine Zeit – zum Ändern auf den Namen tippen.',
   pe_remove:'„{r}“ entfernen', pe_remove_confirm:'{n} aus „{r}“ entfernen?', pe_del_all:'Ganze Schicht löschen', my_team:'Ich und meine Schicht',
   sp_in:'In der Auswahl beim Dienstplan', sp_in_hint:'Aus: erscheint nicht in der Auswahl (unten „Alle anzeigen“ geht trotzdem).', sp_skills:'Kann auch', sp_skills_hint:'Die Hauptrolle zählt automatisch; hier zusätzliche Positionen ankreuzen.',
   sched_dual:'{n} arbeitet in dieser Schicht im Service (zusätzlich {r}) – laut Regel kein {r}-Anteil, nicht automatisch gewählt.', sched_none_dual:'In dieser Schicht ist {r} nur von Servicekräften mit Doppelrolle besetzt – laut Regel automatisch „{none}“ gewählt.',
@@ -3650,6 +3670,56 @@ function fbItem(x){
       <button class="link" data-act="fb-compose" data-id="${x.id}" data-mode="ask">${esc(t('fb_ask'))}</button>` : ''}
       <button class="link" data-act="fb-status" data-id="${x.id}" data-s="${x.status === 'open' ? 'done' : 'open'}">${esc(t(x.status === 'open' ? 'fb_done_btn' : 'fb_reopen'))}</button></div></div>`;
 }
+// ============ 班次时间（v75，老板 2026-10-11 决定）============
+// 排班员（和老板）按店、按班、按星期几设置服务 / Runner / 吧台的上下班时间（数据库 v49 shift_role_times）
+// 一个人按岗位的默认时间：几个岗位取最早开始、最晚结束（tpl = sched_week 的班次，带 times）
+function roleSpan(tpl, roles){
+  const ts = (roles && roles.length ? roles : ['service']).map(r => (tpl.times || {})[r] || { start: tpl.start, end: tpl.end });
+  return { start: ts.map(x => x.start).sort()[0], end: ts.map(x => x.end).sort().pop() };
+}
+// 星期几（1–7）→「周一–周四、周日」
+function wdRange(days){
+  const L = I18N[state.lang] || I18N.zh, ds = [...days].sort((a, b) => a - b), out = [], sep = state.lang === 'de' ? ', ' : '、';
+  for (let i = 0; i < ds.length; ){ let j = i; while (j + 1 < ds.length && ds[j + 1] === ds[j] + 1) j++;
+    out.push(j - i >= 2 ? L.wd[ds[i] - 1] + '–' + L.wd[ds[j] - 1] : ds.slice(i, j + 1).map(x => L.wd[x - 1]).join(sep)); i = j + 1; }
+  return out.join(sep);
+}
+async function sttLoad(){ try { state.stt = await rpc('shift_times', tok()); } catch(e){ state.stt = { err: errText(e) }; } }
+function sttHTML(){
+  const d = state.stt;
+  let h = `<button class="link" data-act="stt-back">${esc(t('stt_back'))}</button><h2 style="margin:10px 0 6px">${esc(t('stt_title'))}</h2>
+    <div class="small muted" style="margin-bottom:12px">${esc(t('stt_hint'))}</div>`;
+  if (!d) return h + `<div class="loading">${esc(t('loading'))}</div>`;
+  if (d.err) return h + `<div class="empty">${esc(d.err)}</div>`;
+  for (const store of STORES){
+    h += `<div class="sheet">`;
+    for (const slot of SLOTS){
+      const rows = (d.slots || []).filter(x => x.store === store && x.slot === slot); if (!rows.length) continue;
+      const groups = [];   // 时间完全一样的几天合成一行
+      rows.forEach(x => { const k = JSON.stringify(ROLES.map(r => x.times[r])), g = groups.find(g => g.k === k);
+        if (g) g.days.push(x.weekday); else groups.push({ k, days: [x.weekday], times: x.times }); });
+      h += `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong></div></div>
+        ${groups.map(g => `<div class="stt-row"><div><strong>${esc(wdRange(g.days))}</strong>
+          <div class="stt-t">${ROLES.map(r => `<span>${esc(t('grp_' + r))} <b class="num">${esc(g.times[r].start)}–${esc(g.times[r].end)}</b></span>`).join('')}</div></div>
+          <button class="pchip add" style="flex:none" data-act="stt-edit" data-store="${store}" data-slot="${slot}" data-days="${g.days.join(',')}">${esc(t('stt_edit'))}</button></div>`).join('')}</div>`;
+    }
+    h += `</div>`;
+  }
+  if (d.updated) h += `<div class="small muted">${esc(t('stt_last', { n: d.updated.name, t: fmtDateTime(d.updated.at) }))}</div>`;
+  return h;
+}
+function sttDlgRender(){
+  const e = state.sttEd, L = I18N[state.lang] || I18N.zh;
+  const have = new Set(state.stt.slots.filter(x => x.store === e.store && x.slot === e.slot).map(x => x.weekday));   // 这家店这个班有的那几天
+  $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${storeTag(e.store)} ${esc(slotLabel(e.slot))} · ${esc(t('stt_title'))}</h2>
+    <div class="small muted" style="margin-bottom:8px">${esc(t('stt_days'))}</div>
+    <div class="sdchips">${[1, 2, 3, 4, 5, 6, 7].map(n => `<button type="button" class="sdchip ${e.days.includes(n) ? 'on' : ''}" aria-pressed="${e.days.includes(n)}" data-act="stt-day" data-d="${n}" ${have.has(n) ? '' : 'disabled'}>${esc(L.wd[n - 1])}</button>`).join('')}</div>
+    ${ROLES.map(r => `<div class="stt-role"><span class="rl">${esc(t('grp_' + r))}</span>
+      <input class="input num" type="time" id="stt-s-${r}" value="${esc(e.times[r].start)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_start'))}"><span>–</span>
+      <input class="input num" type="time" id="stt-e-${r}" value="${esc(e.times[r].end)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_end'))}"></div>`).join('')}
+    <div class="small muted" style="margin:4px 0 14px">${esc(t('stt_late'))}</div>
+    <div class="row"><button class="btn ghost" type="button" data-act="sd-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="stt-save">${esc(t('save'))}</button></div>`;
+}
 // v74：每个弹出窗口右上角放一个小「反馈」，点了截下这个窗口；反馈发完或取消后回到这个窗口，填了一半的内容不丢
 function dlgFbAdd(d){
   if (!d.open || !state.token || !state.me || (state.me.must_change_pin && !state.viewAs) || d.querySelector(':scope > .dlg-fb')) return;
@@ -3927,6 +3997,7 @@ function planRender(){
   const d = state.plan; if (!d || state.tab !== 'plan') return;
   const y = window.scrollY;
   const k = planArea() === 'kitchen';
+  if (state.planTimes && state.planSub === 'edit' && !k && canFront()){ $('#main').innerHTML = sttHTML(); return; }   // v75：班次时间
   $('#main').innerHTML = planHead() + (state.planSub === 'edit' && isSched()
     ? (k ? (canKitchen() ? kEditHTML(d) : `<div class="infobox">${esc(t('kp_ro'))}</div>` + kGridHTML(d, false))
          : (canFront() ? planEditHTML(d) : `<div class="infobox">${esc(t('kp_ro'))}</div>` + planGridHTML(d, false)))
@@ -3996,10 +4067,11 @@ function planGridHTML(d, edit){
       const rows = ROLES.map(r => {
         const ppl = list.filter(x => rolesOf(x).includes(r));
         if (!ppl.length) return '';
-        const chip = x => { const off = x.start !== tpl.start || x.end !== tpl.end, rs = rolesOf(x);
+        const chip = x => { const rs = rolesOf(x), dft = roleSpan(tpl, rs), off = x.start !== dft.start || x.end !== dft.end;   // v75：和他岗位的默认时间比
           const inner = `${esc(x.name)}${rs.length > 1 ? ` <span class="small muted">${esc(rs.map(k => t('grp_' + k)).join(' + '))}</span>` : ''}${off ? ` <span class="small num" style="font-weight:700">${esc(x.start)}–${esc(x.end)}</span>` : ''}${x.changed && (edit || x.staff_id === state.me.id) ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}`;
           return edit ? `<button class="pchip" data-act="pe-open" data-id="${x.id}">${inner}</button>` : `<span class="pchip">${inner}</span>`; };
-        return `<div class="rolerow"><div class="rl">${esc(t('grp_' + r))}</div><div class="rp">${ppl.map(chip).join('')}
+        const rt = (tpl.times || {})[r], rtl = rt && (rt.start !== tpl.start || rt.end !== tpl.end) ? `<small class="num">${esc(rt.start)}–${esc(rt.end)}</small>` : '';
+        return `<div class="rolerow"><div class="rl">${esc(t('grp_' + r))}${rtl}</div><div class="rp">${ppl.map(chip).join('')}
           </div></div>`;
       }).join('');
       const noSvc = edit && !list.some(x => rolesOf(x).includes('service'));
@@ -4084,13 +4156,14 @@ function keRender(){
 function seOpen(p){
   const d = state.plan, cur = d.shifts.filter(x => x.date === p.date && x.store === p.store && x.slot === p.slot);
   const sel = {}; ROLES.forEach(r => sel[r] = cur.filter(x => rolesOf(x).includes(r)).map(x => x.staff_id));
-  state.slotEd = { ...p, sel, showAll: false }; seRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal();
+  const times = {}; ROLES.forEach(r => { times[r] = { ...((p.times || {})[r] || { start: p.start, end: p.end }) }; });   // v75：每栏（岗位）自己的时间
+  state.slotEd = { ...p, sel, showAll: false, times }; seRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal();
 }
 function seRolesOf(id){ const e = state.slotEd; return ROLES.filter(r => e.sel[r].includes(id)); }
 function seRender(){
   const e = state.slotEd, d = state.plan;
   const g = id => { const el = $(id); return el ? el.value : undefined; };
-  if (g('#se-start') !== undefined){ e.start = g('#se-start'); e.end = g('#se-end'); }
+  ROLES.forEach(r => { if (g('#se-s-' + r) !== undefined) e.times[r] = { start: g('#se-s-' + r), end: g('#se-e-' + r) }; });   // 重画时保留已改的时间
   const here = d.shifts.filter(x => x.date === e.date && x.slot === e.slot);
   const elsewhere = id => here.find(x => x.staff_id === id && x.store !== e.store);
   const no = id => d.avail.some(a => a.staff_id === id && a.date === e.date && a.slot === e.slot && a.status === 'no');
@@ -4110,6 +4183,7 @@ function seRender(){
       return `<button type="button" class="sdchip pkchip ${on ? 'on' : ''} ${no(s.id) ? 'no' : ''}" aria-pressed="${on}" data-act="se-toggle" data-role="${r}" data-id="${s.id}" ${x ? 'disabled' : ''}>${esc(s.name)}<small data-sub="${esc(sub)}">${esc(sub)}</small></button>`; };
     const grp = (title, list) => list.length ? `<div class="sdgrp">${esc(title)}</div><div class="sdchips">${list.map(chip).join('')}</div>` : '';
     return `<h3 style="margin:14px 0 4px">${esc(t('grp_' + r))}（<span id="se-n-${r}">${e.sel[r].length}</span>）</h3>
+      <div class="se-time">${esc(t('se_time'))} <input class="input num" type="time" id="se-s-${r}" value="${esc(e.times[r].start)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_start'))}"> – <input class="input num" type="time" id="se-e-${r}" value="${esc(e.times[r].end)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_end'))}"></div>
       ${grp(t('pk_main', { r: t('grp_' + r) }), main)}${grp(t('pk_skill', { r: t('grp_' + r) }), skill)}
       ${other.length ? `<details class="fold" style="margin-top:8px" ${other.some(s => e.sel[r].includes(s.id)) ? 'open' : ''}><summary>${esc(t('pk_other', { n: other.length }))}</summary><div class="inner"><div class="sdchips">${other.map(chip).join('')}</div></div></details>` : ''}
       ${away.length ? `<div class="sdchips" style="margin-top:6px">${away.map(chip).join('')}</div>` : ''}`;
@@ -4119,10 +4193,7 @@ function seRender(){
     ${ROLES.map(col).join('')}
     ${hidden && !e.showAll ? `<button class="link" type="button" style="margin-top:10px" data-act="se-all">${esc(t('pk_all', { n: hidden }))}</button>` : ''}
     <div class="sheet" style="margin-top:14px" id="se-sum"></div>
-    <div class="row" style="margin-top:4px">
-      <div class="field" style="flex:1"><label for="se-start">${esc(t('sd_start'))}</label><input class="input num" type="time" id="se-start" value="${esc(e.start)}"></div>
-      <div class="field" style="flex:1"><label for="se-end">${esc(t('sd_end'))}</label><input class="input num" type="time" id="se-end" value="${esc(e.end)}"></div>
-    </div><div class="small muted" style="margin:-6px 0 10px">${esc(t('pk_time_hint'))}</div>
+    <div class="small muted" style="margin:-4px 0 12px">${esc(t('pk_time_hint'))}</div>
     <div class="row"><button class="btn ghost" type="button" data-act="sd-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="se-save">${esc(t('save'))}</button></div>`;
   seRefresh();
 }
@@ -4188,7 +4259,8 @@ function kGaps(d){
 function planEditHTML(d){
   const changed = d.shifts.filter(x => x.changed && x.slot !== 'day').length, pd = state.planPending, pn = pd ? pd.changes : 0, pm = pd ? pd.people.length : 0;
   const g = planGaps(d), empty = !d.published && !g.a;
-  let h = `<div class="hero"><div class="row" style="justify-content:space-between"><strong>${esc(d.published ? t('pub_state_yes', { t: fmtDateTime(d.published_at) }) : t('pub_state_no'))}</strong></div>
+  let h = `<div style="text-align:right;margin:-4px 0 8px"><button class="link" data-act="stt-open">${esc(t('stt_btn'))}</button></div>`;   // v75
+  h += `<div class="hero"><div class="row" style="justify-content:space-between"><strong>${esc(d.published ? t('pub_state_yes', { t: fmtDateTime(d.published_at) }) : t('pub_state_no'))}</strong></div>
     <div class="small ${g.m ? 'negc' : 'muted'}" style="margin-top:6px">${esc(!g.a ? t('pl_empty') : g.m ? t('pl_progress', g) : t('pl_progress_ok', g))}</div>
     ${d.published ? `<div class="small muted" style="margin-top:8px">${esc(t('pub_live'))}</div>` : ''}
     ${pn ? `<div class="warnbox" style="margin:10px 0 0">${esc(t('pending_banner', { n: pn, m: pm }))}</div>` : ''}
@@ -4376,7 +4448,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(await loadWeekTodo());   // v56
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -4745,7 +4817,7 @@ document.addEventListener('click', async ev => {
         state.token = r.token; state.me = await rpc('me', tok());
         state.receipts = []; state.rcWeek = null; state.menu = false; state.staffEdit = null;
         state.week = mondayOf(today()); state.planWeek = planWeekDefault(); state.bon = blankBon(); state.form = blankForm();
-        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null;   // v70：和员工本人登录时一样
+        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null; state.planTimes = null;   // v70：和员工本人登录时一样
         await loadCommon(); state.tab = navTabs()[0]; render(); window.scrollTo(0, 0);
       } catch(e){ toast(errText(e), true); }
       break;
@@ -4794,8 +4866,8 @@ document.addEventListener('click', async ev => {
     case 'plan-prev': { const min = planMin(); if (min && addDays(state.planWeek, -1) < min) break; state.planWeek = addDays(state.planWeek, -7); viewPlan(); break; }
     case 'plan-this': state.planWeek = mondayOf(today()); viewPlan(); break;
     case 'plan-next': state.planWeek = addDays(state.planWeek, 7); viewPlan(); break;
-    case 'plan-sub': state.planSub = el.dataset.k; planRender(); break;
-    case 'plan-area': state.planArea = el.dataset.k; viewPlan(); break;
+    case 'plan-sub': state.planSub = el.dataset.k; state.planTimes = null; planRender(); break;
+    case 'plan-area': state.planArea = el.dataset.k; state.planTimes = null; viewPlan(); break;
     case 'ke-open': keOpen({ date: el.dataset.date, store: el.dataset.store }); break;
     case 'ke-toggle': {   // 一个人只能一个岗位：选了这一栏就从别的栏去掉
       const e = state.kEd, id = el.dataset.id, r = el.dataset.role, on = e.sel[r].includes(id);
@@ -4869,7 +4941,7 @@ document.addEventListener('click', async ev => {
     case 'sd-close': $('#shiftDlg').close(); state.shiftEdit = null; state.slotEd = null; break;
     case 'se-open': {
       const tpl = state.plan.slots.find(x => x.date === el.dataset.date && x.store === el.dataset.store && x.slot === el.dataset.slot); if (!tpl) break;
-      seOpen({ date: tpl.date, store: tpl.store, slot: tpl.slot, start: tpl.start, end: tpl.end }); break;
+      seOpen({ date: tpl.date, store: tpl.store, slot: tpl.slot, start: tpl.start, end: tpl.end, times: tpl.times }); break;
     }
     case 'se-toggle': {
       const e = state.slotEd, arr = e.sel[el.dataset.role], i = arr.indexOf(el.dataset.id);
@@ -4877,13 +4949,39 @@ document.addEventListener('click', async ev => {
       seRefresh(); break;
     }
     case 'se-all': state.slotEd.showAll = true; seRender(); break;
-    case 'se-save': {
-      const e = state.slotEd; e.start = $('#se-start').value; e.end = $('#se-end').value;
-      if (!e.start || !e.end || e.end <= e.start) return toast(t('err_INVALID_TIME'), true);
+    // v75：班次时间
+    case 'stt-open': state.planTimes = true; state.stt = null; planRender(); window.scrollTo(0, 0); await sttLoad(); planRender(); break;
+    case 'stt-back': state.planTimes = null; window.scrollTo(0, 0); viewPlan(); break;   // 重新读排班（班次时间可能改了）
+    case 'stt-edit': {
+      const days = el.dataset.days.split(',').map(Number), row = (state.stt.slots || []).find(x => x.store === el.dataset.store && x.slot === el.dataset.slot && x.weekday === days[0]);
+      if (!row) break;
+      state.sttEd = { store: el.dataset.store, slot: el.dataset.slot, days, times: JSON.parse(JSON.stringify(row.times)) };
+      sttDlgRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal(); break;
+    }
+    case 'stt-day': {   // 只改按钮样子，不重画（保留已改的时间）
+      const e = state.sttEd, n = +el.dataset.d, i = e.days.indexOf(n);
+      if (i >= 0) e.days.splice(i, 1); else e.days.push(n);
+      el.classList.toggle('on', i < 0); el.setAttribute('aria-pressed', String(i < 0)); break;
+    }
+    case 'stt-save': {
+      const e = state.sttEd; ROLES.forEach(r => { e.times[r] = { start: $('#stt-s-' + r).value, end: $('#stt-e-' + r).value }; });
+      if (!e.days.length) return toast(t('stt_no_day'), true);
+      if (ROLES.some(r => !e.times[r].start || !e.times[r].end || e.times[r].end <= e.times[r].start)) return toast(t('err_INVALID_TIME'), true);
       el.disabled = true;
-      try {
-        const r = await rpc('sched_set_slot', { ...tok(), p_date: e.date, p_store: e.store, p_slot: e.slot,
-          p_service: e.sel.service, p_runner: e.sel.runner, p_bar: e.sel.bar, p_start: e.start, p_end: e.end });
+      try { const r = await rpc('shift_times_set', { ...tok(), p_store: e.store, p_slot: e.slot, p_weekdays: e.days, p_times: e.times });
+        $('#shiftDlg').close(); state.sttEd = null;
+        toast(r && r.shifts_updated ? t('stt_saved_n', { n: r.shifts_updated }) : t('stt_saved'));
+        await sttLoad(); planRender(); }
+      catch(err){ toast(errText(err), true); el.disabled = false; }
+      break;
+    }
+    case 'se-save': {
+      const e = state.slotEd; ROLES.forEach(r => { e.times[r] = { start: $('#se-s-' + r).value, end: $('#se-e-' + r).value }; });
+      if (ROLES.some(r => !e.times[r].start || !e.times[r].end || e.times[r].end <= e.times[r].start)) return toast(t('err_INVALID_TIME'), true);
+      el.disabled = true;
+      try {   // v75：每栏自己的时间（数据库 v49）
+        const r = await rpc('sched_set_slot_roles', { ...tok(), p_date: e.date, p_store: e.store, p_slot: e.slot,
+          p_service: e.sel.service, p_runner: e.sel.runner, p_bar: e.sel.bar, p_times: e.times });
         $('#shiftDlg').close(); state.slotEd = null;
         toast(r.skipped.length ? r.skipped.map(x => t('pk_skipped', { n: x.name, s: x.store })).join(' ') : t('saved'), !!r.skipped.length);
         // 已发布的周、今天或以后：给被改动的人生成通知
@@ -5182,7 +5280,7 @@ async function exitView(){
   try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
-  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null;   // v70
+  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.planTimes = null;   // v70
   await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
