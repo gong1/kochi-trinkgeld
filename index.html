@@ -1841,10 +1841,10 @@ function renderTaskRun(){
   const c = tkOpenRun();
   if (!c){ state.taskOpen = null; $('#main').innerHTML = `<div class="empty">${esc(t('tk_gone'))}</div>`; return; }
   const nm = x => state.lang === 'de' ? x.name_de : x.name_zh, hint = x => state.lang === 'de' ? x.hint_de : x.hint_zh;
-  const photo = c.need && c.need.mode === 'photo';
+  const photoRun = c.need && c.need.mode === 'photo';
   const cam = (it, label, cls) => `<label class="btn ${cls || ''} tk-cam" style="flex:1 1 45%">${esc(label)}<input type="file" accept="image/*" capture="environment" data-taskitem="${it.id}" hidden></label>`;
   const rows = c.items.map((it, i) => {
-    const l = it.last, flagged = l && l.ai && l.ai.ok === false && !l.override;
+    const l = it.last, flagged = l && l.ai && l.ai.ok === false && !l.override, photo = photoRun && !it.check_only;   // v77：只打勾的项（如 Rest 垃圾桶）不拍照
     const st = it.done ? `<div class="meta num"><span class="pos">✓</span> ${esc(t('tk_item_by', { t: fmtDateTime(l.done_at), n: l.by || '' }))}${l.evidence === 'check' ? ' · ' + esc(t('tk_item_checked')) : ''}${l.override ? ' · ' + esc(t('tk_item_override')) : ''}</div>` : '';
     const msgs = flagged ? (l.ai.msgs || []).map(m => `<div>⚠ ${esc(state.lang === 'de' ? m.de : m.zh)}</div>`).join('') : '';
     const acts = flagged ? cam(it, t('tk_retake')) + `<button class="btn ghost" style="flex:1 1 45%" data-act="task-override" data-id="${l.row_id}">${esc(t('tk_override'))}</button>`
