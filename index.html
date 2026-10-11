@@ -304,6 +304,9 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .toast.err{background:var(--neg);text-align:left;line-height:1.45;border-radius:14px;width:min(460px,90vw)}
 dialog{border:0;border-radius:var(--r-m);padding:20px;width:min(360px,92vw)}
 dialog::backdrop{background:rgba(31,42,39,.5)}
+/* v76：收店任务留言窗口 */
+.tkm-ta{height:auto;min-height:0;padding:10px 12px;font:inherit;line-height:1.45;resize:vertical}
+.pchip.tkm-chip{border-radius:12px;font-size:13px;padding:6px 10px;flex:0 1 auto;line-height:1.35}
 /* v75：班次时间 */
 .stt-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
 .stt-t{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:14px;color:var(--muted);margin-top:2px}
@@ -396,6 +399,12 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
+  // v76：收店任务留言
+  tkm_btn:'💬 给 {n} 留言', tkm_title:'给 {n} 留言', tkm_note:'哪里不对？（一句话，中文就行）', tkm_note_ph:'例如：只挂了两个袋子；袋子不满不用换',
+  tkm_c_all:'每一项都要做完再走', tkm_c_photo:'照片要拍全、拍清楚', tkm_c_ai:'AI 提示不对时，点「AI 看错了，继续」，接着做完',
+  tkm_draft:'✨ AI 起草', tkm_drafting:'AI 正在起草……', tkm_zh:'中文', tkm_de:'Deutsch', tkm_hint:'AI 只按你写的那句起草，发之前可以改；也可以不用 AI，直接写。',
+  tkm_send:'发送', tkm_sent:'已发给 {n}', tkm_line:'💬 {t} 提醒了 {n}', tkm_read:'已读 {t}', tkm_unread:'还没看',
+  msg_task_title:'老板的提醒 · 收店任务', msg_ok_task:'知道了，下次按要求做',
   // v75：班次时间
   stt_btn:'⏰ 班次时间', stt_title:'班次时间', stt_back:'← 返回排班', stt_edit:'改', stt_days:'哪几天用这组时间（点一下选中 / 取消）',
   stt_hint:'新排进班的人用这里的时间；兼岗取最早开始、最晚结束。改了以后：还没发布的周里、时间还是旧的班会跟着改；已发布的周不动（要改就点名字单独改）。',
@@ -598,6 +607,12 @@ zh: {
 },
 de: {
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
+  // v76：Nachricht zur Feierabend-Aufgabe
+  tkm_btn:'💬 Nachricht an {n}', tkm_title:'Nachricht an {n}', tkm_note:'Was war nicht richtig? (ein Satz, Chinesisch geht auch)', tkm_note_ph:'z. B.: nur zwei Säcke aufgehängt; nicht volle Säcke nicht wechseln',
+  tkm_c_all:'Jeden Punkt erledigen, bevor du gehst', tkm_c_photo:'Fotos vollständig und deutlich machen', tkm_c_ai:'Wenn die KI-Meldung falsch ist: „KI irrt sich, weiter“ tippen und fertig machen',
+  tkm_draft:'✨ KI-Entwurf', tkm_drafting:'KI schreibt den Entwurf …', tkm_zh:'中文', tkm_de:'Deutsch', tkm_hint:'Die KI schreibt nur nach deinem Satz; vor dem Senden änderbar. Du kannst auch ohne KI direkt schreiben.',
+  tkm_send:'Senden', tkm_sent:'An {n} gesendet', tkm_line:'💬 {t} Nachricht an {n}', tkm_read:'gelesen {t}', tkm_unread:'noch nicht gelesen',
+  msg_task_title:'Hinweis vom Chef · Feierabend-Aufgabe', msg_ok_task:'Verstanden, nächstes Mal mache ich es richtig',
   // v75：Schichtzeiten
   stt_btn:'⏰ Schichtzeiten', stt_title:'Schichtzeiten', stt_back:'← Zurück zum Dienstplan', stt_edit:'Ändern', stt_days:'An welchen Tagen gelten diese Zeiten? (antippen = wählen / abwählen)',
   stt_hint:'Neu eingeplante Personen bekommen diese Zeiten; bei Doppelrolle frühester Beginn bis spätestes Ende. Nach einer Änderung werden in noch nicht veröffentlichten Wochen die Schichten mit der alten Zeit angepasst; veröffentlichte Wochen bleiben unverändert (dort per Tipp auf den Namen ändern).',
@@ -1394,15 +1409,15 @@ function taskCardHTML(k){
   }
   if (k.kind === 'message'){
     const txt = state.lang === 'de' ? d.text_de : d.text_zh;
-    const title = d.ask ? t('msg_q_title') : d.feedback ? t('msg_fb_title') : t('msg_title');
+    const title = d.ask ? t('msg_q_title') : d.feedback ? t('msg_fb_title') : d.task ? t('msg_task_title') : t('msg_title');   // v76
     const btns = d.ask
       ? `<textarea class="input" id="ans-${d.id}" rows="2" placeholder="${esc(t('msg_ans_ph'))}" style="margin-top:8px"></textarea>
         <div class="row" style="margin-top:8px;flex-wrap:wrap;gap:8px"><button class="btn ghost" style="flex:1 1 30%" data-act="msg-ans" data-id="${d.id}" data-q="yes">${esc(t('msg_yes'))}</button>
           <button class="btn ghost" style="flex:1 1 30%" data-act="msg-ans" data-id="${d.id}" data-q="no">${esc(t('msg_no'))}</button>
           <button class="btn" style="flex:1 1 100%" data-act="msg-ans" data-id="${d.id}">${esc(t('msg_ans_send'))}</button></div>`
-      : `<div class="task-b"><button class="btn" data-act="msg-read" data-id="${d.id}">${esc(t('msg_ok'))}</button></div>`;
+      : `<div class="task-b"><button class="btn" data-act="msg-read" data-id="${d.id}">${esc(t(d.task ? 'msg_ok_task' : 'msg_ok'))}</button></div>`;
     return `<div class="task msg"><div class="task-t">${d.ask ? '❓' : '💬'} ${esc(title)}</div><div style="margin-top:4px;white-space:pre-wrap">${esc(txt)}</div>
-      <div class="task-s">${d.entry ? esc(t('msg_about', { d: dayLabel(d.entry.date), s: d.entry.store })) + ' · ' : ''}${esc(fmtDateTime(d.at))}</div>
+      <div class="task-s">${d.entry ? esc(t('msg_about', { d: dayLabel(d.entry.date), s: d.entry.store })) + ' · ' : ''}${d.task ? esc((state.lang === 'de' ? d.task.name_de : d.task.name_zh) + ' · ' + d.task.store + ' · ' + dayLabel(d.task.day)) + ' · ' : ''}${esc(fmtDateTime(d.at))}</div>
       ${btns}</div>`;
   }
   if (k.kind === 'notices') return `<div class="task"><div class="task-t">${esc(t('tk_notice'))}</div>${noticeHTML({ id: d.ids.join(','), kind: d.kind, week_start: d.week_start, items: d.items })}</div>`;   // v68
@@ -1686,6 +1701,7 @@ async function viewReconDay(){
   } catch(e){ $('#main').innerHTML = `<button class="link" data-act="recon-back">${esc(t('rk_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
   const entries = (ov.entries || []).filter(e => e.date === R.day && e.store === R.store);
   await Promise.all([loadXfer(entries.filter(e => e.is_bon).map(e => e.entry_id)), loadCntMethods(entries.filter(e => e.is_bon && e.counted_cents != null).map(e => e.entry_id))]);
+  state.reconDayTasks = tks || [];   // v76：留言窗口要用
   const tkHTML = tkAdminHTML((tks || []).filter(x => x.store === R.store && x.status !== 'closed'));   // v71
   const envG = env ? { ...env, groups: (env.groups || []).filter(g => g.date === R.day && g.store === R.store) } : null;
   const edit = r.can_edit, rp = r.report, sy = r.system, df = r.diff || {};
@@ -1868,6 +1884,27 @@ function tkAdminLine(x){
   if (x.status === 'missed') return '✗ ' + t('tk_adm_missed', { n: nm, p: ppl || '–' });
   return t('tk_adm_open', { n: nm, p: ppl || '–' });
 }
+// v76：可以留言给谁：这天负责的人 + 做了某一项的人
+function tkMsgPeople(x){
+  const out = (x.people || []).map(p => ({ id: p.id, name: p.name }));
+  (x.items || []).forEach(it => { const l = it.last; if (l && l.by_id && !out.some(p => p.id === l.by_id)) out.push({ id: l.by_id, name: l.by || '?' }); });
+  return out;
+}
+// v76：给员工留言的窗口：老板写一句哪里不对 →「AI 起草」中德文 → 改 → 发送
+function tkmRender(read = true){
+  const m = state.tkMsg, dlg = $('#photoDlg'); if (!m) return;
+  if (read) ['note', 'zh', 'de'].forEach(k => { const el = $('#tkm-' + k); if (el) m[k] = el.value; });   // 先记下已经写的
+  dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('tkm_title', { n: m.name }))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(m.task + ' · ' + m.store + ' · ' + dayLabel(m.day))}</div>
+    <div class="field"><label for="tkm-note">${esc(t('tkm_note'))}</label>
+      <textarea class="input tkm-ta" id="tkm-note" rows="2" maxlength="1000" placeholder="${esc(t('tkm_note_ph'))}" >${esc(m.note || '')}</textarea></div>
+    <div class="row" style="flex-wrap:wrap;gap:6px;margin:-4px 0 10px">${['tkm_c_all', 'tkm_c_photo', 'tkm_c_ai'].map(k => `<button type="button" class="pchip tkm-chip" data-act="tkm-chip" data-k="${k}">${esc(t(k))}</button>`).join('')}</div>
+    <button class="btn ghost" type="button" data-act="tkm-draft" ${m.busy ? 'disabled' : ''}>${esc(m.busy ? t('tkm_drafting') : t('tkm_draft'))}</button>
+    <div class="small muted" style="margin:6px 0 10px">${esc(t('tkm_hint'))}</div>
+    <div class="field"><label for="tkm-zh">${esc(t('tkm_zh'))}</label><textarea class="input tkm-ta" id="tkm-zh" rows="3" maxlength="1000" >${esc(m.zh || '')}</textarea></div>
+    <div class="field"><label for="tkm-de">${esc(t('tkm_de'))}</label><textarea class="input tkm-ta" id="tkm-de" rows="3" maxlength="1000" >${esc(m.de || '')}</textarea></div>
+    <div class="row"><button class="btn ghost" type="button" data-act="photo-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="tkm-send" ${m.busy ? 'disabled' : ''}>${esc(t('tkm_send'))}</button></div>`;
+}
 function tkAdminHTML(list){
   if (!(list || []).length) return '';
   return `<h3>${esc(t('tk_adm_title'))}</h3><div class="list">${list.map(x => `<div class="item">
@@ -1876,6 +1913,9 @@ function tkAdminHTML(list){
     ${x.items.map(it => { const l = it.last; return `<div class="meta">${esc(state.lang === 'de' ? it.name_de : it.name_zh)}：${l ? esc((l.evidence === 'photo' ? '📷 ' : '✓ ') + (l.by || '') + ' · ' + fmtDateTime(l.done_at))
         + (l.ai && l.ai.ok === false ? ` <span class="${l.override ? 'negc' : ''}">· ${esc(l.override ? t('tk_adm_override') : t('tk_adm_ai_bad'))}：${esc((l.ai.msgs || []).map(m => state.lang === 'de' ? m.de : m.zh).join(' '))}</span>` : '')
         + (l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') : '–'}</div>`; }).join('')}
+    ${(x.messages || []).map(m => `<div class="meta">${esc(t('tkm_line', { t: fmtDateTime(m.at), n: m.to }))} · <span class="${m.read_at ? '' : 'negc'}">${esc(m.read_at ? t('tkm_read', { t: fmtDateTime(m.read_at) }) : t('tkm_unread'))}</span>
+      <div class="small muted" style="white-space:pre-wrap">${esc(state.lang === 'de' ? m.text_de : m.text_zh)}</div></div>`).join('')}
+    <div class="acts" style="flex-wrap:wrap">${tkMsgPeople(x).map(p => `<button class="link" data-act="tkm-open" data-def="${x.def_id}" data-day="${x.day}" data-id="${p.id}" data-name="${esc(p.name)}">${esc(t('tkm_btn', { n: p.name }))}</button>`).join('')}</div>
   </div>`).join('')}</div>`;
 }
 async function lockUpload(input){
@@ -4481,6 +4521,33 @@ document.addEventListener('click', async ev => {
       if (!confirm(t('tk_override_q'))) break; el.disabled = true;
       try { const st = await rpc('task_item_override', { ...tok(), p_row: el.dataset.id }); await loadTasks();
         if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); render(); window.scrollTo(0, 0); } else keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    // v76：老板就收店任务给员工留言
+    case 'tkm-open': {
+      const x = (state.reconDayTasks || []).find(v => v.def_id === el.dataset.def && v.day === el.dataset.day); if (!x) break;
+      state.tkMsg = { def: x.def_id, day: x.day, store: x.store, task: state.lang === 'de' ? x.name_de : x.name_zh, staff: el.dataset.id, name: el.dataset.name, note: '', zh: '', de: '', busy: false };
+      tkmRender(); const dlg = $('#photoDlg'); if (!dlg.open) dlg.showModal(); break;
+    }
+    case 'tkm-chip': { const n = $('#tkm-note'); if (!n) break; const v = t(el.dataset.k); n.value = n.value.trim() ? n.value.trim() + (state.lang === 'de' ? '; ' : '；') + v : v; break; }
+    case 'tkm-draft': {
+      const m = state.tkMsg; if (!m || m.busy) break; tkmRender();   // 先记下已经写的
+      if (!(m.note || '').trim()) return toast(t('err_MESSAGE_EMPTY'), true);
+      m.busy = true; tkmRender();
+      try { const r = await callTasks({ action: 'task_msg_draft', def_id: m.def, day: m.day, name: m.name, note: m.note.trim() });
+        m.zh = r.text_zh || ''; m.de = r.text_de || ''; }
+      catch(e){ toast(errText(e), true); }
+      m.busy = false; if (state.tkMsg === m && $('#photoDlg').open) tkmRender(false);   // 用 AI 的草稿重画（不再读旧的输入框）
+      break;
+    }
+    case 'tkm-send': {
+      const m = state.tkMsg; if (!m) break; tkmRender();
+      if (!(m.zh || '').trim() && !(m.de || '').trim()) return toast(t('err_MESSAGE_EMPTY'), true);
+      el.disabled = true;
+      try { const mid = await rpc('admin_task_message', { ...tok(), p_def: m.def, p_day: m.day, p_staff_id: m.staff, p_text_zh: m.zh, p_text_de: m.de });
+        callPush('message', { message_id: mid }); $('#photoDlg').close(); state.tkMsg = null; toast(t('tkm_sent', { n: m.name }));
+        if (state.recon) keepScroll(viewReconDay); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
