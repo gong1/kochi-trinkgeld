@@ -304,6 +304,8 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .toast.err{background:var(--neg);text-align:left;line-height:1.45;border-radius:14px;width:min(460px,90vw)}
 dialog{border:0;border-radius:var(--r-m);padding:20px;width:min(360px,92vw)}
 dialog::backdrop{background:rgba(31,42,39,.5)}
+/* v79：资料库里打开文件的链接按钮 */
+a.btn{display:flex;align-items:center;justify-content:center;text-decoration:none;text-align:center}
 /* v76：收店任务留言窗口 */
 .tkm-ta{height:auto;min-height:0;padding:10px 12px;font:inherit;line-height:1.45;resize:vertical}
 .pchip.tkm-chip{border-radius:12px;font-size:13px;padding:6px 10px;flex:0 1 auto;line-height:1.35}
@@ -399,6 +401,25 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 const I18N = {
 zh: {
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
+  // v79：资料库
+  lib_more:'📚 资料', lib_title:'资料', admin_library:'资料', lib_cat_menu:'菜单', lib_cat_drinks:'酒水单', lib_cat_group_menu:'Gruppenmenü', lib_cat_lunch:'午市套餐',
+  lib_cat_sop:'SOP（工作标准）', lib_cat_other:'其他', lib_search:'搜索资料……', lib_none:'还没有资料。', lib_none_q:'没有找到。', lib_ver:'第 {n} 版 · {d}',
+  lib_tag_must:'要确认', lib_tag_ok:'已确认', lib_tag_new:'新', lib_back:'← 资料',
+  lib_lang_de:'德语', lib_lang_zh:'中文', lib_lang_en:'English', lib_lang_zh_en:'中文 / English', lib_lang_other:'其他', lib_open_file:'📄 打开 {l}',
+  lib_show_de:'看德文', lib_show_zh:'看中文', lib_confirm:'我已看过并了解 / Gelesen und verstanden', lib_confirm_first:'先打开文件看一遍，再点确认。',
+  lib_confirmed:'✓ 已确认（{t}）', lib_url_old:'链接过期了，已经更新，请再点一次。',
+  lib_tk:'📚 新资料要看：{n}', lib_tk_sub:'看完点「我已看过并了解」。', lib_tk_btn:'去看',
+  lib_new:'+ 新资料', lib_kind_file:'文件（PDF / 照片）', lib_kind_text:'文字（在这里写）', lib_f_cat:'类别', lib_f_store:'哪家店', lib_store_both:'两家',
+  lib_f_aud:'给谁看', lib_f_must:'要员工确认看过（发布时推送到手机，首页提醒到确认为止）', lib_f_tz:'标题（中文）', lib_f_td:'标题（德文）',
+  lib_f_bz:'正文（中文）', lib_f_bd:'正文（德文）', lib_f_files:'文件（PDF 或照片，每个最大 25 MB；每个选一下语言）', lib_f_add_file:'＋ 选文件',
+  lib_f_photos:'照片（可选）', lib_f_add_photo:'＋ 加照片', lib_f_remove:'去掉', lib_f_kept:'沿用上一版',
+  lib_f_replaces:'换新版：{n}（第 {v} 版）。发布后旧的标「已过期」，员工只看到新的；没去掉的文件沿用，不用重新上传。',
+  lib_publish:'发布', lib_uploading:'正在上传 {a} / {b}……', lib_published:'已发布，已推送给 {n} 人（开了手机通知的人会收到）。', lib_published0:'已发布。',
+  lib_too_big:'{n} 太大了（{s}），每个文件最大 25 MB。请让设计师导出一份「网页版 / 屏幕版」PDF。', lib_bad_type:'{n} 不是 PDF 或图片。',
+  lib_adm_conf:'已确认 {a} / {b}', lib_adm_open:'已看 {a} / {b}', lib_adm_meta:'第 {v} 版 · {n} · {t} · {a}', lib_detail:'详情', lib_remind:'再提醒一次',
+  lib_replace:'换新版', lib_archive:'撤下', lib_archive_q:'撤下「{n}」？员工就看不到了，历史里还能查到。', lib_archived:'已撤下', lib_expired:'已过期', lib_archived_ok:'已撤下',
+  lib_history:'历史（已过期 / 已撤下）（{n}）', lib_waiting:'还没确认：{m}', lib_waiting_open:'还没看：{m}', lib_all_ok:'全部确认了 ✓', lib_all_open:'全部看过了 ✓',
+  lib_reminded:'已再提醒，推送给 {n} 人。',
   // v76：收店任务留言
   tkm_btn:'💬 给 {n} 留言', tkm_title:'给 {n} 留言', tkm_note:'哪里不对？（一句话，中文就行）', tkm_note_ph:'例如：只挂了两个袋子；袋子不满不用换',
   tkm_c_all:'每一项都要做完再走', tkm_c_photo:'照片要拍全、拍清楚', tkm_c_ai:'AI 提示不对时，点「AI 看错了，继续」，接着做完',
@@ -608,6 +629,25 @@ zh: {
 },
 de: {
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
+  // v79：Unterlagen
+  lib_more:'📚 Unterlagen', lib_title:'Unterlagen', admin_library:'Unterlagen', lib_cat_menu:'Speisekarte', lib_cat_drinks:'Getränkekarte', lib_cat_group_menu:'Gruppenmenü', lib_cat_lunch:'Mittagsmenü',
+  lib_cat_sop:'SOP (Arbeitsabläufe)', lib_cat_other:'Sonstiges', lib_search:'Unterlagen durchsuchen …', lib_none:'Noch keine Unterlagen.', lib_none_q:'Nichts gefunden.', lib_ver:'Version {n} · {d}',
+  lib_tag_must:'Bitte bestätigen', lib_tag_ok:'Bestätigt', lib_tag_new:'Neu', lib_back:'← Unterlagen',
+  lib_lang_de:'Deutsch', lib_lang_zh:'Chinesisch', lib_lang_en:'Englisch', lib_lang_zh_en:'Chinesisch / Englisch', lib_lang_other:'Sonstiges', lib_open_file:'📄 {l} öffnen',
+  lib_show_de:'Auf Deutsch', lib_show_zh:'Auf Chinesisch', lib_confirm:'我已看过并了解 / Gelesen und verstanden', lib_confirm_first:'Bitte zuerst die Datei öffnen und lesen, dann bestätigen.',
+  lib_confirmed:'✓ Bestätigt ({t})', lib_url_old:'Der Link war abgelaufen und wurde erneuert – bitte nochmal tippen.',
+  lib_tk:'📚 Neue Unterlage: {n}', lib_tk_sub:'Lesen und dann „Gelesen und verstanden“ tippen.', lib_tk_btn:'Ansehen',
+  lib_new:'+ Neue Unterlage', lib_kind_file:'Datei (PDF / Foto)', lib_kind_text:'Text (hier schreiben)', lib_f_cat:'Kategorie', lib_f_store:'Restaurant', lib_store_both:'Beide',
+  lib_f_aud:'Für wen', lib_f_must:'Lesebestätigung nötig (Push beim Veröffentlichen, Hinweis auf „Heute“ bis zur Bestätigung)', lib_f_tz:'Titel (Chinesisch)', lib_f_td:'Titel (Deutsch)',
+  lib_f_bz:'Text (Chinesisch)', lib_f_bd:'Text (Deutsch)', lib_f_files:'Dateien (PDF oder Foto, je max. 25 MB; Sprache wählen)', lib_f_add_file:'＋ Datei wählen',
+  lib_f_photos:'Fotos (optional)', lib_f_add_photo:'＋ Foto hinzufügen', lib_f_remove:'Entfernen', lib_f_kept:'aus der letzten Version',
+  lib_f_replaces:'Neue Version von: {n} (Version {v}). Die alte wird „abgelaufen“, Mitarbeiter sehen nur die neue; nicht entfernte Dateien werden übernommen.',
+  lib_publish:'Veröffentlichen', lib_uploading:'Wird hochgeladen {a} / {b} …', lib_published:'Veröffentlicht, Push an {n} Personen (wer Benachrichtigungen an hat, bekommt sie).', lib_published0:'Veröffentlicht.',
+  lib_too_big:'{n} ist zu groß ({s}); max. 25 MB pro Datei. Bitte eine „Web/Bildschirm“-Version des PDFs exportieren lassen.', lib_bad_type:'{n} ist kein PDF und kein Bild.',
+  lib_adm_conf:'Bestätigt {a} / {b}', lib_adm_open:'Gelesen {a} / {b}', lib_adm_meta:'Version {v} · {n} · {t} · {a}', lib_detail:'Details', lib_remind:'Nochmal erinnern',
+  lib_replace:'Neue Version', lib_archive:'Zurückziehen', lib_archive_q:'„{n}“ zurückziehen? Mitarbeiter sehen sie dann nicht mehr; in der Historie bleibt sie.', lib_archived:'Zurückgezogen', lib_expired:'Abgelaufen', lib_archived_ok:'Zurückgezogen',
+  lib_history:'Historie (abgelaufen / zurückgezogen) ({n})', lib_waiting:'Noch nicht bestätigt: {m}', lib_waiting_open:'Noch nicht gelesen: {m}', lib_all_ok:'Alle haben bestätigt ✓', lib_all_open:'Alle haben gelesen ✓',
+  lib_reminded:'Erinnerung gesendet, Push an {n} Personen.',
   // v76：Nachricht zur Feierabend-Aufgabe
   tkm_btn:'💬 Nachricht an {n}', tkm_title:'Nachricht an {n}', tkm_note:'Was war nicht richtig? (ein Satz, Chinesisch geht auch)', tkm_note_ph:'z. B.: nur zwei Säcke aufgehängt; nicht volle Säcke nicht wechseln',
   tkm_c_all:'Jeden Punkt erledigen, bevor du gehst', tkm_c_photo:'Fotos vollständig und deutlich machen', tkm_c_ai:'Wenn die KI-Meldung falsch ist: „KI irrt sich, weiter“ tippen und fertig machen',
@@ -1033,6 +1073,11 @@ const ERR_ZH = {
   ANSWER_EMPTY: '回答是空的。请写一句，或者点「是」/「不是」。',
   ANNOUNCE_EMPTY: '公告是空的：标题和正文至少要写一种语言。也可以先用「AI 起草」。',
   ANNOUNCE_NO_TARGET: '这条公告没有收件人：请选「指定的人」里至少一个人，或换成前场 / 厨房 / 所有人。',
+  LIB_EMPTY: '资料不完整：要有标题；文件资料至少一个文件，文字资料要写正文。',
+  LIB_FILE_BAD: '文件不对：只能是 PDF 或图片。请重新选文件再发布。',
+  LIB_FILE_TOO_BIG: '文件太大：每个最大 25 MB。请导出小一点的版本（网页版 / 屏幕版 PDF）。',
+  LIB_UPLOAD_FAILED: '上传失败：请检查网络后再点「发布」（已经传好的文件不用重传）。',
+  LIB_REPLACED: '这份资料已经换了新版或被撤下了：请刷新后再操作。',
   MESSAGE_ANSWERED: '这个问题已经回答过了。如果还要补充，请直接找老板。',
   MESSAGE_TOO_LONG: '留言太长了，请写短一点。',
   LOGIN_FAILED: 'PIN 不对。连续输错 5 次会锁定 15 分钟。忘记 PIN 请点下面「忘记 PIN？」。',
@@ -1154,6 +1199,11 @@ const ERR_DE = {
   ANSWER_EMPTY: 'Die Antwort ist leer. Bitte einen Satz schreiben oder „Ja“ / „Nein“ tippen.',
   ANNOUNCE_EMPTY: 'Die Mitteilung ist leer: Titel und Text in mindestens einer Sprache ausfüllen – oder zuerst „Mit KI entwerfen“.',
   ANNOUNCE_NO_TARGET: 'Diese Mitteilung hat keine Empfänger: bei „Bestimmte Personen“ mindestens eine Person wählen oder Service / Küche / Alle nehmen.',
+  LIB_EMPTY: 'Unvollständig: Titel nötig; bei Datei mindestens eine Datei, bei Text ein Text.',
+  LIB_FILE_BAD: 'Ungültige Datei: nur PDF oder Bild. Bitte Datei neu wählen und nochmal veröffentlichen.',
+  LIB_FILE_TOO_BIG: 'Datei zu groß: max. 25 MB. Bitte eine kleinere Version exportieren (Web-/Bildschirm-PDF).',
+  LIB_UPLOAD_FAILED: 'Hochladen fehlgeschlagen: bitte Verbindung prüfen und nochmal „Veröffentlichen“ (schon hochgeladene Dateien werden nicht erneut geladen).',
+  LIB_REPLACED: 'Diese Unterlage wurde schon ersetzt oder zurückgezogen: bitte neu laden.',
   MESSAGE_ANSWERED: 'Diese Frage wurde schon beantwortet. Für Ergänzungen bitte direkt den Chef ansprechen.',
   MESSAGE_TOO_LONG: 'Die Nachricht ist zu lang. Bitte kürzer fassen.',
   LOGIN_FAILED: 'PIN falsch. Nach 5 Fehlversuchen wird für 15 Minuten gesperrt. PIN vergessen? Unten auf „PIN vergessen?“ tippen.',
@@ -1345,9 +1395,10 @@ function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 async function loadTasks(){
   if (!state.me || state.me.is_kitchen){ state.tasks = null; state.closing = null; return; }
   const NO = Symbol();
-  const [tk, cl] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null)]);   // v31 之前没有；v71：收店任务
+  const [tk, cl, lb] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
+    state.me.is_admin ? null : soft(rpc('my_library', tok()), null)]);   // v79：资料（要确认的放进「今天」）
   if (tk === NO) state.tasks = null; else { state.tasks = tk; state.tasksAt = Date.now(); }
-  state.closing = cl || [];
+  state.closing = cl || []; state.lib = lb;
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
 function viewTasks(){
@@ -1376,6 +1427,8 @@ function viewTasks(){
   });
   // v71：收店任务（my_store_tasks）
   (state.closing || []).forEach(c => out.push({ kind: 'closing', scope: 'personal', day: c.day, due: c.due, status: c.status, data: c }));
+  // v79：要确认、还没确认的资料
+  (state.lib || []).filter(x => x.must_confirm && !x.confirmed_at).forEach(x => out.push({ kind: 'library', scope: 'personal', day: bt, status: 'now', data: x }));
   return out;
 }
 function taskCount(st){ const ts = viewTasks(); return ts.filter(x => st ? x.status === st : ['overdue', 'now'].includes(x.status)).length; }
@@ -1383,6 +1436,8 @@ function shiftLine(x){ return `${storeTag(x.store)} <strong>${esc(slotLabel(x.sl
 function taskCardHTML(k){
   const d = k.data || {}, card = (cls, title, sub, btns) => `<div class="task ${cls}"><div class="task-t">${title}</div>${sub ? `<div class="task-s">${esc(sub)}</div>` : ''}${btns ? `<div class="task-b">${btns}</div>` : ''}</div>`;
   const cls = k.status === 'overdue' ? 'bad' : k.status === 'later' ? 'later' : '';
+  if (k.kind === 'library')   // v79
+    return card('', esc(t('lib_tk', { n: annT(d, 'title') })), t('lib_tk_sub'), `<button class="btn" data-act="lib-open" data-id="${d.id}">${esc(t('lib_tk_btn'))}</button>`);
   if (k.kind === 'bon_missing')
     return card('bad', esc(t('tk_bon_missing', { d: dayLabel(d.date), s: d.store, sl: slotsText(d.slots) })), t('tk_bon_missing_sub'),
       `<button class="btn" data-act="miss-go" data-title="${esc(t('tk_bon_missing', { d: dayLabel(d.date), s: d.store, sl: slotsText(d.slots) }))}">${esc(t('tk_bon_btn'))}</button>`);
@@ -1947,11 +2002,12 @@ async function lockUpload(input){
   } catch(e){ toast(errText(e), true); render(); }
 }
 function viewMore(){
+  if (state.libView) return viewLibrary();   // v79：资料
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
   $('#main').innerHTML = `<h2 style="margin-top:4px">${esc(t('more_title'))}</h2><div class="more">
     ${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
-    ${state.me.is_admin ? '' : b('more-ann', t('an_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
+    ${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
@@ -3352,7 +3408,7 @@ function admMoreHTML(){
     + ADMIN_MORE.map(k => b('admin-more', `data-sub="${k}"`, t('admin_' + k), state.adminSub === k)).join('') + `</div>`;
 }
 async function viewAdmin(){
-  const subs = ['requests', 'feedback', 'notice', 'expense', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
+  const subs = ['requests', 'feedback', 'notice', 'library', 'expense', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
   const segHTML = c => `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}${c && c[s] ? ` <span class="tag pend" style="margin:0 0 0 4px">${c[s]}</span>` : ''}</button>`).join('')}</div>`;
   $('#main').innerHTML = segHTML(state.adminCounts) + `<div id="asub"><div class="loading">${esc(t('loading'))}</div></div>` + admMoreHTML();
   const c = state.adminCounts = await adminCounts();
@@ -3404,6 +3460,9 @@ async function viewAdmin(){
     } else if (state.adminSub === 'notice'){   // v64：公告
       state.annList = await rpc('admin_announce_list', tok()) || [];
       el().innerHTML = annAdminHTML();
+    } else if (state.adminSub === 'library'){   // v79：资料
+      state.libAdmin = await rpc('admin_library_list', tok()) || [];
+      el().innerHTML = libAdminHTML();
     } else if (state.adminSub === 'archive'){
       el().innerHTML = arcAdminHTML(await loadArchives());
     } else if (state.adminSub === 'deleted'){
@@ -3857,6 +3916,166 @@ async function expAdminHTML(){
       <div class="meta">${esc(+x.items ? t('ex_adm_row', { x: eur(x.balance_cents), n: x.items, d: x.oldest ? dayLabel(x.oldest) : '–' }) : t('ex_adm_row0', { x: eur(x.balance_cents) }))}</div>
       ${+x.unconfirmed ? `<div class="meta negc">${esc(t('ex_adm_unconf', { n: x.unconfirmed }))}</div>` : ''}</div>
       <div class="amt num ${x.balance_cents >= 2000 ? 'negc' : ''}">${eur(x.balance_cents)}</div></div></div>`).join('') || `<div class="empty">${esc(t('ex_adm_none'))}</div>`}</div>`;
+}
+// ============ 资料库（v79，老板 2026-10-11 决定）============
+// 文件资料（PDF / 照片，例如菜单有德语、中文 / English 两份）和文字资料（SOP，在 App 里写）。员工在「更多 → 资料」看，要确认的「今天」提醒；
+// 老板在「管理 → 资料」上传、换新版（没去掉的文件沿用）、撤下、看谁确认了、再提醒。文件经文件服务 tasks v4 的临时链接上传和打开。
+const LIB_CATS = ['menu', 'drinks', 'group_menu', 'lunch', 'sop', 'other'], LIB_LANGS = ['de', 'zh_en', 'zh', 'en', 'other'];
+const libSize = b => !b ? '' : b >= 1048576 ? (b / 1048576).toFixed(1).replace('.', state.lang === 'de' ? ',' : '.') + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB';
+const libDay = x => dayLabel(String(x.created_at).slice(0, 10));
+const libTitle = x => `${x.kind === 'text' ? '📝' : '📄'} ${esc(annT(x, 'title'))}${x.store && x.store !== 'both' ? storeTag(x.store) : ''}`;
+function libMark(id, k){ const l = (state.lib || []).find(v => v.id === id), now = new Date().toISOString(); if (l){ l[k] = l[k] || now; if (k === 'confirmed_at') l.opened_at = l.opened_at || now; } }
+// 员工：资料列表 / 一份资料
+async function viewLibrary(){
+  const v = state.libView;
+  if (v !== 'list') return viewLibItem(v);
+  $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  state.lib = await soft(rpc('my_library', tok()), state.lib || []);
+  if (state.tab !== 'more' || state.libView !== 'list') return;
+  $('#main').innerHTML = `<button class="link" data-act="lib-back-more" style="margin:2px 0 8px">← ${esc(t('more_title'))}</button><h2 style="margin-top:4px">${esc(t('lib_title'))}</h2>
+    <input class="input" id="lib-q" placeholder="${esc(t('lib_search'))}" value="${esc(state.libQ || '')}" style="margin-bottom:6px">
+    <div id="lib-list">${libListHTML(state.lib || [], state.libQ)}</div>`;
+}
+function libListHTML(L, q){
+  const ql = String(q || '').trim().toLowerCase(), hit = x => !ql || [x.title_zh, x.title_de].some(v => String(v || '').toLowerCase().includes(ql));
+  const html = LIB_CATS.map(c => { const xs = L.filter(x => x.category === c && hit(x)); if (!xs.length) return '';
+    return `<h3>${esc(t('lib_cat_' + c))}</h3><div class="list">${xs.map(x => `<div class="item" data-act="lib-open" data-id="${x.id}" style="cursor:pointer"><div class="top">
+        <div><strong>${libTitle(x)}</strong><div class="meta">${esc(t('lib_ver', { n: x.version, d: libDay(x) }))}</div></div>
+        ${x.must_confirm && !x.confirmed_at ? `<span class="tag bad">${esc(t('lib_tag_must'))}</span>` : x.confirmed_at ? `<span class="tag ok">${esc(t('lib_tag_ok'))}</span>` : !x.opened_at ? `<span class="tag pend">${esc(t('lib_tag_new'))}</span>` : ''}</div></div>`).join('')}</div>`; }).join('');
+  return html || `<div class="empty">${esc(L.length ? t('lib_none_q') : t('lib_none'))}</div>`;
+}
+document.addEventListener('input', ev => {
+  if (ev.target.id !== 'lib-q') return;
+  state.libQ = ev.target.value; const box = $('#lib-list'); if (box) box.innerHTML = libListHTML(state.lib || [], state.libQ);
+});
+async function libUrls(x){
+  const ids = (x.files || []).map(f => f.id); x.urls = {}; x.urlsAt = Date.now();
+  if (ids.length) try { x.urls = (await callTasks({ action: 'lib_file_urls', file_ids: ids })).urls || {}; } catch(e){ toast(errText(e), true); }
+}
+async function viewLibItem(id){
+  $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let x; try { x = await rpc('library_item', { ...tok(), p_id: id }); }
+  catch(e){ $('#main').innerHTML = `<button class="link" data-act="lib-list">${esc(t('lib_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  await libUrls(x);
+  if (state.libView !== id) return;
+  state.libItem = x;
+  if (x.kind === 'text' && !x.opened_at && !state.viewAs && !state.me.is_admin){   // 文字资料：打开就算看过
+    soft(rpc('library_open', { ...tok(), p_id: id }), null); x.opened_at = new Date().toISOString(); libMark(id, 'opened_at');
+  }
+  renderLibItem();
+}
+function renderLibItem(){
+  const x = state.libItem; if (!x || state.libView !== x.id || state.tab !== 'more') return;
+  const docs = (x.files || []).filter(f => f.lang !== 'photo'), photos = (x.files || []).filter(f => f.lang === 'photo'), u = x.urls || {};
+  const lang = state.libLang || (state.lang === 'de' ? 'de' : 'zh'), other = lang === 'de' ? 'zh' : 'de';
+  const body = x['body_' + lang] || x['body_' + other] || '', can = x.kind === 'text' || !!x.opened_at;
+  $('#main').innerHTML = `<button class="link" data-act="lib-list" style="margin:2px 0 8px">${esc(t('lib_back'))}</button>
+    <h2 style="margin:4px 0 2px">${libTitle(x)}</h2>
+    <div class="meta" style="margin-bottom:12px">${esc(t('lib_cat_' + x.category))} · ${esc(t('lib_ver', { n: x.version, d: libDay(x) }))}</div>
+    ${docs.map(f => u[f.id] ? `<a class="btn ghost" style="margin-bottom:8px" href="${esc(u[f.id])}" target="_blank" rel="noopener" data-act="lib-file">${esc(t('lib_open_file', { l: t('lib_lang_' + f.lang) }))}${f.bytes ? ' · ' + esc(libSize(f.bytes)) : ''}</a>` : '').join('')}
+    ${x.kind === 'text' ? `${x.body_zh && x.body_de ? `<div style="text-align:right"><button class="link" data-act="lib-lang" data-k="${other}">${esc(t(other === 'de' ? 'lib_show_de' : 'lib_show_zh'))}</button></div>` : ''}
+      <div class="sheet" style="white-space:pre-wrap;line-height:1.6">${esc(body)}</div>` : ''}
+    ${photos.map(f => u[f.id] ? `<img src="${esc(u[f.id])}" alt="" style="width:100%;border-radius:8px;margin:6px 0">` : '').join('')}
+    ${x.must_confirm && !state.me.is_admin ? (x.confirmed_at ? `<div class="infobox" style="border-color:var(--celadon)">${esc(t('lib_confirmed', { t: fmtDateTime(x.confirmed_at) }))}</div>`
+      : `${can ? '' : `<div class="small muted" style="margin:8px 0">${esc(t('lib_confirm_first'))}</div>`}<button class="btn" style="margin-top:8px" data-act="lib-confirm" data-id="${x.id}" ${can ? '' : 'disabled'}>${esc(t('lib_confirm'))}</button>`) : ''}`;
+}
+// 老板：管理 → 资料
+function libAdminHTML(){
+  const F = state.libForm; if (F) return libFormHTML(F);
+  const L = state.libAdmin || [], cur = L.filter(x => x.current), old = L.filter(x => !x.current);
+  const card = x => { const D = (state.libDet || {})[x.id];
+    const tag = !x.current ? `<span class="tag off">${esc(t(x.archived_at ? 'lib_archived' : 'lib_expired'))}</span>`
+      : x.must_confirm ? `<span class="tag ${+x.confirmed >= +x.targets ? 'ok' : 'pend'}">${esc(t('lib_adm_conf', { a: x.confirmed, b: x.targets }))}</span>`
+      : `<span class="tag off">${esc(t('lib_adm_open', { a: x.opened, b: x.targets }))}</span>`;
+    return `<div class="item"><div class="top"><div><strong>${libTitle(x)}</strong>
+        <div class="meta">${esc(t('lib_adm_meta', { v: x.version, n: x.by, t: fmtDateTime(x.created_at), a: t('an_aud_' + x.audience) }))}</div></div>${tag}</div>
+      ${D ? libDetHTML(x, D) : ''}
+      <div class="acts" style="flex-wrap:wrap"><button class="link" data-act="lib-adm-detail" data-id="${x.id}">${esc(t('lib_detail'))}</button>
+        ${x.current && x.must_confirm && +x.confirmed < +x.targets ? `<button class="link" data-act="lib-remind" data-id="${x.id}">${esc(t('lib_remind'))}</button>` : ''}
+        ${x.current ? `<button class="link" data-act="lib-replace" data-id="${x.id}">${esc(t('lib_replace'))}</button><button class="link danger" data-act="lib-archive" data-id="${x.id}">${esc(t('lib_archive'))}</button>` : ''}</div></div>`; };
+  const grp = LIB_CATS.map(c => { const xs = cur.filter(x => x.category === c); return xs.length ? `<h3>${esc(t('lib_cat_' + c))}</h3><div class="list">${xs.map(card).join('')}</div>` : ''; }).join('');
+  return `<button class="btn ghost" data-act="lib-new" style="margin-bottom:14px">${esc(t('lib_new'))}</button>` + (grp || `<div class="empty">${esc(t('lib_none'))}</div>`)
+    + (old.length ? `<details class="fold" style="margin-top:16px"><summary>${esc(t('lib_history', { n: old.length }))}</summary><div class="inner"><div class="list">${old.map(card).join('')}</div></div></details>` : '');
+}
+function libDetHTML(x, D){
+  const ppl = D.people || [], wait = ppl.filter(p => !(x.must_confirm ? p.confirmed_at : p.opened_at)), u = D.urls || {};
+  const docs = (D.files || []).filter(f => f.lang !== 'photo'), photos = (D.files || []).filter(f => f.lang === 'photo');
+  return `<div style="margin:8px 0">${docs.map(f => u[f.id] ? `<a class="link" style="display:block;margin:4px 0" href="${esc(u[f.id])}" target="_blank" rel="noopener">${esc(t('lib_open_file', { l: t('lib_lang_' + f.lang) }))} · ${esc(f.name)}${f.bytes ? ' · ' + esc(libSize(f.bytes)) : ''}</a>` : '').join('')}
+    ${D.kind === 'text' ? `<div style="white-space:pre-wrap;margin:6px 0">${esc(annT(D, 'body'))}</div>` : ''}
+    ${photos.map(f => u[f.id] ? `<img src="${esc(u[f.id])}" alt="" style="max-width:100%;border-radius:8px;margin:4px 0">` : '').join('')}
+    ${x.current ? `<div class="small ${wait.length ? 'negc' : 'pos'}" style="margin:6px 0">${esc(wait.length ? t(x.must_confirm ? 'lib_waiting' : 'lib_waiting_open', { m: wait.map(p => p.name + (state.pushMap && !state.pushMap[p.id] ? t('an_nopush') : '')).join('、') }) : t(x.must_confirm ? 'lib_all_ok' : 'lib_all_open'))}</div>` : ''}
+    ${ppl.filter(p => p.confirmed_at || p.opened_at).map(p => `<div class="small muted">${esc(p.name)} ${p.confirmed_at ? '✓ ' + esc(fmtDateTime(p.confirmed_at)) : '👁 ' + esc(fmtDateTime(p.opened_at))}</div>`).join('')}</div>`;
+}
+function libFormHTML(F){
+  const v = k => esc(F[k] || ''), people = (state.loginStaff || []).filter(x => !x.is_kitchen);
+  const row = (f, i, k) => `<div class="item" style="padding:8px 10px"><div class="top"><div style="min-width:0"><strong style="word-break:break-all">${esc(f.name)}</strong>
+      <span class="muted small">${esc(libSize(f.size || f.bytes))}${f.path && !f.file ? ' · ' + esc(t('lib_f_kept')) : ''}</span></div>
+      <button class="link danger" type="button" data-act="lib-f-rm" data-k="${k}" data-i="${i}">${esc(t('lib_f_remove'))}</button></div>
+    ${k === 'files' ? `<select class="input lib-lang" data-i="${i}" style="margin-top:6px">${LIB_LANGS.map(l => `<option value="${l}" ${f.lang === l ? 'selected' : ''}>${esc(t('lib_lang_' + l))}</option>`).join('')}</select>`
+      : f.url ? `<img src="${esc(f.url)}" alt="" style="max-width:120px;border-radius:6px;margin-top:6px">` : ''}</div>`;
+  return `<div class="sheet">
+    ${F.replaces ? `<div class="infobox">${esc(t('lib_f_replaces', { n: F.repTitle, v: F.repVer }))}</div>` : ''}
+    <div class="seg sm" style="margin-bottom:10px">${['file', 'text'].map(k => `<button data-act="lib-kind" data-k="${k}" class="${F.kind === k ? 'on' : ''}">${esc(t('lib_kind_' + k))}</button>`).join('')}</div>
+    <div class="field"><label for="lib-cat">${esc(t('lib_f_cat'))}</label><select class="input" id="lib-cat">${LIB_CATS.map(c => `<option value="${c}" ${F.category === c ? 'selected' : ''}>${esc(t('lib_cat_' + c))}</option>`).join('')}</select></div>
+    <div class="grp-t">${esc(t('lib_f_store'))}</div>
+    <div class="seg sm" style="margin:6px 0 10px">${['both', 'Flingern', 'Bismarck'].map(k => `<button data-act="lib-store" data-k="${k}" class="${F.store === k ? 'on' : ''}">${esc(k === 'both' ? t('lib_store_both') : k)}</button>`).join('')}</div>
+    <div class="field"><label for="lib-tz">${esc(t('lib_f_tz'))}</label><input class="input" id="lib-tz" value="${v('title_zh')}"></div>
+    <div class="field"><label for="lib-td">${esc(t('lib_f_td'))}</label><input class="input" id="lib-td" value="${v('title_de')}"></div>
+    ${F.kind === 'file' ? `<div class="grp-t">${esc(t('lib_f_files'))}</div><div class="list" style="margin:6px 0">${F.files.map((f, i) => row(f, i, 'files')).join('')}</div>
+        <label class="btn ghost" style="cursor:pointer">${esc(t('lib_f_add_file'))}<input type="file" accept="application/pdf,image/*" multiple data-libfile="1" hidden></label>`
+      : `<div class="field"><label for="lib-bz">${esc(t('lib_f_bz'))}</label><textarea class="input tkm-ta" id="lib-bz" rows="10">${v('body_zh')}</textarea></div>
+        <div class="field"><label for="lib-bd">${esc(t('lib_f_bd'))}</label><textarea class="input tkm-ta" id="lib-bd" rows="10">${v('body_de')}</textarea></div>
+        <div class="grp-t">${esc(t('lib_f_photos'))}</div><div class="list" style="margin:6px 0">${F.photos.map((f, i) => row(f, i, 'photos')).join('')}</div>
+        <label class="btn ghost" style="cursor:pointer">${esc(t('lib_f_add_photo'))}<input type="file" accept="image/*" multiple data-libphoto="1" hidden></label>`}
+    <div class="grp-t" style="margin-top:12px">${esc(t('lib_f_aud'))}</div>
+    <div class="seg sm" style="margin:6px 0">${['front', 'kitchen', 'all', 'custom'].map(k => `<button data-act="lib-aud" data-k="${k}" class="${F.audience === k ? 'on' : ''}">${esc(t('an_aud_' + k))}</button>`).join('')}</div>
+    ${F.audience === 'custom' ? `<div class="small" style="margin:6px 0">${people.map(x => `<label class="check" style="display:inline-flex;margin:0 12px 6px 0"><input type="checkbox" class="lib-who" value="${x.id}" ${(F.ids || []).includes(x.id) ? 'checked' : ''}> ${esc(x.name)}</label>`).join('')}</div>` : ''}
+    <label class="check" style="margin:10px 0"><input type="checkbox" id="lib-must" ${F.must ? 'checked' : ''}> ${esc(t('lib_f_must'))}</label>
+    ${F.busy ? `<div class="loading" id="lib-busy">${esc(F.busy)}</div>` : `<div class="row" style="margin-top:10px"><button class="btn ghost" data-act="lib-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="lib-publish">${esc(t('lib_publish'))}</button></div>`}</div>`;
+}
+// 表格里的内容先存进 state，重画时不丢
+function libKeep(){
+  const F = state.libForm; if (!F) return;
+  [['title_zh', 'lib-tz'], ['title_de', 'lib-td'], ['body_zh', 'lib-bz'], ['body_de', 'lib-bd'], ['category', 'lib-cat']].forEach(([k, id]) => { const e = document.getElementById(id); if (e) F[k] = e.value; });
+  const m = document.getElementById('lib-must'); if (m) F.must = m.checked;
+  document.querySelectorAll('.lib-lang').forEach(x => { const f = F.files[+x.dataset.i]; if (f) f.lang = x.value; });
+  if (F.audience === 'custom') F.ids = [...document.querySelectorAll('.lib-who:checked')].map(x => x.value);
+}
+// 按文件名猜语言：有 de / deutsch → 德语；有 cn / zh / chin / en / engl → 中文 / English；猜不出：第一个德语，后面的中文 / English
+function libGuessLang(name, have){
+  const n = String(name || '').toLowerCase();
+  if (/(^|[^a-z])(de|deu|deutsch|german)([^a-z]|$)/.test(n)) return 'de';
+  if (/(^|[^a-z])(cn|zh|chn|chin|chinese|en|eng|engl|english)([^a-z]|$)|中文|英文/.test(n)) return 'zh_en';
+  return have.length ? 'zh_en' : 'de';
+}
+async function libPublish(){
+  libKeep(); const F = state.libForm; if (!F || F.busy) return;
+  if (!(F.title_zh || '').trim() && !(F.title_de || '').trim()) return toast(t('err_LIB_EMPTY'), true);
+  if (F.kind === 'file' && !F.files.length) return toast(t('err_LIB_EMPTY'), true);
+  if (F.kind === 'text' && !(F.body_zh || '').trim() && !(F.body_de || '').trim()) return toast(t('err_LIB_EMPTY'), true);
+  const list = F.kind === 'file' ? F.files : F.photos, todo = list.filter(f => !f.path);
+  try {
+    if (todo.length){
+      F.busy = t('lib_uploading', { a: 0, b: todo.length }); keepScroll(render);
+      const r = await callTasks({ action: 'lib_upload_urls', files: todo.map(f => ({ name: f.name, size: f.size, type: f.type })) });
+      for (let i = 0; i < todo.length; i++){
+        F.busy = t('lib_uploading', { a: i + 1, b: todo.length }); const b = $('#lib-busy'); if (b) b.textContent = F.busy;
+        const u = (r.files || [])[i]; if (!u) throw new Error('LIB_UPLOAD_FAILED');
+        const { error } = await sb.storage.from('library').uploadToSignedUrl(u.path, u.token, todo[i].file, { contentType: todo[i].type });
+        if (error) throw new Error('LIB_UPLOAD_FAILED');
+        todo[i].path = u.path;   // 传好的记住，出错重试时不用再传
+      }
+    }
+    const id = await rpc('admin_library_create', { ...tok(), p_kind: F.kind, p_category: F.category, p_store: F.store,
+      p_title_zh: (F.title_zh || '').trim() || null, p_title_de: (F.title_de || '').trim() || null,
+      p_body_zh: F.kind === 'text' ? (F.body_zh || '').trim() || null : null, p_body_de: F.kind === 'text' ? (F.body_de || '').trim() || null : null,
+      p_audience: F.audience, p_staff_ids: F.audience === 'custom' ? F.ids || [] : null, p_must_confirm: !!F.must, p_replaces: F.replaces || null,
+      p_files: list.map(f => ({ path: f.path, name: f.name, lang: F.kind === 'file' ? f.lang : 'photo', mime: f.type || f.mime || null, bytes: f.size || f.bytes || null })) });
+    state.libForm = null; state.libDet = {};
+    const p = F.must ? await callPush('library', { item_id: id }) : null;
+    toast(p && p.people !== undefined ? t('lib_published', { n: p.people }) : t('lib_published0'));
+    keepScroll(render);
+  } catch(e){ F.busy = null; toast(errText(e), true); keepScroll(render); }
 }
 // ============ 公告（v64，老板 2026-10-09 决定）============
 const annT = (a, k) => (state.lang === 'de' ? a[k + '_de'] || a[k + '_zh'] : a[k + '_zh'] || a[k + '_de']) || '';
@@ -4497,7 +4716,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(await loadWeekTodo());   // v56
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.libView = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -4732,6 +4951,63 @@ document.addEventListener('click', async ev => {
       break;
     }
     // v64：公告
+    // v79：资料库
+    case 'more-lib': state.libView = 'list'; state.libQ = ''; render(); window.scrollTo(0, 0); break;
+    case 'lib-back-more': state.libView = null; render(); window.scrollTo(0, 0); break;
+    case 'lib-open': state.tab = 'more'; state.libView = el.dataset.id; state.libLang = null; state.done = null; state.recon = null; render(); window.scrollTo(0, 0); break;
+    case 'lib-list': state.libView = 'list'; render(); window.scrollTo(0, 0); break;
+    case 'lib-lang': state.libLang = el.dataset.k; renderLibItem(); break;
+    case 'lib-file': {   // 不挡链接（照常在新页面打开）；链接快过期了就先换新的
+      const x = state.libItem; if (!x) break;
+      if (Date.now() - (x.urlsAt || 0) > 9 * 60e3){ ev.preventDefault(); await libUrls(x); renderLibItem(); toast(t('lib_url_old')); break; }
+      if (!x.opened_at && !state.viewAs && !state.me.is_admin){ soft(rpc('library_open', { ...tok(), p_id: x.id }), null); x.opened_at = new Date().toISOString(); libMark(x.id, 'opened_at'); setTimeout(renderLibItem, 300); }
+      break;
+    }
+    case 'lib-confirm': {
+      el.disabled = true;
+      try { await rpc('library_confirm', { ...tok(), p_id: el.dataset.id });
+        const x = state.libItem; if (x && x.id === el.dataset.id){ x.confirmed_at = new Date().toISOString(); x.opened_at = x.opened_at || x.confirmed_at; }
+        libMark(el.dataset.id, 'confirmed_at'); toast(t('saved')); renderLibItem(); refreshTodayBadge(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'lib-new': state.libForm = { kind: 'file', category: 'menu', store: 'both', audience: 'all', must: true, ids: [], files: [], photos: [] }; keepScroll(render); break;
+    case 'lib-cancel': state.libForm = null; keepScroll(render); break;
+    case 'lib-kind': libKeep(); state.libForm.kind = el.dataset.k; keepScroll(render); break;
+    case 'lib-store': libKeep(); state.libForm.store = el.dataset.k; keepScroll(render); break;
+    case 'lib-aud': libKeep(); state.libForm.audience = el.dataset.k; keepScroll(render); break;
+    case 'lib-f-rm': libKeep(); state.libForm[el.dataset.k].splice(+el.dataset.i, 1); keepScroll(render); break;
+    case 'lib-publish': libPublish(); break;
+    case 'lib-adm-detail': {
+      const id = el.dataset.id; state.libDet = state.libDet || {};
+      if (state.libDet[id]){ delete state.libDet[id]; keepScroll(render); break; }
+      try { const [D, pm] = await Promise.all([rpc('admin_library_detail', { ...tok(), p_id: id }), soft(rpc('push_status', tok()), null)]);
+        if (pm) state.pushMap = pm; await libUrls(D); state.libDet[id] = D; keepScroll(render); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'lib-remind': {
+      el.disabled = true; const p = await callPush('library', { item_id: el.dataset.id, remind: true });
+      toast(t('lib_reminded', { n: (p && p.people) || 0 })); el.disabled = false; break;
+    }
+    case 'lib-replace': {
+      try { const D = await rpc('admin_library_detail', { ...tok(), p_id: el.dataset.id });
+        const keep = (D.files || []).map(f => ({ path: f.path, name: f.name, bytes: f.bytes, mime: f.mime, type: f.mime, lang: f.lang }));
+        state.libForm = { kind: D.kind, category: D.category, store: D.store, audience: D.audience, ids: D.staff_ids || [], must: D.must_confirm,
+          title_zh: D.title_zh, title_de: D.title_de, body_zh: D.body_zh, body_de: D.body_de,
+          files: D.kind === 'file' ? keep.filter(f => f.lang !== 'photo') : [], photos: D.kind === 'text' ? keep.filter(f => f.lang === 'photo') : [],
+          replaces: D.id, repTitle: annT(D, 'title'), repVer: D.version };
+        render(); window.scrollTo(0, 0); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'lib-archive': {
+      const x = (state.libAdmin || []).find(v => v.id === el.dataset.id); if (!x) break;
+      if (!confirm(t('lib_archive_q', { n: annT(x, 'title') }))) break;
+      try { await rpc('admin_library_archive', { ...tok(), p_id: x.id, p_note: null }); toast(t('lib_archived_ok')); keepScroll(render); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'more-ann': viewAnnounceList(); window.scrollTo(0, 0); break;
     case 'an-ack': {
       if (state.annGuard && (Date.now() < state.annGuard.until || !state.annGuard.scrolled)) break;   // v73：还没读完
@@ -4893,7 +5169,7 @@ document.addEventListener('click', async ev => {
         state.token = r.token; state.me = await rpc('me', tok());
         state.receipts = []; state.rcWeek = null; state.menu = false; state.staffEdit = null;
         state.week = mondayOf(today()); state.planWeek = planWeekDefault(); state.bon = blankBon(); state.form = blankForm();
-        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null; state.planTimes = null;   // v70：和员工本人登录时一样
+        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null; state.planTimes = null; state.libView = null;   // v70：和员工本人登录时一样
         await loadCommon(); state.tab = navTabs()[0]; render(); window.scrollTo(0, 0);
       } catch(e){ toast(errText(e), true); }
       break;
@@ -5250,6 +5526,23 @@ document.addEventListener('change', async ev => {
     const N = state.expNew = { photo, busy: true, day: bizToday(), store: LS.get('exStore') || null };
     state.tab = 'today'; state.recon = null; render(); window.scrollTo(0, 0); expRead(N); return;
   }
+  if (ev.target.dataset && ev.target.dataset.libfile && ev.target.files){   // v79：资料的文件（PDF / 图片原样上传，最大 25 MB）
+    libKeep(); const F = state.libForm; if (!F) return;
+    for (const f of ev.target.files){
+      if (!/^(application\/pdf|image\/(jpeg|png|webp))$/.test(f.type)){ toast(t('lib_bad_type', { n: f.name }), true); continue; }
+      if (f.size > 25 * 1048576){ toast(t('lib_too_big', { n: f.name, s: libSize(f.size) }), true); continue; }
+      F.files.push({ file: f, name: f.name, size: f.size, type: f.type, lang: libGuessLang(f.name, F.files) });
+    }
+    ev.target.value = ''; keepScroll(render); return;
+  }
+  if (ev.target.dataset && ev.target.dataset.libphoto && ev.target.files){   // v79：文字资料的照片（压缩到最长边 1600）
+    libKeep(); const F = state.libForm; if (!F) return;
+    for (const f of ev.target.files){
+      try { const url = await compressImage(f, 1600, 0.82), blob = await (await fetch(url)).blob(); F.photos.push({ file: blob, name: f.name, size: blob.size, type: 'image/jpeg', lang: 'photo', url }); }
+      catch(e){ toast(t('err_GENERIC'), true); }
+    }
+    ev.target.value = ''; keepScroll(render); return;
+  }
   if (ev.target.dataset && ev.target.dataset.annimg && ev.target.files && ev.target.files[0]){   // v64：公告的图
     annKeep(); try { state.annForm.image = await compressImage(ev.target.files[0], 1400, 0.82); state.annForm.keep = true; } catch(e){ toast(t('err_GENERIC'), true); return; }
     keepScroll(render); return;
@@ -5356,7 +5649,7 @@ async function exitView(){
   try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
-  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.planTimes = null;   // v70
+  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.planTimes = null; state.libView = null;   // v70
   await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
