@@ -434,6 +434,12 @@ zh: {
   lib_f_push_zh:'推送短句（中文；要确认的资料发布时推送，不填就推标题）', lib_f_push_de:'推送短句（德文）',
   lib_f_store_only:'只给在 {s} 上班的人（最近 60 天到之后 14 天排了这家店的班；以后有人开始去这家店上班，会自动收到）',
   lib_store_only_meta:'只给在 {s} 上班的人', lib_hist_only:'只存档（旧版）', lib_push_lbl:'推送：{x}',
+  // v83：区域主管第二步
+  at_title:'我管的区域 · 今天', at_roster:'今天上班：{m}', at_roster_none:'今天厨房还没排人', at_no_tasks:'今天没有收店任务', at_no_ktasks:'还没有厨房任务',
+  at_bon_open:'（今天还在营业，下班后交）', as_title:'两边主管', as_sups:'主管：{m}', as_nosup:'还没有主管（你自己管）', as_rate:'收店任务 7 天完成率 {r}（完成 {a} · 漏做 {b}）',
+  as_notasks:'还没有收店任务', as_open:'今天还没完成：{m}', as_pub_yes:'下周排班已发布', as_pub_no:'下周排班还没发布', as_pend:'改了还没通知 {n} 人',
+  aw_hint:'只读：每人这周分到多少、发放和签收情况；没有现金明细（信封、钱包、Kasse、短款不显示）。', aw_open:'这周还没锁定：下面是目前预计每人分到的，还会变。',
+  aw_locked:'已锁定：每人实发 / 交回，和发放、签收情况。', aw_in:'交回 {x}', aw_none:'这周还没有小费记录。',
   // v82：区域主管
   sup_front:'前场主管', sup_kitchen:'后厨主管', perm_area:'区域主管',
   perm_area_hint:'按区域和门店授权：排这个区域、这家店的班，发布、通知（以后的任务和「今天」总览也挂在这里）。看不到现金核对数字。',
@@ -694,6 +700,12 @@ de: {
   lib_f_push_zh:'Push-Text (Chinesisch; bei Lesebestätigung wird er beim Veröffentlichen gesendet, sonst der Titel)', lib_f_push_de:'Push-Text (Deutsch)',
   lib_f_store_only:'Nur für Leute, die in {s} arbeiten (Schicht dort in den letzten 60 bis nächsten 14 Tagen; wer neu dort arbeitet, bekommt es automatisch)',
   lib_store_only_meta:'nur Leute in {s}', lib_hist_only:'Nur Archiv (alte Version)', lib_push_lbl:'Push: {x}',
+  // v83：Bereichsleitung, Schritt 2
+  at_title:'Meine Bereiche · heute', at_roster:'Heute im Dienst: {m}', at_roster_none:'Heute noch niemand in der Küche eingeplant', at_no_tasks:'Heute keine Feierabend-Aufgaben', at_no_ktasks:'Noch keine Küchen-Aufgaben',
+  at_bon_open:'(heute noch geöffnet, Abgabe nach Feierabend)', as_title:'Bereichsleitungen', as_sups:'Leitung: {m}', as_nosup:'Noch keine Leitung (du selbst)', as_rate:'Feierabend-Aufgaben 7 Tage erledigt: {r} (erledigt {a} · versäumt {b})',
+  as_notasks:'Noch keine Feierabend-Aufgaben', as_open:'Heute noch offen: {m}', as_pub_yes:'Dienstplan nächste Woche veröffentlicht', as_pub_no:'Dienstplan nächste Woche noch nicht veröffentlicht', as_pend:'{n} Personen noch nicht über Änderungen informiert',
+  aw_hint:'Nur ansehen: wer diese Woche wie viel bekommt, Auszahlung und Quittung; keine Kassendetails (Umschläge, Geldbeutel, Kasse, Fehlbeträge werden nicht angezeigt).', aw_open:'Diese Woche ist noch nicht abgeschlossen: unten die bisher erwarteten Anteile, sie ändern sich noch.',
+  aw_locked:'Abgeschlossen: Auszahlung / Rückgabe je Person, Auszahlung und Quittung.', aw_in:'zurück {x}', aw_none:'Diese Woche noch keine Trinkgeld-Einträge.',
   // v82：Bereichsleitung
   sup_front:'Leitung Service', sup_kitchen:'Leitung Küche', perm_area:'Bereichsleitung',
   perm_area_hint:'Pro Bereich und Restaurant: Dienstplan dieses Bereichs und Restaurants erstellen, veröffentlichen, benachrichtigen (später auch Aufgaben und „Heute“-Übersicht). Keine Kassenzahlen.',
@@ -1357,7 +1369,7 @@ function tabs(){
   if (!kstaff) r.push('ledger');
   if (!m.is_kitchen && !m.is_admin) r.push('more');
   if (!m.is_kitchen) r.push('plan');
-  if (m.is_tip_manager || m.is_admin) r.push('week');
+  if (m.is_tip_manager || m.is_admin || isSup('front', m)) r.push('week');   // v83：前场主管看周结（只读）
   if (m.is_admin) r.push('admin');
   return r;
 }
@@ -1368,7 +1380,7 @@ function navTabs(){
   if (m.is_kitchen) return tabs().filter(k => k !== 'more');
   if (m.is_admin) return ['today', 'week', 'plan', 'admin'].filter(ok);
   if (m.is_tip_manager) return ['today', 'plan', 'ledger', 'week', 'more'].filter(ok);
-  return ['today', 'plan', 'ledger', 'more'].filter(ok);   // 厨房员工没有账本：今天 / 排班 / 更多
+  return ['today', 'plan', 'ledger', isSup('front', m) ? 'week' : null, 'more'].filter(k => k && ok(k));   // 厨房员工没有账本：今天 / 排班 / 更多；v83：前场主管多「周结」
 }
 // 页头「⋯」菜单（没有「更多」页的人用：老板、厨房小费账户）
 function menuHTML(){
@@ -1578,14 +1590,29 @@ async function viewToday(){
   // v68：有上次的内容就先显示，同时向服务器要新的（一起要，不再一个接一个）；内容变了再重画
   const shown = !!state.tasks;
   if (shown) renderToday(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
-  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo]);
+  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday]);
   const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // 刚启动时已经要过
-  const [, env] = await Promise.all([fresh ? null : loadTasks(),
-    state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo()]);
-  state.envPend = env || null;
+  const [, env, , at] = await Promise.all([fresh ? null : loadTasks(),
+    state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo(),
+    isSup() ? soft(rpc('area_today', { ...tok(), p_day: bizToday() }), null) : null]);   // v83：区域主管的总览
+  state.envPend = env || null; state.areaToday = at || null;
   if (state.tab !== 'today' || state.recon || !state.me) return;   // 等的时候已经切到别的页
-  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo]) !== before) renderToday();
+  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday]) !== before) renderToday();
   refreshTodayBadge();
+}
+// v83：前场主管的周结（只读）：每人这周分到多少（锁定前是预计），发放和签收；没有任何现金明细
+async function viewAreaWeek(){
+  const wk = state.week;
+  $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
+  let d; try { d = await rpc('area_week_tips', { ...tok(), p_week_start: wk }); }
+  catch(e){ if (state.tab === 'week') $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'week' || state.week !== wk) return;
+  const L = d.lines || [];
+  const amt = l => d.locked ? (l.payout_euros < 0 ? t('aw_in', { x: eur(-l.payout_euros * 100) }) : eur(l.payout_euros * 100)) : eurSigned(l.net_cents);
+  $('#main').innerHTML = weekNav() + `<div class="small muted" style="margin:-4px 0 8px">${esc(t('aw_hint'))}</div>
+    <div class="infobox">${esc(t(d.locked ? 'aw_locked' : 'aw_open'))}</div>
+    <div class="list">${L.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.name)}</strong>${l.is_kitchen ? `<span class="tag k">${esc(t('kitchen'))}</span>` : ''}${d.locked ? rsLabel({ status: l.receipt }) : ''}</div>
+      <div class="amt num ${(d.locked ? l.payout_euros : l.net_cents) < 0 ? 'negc' : ''}">${esc(amt(l))}</div></div></div>`).join('') || `<div class="empty">${esc(t('aw_none'))}</div>`}</div>`;
 }
 // v68：小费管理员的锁定、发放、点信封也算「我要做的」（以前在别处显示，「我要做的」却写「都做完了」）
 function tmTodoCards(){
@@ -1642,12 +1669,40 @@ function renderToday(){
   const tm = tmTodoCards(), nOpen = open.filter(x => x.status !== 'later').length + tm.length;
   if (state.expNew){ viewExpenseNew(); return; }   // v67：正在记垫付
   const msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message');
-  $('#main').innerHTML = (state.me.is_admin ? weekTodoHTML() : '') + expTodayHTML() + shifts
+  $('#main').innerHTML = (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + expTodayHTML() + shifts
     + `<h3>${esc(nOpen ? t('td_mine', { n: nOpen }) : t('td_mine_ok'))}</h3>`
     + (open.length || tm.length ? msgs.map(taskCardHTML).join('') + tm.join('') + rest.map(taskCardHTML).join('') : `<div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
     + (done.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(taskDoneLine).join('')}</div></div></details>` : '')
     + (store.length ? `<h3>${esc(t('td_store'))}</h3>` + store.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status]).map(taskCardHTML).join('')
         + (store.some(x => x.status === 'done') ? `<div class="list">${store.filter(x => x.status === 'done').map(taskDoneLine).join('')}</div>` : '') : '');
+}
+// v83：区域主管的「今天」：自己管的区域、门店各一张卡片（Bon 交了几张 / 谁没交、厨房谁上班、收店任务、下周排班、待通知）；没有现金数字
+function areaTodayHTML(A){
+  if (!A || !isSup() || !(A.cards || []).length) return '';
+  const li = (k, v, cls) => `<div class="li"><span class="muted">${esc(t(k))}</span><span class="${cls || ''}">${v}</span></div>`;
+  const card = c => {
+    let h = '';
+    if (c.area === 'front'){ const b = c.bons || {}, miss = b.missing || [], past = A.day < bizToday();
+      h += li('rk_bon', esc(t('rk_bon_line', { a: +b.expected - miss.length, b: +b.expected })) + (miss.length ? ' · ' + esc(t('rk_bon_miss', { m: miss.map(m => m.name).join('、') })) + (past ? '' : ' ' + esc(t('at_bon_open'))) : ''), past && miss.length ? 'negc' : ''); }
+    else { const R = c.roster || [];
+      h += `<div class="small" style="padding:3px 0">${esc(R.length ? t('at_roster', { m: KROLES.filter(r => R.some(x => x.role === r)).map(r => t('grp_' + r) + ' ' + R.filter(x => x.role === r).map(x => x.name).join('、')).join(' · ') }) : t('at_roster_none'))}</div>`; }
+    h += `<div class="small ${c.next_published ? 'muted' : 'negc'}" style="padding:3px 0">${esc(t(c.next_published ? 'as_pub_yes' : 'as_pub_no'))}${+c.pending ? ` · <span class="negc">${esc(t('as_pend', { n: c.pending }))}</span>` : ''}</div>`;
+    const tk = (c.tasks || []).filter(x => x.status !== 'closed');
+    return `<div class="task later"><div class="task-t">${storeTag(c.store)} ${esc(t('area_' + c.area))}</div><div class="sum" style="margin-top:6px">${h}</div>
+      ${tk.length ? tkAdminHTML(tk, true) : `<div class="small muted" style="margin-top:6px">${esc(t(c.area === 'kitchen' ? 'at_no_ktasks' : 'at_no_tasks'))}</div>`}</div>`;
+  };
+  return `<h3 style="margin-top:4px">${esc(t('at_title'))}</h3>` + A.cards.map(card).join('');
+}
+// v83：老板「今天」：两边主管的情况（每个区域、每家店：谁管、收店任务 7 天完成率、今天没完成的、下周排班、待通知）
+function areaStatusHTML(S){
+  if (!S || !(S.areas || []).length) return '';
+  const rows = S.areas.map(x => { const tot = +x.done + +x.missed, rate = tot ? Math.round(100 * x.done / tot) + '%' : '–';
+    return `<div class="item"><div class="top"><div><strong>${storeTag(x.store)} ${esc(t('area_' + x.area))}</strong>
+        <div class="meta">${esc((x.supervisors || []).length ? t('as_sups', { m: x.supervisors.join('、') }) : t('as_nosup'))}</div></div></div>
+      <div class="meta"><span class="${+x.missed ? 'negc' : ''}">${esc(x.tasks ? t('as_rate', { r: rate, a: x.done, b: x.missed }) : t('as_notasks'))}</span></div>
+      ${(x.open || []).length ? `<div class="meta"><span class="${x.open.some(o => o.status === 'nobody') ? 'negc' : ''}">${esc(t('as_open', { m: x.open.map(o => state.lang === 'de' ? o.name_de : o.name_zh).join('、') }))}</span></div>` : ''}
+      <div class="meta"><span class="${x.next_published ? '' : 'negc'}">${esc(t(x.next_published ? 'as_pub_yes' : 'as_pub_no'))}</span>${+x.pending ? ` · <span class="negc">${esc(t('as_pend', { n: x.pending }))}</span>` : ''}</div></div>`; }).join('');
+  return `<h3>${esc(t('as_title'))}</h3><div class="list">${rows}</div>`;
 }
 // ============ 每日核对（v42）============
 // 营业日（柏林时间，凌晨 5:00 为界，同数据库 _business_day）
@@ -1741,6 +1796,7 @@ async function readReport(){
   }
 }
 function rcStatusText(r){
+  if (r.status == null) return '';   // v83：数据库 v57 起核对状态只给老板（小费管理员看不到）
   if (r.status === 'ok') return r.diff && r.diff.payments_cents ? t('rks_ok_pay', { x: eurSigned(r.diff.payments_cents) }) : t('rks_ok');
   if (r.status === 'noted') return t('rks_noted');
   if (r.status === 'no_report') return t(r.day >= bizToday() ? 'rks_open' : 'rks_no_report');
@@ -1815,7 +1871,8 @@ async function viewReconHome(){
   let o, S;
   try {
     const known = state.reconDay; let tk;
-    [S, , , tk] = await Promise.all([reconStrip(), loadTasks(), loadWeekTodo(), known ? soft(rpc('admin_tasks_day', { ...tok(), p_day: known }), []) : null]);   // v68：一起要；v71：收店任务
+    [S, , , tk, state.areaStatus] = await Promise.all([reconStrip(), loadTasks(), loadWeekTodo(), known ? soft(rpc('admin_tasks_day', { ...tok(), p_day: known }), []) : null,
+      soft(rpc('area_status', tok()), null)]);   // v83：两边主管   // v68：一起要；v71：收店任务
     const day = state.reconDay || S.def;
     o = S.m[day] || await rpc('recon_overview', { ...tok(), p_day: day });
     state.reconTasks = known === o.day ? tk || [] : await soft(rpc('admin_tasks_day', { ...tok(), p_day: o.day }), []);
@@ -1833,6 +1890,7 @@ async function viewReconHome(){
     + reconStripHTML(S, o.day)
     + weekTodoHTML()
     + stores.map(rcCardHTML).join('')
+    + areaStatusHTML(state.areaStatus)
     + ((o.envelopes_older || []).length ? `<h3 class="negc">${esc(t('rk_older'))}</h3>` + envPendHTML(o.envelopes_older) : '')
     + (mine.length ? `<h3>${esc(t('rk_my_tasks'))}</h3>` + mine.map(taskCardHTML).join('') : '');
   refreshTodayBadge();
@@ -2088,7 +2146,7 @@ function tkmRender(read = true){
     <div class="field"><label for="tkm-de">${esc(t('tkm_de'))}</label><textarea class="input tkm-ta" id="tkm-de" rows="3" maxlength="1000" >${esc(m.de || '')}</textarea></div>
     <div class="row"><button class="btn ghost" type="button" data-act="photo-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="tkm-send" ${m.busy ? 'disabled' : ''}>${esc(t('tkm_send'))}</button></div>`;
 }
-function tkAdminHTML(list){
+function tkAdminHTML(list, ro){   // v83：ro = 区域主管只看（没有留言按钮）
   if (!(list || []).length) return '';
   return `<h3>${esc(t('tk_adm_title'))}</h3><div class="list">${list.map(x => `<div class="item">
     <div class="top"><div><strong>${esc(state.lang === 'de' ? x.name_de : x.name_zh)}</strong>${storeTag(x.store)}</div></div>
@@ -2098,7 +2156,7 @@ function tkAdminHTML(list){
         + (l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') : '–'}</div>`; }).join('')}
     ${(x.messages || []).map(m => `<div class="meta">${esc(t('tkm_line', { t: fmtDateTime(m.at), n: m.to }))} · <span class="${m.read_at ? '' : 'negc'}">${esc(m.read_at ? t('tkm_read', { t: fmtDateTime(m.read_at) }) : t('tkm_unread'))}</span>
       <div class="small muted" style="white-space:pre-wrap">${esc(state.lang === 'de' ? m.text_de : m.text_zh)}</div></div>`).join('')}
-    <div class="acts" style="flex-wrap:wrap">${tkMsgPeople(x).map(p => `<button class="link" data-act="tkm-open" data-def="${x.def_id}" data-day="${x.day}" data-id="${p.id}" data-name="${esc(p.name)}">${esc(t('tkm_btn', { n: p.name }))}</button>`).join('')}</div>
+    ${ro ? '' : `<div class="acts" style="flex-wrap:wrap">${tkMsgPeople(x).map(p => `<button class="link" data-act="tkm-open" data-def="${x.def_id}" data-day="${x.day}" data-id="${p.id}" data-name="${esc(p.name)}">${esc(t('tkm_btn', { n: p.name }))}</button>`).join('')}</div>`}
   </div>`).join('')}</div>`;
 }
 async function lockUpload(input){
@@ -3400,6 +3458,7 @@ function arcAsk(m){
 }
 // ============ 周结（小费管理员）============
 async function viewWeek(){
+  if (!state.me.is_admin && !state.me.is_tip_manager) return viewAreaWeek();   // v83：前场主管只读
   $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
   // v68：互不依赖的数据一起要（以前 14 次一个接一个）；week_envelopes 自 v42 起页面不用了，不再要
   const wk = state.week, P = { ...tok(), p_week_start: wk };
@@ -4474,6 +4533,8 @@ function fbComposeHTML(x){
 
 // ============ 排班 ============
 const SLOTS = ['lunch', 'dinner'];
+// v83：主管检查（只算区域授权，旧的排班员字段不算；同数据库 _area_ok）
+const isSup = (a, m) => (((m || state.me) || {}).areas || []).some(x => !a || x.area === a);
 // v82：区域主管（区域 × 门店）；老板和旧的排班员字段 = 这个区域两家店
 const meAreaStores = (m, a) => !m ? [] : (m.is_admin || (a === 'front' ? m.is_scheduler : m.is_kitchen_scheduler)) ? STORES.slice() : (m.areas || []).filter(x => x.area === a).map(x => x.store);
 // 这周排班页：能改哪家店、能不能发布（数据库 v56 起给出；没有这些字段时照旧）
