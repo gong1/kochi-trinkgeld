@@ -434,6 +434,15 @@ zh: {
   lib_f_push_zh:'推送短句（中文；要确认的资料发布时推送，不填就推标题）', lib_f_push_de:'推送短句（德文）',
   lib_f_store_only:'只给在 {s} 上班的人（最近 60 天到之后 14 天排了这家店的班；以后有人开始去这家店上班，会自动收到）',
   lib_store_only_meta:'只给在 {s} 上班的人', lib_hist_only:'只存档（旧版）', lib_push_lbl:'推送：{x}',
+  // v81：等员工做事时发消息；核对首页的信封金额
+  gm_btn:'💬 发消息', gm_title:'给 {n} 发消息', gm_note:'想说什么？（关键词就行）', gm_note_ph:'例如：钱已经给了，快签', gm_draft:'✨ AI 写', gm_drafting:'AI 正在写……',
+  gm_hint:'AI 会带上上面的情况，写成中德文；发之前可以改，也可以不用 AI 直接写。', gm_st_sent:'已发 {t} · 未读', gm_st_read:'已发 {t} · 已读', gm_st_sent_s:'已发·未读', gm_st_read_s:'已发·已读',
+  gm_ctx_receipt:'KW {w}（{a}–{b}）小费{k} {x}：已经结清，还没在 App 里签收（已等 {d} 天）。', gm_ctx_bon:'{d} {s} {sl}（{a}–{b}）的 Bon 还没交。',
+  gm_ctx_ann:'公告「{n}」（{t} 发布）还没确认。', gm_ctx_lib:'资料「{n}」（第 {v} 版）还没确认。', gm_ctx_lib_open:'资料「{n}」（第 {v} 版）还没打开看。',
+  gm_ctx_exp:'垫付付款 {x}（{t} 付的）还没在 App 里点「收到」。',
+  gm_c_sign:'钱已经给你了，请在 App 里签收', gm_c_ask:'有问题直接问我', gm_c_bon:'请今天把 Bon 交上', gm_c_bon_how:'打印 Nutzerbericht 拍照交',
+  gm_c_read:'请打开看一下，点确认', gm_c_exp:'钱已经给你了，请点「收到」',
+  rk_env_total:'合计 {x}', rk_env_one_todo:'待点收', rk_env_one_diff:'点出 {a}（差 {d}）',
   // v76：收店任务留言
   tkm_btn:'💬 给 {n} 留言', tkm_title:'给 {n} 留言', tkm_note:'哪里不对？（一句话，中文就行）', tkm_note_ph:'例如：只挂了两个袋子；袋子不满不用换',
   tkm_c_all:'每一项都要做完再走', tkm_c_photo:'照片要拍全、拍清楚', tkm_c_ai:'AI 提示不对时，点「AI 看错了，继续」，接着做完',
@@ -676,6 +685,15 @@ de: {
   lib_f_push_zh:'Push-Text (Chinesisch; bei Lesebestätigung wird er beim Veröffentlichen gesendet, sonst der Titel)', lib_f_push_de:'Push-Text (Deutsch)',
   lib_f_store_only:'Nur für Leute, die in {s} arbeiten (Schicht dort in den letzten 60 bis nächsten 14 Tagen; wer neu dort arbeitet, bekommt es automatisch)',
   lib_store_only_meta:'nur Leute in {s}', lib_hist_only:'Nur Archiv (alte Version)', lib_push_lbl:'Push: {x}',
+  // v81：Nachricht, wenn der Chef auf jemanden wartet; Umschläge auf der Startseite
+  gm_btn:'💬 Nachricht', gm_title:'Nachricht an {n}', gm_note:'Was willst du sagen? (Stichworte reichen)', gm_note_ph:'z. B.: Geld schon bekommen, bitte quittieren', gm_draft:'✨ KI schreibt', gm_drafting:'Die KI schreibt …',
+  gm_hint:'Die KI nimmt die Angaben oben dazu und schreibt Deutsch und Chinesisch; vor dem Senden kannst du alles ändern – oder ohne KI selbst schreiben.', gm_st_sent:'gesendet {t} · ungelesen', gm_st_read:'gesendet {t} · gelesen', gm_st_sent_s:'gesendet·ungelesen', gm_st_read_s:'gesendet·gelesen',
+  gm_ctx_receipt:'Trinkgeld KW {w} ({a}–{b}), {k} {x}: abgerechnet, aber noch nicht in der App quittiert (wartet seit {d} Tagen).', gm_ctx_bon:'Bon von {d}, {s}, {sl} ({a}–{b}) fehlt noch.',
+  gm_ctx_ann:'Mitteilung „{n}“ (vom {t}) noch nicht bestätigt.', gm_ctx_lib:'Unterlage „{n}“ (Version {v}) noch nicht bestätigt.', gm_ctx_lib_open:'Unterlage „{n}“ (Version {v}) noch nicht geöffnet.',
+  gm_ctx_exp:'Auslagen-Zahlung {x} (am {t}) noch nicht in der App mit „Erhalten“ bestätigt.',
+  gm_c_sign:'Du hast das Geld bekommen – bitte in der App quittieren', gm_c_ask:'Bei Fragen sprich mich an', gm_c_bon:'Bitte heute den Bon abgeben', gm_c_bon_how:'Nutzerbericht drucken und fotografieren',
+  gm_c_read:'Bitte öffnen, lesen und bestätigen', gm_c_exp:'Du hast das Geld bekommen – bitte „Erhalten“ tippen',
+  rk_env_total:'Summe {x}', rk_env_one_todo:'offen', rk_env_one_diff:'gezählt {a} (Diff. {d})',
   // v76：Nachricht zur Feierabend-Aufgabe
   tkm_btn:'💬 Nachricht an {n}', tkm_title:'Nachricht an {n}', tkm_note:'Was war nicht richtig? (ein Satz, Chinesisch geht auch)', tkm_note_ph:'z. B.: nur zwei Säcke aufgehängt; nicht volle Säcke nicht wechseln',
   tkm_c_all:'Jeden Punkt erledigen, bevor du gehst', tkm_c_photo:'Fotos vollständig und deutlich machen', tkm_c_ai:'Wenn die KI-Meldung falsch ist: „KI irrt sich, weiter“ tippen und fertig machen',
@@ -1724,14 +1742,22 @@ function rcCardHTML(r){
     return `<div class="task later" data-act="recon-open" data-store="${esc(r.store)}" data-day="${r.day}" style="cursor:pointer"><div class="task-t">${storeTag(r.store)} ${esc(dayLabel(r.day))} <span class="muted small" style="font-weight:400">· ${esc(r.status === 'before' ? rcStatusText(r) : t('rk_closed'))}</span></div></div>`;
   const line = (k, v, red) => `<div class="li"><span class="muted">${esc(t(k))}</span><span class="${red ? 'negc' : ''}">${esc(v)}</span></div>`;
   const nb = r.expected_bons, miss = r.missing_bons || [];
+  // v81：每个信封的金额（员工申报的钱包金额）和合计；点出来不一样的标红
+  const env = r.envelope_list || [], envSum = env.reduce((a, e) => a + (+e.wallet_cents || 0), 0);
+  const envRows = env.map(e => { const c = e.counted_cents, ok = c != null && +c === +e.wallet_cents;
+    return `<div class="li small"><span class="muted" style="padding-left:12px">${esc(e.name)}${e.start ? ' · ' + esc(e.start + '–' + e.end) : ''}</span>
+      <span class="num ${c != null && !ok ? 'negc' : ''}">${esc(eur(e.wallet_cents))} · ${esc(c == null ? t('rk_env_one_todo') : ok ? '✓' : t('rk_env_one_diff', { a: eur(c), d: eurSigned(c - e.wallet_cents) }))}</span></div>`; }).join('');
+  const bonCtx = m => t('gm_ctx_bon', { d: dayLabel(r.day), s: r.store, sl: t('slot_' + m.slot), a: m.start || '', b: m.end || '' });
   return `<div class="task ${bad ? 'bad' : done ? 'okc' : 'later'}" data-act="recon-open" data-store="${esc(r.store)}" data-day="${r.day}" style="cursor:pointer">
     <div class="task-t">${storeTag(r.store)} ${esc(dayLabel(r.day))}</div>
     ${r.changed_after ? `<div class="negc small" style="margin:4px 0">${esc(t('rk_changed'))}</div>` : done ? `<div class="pos small" style="margin:4px 0">${esc(t('rk_done', { n: r.completed_by, t: fmtDateTime(r.completed_at) }))}</div>` : ''}
     <div class="sum" style="margin-top:6px">
       ${line('rk_cash', rcStatusText(r), r.status === 'diff' || (r.status === 'no_report' && r.day < bizToday()))}
-      ${line('rk_env', (r.envelopes_todo ? t('rk_env_todo', { n: r.envelopes_todo }) : r.envelopes ? t('rk_env_done', { n: r.envelopes }) : t('rk_env_none')) + (r.envelopes_diff ? ' · ' + t('rk_env_diff', { n: r.envelopes_diff }) : ''), !!(r.envelopes_todo || r.envelopes_diff))}
+      ${line('rk_env', (r.envelopes_todo ? t('rk_env_todo', { n: r.envelopes_todo }) : r.envelopes ? t('rk_env_done', { n: r.envelopes }) : t('rk_env_none')) + (r.envelopes_diff ? ' · ' + t('rk_env_diff', { n: r.envelopes_diff }) : '')
+        + (env.length ? ' · ' + t('rk_env_total', { x: eur(envSum) }) : ''), !!(r.envelopes_todo || r.envelopes_diff))}${envRows}
       ${LOCK_ON ? line('rk_lock', rcLockText(r) + (done && r.lock && +r.lock.done_count < +r.lock.total ? t('rk_lock_done') : ''), !done && r.lock && +r.lock.done_count < +r.lock.total) : ''}
-      ${line('rk_bon', t('rk_bon_line', { a: nb - miss.length, b: nb }) + (miss.length ? ' · ' + t('rk_bon_miss', { m: miss.map(m => m.name).join('、') }) : ''), !!miss.length)}
+      <div class="li"><span class="muted">${esc(t('rk_bon'))}</span><span class="${miss.length ? 'negc' : ''}">${esc(t('rk_bon_line', { a: nb - miss.length, b: nb }))}${miss.length
+        ? ' · ' + esc(t('rk_bon_miss', { m: '' })) + miss.map(m => esc(m.name) + gmBtn(m.staff_id, m.name, 'bon:' + r.store + ':' + r.day, bonCtx(m), true)).join('、') : ''}</span></div>
       ${tks.length ? line('rk_tasks', tks.map(tkAdminLine).join('；'), tks.some(tkRed)) : ''}
     </div></div>`;
 }
@@ -1769,6 +1795,7 @@ async function viewReconHome(){
     state.reconTasks = known === o.day ? tk || [] : await soft(rpc('admin_tasks_day', { ...tok(), p_day: o.day }), []);
   }
   catch(e){ $('#main').innerHTML = `<div class="empty">${esc(errText(e))}</div>`; return; }
+  await gmLoad(o.stores.filter(r => (r.missing_bons || []).length).map(r => 'bon:' + r.store + ':' + o.day));   // v81
   if (state.tab !== 'today' || state.recon) return;   // 等的时候已经换了页
   state.reconDay = o.day;
   const stores = o.stores.slice().sort((a, b) => rcProblem(b) - rcProblem(a));
@@ -1983,6 +2010,36 @@ function tkAdminLine(x){
   if (x.status === 'nobody') return x0 + t('tk_adm_nobody', { n: nm, r: t('grp_' + x.role) }) + st;
   if (x.status === 'missed') return x0 + t('tk_adm_missed', { n: nm, p: ppl || '–' }) + st;
   return t('tk_adm_open', { n: nm, p: ppl || '–' }) + st;
+}
+// v81（老板 2026-10-13 决定）：等员工做事的地方「💬 发消息」：窗口自动带上他欠什么（ctx），老板写关键词 → AI 写中德文 → 改 → 发送。
+// about = 这件事（receipt:周一 / bon:门店:日期 / ann:公告 / lib:资料 / expense:付款），老板那边显示最后一次「已发 · 未读 / 已读」
+const GM_CHIPS = { receipt: ['gm_c_sign', 'gm_c_ask'], bon: ['gm_c_bon', 'gm_c_bon_how'], ann: ['gm_c_read', 'gm_c_ask'], lib: ['gm_c_read', 'gm_c_ask'], expense: ['gm_c_exp', 'gm_c_ask'] };
+const gmKey = (about, staff) => about + '|' + staff;
+function gmBtn(staff, name, about, ctx, small){
+  if (!staff || !state.me || !state.me.is_admin || state.viewAs || staff === state.me.id) return '';
+  const k = gmKey(about, staff), st = (state.gmState || {})[k]; (state.gmCtx = state.gmCtx || {})[k] = { staff, name, about, ctx };
+  return `<button class="link" type="button" data-act="gm-open" data-k="${esc(k)}" style="white-space:nowrap;${small ? 'margin-left:2px' : ''}">${small ? '💬' : esc(t('gm_btn'))}${st
+    ? ` <span class="small ${st.read_at ? 'muted' : 'negc'}" style="font-weight:400">${esc(small ? t(st.read_at ? 'gm_st_read_s' : 'gm_st_sent_s') : t(st.read_at ? 'gm_st_read' : 'gm_st_sent', { t: fmtDateTime(st.at) }))}</span>` : ''}</button>`;
+}
+async function gmLoad(abouts){
+  if (!state.me || !state.me.is_admin || state.viewAs || !abouts.length) return;
+  try { const r = await rpc('admin_messages_about', { ...tok(), p_abouts: [...new Set(abouts)] }) || [];
+    state.gmState = state.gmState || {}; r.forEach(x => { state.gmState[gmKey(x.about, x.staff_id)] = x; }); } catch(e){}
+}
+function gmRender(read = true){
+  const m = state.gmMsg, dlg = $('#photoDlg'); if (!m) return;
+  if (read) ['note', 'zh', 'de'].forEach(k => { const el = $('#gm-' + k); if (el) m[k] = el.value; });
+  const st = (state.gmState || {})[m.k];
+  dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('gm_title', { n: m.name }))}</h2>
+    <div class="infobox" style="margin:0 0 10px">${esc(m.ctx)}${st ? `<div class="small" style="margin-top:4px">${esc(t(st.read_at ? 'gm_st_read' : 'gm_st_sent', { t: fmtDateTime(st.at) }))}</div>` : ''}</div>
+    <div class="field"><label for="gm-note">${esc(t('gm_note'))}</label>
+      <textarea class="input tkm-ta" id="gm-note" rows="2" maxlength="500" placeholder="${esc(t('gm_note_ph'))}">${esc(m.note || '')}</textarea></div>
+    <div class="row" style="flex-wrap:wrap;gap:6px;margin:-4px 0 10px">${(GM_CHIPS[m.about.split(':')[0]] || []).map(k => `<button type="button" class="pchip tkm-chip" data-act="gm-chip" data-k="${k}">${esc(t(k))}</button>`).join('')}</div>
+    <button class="btn ghost" type="button" data-act="gm-draft" ${m.busy ? 'disabled' : ''}>${esc(m.busy ? t('gm_drafting') : t('gm_draft'))}</button>
+    <div class="small muted" style="margin:6px 0 10px">${esc(t('gm_hint'))}</div>
+    <div class="field"><label for="gm-zh">${esc(t('tkm_zh'))}</label><textarea class="input tkm-ta" id="gm-zh" rows="3" maxlength="1000">${esc(m.zh || '')}</textarea></div>
+    <div class="field"><label for="gm-de">${esc(t('tkm_de'))}</label><textarea class="input tkm-ta" id="gm-de" rows="3" maxlength="1000">${esc(m.de || '')}</textarea></div>
+    <div class="row"><button class="btn ghost" type="button" data-act="photo-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="gm-send" ${m.busy ? 'disabled' : ''}>${esc(t('tkm_send'))}</button></div>`;
 }
 // v76：可以留言给谁：这天负责的人 + 做了某一项的人
 function tkMsgPeople(x){
@@ -2957,6 +3014,7 @@ function distHTML(dist){
     if (r.receipt_id) acts.push(`<button class="link" data-act="rc-view" data-id="${r.receipt_id}">${esc(t(r.status === 'paper' ? 'dist_view_paper' : 'dist_view'))}</button>`);
     if (me.is_admin && r.status === 'need_admin') acts.push(`<button class="link" data-act="rc-admin-pay" data-staff="${l.staff_id}">${esc(t('dist_admin_pay'))}</button>`);
     if (me.is_admin && ['todo', 'disputed'].includes(r.status)) acts.push(`<button class="link" data-act="rc-paper" data-staff="${l.staff_id}">${esc(t('dist_paper'))}</button>`);
+    if (me.is_admin && l.done && !l.is_kitchen && r.status === 'todo') acts.push(gmBtn(l.staff_id, l.name, 'receipt:' + dist.week_start, gmReceiptCtx({ ...l, kw: dist.kw }, dist.week_start, days(l))));   // v81（厨房小费账户看不到老板的提醒，不给它发）
     return `<div class="item"><div class="top" style="align-items:center">
         <label class="check" style="flex:1"><input type="checkbox" data-act="settled" data-staff="${l.staff_id}" data-name="${esc(l.name)}" ${l.done ? 'checked' : ''} ${selfLock || lockSigned ? 'disabled' : ''} aria-label="${esc(t('dist_paid'))}" ${lockSigned ? `title="${esc(t('err_RECEIPT_SIGNED'))}"` : ''}>
         <span><strong>${esc(l.name)}</strong>${l.is_kitchen ? '' : roles}${l.is_kitchen ? `<span class="tag k">${esc(t('kitchen'))}</span>` : ''}</span></label>
@@ -2995,18 +3053,22 @@ function distGroupsHTML(dist, row, signed, days){
     + (wait.length ? `<div class="grp"><div class="grp-t">${esc(t('grp_wait_sign', { n: wait.length }))}</div></div>${list(wait)}` : '')
     + fold(t('grp_done', { n: done.length }), done) + fold(t('grp_zero', { n: zero.length }), zero);
 }
+// v81：发消息窗口里「他欠什么」：这周的小费结清了、还没签收
+const gmReceiptCtx = (l, w, d) => t('gm_ctx_receipt', { w: l.kw, a: dm(w), b: dm(addDays(w, 6)), k: t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'), x: eur(Math.abs(l.payout_euros) * 100), d: Math.max(0, d) });
 // 所有周里还没完成发放 / 签收的人（老板、小费管理员）
 async function rcOpenHTML(){
   let list = []; try { list = await rpc('receipts_open', tok()) || []; } catch(e){ return ''; }
   list = list.filter(l => l.week_start !== state.week);   // v58：正在看的这一周不重复列（下面的周分配表就是它）
   if (!list.length) return '';
   const weeks = {}; list.forEach(l => (weeks[l.week_start] = weeks[l.week_start] || []).push(l));
+  await gmLoad(Object.keys(weeks).map(w => 'receipt:' + w));   // v81
   return h3i(esc(t('rc_open_title', { n: list.length })), t('rc_open_hint')) + Object.keys(weeks).sort().map(w => {
     const dd = l => l.done && l.done_at ? Math.max(0, Math.floor((Date.now() - new Date(l.done_at)) / 864e5)) : -1;
     const ls = weeks[w].slice().sort((a, b) => dd(b) - dd(a) || Math.abs(b.payout_euros) - Math.abs(a.payout_euros)), mx = Math.max(...ls.map(dd));
     return `<details class="fold"><summary>${esc(t('rc_open_week', { w: ls[0].kw, n: ls.length }))}${mx >= 0 ? ` <span class="tag ${mx > 3 ? 'bad' : 'pend'}">${esc(t('rc_wait_max', { n: mx }))}</span>` : ''}<span class="muted">${esc(dm(w))}–${esc(dm(addDays(w, 6)))}</span></summary><div class="inner"><div class="list">
       ${ls.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.name)}</strong>${rsLabel(l.receipt)}${dd(l) >= 0 ? `<span class="tag ${dd(l) > 3 ? 'bad' : 'pend'}">${esc(dd(l) ? t('waited', { n: dd(l) }) : t('waited_0'))}</span>` : ''}</div>
-        <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div></div>`).join('')}
+        <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div>
+        ${l.done && !l.is_kitchen && l.receipt && l.receipt.status === 'todo' ? `<div class="acts">${gmBtn(l.staff_id, l.name, 'receipt:' + w, gmReceiptCtx(l, w, dd(l)))}</div>` : ''}</div>`).join('')}
       </div><button class="link" data-act="week-go" data-week="${w}">${esc(t('dist_title'))} ›</button></div></details>`; }).join('');
 }
 // 打印 / 存为 PDF：德文为主，附中文
@@ -3356,6 +3418,7 @@ async function viewWeek(){
         <div class="amt num">${eur(Math.abs(l.payout_euros)*100)}</div></div>
         <div class="meta num">${esc(t('net'))} ${eur(l.net_cents)}${l.carry_in_cents?' · '+esc(t('carry_in',{c:eur(l.carry_in_cents)})):''} · ${esc(t('carry',{c:eur(l.carry_out_cents)}))}</div></div>`;
     const ins = st.lines.filter(l => l.payout_euros < 0), outs = st.lines.filter(l => l.payout_euros > 0), zero = st.lines.filter(l => l.payout_euros === 0);
+    if (dist) await gmLoad(['receipt:' + dist.week_start]);   // v81
     if (dist) html += distHTML(dist) + handover + entriesBlock;
     else html += `<div class="hero"><div class="muted small">${esc(t('locked'))}</div>
       <div class="small num">${esc(t('float'))}: <strong>${eur(st.float_cents)}</strong></div></div>
@@ -3934,6 +3997,7 @@ async function viewExpenseList(){
 async function expAdminHTML(){
   if (state.expPerson){
     const P = await rpc('admin_expense_person', { ...tok(), p_staff_id: state.expPerson });
+    await gmLoad(P.payouts.filter(p => !p.confirmed_at).map(p => 'expense:' + p.id));   // v81
     const rows = [...P.items.map(i => ({ ...i, at: i.created_at, k: 'i' })), ...P.payouts.map(p => ({ ...p, at: p.paid_at, k: 'p' }))].sort((a, b) => String(b.at).localeCompare(String(a.at)));
     return `<button class="link" data-act="ex-adm-back" style="margin:0 0 8px">${esc(t('ex_back'))}</button>
       <div class="hero"><div class="muted small">${esc(P.name)}</div><div class="big num">${eur(P.balance_cents)}</div></div>
@@ -3945,7 +4009,8 @@ async function expAdminHTML(){
           ${x.void_at ? `<div class="meta negc">${esc(x.void_reason === 'self' ? t('ex_void_self') : t('ex_void_by', { n: x.void_by || '?', r: x.void_reason || '' }))}</div>` : ''}
           <div class="acts"><button class="link" data-act="ex-photo" data-id="${x.id}">${esc(t('photos'))}</button>${x.void_at ? '' : `<button class="link danger" data-act="ex-void" data-id="${x.id}">${esc(t('ex_void'))}</button>`}</div></div>`
         : `<div class="item"><div class="top"><div><strong>${esc(t('ex_paid', { n: x.by || '?', x: eur(x.amount_cents) }))}</strong><div class="meta">${esc(fmtDateTime(x.paid_at))}</div></div><div class="amt num pos">−${eur(x.amount_cents)}</div></div>
-          <div class="meta ${x.confirmed_at ? '' : 'negc'}">${esc(x.confirmed_at ? t('ex_confirmed', { t: fmtDateTime(x.confirmed_at) }) : t('ex_adm_unconf', { n: 1 }))}</div></div>`).join('')}</div>`;
+          <div class="meta ${x.confirmed_at ? '' : 'negc'}">${esc(x.confirmed_at ? t('ex_confirmed', { t: fmtDateTime(x.confirmed_at) }) : t('ex_adm_unconf', { n: 1 }))}</div>
+          ${x.confirmed_at ? '' : `<div class="acts">${gmBtn(state.expPerson, P.name, 'expense:' + x.id, t('gm_ctx_exp', { x: eur(x.amount_cents), t: fmtDateTime(x.paid_at) }))}</div>`}</div>`).join('')}</div>`;
   }
   const L = await rpc('admin_expense_overview', tok()) || [];
   return `<div class="list">${L.map(x => `<div class="item" data-act="ex-adm-open" data-id="${x.staff_id}" style="cursor:pointer"><div class="top"><div><strong>${esc(x.name)}</strong>
@@ -4042,7 +4107,8 @@ function libDetHTML(x, D){
     ${D.body_zh || D.body_de ? `<div style="white-space:pre-wrap;margin:6px 0">${esc(annT(D, 'body'))}</div>` : ''}
     ${D.push_zh || D.push_de ? `<div class="small muted" style="margin:4px 0">${esc(t('lib_push_lbl', { x: annT(D, 'push') }))}</div>` : ''}
     ${photos.map(f => u[f.id] ? `<img src="${esc(u[f.id])}" alt="" style="max-width:100%;border-radius:8px;margin:4px 0">` : '').join('')}
-    ${x.current ? `<div class="small ${wait.length ? 'negc' : 'pos'}" style="margin:6px 0">${esc(wait.length ? t(x.must_confirm ? 'lib_waiting' : 'lib_waiting_open', { m: wait.map(p => p.name + (state.pushMap && !state.pushMap[p.id] ? t('an_nopush') : '')).join('、') }) : t(x.must_confirm ? 'lib_all_ok' : 'lib_all_open'))}</div>` : ''}
+    ${x.current ? `<div class="small ${wait.length ? 'negc' : 'pos'}" style="margin:6px 0">${wait.length ? esc(t(x.must_confirm ? 'lib_waiting' : 'lib_waiting_open', { m: '' })) + wait.map(p => esc(p.name + (state.pushMap && !state.pushMap[p.id] ? t('an_nopush') : ''))
+      + gmBtn(p.id, p.name, 'lib:' + x.id, t(x.must_confirm ? 'gm_ctx_lib' : 'gm_ctx_lib_open', { n: annT(x, 'title'), v: x.version }), true)).join('、') : esc(t(x.must_confirm ? 'lib_all_ok' : 'lib_all_open'))}</div>` : ''}
     ${ppl.filter(p => p.confirmed_at || p.opened_at).map(p => `<div class="small muted">${esc(p.name)} ${p.confirmed_at ? '✓ ' + esc(fmtDateTime(p.confirmed_at)) : '👁 ' + esc(fmtDateTime(p.opened_at))}</div>`).join('')}</div>`;
 }
 function libRowHTML(f, i, k){
@@ -4248,7 +4314,8 @@ function annAdminHTML(){
         <span class="tag ${a.replaced ? 'off' : +a.acked >= +a.targets ? 'ok' : 'pend'}">${esc(a.replaced ? t('an_replaced') : t('an_acked', { a: a.acked, b: a.targets }))}</span></div>
       ${D ? `<div style="white-space:pre-wrap;margin:8px 0">${esc(annT(D, 'body'))}</div>
         ${D.image ? `<img src="${esc(D.image)}" alt="" style="max-width:100%;border-radius:8px;margin:4px 0">` : ''}
-        <div class="small ${wait.length ? 'negc' : 'pos'}" style="margin:6px 0">${esc(wait.length ? t('an_waiting', { m: wait.map(p => p.name + (state.pushMap && !state.pushMap[p.id] ? t('an_nopush') : '')).join('、') }) : t('an_all_acked'))}</div>
+        <div class="small ${wait.length ? 'negc' : 'pos'}" style="margin:6px 0">${wait.length ? esc(t('an_waiting', { m: '' })) + wait.map(p => esc(p.name + (state.pushMap && !state.pushMap[p.id] ? t('an_nopush') : ''))
+          + (a.replaced ? '' : gmBtn(p.id, p.name, 'ann:' + a.id, t('gm_ctx_ann', { n: annT(a, 'title'), t: fmtDateTime(a.created_at) }), true))).join('、') : esc(t('an_all_acked'))}</div>
         ${ppl.filter(p => p.acked_at).length ? `<div class="small muted">${ppl.filter(p => p.acked_at).map(p => esc(p.name) + ' ✓ ' + esc(fmtDateTime(p.acked_at))).join('<br>')}</div>` : ''}` : ''}
       <div class="acts"><button class="link" data-act="an-detail" data-id="${a.id}">${esc(t('an_detail'))}</button>
         ${!a.replaced && +a.acked < +a.targets ? `<button class="link" data-act="an-remind" data-id="${a.id}">${esc(t('an_remind'))}</button>` : ''}</div></div>`; };
@@ -4910,6 +4977,33 @@ document.addEventListener('click', async ev => {
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
+    // v81：等员工做事时发消息
+    case 'gm-open': {
+      const c = (state.gmCtx || {})[el.dataset.k]; if (!c) break;
+      state.gmMsg = { ...c, k: el.dataset.k, note: '', zh: '', de: '', busy: false };
+      gmRender(false); const dlg = $('#photoDlg'); if (!dlg.open) dlg.showModal(); break;
+    }
+    case 'gm-chip': { const n = $('#gm-note'); if (!n) break; const v = t(el.dataset.k); n.value = n.value.trim() ? n.value.trim() + (state.lang === 'de' ? '; ' : '；') + v : v; break; }
+    case 'gm-draft': {
+      const m = state.gmMsg; if (!m || m.busy) break; gmRender();
+      if (!(m.note || '').trim()) return toast(t('err_MESSAGE_EMPTY'), true);
+      m.busy = true; gmRender();
+      try { const r = await callTasks({ action: 'msg_draft', name: m.name, context: m.ctx, note: m.note.trim() }); m.zh = r.text_zh || ''; m.de = r.text_de || ''; }
+      catch(e){ toast(errText(e), true); }
+      m.busy = false; if (state.gmMsg === m && $('#photoDlg').open) gmRender(false);
+      break;
+    }
+    case 'gm-send': {
+      const m = state.gmMsg; if (!m) break; gmRender();
+      if (!(m.zh || '').trim() && !(m.de || '').trim()) return toast(t('err_MESSAGE_EMPTY'), true);
+      el.disabled = true;
+      try { const mid = await rpc('admin_message_about', { ...tok(), p_staff_id: m.staff, p_about: m.about, p_text_zh: m.zh, p_text_de: m.de });
+        callPush('message', { message_id: mid }); $('#photoDlg').close(); state.gmMsg = null;
+        (state.gmState = state.gmState || {})[m.k] = { about: m.about, staff_id: m.staff, at: new Date().toISOString(), read_at: null };
+        toast(t('tkm_sent', { n: m.name })); keepScroll(state.recon ? viewReconDay : render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
     // v76：老板就收店任务给员工留言
     case 'tkm-open': {
       const x = (state.reconDayTasks || []).find(v => v.def_id === el.dataset.def && v.day === el.dataset.day); if (!x) break;
@@ -5153,7 +5247,7 @@ document.addEventListener('click', async ev => {
       const id = el.dataset.id; state.libDet = state.libDet || {};
       if (state.libDet[id]){ delete state.libDet[id]; keepScroll(render); break; }
       try { const [D, pm] = await Promise.all([rpc('admin_library_detail', { ...tok(), p_id: id }), soft(rpc('push_status', tok()), null)]);
-        if (pm) state.pushMap = pm; await libUrls(D); state.libDet[id] = D; keepScroll(render); }
+        if (pm) state.pushMap = pm; await Promise.all([libUrls(D), gmLoad(['lib:' + id])]); state.libDet[id] = D; keepScroll(render); }
       catch(e){ toast(errText(e), true); }
       break;
     }
@@ -5198,7 +5292,7 @@ document.addEventListener('click', async ev => {
     case 'an-detail': {
       const id = el.dataset.id; state.annDetail = state.annDetail || {};
       if (state.annDetail[id]) delete state.annDetail[id];
-      else try { const [D, pm] = await Promise.all([rpc('admin_announce_detail', { ...tok(), p_id: id }), soft(rpc('push_status', tok()), null)]); state.annDetail[id] = D; if (pm) state.pushMap = pm; } catch(e){ toast(errText(e), true); }   // v73：标出谁没开通知
+      else try { const [D, pm] = await Promise.all([rpc('admin_announce_detail', { ...tok(), p_id: id }), soft(rpc('push_status', tok()), null), gmLoad(['ann:' + id])]); state.annDetail[id] = D; if (pm) state.pushMap = pm; } catch(e){ toast(errText(e), true); }   // v73：标出谁没开通知；v81：发过的消息
       keepScroll(render); break;
     }
     case 'an-remind': {
