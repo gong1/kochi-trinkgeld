@@ -434,6 +434,15 @@ zh: {
   lib_f_push_zh:'推送短句（中文；要确认的资料发布时推送，不填就推标题）', lib_f_push_de:'推送短句（德文）',
   lib_f_store_only:'只给在 {s} 上班的人（最近 60 天到之后 14 天排了这家店的班；以后有人开始去这家店上班，会自动收到）',
   lib_store_only_meta:'只给在 {s} 上班的人', lib_hist_only:'只存档（旧版）', lib_push_lbl:'推送：{x}',
+  // v82：区域主管
+  sup_front:'前场主管', sup_kitchen:'后厨主管', perm_area:'区域主管',
+  perm_area_hint:'按区域和门店授权：排这个区域、这家店的班，发布、通知（以后的任务和「今天」总览也挂在这里）。看不到现金核对数字。',
+  perm_tm_hint:'点收信封、周结、发放小费。', perm_recon:'日结核对员', perm_recon_hint:'现金核对（报告数字、差额、「核对完成」）。目前只有老板，以后单独授权。',
+  perm_admin_hint:'全部功能。', perm_old:'旧：{r}（转为区域主管后去掉）',
+  area_conv_title:'现有排班员：{m}，可以转为区域主管（转了以后去掉旧的排班员权限）。', area_conv_front:'转为前场主管', area_conv_kitchen:'转为后厨主管',
+  area_conv_q:'{n} 转为{a}：管哪几家店？', area_conv_go:'转换', area_conv_ok:'{n} 已转为{a}（{s}）。', area_conv_none:'至少选一家店。',
+  area_tip_q:'这个人既安排排班又经手发放小费，权力比较集中，确定吗？\nDiese Person plant Schichten und zahlt Trinkgeld aus – viel Verantwortung in einer Hand. Sicher?',
+  area_ro_store:'你负责 {s}：另一家店只能看，不能改。', pub_need_both:'发布会同时发布两家店的排班，要两家店都负责的主管或老板来发布。', area_ro:'只读',
   // v81：等员工做事时发消息；核对首页的信封金额
   gm_btn:'💬 发消息', gm_title:'给 {n} 发消息', gm_note:'想说什么？（关键词就行）', gm_note_ph:'例如：钱已经给了，快签', gm_draft:'✨ AI 写', gm_drafting:'AI 正在写……',
   gm_hint:'AI 会带上上面的情况，写成中德文；发之前可以改，也可以不用 AI 直接写。', gm_st_sent:'已发 {t} · 未读', gm_st_read:'已发 {t} · 已读', gm_st_sent_s:'已发·未读', gm_st_read_s:'已发·已读',
@@ -685,6 +694,15 @@ de: {
   lib_f_push_zh:'Push-Text (Chinesisch; bei Lesebestätigung wird er beim Veröffentlichen gesendet, sonst der Titel)', lib_f_push_de:'Push-Text (Deutsch)',
   lib_f_store_only:'Nur für Leute, die in {s} arbeiten (Schicht dort in den letzten 60 bis nächsten 14 Tagen; wer neu dort arbeitet, bekommt es automatisch)',
   lib_store_only_meta:'nur Leute in {s}', lib_hist_only:'Nur Archiv (alte Version)', lib_push_lbl:'Push: {x}',
+  // v82：Bereichsleitung
+  sup_front:'Leitung Service', sup_kitchen:'Leitung Küche', perm_area:'Bereichsleitung',
+  perm_area_hint:'Pro Bereich und Restaurant: Dienstplan dieses Bereichs und Restaurants erstellen, veröffentlichen, benachrichtigen (später auch Aufgaben und „Heute“-Übersicht). Keine Kassenzahlen.',
+  perm_tm_hint:'Umschläge zählen, Wochenabschluss, Trinkgeld auszahlen.', perm_recon:'Tagesabschluss-Prüfung', perm_recon_hint:'Kassenprüfung (Berichtszahlen, Differenzen, „Prüfung abgeschlossen“). Zurzeit nur der Chef; später einzeln vergeben.',
+  perm_admin_hint:'Alle Funktionen.', perm_old:'Alt: {r} (entfällt nach der Umstellung auf Bereichsleitung)',
+  area_conv_title:'Bisherige Dienstplanung: {m} – kann auf Bereichsleitung umgestellt werden (danach entfällt das alte Recht).', area_conv_front:'Zur Leitung Service', area_conv_kitchen:'Zur Leitung Küche',
+  area_conv_q:'{n} wird {a}: für welche Restaurants?', area_conv_go:'Umstellen', area_conv_ok:'{n} ist jetzt {a} ({s}).', area_conv_none:'Mindestens ein Restaurant wählen.',
+  area_tip_q:'这个人既安排排班又经手发放小费，权力比较集中，确定吗？\nDiese Person plant Schichten und zahlt Trinkgeld aus – viel Verantwortung in einer Hand. Sicher?',
+  area_ro_store:'Du bist für {s} zuständig: das andere Restaurant nur ansehen, nicht ändern.', pub_need_both:'Veröffentlichen gilt für beide Restaurants – das macht, wer für beide zuständig ist, oder der Chef.', area_ro:'nur ansehen',
   // v81：Nachricht, wenn der Chef auf jemanden wartet; Umschläge auf der Startseite
   gm_btn:'💬 Nachricht', gm_title:'Nachricht an {n}', gm_note:'Was willst du sagen? (Stichworte reichen)', gm_note_ph:'z. B.: Geld schon bekommen, bitte quittieren', gm_draft:'✨ KI schreibt', gm_drafting:'Die KI schreibt …',
   gm_hint:'Die KI nimmt die Angaben oben dazu und schreibt Deutsch und Chinesisch; vor dem Senden kannst du alles ändern – oder ohne KI selbst schreiben.', gm_st_sent:'gesendet {t} · ungelesen', gm_st_read:'gesendet {t} · gelesen', gm_st_sent_s:'gesendet·ungelesen', gm_st_read_s:'gesendet·gelesen',
@@ -1124,6 +1142,10 @@ const ERR_ZH = {
   LIB_FILE_TOO_BIG: '文件太大：每个最大 25 MB。请导出小一点的版本（网页版 / 屏幕版 PDF）。',
   LIB_UPLOAD_FAILED: '上传失败：请检查网络后再点「发布」（已经传好的文件不用重传）。',
   LIB_REPLACED: '这份资料已经换了新版或被撤下了：请刷新后再操作。',
+  SCHED_STORE_FORBIDDEN: '你没有这家店的排班权限：只能改你负责的门店。需要的话请老板在「管理 → 员工」里加。',
+  SCHED_PUBLISH_BOTH: '发布会同时发布两家店的排班，只有两家店都负责的主管或老板能发布。请找老板发布。',
+  AREA_BAD_PERSON: '这个账号不能当区域主管：停用的账号和厨房小费账户不行。',
+  ROLE_CONCENTRATION: '这个人也是小费管理员，要你确认后才能授权。',
   LIB_AI_FAILED: 'AI 没读出来（可能网络慢或文件太复杂）：请点「再试一次」，或者自己填写标题和说明，照样能发布。',
   LIB_AI_TOO_BIG: '文件太大，AI 读不了（PDF 最大 20 MB，照片最大 5 MB）：请设计师导出一份屏幕版 PDF，或者自己填写标题和说明。',
   LIB_AI_NOT_READ: '有文件 AI 还没读过，不能对比：请点「再试一次」。',
@@ -1254,6 +1276,10 @@ const ERR_DE = {
   LIB_FILE_TOO_BIG: 'Datei zu groß: max. 25 MB. Bitte eine kleinere Version exportieren (Web-/Bildschirm-PDF).',
   LIB_UPLOAD_FAILED: 'Hochladen fehlgeschlagen: bitte Verbindung prüfen und nochmal „Veröffentlichen“ (schon hochgeladene Dateien werden nicht erneut geladen).',
   LIB_REPLACED: 'Diese Unterlage wurde schon ersetzt oder zurückgezogen: bitte neu laden.',
+  SCHED_STORE_FORBIDDEN: 'Keine Dienstplan-Rechte für dieses Restaurant: du kannst nur deine Restaurants ändern. Der Chef kann das unter „Verwaltung → Mitarbeiter“ ergänzen.',
+  SCHED_PUBLISH_BOTH: 'Veröffentlichen gilt für beide Restaurants – nur wer für beide zuständig ist (oder der Chef) kann veröffentlichen. Bitte den Chef fragen.',
+  AREA_BAD_PERSON: 'Dieses Konto kann keine Bereichsleitung sein (inaktiv oder Küchen-Trinkgeldkonto).',
+  ROLE_CONCENTRATION: 'Diese Person ist auch Tip-Manager – bitte erst bestätigen.',
   LIB_AI_FAILED: 'Die KI konnte die Datei nicht lesen (Verbindung langsam oder Datei zu komplex): bitte „Nochmal versuchen“ oder Titel und Beschreibung selbst ausfüllen – Veröffentlichen geht trotzdem.',
   LIB_AI_TOO_BIG: 'Datei zu groß für die KI (PDF max. 20 MB, Foto max. 5 MB): bitte eine Bildschirm-Version des PDFs exportieren lassen oder Titel und Beschreibung selbst ausfüllen.',
   LIB_AI_NOT_READ: 'Eine Datei wurde noch nicht von der KI gelesen, Vergleich nicht möglich: bitte „Nochmal versuchen“.',
@@ -3579,12 +3605,17 @@ async function viewAdmin(){
       const pushTag = s => !pm ? '' : pm[s.id] ? `<span class="tag ok">${esc(pm[s.id] > 1 ? t('push_on_n', { n: pm[s.id] }) : t('push_on_tag'))}</span>` : `<span class="tag off">${esc(t('push_off_tag'))}</span>`;
       const act = list.filter(s => s.is_active), pOn = pm ? act.filter(s => pm[s.id]).length : 0;
       const e = state.staffEdit;
-      el().innerHTML = (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
+      const olds = act.filter(s => s.is_scheduler || s.is_kitchen_scheduler);   // v82：还没转为区域主管的旧排班员
+      const convHTML = !e && olds.length ? `<div class="warnbox" style="margin:0 0 14px">${esc(t('area_conv_title', { m: olds.map(s => s.name).join('、') }))}
+          ${olds.map(s => `<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:8px"><strong>${esc(s.name)}</strong>
+            ${s.is_scheduler ? `<button class="link" data-act="area-conv" data-id="${s.id}" data-name="${esc(s.name)}" data-area="front">${esc(t('area_conv_front'))}</button>` : ''}
+            ${s.is_kitchen_scheduler ? `<button class="link" data-act="area-conv" data-id="${s.id}" data-name="${esc(s.name)}" data-area="kitchen">${esc(t('area_conv_kitchen'))}</button>` : ''}</div>`).join('')}</div>` : '';
+      el().innerHTML = convHTML + (e ? staffForm(e) : `<button class="btn ghost" data-act="staff-new" style="margin-bottom:14px">${esc(t('add_staff'))}</button>`) +
         (pm ? `<div class="muted small" style="margin:0 0 10px">${esc(t('push_sum', { a: pOn, b: act.length - pOn }))}</div>` : '') +
         `<div class="list">${list.map((s, i) => !s.is_active ? '' : `<div class="item"><div class="top" style="align-items:center"><div style="flex:1"><strong style="font-size:17px">${esc(s.name)}</strong>
           <button class="mv" style="float:right" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
           <button class="mv" style="float:right;margin-right:6px" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
-          <div style="margin:4px 0 0 -6px">${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.is_kitchen_scheduler?`<span class="tag m">${esc(t('is_kitchen_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${pushTag(s)}</div>${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div></div>
+          <div style="margin:4px 0 0 -6px">${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${['front', 'kitchen'].map(a => { const ss = (s.areas || []).filter(x => x.area === a).map(x => x.store[0]); return ss.length ? `<span class="tag m">${esc(t('sup_' + a) + ' ' + ss.join('·'))}</span>` : ''; }).join('')}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.is_kitchen_scheduler?`<span class="tag m">${esc(t('is_kitchen_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${pushTag(s)}</div>${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div></div>
           <div class="acts"><button class="link" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button>
           <button class="link" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button></div></div>`).join('')}</div>`
         + (list.some(s => !s.is_active) ? `<details class="fold"><summary>${esc(t('staff_off_grp', { n: list.filter(s => !s.is_active).length }))}</summary><div class="inner"><div class="list">${list.filter(s => !s.is_active).map(s => `<div class="item">
@@ -3682,6 +3713,24 @@ function deletedCard(x){
     ${helpers ? `<div class="meta">${esc(helpers)}</div>` : ''}
     <div class="meta">${who}${x.reason ? '<br>' + esc(t('del_reason', { r: x.reason })) : ''}</div></div>`;
 }
+// v82：区域主管（每个区域勾哪几家店）；还有旧排班员字段的写一句
+function areaPermHTML(s){
+  const has = (a, st) => (s.areas || []).some(x => x.area === a && x.store === st);
+  const old = [s.is_scheduler ? t('is_scheduler') : '', s.is_kitchen_scheduler ? t('is_kitchen_scheduler') : ''].filter(Boolean);
+  return `<div style="margin:4px 0 12px"><strong>${esc(t('perm_area'))}</strong>
+    ${['front', 'kitchen'].map(a => `<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0"><span style="min-width:80px">${esc(t('sup_' + a))}</span>
+      ${STORES.map(st => `<label class="check" style="display:inline-flex;margin:0"><input type="checkbox" class="s-area" data-area="${a}" data-store="${st}" ${has(a, st) ? 'checked' : ''}> ${esc(st)}</label>`).join('')}</div>`).join('')}
+    ${old.length ? `<div class="small negc">${esc(t('perm_old', { r: old.join('、') }))}</div>` : ''}
+    <div class="small muted">${esc(t('perm_area_hint'))}</div></div>`;
+}
+// v82：设某人某区域管哪几家店；他也是小费管理员时先问（confirmed = 已经问过）
+async function areaSet(id, area, stores, confirmed){
+  try { return await rpc('admin_area_set', { ...tok(), p_staff_id: id, p_area: area, p_stores: stores, p_confirm: !!confirmed }); }
+  catch(e){
+    if (String(e && e.message) !== 'ROLE_CONCENTRATION' || confirmed || !confirm(t('area_tip_q'))) throw e;
+    return await rpc('admin_area_set', { ...tok(), p_staff_id: id, p_area: area, p_stores: stores, p_confirm: true });
+  }
+}
 function staffForm(s){
   // 网页 v35：分成 岗位 / 权限 / 账号 三块；主岗位和会做的岗位合并成「不会 → 会 → 主要」
   const isNew = !s.id, active = isNew || s.is_active;
@@ -3698,7 +3747,11 @@ function staffForm(s){
       ${s.in_schedule === undefined && !isNew ? '' : `<div class="field" style="margin-top:12px">${cb('s-insched', t('sp_in'), isNew || s.in_schedule !== false)}
         <div class="small muted">${esc(t('sp_in_hint'))}</div></div>`}</div>
     ${sec('sec_perm')}
-    ${cb('s-mgr', t('is_manager'), s.is_tip_manager)}${cb('s-sched', t('is_scheduler'), s.is_scheduler)}${cb('s-ksched', t('is_kitchen_scheduler'), s.is_kitchen_scheduler)}${cb('s-exp', t('can_expense'), s.can_expense)}${cb('s-admin', t('is_admin'), s.is_admin)}
+    ${s.is_kitchen ? '' : areaPermHTML(s)}
+    ${cb('s-mgr', t('is_manager'), s.is_tip_manager)}<div class="small muted" style="margin:-4px 0 10px 28px">${esc(t('perm_tm_hint'))}</div>
+    <label class="check" style="opacity:.55"><input type="checkbox" disabled> ${esc(t('perm_recon'))}</label><div class="small muted" style="margin:-4px 0 10px 28px">${esc(t('perm_recon_hint'))}</div>
+    ${cb('s-admin', t('is_admin'), s.is_admin)}<div class="small muted" style="margin:-4px 0 10px 28px">${esc(t('perm_admin_hint'))}</div>
+    ${cb('s-exp', t('can_expense'), s.can_expense)}
     ${sec('sec_acct')}
     ${cb('s-kitchen', t('kitchen_acct'), s.is_kitchen)}<div class="small muted" style="margin:-2px 0 10px">${esc(t('kitchen_acct_hint'))}</div>
     ${isNew ? '' : `<div class="field"><label>Lightspeed</label>
@@ -3908,7 +3961,7 @@ function sttHTML(){
       h += `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong></div></div>
         ${groups.map(g => `<div class="stt-row"><div><strong>${esc(wdRange(g.days))}</strong>
           <div class="stt-t">${ROLES.map(r => `<span>${esc(t('grp_' + r))} <b class="num">${esc(g.times[r].start)}–${esc(g.times[r].end)}</b></span>`).join('')}</div></div>
-          <button class="pchip add" style="flex:none" data-act="stt-edit" data-store="${store}" data-slot="${slot}" data-days="${g.days.join(',')}">${esc(t('stt_edit'))}</button></div>`).join('')}</div>`;
+          ${planStoreOk('front', store) ? `<button class="pchip add" style="flex:none" data-act="stt-edit" data-store="${store}" data-slot="${slot}" data-days="${g.days.join(',')}">${esc(t('stt_edit'))}</button>` : ''}</div>`).join('')}</div>`;   // v82
     }
     h += `</div>`;
   }
@@ -4421,12 +4474,17 @@ function fbComposeHTML(x){
 
 // ============ 排班 ============
 const SLOTS = ['lunch', 'dinner'];
-const isSched = () => !!(state.me && (state.me.is_admin || state.me.is_scheduler || state.me.is_kitchen_scheduler));   // v47：两边的排班员都能看完整排班
-const canFront = () => !!(state.me && (state.me.is_admin || state.me.is_scheduler));
-const canKitchen = () => !!(state.me && (state.me.is_admin || state.me.is_kitchen_scheduler));
+// v82：区域主管（区域 × 门店）；老板和旧的排班员字段 = 这个区域两家店
+const meAreaStores = (m, a) => !m ? [] : (m.is_admin || (a === 'front' ? m.is_scheduler : m.is_kitchen_scheduler)) ? STORES.slice() : (m.areas || []).filter(x => x.area === a).map(x => x.store);
+// 这周排班页：能改哪家店、能不能发布（数据库 v56 起给出；没有这些字段时照旧）
+const planStoreOk = (area, store) => { const d = state.plan, k = area + '_stores'; return !(d && Array.isArray(d[k])) || d[k].includes(store); };
+const planCanPublish = area => { const d = state.plan, k = 'can_publish_' + area; return !(d && k in d) || !!d[k]; };
+const isSched = () => canFront() || canKitchen();   // v47：两边的排班员都能看完整排班
+const canFront = () => meAreaStores(state.me, 'front').length > 0;
+const canKitchen = () => meAreaStores(state.me, 'kitchen').length > 0;
 // 排班页看哪一边：厨房员工 / 只有后厨排班权限的人默认看厨房
 function planArea(){
-  if (!state.planArea) state.planArea = (isKRole(state.me.main_role) || (state.me.is_kitchen_scheduler && !canFront())) ? 'kitchen' : 'front';
+  if (!state.planArea) state.planArea = (isKRole(state.me.main_role) || (canKitchen() && !canFront())) ? 'kitchen' : 'front';
   if (!isSched()) state.planArea = isKRole(state.me.main_role) ? 'kitchen' : 'front';
   return state.planArea;
 }
@@ -4554,7 +4612,7 @@ function planGridHTML(d, edit){
     const issues = edit ? taskRoleIssues(d, date) : [];
     const blocks = SLOTS.flatMap(slot => STORES.map(store => {
       const tpl = d.slots.find(x => x.date === date && x.store === store && x.slot === slot); if (!tpl) return '';
-      const miss = issues.filter(x => x.store === store && x.slot === slot);
+      const ed = edit && planStoreOk('front', store), miss = ed ? issues.filter(x => x.store === store && x.slot === slot) : [];   // v82：没授权的店只读
       const list = d.shifts.filter(x => x.date === date && x.store === store && x.slot === slot);
       if (!edit && !list.length) return '';
       const rows = ROLES.map(r => {
@@ -4562,7 +4620,7 @@ function planGridHTML(d, edit){
         if (!ppl.length) return '';
         const chip = x => { const rs = rolesOf(x), dft = roleSpan(tpl, rs), off = x.start !== dft.start || x.end !== dft.end;   // v75：和他岗位的默认时间比
           const inner = `${esc(x.name)}${rs.length > 1 ? ` <span class="small muted">${esc(rs.map(k => t('grp_' + k)).join(' + '))}</span>` : ''}${off ? ` <span class="small num" style="font-weight:700">${esc(x.start)}–${esc(x.end)}</span>` : ''}${x.changed && (edit || x.staff_id === state.me.id) ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}`;
-          return edit ? `<button class="pchip" data-act="pe-open" data-id="${x.id}">${inner}</button>` : `<span class="pchip">${inner}</span>`; };
+          return ed ? `<button class="pchip" data-act="pe-open" data-id="${x.id}">${inner}</button>` : `<span class="pchip">${inner}</span>`; };
         const rt = (tpl.times || {})[r], rtl = rt && (rt.start !== tpl.start || rt.end !== tpl.end) ? `<small class="num">${esc(rt.start)}–${esc(rt.end)}</small>` : '';
         return `<div class="rolerow"><div class="rl">${esc(t('grp_' + r))}${rtl}</div><div class="rp">${ppl.map(chip).join('')}
           </div></div>`;
@@ -4570,7 +4628,7 @@ function planGridHTML(d, edit){
       const noSvc = edit && !list.some(x => rolesOf(x).includes('service'));
       return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}${miss.map(x => x.kind === 'decide' ? `<button class="tag bad" style="border:0;cursor:pointer" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('task_decide', { r: t('grp_' + x.role) }))}</button>`
         : `<span class="tag ${x.kind === 'none' ? 'bad' : 'off'}">${esc(t(x.kind === 'none' ? 'no_role_task' : x.kind === 'one' ? 'task_one_all' : 'task_svc_all', { r: t('grp_' + x.role) }))}</span>`).join('')}</div>
-        ${edit ? `<button class="pchip add" style="flex:none" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('se_edit'))}</button>` : ''}</div>${rows}</div>`;
+        ${ed ? `<button class="pchip add" style="flex:none" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('se_edit'))}</button>` : edit ? `<span class="tag off" style="flex:none">${esc(t('area_ro'))}</span>` : ''}</div>${rows}</div>`;
     })).join('');
     const isToday = date === bizToday();   // v68：按营业日
     return blocks ? `<div class="sheet" ${isToday ? 'id="plan-today" style="border:2px solid var(--celadon)"' : ''}><div class="dayh">${esc(dayLabel(date))}${isToday ? ` <span class="tag ok">${esc(t('today_word'))}</span>` : ''}</div>${blocks}</div>` : '';
@@ -4586,7 +4644,7 @@ function kGridHTML(d, edit){
       const rows = KROLES.map(r => { const ppl = list.filter(x => x.role === r); if (!ppl.length) return '';
         return `<div class="rolerow"><div class="rl">${esc(t('grp_' + r))}</div><div class="rp">${ppl.map(x => `<span class="pchip">${esc(x.name)}${x.changed && (edit || x.staff_id === state.me.id) ? ` <span class="tag pend">${esc(t('changed'))}</span>` : ''}</span>`).join('')}</div></div>`; }).join('');
       return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(t('ke_title'))}</strong></div>
-        ${edit ? `<button class="pchip add" style="flex:none" data-act="ke-open" data-date="${date}" data-store="${store}">${esc(t('se_edit'))}</button>` : ''}</div>
+        ${edit && planStoreOk('kitchen', store) ? `<button class="pchip add" style="flex:none" data-act="ke-open" data-date="${date}" data-store="${store}">${esc(t('se_edit'))}</button>` : edit ? `<span class="tag off" style="flex:none">${esc(t('area_ro'))}</span>` : ''}</div>
         ${rows || `<div class="small muted" style="padding:4px 0">${esc(t('kp_none'))}</div>`}</div>`;
     }).join('');
     const isToday = date === bizToday();   // v68：按营业日
@@ -4599,7 +4657,9 @@ function kEditHTML(d){
   return `<div class="hero"><strong>${esc(d.kitchen_published ? t('kp_state_yes', { t: fmtDateTime(d.kitchen_published_at) }) : t('kp_state_no'))}</strong>
       <div class="small muted" style="margin-top:6px">${esc(g.a ? t('kp_progress', g) : t('pl_empty'))}</div>
       ${pn ? `<div class="warnbox" style="margin:10px 0 0">${esc(t('kp_pending', { n: pn, m: pm }))}</div>` : ''}
-      ${!empty && (!d.kitchen_published || changed || pn) ? `<button class="btn" style="margin-top:12px" data-act="kplan-publish">${esc(!d.kitchen_published ? t('kp_publish') : pn ? t('kp_republish_ntf', { n: pn, m: pm }) : t('kp_republish', { n: changed }))}</button>` : ''}</div>`
+      ${!empty && (!d.kitchen_published || changed || pn) ? (planCanPublish('kitchen') ? `<button class="btn" style="margin-top:12px" data-act="kplan-publish">${esc(!d.kitchen_published ? t('kp_publish') : pn ? t('kp_republish_ntf', { n: pn, m: pm }) : t('kp_republish', { n: changed }))}</button>`
+        : `<div class="small muted" style="margin-top:10px">${esc(t('pub_need_both'))}</div>`) : ''}</div>`
+    + ((d.kitchen_stores || []).length === 1 ? `<div class="infobox">${esc(t('area_ro_store', { s: d.kitchen_stores[0] }))}</div>` : '')
     + noticesHTML((state.planNotices || []).filter(n => (n.items || []).some(i => i.slot === 'day')))
     + kGridHTML(d, true);
 }
@@ -4757,7 +4817,9 @@ function planEditHTML(d){
     <div class="small ${g.m ? 'negc' : 'muted'}" style="margin-top:6px">${esc(!g.a ? t('pl_empty') : g.m ? t('pl_progress', g) : t('pl_progress_ok', g))}</div>
     ${d.published ? `<div class="small muted" style="margin-top:8px">${esc(t('pub_live'))}</div>` : ''}
     ${pn ? `<div class="warnbox" style="margin:10px 0 0">${esc(t('pending_banner', { n: pn, m: pm }))}</div>` : ''}
-    ${!empty && (!d.published || changed || pn) ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(!d.published ? t('publish') : pn ? t('republish_ntf', { n: pn, m: pm }) : t('republish', { n: changed }))}</button>` : ''}</div>`;
+    ${!empty && (!d.published || changed || pn) ? (planCanPublish('front') ? `<button class="btn" style="margin-top:12px" data-act="plan-publish">${esc(!d.published ? t('publish') : pn ? t('republish_ntf', { n: pn, m: pm }) : t('republish', { n: changed }))}</button>`
+      : `<div class="small muted" style="margin-top:10px">${esc(t('pub_need_both'))}</div>`) : ''}</div>`;   // v82
+  if ((d.front_stores || []).length === 1) h += `<div class="infobox">${esc(t('area_ro_store', { s: d.front_stores[0] }))}</div>`;
   h += noticesHTML((state.planNotices || []).filter(n => !(n.items || []).some(i => i.slot === 'day')));
   h += planGridHTML(d, true);
   return h;
@@ -5397,6 +5459,24 @@ document.addEventListener('click', async ev => {
     case 'admin-more': state.done = null; state.rcWeek = null; state.tab = 'admin'; state.adminSub = el.dataset.sub; state.staffEdit = null; state.menu = false; render(); break;
     case 'del-filter': state.delFilter = el.dataset.k; render(); break;
     case 'staff-new': state.staffEdit = {}; render(); break;
+    case 'area-conv': {   // v82：旧排班员转为区域主管：选门店（默认两家）
+      const a = el.dataset.area, dlg = $('#photoDlg');
+      dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('area_conv_q', { n: el.dataset.name, a: t('sup_' + a) }))}</h2>
+        <div style="display:flex;gap:18px;margin:8px 0 16px">${STORES.map(st => `<label class="check" style="display:inline-flex;margin:0"><input type="checkbox" class="conv-st" value="${st}" checked> ${esc(st)}</label>`).join('')}</div>
+        <div class="small muted" style="margin-bottom:12px">${esc(t('perm_area_hint'))}</div>
+        <div class="row"><button class="btn ghost" type="button" data-act="photo-close">${esc(t('cancel'))}</button>
+          <button class="btn" type="button" data-act="area-conv-go" data-id="${el.dataset.id}" data-name="${esc(el.dataset.name)}" data-area="${a}">${esc(t('area_conv_go'))}</button></div>`;
+      if (!dlg.open) dlg.showModal(); break;
+    }
+    case 'area-conv-go': {
+      const sts = [...document.querySelectorAll('.conv-st:checked')].map(x => x.value).sort();
+      if (!sts.length) return toast(t('area_conv_none'), true);
+      el.disabled = true;
+      try { await areaSet(el.dataset.id, el.dataset.area, sts, false); $('#photoDlg').close();
+        toast(t('area_conv_ok', { n: el.dataset.name, a: t('sup_' + el.dataset.area), s: sts.join(' + ') })); render(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
     case 'staff-edit': state.staffEdit = JSON.parse(el.dataset.json); render(); window.scrollTo(0, 0); break;
     case 'staff-cancel': state.staffEdit = null; render(); break;
     case 'staff-save': {
@@ -5404,11 +5484,18 @@ document.addEventListener('click', async ev => {
       try {
         const rb = document.querySelector('#s-role [data-st=main]');
         if (!$('#s-kitchen').checked && !rb) return toast(t('need_main'), true);
+        // v82：区域主管：每个区域勾了哪几家店；同时是小费管理员时先确认（权力集中），确认了才保存
+        const hasArea = !!document.querySelector('.s-area'), want = a => [...document.querySelectorAll(`.s-area[data-area="${a}"]:checked`)].map(x => x.dataset.store).sort();
+        const had = a => (s.areas || []).filter(x => x.area === a).map(x => x.store).sort();
+        const chg = hasArea ? ['front', 'kitchen'].filter(a => want(a).join() !== had(a).join()) : [];
+        const adds = chg.some(a => want(a).some(st => !had(a).includes(st))), anyArea = hasArea && ['front', 'kitchen'].some(a => want(a).length);
+        const ask = $('#s-mgr').checked && anyArea && (adds || !s.is_tip_manager);
+        if (ask && !confirm(t('area_tip_q'))) return;
         const newId = await rpc('admin_upsert_staff', { ...tok(), p_id: s.id || null, p_name: $('#s-name').value.trim(),
           p_is_active: $('#s-active').checked, p_is_kitchen: $('#s-kitchen').checked, p_is_tip_manager: $('#s-mgr').checked, p_is_admin: $('#s-admin').checked });
         if (!$('#s-kitchen').checked && rb) await rpc('admin_set_main_role', { ...tok(), p_id: newId || s.id, p_role: rb.dataset.r });
-        if ($('#s-sched').checked !== !!s.is_scheduler) await rpc('admin_set_scheduler', { ...tok(), p_id: newId || s.id, p_on: $('#s-sched').checked });
-        if ($('#s-ksched') && $('#s-ksched').checked !== !!s.is_kitchen_scheduler) await rpc('admin_set_kitchen_scheduler', { ...tok(), p_id: newId || s.id, p_on: $('#s-ksched').checked });
+        for (const a of chg) await areaSet(newId || s.id, a, want(a), ask);   // v82
+        if (ask && !adds) await rpc('admin_role_ack', { ...tok(), p_staff_id: newId || s.id });   // 只是新勾了小费管理员：记一笔「已确认」
         if ($('#s-exp') && $('#s-exp').checked !== !!s.can_expense) await rpc('admin_set_expense', { ...tok(), p_id: newId || s.id, p_on: $('#s-exp').checked });   // v67
         if ($('#s-insched')){ const main = rb ? rb.dataset.r : null;
           await rpc('admin_set_sched_profile', { ...tok(), p_staff_id: newId || s.id, p_in_schedule: $('#s-insched').checked,
@@ -5933,7 +6020,7 @@ async function signOut(){
   if (tk) try { await sb.rpc('logout', { p_token: tk }); } catch(e){}
 }
 // 员工 90 秒无操作自动退出；管理员和小费管理员 5 分钟
-const idleLimit = () => { const m = state.viewAs ? state.viewAs.adminMe : (state.me || {}); return (m.is_admin || m.is_tip_manager || m.is_scheduler) ? 300 : 90; };
+const idleLimit = () => { const m = state.viewAs ? state.viewAs.adminMe : (state.me || {}); return (m.is_admin || m.is_tip_manager || m.is_scheduler || (m.areas || []).length) ? 300 : 90; };   // v82：区域主管同排班员
 let lastAct = Date.now(), hiddenAt = null;
 function hideIdleBar(){ document.querySelectorAll('.idlebar').forEach(n => n.remove()); }
 function showIdleBar(n){
