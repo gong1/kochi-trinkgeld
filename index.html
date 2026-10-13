@@ -434,6 +434,9 @@ zh: {
   lib_f_push_zh:'推送短句（中文；要确认的资料发布时推送，不填就推标题）', lib_f_push_de:'推送短句（德文）',
   lib_f_store_only:'只给在 {s} 上班的人（最近 60 天到之后 14 天排了这家店的班；以后有人开始去这家店上班，会自动收到）',
   lib_store_only_meta:'只给在 {s} 上班的人', lib_hist_only:'只存档（旧版）', lib_push_lbl:'推送：{x}',
+  // v85：厨房的班次时间
+  kstt_title:'厨房班次时间', kstt_hint:'排厨房的人时，按他的岗位用这里的时间（兼岗取最早开始、最晚结束）。改了以后：还没发布的周里、时间还是旧的厨房班会跟着改；已发布的周不动（要改就在排班窗口里单独改）。',
+  kstt_unset:'还没设，现在用前场这个班次的时间', kstt_saved_n:'已保存。还没发布的周里 {n} 个厨房班改成了新时间。',
   // v84：后厨排班第二版（午班 / 晚班、兼岗、时间）
   ke_hint2:'分午班、晚班排：一个人可以点进同一段的几个岗位（兼岗）；时间默认按他的岗位，可以在下面改。同一天只能在一家店；同一时段已经排在前场的人灰掉。',
   ke_people:'这一段的人和时间', ke_front_busy:'已排在前场{sl}', ke_skip_front:'{n} 已排在前场{sl}，厨房{sl}没有加上。',
@@ -705,6 +708,9 @@ de: {
   lib_f_push_zh:'Push-Text (Chinesisch; bei Lesebestätigung wird er beim Veröffentlichen gesendet, sonst der Titel)', lib_f_push_de:'Push-Text (Deutsch)',
   lib_f_store_only:'Nur für Leute, die in {s} arbeiten (Schicht dort in den letzten 60 bis nächsten 14 Tagen; wer neu dort arbeitet, bekommt es automatisch)',
   lib_store_only_meta:'nur Leute in {s}', lib_hist_only:'Nur Archiv (alte Version)', lib_push_lbl:'Push: {x}',
+  // v85：Schichtzeiten der Küche
+  kstt_title:'Schichtzeiten Küche', kstt_hint:'Beim Einplanen in der Küche gelten diese Zeiten je Posten (bei mehreren Posten frühester Beginn bis spätestes Ende). Nach einer Änderung werden in noch nicht veröffentlichten Wochen die Küchenschichten mit der alten Zeit angepasst; veröffentlichte Wochen bleiben unverändert (dort im Planungsfenster einzeln ändern).',
+  kstt_unset:'noch nicht festgelegt – zurzeit Zeiten der Service-Schicht', kstt_saved_n:'Gespeichert. In noch nicht veröffentlichten Wochen wurden {n} Küchenschichten auf die neue Zeit gesetzt.',
   // v84：Küchenplan Version 2 (Mittag / Abend, mehrere Posten, Zeiten)
   ke_hint2:'Nach Mittag und Abend planen: eine Person kann in derselben Schicht mehrere Posten haben; die Zeit kommt aus ihren Posten und lässt sich unten ändern. Pro Tag nur in einem Laden; wer zur gleichen Zeit im Service eingeplant ist, ist ausgegraut.',
   ke_people:'Personen und Zeiten in dieser Schicht', ke_front_busy:'schon im Service ({sl})', ke_skip_front:'{n} ist {sl} schon im Service eingeplant – in der Küche ({sl}) nicht hinzugefügt.',
@@ -4022,11 +4028,13 @@ function wdRange(days){
     out.push(j - i >= 2 ? L.wd[ds[i] - 1] + '–' + L.wd[ds[j] - 1] : ds.slice(i, j + 1).map(x => L.wd[x - 1]).join(sep)); i = j + 1; }
   return out.join(sep);
 }
-async function sttLoad(){ try { state.stt = await rpc('shift_times', tok()); } catch(e){ state.stt = { err: errText(e) }; } }
+async function sttLoad(){   // v85：厨房用 kshift_times（数据库 v59）
+  const area = planArea() === 'kitchen' ? 'kitchen' : 'front';
+  try { state.stt = { ...(await rpc(area === 'kitchen' ? 'kshift_times' : 'shift_times', tok())), area }; } catch(e){ state.stt = { err: errText(e), area }; } }
 function sttHTML(){
-  const d = state.stt;
-  let h = `<button class="link" data-act="stt-back">${esc(t('stt_back'))}</button><h2 style="margin:10px 0 6px">${esc(t('stt_title'))}</h2>
-    <div class="small muted" style="margin-bottom:12px">${esc(t('stt_hint'))}</div>`;
+  const d = state.stt, kit = !!d && d.area === 'kitchen', RS = kit ? KROLES : ROLES;   // v85：厨房四个岗位
+  let h = `<button class="link" data-act="stt-back">${esc(t('stt_back'))}</button><h2 style="margin:10px 0 6px">${esc(t(kit ? 'kstt_title' : 'stt_title'))}</h2>
+    <div class="small muted" style="margin-bottom:12px">${esc(t(kit ? 'kstt_hint' : 'stt_hint'))}</div>`;
   if (!d) return h + `<div class="loading">${esc(t('loading'))}</div>`;
   if (d.err) return h + `<div class="empty">${esc(d.err)}</div>`;
   for (const store of STORES){
@@ -4034,12 +4042,13 @@ function sttHTML(){
     for (const slot of SLOTS){
       const rows = (d.slots || []).filter(x => x.store === store && x.slot === slot); if (!rows.length) continue;
       const groups = [];   // 时间完全一样的几天合成一行
-      rows.forEach(x => { const k = JSON.stringify(ROLES.map(r => x.times[r])), g = groups.find(g => g.k === k);
-        if (g) g.days.push(x.weekday); else groups.push({ k, days: [x.weekday], times: x.times }); });
+      rows.forEach(x => { const k = JSON.stringify(RS.map(r => x.times[r])) + (kit && !x.set ? '·unset' : ''), g = groups.find(g => g.k === k);
+        if (g) g.days.push(x.weekday); else groups.push({ k, days: [x.weekday], times: x.times, unset: kit && !x.set }); });
       h += `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong></div></div>
         ${groups.map(g => `<div class="stt-row"><div><strong>${esc(wdRange(g.days))}</strong>
-          <div class="stt-t">${ROLES.map(r => `<span>${esc(t('grp_' + r))} <b class="num">${esc(g.times[r].start)}–${esc(g.times[r].end)}</b></span>`).join('')}</div></div>
-          ${planStoreOk('front', store) ? `<button class="pchip add" style="flex:none" data-act="stt-edit" data-store="${store}" data-slot="${slot}" data-days="${g.days.join(',')}">${esc(t('stt_edit'))}</button>` : ''}</div>`).join('')}</div>`;   // v82
+          <div class="stt-t">${RS.map(r => `<span>${esc(t('grp_' + r))} <b class="num">${esc(g.times[r].start)}–${esc(g.times[r].end)}</b></span>`).join('')}</div>
+          ${g.unset ? `<div class="small muted">${esc(t('kstt_unset'))}</div>` : ''}</div>
+          ${planStoreOk(kit ? 'kitchen' : 'front', store) ? `<button class="pchip add" style="flex:none" data-act="stt-edit" data-store="${store}" data-slot="${slot}" data-days="${g.days.join(',')}">${esc(t('stt_edit'))}</button>` : ''}</div>`).join('')}</div>`;   // v82
     }
     h += `</div>`;
   }
@@ -4047,12 +4056,12 @@ function sttHTML(){
   return h;
 }
 function sttDlgRender(){
-  const e = state.sttEd, L = I18N[state.lang] || I18N.zh;
+  const e = state.sttEd, L = I18N[state.lang] || I18N.zh, RS = state.stt.area === 'kitchen' ? KROLES : ROLES;   // v85
   const have = new Set(state.stt.slots.filter(x => x.store === e.store && x.slot === e.slot).map(x => x.weekday));   // 这家店这个班有的那几天
   $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${storeTag(e.store)} ${esc(slotLabel(e.slot))} · ${esc(t('stt_title'))}</h2>
     <div class="small muted" style="margin-bottom:8px">${esc(t('stt_days'))}</div>
     <div class="sdchips">${[1, 2, 3, 4, 5, 6, 7].map(n => `<button type="button" class="sdchip ${e.days.includes(n) ? 'on' : ''}" aria-pressed="${e.days.includes(n)}" data-act="stt-day" data-d="${n}" ${have.has(n) ? '' : 'disabled'}>${esc(L.wd[n - 1])}</button>`).join('')}</div>
-    ${ROLES.map(r => `<div class="stt-role"><span class="rl">${esc(t('grp_' + r))}</span>
+    ${RS.map(r => `<div class="stt-role"><span class="rl">${esc(t('grp_' + r))}</span>
       <input class="input num" type="time" id="stt-s-${r}" value="${esc(e.times[r].start)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_start'))}"><span>–</span>
       <input class="input num" type="time" id="stt-e-${r}" value="${esc(e.times[r].end)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_end'))}"></div>`).join('')}
     <div class="small muted" style="margin:4px 0 14px">${esc(t('stt_late'))}</div>
@@ -4628,7 +4637,7 @@ function planRender(){
   const d = state.plan; if (!d || state.tab !== 'plan') return;
   const y = window.scrollY;
   const k = planArea() === 'kitchen';
-  if (state.planTimes && state.planSub === 'edit' && !k && canFront()){ $('#main').innerHTML = sttHTML(); return; }   // v75：班次时间
+  if (state.planTimes && state.planSub === 'edit' && (k ? canKitchen() : canFront())){ $('#main').innerHTML = sttHTML(); return; }   // v75：班次时间；v85：厨房也有
   $('#main').innerHTML = planHead() + (state.planSub === 'edit' && isSched()
     ? (k ? (canKitchen() ? kEditHTML(d) : `<div class="infobox">${esc(t('kp_ro'))}</div>` + kGridHTML(d, false))
          : (canFront() ? planEditHTML(d) : `<div class="infobox">${esc(t('kp_ro'))}</div>` + planGridHTML(d, false)))
@@ -4745,10 +4754,11 @@ function kGridHTML(d, edit){
     return blocks ? `<div class="sheet" ${isToday ? 'id="plan-today" style="border:2px solid var(--celadon)"' : ''}><div class="dayh">${esc(dayLabel(date))}${isToday ? ` <span class="tag ok">${esc(t('today_word'))}</span>` : ''}</div>${blocks}</div>` : '';
   }).join('');
 }
-function kEditHTML(d){
+function kEditHTML(d){   // v85：上面加「班次时间」入口
   const changed = d.shifts.filter(x => x.changed && x.slot === 'day').length, pd = state.kPending, pn = pd ? pd.changes : 0, pm = pd ? pd.people.length : 0;
   const g = kGaps(d), empty = !d.kitchen_published && !g.a;   // v68
-  return `<div class="hero"><strong>${esc(d.kitchen_published ? t('kp_state_yes', { t: fmtDateTime(d.kitchen_published_at) }) : t('kp_state_no'))}</strong>
+  return `<div style="text-align:right;margin:-4px 0 8px"><button class="link" data-act="stt-open">${esc(t('stt_btn'))}</button></div>
+    <div class="hero"><strong>${esc(d.kitchen_published ? t('kp_state_yes', { t: fmtDateTime(d.kitchen_published_at) }) : t('kp_state_no'))}</strong>
       <div class="small muted" style="margin-top:6px">${esc(g.a ? t('kp_progress', g) : t('pl_empty'))}</div>
       ${pn ? `<div class="warnbox" style="margin:10px 0 0">${esc(t('kp_pending', { n: pn, m: pm }))}</div>` : ''}
       ${!empty && (!d.kitchen_published || changed || pn) ? (planCanPublish('kitchen') ? `<button class="btn" style="margin-top:12px" data-act="kplan-publish">${esc(!d.kitchen_published ? t('kp_publish') : pn ? t('kp_republish_ntf', { n: pn, m: pm }) : t('kp_republish', { n: changed }))}</button>`
@@ -5807,13 +5817,16 @@ document.addEventListener('click', async ev => {
       el.classList.toggle('on', i < 0); el.setAttribute('aria-pressed', String(i < 0)); break;
     }
     case 'stt-save': {
-      const e = state.sttEd; ROLES.forEach(r => { e.times[r] = { start: $('#stt-s-' + r).value, end: $('#stt-e-' + r).value }; });
+      const e = state.sttEd, kit = state.stt.area === 'kitchen', RS = kit ? KROLES : ROLES;   // v85：厨房四个岗位，存到 kshift_times_set
+      RS.forEach(r => { e.times[r] = { start: $('#stt-s-' + r).value, end: $('#stt-e-' + r).value }; });
       if (!e.days.length) return toast(t('stt_no_day'), true);
-      if (ROLES.some(r => !e.times[r].start || !e.times[r].end || e.times[r].end <= e.times[r].start)) return toast(t('err_INVALID_TIME'), true);
+      if (RS.some(r => !e.times[r].start || !e.times[r].end || e.times[r].end <= e.times[r].start)) return toast(t('err_INVALID_TIME'), true);
       el.disabled = true;
-      try { const r = await rpc('shift_times_set', { ...tok(), p_store: e.store, p_slot: e.slot, p_weekdays: e.days, p_times: e.times });
+      try { const r = kit ? await rpc('kshift_times_set', { ...tok(), p_store: e.store, p_part: e.slot, p_weekdays: e.days, p_times: e.times })
+                          : await rpc('shift_times_set', { ...tok(), p_store: e.store, p_slot: e.slot, p_weekdays: e.days, p_times: e.times });
         $('#shiftDlg').close(); state.sttEd = null;
-        toast(r && r.shifts_updated ? t('stt_saved_n', { n: r.shifts_updated }) : t('stt_saved'));
+        const n = r && (kit ? r.parts_updated : r.shifts_updated);
+        toast(n ? t(kit ? 'kstt_saved_n' : 'stt_saved_n', { n }) : t('stt_saved'));
         await sttLoad(); planRender(); }
       catch(err){ toast(errText(err), true); el.disabled = false; }
       break;
