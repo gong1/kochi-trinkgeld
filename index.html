@@ -435,10 +435,10 @@ zh: {
   lib_f_store_only:'只给在 {s} 上班的人（最近 60 天到之后 14 天排了这家店的班；以后有人开始去这家店上班，会自动收到）',
   lib_store_only_meta:'只给在 {s} 上班的人', lib_hist_only:'只存档（旧版）', lib_push_lbl:'推送：{x}',
   // v85：厨房的班次时间
-  kstt_title:'厨房班次时间', kstt_hint:'排厨房的人时，按他的岗位用这里的时间（兼岗取最早开始、最晚结束）。改了以后：还没发布的周里、时间还是旧的厨房班会跟着改；已发布的周不动（要改就在排班窗口里单独改）。',
+  kstt_title:'厨房班次时间', kstt_hint:'排厨房的人时，按他的岗位用这里的时间（兼岗取最早开始、最晚结束）。过了半夜下班的照填，例如清洁 22:00–01:00。改了以后：还没发布的周里、时间还是旧的厨房班会跟着改；已发布的周不动（要改就在排班窗口里单独改）。',
   kstt_unset:'还没设，现在用前场这个班次的时间', kstt_saved_n:'已保存。还没发布的周里 {n} 个厨房班改成了新时间。',
   // v84：后厨排班第二版（午班 / 晚班、兼岗、时间）
-  ke_hint2:'分午班、晚班排：一个人可以点进同一段的几个岗位（兼岗）；时间默认按他的岗位，可以在下面改。同一天只能在一家店；同一时段已经排在前场的人灰掉。',
+  ke_hint2:'分午班、晚班排：一个人可以点进同一段的几个岗位（兼岗）；时间默认按他的岗位，可以在下面改，过了半夜下班的照填（例如 22:00–01:00）。同一天只能在一家店；同一时段已经排在前场的人灰掉。',
   ke_people:'这一段的人和时间', ke_front_busy:'已排在前场{sl}', ke_skip_front:'{n} 已排在前场{sl}，厨房{sl}没有加上。',
   ke_old_day:'这天有以前的「全天」班，已经先放进每一段里，请按实际改好再保存。', k_allday:'全天', pk_kitchen:'已排在厨房{sl}',
   ntf_item_kparts:'{d} {s} 厨房 {list}',
@@ -537,7 +537,7 @@ zh: {
   cash_hint:'今天你的现金收款占 {p}%，超过 10%。以后请多鼓励客人刷卡付款，并用大的刷卡机收款，方便入账。谢谢！',
   fb_menu:'反馈问题', fb_title:'反馈问题 / 建议', fb_desc:'哪里不好用、出了什么问题，或者有什么建议？', fb_desc_ph:'例如：我点提交后一直在转圈……',
   fb_shot:'当前页面截图（会一起发给老板）', fb_shot_none:'没能自动截图。可以从相册选一张截图。', fb_shot_pick:'换一张 / 从相册选截图', fb_shot_remove:'不附截图',
-  fb_send:'发送', fb_sent:'已发送，谢谢你的反馈！', fb_capturing:'正在截图……', admin_feedback:'反馈', fb_open:'未处理', fb_done_btn:'标记已处理', fb_reopen:'重新打开', fb_view:'看截图', fb_none:'还没有反馈',
+  fb_send:'发送', fb_err_hint:'会一起发送刚才出现的提示：「{m}」', fb_err_note:'（{t} 出现的提示：{m}）', fb_sent:'已发送，谢谢你的反馈！', fb_capturing:'正在截图……', admin_feedback:'反馈', fb_open:'未处理', fb_done_btn:'标记已处理', fb_reopen:'重新打开', fb_view:'看截图', fb_none:'还没有反馈',
   err_FEEDBACK_TOO_LONG:'描述太长了（最多 2000 字）。请精简一下。', err_TOO_MANY_FEEDBACK:'今天已经发了 20 条反馈，明天再发吧；紧急的请直接找老板。',
   plan_mine:'我的', plan_edit:'排班', slot_lunch:'午班', slot_dinner:'晚班', only_store:'仅 {s}',
   my_shifts:'我的班', not_published:'这周的排班还没有发布。', no_shifts:'这周没有排你的班', changed:'有变更',
@@ -709,10 +709,10 @@ de: {
   lib_f_store_only:'Nur für Leute, die in {s} arbeiten (Schicht dort in den letzten 60 bis nächsten 14 Tagen; wer neu dort arbeitet, bekommt es automatisch)',
   lib_store_only_meta:'nur Leute in {s}', lib_hist_only:'Nur Archiv (alte Version)', lib_push_lbl:'Push: {x}',
   // v85：Schichtzeiten der Küche
-  kstt_title:'Schichtzeiten Küche', kstt_hint:'Beim Einplanen in der Küche gelten diese Zeiten je Posten (bei mehreren Posten frühester Beginn bis spätestes Ende). Nach einer Änderung werden in noch nicht veröffentlichten Wochen die Küchenschichten mit der alten Zeit angepasst; veröffentlichte Wochen bleiben unverändert (dort im Planungsfenster einzeln ändern).',
+  kstt_title:'Schichtzeiten Küche', kstt_hint:'Beim Einplanen in der Küche gelten diese Zeiten je Posten (bei mehreren Posten frühester Beginn bis spätestes Ende). Über Mitternacht einfach so eintragen, z. B. Reinigung 22:00–01:00. Nach einer Änderung werden in noch nicht veröffentlichten Wochen die Küchenschichten mit der alten Zeit angepasst; veröffentlichte Wochen bleiben unverändert (dort im Planungsfenster einzeln ändern).',
   kstt_unset:'noch nicht festgelegt – zurzeit Zeiten der Service-Schicht', kstt_saved_n:'Gespeichert. In noch nicht veröffentlichten Wochen wurden {n} Küchenschichten auf die neue Zeit gesetzt.',
   // v84：Küchenplan Version 2 (Mittag / Abend, mehrere Posten, Zeiten)
-  ke_hint2:'Nach Mittag und Abend planen: eine Person kann in derselben Schicht mehrere Posten haben; die Zeit kommt aus ihren Posten und lässt sich unten ändern. Pro Tag nur in einem Laden; wer zur gleichen Zeit im Service eingeplant ist, ist ausgegraut.',
+  ke_hint2:'Nach Mittag und Abend planen: eine Person kann in derselben Schicht mehrere Posten haben; die Zeit kommt aus ihren Posten und lässt sich unten ändern, auch über Mitternacht (z. B. 22:00–01:00). Pro Tag nur in einem Laden; wer zur gleichen Zeit im Service eingeplant ist, ist ausgegraut.',
   ke_people:'Personen und Zeiten in dieser Schicht', ke_front_busy:'schon im Service ({sl})', ke_skip_front:'{n} ist {sl} schon im Service eingeplant – in der Küche ({sl}) nicht hinzugefügt.',
   ke_old_day:'An diesem Tag gibt es alte „ganztags“-Schichten; sie sind vorerst in jede Schicht übernommen – bitte anpassen und speichern.', k_allday:'Ganztags', pk_kitchen:'schon in der Küche ({sl})',
   ntf_item_kparts:'{d} {s}, Küche: {list}',
@@ -811,7 +811,7 @@ de: {
   cash_hint:'Heute lag dein Baranteil bei {p} % – mehr als 10 %. Bitte Gäste künftig zur Kartenzahlung ermutigen und dafür das große Kartenterminal nutzen, das erleichtert die Buchhaltung. Danke!',
   fb_menu:'Feedback', fb_title:'Feedback / Vorschlag', fb_desc:'Was funktioniert nicht gut, welches Problem gab es, oder was schlägst du vor?', fb_desc_ph:'z. B.: Nach „Absenden“ dreht sich nur der Kreis …',
   fb_shot:'Screenshot der aktuellen Seite (wird mitgeschickt)', fb_shot_none:'Automatischer Screenshot hat nicht geklappt. Du kannst einen Screenshot aus der Galerie wählen.', fb_shot_pick:'Anderen Screenshot wählen', fb_shot_remove:'Ohne Screenshot',
-  fb_send:'Senden', fb_sent:'Gesendet – danke für dein Feedback!', fb_capturing:'Screenshot wird erstellt …', admin_feedback:'Feedback', fb_open:'Offen', fb_done_btn:'Als erledigt markieren', fb_reopen:'Wieder öffnen', fb_view:'Screenshot', fb_none:'Noch kein Feedback',
+  fb_send:'Senden', fb_err_hint:'Die Meldung von gerade eben wird mitgeschickt: „{m}“', fb_err_note:'(Meldung um {t}: {m})', fb_sent:'Gesendet – danke für dein Feedback!', fb_capturing:'Screenshot wird erstellt …', admin_feedback:'Feedback', fb_open:'Offen', fb_done_btn:'Als erledigt markieren', fb_reopen:'Wieder öffnen', fb_view:'Screenshot', fb_none:'Noch kein Feedback',
   err_FEEDBACK_TOO_LONG:'Die Beschreibung ist zu lang (max. 2000 Zeichen). Bitte kürzen.', err_TOO_MANY_FEEDBACK:'Heute wurden schon 20 Rückmeldungen geschickt – bitte morgen wieder; Dringendes direkt an den Chef.',
   plan_mine:'Meins', plan_edit:'Planen', slot_lunch:'Mittag', slot_dinner:'Abend', only_store:'nur {s}',
   my_shifts:'Meine Schichten', not_published:'Der Dienstplan für diese Woche ist noch nicht veröffentlicht.', no_shifts:'Diese Woche keine Schichten für dich', changed:'Geändert',
@@ -1047,16 +1047,23 @@ async function keepScroll(fn){
   try { await p; } finally { const m2 = $('#main'); if (m2) m2.style.minHeight = ''; window.scrollTo(0, y); }
 }
 // 带一个按钮的提示（例如「已发放：Anna · 撤销」），5 秒后消失
+// v86：开着弹出窗口时，提示放进最上面那个窗口里（弹出窗口在最上层，放在页面上会被窗口挡住，员工看不到报错）
+function toastPlace(n){
+  (([...document.querySelectorAll('dialog[open]')].pop()) || document.body).appendChild(n);
+  // 窗口关了而提示还在里面：挪回页面上，照常显示到时间；提示没了就不再看
+  const iv = setInterval(() => { const p = n.parentElement; if (!p) return clearInterval(iv); if (p.tagName === 'DIALOG' && !p.open) document.body.appendChild(n); }, 150);
+}
 function toastAction(msg, label, data){
   document.querySelectorAll('.toast').forEach(n => n.remove());
   const n = document.createElement('div'); n.className = 'toast'; n.setAttribute('role', 'status');
   n.innerHTML = `${esc(msg)}<button class="tbtn" data-act="${esc(data.act)}" data-staff="${esc(data.staff || '')}" data-week="${esc(data.week || '')}">${esc(label)}</button>`;
-  document.body.appendChild(n); clearTimeout(toastTimer); toastTimer = setTimeout(() => n.remove(), 5000);
+  toastPlace(n); clearTimeout(toastTimer); toastTimer = setTimeout(() => n.remove(), 5000);
 }
 function toast(msg, isErr){
   document.querySelectorAll('.toast').forEach(n => n.remove());
   const n = document.createElement('div'); n.className = 'toast' + (isErr ? ' err' : ''); n.textContent = msg;
-  n.setAttribute('role', 'status'); document.body.appendChild(n);
+  n.setAttribute('role', 'status'); toastPlace(n);
+  if (isErr && !($('#fbDlg') || {}).open) state.lastErr = { msg: String(msg), at: Date.now() };   // v86：点「反馈」时一起发给老板（反馈窗口自己的提示不算）
   // 报错提示较长：按字数延长显示时间（至少 6 秒），点一下即可关闭
   n.addEventListener('click', () => n.remove());
   clearTimeout(toastTimer); toastTimer = setTimeout(() => n.remove(), isErr ? Math.max(6000, String(msg).length * 110) : 3200);
@@ -1195,6 +1202,7 @@ const ERR_ZH = {
   SHIFT_CONFLICT: '这个人在这个时段已经排在另一家店了。请先把那边的班删掉或改掉。',
   INVALID_SLOT: '这家店这一天没有这个班次，不能排人。',
   INVALID_TIME: '时间不对：结束时间要晚于开始时间。',
+  INVALID_KTIME: '时间不对：开始要在 05:00 以后，结束要晚于开始。过了半夜下班的照填，最晚到 05:00（例如 22:00–01:00）。请检查每个人的时间，有没有空着的。',
 };
 const ERR_DE = {
   AUTH_REQUIRED: 'Deine Anmeldung ist abgelaufen. Bitte neu anmelden.',
@@ -1329,6 +1337,7 @@ const ERR_DE = {
   SHIFT_CONFLICT: 'Diese Person ist in dieser Zeit schon im anderen Restaurant eingeplant. Bitte dort zuerst löschen oder ändern.',
   INVALID_SLOT: 'Diese Schicht gibt es an diesem Tag in diesem Restaurant nicht.',
   INVALID_TIME: 'Ungültige Zeit: Das Ende muss nach dem Beginn liegen.',
+  INVALID_KTIME: 'Ungültige Zeit: Beginn ab 05:00, Ende nach dem Beginn. Schichten über Mitternacht einfach so eintragen, Ende spätestens 05:00 (z. B. 22:00–01:00). Bitte alle Zeiten prüfen – ist ein Feld leer?',
 };
 Object.keys(ERR_ZH).forEach(k => { I18N.zh['err_' + k] = ERR_ZH[k]; I18N.de['err_' + k] = ERR_DE[k]; });
 
@@ -3987,9 +3996,12 @@ function fbRender(){
         ${f.shot ? `<button class="link danger" type="button" data-act="fb-noshot">${esc(t('fb_shot_remove'))}</button>` : ''}</div>
       <div class="small muted" style="margin-top:6px">${esc(t('fb_shot_hint'))}</div></div>
     ${state.viewAs ? `<div class="small muted" style="margin-bottom:8px">${esc(t('fb_view_hint', { n: state.viewAs.name }))}</div>` : ''}
+    ${fbLastErr() ? `<div class="small muted" style="margin-bottom:8px">${esc(t('fb_err_hint', { m: fbLastErr().msg }))}</div>` : ''}
     <div class="row" style="margin-top:8px"><button class="btn ghost" type="button" data-act="fb-close">${esc(t('cancel'))}</button>
       <button class="btn" type="button" data-act="fb-send" ${f.busy ? 'disabled' : ''}>${esc(t('fb_send'))}</button></div>`;
 }
+// v86：15 分钟内最近一次报错（反馈时一起发，老板 / Claude 不用查日志就知道原因）
+function fbLastErr(){ const e = state.lastErr; return e && Date.now() - e.at < 15 * 60000 ? e : null; }
 async function fbSend(btn){
   const f = state.fb; f.desc = $('#fb-desc').value.trim();
   if (!f.desc) return toast(t('err_COMMENT_REQUIRED'), true);
@@ -3998,8 +4010,9 @@ async function fbSend(btn){
     // v74：「查看」员工视角时用老板自己的账号发（查看会话只读），注明查看的是谁
     const v = state.viewAs;
     await rpc('submit_feedback', { p_token: v ? v.adminToken : state.token, p_page: f.page,
-      p_description: v ? t('fb_view_note', { n: v.name }) + ' ' + f.desc : f.desc, p_screenshot: f.shot, p_user_agent: navigator.userAgent });
-    $('#fbDlg').close(); state.fb = null; toast(t('fb_sent'));
+      p_description: (v ? t('fb_view_note', { n: v.name }) + ' ' + f.desc : f.desc) + (fbLastErr() ? '\n' + t('fb_err_note', { t: new Date(fbLastErr().at).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }), m: fbLastErr().msg }) : ''),
+      p_screenshot: f.shot, p_user_agent: navigator.userAgent });
+    $('#fbDlg').close(); state.fb = null; state.lastErr = null; toast(t('fb_sent'));
   } catch(e){ toast(errText(e), true); btn.disabled = false; }
 }
 function fbItem(x){
@@ -4788,7 +4801,10 @@ function kMineHTML(d){
 }
 // v84：这家店这天这一段每个岗位的默认时间（数据库 kslots；没有这一段 → null）；几个岗位取最早开始–最晚结束
 function kPartTimes(d, date, store, part){ const k = (d.kslots || []).find(x => x.date === date && x.store === store && x.part === part); return k && k.times ? k.times : null; }
-function kDefTime(T, roles){ const xs = roles.map(r => (T || {})[r]).filter(Boolean); return xs.length ? { start: xs.map(x => x.start).sort()[0], end: xs.map(x => x.end).sort().slice(-1)[0] } : null; }
+// v86：厨房的班可以过半夜：开始 05:00 以后，结束晚于开始，或者 00:00–05:00（= 第二天凌晨）
+const kTimeOk = (a, b) => !!a && !!b && a >= '05:00' && b !== a && (b > a || b <= '05:00');
+const kEndKey = (a, b) => (b <= a ? '1' : '0') + b;   // 比谁最晚下班：过半夜的算最晚
+function kDefTime(T, roles){ const xs = roles.map(r => (T || {})[r]).filter(Boolean); return xs.length ? { start: xs.map(x => x.start).sort()[0], end: xs.reduce((m, x) => kEndKey(x.start, x.end) > kEndKey(m.start, m.end) ? x : m).end } : null; }
 function keOpen(p){
   const d = state.plan, cur = d.shifts.filter(x => x.slot === 'day' && x.date === p.date && x.store === p.store);
   const avail = KPARTS.filter(pt => kPartTimes(d, p.date, p.store, pt)), parts = {};
@@ -5722,7 +5738,7 @@ document.addEventListener('click', async ev => {
       keKeep(); const e = state.kEd, d = state.plan, body = {};
       for (const pt of e.avail){ const P = e.parts[pt], T = kPartTimes(d, e.date, e.store, pt), times = {};
         [...new Set(KROLES.flatMap(r => P.sel[r]))].forEach(id => { const tm = P.times[id] || kDefTime(T, KROLES.filter(r => P.sel[r].includes(id))); if (tm) times[id] = tm; });
-        if (Object.values(times).some(x => !x.start || !x.end || x.end <= x.start)) return toast(t('err_INVALID_TIME'), true);
+        if (Object.values(times).some(x => !kTimeOk(x.start, x.end))) return toast(t('err_INVALID_KTIME'), true);   // v86：可以过半夜
         body[pt] = { ...P.sel, times }; }
       el.disabled = true;
       try {
@@ -5820,7 +5836,8 @@ document.addEventListener('click', async ev => {
       const e = state.sttEd, kit = state.stt.area === 'kitchen', RS = kit ? KROLES : ROLES;   // v85：厨房四个岗位，存到 kshift_times_set
       RS.forEach(r => { e.times[r] = { start: $('#stt-s-' + r).value, end: $('#stt-e-' + r).value }; });
       if (!e.days.length) return toast(t('stt_no_day'), true);
-      if (RS.some(r => !e.times[r].start || !e.times[r].end || e.times[r].end <= e.times[r].start)) return toast(t('err_INVALID_TIME'), true);
+      if (RS.some(r => kit ? !kTimeOk(e.times[r].start, e.times[r].end) : (!e.times[r].start || !e.times[r].end || e.times[r].end <= e.times[r].start)))
+        return toast(t(kit ? 'err_INVALID_KTIME' : 'err_INVALID_TIME'), true);   // v86：厨房可以过半夜，前场照旧
       el.disabled = true;
       try { const r = kit ? await rpc('kshift_times_set', { ...tok(), p_store: e.store, p_part: e.slot, p_weekdays: e.days, p_times: e.times })
                           : await rpc('shift_times_set', { ...tok(), p_store: e.store, p_slot: e.slot, p_weekdays: e.days, p_times: e.times });
