@@ -541,7 +541,10 @@ zh: {
   cash_hint:'今天你的现金收款占 {p}%，超过 10%。以后请多鼓励客人刷卡付款，并用大的刷卡机收款，方便入账。谢谢！',
   fb_menu:'反馈问题', fb_title:'反馈问题 / 建议', fb_desc:'哪里不好用、出了什么问题，或者有什么建议？', fb_desc_ph:'例如：我点提交后一直在转圈……',
   fb_shot:'当前页面截图（会一起发给老板）', fb_shot_none:'没能自动截图。可以从相册选一张截图。', fb_shot_pick:'换一张 / 从相册选截图', fb_shot_remove:'不附截图',
-  fb_send:'发送', fb_err_hint:'会一起发送刚才出现的提示：「{m}」', fb_err_note:'（{t} 出现的提示：{m}）', fb_sent:'已发送，谢谢你的反馈！', fb_capturing:'正在截图……', admin_feedback:'反馈', fb_open:'未处理', fb_done_btn:'标记已处理', fb_reopen:'重新打开', fb_view:'看截图', fb_none:'还没有反馈',
+  fb_send:'发送', fbai_bug:'🐞 bug', fbai_howto:'❓ 操作问题', fbai_idea:'💡 建议', fbai_other:'💬 其他', fbai_urgent:'急',
+  fbai_next:'建议：{x}', fbai_by:'AI 看的，仅供参考', fbai_run:'✨ AI 看一下', fbai_again:'再看一次', fbai_busy1:'AI 正在看…',
+  fbai_busy:'AI 正在看…（{i} / {n}）', fbai_all:'✨ 让 AI 看还没看的 {n} 条', fbai_sum:'未处理 {n} 条', fbai_urgent_n:'急 {n}',
+  fbai_failed:'AI 这次没看成（网络或服务忙），请过一会儿再点一次。', fbai_failed_n:'有 {n} 条 AI 没看成，请过一会儿再点一次。', fb_err_hint:'会一起发送刚才出现的提示：「{m}」', fb_err_note:'（{t} 出现的提示：{m}）', fb_sent:'已发送，谢谢你的反馈！', fb_capturing:'正在截图……', admin_feedback:'反馈', fb_open:'未处理', fb_done_btn:'标记已处理', fb_reopen:'重新打开', fb_view:'看截图', fb_none:'还没有反馈',
   err_FEEDBACK_TOO_LONG:'描述太长了（最多 2000 字）。请精简一下。', err_TOO_MANY_FEEDBACK:'今天已经发了 20 条反馈，明天再发吧；紧急的请直接找老板。',
   plan_mine:'我的', plan_edit:'排班', slot_lunch:'午班', slot_dinner:'晚班', only_store:'仅 {s}',
   my_shifts:'我的班', not_published:'这周的排班还没有发布。', no_shifts:'这周没有排你的班', changed:'有变更',
@@ -819,7 +822,10 @@ de: {
   cash_hint:'Heute lag dein Baranteil bei {p} % – mehr als 10 %. Bitte Gäste künftig zur Kartenzahlung ermutigen und dafür das große Kartenterminal nutzen, das erleichtert die Buchhaltung. Danke!',
   fb_menu:'Feedback', fb_title:'Feedback / Vorschlag', fb_desc:'Was funktioniert nicht gut, welches Problem gab es, oder was schlägst du vor?', fb_desc_ph:'z. B.: Nach „Absenden“ dreht sich nur der Kreis …',
   fb_shot:'Screenshot der aktuellen Seite (wird mitgeschickt)', fb_shot_none:'Automatischer Screenshot hat nicht geklappt. Du kannst einen Screenshot aus der Galerie wählen.', fb_shot_pick:'Anderen Screenshot wählen', fb_shot_remove:'Ohne Screenshot',
-  fb_send:'Senden', fb_err_hint:'Die Meldung von gerade eben wird mitgeschickt: „{m}“', fb_err_note:'(Meldung um {t}: {m})', fb_sent:'Gesendet – danke für dein Feedback!', fb_capturing:'Screenshot wird erstellt …', admin_feedback:'Feedback', fb_open:'Offen', fb_done_btn:'Als erledigt markieren', fb_reopen:'Wieder öffnen', fb_view:'Screenshot', fb_none:'Noch kein Feedback',
+  fb_send:'Senden', fbai_bug:'🐞 Fehler', fbai_howto:'❓ Bedienung', fbai_idea:'💡 Vorschlag', fbai_other:'💬 Sonstiges', fbai_urgent:'dringend',
+  fbai_next:'Vorschlag: {x}', fbai_by:'Einschätzung der KI, ohne Gewähr', fbai_run:'✨ Von der KI ansehen lassen', fbai_again:'nochmal', fbai_busy1:'KI sieht es sich an …',
+  fbai_busy:'KI sieht es sich an … ({i} / {n})', fbai_all:'✨ {n} noch nicht angesehene von der KI ansehen lassen', fbai_sum:'{n} offen', fbai_urgent_n:'{n} dringend',
+  fbai_failed:'Die KI konnte es diesmal nicht ansehen (Netz oder Dienst ausgelastet). Bitte später nochmal tippen.', fbai_failed_n:'{n} konnte die KI nicht ansehen. Bitte später nochmal tippen.', fb_err_hint:'Die Meldung von gerade eben wird mitgeschickt: „{m}“', fb_err_note:'(Meldung um {t}: {m})', fb_sent:'Gesendet – danke für dein Feedback!', fb_capturing:'Screenshot wird erstellt …', admin_feedback:'Feedback', fb_open:'Offen', fb_done_btn:'Als erledigt markieren', fb_reopen:'Wieder öffnen', fb_view:'Screenshot', fb_none:'Noch kein Feedback',
   err_FEEDBACK_TOO_LONG:'Die Beschreibung ist zu lang (max. 2000 Zeichen). Bitte kürzen.', err_TOO_MANY_FEEDBACK:'Heute wurden schon 20 Rückmeldungen geschickt – bitte morgen wieder; Dringendes direkt an den Chef.',
   plan_mine:'Meins', plan_edit:'Planen', slot_lunch:'Mittag', slot_dinner:'Abend', only_store:'nur {s}',
   my_shifts:'Meine Schichten', not_published:'Der Dienstplan für diese Woche ist noch nicht veröffentlicht.', no_shifts:'Diese Woche keine Schichten für dich', changed:'Geändert',
@@ -3747,9 +3753,10 @@ async function viewAdmin(){
         <div class="list">${rates.map(r => `<div class="item"><div class="top"><div>${esc(t('valid_from'))} ${esc(fullDate(r.valid_from))}</div></div>
           <div class="meta num">${esc(t('kitchen'))} ${r.kitchen_pct}% · ${esc(t('runner'))} ${r.runner_pct}% · ${esc(t('bar'))} ${r.bar_pct}%</div></div>`).join('')}</div>`;
     } else if (state.adminSub === 'feedback'){
-      const list = await rpc('admin_feedback_list', tok()) || [];
-      const open = list.filter(x => x.status === 'open'), done = list.filter(x => x.status !== 'open');
-      el().innerHTML = `<div class="list">${open.map(fbItem).join('') || `<div class="empty">${esc(t('fb_none'))}</div>`}</div>`
+      const [fl, ai] = await Promise.all([rpc('admin_feedback_list', tok()), soft(rpc('admin_feedback_ai', tok()), {})]);   // v88：AI 的分类
+      const list = fl || []; state.fbAi = ai || {};
+      const open = list.filter(x => x.status === 'open').sort((a, b) => fbAiRank(a) - fbAiRank(b)), done = list.filter(x => x.status !== 'open');
+      el().innerHTML = fbAiSumHTML(open) + `<div class="list">${open.map(fbItem).join('') || `<div class="empty">${esc(t('fb_none'))}</div>`}</div>`
         + (done.length ? `<details class="fold"><summary>${esc(t('fb_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(fbItem).join('')}</div></div></details>` : '');
     } else if (state.adminSub === 'report'){
       const d = new Date(); const first = ymd(new Date(d.getFullYear(), d.getMonth(), 1));
@@ -4025,18 +4032,44 @@ async function fbSend(btn){
   btn.disabled = true;
   try {
     // v74：「查看」员工视角时用老板自己的账号发（查看会话只读），注明查看的是谁
-    const v = state.viewAs;
-    await rpc('submit_feedback', { p_token: v ? v.adminToken : state.token, p_page: f.page,
+    const v = state.viewAs, tk = v ? v.adminToken : state.token;
+    const fid = await rpc('submit_feedback', { p_token: tk, p_page: f.page,
       p_description: (v ? t('fb_view_note', { n: v.name }) + ' ' + f.desc : f.desc) + (fbLastErr() ? '\n' + t('fb_err_note', { t: new Date(fbLastErr().at).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }), m: fbLastErr().msg }) : ''),
       p_screenshot: f.shot, p_user_agent: navigator.userAgent });
     $('#fbDlg').close(); state.fb = null; state.lastErr = null; toast(t('fb_sent'));
+    if (fid) fbAiRun(fid, tk);   // v88：交给 AI 先看（只给老板看），不等结果，出错也不影响
   } catch(e){ toast(errText(e), true); btn.disabled = false; }
+}
+// v88：AI 先看反馈（文件服务 tasks v7 的 fb_triage，数据库 v62）：bug / 操作问题 / 建议 / 其他、急不急、一句可能的原因、建议怎么处理
+function fbAiRun(id, token, again){
+  return sb.functions.invoke('tasks', { body: { action: 'fb_triage', feedback_id: id, again: !!again, token: token || state.token } })
+    .then(r => r.error ? null : r.data, () => null);
+}
+const FBAI_KINDS = ['bug', 'howto', 'idea', 'other'];
+// 未处理的排序：急的在前，再按 bug → 操作问题 → 建议 → 其他，AI 还没看的在最后；同一类里照旧新的在前
+const fbAiRank = x => { const a = (state.fbAi || {})[x.id]; return a ? (a.urgent ? 0 : 10) + FBAI_KINDS.indexOf(a.kind) : 50; };
+function fbAiSumHTML(open){
+  if (!open.length) return '';
+  const A = state.fbAi || {}, n = k => open.filter(x => (A[x.id] || {}).kind === k).length, urg = open.filter(x => (A[x.id] || {}).urgent).length;
+  state.fbAiTodo = open.filter(x => !A[x.id]).map(x => x.id);
+  const parts = FBAI_KINDS.filter(n).map(k => `${t('fbai_' + k)} ${n(k)}`).concat(urg ? [t('fbai_urgent_n', { n: urg })] : []);
+  return `<div class="sheet"><strong>${esc(t('fbai_sum', { n: open.length }))}</strong>${parts.length ? ' · ' + esc(parts.join(' · ')) : ''}
+    ${state.fbAiTodo.length ? `<div style="margin-top:8px"><button class="btn ghost" data-act="fbai-all">${esc(t('fbai_all', { n: state.fbAiTodo.length }))}</button></div>` : ''}</div>`;
+}
+function fbAiHTML(x){
+  const a = (state.fbAi || {})[x.id];
+  if (!a) return `<div style="margin:4px 0"><button class="link" data-act="fbai-run" data-id="${x.id}">${esc(t('fbai_run'))}</button></div>`;
+  return `<div class="infobox" style="margin:6px 0"><div><span class="tag ${a.kind === 'bug' ? 'bad' : a.kind === 'howto' ? 'pend' : 'ok'}" style="margin-left:0">${esc(t('fbai_' + a.kind))}</span>${a.urgent ? `<span class="tag bad">${esc(t('fbai_urgent'))}</span>` : ''} <strong>${esc(a.title_zh || '')}</strong></div>
+    ${a.cause_zh ? `<div class="small" style="margin-top:4px">${esc(a.cause_zh)}</div>` : ''}
+    ${a.next_zh ? `<div class="small" style="margin-top:2px">${esc(t('fbai_next', { x: a.next_zh }))}</div>` : ''}
+    <div class="small muted" style="margin-top:4px">${esc(t('fbai_by'))} · <button class="link" data-act="fbai-run" data-id="${x.id}" data-again="1">${esc(t('fbai_again'))}</button></div></div>`;
 }
 function fbItem(x){
   const when = fmtDateTime(x.created_at);
   return `<div class="item"><div class="top"><div><strong>${esc(x.name)}</strong> <span class="muted small">${esc(when)} · ${esc(fbPageLabel(x.page))}</span></div>
       ${x.status === 'open' ? `<span class="tag pend">${esc(t('fb_open'))}</span>` : ''}</div>
     <div style="white-space:pre-wrap;margin:6px 0">${esc(x.description)}</div>
+    ${fbAiHTML(x)}
     ${fbThreadHTML(x)}
     ${fbComposeHTML(x)}
     <div class="acts">${x.has_screenshot ? `<button class="link" data-act="fb-shot" data-id="${x.id}">${esc(t('fb_view'))}</button>` : ''}
@@ -5734,6 +5767,22 @@ document.addEventListener('click', async ev => {
         dlg.showModal(); }
       catch(e){ toast(errText(e), true); }
       break;
+    }
+    case 'fbai-run': {   // v88：AI 看一条（again = 再看一次）
+      el.disabled = true; el.textContent = t('fbai_busy1');
+      const r = await fbAiRun(el.dataset.id, state.token, el.dataset.again === '1');
+      if (!r || r.error) toast(t('fbai_failed'), true);
+      keepScroll(render); break;
+    }
+    case 'fbai-all': {   // v88：AI 看所有还没看的未处理反馈，一次 3 条
+      const ids = [...(state.fbAiTodo || [])]; let done = 0, bad = 0; el.disabled = true;
+      el.textContent = t('fbai_busy', { i: 0, n: ids.length });
+      for (let i = 0; i < ids.length; i += 3){
+        const rs = await Promise.all(ids.slice(i, i + 3).map(id => fbAiRun(id, state.token)));
+        rs.forEach(r => { if (!r || r.error) bad++; }); done += rs.length; el.textContent = t('fbai_busy', { i: done, n: ids.length });
+      }
+      if (bad) toast(t('fbai_failed_n', { n: bad }), true);
+      keepScroll(render); break;
     }
     case 'fb-status':
       try { await rpc('admin_feedback_set', { ...tok(), p_id: el.dataset.id, p_status: el.dataset.s });
