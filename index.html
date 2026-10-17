@@ -378,6 +378,20 @@ td.r,th.r{text-align:right}
 .scroll{overflow-x:auto}
 .loading{padding:40px 0;text-align:center;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* v91：物品 */
+.inv-row{display:flex;gap:12px;align-items:flex-start}
+.inv-txt{flex:1;min-width:0}
+.inv-ph{width:56px;height:56px;border-radius:8px;object-fit:cover;background:#E9EEEB;flex:none;display:block}
+.inv-ph.sm{width:44px;height:44px}
+.inv-ph.lg{width:96px;height:96px}
+.inv-ph.big{width:100%;height:auto;max-height:55vh;object-fit:contain;cursor:zoom-in;margin-bottom:4px}
+.inv-noph{display:flex;align-items:center;justify-content:center;font-size:22px;color:#9AA8A3}
+div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)}
+.inv-loc{font-size:14px;margin-top:4px;cursor:pointer}
+.inv-code{font-size:30px;font-weight:800;letter-spacing:.5px;margin:4px 0 0}
+.inv-warn{color:var(--neg)}
+.inv-chosen{font-weight:700;font-size:17px;margin:4px 0 8px}
+.inv-find{display:block;width:100%;height:48px;text-align:left;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;color:var(--muted);font-size:16px;margin:0 0 12px}
 </style>
 </head>
 <body>
@@ -400,6 +414,53 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v91：物品
+  tab_inv:'物品', inv_more:'📦 物品', inv_title:'物品', inv_q_ph:'找东西：名字、别名、编号……', inv_find:'找东西（物品放在哪里）',
+  inv_new:'＋ 新物品（拍照）', inv_settings:'⚙ 物品设置', inv_store_empty:'还没整理', inv_area_counts:'{p} 个储位 · {i} 件东西', inv_no_photo_n:'还没照片 {n}',
+  inv_owner_front:'前场', inv_owner_kitchen:'后厨', inv_owner_shared:'共用', inv_tag_damp:'潮湿', inv_tag_nofood:'不放食品', inv_tag_chem:'放化学品',
+  inv_tag_gas:'瓦斯罐专用', inv_tag_temp:'临时区', inv_tag_off:'已停用', inv_main:'主', inv_main_long:'主储位', inv_not_main:'不是主储位', inv_no_loc:'还没有位置',
+  inv_none:'没找到「{q}」。换个叫法试试（中文、德文、别名都行），或者问主管。', inv_none_sup:'是新东西的话，点上面「＋ 新物品」录进去。',
+  inv_places_h:'储位', inv_searching:'正在找……', inv_back:'← 物品', inv_back_more:'← 更多', inv_add_unit:'＋ 加货架 / 柜子', inv_edit:'编辑',
+  inv_unit_off:'已停用（{n}）', inv_items_n:'{n} 件', inv_empty_place:'空着', inv_area_empty:'这里还没有储位。',
+  inv_photo_none:'还没照片', inv_photo_take:'📷 拍照片', inv_photo_retake:'📷 重拍', inv_photo_by:'照片：{n} · {t}', inv_photo_saved:'照片已保存', inv_uploading:'正在上传照片……',
+  inv_here:'这里应该放（{n}）', inv_here_none:'这里还没登记东西。', inv_temp_hint:'临时区：东西只是暂时放这里，不能当固定位置。',
+  inv_put_new:'＋ 新物品放这里', inv_put_old:'＋ 已有的物品放这里', inv_slots:'层 / 格', inv_aka:'也叫：{a}', inv_damp:'怕潮',
+  inv_unit_line:'单位：{u}', inv_pack_line:'1 {p} = {n} {u}', inv_locs:'放在哪里', inv_set_main:'设为主储位', inv_unplace:'拿走',
+  inv_unplace_q:'从 {p} 拿走「{n}」？（这个位置停用，记录留着）', inv_add_loc:'＋ 再放一个位置', inv_edit_item:'编辑物品',
+  inv_disable:'停用这件东西', inv_enable:'重新启用', inv_disable_q:'停用「{n}」？停用后搜不到，位置记录留着，以后可以重新启用。',
+  inv_merge:'合并到另一件…', inv_merge_q:'把「{a}」合并到「{b}」？「{a}」停用，它的名字变成「{b}」的别名，位置挪过去。不能撤回。', inv_merged:'已合并到「{n}」',
+  inv_by:'录入：{n} · {t}', inv_upd:'最后修改：{n} · {t}', inv_off:'已停用', inv_warn_h:'⚠ 放的地方不对',
+  inv_new_h:'新物品', inv_edit_h:'修改物品', inv_loc_h:'「{n}」再放一个位置', inv_s1:'① 拍照', inv_s2:'② 名字和分类', inv_s3:'③ 放在哪里', inv_s3_loc:'放在哪里',
+  inv_ai_busy:'AI 正在看照片……{s} 秒', inv_ai_ok:'✓ AI 填好了，请看一眼，不对就改。', inv_ai_unsure:'AI 看不太清，填的是猜的，请仔细看。',
+  inv_ai_fail:'AI 没看成，自己填名字就行。', inv_ai_again:'让 AI 再看一次',
+  inv_f_de:'德文名', inv_f_zh:'中文名', inv_f_alias:'别名 / 关键词（用逗号分开，任何语言）', inv_f_alias_ph:'例如：Papierservietten, 纸巾, napkin',
+  inv_f_cat:'分类', inv_f_cat_pick:'请选分类', inv_f_damp:'怕潮（纸品、布类、食品、电器、纸质文件）', inv_f_more:'更多资料（可不填）',
+  inv_f_unit:'基本单位（瓶、kg、个……）', inv_f_pack:'包装单位（箱、包……）', inv_f_qty:'1 个包装 = 多少基本单位（例如 24）', inv_f_note:'备注',
+  inv_f_stock:'以后要管库存（现在还没用）', inv_f_expiry:'以后要管保质期（现在还没用）', inv_f_area:'储区', inv_f_unit_pick:'货架 / 柜子 / 抽屉',
+  inv_f_slot:'哪一层 / 哪一格（从上往下 A、B、C）', inv_f_pick:'请选', inv_f_chosen:'放在：{c}', inv_f_last:'（上次用的）', inv_f_noplace:'你还没有可以维护的储区（要老板授权区域主管）。',
+  inv_save:'保存', inv_cancel:'← 取消', inv_saved:'已保存', inv_need_name:'请写名字（德文或中文至少一个）。', inv_need_cat:'请选分类。',
+  inv_need_place:'请选放在哪里（储区 → 货架 → 层）。', inv_photo_wait:'照片还在上传，请等一下再保存。',
+  inv_dup_h:'已经有差不多的东西了', inv_dup_q:'是同一件吗？是的话点它，只给它加这个位置，不用新建。', inv_dup_new:'不是，新建一件',
+  inv_c_FOOD_AREA:'「{a}」规定不能放食品。请换到能放食品的地方（例如仓库）。', inv_c_CHEM_AREA:'清洁剂 / 化学品只能放在清洁间，「{a}」不行（不能和食品、餐具放在一起）。',
+  inv_c_DAMP:'这件东西怕潮，「{a}」潮湿，放久了会坏。请放到干燥的地方。', inv_c_FOOD_FLOOR:'食品不能直接放在地面区（{p}），要放到货架上。',
+  inv_c_GAS_PLACE:'瓦斯罐只能放在「瓦斯罐专用」的位置（Flingern：办公室门口储物柜 B1–B3），{p} 不是。', inv_c_GAS_ONLY:'{p} 是瓦斯罐专用的位置，不能放别的东西。',
+  inv_c_change:'换一个位置', inv_c_only_boss:'只有老板可以确认后强制保存。', inv_c_force_lbl:'老板：确实要放这里，写一句原因（记进日志）',
+  inv_c_force:'我确认，仍然保存', inv_c_note_need:'请写一句原因。', inv_placed:'已放到 {c}',
+  inv_u_new_h:'加货架 / 柜子 · {a}', inv_u_edit_h:'编辑储位 {c}', inv_u_edit_btn:'编辑这个储位', inv_u_type:'类型',
+  inv_type_R:'货架', inv_type_S:'柜子', inv_type_SL:'抽屉', inv_type_K:'冷藏柜', inv_type_T:'冷冻柜', inv_type_F:'地面区',
+  inv_u_no:'号码（空着 = 接着最大的号；停用过的号码不能再用）', inv_u_preview:'编号：{c}', inv_u_name_zh:'名称（中文，例如「窗边铁货架」）', inv_u_name_de:'名称（德文）',
+  inv_u_use_zh:'用途（中文，可不填，例如「食品」）', inv_u_use_de:'用途（德文，可不填）', inv_u_layout:'分层', inv_u_lay_none:'不分层',
+  inv_u_lay_levels:'分层 A、B、C', inv_u_lay_grid:'格子 A1、A2', inv_u_levels:'几层（从上往下 A、B、C……）', inv_u_rows:'几行（A、B……）', inv_u_cols:'几列（1、2……）',
+  inv_u_gas:'瓦斯罐专用（只有老板能改）', inv_u_temp:'临时区：不能当物品的固定位置（只有老板能改）',
+  inv_u_add_slots:'加层 / 加一行格子', inv_u_add_hint:'接着往后加：已有 A–D 就加 E……；格子柜加一整行。', inv_u_add_hint0:'现在不分层。加几层（从上往下 A、B……）；要格子就同时填列数。',
+  inv_u_add_n:'加几层（几行）', inv_u_cols_opt:'列数（格子才填）', inv_u_added:'加好了 {n} 个',
+  inv_u_off:'停用这个储位', inv_u_off_q:'停用 {c}？编号作废，以后不会再用；层 / 格一起停用。只有老板能重新启用。', inv_u_on:'重新启用',
+  inv_set_h:'物品设置', inv_set_areas:'储区', inv_set_cats:'分类', inv_set_new_area:'＋ 新储区', inv_set_new_cat:'＋ 新分类',
+  inv_a_code:'代码（3 个字符，例如 TKR）', inv_a_owner:'归属（哪边的区域主管维护）', inv_a_damp:'潮湿（地下室）', inv_a_food:'能放食品', inv_a_chem:'能放化学品（只有清洁间）',
+  inv_a_active:'启用', inv_a_sort:'排序（小的在前）', inv_a_hint:'改了规矩以后，已经放着的东西不符合的会标 ⚠（不会自动挪走）。',
+  inv_k_nature:'性质（决定放置规则）', inv_nat_food:'食品', inv_nat_chemical:'化学品', inv_nat_gas:'瓦斯罐', inv_nat_other:'其他',
+  inv_k_damp:'新物品默认怕潮', inv_k_area:'默认储区代码（例如 LAG，可空）', inv_k_area_short:'默认 {c}',
+  inv_pick_h:'选一件已有的物品', inv_pick_merge_h:'「{n}」合并到哪一件？',
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
   // v79：资料库
   lib_more:'📚 资料', lib_title:'资料', admin_library:'资料', lib_cat_menu:'菜单', lib_cat_drinks:'酒水单', lib_cat_group_menu:'Gruppenmenü', lib_cat_lunch:'午市套餐',
@@ -688,6 +749,53 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v91：Artikel
+  tab_inv:'Artikel', inv_more:'📦 Artikel', inv_title:'Artikel', inv_q_ph:'Suchen: Name, anderer Name, Lagerplatz …', inv_find:'Suchen (wo liegt was?)',
+  inv_new:'＋ Neuer Artikel (Foto)', inv_settings:'⚙ Artikel-Einstellungen', inv_store_empty:'Noch nicht erfasst', inv_area_counts:'{p} Plätze · {i} Artikel', inv_no_photo_n:'{n} ohne Foto',
+  inv_owner_front:'Service', inv_owner_kitchen:'Küche', inv_owner_shared:'gemeinsam', inv_tag_damp:'feucht', inv_tag_nofood:'keine Lebensmittel', inv_tag_chem:'Chemikalien',
+  inv_tag_gas:'nur Gaskartuschen', inv_tag_temp:'Zwischenablage', inv_tag_off:'deaktiviert', inv_main:'Haupt', inv_main_long:'Hauptplatz', inv_not_main:'nicht Hauptplatz', inv_no_loc:'Noch kein Platz',
+  inv_none:'„{q}“ nicht gefunden. Anders schreiben (Deutsch, Chinesisch, anderer Name) oder die Bereichsleitung fragen.', inv_none_sup:'Neuer Artikel? Oben „＋ Neuer Artikel“ tippen.',
+  inv_places_h:'Lagerplätze', inv_searching:'Suche …', inv_back:'← Artikel', inv_back_more:'← Mehr', inv_add_unit:'＋ Regal / Schrank hinzufügen', inv_edit:'Bearbeiten',
+  inv_unit_off:'Deaktiviert ({n})', inv_items_n:'{n} Artikel', inv_empty_place:'leer', inv_area_empty:'Hier gibt es noch keine Lagerplätze.',
+  inv_photo_none:'kein Foto', inv_photo_take:'📷 Foto machen', inv_photo_retake:'📷 Neues Foto', inv_photo_by:'Foto: {n} · {t}', inv_photo_saved:'Foto gespeichert', inv_uploading:'Foto wird hochgeladen …',
+  inv_here:'Gehört hierher ({n})', inv_here_none:'Hier ist noch nichts eingetragen.', inv_temp_hint:'Zwischenablage: Sachen liegen hier nur kurz, kein fester Platz.',
+  inv_put_new:'＋ Neuen Artikel hierher', inv_put_old:'＋ Vorhandenen Artikel hierher', inv_slots:'Ebenen / Fächer', inv_aka:'Auch: {a}', inv_damp:'feuchtigkeitsempfindlich',
+  inv_unit_line:'Einheit: {u}', inv_pack_line:'1 {p} = {n} {u}', inv_locs:'Wo liegt es?', inv_set_main:'Als Hauptplatz', inv_unplace:'Entfernen',
+  inv_unplace_q:'„{n}“ von {p} entfernen? (Der Platz wird deaktiviert, der Eintrag bleibt gespeichert)', inv_add_loc:'＋ Weiteren Platz hinzufügen', inv_edit_item:'Artikel bearbeiten',
+  inv_disable:'Artikel deaktivieren', inv_enable:'Wieder aktivieren', inv_disable_q:'„{n}“ deaktivieren? Danach nicht mehr auffindbar; die Plätze bleiben gespeichert, später wieder aktivierbar.',
+  inv_merge:'Mit anderem Artikel zusammenführen …', inv_merge_q:'„{a}“ mit „{b}“ zusammenführen? „{a}“ wird deaktiviert, sein Name wird ein anderer Name von „{b}“, die Plätze wandern mit. Nicht rückgängig.', inv_merged:'Zusammengeführt mit „{n}“',
+  inv_by:'Erfasst: {n} · {t}', inv_upd:'Zuletzt geändert: {n} · {t}', inv_off:'deaktiviert', inv_warn_h:'⚠ Falscher Platz',
+  inv_new_h:'Neuer Artikel', inv_edit_h:'Artikel bearbeiten', inv_loc_h:'Weiterer Platz für „{n}“', inv_s1:'① Foto', inv_s2:'② Name und Kategorie', inv_s3:'③ Wo kommt es hin?', inv_s3_loc:'Wo kommt es hin?',
+  inv_ai_busy:'Die KI schaut sich das Foto an … {s} Sek.', inv_ai_ok:'✓ Von der KI ausgefüllt – bitte kurz prüfen und korrigieren.', inv_ai_unsure:'Die KI konnte es nicht gut erkennen – nur geraten, bitte genau prüfen.',
+  inv_ai_fail:'Die KI hat es nicht geschafft – Namen einfach selbst eintragen.', inv_ai_again:'KI nochmal schauen lassen',
+  inv_f_de:'Name Deutsch', inv_f_zh:'Name Chinesisch', inv_f_alias:'Andere Namen / Suchwörter (mit Komma getrennt, jede Sprache)', inv_f_alias_ph:'z. B. Papierservietten, 纸巾, napkin',
+  inv_f_cat:'Kategorie', inv_f_cat_pick:'Kategorie wählen', inv_f_damp:'Feuchtigkeitsempfindlich (Papier, Textilien, Lebensmittel, Elektrogeräte, Dokumente)', inv_f_more:'Weitere Angaben (optional)',
+  inv_f_unit:'Grundeinheit (Flasche, kg, Stück …)', inv_f_pack:'Verpackungseinheit (Kiste, Packung …)', inv_f_qty:'1 Verpackung = wie viele Grundeinheiten (z. B. 24)', inv_f_note:'Notiz',
+  inv_f_stock:'Später Bestand führen (noch nicht in Gebrauch)', inv_f_expiry:'Später MHD führen (noch nicht in Gebrauch)', inv_f_area:'Bereich', inv_f_unit_pick:'Regal / Schrank / Schublade',
+  inv_f_slot:'Welche Ebene / welches Fach (von oben A, B, C)', inv_f_pick:'Bitte wählen', inv_f_chosen:'Platz: {c}', inv_f_last:'(zuletzt benutzt)', inv_f_noplace:'Du verwaltest noch keinen Bereich (Freigabe als Bereichsleitung durch den Chef nötig).',
+  inv_save:'Speichern', inv_cancel:'← Abbrechen', inv_saved:'Gespeichert', inv_need_name:'Bitte einen Namen eintragen (Deutsch oder Chinesisch).', inv_need_cat:'Bitte eine Kategorie wählen.',
+  inv_need_place:'Bitte den Platz wählen (Bereich → Regal → Ebene).', inv_photo_wait:'Das Foto wird noch hochgeladen – bitte kurz warten.',
+  inv_dup_h:'Es gibt schon etwas Ähnliches', inv_dup_q:'Ist es derselbe Artikel? Dann antippen – er bekommt nur diesen Platz dazu, kein neuer Artikel.', inv_dup_new:'Nein, neuen Artikel anlegen',
+  inv_c_FOOD_AREA:'„{a}“: Hier dürfen keine Lebensmittel hin. Bitte an einen Ort für Lebensmittel (z. B. Lager).', inv_c_CHEM_AREA:'Reiniger / Chemikalien nur in den Putzraum, nicht in „{a}“ (nicht zusammen mit Lebensmitteln und Geschirr).',
+  inv_c_DAMP:'Der Artikel verträgt keine Feuchtigkeit, „{a}“ ist feucht – er geht kaputt. Bitte an einen trockenen Ort.', inv_c_FOOD_FLOOR:'Lebensmittel nicht direkt auf die Bodenfläche ({p}), sondern ins Regal.',
+  inv_c_GAS_PLACE:'Gaskartuschen nur an Plätze „nur Gaskartuschen“ (Flingern: Fächerschrank an der Bürotür B1–B3); {p} ist keiner.', inv_c_GAS_ONLY:'{p} ist nur für Gaskartuschen – nichts anderes hinlegen.',
+  inv_c_change:'Anderen Platz wählen', inv_c_only_boss:'Nur der Chef kann das bestätigen und trotzdem speichern.', inv_c_force_lbl:'Chef: Wenn es wirklich hierher soll, kurz den Grund schreiben (kommt ins Protokoll)',
+  inv_c_force:'Bestätigen und trotzdem speichern', inv_c_note_need:'Bitte einen Grund schreiben.', inv_placed:'Platz {c} eingetragen',
+  inv_u_new_h:'Regal / Schrank hinzufügen · {a}', inv_u_edit_h:'Lagerplatz {c} bearbeiten', inv_u_edit_btn:'Diesen Lagerplatz bearbeiten', inv_u_type:'Art',
+  inv_type_R:'Regal', inv_type_S:'Schrank', inv_type_SL:'Schublade', inv_type_K:'Kühlschrank', inv_type_T:'Tiefkühler', inv_type_F:'Bodenfläche',
+  inv_u_no:'Nummer (leer = nächste freie; deaktivierte Nummern werden nicht wieder vergeben)', inv_u_preview:'Platznummer: {c}', inv_u_name_zh:'Name Chinesisch (z. B. „窗边铁货架“)', inv_u_name_de:'Name Deutsch (z. B. „Metallregal am Fenster“)',
+  inv_u_use_zh:'Zweck Chinesisch (optional)', inv_u_use_de:'Zweck Deutsch (optional, z. B. „Lebensmittel“)', inv_u_layout:'Ebenen', inv_u_lay_none:'ohne Ebenen',
+  inv_u_lay_levels:'Ebenen A, B, C', inv_u_lay_grid:'Fächer A1, A2', inv_u_levels:'Wie viele Ebenen (von oben A, B, C …)', inv_u_rows:'Reihen (A, B …)', inv_u_cols:'Spalten (1, 2 …)',
+  inv_u_gas:'Nur Gaskartuschen (nur der Chef kann das ändern)', inv_u_temp:'Zwischenablage: kein fester Platz für Artikel (nur der Chef kann das ändern)',
+  inv_u_add_slots:'Ebenen / Fachreihe hinzufügen', inv_u_add_hint:'Es geht hinten weiter: bei A–D kommt E …; bei Fächern eine ganze Reihe.', inv_u_add_hint0:'Noch ohne Ebenen. Wie viele Ebenen (von oben A, B …); für Fächer zusätzlich die Spalten.',
+  inv_u_add_n:'Wie viele Ebenen (Reihen)', inv_u_cols_opt:'Spalten (nur für Fächer)', inv_u_added:'{n} hinzugefügt',
+  inv_u_off:'Lagerplatz deaktivieren', inv_u_off_q:'{c} deaktivieren? Die Nummer wird nicht wieder vergeben; Ebenen / Fächer werden mit deaktiviert. Nur der Chef kann wieder aktivieren.', inv_u_on:'Wieder aktivieren',
+  inv_set_h:'Artikel-Einstellungen', inv_set_areas:'Bereiche', inv_set_cats:'Kategorien', inv_set_new_area:'＋ Neuer Bereich', inv_set_new_cat:'＋ Neue Kategorie',
+  inv_a_code:'Kürzel (3 Zeichen, z. B. TKR)', inv_a_owner:'Zuständig (welche Bereichsleitung)', inv_a_damp:'Feucht (Keller)', inv_a_food:'Lebensmittel erlaubt', inv_a_chem:'Chemikalien erlaubt (nur Putzraum)',
+  inv_a_active:'Aktiv', inv_a_sort:'Reihenfolge (kleiner = weiter oben)', inv_a_hint:'Nach einer Änderung werden vorhandene Artikel, die nicht mehr passen, mit ⚠ markiert (nicht automatisch umgeräumt).',
+  inv_k_nature:'Art (bestimmt die Regeln)', inv_nat_food:'Lebensmittel', inv_nat_chemical:'Chemikalie', inv_nat_gas:'Gaskartusche', inv_nat_other:'Sonstiges',
+  inv_k_damp:'Neue Artikel standardmäßig feuchtigkeitsempfindlich', inv_k_area:'Standard-Bereich (Kürzel, z. B. LAG; optional)', inv_k_area_short:'Standard {c}',
+  inv_pick_h:'Vorhandenen Artikel wählen', inv_pick_merge_h:'„{n}“ zusammenführen mit …',
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
   // v79：Unterlagen
   lib_more:'📚 Unterlagen', lib_title:'Unterlagen', admin_library:'Unterlagen', lib_cat_menu:'Speisekarte', lib_cat_drinks:'Getränkekarte', lib_cat_group_menu:'Gruppenmenü', lib_cat_lunch:'Mittagsmenü',
@@ -1098,6 +1206,20 @@ function toast(msg, isErr){
 }
 // 报错提示：每条都写清原因和下一步怎么做
 const ERR_ZH = {
+  INV_NAME_EMPTY: '请写名字（德文或中文至少一个）。',
+  INV_BAD: '填写的内容不对（例如数字或代码的格式）。请检查后再保存；还不行请截图发给老板。',
+  INV_PICK_SLOT: '这个货架 / 柜子分了层，请选是哪一层（哪一格）。',
+  INV_TEMP_PLACE: '这是临时区（待上架 / 待归位），不能当东西的固定位置。请选一个正式的储位。',
+  INV_PLACE_OFF: '这个储位已经停用了。请返回刷新，选别的储位。',
+  INV_ITEM_OFF: '这件东西已经停用或合并到别的物品了。请返回刷新再看。',
+  INV_PHOTO_BAD: '照片没有传上去（网络断了或照片有问题）。请重拍一次。',
+  INV_CODE_TAKEN: '这个编号已经有了（停用过的编号也不能再用）。请换一个号码，或者号码空着让系统接着编。',
+  INV_FORCE_NOTE: '强制保存要写一句原因。',
+  INV_AREA_FORBIDDEN: '这个储区不归你管：前场的储区由前场主管维护，后厨的由后厨主管维护，共用的两边主管都能维护（只限你被授权的门店）。请找对应的主管或老板。',
+  INV_PLACE_HAS_ITEMS: '这里还放着东西，不能停用。请先在物品页把东西挪到别的储位（「再放一个位置」，再「拿走」）。',
+  INV_MERGE_SELF: '不能合并到它自己。请选另一件。',
+  INV_UPLOAD_FAILED: '照片上传失败（服务器没给上传链接）。请检查网络后重拍；还不行请截图发给老板。',
+  INV_AI_FAILED: 'AI 没看成。不影响保存：自己填名字就行。',
   AUTH_REQUIRED: '登录已过期（超过有效时间，或已在别处退出）。请重新登录。',
   FORBIDDEN: '你的账号没有这个操作的权限。如果你认为应该有，请找老板在「员工」里调整。',
   EDIT_WINDOW_CLOSED: '已经过了可以直接修改的时间。请用「申请修改」写明原因，由老板批准。',
@@ -1234,6 +1356,20 @@ const ERR_ZH = {
   INVALID_KTIME: '时间不对：开始要在 05:00 以后，结束要晚于开始。过了半夜下班的照填，最晚到 05:00（例如 22:00–01:00）。请检查每个人的时间，有没有空着的。',
 };
 const ERR_DE = {
+  INV_NAME_EMPTY: 'Bitte einen Namen eintragen (Deutsch oder Chinesisch).',
+  INV_BAD: 'Eingabe ungültig (z. B. Zahl oder Kürzel im falschen Format). Bitte prüfen und erneut speichern; sonst Screenshot an den Chef.',
+  INV_PICK_SLOT: 'Dieses Regal / dieser Schrank hat Ebenen – bitte die Ebene (das Fach) wählen.',
+  INV_TEMP_PLACE: 'Das ist eine Zwischenablage (Wareneingang / Unsortiert), kein fester Platz. Bitte einen richtigen Lagerplatz wählen.',
+  INV_PLACE_OFF: 'Dieser Lagerplatz ist deaktiviert. Bitte zurück, neu laden und einen anderen wählen.',
+  INV_ITEM_OFF: 'Dieser Artikel ist deaktiviert oder wurde zusammengeführt. Bitte zurück und neu laden.',
+  INV_PHOTO_BAD: 'Das Foto wurde nicht hochgeladen (keine Verbindung oder Fotoproblem). Bitte noch einmal fotografieren.',
+  INV_CODE_TAKEN: 'Diese Nummer gibt es schon (auch deaktivierte Nummern werden nicht wieder vergeben). Bitte andere Nummer oder leer lassen.',
+  INV_FORCE_NOTE: 'Zum Trotzdem-Speichern bitte einen Grund schreiben.',
+  INV_AREA_FORBIDDEN: 'Für diesen Bereich bist du nicht zuständig: Service-Bereiche pflegt die Service-Leitung, Küchen-Bereiche die Küchen-Leitung, gemeinsame Bereiche beide (nur in deinen freigegebenen Filialen). Bitte die zuständige Leitung oder den Chef fragen.',
+  INV_PLACE_HAS_ITEMS: 'Hier liegen noch Artikel – Deaktivieren nicht möglich. Bitte die Artikel zuerst umräumen (im Artikel „Weiteren Platz hinzufügen“, dann „Entfernen“).',
+  INV_MERGE_SELF: 'Ein Artikel kann nicht mit sich selbst zusammengeführt werden. Bitte einen anderen wählen.',
+  INV_UPLOAD_FAILED: 'Foto-Upload fehlgeschlagen (kein Upload-Link vom Server). Bitte Verbindung prüfen und neu fotografieren; sonst Screenshot an den Chef.',
+  INV_AI_FAILED: 'Die KI hat es nicht geschafft. Speichern geht trotzdem – Namen einfach selbst eintragen.',
   AUTH_REQUIRED: 'Deine Anmeldung ist abgelaufen. Bitte neu anmelden.',
   FORBIDDEN: 'Dafür hat dein Konto keine Berechtigung. Falls nötig, bitte den Chef bitten, deine Rechte anzupassen.',
   EDIT_WINDOW_CLOSED: 'Die Zeit für direkte Änderungen ist vorbei. Bitte über „Änderung beantragen“ mit Begründung einreichen – der Chef gibt frei.',
@@ -1424,6 +1560,7 @@ function tabs(){
   if (!kstaff) r.push('ledger');
   if (!m.is_kitchen && !m.is_admin) r.push('more');
   if (!m.is_kitchen) r.push('plan');
+  if (!m.is_kitchen) r.push('inv');   // v91：物品
   if (m.is_tip_manager || m.is_admin || isSup('front', m)) r.push('week');   // v83：前场主管看周结（只读）
   if (m.is_admin) r.push('admin');
   return r;
@@ -1433,9 +1570,9 @@ function tabs(){
 function navTabs(){
   const m = state.me || {}, ok = k => tabs().includes(k);
   if (m.is_kitchen) return tabs().filter(k => k !== 'more');
-  if (m.is_admin) return ['today', 'week', 'plan', 'admin'].filter(ok);
+  if (m.is_admin) return ['today', 'week', 'plan', 'inv', 'admin'].filter(ok);   // v91：老板多「物品」
   if (m.is_tip_manager) return ['today', 'plan', 'ledger', 'week', 'more'].filter(ok);
-  return ['today', 'plan', 'ledger', isSup('front', m) ? 'week' : null, 'more'].filter(k => k && ok(k));   // 厨房员工没有账本：今天 / 排班 / 更多；v83：前场主管多「周结」
+  return ['today', 'plan', 'ledger', isSup('front', m) ? 'week' : 'inv', 'more'].filter(k => k && ok(k));   // 厨房员工没有账本：今天 / 排班 / 更多；v83：前场主管多「周结」
 }
 // 页头「⋯」菜单（没有「更多」页的人用：老板、厨房小费账户）
 function menuHTML(){
@@ -1743,7 +1880,7 @@ function renderToday(){
   const tm = tmTodoCards(), nOpen = open.filter(x => x.status !== 'later').length + tm.length;
   if (state.expNew){ viewExpenseNew(); return; }   // v67：正在记垫付
   const msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message');
-  $('#main').innerHTML = (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + expTodayHTML() + shifts
+  $('#main').innerHTML = invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + expTodayHTML() + shifts
     + `<h3>${esc(nOpen ? t('td_mine', { n: nOpen }) : t('td_mine_ok'))}</h3>`
     + (open.length || tm.length ? msgs.map(taskCardHTML).join('') + tm.join('') + rest.map(taskCardHTML).join('') : `<div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
     + (done.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(taskDoneLine).join('')}</div></div></details>` : '')
@@ -2264,12 +2401,590 @@ function viewMore(){
   if (state.libView) return viewLibrary();   // v79：资料
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
   $('#main').innerHTML = `<h2 style="margin-top:4px">${esc(t('more_title'))}</h2><div class="more">
-    ${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
+    ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
     ${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
+
+// ============ 物品（v91，数据库 v63 / 文件服务 tasks v8，老板 2026-10-17 决定）============
+// 第一步：储区、储位、物品、放置规则、搜索、照片、AI 拍照填名字。二维码（第 2 步）、待归位（第 3 步）、3 个月确认和「搜不到的词」（第 4 步）以后做。
+// 页面：首页（搜索 + 按储区浏览）→ 储区 → 储位 → 物品；录入（拍照 → AI 填名字 → 选储位）；储位编辑；物品设置（老板）。
+const INV_TYPES = ['R', 'S', 'SL', 'K', 'T', 'F'];
+const INV_URLS = {};   // 照片路径 → { url, at }（文件服务给的 1 小时链接，50 分钟内重用）
+function invS(){ return state.inv || (state.inv = { view: 'home', q: '' }); }
+function invGo(view, id, extra){ const S = invS(); S.view = view; S.id = id || null; Object.assign(S, extra || {}); state.tab = 'inv'; render(); window.scrollTo(0, 0); }
+// 名字：当前语言优先，没有就用另一种；第二行显示另一种
+function invName(x, k){ k = k || 'name'; const zh = x && x[k + '_zh'], de = x && x[k + '_de']; return (state.lang === 'de' ? (de || zh) : (zh || de)) || ''; }
+function invOther(x, k){ k = k || 'name'; const zh = x && x[k + '_zh'], de = x && x[k + '_de'], o = state.lang === 'de' ? zh : de; return o && o !== invName(x, k) ? o : ''; }
+function invImg(path, cls, full){
+  return path ? `<img class="inv-ph${cls ? ' ' + cls : ''}" data-ph="${esc(path)}"${full ? ` data-full="${esc(full)}" data-act="inv-photo-big"` : ''} alt="">`
+    : `<div class="inv-ph inv-noph${cls ? ' ' + cls : ''}" aria-hidden="true">📦</div>`;
+}
+// 页面上所有还没有链接的照片，一次向文件服务要（每次最多 100 张）
+async function invLoadPhotos(){
+  const els = [...document.querySelectorAll('img[data-ph]')], now = Date.now();
+  const fresh = p => INV_URLS[p] && now - INV_URLS[p].at < 50 * 60e3;
+  const need = [...new Set(els.map(e => e.dataset.ph).filter(p => !fresh(p)))];
+  for (let i = 0; i < need.length; i += 100){
+    try { const r = await callTasks({ action: 'inv_urls', paths: need.slice(i, i + 100) }); Object.entries(r.urls || {}).forEach(([p, u]) => { if (u) INV_URLS[p] = { url: u, at: now }; }); }
+    catch(e){ break; }
+  }
+  document.querySelectorAll('img[data-ph]').forEach(e => { const u = INV_URLS[e.dataset.ph]; if (u && e.getAttribute('src') !== u.url) e.src = u.url; });
+}
+async function invPhotoBig(path){
+  if (!INV_URLS[path] || Date.now() - INV_URLS[path].at > 50 * 60e3){
+    try { const r = await callTasks({ action: 'inv_urls', paths: [path] }); if (r.urls && r.urls[path]) INV_URLS[path] = { url: r.urls[path], at: Date.now() }; } catch(e){ toast(errText(e), true); return; }
+  }
+  const u = INV_URLS[path]; if (!u) return;
+  const dlg = $('#photoDlg'); dlg.innerHTML = `<img src="${esc(u.url)}" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><button class="btn" data-act="photo-close">${esc(t('close'))}</button>`; dlg.showModal();
+}
+// 拍的照片压缩成大图（最长边 1280）和小图（320），传进存储桶；返回 { photo, photo_t }
+async function invPrep(file){
+  const big = await compressImage(file, 1280, 0.82), small = await compressImage(file, 320, 0.75);
+  return { preview: small, big: await (await fetch(big)).blob(), small: await (await fetch(small)).blob() };
+}
+async function invUpload(kind, prep){
+  const r = await callTasks({ action: 'inv_upload_urls', kind, count: 1 }), p = (r.photos || [])[0];
+  if (!p) throw new Error('INV_UPLOAD_FAILED');
+  for (const [x, blob] of [[p.photo, prep.big], [p.thumb, prep.small]]){
+    const { error } = await sb.storage.from('inventory').uploadToSignedUrl(x.path, x.token, blob, { contentType: 'image/jpeg' });
+    if (error) throw new Error('INV_PHOTO_BAD');
+  }
+  return { photo: p.photo.path, photo_t: p.thumb.path };
+}
+function invAreaTags(a){
+  return [`<span class="tag off" style="margin-left:0">${esc(t('inv_owner_' + a.owner))}</span>`,
+    a.damp ? `<span class="tag k">${esc(t('inv_tag_damp'))}</span>` : '',
+    !a.food_ok && !a.inbox ? `<span class="tag pend">${esc(t('inv_tag_nofood'))}</span>` : '',
+    a.chem_ok ? `<span class="tag pend">${esc(t('inv_tag_chem'))}</span>` : '',
+    a.inbox ? `<span class="tag pend">${esc(t('inv_tag_temp'))}</span>` : '',
+    a.active === false ? `<span class="tag off">${esc(t('inv_tag_off'))}</span>` : ''].join('');
+}
+function invPlaceTags(p){
+  return (p.special === 'gas' ? `<span class="tag bad">${esc(t('inv_tag_gas'))}</span>` : '') + (p.temp ? `<span class="tag pend">${esc(t('inv_tag_temp'))}</span>` : '')
+    + (p.active === false ? `<span class="tag off">${esc(t('inv_tag_off'))}</span>` : '');
+}
+// 冲突说明：当前语言一行，另一种语言小字一行（中德双语）
+function invConflictText(c, lang){ const s = (I18N[lang] || I18N.zh)['inv_c_' + c.code] || c.code; return s.split('{a}').join(lang === 'de' ? c.area_de : c.area_zh).split('{p}').join(c.place); }
+function invConflictHTML(list){
+  const other = state.lang === 'de' ? 'zh' : 'de';
+  return list.map(c => `<div style="margin:0 0 10px"><div class="inv-warn">⚠ ${esc(invConflictText(c, state.lang))}</div><div class="small muted">${esc(invConflictText(c, other))}</div></div>`).join('');
+}
+function invWarnLine(codes, place){   // 已经放着的东西：现在的冲突（储区规矩改过）
+  if (!(codes || []).length) return '';
+  return `<div class="small inv-warn">⚠ ${codes.map(c => esc(invConflictText({ code: c, area_zh: place.area_zh || '', area_de: place.area_de || '', place: place.code || '' }, state.lang))).join(' ')}</div>`;
+}
+function invMyStore(){ const sh = ((state.tasks || {}).shifts || [])[0]; return (sh && sh.store) || LS.get('invStore') || null; }
+function invBackMore(){ return navTabs().includes('inv') ? '' : `<button class="link" data-act="inv-back-more" style="margin:2px 0 6px">${esc(t('inv_back_more'))}</button>`; }
+
+// ---------- 首页：搜索 + 按储区浏览 ----------
+async function viewInv(){
+  const S = invS();
+  if (S.view === 'area') return viewInvArea();
+  if (S.view === 'place') return viewInvPlace();
+  if (S.view === 'item') return viewInvItem();
+  if (S.view === 'form') return viewInvForm();
+  if (S.view === 'unit') return viewInvUnit();
+  if (S.view === 'pick') return renderInvPick();
+  if (S.view === 'settings' || S.view === 'aform' || S.view === 'cform') return viewInvSettings();
+  return viewInvHome();
+}
+async function viewInvHome(){
+  const S = invS();
+  if (S.home) renderInvHome(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  const h = await soft(rpc('inv_home', tok()), null);
+  if (state.tab !== 'inv' || invS().view !== 'home') return;
+  if (h) S.home = h;
+  renderInvHome();
+  if (S.q.trim()) invSearch();
+}
+function renderInvHome(){
+  const S = invS(), H = S.home;
+  if (!H){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
+  $('#main').innerHTML = `${invBackMore()}<h2 style="margin-top:4px">${esc(t('inv_title'))}</h2>
+    <input type="search" class="input" id="inv-q" placeholder="${esc(t('inv_q_ph'))}" value="${esc(S.q)}" autocomplete="off" enterkeyhint="search" style="margin-bottom:10px">
+    ${H.sup ? `<button class="btn ghost" data-act="inv-new" style="margin-bottom:6px">${esc(t('inv_new'))}</button>` : ''}
+    <div id="inv-res">${S.q.trim() ? invResultsHTML() : invBrowseHTML(H)}</div>
+    ${H.admin ? `<button class="link" data-act="inv-settings" style="margin-top:8px">${esc(t('inv_settings'))}</button>` : ''}`;
+  if (S.focus){ S.focus = false; const q = $('#inv-q'); if (q){ q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
+  invLoadPhotos();
+}
+function invBrowseHTML(H){
+  return STORES.map(st => {
+    const as = (H.areas || []).filter(a => a.store === st && a.active);
+    if (!as.length) return `<h3>${storeTag(st)}</h3><div class="list"><div class="empty">${esc(t('inv_store_empty'))}</div></div>`;
+    return `<h3>${storeTag(st)}</h3><div class="list">${as.map(a => `<div class="item" data-act="inv-area" data-id="${a.id}" style="cursor:pointer"><div class="top">
+      <div><strong>${esc(invName(a))}</strong> <span class="muted small num">${esc(a.code)}</span><div class="meta" style="margin-top:3px">${invAreaTags(a)}</div></div>
+      <div class="meta" style="text-align:right;white-space:nowrap">${esc(t('inv_area_counts', { p: a.places, i: a.items }))}${a.can_edit && a.no_photo ? `<br><span class="tag pend" style="margin:3px 0 0">${esc(t('inv_no_photo_n', { n: a.no_photo }))}</span>` : ''}</div></div></div>`).join('')}</div>`;
+  }).join('');
+}
+let invTimer = null, invLogTimer = null, invSeq = 0;
+function invQueue(){
+  clearTimeout(invTimer); clearTimeout(invLogTimer);
+  invTimer = setTimeout(invSearch, 250);
+  invLogTimer = setTimeout(() => invLogMiss(), 1500);   // 停下不打字 1.5 秒：搜不到就记下这个词
+}
+async function invSearch(){
+  const S = invS(), q = S.q.trim(), seq = ++invSeq, box = () => $('#inv-res');
+  if (!q){ S.res = null; if (box() && S.home) box().innerHTML = invBrowseHTML(S.home); return; }
+  if (box() && !(S.res && S.res.q)) box().innerHTML = `<div class="empty">${esc(t('inv_searching'))}</div>`;
+  try { const r = await rpc('inv_search', { ...tok(), p_q: q, p_log: false }); if (seq !== invSeq) return; S.res = r; }
+  catch(e){ if (seq === invSeq) toast(errText(e), true); return; }
+  if (state.tab === 'inv' && S.view === 'home' && box()){ box().innerHTML = invResultsHTML(); invLoadPhotos(); }
+}
+async function invLogMiss(){
+  const S = invS(), R = S.res, q = S.q.trim();
+  if (!q || !R || R.q !== q || (R.items || []).length || (R.places || []).length) return;
+  soft(rpc('inv_search', { ...tok(), p_q: q, p_log: true }), null);
+}
+function invLocLine(l, plain){
+  return `<div class="inv-loc"${plain ? '' : ` data-act="inv-place" data-id="${l.place}"`}>${storeTag(l.store)} ${esc(invName(l, 'area'))} · <b class="num">${esc(l.code)}</b>${l.main ? ` <span class="tag m">${esc(t('inv_main'))}</span>` : ''}${(l.warn || []).length ? ' <span class="inv-warn">⚠</span>' : ''}</div>`;
+}
+function invSortLocs(locs){ const my = invMyStore(); return (locs || []).slice().sort((a, b) => (b.store === my) - (a.store === my) || a.store.localeCompare(b.store) || (b.main - a.main)); }
+function invItemCard(x, act){
+  const sub = [invOther(x), state.lang === 'de' ? x.cat_de : x.cat_zh].filter(Boolean).join(' · ');
+  return `<div class="item" data-act="${act || 'inv-item'}" data-id="${x.id}" style="cursor:pointer"><div class="inv-row">${invImg(x.photo_t)}<div class="inv-txt">
+    <strong>${esc(invName(x))}</strong><div class="meta">${esc(sub)}</div>
+    ${(x.locs || []).length ? invSortLocs(x.locs).map(l => invLocLine(l, !!act)).join('') : `<div class="meta">${esc(t('inv_no_loc'))}</div>`}</div></div></div>`;
+}
+function invResultsHTML(){
+  const S = invS(), R = S.res, H = S.home || {};
+  if (!R) return `<div class="empty">${esc(t('inv_searching'))}</div>`;
+  const items = R.items || [], places = R.places || [];
+  if (!items.length && !places.length) return `<div class="list"><div class="empty">${esc(t('inv_none', { q: R.q }))}${H.sup ? '<br>' + esc(t('inv_none_sup')) : ''}</div></div>`;
+  return (items.length ? `<div class="list">${items.map(x => invItemCard(x)).join('')}</div>` : '')
+    + (places.length ? `<h3>${esc(t('inv_places_h'))}</h3><div class="list">${places.map(p => `<div class="item" data-act="inv-place" data-id="${p.id}" style="cursor:pointer"><div class="inv-row">${invImg(p.photo_t)}<div class="inv-txt">
+        <strong class="num">${esc(p.code)}</strong><div class="meta">${storeTag(p.store)} ${esc(invName(p, 'area'))}${invName(p) ? ' · ' + esc(invName(p)) : ''}</div>
+        <div class="meta">${esc(p.items ? t('inv_items_n', { n: p.items }) : t('inv_empty_place'))}</div></div></div></div>`).join('')}</div>` : '');
+}
+
+// ---------- 储区 ----------
+async function viewInvArea(){
+  const S = invS(), id = S.id;
+  if (!(S.area && S.area.id === id)) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let a; try { a = await rpc('inv_area', { ...tok(), p_id: id }); }
+  catch(e){ $('#main').innerHTML = `<button class="link" data-act="inv-home">${esc(t('inv_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'area' || S.id !== id) return;
+  S.area = a; renderInvArea();
+}
+function invSlotRow(s, edit, unit){
+  const its = s.items || [], names = its.slice(0, 4).map(x => invName(x)).join('、') + (its.length > 4 ? ` +${its.length - 4}` : '');
+  const warn = its.some(x => (x.warn || []).length);
+  return `<div class="item" data-act="inv-place" data-id="${s.id}" style="cursor:pointer"><div class="inv-row">${invImg(s.photo_t || (unit && unit.photo_t), 'sm')}<div class="inv-txt">
+    <strong class="num">${esc(unit ? s.slot : s.code)}</strong>${invName(s) && unit ? ' <span class="small">' + esc(invName(s)) + '</span>' : ''}${invPlaceTags(s)}${warn ? ' <span class="inv-warn">⚠</span>' : ''}
+    ${edit && !s.photo && s.active ? ` <span class="tag pend">${esc(t('inv_photo_none'))}</span>` : ''}
+    <div class="meta">${its.length ? esc(names) : esc(t('inv_empty_place'))}</div></div></div></div>`;
+}
+function renderInvArea(){
+  const S = invS(), A = S.area, edit = A.can_edit;
+  const units = (A.units || []).filter(u => u.active), off = (A.units || []).filter(u => !u.active);
+  const unitHTML = u => `<div class="list"><div class="item" data-act="inv-place" data-id="${u.id}" style="cursor:pointer;background:var(--celadon-soft)"><div class="top">
+      <div><strong class="num">${esc(u.code)}</strong> ${esc(invName(u))}${invPlaceTags(u)}${invName(u, 'use') ? `<div class="meta">${esc(invName(u, 'use'))}</div>` : ''}</div>
+      ${edit ? `<button class="link" data-act="inv-unit-edit" data-id="${u.id}">${esc(t('inv_edit'))}</button>` : ''}</div></div>
+    ${(u.slots || []).filter(s => s.active).length ? u.slots.filter(s => s.active).map(s => invSlotRow(s, edit, u)).join('') : invSlotRow(u, edit, null)}</div>`;
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
+    <h2 style="margin:4px 0 2px">${storeTag(A.store)} ${esc(invName(A))} <span class="muted num" style="font-size:16px">${esc(A.code)}</span></h2>
+    <div style="margin-bottom:10px">${invAreaTags(A)}</div>
+    ${edit && !A.inbox ? `<button class="btn ghost" data-act="inv-unit-new" style="margin-bottom:12px">${esc(t('inv_add_unit'))}</button>` : ''}
+    ${units.length ? units.map(unitHTML).join('') : `<div class="list"><div class="empty">${esc(t('inv_area_empty'))}</div></div>`}
+    ${off.length ? `<details class="fold"><summary>${esc(t('inv_unit_off', { n: off.length }))}</summary><div class="inner"><div class="list">${off.map(u => `<div class="item" data-act="inv-place" data-id="${u.id}" style="cursor:pointer"><span class="num">${esc(u.code)}</span> ${esc(invName(u))} <span class="tag off">${esc(t('inv_tag_off'))}</span></div>`).join('')}</div></div></details>` : ''}`;
+  invLoadPhotos();
+}
+
+// ---------- 储位 ----------
+async function viewInvPlace(){
+  const S = invS(), id = S.id;
+  if (!(S.place && S.place.id === id)) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let p; try { p = await rpc('inv_place', { ...tok(), p_id: id }); }
+  catch(e){ $('#main').innerHTML = `<button class="link" data-act="inv-home">${esc(t('inv_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'place' || S.id !== id) return;
+  S.place = p; renderInvPlace();
+}
+function renderInvPlace(){
+  const S = invS(), P = S.place, A = P.area, edit = P.can_edit && P.active, U = P.unit;
+  const title = U ? [invName(U), invName(P)].filter(Boolean).join(' · ') + ` · ${P.slot}` : invName(P);
+  const use = invName(P, 'use') || (U && invName(U, 'use'));
+  const slots = (P.slots || []).filter(s => s.active || edit);
+  const photoBtn = edit ? `<label class="btn ghost" style="display:flex;align-items:center;justify-content:center;margin:8px 0">${esc(t(P.photo ? 'inv_photo_retake' : 'inv_photo_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="place" hidden></label>` : '';
+  const its = P.items || [];
+  $('#main').innerHTML = `<button class="link" data-act="inv-area" data-id="${A.id}" style="margin:2px 0 6px">← ${esc(invName(A))}</button>
+    <div class="inv-code num">${esc(P.code)}</div>
+    <div style="margin:2px 0 4px"><strong>${esc(title)}</strong>${invPlaceTags(P)}</div>
+    ${use ? `<div class="meta" style="margin-bottom:4px">${esc(use)}</div>` : ''}
+    <div style="margin-bottom:10px">${storeTag(A.store)} ${invAreaTags(A)}</div>
+    ${P.photo ? invImg(P.photo, 'big', P.photo) + `<div class="small muted">${esc(t('inv_photo_by', { n: P.photo_by || '?', t: fmtDateTime(P.photo_at) }))}</div>` : `<div class="inv-noph big" aria-hidden="true">📷</div><div class="small muted">${esc(t('inv_photo_none'))}</div>`}
+    ${photoBtn}
+    ${slots.length ? `<h3>${esc(t('inv_slots'))}</h3><div class="list">${slots.map(s => invSlotRow(s, edit, P)).join('')}</div>` : ''}
+    ${P.holds || its.length ? `<h3>${esc(t('inv_here', { n: its.length }))}</h3><div class="list">${its.length ? its.map(x => `<div class="item" data-act="inv-item" data-id="${x.id}" style="cursor:pointer"><div class="inv-row">${invImg(x.photo_t, 'sm')}<div class="inv-txt">
+        <strong>${esc(invName(x))}</strong>${x.main ? '' : ` <span class="tag off">${esc(t('inv_not_main'))}</span>`}<div class="meta">${esc(invOther(x))}</div>${invWarnLine(x.warn, { area_zh: A.name_zh, area_de: A.name_de, code: P.code })}</div></div></div>`).join('')
+        : `<div class="empty">${esc(t(P.temp ? 'inv_temp_hint' : 'inv_here_none'))}</div>`}</div>` : ''}
+    ${edit && P.holds && !P.temp && !A.inbox ? `<button class="btn ghost" data-act="inv-put-new" style="margin-bottom:8px">${esc(t('inv_put_new'))}</button><button class="btn ghost" data-act="inv-put-old">${esc(t('inv_put_old'))}</button>` : ''}
+    ${P.can_edit ? `<button class="link" data-act="inv-unit-edit" data-id="${P.id}" style="margin-top:12px">${esc(t('inv_u_edit_btn'))}</button>` : ''}`;
+  invLoadPhotos();
+}
+
+// ---------- 物品 ----------
+async function viewInvItem(){
+  const S = invS(), id = S.id;
+  if (!(S.item && S.item.id === id)) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let x; try { x = await rpc('inv_item', { ...tok(), p_id: id }); }
+  catch(e){ $('#main').innerHTML = `<button class="link" data-act="inv-home">${esc(t('inv_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'item' || S.id !== id) return;
+  S.item = x; renderInvItem();
+}
+function renderInvItem(){
+  const S = invS(), X = S.item, locs = invSortLocs(X.locs);
+  const unitLine = [X.unit ? t('inv_unit_line', { u: X.unit }) : '', X.pack_unit && X.pack_qty ? t('inv_pack_line', { p: X.pack_unit, n: String(+X.pack_qty).replace('.', ','), u: X.unit || '' }) : ''].filter(Boolean).join(' · ');
+  const byStore = STORES.map(st => { const ls = locs.filter(l => l.store === st); if (!ls.length) return '';
+    return ls.map(l => `<div class="item"><div class="inv-row">${invImg(l.photo_t, 'sm')}<div class="inv-txt" data-act="inv-place" data-id="${l.place}" style="cursor:pointer">
+      <strong class="num">${esc(l.code)}</strong>${l.main ? ` <span class="tag m">${esc(t('inv_main_long'))}</span>` : ''}
+      <div class="meta">${storeTag(l.store)} ${esc(invName(l, 'area'))}${invName(l) ? ' · ' + esc(invName(l)) : ''}</div>${invWarnLine(l.warn, l)}</div></div>
+      ${l.can_edit && X.active ? `<div class="acts">${l.main ? '' : `<button class="link" data-act="inv-main" data-id="${l.link}">${esc(t('inv_set_main'))}</button>`}<button class="link danger" data-act="inv-unplace" data-id="${l.link}" data-code="${esc(l.code)}">${esc(t('inv_unplace'))}</button></div>` : ''}</div>`).join(''); }).join('');
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
+    ${X.photo ? invImg(X.photo, 'big', X.photo) : ''}
+    <h2 style="margin:8px 0 2px">${esc(invName(X))}${X.active ? '' : ` <span class="tag off">${esc(t('inv_off'))}</span>`}</h2>
+    ${invOther(X) ? `<div style="font-size:17px;margin-bottom:4px">${esc(invOther(X))}</div>` : ''}
+    ${X.merged_into ? `<div class="infobox">${esc(t('inv_merged', { n: invName(X.merged_into) }))} <button class="link" data-act="inv-item" data-id="${X.merged_into.id}">→</button></div>` : ''}
+    <div class="meta">${esc(state.lang === 'de' ? X.cat_de : X.cat_zh)}${X.damp ? ` <span class="tag k">${esc(t('inv_damp'))}</span>` : ''}</div>
+    ${(X.aliases || []).length ? `<div class="meta">${esc(t('inv_aka', { a: X.aliases.join(', ') }))}</div>` : ''}
+    ${unitLine ? `<div class="meta">${esc(unitLine)}</div>` : ''}
+    ${X.note ? `<div class="sheet" style="margin:8px 0;white-space:pre-wrap">${esc(X.note)}</div>` : ''}
+    <h3>${esc(t('inv_locs'))}</h3><div class="list">${byStore || `<div class="empty">${esc(t('inv_no_loc'))}</div>`}</div>
+    ${X.can_edit && X.active ? `<button class="btn ghost" data-act="inv-add-loc" style="margin-bottom:8px">${esc(t('inv_add_loc'))}</button><button class="btn ghost" data-act="inv-edit-item">${esc(t('inv_edit_item'))}</button>` : ''}
+    ${X.can_admin && !X.merged_into ? `<div class="row" style="gap:16px;margin-top:14px">${X.active ? `<button class="link" data-act="inv-merge">${esc(t('inv_merge'))}</button>` : ''}<button class="link${X.active ? ' danger' : ''}" data-act="inv-active" data-on="${X.active ? '' : '1'}">${esc(t(X.active ? 'inv_disable' : 'inv_enable'))}</button></div>` : ''}
+    <div class="small muted" style="margin-top:14px">${esc(t('inv_by', { n: X.created_by || '?', t: fmtDateTime(X.created_at) }))}${X.updated_at ? '<br>' + esc(t('inv_upd', { n: X.updated_by || '?', t: fmtDateTime(X.updated_at) })) : ''}</div>`;
+  invLoadPhotos();
+}
+
+// ---------- 录入 / 修改物品（拍照 → AI 填名字 → 选储位） ----------
+// mode：new 新物品；edit 修改；loc 给已有物品再放一个位置
+async function invFormOpen(mode, preset){
+  const S = invS(), X = mode === 'new' ? null : S.item;
+  const F = S.form = { mode, id: X ? X.id : null, photo: X && X.photo ? { path: X.photo, path_t: X.photo_t, keep: true } : null, ai: null,
+    name_de: X ? X.name_de || '' : '', name_zh: X ? X.name_zh || '' : '', aliases: X ? (X.aliases || []).join(', ') : '',
+    category_id: X ? X.category : '', damp: X ? !!X.damp : false, dampTouched: !!X,
+    unit: X ? X.unit || '' : '', pack_unit: X ? X.pack_unit || '' : '', pack_qty: X && X.pack_qty ? String(+X.pack_qty).replace('.', ',') : '', note: X ? X.note || '' : '',
+    track_stock: X ? !!X.track_stock : false, track_expiry: X ? !!X.track_expiry : false,
+    store: null, area: null, unit_id: null, place: null, back: { view: S.view, id: S.id }, ...(preset || {}) };
+  S.view = 'form'; state.tab = 'inv';
+  if (!S.home) S.home = await soft(rpc('inv_home', tok()), null);
+  if (mode !== 'edit' && !S.pick) S.pick = await soft(rpc('inv_pick', tok()), []);
+  if (mode !== 'edit' && !F.place){   // 默认：上次用的储位
+    const last = LS.get('invLast', null), hit = last && invPickFind(last);
+    if (hit) Object.assign(F, { store: hit.a.store, area: hit.a.id, unit_id: hit.u.id, place: last, lastUsed: true });
+  }
+  if (mode !== 'edit' && F.place && !F.area){ const hit = invPickFind(F.place); if (hit) Object.assign(F, { store: hit.a.store, area: hit.a.id, unit_id: hit.u.id }); }
+  render(); window.scrollTo(0, 0);
+}
+function invPickFind(placeId){
+  for (const a of invS().pick || []) for (const u of a.units || []){
+    if (u.id === placeId && u.holds) return { a, u, s: null };
+    const s = (u.slots || []).find(x => x.id === placeId); if (s) return { a, u, s };
+  }
+  return null;
+}
+function invPickCode(){ const F = invS().form, h = F && F.place && invPickFind(F.place); return h ? (h.s ? h.s.code : h.u.code) : ''; }
+function viewInvForm(){ if (!invS().form){ invS().view = 'home'; return viewInvHome(); } renderInvForm(); }
+function invAiLine(F){
+  const A = F.ai; if (!A) return '';
+  if (A.busy) return `<div class="infobox" id="inv-ai">${esc(t('inv_ai_busy', { s: Math.round((Date.now() - A.at) / 1000) }))}</div>`;
+  if (A.err) return `<div class="infobox" id="inv-ai" style="background:var(--copper-soft);color:var(--copper)">${esc(t('inv_ai_fail'))} <button class="link" data-act="inv-ai-again">${esc(t('inv_ai_again'))}</button></div>`;
+  return `<div class="infobox" id="inv-ai">${esc(t(A.res && A.res.sure === false ? 'inv_ai_unsure' : 'inv_ai_ok'))}${A.res && A.res.note_zh ? '<br><span class="small">' + esc(A.res.note_zh) + '</span>' : ''}</div>`;
+}
+function invPickerHTML(F){
+  const P = invS().pick || [];
+  if (!P.length) return `<div class="empty">${esc(t('inv_f_noplace'))}</div>`;
+  const stores = [...new Set(P.map(a => a.store))], st = F.store && stores.includes(F.store) ? F.store : stores[0];
+  const areas = P.filter(a => a.store === st), A = areas.find(a => a.id === F.area), U = A && (A.units || []).find(u => u.id === F.unit_id);
+  const opt = (v, label, on) => `<option value="${esc(v)}"${on ? ' selected' : ''}>${esc(label)}</option>`;
+  return `${stores.length > 1 ? `<div class="seg sm" style="margin-bottom:10px">${stores.map(s => `<button data-act="inv-pick-store" data-store="${s}" class="${s === st ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>` : ''}
+    <div class="field"><label for="inv-pa">${esc(t('inv_f_area'))}</label><select class="input" id="inv-pa">${opt('', t('inv_f_pick'), !A)}${areas.map(a => opt(a.id, `${invName(a)} · ${a.code}`, A && a.id === A.id)).join('')}</select></div>
+    ${A ? `<div class="field"><label for="inv-pu">${esc(t('inv_f_unit_pick'))}</label><select class="input" id="inv-pu">${opt('', t('inv_f_pick'), !U)}${(A.units || []).map(u => opt(u.id, `${u.code.split('-').slice(2).join('-')} · ${invName(u)}${invName(u, 'use') ? ' (' + invName(u, 'use') + ')' : ''}`, U && u.id === U.id)).join('')}</select></div>` : ''}
+    ${U && (U.slots || []).length ? `<div class="field"><label>${esc(t('inv_f_slot'))}</label><div class="chips">${U.slots.map(s => `<button class="chip${F.place === s.id ? ' on' : ''}" data-act="inv-pick-slot" data-id="${s.id}">${esc(s.slot)}${s.special === 'gas' ? ' 🔥' : ''}</button>`).join('')}</div></div>` : ''}
+    ${F.place ? `<div class="inv-chosen">${esc(t('inv_f_chosen', { c: invPickCode() }))}${F.lastUsed ? ' <span class="small muted">' + esc(t('inv_f_last')) + '</span>' : ''}</div>` : ''}`;
+}
+function renderInvForm(){
+  const S = invS(), F = S.form, H = S.home || {}, cats = (H.categories || []).filter(k => k.active || k.id === F.category_id);
+  const fld = (k, label, attrs) => `<div class="field"><label for="invf-${k}">${esc(label)}</label><input class="input" id="invf-${k}" data-invf="${k}" value="${esc(F[k] || '')}" ${attrs || ''}></div>`;
+  const chk = (k, label) => `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invf="${k}"${F[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`;
+  const head = F.mode === 'loc' ? t('inv_loc_h', { n: invName(S.item || {}) }) : t(F.mode === 'edit' ? 'inv_edit_h' : 'inv_new_h');
+  const prev = F.photo && (F.photo.preview || F.photo.path_t);
+  $('#main').innerHTML = `<button class="link" data-act="inv-form-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(head)}</h2>
+    ${F.mode === 'loc' ? '' : `<h3>${esc(t('inv_s1'))}</h3>
+    <div class="inv-row" style="align-items:center;margin-bottom:8px">${prev ? (F.photo.preview ? `<img class="inv-ph lg" src="${esc(F.photo.preview)}" alt="">` : invImg(F.photo.path_t, 'lg')) : ''}
+      <label class="btn ${prev ? 'ghost' : ''}" style="display:flex;align-items:center;justify-content:center;flex:1">${esc(t(prev ? 'inv_photo_retake' : 'inv_photo_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="item" hidden></label></div>
+    ${F.photo && F.photo.busy ? `<div class="small muted" style="margin-bottom:6px">${esc(t('inv_uploading'))}</div>` : ''}
+    ${invAiLine(F)}
+    <h3>${esc(t('inv_s2'))}</h3>
+    ${fld('name_de', t('inv_f_de'), 'autocomplete="off"')}${fld('name_zh', t('inv_f_zh'), 'autocomplete="off"')}
+    ${fld('aliases', t('inv_f_alias'), `placeholder="${esc(t('inv_f_alias_ph'))}" autocomplete="off"`)}
+    <div class="field"><label for="invf-cat">${esc(t('inv_f_cat'))}</label><select class="input" id="invf-cat">
+      <option value="">${esc(t('inv_f_cat_pick'))}</option>${cats.map(k => `<option value="${k.id}"${k.id === F.category_id ? ' selected' : ''}>${esc(invName(k))}</option>`).join('')}</select></div>
+    ${chk('damp', t('inv_f_damp'))}
+    <details class="fold"><summary>${esc(t('inv_f_more'))}</summary><div class="inner">
+      ${fld('unit', t('inv_f_unit'))}${fld('pack_unit', t('inv_f_pack'))}${fld('pack_qty', t('inv_f_qty'), 'inputmode="decimal"')}
+      <div class="field"><label for="invf-note">${esc(t('inv_f_note'))}</label><textarea class="input" id="invf-note" data-invf="note" rows="2" style="height:auto;padding:10px 14px">${esc(F.note)}</textarea></div>
+      ${chk('track_stock', t('inv_f_stock'))}${chk('track_expiry', t('inv_f_expiry'))}</div></details>`}
+    ${F.mode === 'edit' ? '' : `<h3>${esc(t(F.mode === 'loc' ? 'inv_s3_loc' : 'inv_s3'))}</h3><div id="inv-picker">${invPickerHTML(F)}</div>`}
+    <button class="btn" data-act="inv-save" style="margin-top:14px">${esc(t('inv_save'))}</button>`;
+  invLoadPhotos();
+}
+function invFormKeep(){   // 重画前把输入框里的内容记下
+  const F = invS().form; if (!F) return;
+  document.querySelectorAll('[data-invf]').forEach(e => { F[e.dataset.invf] = e.type === 'checkbox' ? e.checked : e.value; });
+}
+function invRepaintPicker(){ const b = $('#inv-picker'), F = invS().form; if (b && F) b.innerHTML = invPickerHTML(F); }
+// 分类选好后：默认怕潮（没手动改过）、默认储区（还没选储位）
+function invCatChanged(id){
+  const S = invS(), F = S.form, k = ((S.home || {}).categories || []).find(x => x.id === id); F.category_id = id;
+  if (!k) return;
+  if (!F.dampTouched){ F.damp = !!k.damp; const c = document.querySelector('[data-invf="damp"]'); if (c) c.checked = F.damp; }
+  if (F.mode === 'new' && !F.place && k.area_code){
+    const P = S.pick || [], st = F.store || invMyStore(), a = P.find(x => x.code === k.area_code && x.store === st) || P.find(x => x.code === k.area_code);
+    if (a){ F.store = a.store; F.area = a.id; F.unit_id = null; invRepaintPicker(); }
+  }
+}
+async function invPhotoChosen(file){
+  const S = invS(), F = S.form; if (!F) return;
+  invFormKeep();
+  let prep; try { prep = await invPrep(file); } catch(e){ toast(t('err_GENERIC'), true); return; }
+  const ph = F.photo = { preview: prep.preview, busy: true }; F.ai = null; render();
+  try { Object.assign(ph, await invUpload('i', prep)); ph.path = ph.photo; ph.path_t = ph.photo_t; }
+  catch(e){ if (F.photo === ph) F.photo = null; toast(errText(e), true); if (S.form === F && S.view === 'form'){ invFormKeep(); render(); } return; }
+  ph.busy = false;
+  if (S.form !== F) return;
+  invFormKeep(); render();
+  invAiRead(F);
+}
+// AI 看照片：只填空着的名字和别名、没选的分类、没动过的怕潮
+async function invAiRead(F){
+  const S = invS(); if (!F.photo || !F.photo.path) return;
+  const A = F.ai = { busy: true, at: Date.now() };
+  const tick = setInterval(() => { const b = $('#inv-ai'); if (S.form === F && A.busy && b) b.outerHTML = invAiLine(F); else if (!A.busy) clearInterval(tick); }, 1000);
+  try {
+    const cats = ((S.home || {}).categories || []).filter(k => k.active).map(k => ({ id: k.id, zh: k.name_zh, de: k.name_de, nature: k.nature }));
+    A.res = await callTasks({ action: 'inv_ai_read', path: F.photo.path, categories: cats });
+  } catch(e){ A.err = String(e.message || e); }
+  A.busy = false; clearInterval(tick);
+  if (S.form !== F || S.view !== 'form') return;
+  invFormKeep();
+  const R = A.res;
+  if (R){
+    if (!String(F.name_de).trim() && R.name_de) F.name_de = R.name_de;
+    if (!String(F.name_zh).trim() && R.name_zh) F.name_zh = R.name_zh;
+    if (!String(F.aliases).trim() && (R.aliases || []).length) F.aliases = R.aliases.join(', ');
+    F.aiRes = R;
+    if (!F.category_id && R.category_id){ render(); invCatChanged(R.category_id); }
+    if (!F.dampTouched) F.damp = !!R.damp;
+  }
+  render();
+}
+function invPayload(F){
+  return { name_de: String(F.name_de || '').trim(), name_zh: String(F.name_zh || '').trim(),
+    aliases: String(F.aliases || '').split(/[,，;；、\n]/).map(s => s.trim()).filter(Boolean), category_id: F.category_id, damp: !!F.damp,
+    unit: F.unit, pack_unit: F.pack_unit, pack_qty: String(F.pack_qty || '').replace(',', '.').trim(), note: F.note,
+    photo: F.photo ? F.photo.path || null : null, photo_t: F.photo ? F.photo.path_t || null : null,
+    track_stock: !!F.track_stock, track_expiry: !!F.track_expiry,
+    ai: F.aiRes ? { ...F.aiRes, at: new Date().toISOString() } : null };
+}
+// 冲突：中德双语说明；老板可以写原因强制保存
+function invConflict(e, retry){
+  const m = String(e && e.message || ''); if (!m.startsWith('INV_CONFLICT:')) return false;
+  let info; try { info = JSON.parse(m.slice('INV_CONFLICT:'.length)); } catch(x){ return false; }
+  const dlg = $('#photoDlg');
+  dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('inv_warn_h'))}</h2>${invConflictHTML(info.conflicts || [])}
+    ${info.can_force ? `<div class="field" style="margin-top:12px"><label for="inv-force-note">${esc(t('inv_c_force_lbl'))}</label><textarea class="input" id="inv-force-note" rows="2" style="height:auto;padding:10px 14px"></textarea></div>
+      <button class="btn warn" data-act="inv-force" style="margin-bottom:8px">${esc(t('inv_c_force'))}</button>` : `<div class="small muted" style="margin:6px 0 12px">${esc(t('inv_c_only_boss'))}</div>`}
+    <button class="btn" data-act="photo-close">${esc(t('inv_c_change'))}</button>`;
+  state.invRetry = retry; dlg.showModal();
+  return true;
+}
+async function invSave(force, note){
+  const S = invS(), F = S.form; if (!F) return;
+  invFormKeep();
+  const P = invPayload(F);
+  if (F.mode !== 'loc'){
+    if (!P.name_de && !P.name_zh) return toast(t('inv_need_name'), true);
+    if (!P.category_id) return toast(t('inv_need_cat'), true);
+    if (F.photo && F.photo.busy) return toast(t('inv_photo_wait'), true);
+  }
+  if (F.mode !== 'edit' && !F.place) return toast(t('inv_need_place'), true);
+  // 新物品：先看有没有差不多的（避免重复）
+  if (F.mode === 'new' && !force && !F.dupChecked){
+    const r = await soft(rpc('inv_search', { ...tok(), p_q: P.name_de || P.name_zh, p_log: false }), null);
+    const n = s => String(s || '').toLowerCase().replace(/\s+/g, '');
+    const same = ((r && r.items) || []).filter(x => x.score >= 1.5 || [x.name_de, x.name_zh].some(v => v && [P.name_de, P.name_zh].some(w => w && n(v) === n(w)))).slice(0, 4);
+    if (same.length){
+      const dlg = $('#photoDlg');
+      dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('inv_dup_h'))}</h2><div style="margin-bottom:10px">${esc(t('inv_dup_q'))}</div>
+        <div class="list">${same.map(x => invItemCard(x, 'inv-dup-same')).join('')}</div>
+        <button class="btn ghost" data-act="inv-dup-new" style="margin-bottom:8px">${esc(t('inv_dup_new'))}</button><button class="link" data-act="photo-close">${esc(t('inv_cancel'))}</button>`;
+      dlg.showModal(); invLoadPhotos(); return;
+    }
+  }
+  try {
+    let id = F.id;
+    if (F.mode === 'loc') await rpc('inv_place_item', { ...tok(), p_item: F.id, p_place: F.place, p_main: false, p_force: !!force, p_note: note || null });
+    else { const r = await rpc('inv_item_save', { ...tok(), p_id: F.id, p_item: P, p_place: F.mode === 'new' ? F.place : null, p_main: true, p_force: !!force, p_note: note || null }); id = r.id; }
+    if (F.place){ LS.set('invLast', F.place); const h = invPickFind(F.place); if (h) LS.set('invStore', h.a.store); }
+    S.form = null; S.res = null; S.item = null; S.place = null; S.area = null; S.home = null;
+    toast(F.mode === 'loc' ? t('inv_placed', { c: invPickCode() || '' }) : t('inv_saved'));
+    if (F.back && F.back.view === 'place' && F.mode !== 'edit') invGo('place', F.back.id);
+    else invGo('item', id);
+  } catch(e){ if (!invConflict(e, n => invSave(true, n))) toast(errText(e), true); }
+}
+
+// ---------- 选一件已有的物品（放到这里 / 合并到） ----------
+function renderInvPick(){
+  const S = invS(), K = S.pickItem || {};
+  const head = K.mode === 'merge' ? t('inv_pick_merge_h', { n: invName(S.item || {}) }) : t('inv_pick_h');
+  const R = K.res, items = ((R && R.items) || []).filter(x => !(K.mode === 'merge' && S.item && x.id === S.item.id));
+  $('#main').innerHTML = `<button class="link" data-act="inv-pick-back" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(head)}</h2>
+    ${K.mode === 'put' && S.place ? `<div class="inv-chosen" style="margin-bottom:8px">${esc(t('inv_f_chosen', { c: S.place.code }))}</div>` : ''}
+    <input type="search" class="input" id="inv-pq" placeholder="${esc(t('inv_q_ph'))}" value="${esc(K.q || '')}" autocomplete="off" style="margin-bottom:10px">
+    <div id="inv-pres">${!K.q ? '' : !R ? `<div class="empty">${esc(t('inv_searching'))}</div>` : items.length ? `<div class="list">${items.map(x => invItemCard(x, 'inv-pick-it')).join('')}</div>` : `<div class="list"><div class="empty">${esc(t('inv_none', { q: K.q }))}</div></div>`}</div>`;
+  const q = $('#inv-pq'); if (q && K.focus){ K.focus = false; q.focus(); }
+  invLoadPhotos();
+}
+let invPickTimer = null;
+async function invPickSearch(){
+  const S = invS(), K = S.pickItem; if (!K) return;
+  const q = (K.q || '').trim(); if (!q){ K.res = null; const b = $('#inv-pres'); if (b) b.innerHTML = ''; return; }
+  const r = await soft(rpc('inv_search', { ...tok(), p_q: q, p_log: false }), null);
+  if (S.pickItem !== K || (K.q || '').trim() !== q) return;
+  K.res = r; const box = $('#inv-pres'); if (!box) return;
+  const items = ((r && r.items) || []).filter(x => !(K.mode === 'merge' && S.item && x.id === S.item.id));
+  box.innerHTML = items.length ? `<div class="list">${items.map(x => invItemCard(x, 'inv-pick-it')).join('')}</div>` : `<div class="list"><div class="empty">${esc(t('inv_none', { q }))}</div></div>`;
+  invLoadPhotos();
+}
+
+// ---------- 储位编辑（新建储存单元 / 改名称、用途 / 加层 / 停用） ----------
+function viewInvUnit(){ if (!invS().uform){ invS().view = 'home'; return viewInvHome(); } renderInvUnit(); }
+async function invUnitOpen(placeId){
+  const S = invS();
+  if (!placeId){   // 新建：在当前储区
+    const A = S.area; S.uform = { id: null, area: A, unit_type: 'R', unit_no: '', name_zh: '', name_de: '', use_zh: '', use_de: '', layout: 'levels', levels: '4', rows: '3', cols: '3', back: { view: 'area', id: A.id } };
+  } else {
+    let p; try { p = await rpc('inv_place', { ...tok(), p_id: placeId }); } catch(e){ toast(errText(e), true); return; }
+    S.uform = { id: p.id, place: p, area: p.area, name_zh: p.name_zh || '', name_de: p.name_de || '', use_zh: p.use_zh || '', use_de: p.use_de || '',
+      special: p.special || '', temp: !!p.temp, add: '1', back: { view: S.view, id: S.id } };
+  }
+  S.view = 'unit'; render(); window.scrollTo(0, 0);
+}
+function invUnitKeep(){ const U = invS().uform; if (!U) return; document.querySelectorAll('[data-invu]').forEach(e => { U[e.dataset.invu] = e.type === 'checkbox' ? e.checked : e.value; }); }
+function invUnitPreview(U){
+  const no = parseInt(U.unit_no, 10), A = U.area;
+  if (U.unit_no && !(no >= 1 && no <= 99)) return '';
+  const nx = no || (Math.max(0, ...((A.units || []).filter(u => u.unit_type === U.unit_type).map(u => u.unit_no || 0))) + 1);
+  return `${A.store === 'Bismarck' ? 'B' : 'F'}-${A.code}-${U.unit_type}${String(nx).padStart(2, '0')}`;
+}
+function renderInvUnit(){
+  const S = invS(), U = S.uform, A = U.area, admin = !!state.me.is_admin;
+  const fld = (k, label, attrs) => `<div class="field"><label for="invu-${k}">${esc(label)}</label><input class="input" id="invu-${k}" data-invu="${k}" value="${esc(U[k] || '')}" ${attrs || ''}></div>`;
+  const chk = (k, label) => `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invu="${k}"${U[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`;
+  const names = fld('name_zh', t('inv_u_name_zh')) + fld('name_de', t('inv_u_name_de')) + fld('use_zh', t('inv_u_use_zh')) + fld('use_de', t('inv_u_use_de'));
+  if (!U.id){
+    $('#main').innerHTML = `<button class="link" data-act="inv-unit-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button>
+      <h2 style="margin-top:4px">${esc(t('inv_u_new_h', { a: invName(A) }))}</h2>
+      <div class="field"><label>${esc(t('inv_u_type'))}</label><div class="chips">${INV_TYPES.map(k => `<button class="chip${U.unit_type === k ? ' on' : ''}" data-act="inv-u-type" data-k="${k}">${k} · ${esc(t('inv_type_' + k))}</button>`).join('')}</div></div>
+      ${fld('unit_no', t('inv_u_no'), 'inputmode="numeric"')}
+      <div class="inv-chosen" id="inv-u-prev">${esc(t('inv_u_preview', { c: invUnitPreview(U) }))}</div>
+      ${names}
+      <div class="field"><label>${esc(t('inv_u_layout'))}</label><div class="seg sm">${['none', 'levels', 'grid'].map(k => `<button data-act="inv-u-lay" data-k="${k}" class="${U.layout === k ? 'on' : ''}">${esc(t('inv_u_lay_' + k))}</button>`).join('')}</div></div>
+      ${U.layout === 'levels' ? fld('levels', t('inv_u_levels'), 'inputmode="numeric"') : ''}
+      ${U.layout === 'grid' ? `<div class="row" style="gap:10px">${fld('rows', t('inv_u_rows'), 'inputmode="numeric"')}${fld('cols', t('inv_u_cols'), 'inputmode="numeric"')}</div>` : ''}
+      <button class="btn" data-act="inv-unit-save">${esc(t('inv_save'))}</button>`;
+    return;
+  }
+  const P = U.place, isUnit = P.kind === 'unit', hasSlots = (P.slots || []).length > 0;
+  $('#main').innerHTML = `<button class="link" data-act="inv-unit-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button>
+    <h2 style="margin-top:4px">${esc(t('inv_u_edit_h', { c: P.code }))}</h2>
+    ${P.active ? `${names}
+    ${admin ? chk('special', t('inv_u_gas')) + chk('temp', t('inv_u_temp')) : ''}
+    <button class="btn" data-act="inv-unit-save">${esc(t('inv_save'))}</button>
+    ${isUnit && !P.temp ? `<h3>${esc(t('inv_u_add_slots'))}</h3><div class="small muted" style="margin-bottom:8px">${esc(t(hasSlots ? 'inv_u_add_hint' : 'inv_u_add_hint0'))}</div>
+      <div class="row" style="gap:10px;align-items:flex-end">${fld('add', t('inv_u_add_n'), 'inputmode="numeric"')}${!hasSlots ? fld('cols', t('inv_u_cols_opt'), 'inputmode="numeric"') : ''}</div>
+      <button class="btn ghost" data-act="inv-unit-slots">${esc(t('inv_u_add_slots'))}</button>` : ''}
+    <button class="link danger" data-act="inv-unit-off" style="margin-top:18px">${esc(t('inv_u_off'))}</button>`
+    : `<div class="infobox">${esc(t('inv_tag_off'))}</div>${admin ? `<button class="btn ghost" data-act="inv-unit-on">${esc(t('inv_u_on'))}</button>` : ''}`}`;
+}
+async function invUnitSave(){
+  const S = invS(), U = S.uform; invUnitKeep();
+  try {
+    if (!U.id){
+      const d = { area_id: U.area.id, unit_type: U.unit_type, unit_no: U.unit_no.trim(), name_zh: U.name_zh, name_de: U.name_de, use_zh: U.use_zh, use_de: U.use_de,
+        levels: U.layout === 'levels' ? U.levels : '', rows: U.layout === 'grid' ? U.rows : '', cols: U.layout === 'grid' ? U.cols : '' };
+      const id = await rpc('inv_place_save', { ...tok(), p_id: null, p_data: d });
+      S.uform = null; S.home = null; toast(t('inv_saved')); invGo('place', id); return;
+    }
+    const d = { name_zh: U.name_zh, name_de: U.name_de, use_zh: U.use_zh, use_de: U.use_de };
+    if (state.me.is_admin){ d.special = U.special ? 'gas' : ''; d.temp = !!U.temp; }
+    await rpc('inv_place_save', { ...tok(), p_id: U.id, p_data: d });
+    const back = U.back; S.uform = null; S.place = null; S.area = null; toast(t('inv_saved')); invGo(back.view === 'area' ? 'area' : 'place', back.view === 'area' ? back.id : U.id);
+  } catch(e){ toast(errText(e), true); }
+}
+
+// ---------- 物品设置（老板）：储区属性、分类 ----------
+async function viewInvSettings(){
+  const S = invS();
+  if (!S.home){ $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`; S.home = await soft(rpc('inv_home', tok()), null); }
+  if (state.tab !== 'inv' || !['settings', 'aform', 'cform'].includes(S.view)) return;
+  const H = S.home; if (!H){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
+  if (S.view === 'aform') return renderInvAreaForm();
+  if (S.view === 'cform') return renderInvCatForm();
+  const natTag = n => n === 'other' ? '' : `<span class="tag ${n === 'food' ? 'm' : 'pend'}">${esc(t('inv_nat_' + n))}</span>`;
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('inv_set_h'))}</h2>
+    <h3>${esc(t('inv_set_areas'))}</h3>
+    ${STORES.map(st => { const as = (H.areas || []).filter(a => a.store === st); return `<div class="small muted" style="margin:6px 0">${storeTag(st)}</div><div class="list">${as.length ? as.map(a => `<div class="item"><div class="top">
+      <div><strong>${esc(invName(a))}</strong> <span class="muted small num">${esc(a.code)}</span><div class="meta" style="margin-top:3px">${invAreaTags(a)}</div></div>
+      <button class="link" data-act="inv-aform" data-id="${a.id}">${esc(t('inv_edit'))}</button></div></div>`).join('') : `<div class="empty">${esc(t('inv_store_empty'))}</div>`}</div>`; }).join('')}
+    <button class="btn ghost" data-act="inv-aform" data-id="">${esc(t('inv_set_new_area'))}</button>
+    <h3>${esc(t('inv_set_cats'))}</h3>
+    <div class="list">${(H.categories || []).map(k => `<div class="item"><div class="top">
+      <div><strong>${esc(invName(k))}</strong>${natTag(k.nature)}${k.damp ? `<span class="tag k">${esc(t('inv_damp'))}</span>` : ''}${k.active ? '' : `<span class="tag off">${esc(t('inv_tag_off'))}</span>`}
+        <div class="meta">${esc(invOther(k))}${k.area_code ? ' · ' + esc(t('inv_k_area_short', { c: k.area_code })) : ''} · ${esc(t('inv_items_n', { n: k.items }))}</div></div>
+      <button class="link" data-act="inv-cform" data-id="${k.id}">${esc(t('inv_edit'))}</button></div></div>`).join('')}</div>
+    <button class="btn ghost" data-act="inv-cform" data-id="">${esc(t('inv_set_new_cat'))}</button>`;
+}
+function invSetKeep(){ const G = invS().sform; if (!G) return; document.querySelectorAll('[data-invs]').forEach(e => { G[e.dataset.invs] = e.type === 'checkbox' ? e.checked : e.value; }); }
+function invSetFld(G, k, label, attrs){ return `<div class="field"><label for="invs-${k}">${esc(label)}</label><input class="input" id="invs-${k}" data-invs="${k}" value="${esc(G[k] == null ? '' : G[k])}" ${attrs || ''}></div>`; }
+function invSetChk(G, k, label){ return `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invs="${k}"${G[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`; }
+function renderInvAreaForm(){
+  const G = invS().sform;
+  $('#main').innerHTML = `<button class="link" data-act="inv-settings" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(G.id ? invName(G) + ' · ' + G.code : t('inv_set_new_area'))}</h2>
+    ${G.id ? '' : `<div class="seg sm" style="margin-bottom:12px">${STORES.map(s => `<button data-act="inv-s-store" data-store="${s}" class="${G.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>${invSetFld(G, 'code', t('inv_a_code'), 'autocapitalize="characters" maxlength="3"')}`}
+    ${invSetFld(G, 'name_zh', t('inv_f_zh'))}${invSetFld(G, 'name_de', t('inv_f_de'))}
+    <div class="field"><label>${esc(t('inv_a_owner'))}</label><div class="seg sm">${['front', 'kitchen', 'shared'].map(k => `<button data-act="inv-s-owner" data-k="${k}" class="${G.owner === k ? 'on' : ''}">${esc(t('inv_owner_' + k))}</button>`).join('')}</div></div>
+    ${invSetChk(G, 'damp', t('inv_a_damp'))}${invSetChk(G, 'food_ok', t('inv_a_food'))}${invSetChk(G, 'chem_ok', t('inv_a_chem'))}
+    ${invSetFld(G, 'sort', t('inv_a_sort'), 'inputmode="numeric"')}${G.id && !G.inbox ? invSetChk(G, 'active', t('inv_a_active')) : ''}
+    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_a_hint'))}</div>
+    <button class="btn" data-act="inv-aform-save">${esc(t('inv_save'))}</button>`;
+}
+function renderInvCatForm(){
+  const G = invS().sform;
+  $('#main').innerHTML = `<button class="link" data-act="inv-settings" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(G.id ? invName(G) : t('inv_set_new_cat'))}</h2>
+    ${invSetFld(G, 'name_zh', t('inv_f_zh'))}${invSetFld(G, 'name_de', t('inv_f_de'))}
+    <div class="field"><label>${esc(t('inv_k_nature'))}</label><div class="seg sm">${['food', 'chemical', 'gas', 'other'].map(k => `<button data-act="inv-s-nature" data-k="${k}" class="${G.nature === k ? 'on' : ''}">${esc(t('inv_nat_' + k))}</button>`).join('')}</div></div>
+    ${invSetChk(G, 'damp', t('inv_k_damp'))}${invSetFld(G, 'area_code', t('inv_k_area'), 'autocapitalize="characters" maxlength="3"')}
+    ${invSetFld(G, 'sort', t('inv_a_sort'), 'inputmode="numeric"')}${G.id ? invSetChk(G, 'active', t('inv_a_active')) : ''}
+    <button class="btn" data-act="inv-cform-save">${esc(t('inv_save'))}</button>`;
+}
+// 给储位拍新照片
+async function invPlacePhoto(file){
+  const S = invS(), P = S.place; if (!P) return;
+  let prep; try { prep = await invPrep(file); } catch(e){ toast(t('err_GENERIC'), true); return; }
+  toast(t('inv_uploading'));
+  try {
+    const up = await invUpload('p', prep);
+    await rpc('inv_place_photo', { ...tok(), p_place: P.id, p_photo: up.photo, p_photo_t: up.photo_t });
+    toast(t('inv_photo_saved')); S.home = null; S.area = null;
+    if (state.tab === 'inv' && S.view === 'place' && S.id === P.id) keepScroll(viewInvPlace);
+  } catch(e){ toast(errText(e), true); }
+}
+// 「今天」页顶部的「🔍 找东西」
+function invFindHTML(){ return tabs().includes('inv') && !state.me.is_admin ? `<button class="inv-find" data-act="inv-find">🔍 ${esc(t('inv_find'))}</button>` : ''; }
 
 // ============ 渲染入口 ============
 function render(){
@@ -2291,7 +3006,7 @@ function render(){
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
     ${navTabs().length < 2 ? '' : `<nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}${k==='today' ? todayBadgeHTML() : ''}</button>`).join('')}</nav>`}`;   // v68：只有一页（厨房小费账户）时不要底部导航
   if (state.rcWeek) return viewReceipt();
-  return ({ today: viewToday, more: viewMore, entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan })[state.tab]();   // v74：返回加载过程，keepScroll 等它
+  return ({ today: viewToday, more: viewMore, entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan, inv: viewInv })[state.tab]();   // v74：返回加载过程，keepScroll 等它
 }
 
 // ============ 登录 ============
@@ -3682,7 +4397,7 @@ function admMoreHTML(){
   const b = (act, attr, label, on) => `<button class="btn ghost${on ? ' on' : ''}" data-act="${act}" ${attr}>${esc(label)}</button>`;
   return `<h3 style="margin-top:28px">${esc(t('adm_more'))}</h3><div class="admore">`
     + b('tab', 'data-tab="entry"', t('tab_entry')) + b('tab', 'data-tab="ledger"', t('adm_ledger'))
-    + ADMIN_MORE.map(k => b('admin-more', `data-sub="${k}"`, t('admin_' + k), state.adminSub === k)).join('') + `</div>`;
+    + b('inv-settings', '', t('inv_set_h')) + ADMIN_MORE.map(k => b('admin-more', `data-sub="${k}"`, t('admin_' + k), state.adminSub === k)).join('') + `</div>`;
 }
 async function viewAdmin(){
   const subs = ['requests', 'feedback', 'notice', 'library', 'expense', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
@@ -5243,7 +5958,8 @@ document.addEventListener('click', async ev => {
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
-    case 'tab': if (el.dataset.tab === 'today' && state.tab !== 'today') state.reconDay = null;   // v57
+    case 'tab': if (el.dataset.tab === 'inv') Object.assign(invS(), { view: 'home', form: null, uform: null, sform: null, pickItem: null });   // v91
+      if (el.dataset.tab === 'today' && state.tab !== 'today') state.reconDay = null;   // v57
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(await loadWeekTodo());   // v56
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
@@ -6137,14 +6853,132 @@ document.addEventListener('click', async ev => {
         toast(t('ls_unbound')); state.staffEdit = null; state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
     }
+    // v91：物品
+    case 'inv-find': { const S = invS(); S.view = 'home'; S.focus = true; state.tab = 'inv'; render(); window.scrollTo(0, 0); break; }
+    case 'more-inv': case 'inv-home': invGo('home'); break;
+    case 'inv-back-more': state.tab = 'more'; render(); window.scrollTo(0, 0); break;
+    case 'inv-area': invGo('area', el.dataset.id); break;
+    case 'inv-place': invGo('place', el.dataset.id); break;
+    case 'inv-item': invGo('item', el.dataset.id); break;
+    case 'inv-photo-big': invPhotoBig(el.dataset.full); break;
+    case 'inv-new': invFormOpen('new'); break;
+    case 'inv-put-new': { const P = invS().place; if (P) invFormOpen('new', { place: P.id }); break; }
+    case 'inv-edit-item': invFormOpen('edit'); break;
+    case 'inv-add-loc': invFormOpen('loc'); break;
+    case 'inv-save': invSave(); break;
+    case 'inv-form-cancel': { const S = invS(), b = (S.form || {}).back || { view: 'home' }; S.form = null; invGo(b.view, b.id); break; }
+    case 'inv-ai-again': { const F = invS().form; if (F) invAiRead(F); break; }
+    case 'inv-pick-store': { invFormKeep(); const F = invS().form; if (!F) break; Object.assign(F, { store: el.dataset.store, area: null, unit_id: null, place: null, lastUsed: false }); invRepaintPicker(); break; }
+    case 'inv-pick-slot': { const F = invS().form; if (!F) break; F.place = el.dataset.id; F.lastUsed = false; invRepaintPicker(); break; }
+    case 'inv-force': {
+      const n = (($('#inv-force-note') || {}).value || '').trim(); if (!n){ toast(t('inv_c_note_need'), true); break; }
+      $('#photoDlg').close(); const f = state.invRetry; state.invRetry = null; if (f) f(n); break;
+    }
+    case 'inv-dup-new': { $('#photoDlg').close(); const F = invS().form; if (F){ F.dupChecked = true; invSave(); } break; }
+    case 'inv-dup-same': {   // 是已有的那一件：只给它加这个位置
+      $('#photoDlg').close(); const S = invS(), F = S.form, id = el.dataset.id; if (!F) break;
+      const code = invPickCode(), place = F.place;
+      const go = async (force, note) => {
+        try { await rpc('inv_place_item', { ...tok(), p_item: id, p_place: place, p_main: false, p_force: !!force, p_note: note || null });
+          LS.set('invLast', place); toast(t('inv_placed', { c: code })); S.form = null; S.home = null; S.res = null; invGo('item', id); }
+        catch(e){ if (!invConflict(e, n => go(true, n))) toast(errText(e), true); }
+      };
+      go(); break;
+    }
+    case 'inv-put-old': case 'inv-merge': {
+      const S = invS(); S.pickItem = { mode: act === 'inv-merge' ? 'merge' : 'put', q: '', focus: true, back: { view: S.view, id: S.id } };
+      S.view = 'pick'; render(); window.scrollTo(0, 0); break;
+    }
+    case 'inv-pick-back': { const S = invS(), b = (S.pickItem || {}).back || { view: 'home' }; S.pickItem = null; invGo(b.view, b.id); break; }
+    case 'inv-pick-it': {
+      const S = invS(), K = S.pickItem; if (!K) break;
+      const x = ((K.res || {}).items || []).find(i => i.id === el.dataset.id); if (!x) break;
+      if (K.mode === 'merge'){
+        const X = S.item; if (!X || !confirm(t('inv_merge_q', { a: invName(X), b: invName(x) }))) break;
+        try { await rpc('inv_item_merge', { ...tok(), p_from: X.id, p_into: x.id }); S.pickItem = null; S.item = null; S.res = null; S.home = null; toast(t('inv_saved')); invGo('item', x.id); }
+        catch(e){ toast(errText(e), true); }
+        break;
+      }
+      const P = S.place; if (!P) break;
+      const go = async (force, note) => {
+        try { await rpc('inv_place_item', { ...tok(), p_item: x.id, p_place: P.id, p_main: false, p_force: !!force, p_note: note || null });
+          toast(t('inv_placed', { c: P.code })); S.pickItem = null; S.home = null; S.res = null; S.place = null; invGo('place', P.id); }
+        catch(e){ if (!invConflict(e, n => go(true, n))) toast(errText(e), true); }
+      };
+      go(); break;
+    }
+    case 'inv-main': try { await rpc('inv_set_main', { ...tok(), p_link: el.dataset.id }); keepScroll(viewInvItem); } catch(e){ toast(errText(e), true); } break;
+    case 'inv-unplace': {
+      const X = invS().item; if (!X || !confirm(t('inv_unplace_q', { p: el.dataset.code, n: invName(X) }))) break;
+      try { await rpc('inv_unplace', { ...tok(), p_link: el.dataset.id }); invS().home = null; invS().res = null; keepScroll(viewInvItem); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'inv-active': {
+      const X = invS().item, on = !!el.dataset.on; if (!X || (!on && !confirm(t('inv_disable_q', { n: invName(X) })))) break;
+      try { await rpc('inv_item_active', { ...tok(), p_item: X.id, p_active: on }); invS().home = null; invS().res = null; keepScroll(viewInvItem); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'inv-unit-new': invUnitOpen(null); break;
+    case 'inv-unit-edit': invUnitOpen(el.dataset.id); break;
+    case 'inv-unit-cancel': { const S = invS(), b = (S.uform || {}).back || { view: 'home' }; S.uform = null; invGo(b.view, b.id); break; }
+    case 'inv-u-type': { invUnitKeep(); invS().uform.unit_type = el.dataset.k; renderInvUnit(); break; }
+    case 'inv-u-lay': { invUnitKeep(); invS().uform.layout = el.dataset.k; renderInvUnit(); break; }
+    case 'inv-unit-save': invUnitSave(); break;
+    case 'inv-unit-slots': {
+      invUnitKeep(); const S = invS(), U = S.uform; if (!U) break;
+      try { const n = await rpc('inv_place_add_slots', { ...tok(), p_unit: U.id, p_count: parseInt(U.add, 10) || 0, p_cols: (U.place.slots || []).length ? null : (parseInt(U.cols, 10) || null) });
+        toast(t('inv_u_added', { n })); S.home = null; S.area = null; S.uform = null; S.place = null; invGo('place', U.id); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'inv-unit-off': case 'inv-unit-on': {
+      const S = invS(), U = S.uform, on = act === 'inv-unit-on'; if (!U || (!on && !confirm(t('inv_u_off_q', { c: U.place.code })))) break;
+      try { await rpc('inv_place_active', { ...tok(), p_id: U.id, p_active: on }); S.home = null; S.area = null; S.uform = null; S.place = null; toast(t('inv_saved')); invGo(on ? 'place' : 'area', on ? U.id : U.area.id); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'inv-settings': { const S = invS(); S.sform = null; S.home = null; invGo('settings'); break; }
+    case 'inv-aform': {
+      const S = invS(), a = el.dataset.id ? ((S.home || {}).areas || []).find(x => x.id === el.dataset.id) : null;
+      S.sform = a ? { ...a, sort: String(a.sort) } : { id: null, store: STORES[0], code: '', name_zh: '', name_de: '', owner: 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true };
+      S.view = 'aform'; render(); window.scrollTo(0, 0); break;
+    }
+    case 'inv-cform': {
+      const S = invS(), k = el.dataset.id ? ((S.home || {}).categories || []).find(x => x.id === el.dataset.id) : null;
+      S.sform = k ? { ...k, sort: String(k.sort), area_code: k.area_code || '' } : { id: null, name_zh: '', name_de: '', nature: 'other', damp: false, area_code: '', sort: '500', active: true };
+      S.view = 'cform'; render(); window.scrollTo(0, 0); break;
+    }
+    case 'inv-s-store': invSetKeep(); invS().sform.store = el.dataset.store; renderInvAreaForm(); break;
+    case 'inv-s-owner': invSetKeep(); invS().sform.owner = el.dataset.k; renderInvAreaForm(); break;
+    case 'inv-s-nature': invSetKeep(); invS().sform.nature = el.dataset.k; renderInvCatForm(); break;
+    case 'inv-aform-save': case 'inv-cform-save': {
+      invSetKeep(); const S = invS(), G = S.sform, isA = act === 'inv-aform-save'; if (!G) break;
+      const d = isA ? { store: G.store, code: G.code, name_zh: G.name_zh, name_de: G.name_de, owner: G.owner, damp: !!G.damp, food_ok: !!G.food_ok, chem_ok: !!G.chem_ok, sort: G.sort, active: !!G.active }
+        : { name_zh: G.name_zh, name_de: G.name_de, nature: G.nature, damp: !!G.damp, area_code: G.area_code, sort: G.sort, active: !!G.active };
+      try { await rpc(isA ? 'inv_area_save' : 'inv_category_save', { ...tok(), p_id: G.id || null, p_data: d }); S.sform = null; S.home = null; toast(t('inv_saved')); invGo('settings'); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'ls-confirm': case 'ls-unbind':
       try { await rpc('admin_ls_set', { ...tok(), p_staff_id: el.dataset.id, p_store: el.dataset.store, p_confirm: act === 'ls-confirm' });
         state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
   }
 });
-document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur(); });
+document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
+  if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.dataset && ev.target.dataset.invphoto && ev.target.files && ev.target.files[0]){   // v91：物品 / 储位照片
+    const f = ev.target.files[0], k = ev.target.dataset.invphoto; ev.target.value = '';
+    if (k === 'item') invPhotoChosen(f); else invPlacePhoto(f);
+    return;
+  }
+  if (ev.target.id === 'invf-cat'){ invFormKeep(); invCatChanged(ev.target.value); return; }
+  if (ev.target.dataset && ev.target.dataset.invf === 'damp'){ const F = invS().form; if (F){ F.damp = ev.target.checked; F.dampTouched = true; } return; }
+  if (ev.target.id === 'inv-pa'){ invFormKeep(); const F = invS().form; if (!F) return; const a = (invS().pick || []).find(x => x.id === ev.target.value);
+    Object.assign(F, { area: a ? a.id : null, store: a ? a.store : F.store, unit_id: null, place: null, lastUsed: false }); invRepaintPicker(); return; }
+  if (ev.target.id === 'inv-pu'){ invFormKeep(); const F = invS().form; if (!F) return; const a = (invS().pick || []).find(x => x.id === F.area), u = a && (a.units || []).find(x => x.id === ev.target.value);
+    Object.assign(F, { unit_id: u ? u.id : null, place: u && u.holds && !(u.slots || []).length ? u.id : null, lastUsed: false }); invRepaintPicker(); return; }
   if (ev.target.dataset && ev.target.dataset.lockcp){ lockUpload(ev.target); return; }
   if (ev.target.dataset && ev.target.dataset.taskitem){ taskUpload(ev.target); return; }   // v71
   if (ev.target.dataset && ev.target.dataset.expimg && ev.target.files && ev.target.files[0]){   // v67：垫付照片
@@ -6241,6 +7075,9 @@ document.addEventListener('change', async ev => {
 });
 document.addEventListener('input', ev => {
   const id = ev.target.id;
+  if (id === 'inv-q'){ invS().q = ev.target.value; invQueue(); }   // v91
+  if (id === 'inv-pq'){ const K = invS().pickItem; if (K){ K.q = ev.target.value; clearTimeout(invPickTimer); invPickTimer = setTimeout(invPickSearch, 250); } }
+  if (id === 'invu-unit_no'){ invUnitKeep(); const b = $('#inv-u-prev'), U = invS().uform; if (b && U) b.textContent = t('inv_u_preview', { c: invUnitPreview(U) }); }
   if (id && id.startsWith('rp-')) rcPartsSum();
   if (ev.target.classList && ev.target.classList.contains('xr')) extrasSlide(ev.target);
   if (id === 'f-reason') state.form.reason = ev.target.value;
@@ -6280,7 +7117,7 @@ async function exitView(){
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
   state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.planTimes = null; state.libView = null;   // v70
-  await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
+  state.inv = null; await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 async function signOut(){
@@ -6288,7 +7125,7 @@ async function signOut(){
   if (state.viewAs){ const v = state.viewAs; state.viewAs = null; try { await sb.rpc('logout', { p_token: v.token }); } catch(e){} state.token = v.adminToken; state.me = v.adminMe; }
   const tk = state.token;
   logoutLocal(); state.loginStaff = null; state.loginAdmin = false; state.loginErr = '';
-  state.bon = blankBon(); state.form = blankForm(); state.done = null; state.staffEdit = null;
+  state.bon = blankBon(); state.form = blankForm(); state.done = null; state.staffEdit = null; state.inv = null;
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
   hideIdleBar(); render();
   if (tk) try { await sb.rpc('logout', { p_token: tk }); } catch(e){}
