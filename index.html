@@ -391,7 +391,11 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .inv-code{font-size:30px;font-weight:800;letter-spacing:.5px;margin:4px 0 0}
 .inv-warn{color:var(--neg)}
 .inv-chosen{font-weight:700;font-size:17px;margin:4px 0 8px}
-.inv-find{display:block;width:100%;height:48px;text-align:left;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;color:var(--muted);font-size:16px;margin:0 0 12px}
+.inv-scan{position:relative;background:#000;border-radius:var(--r-s);overflow:hidden;aspect-ratio:3/4;max-height:60vh}
+.inv-scan video{width:100%;height:100%;object-fit:cover;display:block}
+.inv-scan-box{position:absolute;inset:18% 12%;border:3px solid rgba(255,255,255,.85);border-radius:12px}
+.inv-scanbtn{flex:none;width:auto;padding:0 14px;height:48px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:600;font-size:15px;white-space:nowrap}
+.inv-find{display:block;flex:1;min-width:0;height:48px;text-align:left;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;color:var(--muted);font-size:16px}
 </style>
 </head>
 <body>
@@ -414,6 +418,18 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v93：物品第二步（扫码、标签）
+  inv_scan:'📷 扫码', inv_scan_h:'扫码', inv_scan_hint:'把手机对准标签上的二维码，离 20–40 厘米。', inv_scan_loading:'正在打开摄像头……',
+  inv_scan_nocam:'打不开摄像头。请在手机「设置」里允许 Kochi Team（或 Safari / Chrome）使用相机；也可以用手机自带的相机扫标签（会打开浏览器，要先登录）。',
+  inv_lab_btn:'🏷 打印标签', inv_lab_item_btn:'🏷 打印这件东西的标签', inv_lab_store_btn:'🏷 打印 {s} 全部储位的标签',
+  inv_lab_h:'打印标签 · {a}', inv_lab_item_h:'打印物品标签（贴在箱子上）',
+  inv_lab_paper:'标签纸：A4 每张 10 个（2 列 × 5 行，每个 10,5 × 5,1 cm）。在电脑上打开 PDF，选「实际大小 / 100%」打印，不要选「适合页面」。',
+  inv_lab_all:'全选', inv_lab_none:'全不选', inv_lab_n:'{n} 个 · {p} 页', inv_lab_copies:'打几张（同一件东西几个箱子）',
+  inv_lab_start:'从第几个格子开始（用掉一部分的标签纸可以接着用；从左到右、从上往下数）',
+  inv_lab_border:'画出标签边框（第一次先用普通纸试打，叠在标签纸上对着光看准不准）',
+  inv_lab_off:'微调位置（这台设备记住）：往下 {y} mm，往右 {x} mm', inv_lab_offy:'往下移（毫米，往上用负数）', inv_lab_offx:'往右移（毫米，往左用负数）',
+  inv_lab_make:'生成 PDF', inv_lab_busy:'正在生成第 {a} / {b} 页……', inv_lab_ready:'PDF 好了（{n}）。在电脑上打开打印最准。', inv_lab_share:'打开 / 保存 / 分享 PDF',
+  inv_lab_fail:'生成 PDF 失败：{e}。请检查网络后再试；还不行请截图发给老板。', inv_lab_none_sel:'请至少选一个储位。',
   // v91：物品
   tab_inv:'物品', inv_more:'📦 物品', inv_title:'物品', inv_q_ph:'找东西：名字、别名、编号……', inv_find:'找东西（物品放在哪里）',
   inv_new:'＋ 新物品（拍照）', inv_settings:'⚙ 物品设置', inv_store_empty:'还没整理', inv_area_counts:'{p} 个储位 · {i} 件东西', inv_no_photo_n:'还没照片 {n}',
@@ -757,6 +773,18 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v93：Artikel Schritt 2 (Scannen, Etiketten)
+  inv_scan:'📷 Scannen', inv_scan_h:'Scannen', inv_scan_hint:'Handy auf den QR-Code des Etiketts richten, 20–40 cm Abstand.', inv_scan_loading:'Kamera wird geöffnet …',
+  inv_scan_nocam:'Kamera lässt sich nicht öffnen. Bitte in den Handy-Einstellungen Kochi Team (bzw. Safari / Chrome) die Kamera erlauben – oder das Etikett mit der normalen Handy-Kamera scannen (öffnet den Browser, dort einmal anmelden).',
+  inv_lab_btn:'🏷 Etiketten drucken', inv_lab_item_btn:'🏷 Etikett für diesen Artikel drucken', inv_lab_store_btn:'🏷 Alle Etiketten für {s} drucken',
+  inv_lab_h:'Etiketten drucken · {a}', inv_lab_item_h:'Artikel-Etikett drucken (für Kisten)',
+  inv_lab_paper:'Etikettenbogen: A4 mit 10 Etiketten (2 Spalten × 5 Reihen, je 10,5 × 5,1 cm). PDF am Computer öffnen und mit „Tatsächliche Größe / 100 %“ drucken, nicht „An Seite anpassen“.',
+  inv_lab_all:'Alle', inv_lab_none:'Keine', inv_lab_n:'{n} Etiketten · {p} Seiten', inv_lab_copies:'Wie viele (gleicher Artikel, mehrere Kisten)',
+  inv_lab_start:'Ab welchem Feld beginnen (angebrochene Bögen weiter nutzen; von links nach rechts, oben nach unten)',
+  inv_lab_border:'Etikettenrahmen drucken (zuerst auf normalem Papier testen und gegen das Licht auf den Bogen legen)',
+  inv_lab_off:'Feinjustierung (für dieses Gerät gespeichert): {y} mm nach unten, {x} mm nach rechts', inv_lab_offy:'Nach unten (mm, nach oben negativ)', inv_lab_offx:'Nach rechts (mm, nach links negativ)',
+  inv_lab_make:'PDF erstellen', inv_lab_busy:'Seite {a} / {b} wird erstellt …', inv_lab_ready:'PDF fertig ({n}). Am genauesten vom Computer drucken.', inv_lab_share:'PDF öffnen / speichern / teilen',
+  inv_lab_fail:'PDF konnte nicht erstellt werden: {e}. Bitte Verbindung prüfen und erneut versuchen; sonst Screenshot an den Chef.', inv_lab_none_sel:'Bitte mindestens einen Lagerplatz wählen.',
   // v91：Artikel
   tab_inv:'Artikel', inv_more:'📦 Artikel', inv_title:'Artikel', inv_q_ph:'Suchen: Name, anderer Name, Lagerplatz …', inv_find:'Suchen (wo liegt was?)',
   inv_new:'＋ Neuer Artikel (Foto)', inv_settings:'⚙ Artikel-Einstellungen', inv_store_empty:'Noch nicht erfasst', inv_area_counts:'{p} Plätze · {i} Artikel', inv_no_photo_n:'{n} ohne Foto',
@@ -1222,6 +1250,8 @@ function toast(msg, isErr){
 }
 // 报错提示：每条都写清原因和下一步怎么做
 const ERR_ZH = {
+  INV_QR_UNKNOWN: '这个二维码不是 Kochi 的储位 / 物品标签，或者已经不用了。请扫别的，或者在物品页里搜名字。',
+  INV_QR_OFF: '这个储位已经停用了（编号作废）。请告诉主管把这张标签撕掉。',
   INV_NAME_EMPTY: '请写名字（德文或中文至少一个）。',
   INV_BAD: '填写的内容不对（例如数字或代码的格式）。请检查后再保存；还不行请截图发给老板。',
   INV_PICK_SLOT: '这个货架 / 柜子分了层，请选是哪一层（哪一格）。',
@@ -1372,6 +1402,8 @@ const ERR_ZH = {
   INVALID_KTIME: '时间不对：开始要在 05:00 以后，结束要晚于开始。过了半夜下班的照填，最晚到 05:00（例如 22:00–01:00）。请检查每个人的时间，有没有空着的。',
 };
 const ERR_DE = {
+  INV_QR_UNKNOWN: 'Dieser QR-Code ist kein Kochi-Etikett für Lagerplatz / Artikel oder nicht mehr gültig. Bitte einen anderen scannen oder unter „Artikel“ nach dem Namen suchen.',
+  INV_QR_OFF: 'Dieser Lagerplatz ist deaktiviert (Nummer ungültig). Bitte der Bereichsleitung sagen, dass das Etikett entfernt werden soll.',
   INV_NAME_EMPTY: 'Bitte einen Namen eintragen (Deutsch oder Chinesisch).',
   INV_BAD: 'Eingabe ungültig (z. B. Zahl oder Kürzel im falschen Format). Bitte prüfen und erneut speichern; sonst Screenshot an den Chef.',
   INV_PICK_SLOT: 'Dieses Regal / dieser Schrank hat Ebenen – bitte die Ebene (das Fach) wählen.',
@@ -2504,6 +2536,7 @@ async function viewInv(){
   if (S.view === 'form') return viewInvForm();
   if (S.view === 'unit') return viewInvUnit();
   if (S.view === 'pick') return renderInvPick();
+  if (S.view === 'labels') return renderInvLabels();   // v93
   if (S.view === 'settings' || S.view === 'aform' || S.view === 'cform') return viewInvSettings();
   return viewInvHome();
 }
@@ -2520,7 +2553,7 @@ function renderInvHome(){
   const S = invS(), H = S.home;
   if (!H){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
   $('#main').innerHTML = `${invBackMore()}<h2 style="margin-top:4px">${esc(t('inv_title'))}</h2>
-    <input type="search" class="input" id="inv-q" placeholder="${esc(t('inv_q_ph'))}" value="${esc(S.q)}" autocomplete="off" enterkeyhint="search" style="margin-bottom:10px">
+    <div class="row" style="gap:8px;margin-bottom:10px"><input type="search" class="input" id="inv-q" placeholder="${esc(t('inv_q_ph'))}" value="${esc(S.q)}" autocomplete="off" enterkeyhint="search"><button class="inv-scanbtn" data-act="inv-scan">${esc(t('inv_scan'))}</button></div>
     ${H.sup ? `<button class="btn ghost" data-act="inv-new" style="margin-bottom:6px">${esc(t('inv_new'))}</button>` : ''}
     <div id="inv-res">${S.q.trim() ? invResultsHTML() : invBrowseHTML(H)}</div>
     ${H.admin ? `<button class="link" data-act="inv-settings" style="margin-top:8px">${esc(t('inv_settings'))}</button>` : ''}`;
@@ -2603,7 +2636,8 @@ function renderInvArea(){
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
     <h2 style="margin:4px 0 2px">${storeTag(A.store)} ${esc(invName(A))} <span class="muted num" style="font-size:16px">${esc(A.code)}</span></h2>
     <div style="margin-bottom:10px">${invAreaTags(A)}</div>
-    ${edit && !A.inbox ? `<button class="btn ghost" data-act="inv-unit-new" style="margin-bottom:12px">${esc(t('inv_add_unit'))}</button>` : ''}
+    ${edit && !A.inbox ? `<button class="btn ghost" data-act="inv-unit-new" style="margin-bottom:8px">${esc(t('inv_add_unit'))}</button>` : ''}
+    ${edit ? `<button class="btn ghost" data-act="inv-lab-area" data-id="${A.id}" style="margin-bottom:12px">${esc(t('inv_lab_btn'))}</button>` : ''}
     ${units.length ? units.map(unitHTML).join('') : `<div class="list"><div class="empty">${esc(t('inv_area_empty'))}</div></div>`}
     ${off.length ? `<details class="fold"><summary>${esc(t('inv_unit_off', { n: off.length }))}</summary><div class="inner"><div class="list">${off.map(u => `<div class="item" data-act="inv-place" data-id="${u.id}" style="cursor:pointer"><span class="num">${esc(u.code)}</span> ${esc(invName(u))} <span class="tag off">${esc(t('inv_tag_off'))}</span></div>`).join('')}</div></div></details>` : ''}`;
   invLoadPhotos();
@@ -2668,7 +2702,7 @@ function renderInvItem(){
     ${unitLine ? `<div class="meta">${esc(unitLine)}</div>` : ''}
     ${X.note ? `<div class="sheet" style="margin:8px 0;white-space:pre-wrap">${esc(X.note)}</div>` : ''}
     <h3>${esc(t('inv_locs'))}</h3><div class="list">${byStore || `<div class="empty">${esc(t('inv_no_loc'))}</div>`}</div>
-    ${X.can_edit && X.active ? `<button class="btn ghost" data-act="inv-add-loc" style="margin-bottom:8px">${esc(t('inv_add_loc'))}</button><button class="btn ghost" data-act="inv-edit-item">${esc(t('inv_edit_item'))}</button>` : ''}
+    ${X.can_edit && X.active ? `<button class="btn ghost" data-act="inv-add-loc" style="margin-bottom:8px">${esc(t('inv_add_loc'))}</button><button class="btn ghost" data-act="inv-edit-item" style="margin-bottom:8px">${esc(t('inv_edit_item'))}</button><button class="btn ghost" data-act="inv-lab-item">${esc(t('inv_lab_item_btn'))}</button>` : ''}
     ${X.can_admin && !X.merged_into ? `<div class="row" style="gap:16px;margin-top:14px">${X.active ? `<button class="link" data-act="inv-merge">${esc(t('inv_merge'))}</button>` : ''}<button class="link${X.active ? ' danger' : ''}" data-act="inv-active" data-on="${X.active ? '' : '1'}">${esc(t(X.active ? 'inv_disable' : 'inv_enable'))}</button></div>` : ''}
     <div class="small muted" style="margin-top:14px">${esc(t('inv_by', { n: X.created_by || '?', t: fmtDateTime(X.created_at) }))}${X.updated_at ? '<br>' + esc(t('inv_upd', { n: X.updated_by || '?', t: fmtDateTime(X.updated_at) })) : ''}</div>`;
   invLoadPhotos();
@@ -2955,7 +2989,7 @@ async function viewInvSettings(){
     <h3>${esc(t('inv_set_areas'))}</h3>
     ${STORES.map(st => { const as = (H.areas || []).filter(a => a.store === st); return `<div class="small muted" style="margin:6px 0">${storeTag(st)}</div><div class="list">${as.length ? as.map(a => `<div class="item"><div class="top">
       <div><strong>${esc(invName(a))}</strong> <span class="muted small num">${esc(a.code)}</span><div class="meta" style="margin-top:3px">${invAreaTags(a)}</div></div>
-      <button class="link" data-act="inv-aform" data-id="${a.id}">${esc(t('inv_edit'))}</button></div></div>`).join('') : `<div class="empty">${esc(t('inv_store_empty'))}</div>`}</div>`; }).join('')}
+      <button class="link" data-act="inv-aform" data-id="${a.id}">${esc(t('inv_edit'))}</button></div></div>`).join('') : `<div class="empty">${esc(t('inv_store_empty'))}</div>`}</div>${as.length ? `<button class="link" data-act="inv-lab-store" data-store="${st}" style="margin:-6px 0 12px">${esc(t('inv_lab_store_btn', { s: st }))}</button>` : ''}`; }).join('')}
     <button class="btn ghost" data-act="inv-aform" data-id="">${esc(t('inv_set_new_area'))}</button>
     <h3>${esc(t('inv_set_cats'))}</h3>
     <div class="list">${(H.categories || []).map(k => `<div class="item"><div class="top">
@@ -2999,8 +3033,181 @@ async function invPlacePhoto(file){
     if (state.tab === 'inv' && S.view === 'place' && S.id === P.id) keepScroll(viewInvPlace);
   } catch(e){ toast(errText(e), true); }
 }
-// 「今天」页顶部的「🔍 找东西」
-function invFindHTML(){ return tabs().includes('inv') && !state.me.is_admin ? `<button class="inv-find" data-act="inv-find">🔍 ${esc(t('inv_find'))}</button>` : ''; }
+// 「今天」页顶部的「🔍 找东西」和「📷 扫码」（v93）
+function invFindHTML(){ return tabs().includes('inv') && !state.me.is_admin ? `<div class="row" style="gap:8px;margin:0 0 12px"><button class="inv-find" data-act="inv-find">🔍 ${esc(t('inv_find'))}</button><button class="inv-scanbtn" data-act="inv-scan">${esc(t('inv_scan'))}</button></div>` : ''; }
+// ---------- 第二步（v93，数据库 v65）：扫码、打印标签 ----------
+// 二维码里是 https://app.kochide.com/#q=<扫码码>（inv_places.qr / inv_items.qr，8 位，固定不变）
+const INV_QR_URL = 'https://app.kochide.com/#q=';
+function invQrCode(raw){ const s = String(raw || '').trim(), m = s.match(/[#?&]q=([A-Za-z0-9]{8})\b/i) || s.match(/^([A-Za-z0-9]{8})$/); return m ? m[1].toUpperCase() : null; }
+async function invOpenQr(raw){
+  const code = invQrCode(raw);
+  if (!code){ toast(t('err_INV_QR_UNKNOWN'), true); return; }
+  try {
+    const r = await rpc('inv_qr_find', { ...tok(), p_qr: code });
+    const S = invS(); S.res = null;
+    if (r.kind === 'place'){ S.place = null; invGo('place', r.id); } else { S.item = null; invGo('item', r.id); }
+  } catch(e){ toast(errText(e), true); }
+}
+// 从标签的网址打开 App（手机相机扫的）：登录、看完公告以后再跳过去
+function invPending(){
+  if (!state.pendingQr || !state.token || !state.me || state.me.must_change_pin || (state.annPending || []).length || state.viewAs) return;
+  if (!tabs().includes('inv')) { state.pendingQr = null; return; }
+  const q = state.pendingQr; state.pendingQr = null; invOpenQr(q);
+}
+// App 里的扫码：有 BarcodeDetector（安卓 Chrome）就用它，没有（iPhone）就用 jsQR 读摄像头画面
+async function invScan(){
+  const dlg = $('#photoDlg');
+  dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('inv_scan_h'))}</h2><div class="inv-scan"><video playsinline muted autoplay></video><div class="inv-scan-box"></div></div>
+    <div class="small muted" id="inv-scan-msg" style="margin:8px 0 12px">${esc(t('inv_scan_loading'))}</div><button class="btn ghost" data-act="photo-close">${esc(t('close'))}</button>`;
+  dlg.showModal();
+  const msg = h => { const m = $('#inv-scan-msg'); if (m) m.textContent = h; };
+  let stream = null, done = false;
+  const stop = () => { done = true; if (stream) stream.getTracks().forEach(x => x.stop()); stream = null; };
+  dlg.addEventListener('close', stop, { once: true });
+  try { stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false }); }
+  catch(e){ msg(t('inv_scan_nocam')); return; }
+  if (done || !dlg.open){ stop(); return; }
+  const v = dlg.querySelector('video'); v.srcObject = stream; try { await v.play(); } catch(e){}
+  let detect = null;
+  if ('BarcodeDetector' in window){ try { const d = new window.BarcodeDetector({ formats: ['qr_code'] }); detect = async () => { const r = await d.detect(v); return r && r[0] ? r[0].rawValue : null; }; } catch(e){} }
+  if (!detect){
+    try { await loadScript('https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js', () => window.jsQR); } catch(e){ msg(t('inv_scan_nocam')); stop(); return; }
+    const c = document.createElement('canvas'), g = c.getContext('2d', { willReadFrequently: true });
+    detect = async () => { const w = v.videoWidth, h = v.videoHeight; if (!w || !h) return null;
+      const k = Math.min(1, 720 / Math.max(w, h)); c.width = Math.round(w * k); c.height = Math.round(h * k); g.drawImage(v, 0, 0, c.width, c.height);
+      const r = window.jsQR(g.getImageData(0, 0, c.width, c.height).data, c.width, c.height, { inversionAttempts: 'dontInvert' }); return r ? r.data : null; };
+  }
+  msg(t('inv_scan_hint'));
+  while (!done && dlg.open){
+    let val = null; try { val = await detect(); } catch(e){}
+    if (val){
+      if (invQrCode(val)){ stop(); dlg.close(); invOpenQr(val); return; }
+      msg(t('err_INV_QR_UNKNOWN'));
+    }
+    await new Promise(r => setTimeout(r, 180));
+  }
+  stop();
+}
+
+// 打印标签：储区（主管 / 老板）、整家店（老板）、一件物品
+const INV_LAB = { cols: 2, rows: 5, w: 105, h: 51, top: 21, left: 0 };   // A4 每张 10 个（老板 2026-10-17 的标签纸）
+function invLabOff(){ const o = LS.get('invLabOff', null) || {}; return { x: +o.x || 0, y: +o.y || 0 }; }
+async function invLabOpen(mode, ref){
+  const S = invS();
+  S.lab = { mode, ref, list: null, sel: {}, start: 1, copies: 1, border: false, back: { view: S.view, id: S.id } };
+  S.view = 'labels'; render(); window.scrollTo(0, 0);
+  if (mode === 'item') return;
+  try {
+    const L = await rpc('inv_labels', { ...tok(), p_area: mode === 'area' ? ref : null, p_store: mode === 'store' ? ref : null });
+    if (S.lab && S.lab.ref === ref){ S.lab.list = L; L.forEach(x => { S.lab.sel[x.id] = true; }); if (S.view === 'labels') renderInvLabels(); }
+  } catch(e){ toast(errText(e), true); }
+}
+function invLabItems(){
+  const S = invS(), B = S.lab;
+  if (B.mode === 'item'){ const X = S.item; return X ? Array.from({ length: Math.max(1, Math.min(30, +B.copies || 1)) }, () => ({ item: X })) : []; }
+  return (B.list || []).filter(x => B.sel[x.id]);
+}
+function renderInvLabels(){
+  const S = invS(), B = S.lab; if (!B) { S.view = 'home'; return viewInvHome(); }
+  const off = invLabOff(), items = invLabItems(), start = Math.max(1, Math.min(10, +B.start || 1)), pages = items.length ? Math.ceil((items.length + start - 1) / 10) : 0;
+  const title = B.mode === 'item' ? t('inv_lab_item_h') : B.mode === 'store' ? t('inv_lab_h', { a: B.ref }) : t('inv_lab_h', { a: (S.area && S.area.id === B.ref) ? invName(S.area) : '' });
+  let list = '';
+  if (B.mode === 'item'){
+    const X = S.item || {};
+    list = `<div class="sheet"><strong>${esc(invName(X))}</strong><div class="meta">${esc(invOther(X))}</div></div>
+      <div class="field"><label for="inv-lab-copies">${esc(t('inv_lab_copies'))}</label><input class="input" id="inv-lab-copies" inputmode="numeric" value="${esc(B.copies)}"></div>`;
+  } else if (!B.list) list = `<div class="loading">${esc(t('loading'))}</div>`;
+  else {
+    const groups = []; B.list.forEach(x => { const k = x.area_code + '|' + x.code.split('-').slice(0, 3).join('-'); let g = groups.find(y => y.k === k); if (!g){ g = { k, items: [] }; groups.push(g); } g.items.push(x); });
+    list = `<div class="row" style="gap:16px;margin-bottom:6px"><button class="link" data-act="inv-lab-all">${esc(t('inv_lab_all'))}</button><button class="link" data-act="inv-lab-none">${esc(t('inv_lab_none'))}</button></div>
+      <div class="list">${groups.map(g => `<div class="item"><div class="small muted" style="margin-bottom:4px">${esc(g.items[0].code.split('-').slice(0, 3).join('-'))} · ${esc(state.lang === 'de' ? g.items[0].unit_de || '' : g.items[0].unit_zh || '')}</div><div class="chips">${g.items.map(x => `<label class="chip${B.sel[x.id] ? ' on' : ''}" style="cursor:pointer"><input type="checkbox" data-invlab="${x.id}"${B.sel[x.id] ? ' checked' : ''} hidden>${esc(x.slot || x.code.split('-').slice(2).join('-'))}</label>`).join('')}</div></div>`).join('')}</div>`;
+  }
+  $('#main').innerHTML = `<button class="link" data-act="inv-lab-back" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(title)}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_lab_paper'))}</div>
+    ${list}
+    <div class="field" style="margin-top:10px"><label for="inv-lab-start">${esc(t('inv_lab_start'))}</label><select class="input" id="inv-lab-start">${Array.from({ length: 10 }, (_, i) => `<option value="${i + 1}"${start === i + 1 ? ' selected' : ''}>${i + 1}</option>`).join('')}</select></div>
+    <label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" id="inv-lab-border"${B.border ? ' checked' : ''} style="width:22px;height:22px">${esc(t('inv_lab_border'))}</label>
+    <details class="fold"><summary>${esc(t('inv_lab_off', { y: off.y, x: off.x }))}</summary><div class="inner"><div class="row" style="gap:10px">
+      <div class="field"><label for="inv-lab-offy">${esc(t('inv_lab_offy'))}</label><input class="input" id="inv-lab-offy" inputmode="decimal" value="${off.y}"></div>
+      <div class="field"><label for="inv-lab-offx">${esc(t('inv_lab_offx'))}</label><input class="input" id="inv-lab-offx" inputmode="decimal" value="${off.x}"></div></div></div></details>
+    <button class="btn" data-act="inv-lab-make" style="margin-top:8px"${items.length ? '' : ' disabled'}>${esc(t('inv_lab_make'))} · ${esc(t('inv_lab_n', { n: items.length, p: pages }))}</button>
+    <div id="inv-lab-msg" style="margin-top:10px">${B.file ? invLabReadyHTML(B.file) : ''}</div>`;
+}
+function invLabReadyHTML(f){ return `<div class="infobox">${esc(t('inv_lab_ready', { n: (f.size / 1048576).toFixed(1) + ' MB' }))}</div><button class="btn ghost" data-act="pdf-share">${esc(t('inv_lab_share'))}</button>`; }
+// 一行字：按宽度自动缩小字号
+function invFit(g, text, x, y, maxW, px, weight){
+  let s = px; const fam = '"PingFang SC","Noto Sans SC","Hiragino Sans GB","Microsoft YaHei","Source Sans 3",system-ui,sans-serif';
+  do { g.font = `${weight || 400} ${s}px ${fam}`; if (g.measureText(text).width <= maxW) break; s -= 1; } while (s > px * 0.75);   // 最多缩到 3/4，再长就截掉后面
+  let tx = text; while (g.measureText(tx).width > maxW && tx.length > 1) tx = tx.slice(0, -2) + '…';
+  g.fillText(tx, x, y);
+}
+function invLabLines(x){
+  if (x.item){
+    const X = x.item, locs = invSortLocs(X.locs).filter(l => l.main);
+    return { url: INV_QR_URL + X.qr, big: X.name_zh || X.name_de || '', l2: X.name_zh && X.name_de ? X.name_de : '',
+      l3: locs.length ? '放在 / Platz: ' + locs.slice(0, 2).map(l => l.code).join('  ·  ') : '', l4: '', warn: '' };
+  }
+  const grid = /\d/.test(x.slot || ''), unitZh = x.unit_zh || '', unitDe = x.unit_de || '';
+  // 层 / 格写在前面：名称太长被截掉时，最要紧的「哪一层」还在
+  const zh = x.kind === 'slot' ? `${x.slot} ${grid ? '格' : '层'}${unitZh ? ' · ' + unitZh : ''}` : (unitZh || x.area_zh);
+  const de = x.kind === 'slot' ? `${grid ? 'Fach' : 'Ebene'} ${x.slot}${unitDe ? ' · ' + unitDe : ''}` : (unitDe || x.area_de);
+  return { url: INV_QR_URL + x.qr, big: x.code, l2: zh, l3: de, l4: `${x.store} · ${x.area_zh} / ${x.area_de}`, warn: x.special === 'gas' ? '只放瓦斯罐 · nur Gaskartuschen' : '' };
+}
+function invLabPages(items, start, border, off){
+  const K = 8, W = 210 * K, H = 297 * K, n = items.length + start - 1, pages = [];
+  for (let p = 0; p * 10 < n; p++){
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
+    const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, W, H); g.textBaseline = 'alphabetic';
+    for (let s = 0; s < 10; s++){
+      const idx = p * 10 + s - (start - 1); if (idx < 0 || idx >= items.length) continue;
+      const col = s % 2, row = Math.floor(s / 2), x0 = (INV_LAB.left + col * INV_LAB.w + off.x) * K, y0 = (INV_LAB.top + row * INV_LAB.h + off.y) * K;
+      if (border){ g.strokeStyle = '#999'; g.lineWidth = 2; g.strokeRect(x0, y0, INV_LAB.w * K, INV_LAB.h * K); }
+      const L = invLabLines(items[idx]);
+      // 二维码：约 40 mm，左边居中
+      const qr = window.qrcode(0, 'M'); qr.addData(L.url); qr.make();
+      const m = qr.getModuleCount(), cell = Math.floor(40 * K / (m + 2)), size = cell * (m + 2), qx = Math.round(x0 + 4 * K), qy = Math.round(y0 + (INV_LAB.h * K - size) / 2);
+      g.fillStyle = '#000';
+      for (let r = 0; r < m; r++) for (let q = 0; q < m; q++) if (qr.isDark(r, q)) g.fillRect(qx + (q + 1) * cell, qy + (r + 1) * cell, cell, cell);
+      // 文字：右边 52 mm
+      const tx = x0 + 49 * K, tw = 52 * K;
+      g.fillStyle = '#000';
+      invFit(g, L.big, tx, y0 + 13 * K, tw, 6.4 * K, 800);
+      if (L.l2) invFit(g, L.l2, tx, y0 + 22 * K, tw, 4 * K, 600);
+      if (L.l3) invFit(g, L.l3, tx, y0 + 29.5 * K, tw, 3.6 * K, 400);
+      g.fillStyle = '#333';
+      if (L.l4) invFit(g, L.l4, tx, y0 + 37 * K, tw, 2.9 * K, 400);
+      if (L.warn){ g.fillStyle = '#000'; invFit(g, L.warn, tx, y0 + 44 * K, tw, 3 * K, 700); }
+    }
+    pages.push(c);
+  }
+  return pages;
+}
+async function invLabMake(btn){
+  const S = invS(), B = S.lab; if (!B) return;
+  invLabKeep();
+  const items = invLabItems(); if (!items.length){ toast(t('inv_lab_none_sel'), true); return; }
+  const box = $('#inv-lab-msg'), say = h => { if (box) box.innerHTML = h; };
+  btn.disabled = true; B.file = null;
+  try {
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js', () => window.qrcode);
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', () => window.jspdf);
+    if (B.mode === 'item' && S.item && !S.item.qr) throw new Error('INV_QR_UNKNOWN');
+    const pages = invLabPages(items, Math.max(1, Math.min(10, +B.start || 1)), !!B.border, invLabOff());
+    const pdf = new window.jspdf.jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    pages.forEach((c, i) => { say(esc(t('inv_lab_busy', { a: i + 1, b: pages.length }))); if (i) pdf.addPage(); pdf.addImage(c.toDataURL('image/png'), 'PNG', 0, 0, 210, 297, undefined, 'FAST'); });
+    const name = (B.mode === 'item' ? `Etikett ${(S.item && (S.item.name_de || S.item.name_zh)) || ''}` : `Etiketten ${B.mode === 'store' ? B.ref : ((S.area && S.area.code) || '')}`).replace(/[\\/:*?"<>|]+/g, '-').trim() + '.pdf';
+    B.file = state.pdfFile = new File([pdf.output('blob')], name, { type: 'application/pdf' });
+    say(invLabReadyHTML(B.file));
+  } catch(e){ say(`<span class="negc">${esc(t('inv_lab_fail', { e: String(e && e.message || e).slice(0, 80) }))}</span>`); }
+  finally { btn.disabled = false; }
+}
+function invLabKeep(){
+  const B = invS().lab; if (!B) return;
+  const st = $('#inv-lab-start'), bd = $('#inv-lab-border'), cp = $('#inv-lab-copies'), oy = $('#inv-lab-offy'), ox = $('#inv-lab-offx');
+  if (st) B.start = +st.value || 1; if (bd) B.border = bd.checked; if (cp) B.copies = Math.max(1, Math.min(30, parseInt(cp.value, 10) || 1));
+  if (oy && ox){ const n = v => { const x = parseFloat(String(v).replace(',', '.')); return isFinite(x) ? Math.max(-15, Math.min(15, x)) : 0; }; LS.set('invLabOff', { x: n(ox.value), y: n(oy.value) }); }
+}
+
 
 // ============ 渲染入口 ============
 function render(){
@@ -3009,6 +3216,7 @@ function render(){
   if (state.me && state.me.must_change_pin && !state.viewAs){ renderSetPin(); return; }
   if ((state.annPending || []).length && !state.viewAs){ renderAnnounce(); return; }   // v64：没确认的公告先看
   if (!tabs().includes(state.tab)) state.tab = navTabs()[0];
+  if (state.pendingQr) setTimeout(invPending, 0);   // v93：从标签的网址打开
   const m = state.me;
   $('#app').innerHTML = (state.viewAs ? `<div class="viewbar" role="status"><span>${esc(t('viewing_as', { n: state.viewAs.name }))}</span><button data-act="view-exit">${esc(t('exit_view'))}</button></div>` : '') + `
     <header>
@@ -6017,7 +6225,7 @@ document.addEventListener('click', async ev => {
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
-    case 'tab': if (el.dataset.tab === 'inv') Object.assign(invS(), { view: 'home', form: null, uform: null, sform: null, pickItem: null });   // v91
+    case 'tab': if (el.dataset.tab === 'inv') Object.assign(invS(), { view: 'home', form: null, uform: null, sform: null, pickItem: null, lab: null });   // v91
       if (el.dataset.tab === 'today' && state.tab !== 'today') state.reconDay = null;   // v57
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(await loadWeekTodo());   // v56
@@ -6916,6 +7124,14 @@ document.addEventListener('click', async ev => {
         toast(t('ls_unbound')); state.staffEdit = null; state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
     }
+    // v93：扫码、标签
+    case 'inv-scan': invScan(); break;
+    case 'inv-lab-area': invLabOpen('area', el.dataset.id); break;
+    case 'inv-lab-store': invLabOpen('store', el.dataset.store); break;
+    case 'inv-lab-item': invLabOpen('item', invS().item && invS().item.id); break;
+    case 'inv-lab-back': { const S = invS(), b = (S.lab || {}).back || { view: 'home' }; S.lab = null; invGo(b.view, b.id); break; }
+    case 'inv-lab-all': case 'inv-lab-none': { invLabKeep(); const B = invS().lab; if (B && B.list) B.list.forEach(x => { B.sel[x.id] = act === 'inv-lab-all'; }); B.file = null; keepScroll(renderInvLabels); break; }
+    case 'inv-lab-make': invLabMake(el); break;
     // v91：物品
     case 'inv-find': { const S = invS(); S.view = 'home'; S.focus = true; state.tab = 'inv'; render(); window.scrollTo(0, 0); break; }
     case 'more-inv': case 'inv-home': invGo('home'); break;
@@ -7036,6 +7252,8 @@ document.addEventListener('change', async ev => {
     if (k === 'item') invPhotoChosen(f); else invPlacePhoto(f);
     return;
   }
+  if (ev.target.dataset && ev.target.dataset.invlab){ invLabKeep(); const B = invS().lab; if (B){ B.sel[ev.target.dataset.invlab] = ev.target.checked; B.file = null; keepScroll(renderInvLabels); } return; }   // v93
+  if (['inv-lab-start', 'inv-lab-border', 'inv-lab-copies', 'inv-lab-offy', 'inv-lab-offx'].includes(ev.target.id)){ invLabKeep(); const B = invS().lab; if (B){ B.file = null; keepScroll(renderInvLabels); } return; }
   if (ev.target.id === 'invf-cat'){ invFormKeep(); invCatChanged(ev.target.value); return; }
   if (ev.target.id === 'px-pick'){ state.bon.pxPick = ev.target.value || null; state.bon.sched = null; refreshBonParts(); return; }   // v92：代交记给谁
   if (ev.target.id === 'px-counted'){ state.bon.pxCounted = ev.target.checked; return; }
@@ -7226,6 +7444,9 @@ setInterval(() => {
 }, 1000);
 
 // ============ 启动 ============
+// v93：手机相机扫了物品标签（https://app.kochide.com/#q=…）：记下来，登录后打开那个储位 / 物品
+function invHashQr(live){ const m = location.hash.match(/[#&]q=([A-Za-z0-9]{8})\b/); if (!m) return; state.pendingQr = m[1].toUpperCase(); history.replaceState(null, '', location.pathname + location.search); if (live) invPending(); }
+invHashQr(false); window.addEventListener('hashchange', () => invHashQr(true));   // 启动时只记下，等页面画好（render）再打开
 (async () => {
   if (state.token){
     splash();   // v68
