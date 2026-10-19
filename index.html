@@ -418,6 +418,24 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v94：物品第三、四步（待归位、搜不到的词、储位确认）
+  inv_ib_btn:'📦 不知道放哪？登记待归位', inv_ib_mine:'我登记的（{n}）', inv_ib_new_h:'登记待归位',
+  inv_ib_new_hint:'不知道该放哪的东西：拍一张照片，写一句话（在哪找到的、是什么），然后放进这家店办公室的「待归位」箱子（F-UNS）。主管会处理，你在「我登记的」里能看到去了哪里。',
+  inv_ib_note:'一句话（可以不写）', inv_ib_note_ph:'例如：仓库门口一箱，看不懂是什么酱', inv_ib_store:'在哪家店', inv_ib_save:'登记', inv_ib_need_photo:'请先拍照片。',
+  inv_ib_added:'已登记。请把东西放进办公室的「待归位」箱子。', inv_ib_mine_h:'我登记的待归位', inv_ib_box_hint:'东西请放进这家店办公室的「待归位」箱子（F-UNS）。',
+  inv_ib_mine_none:'最近 60 天你没有登记过。', inv_ib_done_h:'已处理（{n}）', inv_ib_no_note:'（没写说明）',
+  inv_ib_wait:'待处理 · 已等 {d} 天', inv_ib_wait_late:'待处理 · 已等 {d} 天（超过 7 天）', inv_ib_r_placed:'已放到 {c}（{n}）', inv_ib_r_new:'新物品「{n}」，放在 {c}', inv_ib_r_discarded:'已丢弃',
+  inv_ib_by:'处理：{n} · {t}', inv_ib_list_h:'待归位（{n}）', inv_ib_list_short:'待归位', inv_ib_list_hint:'员工登记的「不知道放哪的东西」。最早的在上面，超过 7 天的标红。东西在办公室的待归位箱子里。',
+  inv_ib_list_none:'现在没有待归位的东西 ✓', inv_ib_todo:'待归位 {n} 件', inv_ib_late_n:'{n} 件超过 7 天',
+  inv_ib_ai_h:'这是什么？', inv_ib_ai_fail:'AI 没看成。自己看照片，选下面的一种处理。', inv_ib_ai_guess:'AI 看照片：可能是「{n}」。', inv_ib_cand:'已经有的物品里像的（点它 = 是这一件，接着选储位）：',
+  inv_ib_other:'是别的已有物品（搜一下）', inv_ib_asnew:'都不是：录成新物品（照片已带上）', inv_ib_discard:'已丢弃（要写原因）',
+  inv_ib_discard_h:'确定已丢弃？', inv_ib_discard_lbl:'原因（必须写，例如：坏了扔掉了 / 是员工私人的，已还给他）', inv_ib_discard_ok:'确认已丢弃', inv_ib_done:'已处理',
+  inv_ib_place_h:'「{n}」放到哪里', inv_todo_h:'📦 物品',
+  inv_due_line:'{a}：{n} 个储位 3 个月没确认，该去看看了', inv_due_tag:'该看了', inv_check:'✓ 看过了，没变', inv_checked:'已确认',
+  inv_checked_by:'上次确认：{n} · {t}', inv_check_hint:'3 个月要确认一次：去看一眼，没变就点「看过了」，变了就重拍照片。',
+  inv_miss_todo:'搜不到的词 {n} 个', inv_miss_h:'最近搜不到的词（{n}）', inv_miss_hint:'员工搜了、什么都没找到的词（最近 60 天，次数多的在前）。是店里有的东西就加成别名或新建物品；店里本来就没有的点「忽略」。能搜到以后自动从这里消失。',
+  inv_miss_last:'最后一次 {t}', inv_miss_alias:'加到别名', inv_miss_new:'新建物品', inv_miss_ignore:'忽略', inv_miss_none:'没有搜不到的词 ✓',
+  inv_miss_alias_h:'「{w}」加到哪件物品的别名？', inv_miss_alias_q:'把「{w}」加成「{n}」的别名？以后搜「{w}」就能找到它。', inv_miss_added:'已加成别名', inv_miss_ignored:'已忽略',
   // v93：物品第二步（扫码、标签）
   inv_scan:'📷 扫码', inv_scan_h:'扫码', inv_scan_hint:'把手机对准标签上的二维码，离 20–40 厘米。', inv_scan_loading:'正在打开摄像头……',
   inv_scan_nocam:'打不开摄像头。请在手机「设置」里允许 Kochi Team（或 Safari / Chrome）使用相机；也可以用手机自带的相机扫标签（会打开浏览器，要先登录）。',
@@ -773,6 +791,24 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v94：Artikel Schritt 3–4 (Unsortiert, Suchwörter ohne Treffer, Lagerplatz-Kontrolle)
+  inv_ib_btn:'📦 Weißt du nicht, wohin? Als unsortiert melden', inv_ib_mine:'Meine Meldungen ({n})', inv_ib_new_h:'Unsortiert melden',
+  inv_ib_new_hint:'Für Sachen, bei denen du nicht weißt, wohin sie gehören: Foto machen, kurz dazuschreiben (wo gefunden, was es ist) und in die Kiste „Unsortiert“ im Büro dieser Filiale legen (F-UNS). Die Bereichsleitung kümmert sich darum; unter „Meine Meldungen“ siehst du, wo es gelandet ist.',
+  inv_ib_note:'Ein Satz (optional)', inv_ib_note_ph:'z. B.: Kiste vor der Lagertür, unbekannte Soße', inv_ib_store:'In welcher Filiale', inv_ib_save:'Melden', inv_ib_need_photo:'Bitte zuerst ein Foto machen.',
+  inv_ib_added:'Gemeldet. Bitte die Sache in die Kiste „Unsortiert“ im Büro legen.', inv_ib_mine_h:'Meine Unsortiert-Meldungen', inv_ib_box_hint:'Die Sachen bitte in die Kiste „Unsortiert“ im Büro dieser Filiale legen (F-UNS).',
+  inv_ib_mine_none:'In den letzten 60 Tagen hast du nichts gemeldet.', inv_ib_done_h:'Erledigt ({n})', inv_ib_no_note:'(ohne Beschreibung)',
+  inv_ib_wait:'Offen · seit {d} Tagen', inv_ib_wait_late:'Offen · seit {d} Tagen (über 7 Tage)', inv_ib_r_placed:'Nach {c} geräumt ({n})', inv_ib_r_new:'Neuer Artikel „{n}“, Platz {c}', inv_ib_r_discarded:'Entsorgt',
+  inv_ib_by:'Erledigt: {n} · {t}', inv_ib_list_h:'Unsortiert ({n})', inv_ib_list_short:'Unsortiert', inv_ib_list_hint:'Vom Team gemeldete Sachen ohne festen Platz. Älteste oben, über 7 Tage rot markiert. Die Sachen liegen in der Kiste „Unsortiert“ im Büro.',
+  inv_ib_list_none:'Gerade nichts unsortiert ✓', inv_ib_todo:'{n} Sachen unsortiert', inv_ib_late_n:'{n} über 7 Tage',
+  inv_ib_ai_h:'Was ist das?', inv_ib_ai_fail:'Die KI hat es nicht geschafft. Bitte selbst aufs Foto schauen und unten eine Möglichkeit wählen.', inv_ib_ai_guess:'KI nach dem Foto: vermutlich „{n}“.', inv_ib_cand:'Ähnliche vorhandene Artikel (antippen = dieser ist es, dann den Platz wählen):',
+  inv_ib_other:'Ein anderer vorhandener Artikel (suchen)', inv_ib_asnew:'Keiner davon: als neuen Artikel erfassen (Foto ist dabei)', inv_ib_discard:'Entsorgt (Grund nötig)',
+  inv_ib_discard_h:'Wirklich entsorgt?', inv_ib_discard_lbl:'Grund (Pflicht, z. B.: kaputt, weggeworfen / privat, zurückgegeben)', inv_ib_discard_ok:'Entsorgt bestätigen', inv_ib_done:'Erledigt',
+  inv_ib_place_h:'Wohin kommt „{n}“?', inv_todo_h:'📦 Artikel',
+  inv_due_line:'{a}: {n} Lagerplätze seit 3 Monaten nicht kontrolliert – bitte nachsehen', inv_due_tag:'nachsehen', inv_check:'✓ Kontrolliert, unverändert', inv_checked:'Kontrolliert',
+  inv_checked_by:'Zuletzt kontrolliert: {n} · {t}', inv_check_hint:'Alle 3 Monate kontrollieren: kurz nachsehen; unverändert → „Kontrolliert“, verändert → neues Foto.',
+  inv_miss_todo:'{n} Suchwörter ohne Treffer', inv_miss_h:'Suchwörter ohne Treffer ({n})', inv_miss_hint:'Wörter, nach denen gesucht und nichts gefunden wurde (letzte 60 Tage, häufigste oben). Gibt es die Sache: als anderen Namen hinzufügen oder neuen Artikel anlegen; gibt es sie nicht: „Ignorieren“. Sobald etwas gefunden wird, verschwindet das Wort von hier.',
+  inv_miss_last:'zuletzt {t}', inv_miss_alias:'Als anderen Namen hinzufügen', inv_miss_new:'Neuer Artikel', inv_miss_ignore:'Ignorieren', inv_miss_none:'Keine Suchwörter ohne Treffer ✓',
+  inv_miss_alias_h:'„{w}“ als anderen Namen von welchem Artikel?', inv_miss_alias_q:'„{w}“ als anderen Namen von „{n}“ hinzufügen? Dann findet man ihn auch mit „{w}“.', inv_miss_added:'Als anderer Name hinzugefügt', inv_miss_ignored:'Ignoriert',
   // v93：Artikel Schritt 2 (Scannen, Etiketten)
   inv_scan:'📷 Scannen', inv_scan_h:'Scannen', inv_scan_hint:'Handy auf den QR-Code des Etiketts richten, 20–40 cm Abstand.', inv_scan_loading:'Kamera wird geöffnet …',
   inv_scan_nocam:'Kamera lässt sich nicht öffnen. Bitte in den Handy-Einstellungen Kochi Team (bzw. Safari / Chrome) die Kamera erlauben – oder das Etikett mit der normalen Handy-Kamera scannen (öffnet den Browser, dort einmal anmelden).',
@@ -1250,6 +1286,9 @@ function toast(msg, isErr){
 }
 // 报错提示：每条都写清原因和下一步怎么做
 const ERR_ZH = {
+  INV_INBOX_DONE: '这件已经有人处理过了。请返回刷新。',
+  INV_DISCARD_NOTE: '标「已丢弃」要写一句原因。',
+  INV_INBOX_LIMIT: '今天登记得太多了（每人每天最多 30 条）。剩下的明天再登记，或者直接问主管。',
   INV_QR_UNKNOWN: '这个二维码不是 Kochi 的储位 / 物品标签，或者已经不用了。请扫别的，或者在物品页里搜名字。',
   INV_QR_OFF: '这个储位已经停用了（编号作废）。请告诉主管把这张标签撕掉。',
   INV_NAME_EMPTY: '请写名字（德文或中文至少一个）。',
@@ -1402,6 +1441,9 @@ const ERR_ZH = {
   INVALID_KTIME: '时间不对：开始要在 05:00 以后，结束要晚于开始。过了半夜下班的照填，最晚到 05:00（例如 22:00–01:00）。请检查每个人的时间，有没有空着的。',
 };
 const ERR_DE = {
+  INV_INBOX_DONE: 'Das wurde schon erledigt. Bitte zurück und neu laden.',
+  INV_DISCARD_NOTE: 'Für „Entsorgt“ bitte kurz den Grund schreiben.',
+  INV_INBOX_LIMIT: 'Heute schon sehr viele Meldungen (max. 30 pro Person und Tag). Den Rest bitte morgen melden oder direkt die Bereichsleitung fragen.',
   INV_QR_UNKNOWN: 'Dieser QR-Code ist kein Kochi-Etikett für Lagerplatz / Artikel oder nicht mehr gültig. Bitte einen anderen scannen oder unter „Artikel“ nach dem Namen suchen.',
   INV_QR_OFF: 'Dieser Lagerplatz ist deaktiviert (Nummer ungültig). Bitte der Bereichsleitung sagen, dass das Etikett entfernt werden soll.',
   INV_NAME_EMPTY: 'Bitte einen Namen eintragen (Deutsch oder Chinesisch).',
@@ -1688,7 +1730,7 @@ async function loadCommon(){
     soft(rpc('list_login_staff'), NO), soft(rpc('list_staff', tok()), NO), soft(rpc('list_rates', tok()), NO),
     state.me && !state.me.is_kitchen ? soft(rpc('my_notices', tok()), []) : [],   // v26 之前没有
     soft(rpc('helper_stats', tok()), NO),
-    loadMyBon(), loadReceipts(), refreshPushState(), loadAnnouncements() /* v64 */, loadExpense() /* v67 */, loadTasks()]);
+    loadMyBon(), loadReceipts(), refreshPushState(), loadAnnouncements() /* v64 */, loadExpense() /* v67 */, loadTasks(), invTodoLoad() /* v94 */]);
   if (ls !== NO) state.loginStaff = ls;
   if (staff !== NO) state.staff = (staff || []).filter(x => !isKitchenStaff(x.id));   // 小费相关的名单不含厨房员工
   if (rates !== NO) state.rates = rates || [];
@@ -1841,14 +1883,15 @@ async function viewToday(){
   // v68：有上次的内容就先显示，同时向服务器要新的（一起要，不再一个接一个）；内容变了再重画
   const shown = !!state.tasks;
   if (shown) renderToday(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
-  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday]);
+  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo]);
   const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // 刚启动时已经要过
   const [, env, , at] = await Promise.all([fresh ? null : loadTasks(),
     state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo(),
-    isSup() ? soft(rpc('area_today', { ...tok(), p_day: bizToday() }), null) : null]);   // v83：区域主管的总览
+    isSup() ? soft(rpc('area_today', { ...tok(), p_day: bizToday() }), null) : null,   // v83：区域主管的总览
+    isSup() ? invTodoLoad() : null]);   // v94：物品待办
   state.envPend = env || null; state.areaToday = at || null;
   if (state.tab !== 'today' || state.recon || !state.me) return;   // 等的时候已经切到别的页
-  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday]) !== before) renderToday();
+  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo]) !== before) renderToday();
   refreshTodayBadge();
 }
 // 待处理的疑问（周结页；v89 起老板的「今天」也显示，老板 2026-10-15）：「处理」写怎么处理的
@@ -1928,7 +1971,7 @@ function renderToday(){
   const tm = tmTodoCards(), nOpen = open.filter(x => x.status !== 'later').length + tm.length;
   if (state.expNew){ viewExpenseNew(); return; }   // v67：正在记垫付
   const msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message');
-  $('#main').innerHTML = invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + expTodayHTML() + shifts
+  $('#main').innerHTML = invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts
     + `<h3>${esc(nOpen ? t('td_mine', { n: nOpen }) : t('td_mine_ok'))}</h3>`
     + (open.length || tm.length ? msgs.map(taskCardHTML).join('') + tm.join('') + rest.map(taskCardHTML).join('') : `<div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
     + (done.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(taskDoneLine).join('')}</div></div></details>` : '')
@@ -2537,15 +2580,20 @@ async function viewInv(){
   if (S.view === 'unit') return viewInvUnit();
   if (S.view === 'pick') return renderInvPick();
   if (S.view === 'labels') return renderInvLabels();   // v93
+  if (S.view === 'ibnew') return renderInvIbNew();   // v94：待归位
+  if (S.view === 'ibmine') return viewInvIbMine();
+  if (S.view === 'inbox') return viewInvInbox();
+  if (S.view === 'ibitem') return viewInvIbItem();
+  if (S.view === 'misses') return viewInvMisses();
   if (S.view === 'settings' || S.view === 'aform' || S.view === 'cform') return viewInvSettings();
   return viewInvHome();
 }
 async function viewInvHome(){
   const S = invS();
   if (S.home) renderInvHome(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
-  const h = await soft(rpc('inv_home', tok()), null);
+  const [h, mine] = await Promise.all([soft(rpc('inv_home', tok()), null), soft(rpc('inv_inbox_mine', tok()), null), invTodoLoad()]);   // v94：待办、我登记的
   if (state.tab !== 'inv' || invS().view !== 'home') return;
-  if (h) S.home = h;
+  if (h) S.home = h; if (mine) S.ibMine = mine; refreshInvBadge();
   renderInvHome();
   if (S.q.trim()) invSearch();
 }
@@ -2554,7 +2602,10 @@ function renderInvHome(){
   if (!H){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
   $('#main').innerHTML = `${invBackMore()}<h2 style="margin-top:4px">${esc(t('inv_title'))}</h2>
     <div class="row" style="gap:8px;margin-bottom:10px"><input type="search" class="input" id="inv-q" placeholder="${esc(t('inv_q_ph'))}" value="${esc(S.q)}" autocomplete="off" enterkeyhint="search"><button class="inv-scanbtn" data-act="inv-scan">${esc(t('inv_scan'))}</button></div>
+    ${invTodoLines(state.invTodo).length ? `<div class="list">${invTodoLines(state.invTodo).join('')}</div>` : ''}
     ${H.sup ? `<button class="btn ghost" data-act="inv-new" style="margin-bottom:6px">${esc(t('inv_new'))}</button>` : ''}
+    <button class="btn ghost" data-act="inv-ib-new" style="margin-bottom:6px">${esc(t('inv_ib_btn'))}</button>
+    ${(S.ibMine || []).length ? `<button class="link" data-act="inv-ib-mine" style="margin:0 0 6px">${esc(t('inv_ib_mine', { n: S.ibMine.length }))}</button>` : ''}
     <div id="inv-res">${S.q.trim() ? invResultsHTML() : invBrowseHTML(H)}</div>
     ${H.admin ? `<button class="link" data-act="inv-settings" style="margin-top:8px">${esc(t('inv_settings'))}</button>` : ''}`;
   if (S.focus){ S.focus = false; const q = $('#inv-q'); if (q){ q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
@@ -2602,7 +2653,7 @@ function invResultsHTML(){
   const S = invS(), R = S.res, H = S.home || {};
   if (!R) return `<div class="empty">${esc(t('inv_searching'))}</div>`;
   const items = R.items || [], places = R.places || [];
-  if (!items.length && !places.length) return `<div class="list"><div class="empty">${esc(t('inv_none', { q: R.q }))}${H.sup ? '<br>' + esc(t('inv_none_sup')) : ''}</div></div>`;
+  if (!items.length && !places.length) return `<div class="list"><div class="empty">${esc(t('inv_none', { q: R.q }))}${H.sup ? '<br>' + esc(t('inv_none_sup')) : ''}</div></div><button class="btn ghost" data-act="inv-ib-new">${esc(t('inv_ib_btn'))}</button>`;
   return (items.length ? `<div class="list">${items.map(x => invItemCard(x)).join('')}</div>` : '')
     + (places.length ? `<h3>${esc(t('inv_places_h'))}</h3><div class="list">${places.map(p => `<div class="item" data-act="inv-place" data-id="${p.id}" style="cursor:pointer"><div class="inv-row">${invImg(p.photo_t)}<div class="inv-txt">
         <strong class="num">${esc(p.code)}</strong><div class="meta">${storeTag(p.store)} ${esc(invName(p, 'area'))}${invName(p) ? ' · ' + esc(invName(p)) : ''}</div>
@@ -2623,7 +2674,7 @@ function invSlotRow(s, edit, unit){
   const warn = its.some(x => (x.warn || []).length);
   return `<div class="item" data-act="inv-place" data-id="${s.id}" style="cursor:pointer"><div class="inv-row">${invImg(s.photo_t || (unit && unit.photo_t), 'sm')}<div class="inv-txt">
     <strong class="num">${esc(unit ? s.slot : s.code)}</strong>${invName(s) && unit ? ' <span class="small">' + esc(invName(s)) + '</span>' : ''}${invPlaceTags(s)}${warn ? ' <span class="inv-warn">⚠</span>' : ''}
-    ${edit && !s.photo && s.active ? ` <span class="tag pend">${esc(t('inv_photo_none'))}</span>` : ''}
+    ${edit && !s.photo && s.active ? ` <span class="tag pend">${esc(t('inv_photo_none'))}</span>` : ''}${edit && s.active && invDue(s) ? ` <span class="tag bad">${esc(t('inv_due_tag'))}</span>` : ''}
     <div class="meta">${its.length ? esc(names) : esc(t('inv_empty_place'))}</div></div></div></div>`;
 }
 function renderInvArea(){
@@ -2665,6 +2716,8 @@ function renderInvPlace(){
     ${use ? `<div class="meta" style="margin-bottom:4px">${esc(use)}</div>` : ''}
     <div style="margin-bottom:10px">${storeTag(A.store)} ${invAreaTags(A)}</div>
     ${P.photo ? invImg(P.photo, 'big', P.photo) + `<div class="small muted">${esc(t('inv_photo_by', { n: P.photo_by || '?', t: fmtDateTime(P.photo_at) }))}</div>` : `<div class="inv-noph big" aria-hidden="true">📷</div><div class="small muted">${esc(t('inv_photo_none'))}</div>`}
+    ${P.photo && P.checked_at ? `<div class="small muted">${esc(t('inv_checked_by', { n: P.checked_by || '?', t: fmtDateTime(P.checked_at) }))}${invDue(P) ? ` <span class="tag bad">${esc(t('inv_due_tag'))}</span>` : ''}</div>` : ''}
+    ${edit && P.photo ? `<button class="btn ghost" data-act="inv-place-check" style="margin-top:8px">${esc(t('inv_check'))}</button>${invDue(P) ? `<div class="small muted" style="margin-top:4px">${esc(t('inv_check_hint'))}</div>` : ''}` : ''}
     ${photoBtn}
     ${slots.length ? `<h3>${esc(t('inv_slots'))}</h3><div class="list">${slots.map(s => invSlotRow(s, edit, P)).join('')}</div>` : ''}
     ${P.holds || its.length ? `<h3>${esc(t('inv_here', { n: its.length }))}</h3><div class="list">${its.length ? its.map(x => `<div class="item" data-act="inv-item" data-id="${x.id}" style="cursor:pointer"><div class="inv-row">${invImg(x.photo_t, 'sm')}<div class="inv-txt">
@@ -2759,10 +2812,10 @@ function renderInvForm(){
   const S = invS(), F = S.form, H = S.home || {}, cats = (H.categories || []).filter(k => k.active || k.id === F.category_id);
   const fld = (k, label, attrs) => `<div class="field"><label for="invf-${k}">${esc(label)}</label><input class="input" id="invf-${k}" data-invf="${k}" value="${esc(F[k] || '')}" ${attrs || ''}></div>`;
   const chk = (k, label) => `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invf="${k}"${F[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`;
-  const head = F.mode === 'loc' ? t('inv_loc_h', { n: invName(S.item || {}) }) : t(F.mode === 'edit' ? 'inv_edit_h' : 'inv_new_h');
+  const head = F.mode === 'loc' ? t('inv_loc_h', { n: invName(S.item || {}) }) : F.mode === 'inbox' ? t('inv_ib_place_h', { n: invName(S.item || {}) }) : t(F.mode === 'edit' ? 'inv_edit_h' : 'inv_new_h');
   const prev = F.photo && (F.photo.preview || F.photo.path_t);
   $('#main').innerHTML = `<button class="link" data-act="inv-form-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(head)}</h2>
-    ${F.mode === 'loc' ? '' : `<h3>${esc(t('inv_s1'))}</h3>
+    ${F.mode === 'loc' || F.mode === 'inbox' ? '' : `<h3>${esc(t('inv_s1'))}</h3>
     <div class="inv-row" style="align-items:center;margin-bottom:8px">${prev ? (F.photo.preview ? `<img class="inv-ph lg" src="${esc(F.photo.preview)}" alt="">` : invImg(F.photo.path_t, 'lg')) : ''}
       <label class="btn ${prev ? 'ghost' : ''}" style="display:flex;align-items:center;justify-content:center;flex:1">${esc(t(prev ? 'inv_photo_retake' : 'inv_photo_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="item" hidden></label></div>
     ${F.photo && F.photo.busy ? `<div class="small muted" style="margin-bottom:6px">${esc(t('inv_uploading'))}</div>` : ''}
@@ -2777,7 +2830,7 @@ function renderInvForm(){
       ${fld('unit', t('inv_f_unit'))}${fld('pack_unit', t('inv_f_pack'))}${fld('pack_qty', t('inv_f_qty'), 'inputmode="decimal"')}
       <div class="field"><label for="invf-note">${esc(t('inv_f_note'))}</label><textarea class="input" id="invf-note" data-invf="note" rows="2" style="height:auto;padding:10px 14px">${esc(F.note)}</textarea></div>
       ${chk('track_stock', t('inv_f_stock'))}${chk('track_expiry', t('inv_f_expiry'))}</div></details>`}
-    ${F.mode === 'edit' ? '' : `<h3>${esc(t(F.mode === 'loc' ? 'inv_s3_loc' : 'inv_s3'))}</h3><div id="inv-picker">${invPickerHTML(F)}</div>`}
+    ${F.mode === 'edit' ? '' : `<h3>${esc(t(F.mode === 'loc' || F.mode === 'inbox' ? 'inv_s3_loc' : 'inv_s3'))}</h3><div id="inv-picker">${invPickerHTML(F)}</div>`}
     <button class="btn" data-act="inv-save" style="margin-top:14px">${esc(t('inv_save'))}</button>`;
   invLoadPhotos();
 }
@@ -2855,7 +2908,7 @@ async function invSave(force, note){
   const S = invS(), F = S.form; if (!F) return;
   invFormKeep();
   const P = invPayload(F);
-  if (F.mode !== 'loc'){
+  if (F.mode !== 'loc' && F.mode !== 'inbox'){
     if (!P.name_de && !P.name_zh) return toast(t('inv_need_name'), true);
     if (!P.category_id) return toast(t('inv_need_cat'), true);
     if (F.photo && F.photo.busy) return toast(t('inv_photo_wait'), true);
@@ -2876,9 +2929,18 @@ async function invSave(force, note){
   }
   try {
     let id = F.id;
+    if (F.mode === 'inbox'){   // v94：待归位 → 已有物品放到这个储位
+      await invIbHandle('placed', F.id, F.place, null, force, note);
+      if (F.place) LS.set('invLast', F.place);
+      S.form = null; S.item = null; toast(t('inv_ib_done')); invGo('inbox'); return;
+    }
     if (F.mode === 'loc') await rpc('inv_place_item', { ...tok(), p_item: F.id, p_place: F.place, p_main: false, p_force: !!force, p_note: note || null });
     else { const r = await rpc('inv_item_save', { ...tok(), p_id: F.id, p_item: P, p_place: F.mode === 'new' ? F.place : null, p_main: true, p_force: !!force, p_note: note || null }); id = r.id; }
     if (F.place){ LS.set('invLast', F.place); const h = invPickFind(F.place); if (h) LS.set('invStore', h.a.store); }
+    if (F.mode === 'new' && F.inbox){   // v94：待归位 → 新物品：记下去向
+      try { await invIbHandle('new_item', id, F.place); toast(t('inv_ib_done')); } catch(e){ toast(errText(e), true); }
+      S.form = null; S.res = null; S.item = null; invGo('inbox'); return;
+    }
     S.form = null; S.res = null; S.item = null; S.place = null; S.area = null; S.home = null;
     toast(F.mode === 'loc' ? t('inv_placed', { c: invPickCode() || '' }) : t('inv_saved'));
     if (F.back && F.back.view === 'place' && F.mode !== 'edit') invGo('place', F.back.id);
@@ -2889,7 +2951,7 @@ async function invSave(force, note){
 // ---------- 选一件已有的物品（放到这里 / 合并到） ----------
 function renderInvPick(){
   const S = invS(), K = S.pickItem || {};
-  const head = K.mode === 'merge' ? t('inv_pick_merge_h', { n: invName(S.item || {}) }) : t('inv_pick_h');
+  const head = K.mode === 'merge' ? t('inv_pick_merge_h', { n: invName(S.item || {}) }) : K.mode === 'alias' ? t('inv_miss_alias_h', { w: K.word }) : t('inv_pick_h');
   const R = K.res, items = ((R && R.items) || []).filter(x => !(K.mode === 'merge' && S.item && x.id === S.item.id));
   $('#main').innerHTML = `<button class="link" data-act="inv-pick-back" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(head)}</h2>
     ${K.mode === 'put' && S.place ? `<div class="inv-chosen" style="margin-bottom:8px">${esc(t('inv_f_chosen', { c: S.place.code }))}</div>` : ''}
@@ -3209,6 +3271,159 @@ function invLabKeep(){
 }
 
 
+// ---------- 第三、四步（v94，数据库 v66 / 文件服务 tasks v9）：待归位区、搜不到的词、储位 3 个月确认 ----------
+function invDue(p){ return !!(p && p.photo && p.checked_at && Date.now() - new Date(p.checked_at).getTime() > 90 * 864e5); }
+// 主管 / 老板的物品待办（「今天」卡片、物品页最上面、底部「物品」上的数字）
+async function invTodoLoad(){ const m = state.me || {}; if (!(m.is_admin || isSup())) { state.invTodo = null; return null; } state.invTodo = await soft(rpc('inv_todo', tok()), state.invTodo || null); return state.invTodo; }
+function invTodoLines(T){
+  if (!T || !T.sup) return [];
+  const out = [];
+  if (T.inbox_open) out.push(`<div class="item" data-act="inv-ib-list" style="cursor:pointer"><strong>📦 ${esc(t('inv_ib_todo', { n: T.inbox_open }))}</strong>${T.inbox_late ? ` <span class="tag bad">${esc(t('inv_ib_late_n', { n: T.inbox_late }))}</span>` : ''}</div>`);
+  (T.due || []).forEach(d => out.push(`<div class="item" data-act="inv-area" data-id="${d.area}" style="cursor:pointer">🔄 ${storeTag(d.store)} ${esc(t('inv_due_line', { a: invName(d), n: d.n }))}</div>`));
+  if (T.misses) out.push(`<div class="item" data-act="inv-misses" style="cursor:pointer">🔍 ${esc(t('inv_miss_todo', { n: T.misses }))}</div>`);
+  return out;
+}
+function invTodoCardHTML(T){   // 「今天」页：主管（老板的「今天」是每日核对，看底部「物品」上的数字）
+  const L = invTodoLines(T); if (!L.length) return '';
+  return `<h3>${esc(t('inv_todo_h'))}</h3><div class="list">${L.join('')}</div>`;
+}
+function invBadge(){ const T = state.invTodo; return T && T.inbox_open ? ` <span class="tag ${T.inbox_late ? 'bad' : 'pend'}">${T.inbox_open}</span>` : ''; }
+
+// 待归位：员工登记
+function invIbNew(){ const S = invS(); S.ibf = { store: invMyStore() || STORES[0], note: '', photo: null }; invGo('ibnew'); }
+function renderInvIbNew(){
+  const S = invS(), B = S.ibf; if (!B){ S.view = 'home'; return viewInvHome(); }
+  const prev = B.photo && B.photo.preview;
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(t('inv_ib_new_h'))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_ib_new_hint'))}</div>
+    <div class="inv-row" style="align-items:center;margin-bottom:8px">${prev ? `<img class="inv-ph lg" src="${esc(prev)}" alt="">` : ''}
+      <label class="btn ${prev ? 'ghost' : ''}" style="display:flex;align-items:center;justify-content:center;flex:1">${esc(t(prev ? 'inv_photo_retake' : 'inv_photo_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="inbox" hidden></label></div>
+    ${B.photo && B.photo.busy ? `<div class="small muted" style="margin-bottom:6px">${esc(t('inv_uploading'))}</div>` : ''}
+    <div class="field"><label for="inv-ib-note">${esc(t('inv_ib_note'))}</label><textarea class="input" id="inv-ib-note" rows="2" style="height:auto;padding:10px 14px" placeholder="${esc(t('inv_ib_note_ph'))}">${esc(B.note)}</textarea></div>
+    <div class="field"><label>${esc(t('inv_ib_store'))}</label><div class="seg sm">${STORES.map(s => `<button data-act="inv-ib-store" data-store="${s}" class="${B.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div></div>
+    <button class="btn" data-act="inv-ib-save"${B.photo && B.photo.path ? '' : ' disabled'}>${esc(t('inv_ib_save'))}</button>`;
+}
+async function invIbPhoto(file){
+  const S = invS(), B = S.ibf; if (!B) return;
+  const n = $('#inv-ib-note'); if (n) B.note = n.value;
+  let prep; try { prep = await invPrep(file); } catch(e){ toast(t('err_GENERIC'), true); return; }
+  const ph = B.photo = { preview: prep.preview, busy: true }; renderInvIbNew();
+  try { const up = await invUpload('u', prep); ph.path = up.photo; ph.path_t = up.photo_t; }
+  catch(e){ if (B.photo === ph) B.photo = null; toast(errText(e), true); }
+  ph.busy = false; if (S.ibf === B && S.view === 'ibnew'){ const m = $('#inv-ib-note'); if (m) B.note = m.value; renderInvIbNew(); }
+}
+async function invIbSave(btn){
+  const S = invS(), B = S.ibf; if (!B || !B.photo || !B.photo.path) return toast(t('inv_ib_need_photo'), true);
+  const n = $('#inv-ib-note'); if (n) B.note = n.value;
+  btn.disabled = true;
+  try { await rpc('inv_inbox_add', { ...tok(), p_store: B.store, p_photo: B.photo.path, p_photo_t: B.photo.path_t, p_note: B.note });
+    S.ibf = null; S.ibMine = null; LS.set('invStore', B.store); toast(t('inv_ib_added')); invGo('ibmine'); }
+  catch(e){ btn.disabled = false; toast(errText(e), true); }
+}
+function invIbStatus(x){
+  if (!x.result) return `<span class="tag pend">${esc(t(x.late ? 'inv_ib_wait_late' : 'inv_ib_wait', { d: x.days }))}</span>`;
+  const item = x.item_zh || x.item_de ? invName({ name_zh: x.item_zh, name_de: x.item_de }) : '';
+  const what = x.result === 'discarded' ? t('inv_ib_r_discarded') : t(x.result === 'new_item' ? 'inv_ib_r_new' : 'inv_ib_r_placed', { n: item, c: x.place || '–' });
+  return `<span class="tag ${x.result === 'discarded' ? 'off' : 'ok'}">${esc(what)}</span>`;
+}
+function invIbCard(x, act, mine){
+  return `<div class="item"${act ? ` data-act="${act}" data-id="${x.id}" style="cursor:pointer"` : ''}><div class="inv-row">${invImg(x.photo_t, '', x.photo)}<div class="inv-txt">
+    <div>${x.note ? esc(x.note) : `<span class="muted">${esc(t('inv_ib_no_note'))}</span>`}</div>
+    <div class="meta">${mine ? '' : esc(x.by || '?') + ' · '}${esc(fmtDateTime(x.created_at))} ${storeTag(x.store)}</div>
+    <div style="margin-top:4px">${invIbStatus(x)}</div>
+    ${x.result ? `<div class="meta">${esc(t('inv_ib_by', { n: x.handled_by || '?', t: fmtDateTime(x.handled_at) }))}${x.handled_note ? ' · ' + esc(x.handled_note) : ''}</div>` : ''}</div></div></div>`;
+}
+async function viewInvIbMine(){
+  const S = invS();
+  if (!S.ibMine) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  S.ibMine = await soft(rpc('inv_inbox_mine', tok()), S.ibMine || []);
+  if (state.tab !== 'inv' || S.view !== 'ibmine') return;
+  const L = S.ibMine || [], open = L.filter(x => !x.result), done = L.filter(x => x.result);
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('inv_ib_mine_h'))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_ib_box_hint'))}</div>
+    ${open.length ? `<div class="list">${open.map(x => invIbCard(x, null, true)).join('')}</div>` : ''}
+    ${done.length ? `<h3>${esc(t('inv_ib_done_h', { n: done.length }))}</h3><div class="list">${done.map(x => invIbCard(x, null, true)).join('')}</div>` : ''}
+    ${L.length ? '' : `<div class="list"><div class="empty">${esc(t('inv_ib_mine_none'))}</div></div>`}
+    <button class="btn ghost" data-act="inv-ib-new" style="margin-top:10px">${esc(t('inv_ib_btn'))}</button>`;
+  invLoadPhotos();
+}
+// 待归位：主管 / 老板处理
+async function viewInvInbox(){
+  const S = invS();
+  if (!S.inbox) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let L; try { L = await rpc('inv_inbox_list', tok()); } catch(e){ $('#main').innerHTML = `<button class="link" data-act="inv-home">${esc(t('inv_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'inbox') return;
+  S.inbox = L; invTodoLoad().then(() => refreshInvBadge());
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('inv_ib_list_h', { n: L.open.length }))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_ib_list_hint'))}</div>
+    ${L.open.length ? `<div class="list">${L.open.map(x => invIbCard(x, 'inv-ib-open')).join('')}</div>` : `<div class="list"><div class="empty">${esc(t('inv_ib_list_none'))}</div></div>`}
+    ${L.done.length ? `<details class="fold"><summary>${esc(t('inv_ib_done_h', { n: L.done.length }))}</summary><div class="inner"><div class="list">${L.done.map(x => invIbCard(x)).join('')}</div></div></details>` : ''}`;
+  invLoadPhotos();
+}
+async function viewInvIbItem(){
+  const S = invS(), x = ((S.inbox || {}).open || []).find(b => b.id === S.id);
+  if (!x){ S.view = 'inbox'; return viewInvInbox(); }
+  const A = S.ibAi && S.ibAi.id === x.id ? S.ibAi : (S.ibAi = { id: x.id, busy: true, at: Date.now() });
+  const cand = A.cands || [];
+  $('#main').innerHTML = `<button class="link" data-act="inv-ib-list" style="margin:2px 0 6px">← ${esc(t('inv_ib_list_short'))}</button>
+    ${invImg(x.photo, 'big', x.photo)}
+    <div style="margin:8px 0 2px;font-size:17px">${x.note ? esc(x.note) : `<span class="muted">${esc(t('inv_ib_no_note'))}</span>`}</div>
+    <div class="meta" style="margin-bottom:10px">${esc(x.by || '?')} · ${esc(fmtDateTime(x.created_at))} ${storeTag(x.store)} ${invIbStatus(x)}</div>
+    <h3>${esc(t('inv_ib_ai_h'))}</h3>
+    ${A.busy ? `<div class="infobox">${esc(t('inv_ai_busy', { s: Math.round((Date.now() - A.at) / 1000) }))}</div>`
+      : A.err ? `<div class="infobox" style="background:var(--copper-soft);color:var(--copper)">${esc(t('inv_ib_ai_fail'))}</div>`
+      : `<div class="infobox">${esc(t('inv_ib_ai_guess', { n: [A.res.name_zh, A.res.name_de].filter(Boolean).join(' / ') }))}</div>`}
+    ${cand.length ? `<div class="small muted" style="margin:6px 0">${esc(t('inv_ib_cand'))}</div><div class="list">${cand.map(c => invItemCard(c, 'inv-ib-same')).join('')}</div>` : ''}
+    <button class="btn ghost" data-act="inv-ib-other" style="margin-bottom:8px">${esc(t('inv_ib_other'))}</button>
+    <button class="btn ghost" data-act="inv-ib-asnew" style="margin-bottom:8px">${esc(t('inv_ib_asnew'))}</button>
+    <button class="btn ghost danger" data-act="inv-ib-discard">${esc(t('inv_ib_discard'))}</button>`;
+  invLoadPhotos();
+  if (A.busy && !A.started){
+    A.started = true;
+    const cats = ((S.home || {}).categories || []).filter(k => k.active).map(k => ({ id: k.id, zh: k.name_zh, de: k.name_de, nature: k.nature }));
+    try {
+      A.res = await callTasks({ action: 'inv_ai_read', path: x.photo, categories: cats });
+      const qs = [A.res.name_de, A.res.name_zh, ...(A.res.aliases || []).slice(0, 2)].filter(Boolean);
+      const seen = {}; A.cands = [];
+      for (const q of qs){ const r = await soft(rpc('inv_search', { ...tok(), p_q: q, p_log: false }), null);
+        ((r && r.items) || []).slice(0, 3).forEach(c => { if (!seen[c.id] && A.cands.length < 4){ seen[c.id] = 1; A.cands.push(c); } }); }
+    } catch(e){ A.err = true; }
+    A.busy = false;
+    if (state.tab === 'inv' && S.view === 'ibitem' && S.id === x.id) viewInvIbItem();
+  }
+}
+// 选好了已有的物品：打开选储位（默认这件东西在这家店的主储位）
+async function invIbPlaceItem(itemId){
+  const S = invS(), x = ((S.inbox || {}).open || []).find(b => b.id === S.id); if (!x) return;
+  let it; try { it = await rpc('inv_item', { ...tok(), p_id: itemId }); } catch(e){ toast(errText(e), true); return; }
+  S.item = it;
+  if (!S.pick) S.pick = await soft(rpc('inv_pick', tok()), []);
+  const main = (it.locs || []).find(l => l.store === x.store && l.main) || (it.locs || []).find(l => l.store === x.store);
+  invFormOpen('inbox', { inbox: x.id, place: main && invPickFind(main.place) ? main.place : null, store: x.store, back: { view: 'ibitem', id: x.id } });
+}
+async function invIbHandle(result, item, place, note, force, fnote){
+  const S = invS(), id = S.form && S.form.inbox || S.id;
+  await rpc('inv_inbox_handle', { ...tok(), p_id: id, p_result: result, p_item: item || null, p_place: place || null, p_note: note || null, p_force: !!force, p_force_note: fnote || null });
+  S.inbox = null; S.ibAi = null; S.home = null; S.res = null;
+  await invTodoLoad(); refreshInvBadge();
+}
+function refreshInvBadge(){ const b = document.querySelector('nav [data-tab="inv"]'); if (b) b.innerHTML = esc(t('tab_inv')) + invBadge(); }
+
+// 搜不到的词
+async function viewInvMisses(){
+  const S = invS();
+  if (!S.misses) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let L; try { L = await rpc('inv_misses', tok()); } catch(e){ $('#main').innerHTML = `<button class="link" data-act="inv-home">${esc(t('inv_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'misses') return;
+  S.misses = L;
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('inv_miss_h', { n: L.length }))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_miss_hint'))}</div>
+    ${L.length ? `<div class="list">${L.map((m, i) => `<div class="item"><div class="top"><div><strong>「${esc(m.q)}」</strong> <span class="tag pend">× ${m.n}</span>
+        <div class="meta">${esc((m.people || []).join('、'))} · ${esc(t('inv_miss_last', { t: fmtDateTime(m.last) }))}</div></div></div>
+        <div class="acts"><button class="link" data-act="inv-miss-alias" data-i="${i}">${esc(t('inv_miss_alias'))}</button><button class="link" data-act="inv-miss-new" data-i="${i}">${esc(t('inv_miss_new'))}</button><button class="link danger" data-act="inv-miss-ignore" data-i="${i}">${esc(t('inv_miss_ignore'))}</button></div></div>`).join('')}</div>`
+      : `<div class="list"><div class="empty">${esc(t('inv_miss_none'))}</div></div>`}`;
+}
+
 // ============ 渲染入口 ============
 function render(){
   document.documentElement.lang = state.lang === 'de' ? 'de' : 'zh';
@@ -3228,7 +3443,7 @@ function render(){
     </header>
     ${todoCardHTML()}
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
-    ${navTabs().length < 2 ? '' : `<nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}${k==='today' ? todayBadgeHTML() : ''}</button>`).join('')}</nav>`}`;   // v68：只有一页（厨房小费账户）时不要底部导航
+    ${navTabs().length < 2 ? '' : `<nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}${k==='today' ? todayBadgeHTML() : ''}${k==='inv' ? invBadge() : ''}</button>`).join('')}</nav>`}`;   // v68：只有一页（厨房小费账户）时不要底部导航
   if (state.rcWeek) return viewReceipt();
   return ({ today: viewToday, more: viewMore, entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan, inv: viewInv })[state.tab]();   // v74：返回加载过程，keepScroll 等它
 }
@@ -7124,6 +7339,46 @@ document.addEventListener('click', async ev => {
         toast(t('ls_unbound')); state.staffEdit = null; state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
     }
+    // v94：待归位、搜不到的词、储位确认
+    case 'inv-ib-new': invIbNew(); break;
+    case 'inv-ib-mine': invGo('ibmine'); break;
+    case 'inv-ib-store': { const B = invS().ibf; if (!B) break; const n = $('#inv-ib-note'); if (n) B.note = n.value; B.store = el.dataset.store; renderInvIbNew(); break; }
+    case 'inv-ib-save': invIbSave(el); break;
+    case 'inv-ib-list': invGo('inbox'); break;
+    case 'inv-ib-open': invS().ibAi = null; invGo('ibitem', el.dataset.id); break;
+    case 'inv-ib-same': invIbPlaceItem(el.dataset.id); break;
+    case 'inv-ib-other': { const S = invS(); S.pickItem = { mode: 'ib', q: '', focus: true, back: { view: 'ibitem', id: S.id } }; S.view = 'pick'; render(); window.scrollTo(0, 0); break; }
+    case 'inv-ib-asnew': {
+      const S = invS(), x = ((S.inbox || {}).open || []).find(b => b.id === S.id), R = S.ibAi && S.ibAi.res; if (!x) break;
+      invFormOpen('new', { inbox: x.id, photo: { path: x.photo, path_t: x.photo_t, keep: true }, store: x.store, back: { view: 'ibitem', id: x.id },
+        ...(R ? { name_de: R.name_de || '', name_zh: R.name_zh || '', aliases: (R.aliases || []).join(', '), category_id: R.category_id || '', damp: !!R.damp, aiRes: R, ai: { res: R } } : {}) });
+      break;
+    }
+    case 'inv-ib-discard': {
+      const dlg = $('#photoDlg');
+      dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('inv_ib_discard_h'))}</h2><div class="field"><label for="inv-ib-dnote">${esc(t('inv_ib_discard_lbl'))}</label><textarea class="input" id="inv-ib-dnote" rows="2" style="height:auto;padding:10px 14px"></textarea></div>
+        <button class="btn warn" data-act="inv-ib-discard-ok" style="margin-bottom:8px">${esc(t('inv_ib_discard_ok'))}</button><button class="btn ghost" data-act="photo-close">${esc(t('inv_cancel'))}</button>`;
+      dlg.showModal(); break;
+    }
+    case 'inv-ib-discard-ok': {
+      const n = (($('#inv-ib-dnote') || {}).value || '').trim(); if (!n){ toast(t('err_INV_DISCARD_NOTE'), true); break; }
+      try { await invIbHandle('discarded', null, null, n); $('#photoDlg').close(); toast(t('inv_ib_done')); invGo('inbox'); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'inv-misses': invGo('misses'); break;
+    case 'inv-miss-alias': { const S = invS(), m = (S.misses || [])[+el.dataset.i]; if (!m) break; S.pickItem = { mode: 'alias', word: m.q, q: '', focus: true, back: { view: 'misses' } }; S.view = 'pick'; render(); window.scrollTo(0, 0); break; }
+    case 'inv-miss-new': { const m = (invS().misses || [])[+el.dataset.i]; if (!m) break; const cjk = /[一-鿿]/.test(m.q);
+      invFormOpen('new', { [cjk ? 'name_zh' : 'name_de']: m.q, back: { view: 'misses' } }); break; }
+    case 'inv-miss-ignore': {
+      const S = invS(), m = (S.misses || [])[+el.dataset.i]; if (!m) break;
+      try { await rpc('inv_miss_ignore', { ...tok(), p_norm: m.norm }); toast(t('inv_miss_ignored')); await invTodoLoad(); keepScroll(viewInvMisses); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'inv-place-check': {
+      const P = invS().place; if (!P) break;
+      try { await rpc('inv_place_check', { ...tok(), p_place: P.id, p_note: null }); toast(t('inv_checked')); invS().area = null; invTodoLoad(); keepScroll(viewInvPlace); } catch(e){ toast(errText(e), true); }
+      break;
+    }
     // v93：扫码、标签
     case 'inv-scan': invScan(); break;
     case 'inv-lab-area': invLabOpen('area', el.dataset.id); break;
@@ -7157,6 +7412,11 @@ document.addEventListener('click', async ev => {
     case 'inv-dup-same': {   // 是已有的那一件：只给它加这个位置
       $('#photoDlg').close(); const S = invS(), F = S.form, id = el.dataset.id; if (!F) break;
       const code = invPickCode(), place = F.place;
+      if (F.inbox){   // v94：待归位登记的东西是已有的这一件
+        const go2 = async (force, note) => { try { await invIbHandle('placed', id, place, null, force, note); LS.set('invLast', place); S.form = null; toast(t('inv_ib_done')); invGo('inbox'); }
+          catch(e){ if (!invConflict(e, n => go2(true, n))) toast(errText(e), true); } };
+        go2(); break;
+      }
       const go = async (force, note) => {
         try { await rpc('inv_place_item', { ...tok(), p_item: id, p_place: place, p_main: false, p_force: !!force, p_note: note || null });
           LS.set('invLast', place); toast(t('inv_placed', { c: code })); S.form = null; S.home = null; S.res = null; invGo('item', id); }
@@ -7172,6 +7432,12 @@ document.addEventListener('click', async ev => {
     case 'inv-pick-it': {
       const S = invS(), K = S.pickItem; if (!K) break;
       const x = ((K.res || {}).items || []).find(i => i.id === el.dataset.id); if (!x) break;
+      if (K.mode === 'ib'){ S.pickItem = null; invIbPlaceItem(x.id); break; }   // v94：待归位是这一件
+      if (K.mode === 'alias'){   // v94：搜不到的词 → 别名
+        if (!confirm(t('inv_miss_alias_q', { w: K.word, n: invName(x) }))) break;
+        try { await rpc('inv_item_add_alias', { ...tok(), p_item: x.id, p_alias: K.word }); S.pickItem = null; S.misses = null; S.res = null; toast(t('inv_miss_added')); await invTodoLoad(); invGo('misses'); } catch(e){ toast(errText(e), true); }
+        break;
+      }
       if (K.mode === 'merge'){
         const X = S.item; if (!X || !confirm(t('inv_merge_q', { a: invName(X), b: invName(x) }))) break;
         try { await rpc('inv_item_merge', { ...tok(), p_from: X.id, p_into: x.id }); S.pickItem = null; S.item = null; S.res = null; S.home = null; toast(t('inv_saved')); invGo('item', x.id); }
@@ -7249,7 +7515,7 @@ document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target
 document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.invphoto && ev.target.files && ev.target.files[0]){   // v91：物品 / 储位照片
     const f = ev.target.files[0], k = ev.target.dataset.invphoto; ev.target.value = '';
-    if (k === 'item') invPhotoChosen(f); else invPlacePhoto(f);
+    if (k === 'item') invPhotoChosen(f); else if (k === 'inbox') invIbPhoto(f); else invPlacePhoto(f);   // v94：待归位照片
     return;
   }
   if (ev.target.dataset && ev.target.dataset.invlab){ invLabKeep(); const B = invS().lab; if (B){ B.sel[ev.target.dataset.invlab] = ev.target.checked; B.file = null; keepScroll(renderInvLabels); } return; }   // v93
