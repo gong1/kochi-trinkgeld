@@ -308,6 +308,8 @@ dialog::backdrop{background:rgba(31,42,39,.5)}
 a.btn{display:flex;align-items:center;justify-content:center;text-decoration:none;text-align:center}
 /* v76：收店任务留言窗口 */
 .tkm-ta{height:auto;min-height:0;padding:10px 12px;font:inherit;line-height:1.45;resize:vertical}
+#main.stale::before{content:'';position:fixed;left:0;right:0;top:0;height:3px;z-index:60;background:linear-gradient(90deg,transparent,var(--celadon),transparent);background-size:40% 100%;background-repeat:no-repeat;animation:stalebar 1.1s linear infinite}
+@keyframes stalebar{from{background-position:-40% 0}to{background-position:140% 0}}
 .pchip.tkm-chip{border-radius:12px;font-size:13px;padding:6px 10px;flex:0 1 auto;line-height:1.35}
 /* v75：班次时间 */
 .stt-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
@@ -586,6 +588,7 @@ zh: {
   tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
   tk_close_photo_learning:'要拍照（前 {b} 次每次都拍，已做 {a} 次）', tk_close_photo_again:'要拍照（漏做过或点过「AI 看错了」，重新拍 {b} 次，已做 {a} 次）',
   tk_close_photo_random:'今天抽到要拍照', tk_close_photo_important:'要拍照（重要任务每次都拍）', tk_close_check:'今天只要打勾',
+  admin_perf:'速度记录', pf_title:'速度记录（只存在这台手机上）', pf_hint:'每次打开页面、每次向服务器要数据花了多久。正常用一两天后点「复制」粘贴给 Claude，或者截图。', pf_views:'打开页面（最近 30 次）', pf_reqs:'向服务器要的数据（按平均时间，慢的在前）', pf_row:'{c} 次 · 平均 {a} 秒 · 最慢 {m} 秒{e}', pf_err:' · 出错 {n} 次', pf_cached:'先显示了上次的', pf_none:'还没有记录。', pf_copy:'复制', pf_clear:'清空记录', pf_copied:'已复制，可以粘贴给 Claude', pf_cleared:'记录已清空', pf_copy_fail:'没能复制：请截图', 
   admin_tasks:'任务', tl_title:'负责人', tl_hint:'每家店前场、后厨各设一个负责人：某一天的任务先归他管，他可以交给这个区域的某个人；没交的话，到那天按「默认交给」当天排的岗位（例如清洁）。负责人在自己的「今天」里看到这些任务。', tl_lead:'负责人', tl_role:'默认交给（当天排的岗位）', tl_none:'— 还没设 —', tl_by:'{n} · {t}', tl_saved:'负责人已保存', to_new:'＋ 新任务', to_title_new:'新任务（某一天做）', to_title_edit:'改任务', to_day:'哪天', to_when:'什么时候做', to_text:'做什么（写一句话，中文或德文都行）', to_text_ph:'例如：把油桶从地下室拿到门口，明天早上 ReFood 来收油', to_ai:'✨ AI 写成中德文', to_ai_busy:'AI 正在写…', to_ai_hint:'AI 写好任务名和说明，你可以改。不用 AI 也可以直接填下面。', to_name_zh:'任务名（中文）', to_name_de:'任务名（德文）', to_hint_zh:'说明（中文，可不填）', to_hint_de:'说明（德文，可不填）', to_how:'怎么算做完', to_check:'打勾', to_photo:'拍照', to_save:'保存任务', to_saved:'任务已保存', to_list:'某一天的任务', to_list_hint:'最近 7 天和以后的。谁做：交给的人那天上班就是他；不然按默认交给当天排的岗位；也没排就是那天这个区域上班的人，谁做都算。负责人和老板随时也能做。', to_none:'还没有某一天的任务。点「＋ 新任务」加一个。', to_lead:'负责：{n}', to_lead_none:'这个区域还没设负责人（在下面设）', to_who_assignee:'交给 {n}', to_who_assignee_off:'交给 {n}，但他那天没排班 → {p}', to_who_default:'按默认：当天的{r}（{p}）', to_who_default0:'按默认：当天的{r}', to_who_area:'当天没排{r} → 那天上班的都算（{p}）', to_nobody:'那天这个区域没人上班', to_unpub:'排班还没发布，发布后才知道是谁', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ 没做', to_assign:'交给…', to_edit:'改', to_cancel:'取消任务', to_cancel_q:'取消这个任务？（{n}，{d}）', to_cancelled:'任务已取消', tk_once:'{w}：{n} · {s}', tk_once_closing:'收店时', tk_once_arrival:'到店后', tk_once_now_arrival:'到店后先做', tk_close_photo_once:'这个任务要拍照', tk_by_lead:'{n} 交给你的', td_upcoming:'接下来（{n}）', ld_title:'我负责的任务（{n}）', ld_hint:'你是这个区域的任务负责人。可以把任务交给某个人（他会在自己的「今天」里看到）；不交的话，到那天按默认交给当天排的岗位。你自己也随时可以做。', ld_self:'我自己做', ld_assign_title:'交给谁', ld_default:'按默认：当天排的{r}', ld_on:'那天上班', ld_off:'那天没排班', ld_assign_hint:'交给的人那天没排班的话，到时候还是按默认交给当天的{r}。', ld_assigned:'已交给 {n}', ld_reset:'已改回默认', tk_adm_nobody_once:'{n}：那天没人上班',
   tk_close_go:'开始', tk_close_cont:'继续', tk_close_done:'{n} · {s} 做完了', tk_gone:'这个任务已经没有了。点「今天」回去。',
   tk_item_by:'{t} · {n}', tk_item_checked:'打勾', tk_item_override:'说 AI 看错了', tk_retake:'📷 重拍', tk_photo:'📷 拍照', tk_check:'✓ 做好了',
@@ -960,6 +963,7 @@ de: {
   tk_close:'Feierabend: {n} · {s}', tk_close_later:'Vor Feierabend erledigen', tk_close_now:'Bald Feierabend – jetzt erledigen', tk_close_over:'Gestern nicht erledigt – heute nachholen',
   tk_close_photo_learning:'Mit Foto (die ersten {b} Male immer, {a} erledigt)', tk_close_photo_again:'Mit Foto (vergessen oder „KI irrt sich“ gewählt – wieder {b} Male, {a} erledigt)',
   tk_close_photo_random:'Heute mit Foto (Stichprobe)', tk_close_photo_important:'Mit Foto (wichtige Aufgabe, immer)', tk_close_check:'Heute nur abhaken',
+  admin_perf:'Ladezeiten', pf_title:'Ladezeiten (nur auf diesem Gerät gespeichert)', pf_hint:'Wie lange jede Seite und jede Datenabfrage gedauert hat. Nach ein, zwei Tagen „Kopieren“ tippen und an Claude schicken – oder einen Screenshot machen.', pf_views:'Seiten geöffnet (letzte 30)', pf_reqs:'Datenabfragen (nach Durchschnitt, langsamste zuerst)', pf_row:'{c}× · Ø {a} s · langsamste {m} s{e}', pf_err:' · {n} Fehler', pf_cached:'zuerst alte Ansicht', pf_none:'Noch keine Einträge.', pf_copy:'Kopieren', pf_clear:'Löschen', pf_copied:'Kopiert – du kannst es an Claude schicken', pf_cleared:'Gelöscht', pf_copy_fail:'Kopieren ging nicht – bitte Screenshot', 
   admin_tasks:'Aufgaben', tl_title:'Verantwortliche', tl_hint:'Pro Filiale je eine verantwortliche Person für Service und Küche: Aufgaben für einen bestimmten Tag gehen zuerst an sie; sie kann sie jemandem aus ihrem Bereich zuteilen. Sonst macht es am Tag die eingeplante Standard-Position (z. B. Reinigung). Die Verantwortlichen sehen diese Aufgaben unter „Heute“.', tl_lead:'Verantwortlich', tl_role:'Standard (eingeplante Position am Tag)', tl_none:'— noch niemand —', tl_by:'{n} · {t}', tl_saved:'Verantwortliche gespeichert', to_new:'＋ Neue Aufgabe', to_title_new:'Neue Aufgabe (an einem Tag)', to_title_edit:'Aufgabe ändern', to_day:'Tag', to_when:'Wann', to_text:'Was ist zu tun (ein Satz, Deutsch oder Chinesisch)', to_text_ph:'z. B. Ölfass aus dem Keller vor die Tür stellen, morgen früh holt ReFood das Altfett ab', to_ai:'✨ Mit KI zweisprachig schreiben', to_ai_busy:'KI schreibt …', to_ai_hint:'Die KI schreibt Name und Hinweis, du kannst alles ändern. Ohne KI einfach unten ausfüllen.', to_name_zh:'Name (Chinesisch)', to_name_de:'Name (Deutsch)', to_hint_zh:'Hinweis (Chinesisch, optional)', to_hint_de:'Hinweis (Deutsch, optional)', to_how:'Wie erledigt', to_check:'Abhaken', to_photo:'Foto', to_save:'Aufgabe speichern', to_saved:'Aufgabe gespeichert', to_list:'Aufgaben an einem Tag', to_list_hint:'Die letzten 7 Tage und alles danach. Wer: die zugeteilte Person, wenn sie an dem Tag arbeitet; sonst die eingeplante Standard-Position; sonst alle aus dem Bereich, die an dem Tag arbeiten. Verantwortliche und Chef können jederzeit selbst erledigen.', to_none:'Noch keine Aufgaben an einem Tag. Mit „＋ Neue Aufgabe“ anlegen.', to_lead:'Verantwortlich: {n}', to_lead_none:'Für diesen Bereich ist noch niemand verantwortlich (unten festlegen)', to_who_assignee:'An {n}', to_who_assignee_off:'An {n}, aber an dem Tag nicht eingeplant → {p}', to_who_default:'Standard: {r} am Tag ({p})', to_who_default0:'Standard: {r} am Tag', to_who_area:'kein(e) {r} eingeplant → alle, die an dem Tag arbeiten ({p})', to_nobody:'an dem Tag arbeitet niemand aus dem Bereich', to_unpub:'Dienstplan noch nicht veröffentlicht – erst danach steht fest, wer', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ nicht erledigt', to_assign:'Zuteilen …', to_edit:'Ändern', to_cancel:'Aufgabe absagen', to_cancel_q:'Diese Aufgabe absagen? ({n}, {d})', to_cancelled:'Aufgabe abgesagt', tk_once:'{w}: {n} · {s}', tk_once_closing:'Bei Feierabend', tk_once_arrival:'Bei Dienstbeginn', tk_once_now_arrival:'Gleich bei Dienstbeginn erledigen', tk_close_photo_once:'Mit Foto', tk_by_lead:'von {n} zugeteilt', td_upcoming:'Demnächst ({n})', ld_title:'Meine Bereichsaufgaben ({n})', ld_hint:'Du bist für die Aufgaben in diesem Bereich verantwortlich. Du kannst eine Aufgabe jemandem zuteilen (die Person sieht sie unter „Heute“); sonst macht es am Tag die eingeplante Standard-Position. Du kannst sie auch jederzeit selbst erledigen.', ld_self:'Selbst erledigen', ld_assign_title:'Wem zuteilen', ld_default:'Standard: {r} am Tag', ld_on:'arbeitet an dem Tag', ld_off:'an dem Tag nicht eingeplant', ld_assign_hint:'Ist die Person an dem Tag nicht eingeplant, macht es am Tag trotzdem die Standard-Position ({r}).', ld_assigned:'An {n} zugeteilt', ld_reset:'Zurück auf Standard', tk_adm_nobody_once:'{n}: an dem Tag arbeitet niemand',
   tk_close_go:'Starten', tk_close_cont:'Weiter', tk_close_done:'{n} · {s} erledigt', tk_gone:'Diese Aufgabe gibt es nicht mehr. Zurück zu „Heute“.',
   tk_item_by:'{t} · {n}', tk_item_checked:'abgehakt', tk_item_override:'„KI irrt sich“', tk_retake:'📷 Neu fotografieren', tk_photo:'📷 Foto', tk_check:'✓ Erledigt',
@@ -1625,7 +1629,9 @@ function errText(e){
 }
 
 async function rpc(fn, args){
+  const t0 = performance.now();
   const { data, error } = await sb.rpc(fn, args || {});
+  perfAdd({ k: 'r', n: fn, ms: Math.round(performance.now() - t0), ok: !error });   // v96：速度记录
   if (error){
     const code = String(error.message || '').trim();
     if (code === 'AUTH_REQUIRED'){ if (state.viewAs && state.token === state.viewAs.token){ exitView(); throw new Error(code); } logoutLocal(); render(); }
@@ -1635,6 +1641,13 @@ async function rpc(fn, args){
   return data;
 }
 const tok = () => ({ p_token: state.token });
+// v96：速度记录（老板「管理 → 其他功能 → 速度记录」）：每个请求、每次打开页面花了多久。只记老板的，只存在这台手机上（最多 400 条）
+function perfAll(){ if (!state.perf) state.perf = LS.get('kochi_perf', []) || []; return state.perf; }
+function perfAdd(x){
+  if (!state.me || !state.me.is_admin || state.viewAs) return;
+  const a = perfAll(); a.push({ ...x, at: Date.now() }); if (a.length > 400) a.splice(0, a.length - 400);
+  clearTimeout(state.perfT); state.perfT = setTimeout(() => LS.set('kochi_perf', state.perf), 1500);
+}
 
 // ============ 状态 ============
 const state = {
@@ -1924,7 +1937,7 @@ function disputesHTML(disp){
 // v83：前场主管的周结（只读）：每人这周分到多少（锁定前是预计），发放和签收；没有任何现金明细
 async function viewAreaWeek(){
   const wk = state.week;
-  $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
+  if (!state.cacheShown) $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;   // v96
   let d; try { d = await rpc('area_week_tips', { ...tok(), p_week_start: wk }); }
   catch(e){ if (state.tab === 'week') $('#main').innerHTML = weekNav() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   if (state.tab !== 'week' || state.week !== wk) return;
@@ -2193,7 +2206,7 @@ function reconStripHTML(S, sel){
     <div class="rs-legend">${esc(t('rs_legend'))}</div>`;
 }
 async function viewReconHome(){
-  $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  if (!state.cacheShown) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;   // v96
   let o, S;
   try {
     const known = state.reconDay; let tk;
@@ -2506,6 +2519,27 @@ function toAdminRender(){
     + h3i(esc(t('to_list')), t('to_list_hint')) + (list || `<div class="list"><div class="empty">${esc(t('to_none'))}</div></div>`) + leads;
 }
 function toRedraw(){ const el = $('#asub'); if (el && state.tab === 'admin' && state.adminSub === 'tasks') el.innerHTML = toAdminRender(); }
+// v96：速度记录页：最近 30 次打开页面、每种请求的平均 / 最慢时间（慢的在前）
+function perfSummary(){
+  const a = perfAll(), sec = ms => (ms / 1000).toFixed(1), by = {};
+  a.filter(x => x.k === 'r').forEach(x => { const b = by[x.n] = by[x.n] || { n: x.n, c: 0, sum: 0, max: 0, err: 0 }; b.c++; b.sum += x.ms; b.max = Math.max(b.max, x.ms); if (!x.ok) b.err++; });
+  return { views: a.filter(x => x.k === 'v').slice(-30).reverse(), reqs: Object.values(by).sort((p, q) => q.sum / q.c - p.sum / p.c).slice(0, 30), sec };
+}
+function perfHTML(){
+  const { views, reqs, sec } = perfSummary(), none = `<div class="empty">${esc(t('pf_none'))}</div>`;
+  return h3i(esc(t('pf_title')), t('pf_hint'))
+    + `<div class="row" style="gap:8px;margin-bottom:6px"><button class="btn" data-act="pf-copy">${esc(t('pf_copy'))}</button><button class="btn ghost" data-act="pf-clear">${esc(t('pf_clear'))}</button></div>`
+    + `<h3>${esc(t('pf_views'))}</h3><div class="list">${views.map(v => `<div class="item"><div class="top"><div><strong>${esc(t('tab_' + v.n))}</strong>${v.c ? ` <span class="tag ok">${esc(t('pf_cached'))}</span>` : ''}</div>
+        <div class="amt num ${v.ms > 3000 && !v.c ? 'negc' : ''}">${sec(v.ms)} s</div></div><div class="meta small muted">${esc(fmtDateTime(new Date(v.at).toISOString()))}</div></div>`).join('') || none}</div>`
+    + `<h3>${esc(t('pf_reqs'))}</h3><div class="list">${reqs.map(b => `<div class="item"><div class="top"><div><strong class="num" style="word-break:break-all">${esc(b.n)}</strong></div><div class="amt num ${b.sum / b.c > 1500 ? 'negc' : ''}">${sec(b.sum / b.c)} s</div></div>
+        <div class="meta small muted">${esc(t('pf_row', { c: b.c, a: sec(b.sum / b.c), m: sec(b.max), e: b.err ? t('pf_err', { n: b.err }) : '' }))}</div></div>`).join('') || none}</div>`;
+}
+function perfText(){
+  const { views, reqs, sec } = perfSummary(), bt = ms => new Intl.DateTimeFormat('de-DE', { timeZone: 'Europe/Berlin', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(ms));   // 德国时间
+  return 'Kochi 速度记录 ' + bt(Date.now()) + ' · ' + navigator.userAgent.slice(0, 80) + '\n'
+    + views.map(v => `${bt(v.at)} ${v.n} ${sec(v.ms)}s${v.c ? ' (cached)' : ''}`).join('\n') + '\n--\n'
+    + reqs.map(b => `${b.n}: ${b.c}x avg ${sec(b.sum / b.c)}s max ${sec(b.max)}s${b.err ? ' err ' + b.err : ''}`).join('\n');
+}
 // 老板：一个任务一天的情况（每日核对页）
 // v78（老板 2026-10-11）：老板就这个任务这一天给员工留了言 → 等员工确认（wait）；都点了「知道了」→ 已处理（done）。这两种都不标红、不算待办
 function tkHandled(x){ const ms = x.messages || []; return !ms.length ? null : ms.every(m => m.read_at) ? 'done' : 'wait'; }
@@ -3563,7 +3597,29 @@ function render(){
     <main id="main"><div class="loading">${esc(t('loading'))}</div></main>
     ${navTabs().length < 2 ? '' : `<nav>${navTabs().map(k => `<button data-act="tab" data-tab="${k}" class="${state.tab===k?'on':''}">${esc(t('tab_'+k))}${k==='admin' && m.pending_requests ? ` <span class="tag pend">${m.pending_requests}</span>` : ''}${k==='today' ? todayBadgeHTML() : ''}${k==='inv' ? invBadge() : ''}</button>`).join('')}</nav>`}`;   // v68：只有一页（厨房小费账户）时不要底部导航
   if (state.rcWeek) return viewReceipt();
-  return ({ today: viewToday, more: viewMore, entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan, inv: viewInv })[state.tab]();   // v74：返回加载过程，keepScroll 等它
+  // v96（老板 2026-10-20）：从底部切到今天（老板）/ 周结 / 排班时，先显示上次的内容，后台取最新的，取到再换上（页面最上面一条细线表示正在更新）
+  const key = viewKey(), tab = state.tab, t0 = performance.now(), cached = state.fromTab && key && (state.viewCache || {})[key];
+  state.fromTab = false;
+  if (cached){ $('#main').innerHTML = cached; $('#main').classList.add('stale'); }
+  state.cacheShown = !!cached;
+  const p = ({ today: viewToday, more: viewMore, entry: viewEntry, ledger: viewLedger, week: viewWeek, admin: viewAdmin, plan: viewPlan, inv: viewInv })[state.tab]();   // v74：返回加载过程，keepScroll 等它
+  Promise.resolve(p).catch(() => {}).then(() => {
+    const mm = $('#main'); state.cacheShown = false; if (mm) mm.classList.remove('stale');
+    if (state.tab !== tab) return;
+    perfAdd({ k: 'v', n: tab, ms: Math.round(performance.now() - t0), c: !!cached });
+    const k2 = viewKey();   // 打开过程中才定下来的（例如排班的前场 / 厨房）也记一份
+    if (mm && !mm.querySelector('.loading') && !mm.querySelector(':scope > .empty')) [key, k2].forEach(k => { if (k) (state.viewCache = state.viewCache || {})[k] = mm.innerHTML; });
+  });
+  return p;
+}
+// 哪些页面可以先显示上次的内容（同一个人、同一种语言、同一周 / 同一天）；查看模式、核对页、做任务时不用
+function viewKey(){
+  const m = state.me; if (!m || state.viewAs) return null;
+  const pre = m.id + '|' + state.lang + '|';
+  if (state.tab === 'today' && m.is_admin && !state.recon && !state.taskOpen && !state.lockOpen && !state.expNew) return pre + 'today|' + (state.reconDay || '');
+  if (state.tab === 'week' && !state.rcWeek) return pre + 'week|' + state.week;
+  if (state.tab === 'plan' && !state.planTimes) return pre + 'plan|' + state.planWeek + '|' + state.planSub + '|' + (state.planArea || '');
+  return null;
 }
 
 // ============ 登录 ============
@@ -4871,7 +4927,7 @@ function arcAsk(m){
 // ============ 周结（小费管理员）============
 async function viewWeek(){
   if (!state.me.is_admin && !state.me.is_tip_manager) return viewAreaWeek();   // v83：前场主管只读
-  $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;
+  if (!state.cacheShown) $('#main').innerHTML = weekNav() + `<div class="loading">${esc(t('loading'))}</div>`;   // v96
   // v68：互不依赖的数据一起要（以前 14 次一个接一个）；week_envelopes 自 v42 起页面不用了，不再要
   const wk = state.week, P = { ...tok(), p_week_start: wk };
   let ov, st, disp, dist = null, wex = [], prevOv = null, arcH = '', rcH = '';
@@ -4982,7 +5038,7 @@ function staffOptions(withKitchen){
 }
 
 // ============ 管理（超级管理员）============
-const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['rates', 'report', 'deleted', 'audit']);   // v69：锁门检查点暂时隐藏
+const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['rates', 'report', 'deleted', 'audit', 'perf']);   // v96：速度记录   // v69：锁门检查点暂时隐藏
 // v61：「管理」上的待办数字分到「审批」「反馈」两个按钮上（反馈 = 未处理的反馈，审批 = 其余：修改申请、待核对的 Bon、工号绑定、忘记 PIN）
 async function adminCounts(){
   let total = state.me.pending_requests || 0;
@@ -5049,6 +5105,8 @@ async function viewAdmin(){
       }).join('');
     } else if (state.adminSub === 'tasks'){   // v95：某一天的任务 + 负责人
       el().innerHTML = await toAdminLoad();
+    } else if (state.adminSub === 'perf'){   // v96：速度记录
+      el().innerHTML = perfHTML();
     } else if (state.adminSub === 'expense'){   // v67：垫付
       el().innerHTML = await expAdminHTML();
     } else if (state.adminSub === 'notice'){   // v64：公告
@@ -6031,7 +6089,7 @@ function planDays(d){ return [...new Set(d.slots.map(x => x.date))]; }
 function slotsOn(d, date){ return d.slots.filter(x => x.date === date); }
 async function viewPlan(){
   if (!isSched()) state.planSub = 'mine';
-  $('#main').innerHTML = planHead() + `<div class="loading">${esc(t('loading'))}</div>`;
+  if (!state.cacheShown) $('#main').innerHTML = planHead() + `<div class="loading">${esc(t('loading'))}</div>`;   // v96
   try { state.plan = await rpc('sched_week', { ...tok(), p_week_start: state.planWeek }); }
   catch(e){ $('#main').innerHTML = planHead() + `<div class="empty">${esc(errText(e))}</div>`; return; }
   // v68：排班员要的 4 份数据一起要
@@ -6563,9 +6621,9 @@ document.addEventListener('click', async ev => {
     case 'tab': if (el.dataset.tab === 'inv') Object.assign(invS(), { view: 'home', form: null, uform: null, sform: null, pickItem: null, lab: null });   // v91
       if (el.dataset.tab === 'today' && state.tab !== 'today') state.reconDay = null;   // v57
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
-      if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(await loadWeekTodo());   // v56
+      if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(state.weekTodo || await loadWeekTodo());   // v56；v96：有上次的结果就不等（周结页自己会取最新的）
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.libView = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.libView = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -6587,6 +6645,9 @@ document.addEventListener('click', async ev => {
     // v71：收店任务
     case 'task-open': state.taskOpen = { def: el.dataset.def, day: el.dataset.day }; state.done = null; state.recon = null; state.tab = 'today'; render(); window.scrollTo(0, 0); break;
     case 'task-close': state.taskOpen = null; render(); window.scrollTo(0, 0); break;
+    // v96：速度记录
+    case 'pf-copy': { try { await navigator.clipboard.writeText(perfText()); toast(t('pf_copied')); } catch(e){ toast(t('pf_copy_fail'), true); } break; }
+    case 'pf-clear': state.perf = []; LS.set('kochi_perf', []); toast(t('pf_cleared')); keepScroll(render); break;
     // v95：某一天的任务（老板「管理 → 任务」、负责人「交给…」）
     case 'to-new': { const last = state.toLast || {};
       state.toEdit = { store: last.store || 'Bismarck', area: last.area || 'kitchen', day: addDays(bizToday(), 1), timing: 'closing', photo: false, text: '', zh: '', de: '', hzh: '', hde: '' };
