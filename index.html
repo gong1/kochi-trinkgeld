@@ -430,6 +430,22 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v100：房间 / 货架的特点（老板口述，AI 整理；只是提醒）
+  inv_tr_h_area:'房间的特点（只是提醒：AI 推荐位置时参考，员工也能看到）', inv_tr_h_unit:'货架的特点（只是提醒：AI 推荐位置时参考，员工也能看到）',
+  inv_tr_hint:'站在这里，打字或点键盘上的 🎤 说一段：潮不潮、冷不冷、多久来一次、货架什么材质、能不能放重的、最下层是不是贴地……然后点「✨ AI 整理」，看一眼再保存。',
+  inv_tr_raw:'你的描述（原话会存下来）', inv_tr_raw_ph_area:'例如：地下室最里面，很潮，没有暖气，冬天很冷，放不常用的东西', inv_tr_raw_ph_unit:'例如：木头货架，不太结实，最下层贴着地，最上层要梯子',
+  inv_tr_ai:'✨ AI 整理', inv_tr_ai_busy:'AI 正在整理……', inv_tr_ai_fail:'AI 没整理成，自己点下面的选项也行。', inv_tr_need:'请先写（或说）一段描述。',
+  inv_tr_zh:'说明（中文）', inv_tr_de:'说明（德文）',
+  inv_tr_temp:'温度', inv_tr_temp_normal:'常温', inv_tr_temp_cool:'凉', inv_tr_temp_cold:'冷',
+  inv_tr_humid:'潮湿', inv_tr_humid_dry:'干燥', inv_tr_humid_normal:'一般', inv_tr_humid_damp:'潮',
+  inv_tr_access:'多久去一次', inv_tr_access_daily:'每天', inv_tr_access_weekly:'每周', inv_tr_access_rare:'很少',
+  inv_tr_sun:'阳光直射', inv_tr_grease:'有油烟', inv_tr_locked:'要钥匙',
+  inv_tr_material:'材质', inv_tr_material_metal:'金属', inv_tr_material_wood:'木头', inv_tr_material_plastic:'塑料', inv_tr_material_other:'其他',
+  inv_tr_load:'承重', inv_tr_load_light:'只放轻的', inv_tr_load_normal:'普通', inv_tr_load_heavy:'能放重的',
+  inv_tr_closed:'有门', inv_tr_bottom_floor:'最下层贴地', inv_tr_top_ladder:'最上层要梯子',
+  inv_tr_sw_ok:'确认改：{s}', inv_tr_sw_damp_on:'标为潮湿', inv_tr_sw_damp_off:'取消潮湿', inv_tr_sw_food_ok_on:'允许放食品', inv_tr_sw_food_ok_off:'不放食品',
+  inv_tr_sw_chem_ok_on:'允许放化学品', inv_tr_sw_chem_ok_off:'不放化学品', inv_tr_sw_done:'已改，点「保存」后生效。',
+  inv_tr_hint_bottom:'这一层贴地：纸箱、纸品、布类不要直接放。', inv_tr_hint_top:'这一层要梯子：重的、常用的东西不要放这里。',
   // v99：物品——AI 改一改、AI 推荐位置、按真实架子显示层 / 格
   inv_fix_lbl:'AI 认错了？说一句正确的（可以点键盘上的 🎤 直接说）', inv_fix_ph:'例如：这是韩国辣椒酱，不是番茄酱', inv_fix_btn:'✨ 让 AI 改', inv_fix_need:'请先写（或说）一句哪里不对。',
   inv_fix_done:'✓ AI 按你说的改好了，请再看一眼。', inv_aip_btn:'✨ AI 推荐位置', inv_aip_again:'换一批推荐', inv_aip_busy:'AI 正在想放哪里……{s} 秒',
@@ -813,6 +829,22 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v100：Eigenschaften von Räumen / Regalen (vom Chef beschrieben, von der KI geordnet; nur Hinweise)
+  inv_tr_h_area:'Eigenschaften des Raums (nur Hinweise: für KI-Platzvorschläge, auch für das Team sichtbar)', inv_tr_h_unit:'Eigenschaften des Regals (nur Hinweise: für KI-Platzvorschläge, auch für das Team sichtbar)',
+  inv_tr_hint:'Vor Ort kurz beschreiben (tippen oder 🎤 auf der Tastatur): feucht? kalt? wie oft man hinkommt, Material des Regals, ob Schweres darf, ob die unterste Ebene auf dem Boden steht … dann „✨ KI ordnen“, kurz prüfen und speichern.',
+  inv_tr_raw:'Deine Beschreibung (wird im Original gespeichert)', inv_tr_raw_ph_area:'z. B.: hinterster Kellerraum, sehr feucht, keine Heizung, im Winter kalt, für selten Benötigtes', inv_tr_raw_ph_unit:'z. B.: Holzregal, nicht sehr stabil, unterste Ebene auf dem Boden, oben nur mit Leiter',
+  inv_tr_ai:'✨ KI ordnen', inv_tr_ai_busy:'Die KI ordnet …', inv_tr_ai_fail:'Die KI hat es nicht geschafft – die Optionen unten einfach selbst antippen.', inv_tr_need:'Bitte zuerst etwas beschreiben (schreiben oder sprechen).',
+  inv_tr_zh:'Beschreibung (Chinesisch)', inv_tr_de:'Beschreibung (Deutsch)',
+  inv_tr_temp:'Temperatur', inv_tr_temp_normal:'Raumtemperatur', inv_tr_temp_cool:'kühl', inv_tr_temp_cold:'kalt',
+  inv_tr_humid:'Feuchtigkeit', inv_tr_humid_dry:'trocken', inv_tr_humid_normal:'normal', inv_tr_humid_damp:'feucht',
+  inv_tr_access:'Wie oft man hinkommt', inv_tr_access_daily:'täglich', inv_tr_access_weekly:'wöchentlich', inv_tr_access_rare:'selten',
+  inv_tr_sun:'direkte Sonne', inv_tr_grease:'Küchendunst', inv_tr_locked:'mit Schlüssel',
+  inv_tr_material:'Material', inv_tr_material_metal:'Metall', inv_tr_material_wood:'Holz', inv_tr_material_plastic:'Kunststoff', inv_tr_material_other:'Sonstiges',
+  inv_tr_load:'Belastbarkeit', inv_tr_load_light:'nur Leichtes', inv_tr_load_normal:'normal', inv_tr_load_heavy:'auch Schweres',
+  inv_tr_closed:'mit Türen', inv_tr_bottom_floor:'unterste Ebene auf dem Boden', inv_tr_top_ladder:'oberste Ebene nur mit Leiter',
+  inv_tr_sw_ok:'Übernehmen: {s}', inv_tr_sw_damp_on:'als feucht markieren', inv_tr_sw_damp_off:'nicht mehr feucht', inv_tr_sw_food_ok_on:'Lebensmittel erlauben', inv_tr_sw_food_ok_off:'keine Lebensmittel',
+  inv_tr_sw_chem_ok_on:'Chemikalien erlauben', inv_tr_sw_chem_ok_off:'keine Chemikalien', inv_tr_sw_done:'Geändert – wirksam nach „Speichern“.',
+  inv_tr_hint_bottom:'Diese Ebene steht auf dem Boden: keine Kartons, Papier oder Textilien direkt hinstellen.', inv_tr_hint_top:'Diese Ebene nur mit Leiter: nichts Schweres oder oft Gebrauchtes hier.',
   // v99：Artikel – KI-Korrektur, KI-Platzvorschlag, Ebenen / Fächer wie im echten Regal
   inv_fix_lbl:'KI liegt falsch? Sag in einem Satz, was richtig ist (auch per 🎤 auf der Tastatur)', inv_fix_ph:'z. B.: Das ist koreanische Chilipaste, kein Ketchup', inv_fix_btn:'✨ KI korrigieren lassen', inv_fix_need:'Bitte zuerst schreiben (oder sagen), was falsch ist.',
   inv_fix_done:'✓ Die KI hat es nach deinen Angaben korrigiert – bitte kurz prüfen.', inv_aip_btn:'✨ KI-Platzvorschlag', inv_aip_again:'Andere Vorschläge', inv_aip_busy:'Die KI überlegt, wohin … {s} Sek.',
@@ -2879,12 +2911,12 @@ function renderInvArea(){
   const S = invS(), A = S.area, edit = A.can_edit;
   const units = (A.units || []).filter(u => u.active), off = (A.units || []).filter(u => !u.active);
   const unitHTML = u => `<div class="list"><div class="item" data-act="inv-place" data-id="${u.id}" style="cursor:pointer;background:var(--celadon-soft)"><div class="top">
-      <div><strong class="num">${esc(u.code)}</strong> ${esc(invName(u))}${invPlaceTags(u)}${invName(u, 'use') ? `<div class="meta">${esc(invName(u, 'use'))}</div>` : ''}</div>
+      <div><strong class="num">${esc(u.code)}</strong> ${esc(invName(u))}${invPlaceTags(u)}${invName(u, 'use') ? `<div class="meta">${esc(invName(u, 'use'))}</div>` : ''}${invTrTags('unit', u.traits) ? `<div style="margin-top:2px">${invTrTags('unit', u.traits)}</div>` : ''}</div>
       ${edit ? `<button class="link" data-act="inv-unit-edit" data-id="${u.id}">${esc(t('inv_edit'))}</button>` : ''}</div></div>
     ${(u.slots || []).filter(s => s.active).length ? u.slots.filter(s => s.active).map(s => invSlotRow(s, edit, u)).join('') : invSlotRow(u, edit, null)}</div>`;
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
     <h2 style="margin:4px 0 2px">${storeTag(A.store)} ${esc(invName(A))} <span class="muted num" style="font-size:16px">${esc(A.code)}</span></h2>
-    <div style="margin-bottom:10px">${invAreaTags(A)}</div>
+    <div style="margin-bottom:10px">${invAreaTags(A)}</div>${invTrShow('area', A)}
     ${edit && !A.inbox ? `<button class="btn ghost" data-act="inv-unit-new" style="margin-bottom:8px">${esc(t('inv_add_unit'))}</button>` : ''}
     ${edit ? `<button class="btn ghost" data-act="inv-lab-area" data-id="${A.id}" style="margin-bottom:12px">${esc(t('inv_lab_btn'))}</button>` : ''}
     ${units.length ? units.map(unitHTML).join('') : `<div class="list"><div class="empty">${esc(t('inv_area_empty'))}</div></div>`}
@@ -2912,7 +2944,10 @@ function renderInvPlace(){
     <div class="inv-code num">${esc(P.code)}</div>
     <div class="inv-row" style="margin:2px 0 4px;align-items:center"><div class="inv-txt"><strong>${esc(title)}</strong>${invPlaceTags(P)}${P.pos ? `<div style="font-weight:600">${esc(invPosText(P.pos, true))}</div>` : ''}</div>${invShelfHTML(P.pos)}</div>
     ${use ? `<div class="meta" style="margin-bottom:4px">${esc(use)}</div>` : ''}
-    <div style="margin-bottom:10px">${storeTag(A.store)} ${invAreaTags(A)}</div>
+    <div style="margin-bottom:10px">${storeTag(A.store)} ${invAreaTags(A)}${invTrTags('area', A.traits)}</div>
+    ${invTrShow('unit', U || P)}${(() => { const UT = (U || P).traits || {}, ps = P.pos; if (!ps) return '';
+      const h = UT.bottom_floor && ps.row === ps.rows ? 'inv_tr_hint_bottom' : UT.top_ladder && ps.row === 1 ? 'inv_tr_hint_top' : '';
+      return h ? `<div class="infobox" style="background:#FFF1C9;color:#8A6A00">${esc(t(h))}</div>` : ''; })()}
     ${P.photo ? invImg(P.photo, 'big', P.photo) + `<div class="small muted">${esc(t('inv_photo_by', { n: P.photo_by || '?', t: fmtDateTime(P.photo_at) }))}</div>` : `<div class="inv-noph big" aria-hidden="true">📷</div><div class="small muted">${esc(t('inv_photo_none'))}</div>`}
     ${P.photo && P.checked_at ? `<div class="small muted">${esc(t('inv_checked_by', { n: P.checked_by || '?', t: fmtDateTime(P.checked_at) }))}${invDue(P) ? ` <span class="tag bad">${esc(t('inv_due_tag'))}</span>` : ''}</div>` : ''}
     ${edit && P.photo ? `<button class="btn ghost" data-act="inv-place-check" style="margin-top:8px">${esc(t('inv_check'))}</button>${invDue(P) ? `<div class="small muted" style="margin-top:4px">${esc(t('inv_check_hint'))}</div>` : ''}` : ''}
@@ -3241,7 +3276,7 @@ async function invUnitOpen(placeId){
   } else {
     let p; try { p = await rpc('inv_place', { ...tok(), p_id: placeId }); } catch(e){ toast(errText(e), true); return; }
     S.uform = { id: p.id, place: p, area: p.area, name_zh: p.name_zh || '', name_de: p.name_de || '', use_zh: p.use_zh || '', use_de: p.use_de || '',
-      special: p.special || '', temp: !!p.temp, add: '1', back: { view: S.view, id: S.id } };
+      special: p.special || '', temp: !!p.temp, add: '1', back: { view: S.view, id: S.id }, tr: p.kind === 'slot' ? null : invTrNew(p) };   // v100：特点记在储存单元上
   }
   S.view = 'unit'; render(); window.scrollTo(0, 0);
 }
@@ -3275,6 +3310,7 @@ function renderInvUnit(){
     <h2 style="margin-top:4px">${esc(t('inv_u_edit_h', { c: P.code }))}</h2>
     ${P.active ? `${names}
     ${admin ? chk('special', t('inv_u_gas')) + chk('temp', t('inv_u_temp')) : ''}
+    ${U.tr ? invTrHTML('unit', U.tr) : ''}
     <button class="btn" data-act="inv-unit-save">${esc(t('inv_save'))}</button>
     ${isUnit && !P.temp ? `<h3>${esc(t('inv_u_add_slots'))}</h3><div class="small muted" style="margin-bottom:8px">${esc(t(hasSlots ? 'inv_u_add_hint' : 'inv_u_add_hint0'))}</div>
       <div class="row" style="gap:10px;align-items:flex-end">${fld('add', t('inv_u_add_n'), 'inputmode="numeric"')}${!hasSlots ? fld('cols', t('inv_u_cols_opt'), 'inputmode="numeric"') : ''}</div>
@@ -3283,7 +3319,7 @@ function renderInvUnit(){
     : `<div class="infobox">${esc(t('inv_tag_off'))}</div>${admin ? `<button class="btn ghost" data-act="inv-unit-on">${esc(t('inv_u_on'))}</button>` : ''}`}`;
 }
 async function invUnitSave(){
-  const S = invS(), U = S.uform; invUnitKeep();
+  const S = invS(), U = S.uform; invUnitKeep(); invTrKeep();
   try {
     if (!U.id){
       const d = { area_id: U.area.id, unit_type: U.unit_type, unit_no: U.unit_no.trim(), name_zh: U.name_zh, name_de: U.name_de, use_zh: U.use_zh, use_de: U.use_de,
@@ -3294,6 +3330,7 @@ async function invUnitSave(){
     const d = { name_zh: U.name_zh, name_de: U.name_de, use_zh: U.use_zh, use_de: U.use_de };
     if (state.me.is_admin){ d.special = U.special ? 'gas' : ''; d.temp = !!U.temp; }
     await rpc('inv_place_save', { ...tok(), p_id: U.id, p_data: d });
+    await invTrSave('place', U.id);   // v100：特点
     const back = U.back; S.uform = null; S.place = null; S.area = null; toast(t('inv_saved')); invGo(back.view === 'area' ? 'area' : 'place', back.view === 'area' ? back.id : U.id);
   } catch(e){ toast(errText(e), true); }
 }
@@ -3324,6 +3361,7 @@ function invSetKeep(){ const G = invS().sform; if (!G) return; document.querySel
 function invSetFld(G, k, label, attrs){ return `<div class="field"><label for="invs-${k}">${esc(label)}</label><input class="input" id="invs-${k}" data-invs="${k}" value="${esc(G[k] == null ? '' : G[k])}" ${attrs || ''}></div>`; }
 function invSetChk(G, k, label){ return `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invs="${k}"${G[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`; }
 function renderInvAreaForm(){
+  invTrKeep();   // v100：重画前记下特点框里的字
   const G = invS().sform;
   $('#main').innerHTML = `<button class="link" data-act="inv-settings" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(G.id ? invName(G) + ' · ' + G.code : t('inv_set_new_area'))}</h2>
     ${G.id ? '' : `<div class="seg sm" style="margin-bottom:12px">${STORES.map(s => `<button data-act="inv-s-store" data-store="${s}" class="${G.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>${invSetFld(G, 'code', t('inv_a_code'), 'autocapitalize="characters" maxlength="3"')}`}
@@ -3332,6 +3370,7 @@ function renderInvAreaForm(){
     ${invSetChk(G, 'damp', t('inv_a_damp'))}${invSetChk(G, 'food_ok', t('inv_a_food'))}${invSetChk(G, 'chem_ok', t('inv_a_chem'))}
     ${invSetFld(G, 'sort', t('inv_a_sort'), 'inputmode="numeric"')}${G.id && !G.inbox ? invSetChk(G, 'active', t('inv_a_active')) : ''}
     <div class="small muted" style="margin-bottom:10px">${esc(t('inv_a_hint'))}</div>
+    ${G.tr ? invTrHTML('area', G.tr) : ''}
     <button class="btn" data-act="inv-aform-save">${esc(t('inv_save'))}</button>`;
 }
 function renderInvCatForm(){
@@ -3682,6 +3721,59 @@ async function viewInvMisses(){
         <div class="meta">${esc((m.people || []).join('、'))} · ${esc(t('inv_miss_last', { t: fmtDateTime(m.last) }))}</div></div></div>
         <div class="acts"><button class="link" data-act="inv-miss-alias" data-i="${i}">${esc(t('inv_miss_alias'))}</button><button class="link" data-act="inv-miss-new" data-i="${i}">${esc(t('inv_miss_new'))}</button><button class="link danger" data-act="inv-miss-ignore" data-i="${i}">${esc(t('inv_miss_ignore'))}</button></div></div>`).join('')}</div>`
       : `<div class="list"><div class="empty">${esc(t('inv_miss_none'))}</div></div>`}`;
+}
+
+// ---------- v100：房间 / 货架的特点（老板口述，AI 整理成中德文说明和特点；只是提醒，不挡保存） ----------
+const INV_TR = { area: [['temp', ['normal', 'cool', 'cold']], ['humid', ['dry', 'normal', 'damp']], ['access', ['daily', 'weekly', 'rare']], ['sun'], ['grease'], ['locked']],
+                 unit: [['material', ['metal', 'wood', 'plastic', 'other']], ['load', ['light', 'normal', 'heavy']], ['closed'], ['bottom_floor'], ['top_ladder']] };
+function invTrNew(x){ return { raw: (x && x.notes_raw) || '', zh: (x && x.notes_zh) || '', de: (x && x.notes_de) || '', traits: { ...((x && x.traits) || {}) }, ai: null, sugg: [], dirty: false }; }
+function invTrTags(kind, traits){
+  return INV_TR[kind].map(([k, vals]) => { const v = (traits || {})[k]; if (v == null || v === false) return '';
+    return `<span class="tag off">${esc(vals ? t('inv_tr_' + k) + '：' + t(`inv_tr_${k}_${v}`) : t('inv_tr_' + k))}</span>`; }).join('');
+}
+function invTrShow(kind, x){   // 储区页 / 储位页：说明 + 特点标签
+  const notes = invName(x, 'notes'), tags = invTrTags(kind, x && x.traits);
+  return notes || tags ? `<div class="small" style="margin:-4px 0 10px">${notes ? esc(notes) + ' ' : ''}${tags}</div>` : '';
+}
+function invTrHTML(kind, T){
+  const chip = (k, v, on, label) => `<button class="chip${on ? ' on' : ''}" data-act="inv-tr-chip" data-k="${k}" data-v="${v}">${esc(label)}</button>`;
+  const rows = INV_TR[kind].filter(([, vals]) => vals).map(([k, vals]) => `<div class="field"><label>${esc(t('inv_tr_' + k))}</label><div class="chips">${vals.map(v => chip(k, v, T.traits[k] === v, t(`inv_tr_${k}_${v}`))).join('')}</div></div>`).join('');
+  const bools = INV_TR[kind].filter(([, vals]) => !vals).map(([k]) => chip(k, 'true', T.traits[k] === true, t('inv_tr_' + k))).join('');
+  const A = T.ai, other = state.lang === 'de';
+  const sugg = (T.sugg || []).map((x, i) => `<div class="infobox" style="background:#FFF1C9;color:#8A6A00">${esc(other ? x.reason_de || x.reason_zh : x.reason_zh || x.reason_de)}<br><button class="link" data-act="inv-tr-switch" data-i="${i}">${esc(t('inv_tr_sw_ok', { s: t('inv_tr_sw_' + x.key + (x.value ? '_on' : '_off')) }))}</button></div>`).join('');
+  return `<div class="sheet" id="inv-tr" style="margin:12px 0"><div class="grp-t" style="margin-bottom:6px">${esc(t(kind === 'area' ? 'inv_tr_h_area' : 'inv_tr_h_unit'))}</div>
+    <div class="small muted" style="margin-bottom:8px">${esc(t('inv_tr_hint'))}</div>
+    <div class="field"><label for="inv-tr-raw">${esc(t('inv_tr_raw'))}</label><textarea class="input" id="inv-tr-raw" rows="3" style="height:auto;padding:10px 14px" placeholder="${esc(t(kind === 'area' ? 'inv_tr_raw_ph_area' : 'inv_tr_raw_ph_unit'))}">${esc(T.raw)}</textarea></div>
+    <button class="btn ghost" data-act="inv-tr-ai" style="margin-bottom:10px"${A && A.busy ? ' disabled' : ''}>${esc(A && A.busy ? t('inv_tr_ai_busy') : t('inv_tr_ai'))}</button>
+    ${A && A.err ? `<div class="infobox" style="background:var(--copper-soft);color:var(--copper)">${esc(t('inv_tr_ai_fail'))}</div>` : ''}${sugg}
+    <div class="field"><label for="inv-tr-zh">${esc(t('inv_tr_zh'))}</label><input class="input" id="inv-tr-zh" value="${esc(T.zh)}"></div>
+    <div class="field"><label for="inv-tr-de">${esc(t('inv_tr_de'))}</label><input class="input" id="inv-tr-de" value="${esc(T.de)}"></div>
+    ${rows}<div class="field"><div class="chips">${bools}</div></div></div>`;
+}
+function invTrCtx(){ const S = invS(); if (S.view === 'aform' && S.sform && S.sform.tr) return { kind: 'area', T: S.sform.tr, F: S.sform };
+  if (S.view === 'unit' && S.uform && S.uform.tr) return { kind: 'unit', T: S.uform.tr, F: S.uform }; return null; }
+function invTrKeep(){
+  const c = invTrCtx(); if (!c) return; const T = c.T;
+  [['raw', '#inv-tr-raw'], ['zh', '#inv-tr-zh'], ['de', '#inv-tr-de']].forEach(([k, sel]) => { const e = $(sel); if (e && e.value !== T[k]){ T[k] = e.value; T.dirty = true; } });
+}
+function invTrPaint(){ const c = invTrCtx(), b = $('#inv-tr'); if (c && b) b.outerHTML = invTrHTML(c.kind, c.T); }
+async function invTrAi(){
+  invTrKeep(); const c = invTrCtx(); if (!c) return;
+  if (c.kind === 'area') invSetKeep(); else invUnitKeep();
+  const T = c.T, F = c.F;
+  if (!T.raw.trim()) return toast(t('inv_tr_need'), true);
+  T.ai = { busy: true }; invTrPaint();
+  try {
+    const R = await callTasks({ action: 'inv_ai_traits', kind: c.kind, text: T.raw, name_zh: F.name_zh, name_de: F.name_de,
+      area_zh: c.kind === 'unit' ? (F.area || {}).name_zh : null, area_de: c.kind === 'unit' ? (F.area || {}).name_de : null,
+      current: c.kind === 'area' ? { damp: !!F.damp, food_ok: !!F.food_ok, chem_ok: !!F.chem_ok } : null });
+    T.zh = R.notes_zh || T.zh; T.de = R.notes_de || T.de; T.traits = { ...(R.traits || {}) }; T.sugg = R.switches || []; T.dirty = true; T.ai = { ok: true };
+  } catch(e){ T.ai = { err: true }; }
+  const c2 = invTrCtx(); if (c2 && c2.T === T) invTrPaint();
+}
+async function invTrSave(kind, id){   // 保存（只在改过的时候）
+  const c = invTrCtx(); const T = c && c.T; if (!T || !T.dirty || !id) return;
+  await rpc('inv_traits_save', { ...tok(), p_kind: kind, p_id: id, p_raw: T.raw, p_notes_zh: T.zh, p_notes_de: T.de, p_traits: T.traits });
 }
 
 // ============ 渲染入口 ============
@@ -7744,6 +7836,12 @@ document.addEventListener('click', async ev => {
         toast(t('ls_unbound')); state.staffEdit = null; state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
     }
+    // v100：房间 / 货架的特点
+    case 'inv-tr-ai': invTrAi(); break;
+    case 'inv-tr-chip': { invTrKeep(); const c = invTrCtx(); if (!c) break; const T = c.T, k = el.dataset.k, v = el.dataset.v === 'true' ? true : el.dataset.v;
+      if (T.traits[k] === v) delete T.traits[k]; else T.traits[k] = v; T.dirty = true; invTrPaint(); break; }
+    case 'inv-tr-switch': { const c = invTrCtx(); if (!c || c.kind !== 'area') break; invSetKeep(); invTrKeep(); const x = c.T.sugg[+el.dataset.i]; if (!x) break;
+      c.F[x.key] = x.value; c.T.sugg.splice(+el.dataset.i, 1); renderInvAreaForm(); toast(t('inv_tr_sw_done')); break; }
     // v99：AI 改一改、AI 推荐位置
     case 'inv-ai-fix': { const F = invS().form; if (!F) break; invFormKeep(); const v = (($('#inv-ai-fix') || {}).value || '').trim(); if (!v){ toast(t('inv_fix_need'), true); break; } F.fix = v; invAiRead(F, v); break; }
     case 'inv-aip': { const F = invS().form; if (F) invAiPlace(F); break; }
@@ -7895,7 +7993,7 @@ document.addEventListener('click', async ev => {
     case 'inv-settings': { const S = invS(); S.sform = null; S.home = null; invGo('settings'); break; }
     case 'inv-aform': {
       const S = invS(), a = el.dataset.id ? ((S.home || {}).areas || []).find(x => x.id === el.dataset.id) : null;
-      S.sform = a ? { ...a, sort: String(a.sort) } : { id: null, store: STORES[0], code: '', name_zh: '', name_de: '', owner: 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true };
+      S.sform = a ? { ...a, sort: String(a.sort), tr: invTrNew(a) } : { id: null, store: STORES[0], code: '', name_zh: '', name_de: '', owner: 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true, tr: invTrNew(null) };
       S.view = 'aform'; render(); window.scrollTo(0, 0); break;
     }
     case 'inv-cform': {
@@ -7910,7 +8008,9 @@ document.addEventListener('click', async ev => {
       invSetKeep(); const S = invS(), G = S.sform, isA = act === 'inv-aform-save'; if (!G) break;
       const d = isA ? { store: G.store, code: G.code, name_zh: G.name_zh, name_de: G.name_de, owner: G.owner, damp: !!G.damp, food_ok: !!G.food_ok, chem_ok: !!G.chem_ok, sort: G.sort, active: !!G.active }
         : { name_zh: G.name_zh, name_de: G.name_de, nature: G.nature, damp: !!G.damp, area_code: G.area_code, sort: G.sort, active: !!G.active };
-      try { await rpc(isA ? 'inv_area_save' : 'inv_category_save', { ...tok(), p_id: G.id || null, p_data: d }); S.sform = null; S.home = null; toast(t('inv_saved')); invGo('settings'); }
+      if (isA) invTrKeep();
+      try { const id = await rpc(isA ? 'inv_area_save' : 'inv_category_save', { ...tok(), p_id: G.id || null, p_data: d }); if (isA) await invTrSave('area', id);   // v100：特点
+        S.sform = null; S.home = null; toast(t('inv_saved')); invGo('settings'); }
       catch(e){ toast(errText(e), true); }
       break;
     }
