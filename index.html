@@ -538,7 +538,7 @@ zh: {
   ke_old_day:'这天有以前的「全天」班，已经先放进每一段里，请按实际改好再保存。', k_allday:'全天', pk_kitchen:'已排在厨房{sl}',
   ntf_item_kparts:'{d} {s} 厨房 {list}',
   // v83：区域主管第二步
-  at_title:'我管的区域 · 今天', at_roster:'今天上班：{m}', at_roster_none:'今天厨房还没排人', at_no_tasks:'今天没有收店任务', at_no_ktasks:'还没有厨房任务',
+  at_title:'我管的区域 · 今天', at_roster:'今天上班：{m}', at_roster_none:'今天厨房还没排人', at_no_tasks:'今天没有任务', at_no_ktasks:'还没有厨房任务',
   at_bon_open:'（今天还在营业，下班后交）', as_title:'两边主管', as_sups:'主管：{m}', as_nosup:'还没有主管（你自己管）', as_rate:'收店任务 7 天完成率 {r}（完成 {a} · 漏做 {b}）',
   as_notasks:'还没有收店任务', as_open:'今天还没完成：{m}', as_pub_yes:'下周排班已发布', as_pub_no:'下周排班还没发布', as_pend:'改了还没通知 {n} 人',
   aw_hint:'只读：每人这周分到多少、发放和签收情况；没有现金明细（信封、钱包、Kasse、短款不显示）。', aw_open:'这周还没锁定：下面是目前预计每人分到的，还会变。',
@@ -586,12 +586,13 @@ zh: {
   tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
   tk_close_photo_learning:'要拍照（前 {b} 次每次都拍，已做 {a} 次）', tk_close_photo_again:'要拍照（漏做过或点过「AI 看错了」，重新拍 {b} 次，已做 {a} 次）',
   tk_close_photo_random:'今天抽到要拍照', tk_close_photo_important:'要拍照（重要任务每次都拍）', tk_close_check:'今天只要打勾',
+  admin_tasks:'任务', tl_title:'负责人', tl_hint:'每家店前场、后厨各设一个负责人：某一天的任务先归他管，他可以交给这个区域的某个人；没交的话，到那天按「默认交给」当天排的岗位（例如清洁）。负责人在自己的「今天」里看到这些任务。', tl_lead:'负责人', tl_role:'默认交给（当天排的岗位）', tl_none:'— 还没设 —', tl_by:'{n} · {t}', tl_saved:'负责人已保存', to_new:'＋ 新任务', to_title_new:'新任务（某一天做）', to_title_edit:'改任务', to_day:'哪天', to_when:'什么时候做', to_text:'做什么（写一句话，中文或德文都行）', to_text_ph:'例如：把油桶从地下室拿到门口，明天早上 ReFood 来收油', to_ai:'✨ AI 写成中德文', to_ai_busy:'AI 正在写…', to_ai_hint:'AI 写好任务名和说明，你可以改。不用 AI 也可以直接填下面。', to_name_zh:'任务名（中文）', to_name_de:'任务名（德文）', to_hint_zh:'说明（中文，可不填）', to_hint_de:'说明（德文，可不填）', to_how:'怎么算做完', to_check:'打勾', to_photo:'拍照', to_save:'保存任务', to_saved:'任务已保存', to_list:'某一天的任务', to_list_hint:'最近 7 天和以后的。谁做：交给的人那天上班就是他；不然按默认交给当天排的岗位；也没排就是那天这个区域上班的人，谁做都算。负责人和老板随时也能做。', to_none:'还没有某一天的任务。点「＋ 新任务」加一个。', to_lead:'负责：{n}', to_lead_none:'这个区域还没设负责人（在下面设）', to_who_assignee:'交给 {n}', to_who_assignee_off:'交给 {n}，但他那天没排班 → {p}', to_who_default:'按默认：当天的{r}（{p}）', to_who_default0:'按默认：当天的{r}', to_who_area:'当天没排{r} → 那天上班的都算（{p}）', to_nobody:'那天这个区域没人上班', to_unpub:'排班还没发布，发布后才知道是谁', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ 没做', to_assign:'交给…', to_edit:'改', to_cancel:'取消任务', to_cancel_q:'取消这个任务？（{n}，{d}）', to_cancelled:'任务已取消', tk_once:'{w}：{n} · {s}', tk_once_closing:'收店时', tk_once_arrival:'到店后', tk_once_now_arrival:'到店后先做', tk_close_photo_once:'这个任务要拍照', tk_by_lead:'{n} 交给你的', td_upcoming:'接下来（{n}）', ld_title:'我负责的任务（{n}）', ld_hint:'你是这个区域的任务负责人。可以把任务交给某个人（他会在自己的「今天」里看到）；不交的话，到那天按默认交给当天排的岗位。你自己也随时可以做。', ld_self:'我自己做', ld_assign_title:'交给谁', ld_default:'按默认：当天排的{r}', ld_on:'那天上班', ld_off:'那天没排班', ld_assign_hint:'交给的人那天没排班的话，到时候还是按默认交给当天的{r}。', ld_assigned:'已交给 {n}', ld_reset:'已改回默认', tk_adm_nobody_once:'{n}：那天没人上班',
   tk_close_go:'开始', tk_close_cont:'继续', tk_close_done:'{n} · {s} 做完了', tk_gone:'这个任务已经没有了。点「今天」回去。',
   tk_item_by:'{t} · {n}', tk_item_checked:'打勾', tk_item_override:'说 AI 看错了', tk_retake:'📷 重拍', tk_photo:'📷 拍照', tk_check:'✓ 做好了',
   tk_override:'AI 看错了，继续', tk_override_q:'确定是 AI 看错了吗？老板会看到你点了这个。', tk_run_done:'做完了（{t} · {n}）',
   tk_uploading_ai:'照片上传中，AI 在看…', tk_ai_problem:'AI 看出问题了，请看提示', tk_all_done:'收店任务做完了 ✓ 谢谢！', tk_before_leave:'走之前还有：{x}',
-  tk_adm_title:'收店任务', tk_adm_done:'{n}（{b} · {t}）', tk_adm_nobody:'{n}：没人负责（没排{r}，或者排了 Runner 但没定谁做{r}）', tk_adm_missed:'{n} 没做（{p}）', tk_adm_open:'{n}：还没做（{p}）',
-  tk_adm_override:'员工说 AI 看错了', tk_adm_ai_bad:'AI 看出问题', rk_tasks:'收店任务', no_role_task:'没排{r}（有收店任务）',
+  tk_adm_title:'任务', tk_adm_done:'{n}（{b} · {t}）', tk_adm_nobody:'{n}：没人负责（没排{r}，或者排了 Runner 但没定谁做{r}）', tk_adm_missed:'{n} 没做（{p}）', tk_adm_open:'{n}：还没做（{p}）',
+  tk_adm_override:'员工说 AI 看错了', tk_adm_ai_bad:'AI 看出问题', rk_tasks:'任务', no_role_task:'没排{r}（有收店任务）',
   act_task_item:'收店任务', act_task_override:'收店任务：说 AI 看错了',
   // v68：界面简化
   hdr_fb:'反馈', bn_head:'交 Bon：{d} {s} {sl}', co_with:'同班：{x}', avail_sum_all:'已截止 · 全部能上', avail_sum_no:'已截止 · 你标了 {n} 个不能上',
@@ -911,7 +912,7 @@ de: {
   ke_old_day:'An diesem Tag gibt es alte „ganztags“-Schichten; sie sind vorerst in jede Schicht übernommen – bitte anpassen und speichern.', k_allday:'Ganztags', pk_kitchen:'schon in der Küche ({sl})',
   ntf_item_kparts:'{d} {s}, Küche: {list}',
   // v83：Bereichsleitung, Schritt 2
-  at_title:'Meine Bereiche · heute', at_roster:'Heute im Dienst: {m}', at_roster_none:'Heute noch niemand in der Küche eingeplant', at_no_tasks:'Heute keine Feierabend-Aufgaben', at_no_ktasks:'Noch keine Küchen-Aufgaben',
+  at_title:'Meine Bereiche · heute', at_roster:'Heute im Dienst: {m}', at_roster_none:'Heute noch niemand in der Küche eingeplant', at_no_tasks:'Heute keine Aufgaben', at_no_ktasks:'Noch keine Küchen-Aufgaben',
   at_bon_open:'(heute noch geöffnet, Abgabe nach Feierabend)', as_title:'Bereichsleitungen', as_sups:'Leitung: {m}', as_nosup:'Noch keine Leitung (du selbst)', as_rate:'Feierabend-Aufgaben 7 Tage erledigt: {r} (erledigt {a} · versäumt {b})',
   as_notasks:'Noch keine Feierabend-Aufgaben', as_open:'Heute noch offen: {m}', as_pub_yes:'Dienstplan nächste Woche veröffentlicht', as_pub_no:'Dienstplan nächste Woche noch nicht veröffentlicht', as_pend:'{n} Personen noch nicht über Änderungen informiert',
   aw_hint:'Nur ansehen: wer diese Woche wie viel bekommt, Auszahlung und Quittung; keine Kassendetails (Umschläge, Geldbeutel, Kasse, Fehlbeträge werden nicht angezeigt).', aw_open:'Diese Woche ist noch nicht abgeschlossen: unten die bisher erwarteten Anteile, sie ändern sich noch.',
@@ -959,12 +960,13 @@ de: {
   tk_close:'Feierabend: {n} · {s}', tk_close_later:'Vor Feierabend erledigen', tk_close_now:'Bald Feierabend – jetzt erledigen', tk_close_over:'Gestern nicht erledigt – heute nachholen',
   tk_close_photo_learning:'Mit Foto (die ersten {b} Male immer, {a} erledigt)', tk_close_photo_again:'Mit Foto (vergessen oder „KI irrt sich“ gewählt – wieder {b} Male, {a} erledigt)',
   tk_close_photo_random:'Heute mit Foto (Stichprobe)', tk_close_photo_important:'Mit Foto (wichtige Aufgabe, immer)', tk_close_check:'Heute nur abhaken',
+  admin_tasks:'Aufgaben', tl_title:'Verantwortliche', tl_hint:'Pro Filiale je eine verantwortliche Person für Service und Küche: Aufgaben für einen bestimmten Tag gehen zuerst an sie; sie kann sie jemandem aus ihrem Bereich zuteilen. Sonst macht es am Tag die eingeplante Standard-Position (z. B. Reinigung). Die Verantwortlichen sehen diese Aufgaben unter „Heute“.', tl_lead:'Verantwortlich', tl_role:'Standard (eingeplante Position am Tag)', tl_none:'— noch niemand —', tl_by:'{n} · {t}', tl_saved:'Verantwortliche gespeichert', to_new:'＋ Neue Aufgabe', to_title_new:'Neue Aufgabe (an einem Tag)', to_title_edit:'Aufgabe ändern', to_day:'Tag', to_when:'Wann', to_text:'Was ist zu tun (ein Satz, Deutsch oder Chinesisch)', to_text_ph:'z. B. Ölfass aus dem Keller vor die Tür stellen, morgen früh holt ReFood das Altfett ab', to_ai:'✨ Mit KI zweisprachig schreiben', to_ai_busy:'KI schreibt …', to_ai_hint:'Die KI schreibt Name und Hinweis, du kannst alles ändern. Ohne KI einfach unten ausfüllen.', to_name_zh:'Name (Chinesisch)', to_name_de:'Name (Deutsch)', to_hint_zh:'Hinweis (Chinesisch, optional)', to_hint_de:'Hinweis (Deutsch, optional)', to_how:'Wie erledigt', to_check:'Abhaken', to_photo:'Foto', to_save:'Aufgabe speichern', to_saved:'Aufgabe gespeichert', to_list:'Aufgaben an einem Tag', to_list_hint:'Die letzten 7 Tage und alles danach. Wer: die zugeteilte Person, wenn sie an dem Tag arbeitet; sonst die eingeplante Standard-Position; sonst alle aus dem Bereich, die an dem Tag arbeiten. Verantwortliche und Chef können jederzeit selbst erledigen.', to_none:'Noch keine Aufgaben an einem Tag. Mit „＋ Neue Aufgabe“ anlegen.', to_lead:'Verantwortlich: {n}', to_lead_none:'Für diesen Bereich ist noch niemand verantwortlich (unten festlegen)', to_who_assignee:'An {n}', to_who_assignee_off:'An {n}, aber an dem Tag nicht eingeplant → {p}', to_who_default:'Standard: {r} am Tag ({p})', to_who_default0:'Standard: {r} am Tag', to_who_area:'kein(e) {r} eingeplant → alle, die an dem Tag arbeiten ({p})', to_nobody:'an dem Tag arbeitet niemand aus dem Bereich', to_unpub:'Dienstplan noch nicht veröffentlicht – erst danach steht fest, wer', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ nicht erledigt', to_assign:'Zuteilen …', to_edit:'Ändern', to_cancel:'Aufgabe absagen', to_cancel_q:'Diese Aufgabe absagen? ({n}, {d})', to_cancelled:'Aufgabe abgesagt', tk_once:'{w}: {n} · {s}', tk_once_closing:'Bei Feierabend', tk_once_arrival:'Bei Dienstbeginn', tk_once_now_arrival:'Gleich bei Dienstbeginn erledigen', tk_close_photo_once:'Mit Foto', tk_by_lead:'von {n} zugeteilt', td_upcoming:'Demnächst ({n})', ld_title:'Meine Bereichsaufgaben ({n})', ld_hint:'Du bist für die Aufgaben in diesem Bereich verantwortlich. Du kannst eine Aufgabe jemandem zuteilen (die Person sieht sie unter „Heute“); sonst macht es am Tag die eingeplante Standard-Position. Du kannst sie auch jederzeit selbst erledigen.', ld_self:'Selbst erledigen', ld_assign_title:'Wem zuteilen', ld_default:'Standard: {r} am Tag', ld_on:'arbeitet an dem Tag', ld_off:'an dem Tag nicht eingeplant', ld_assign_hint:'Ist die Person an dem Tag nicht eingeplant, macht es am Tag trotzdem die Standard-Position ({r}).', ld_assigned:'An {n} zugeteilt', ld_reset:'Zurück auf Standard', tk_adm_nobody_once:'{n}: an dem Tag arbeitet niemand',
   tk_close_go:'Starten', tk_close_cont:'Weiter', tk_close_done:'{n} · {s} erledigt', tk_gone:'Diese Aufgabe gibt es nicht mehr. Zurück zu „Heute“.',
   tk_item_by:'{t} · {n}', tk_item_checked:'abgehakt', tk_item_override:'„KI irrt sich“', tk_retake:'📷 Neu fotografieren', tk_photo:'📷 Foto', tk_check:'✓ Erledigt',
   tk_override:'KI irrt sich – weiter', tk_override_q:'Sicher, dass die KI sich irrt? Der Chef sieht, dass du das gewählt hast.', tk_run_done:'Erledigt ({t} · {n})',
   tk_uploading_ai:'Foto wird hochgeladen, die KI schaut…', tk_ai_problem:'Die KI sieht ein Problem – bitte Hinweis lesen', tk_all_done:'Feierabend-Aufgabe erledigt ✓ Danke!', tk_before_leave:'Vor dem Gehen noch: {x}',
-  tk_adm_title:'Feierabend-Aufgaben', tk_adm_done:'{n} ({b} · {t})', tk_adm_nobody:'{n}: niemand zuständig (kein(e) {r} eingeplant oder nicht festgelegt, wer {r} übernimmt)', tk_adm_missed:'{n} nicht erledigt ({p})', tk_adm_open:'{n}: noch offen ({p})',
-  tk_adm_override:'Mitarbeiter: KI irrt sich', tk_adm_ai_bad:'KI sieht Problem', rk_tasks:'Feierabend', no_role_task:'Kein(e) {r} (Feierabend-Aufgabe)',
+  tk_adm_title:'Aufgaben', tk_adm_done:'{n} ({b} · {t})', tk_adm_nobody:'{n}: niemand zuständig (kein(e) {r} eingeplant oder nicht festgelegt, wer {r} übernimmt)', tk_adm_missed:'{n} nicht erledigt ({p})', tk_adm_open:'{n}: noch offen ({p})',
+  tk_adm_override:'Mitarbeiter: KI irrt sich', tk_adm_ai_bad:'KI sieht Problem', rk_tasks:'Aufgaben', no_role_task:'Kein(e) {r} (Feierabend-Aufgabe)',
   act_task_item:'Feierabend-Aufgabe', act_task_override:'Feierabend-Aufgabe: KI irrt sich',
   // v68：Oberfläche vereinfacht
   hdr_fb:'Feedback', bn_head:'Bon einreichen: {d} {s} {sl}', co_with:'Mit dir: {x}', avail_sum_all:'Frist vorbei · alle Schichten möglich', avail_sum_no:'Frist vorbei · {n} × „kann nicht“ markiert',
@@ -1385,9 +1387,17 @@ const ERR_ZH = {
   PHOTO_UPLOAD_FAILED: '照片保存失败（网络或服务器问题）。请稍后重拍；还不行请截图发给老板。',
   TASK_FAILED: '记录失败。请稍后再试；还不行请截图发给老板。',
   TASK_NOT_YOURS: '这个任务今天不是你负责（你没有排这个岗位）。如果排班有错，请找排班员改。',
-  TASK_TOO_EARLY: '你的班还没开始，还不能做这个任务。',
+  TASK_TOO_EARLY: '你的班还没开始（或者还没到这个任务的日子），还不能做这个任务。',
   TASK_PHOTO_REQUIRED: '今天这个任务要拍照，不能只打勾。请拍照。',
   TASK_DAY_CLOSED: '这一天已经过了，不能再补做。',
+  TASK_INPUT: '区域或时间选得不对：区域只能是前场或后厨，时间只能是「收店时」或「到店后」。请重新选一下。',
+  TASK_NAME_EMPTY: '请写这个任务要做什么（中文或德文都行）。',
+  TASK_DAY_PAST: '日期已经过了：只能选今天或以后。过了日期的任务不能再改、取消或交给别人；需要的话加一个新任务。',
+  TASK_DAY_FAR: '日期太远了：最多选一年以内的日子。',
+  TASK_DONE: '这个任务已经做完了，不能再改、取消或交给别人。',
+  TASK_CANCELLED: '这个任务已经取消了。请刷新页面。',
+  TASK_WRONG_AREA: '只能交给这个区域的人：后厨的任务交给厨房员工，前场的任务交给前场员工。',
+  TASK_LEAD_ROLE: '默认岗位和区域对不上：后厨选热菜、冷菜、出串或清洁，前场选服务、Runner 或吧台。',
   TASK_PHOTO_BAD: '照片没收到或格式不对。请重新拍一张。',
   INVALID_KIND: '类型不对，请选「门」或「窗户组」。',
   PAYER_INVALID: '选的发放人不是在职的小费管理员。请刷新页面后重新选择。',
@@ -1540,9 +1550,17 @@ const ERR_DE = {
   PHOTO_UPLOAD_FAILED: 'Foto konnte nicht gespeichert werden (Netz oder Server). Bitte gleich nochmal; sonst Screenshot an den Chef.',
   TASK_FAILED: 'Speichern fehlgeschlagen. Bitte gleich nochmal; sonst Screenshot an den Chef.',
   TASK_NOT_YOURS: 'Diese Aufgabe ist heute nicht deine (du bist nicht für diese Rolle eingeplant). Bei Fehlern im Plan bitte die Dienstplanung fragen.',
-  TASK_TOO_EARLY: 'Deine Schicht hat noch nicht begonnen – die Aufgabe geht erst danach.',
+  TASK_TOO_EARLY: 'Deine Schicht hat noch nicht begonnen (oder der Tag der Aufgabe ist noch nicht da) – die Aufgabe geht erst danach.',
   TASK_PHOTO_REQUIRED: 'Heute ist ein Foto nötig, Abhaken reicht nicht. Bitte fotografieren.',
   TASK_DAY_CLOSED: 'Dieser Tag ist vorbei, nachholen geht nicht mehr.',
+  TASK_INPUT: 'Bereich oder Zeitpunkt ungültig: Bereich nur Service oder Küche, Zeitpunkt nur „Bei Feierabend“ oder „Bei Dienstbeginn“. Bitte neu wählen.',
+  TASK_NAME_EMPTY: 'Bitte eintragen, was zu tun ist (Deutsch oder Chinesisch).',
+  TASK_DAY_PAST: 'Das Datum ist vorbei: nur heute oder später. Vergangene Aufgaben können nicht mehr geändert, abgesagt oder zugeteilt werden; bei Bedarf eine neue anlegen.',
+  TASK_DAY_FAR: 'Das Datum ist zu weit weg: höchstens ein Jahr im Voraus.',
+  TASK_DONE: 'Diese Aufgabe ist schon erledigt und kann nicht mehr geändert, abgesagt oder zugeteilt werden.',
+  TASK_CANCELLED: 'Diese Aufgabe wurde abgesagt. Bitte die Seite neu laden.',
+  TASK_WRONG_AREA: 'Nur an Personen aus dem Bereich: Küchenaufgaben an Küchenpersonal, Service-Aufgaben an Service-Personal.',
+  TASK_LEAD_ROLE: 'Standard-Position passt nicht zum Bereich: Küche = Warme Küche, Kalte Küche, Spieße oder Reinigung; Service = Service, Runner oder Bar.',
   TASK_PHOTO_BAD: 'Foto nicht angekommen oder falsches Format. Bitte neu fotografieren.',
   INVALID_KIND: 'Falsche Art – bitte „Tür“ oder „Fenstergruppe“ wählen.',
   PAYER_INVALID: 'Der gewählte Auszahler ist kein aktiver Tip-Manager. Bitte Seite neu laden und neu wählen.',
@@ -1777,10 +1795,11 @@ function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 async function loadTasks(){
   if (!state.me || state.me.is_kitchen){ state.tasks = null; state.closing = null; return; }
   const NO = Symbol();
-  const [tk, cl, lb] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
-    state.me.is_admin ? null : soft(rpc('my_library', tok()), null)]);   // v79：资料（要确认的放进「今天」）
+  const [tk, cl, lb, ld] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
+    state.me.is_admin ? null : soft(rpc('my_library', tok()), null),   // v79：资料（要确认的放进「今天」）
+    (state.me.leads || []).length && !state.me.is_admin ? soft(rpc('my_led_tasks', tok()), null) : null]);   // v95：我负责的任务
   if (tk === NO) state.tasks = null; else { state.tasks = tk; state.tasksAt = Date.now(); }
-  state.closing = cl || []; state.lib = lb;
+  state.closing = cl || []; state.lib = lb; state.led = ld;
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
 function viewTasks(){
@@ -1808,7 +1827,7 @@ function viewTasks(){
       data: { date: k.data.date, store: k.data.store, shifts: g.map(x => ({ ...x.data, done: x.status === 'done' })) } });
   });
   // v71：收店任务（my_store_tasks）
-  (state.closing || []).forEach(c => out.push({ kind: 'closing', scope: 'personal', day: c.day, due: c.due, status: c.status, data: c }));
+  (state.closing || []).forEach(c => out.push({ kind: 'closing', scope: c.status === 'upcoming' ? 'upcoming' : 'personal', day: c.day, due: c.due, status: c.status, data: c }));   // v95：以后几天的放进「接下来」
   // v79：要确认、还没确认的资料
   (state.lib || []).filter(x => x.must_confirm && !x.confirmed_at).forEach(x => out.push({ kind: 'library', scope: 'personal', day: bt, status: 'now', data: x }));
   return out;
@@ -1836,10 +1855,10 @@ function taskCardHTML(k){
       dn.length ? t('tk_bon_part', { a: dn.map(x => slotLabel(x.slot)).join(' + '), b: left.map(x => slotLabel(x.slot)).join(' + ') }) : t('tk_bon_day_sub'),
       `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="miss-go" data-title="${esc(t('bn_head', { d: dayLabel(d.date), s: d.store, sl }))}">${esc(t('tk_bon_btn'))}</button>`);
   }
-  if (k.kind === 'closing'){   // v71：收店任务
+  if (k.kind === 'closing'){   // v71：收店任务；v95：某一天的任务（收店时 / 到店后）
     const nd = d.need || {}, n = d.items.length, got = d.items.filter(i => i.done).length;
-    const title = t('tk_close', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store }) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
-    const sub = t(k.status === 'overdue' ? 'tk_close_over' : k.status === 'now' ? 'tk_close_now' : 'tk_close_later') + ' · ' + tkHow(nd);
+    const title = (d.once ? t('tk_once', { w: toWhen(d), n: toName(d), s: d.store }) : t('tk_close', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store })) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
+    const sub = t(k.status === 'overdue' ? 'tk_close_over' : d.once && d.timing === 'arrival' ? 'tk_once_now_arrival' : k.status === 'now' ? 'tk_close_now' : 'tk_close_later') + ' · ' + tkHow(nd) + toByLead(d);
     return card(cls, esc(title) + (got ? ` <span class="muted small num">${got}/${n}</span>` : ''), sub,
       `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="task-open" data-def="${d.def_id}" data-day="${d.day}">${esc(t(got ? 'tk_close_cont' : 'tk_close_go'))}</button>`);
   }
@@ -1873,7 +1892,7 @@ function taskCardHTML(k){
 }
 function taskDoneLine(k){
   const d = k.data || {};
-  const txt = k.kind === 'closing' ? t('tk_close_done', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store }) : k.kind === 'lock_round' ? t('lk_done_line', { s: d.store }) : k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'bon_day' ? t('tk_bon_day_done', { s: d.store, sl: d.shifts.map(x => slotLabel(x.slot)).join(' + ') }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
+  const txt = k.kind === 'closing' ? t('tk_close_done', { n: (d.once ? toWhen(d) + (state.lang === 'de' ? ': ' : '：') : '') + toName(d), s: d.store }) : k.kind === 'lock_round' ? t('lk_done_line', { s: d.store }) : k.kind === 'bon_shift' ? t('tk_bon_done', { sl: slotLabel(d.slot), s: d.store }) : k.kind === 'bon_day' ? t('tk_bon_day_done', { s: d.store, sl: d.shifts.map(x => slotLabel(x.slot)).join(' + ') }) : k.kind === 'avail' ? t('tk_avail_done', { w: isoWeek(d.week_start) }) : k.kind;
   return `<div class="item"><div class="top"><div><span class="pos">✓</span> ${esc(txt)}</div></div></div>`;
 }
 async function viewToday(){
@@ -1883,7 +1902,7 @@ async function viewToday(){
   // v68：有上次的内容就先显示，同时向服务器要新的（一起要，不再一个接一个）；内容变了再重画
   const shown = !!state.tasks;
   if (shown) renderToday(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
-  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo]);
+  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led]);
   const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // 刚启动时已经要过
   const [, env, , at] = await Promise.all([fresh ? null : loadTasks(),
     state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo(),
@@ -1891,7 +1910,7 @@ async function viewToday(){
     isSup() ? invTodoLoad() : null]);   // v94：物品待办
   state.envPend = env || null; state.areaToday = at || null;
   if (state.tab !== 'today' || state.recon || !state.me) return;   // 等的时候已经切到别的页
-  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo]) !== before) renderToday();
+  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led]) !== before) renderToday();
   refreshTodayBadge();
 }
 // 待处理的疑问（周结页；v89 起老板的「今天」也显示，老板 2026-10-15）：「处理」写怎么处理的
@@ -1962,7 +1981,7 @@ function renderToday(){
   const order = { overdue: 0, now: 1, later: 2 };
   if (state.lockOpen){ renderLock(); return; }
   if (state.taskOpen){ renderTaskRun(); return; }   // v71
-  const all = viewTasks().filter(x => x.scope !== 'store'), store = viewTasks().filter(x => x.scope === 'store'), open = all.filter(x => x.status !== 'done').sort((a, b) => (b.kind === 'message') - (a.kind === 'message') || order[a.status] - order[b.status] || String(a.due || '').localeCompare(String(b.due || '')));
+  const all = viewTasks().filter(x => x.scope !== 'store' && x.scope !== 'upcoming'), store = viewTasks().filter(x => x.scope === 'store'), up = viewTasks().filter(x => x.scope === 'upcoming'), open = all.filter(x => x.status !== 'done').sort((a, b) => (b.kind === 'message') - (a.kind === 'message') || order[a.status] - order[b.status] || String(a.due || '').localeCompare(String(b.due || '')));
   const done = all.filter(x => x.status === 'done');
   const shifts = (T.shifts || []).length
     ? `<div class="sheet today-shift"><div class="muted small">${esc(t('td_shift'))} · ${esc(dayLabel(T.day))}</div>${T.shifts.map(x => `<div class="ts-row">${shiftLine(x)}</div>`).join('')}</div>`
@@ -1975,6 +1994,7 @@ function renderToday(){
     + `<h3>${esc(nOpen ? t('td_mine', { n: nOpen }) : t('td_mine_ok'))}</h3>`
     + (open.length || tm.length ? msgs.map(taskCardHTML).join('') + tm.join('') + rest.map(taskCardHTML).join('') : `<div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
     + (done.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(taskDoneLine).join('')}</div></div></details>` : '')
+    + upcomingHTML(up) + ledHTML()   // v95：接下来、我负责的任务
     + (store.length ? `<h3>${esc(t('td_store'))}</h3>` + store.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status]).map(taskCardHTML).join('')
         + (store.some(x => x.status === 'done') ? `<div class="list">${store.filter(x => x.status === 'done').map(taskDoneLine).join('')}</div>` : '') : '');
 }
@@ -2348,7 +2368,8 @@ function renderLock(){
 // ============ 收店任务（v71）============
 // 今天要不要拍照、为什么
 function tkHow(nd){ return nd && nd.mode === 'photo' ? t('tk_close_photo_' + (nd.reason || 'learning'), { a: nd.done || 0, b: nd.need || 0 }) : t('tk_close_check'); }
-function tkOpenRun(){ const o = state.taskOpen; return o && (state.closing || []).find(x => x.def_id === o.def && x.day === o.day); }
+function tkOpenRun(){ const o = state.taskOpen; return o && ((state.closing || []).find(x => x.def_id === o.def && x.day === o.day && x.status !== 'upcoming')
+  || ((state.led || {}).tasks || []).find(x => x.def_id === o.def && x.day === o.day && x.status !== 'upcoming')); }   // v95：负责人「我自己做」
 function renderTaskRun(){
   const c = tkOpenRun();
   if (!c){ state.taskOpen = null; $('#main').innerHTML = `<div class="empty">${esc(t('tk_gone'))}</div>`; return; }
@@ -2367,7 +2388,7 @@ function renderTaskRun(){
       <div class="acts" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px">${acts}</div></div>`;
   }).join('');
   $('#main').innerHTML = `<button class="link" data-act="task-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>
-    <h2 style="margin-top:0">${esc(nm(c))}${storeTag(c.store)}</h2>
+    <h2 style="margin-top:0">${esc((c.once ? toWhen(c) + (state.lang === 'de' ? ': ' : '：') : '') + nm(c))}${storeTag(c.store)}</h2>
     <div class="infobox">${esc(tkHow(c.need))}${c.day !== (state.tasks || {}).day ? ' · ' + esc(dayLabel(c.day)) : ''}</div>
     ${c.completed_at ? `<div class="infobox" style="border-color:var(--celadon)">✓ ${esc(t('tk_run_done', { t: fmtDateTime(c.completed_at), n: c.completed_by || '' }))}</div>` : ''}
     <div class="list">${rows}</div>`;
@@ -2388,18 +2409,115 @@ async function taskUpload(input){
     render();
   } catch(e){ toast(errText(e), true); render(); }
 }
+// ============ 任务模块第二步（v95，数据库 v68 / 文件服务 tasks v10，老板 2026-10-19）：某一天的任务 + 负责人 ============
+// 老板在「管理 → 任务」加某一天的任务、设每家店前场 / 后厨的负责人；负责人在「今天」把任务交给某个人；做的人在「今天」做
+const FROLES = ['service', 'runner', 'bar'];
+const toName = x => state.lang === 'de' ? x.name_de : x.name_zh;
+const toWhen = x => t('tk_once_' + (x.timing === 'arrival' ? 'arrival' : 'closing'));
+const toByLead = d => d.once && d.assignee && state.me && d.assignee.id === state.me.id && d.lead && d.lead.id !== state.me.id ? ' · ' + t('tk_by_lead', { n: d.lead.name }) : '';
+const toAreaStaff = (list, area) => (list || []).filter(s => s.is_active && !s.is_kitchen && (area === 'kitchen' ? KROLES : FROLES).includes(s.main_role || 'service'));
+// 谁做：交给的人 / 按默认（当天的清洁）+ 那天排了谁
+function toWhoText(x){
+  const ppl = (x.people || []).map(p => p.name).join('、'), r = t('grp_' + x.default_role);
+  if (!x.published) return (x.assignee ? t('to_who_assignee', { n: x.assignee.name }) : t('to_who_default0', { r })) + ' · ' + t('to_unpub');
+  if (x.via === 'assignee') return t('to_who_assignee', { n: x.assignee.name });
+  const base = x.via === 'role' ? t('to_who_default', { r, p: ppl }) : x.via === 'area' ? t('to_who_area', { r, p: ppl }) : t('to_nobody');
+  return x.assignee ? t('to_who_assignee_off', { n: x.assignee.name, p: base }) : base;
+}
+// 一个任务（老板的列表 mode = admin；负责人的「今天」mode = lead）
+function toItemHTML(x, mode){
+  const done = x.status === 'done', bad = x.status === 'missed' || x.status === 'overdue', it = (x.items || [])[0] || {}, l = it.last;
+  const st = done ? `<span class="pos">${esc(t('to_st_done', { n: x.completed_by || '', t: fmtDateTime(x.completed_at) }))}</span>` : bad ? `<span class="negc">${esc(t('to_st_missed'))}</span>` : '';
+  const hint = state.lang === 'de' ? it.hint_de : it.hint_zh, acts = [];
+  if (!done && !bad) acts.push(`<button class="link" data-act="asg-open" data-def="${x.def_id}" data-mode="${mode}">${esc(t('to_assign'))}</button>`);
+  if (mode === 'admin' && !done && !bad) acts.push(`<button class="link" data-act="to-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button>`,
+    `<button class="link danger" data-act="to-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>`);
+  if (mode === 'lead' && !done && ['today', 'overdue'].includes(x.status)) acts.push(`<button class="link" data-act="task-open" data-def="${x.def_id}" data-day="${x.day}">${esc(t('ld_self'))}</button>`);
+  return `<div class="item"><div class="top"><div><strong>${esc(toWhen(x) + (state.lang === 'de' ? ': ' : '：') + toName(x))}</strong>${storeTag(x.store)}${mode === 'admin' ? ` <span class="tag">${esc(t('area_' + x.area))}</span>` : ''}${x.important ? ' <span class="tag">📷</span>' : ''}</div>
+      ${st ? `<div class="meta small">${st}</div>` : ''}</div>
+    ${mode === 'lead' ? `<div class="meta">${esc(x.status === 'today' ? t('rk_rel0') + ' · ' + dayLabel(x.day) : dayLabel(x.day))}</div>` : ''}
+    ${hint ? `<div class="meta">${esc(hint)}</div>` : ''}
+    <div class="meta">${mode === 'admin' ? esc(x.lead ? t('to_lead', { n: x.lead.name }) : t('to_lead_none')) + (done ? '' : ' · ') : ''}${done ? '' : esc(toWhoText(x))}${l && l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : ''}</div>
+    ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}</div>`;
+}
+// 员工「今天」：接下来几天要做的（某一天的任务）
+function upcomingHTML(up){
+  if (!up.length) return '';
+  return `<h3>${esc(t('td_upcoming', { n: up.length }))}</h3><div class="list">${up.slice().sort((a, b) => String(a.day).localeCompare(String(b.day))).map(k => { const d = k.data, it = (d.items || [])[0] || {}, hint = state.lang === 'de' ? it.hint_de : it.hint_zh;
+    return `<div class="item"><div class="top"><div><strong>${esc(toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d))}</strong>${storeTag(d.store)}</div><div class="meta small muted">${esc(d.day === bizToday() ? t('rk_rel0') : dayLabel(d.day))}</div></div>
+      ${hint ? `<div class="meta">${esc(hint)}</div>` : ''}${toByLead(d) ? `<div class="meta">${esc(toByLead(d).replace(/^ · /, ''))}</div>` : ''}</div>`; }).join('')}</div>`;
+}
+// 负责人「今天」：我负责的任务
+function ledHTML(){
+  const L = state.led; if (!L || !(L.tasks || []).length || !state.me || state.me.is_admin) return '';
+  return h3i(esc(t('ld_title', { n: L.tasks.filter(x => x.status !== 'done').length })), t('ld_hint')) + `<div class="list">${L.tasks.map(x => toItemHTML(x, 'lead')).join('')}</div>`;
+}
+// 「交给…」窗口（负责人和老板）
+function asgRender(){
+  const a = state.asg, dlg = $('#photoDlg'); if (!a) return;
+  const x = a.x, on = x.on_shift || [];
+  const staff = a.mode === 'admin' ? toAreaStaff(state.toStaff, x.area) : ((state.led || {}).staff || []).filter(s => s.area === x.area || s.id === state.me.id);
+  const row = (id, name, sub, cur) => `<button class="btn ghost" type="button" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;text-align:left${cur ? ';border-color:var(--celadon)' : ''}" data-act="asg-pick" data-id="${id || ''}" data-name="${esc(name)}"><span>${cur ? '✓ ' : ''}${esc(name)}</span><span class="small muted">${esc(sub)}</span></button>`;
+  dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('ld_assign_title'))}</h2>
+    <div class="small muted" style="margin-bottom:12px">${esc(dayLabel(x.day) + ' · ' + toWhen(x) + (state.lang === 'de' ? ': ' : '：') + toName(x) + ' · ' + x.store)}</div>
+    ${row('', t('ld_default', { r: t('grp_' + x.default_role) }), '', !x.assignee)}
+    ${staff.slice().sort((p, q) => on.includes(q.id) - on.includes(p.id)).map(s => row(s.id, s.name, x.published ? t(on.includes(s.id) ? 'ld_on' : 'ld_off') : '', x.assignee && x.assignee.id === s.id)).join('')}
+    <div class="small muted" style="margin:4px 0 12px">${x.published ? '' : esc(t('to_unpub')) + ' '}${esc(t('ld_assign_hint', { r: t('grp_' + x.default_role) }))}</div>
+    <button class="btn ghost" type="button" data-act="photo-close">${esc(t('cancel'))}</button>`;
+}
+// 老板「管理 → 任务」
+async function toAdminLoad(){
+  const [L, list, staff] = await Promise.all([rpc('admin_task_leads', tok()), rpc('admin_tasks_once', tok()), rpc('admin_list_staff', tok())]);
+  state.toLeads = L || []; state.toList = list || []; state.toStaff = staff || [];
+  return toAdminRender();
+}
+function toSync(){ const e = state.toEdit; if (!e) return;
+  [['day', 'to-day'], ['text', 'to-text'], ['zh', 'to-zh'], ['de', 'to-de'], ['hzh', 'to-hzh'], ['hde', 'to-hde']].forEach(([k, id]) => { const el = document.getElementById(id); if (el) e[k] = el.value; }); }
+function toFormHTML(e){
+  const seg = (k, opts) => `<div class="seg sm" style="margin-bottom:12px">${opts.map(([v, lbl]) => `<button type="button" data-act="to-set" data-k="${k}" data-v="${v}" class="${String(e[k]) === String(v) ? 'on' : ''}">${esc(lbl)}</button>`).join('')}</div>`;
+  return `<div class="sheet" id="to-form"><h3 style="margin-top:0">${esc(t(e.id ? 'to_title_edit' : 'to_title_new'))}</h3>
+    ${seg('store', STORES.map(x => [x, x]))}${seg('area', [['kitchen', t('area_kitchen')], ['front', t('area_front')]])}
+    <div class="field"><label for="to-day">${esc(t('to_day'))}</label><input class="input" type="date" id="to-day" min="${bizToday()}" value="${esc(e.day || '')}"></div>
+    <div class="small muted" style="margin-bottom:6px">${esc(t('to_when'))}</div>${seg('timing', [['closing', t('tk_once_closing')], ['arrival', t('tk_once_arrival')]])}
+    <div class="field"><label for="to-text">${esc(t('to_text'))}</label><textarea class="input tkm-ta" id="to-text" rows="2" maxlength="1000" placeholder="${esc(t('to_text_ph'))}">${esc(e.text || '')}</textarea></div>
+    <button class="btn ghost" type="button" data-act="to-ai" ${e.busy ? 'disabled' : ''}>${esc(e.busy ? t('to_ai_busy') : t('to_ai'))}</button>
+    <div class="small muted" style="margin:6px 0 10px">${esc(t('to_ai_hint'))}</div>
+    <div class="field"><label for="to-zh">${esc(t('to_name_zh'))}</label><input class="input" id="to-zh" maxlength="120" value="${esc(e.zh || '')}"></div>
+    <div class="field"><label for="to-de">${esc(t('to_name_de'))}</label><input class="input" id="to-de" maxlength="200" value="${esc(e.de || '')}"></div>
+    <div class="field"><label for="to-hzh">${esc(t('to_hint_zh'))}</label><textarea class="input tkm-ta" id="to-hzh" rows="2" maxlength="900">${esc(e.hzh || '')}</textarea></div>
+    <div class="field"><label for="to-hde">${esc(t('to_hint_de'))}</label><textarea class="input tkm-ta" id="to-hde" rows="2" maxlength="900">${esc(e.hde || '')}</textarea></div>
+    <div class="small muted" style="margin-bottom:6px">${esc(t('to_how'))}</div>${seg('photo', [['false', t('to_check')], ['true', t('to_photo')]])}
+    <div class="row"><button class="btn ghost" type="button" data-act="to-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="to-save">${esc(t('to_save'))}</button></div></div>`;
+}
+function toAdminRender(){
+  const e = state.toEdit, groups = {};
+  (state.toList || []).forEach(x => (groups[x.day] = groups[x.day] || []).push(x));
+  const list = Object.keys(groups).sort().map(d => `<h3>${esc(dayLabel(d))}${d === bizToday() ? ' · ' + esc(t('rk_rel0')) : ''}</h3><div class="list">${groups[d].map(x => toItemHTML(x, 'admin')).join('')}</div>`).join('');
+  const leads = h3i(esc(t('tl_title')), t('tl_hint')) + `<div class="list">${STORES.flatMap(st => ['kitchen', 'front'].map(a => {
+      const l = (state.toLeads || []).find(x => x.store === st && x.area === a) || {}, k = st + '-' + a, pick = toAreaStaff(state.toStaff, a);
+      if (l.staff_id && !pick.some(p => p.id === l.staff_id)) pick.unshift({ id: l.staff_id, name: l.name || '?' });
+      return `<div class="item"><div class="top"><div>${storeTag(st)} <strong>${esc(t('area_' + a))}</strong></div>${l.updated_by ? `<div class="meta small muted">${esc(t('tl_by', { n: l.updated_by, t: fmtDateTime(l.updated_at) }))}</div>` : ''}</div>
+        <div class="row" style="gap:8px;margin-top:8px;flex-wrap:wrap">
+          <div class="field" style="flex:1 1 140px;margin:0"><label for="tl-p-${k}" class="small muted">${esc(t('tl_lead'))}</label><select class="input" id="tl-p-${k}"><option value="">${esc(t('tl_none'))}</option>${pick.map(p => `<option value="${p.id}" ${p.id === l.staff_id ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>
+          <div class="field" style="flex:1 1 140px;margin:0"><label for="tl-r-${k}" class="small muted">${esc(t('tl_role'))}</label><select class="input" id="tl-r-${k}">${(a === 'kitchen' ? KROLES : FROLES).map(r => `<option value="${r}" ${r === l.default_role ? 'selected' : ''}>${esc(t('grp_' + r))}</option>`).join('')}</select></div></div>
+        <div class="acts"><button class="link" data-act="tl-save" data-store="${st}" data-area="${a}">${esc(t('save'))}</button></div></div>`;
+    })).join('')}</div>`;
+  return (e ? toFormHTML(e) : `<button class="btn" data-act="to-new" style="margin:0 0 6px">${esc(t('to_new'))}</button>`)
+    + h3i(esc(t('to_list')), t('to_list_hint')) + (list || `<div class="list"><div class="empty">${esc(t('to_none'))}</div></div>`) + leads;
+}
+function toRedraw(){ const el = $('#asub'); if (el && state.tab === 'admin' && state.adminSub === 'tasks') el.innerHTML = toAdminRender(); }
 // 老板：一个任务一天的情况（每日核对页）
 // v78（老板 2026-10-11）：老板就这个任务这一天给员工留了言 → 等员工确认（wait）；都点了「知道了」→ 已处理（done）。这两种都不标红、不算待办
 function tkHandled(x){ const ms = x.messages || []; return !ms.length ? null : ms.every(m => m.read_at) ? 'done' : 'wait'; }
 const tkRed = x => ['missed', 'nobody'].includes(x.status) && !tkHandled(x);
 function tkAdminLine(x){
-  const nm = state.lang === 'de' ? x.name_de : x.name_zh, ppl = (x.people || []).map(p => p.name).join('、');
+  const nm = (x.once ? toWhen(x) + (state.lang === 'de' ? ': ' : '：') : '') + (state.lang === 'de' ? x.name_de : x.name_zh), ppl = (x.people || []).map(p => p.name).join('、');   // v95
   const h = tkHandled(x), ms = x.messages || [], who = list => [...new Set(list.map(m => m.to))].join('、');
   const st = h === 'done' ? ' · ' + t('tkm_st_done', { n: who(ms), t: fmtDateTime(ms.map(m => m.read_at).sort().pop()) })
     : h === 'wait' ? ' · ' + t('tkm_st_wait', { n: who(ms.filter(m => !m.read_at)) }) : '';
   const x0 = h ? '' : '✗ ';   // 已经留言处理的，不再打 ✗
   if (x.status === 'done') return '✓ ' + t('tk_adm_done', { n: nm, b: x.completed_by || '', t: fmtDateTime(x.completed_at) }) + st;
-  if (x.status === 'nobody') return x0 + t('tk_adm_nobody', { n: nm, r: t('grp_' + x.role) }) + st;
+  if (x.status === 'nobody') return x0 + t(x.once ? 'tk_adm_nobody_once' : 'tk_adm_nobody', { n: nm, r: t('grp_' + x.role) }) + st;
   if (x.status === 'missed') return x0 + t('tk_adm_missed', { n: nm, p: ppl || '–' }) + st;
   return t('tk_adm_open', { n: nm, p: ppl || '–' }) + st;
 }
@@ -4882,7 +5000,7 @@ function admMoreHTML(){
     + b('inv-settings', '', t('inv_set_h')) + ADMIN_MORE.map(k => b('admin-more', `data-sub="${k}"`, t('admin_' + k), state.adminSub === k)).join('') + `</div>`;
 }
 async function viewAdmin(){
-  const subs = ['requests', 'feedback', 'notice', 'library', 'expense', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
+  const subs = ['requests', 'feedback', 'notice', 'library', 'tasks', 'expense', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
   const segHTML = c => `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}${c && c[s] ? ` <span class="tag pend" style="margin:0 0 0 4px">${c[s]}</span>` : ''}</button>`).join('')}</div>`;
   $('#main').innerHTML = segHTML(state.adminCounts) + `<div id="asub"><div class="loading">${esc(t('loading'))}</div></div>` + admMoreHTML();
   const c = state.adminCounts = await adminCounts();
@@ -4929,6 +5047,8 @@ async function viewAdmin(){
         return `<h3>${storeTag(st)}</h3><div class="list">${act.map((c, i) => row(c, i, act.length)).join('')}${off.map(c => row(c, 0, 0)).join('')}</div>
           <button class="btn ghost" style="margin:8px 0 6px" data-act="lkadm-edit" data-store="${st}">${esc(t('lk_adm_add'))}</button>`;
       }).join('');
+    } else if (state.adminSub === 'tasks'){   // v95：某一天的任务 + 负责人
+      el().innerHTML = await toAdminLoad();
     } else if (state.adminSub === 'expense'){   // v67：垫付
       el().innerHTML = await expAdminHTML();
     } else if (state.adminSub === 'notice'){   // v64：公告
@@ -6467,6 +6587,62 @@ document.addEventListener('click', async ev => {
     // v71：收店任务
     case 'task-open': state.taskOpen = { def: el.dataset.def, day: el.dataset.day }; state.done = null; state.recon = null; state.tab = 'today'; render(); window.scrollTo(0, 0); break;
     case 'task-close': state.taskOpen = null; render(); window.scrollTo(0, 0); break;
+    // v95：某一天的任务（老板「管理 → 任务」、负责人「交给…」）
+    case 'to-new': { const last = state.toLast || {};
+      state.toEdit = { store: last.store || 'Bismarck', area: last.area || 'kitchen', day: addDays(bizToday(), 1), timing: 'closing', photo: false, text: '', zh: '', de: '', hzh: '', hde: '' };
+      toRedraw(); const f = $('#to-form'); if (f) f.scrollIntoView({ block: 'start' }); break; }
+    case 'to-edit': { const x = (state.toList || []).find(v => v.def_id === el.dataset.def); if (!x) break; const it = (x.items || [])[0] || {};
+      state.toEdit = { id: x.def_id, store: x.store, area: x.area, day: x.day, timing: x.timing, photo: !!x.important, text: '', zh: x.name_zh, de: x.name_de, hzh: it.hint_zh || '', hde: it.hint_de || '' };
+      toRedraw(); window.scrollTo(0, 0); break; }
+    case 'to-set': { const e = state.toEdit; if (!e) break; toSync(); e[el.dataset.k] = el.dataset.k === 'photo' ? el.dataset.v === 'true' : el.dataset.v; keepScroll(toRedraw); break; }
+    case 'to-close': state.toEdit = null; toRedraw(); break;
+    case 'to-ai': {
+      const e = state.toEdit; if (!e || e.busy) break; toSync();
+      const txt = (e.text || '').trim() || (e.zh || '').trim() || (e.de || '').trim(); if (!txt) return toast(t('err_TASK_NAME_EMPTY'), true);
+      e.busy = true; keepScroll(toRedraw);
+      try { const r = await callTasks({ action: 'task_text', text: txt }); Object.assign(e, { zh: r.name_zh || e.zh, de: r.name_de || e.de, hzh: r.hint_zh || '', hde: r.hint_de || '' }); }
+      catch(err){ toast(errText(err), true); }
+      e.busy = false; if (state.toEdit === e) keepScroll(toRedraw);
+      break;
+    }
+    case 'to-save': {
+      const e = state.toEdit; if (!e) break; toSync();
+      let zh = (e.zh || '').trim(); const de = (e.de || '').trim(); if (!zh && !de) zh = (e.text || '').trim();   // 没用 AI：那一句话就是任务名
+      if (!zh && !de) return toast(t('err_TASK_NAME_EMPTY'), true);
+      el.disabled = true;
+      try { await rpc('admin_task_once_save', { ...tok(), p_id: e.id || null, p_store: e.store, p_area: e.area, p_day: e.day || null, p_timing: e.timing,
+          p_name_zh: zh, p_name_de: de, p_hint_zh: e.hzh || null, p_hint_de: e.hde || null, p_photo: !!e.photo });
+        state.toLast = { store: e.store, area: e.area }; state.toEdit = null; toast(t('to_saved')); render(); }
+      catch(err){ toast(errText(err), true); el.disabled = false; }
+      break;
+    }
+    case 'to-cancel': {
+      const x = (state.toList || []).find(v => v.def_id === el.dataset.def); if (!x) break;
+      if (!confirm(t('to_cancel_q', { n: toName(x), d: dayLabel(x.day) }))) break; el.disabled = true;
+      try { await rpc('admin_task_once_cancel', { ...tok(), p_id: x.def_id }); toast(t('to_cancelled')); keepScroll(render); }
+      catch(err){ toast(errText(err), true); el.disabled = false; }
+      break;
+    }
+    case 'tl-save': {
+      const k = el.dataset.store + '-' + el.dataset.area; el.disabled = true;
+      try { await rpc('admin_task_lead_set', { ...tok(), p_store: el.dataset.store, p_area: el.dataset.area, p_staff_id: $('#tl-p-' + k).value || null, p_default_role: $('#tl-r-' + k).value });
+        toast(t('tl_saved')); keepScroll(render); }
+      catch(err){ toast(errText(err), true); el.disabled = false; }
+      break;
+    }
+    case 'asg-open': {
+      const src = el.dataset.mode === 'admin' ? state.toList : (state.led || {}).tasks, x = (src || []).find(v => v.def_id === el.dataset.def); if (!x) break;
+      state.asg = { x, mode: el.dataset.mode }; asgRender(); const dlg = $('#photoDlg'); if (!dlg.open) dlg.showModal(); break;
+    }
+    case 'asg-pick': {
+      const a = state.asg; if (!a) break; const id = el.dataset.id || null; el.disabled = true;
+      try { await rpc('task_assign', { ...tok(), p_def: a.x.def_id, p_staff_id: id });
+        $('#photoDlg').close(); state.asg = null; toast(id ? t('ld_assigned', { n: el.dataset.name }) : t('ld_reset'));
+        if (a.mode === 'lead') await loadTasks();
+        keepScroll(render); }
+      catch(err){ toast(errText(err), true); el.disabled = false; }
+      break;
+    }
     case 'task-check': {
       const c = tkOpenRun(); if (!c) break; el.disabled = true;
       try { const st = await rpc('task_item_check', { ...tok(), p_def: c.def_id, p_item: el.dataset.item, p_day: c.day }); await loadTasks();
