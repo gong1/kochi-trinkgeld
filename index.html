@@ -397,6 +397,16 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .inv-scan video{width:100%;height:100%;object-fit:cover;display:block}
 .inv-scan-box{position:absolute;inset:18% 12%;border:3px solid rgba(255,255,255,.85);border-radius:12px}
 .inv-scanbtn{flex:none;width:auto;padding:0 14px;height:48px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:600;font-size:15px;white-space:nowrap}
+.inv-shelf{display:grid;gap:2px;flex:none;width:40px;padding:3px;border:1.5px solid var(--line);border-radius:4px;background:#fff}
+.inv-shelf i{display:block;height:7px;border-radius:1px}
+.inv-shelf.grid{width:auto}
+.inv-shelf.grid i{width:12px;height:9px}
+.inv-levels{display:flex;flex-direction:column;gap:6px}
+.inv-lvbtn{display:flex;gap:10px;align-items:center;height:44px;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;text-align:left;font-size:15px}
+.inv-lvbtn b{font-size:18px;min-width:22px}
+.inv-lvbtn.on,.inv-cell.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.inv-grid{display:grid;gap:6px}
+.inv-cell{height:44px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:700}
 .inv-find{display:block;flex:1;min-width:0;height:48px;text-align:left;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;color:var(--muted);font-size:16px}
 </style>
 </head>
@@ -420,6 +430,13 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v99：物品——AI 改一改、AI 推荐位置、按真实架子显示层 / 格
+  inv_fix_lbl:'AI 认错了？说一句正确的（可以点键盘上的 🎤 直接说）', inv_fix_ph:'例如：这是韩国辣椒酱，不是番茄酱', inv_fix_btn:'✨ 让 AI 改', inv_fix_need:'请先写（或说）一句哪里不对。',
+  inv_fix_done:'✓ AI 按你说的改好了，请再看一眼。', inv_aip_btn:'✨ AI 推荐位置', inv_aip_again:'换一批推荐', inv_aip_busy:'AI 正在想放哪里……{s} 秒',
+  inv_aip_h:'AI 推荐（点一下就选上；只推荐不违反规矩的位置）', inv_aip_none:'没有符合规矩、你又能维护的位置。请检查分类和「怕潮」，或者找老板加储位。', inv_aip_fail:'AI 没推荐成，自己选就行。',
+  inv_aip_need:'先选好分类，AI 才能推荐位置。',
+  inv_pos_lv:'从上往下第 {r} 层', inv_pos_lv_of:'从上往下第 {r} 层（共 {n} 层）', inv_pos_top:'最上层', inv_pos_bottom:'最下层',
+  inv_pos_grid:'第 {r} 行 · 左起第 {c} 格', inv_pos_grid_of:'第 {r} 行 · 左起第 {c} 格（{n} 行 × {m} 格）',
   // v94：物品第三、四步（待归位、搜不到的词、储位确认）
   inv_ib_btn:'📦 不知道放哪？登记待归位', inv_ib_mine:'我登记的（{n}）', inv_ib_new_h:'登记待归位',
   inv_ib_new_hint:'不知道该放哪的东西：拍一张照片，写一句话（在哪找到的、是什么），然后放进这家店办公室的「待归位」箱子（F-UNS）。主管会处理，你在「我登记的」里能看到去了哪里。',
@@ -796,6 +813,13 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v99：Artikel – KI-Korrektur, KI-Platzvorschlag, Ebenen / Fächer wie im echten Regal
+  inv_fix_lbl:'KI liegt falsch? Sag in einem Satz, was richtig ist (auch per 🎤 auf der Tastatur)', inv_fix_ph:'z. B.: Das ist koreanische Chilipaste, kein Ketchup', inv_fix_btn:'✨ KI korrigieren lassen', inv_fix_need:'Bitte zuerst schreiben (oder sagen), was falsch ist.',
+  inv_fix_done:'✓ Die KI hat es nach deinen Angaben korrigiert – bitte kurz prüfen.', inv_aip_btn:'✨ KI-Platzvorschlag', inv_aip_again:'Andere Vorschläge', inv_aip_busy:'Die KI überlegt, wohin … {s} Sek.',
+  inv_aip_h:'KI-Vorschläge (antippen zum Auswählen; nur Plätze, die die Regeln erfüllen)', inv_aip_none:'Kein passender Platz, den du verwaltest. Bitte Kategorie und „feuchtigkeitsempfindlich“ prüfen oder den Chef um neue Lagerplätze bitten.', inv_aip_fail:'Die KI hat keinen Vorschlag gemacht – einfach selbst wählen.',
+  inv_aip_need:'Bitte zuerst die Kategorie wählen, dann schlägt die KI einen Platz vor.',
+  inv_pos_lv:'{r}. Ebene von oben', inv_pos_lv_of:'{r}. Ebene von oben (von {n})', inv_pos_top:'oberste Ebene', inv_pos_bottom:'unterste Ebene',
+  inv_pos_grid:'Reihe {r} · {c}. Fach von links', inv_pos_grid_of:'Reihe {r} · {c}. Fach von links ({n} Reihen × {m} Fächer)',
   // v94：Artikel Schritt 3–4 (Unsortiert, Suchwörter ohne Treffer, Lagerplatz-Kontrolle)
   inv_ib_btn:'📦 Weißt du nicht, wohin? Als unsortiert melden', inv_ib_mine:'Meine Meldungen ({n})', inv_ib_new_h:'Unsortiert melden',
   inv_ib_new_hint:'Für Sachen, bei denen du nicht weißt, wohin sie gehören: Foto machen, kurz dazuschreiben (wo gefunden, was es ist) und in die Kiste „Unsortiert“ im Büro dieser Filiale legen (F-UNS). Die Bereichsleitung kümmert sich darum; unter „Meine Meldungen“ siehst du, wo es gelandet ist.',
@@ -2795,8 +2819,26 @@ async function invLogMiss(){
   if (!q || !R || R.q !== q || (R.items || []).length || (R.places || []).length) return;
   soft(rpc('inv_search', { ...tok(), p_q: q, p_log: true }), null);
 }
+
+// v99：在货架上的位置（数据库 _inv_pos）：文字「从上往下第 2 层」/「第 2 行 · 左起第 1 格」和小货架图
+function invPosText(pos, full){
+  if (!pos) return '';
+  if (pos.grid) return t(full ? 'inv_pos_grid_of' : 'inv_pos_grid', { r: pos.row, c: pos.col, n: pos.rows, m: pos.cols });
+  if (!full && pos.rows > 1 && pos.row === 1) return t('inv_pos_top');
+  if (!full && pos.rows > 1 && pos.row === pos.rows) return t('inv_pos_bottom');
+  return t(full ? 'inv_pos_lv_of' : 'inv_pos_lv', { r: pos.row, n: pos.rows });
+}
+function invShelfHTML(pos){
+  if (!pos || !pos.rows) return '';
+  const on = 'var(--celadon-deep)', off = 'var(--line)';
+  if (pos.grid){
+    const cells = []; for (let r = 1; r <= pos.rows; r++) for (let c = 1; c <= pos.cols; c++) cells.push(`<i style="background:${r === pos.row && c === pos.col ? on : off}"></i>`);
+    return `<div class="inv-shelf grid" style="grid-template-columns:repeat(${pos.cols},12px)" aria-hidden="true">${cells.join('')}</div>`;
+  }
+  return `<div class="inv-shelf" aria-hidden="true">${Array.from({ length: pos.rows }, (_, i) => `<i style="background:${i + 1 === pos.row ? on : off}"></i>`).join('')}</div>`;
+}
 function invLocLine(l, plain){
-  return `<div class="inv-loc"${plain ? '' : ` data-act="inv-place" data-id="${l.place}"`}>${storeTag(l.store)} ${esc(invName(l, 'area'))} · <b class="num">${esc(l.code)}</b>${l.main ? ` <span class="tag m">${esc(t('inv_main'))}</span>` : ''}${(l.warn || []).length ? ' <span class="inv-warn">⚠</span>' : ''}</div>`;
+  return `<div class="inv-loc"${plain ? '' : ` data-act="inv-place" data-id="${l.place}"`}>${storeTag(l.store)} ${esc(invName(l, 'area'))} · <b class="num">${esc(l.code)}</b>${l.pos ? ` <span class="muted">· ${esc(invPosText(l.pos))}</span>` : ''}${l.main ? ` <span class="tag m">${esc(t('inv_main'))}</span>` : ''}${(l.warn || []).length ? ' <span class="inv-warn">⚠</span>' : ''}</div>`;
 }
 function invSortLocs(locs){ const my = invMyStore(); return (locs || []).slice().sort((a, b) => (b.store === my) - (a.store === my) || a.store.localeCompare(b.store) || (b.main - a.main)); }
 function invItemCard(x, act){
@@ -2868,7 +2910,7 @@ function renderInvPlace(){
   const its = P.items || [];
   $('#main').innerHTML = `<button class="link" data-act="inv-area" data-id="${A.id}" style="margin:2px 0 6px">← ${esc(invName(A))}</button>
     <div class="inv-code num">${esc(P.code)}</div>
-    <div style="margin:2px 0 4px"><strong>${esc(title)}</strong>${invPlaceTags(P)}</div>
+    <div class="inv-row" style="margin:2px 0 4px;align-items:center"><div class="inv-txt"><strong>${esc(title)}</strong>${invPlaceTags(P)}${P.pos ? `<div style="font-weight:600">${esc(invPosText(P.pos, true))}</div>` : ''}</div>${invShelfHTML(P.pos)}</div>
     ${use ? `<div class="meta" style="margin-bottom:4px">${esc(use)}</div>` : ''}
     <div style="margin-bottom:10px">${storeTag(A.store)} ${invAreaTags(A)}</div>
     ${P.photo ? invImg(P.photo, 'big', P.photo) + `<div class="small muted">${esc(t('inv_photo_by', { n: P.photo_by || '?', t: fmtDateTime(P.photo_at) }))}</div>` : `<div class="inv-noph big" aria-hidden="true">📷</div><div class="small muted">${esc(t('inv_photo_none'))}</div>`}
@@ -2899,7 +2941,8 @@ function renderInvItem(){
   const byStore = STORES.map(st => { const ls = locs.filter(l => l.store === st); if (!ls.length) return '';
     return ls.map(l => `<div class="item"><div class="inv-row">${invImg(l.photo_t, 'sm')}<div class="inv-txt" data-act="inv-place" data-id="${l.place}" style="cursor:pointer">
       <strong class="num">${esc(l.code)}</strong>${l.main ? ` <span class="tag m">${esc(t('inv_main_long'))}</span>` : ''}
-      <div class="meta">${storeTag(l.store)} ${esc(invName(l, 'area'))}${invName(l) ? ' · ' + esc(invName(l)) : ''}</div>${invWarnLine(l.warn, l)}</div></div>
+      <div class="meta">${storeTag(l.store)} ${esc(invName(l, 'area'))}${invName(l, 'unit') ? ' · ' + esc(invName(l, 'unit')) : invName(l) ? ' · ' + esc(invName(l)) : ''}</div>
+      ${l.pos ? `<div style="font-weight:600;margin-top:2px">${esc(invPosText(l.pos, true))}</div>` : ''}${invWarnLine(l.warn, l)}</div>${invShelfHTML(l.pos)}</div>
       ${l.can_edit && X.active ? `<div class="acts">${l.main ? '' : `<button class="link" data-act="inv-main" data-id="${l.link}">${esc(t('inv_set_main'))}</button>`}<button class="link danger" data-act="inv-unplace" data-id="${l.link}" data-code="${esc(l.code)}">${esc(t('inv_unplace'))}</button></div>` : ''}</div>`).join(''); }).join('');
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
     ${X.photo ? invImg(X.photo, 'big', X.photo) : ''}
@@ -2936,6 +2979,8 @@ async function invFormOpen(mode, preset){
   }
   if (mode !== 'edit' && F.place && !F.area){ const hit = invPickFind(F.place); if (hit) Object.assign(F, { store: hit.a.store, area: hit.a.id, unit_id: hit.u.id }); }
   render(); window.scrollTo(0, 0);
+  if ((mode === 'loc' || mode === 'inbox') && S.item) invAiPlace(F);   // v99：已有物品，分类已经知道，直接推荐位置
+  else if (mode === 'new' && F.category_id) invAiPlace(F);   // 从待归位来的新物品：AI 已经认出分类
 }
 function invPickFind(placeId){
   for (const a of invS().pick || []) for (const u of a.units || []){
@@ -2961,8 +3006,54 @@ function invPickerHTML(F){
   return `${stores.length > 1 ? `<div class="seg sm" style="margin-bottom:10px">${stores.map(s => `<button data-act="inv-pick-store" data-store="${s}" class="${s === st ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>` : ''}
     <div class="field"><label for="inv-pa">${esc(t('inv_f_area'))}</label><select class="input" id="inv-pa">${opt('', t('inv_f_pick'), !A)}${areas.map(a => opt(a.id, `${invName(a)} · ${a.code}`, A && a.id === A.id)).join('')}</select></div>
     ${A ? `<div class="field"><label for="inv-pu">${esc(t('inv_f_unit_pick'))}</label><select class="input" id="inv-pu">${opt('', t('inv_f_pick'), !U)}${(A.units || []).map(u => opt(u.id, `${u.code.split('-').slice(2).join('-')} · ${invName(u)}${invName(u, 'use') ? ' (' + invName(u, 'use') + ')' : ''}`, U && u.id === U.id)).join('')}</select></div>` : ''}
-    ${U && (U.slots || []).length ? `<div class="field"><label>${esc(t('inv_f_slot'))}</label><div class="chips">${U.slots.map(s => `<button class="chip${F.place === s.id ? ' on' : ''}" data-act="inv-pick-slot" data-id="${s.id}">${esc(s.slot)}${s.special === 'gas' ? ' 🔥' : ''}</button>`).join('')}</div></div>` : ''}
+    ${U && (U.slots || []).length ? `<div class="field"><label>${esc(t('inv_f_slot'))}</label>${invSlotPicker(U, F)}</div>` : ''}
     ${F.place ? `<div class="inv-chosen">${esc(t('inv_f_chosen', { c: invPickCode() }))}${F.lastUsed ? ' <span class="small muted">' + esc(t('inv_f_last')) + '</span>' : ''}</div>` : ''}`;
+}
+
+// v99：选层 / 格，按真实的架子排：层从上往下竖着排（A 在最上面），格子柜按行和列排成格子
+function invSlotPicker(U, F){
+  const sl = U.slots || [], grid = sl.some(s => /\d/.test(s.slot));
+  const row = s => s.slot.charCodeAt(0) - 64, col = s => +s.slot.slice(1) || 1;
+  if (grid){
+    const cols = Math.max(...sl.map(col)), rows = Math.max(...sl.map(row));
+    const cell = (r, c) => { const s = sl.find(x => row(x) === r && col(x) === c);
+      return s ? `<button class="inv-cell${F.place === s.id ? ' on' : ''}" data-act="inv-pick-slot" data-id="${s.id}">${esc(s.slot)}${s.special === 'gas' ? ' 🔥' : ''}</button>` : '<span></span>'; };
+    const cellsHtml = []; for (let r = 1; r <= rows; r++) for (let c = 1; c <= cols; c++) cellsHtml.push(cell(r, c));
+    return `<div class="inv-grid" style="grid-template-columns:repeat(${cols},1fr)">${cellsHtml.join('')}</div>`;
+  }
+  const n = Math.max(...sl.map(row));
+  return `<div class="inv-levels">${sl.slice().sort((a, b) => row(a) - row(b)).map(s => `<button class="inv-lvbtn${F.place === s.id ? ' on' : ''}" data-act="inv-pick-slot" data-id="${s.id}"><b>${esc(s.slot)}</b> <span>${esc(invPosText({ row: row(s), rows: n }))}</span>${s.special === 'gas' ? ' 🔥' : ''}</button>`).join('')}</div>`;
+}
+// v99：AI 推荐位置（文件服务 tasks v11 inv_ai_place；数据库先筛掉违反规矩的位置）
+function invAipHTML(F){
+  const A = F.aip;
+  const btn = `<button class="btn ghost" data-act="inv-aip" style="margin-bottom:10px">${esc(A && A.list ? t('inv_aip_again') : t('inv_aip_btn'))}</button>`;
+  if (!A) return `<div id="inv-aip">${btn}</div>`;
+  if (A.busy) return `<div id="inv-aip"><div class="infobox">${esc(t('inv_aip_busy', { s: Math.round((Date.now() - A.at) / 1000) }))}</div></div>`;
+  if (A.err) return `<div id="inv-aip"><div class="infobox" style="background:var(--copper-soft);color:var(--copper)">${esc(t(A.err === 'need' ? 'inv_aip_need' : 'inv_aip_fail'))}</div>${btn}</div>`;
+  if (!(A.list || []).length) return `<div id="inv-aip"><div class="infobox">${esc(t('inv_aip_none'))}</div>${btn}</div>`;
+  return `<div id="inv-aip"><div class="small muted" style="margin-bottom:4px">${esc(t('inv_aip_h'))}</div><div class="list">${A.list.map(x => { const h = invPickFind(x.id);
+      const unit = h ? invName(h.u) : '', pos = h && h.s ? invPosText({ row: h.s.slot.charCodeAt(0) - 64, rows: Math.max(...h.u.slots.map(s => s.slot.charCodeAt(0) - 64)), grid: /\d/.test(h.s.slot), col: +h.s.slot.slice(1) || 1, cols: Math.max(...h.u.slots.map(s => +s.slot.slice(1) || 1)) }) : '';
+      return `<div class="item" data-act="inv-aip-pick" data-id="${x.id}" style="cursor:pointer${F.place === x.id ? ';background:var(--celadon-soft)' : ''}"><strong class="num">${esc(x.code)}</strong>${F.place === x.id ? ' ✓' : ''}
+        <div class="meta">${esc([h ? invName(h.a) : '', unit, pos].filter(Boolean).join(' · '))}</div><div class="small">${esc(state.lang === 'de' ? x.reason_de || x.reason_zh : x.reason_zh || x.reason_de)}</div></div>`; }).join('')}</div>${btn}</div>`;
+}
+async function invAiPlace(F){
+  const S = invS(), X = F.mode === 'new' ? null : S.item;
+  invFormKeep();
+  const cat = F.mode === 'new' || F.mode === 'edit' ? F.category_id : X && X.category;
+  const paint = () => { const b = $('#inv-aip'); if (S.form === F && b) b.outerHTML = invAipHTML(F); };
+  if (!cat){ F.aip = { err: 'need' }; paint(); return; }
+  const A = F.aip = { busy: true, at: Date.now() }; paint();
+  const tick = setInterval(() => { if (A.busy) paint(); else clearInterval(tick); }, 1000);
+  try {
+    const P = F.mode === 'new' ? invPayload(F) : { name_de: X.name_de, name_zh: X.name_zh, aliases: X.aliases || [], damp: !!X.damp };
+    const inboxStore = F.inbox && ((((S.inbox || {}).open) || []).find(b => b.id === F.inbox) || {}).store;
+    const r = await callTasks({ action: 'inv_ai_place', category_id: cat, damp: !!P.damp, item_id: F.mode === 'new' ? null : F.id,
+      name_de: P.name_de, name_zh: P.name_zh, aliases: P.aliases, store: inboxStore || null });
+    A.list = (r.suggestions || []).filter(x => invPickFind(x.id));
+  } catch(e){ A.err = 'fail'; }
+  A.busy = false; clearInterval(tick);
+  if (S.form === F && S.view === 'form') paint();
 }
 function renderInvForm(){
   const S = invS(), F = S.form, H = S.home || {}, cats = (H.categories || []).filter(k => k.active || k.id === F.category_id);
@@ -2976,6 +3067,8 @@ function renderInvForm(){
       <label class="btn ${prev ? 'ghost' : ''}" style="display:flex;align-items:center;justify-content:center;flex:1">${esc(t(prev ? 'inv_photo_retake' : 'inv_photo_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="item" hidden></label></div>
     ${F.photo && F.photo.busy ? `<div class="small muted" style="margin-bottom:6px">${esc(t('inv_uploading'))}</div>` : ''}
     ${invAiLine(F)}
+    ${F.photo && F.photo.path && !(F.ai && F.ai.busy) && (F.mode === 'new' || F.mode === 'edit') ? `<div class="field" id="inv-fix-box"><label for="inv-ai-fix">${esc(t('inv_fix_lbl'))}</label><textarea class="input" id="inv-ai-fix" rows="2" style="height:auto;padding:10px 14px" placeholder="${esc(t('inv_fix_ph'))}">${esc(F.fix || '')}</textarea>
+      <button class="btn ghost" data-act="inv-ai-fix" style="margin-top:6px">${esc(t('inv_fix_btn'))}</button></div>` : ''}
     <h3>${esc(t('inv_s2'))}</h3>
     ${fld('name_de', t('inv_f_de'), 'autocomplete="off"')}${fld('name_zh', t('inv_f_zh'), 'autocomplete="off"')}
     ${fld('aliases', t('inv_f_alias'), `placeholder="${esc(t('inv_f_alias_ph'))}" autocomplete="off"`)}
@@ -2986,7 +3079,7 @@ function renderInvForm(){
       ${fld('unit', t('inv_f_unit'))}${fld('pack_unit', t('inv_f_pack'))}${fld('pack_qty', t('inv_f_qty'), 'inputmode="decimal"')}
       <div class="field"><label for="invf-note">${esc(t('inv_f_note'))}</label><textarea class="input" id="invf-note" data-invf="note" rows="2" style="height:auto;padding:10px 14px">${esc(F.note)}</textarea></div>
       ${chk('track_stock', t('inv_f_stock'))}${chk('track_expiry', t('inv_f_expiry'))}</div></details>`}
-    ${F.mode === 'edit' ? '' : `<h3>${esc(t(F.mode === 'loc' || F.mode === 'inbox' ? 'inv_s3_loc' : 'inv_s3'))}</h3><div id="inv-picker">${invPickerHTML(F)}</div>`}
+    ${F.mode === 'edit' ? '' : `<h3>${esc(t(F.mode === 'loc' || F.mode === 'inbox' ? 'inv_s3_loc' : 'inv_s3'))}</h3>${invAipHTML(F)}<div id="inv-picker">${invPickerHTML(F)}</div>`}
     <button class="btn" data-act="inv-save" style="margin-top:14px">${esc(t('inv_save'))}</button>`;
   invLoadPhotos();
 }
@@ -3018,18 +3111,28 @@ async function invPhotoChosen(file){
   invAiRead(F);
 }
 // AI 看照片：只填空着的名字和别名、没选的分类、没动过的怕潮
-async function invAiRead(F){
+async function invAiRead(F, fix){
   const S = invS(); if (!F.photo || !F.photo.path) return;
-  const A = F.ai = { busy: true, at: Date.now() };
+  const A = F.ai = { busy: true, at: Date.now(), fix: !!fix };
   const tick = setInterval(() => { const b = $('#inv-ai'); if (S.form === F && A.busy && b) b.outerHTML = invAiLine(F); else if (!A.busy) clearInterval(tick); }, 1000);
   try {
     const cats = ((S.home || {}).categories || []).filter(k => k.active).map(k => ({ id: k.id, zh: k.name_zh, de: k.name_de, nature: k.nature }));
-    A.res = await callTasks({ action: 'inv_ai_read', path: F.photo.path, categories: cats });
+    A.res = await callTasks({ action: 'inv_ai_read', path: F.photo.path, categories: cats, correction: fix || null });   // v99：带一句纠正
   } catch(e){ A.err = String(e.message || e); }
   A.busy = false; clearInterval(tick);
   if (S.form !== F || S.view !== 'form') return;
   invFormKeep();
   const R = A.res;
+  if (R && fix){   // v99：主管说了哪里不对 → 照 AI 的新回答整个改
+    if (R.name_de) F.name_de = R.name_de; if (R.name_zh) F.name_zh = R.name_zh;
+    if ((R.aliases || []).length) F.aliases = R.aliases.join(', ');
+    F.aiRes = { ...R, correction: fix }; F.fix = '';
+    if (R.category_id){ F.category_id = R.category_id; }
+    F.damp = !!R.damp; F.dampTouched = false;
+    render(); toast(t('inv_fix_done'));
+    if (F.mode === 'new' && R.category_id) invAiPlace(F);
+    return;
+  }
   if (R){
     if (!String(F.name_de).trim() && R.name_de) F.name_de = R.name_de;
     if (!String(F.name_zh).trim() && R.name_zh) F.name_zh = R.name_zh;
@@ -3039,6 +3142,7 @@ async function invAiRead(F){
     if (!F.dampTouched) F.damp = !!R.damp;
   }
   render();
+  if (F.mode === 'new' && F.category_id && !F.aip) invAiPlace(F);   // v99：分类有了就推荐一次位置
 }
 function invPayload(F){
   return { name_de: String(F.name_de || '').trim(), name_zh: String(F.name_zh || '').trim(),
@@ -7640,6 +7744,11 @@ document.addEventListener('click', async ev => {
         toast(t('ls_unbound')); state.staffEdit = null; state.me = await rpc('me', tok()); authStore().set('me', state.me); render(); } catch(e){ toast(errText(e), true); }
       break;
     }
+    // v99：AI 改一改、AI 推荐位置
+    case 'inv-ai-fix': { const F = invS().form; if (!F) break; invFormKeep(); const v = (($('#inv-ai-fix') || {}).value || '').trim(); if (!v){ toast(t('inv_fix_need'), true); break; } F.fix = v; invAiRead(F, v); break; }
+    case 'inv-aip': { const F = invS().form; if (F) invAiPlace(F); break; }
+    case 'inv-aip-pick': { const F = invS().form, h = F && invPickFind(el.dataset.id); if (!h) break; invFormKeep();
+      Object.assign(F, { store: h.a.store, area: h.a.id, unit_id: h.u.id, place: el.dataset.id, lastUsed: false }); invRepaintPicker(); const b = $('#inv-aip'); if (b) b.outerHTML = invAipHTML(F); break; }
     // v94：待归位、搜不到的词、储位确认
     case 'inv-ib-new': invIbNew(); break;
     case 'inv-ib-mine': invGo('ibmine'); break;
