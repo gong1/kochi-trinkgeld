@@ -163,6 +163,34 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .task .task-b{display:flex;gap:8px;margin-top:10px}
 .task .task-b .btn{flex:1}
 .task .todo-n{border-top:0;padding-top:4px}
+/* v103：员工「今天的任务」打勾清单（按到店后 / 收店时分组） */
+.tdl{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:14px 16px 8px;margin:12px 0}
+.tdl-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.tdl-h b{font-size:18px}
+.tdl-bar{height:6px;border-radius:3px;background:var(--celadon-soft);overflow:hidden;margin:8px 0 2px}
+.tdl-bar i{display:block;height:100%;background:var(--celadon)}
+.tdl-g{font-size:14px;font-weight:600;color:var(--muted);margin:14px 0 2px}
+.tdl-g.now{color:var(--copper)} .tdl-g.bad{color:var(--neg)}
+.tdl-r{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;padding:10px 0;border:0;border-top:1px solid var(--line);background:none;text-align:left;color:inherit}
+.tdl-g + .tdl-r{border-top:0}
+.tdl-cb{flex:none;width:24px;height:24px;border:2px solid var(--muted);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff}
+.tdl-r.fin .tdl-cb{background:var(--celadon-deep);border-color:var(--celadon-deep)}
+.tdl-r.bad .tdl-cb{border-color:var(--neg)}
+.tdl-m{flex:1;min-width:0;display:flex;flex-direction:column}
+.tdl-n{font-size:17px;font-weight:600}
+.tdl-r.fin .tdl-n{font-weight:400;color:var(--muted);text-decoration:line-through}
+.tdl-s{font-size:13px;color:var(--muted)} .tdl-s.bad{color:var(--neg)}
+.tdl-i{flex:none;color:var(--muted);font-size:16px}
+.tdl-up{font-size:14px;color:var(--muted);padding:6px 0;border-top:1px dashed var(--line)}
+.tdl-g + .tdl-up{border-top:0}
+/* v103：主管「我管的区域」、负责人「我负责的任务」的任务状态行：颜色点 + 名字 + 谁 / 状态 + 操作 */
+.tsr{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.tsr:first-child{border-top:0}
+.tsr-d{flex:none;width:10px;height:10px;border-radius:50%;margin-top:8px;background:#B9C3BF}
+.tsr-d.ok{background:var(--celadon)} .tsr-d.todo{background:#D9A23A} .tsr-d.bad{background:var(--neg)}
+.tsr-m{flex:1;min-width:0} .tsr-n{font-weight:600} .tsr-s{font-size:14px;color:var(--muted)} .tsr-s.negc{color:var(--neg)}
+.tsr-a{display:flex;gap:14px;margin-top:2px}
+.tsr-box{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:4px 14px}
 .more{display:flex;flex-direction:column;gap:10px}
 .task.okc{border-left-color:var(--celadon)}
 .task.msg{border-left-color:var(--glaze);background:#EEF4F8}
@@ -625,6 +653,7 @@ zh: {
   // v72：收店任务谁负责
   task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
+  tdl_title:'今天的任务', tdl_count:'做完 {a} / {b}', tdl_all:'都做完了 ✓', tdl_none:'今天没有任务', tdl_g_over:'要补做', tdl_g_arrival:'到店后', tdl_g_closing:'收店时 · 下班前做', tdl_g_closing_now:'收店时 · 快下班了，现在做', tdl_part:'做了 {a}/{b}', tdl_up:'接下来', tdl_photo:'要拍照', tdl_today:'今天', tdl_tomorrow:'明天', td_other:'其他要做的（{n}）', td_other0:'其他', tsr_open:'还没做 · {p}', tsr_open0:'还没做', tsr_missed:'没做 · {p}', tsr_nobody:'没人负责：没排{r}',   // v103
   tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
   tk_close_photo_learning:'要拍照（前 {b} 次每次都拍，已做 {a} 次）', tk_close_photo_again:'要拍照（漏做过或点过「AI 看错了」，重新拍 {b} 次，已做 {a} 次）',
   tk_close_photo_random:'今天抽到要拍照', tk_close_photo_important:'要拍照（重要任务每次都拍）', tk_close_check:'今天只要打勾',
@@ -1025,6 +1054,7 @@ de: {
   // v72：Wer erledigt die Feierabend-Aufgabe
   task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
+  tdl_title:'Heute zu erledigen', tdl_count:'{a} von {b} erledigt', tdl_all:'Alles erledigt ✓', tdl_none:'Heute keine Aufgaben', tdl_g_over:'Nachholen', tdl_g_arrival:'Nach Ankunft', tdl_g_closing:'Feierabend · vor dem Gehen', tdl_g_closing_now:'Feierabend · jetzt erledigen', tdl_part:'{a}/{b} erledigt', tdl_up:'Demnächst', tdl_photo:'Foto nötig', tdl_today:'Heute', tdl_tomorrow:'Morgen', td_other:'Sonst noch zu tun ({n})', td_other0:'Sonstiges', tsr_open:'Offen · {p}', tsr_open0:'Offen', tsr_missed:'Nicht erledigt · {p}', tsr_nobody:'Niemand zuständig: kein(e) {r} eingeplant',   // v103
   tk_close:'Feierabend: {n} · {s}', tk_close_later:'Vor Feierabend erledigen', tk_close_now:'Bald Feierabend – jetzt erledigen', tk_close_over:'Gestern nicht erledigt – heute nachholen',
   tk_close_photo_learning:'Mit Foto (die ersten {b} Male immer, {a} erledigt)', tk_close_photo_again:'Mit Foto (vergessen oder „KI irrt sich“ gewählt – wieder {b} Male, {a} erledigt)',
   tk_close_photo_random:'Heute mit Foto (Stichprobe)', tk_close_photo_important:'Mit Foto (wichtige Aufgabe, immer)', tk_close_check:'Heute nur abhaken',
@@ -2089,14 +2119,18 @@ function renderToday(){
     ? `<div class="sheet today-shift"><div class="muted small">${esc(t('td_shift'))} · ${esc(dayLabel(T.day))}</div>${T.shifts.map(x => `<div class="ts-row">${shiftLine(x)}</div>`).join('')}</div>`
     : `<div class="sheet today-shift"><div class="muted small">${esc(dayLabel(T.day))}</div><div><strong>${esc(t('td_noshift'))}</strong></div>
         <div class="small muted" style="margin-top:4px">${T.next_shift ? `${esc(t('td_next', { x: dayLabel(T.next_shift.date) }))} ${shiftLine(T.next_shift)}` : esc(t('td_nonext'))}</div></div>`;
-  const tm = tmTodoCards(), nOpen = open.filter(x => x.status !== 'later').length + tm.length;
   if (state.expNew){ viewExpenseNew(); return; }   // v67：正在记垫付
-  const msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message');
+  // v103：收店任务 / 某一天的任务放进「今天的任务」清单（tdlHTML），其他待办（交 Bon、签收、资料、排班……）照旧是卡片，放在下面
+  const isCl = x => x.kind === 'closing', cl = all.filter(isCl), upCl = up.filter(isCl);
+  const tm = tmTodoCards(), msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message' && !isCl(x));
+  const nOther = rest.filter(x => x.status !== 'later').length + tm.length, hasList = !!(cl.length || upCl.length);
+  const doneO = done.filter(x => !isCl(x));
   $('#main').innerHTML = invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts
-    + `<h3>${esc(nOpen ? t('td_mine', { n: nOpen }) : t('td_mine_ok'))}</h3>`
-    + (open.length || tm.length ? msgs.map(taskCardHTML).join('') + tm.join('') + rest.map(taskCardHTML).join('') : `<div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
-    + (done.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(taskDoneLine).join('')}</div></div></details>` : '')
-    + upcomingHTML(up) + ledHTML()   // v95：接下来、我负责的任务
+    + msgs.map(taskCardHTML).join('') + tdlHTML(cl, upCl)
+    + (rest.length || tm.length ? `<h3>${esc(nOther ? t(hasList ? 'td_other' : 'td_mine', { n: nOther }) : t(hasList ? 'td_other0' : 'td_mine_ok'))}</h3>` + tm.join('') + rest.map(taskCardHTML).join('')
+      : hasList || msgs.length ? '' : `<h3>${esc(t('td_mine_ok'))}</h3><div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
+    + (doneO.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: doneO.length }))}</summary><div class="inner"><div class="list">${doneO.map(taskDoneLine).join('')}</div></div></details>` : '')
+    + ledHTML()   // v95：我负责的任务（v103：「接下来」放进了上面的清单）
     + (store.length ? `<h3>${esc(t('td_store'))}</h3>` + store.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status]).map(taskCardHTML).join('')
         + (store.some(x => x.status === 'done') ? `<div class="list">${store.filter(x => x.status === 'done').map(taskDoneLine).join('')}</div>` : '') : '');
 }
@@ -2117,7 +2151,7 @@ function areaTodayHTML(A){
     h += `<div class="small ${c.next_published ? 'muted' : 'negc'}" style="padding:3px 0">${esc(t(c.next_published ? 'as_pub_yes' : 'as_pub_no'))}${+c.pending ? ` · <span class="negc">${esc(t('as_pend', { n: c.pending }))}</span>` : ''}</div>`;
     const tk = (c.tasks || []).filter(x => x.status !== 'closed');
     return `<div class="task later"><div class="task-t">${storeTag(c.store)} ${esc(t('area_' + c.area))}</div><div class="sum" style="margin-top:6px">${h}</div>
-      ${tk.length ? tkAdminHTML(tk, true) : `<div class="small muted" style="margin-top:6px">${esc(t(c.area === 'kitchen' ? 'at_no_ktasks' : 'at_no_tasks'))}</div>`}</div>`;
+      ${tk.length ? tsrAreaHTML(tk) : `<div class="small muted" style="margin-top:6px">${esc(t(c.area === 'kitchen' ? 'at_no_ktasks' : 'at_no_tasks'))}</div>`}</div>`;
   };
   return `<h3 style="margin-top:4px">${esc(t('at_title'))}</h3>` + A.cards.map(card).join('');
 }
@@ -2501,7 +2535,7 @@ function renderTaskRun(){
       <div class="acts" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px">${acts}</div></div>`;
   }).join('');
   $('#main').innerHTML = `<button class="link" data-act="task-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>
-    <h2 style="margin-top:0">${esc((c.once ? toWhen(c) + (state.lang === 'de' ? ': ' : '：') : '') + nm(c))}${storeTag(c.store)}</h2>
+    <h2 style="margin-top:0">${esc((c.once ? toWhen(c) + (state.lang === 'de' ? ': ' : '：') : '') + nm(c))} ${storeTag(c.store)}</h2>
     <div class="infobox">${esc(tkHow(c.need))}${c.day !== (state.tasks || {}).day ? ' · ' + esc(dayLabel(c.day)) : ''}</div>
     ${c.completed_at ? `<div class="infobox" style="border-color:var(--celadon)">✓ ${esc(t('tk_run_done', { t: fmtDateTime(c.completed_at), n: c.completed_by || '' }))}</div>` : ''}
     <div class="list">${rows}</div>` + tkAskHTML(c);
@@ -2563,17 +2597,73 @@ function toItemHTML(x, mode){
     <div class="meta">${mode === 'admin' ? esc(x.lead ? t('to_lead', { n: x.lead.name }) : t('to_lead_none')) + (done ? '' : ' · ') : ''}${done ? '' : `<span class="${!bad && toNobody(x) ? 'warnc' : ''}">${esc(toWhoText(x))}</span>`}${l && l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : ''}</div>
     ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}</div>`;
 }
-// 员工「今天」：接下来几天要做的（某一天的任务）
-function upcomingHTML(up){
-  if (!up.length) return '';
-  return `<h3>${esc(t('td_upcoming', { n: up.length }))}</h3><div class="list">${up.slice().sort((a, b) => String(a.day).localeCompare(String(b.day))).map(k => { const d = k.data, it = (d.items || [])[0] || {}, hint = state.lang === 'de' ? it.hint_de : it.hint_zh;
-    return `<div class="item"><div class="top"><div><strong>${esc(toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d))}</strong>${storeTag(d.store)}</div><div class="meta small muted">${esc(d.day === bizToday() ? t('rk_rel0') : dayLabel(d.day))}</div></div>
-      ${hint ? `<div class="meta">${esc(hint)}</div>` : ''}${toByLead(d) ? `<div class="meta">${esc(toByLead(d).replace(/^ · /, ''))}</div>` : ''}</div>`; }).join('')}</div>`;
+// v103（老板 2026-10-22：任务界面不够直观）：员工「今天的任务」= 打勾清单。要补做的在最上面，再按「到店后」「收店时」分组；
+// 每件一行（方框 + 名字 + 要拍照的 📷），点一下进去做，做完打勾变灰；最上面「做完 a / b」和进度条；接下来几天的放在最下面（只看，不能点）
+const fmtTime = iso => iso ? new Date(iso).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }) : '';
+const dayWord = dy => dy === bizToday() ? t('tdl_today') + ' · ' + dayLabel(dy) : dy === addDays(bizToday(), 1) ? t('tdl_tomorrow') + ' · ' + dayLabel(dy) : dayLabel(dy);
+function tdlHTML(cl, up){
+  if (!cl.length && !up.length) return '';
+  const stores = new Set([...cl, ...up].map(k => k.data.store)), st = d => stores.size > 1 ? ' ' + storeTag(d.store) : '';
+  const row = k => {
+    const d = k.data, done = k.status === 'done', bad = k.status === 'overdue', its = d.items || [], n = its.length, got = its.filter(i => i.done).length;
+    const sub = done ? [fmtTime(d.completed_at), d.completed_by && d.completed_by !== state.me.name ? d.completed_by : '', d.answer ? askAns(d) : ''].filter(Boolean).join(' · ')
+      : [bad ? t('tk_close_over') : d.day !== (state.tasks || {}).day ? dayLabel(d.day) : '', got && got < n ? t('tdl_part', { a: got, b: n }) : '',
+         d.ask && n && got === n && !d.answer ? t('tk_ask_pending') : '', toByLead(d).replace(/^ · /, '')].filter(Boolean).join(' · ');
+    const inner = `<span class="tdl-cb">${done ? '✓' : ''}</span><span class="tdl-m"><span class="tdl-n">${esc(toName(d))}${st(d)}</span>${sub ? `<span class="tdl-s${bad ? ' bad' : ''}">${esc(sub)}</span>` : ''}</span>`
+      + (done ? '' : ((d.need || {}).mode === 'photo' ? `<span class="tdl-i" title="${esc(t('tdl_photo'))}">📷</span>` : '') + '<span class="tdl-i" aria-hidden="true">›</span>');
+    return done ? `<div class="tdl-r fin">${inner}</div>` : `<button class="tdl-r${bad ? ' bad' : ''}" data-act="task-open" data-def="${d.def_id}" data-day="${d.day}">${inner}</button>`;
+  };
+  const ord = list => list.filter(k => k.status !== 'done').concat(list.filter(k => k.status === 'done'));
+  const grp = (cls, label, list) => list.length ? `<div class="tdl-g ${cls}">${esc(label)}</div>` + ord(list).map(row).join('') : '';
+  const over = cl.filter(k => k.status === 'overdue'), rest = cl.filter(k => k.status !== 'overdue');
+  const arr = rest.filter(k => k.data.timing === 'arrival'), clo = rest.filter(k => k.data.timing !== 'arrival'), cloNow = clo.some(k => k.status === 'now');
+  const nd = cl.filter(k => k.status === 'done').length;
+  const head = `<div class="tdl-h"><b>${esc(t('tdl_title'))}</b><span class="small ${cl.length && nd === cl.length ? 'pos' : 'muted'}">${esc(!cl.length ? t('tdl_none') : nd === cl.length ? t('tdl_all') : t('tdl_count', { a: nd, b: cl.length }))}</span></div>`
+    + (cl.length ? `<div class="tdl-bar"><i style="width:${Math.round(100 * nd / cl.length)}%"></i></div>` : '');
+  const ups = up.slice().sort((a, b) => String(a.data.day).localeCompare(String(b.data.day))).map(k => { const d = k.data;
+    return `<div class="tdl-up">${esc(dayWord(d.day) + ' · ' + toWhen(d) + ' · ' + toName(d))}${d.important ? ' 📷' : ''}${st(d)}${toByLead(d) ? ` · ${esc(toByLead(d).replace(/^ · /, ''))}` : ''}</div>`; }).join('');
+  return `<div class="tdl">${head}${grp('bad', t('tdl_g_over'), over)}${grp('', t('tdl_g_arrival'), arr)}${grp(cloNow ? 'now' : '', t(cloNow ? 'tdl_g_closing_now' : 'tdl_g_closing'), clo)}${ups ? `<div class="tdl-g">${esc(t('tdl_up'))}</div>` + ups : ''}</div>`;
+}
+// v103：任务状态行（主管「我管的区域」、负责人「我负责的任务」共用）：颜色点（绿 做完 · 黄 还没做 · 红 没人做 / 漏做 · 灰 还没到那天）+ 名字 + 谁、什么状态 + 操作。sub 是已经转义的 HTML
+function tsrRow(name, dot, sub, subCls, acts){
+  return `<div class="tsr"><span class="tsr-d ${dot}"></span><div class="tsr-m"><div class="tsr-n">${name}</div>${sub ? `<div class="tsr-s ${subCls || ''}">${sub}</div>` : ''}${acts ? `<div class="tsr-a">${acts}</div>` : ''}</div></div>`;
+}
+// 我负责、还没做的某一天的任务：「交给…」「我自己做」（state.led 里有这一条才有）
+function tsrLeadActs(def, day){
+  const v = ((state.led || {}).tasks || []).find(x => x.def_id === def && x.day === day);
+  if (!v || ['done', 'missed'].includes(v.status)) return '';
+  return `<button class="link" data-act="asg-open" data-def="${def}" data-mode="lead">${esc(t('to_assign'))}</button>`
+    + (['today', 'overdue'].includes(v.status) ? `<button class="link" data-act="task-open" data-def="${def}" data-day="${day}">${esc(t('ld_self'))}</button>` : '');
+}
+// 主管「我管的区域」卡片里今天的任务（area_today）：以前每项一行（「检查废油桶：–」），现在一个任务一行
+function tsrAreaHTML(list){
+  return `<div style="margin-top:8px">${list.map(x => {
+    const nm = esc((x.once ? toWhen(x) + ' · ' : '') + toName(x)) + (x.once && x.important ? ' 📷' : ''), ppl = (x.people || []).map(p => p.name).join('、');
+    const photo = (x.items || []).map(i => i.last).find(l => l && l.evidence === 'photo'), aiBad = (x.items || []).some(i => i.last && i.last.ai && i.last.ai.ok === false);
+    const [dot, sub] = x.status === 'done' ? ['ok', '✓ ' + [x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : ''].filter(Boolean).join(' · ')]
+      : x.status === 'nobody' ? ['bad', x.once ? t('to_nobody') : t('tsr_nobody', { r: t('grp_' + x.role) })]
+      : x.status === 'missed' ? ['bad', t('tsr_missed', { p: ppl || '–' })]
+      : ['todo', (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + (x.ask && !x.answer && (x.items || []).length && x.items.every(i => i.last) ? ' · ' + t('tk_ask_pending') : '')];   // 拍好了还没回答
+    const acts = (photo ? `<button class="link" data-act="task-photo" data-id="${photo.row_id}">${esc(t('lk_view'))}</button>` : '') + (x.status === 'done' ? '' : tsrLeadActs(x.def_id, x.day));
+    return tsrRow(nm, dot, esc(sub) + (aiBad ? ` <span class="negc">· ${esc(t('tk_adm_ai_bad'))}</span>` : ''), dot === 'bad' ? 'negc' : '', acts);
+  }).join('')}</div>`;
 }
 // 负责人「今天」：我负责的任务
 function ledHTML(){
   const L = state.led; if (!L || !(L.tasks || []).length || !state.me || state.me.is_admin) return '';
-  return h3i(esc(t('ld_title', { n: L.tasks.filter(x => x.status !== 'done').length })), t('ld_hint')) + `<div class="list">${L.tasks.map(x => toItemHTML(x, 'lead')).join('')}</div>`;
+  // v103：「我管的区域」卡片里已经列出的（今天的）不再列一遍（以前同一个任务在页面上出现两次）；按天分组，一个任务一行
+  const shown = new Set(((state.areaToday || {}).cards || []).flatMap(c => (c.tasks || []).map(x => x.def_id + '|' + x.day)));
+  const list = L.tasks.filter(x => !shown.has(x.def_id + '|' + x.day)); if (!list.length) return '';
+  const stores = new Set(list.map(x => x.store)), days = [...new Set(list.map(x => x.day))].sort();
+  const row = x => {
+    const done = x.status === 'done', bad = ['missed', 'overdue'].includes(x.status), nob = !done && !bad && toNobody(x);
+    const dot = done ? 'ok' : bad || nob ? 'bad' : x.status === 'today' ? 'todo' : '';
+    const sub = done ? '✓ ' + [x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : ''].filter(Boolean).join(' · ') : bad ? t('to_st_missed') : toWhoText(x);
+    return tsrRow(esc(toWhen(x) + ' · ' + toName(x)) + (x.important ? ' 📷' : '') + (stores.size > 1 ? ' ' + storeTag(x.store) : ''), dot,
+      `<span class="${nob ? 'warnc' : ''}">${esc(sub)}</span>`, bad ? 'negc' : '', done || bad ? '' : tsrLeadActs(x.def_id, x.day));
+  };
+  return h3i(esc(t('ld_title', { n: list.filter(x => x.status !== 'done').length })), t('ld_hint'))
+    + days.map(dy => `<div class="tdl-g">${esc(dayWord(dy))}</div><div class="tsr-box">${list.filter(x => x.day === dy).map(row).join('')}</div>`).join('');
 }
 // 「交给…」窗口（负责人和老板）
 function asgRender(){
