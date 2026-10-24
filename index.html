@@ -191,6 +191,11 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .tsr-m{flex:1;min-width:0} .tsr-n{font-weight:600} .tsr-s{font-size:14px;color:var(--muted)} .tsr-s.negc{color:var(--neg)}
 .tsr-a{display:flex;gap:14px;margin-top:2px}
 .tsr-box{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:4px 14px}
+/* v105：老板「管理 → 任务」看板：每家店 × 区域一块；收废油步骤条 */
+.tb{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:12px 14px 6px;margin:10px 0}
+.tb-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.oil-steps{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;font-size:14px;margin:2px 0 10px;color:var(--muted)}
+.oil-steps .cur{color:var(--ink);font-weight:700} .oil-steps .fin{color:var(--celadon-deep)}
 .more{display:flex;flex-direction:column;gap:10px}
 .task.okc{border-left-color:var(--celadon)}
 .task.msg{border-left-color:var(--glaze);background:#EEF4F8}
@@ -655,6 +660,7 @@ zh: {
   // v72：收店任务谁负责
   task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
+  tb_today:'今天', tb_tomorrow:'明天', tb_later:'以后（{n}）', tb_past:'前几天（{n}）', tb_none:'这天没有任务。', tb_later_none:'以后还没有任务。点「＋ 新任务」加一个。', tb_past_none:'最近 7 天没有某一天的任务。', tb_lead_none:'还没设负责人', tl_sum:'负责人（已设 {a} / {b}）', oil_s1:'检查', oil_s2:'填收油日期', oil_s3:'拿到门口', oil_s4:'拿回地下室',   // v105
   tdl_title:'今天的任务', tdl_count:'做完 {a} / {b}', tdl_all:'都做完了 ✓', tdl_none:'今天没有任务', tdl_g_over:'要补做', tdl_g_arrival:'到店后', tdl_g_closing:'收店时 · 下班前做', tdl_g_closing_now:'收店时 · 快下班了，现在做', tdl_part:'做了 {a}/{b}', tdl_up:'接下来', tdl_photo:'要拍照', tdl_today:'今天', tdl_tomorrow:'明天', td_other:'其他要做的（{n}）', td_other0:'其他', tsr_open:'还没做 · {p}', tsr_open0:'还没做', tsr_missed:'没做 · {p}', tsr_nobody:'没人负责：没排{r}',   // v103
   tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
   tk_close_photo_learning:'要拍照（前 {b} 次每次都拍，已做 {a} 次）', tk_close_photo_again:'要拍照（漏做过或点过「AI 看错了」，重新拍 {b} 次，已做 {a} 次）',
@@ -1058,6 +1064,7 @@ de: {
   // v72：Wer erledigt die Feierabend-Aufgabe
   task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
+  tb_today:'Heute', tb_tomorrow:'Morgen', tb_later:'Später ({n})', tb_past:'Vorher ({n})', tb_none:'An diesem Tag keine Aufgaben.', tb_later_none:'Später noch keine Aufgaben. Mit „＋ Neue Aufgabe“ anlegen.', tb_past_none:'Keine Aufgaben an einem Tag in den letzten 7 Tagen.', tb_lead_none:'Noch niemand verantwortlich', tl_sum:'Verantwortliche ({a} von {b} festgelegt)', oil_s1:'Prüfen', oil_s2:'Abholtermin eintragen', oil_s3:'Raus zur Tür', oil_s4:'Zurück in den Keller',   // v105
   tdl_title:'Heute zu erledigen', tdl_count:'{a} von {b} erledigt', tdl_all:'Alles erledigt ✓', tdl_none:'Heute keine Aufgaben', tdl_g_over:'Nachholen', tdl_g_arrival:'Nach Ankunft', tdl_g_closing:'Feierabend · vor dem Gehen', tdl_g_closing_now:'Feierabend · jetzt erledigen', tdl_part:'{a}/{b} erledigt', tdl_up:'Demnächst', tdl_photo:'Foto nötig', tdl_today:'Heute', tdl_tomorrow:'Morgen', td_other:'Sonst noch zu tun ({n})', td_other0:'Sonstiges', tsr_open:'Offen · {p}', tsr_open0:'Offen', tsr_missed:'Nicht erledigt · {p}', tsr_nobody:'Niemand zuständig: kein(e) {r} eingeplant',   // v103
   tk_close:'Feierabend: {n} · {s}', tk_close_later:'Vor Feierabend erledigen', tk_close_now:'Bald Feierabend – jetzt erledigen', tk_close_over:'Gestern nicht erledigt – heute nachholen',
   tk_close_photo_learning:'Mit Foto (die ersten {b} Male immer, {a} erledigt)', tk_close_photo_again:'Mit Foto (vergessen oder „KI irrt sich“ gewählt – wieder {b} Male, {a} erledigt)',
@@ -2585,22 +2592,6 @@ function toWhoText(x){
   const base = x.via === 'role' ? t('to_who_default', { r, p: ppl }) : x.via === 'area' ? t('to_who_area', { r, p: ppl }) : t('to_nobody');
   return x.assignee ? t('to_who_assignee_off', { n: x.assignee.name, p: base }) : base;
 }
-// 一个任务（老板的列表 mode = admin；负责人的「今天」mode = lead）
-function toItemHTML(x, mode){
-  const done = x.status === 'done', bad = x.status === 'missed' || x.status === 'overdue', it = (x.items || [])[0] || {}, l = it.last;
-  const st = done ? `<span class="pos">${esc(t('to_st_done', { n: x.completed_by || '', t: fmtDateTime(x.completed_at) }) + (x.answer ? ' · ' + askAns(x) : ''))}</span>` : bad ? `<span class="negc">${esc(t('to_st_missed'))}</span>` : '';
-  const hint = state.lang === 'de' ? it.hint_de : it.hint_zh, acts = [];
-  if (!done && !bad) acts.push(`<button class="link" data-act="asg-open" data-def="${x.def_id}" data-mode="${mode}">${esc(t('to_assign'))}</button>`);
-  if (mode === 'admin' && !done && !bad) acts.push(`<button class="link" data-act="to-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button>`,
-    `<button class="link danger" data-act="to-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>`);
-  if (mode === 'lead' && !done && ['today', 'overdue'].includes(x.status)) acts.push(`<button class="link" data-act="task-open" data-def="${x.def_id}" data-day="${x.day}">${esc(t('ld_self'))}</button>`);
-  return `<div class="item"><div class="top"><div><strong>${esc(toWhen(x) + (state.lang === 'de' ? ': ' : '：') + toName(x))}</strong>${storeTag(x.store)}${mode === 'admin' ? ` <span class="tag">${esc(t('area_' + x.area))}</span>` : ''}${x.important ? ' <span class="tag">📷</span>' : ''}${x.flow_id ? ` <span class="tag">${esc(t('oil_tag'))}</span>` : ''}</div>
-      ${st ? `<div class="meta small">${st}</div>` : ''}</div>
-    ${mode === 'lead' ? `<div class="meta">${esc(x.status === 'today' ? t('rk_rel0') + ' · ' + dayLabel(x.day) : dayLabel(x.day))}</div>` : ''}
-    ${hint ? `<div class="meta">${esc(hint)}</div>` : ''}
-    <div class="meta">${mode === 'admin' ? esc(x.lead ? t('to_lead', { n: x.lead.name }) : t('to_lead_none')) + (done ? '' : ' · ') : ''}${done ? '' : `<span class="${!bad && toNobody(x) ? 'warnc' : ''}">${esc(toWhoText(x))}</span>`}${l && l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : ''}</div>
-    ${acts.length ? `<div class="acts">${acts.join('')}</div>` : ''}</div>`;
-}
 // v103（老板 2026-10-22：任务界面不够直观）：员工「今天的任务」= 打勾清单。要补做的在最上面，再按「到店后」「收店时」分组；
 // 每件一行（方框 + 名字 + 要拍照的 📷），点一下进去做，做完打勾变灰；最上面「做完 a / b」和进度条；接下来几天的放在最下面（只看，不能点）
 const fmtTime = iso => iso ? new Date(iso).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }) : '';
@@ -2684,9 +2675,11 @@ function asgRender(){
 }
 // 老板「管理 → 任务」
 async function toAdminLoad(){
-  const [L, list, staff, fl] = await Promise.all([rpc('admin_task_leads', tok()), rpc('admin_tasks_once', tok()), rpc('admin_list_staff', tok()),
-    soft(rpc('admin_task_flows', tok()), [])]);   // v101：收废油
-  state.toLeads = L || []; state.toList = list || []; state.toStaff = staff || []; state.toFlows = fl || [];
+  const bd = bizToday(), bd1 = addDays(bd, 1);
+  const [L, list, staff, fl, d0, d1] = await Promise.all([rpc('admin_task_leads', tok()), rpc('admin_tasks_once', tok()), rpc('admin_list_staff', tok()),
+    soft(rpc('admin_task_flows', tok()), []),   // v101：收废油
+    soft(rpc('admin_tasks_day', { ...tok(), p_day: bd }), []), soft(rpc('admin_tasks_day', { ...tok(), p_day: bd1 }), [])]);   // v105：看板（今天、明天，每天的任务和某一天的任务）
+  state.toLeads = L || []; state.toList = list || []; state.toStaff = staff || []; state.toFlows = fl || []; state.toDays = { [bd]: d0 || [], [bd1]: d1 || [] };
   return toAdminRender();
 }
 function toSync(){ const e = state.toEdit; if (!e) return;
@@ -2707,11 +2700,62 @@ function toFormHTML(e){
     <div class="small muted" style="margin-bottom:6px">${esc(t('to_how'))}</div>${seg('photo', [['false', t('to_check')], ['true', t('to_photo')]])}
     <div class="row"><button class="btn ghost" type="button" data-act="to-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="to-save">${esc(t('to_save'))}</button></div></div>`;
 }
+// v105（老板 2026-10-22 同意：任务界面第二步）：老板「管理 → 任务」= 看板。最上面切换 今天 / 明天 / 以后 / 前几天；
+// 今天、明天：每家店 × 后厨 / 前场一块（负责人、做完 a / b、进度条），每个任务一行（颜色点 + 谁 + 状态 + 操作），每天的任务和某一天的任务都在里面；
+// 以后、前几天：某一天的任务按天列。收废油在下面，加了步骤条；负责人设置收进折叠里
+const toArea = x => x.area || (isKRole(x.role) ? 'kitchen' : 'front');
+// 看板里的一行：x 来自 admin_tasks_day（今天、明天）；某一天的任务另外在 admin_tasks_once 里找到同一条（o），用来写谁做、交给…、改、取消
+function toBoardRow(x){
+  const o = x.once ? (state.toList || []).find(v => v.def_id === x.def_id) : null;
+  const nm = esc(toWhen(x) + ' · ' + toName(x)) + (x.once && x.important ? ' 📷' : '') + (x.flow_id ? ` <span class="tag">${esc(t('oil_tag'))}</span>` : '');
+  const ppl = (x.people || []).map(p => p.name).join('、'), its = x.items || [];
+  const photo = its.map(i => i.last).find(l => l && l.evidence === 'photo'), aiBad = its.some(i => i.last && i.last.ai && i.last.ai.ok === false);
+  let dot = 'todo', sub, cls = '';
+  if (x.status === 'done'){ dot = 'ok'; sub = '✓ ' + [x.completed_by, fmtTime(x.completed_at), askAns(x)].filter(Boolean).join(' · '); }
+  else if (x.status === 'missed'){ dot = 'bad'; cls = 'negc'; sub = t('tsr_missed', { p: ppl || '–' }); }
+  else if (x.status === 'nobody' && !o){ dot = 'bad'; cls = 'negc'; sub = t('tsr_nobody', { r: t('grp_' + x.role) }); }
+  else { if (o && toNobody(o)) { dot = 'bad'; cls = 'warnc'; }
+    sub = (o ? toWhoText(o) : ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + (x.ask && !x.answer && its.length && its.every(i => i.last) ? ' · ' + t('tk_ask_pending') : ''); }
+  const acts = (photo ? `<button class="link" data-act="task-photo" data-id="${photo.row_id}">${esc(t('lk_view'))}</button>` : '')
+    + (o && !['done', 'missed'].includes(x.status) ? `<button class="link" data-act="asg-open" data-def="${x.def_id}" data-mode="admin">${esc(t('to_assign'))}</button>`
+      + (x.flow_id ? '' : `<button class="link" data-act="to-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="to-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>`) : '');   // 收废油的任务在收废油卡片里改
+  return tsrRow(nm, dot, esc(sub) + (aiBad ? ` <span class="negc">· ${esc(t('tk_adm_ai_bad'))}</span>` : ''), cls, acts);
+}
+function toBoardHTML(day){
+  const all = ((state.toDays || {})[day] || []).filter(x => x.status !== 'closed'), rank = x => x.status === 'done' ? 3 : ['missed', 'nobody'].includes(x.status) ? 0 : 1;
+  const blocks = STORES.flatMap(st => ['kitchen', 'front'].map(a => ({ st, a, list: all.filter(x => x.store === st && toArea(x) === a).sort((p, q) => rank(p) - rank(q)) }))).filter(b => b.list.length);
+  if (!blocks.length) return `<div class="list"><div class="empty">${esc(t('tb_none'))}</div></div>`;
+  return blocks.map(b => {
+    const l = (state.toLeads || []).find(x => x.store === b.st && x.area === b.a) || {}, n = b.list.length, nd = b.list.filter(x => x.status === 'done').length;
+    return `<div class="tb"><div class="tb-h"><div>${storeTag(b.st)} <strong>${esc(t('area_' + b.a))}</strong></div><span class="small ${nd === n ? 'pos' : 'muted'}">${esc(t('tdl_count', { a: nd, b: n }))}</span></div>
+      <div class="small ${l.staff_id ? 'muted' : 'warnc'}">${esc(l.staff_id ? t('to_lead', { n: l.name || '?' }) : t('tb_lead_none'))}</div>
+      <div class="tdl-bar"><i style="width:${Math.round(100 * nd / n)}%"></i></div>${b.list.map(toBoardRow).join('')}</div>`;
+  }).join('');
+}
+// 以后 / 前几天：某一天的任务（admin_tasks_once）按天列
+function toListRow(x){
+  const done = x.status === 'done', bad = ['missed', 'overdue'].includes(x.status), nob = !done && !bad && toNobody(x);
+  const sub = done ? '✓ ' + [x.completed_by, fmtDateTime(x.completed_at), askAns(x)].filter(Boolean).join(' · ') : bad ? t('to_st_missed') : toWhoText(x);
+  const l = ((x.items || [])[0] || {}).last;
+  const acts = (l && l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '')
+    + (done || bad ? '' : `<button class="link" data-act="asg-open" data-def="${x.def_id}" data-mode="admin">${esc(t('to_assign'))}</button>`
+      + (x.flow_id ? '' : `<button class="link" data-act="to-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="to-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>`));
+  return tsrRow(esc(toWhen(x) + ' · ' + toName(x)) + (x.important ? ' 📷' : '') + ' ' + storeTag(x.store) + ` <span class="tag">${esc(t('area_' + x.area))}</span>`,
+    done ? 'ok' : bad || nob ? 'bad' : '', `<span class="${nob ? 'warnc' : ''}">${esc(sub)}</span>`, bad ? 'negc' : '', acts);
+}
 function toAdminRender(){
-  const e = state.toEdit, groups = {};
-  (state.toList || []).forEach(x => (groups[x.day] = groups[x.day] || []).push(x));
-  const list = Object.keys(groups).sort().map(d => `<h3>${esc(dayLabel(d))}${d === bizToday() ? ' · ' + esc(t('rk_rel0')) : ''}</h3><div class="list">${groups[d].map(x => toItemHTML(x, 'admin')).join('')}</div>`).join('');
-  const leads = h3i(esc(t('tl_title')), t('tl_hint')) + `<div class="list">${STORES.flatMap(st => ['kitchen', 'front'].map(a => {
+  const e = state.toEdit, bd = bizToday(), bd1 = addDays(bd, 1), v = state.toView || 'today', L = state.toList || [];
+  const later = L.filter(x => x.day > bd1), past = L.filter(x => x.day < bd);
+  const byDay = (list, desc) => { const g = {}; list.forEach(x => (g[x.day] = g[x.day] || []).push(x)); const ks = Object.keys(g).sort(); if (desc) ks.reverse();
+    return ks.map(d => `<div class="tdl-g">${esc(dayLabel(d))}</div><div class="tsr-box">${g[d].map(toListRow).join('')}</div>`).join(''); };
+  const seg = `<div class="seg sm" style="margin-bottom:8px">${[['today', t('tb_today')], ['tomorrow', t('tb_tomorrow')], ['later', t('tb_later', { n: later.length })], ['past', t('tb_past', { n: past.length })]]
+    .map(([k, lbl]) => `<button data-act="to-view" data-k="${k}" class="${v === k ? 'on' : ''}">${esc(lbl)}</button>`).join('')}</div>`;
+  const board = v === 'today' ? toBoardHTML(bd) : v === 'tomorrow' ? toBoardHTML(bd1)
+    : v === 'later' ? (byDay(later) || `<div class="list"><div class="empty">${esc(t('tb_later_none'))}</div></div>`)
+    : (byDay(past, true) || `<div class="list"><div class="empty">${esc(t('tb_past_none'))}</div></div>`);
+  const nLead = (state.toLeads || []).filter(x => x.staff_id).length;
+  const leads = `<details class="fold" style="margin-top:14px"${state.toLeadsOpen ? ' open' : ''}><summary>${esc(t('tl_sum', { a: nLead, b: STORES.length * 2 }))}</summary><div class="inner">
+    <div class="small muted" style="margin-bottom:8px">${esc(t('tl_hint'))}</div><div class="list">${STORES.flatMap(st => ['kitchen', 'front'].map(a => {
       const l = (state.toLeads || []).find(x => x.store === st && x.area === a) || {}, k = st + '-' + a, pick = toAreaStaff(state.toStaff, a);
       if (l.staff_id && !pick.some(p => p.id === l.staff_id)) pick.unshift({ id: l.staff_id, name: l.name || '?' });
       return `<div class="item"><div class="top"><div>${storeTag(st)} <strong>${esc(t('area_' + a))}</strong></div>${l.updated_by ? `<div class="meta small muted">${esc(t('tl_by', { n: l.updated_by, t: fmtDateTime(l.updated_at) }))}</div>` : ''}</div>
@@ -2719,9 +2763,8 @@ function toAdminRender(){
           <div class="field" style="flex:1 1 140px;margin:0"><label for="tl-p-${k}" class="small muted">${esc(t('tl_lead'))}</label><select class="input" id="tl-p-${k}"><option value="">${esc(t('tl_none'))}</option>${pick.map(p => `<option value="${p.id}" ${p.id === l.staff_id ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>
           <div class="field" style="flex:1 1 140px;margin:0"><label for="tl-r-${k}" class="small muted">${esc(t('tl_role'))}</label><select class="input" id="tl-r-${k}">${(a === 'kitchen' ? KROLES : FROLES).map(r => `<option value="${r}" ${r === l.default_role ? 'selected' : ''}>${esc(t('grp_' + r))}</option>`).join('')}</select></div></div>
         <div class="acts"><button class="link" data-act="tl-save" data-store="${st}" data-area="${a}">${esc(t('save'))}</button></div></div>`;
-    })).join('')}</div>`;
-  return oilHTML() + (e ? toFormHTML(e) : `<button class="btn" data-act="to-new" style="margin:12px 0 6px">${esc(t('to_new'))}</button>`)
-    + h3i(esc(t('to_list')), t('to_list_hint')) + (list || `<div class="list"><div class="empty">${esc(t('to_none'))}</div></div>`) + leads;
+    })).join('')}</div></div></details>`;
+  return seg + (e ? toFormHTML(e) : '') + board + (e ? '' : `<button class="btn" data-act="to-new" style="margin:12px 0 6px">${esc(t('to_new'))}</button>`) + oilHTML() + leads;
 }
 function toRedraw(){ const el = $('#asub'); if (el && state.tab === 'admin' && state.adminSub === 'tasks') el.innerHTML = toAdminRender(); }
 // v96：速度记录页：最近 30 次打开页面、每种请求的平均 / 最慢时间（慢的在前）
@@ -2777,8 +2820,11 @@ function oilHTML(){
     const hist = F.filter(f => f.store === st && ['done', 'closed'].includes(f.status)).slice(0, 3);
     let body;
     if (open){
+      // v105：步骤条：检查 → 填收油日期 → 拿到门口 → 拿回地下室（做完的绿色 ✓，现在这一步加粗）
+      const fin = [open.status !== 'check', open.status === 'dated', !!(open.out && open.out.completed_at), !!(open.back && open.back.completed_at)], cur = fin.indexOf(false);
+      const steps = `<div class="oil-steps">${[1, 2, 3, 4].map((n, i) => `<span class="${fin[i] ? 'fin' : i === cur ? 'cur' : ''}">${fin[i] ? '✓ ' : ''}${esc(t('oil_s' + n))}</span>`).join('<span aria-hidden="true">›</span>')}</div>`;
       const dated = open.status === 'dated', tasks = (dated ? (open.check && open.check.completed_at ? [open.check] : []).concat([open.out, open.back]) : [open.check]);
-      body = (dated ? `<div style="margin:2px 0 8px"><strong>${esc(t('oil_pickup', { d: dayLabel(open.pickup_date) }))}</strong></div>` : '')
+      body = steps + (dated ? `<div style="margin:2px 0 8px"><strong>${esc(t('oil_pickup', { d: dayLabel(open.pickup_date) }))}</strong></div>` : '')
         + `<div class="list">${tasks.map(oilTaskLine).join('')}</div>`
         + `<div class="row" style="gap:8px;align-items:flex-end;margin-top:10px;flex-wrap:wrap">
             <div class="field" style="flex:1 1 160px;margin:0"><label for="oil-date-${open.id}" class="small muted">${esc(t(dated ? 'oil_date_change' : 'oil_date_lbl'))}</label>
@@ -7164,6 +7210,7 @@ document.addEventListener('click', async ev => {
     case 'pf-copy': { try { await navigator.clipboard.writeText(perfText()); toast(t('pf_copied')); } catch(e){ toast(t('pf_copy_fail'), true); } break; }
     case 'pf-clear': state.perf = []; LS.set('kochi_perf', []); toast(t('pf_cleared')); keepScroll(render); break;
     // v95：某一天的任务（老板「管理 → 任务」、负责人「交给…」）
+    case 'to-view': state.toView = el.dataset.k; keepScroll(toRedraw); break;   // v105：看板 今天 / 明天 / 以后 / 前几天
     case 'to-new': { const last = state.toLast || {};
       state.toEdit = { store: last.store || 'Bismarck', area: last.area || 'kitchen', day: addDays(bizToday(), 1), timing: 'closing', photo: false, text: '', zh: '', de: '', hzh: '', hde: '' };
       toRedraw(); const f = $('#to-form'); if (f) f.scrollIntoView({ block: 'start' }); break; }
@@ -7202,7 +7249,7 @@ document.addEventListener('click', async ev => {
     case 'tl-save': {
       const k = el.dataset.store + '-' + el.dataset.area; el.disabled = true;
       try { await rpc('admin_task_lead_set', { ...tok(), p_store: el.dataset.store, p_area: el.dataset.area, p_staff_id: $('#tl-p-' + k).value || null, p_default_role: $('#tl-r-' + k).value });
-        toast(t('tl_saved')); keepScroll(render); }
+        state.toLeadsOpen = true; toast(t('tl_saved')); keepScroll(render); }   // v105：负责人设置折叠着，保存后保持打开
       catch(err){ toast(errText(err), true); el.disabled = false; }
       break;
     }
