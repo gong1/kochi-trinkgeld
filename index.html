@@ -413,6 +413,7 @@ body.printing{overflow:hidden}
 .sdchip.on{background:var(--celadon-deep);border-color:var(--celadon-deep);color:#fff}
 .sdchip.on small{color:#fff}
 .sdchip:disabled{opacity:.45}
+.sdchip.def{background:var(--celadon-soft);border:1.5px dashed var(--celadon-deep);color:var(--celadon-deep)} .sdchip.def small{color:var(--celadon-deep)}
 table{width:100%;border-collapse:collapse;font-size:15px}
 td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
 th{color:var(--muted);font-weight:600}
@@ -610,7 +611,8 @@ zh: {
   kstt_title:'厨房班次时间', kstt_hint:'排厨房的人时，按他的岗位用这里的时间（兼岗取最早开始、最晚结束）。过了半夜下班的照填，例如清洁 22:00–01:00。改了以后：还没发布的周里、时间还是旧的厨房班会跟着改；已发布的周不动（要改就在排班窗口里单独改）。',
   kstt_unset:'还没设，现在用前场这个班次的时间', kstt_saved_n:'已保存。还没发布的周里 {n} 个厨房班改成了新时间。',
   // v84：后厨排班第二版（午班 / 晚班、兼岗、时间）
-  ke_hint2:'分午班、晚班排：一个人可以点进同一段的几个岗位（兼岗）；时间默认按他的岗位，可以在下面改，过了半夜下班的照填（例如 22:00–01:00）。同一天只能在一家店；同一时段已经排在前场的人灰掉。',
+  ke_def_col:'默认：{n}（同热菜）', ke_def_sub:'默认 · 同热菜',
+  ke_hint2:'热菜第一个点的人默认也做冷菜、出串（清洁不默认）；有别人做，就在那一栏点那个人。分午班、晚班排：一个人可以点进同一段的几个岗位（兼岗）；时间默认按他的岗位，可以在下面改，过了半夜下班的照填（例如 22:00–01:00）。同一天只能在一家店；同一时段已经排在前场的人灰掉。',
   ke_people:'这一段的人和时间', ke_front_busy:'已排在前场{sl}', ke_skip_front:'{n} 已排在前场{sl}，厨房{sl}没有加上。',
   ke_old_day:'这天有以前的「全天」班，已经先放进每一段里，请按实际改好再保存。', k_allday:'全天', pk_kitchen:'已排在厨房{sl}',
   ntf_item_kparts:'{d} {s} 厨房 {list}',
@@ -805,7 +807,8 @@ zh: {
   req_done_grp:'已处理（{n}）', req_approved:'已批准', req_rejected:'已拒绝', staff_off_grp:'已停用（{n}）',
   fb_done_grp:'已处理（{n}）', arc_done_grp:'已存档（{n}）', todo_title:'我的待办（{n}）', rc_wait_max:'最久已等 {n} 天',
   se_edit:'编辑', se_sum:'这个班：', se_dual:'兼岗：{n}（{r}）· 同一班次做服务，不拿别人的 Runner / 吧台份额', se_none:'（没人）',
-  se_removed:'{n} 从这个班去掉', se_hint:'点名字选中，再点取消。同一个人在两栏都选 = 兼岗。窗口里没选的人保存后会从这个班去掉。',
+  se_removed:'{n} 从这个班去掉', se_hint:'点名字选中，再点取消。同一个人在两栏都选 = 兼岗。窗口里没选的人保存后会从这个班去掉。只排一个服务员时，他默认也做 Runner、吧台（一人三岗），不用再点。',
+  se_def_col:'默认：{n}（一人三岗）', se_def_sub:'默认 · 一人三岗', se_def_tip:'{n} 一个人做服务、Runner、吧台（一人三岗），这一栏不用再点。有别人做这个岗位，就点那个人。', se_bar_q:'排了 Runner、没排吧台：请在吧台栏点谁兼吧台。服务员兼：吧台那份留给交 Bon 的服务员；Runner 兼：拿 Runner + 吧台两份。',
   pk_title:'选{r}', pk_main:'主岗位是{r}', pk_skill:'会做{r}', pk_other:'其他人（{n}）', pk_all:'显示全部（包括不参与排班的 {n} 人）',
   pk_elsewhere:'已排在 {s}', pk_no:'标了不能上', pk_save:'保存（{n} 人）', pk_none_sel:'请至少选一个人。', pk_already:'已排',
   pk_skipped:'{n} 已排在 {s} 同一时段，没有加上。', pk_same:'{n} 已经是这个岗位。', pk_time_hint:'新加进来的人用他那一栏的时间（兼岗取最早开始、最晚结束），可以只改这一天的。原来就在班上的人时间不变，要改点他的名字。',
@@ -1014,7 +1017,8 @@ de: {
   kstt_title:'Schichtzeiten Küche', kstt_hint:'Beim Einplanen in der Küche gelten diese Zeiten je Posten (bei mehreren Posten frühester Beginn bis spätestes Ende). Über Mitternacht einfach so eintragen, z. B. Reinigung 22:00–01:00. Nach einer Änderung werden in noch nicht veröffentlichten Wochen die Küchenschichten mit der alten Zeit angepasst; veröffentlichte Wochen bleiben unverändert (dort im Planungsfenster einzeln ändern).',
   kstt_unset:'noch nicht festgelegt – zurzeit Zeiten der Service-Schicht', kstt_saved_n:'Gespeichert. In noch nicht veröffentlichten Wochen wurden {n} Küchenschichten auf die neue Zeit gesetzt.',
   // v84：Küchenplan Version 2 (Mittag / Abend, mehrere Posten, Zeiten)
-  ke_hint2:'Nach Mittag und Abend planen: eine Person kann in derselben Schicht mehrere Posten haben; die Zeit kommt aus ihren Posten und lässt sich unten ändern, auch über Mitternacht (z. B. 22:00–01:00). Pro Tag nur in einem Laden; wer zur gleichen Zeit im Service eingeplant ist, ist ausgegraut.',
+  ke_def_col:'Standard: {n} (wie Warme Küche)', ke_def_sub:'Standard · wie Warme Küche',
+  ke_hint2:'Die erste Person bei Warme Küche macht standardmäßig auch Kalte Küche und Spieße (Reinigung nicht); macht es jemand anderes, in der Spalte diese Person antippen. Nach Mittag und Abend planen: eine Person kann in derselben Schicht mehrere Posten haben; die Zeit kommt aus ihren Posten und lässt sich unten ändern, auch über Mitternacht (z. B. 22:00–01:00). Pro Tag nur in einem Laden; wer zur gleichen Zeit im Service eingeplant ist, ist ausgegraut.',
   ke_people:'Personen und Zeiten in dieser Schicht', ke_front_busy:'schon im Service ({sl})', ke_skip_front:'{n} ist {sl} schon im Service eingeplant – in der Küche ({sl}) nicht hinzugefügt.',
   ke_old_day:'An diesem Tag gibt es alte „ganztags“-Schichten; sie sind vorerst in jede Schicht übernommen – bitte anpassen und speichern.', k_allday:'Ganztags', pk_kitchen:'schon in der Küche ({sl})',
   ntf_item_kparts:'{d} {s}, Küche: {list}',
@@ -1209,7 +1213,8 @@ de: {
   req_done_grp:'Erledigt ({n})', req_approved:'Genehmigt', req_rejected:'Abgelehnt', staff_off_grp:'Inaktiv ({n})',
   fb_done_grp:'Erledigt ({n})', arc_done_grp:'Archiviert ({n})', todo_title:'Meine Aufgaben ({n})', rc_wait_max:'längste Wartezeit {n} Tage',
   se_edit:'Bearbeiten', se_sum:'Diese Schicht:', se_dual:'Doppelrolle: {n} ({r}) · Service in derselben Schicht, kein Runner-/Bar-Anteil anderer', se_none:'(niemand)',
-  se_removed:'{n} aus der Schicht entfernt', se_hint:'Namen antippen zum Auswählen, nochmal zum Abwählen. In zwei Spalten gewählt = Doppelrolle. Nicht gewählte Personen werden beim Speichern aus der Schicht entfernt.',
+  se_removed:'{n} aus der Schicht entfernt', se_hint:'Namen antippen zum Auswählen, nochmal zum Abwählen. In zwei Spalten gewählt = Doppelrolle. Nicht gewählte Personen werden beim Speichern aus der Schicht entfernt. Nur eine Person im Service: sie macht standardmäßig auch Runner und Bar (alle drei Posten) – nicht extra antippen.',
+  se_def_col:'Standard: {n} (alle drei Posten)', se_def_sub:'Standard · alle drei Posten', se_def_tip:'{n} macht Service, Runner und Bar allein (alle drei Posten) – hier nichts mehr antippen. Macht jemand anderes diesen Posten, diese Person antippen.', se_bar_q:'Runner eingeplant, aber keine Bar: bitte in der Spalte Bar antippen, wer die Bar mitmacht. Service macht Bar mit: der Bar-Anteil bleibt beim Service mit dem Bon; Runner macht Bar mit: bekommt Runner- und Bar-Anteil.',
   pk_title:'{r} wählen', pk_main:'Hauptrolle {r}', pk_skill:'Kann {r}', pk_other:'Weitere ({n})', pk_all:'Alle anzeigen (inkl. {n} nicht eingeplante)',
   pk_elsewhere:'schon in {s}', pk_no:'nicht verfügbar', pk_save:'Speichern ({n})', pk_none_sel:'Bitte mindestens eine Person wählen.', pk_already:'schon eingeplant',
   pk_skipped:'{n} ist zur gleichen Zeit schon in {s} eingeplant – nicht hinzugefügt.', pk_same:'{n} hat diese Position schon.', pk_time_hint:'Neu hinzugefügte Personen bekommen die Zeit ihrer Spalte (Doppelrolle: frühester Beginn bis spätestes Ende); hier nur für diesen Tag änderbar. Wer schon eingeplant ist, behält seine Zeit – zum Ändern auf den Namen tippen.',
@@ -6802,10 +6807,16 @@ function kPartTimes(d, date, store, part){ const k = (d.kslots || []).find(x => 
 const kTimeOk = (a, b) => !!a && !!b && a >= '05:00' && b !== a && (b > a || b <= '05:00');
 const kEndKey = (a, b) => (b <= a ? '1' : '0') + b;   // 比谁最晚下班：过半夜的算最晚
 function kDefTime(T, roles){ const xs = roles.map(r => (T || {})[r]).filter(Boolean); return xs.length ? { start: xs.map(x => x.start).sort()[0], end: xs.reduce((m, x) => kEndKey(x.start, x.end) > kEndKey(m.start, m.end) ? x : m).end } : null; }
+// v106（老板 2026-10-24）：新排的一段里，热菜第一个点的人（主厨）默认也做冷菜、出串（清洁不默认）；
+//   哪一栏点了别人（或点掉默认）这一栏就不再默认。默认的会存下来（= 兼岗）。打开时已经有人的段不默认，免得一保存就算改动、通知员工
+const KDEF = ['cold', 'skewer'];
+function keDefId(P, r){ return KDEF.includes(r) && !P.touched[r] && !P.sel[r].length && P.sel.hot.length ? P.sel.hot[0] : null; }
+function keSel(P, r){ const id = keDefId(P, r); return id ? [id] : P.sel[r]; }   // 这一栏实际排的人（含默认）
+function keRolesOf(P, id){ return KROLES.filter(r => keSel(P, r).includes(id)); }
 function keOpen(p){
   const d = state.plan, cur = d.shifts.filter(x => x.slot === 'day' && x.date === p.date && x.store === p.store);
   const avail = KPARTS.filter(pt => kPartTimes(d, p.date, p.store, pt)), parts = {};
-  avail.forEach(pt => { parts[pt] = { sel: { hot: [], cold: [], skewer: [], clean: [] }, times: {} }; });
+  avail.forEach(pt => { parts[pt] = { sel: { hot: [], cold: [], skewer: [], clean: [] }, times: {}, touched: {} }; });
   let old = false;
   cur.forEach(x => {
     if ((x.parts || []).length) x.parts.forEach(q => { const P = parts[q.part]; if (!P) return;
@@ -6814,13 +6825,14 @@ function keOpen(p){
       if (!def || def.start !== q.start || def.end !== q.end) P.times[x.staff_id] = { start: q.start, end: q.end }; });
     else { old = true; avail.forEach(pt => { if (parts[pt].sel[x.role]) parts[pt].sel[x.role].push(x.staff_id); }); }   // 以前的「全天」班：先放进每一段
   });
+  avail.forEach(pt => { const P = parts[pt]; if (KROLES.some(r => P.sel[r].length)) KDEF.forEach(r => { P.touched[r] = true; }); });   // v106：已经排了人的段不默认
   state.kEd = { ...p, parts, avail, old, part: avail[0] || 'dinner' }; keRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal();
 }
 // 把这一段输入框里的时间记下来（和默认时间一样就不算改过）
 function keKeep(){
   const e = state.kEd; if (!e) return; const P = e.parts[e.part]; if (!P) return; const T = kPartTimes(state.plan, e.date, e.store, e.part);
   document.querySelectorAll('.ke-ts').forEach(a => { const id = a.dataset.id, b = document.querySelector(`.ke-te[data-id="${id}"]`); if (!b) return;
-    const def = kDefTime(T, KROLES.filter(r => P.sel[r].includes(id))) || {};
+    const def = kDefTime(T, keRolesOf(P, id)) || {};
     if (a.value === def.start && b.value === def.end) delete P.times[id]; else P.times[id] = { start: a.value, end: b.value }; });
 }
 function keRender(){
@@ -6833,19 +6845,20 @@ function keRender(){
     const sortFn = (a, b) => (no(a.id) - no(b.id)) || a.name.localeCompare(b.name);
     const main = pool.filter(s => s.main_role === r).sort(sortFn), skill = pool.filter(s => s.main_role !== r && (s.skills || []).includes(r)).sort(sortFn);
     const other = pool.filter(s => s.main_role !== r && !(s.skills || []).includes(r)).sort(sortFn);
-    const chip = s => { const on = P.sel[r].includes(s.id), x = elsewhere(s.id), f = front(s.id);
-      const sub = x ? t('ke_elsewhere', { s: x.store }) : f ? t('ke_front_busy', { sl: slotLabel(e.part) }) : no(s.id) ? t('ke_no') : t('grp_' + s.main_role);
-      return `<button type="button" class="sdchip pkchip ${on ? 'on' : ''} ${no(s.id) ? 'no' : ''}" aria-pressed="${on}" data-act="ke-toggle" data-role="${r}" data-id="${s.id}" ${(x || f) && !on ? 'disabled' : ''}>${esc(s.name)}<small>${esc(sub)}</small></button>`; };
-    return `<h3 style="margin:14px 0 4px">${esc(t('grp_' + r))}（${P.sel[r].length}）</h3>
+    const defId = keDefId(P, r);   // v106：这一栏默认是热菜第一个人
+    const chip = s => { const on = P.sel[r].includes(s.id), isDef = s.id === defId, x = elsewhere(s.id), f = front(s.id);
+      const sub = isDef ? t('ke_def_sub') : x ? t('ke_elsewhere', { s: x.store }) : f ? t('ke_front_busy', { sl: slotLabel(e.part) }) : no(s.id) ? t('ke_no') : t('grp_' + s.main_role);
+      return `<button type="button" class="sdchip pkchip ${on ? 'on' : ''} ${isDef ? 'def' : ''} ${no(s.id) ? 'no' : ''}" aria-pressed="${on || isDef}" data-act="ke-toggle" data-role="${r}" data-id="${s.id}" ${(x || f) && !on && !isDef ? 'disabled' : ''}>${esc(s.name)}<small>${esc(sub)}</small></button>`; };
+    return `<h3 style="margin:14px 0 4px">${esc(t('grp_' + r))}（${keSel(P, r).length}）${defId ? `<span class="small" style="font-weight:400;color:var(--celadon-deep)"> ${esc(t('ke_def_col', { n: (pool.find(s => s.id === defId) || {}).name || '?' }))}</span>` : ''}</h3>
       <div class="sdchips">${[...main, ...skill].map(chip).join('')}</div>
-      ${other.length ? `<details class="fold" style="margin-top:6px" ${other.some(s => P.sel[r].includes(s.id)) ? 'open' : ''}><summary>${esc(t('ke_other', { n: other.length }))}</summary><div class="inner"><div class="sdchips">${other.map(chip).join('')}</div></div></details>` : ''}`;
+      ${other.length ? `<details class="fold" style="margin-top:6px" ${other.some(s => keSel(P, r).includes(s.id)) ? 'open' : ''}><summary>${esc(t('ke_other', { n: other.length }))}</summary><div class="inner"><div class="sdchips">${other.map(chip).join('')}</div></div></details>` : ''}`;
   };
-  const ppl = pool.filter(s => KROLES.some(r => P.sel[r].includes(s.id)));
-  const rows = ppl.map(s => { const rs = KROLES.filter(r => P.sel[r].includes(s.id)), tm = P.times[s.id] || kDefTime(T, rs) || { start: '', end: '' };
+  const ppl = pool.filter(s => KROLES.some(r => keSel(P, r).includes(s.id)));
+  const rows = ppl.map(s => { const rs = keRolesOf(P, s.id), tm = P.times[s.id] || kDefTime(T, rs) || { start: '', end: '' };
     return `<div class="stt-role" style="flex-wrap:wrap"><span class="rl" style="min-width:110px"><strong>${esc(s.name)}</strong> <span class="small muted">${esc(rs.map(r => t('grp_' + r)).join(' + '))}</span></span>
       <input class="input num ke-ts" type="time" data-id="${s.id}" value="${esc(tm.start)}" aria-label="${esc(s.name + ' ' + t('sd_start'))}"><span>–</span>
       <input class="input num ke-te" type="time" data-id="${s.id}" value="${esc(tm.end)}" aria-label="${esc(s.name + ' ' + t('sd_end'))}"></div>`; }).join('');
-  const cnt = pt => new Set(KROLES.flatMap(r => e.parts[pt].sel[r])).size;
+  const cnt = pt => new Set(KROLES.flatMap(r => keSel(e.parts[pt], r))).size;
   $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${esc(dayLabel(e.date))}${storeTag(e.store)} ${esc(t('ke_title'))}</h2>
     <div class="small muted">${esc(t('ke_hint2'))}</div>
     ${e.old ? `<div class="infobox" style="margin:8px 0">${esc(t('ke_old_day'))}</div>` : ''}
@@ -6863,6 +6876,8 @@ function seOpen(p){
   state.slotEd = { ...p, sel, showAll: false, times }; seRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal();
 }
 function seRolesOf(id){ const e = state.slotEd; return ROLES.filter(r => e.sel[r].includes(id)); }
+// v106：只排了一个服务员、Runner 和吧台都没人 → 按「一人三岗」规则他也做 Runner、吧台：两栏里标「默认」，只是显示，不存
+function seDef(){ const e = state.slotEd; return e.sel.service.length === 1 && !e.sel.runner.length && !e.sel.bar.length ? e.sel.service[0] : null; }
 function seRender(){
   const e = state.slotEd, d = state.plan;
   const g = id => { const el = $(id); return el ? el.value : undefined; };
@@ -6886,7 +6901,7 @@ function seRender(){
       const sub = x ? (x.kitchen ? t('pk_kitchen', { sl: slotLabel(e.slot) }) : t('pk_elsewhere', { s: x.store })) : no(s.id) ? t('pk_no') + (a && a.note ? ' · ' + a.note : '') : t('grp_' + (s.main_role || 'service'));
       return `<button type="button" class="sdchip pkchip ${on ? 'on' : ''} ${no(s.id) ? 'no' : ''}" aria-pressed="${on}" data-act="se-toggle" data-role="${r}" data-id="${s.id}" ${x ? 'disabled' : ''}>${esc(s.name)}<small data-sub="${esc(sub)}">${esc(sub)}</small></button>`; };
     const grp = (title, list) => list.length ? `<div class="sdgrp">${esc(title)}</div><div class="sdchips">${list.map(chip).join('')}</div>` : '';
-    return `<h3 style="margin:14px 0 4px">${esc(t('grp_' + r))}（<span id="se-n-${r}">${e.sel[r].length}</span>）</h3>
+    return `<h3 style="margin:14px 0 4px">${esc(t('grp_' + r))}（<span id="se-n-${r}">${e.sel[r].length}</span>）<span class="small" style="font-weight:400;color:var(--celadon-deep)" id="se-d-${r}"></span></h3>
       <div class="se-time">${esc(t('se_time'))} <input class="input num" type="time" id="se-s-${r}" value="${esc(e.times[r].start)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_start'))}"> – <input class="input num" type="time" id="se-e-${r}" value="${esc(e.times[r].end)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_end'))}"></div>
       ${grp(t('pk_main', { r: t('grp_' + r) }), main)}${grp(t('pk_skill', { r: t('grp_' + r) }), skill)}
       ${other.length ? `<details class="fold" style="margin-top:8px" ${other.some(s => e.sel[r].includes(s.id)) ? 'open' : ''}><summary>${esc(t('pk_other', { n: other.length }))}</summary><div class="inner"><div class="sdchips">${other.map(chip).join('')}</div></div></details>` : ''}
@@ -6903,18 +6918,20 @@ function seRender(){
 }
 // 选中 / 取消后只更新人数、兼岗标记和汇总，不整个重画（保留折叠和滚动位置）
 function seRefresh(){
-  const e = state.slotEd, d = state.plan, name = id => ((d.staff.find(s => s.id === id) || {}).name || '?');
-  ROLES.forEach(r => { const n = $('#se-n-' + r); if (n) n.textContent = e.sel[r].length; });
+  const e = state.slotEd, d = state.plan, name = id => ((d.staff.find(s => s.id === id) || {}).name || '?'), def = seDef();
+  ROLES.forEach(r => { const n = $('#se-n-' + r); if (n) n.textContent = e.sel[r].length;
+    const dl = $('#se-d-' + r); if (dl) dl.textContent = def && r !== 'service' ? ' ' + t('se_def_col', { n: name(def) }) : ''; });
   document.querySelectorAll('#shiftDlg [data-act="se-toggle"]').forEach(b => {
-    const on = e.sel[b.dataset.role].includes(b.dataset.id), rs = seRolesOf(b.dataset.id), sm = b.querySelector('small');
-    b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on));
-    if (sm) sm.textContent = rs.length > 1 ? rs.map(k => t('grp_' + k)).join(' + ') : sm.dataset.sub;
+    const on = e.sel[b.dataset.role].includes(b.dataset.id), isDef = !on && b.dataset.role !== 'service' && b.dataset.id === def, rs = seRolesOf(b.dataset.id), sm = b.querySelector('small');
+    b.classList.toggle('on', on); b.classList.toggle('def', isDef); b.setAttribute('aria-pressed', String(on || isDef));
+    if (sm) sm.textContent = isDef ? t('se_def_sub') : rs.length > 1 ? rs.map(k => t('grp_' + k)).join(' + ') : sm.dataset.sub;
   });
   const ids = [...new Set(ROLES.flatMap(r => e.sel[r]))], dual = ids.filter(id => { const rs = seRolesOf(id); return rs.length > 1 && rs.includes('service'); });
   const sum = $('#se-sum'); if (!sum) return;
   sum.innerHTML = `<div class="small" style="font-weight:700;margin-bottom:4px">${esc(t('se_sum'))}</div>`
-    + ROLES.map(r => `<div class="small">${esc(t('grp_' + r))}：${esc(e.sel[r].map(name).join('、') || t('se_none'))}</div>`).join('')
-    + dual.map(id => `<div class="small negc" style="margin-top:4px">${esc(t('se_dual', { n: name(id), r: seRolesOf(id).map(k => t('grp_' + k)).join(' + ') }))}</div>`).join('');
+    + ROLES.map(r => `<div class="small">${esc(t('grp_' + r))}：${esc(e.sel[r].map(name).join('、') || (def && r !== 'service' ? `${name(def)}（${t('se_def_sub')}）` : t('se_none')))}</div>`).join('')
+    + dual.map(id => `<div class="small negc" style="margin-top:4px">${esc(t('se_dual', { n: name(id), r: seRolesOf(id).map(k => t('grp_' + k)).join(' + ') }))}</div>`).join('')
+    + (e.sel.service.length && e.sel.runner.length && !e.sel.bar.length ? `<div class="small" style="margin-top:4px;color:var(--copper)">${esc(t('se_bar_q'))}</div>` : '');   // v106：有 Runner、没排吧台 → 照规则要定谁兼吧台（10-10）
 }
 // 点某人的名字：改时间 / 备注，去掉某个岗位
 function peOpen(x){ state.shiftEdit = { ...x }; peRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal(); }
@@ -7841,17 +7858,18 @@ document.addEventListener('click', async ev => {
     case 'plan-area': state.planArea = el.dataset.k; state.planTimes = null; viewPlan(); break;
     case 'ke-open': keOpen({ date: el.dataset.date, store: el.dataset.store }); break;
     case 'ke-toggle': {   // v84：同一段里一个人可以有几个岗位（兼岗），点一下加上 / 去掉
-      keKeep(); const P = state.kEd.parts[state.kEd.part], id = el.dataset.id, r = el.dataset.role;
-      P.sel[r] = P.sel[r].includes(id) ? P.sel[r].filter(x => x !== id) : [...P.sel[r], id];
+      keKeep(); const P = state.kEd.parts[state.kEd.part], id = el.dataset.id, r = el.dataset.role, defId = keDefId(P, r);
+      if (KDEF.includes(r)) P.touched[r] = true;   // v106：这一栏动过就不再默认；点的是默认的人 = 把他从这一栏去掉
+      if (id !== defId) P.sel[r] = P.sel[r].includes(id) ? P.sel[r].filter(x => x !== id) : [...P.sel[r], id];
       keRender(); break;
     }
     case 'ke-part': keKeep(); state.kEd.part = el.dataset.k; keRender(); break;   // v84：午班 / 晚班切换
     case 'ke-save': {
       keKeep(); const e = state.kEd, d = state.plan, body = {};
       for (const pt of e.avail){ const P = e.parts[pt], T = kPartTimes(d, e.date, e.store, pt), times = {};
-        [...new Set(KROLES.flatMap(r => P.sel[r]))].forEach(id => { const tm = P.times[id] || kDefTime(T, KROLES.filter(r => P.sel[r].includes(id))); if (tm) times[id] = tm; });
+        [...new Set(KROLES.flatMap(r => keSel(P, r)))].forEach(id => { const tm = P.times[id] || kDefTime(T, keRolesOf(P, id)); if (tm) times[id] = tm; });
         if (Object.values(times).some(x => !kTimeOk(x.start, x.end))) return toast(t('err_INVALID_KTIME'), true);   // v86：可以过半夜
-        body[pt] = { ...P.sel, times }; }
+        body[pt] = { times }; KROLES.forEach(r => { body[pt][r] = keSel(P, r); }); }   // v106：默认的也存
       el.disabled = true;
       try {
         const r = await rpc('ksched_set_parts', { ...tok(), p_date: e.date, p_store: e.store, p_parts: body });   // v84
@@ -7926,6 +7944,8 @@ document.addEventListener('click', async ev => {
     }
     case 'se-toggle': {
       const e = state.slotEd, arr = e.sel[el.dataset.role], i = arr.indexOf(el.dataset.id);
+      if (el.dataset.role !== 'service' && el.dataset.id === seDef()){   // v106：点「默认」的人：只说明，不改（真点上会变成兼岗，另一栏就要另外定）
+        toast(t('se_def_tip', { n: (state.plan.staff.find(s => s.id === el.dataset.id) || {}).name || '?' })); break; }
       if (i >= 0) arr.splice(i, 1); else arr.push(el.dataset.id);
       seRefresh(); break;
     }
