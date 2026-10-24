@@ -465,6 +465,8 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v104：储区页上直接改储区
+  inv_area_edit:'✏️ 编辑这个储区（名字、规矩、特点）',
   // v100：房间 / 货架的特点（老板口述，AI 整理；只是提醒）
   inv_tr_h_area:'房间的特点（只是提醒：AI 推荐位置时参考，员工也能看到）', inv_tr_h_unit:'货架的特点（只是提醒：AI 推荐位置时参考，员工也能看到）',
   inv_tr_hint:'站在这里，打字或点键盘上的 🎤 说一段：潮不潮、冷不冷、多久来一次、货架什么材质、能不能放重的、最下层是不是贴地……然后点「✨ AI 整理」，看一眼再保存。',
@@ -866,6 +868,8 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v104：Bereich direkt auf der Bereichsseite bearbeiten
+  inv_area_edit:'✏️ Diesen Bereich bearbeiten (Name, Regeln, Eigenschaften)',
   // v100：Eigenschaften von Räumen / Regalen (vom Chef beschrieben, von der KI geordnet; nur Hinweise)
   inv_tr_h_area:'Eigenschaften des Raums (nur Hinweise: für KI-Platzvorschläge, auch für das Team sichtbar)', inv_tr_h_unit:'Eigenschaften des Regals (nur Hinweise: für KI-Platzvorschläge, auch für das Team sichtbar)',
   inv_tr_hint:'Vor Ort kurz beschreiben (tippen oder 🎤 auf der Tastatur): feucht? kalt? wie oft man hinkommt, Material des Regals, ob Schweres darf, ob die unterste Ebene auf dem Boden steht … dann „✨ KI ordnen“, kurz prüfen und speichern.',
@@ -3100,6 +3104,7 @@ function invSlotRow(s, edit, unit){
     ${edit && !s.photo && s.active ? ` <span class="tag pend">${esc(t('inv_photo_none'))}</span>` : ''}${edit && s.active && invDue(s) ? ` <span class="tag bad">${esc(t('inv_due_tag'))}</span>` : ''}
     <div class="meta">${its.length ? esc(names) : esc(t('inv_empty_place'))}</div></div></div></div>`;
 }
+// v104：老板在储区页最上面有「✏️ 编辑这个储区」（名字、规矩、特点），以前只能从「⚙ 物品设置」进去
 function renderInvArea(){
   const S = invS(), A = S.area, edit = A.can_edit;
   const units = (A.units || []).filter(u => u.active), off = (A.units || []).filter(u => !u.active);
@@ -3110,6 +3115,7 @@ function renderInvArea(){
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
     <h2 style="margin:4px 0 2px">${storeTag(A.store)} ${esc(invName(A))} <span class="muted num" style="font-size:16px">${esc(A.code)}</span></h2>
     <div style="margin-bottom:10px">${invAreaTags(A)}</div>${invTrShow('area', A)}
+    ${state.me.is_admin ? `<button class="btn ghost" data-act="inv-area-edit" style="margin-bottom:8px">${esc(t('inv_area_edit'))}</button>` : ''}
     ${edit && !A.inbox ? `<button class="btn ghost" data-act="inv-unit-new" style="margin-bottom:8px">${esc(t('inv_add_unit'))}</button>` : ''}
     ${edit ? `<button class="btn ghost" data-act="inv-lab-area" data-id="${A.id}" style="margin-bottom:12px">${esc(t('inv_lab_btn'))}</button>` : ''}
     ${units.length ? units.map(unitHTML).join('') : `<div class="list"><div class="empty">${esc(t('inv_area_empty'))}</div></div>`}
@@ -3556,7 +3562,7 @@ function invSetChk(G, k, label){ return `<label class="small" style="display:fle
 function renderInvAreaForm(){
   invTrKeep();   // v100：重画前记下特点框里的字
   const G = invS().sform;
-  $('#main').innerHTML = `<button class="link" data-act="inv-settings" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(G.id ? invName(G) + ' · ' + G.code : t('inv_set_new_area'))}</h2>
+  $('#main').innerHTML = `<button class="link" data-act="inv-aform-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(G.id ? invName(G) + ' · ' + G.code : t('inv_set_new_area'))}</h2>
     ${G.id ? '' : `<div class="seg sm" style="margin-bottom:12px">${STORES.map(s => `<button data-act="inv-s-store" data-store="${s}" class="${G.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>${invSetFld(G, 'code', t('inv_a_code'), 'autocapitalize="characters" maxlength="3"')}`}
     ${invSetFld(G, 'name_zh', t('inv_f_zh'))}${invSetFld(G, 'name_de', t('inv_f_de'))}
     <div class="field"><label>${esc(t('inv_a_owner'))}</label><div class="seg sm">${['front', 'kitchen', 'shared'].map(k => `<button data-act="inv-s-owner" data-k="${k}" class="${G.owner === k ? 'on' : ''}">${esc(t('inv_owner_' + k))}</button>`).join('')}</div></div>
@@ -8246,6 +8252,12 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'inv-settings': { const S = invS(); S.sform = null; S.home = null; invGo('settings'); break; }
+    case 'inv-area-edit': {   // v104：从储区页直接打开这个储区的编辑表单，保存 / 取消后回到储区页
+      const S = invS(), A = S.area; if (!A) break;
+      S.sform = { ...A, sort: String(A.sort), tr: invTrNew(A), back: { view: 'area', id: A.id } };
+      S.view = 'aform'; render(); window.scrollTo(0, 0); break;
+    }
+    case 'inv-aform-cancel': { const S = invS(), b = (S.sform || {}).back; S.sform = null; if (b) invGo(b.view, b.id); else invGo('settings'); break; }
     case 'inv-aform': {
       const S = invS(), a = el.dataset.id ? ((S.home || {}).areas || []).find(x => x.id === el.dataset.id) : null;
       S.sform = a ? { ...a, sort: String(a.sort), tr: invTrNew(a) } : { id: null, store: STORES[0], code: '', name_zh: '', name_de: '', owner: 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true, tr: invTrNew(null) };
@@ -8265,7 +8277,7 @@ document.addEventListener('click', async ev => {
         : { name_zh: G.name_zh, name_de: G.name_de, nature: G.nature, damp: !!G.damp, area_code: G.area_code, sort: G.sort, active: !!G.active };
       if (isA) invTrKeep();
       try { const id = await rpc(isA ? 'inv_area_save' : 'inv_category_save', { ...tok(), p_id: G.id || null, p_data: d }); if (isA) await invTrSave('area', id);   // v100：特点
-        S.sform = null; S.home = null; toast(t('inv_saved')); invGo('settings'); }
+        const back = G.back; S.sform = null; S.home = null; S.area = null; toast(t('inv_saved')); if (isA && back) invGo(back.view, back.id); else invGo('settings'); }
       catch(e){ toast(errText(e), true); }
       break;
     }
