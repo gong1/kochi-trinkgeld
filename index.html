@@ -477,6 +477,16 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v109：新人带教——几个带教人
+  onb_q_self_who:'这个班主要是谁带你的？', onb_who_hint:'点名字，可以选几个，也可以不选；★ 是带教人。', onb_src_hint_self:'{n} 说这个班是你带的', onb_src_hint_boss:'老板请你评价这一天', onb_teach_hint:'你负责教：{t}',
+  onb_f_mentors:'带教人（可以选几个）', onb_f_mentors_hint:'每人负责教什么，开始以后在「带教人」名单里点「改」写上。', onb_row_start:'从 {d} 开始', onb_days_h:'每一天',
+  onb_mentors_h:'带教人', onb_m_line:'一起上班 {a} 天 · 评价了 {b} 次', onb_m_add:'＋ 加带教人', onb_m_edit:'改', onb_m_remove:'去掉', onb_m_teaches:'负责教什么（可不填，例如：酒水、收银）',
+  onb_m_remove_q:'把 {n} 从带教人名单里去掉？以前的评价留着，以后不再请这个人评价。', onb_m_none:'还没有带教人：点「＋ 加带教人」。',
+  onb_next:'下个班：{d} {s} {t}', onb_next_m:'同班的带教人：{m}', onb_next_none:'名单里的带教人都不在这个班', onb_next_no:'下个班还没排（或者还没发布）',
+  onb_revs:'这一天评价的人：{m}', onb_src_self:'新同事说的', onb_src_boss:'老板请的', onb_taught:'谁带的：{m}',
+  onb_ask:'请别人也评价这一天', onb_ask_who:'请谁评价', onb_ask_notify:'在 App 里提醒这个人（开了手机通知的会收到推送）', onb_ask_done:'已请 {n} 评价',
+  onb_ai_send_next:'发给下个班的带教人（{d}：{m}）', onb_ai_send_pick:'发给带教人…', onb_msg_to:'发给（可以选几个）', onb_msg_pick:'请先选发给谁。', onb_day_who:'那天哪几个带教人在（可不选）',
+  act_onb_ask:'请人评价带教',
   // v107：新人带教（入职培训第一步）
   admin_onb:'新人',
   onb_tk_self:'今天学得怎么样？', onb_tk_self_d:'{d} 学得怎么样？', onb_tk_mentor:'评价新同事 {n} 今天的表现', onb_tk_mentor_d:'评价新同事 {n}（{d}）',
@@ -487,19 +497,18 @@ zh: {
   onb_q_self_learned:'这个班学到了什么？', onb_q_self_unclear:'哪些还不清楚、心里没底？', onb_q_self_untaught:'有没有没人教、只能自己猜的地方？', onb_q_self_feeling:'这个班感觉怎么样？', onb_q_self_feeling_why:'为什么？', onb_q_self_next:'下个班最想先学什么？',
   onb_q_mentor_taught:'这个班教了哪些？', onb_q_mentor_can:'哪些已经会了？', onb_q_mentor_practice:'哪些还要练？', onb_q_mentor_attitude:'学习态度', onb_q_mentor_speed:'学习速度', onb_q_mentor_concern:'有没有让你担心的地方？', onb_q_mentor_next:'下个班建议重点教什么？',
   onb_rate_lo:'1 很差', onb_rate_hi:'5 很好', onb_send:'提交', onb_send_note:'提交后不能改。', onb_sent:'谢谢！已经交给老板。', onb_opt:'（可不填）',
-  onb_title:'新人带教', onb_hint:'新同事每次上完班填「今天学得怎么样」；带教人在一起上班的那天（同一家店、班至少重叠 1 小时）填评价。两边的回答只有你能看到。AI 帮你翻译成中文、总结、找出两边说法对不上的地方，并建议下个班重点教什么。',
+  onb_title:'新人带教', onb_hint:'新同事每次上完班填「今天学得怎么样」；名单里的带教人在一起上班的那天（同一家店、班至少重叠 1 小时）各填一份评价，新同事说是谁带的、你请的人也会收到评价。所有回答只有你能看到。AI 帮你翻译成中文、总结、找出说法对不上的地方，并给下个班的带教人写重点。',
   onb_new:'＋ 开始带教', onb_f_staff:'新同事', onb_f_mentor:'带教人', onb_f_start:'从哪天开始算（最近 14 天，可以是昨天）', onb_f_notify:'在 App 里通知两个人（开了手机通知的会收到推送）', onb_start:'开始带教', onb_started:'已开始带教 {n}',
   onb_open_none:'现在没有在带教的新同事。', onb_ended_grp:'已结束（{n}）', onb_row_mentor:'带教人 {m} · 从 {d} 开始', onb_row_days:'上了 {a} 天班 · 自评 {b} 次 · 带教人评价 {c} 次', onb_row_missed:'没填 {n} 次', onb_new_tag:'新 {n}',
   onb_trend_feel:'感觉', onb_trend_att:'态度', onb_trend_speed:'速度',
-  onb_back:'← 返回新人列表', onb_intro:'开始时的通知：', onb_read:'已读', onb_unread:'还没看',
-  onb_btn_mentor:'换带教人', onb_btn_day:'加一天', onb_btn_end:'带教结束',
-  onb_m_notify:'在 App 里通知新的带教人', onb_day_date:'哪一天', onb_day_store:'门店', onb_day_with:'那天带教人也一起上班',
-  onb_day_hint:'排班里没有、但那天上了班（例如没排班的试工）。加上以后，今天和明天两个人可以在 App 里填；已经有回答（例如 WhatsApp）就直接点那一天的「补记」。',
+  onb_back:'← 返回新人列表', onb_intro:'开始时的通知：', onb_read:'已读', onb_unread:'还没看', onb_btn_day:'加一天', onb_btn_end:'带教结束',
+  onb_m_notify:'在 App 里通知新的带教人', onb_day_date:'哪一天', onb_day_store:'门店',
+  onb_day_hint:'排班里没有、但那天上了班（例如没排班的试工）。加上以后，今天和明天可以在 App 里填；已经有回答（例如 WhatsApp）就直接点那一天的「补记」。',
   onb_end_note:'写一句结果（可不填，例如「可以独立上岗」）', onb_end_q:'确定结束 {n} 的带教？结束后不再出新的填写。', onb_end_btn:'确认结束', onb_ended:'已结束 · {t}', onb_saved:'已保存',
-  onb_src_extra:'老板加的一天', onb_src_answer:'排班已改', onb_m_here:'带教人一起上班', onb_m_away:'带教人不在同一个班（只有新同事自评）',
+  onb_src_extra:'老板加的一天', onb_src_answer:'排班已改', onb_m_away:'没有带教人在同一个班（只有新同事自评）',
   onb_side_self:'新同事', onb_side_mentor:'带教人', onb_st_later:'下班前填（{t} 起）', onb_st_now:'今天还没填', onb_st_overdue:'还没填（今天结束前）', onb_st_missed:'没填', onb_by_boss:'老板补记 · {t}', onb_by:'{n} · {t}',
   onb_fill:'补记', onb_fill_ph:'把 WhatsApp 等收到的回答贴进来', onb_fill_hint:'贴进来的原话会存下来，AI 一起看。',
-  onb_ai_h:'AI 看的，仅供参考', onb_ai_run:'✨ AI 总结', onb_ai_again:'✨ 再看一次', onb_ai_stale:'有新的回答', onb_ai_busy:'AI 正在看……', onb_ai_fail:'AI 没看成，稍后点「✨ AI 总结」再试。', onb_ai_gaps:'两边说法对不上', onb_ai_watch:'要注意', onb_ai_next:'下个班建议重点', onb_ai_send:'发给带教人', onb_tr:'译：',
+  onb_ai_h:'AI 看的，仅供参考', onb_ai_run:'✨ AI 总结', onb_ai_again:'✨ 再看一次', onb_ai_stale:'有新的回答', onb_ai_busy:'AI 正在看……', onb_ai_fail:'AI 没看成，稍后点「✨ AI 总结」再试。', onb_ai_gaps:'说法对不上的地方', onb_ai_watch:'要注意', onb_ai_next:'下个班建议重点', onb_tr:'译：',
   onb_msg_self:'💬 给新同事说一句', onb_msg_mentor:'💬 给带教人说一句', onb_msg_zh:'中文', onb_msg_de:'德文', onb_msg_hint:'只写一种语言也行；点「✨ AI 写」按你写的写成中德文。', onb_msg_ai:'✨ AI 写', onb_msg_send:'发送', onb_msg_sent:'已发给 {n}',
   onb_msg_ctx:'不是等员工在 App 里做事：老板想就新同事 {n} 在 {d} 的带教说一句话（只说老板写的意思）。',
   onb_none_days:'还没有上班的日子（排班发布后出现；没排班也上了的点「加一天」）。',
@@ -911,6 +920,16 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v109：Einarbeitung – mehrere Ansprechpersonen
+  onb_q_self_who:'Wer hat dich in dieser Schicht hauptsächlich eingearbeitet?', onb_who_hint:'Namen antippen, auch mehrere oder keinen; ★ = Ansprechperson.', onb_src_hint_self:'{n} sagt, du hast eingearbeitet', onb_src_hint_boss:'Der Chef bittet dich um eine Rückmeldung', onb_teach_hint:'Dein Teil: {t}',
+  onb_f_mentors:'Ansprechpersonen (auch mehrere)', onb_f_mentors_hint:'Wer was zeigt, nach dem Start in der Liste „Ansprechpersonen“ unter „Ändern“ eintragen.', onb_row_start:'seit {d}', onb_days_h:'Tage',
+  onb_mentors_h:'Ansprechpersonen', onb_m_line:'{a} gemeinsame Tage · {b} Rückmeldungen', onb_m_add:'＋ Ansprechperson hinzufügen', onb_m_edit:'Ändern', onb_m_remove:'Entfernen', onb_m_teaches:'Was zeigt diese Person? (optional, z. B. Getränke, Kasse)',
+  onb_m_remove_q:'{n} aus der Liste entfernen? Bisherige Rückmeldungen bleiben, künftig wird diese Person nicht mehr gefragt.', onb_m_none:'Noch keine Ansprechperson: „＋ Ansprechperson hinzufügen“ tippen.',
+  onb_next:'Nächste Schicht: {d} {s} {t}', onb_next_m:'Ansprechpersonen dabei: {m}', onb_next_none:'keine Ansprechperson aus der Liste in dieser Schicht', onb_next_no:'Nächste Schicht noch nicht geplant (oder nicht veröffentlicht)',
+  onb_revs:'Rückmeldung an diesem Tag: {m}', onb_src_self:'von der neuen Person genannt', onb_src_boss:'vom Chef gebeten', onb_taught:'Eingearbeitet von: {m}',
+  onb_ask:'Weitere Person um Rückmeldung bitten', onb_ask_who:'Wen fragen?', onb_ask_notify:'Diese Person in der App informieren (mit Benachrichtigung, falls aktiviert)', onb_ask_done:'{n} um Rückmeldung gebeten',
+  onb_ai_send_next:'An die Ansprechperson der nächsten Schicht ({d}: {m})', onb_ai_send_pick:'An Ansprechperson senden …', onb_msg_to:'An (auch mehrere)', onb_msg_pick:'Bitte zuerst wählen, an wen.', onb_day_who:'Welche Ansprechpersonen waren da? (optional)',
+  act_onb_ask:'Einarbeitung: um Rückmeldung gebeten',
   // v107：Einarbeitung neuer Mitarbeiter (Schritt 1)
   admin_onb:'Neue',
   onb_tk_self:'Wie war dein Tag?', onb_tk_self_d:'Wie war dein Tag am {d}?', onb_tk_mentor:'Rückmeldung zu {n} (heute)', onb_tk_mentor_d:'Rückmeldung zu {n} ({d})',
@@ -921,19 +940,18 @@ de: {
   onb_q_self_learned:'Was hast du in der Schicht gelernt?', onb_q_self_unclear:'Was ist dir noch unklar?', onb_q_self_untaught:'Gab es etwas, das dir niemand gezeigt hat und du raten musstest?', onb_q_self_feeling:'Wie hast du dich in der Schicht gefühlt?', onb_q_self_feeling_why:'Warum?', onb_q_self_next:'Was möchtest du in der nächsten Schicht zuerst lernen?',
   onb_q_mentor_taught:'Was hast du in der Schicht gezeigt?', onb_q_mentor_can:'Was klappt schon?', onb_q_mentor_practice:'Was muss noch geübt werden?', onb_q_mentor_attitude:'Einstellung', onb_q_mentor_speed:'Lerntempo', onb_q_mentor_concern:'Gibt es etwas, das dir Sorgen macht?', onb_q_mentor_next:'Worauf sollte die nächste Schicht den Schwerpunkt legen?',
   onb_rate_lo:'1 schlecht', onb_rate_hi:'5 sehr gut', onb_send:'Abschicken', onb_send_note:'Nach dem Abschicken nicht mehr änderbar.', onb_sent:'Danke! Beim Chef angekommen.', onb_opt:'(optional)',
-  onb_title:'Einarbeitung', onb_hint:'Neue Mitarbeiter füllen nach jeder Schicht „Wie war dein Tag?“ aus; die Ansprechperson gibt an gemeinsamen Tagen (gleicher Laden, Schichten überschneiden sich mind. 1 Std.) eine Rückmeldung. Beide Antworten siehst nur du. Die KI übersetzt ins Chinesische, fasst zusammen, zeigt Widersprüche und schlägt den Schwerpunkt für die nächste Schicht vor.',
+  onb_title:'Einarbeitung', onb_hint:'Neue füllen nach jeder Schicht „Wie war dein Tag?“ aus; jede Ansprechperson aus der Liste, die in derselben Schicht war (gleicher Laden, mind. 1 Std. Überschneidung), gibt eine eigene Rückmeldung – ebenso Personen, die die neue Person nennt oder die du bittest. Alle Antworten siehst nur du. Die KI übersetzt ins Chinesische, fasst zusammen, zeigt Widersprüche und schreibt den Schwerpunkt für die Ansprechperson der nächsten Schicht.',
   onb_new:'＋ Einarbeitung starten', onb_f_staff:'Neue Person', onb_f_mentor:'Ansprechperson', onb_f_start:'Beginn (letzte 14 Tage, auch gestern möglich)', onb_f_notify:'Beide in der App informieren (mit Benachrichtigung aufs Handy, falls aktiviert)', onb_start:'Einarbeitung starten', onb_started:'Einarbeitung von {n} gestartet',
   onb_open_none:'Zurzeit wird niemand eingearbeitet.', onb_ended_grp:'Beendet ({n})', onb_row_mentor:'Ansprechperson {m} · seit {d}', onb_row_days:'{a} Arbeitstage · {b}× selbst · {c}× Ansprechperson', onb_row_missed:'{n}× nicht ausgefüllt', onb_new_tag:'{n} neu',
   onb_trend_feel:'Gefühl', onb_trend_att:'Einstellung', onb_trend_speed:'Tempo',
-  onb_back:'← Zurück zur Liste', onb_intro:'Info beim Start: ', onb_read:'gelesen', onb_unread:'noch nicht gelesen',
-  onb_btn_mentor:'Ansprechperson ändern', onb_btn_day:'Tag hinzufügen', onb_btn_end:'Einarbeitung beenden',
-  onb_m_notify:'Neue Ansprechperson in der App informieren', onb_day_date:'Welcher Tag', onb_day_store:'Laden', onb_day_with:'Die Ansprechperson war an dem Tag auch da',
-  onb_day_hint:'Nicht im Dienstplan, aber an dem Tag gearbeitet (z. B. Probearbeit ohne Plan). Danach können beide heute und morgen in der App ausfüllen; liegen die Antworten schon vor (z. B. WhatsApp), am Tag „Nachtragen“ tippen.',
+  onb_back:'← Zurück zur Liste', onb_intro:'Info beim Start: ', onb_read:'gelesen', onb_unread:'noch nicht gelesen', onb_btn_day:'Tag hinzufügen', onb_btn_end:'Einarbeitung beenden',
+  onb_m_notify:'Neue Ansprechperson in der App informieren', onb_day_date:'Welcher Tag', onb_day_store:'Laden',
+  onb_day_hint:'Nicht im Dienstplan, aber an dem Tag gearbeitet (z. B. Probearbeit ohne Plan). Danach können alle heute und morgen in der App ausfüllen; liegen die Antworten schon vor (z. B. WhatsApp), am Tag „Nachtragen“ tippen.',
   onb_end_note:'Ergebnis in einem Satz (optional, z. B. „kann selbstständig arbeiten“)', onb_end_q:'Einarbeitung von {n} beenden? Danach gibt es keine neuen Fragebögen mehr.', onb_end_btn:'Beenden', onb_ended:'Beendet · {t}', onb_saved:'Gespeichert',
-  onb_src_extra:'vom Chef hinzugefügt', onb_src_answer:'Dienstplan geändert', onb_m_here:'Ansprechperson in derselben Schicht', onb_m_away:'Ansprechperson nicht in derselben Schicht (nur Selbsteinschätzung)',
+  onb_src_extra:'vom Chef hinzugefügt', onb_src_answer:'Dienstplan geändert', onb_m_away:'Keine Ansprechperson in derselben Schicht (nur Selbsteinschätzung)',
   onb_side_self:'Neue Person', onb_side_mentor:'Ansprechperson', onb_st_later:'vor Feierabend (ab {t})', onb_st_now:'heute noch offen', onb_st_overdue:'noch offen (bis heute)', onb_st_missed:'nicht ausgefüllt', onb_by_boss:'vom Chef nachgetragen · {t}', onb_by:'{n} · {t}',
   onb_fill:'Nachtragen', onb_fill_ph:'Antwort aus WhatsApp o. Ä. hier einfügen', onb_fill_hint:'Der Text wird so gespeichert und von der KI mitgelesen.',
-  onb_ai_h:'Von der KI, ohne Gewähr', onb_ai_run:'✨ KI-Zusammenfassung', onb_ai_again:'✨ Neu ansehen', onb_ai_stale:'neue Antworten', onb_ai_busy:'KI liest …', onb_ai_fail:'Die KI hat es nicht geschafft – später „✨ KI-Zusammenfassung“ erneut tippen.', onb_ai_gaps:'Widersprüche', onb_ai_watch:'Im Blick behalten', onb_ai_next:'Schwerpunkt nächste Schicht', onb_ai_send:'An Ansprechperson senden', onb_tr:'Übersetzung: ',
+  onb_ai_h:'Von der KI, ohne Gewähr', onb_ai_run:'✨ KI-Zusammenfassung', onb_ai_again:'✨ Neu ansehen', onb_ai_stale:'neue Antworten', onb_ai_busy:'KI liest …', onb_ai_fail:'Die KI hat es nicht geschafft – später „✨ KI-Zusammenfassung“ erneut tippen.', onb_ai_gaps:'Widersprüche', onb_ai_watch:'Im Blick behalten', onb_ai_next:'Schwerpunkt nächste Schicht', onb_tr:'Übersetzung: ',
   onb_msg_self:'💬 Nachricht an die neue Person', onb_msg_mentor:'💬 Nachricht an die Ansprechperson', onb_msg_zh:'Chinesisch', onb_msg_de:'Deutsch', onb_msg_hint:'Eine Sprache reicht; „✨ KI schreiben“ macht daraus Chinesisch und Deutsch.', onb_msg_ai:'✨ KI schreiben', onb_msg_send:'Senden', onb_msg_sent:'An {n} gesendet',
   onb_msg_ctx:'Nichts ist in der App offen: Der Chef möchte etwas zur Einarbeitung von {n} am {d} sagen (nur das, was der Chef schreibt).',
   onb_none_days:'Noch keine Arbeitstage (erscheinen nach Veröffentlichung des Dienstplans; ohne Plan gearbeitet → „Tag hinzufügen“).',
@@ -1467,6 +1485,8 @@ function toast(msg, isErr){
 }
 // 报错提示：每条都写清原因和下一步怎么做
 const ERR_ZH = {
+  ONB_ASK_EXISTS: '这个人这一天本来就要评价（名单里同班的、新同事点到的，或者已经请过）。',
+  ONB_NOT_IN_PLAN: '只能发给新同事或这个带教的带教人 / 评价人。请在「发给」里重新选。',
   ONB_NOT_YOURS: '这条不是给你填的。请回到「今天」，填写你自己的那一条。',
   ONB_NO_DAY: '这一天不在带教记录里（可能排班改了）。请回到「今天」刷新；老板可以在「管理 → 新人」里「加一天」。',
   ONB_NO_MENTOR: '这一天带教人不在同一个班，不用评价。老板可以在「管理 → 新人」里换带教人或补记。',
@@ -1650,6 +1670,8 @@ const ERR_ZH = {
   INVALID_KTIME: '时间不对：开始要在 05:00 以后，结束要晚于开始。过了半夜下班的照填，最晚到 05:00（例如 22:00–01:00）。请检查每个人的时间，有没有空着的。',
 };
 const ERR_DE = {
+  ONB_ASK_EXISTS: 'Diese Person gibt für diesen Tag ohnehin eine Rückmeldung (Ansprechperson in derselben Schicht, von der neuen Person genannt oder schon gefragt).',
+  ONB_NOT_IN_PLAN: 'Nur an die neue Person oder an Ansprechpersonen dieser Einarbeitung. Bitte unter „An“ neu wählen.',
   ONB_NOT_YOURS: 'Das ist nicht deine Rückmeldung. Bitte zurück zu „Heute“ und deine eigene ausfüllen.',
   ONB_NO_DAY: 'Dieser Tag gehört nicht (mehr) zur Einarbeitung – vielleicht wurde der Dienstplan geändert. Bitte „Heute“ neu laden; der Chef kann den Tag unter Verwaltung → Neue hinzufügen.',
   ONB_NO_MENTOR: 'An diesem Tag wart ihr nicht in derselben Schicht – keine Rückmeldung nötig. Der Chef kann die Ansprechperson ändern oder nachtragen.',
@@ -2282,8 +2304,9 @@ function areaStatusHTML(S){
       <div class="meta"><span class="${x.next_published ? '' : 'negc'}">${esc(t(x.next_published ? 'as_pub_yes' : 'as_pub_no'))}</span>${+x.pending ? ` · <span class="negc">${esc(t('as_pend', { n: x.pending }))}</span>` : ''}</div></div>`; }).join('');
   return `<h3>${esc(t('as_title'))}</h3><div class="list">${rows}</div>`;
 }
-// ============ 新人带教（v107，入职培训第一步）============
-// 新同事每个上班的营业日填「今天学得怎么样」，带教人在一起上班的那天填评价；两边的回答只给老板看（数据库 v77，AI：文件服务 tasks v13 onb_ai）
+// ============ 新人带教（v107，入职培训第一步；v109 起可以有几个带教人）============
+// 新同事每个上班的营业日填「今天学得怎么样」；名单里同班的带教人、新同事点到的同事、老板请的人各填一份评价；回答只给老板看
+// （数据库 v77、v78，AI：文件服务 tasks v13、v14 onb_ai）
 const ONB_Q = {
   self: [{ k: 'learned', req: 1 }, { k: 'unclear' }, { k: 'untaught' }, { k: 'feeling', req: 1, rate: 1 }, { k: 'feeling_why' }, { k: 'next' }],
   mentor: [{ k: 'taught', req: 1 }, { k: 'can' }, { k: 'practice' }, { k: 'attitude', req: 1, rate: 1 }, { k: 'speed', req: 1, rate: 1 }, { k: 'concern' }, { k: 'next' }],
@@ -2293,9 +2316,14 @@ function onbTitle(x){
   const isT = x.day === bizToday();
   return x.side === 'self' ? t(isT ? 'onb_tk_self' : 'onb_tk_self_d', { d: dayLabel(x.day) }) : t(isT ? 'onb_tk_mentor' : 'onb_tk_mentor_d', { n: x.name, d: dayLabel(x.day) });
 }
+// v109：评价人为什么要填（新同事说是你带的 / 老板请的）和负责教什么
+function onbWhy(x){
+  return [x.src === 'self' ? t('onb_src_hint_self', { n: x.name }) : x.src === 'boss' ? t('onb_src_hint_boss') : '', x.teaches ? t('onb_teach_hint', { t: x.teaches }) : ''].filter(Boolean).join(' · ');
+}
 function onbCardHTML(k){
   const x = k.data, cls = k.status === 'overdue' ? 'bad' : k.status === 'later' ? 'later' : '';
-  const sub = k.status === 'later' ? t('onb_sub_later', { t: String(x.opens || '').slice(11, 16) }) : t(k.status === 'overdue' ? 'onb_sub_over' : 'onb_sub_now');
+  const sub = (k.status === 'later' ? t('onb_sub_later', { t: String(x.opens || '').slice(11, 16) }) : t(k.status === 'overdue' ? 'onb_sub_over' : 'onb_sub_now'))
+    + (x.side === 'mentor' && onbWhy(x) ? ' · ' + onbWhy(x) : '');
   return `<div class="task ${cls}"><div class="task-t">${esc(onbTitle(x))} ${storeTag(x.store)}</div><div class="task-s">${esc(sub)}</div>
     <div class="task-b"><button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="onb-open" data-plan="${x.plan_id}" data-day="${x.day}" data-side="${x.side}">${esc(t('onb_go'))}</button></div></div>`;
 }
@@ -2307,12 +2335,17 @@ function renderOnbForm(){
   if (!x || x.status === 'done'){ state.onbOpen = null; $('#main').innerHTML = `<button class="link" data-act="onb-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button><div class="empty">${esc(t('tk_gone'))}</div>`; return; }
   const rate = q => `<div class="seg onb-rate" style="margin-top:6px">${[1, 2, 3, 4, 5].map(v => `<button data-act="onb-rate" data-k="${q.k}" data-v="${v}" class="${+o.a[q.k] === v ? 'on' : ''}">${o.side === 'self' ? ONB_FACE[v - 1] + ' ' : ''}${v}</button>`).join('')}</div>
     <div class="small muted" style="display:flex;justify-content:space-between;margin-top:2px"><span>${esc(t('onb_rate_lo'))}</span><span>${esc(t('onb_rate_hi'))}</span></div>`;
+  // v109：这个班主要是谁带你的？（同班同事，可以选几个，也可以不选）
+  const who = o.a.taught_by || [], cols = x.colleagues || [];
+  const whoHTML = o.side === 'self' && cols.length ? `<div class="field"><label>${esc(t('onb_q_self_who'))} <span class="muted small">${esc(t('onb_opt'))}</span></label>
+    <div class="chips">${cols.map(c => `<button class="chip${who.includes(c.id) ? ' on' : ''}" data-act="onb-who" data-id="${c.id}">${esc(c.name)}${c.mentor ? ' ★' : ''}</button>`).join('')}</div>
+    <div class="small muted" style="margin-top:4px">${esc(t('onb_who_hint'))}</div></div>` : '';
   const fields = ONB_Q[o.side].map(q => `<div class="field"><label${q.rate ? '' : ` for="onb-${q.k}"`}>${esc(t('onb_q_' + o.side + '_' + q.k))}${q.req ? ' *' : ` <span class="muted small">${esc(t('onb_opt'))}</span>`}</label>
     ${q.rate ? rate(q) : `<textarea class="input" id="onb-${q.k}" data-onbk="${q.k}" rows="${q.k === 'feeling_why' ? 1 : 2}" maxlength="1000">${esc(o.a[q.k] || '')}</textarea>`}</div>`).join('');
   $('#main').innerHTML = `<button class="link" data-act="onb-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>
     <h2 style="margin-top:0">${esc(onbTitle(x))} ${storeTag(x.store)}</h2>
-    <div class="infobox">${esc(o.side === 'self' ? t('onb_f_hint_self') : t('onb_f_hint_mentor', { n: x.name }))}</div>
-    <div class="sheet">${fields}<button class="btn" data-act="onb-send">${esc(t('onb_send'))}</button>
+    <div class="infobox">${esc(o.side === 'self' ? t('onb_f_hint_self') : t('onb_f_hint_mentor', { n: x.name }))}${o.side === 'mentor' && onbWhy(x) ? `<div style="margin-top:4px"><strong>${esc(onbWhy(x))}</strong></div>` : ''}</div>
+    <div class="sheet">${whoHTML}${fields}<button class="btn" data-act="onb-send">${esc(t('onb_send'))}</button>
       <div class="small muted" style="margin-top:6px;text-align:center">${esc(t('onb_send_note'))}</div></div>`;
 }
 
@@ -2327,17 +2360,21 @@ function onbRedraw(){ const el = $('#asub'); if (el && state.tab === 'admin' && 
 function onbRoleTag(r){ return r ? `<span class="tag">${esc(t('grp_' + r))}</span>` : ''; }
 function onbCanStaff(s){ return s.is_active && !s.is_admin && !s.is_kitchen; }
 function onbStaffOpts(list, sel){ return `<option value="">–</option>` + list.map(s => `<option value="${s.id}" ${sel === s.id ? 'selected' : ''}>${esc(s.name)} · ${esc(t('grp_' + (s.main_role || 'service')))}</option>`).join(''); }
+// 名字按钮（可以点几个）：选中的放在 state 里的数组，点一下切换
+function onbChips(list, sel, act){ return `<div class="chips">${list.map(s => `<button class="chip${sel.includes(s.id) ? ' on' : ''}" data-act="${act}" data-id="${s.id}">${esc(s.name)}</button>`).join('')}</div>`; }
+function onbNames(ms){ return (ms || []).map(m => m.name + (m.teaches ? (state.lang === 'de' ? ' (' + m.teaches + ')' : '（' + m.teaches + '）') : '')).join(state.lang === 'de' ? ', ' : '、'); }
 // 每天的感觉 / 态度 / 速度：「感觉 4 → 3 → 5」
 function onbTrend(sc, key){ const v = (sc || []).filter(x => x[key] != null).map(x => x[key]); return v.length ? t('onb_trend_' + { feeling: 'feel', attitude: 'att', speed: 'speed' }[key]) + ' ' + v.join(' → ') : ''; }
 function onbListHTML(){
   const L = state.onbList || [], open = L.filter(p => !p.ended_at), done = L.filter(p => p.ended_at);
   const row = p => {
-    const R = p.rows || [], selfN = R.filter(r => r.self === 'done').length, mN = R.filter(r => r.mentor === 'done').length;
-    const miss = R.filter(r => r.self === 'missed').length + R.filter(r => r.mentor === 'missed').length;
+    const R = p.rows || [], ms = r => r.mentors || (r.mentor ? [{ status: r.mentor }] : []);
+    const selfN = R.filter(r => r.self === 'done').length, mN = R.reduce((a, r) => a + ms(r).filter(m => m.status === 'done').length, 0);
+    const miss = R.filter(r => r.self === 'missed').length + R.reduce((a, r) => a + ms(r).filter(m => m.status === 'missed').length, 0);
     const trend = ['feeling', 'attitude', 'speed'].map(k => onbTrend(p.scores, k)).filter(Boolean).join(' · ');
     return `<div class="item" data-act="onba-open" data-id="${p.id}" style="cursor:pointer"><div class="top"><div><strong>${esc(p.name)}</strong>${onbRoleTag(p.main_role)}${+p.unread ? `<span class="tag pend">${esc(t('onb_new_tag', { n: p.unread }))}</span>` : ''}</div>
         ${p.ended_at ? `<div class="meta small muted">${esc(t('onb_ended', { t: fmtDateTime(p.ended_at) }))}</div>` : ''}</div>
-      <div class="meta">${esc(t('onb_row_mentor', { m: p.mentor || '–', d: dayLabel(p.started_on) }))}</div>
+      <div class="meta">${esc(t('onb_row_mentor', { m: (p.mentors || []).length ? onbNames(p.mentors) : (p.mentor || '–'), d: dayLabel(p.started_on) }))}</div>
       <div class="meta">${esc(t('onb_row_days', { a: R.length, b: selfN, c: mN }))}${miss ? ` · <span class="negc">${esc(t('onb_row_missed', { n: miss }))}</span>` : ''}</div>
       ${trend ? `<div class="meta num">${esc(trend)}</div>` : ''}${p.end_note ? `<div class="meta">${esc(p.end_note)}</div>` : ''}</div>`;
   };
@@ -2347,15 +2384,17 @@ function onbListHTML(){
 }
 function onbNewForm(){
   const S = (state.onbStaff || []).filter(onbCanStaff), busy = new Set((state.onbList || []).filter(p => !p.ended_at).map(p => p.staff_id)), bd = bizToday();
-  return `<div class="sheet"><div class="field"><label for="onb-n-staff">${esc(t('onb_f_staff'))}</label><select class="input" id="onb-n-staff">${onbStaffOpts(S.filter(s => !busy.has(s.id)))}</select></div>
-    <div class="field"><label for="onb-n-mentor">${esc(t('onb_f_mentor'))}</label><select class="input" id="onb-n-mentor">${onbStaffOpts(S)}</select></div>
-    <div class="field"><label for="onb-n-start">${esc(t('onb_f_start'))}</label><input class="input" type="date" id="onb-n-start" min="${addDays(bd, -14)}" max="${bd}" value="${bd}"></div>
+  const N = state.onbNewSel = state.onbNewSel || { staff: '', mentors: [] };
+  return `<div class="sheet"><div class="field"><label for="onb-n-staff">${esc(t('onb_f_staff'))}</label><select class="input" id="onb-n-staff">${onbStaffOpts(S.filter(s => !busy.has(s.id)), N.staff)}</select></div>
+    <div class="field"><label>${esc(t('onb_f_mentors'))}</label>${onbChips(S.filter(s => s.id !== N.staff), N.mentors, 'onba-new-m')}
+      <div class="small muted" style="margin-top:4px">${esc(t('onb_f_mentors_hint'))}</div></div>
+    <div class="field"><label for="onb-n-start">${esc(t('onb_f_start'))}</label><input class="input" type="date" id="onb-n-start" min="${addDays(bd, -14)}" max="${bd}" value="${N.start || bd}"></div>
     <label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" id="onb-n-notify" checked style="margin-top:4px"> <span>${esc(t('onb_f_notify'))}</span></label>
     <div class="row" style="margin-top:12px"><button class="btn ghost" data-act="onba-new-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="onba-start">${esc(t('onb_start'))}</button></div></div>`;
 }
 async function onbDetailLoad(){
   const id = state.onbPlan;
-  const [d, staff] = await Promise.all([rpc('admin_onb_detail', { ...tok(), p_plan: id }), state.onbForm && state.onbForm.mentor && !state.onbStaff ? rpc('admin_list_staff', tok()) : null]);
+  const [d, staff] = await Promise.all([rpc('admin_onb_detail', { ...tok(), p_plan: id }), state.onbStaff ? null : rpc('admin_list_staff', tok())]);
   if (staff) state.onbStaff = staff;
   if (state.onbPlan !== id) return '';
   state.onbDet = d;
@@ -2368,7 +2407,7 @@ async function onbDetailLoad(){
   });
   return onbDetailHTML();
 }
-// 一边（新同事 / 带教人）的回答；AI 的中文翻译和原文不一样时，下面灰字写「译：…」
+// 一份回答；AI 的中文翻译和原文不一样时，下面灰字写「译：…」（v109：翻译按每份回答存在 tr）
 function onbAnsHTML(side, e, tr){
   if (!e) return '';
   const A = e.answers || {}, trl = (v, x) => x && state.lang === 'zh' && String(x).trim() !== String(v).trim() ? `<div class="small muted" style="white-space:pre-wrap">${esc(t('onb_tr') + x)}</div>` : '';
@@ -2376,35 +2415,49 @@ function onbAnsHTML(side, e, tr){
   return ONB_Q[side].filter(q => A[q.k] != null && A[q.k] !== '').map(q => `<div class="onb-a"><div class="small muted">${esc(t('onb_q_' + side + '_' + q.k))}</div>
     ${q.rate ? `<div><strong class="num">${esc(A[q.k])} / 5</strong>${side === 'self' ? ' ' + (ONB_FACE[A[q.k] - 1] || '') : ''}</div>` : `<div style="white-space:pre-wrap">${esc(A[q.k])}</div>${trl(A[q.k], tr && tr[q.k])}`}</div>`).join('');
 }
-function onbSideHTML(r, side){
-  const s = r[side]; if (!s) return '';
-  const e = s.entry, F = state.onbForm || {}, filling = F.fill && F.fill.day === r.day && F.fill.side === side, ai = r.ai && r.ai.out;
+function onbTr(r, e, side, first){ const o = r.ai && r.ai.out; if (!o || !e) return null; return (o.tr && o.tr[e.id]) || (side === 'self' ? o.self_zh : first ? o.mentor_zh : null) || null; }
+// 一块：新同事（s = r.self）或一个评价人（s = r.mentors[i]，有 staff_id）
+function onbBlockHTML(r, side, s, first){
+  if (!s) return '';
+  const e = s.entry, F = state.onbForm || {}, key = side === 'self' ? 'self' : s.staff_id, filling = F.fill && F.fill.day === r.day && F.fill.key === key;
   const st = e ? (e.by_boss ? t('onb_by_boss', { t: fmtDateTime(e.at) }) : t('onb_by', { n: e.author || '', t: fmtDateTime(e.at) }))
     : s.status === 'later' ? t('onb_st_later', { t: String(s.opens || '').slice(11, 16) }) : t('onb_st_' + s.status);
+  const head = side === 'self' ? esc(t('onb_side_self')) : esc(s.name) + (s.teaches ? ` <span class="muted small">${esc(state.lang === 'de' ? '(' + s.teaches + ')' : '（' + s.teaches + '）')}</span>` : '')
+    + (s.src === 'self' || s.src === 'boss' ? `<span class="tag">${esc(t('onb_src_' + s.src))}</span>` : '');
   const fillBox = filling ? `<div style="margin-top:8px"><textarea class="input" id="onb-fill" rows="4" maxlength="4000" placeholder="${esc(t('onb_fill_ph'))}"></textarea>
       <div class="small muted" style="margin:4px 0 8px">${esc(t('onb_fill_hint'))}</div>
       <div class="row"><button class="btn ghost" data-act="onba-form-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="onba-fill-save">${esc(t('save'))}</button></div></div>` : '';
-  return `<div class="onb-side"><div><strong>${esc(t('onb_side_' + side))}</strong> <span class="small ${!e && ['missed', 'overdue'].includes(s.status) ? 'negc' : 'muted'}">· ${esc(st)}</span>
-      ${!e && !filling && ['missed', 'overdue'].includes(s.status) ? ` <button class="link" data-act="onba-fill" data-day="${r.day}" data-side="${side}">${esc(t('onb_fill'))}</button>` : ''}</div>
-    ${onbAnsHTML(side, e, ai && ai[side + '_zh'])}${fillBox}</div>`;
+  const taught = side === 'self' && e && (e.taught || []).length ? `<div class="small" style="margin-top:4px">${esc(t('onb_taught', { m: e.taught.join(state.lang === 'de' ? ', ' : '、') }))}</div>` : '';
+  return `<div class="onb-side"><div><strong>${head}</strong> <span class="small ${!e && ['missed', 'overdue'].includes(s.status) ? 'negc' : 'muted'}">· ${esc(st)}</span>
+      ${!e && !filling && ['missed', 'overdue'].includes(s.status) ? ` <button class="link" data-act="onba-fill" data-day="${r.day}" data-side="${side}" data-mentor="${side === 'self' ? '' : s.staff_id}">${esc(t('onb_fill'))}</button>` : ''}</div>
+    ${taught}${onbAnsHTML(side, e, onbTr(r, e, side, first))}${fillBox}</div>`;
 }
 function onbAiHTML(r){
-  if (!((r.self && r.self.entry) || (r.mentor && r.mentor.entry))) return '';
-  const a = r.ai, busy = state.onbAiBusy === r.day;
+  if (!((r.self && r.self.entry) || (r.mentors || []).some(m => m.entry))) return '';
+  const a = r.ai, busy = state.onbAiBusy === r.day, D = state.onbDet, nx = D.next;
   const run = k => `<button class="link" data-act="onba-ai" data-day="${r.day}" ${busy ? 'disabled' : ''}>${esc(t(busy ? 'onb_ai_busy' : k))}</button>`;
   if (!a) return `<div class="acts">${run('onb_ai_run')}</div>`;
   const o = a.out || {}, li = xs => `<ul>${xs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`, next = state.lang === 'de' ? (o.next_de || o.next_zh) : (o.next_zh || o.next_de);
+  // v109：发给下个班实际同班的带教人；没有就自己选
+  const nm = nx && (nx.mentors || []).length ? nx.mentors : null;
+  const sendBtn = D.plan.ended_at ? '' : nm ? ` <button class="link" data-act="onba-msg" data-day="${r.day}" data-to="${nm.map(m => m.staff_id).join(',')}" data-ai="1">${esc(t('onb_ai_send_next', { d: dayLabel(nx.day), m: nm.map(m => m.name).join(state.lang === 'de' ? ', ' : '、') }))}</button>`
+    : ` <button class="link" data-act="onba-msg" data-day="${r.day}" data-to="" data-ai="1">${esc(t('onb_ai_send_pick'))}</button>`;
   return `<div class="onb-ai"><div class="small muted">${esc(t('onb_ai_h'))}${a.stale ? ` · <span class="negc">${esc(t('onb_ai_stale'))}</span>` : ''} · ${run('onb_ai_again')}</div>
     ${o.summary_zh ? `<div style="margin-top:4px">${esc(o.summary_zh)}</div>` : ''}
     ${(o.gaps_zh || []).length ? `<div style="margin-top:6px"><strong class="negc">⚠ ${esc(t('onb_ai_gaps'))}</strong>${li(o.gaps_zh)}</div>` : ''}
     ${(o.watch_zh || []).length ? `<div style="margin-top:6px"><strong>👀 ${esc(t('onb_ai_watch'))}</strong>${li(o.watch_zh)}</div>` : ''}
-    ${next ? `<div style="margin-top:6px"><strong>${esc(t('onb_ai_next'))}</strong>${state.lang === 'de' ? ': ' : '：'}${esc(next)}
-      ${state.onbDet.plan.mentor_id && !state.onbDet.plan.ended_at ? ` <button class="link" data-act="onba-msg" data-day="${r.day}" data-to="mentor" data-ai="1">${esc(t('onb_ai_send'))}</button>` : ''}</div>` : ''}</div>`;
+    ${next ? `<div style="margin-top:6px"><strong>${esc(t('onb_ai_next'))}</strong>${state.lang === 'de' ? ': ' : '：'}${esc(next)}${sendBtn}</div>` : ''}</div>`;
+}
+// 能发给谁：新同事 + 名单里的带教人 + 这一天的评价人
+function onbMsgCands(day){
+  const D = state.onbDet, r = (D.days || []).find(x => x.day === day) || {}, out = [{ id: D.plan.staff_id, name: D.plan.name }];
+  (D.mentors || []).concat((r.mentors || []).map(m => ({ staff_id: m.staff_id, name: m.name }))).forEach(m => { if (!out.some(x => x.id === m.staff_id)) out.push({ id: m.staff_id, name: m.name }); });
+  return out;
 }
 function onbMsgBox(r){
   const F = state.onbForm || {}; if (!(F.msg && F.msg.day === r.day)) return '';
-  const m = F.msg, P = state.onbDet.plan;
-  return `<div class="sheet" style="margin-top:8px"><div><strong>${esc(t(m.to === 'self' ? 'onb_msg_self' : 'onb_msg_mentor'))}</strong> · ${esc((m.to === 'self' ? P.name : P.mentor) || '')}</div>
+  const m = F.msg;
+  return `<div class="sheet" style="margin-top:8px"><div class="field"><label>${esc(t('onb_msg_to'))}</label>${onbChips(onbMsgCands(r.day), m.to, 'onba-msg-to')}</div>
     <div class="field"><label for="onb-m-zh">${esc(t('onb_msg_zh'))}</label><textarea class="input" id="onb-m-zh" rows="2">${esc(m.zh || '')}</textarea></div>
     <div class="field"><label for="onb-m-de">${esc(t('onb_msg_de'))}</label><textarea class="input" id="onb-m-de" rows="2">${esc(m.de || '')}</textarea></div>
     <div class="small muted" style="margin-bottom:8px">${esc(t('onb_msg_hint'))}</div>
@@ -2412,37 +2465,67 @@ function onbMsgBox(r){
       <button class="btn ghost" data-act="onba-msg-ai" ${m.busy ? 'disabled' : ''}>${esc(t(m.busy ? 'onb_ai_busy' : 'onb_msg_ai'))}</button><button class="btn" data-act="onba-msg-send">${esc(t('onb_msg_send'))}</button></div></div>`;
 }
 function onbMsgKeep(){ const m = ((state.onbForm || {}).msg); if (!m) return; const a = $('#onb-m-zh'), b = $('#onb-m-de'); if (a) m.zh = a.value; if (b) m.de = b.value; }
+// 请别人也评价这一天
+function onbAskBox(r){
+  const F = state.onbForm || {}; if (!(F.ask && F.ask.day === r.day)) return '';
+  const P = state.onbDet.plan, have = (r.mentors || []).map(m => m.staff_id);
+  const S = (state.onbStaff || []).filter(s => onbCanStaff(s) && s.id !== P.staff_id && !have.includes(s.id));
+  return `<div class="sheet" style="margin-top:8px"><div class="field"><label for="onb-ask">${esc(t('onb_ask_who'))}</label><select class="input" id="onb-ask">${onbStaffOpts(S)}</select></div>
+    <label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" id="onb-ask-notify" checked style="margin-top:4px"> <span>${esc(t('onb_ask_notify'))}</span></label>
+    <div class="row" style="margin-top:10px"><button class="btn ghost" data-act="onba-form-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="onba-ask-save">${esc(t('save'))}</button></div></div>`;
+}
 function onbDetailHTML(){
-  const D = state.onbDet, P = D.plan, F = state.onbForm || {}, ended = !!P.ended_at, bd = bizToday();
+  const D = state.onbDet, P = D.plan, F = state.onbForm || {}, ended = !!P.ended_at, bd = bizToday(), M = D.mentors || [];
   const intro = (D.intro || []).map(m => `${m.to} ${t(m.read_at ? 'onb_read' : 'onb_unread')}`).join(' · ');
-  const btns = (cancel, save, label) => `<div class="row" style="margin-top:10px"><button class="btn ghost" data-act="onba-form-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="${save}">${esc(label || t('save'))}</button></div>`;
+  const btns = (save, label) => `<div class="row" style="margin-top:10px"><button class="btn ghost" data-act="onba-form-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="${save}">${esc(label || t('save'))}</button></div>`;
+  // 带教人名单：谁、负责教什么、一起上班几天、评价几次；改 / 去掉；＋ 加带教人
+  const medit = F.medit, madd = F.madd;
+  const mForm = id => {
+    const cur = M.find(m => m.staff_id === id) || {}, S = (state.onbStaff || []).filter(s => onbCanStaff(s) && s.id !== P.staff_id && !M.some(m => m.staff_id === s.id));
+    return `<div class="sheet" style="margin:6px 0">${id ? '' : `<div class="field"><label for="onb-mt">${esc(t('onb_f_mentor'))}</label><select class="input" id="onb-mt">${onbStaffOpts(S)}</select></div>`}
+      <div class="field"><label for="onb-mt-teach">${esc(t('onb_m_teaches'))}</label><input class="input" id="onb-mt-teach" maxlength="200" value="${esc(cur.teaches || '')}"></div>
+      ${id ? '' : `<label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" id="onb-mt-notify" checked style="margin-top:4px"> <span>${esc(t('onb_m_notify'))}</span></label>`}
+      ${btns('onba-m-save')}</div>`;
+  };
+  const mList = `<h3 style="margin:14px 0 6px">${esc(t('onb_mentors_h'))}</h3><div class="list">${M.map(m => `<div class="item"><div class="top"><div><strong>${esc(m.name)}</strong>${m.teaches ? ` <span class="muted">${esc(state.lang === 'de' ? '(' + m.teaches + ')' : '（' + m.teaches + '）')}</span>` : ''}</div></div>
+      <div class="meta">${esc(t('onb_m_line', { a: m.days, b: m.done }))}</div>
+      ${ended ? '' : `<div class="acts"><button class="link" data-act="onba-m-edit" data-id="${m.staff_id}">${esc(t('onb_m_edit'))}</button><button class="link danger" data-act="onba-m-remove" data-id="${m.staff_id}" data-name="${esc(m.name)}">${esc(t('onb_m_remove'))}</button></div>`}
+      ${medit === m.staff_id ? mForm(m.staff_id) : ''}</div>`).join('') || `<div class="empty">${esc(t('onb_m_none'))}</div>`}</div>
+    ${ended ? '' : madd ? mForm(null) : `<button class="btn ghost sm" style="margin:8px 0;width:auto" data-act="onba-m-add">${esc(t('onb_m_add'))}</button>`}`;
+  // 新同事下一个班和那天同班的带教人
+  const nx = D.next, nextLine = ended ? '' : `<div class="meta">${nx ? esc(t('onb_next', { d: dayLabel(nx.day), s: nx.store, t: nx.start + '–' + nx.end })) + ' · ' + esc((nx.mentors || []).length ? t('onb_next_m', { m: onbNames(nx.mentors) }) : t('onb_next_none')) : esc(t('onb_next_no'))}</div>`;
   let form = '';
-  if (F.mentor) form = `<div class="sheet"><div class="field"><label for="onb-mt">${esc(t('onb_f_mentor'))}</label>
-      <select class="input" id="onb-mt">${onbStaffOpts((state.onbStaff || []).filter(s => onbCanStaff(s) && s.id !== P.staff_id), P.mentor_id)}</select></div>
-      <label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" id="onb-mt-notify" checked style="margin-top:4px"> <span>${esc(t('onb_m_notify'))}</span></label>${btns(1, 'onba-mentor-save')}</div>`;
-  if (F.day) form = `<div class="sheet"><div class="small muted" style="margin-bottom:8px">${esc(t('onb_day_hint'))}</div>
-      <div class="row"><div class="field"><label for="onb-d-day">${esc(t('onb_day_date'))}</label><input class="input" type="date" id="onb-d-day" min="${P.started_on > addDays(bd, -14) ? P.started_on : addDays(bd, -14)}" max="${bd}" value="${addDays(bd, -1) >= P.started_on ? addDays(bd, -1) : bd}"></div>
-        <div class="field"><label for="onb-d-store">${esc(t('onb_day_store'))}</label><select class="input" id="onb-d-store">${STORES.map(x => `<option>${x}</option>`).join('')}</select></div></div>
-      ${P.mentor_id ? `<label style="display:flex;gap:8px;align-items:flex-start;margin:4px 0"><input type="checkbox" id="onb-d-with" checked style="margin-top:4px"> <span>${esc(t('onb_day_with'))}</span></label>` : ''}${btns(1, 'onba-day-save')}</div>`;
-  if (F.end) form = `<div class="sheet"><div class="field"><label for="onb-end">${esc(t('onb_end_note'))}</label><textarea class="input" id="onb-end" rows="2" maxlength="1000"></textarea></div>${btns(1, 'onba-end-save', t('onb_end_btn'))}</div>`;
+  if (F.day){ const sel = F.day.mentors || [];
+    form = `<div class="sheet"><div class="small muted" style="margin-bottom:8px">${esc(t('onb_day_hint'))}</div>
+      <div class="row"><div class="field"><label for="onb-d-day">${esc(t('onb_day_date'))}</label><input class="input" type="date" id="onb-d-day" min="${P.started_on > addDays(bd, -14) ? P.started_on : addDays(bd, -14)}" max="${bd}" value="${F.day.date || (addDays(bd, -1) >= P.started_on ? addDays(bd, -1) : bd)}"></div>
+        <div class="field"><label for="onb-d-store">${esc(t('onb_day_store'))}</label><select class="input" id="onb-d-store">${STORES.map(x => `<option ${F.day.store === x ? 'selected' : ''}>${x}</option>`).join('')}</select></div></div>
+      ${M.length ? `<div class="field"><label>${esc(t('onb_day_who'))}</label>${onbChips(M.map(m => ({ id: m.staff_id, name: m.name })), sel, 'onba-day-m')}</div>` : ''}${btns('onba-day-save')}</div>`; }
+  if (F.end) form = `<div class="sheet"><div class="field"><label for="onb-end">${esc(t('onb_end_note'))}</label><textarea class="input" id="onb-end" rows="2" maxlength="1000"></textarea></div>${btns('onba-end-save', t('onb_end_btn'))}</div>`;
   const dayHTML = r => {
-    const tag = r.src === 'extra' ? t('onb_src_extra') : r.src === 'answer' ? t('onb_src_answer') : '';
+    const tag = r.src === 'extra' ? t('onb_src_extra') : r.src === 'answer' ? t('onb_src_answer') : '', ms = r.mentors || [];
     const msgs = (r.msgs || []).map(m => `<div class="small muted" style="margin-top:6px">💬 ${esc(m.to)} · ${esc(fmtDateTime(m.at))} · ${esc(t(m.read_at ? 'onb_read' : 'onb_unread'))}${state.lang === 'de' ? ': ' : '：'}${esc(state.lang === 'de' ? m.text_de : m.text_zh)}</div>`).join('');
-    const msgOpen = F.msg && F.msg.day === r.day;
+    const boxOpen = (F.msg && F.msg.day === r.day) || (F.ask && F.ask.day === r.day);
     return `<div class="item"><div class="top"><div><strong>${esc(dayLabel(r.day))}</strong>${storeTag(r.store)}${r.start ? ` <span class="muted num">${esc(r.start)}–${esc(r.end)}</span>` : ''}${tag ? `<span class="tag">${esc(tag)}</span>` : ''}${(r.unread || []).length ? `<span class="tag pend">${esc(t('onb_new_tag', { n: r.unread.length }))}</span>` : ''}</div></div>
-      <div class="meta">${esc(t(r.mentor ? 'onb_m_here' : 'onb_m_away'))}</div>
-      ${onbSideHTML(r, 'self')}${onbSideHTML(r, 'mentor')}${onbAiHTML(r)}${msgs}${onbMsgBox(r)}
-      ${ended || msgOpen ? '' : `<div class="acts" style="display:flex;gap:14px;flex-wrap:wrap"><button class="link" data-act="onba-msg" data-day="${r.day}" data-to="self">${esc(t('onb_msg_self'))}</button>${P.mentor_id ? `<button class="link" data-act="onba-msg" data-day="${r.day}" data-to="mentor">${esc(t('onb_msg_mentor'))}</button>` : ''}</div>`}</div>`;
+      <div class="meta">${esc(ms.length ? t('onb_revs', { m: ms.map(m => m.name).join(state.lang === 'de' ? ', ' : '、') }) : t('onb_m_away'))}</div>
+      ${onbBlockHTML(r, 'self', r.self)}${ms.map((m, i) => onbBlockHTML(r, 'mentor', m, i === 0)).join('')}${onbAiHTML(r)}${msgs}${onbMsgBox(r)}${onbAskBox(r)}
+      ${ended || boxOpen ? '' : `<div class="acts" style="display:flex;gap:14px;flex-wrap:wrap"><button class="link" data-act="onba-msg" data-day="${r.day}" data-to="${P.staff_id}">${esc(t('onb_msg_self'))}</button>${ms.length || M.length ? `<button class="link" data-act="onba-msg" data-day="${r.day}" data-to="${(ms.length ? ms.map(m => m.staff_id) : M.map(m => m.staff_id)).join(',')}">${esc(t('onb_msg_mentor'))}</button>` : ''}<button class="link" data-act="onba-ask" data-day="${r.day}">${esc(t('onb_ask'))}</button></div>`}</div>`;
   };
   return `<button class="link" data-act="onba-back" style="margin:2px 0 10px">${esc(t('onb_back'))}</button>
     <h2 style="margin:0 0 4px">${esc(P.name)} ${onbRoleTag(P.main_role)}</h2>
-    <div class="meta">${esc(t('onb_row_mentor', { m: P.mentor || '–', d: dayLabel(P.started_on) }))}</div>
+    <div class="meta">${esc(t('onb_row_start', { d: dayLabel(P.started_on) }))}</div>${nextLine}
     ${intro ? `<div class="meta small muted">${esc(t('onb_intro') + intro)}</div>` : ''}
-    ${ended ? `<div class="infobox">${esc(t('onb_ended', { t: fmtDateTime(P.ended_at) }))}${P.end_note ? ' · ' + esc(P.end_note) : ''}</div>`
-      : `<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">${['mentor', 'day', 'end'].map(k => `<button class="btn ghost sm" style="flex:1 1 30%;width:auto" data-act="onba-form" data-k="${k}">${esc(t('onb_btn_' + k))}</button>`).join('')}</div>`}
-    ${form}<div class="list">${(D.days || []).map(dayHTML).join('') || `<div class="empty">${esc(t('onb_none_days'))}</div>`}</div>`;
+    ${ended ? `<div class="infobox">${esc(t('onb_ended', { t: fmtDateTime(P.ended_at) }))}${P.end_note ? ' · ' + esc(P.end_note) : ''}</div>` : ''}
+    ${mList}
+    ${ended ? '' : `<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">${['day', 'end'].map(k => `<button class="btn ghost sm" style="flex:1 1 40%;width:auto" data-act="onba-form" data-k="${k}">${esc(t('onb_btn_' + k))}</button>`).join('')}</div>`}
+    ${form}<h3 style="margin:14px 0 6px">${esc(t('onb_days_h'))}</h3><div class="list">${(D.days || []).map(dayHTML).join('') || `<div class="empty">${esc(t('onb_none_days'))}</div>`}</div>`;
 }
 // AI 看这一天（交完自动看过的不用再点）；老板点了等结果再刷新
+// v109：开始带教时换了新同事 → 带教人的名字按钮里去掉这个人
+document.addEventListener('input', ev => {
+  if (ev.target.id !== 'onb-n-staff' || !state.onbNewSel) return;
+  const N = state.onbNewSel, d = $('#onb-n-start'); N.staff = ev.target.value; if (d) N.start = d.value;
+  N.mentors = N.mentors.filter(x => x !== N.staff); onbRedraw();
+});
 async function onbAiRun(day){
   const id = state.onbPlan; state.onbAiBusy = day; onbRedraw();
   try { await callTasks({ action: 'onb_ai', plan_id: id, day }); } catch(e){ toast(t('onb_ai_fail'), true); }
@@ -7749,6 +7832,10 @@ document.addEventListener('click', async ev => {
     }
     case 'onb-close': onbKeep(); state.onbOpen = null; render(); window.scrollTo(0, 0); break;
     case 'onb-rate': { const o = state.onbOpen; if (!o) break; o.a[el.dataset.k] = +el.dataset.v; el.parentElement.querySelectorAll('button').forEach(b => b.classList.toggle('on', b === el)); break; }
+    case 'onb-who': {   // v109：这个班主要是谁带你的？（点一下选上 / 去掉）
+      const o = state.onbOpen; if (!o) break; const a = o.a.taught_by = o.a.taught_by || [], i = a.indexOf(el.dataset.id);
+      if (i < 0) a.push(el.dataset.id); else a.splice(i, 1); el.classList.toggle('on', i < 0); break;
+    }
     case 'onb-send': {
       const o = state.onbOpen; if (!o) break; onbKeep();
       if (ONB_Q[o.side].some(q => q.req && !(q.rate ? o.a[q.k] : String(o.a[q.k] || '').trim()))) return toast(t('err_ONB_EMPTY'), true);
@@ -7759,43 +7846,61 @@ document.addEventListener('click', async ev => {
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
-    // v107：新人带教——老板（管理 → 新人）
-    case 'onba-new': state.onbNew = true; keepScroll(render); break;
+    // v107：新人带教——老板（管理 → 新人）；v109：几个带教人
+    case 'onba-new': state.onbNew = true; state.onbNewSel = { staff: '', mentors: [] }; keepScroll(render); break;
     case 'onba-new-cancel': state.onbNew = false; onbRedraw(); break;
+    case 'onba-new-m': {   // 开始带教时选带教人（可以选几个）
+      const N = state.onbNewSel, s = $('#onb-n-staff'), d = $('#onb-n-start'); if (!N) break;
+      if (s) N.staff = s.value; if (d) N.start = d.value;
+      const i = N.mentors.indexOf(el.dataset.id); if (i < 0) N.mentors.push(el.dataset.id); else N.mentors.splice(i, 1);
+      el.classList.toggle('on', i < 0); break;
+    }
     case 'onba-start': {
-      const sid = $('#onb-n-staff').value, mid = $('#onb-n-mentor').value, d0 = $('#onb-n-start').value, nt = $('#onb-n-notify').checked;
+      const N = state.onbNewSel || { mentors: [] }, sid = $('#onb-n-staff').value, d0 = $('#onb-n-start').value, nt = $('#onb-n-notify').checked;
+      const ms = N.mentors.filter(x => x !== sid);
       if (!sid) return toast(t('err_ONB_STAFF_BAD'), true);
-      if (!mid || mid === sid) return toast(t('err_ONB_MENTOR_BAD'), true);
+      if (!ms.length) return toast(t('err_ONB_MENTOR_BAD'), true);
       el.disabled = true;
-      try { const r = await rpc('admin_onb_start', { ...tok(), p_staff: sid, p_mentor: mid, p_started_on: d0, p_notify: nt });
+      try { const r = await rpc('admin_onb_start_x', { ...tok(), p_staff: sid, p_mentors: ms.map(x => ({ staff_id: x })), p_started_on: d0, p_notify: nt });
         (r.messages || []).forEach(id => callPush('message', { message_id: id }));
         const nm = ((state.onbStaff || []).find(s => s.id === sid) || {}).name || '';
-        state.onbNew = false; state.onbPlan = r.id; state.onbForm = null; state.onbDet = null; toast(t('onb_started', { n: nm })); render(); window.scrollTo(0, 0); }
+        state.onbNew = false; state.onbNewSel = null; state.onbPlan = r.id; state.onbForm = null; state.onbDet = null; toast(t('onb_started', { n: nm })); render(); window.scrollTo(0, 0); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
     case 'onba-open': state.onbPlan = el.dataset.id; state.onbForm = null; state.onbDet = null; state.onbNew = false; state.done = null; state.recon = null; state.tab = 'admin'; state.adminSub = 'onb'; render(); window.scrollTo(0, 0); break;
     case 'onba-back': state.onbPlan = null; state.onbForm = null; state.onbDet = null; render(); window.scrollTo(0, 0); break;
-    case 'onba-form': {
-      state.onbForm = { [el.dataset.k]: true };
-      if (el.dataset.k === 'mentor' && !state.onbStaff){ try { state.onbStaff = await rpc('admin_list_staff', tok()); } catch(e){ return toast(errText(e), true); } }
-      onbRedraw(); break;
-    }
+    case 'onba-form': state.onbForm = el.dataset.k === 'day' ? { day: { mentors: [] } } : { [el.dataset.k]: true }; onbRedraw(); break;
     case 'onba-form-cancel': state.onbForm = null; onbRedraw(); break;
-    case 'onba-mentor-save': {
-      const mid = $('#onb-mt').value, P = state.onbDet.plan;
-      if (!mid || mid === P.staff_id) return toast(t('err_ONB_MENTOR_BAD'), true);
+    // 带教人名单：加、改「负责教什么」、去掉
+    case 'onba-m-add': state.onbForm = { madd: true }; onbRedraw(); break;
+    case 'onba-m-edit': state.onbForm = { medit: el.dataset.id }; onbRedraw(); break;
+    case 'onba-m-save': {
+      const F = state.onbForm || {}, P = state.onbDet.plan, id = F.medit || ($('#onb-mt') || {}).value, nt = $('#onb-mt-notify');
+      if (!id || id === P.staff_id) return toast(t('err_ONB_MENTOR_BAD'), true);
       el.disabled = true;
-      try { const r = await rpc('admin_onb_mentor', { ...tok(), p_plan: P.id, p_mentor: mid, p_notify: $('#onb-mt-notify').checked });
-        (r.messages || []).forEach(id => callPush('message', { message_id: id }));
+      try { const r = await rpc('admin_onb_mentor_add', { ...tok(), p_plan: P.id, p_staff: id, p_teaches: $('#onb-mt-teach').value, p_notify: !!(nt && nt.checked) });
+        (r.messages || []).forEach(m => callPush('message', { message_id: m }));
         state.onbForm = null; toast(t('onb_saved')); keepScroll(render); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
-    case 'onba-day-save': {
-      const P = state.onbDet.plan, w = $('#onb-d-with');
+    case 'onba-m-remove': {
+      if (!confirm(t('onb_m_remove_q', { n: el.dataset.name }))) break;
       el.disabled = true;
-      try { await rpc('admin_onb_day_add', { ...tok(), p_plan: P.id, p_day: $('#onb-d-day').value, p_store: $('#onb-d-store').value, p_with_mentor: !!(w && w.checked) });
+      try { await rpc('admin_onb_mentor_remove', { ...tok(), p_plan: state.onbPlan, p_staff: el.dataset.id }); state.onbForm = null; toast(t('onb_saved')); keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'onba-day-m': {   // 加一天：那天哪几个带教人在
+      const D = (state.onbForm || {}).day; if (!D) break; const a = $('#onb-d-day'), b = $('#onb-d-store'); if (a) D.date = a.value; if (b) D.store = b.value;
+      const i = D.mentors.indexOf(el.dataset.id); if (i < 0) D.mentors.push(el.dataset.id); else D.mentors.splice(i, 1);
+      el.classList.toggle('on', i < 0); break;
+    }
+    case 'onba-day-save': {
+      const P = state.onbDet.plan, D = (state.onbForm || {}).day || { mentors: [] };
+      el.disabled = true;
+      try { await rpc('admin_onb_day_add_x', { ...tok(), p_plan: P.id, p_day: $('#onb-d-day').value, p_store: $('#onb-d-store').value, p_mentors: D.mentors });
         state.onbForm = null; toast(t('onb_saved')); keepScroll(render); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
@@ -7809,27 +7914,46 @@ document.addEventListener('click', async ev => {
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
-    case 'onba-fill': state.onbForm = { fill: { day: el.dataset.day, side: el.dataset.side } }; onbRedraw(); setTimeout(() => { const n = $('#onb-fill'); if (n) n.focus(); }, 50); break;
+    case 'onba-fill': state.onbForm = { fill: { day: el.dataset.day, side: el.dataset.side, key: el.dataset.side === 'self' ? 'self' : el.dataset.mentor, mentor: el.dataset.mentor || null } }; onbRedraw(); setTimeout(() => { const n = $('#onb-fill'); if (n) n.focus(); }, 50); break;
     case 'onba-fill-save': {
       const f = (state.onbForm || {}).fill, txt = ($('#onb-fill') || {}).value || '';
       if (!f) break;
       if (!txt.trim()) return toast(t('err_ONB_EMPTY'), true);
       el.disabled = true;
-      try { await rpc('admin_onb_fill', { ...tok(), p_plan: state.onbPlan, p_day: f.day, p_side: f.side, p_text: txt });
+      try { await rpc('admin_onb_fill_x', { ...tok(), p_plan: state.onbPlan, p_day: f.day, p_side: f.side, p_text: txt, p_mentor: f.mentor });
         state.onbForm = null; toast(t('onb_saved')); await keepScroll(render); onbAiRun(f.day); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
     case 'onba-ai': onbAiRun(el.dataset.day); break;
+    // 请别人也评价这一天
+    case 'onba-ask': state.onbForm = { ask: { day: el.dataset.day } }; onbRedraw(); break;
+    case 'onba-ask-save': {
+      const A = (state.onbForm || {}).ask, id = ($('#onb-ask') || {}).value; if (!A) break;
+      if (!id) return toast(t('err_ONB_MENTOR_BAD'), true);
+      el.disabled = true;
+      try { const r = await rpc('admin_onb_ask', { ...tok(), p_plan: state.onbPlan, p_day: A.day, p_staff: id, p_notify: $('#onb-ask-notify').checked });
+        if (r && r.message) callPush('message', { message_id: r.message });
+        state.onbForm = null; toast(t('onb_ask_done', { n: ((state.onbStaff || []).find(s => s.id === id) || {}).name || '' })); keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    // 发一句话：发给谁（新同事 / 带教人 / 这一天的评价人，可以几个）
     case 'onba-msg': {
       const r = ((state.onbDet || {}).days || []).find(x => x.day === el.dataset.day), o = el.dataset.ai && r && r.ai ? r.ai.out : null;
-      state.onbForm = { msg: { day: el.dataset.day, to: el.dataset.to, zh: o ? o.next_zh || '' : '', de: o ? o.next_de || '' : '' } }; onbRedraw(); break;
+      state.onbForm = { msg: { day: el.dataset.day, to: (el.dataset.to || '').split(',').filter(Boolean), zh: o ? o.next_zh || '' : '', de: o ? o.next_de || '' : '' } }; onbRedraw(); break;
+    }
+    case 'onba-msg-to': {
+      onbMsgKeep(); const m = (state.onbForm || {}).msg; if (!m) break;
+      const i = m.to.indexOf(el.dataset.id); if (i < 0) m.to.push(el.dataset.id); else m.to.splice(i, 1);
+      el.classList.toggle('on', i < 0); break;
     }
     case 'onba-msg-ai': {
       onbMsgKeep(); const m = (state.onbForm || {}).msg; if (!m || m.busy) break;
       const note = (m.zh || '').trim() || (m.de || '').trim(); if (!note) return toast(t('err_MESSAGE_EMPTY'), true);
-      const P = state.onbDet.plan; m.busy = true; onbRedraw();
-      try { const r = await callTasks({ action: 'msg_draft', name: m.to === 'self' ? P.name : P.mentor, context: t('onb_msg_ctx', { n: P.name, d: dayLabel(m.day) }), note });
+      const P = state.onbDet.plan, nm = onbMsgCands(m.day).filter(c => m.to.includes(c.id)).map(c => c.name).join(', ') || P.name;
+      m.busy = true; onbRedraw();
+      try { const r = await callTasks({ action: 'msg_draft', name: nm, context: t('onb_msg_ctx', { n: P.name, d: dayLabel(m.day) }), note });
         m.zh = r.text_zh || m.zh; m.de = r.text_de || m.de; }
       catch(e){ toast(errText(e), true); }
       m.busy = false; if ((state.onbForm || {}).msg === m) onbRedraw();
@@ -7837,11 +7961,12 @@ document.addEventListener('click', async ev => {
     }
     case 'onba-msg-send': {
       onbMsgKeep(); const m = (state.onbForm || {}).msg; if (!m) break;
+      if (!m.to.length) return toast(t('onb_msg_pick'), true);
       if (!(m.zh || '').trim() && !(m.de || '').trim()) return toast(t('err_MESSAGE_EMPTY'), true);
-      const P = state.onbDet.plan; el.disabled = true;
-      try { const mid = await rpc('admin_onb_send', { ...tok(), p_plan: P.id, p_day: m.day, p_to: m.to, p_text_zh: m.zh, p_text_de: m.de });
-        callPush('message', { message_id: mid }); state.onbForm = null; toast(t('onb_msg_sent', { n: m.to === 'self' ? P.name : P.mentor })); keepScroll(render); }
-      catch(e){ toast(errText(e), true); el.disabled = false; }
+      const P = state.onbDet.plan, names = onbMsgCands(m.day).filter(c => m.to.includes(c.id)).map(c => c.name); el.disabled = true;
+      try { for (const id of m.to){ const mid = await rpc('admin_onb_send_x', { ...tok(), p_plan: P.id, p_day: m.day, p_staff: id, p_text_zh: m.zh, p_text_de: m.de }); callPush('message', { message_id: mid }); }
+        state.onbForm = null; toast(t('onb_msg_sent', { n: names.join(state.lang === 'de' ? ', ' : '、') })); keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; keepScroll(render); }
       break;
     }
     case 'msg-read': {
