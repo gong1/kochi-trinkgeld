@@ -330,6 +330,12 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .onb-ai{margin-top:10px;padding:8px 10px;background:var(--celadon-soft);border-radius:var(--r-s);font-size:15px}
 .onb-ai ul{margin:2px 0 0 18px;padding:0}
 .seg.onb-rate button{padding:10px 2px}
+/* v111：SOP */
+.sop-steps{margin:4px 0 0;padding-left:22px}.sop-steps li{margin:4px 0}
+.sop-sec{margin-top:10px}.sop-sec ul{margin:2px 0 0 18px;padding:0}
+.sop-ph{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.sop-ph div{display:flex;flex-direction:column;align-items:center;gap:2px}
+.sop-ph img{width:96px;height:96px;object-fit:cover;border-radius:8px;background:var(--celadon-soft);cursor:pointer}
+.sop-topic{margin-bottom:12px}.sop-box{margin-top:8px;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r-s)}
 .warnbox > .btn, .infobox > .btn{max-width:48%;height:auto !important;min-height:40px;line-height:1.2;padding-top:6px !important;padding-bottom:6px !important}
 .warnc{color:var(--copper)}
 .errbox{background:#F8E1DA;color:var(--neg);border-radius:var(--r-s);padding:10px 12px;margin:10px 0;font-size:15px}
@@ -477,6 +483,25 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v111：SOP
+  admin_sop:'SOP', sop_more:'📋 SOP', sop_title:'SOP', sop_new:'＋ 写一条 SOP（说一段就行）', sop_mine:'我写的（{n}）', sop_st_pending:'等老板确认', sop_st_rejected:'被退回', sop_st_approved:'已确认', sop_st_superseded:'被新的一版取代',
+  sop_reject_why:'退回原因：{m}', sop_fix:'改好再交', sop_search:'搜索 SOP', sop_none:'这个区域还没有 SOP。', sop_none_w:'这个区域还没有 SOP：点上面「写一条 SOP」，说一段就行。', sop_none_q:'没有找到。', sop_role_all:'整个区域',
+  sop_tag_pending:'有新的一版等确认', sop_updated:'{n} · {t}', sop_topic_empty:'这个主题里还没有确认的 SOP。', sop_back:'返回 SOP 列表', sop_tips:'标准和注意', sop_mistakes:'常见错误',
+  sop_archived:'这条 SOP 已经撤下，员工看不到。', sop_updated_ok:'{n} 写的 · 老板确认于 {t}', sop_not_yet:'这条还没有确认的版本，员工还看不到。', sop_pv:'有一版在等老板确认（{n} · {t}）', sop_pv_show:'看等确认的那一版',
+  sop_edit:'补充 / 修改（说一段）', sop_archive:'撤下这条 SOP', sop_archive_q:'撤下以后员工看不到这条 SOP（记录都留着）。确定吗？', sop_hist:'每一版（{n}）', sop_ver:'第 {n} 版',
+  sop_admin_h:'SOP', sop_admin_hint:'SOP 编写人、区域主管和你都能写：说一段，AI 整理成步骤；你确认以后，员工在「更多 → SOP」里就能看到。退回要写原因，写的人会收到提醒。',
+  sop_pend:'等你确认（{n}）', sop_pend_none:'现在没有等你确认的 SOP。', sop_au_h:'SOP 编写人', sop_au_none:'还没有', sop_au_sup:'区域主管也能写：{m}', sop_au_add:'＋ 加', sop_au_rm:'取消编写人',
+  sop_au_rm_q:'取消 {n} 的 SOP 编写人？以前写的都留着。', sop_au_hint:'加的时候会在 App 里通知这个人（开了手机通知的会收到推送）。', sop_all:'全部 SOP',
+  sop_newtopic:'新主题：{r} · {n}', sop_is_new:'新的一条', sop_is_edit:'修改（第 {n} 版）', sop_changes:'这次改了：', sop_cur_ver:'现在员工看到的（第 {n} 版）', sop_raw:'原话',
+  sop_reject_q:'退回的原因（写的人会看到）', sop_reject:'退回', sop_approve:'确认，给员工看', sop_decided_ok:'已确认，员工现在能看到了', sop_decided_rej:'已退回，写的人会收到提醒',
+  sop_topic_zh:'主题（中文）', sop_topic_de:'主题（德文）', sop_topic_role:'岗位', sop_topic_sort:'排序（小的在前）', sop_topic_arch:'撤下主题', sop_topic_arch_q:'撤下这个主题？', sop_topic:'放进哪个主题', sop_topic_new:'＋ 新主题',
+  sop_new_h:'写一条 SOP', sop_edit_h:'补充 / 修改：{n}', sop_raw_hint:'按键盘上的 🎤，像教新同事一样说一遍：先做什么、再做什么、要注意什么、新人常犯什么错。中文、德文都行，说得乱也没关系，AI 会整理。',
+  sop_raw_l:'说一段（或者打字）', sop_raw_l_edit:'说一下要补充或改什么', sop_raw_ph:'例如：开吧台先开灯，再开咖啡机，预热十分钟……', sop_photos:'照片（可不加，最多 6 张）', sop_ph_add:'📷 加照片', sop_ph_busy:'正在上传……', sop_ph_rm:'去掉',
+  sop_ai:'✨ AI 整理', sop_ai_busy:'AI 正在整理……', sop_ai_again:'✨ 按补充的再整理', sop_direct:'不用 AI，直接改文字', sop_same:'这好像是已有的「{n}」。要补充到那一条吗？', sop_same_yes:'补充到那一条', sop_same_no:'不是，新的一条',
+  sop_draft:'AI 整理好的（可以直接改）', sop_f_title:'标题', sop_f_lines:'下面每行一条。', sop_f_steps:'步骤', sop_ai_q:'AI 还想知道', sop_extra:'补充一句（回答上面的问题，可以按 🎤 说）', sop_extra_ph:'例如：冰块装满杯，预热 10 分钟',
+  sop_note:'给老板的一句话（可不写）', sop_submit:'提交给老板确认', sop_submit_hint:'老板确认以后员工才看得到。', sop_sent:'已提交，等老板确认', sop_need_draft:'请先点「✨ AI 整理」（或者「直接改文字」）。', sop_need_topic:'请选一个主题，或者写上新主题的名字。',
+  sop_todo:'SOP：{n} 条等你确认', sop_todo_go:'去看',
+  act_sop_submit:'提交 SOP', act_sop_decide:'确认 / 退回 SOP', act_sop_author:'设 SOP 编写人', act_sop_archive:'撤下 SOP', act_sop_topic:'改 SOP 主题',
   // v109：新人带教——几个带教人
   onb_q_self_who:'这个班主要是谁带你的？', onb_who_hint:'点名字，可以选几个，也可以不选；★ 是带教人。', onb_src_hint_self:'{n} 说这个班是你带的', onb_src_hint_boss:'老板请你评价这一天', onb_teach_hint:'你负责教：{t}',
   onb_f_mentors:'带教人（可以选几个）', onb_f_mentors_hint:'每人负责教什么，开始以后在「带教人」名单里点「改」写上。', onb_row_start:'从 {d} 开始', onb_days_h:'每一天',
@@ -920,6 +945,25 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v111：SOP
+  admin_sop:'SOP', sop_more:'📋 SOP', sop_title:'SOP', sop_new:'＋ SOP schreiben (einfach erzählen)', sop_mine:'Meine ({n})', sop_st_pending:'wartet auf den Chef', sop_st_rejected:'zurückgegeben', sop_st_approved:'bestätigt', sop_st_superseded:'durch neue Fassung ersetzt',
+  sop_reject_why:'Grund: {m}', sop_fix:'Überarbeiten und erneut einreichen', sop_search:'SOP suchen', sop_none:'Für diesen Bereich gibt es noch keine SOP.', sop_none_w:'Noch keine SOP: oben „SOP schreiben“ tippen und einfach erzählen.', sop_none_q:'Nichts gefunden.', sop_role_all:'ganzer Bereich',
+  sop_tag_pending:'neue Fassung wartet', sop_updated:'{n} · {t}', sop_topic_empty:'In diesem Thema gibt es noch keine bestätigte SOP.', sop_back:'Zurück zur SOP-Liste', sop_tips:'Standard und Hinweise', sop_mistakes:'Häufige Fehler',
+  sop_archived:'Diese SOP ist zurückgezogen, das Team sieht sie nicht.', sop_updated_ok:'von {n} · vom Chef bestätigt am {t}', sop_not_yet:'Noch keine bestätigte Fassung – das Team sieht sie noch nicht.', sop_pv:'Eine Fassung wartet auf den Chef ({n} · {t})', sop_pv_show:'Wartende Fassung ansehen',
+  sop_edit:'Ergänzen / ändern (erzählen)', sop_archive:'SOP zurückziehen', sop_archive_q:'Danach sieht das Team diese SOP nicht mehr (alles bleibt gespeichert). Sicher?', sop_hist:'Fassungen ({n})', sop_ver:'Fassung {n}',
+  sop_admin_h:'SOP', sop_admin_hint:'SOP-Schreiber, Bereichsleitungen und du können schreiben: erzählen, die KI macht Schritte daraus; nach deiner Bestätigung sieht das Team sie unter „Mehr → SOP“. Beim Zurückgeben bitte einen Grund schreiben, die Person bekommt einen Hinweis.',
+  sop_pend:'Wartet auf dich ({n})', sop_pend_none:'Zurzeit wartet keine SOP auf dich.', sop_au_h:'SOP-Schreiber', sop_au_none:'noch niemand', sop_au_sup:'Bereichsleitungen können auch schreiben: {m}', sop_au_add:'＋ Hinzufügen', sop_au_rm:'Entfernen',
+  sop_au_rm_q:'{n} als SOP-Schreiber entfernen? Bisher Geschriebenes bleibt.', sop_au_hint:'Beim Hinzufügen bekommt die Person einen Hinweis in der App (mit Benachrichtigung, falls aktiviert).', sop_all:'Alle SOPs',
+  sop_newtopic:'Neues Thema: {r} · {n}', sop_is_new:'neu', sop_is_edit:'Änderung (Fassung {n})', sop_changes:'Was sich ändert:', sop_cur_ver:'Was das Team jetzt sieht (Fassung {n})', sop_raw:'Originaltext',
+  sop_reject_q:'Grund (die Person sieht ihn)', sop_reject:'Zurückgeben', sop_approve:'Bestätigen, für alle sichtbar', sop_decided_ok:'Bestätigt – jetzt für alle sichtbar', sop_decided_rej:'Zurückgegeben, die Person bekommt einen Hinweis',
+  sop_topic_zh:'Thema (Chinesisch)', sop_topic_de:'Thema (Deutsch)', sop_topic_role:'Posten', sop_topic_sort:'Reihenfolge (klein zuerst)', sop_topic_arch:'Thema zurückziehen', sop_topic_arch_q:'Dieses Thema zurückziehen?', sop_topic:'In welches Thema', sop_topic_new:'＋ Neues Thema',
+  sop_new_h:'SOP schreiben', sop_edit_h:'Ergänzen / ändern: {n}', sop_raw_hint:'Mit dem 🎤 auf der Tastatur einfach erzählen, wie du es einer neuen Person zeigst: was zuerst, was dann, worauf achten, welche Fehler Neue oft machen. Deutsch oder Chinesisch, gern durcheinander – die KI ordnet es.',
+  sop_raw_l:'Erzählen (oder tippen)', sop_raw_l_edit:'Erzähl, was ergänzt oder geändert werden soll', sop_raw_ph:'z. B.: Zum Öffnen zuerst Licht an, dann Kaffeemaschine einschalten, 10 Minuten aufheizen …', sop_photos:'Fotos (optional, höchstens 6)', sop_ph_add:'📷 Foto hinzufügen', sop_ph_busy:'Wird hochgeladen …', sop_ph_rm:'Entfernen',
+  sop_ai:'✨ KI ordnen', sop_ai_busy:'KI ordnet …', sop_ai_again:'✨ Mit Ergänzung neu ordnen', sop_direct:'Ohne KI direkt bearbeiten', sop_same:'Das klingt nach der vorhandenen SOP „{n}“. Dort ergänzen?', sop_same_yes:'Dort ergänzen', sop_same_no:'Nein, neue SOP',
+  sop_draft:'Von der KI geordnet (direkt bearbeitbar)', sop_f_title:'Titel', sop_f_lines:'Unten eine Zeile pro Punkt.', sop_f_steps:'Schritte', sop_ai_q:'Die KI möchte noch wissen', sop_extra:'Ergänzung (Antwort auf die Fragen, gern mit 🎤)', sop_extra_ph:'z. B.: Glas voll mit Eis, 10 Minuten aufheizen',
+  sop_note:'Ein Satz an den Chef (optional)', sop_submit:'Zur Bestätigung an den Chef', sop_submit_hint:'Das Team sieht es erst nach der Bestätigung.', sop_sent:'Eingereicht, wartet auf den Chef', sop_need_draft:'Bitte zuerst „✨ KI ordnen“ (oder „direkt bearbeiten“) tippen.', sop_need_topic:'Bitte ein Thema wählen oder den Namen des neuen Themas eintragen.',
+  sop_todo:'SOP: {n} warten auf deine Bestätigung', sop_todo_go:'Ansehen',
+  act_sop_submit:'SOP eingereicht', act_sop_decide:'SOP bestätigt / zurückgegeben', act_sop_author:'SOP-Schreiber geändert', act_sop_archive:'SOP zurückgezogen', act_sop_topic:'SOP-Thema geändert',
   // v109：Einarbeitung – mehrere Ansprechpersonen
   onb_q_self_who:'Wer hat dich in dieser Schicht hauptsächlich eingearbeitet?', onb_who_hint:'Namen antippen, auch mehrere oder keinen; ★ = Ansprechperson.', onb_src_hint_self:'{n} sagt, du hast eingearbeitet', onb_src_hint_boss:'Der Chef bittet dich um eine Rückmeldung', onb_teach_hint:'Dein Teil: {t}',
   onb_f_mentors:'Ansprechpersonen (auch mehrere)', onb_f_mentors_hint:'Wer was zeigt, nach dem Start in der Liste „Ansprechpersonen“ unter „Ändern“ eintragen.', onb_row_start:'seit {d}', onb_days_h:'Tage',
@@ -1485,6 +1529,18 @@ function toast(msg, isErr){
 }
 // 报错提示：每条都写清原因和下一步怎么做
 const ERR_ZH = {
+  SOP_NOT_WRITER: '你不能写这个区域的 SOP：只有老板、区域主管和老板指定的 SOP 编写人能写。需要的话请找老板。',
+  SOP_EMPTY: '内容不够：要有标题和至少一个步骤。先说一段，再点「✨ AI 整理」。',
+  SOP_TOO_LONG: '写得太长了：标题最多 80 字，每一步最多 300 字，每个列表最多 30 条。请分成几条 SOP，或者写短一点。',
+  SOP_TOPIC_BAD: '主题不对：请从列表里选一个，或者写上新主题的名字（岗位要对）。',
+  SOP_PHOTO_BAD: '照片不对，请去掉后重新加一次。',
+  SOP_TOO_MANY_PHOTOS: '一条 SOP 最多 6 张照片，请先去掉几张。',
+  SOP_ARCHIVED: '这条 SOP 已经撤下了，不能再改。需要的话写一条新的。',
+  SOP_DECIDED: '这一版已经处理过了（确认或退回）。请刷新页面看最新的。',
+  SOP_REJECT_NOTE: '退回要写原因，写的人才知道怎么改。',
+  SOP_AUTHOR_BAD: '只能选在职的员工（不能是老板或厨房共用账号）。',
+  SOP_TOPIC_NOT_EMPTY: '这个主题里还有 SOP：先把它们撤下或者放进别的主题，再撤主题。',
+  SOP_UPLOAD_FAILED: '照片没传上去：请检查网络，再试一次。',
   ONB_ASK_EXISTS: '这个人这一天本来就要评价（名单里同班的、新同事点到的，或者已经请过）。',
   ONB_NOT_IN_PLAN: '只能发给新同事或这个带教的带教人 / 评价人。请在「发给」里重新选。',
   ONB_NOT_YOURS: '这条不是给你填的。请回到「今天」，填写你自己的那一条。',
@@ -1670,6 +1726,18 @@ const ERR_ZH = {
   INVALID_KTIME: '时间不对：开始要在 05:00 以后，结束要晚于开始。过了半夜下班的照填，最晚到 05:00（例如 22:00–01:00）。请检查每个人的时间，有没有空着的。',
 };
 const ERR_DE = {
+  SOP_NOT_WRITER: 'Du kannst für diesen Bereich keine SOP schreiben: nur der Chef, Bereichsleitungen und vom Chef bestimmte SOP-Schreiber. Bei Bedarf den Chef fragen.',
+  SOP_EMPTY: 'Zu wenig Inhalt: Titel und mindestens ein Schritt nötig. Erst erzählen, dann „✨ KI ordnen“ tippen.',
+  SOP_TOO_LONG: 'Zu lang: Titel höchstens 80 Zeichen, jeder Schritt höchstens 300, höchstens 30 Punkte pro Liste. Bitte in mehrere SOPs teilen oder kürzer schreiben.',
+  SOP_TOPIC_BAD: 'Thema passt nicht: bitte eines aus der Liste wählen oder den Namen des neuen Themas eintragen (Posten muss stimmen).',
+  SOP_PHOTO_BAD: 'Foto ungültig – bitte entfernen und erneut hinzufügen.',
+  SOP_TOO_MANY_PHOTOS: 'Höchstens 6 Fotos pro SOP – bitte erst welche entfernen.',
+  SOP_ARCHIVED: 'Diese SOP ist zurückgezogen und kann nicht mehr geändert werden. Bei Bedarf eine neue schreiben.',
+  SOP_DECIDED: 'Diese Fassung wurde schon bearbeitet (bestätigt oder zurückgegeben). Bitte Seite neu laden.',
+  SOP_REJECT_NOTE: 'Beim Zurückgeben bitte einen Grund schreiben, damit die Person weiß, was zu ändern ist.',
+  SOP_AUTHOR_BAD: 'Nur aktive Mitarbeiter (nicht der Chef, nicht das gemeinsame Küchenkonto).',
+  SOP_TOPIC_NOT_EMPTY: 'In diesem Thema gibt es noch SOPs: diese erst zurückziehen oder verschieben, dann das Thema.',
+  SOP_UPLOAD_FAILED: 'Foto nicht hochgeladen: bitte Verbindung prüfen und erneut versuchen.',
   ONB_ASK_EXISTS: 'Diese Person gibt für diesen Tag ohnehin eine Rückmeldung (Ansprechperson in derselben Schicht, von der neuen Person genannt oder schon gefragt).',
   ONB_NOT_IN_PLAN: 'Nur an die neue Person oder an Ansprechpersonen dieser Einarbeitung. Bitte unter „An“ neu wählen.',
   ONB_NOT_YOURS: 'Das ist nicht deine Rückmeldung. Bitte zurück zu „Heute“ und deine eigene ausfüllen.',
@@ -2224,12 +2292,14 @@ function refreshTodayBadge(){ const b = document.querySelector('nav [data-tab="t
 async function loadWeekTodo(){
   const m = state.me; if (!(m.is_admin || m.is_tip_manager)){ state.weekTodo = null; return null; }
   const prev = addDays(mondayOf(today()), -7), w = { lock: null, pay: null, payN: 0 };
-  const [ov, exp, open, onbL] = await Promise.all([soft(rpc('week_overview', { ...tok(), p_week_start: prev }), null),
+  const [ov, exp, open, onbL, sopP] = await Promise.all([soft(rpc('week_overview', { ...tok(), p_week_start: prev }), null),
     m.is_admin ? soft(rpc('admin_expense_overview', tok()), null) : null,   // v67
-    soft(rpc('receipts_open', tok()), null), m.is_admin ? soft(rpc('admin_onb_list', tok()), null) : null]);   // v107：新人带教有新回答
+    soft(rpc('receipts_open', tok()), null), m.is_admin ? soft(rpc('admin_onb_list', tok()), null) : null,   // v107：新人带教有新回答
+    m.is_admin ? soft(rpc('admin_sop_pending', tok()), null) : null]);   // v111：SOP 等确认
   if (ov && !ov.locked && ov.entries.length) w.lock = prev;
   if (exp) w.exp = exp.filter(x => x.balance_cents >= 2000);
   if (onbL) w.onb = onbL.filter(p => !p.ended_at && +p.unread > 0);
+  if (sopP) w.sop = sopP.length;
   const o = (open || []).filter(l => !l.done && l.payout_euros !== 0);
   if (o.length){ w.pay = o.map(l => l.week_start).sort()[0]; w.payN = o.filter(l => l.week_start === w.pay).length; }
   return state.weekTodo = w;
@@ -2241,6 +2311,7 @@ function weekTodoHTML(){
   const box = (txt, act, wk) => `<div class="warnbox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(txt)}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="week-open" data-week="${wk}" data-focus="${act === 'wk_pay_go' ? 'wk-dist' : 'wk-lock'}">${esc(t(act))}</button></div>`;
   return (w.exp || []).map(x => `<div class="warnbox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(t('ex_todo', { n: x.name, x: eur(x.balance_cents) }))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="ex-todo" data-id="${x.staff_id}">${esc(t('ex_todo_go'))}</button></div>`).join('')
     + (w.onb || []).map(p => `<div class="infobox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(t('onb_todo', { n: p.name, k: p.unread }))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="onba-open" data-id="${p.id}">${esc(t('onb_todo_go'))}</button></div>`).join('')   // v107
+    + (w.sop ? `<div class="infobox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(t('sop_todo', { n: w.sop }))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="sop-admin">${esc(t('sop_todo_go'))}</button></div>` : '')   // v111
     + (w.pay ? box(t('wk_pay_todo', { w: isoWeek(w.pay), n: w.payN }), 'wk_pay_go', w.pay) : '')
     + (w.lock ? box(t('wk_lock_todo', { w: isoWeek(w.lock), a: dm(w.lock), b: dm(addDays(w.lock, 6)) }), 'wk_lock_go', w.lock) : '');
 }
@@ -2303,6 +2374,210 @@ function areaStatusHTML(S){
       ${(x.open || []).length ? `<div class="meta"><span class="${x.open.some(o => o.status === 'nobody') ? 'negc' : ''}">${esc(t('as_open', { m: x.open.map(o => state.lang === 'de' ? o.name_de : o.name_zh).join('、') }))}</span></div>` : ''}
       <div class="meta"><span class="${x.next_published ? '' : 'negc'}">${esc(t(x.next_published ? 'as_pub_yes' : 'as_pub_no'))}</span>${+x.pending ? ` · <span class="negc">${esc(t('as_pend', { n: x.pending }))}</span>` : ''}</div></div>`; }).join('');
   return `<h3>${esc(t('as_title'))}</h3><div class="list">${rows}</div>`;
+}
+// ============ SOP（v111，数据库 v79，AI：文件服务 tasks v15）============
+// 说一段（键盘上的 🎤）→ AI 整理成一条 SOP（中德文步骤、标准和注意、常见错误，放进哪个主题，缺什么就追问）→ 提交 → 老板确认 → 员工看。
+// 员工：更多 → 📋 SOP；老板：管理 → SOP（等确认的、编写人、全部 SOP）。能写的人：老板、区域主管、老板指定的 SOP 编写人。
+const SOP_ROLES = { front: ['bar', 'service', 'runner'], kitchen: ['hot', 'cold', 'skewer', 'clean'] };
+const SOP_URLS = {};   // 照片路径 → { url, at }（1 小时链接，50 分钟内重用）
+function sopS(){ return state.sop || (state.sop = { view: 'list', q: '' }); }
+function sopHost(){ return state.me.is_admin ? $('#asub') : $('#main'); }
+function sopShown(){ return state.me.is_admin ? (state.tab === 'admin' && state.adminSub === 'sop') : (state.tab === 'more' && !!state.sop); }
+function sopGo(view, extra){ const S = sopS(); S.view = view; Object.assign(S, extra || {}); if (state.me.is_admin){ state.tab = 'admin'; state.adminSub = 'sop'; } else state.tab = 'more'; render(); window.scrollTo(0, 0); }
+function sopT(c, k){ const zh = c && c[k + '_zh'], de = c && c[k + '_de']; return state.lang === 'de' ? (de && (Array.isArray(de) ? de.length : de) ? de : zh) : (zh && (Array.isArray(zh) ? zh.length : zh) ? zh : de); }
+function sopTitle(x){ return sopT(x, 'title') || ''; }
+function sopTopicName(tp){ return tp ? (state.lang === 'de' ? tp.name_de || tp.name_zh : tp.name_zh || tp.name_de) : ''; }
+function sopRoleName(r){ return r ? t('grp_' + r) : t('sop_role_all'); }
+function sopMyArea(){ return (state.me.main_role && ['hot', 'cold', 'skewer', 'clean'].includes(state.me.main_role)) ? 'kitchen' : 'front'; }
+// 照片：页面上还没有链接的，一次要
+async function sopLoadPhotos(){
+  const now = Date.now(), fresh = p => SOP_URLS[p] && now - SOP_URLS[p].at < 50 * 60e3;
+  const need = [...new Set([...document.querySelectorAll('img[data-sop]')].map(e => e.dataset.sop).filter(p => !fresh(p)))];
+  if (need.length) try { const r = await callTasks({ action: 'sop_urls', paths: need.slice(0, 60) }); Object.entries(r.urls || {}).forEach(([p, u]) => { if (u) SOP_URLS[p] = { url: u, at: now }; }); } catch(e){}
+  document.querySelectorAll('img[data-sop]').forEach(e => { const u = SOP_URLS[e.dataset.sop]; if (u && e.getAttribute('src') !== u.url) e.src = u.url; });
+}
+function sopPhotosHTML(paths, rm){ return (paths || []).length ? `<div class="sop-ph">${paths.map(p => `<div><img data-sop="${esc(p)}" data-act="sop-photo-big" alt="">${rm ? `<button class="link danger" data-act="sop-ph-rm" data-p="${esc(p)}">${esc(t('sop_ph_rm'))}</button>` : ''}</div>`).join('')}</div>` : ''; }
+// 一条 SOP 的内容（步骤编号、标准和注意、常见错误）
+function sopBodyHTML(c, photos){
+  const ul = (xs, cls) => (xs || []).length ? `<ul class="${cls || ''}">${xs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+  const steps = sopT(c, 'steps') || [], tips = sopT(c, 'tips') || [], mis = sopT(c, 'mistakes') || [];
+  return `<ol class="sop-steps">${steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`
+    + (tips.length ? `<div class="sop-sec"><strong>✅ ${esc(t('sop_tips'))}</strong>${ul(tips)}</div>` : '')
+    + (mis.length ? `<div class="sop-sec"><strong>⚠ ${esc(t('sop_mistakes'))}</strong>${ul(mis)}</div>` : '') + sopPhotosHTML(photos);
+}
+async function viewSop(){
+  const S = sopS(), host = sopHost(); if (!host) return;
+  if (S.view === 'edit') return renderSopEdit();
+  if (S.view === 'item') return viewSopItem();
+  if (!state.cacheShown && !S.tree) host.innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  const adm = state.me.is_admin;
+  const [tree, pend, au, staff] = await Promise.all([rpc('sop_tree', tok()), adm ? rpc('admin_sop_pending', tok()) : null, adm ? rpc('admin_sop_authors', tok()) : null,
+    adm && !state.sopStaff ? soft(rpc('admin_list_staff', tok()), null) : null]);
+  if (!sopShown() || S.view !== 'list') return;
+  S.tree = tree; S.pend = pend; S.authors = au; if (staff) state.sopStaff = staff;
+  renderSopList();
+}
+function renderSopList(){
+  const S = sopS(), host = sopHost(), T = S.tree || { topics: [], areas_w: [] }, adm = state.me.is_admin; if (!host) return;
+  S.area = S.area || ((T.areas_w || []).length === 1 ? T.areas_w[0] : adm ? 'front' : sopMyArea());
+  const q = (S.q || '').trim().toLowerCase(), canW = (T.areas_w || []).length > 0;
+  const tops = (T.topics || []).filter(tp => tp.area === S.area).map(tp => ({ ...tp, items: (tp.items || []).filter(i => !q || [i.title_zh, i.title_de, tp.name_zh, tp.name_de].some(x => (x || '').toLowerCase().includes(q))) })).filter(tp => tp.items.length || (!q && adm));
+  const roles = [null].concat(SOP_ROLES[S.area]).filter(r => tops.some(tp => (tp.role || null) === r));
+  const itemRow = i => `<div class="item" data-act="sop-open" data-id="${i.id}" style="cursor:pointer"><div class="top"><div><strong>${esc(sopTitle(i))}</strong>${i.pending ? `<span class="tag pend">${esc(t('sop_tag_pending'))}</span>` : ''}</div></div>
+    <div class="meta small muted">${esc(t('sop_updated', { n: i.by || '', t: fmtDateTime(i.at) }))}</div></div>`;
+  const topicHTML = tp => `<div class="sop-topic"><div style="display:flex;align-items:center;gap:8px"><strong style="flex:1">${esc(sopTopicName(tp))}</strong>
+      ${adm ? `<button class="link" data-act="sop-topic-edit" data-id="${tp.id}">${esc(t('edit'))}</button>` : ''}</div>
+      ${adm && S.topicEdit === tp.id ? sopTopicForm(tp) : ''}<div class="list">${tp.items.map(itemRow).join('') || `<div class="empty">${esc(t('sop_topic_empty'))}</div>`}</div></div>`;
+  const mine = (T.mine || []).filter(x => x.status !== 'approved');
+  const mineHTML = canW && mine.length ? `<h3>${esc(t('sop_mine', { n: mine.length }))}</h3><div class="list">${mine.map(x => `<div class="item"><div class="top"><div><strong>${esc(sopTitle(x))}</strong>
+      <span class="tag ${x.status === 'rejected' ? 'bad' : 'pend'}">${esc(t('sop_st_' + x.status))}</span></div><div class="meta small muted num">${esc(fmtDateTime(x.at))}</div></div>
+      ${x.status === 'rejected' && x.note ? `<div class="meta negc">${esc(t('sop_reject_why', { m: x.note }))}</div>` : ''}
+      ${x.status === 'rejected' ? `<div class="acts"><button class="link" data-act="sop-fix" data-v="${x.version_id}">${esc(t('sop_fix'))}</button></div>` : ''}</div>`).join('')}</div>` : '';
+  host.innerHTML = (state.me.is_admin ? sopAdminTopHTML() : `<button class="link" data-act="sop-back-more" style="margin:2px 0 10px">← ${esc(t('back'))}</button><h2 style="margin-top:0">${esc(t('sop_title'))}</h2>`)
+    + (canW ? `<button class="btn" data-act="sop-new" style="margin:4px 0 12px">${esc(t('sop_new'))}</button>` : '') + mineHTML
+    + `<div class="seg sm" style="margin:12px 0 10px">${['front', 'kitchen'].map(a => `<button data-act="sop-area" data-a="${a}" class="${S.area === a ? 'on' : ''}">${esc(t('area_' + a))}</button>`).join('')}</div>
+      <input class="input" id="sop-q" placeholder="${esc(t('sop_search'))}" value="${esc(S.q || '')}" style="margin-bottom:10px">`
+    + (roles.length ? roles.map(r => `<h3>${esc(sopRoleName(r))}</h3>` + tops.filter(tp => (tp.role || null) === r).map(topicHTML).join('')).join('')
+      : `<div class="list"><div class="empty">${esc(q ? t('sop_none_q') : t(canW ? 'sop_none_w' : 'sop_none'))}</div></div>`);
+}
+function sopTopicForm(tp){
+  return `<div class="sheet" style="margin:6px 0"><div class="row"><div class="field"><label for="sop-tz">${esc(t('sop_topic_zh'))}</label><input class="input" id="sop-tz" value="${esc(tp.name_zh || '')}"></div>
+      <div class="field"><label for="sop-td">${esc(t('sop_topic_de'))}</label><input class="input" id="sop-td" value="${esc(tp.name_de || '')}"></div></div>
+    <div class="row"><div class="field"><label for="sop-tr">${esc(t('sop_topic_role'))}</label><select class="input" id="sop-tr"><option value="">${esc(t('sop_role_all'))}</option>${SOP_ROLES[tp.area].map(r => `<option value="${r}" ${tp.role === r ? 'selected' : ''}>${esc(t('grp_' + r))}</option>`).join('')}</select></div>
+      <div class="field"><label for="sop-ts">${esc(t('sop_topic_sort'))}</label><input class="input num" id="sop-ts" inputmode="numeric" value="${tp.sort || 0}"></div></div>
+    <div class="row" style="flex-wrap:wrap;gap:8px"><button class="btn ghost" data-act="sop-topic-cancel">${esc(t('cancel'))}</button><button class="btn ghost danger" data-act="sop-topic-arch" data-id="${tp.id}">${esc(t('sop_topic_arch'))}</button><button class="btn" data-act="sop-topic-save" data-id="${tp.id}">${esc(t('save'))}</button></div></div>`;
+}
+// 老板：等确认的、SOP 编写人
+function sopAdminTopHTML(){
+  const S = sopS(), P = S.pend || [], A = S.authors || {};
+  const pendHTML = P.length ? `<h3>${esc(t('sop_pend', { n: P.length }))}</h3>` + P.map(sopPendCard).join('') : `<div class="infobox">${esc(t('sop_pend_none'))}</div>`;
+  const staff = (state.sopStaff || []).filter(s => s.is_active && !s.is_admin && !s.is_kitchen);
+  const auHTML = ['front', 'kitchen'].map(a => { const x = A[a] || { authors: [], supervisors: [] }, have = x.authors.map(u => u.staff_id);
+    return `<div class="item"><div><strong>${esc(t('area_' + a))}</strong></div>
+      <div class="chips" style="margin-top:6px">${x.authors.map(u => `<span class="chip on" style="cursor:default">${esc(u.name)} <button class="link" style="color:#fff;margin-left:4px" data-act="sop-au-rm" data-area="${a}" data-id="${u.staff_id}" aria-label="${esc(t('sop_au_rm'))}">✕</button></span>`).join('') || `<span class="muted small">${esc(t('sop_au_none'))}</span>`}</div>
+      ${x.supervisors.length ? `<div class="meta small muted">${esc(t('sop_au_sup', { m: x.supervisors.join('、') }))}</div>` : ''}
+      <div class="row" style="margin-top:8px;align-items:center"><select class="input" id="sop-au-${a}"><option value="">–</option>${staff.filter(s => !have.includes(s.id)).map(s => `<option value="${s.id}">${esc(s.name)} · ${esc(t('grp_' + (s.main_role || 'service')))}</option>`).join('')}</select>
+        <button class="btn ghost" style="flex:none;width:auto" data-act="sop-au-add" data-area="${a}">${esc(t('sop_au_add'))}</button></div></div>`; }).join('');
+  return h3i(esc(t('sop_admin_h')), t('sop_admin_hint')) + pendHTML + `<details class="fold" style="margin-top:12px"${S.auOpen ? ' open' : ''}><summary>${esc(t('sop_au_h'))}</summary><div class="inner"><div class="list">${auHTML}</div><div class="small muted">${esc(t('sop_au_hint'))}</div></div></details>`
+    + `<h3 style="margin-top:18px">${esc(t('sop_all'))}</h3>`;
+}
+function sopPendCard(v){
+  const S = sopS(), c = v.content || {}, tp = v.topic, nt = v.new_topic, rej = S.rejecting === v.version_id, ai = v.ai || {};
+  const topicLine = tp ? sopRoleName(tp.role) + ' · ' + sopTopicName(tp) : t('sop_newtopic', { r: sopRoleName(nt && nt.role), n: (nt && (state.lang === 'de' ? nt.name_de || nt.name_zh : nt.name_zh || nt.name_de)) || '' });
+  return `<div class="item sop-pend"><div class="top"><div><strong>${esc(sopTitle(c))}</strong><span class="tag">${esc(t('area_' + v.area))}</span><span class="tag pend">${esc(v.cur ? t('sop_is_edit', { n: v.n }) : t('sop_is_new'))}</span></div>
+      <div class="meta small muted num">${esc(v.by || '')} · ${esc(fmtDateTime(v.at))}</div></div>
+    <div class="meta">${esc(topicLine)}</div>
+    ${!tp ? `<div class="row" style="margin-top:6px"><div class="field"><label for="sop-nz-${v.version_id}">${esc(t('sop_topic_zh'))}</label><input class="input" id="sop-nz-${v.version_id}" value="${esc((nt && nt.name_zh) || '')}"></div>
+      <div class="field"><label for="sop-nd-${v.version_id}">${esc(t('sop_topic_de'))}</label><input class="input" id="sop-nd-${v.version_id}" value="${esc((nt && nt.name_de) || '')}"></div></div>` : ''}
+    ${v.note ? `<div class="infobox">💬 ${esc(v.note)}</div>` : ''}
+    ${(ai.changes_zh || []).length ? `<div class="small" style="margin-top:6px"><strong>${esc(t('sop_changes'))}</strong><ul style="margin:2px 0 0 18px;padding:0">${ai.changes_zh.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    <div class="sop-box">${sopBodyHTML(c, v.photos)}</div>
+    ${v.cur ? `<details class="fold"><summary>${esc(t('sop_cur_ver', { n: v.cur.n }))}</summary><div class="inner">${sopBodyHTML(v.cur.content, v.cur.photos)}</div></details>` : ''}
+    ${v.raw ? `<details class="fold"><summary>${esc(t('sop_raw'))}</summary><div class="inner small" style="white-space:pre-wrap">${esc(v.raw)}</div></details>` : ''}
+    ${rej ? `<div class="field" style="margin-top:8px"><label for="sop-rej">${esc(t('sop_reject_q'))}</label><textarea class="input" id="sop-rej" rows="2" maxlength="500"></textarea></div>
+      <div class="row"><button class="btn ghost" data-act="sop-rej-cancel">${esc(t('cancel'))}</button><button class="btn danger" data-act="sop-decide" data-v="${v.version_id}" data-d="rejected">${esc(t('sop_reject'))}</button></div>`
+      : `<div class="row" style="margin-top:8px"><button class="btn ghost" data-act="sop-rej-open" data-v="${v.version_id}">${esc(t('sop_reject'))}</button><button class="btn" data-act="sop-decide" data-v="${v.version_id}" data-d="approved">${esc(t('sop_approve'))}</button></div>`}</div>`;
+}
+// 一条 SOP
+async function viewSopItem(){
+  const S = sopS(), host = sopHost(), id = S.id;
+  if (!S.item || S.item.id !== id) host.innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let x; try { x = await rpc('sop_item', { ...tok(), p_item: id }); } catch(e){ if (sopShown()) host.innerHTML = `<button class="link" data-act="sop-list" style="margin:2px 0 10px">← ${esc(t('back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (!sopShown() || S.view !== 'item' || S.id !== id) return;
+  S.item = x; renderSopItem();
+}
+function renderSopItem(){
+  const S = sopS(), x = S.item, host = sopHost(), c = x.cur, pv = x.pending, T = S.tree || { topics: [] };
+  const tp = c && (T.topics || []).find(q => q.id === c.topic_id);
+  host.innerHTML = `<button class="link" data-act="sop-list" style="margin:2px 0 10px">← ${esc(t('sop_back'))}</button>
+    ${tp ? `<div class="small muted">${esc(t('area_' + x.area))} · ${esc(sopRoleName(tp.role))} · ${esc(sopTopicName(tp))}</div>` : ''}
+    <h2 style="margin-top:2px">${esc(sopTitle(c ? c.content : pv && pv.content))}</h2>
+    ${x.archived ? `<div class="warnbox">${esc(t('sop_archived'))}</div>` : ''}
+    ${c ? `<div class="sheet">${sopBodyHTML(c.content, c.photos)}<div class="small muted" style="margin-top:8px">${esc(t('sop_updated_ok', { n: c.by || '', t: fmtDateTime(c.approved_at || c.at) }))}</div></div>` : `<div class="infobox">${esc(t('sop_not_yet'))}</div>`}
+    ${pv ? `<div class="warnbox" style="margin-top:10px">${esc(t('sop_pv', { n: pv.by || '', t: fmtDateTime(pv.at) }))}</div><details class="fold"><summary>${esc(t('sop_pv_show'))}</summary><div class="inner">${sopBodyHTML(pv.content, pv.photos)}</div></details>` : ''}
+    ${x.can_write && !x.archived ? `<button class="btn ghost" data-act="sop-edit" style="margin-top:12px">${esc(t('sop_edit'))}</button>` : ''}
+    ${state.me.is_admin && !x.archived ? `<button class="link danger" data-act="sop-archive" style="margin-top:12px">${esc(t('sop_archive'))}</button>` : ''}
+    ${(x.history || []).length ? `<details class="fold" style="margin-top:12px"><summary>${esc(t('sop_hist', { n: x.history.length }))}</summary><div class="inner"><div class="list">${x.history.map(h => `<div class="item"><div class="top"><div><strong>${esc(t('sop_ver', { n: h.n }))}</strong> <span class="muted">${esc(h.by || '')}</span>
+        <span class="tag ${h.decision === 'approved' ? 'ok' : h.decision === 'rejected' ? 'bad' : h.decision ? 'off' : 'pend'}">${esc(t('sop_st_' + (h.decision || 'pending')))}</span></div><div class="meta small muted num">${esc(fmtDateTime(h.at))}</div></div>
+        ${h.note ? `<div class="meta">${esc(h.note)}</div>` : ''}</div>`).join('')}</div></div></details>` : ''}`;
+  sopLoadPhotos();
+}
+// 写 / 改一条：说一段 → AI 整理 → 看一眼、改一改 → 提交给老板确认
+function sopEditStart(o){ sopS().edit = { raw: '', extra: '', draft: null, photos: [], topic: '', newTopic: null, note: '', busy: false, ...o }; sopGo('edit'); }
+function sopKeep(){
+  const E = sopS().edit; if (!E) return;
+  document.querySelectorAll('[data-sopk]').forEach(n => { const k = n.dataset.sopk;
+    if (k === 'raw' || k === 'extra' || k === 'note') E[k] = n.value;
+    else if (k === 'topic') E.topic = n.value;
+    else if (k.startsWith('nt_')){ E.newTopic = E.newTopic || {}; E.newTopic[k.slice(3)] = n.value || null; }
+    else if (E.draft){ E.draft[k] = /^(steps|tips|mistakes)_/.test(k) ? n.value.split('\n').map(x => x.trim()).filter(Boolean) : n.value; } });
+}
+function renderSopEdit(){
+  const S = sopS(), E = S.edit, host = sopHost(), T = S.tree || { topics: [], areas_w: [] }; if (!E){ S.view = 'list'; return viewSop(); }
+  const D = E.draft, ai = E.ai || {}, tops = (T.topics || []).filter(tp => tp.area === E.area);
+  const ta = (k, rows) => `<textarea class="input" data-sopk="${k}" rows="${rows || 3}">${esc(((D && D[k]) || []).join('\n'))}</textarea>`;
+  const areaPick = !E.item_id && (T.areas_w || []).length > 1 ? `<div class="seg sm" style="margin:0 0 10px">${T.areas_w.map(a => `<button data-act="sop-e-area" data-a="${a}" class="${E.area === a ? 'on' : ''}">${esc(t('area_' + a))}</button>`).join('')}</div>` : '';
+  const sameHTML = E.same && !E.item_id ? `<div class="warnbox">${esc(t('sop_same', { n: E.same.title }))}
+      <div class="row" style="margin-top:8px"><button class="btn ghost" data-act="sop-same-no">${esc(t('sop_same_no'))}</button><button class="btn" data-act="sop-same-yes">${esc(t('sop_same_yes'))}</button></div></div>` : '';
+  const topicHTML = D ? `<div class="field"><label for="sop-topic">${esc(t('sop_topic'))}</label><select class="input" id="sop-topic" data-sopk="topic">
+      ${tops.map(tp => `<option value="${tp.id}" ${E.topic === tp.id ? 'selected' : ''}>${esc(sopRoleName(tp.role) + ' · ' + sopTopicName(tp))}</option>`).join('')}<option value="" ${!E.topic ? 'selected' : ''}>${esc(t('sop_topic_new'))}</option></select></div>
+    ${!E.topic ? `<div class="row"><div class="field"><label for="sop-nz">${esc(t('sop_topic_zh'))}</label><input class="input" id="sop-nz" data-sopk="nt_name_zh" value="${esc((E.newTopic && E.newTopic.name_zh) || '')}"></div>
+      <div class="field"><label for="sop-nd">${esc(t('sop_topic_de'))}</label><input class="input" id="sop-nd" data-sopk="nt_name_de" value="${esc((E.newTopic && E.newTopic.name_de) || '')}"></div></div>
+      <div class="field"><label for="sop-nr">${esc(t('sop_topic_role'))}</label><select class="input" id="sop-nr" data-sopk="nt_role"><option value="">${esc(t('sop_role_all'))}</option>${SOP_ROLES[E.area].map(r => `<option value="${r}" ${E.newTopic && E.newTopic.role === r ? 'selected' : ''}>${esc(t('grp_' + r))}</option>`).join('')}</select></div>` : ''}` : '';
+  const draftHTML = D ? `<h3>${esc(t('sop_draft'))}</h3>${(ai.changes_zh || []).length ? `<div class="infobox"><strong>${esc(t('sop_changes'))}</strong><ul style="margin:2px 0 0 18px;padding:0">${ai.changes_zh.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    <div class="sheet">
+      <div class="row"><div class="field"><label>${esc(t('sop_f_title'))} 中文</label><input class="input" data-sopk="title_zh" maxlength="80" value="${esc(D.title_zh || '')}"></div>
+        <div class="field"><label>${esc(t('sop_f_title'))} Deutsch</label><input class="input" data-sopk="title_de" maxlength="80" value="${esc(D.title_de || '')}"></div></div>
+      <div class="small muted" style="margin-bottom:6px">${esc(t('sop_f_lines'))}</div>
+      <div class="field"><label>${esc(t('sop_f_steps'))} 中文</label>${ta('steps_zh', 5)}</div><div class="field"><label>${esc(t('sop_f_steps'))} Deutsch</label>${ta('steps_de', 5)}</div>
+      <div class="field"><label>✅ ${esc(t('sop_tips'))} 中文</label>${ta('tips_zh', 2)}</div><div class="field"><label>✅ ${esc(t('sop_tips'))} Deutsch</label>${ta('tips_de', 2)}</div>
+      <div class="field"><label>⚠ ${esc(t('sop_mistakes'))} 中文</label>${ta('mistakes_zh', 2)}</div><div class="field"><label>⚠ ${esc(t('sop_mistakes'))} Deutsch</label>${ta('mistakes_de', 2)}</div>
+      ${topicHTML}</div>
+    ${(ai.questions_zh || []).length ? `<div class="infobox" style="margin-top:10px"><strong>🤔 ${esc(t('sop_ai_q'))}</strong><ul style="margin:2px 0 0 18px;padding:0">${(state.lang === 'de' && (ai.questions_de || []).length ? ai.questions_de : ai.questions_zh).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    <div class="field" style="margin-top:8px"><label for="sop-extra">${esc(t('sop_extra'))}</label><textarea class="input" id="sop-extra" data-sopk="extra" rows="2" placeholder="${esc(t('sop_extra_ph'))}">${esc(E.extra || '')}</textarea></div>
+    <button class="btn ghost" data-act="sop-ai" data-again="1" ${E.busy ? 'disabled' : ''}>${esc(t(E.busy ? 'sop_ai_busy' : 'sop_ai_again'))}</button>
+    <div class="field" style="margin-top:14px"><label for="sop-note">${esc(t('sop_note'))}</label><input class="input" id="sop-note" data-sopk="note" maxlength="500" value="${esc(E.note || '')}"></div>
+    <button class="btn" data-act="sop-submit" style="margin-top:6px">${esc(t('sop_submit'))}</button><div class="small muted" style="text-align:center;margin-top:6px">${esc(t('sop_submit_hint'))}</div>` : '';
+  host.innerHTML = `<button class="link" data-act="sop-edit-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>
+    <h2 style="margin-top:0">${esc(E.item_id ? t('sop_edit_h', { n: E.baseTitle || '' }) : t('sop_new_h'))}</h2>${areaPick}
+    <div class="infobox">${esc(t('sop_raw_hint'))}</div>
+    <div class="field"><label for="sop-raw">${esc(t(E.item_id ? 'sop_raw_l_edit' : 'sop_raw_l'))}</label><textarea class="input" id="sop-raw" data-sopk="raw" rows="6" maxlength="8000" placeholder="${esc(t('sop_raw_ph'))}">${esc(E.raw || '')}</textarea></div>
+    <div class="field"><label>${esc(t('sop_photos'))}</label>${sopPhotosHTML(E.photos, true)}
+      ${(E.photos || []).length < 6 ? `<label class="btn ghost" style="width:auto;display:inline-flex">${esc(t(E.upBusy ? 'sop_ph_busy' : 'sop_ph_add'))}<input type="file" accept="image/*" data-sopphoto="1" hidden></label>` : ''}</div>
+    ${D ? '' : `<button class="btn" data-act="sop-ai" ${E.busy ? 'disabled' : ''}>${esc(t(E.busy ? 'sop_ai_busy' : 'sop_ai'))}</button>${E.base ? `<button class="link" data-act="sop-e-direct" style="margin-top:10px">${esc(t('sop_direct'))}</button>` : ''}`}
+    ${sameHTML}${draftHTML}`;
+  sopLoadPhotos();
+}
+async function sopRunAi(again){
+  const S = sopS(), E = S.edit; if (!E || E.busy) return; sopKeep();
+  if (!(E.raw || '').trim() && !(E.extra || '').trim()) return toast(t('err_SOP_EMPTY'), true);
+  E.busy = true; renderSopEdit();
+  try {
+    const base = again && E.draft ? E.draft : E.base || null;
+    const r = await callTasks({ action: 'sop_ai', area: E.area, raw: E.raw, extra: again ? E.extra : '', base, is_draft: !!(again && E.draft) });
+    E.draft = { title_zh: r.title_zh, title_de: r.title_de, steps_zh: r.steps_zh, steps_de: r.steps_de, tips_zh: r.tips_zh, tips_de: r.tips_de, mistakes_zh: r.mistakes_zh, mistakes_de: r.mistakes_de };
+    // 「这次改了」只对改已有的一条有用；按补充再整理时接着加在后面
+    E.ai = { questions_zh: r.questions_zh, questions_de: r.questions_de, model: r.model,
+      changes_zh: E.item_id ? (again && E.ai ? (E.ai.changes_zh || []) : []).concat(r.changes_zh || []).slice(0, 12) : [] };
+    if (again && (E.extra || '').trim()){ E.raw = ((E.raw || '') + '\n' + E.extra).trim(); E.extra = ''; }
+    if (!E.topicTouched){ E.topic = E.item_id && E.baseTopic ? E.baseTopic : r.topic_id || ''; E.newTopic = r.new_topic || E.newTopic || null; }
+    const same = r.same_item_id && (S.tree.topics || []).flatMap(tp => tp.items || []).find(i => i.id === r.same_item_id);
+    E.same = same ? { id: same.id, title: sopTitle(same) } : null;
+  } catch(e){ toast(errText(e), true); }
+  E.busy = false; if (S.edit === E && S.view === 'edit') renderSopEdit();
+}
+async function sopPhotoChosen(f){
+  const E = sopS().edit; if (!E) return; sopKeep();
+  if ((E.photos || []).length >= 6) return toast(t('err_SOP_TOO_MANY_PHOTOS'), true);
+  E.upBusy = true; renderSopEdit();
+  try {
+    const big = await compressImage(f, 1280, 0.82), blob = await (await fetch(big)).blob();
+    const r = await callTasks({ action: 'sop_upload_urls', count: 1 }), p = (r.photos || [])[0]; if (!p) throw new Error('SOP_UPLOAD_FAILED');
+    const { error } = await sb.storage.from('sop').uploadToSignedUrl(p.path, p.token, blob, { contentType: 'image/jpeg' });
+    if (error) throw new Error('SOP_UPLOAD_FAILED');
+    SOP_URLS[p.path] = { url: big, at: Date.now() }; E.photos = (E.photos || []).concat(p.path);
+  } catch(e){ toast(errText(e), true); }
+  E.upBusy = false; if (sopS().edit === E) renderSopEdit();
 }
 // ============ 新人带教（v107，入职培训第一步；v109 起可以有几个带教人）============
 // 新同事每个上班的营业日填「今天学得怎么样」；名单里同班的带教人、新同事点到的同事、老板请的人各填一份评价；回答只给老板看
@@ -2520,6 +2795,11 @@ function onbDetailHTML(){
     ${form}<h3 style="margin:14px 0 6px">${esc(t('onb_days_h'))}</h3><div class="list">${(D.days || []).map(dayHTML).join('') || `<div class="empty">${esc(t('onb_none_days'))}</div>`}</div>`;
 }
 // AI 看这一天（交完自动看过的不用再点）；老板点了等结果再刷新
+// v111：SOP 搜索（只重画列表）；改主题下拉
+document.addEventListener('input', ev => {
+  if (ev.target.id === 'sop-q' && state.sop){ const pos = ev.target.selectionStart; state.sop.q = ev.target.value; renderSopList(); const n = $('#sop-q'); if (n){ n.focus(); try { n.setSelectionRange(pos, pos); } catch(e){} } return; }
+  if (ev.target.id === 'sop-topic' && state.sop && state.sop.edit){ sopKeep(); state.sop.edit.topicTouched = true; renderSopEdit(); }
+});
 // v109：开始带教时换了新同事 → 带教人的名字按钮里去掉这个人
 document.addEventListener('input', ev => {
   if (ev.target.id !== 'onb-n-staff' || !state.onbNewSel) return;
@@ -3300,11 +3580,12 @@ async function lockUpload(input){
 }
 function viewMore(){
   if (state.libView) return viewLibrary();   // v79：资料
+  if (state.sop) return viewSop();   // v111：SOP
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
   $('#main').innerHTML = `<h2 style="margin-top:4px">${esc(t('more_title'))}</h2><div class="more">
     ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
-    ${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
+    ${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
@@ -4497,7 +4778,7 @@ async function doLogin(){
   }
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   state.loginErr = ''; state.loginInfo = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
-  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.onbOpen = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
+  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.onbOpen = null; state.sop = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
   if (!r.me.must_change_pin){
     splash();   // v68
     // v102：me、启动数据、老板的上周检查一起要（以前一个等一个）；登录返回的 me 没有区域主管 / 负责人，是主管的话按新的再要一次
@@ -5872,10 +6153,10 @@ const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['rates', 'report', 'deleted
 // v61：「管理」上的待办数字分到「审批」「反馈」两个按钮上（反馈 = 未处理的反馈，审批 = 其余：修改申请、待核对的 Bon、工号绑定、忘记 PIN）
 async function adminCounts(){
   let total = state.me.pending_requests || 0;
-  const [m2, fl, ol] = await Promise.all([soft(rpc('me', tok()), null), soft(rpc('admin_feedback_list', tok()), null), soft(rpc('admin_onb_list', tok()), null)]);   // v68：一起要；v107：新人带教
+  const [m2, fl, ol, sp] = await Promise.all([soft(rpc('me', tok()), null), soft(rpc('admin_feedback_list', tok()), null), soft(rpc('admin_onb_list', tok()), null), soft(rpc('admin_sop_pending', tok()), null)]);   // v68：一起要；v107：新人带教；v111：SOP
   if (m2){ total = m2.pending_requests || 0; refreshBadge(total); }
   const fb = (fl || []).filter(x => x.status === 'open').length;
-  return { requests: Math.max(0, total - fb), feedback: fb, onb: (ol || []).filter(p => !p.ended_at).reduce((a, p) => a + (+p.unread || 0), 0) };
+  return { requests: Math.max(0, total - fb), feedback: fb, onb: (ol || []).filter(p => !p.ended_at).reduce((a, p) => a + (+p.unread || 0), 0), sop: (sp || []).length };
 }
 // v68：不常用的功能从右上角「⋯」搬到「管理」页最下面（「⋯」只留通知、反馈、改 PIN、退出）
 function admMoreHTML(){
@@ -5886,7 +6167,7 @@ function admMoreHTML(){
     + b('inv-settings', '', t('inv_set_h')) + ADMIN_MORE.map(k => b('admin-more', `data-sub="${k}"`, t('admin_' + k), state.adminSub === k)).join('') + `</div>`;
 }
 async function viewAdmin(){
-  const subs = ['requests', 'feedback', 'notice', 'library', 'tasks', 'expense', 'staff', 'onb', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
+  const subs = ['requests', 'feedback', 'notice', 'library', 'sop', 'tasks', 'expense', 'staff', 'onb', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
   const segHTML = c => `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}${c && c[s] ? ` <span class="tag pend" style="margin:0 0 0 4px">${c[s]}</span>` : ''}</button>`).join('')}</div>`;
   $('#main').innerHTML = segHTML(state.adminCounts) + `<div id="asub"><div class="loading">${esc(t('loading'))}</div></div>` + admMoreHTML();
   // v102：上面的数字和下面的内容一起要（以前先等数字）
@@ -5936,6 +6217,8 @@ async function viewAdmin(){
       }).join('');
     } else if (state.adminSub === 'tasks'){   // v95：某一天的任务 + 负责人
       el().innerHTML = await toAdminLoad();
+    } else if (state.adminSub === 'sop'){   // v111：SOP
+      await viewSop();
     } else if (state.adminSub === 'onb'){   // v107：新人带教
       el().innerHTML = await onbAdminLoad();
     } else if (state.adminSub === 'perf'){   // v96：速度记录
@@ -7525,7 +7808,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(state.weekTodo || await loadWeekTodo());   // v56；v96：有上次的结果就不等（周结页自己会取最新的）
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.libView = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.libView = null; if (!state.me.is_admin) state.sop = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -7820,6 +8103,100 @@ document.addEventListener('click', async ev => {
       el.disabled = true;
       try { await rpc('message_answer', { ...tok(), p_id: el.dataset.id, p_answer: txt + extra }); callPush('answer', { message_id: el.dataset.id });
         toast(t('msg_ans_sent')); await loadTasks(); render(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    // v111：SOP
+    case 'more-sop': state.sop = { view: 'list', q: '' }; render(); window.scrollTo(0, 0); break;
+    case 'sop-admin': state.sop = { view: 'list', q: '' }; state.done = null; state.recon = null; state.tab = 'admin'; state.adminSub = 'sop'; render(); window.scrollTo(0, 0); break;
+    case 'sop-back-more': state.sop = null; render(); window.scrollTo(0, 0); break;
+    case 'sop-list': sopS().edit = null; sopGo('list'); break;
+    case 'sop-area': sopS().area = el.dataset.a; renderSopList(); break;
+    case 'sop-open': sopGo('item', { id: el.dataset.id }); break;
+    case 'sop-photo-big': {
+      const u = SOP_URLS[el.dataset.sop]; if (!u) break;
+      const dlg = $('#photoDlg'); dlg.innerHTML = `<img src="${esc(u.url)}" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><button class="btn" data-act="photo-close">${esc(t('close'))}</button>`; dlg.showModal(); break;
+    }
+    case 'sop-new': { const T = sopS().tree || {}; sopEditStart({ area: (T.areas_w || []).includes(sopS().area) ? sopS().area : (T.areas_w || [])[0] }); break; }
+    case 'sop-fix': {   // 被退回的那一版：带着内容打开，改好再交
+      const x = ((sopS().tree || {}).mine || []).find(m => m.version_id === el.dataset.v); if (!x) break;
+      sopEditStart({ item_id: x.item_id, area: x.area, baseTitle: sopTitle(x), draft: JSON.parse(JSON.stringify(x.content || {})), raw: x.raw || '', photos: x.photos || [],
+        topic: x.topic_id || '', newTopic: x.new_topic || null, topicTouched: true }); break;
+    }
+    case 'sop-edit': {   // 已有的一条：说一下要补充或改什么（AI 和现在的内容合在一起）；等确认的那一版比现在的新，就从那一版接着改
+      const x = sopS().item; if (!x) break; const src = x.pending || x.cur; if (!src) break;
+      sopEditStart({ item_id: x.id, area: x.area, base: src.content, baseTitle: sopTitle(src.content), baseTopic: src.topic_id || (x.cur && x.cur.topic_id) || '', photos: (src.photos || []).slice(),
+        topic: src.topic_id || '', newTopic: src.new_topic || null }); break;
+    }
+    case 'sop-e-direct': { const E = sopS().edit; if (!E || !E.base) break; sopKeep(); E.draft = JSON.parse(JSON.stringify(E.base)); E.topic = E.baseTopic || E.topic; renderSopEdit(); break; }
+    case 'sop-edit-close': sopKeep(); { const E = sopS().edit; sopS().edit = null; if (E && E.item_id && sopS().item && sopS().item.id === E.item_id) sopGo('item', { id: E.item_id }); else sopGo('list'); } break;
+    case 'sop-e-area': { const E = sopS().edit; if (!E) break; sopKeep(); E.area = el.dataset.a; E.topic = ''; E.topicTouched = false; renderSopEdit(); break; }
+    case 'sop-ai': sopRunAi(!!el.dataset.again); break;
+    case 'sop-same-no': { const E = sopS().edit; if (E){ sopKeep(); E.same = null; renderSopEdit(); } break; }
+    case 'sop-same-yes': {   // 补充到已有的那一条：拿那一条现在的内容，和说的话一起再整理一次
+      const E = sopS().edit; if (!E || !E.same) break; sopKeep();
+      try { const x = await rpc('sop_item', { ...tok(), p_item: E.same.id }), src = x.pending || x.cur;
+        Object.assign(E, { item_id: x.id, base: src ? src.content : null, baseTitle: E.same.title, baseTopic: src && src.topic_id || '', topic: src && src.topic_id || '', topicTouched: false,
+          photos: (src && src.photos || []).concat(E.photos || []).slice(0, 6), draft: null, same: null }); }
+      catch(e){ return toast(errText(e), true); }
+      sopRunAi(false); break;
+    }
+    case 'sop-ph-rm': { const E = sopS().edit; if (!E) break; sopKeep(); E.photos = (E.photos || []).filter(p => p !== el.dataset.p); renderSopEdit(); break; }
+    case 'sop-submit': {
+      const S = sopS(), E = S.edit; if (!E) break; sopKeep();
+      if (!E.draft) return toast(t('sop_need_draft'), true);
+      const nt = E.topic ? null : { role: (E.newTopic && E.newTopic.role) || null, name_zh: (E.newTopic && E.newTopic.name_zh) || '', name_de: (E.newTopic && E.newTopic.name_de) || '' };
+      if (!E.topic && !(nt.name_zh || nt.name_de || '').trim()) return toast(t('sop_need_topic'), true);
+      el.disabled = true;
+      try { const r = await rpc('sop_submit', { ...tok(), p_item: E.item_id || null, p_area: E.area, p_topic: E.topic || null, p_new_topic: nt, p_content: E.draft,
+          p_raw: E.raw || null, p_photos: E.photos || [], p_ai: E.ai || null, p_note: E.note || null });
+        S.edit = null; S.tree = null; toast(t('sop_sent'));
+        if (state.me.is_admin) sopGo('list'); else sopGo('item', { id: r.item_id }); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'sop-archive': {
+      const x = sopS().item; if (!x || !confirm(t('sop_archive_q'))) break; el.disabled = true;
+      try { await rpc('admin_sop_archive', { ...tok(), p_item: x.id }); toast(t('saved')); sopGo('list'); } catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'sop-topic-edit': sopS().topicEdit = el.dataset.id; renderSopList(); break;
+    case 'sop-topic-cancel': sopS().topicEdit = null; renderSopList(); break;
+    case 'sop-topic-save': case 'sop-topic-arch': {
+      const arch = act === 'sop-topic-arch'; if (arch && !confirm(t('sop_topic_arch_q'))) break; el.disabled = true;
+      try { await rpc('admin_sop_topic_save', { ...tok(), p_topic: el.dataset.id, p_name_zh: ($('#sop-tz') || {}).value || null, p_name_de: ($('#sop-td') || {}).value || null,
+          p_role: ($('#sop-tr') || {}).value || null, p_sort: parseInt(($('#sop-ts') || {}).value, 10) || 0, p_archive: arch });
+        sopS().topicEdit = null; toast(t('saved')); keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    // 老板：确认 / 退回
+    case 'sop-rej-open': sopS().rejecting = el.dataset.v; renderSopList(); setTimeout(() => { const n = $('#sop-rej'); if (n) n.focus(); }, 50); break;
+    case 'sop-rej-cancel': sopS().rejecting = null; renderSopList(); break;
+    case 'sop-decide': {
+      const vid = el.dataset.v, d = el.dataset.d, note = d === 'rejected' ? (($('#sop-rej') || {}).value || '') : '';
+      if (d === 'rejected' && !note.trim()) return toast(t('err_SOP_REJECT_NOTE'), true);
+      const zh = $('#sop-nz-' + vid), de = $('#sop-nd-' + vid);
+      el.disabled = true;
+      try { const r = await rpc('admin_sop_decide', { ...tok(), p_version: vid, p_decision: d, p_note: note || null,
+          p_topic_name: zh || de ? { name_zh: zh ? zh.value : null, name_de: de ? de.value : null } : null });
+        if (r && r.message) callPush('message', { message_id: r.message });
+        sopS().rejecting = null; toast(t(d === 'approved' ? 'sop_decided_ok' : 'sop_decided_rej')); keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    // 老板：SOP 编写人
+    case 'sop-au-add': {
+      const a = el.dataset.area, id = ($('#sop-au-' + a) || {}).value; if (!id) break; el.disabled = true;
+      try { const r = await rpc('admin_sop_author_set', { ...tok(), p_area: a, p_staff: id, p_on: true, p_notify: true });
+        if (r && r.message) callPush('message', { message_id: r.message }); sopS().auOpen = true; toast(t('saved')); keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'sop-au-rm': {
+      const a = el.dataset.area, id = el.dataset.id, nm = ((((sopS().authors || {})[a] || {}).authors || []).find(u => u.staff_id === id) || {}).name || '';
+      if (!confirm(t('sop_au_rm_q', { n: nm }))) break; el.disabled = true;
+      try { await rpc('admin_sop_author_set', { ...tok(), p_area: a, p_staff: id, p_on: false, p_notify: false }); sopS().auOpen = true; toast(t('saved')); keepScroll(render); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
@@ -8212,7 +8589,7 @@ document.addEventListener('click', async ev => {
       el.disabled = true;
       try { await rpc('lock_week', { ...tok(), p_week_start: state.week }); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
-    case 'admin-sub': state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; state.onbPlan = null; state.onbForm = null; state.onbNew = false; render(); break;
+    case 'admin-sub': state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; state.onbPlan = null; state.onbForm = null; state.onbNew = false; if (el.dataset.sub === 'sop') state.sop = { view: 'list', q: '' }; render(); break;
     case 'admin-more': state.done = null; state.rcWeek = null; state.tab = 'admin'; state.adminSub = el.dataset.sub; state.staffEdit = null; state.menu = false; render(); break;
     case 'del-filter': state.delFilter = el.dataset.k; render(); break;
     case 'staff-new': state.staffEdit = {}; render(); break;
@@ -8278,7 +8655,7 @@ document.addEventListener('click', async ev => {
         state.token = r.token; state.me = await rpc('me', tok());
         state.receipts = []; state.rcWeek = null; state.menu = false; state.staffEdit = null;
         state.week = mondayOf(today()); state.planWeek = planWeekDefault(); state.bon = blankBon(); state.form = blankForm();
-        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null; state.onbOpen = null; state.planTimes = null; state.libView = null;   // v70：和员工本人登录时一样
+        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null;   // v70：和员工本人登录时一样
         await loadCommon(); state.tab = navTabs()[0]; render(); window.scrollTo(0, 0);
       } catch(e){ toast(errText(e), true); }
       break;
@@ -8855,6 +9232,7 @@ document.addEventListener('click', async ev => {
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.dataset && ev.target.dataset.sopphoto && ev.target.files && ev.target.files[0]){ const f = ev.target.files[0]; ev.target.value = ''; sopPhotoChosen(f); return; }   // v111：SOP 照片
   if (ev.target.dataset && ev.target.dataset.invphoto && ev.target.files && ev.target.files[0]){   // v91：物品 / 储位照片
     const f = ev.target.files[0], k = ev.target.dataset.invphoto; ev.target.value = '';
     if (k === 'item') invPhotoChosen(f); else if (k === 'inbox') invIbPhoto(f); else invPlacePhoto(f);   // v94：待归位照片
@@ -9007,7 +9385,7 @@ async function exitView(){
   try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
-  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.onbOpen = null; state.planTimes = null; state.libView = null;   // v70
+  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null;   // v70
   state.inv = null; await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
