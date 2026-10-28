@@ -483,6 +483,16 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { pe
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v112：Bon 上的日期读错时（老板 2026-10-28：Hang 28 号的 Bon 被读成 26 号）
+  bon_date_q:'Bon 上的日期读出来是 {d}，对吗？', bon_date_q_hint:'请看一眼纸上 Bon 顶部的日期（Anfangsdatum）。热敏纸上 8 和 6、3 和 8 容易读错。',
+  bon_date_yes:'对，是 {d}', bon_date_no:'不对，是{d}', bon_date_none:'都不对，重拍', bon_date_need:'请先确认 Bon 上的日期（上面黄色的框）。',
+  bon_date_ok:'日期：{d}（已确认）', bon_date_set:'日期按 {d} 存（AI 读的是 {a}）', bon_date_change:'改', bon_date_ai:'（AI 读的是 {d}）',
+  tag_datefix:'日期改过（AI 读的是 {d}）', tag_datefix_by:'{n} 改的',
+  be_date_btn:'改日期', be_date_lbl:'新日期', be_date_hint:'只有老板能改。改了日期，Runner / 吧台按新日期的排班重新选好，小费按新日期重新分；点收不变。',
+  be_date_reason:'为什么改日期（会记进日志）', be_date_reason_ph:'例如：AI 把 28 号读成了 26 号',
+  be_date_sched:'{d}{s}的排班：Runner {r}，吧台 {b}。已按这个选好，请看一眼。', be_date_nosched:'{d} 的排班还没发布：Runner / 吧台请自己选。',
+  be_date_cancel:'不改日期', be_date_saved:'日期已改成 {d}', be_date_ai:'AI 读的是 {d}，{n} 改过',
+  act_bon_entry_date:'改 Bon 日期', ad_date_from:'原来的日期', ad_date_into:'改成', ad_ai_date:'AI 读的日期',
   // v111：SOP
   admin_sop:'SOP', sop_more:'📋 SOP', sop_title:'SOP', sop_new:'＋ 写一条 SOP（说一段就行）', sop_mine:'我写的（{n}）', sop_st_pending:'等老板确认', sop_st_rejected:'被退回', sop_st_approved:'已确认', sop_st_superseded:'被新的一版取代',
   sop_reject_why:'退回原因：{m}', sop_fix:'改好再交', sop_search:'搜索 SOP', sop_none:'这个区域还没有 SOP。', sop_none_w:'这个区域还没有 SOP：点上面「写一条 SOP」，说一段就行。', sop_none_q:'没有找到。', sop_role_all:'整个区域',
@@ -945,6 +955,16 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v112：Bon-Datum falsch gelesen
+  bon_date_q:'Datum auf dem Bon gelesen als {d} – stimmt das?', bon_date_q_hint:'Bitte kurz oben auf dem Bon nachsehen (Anfangsdatum). Auf Thermopapier werden 8 und 6, 3 und 8 leicht verwechselt.',
+  bon_date_yes:'Ja, {d}', bon_date_no:'Nein, richtig ist {d}', bon_date_none:'Beides falsch – neu fotografieren', bon_date_need:'Bitte zuerst das Datum auf dem Bon bestätigen (gelber Kasten oben).',
+  bon_date_ok:'Datum: {d} (bestätigt)', bon_date_set:'Wird als {d} gespeichert (KI las {a})', bon_date_change:'ändern', bon_date_ai:'(KI las {d})',
+  tag_datefix:'Datum korrigiert (KI las {d})', tag_datefix_by:'korrigiert von {n}',
+  be_date_btn:'Datum ändern', be_date_lbl:'Neues Datum', be_date_hint:'Nur der Chef kann das. Mit neuem Datum werden Runner / Bar nach dem Dienstplan dieses Tages neu gewählt und das Trinkgeld neu verteilt; „gezählt“ bleibt.',
+  be_date_reason:'Warum wird das Datum geändert? (kommt ins Protokoll)', be_date_reason_ph:'z. B. KI hat 28 als 26 gelesen',
+  be_date_sched:'Dienstplan {d}{s}: Runner {r}, Bar {b}. So vorausgewählt – bitte kurz prüfen.', be_date_nosched:'Der Dienstplan für {d} ist noch nicht veröffentlicht: Runner / Bar bitte selbst wählen.',
+  be_date_cancel:'Datum nicht ändern', be_date_saved:'Datum geändert auf {d}', be_date_ai:'KI las {d}, korrigiert von {n}',
+  act_bon_entry_date:'Bon-Datum geändert', ad_date_from:'Altes Datum', ad_date_into:'Neu', ad_ai_date:'Von KI gelesen',
   // v111：SOP
   admin_sop:'SOP', sop_more:'📋 SOP', sop_title:'SOP', sop_new:'＋ SOP schreiben (einfach erzählen)', sop_mine:'Meine ({n})', sop_st_pending:'wartet auf den Chef', sop_st_rejected:'zurückgegeben', sop_st_approved:'bestätigt', sop_st_superseded:'durch neue Fassung ersetzt',
   sop_reject_why:'Grund: {m}', sop_fix:'Überarbeiten und erneut einreichen', sop_search:'SOP suchen', sop_none:'Für diesen Bereich gibt es noch keine SOP.', sop_none_w:'Noch keine SOP: oben „SOP schreiben“ tippen und einfach erzählen.', sop_none_q:'Nichts gefunden.', sop_role_all:'ganzer Bereich',
@@ -1529,6 +1549,10 @@ function toast(msg, isErr){
 }
 // 报错提示：每条都写清原因和下一步怎么做
 const ERR_ZH = {
+  BON_DATE_CHOICE: '只能改成今天或昨天。都不对请点「都不对，重拍」把顶部的日期拍清楚；重拍还不行，请把 Bon 交给老板录入。',
+  BON_NEWDATE_BAD: '新日期不对：不能是今天以后的日子。请重新选日期。',
+  BON_DATE_REASON: '请写一句为什么改日期（会记进日志）。',
+  BON_DATE_PENDING: '这张 Bon 还有一个员工的修改申请没处理：请先在「管理 → 审批」里批准或拒绝，再改日期。',
   SOP_NOT_WRITER: '你不能写这个区域的 SOP：只有老板、区域主管和老板指定的 SOP 编写人能写。需要的话请找老板。',
   SOP_EMPTY: '内容不够：要有标题和至少一个步骤。先说一段，再点「✨ AI 整理」。',
   SOP_TOO_LONG: '写得太长了：标题最多 80 字，每一步最多 300 字，每个列表最多 30 条。请分成几条 SOP，或者写短一点。',
@@ -1726,6 +1750,10 @@ const ERR_ZH = {
   INVALID_KTIME: '时间不对：开始要在 05:00 以后，结束要晚于开始。过了半夜下班的照填，最晚到 05:00（例如 22:00–01:00）。请检查每个人的时间，有没有空着的。',
 };
 const ERR_DE = {
+  BON_DATE_CHOICE: 'Nur heute oder gestern möglich. Stimmt beides nicht, „Beides falsch – neu fotografieren“ tippen und das Datum oben scharf fotografieren; klappt es dann nicht, den Bon dem Chef zum Eintragen geben.',
+  BON_NEWDATE_BAD: 'Neues Datum ungültig: Es darf nicht in der Zukunft liegen. Bitte ein anderes Datum wählen.',
+  BON_DATE_REASON: 'Bitte kurz schreiben, warum das Datum geändert wird (kommt ins Protokoll).',
+  BON_DATE_PENDING: 'Für diesen Bon wartet noch ein Änderungsantrag: bitte erst unter „Verwaltung → Freigaben“ annehmen oder ablehnen, dann das Datum ändern.',
   SOP_NOT_WRITER: 'Du kannst für diesen Bereich keine SOP schreiben: nur der Chef, Bereichsleitungen und vom Chef bestimmte SOP-Schreiber. Bei Bedarf den Chef fragen.',
   SOP_EMPTY: 'Zu wenig Inhalt: Titel und mindestens ein Schritt nötig. Erst erzählen, dann „✨ KI ordnen“ tippen.',
   SOP_TOO_LONG: 'Zu lang: Titel höchstens 80 Zeichen, jeder Schritt höchstens 300, höchstens 30 Punkte pro Liste. Bitte in mehrere SOPs teilen oder kürzer schreiben.',
@@ -1968,7 +1996,7 @@ const state = {
   adminSub: 'requests', staffEdit: null, staffList: [],
   entryMode: 'bon', bon: blankBon(), viewAs: null, planWeek: addDays(mondayOf(today()), 7), planSub: 'edit', plan: null, shiftEdit: null
 };
-function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null, sched: null }; }
+function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null, sched: null, dateAns: null }; }
 function blankForm(){
   return { date: bizToday(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '', extras: {} };   // v102：默认日期按营业日（凌晨 5 点前录入算前一天）
 }
@@ -4956,7 +4984,7 @@ function bonState(){
 function bonNumbersHTML(d){
   return `<div style="margin-bottom:12px"><div class="muted small" style="margin-bottom:4px">${esc(t('bon_numbers'))}</div><div class="sum num">
       <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${d.store ? storeTag(d.store) : '?'}</strong></div>
-      <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(bonDayText(d.work_date)) : '?'}</strong></div>
+      <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(bonDayText(bonWorkDate())) : '?'}${(state.bon.dateAns || {}).changed ? ` <span class="muted small">${esc(t('bon_date_ai', { d: dm(d.work_date) }))}</span>` : ''}</strong></div>
       <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
       <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(d.schluss_cents || 0)}</strong></div>
       ${(d.bar_transfers || []).length ? `<div class="li"><span class="muted">${esc(t('xfer_lbl'))}</span><strong>${esc(d.bar_transfers.map(x => x.name + ' ' + (x.dir === 'out' ? '−' : '+') + (x.cents == null ? '?' : eur(x.cents))).join(' · '))}</strong></div>
@@ -4970,6 +4998,55 @@ function bonDayText(d){ const y = String(d || '').slice(0, 4); return (y && y !=
 function bonDateOnly(){ return bonOnly('DATE_ODD'); }
 // v90：识别的问题只有某几种（例如只有工号对不上：bon v14 的 USER_ID_MISMATCH / USER_ID_ODD）
 function bonOnly(...pre){ const ps = (((state.bon.read || {}).checks || {}).problems || []); return ps.length > 0 && ps.every(p => pre.some(x => String(p).startsWith(x))); }
+// v112：读出的日期不是今天（营业日）时先问一句；老板代交时和点进来的那一天比
+function bonDateExpect(){ const c = (state.entryCtx || {}).proxy; return bonPxActive() && c && c.date ? c.date : bizToday(); }
+function bonDateAsk(){ const d = bonDerived(), st = bonState(); return !!(d && d.work_date && (st === 'ok' || st === 'review') && d.work_date !== bonDateExpect()); }
+function bonDateNeed(){ return bonDateAsk() && !state.bon.dateAns; }
+function bonWorkDate(){ const a = state.bon.dateAns; return (a && a.date) || (bonDerived() || {}).work_date; }
+// 可以改成哪几天：员工只能今天、昨天；老板代交时还有点进来的那一天
+function bonDateOpts(){
+  const d = (bonDerived() || {}).work_date, bd = bizToday(), c = (state.entryCtx || {}).proxy;
+  return [...new Set([bonPxActive() && c && c.date, bd, addDays(bd, -1)].filter(x => x && x !== d && x <= bd))];
+}
+function relWord(x){ const n = Math.round((parseD(bizToday()) - parseD(x)) / 864e5); return n >= 0 && n <= 2 ? t('rk_rel' + n) : ''; }
+function relDayText(x){ const w = relWord(x); return (w ? w + ' ' : '') + dm(x); }
+function bonDateHTML(){
+  if (!bonDateAsk()) return '';
+  const d = bonDerived().work_date, a = state.bon.dateAns;
+  if (a) return `<div class="infobox">✓ ${esc(a.changed ? t('bon_date_set', { d: dayLabel(a.date), a: dayLabel(d) }) : t('bon_date_ok', { d: dayLabel(d) }))} <button class="link" data-act="bon-date-again">${esc(t('bon_date_change'))}</button></div>`;
+  const btn = (x, label) => `<button class="btn ghost" style="margin-top:8px;max-width:none" data-act="bon-date" data-d="${esc(x)}">${esc(label)}</button>`;
+  return `<div class="warnbox" id="bon-date-q"><strong>${esc(t('bon_date_q', { d: bonDayText(d) + (relWord(d) ? (state.lang === 'de' ? ' (' + relWord(d) + ')' : '（' + relWord(d) + '）') : '') }))}</strong>
+    <div class="small" style="margin-top:4px">${esc(t('bon_date_q_hint'))}</div>
+    ${btn('', t('bon_date_yes', { d: dm(d) }))}${bonDateOpts().map(x => btn(x, t('bon_date_no', { d: relDayText(x) }))).join('')}
+    <button class="btn ghost" style="margin-top:8px;max-width:none" data-act="bon-retake">${esc(t('bon_date_none'))}</button></div>`;
+}
+async function bonDateAnswer(day){
+  const b = state.bon, d = bonDerived(); if (!b.read || !d) return;
+  let r;
+  try { r = await rpc('bon_read_date', { ...tok(), p_read_id: b.read.read_id, p_date: day || null }); }
+  catch(e){ return toast(errText(e), true); }
+  if (state.bon !== b) return;
+  b.dateAns = { date: r.date, changed: !!r.changed };
+  if (state.form.date !== r.date){ await bonLoadDay(b, r.date, d.store); if (state.bon !== b) return; bonAutoPick(); }
+  refreshBonParts();
+}
+// 按这一天读当天的 Runner / 吧台和自己的排班（识别完、员工改了日期时）
+async function bonLoadDay(b, day, store){
+  state.form.date = day; b.dayHelp = null; b.sched = null;
+  try { b.dayHelp = await rpc('day_helpers', { ...tok(), p_date: day, p_store: store }); } catch(e){}
+  if (!bonPxActive()){ try { b.sched = await rpc('sched_bon_helpers', { ...tok(), p_date: day, p_store: store }); } catch(e){ b.sched = null; } }   // v92：代交时不用老板自己的排班
+}
+// 当天有已发布的排班：自动选上这个班次的 Runner / 吧台（员工还没自己选过时才填；排班里没排的岗位不自动填）
+function bonAutoPick(){
+  const f = state.form, sc = state.bon.sched;
+  [['runner', 'runners', 'autoRunners'], ['bar', 'bars', 'autoBars']].forEach(([role, key, flag]) => {
+    if (f[key] !== null && !f[flag]) return;
+    const ids = schedPicks(role);
+    if (ids.length){ f[key] = ids.slice(); f[flag] = true; }
+    else if (sc && sc.published && sc['none_' + role]){ f[key] = []; f[flag] = true; }   // 这个岗位的人全是兼岗的服务员
+    else if (f[flag]){ f[key] = null; f[flag] = false; }
+  });
+}
 // v92（老板 2026-10-17 决定）：老板代交 Bon。老板在「录入 → 拍照」或从「Bon 没交：某人」的 📷 进来，识别服务 bon v15 按 Bon 上的工号
 // 找出是谁的（derived.owner）；老板确认记给谁（pxPick），填数过的信封金额 → 数据库 v64 admin_bon_entry_for（同时点收、发消息给员工）
 function bonPx(){
@@ -5029,7 +5106,7 @@ function bonStatusHTML(){
   const uOnly = bonOnly('USER_ID_MISMATCH', 'USER_ID_ODD');   // v90：只有工号对不上
   if (st === 'retake') h += `<div class="warnbox">${esc(dOnly ? t('checks_retake_date', { n: b.fails, d: dTxt }) : uOnly ? t('checks_retake_id', { n: b.fails }) : t('checks_retake', { n: b.fails }))}${dOnly ? '' : bonFixHTML()}</div>`;
   if (st === 'review') h += `<div class="warnbox">${esc(dOnly ? t('checks_review_date', { d: dTxt }) : uOnly ? t('checks_review_id') : t('checks_review'))}${dOnly ? '' : bonFixHTML()}</div>`;
-  return h + bonPxHTML();   // v92：老板代交
+  return h + bonDateHTML() + bonPxHTML();   // v92：老板代交；v112：日期对吗
 }
 function schedInfoHTML(){
   const sc = state.bon.sched, f = state.form;
@@ -5081,17 +5158,51 @@ function refreshBonParts(){
   const c = $('#bon-chips'); if (c) c.innerHTML = bonChipsBlock();
   refreshBonSum();
 }
+// v112：老板改 Bon 的日期（修改页里）：选新日期 → 按那张 Bon 的服务员在新日期的班选好 Runner / 吧台 → 写原因 → 保存
+const bonEditCanDate = () => !!(state.me.is_admin && !state.viewAs && state.form.isBon && state.form.entryId);
+function bonEditDateRow(){
+  const f = state.form;
+  const ai = f.aiDate ? `<div class="small muted">${esc(t('be_date_ai', { d: dayLabel(f.aiDate), n: f.dateFixBy || '?' }))}</div>` : '';
+  if (!bonEditCanDate()) return f.aiDate ? `<div class="li"><span class="muted">${esc(t('date'))}</span><strong>${esc(dayLabel(f.date))}${ai}</strong></div>` : '';
+  return `<div class="li"><span class="muted">${esc(t('date'))}</span><strong>${esc(dayLabel(f.newDate || f.date))}${f.newDate && f.newDate !== f.date ? ` <span class="muted small">(${esc(dm(f.date))} →)</span>` : ''}
+    ${f.dateOpen ? '' : ` <button class="link" data-act="be-date-open">${esc(t('be_date_btn'))}</button>`}${ai}</strong></div>`;
+}
+function bonEditDateBox(){
+  const f = state.form; if (!bonEditCanDate() || !f.dateOpen) return '';
+  const sc = f.dateSched, nd = f.newDate, names = a => a.length ? a.map(staffName).join('、') : '—';
+  const info = nd && nd !== f.date && sc ? `<div class="infobox" style="margin-top:8px">${esc(sc.published
+      ? t('be_date_sched', { d: dayLabel(nd), s: state.lang === 'de' ? ' (' + slotLabel(sc.slot) + ')' : ' ' + slotLabel(sc.slot), r: names(sc.runners || []), b: names(sc.bars || []) })
+      : t('be_date_nosched', { d: dayLabel(nd) }))}</div>` : '';
+  return `<div style="margin-top:10px"><div class="small muted" style="margin-bottom:6px">${esc(t('be_date_hint'))}</div>
+    <div class="field"><label for="e-date">${esc(t('be_date_lbl'))}</label><input class="input" type="date" id="e-date" value="${esc(nd || f.date)}" max="${esc(today())}"></div>
+    ${info}
+    <div class="field"><label for="e-dreason">${esc(t('be_date_reason'))}</label><input class="input" id="e-dreason" value="${esc(f.dateReason)}" placeholder="${esc(t('be_date_reason_ph'))}"></div>
+    <button class="link" data-act="be-date-cancel">${esc(t('be_date_cancel'))}</button></div>`;
+}
+async function bonEditDate(v){
+  const f = state.form; if (!bonEditCanDate()) return;
+  f.newDate = v && v !== f.date ? v : null; f.dateSched = null;
+  if (f.newDate){
+    try { f.dateSched = await rpc('admin_bon_date_helpers', { ...tok(), p_entry_id: f.entryId, p_date: f.newDate }); }
+    catch(e){ toast(errText(e), true); }
+    if (state.form !== f) return;
+    const sc = f.dateSched;
+    if (sc && sc.published){ f.runners = (sc.runners || []).slice(); f.bars = (sc.bars || []).slice(); }   // 按新日期那个班的排班选好（老板可以再改）
+  } else { f.runners = (f.origRunners || []).slice(); f.bars = (f.origBars || []).slice(); }
+  keepScroll(render);
+}
 function viewBonEdit(){
   const f = state.form;
   $('#main').innerHTML = `
     <div class="sheet" style="background:var(--copper-soft);border-color:transparent">
       <div class="row"><strong>${esc(t('editing', { d: dayLabel(f.date) }))}</strong>
-      <button class="link" style="flex:0" data-act="edit-cancel">${esc(t('cancel'))}</button></div></div>
+      <button class="link" style="flex:0;white-space:nowrap" data-act="edit-cancel">${esc(t('cancel'))}</button></div></div>
     <div class="sheet"><div class="sum num">
       <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(f.store)}</strong></div>
+      ${bonEditDateRow()}
       <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(f.schluss)}</strong></div>
       <div class="li"><span class="muted">${esc(t('card_tip'))}</span><strong>${eur(f.card)}</strong></div>
-    </div></div>
+    </div>${bonEditDateBox()}</div>
     <div class="field"><label for="e-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="e-wallet" inputmode="decimal" value="${esc(f.wallet)}"></div></div>
     <div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
     <div class="field"><label>${esc(t('bar'))}</label><div class="chips">${chipsHTML('bar')}</div></div>
@@ -5117,7 +5228,7 @@ function readTimer(isBusy, id){
 async function readBon(){
   const b = state.bon; if (!b.top || !b.bottom) return;
   const my = ++b.seq;
-  b.busy = true; b.readErr = null; b.read = null; b.dayHelp = null; b.sched = null; b.ack = false; refreshBonParts();
+  b.busy = true; b.readErr = null; b.read = null; b.dayHelp = null; b.sched = null; b.ack = false; b.dateAns = null; refreshBonParts();
   readTimer(() => b.busy && state.bon === b && my === b.seq, 'read-secs');
   let r = null, err = null;
   const pxc = state.me.is_admin && !state.viewAs ? { proxy: true, staff_id: ((state.entryCtx || {}).proxy || {}).staff || null } : {};   // v92：老板代交
@@ -5130,18 +5241,9 @@ async function readBon(){
     if (pxc.proxy) b.pxPick = (d.owner && d.owner.id) || pxc.staff_id || null;   // v92：先按 Bon 上的工号，认不出就用点进来的那个人
     if (!(r.checks && r.checks.ok) && d.store && d.user_id && d.report_id) b.fails++;
     if (d.work_date) state.form.date = d.work_date;
-    if (d.work_date && d.store){ try { b.dayHelp = await rpc('day_helpers', { ...tok(), p_date: d.work_date, p_store: d.store }); } catch(e){} }
-    // 当天有已发布的排班：自动选上这个班次的 Runner / 吧台（员工还没自己选过时才填；排班里没排的岗位不自动填）
-    if (d.work_date && d.store && !bonPxActive()){ try { b.sched = await rpc('sched_bon_helpers', { ...tok(), p_date: d.work_date, p_store: d.store }); } catch(e){ b.sched = null; } }   // v92：代交时不用老板自己的排班
+    if (d.work_date && d.store) await bonLoadDay(b, d.work_date, d.store);   // v112：抽成 bonLoadDay / bonAutoPick，员工改日期时再用
     if (state.bon !== b || my !== b.seq) return;
-    const f = state.form;
-    [['runner', 'runners', 'autoRunners'], ['bar', 'bars', 'autoBars']].forEach(([role, key, flag]) => {
-      if (f[key] !== null && !f[flag]) return;
-      const ids = schedPicks(role), sc = b.sched;
-      if (ids.length){ f[key] = ids.slice(); f[flag] = true; }
-      else if (sc && sc.published && sc['none_' + role]){ f[key] = []; f[flag] = true; }   // 这个岗位的人全是兼岗的服务员
-      else if (f[flag]){ f[key] = null; f[flag] = false; }
-    });
+    bonAutoPick();
   } else b.readErr = err;
   b.busy = false; refreshBonParts();
 }
@@ -5151,6 +5253,7 @@ async function submitBon(){
   if (st === 'error' || st === 'none') return toast(t('wait_read'), true);
   if (st === 'open') return toast(t('report_open'), true);
   if (st === 'unknown' || st === 'retake') return toast(t('need_retake'), true);
+  if (bonDateNeed()){ const q = $('#bon-date-q'); if (q) q.scrollIntoView({ block: 'center', behavior: 'smooth' }); return toast(t('bon_date_need'), true); }   // v112
   const card = d.card_cents || 0, schluss = d.schluss_cents || 0, w = parseEur(b.wallet);
   if (String(b.wallet).trim() === '') return toast(t('enter_wallet'), true);
   if (isNaN(w)) return toast(t('bad_amount'), true);
@@ -5190,6 +5293,19 @@ async function saveBonEdit(){
   if (!f.direct && !f.reason.trim()) return toast(t('err_REASON_REQUIRED'), true);
   const short = f.card - (w - f.schluss) > 0;
   if (short && !f.ack) return toast(t('shortage_msg', { n: eur(f.card - (w - f.schluss)) }), true);
+  if (f.newDate && f.newDate !== f.date){   // v112：老板改日期（Runner / 吧台一起存）；钱包也改了的话再存一次钱包
+    if (!f.dateReason.trim()) return toast(t('err_BON_DATE_REASON'), true);
+    try {
+      await rpc('admin_bon_date', { ...tok(), p_entry_id: f.entryId, p_date: f.newDate, p_runner_ids: f.runners, p_bar_ids: f.bars, p_reason: f.dateReason.trim() });
+      if (w !== f.origWallet) await rpc('edit_bon_entry', { ...tok(), p_entry_id: f.entryId, p_wallet_cents: w, p_runner_ids: f.runners,
+          p_bar_ids: f.bars, p_reason: f.dateReason.trim(), p_shortage_ack: !!f.ack });
+      toast(t('be_date_saved', { d: dayLabel(f.newDate) }));
+      state.form = blankForm(); const back = state.entryCtx && state.entryCtx.back;
+      if (back && back !== 'entry' && tabs().includes(back)){ state.entryCtx = null; state.tab = back; if (navTabs().includes(back)) LS.set('tab', back); }
+      render();
+    } catch(e){ toast(errText(e), true); }
+    return;
+  }
   try {
     // 本人 10 分钟内：连同多给一起改；其他情况用原来的函数（多给保持不变，由数据库按新的分配重新核对）
     const r = f.selfEdit
@@ -5295,6 +5411,7 @@ function entryTags(e){
     else countTag = `<span class="tag bad">${esc(t('tag_mismatch', { a: eur(e.counted_cents), b: eur(e.wallet_cents) }))}</span>`;
   }
   const tags = (e.is_late ? `<span class="tag late">${esc(t('late'))}</span>` : '')
+    + (e.ai_date ? `<span class="tag late" title="${esc(t('tag_datefix_by', { n: e.date_fix_by || '?' }))}">${esc(t('tag_datefix', { d: dm(e.ai_date) }))}</span>` : '')   // v112
     + (e.pending ? `<span class="tag pend">${esc(t('pending_tag'))}</span>` : '')
     + (e.manual_edit ? `<span class="tag bad">${esc(t('tag_manual'))}</span>` : '')
     + (e.shortage_cents ? `<span class="tag bad">${esc(t('tag_short', { n: eur(e.shortage_cents) }))}${e.shortage_bearer === 'store' ? ' · ' + esc(t('bearer_is_store')) : ''}</span>` : '')
@@ -5417,7 +5534,8 @@ function envelopeCard(e, i, store){
   // v89（老板 2026-10-15）：直接给交这张 Bon 的人发消息（例如怎么拍照），用「💬 发消息」：关键词 → AI 写中德文 → 发送，看得到已读
   const sid = (i && i.server_id) || ((state.loginStaff || []).find(x => x.name === e.server) || {}).id;
   const gm = gmBtn(sid, e.server, 'bon:e:' + e.entry_id, t('gm_ctx_env', { d: dayLabel(e.date), s: e.store, n: e.server || '?', w: eur(e.wallet_cents), x: eur(e.card_cents + e.cash_cents) }));
-  const acts = e.has_photo || gm ? `<div class="acts">${e.has_photo ? `<button class="link" data-act="photos" data-id="${e.entry_id}">${esc(t('photos'))}</button>` : ''}${gm}</div>` : '';
+  const ed = state.me.is_admin && !state.viewAs && e.editable ? `<button class="link" data-act="entry-edit" data-id="${e.entry_id}">${esc(t('edit'))}</button>` : '';   // v112：老板在信封上就能改（例如日期读错）
+  const acts = e.has_photo || gm || ed ? `<div class="acts">${e.has_photo ? `<button class="link" data-act="photos" data-id="${e.entry_id}">${esc(t('photos'))}</button>` : ''}${ed}${gm}</div>` : '';
   return `<div class="item env">
     <div class="top"><div><span class="who">${esc(e.server || '?')}</span>${shift ? `<span class="tag${(i && i.scheduled === false) || cross ? ' late' : ' m'}"${i && i.guess ? ` title="${esc(t('env_guess'))}"` : ''}>${esc(shift)}</span>` : ''}${entryTags(e)}</div>
       <div class="amt num">${eur(e.wallet_cents)}<span class="lbl">${esc(t('env_declared'))}</span></div></div>
@@ -5472,6 +5590,8 @@ function loadIntoForm(id){
   if (e.is_bon){
     state.form = { date: e.date, store: e.store, isBon: true, schluss: e.schluss_cents, card: e.card_cents,
       wallet: money(e.wallet_cents), runners: helpers('runner'), bars: helpers('bar'), entryId: id,
+      aiDate: e.ai_date || null, dateFixBy: e.date_fix_by || null, origWallet: e.wallet_cents, origRunners: helpers('runner'), origBars: helpers('bar'),   // v112：老板改日期
+      newDate: null, dateOpen: false, dateReason: '', dateSched: null,
       direct: !!e.direct, reason: '', ack: false, server: null,
       selfEdit: !!e.direct && (!e.server || e.server === state.me.name),
       extras: Object.fromEntries(extrasOf(id).map(x => [x.staff_id, x.extra_cents])) };
@@ -6313,7 +6433,7 @@ function auditDetail(d){
     if (/_cents$/.test(k) || k === 'counted' || k === 'expected') return eur(v);
     if (k === 'payout_euros') return eur(v * 100);
     if (k === 'week' && day(v)) return 'KW ' + isoWeek(day(v));
-    if ((k === 'date' || k === 'valid_from') && day(v)) return dayLabel(day(v));
+    if ((k === 'date' || k === 'valid_from' || k === 'date_from' || k === 'date_into' || k === 'ai_date') && day(v)) return dayLabel(day(v));
     if (k === 'role') return t('role_' + v);
     if (k === 'slot') return slotLabel(v);
     if (k === 'method') return t('tag_counted_' + v);
@@ -8528,6 +8648,8 @@ document.addEventListener('click', async ev => {
       render(); break;
     }
     case 'entry-edit': loadIntoForm(el.dataset.id); break;
+    case 'be-date-open': state.form.dateOpen = true; keepScroll(render); setTimeout(() => { const n = $('#e-date'); if (n) n.focus(); }, 50); break;   // v112
+    case 'be-date-cancel': state.form.dateOpen = false; state.form.dateReason = ''; bonEditDate(null); break;
     // v65：金额不一致的信封 → 打开这张 Bon 的修改页，钱包先填好点出的金额
     case 'cnt-fix': { const e = state.entryCache[el.dataset.id]; if (!e) break; loadIntoForm(el.dataset.id); if (state.form && state.form.entryId === el.dataset.id){ state.form.wallet = money(e.counted_cents); render(); } break; }
     case 'entry-del': {
@@ -8667,7 +8789,9 @@ document.addEventListener('click', async ev => {
       state.entryMode = 'bon'; state.bon = blankBon(); state.form = blankForm(); state.done = null; state.tab = 'entry'; render(); window.scrollTo(0, 0); break;
     }
     case 'bon-read': readBon(); break;
-    case 'bon-retake': { const b = state.bon; b.top = null; b.bottom = null; b.read = null; b.readErr = null; b.busy = false; b.seq++; render(); window.scrollTo(0, 0); break; }
+    case 'bon-retake': { const b = state.bon; b.top = null; b.bottom = null; b.read = null; b.readErr = null; b.busy = false; b.dateAns = null; b.seq++; render(); window.scrollTo(0, 0); break; }
+    case 'bon-date': bonDateAnswer(el.dataset.d || null); break;   // v112：日期对吗
+    case 'bon-date-again': state.bon.dateAns = null; refreshBonParts(); break;
     case 'review-save': {
       const id = el.dataset.id, sv = parseSigned($('#rv-s-' + id).value), cv = parseEur($('#rv-c-' + id).value);
       if (isNaN(sv) || isNaN(cv)) return toast(t('bad_amount'), true);
@@ -9232,6 +9356,7 @@ document.addEventListener('click', async ev => {
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.id === 'e-date'){ bonEditDate(ev.target.value); return; }   // v112：老板改 Bon 日期
   if (ev.target.dataset && ev.target.dataset.sopphoto && ev.target.files && ev.target.files[0]){ const f = ev.target.files[0]; ev.target.value = ''; sopPhotoChosen(f); return; }   // v111：SOP 照片
   if (ev.target.dataset && ev.target.dataset.invphoto && ev.target.files && ev.target.files[0]){   // v91：物品 / 储位照片
     const f = ev.target.files[0], k = ev.target.dataset.invphoto; ev.target.value = '';
@@ -9350,6 +9475,7 @@ document.addEventListener('input', ev => {
   if (id && id.startsWith('rp-')) rcPartsSum();
   if (ev.target.classList && ev.target.classList.contains('xr')) extrasSlide(ev.target);
   if (id === 'f-reason') state.form.reason = ev.target.value;
+  if (id === 'e-dreason') state.form.dateReason = ev.target.value;   // v112
   if (id === 'b-wallet'){ const b = state.bon; b.wallet = ev.target.value; b.ack = false; if (b.walletDone){ b.walletDone = false; refreshBonSum(); } }
   if (id === 'e-wallet'){ state.form.wallet = ev.target.value; state.form.ack = false; refreshBonSum(); }
   if (id === 'f-card' || id === 'f-cash'){
