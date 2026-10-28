@@ -738,7 +738,7 @@ zh: {
   // v73：公告认真读、推送情况
   an_wait:'请先读完 · {s}', an_scroll:'请滑到最下面', an_push_pub:'已发布。推送到了 {a} 人的手机（共 {b} 人要确认）。', an_push_remind:'已再提醒。推送到了 {a} 人的手机（还有 {b} 人没确认）。', an_push_off:'{n} 人没开手机通知，收不到推送，请当面提醒，或者让他们在「更多」里开启通知：{m}', an_nopush:'（没开通知）',
   // v72：收店任务谁负责
-  task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
+  task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', task_svc_one:'服务员负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
   tb_today:'今天', tb_tomorrow:'明天', tb_later:'以后（{n}）', tb_past:'前几天（{n}）', tb_none:'这天没有任务。', tb_later_none:'以后还没有任务。点「＋ 新任务」加一个。', tb_past_none:'最近 7 天没有某一天的任务。', tb_lead_none:'还没设负责人', tl_sum:'负责人（已设 {a} / {b}）', oil_s1:'检查', oil_s2:'填收油日期', oil_s3:'拿到门口', oil_s4:'拿回地下室',   // v105
   tdl_title:'今天的任务', tdl_count:'做完 {a} / {b}', tdl_all:'都做完了 ✓', tdl_none:'今天没有任务', tdl_g_over:'要补做', tdl_g_arrival:'到店后', tdl_g_closing:'收店时 · 下班前做', tdl_g_closing_now:'收店时 · 快下班了，现在做', tdl_part:'做了 {a}/{b}', tdl_up:'接下来', tdl_photo:'要拍照', tdl_today:'今天', tdl_tomorrow:'明天', td_other:'其他要做的（{n}）', td_other0:'其他', tsr_open:'还没做 · {p}', tsr_open0:'还没做', tsr_missed:'没做 · {p}', tsr_nobody:'没人负责：没排{r}',   // v103
@@ -1210,7 +1210,7 @@ de: {
   // v73：Mitteilungen gründlich lesen, Push-Status
   an_wait:'Bitte zuerst lesen · {s}', an_scroll:'Bitte bis ganz unten scrollen', an_push_pub:'Veröffentlicht. Push an {a} Handys gesendet ({b} müssen bestätigen).', an_push_remind:'Erinnerung gesendet. Push an {a} Handys ({b} noch nicht bestätigt).', an_push_off:'{n} haben keine Benachrichtigungen aktiviert und bekommen keinen Push – bitte persönlich ansprechen oder unter „Mehr“ aktivieren lassen: {m}', an_nopush:' (keine Benachrichtigungen)',
   // v72：Wer erledigt die Feierabend-Aufgabe
-  task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
+  task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', task_svc_one:'Service übernimmt {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
   tb_today:'Heute', tb_tomorrow:'Morgen', tb_later:'Später ({n})', tb_past:'Vorher ({n})', tb_none:'An diesem Tag keine Aufgaben.', tb_later_none:'Später noch keine Aufgaben. Mit „＋ Neue Aufgabe“ anlegen.', tb_past_none:'Keine Aufgaben an einem Tag in den letzten 7 Tagen.', tb_lead_none:'Noch niemand verantwortlich', tl_sum:'Verantwortliche ({a} von {b} festgelegt)', oil_s1:'Prüfen', oil_s2:'Abholtermin eintragen', oil_s3:'Raus zur Tür', oil_s4:'Zurück in den Keller',   // v105
   tdl_title:'Heute zu erledigen', tdl_count:'{a} von {b} erledigt', tdl_all:'Alles erledigt ✓', tdl_none:'Heute keine Aufgaben', tdl_g_over:'Nachholen', tdl_g_arrival:'Nach Ankunft', tdl_g_closing:'Feierabend · vor dem Gehen', tdl_g_closing_now:'Feierabend · jetzt erledigen', tdl_part:'{a}/{b} erledigt', tdl_up:'Demnächst', tdl_photo:'Foto nötig', tdl_today:'Heute', tdl_tomorrow:'Morgen', td_other:'Sonst noch zu tun ({n})', td_other0:'Sonstiges', tsr_open:'Offen · {p}', tsr_open0:'Offen', tsr_missed:'Nicht erledigt · {p}', tsr_nobody:'Niemand zuständig: kein(e) {r} eingeplant',   // v103
@@ -7493,7 +7493,7 @@ function planGridHTML(d, edit){
       }).join('');
       const noSvc = edit && !list.some(x => rolesOf(x).includes('service'));
       return `<div class="slotblk"><div class="sh"><div>${storeTag(store)} <strong>${esc(slotLabel(slot))}</strong> <span class="muted small">${esc(tpl.start)}–${esc(tpl.end)}</span>${noSvc ? `<span class="tag bad">${esc(t('no_service'))}</span>` : ''}${miss.map(x => x.kind === 'decide' ? `<button class="tag bad" style="border:0;cursor:pointer" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('task_decide', { r: t('grp_' + x.role) }))}</button>`
-        : `<span class="tag ${x.kind === 'none' ? 'bad' : 'off'}">${esc(t(x.kind === 'none' ? 'no_role_task' : x.kind === 'one' ? 'task_one_all' : 'task_svc_all', { r: t('grp_' + x.role) }))}</span>`).join('')}</div>
+        : `<span class="tag ${x.kind === 'none' ? 'bad' : 'off'}">${esc(t(x.kind === 'none' ? 'no_role_task' : x.kind === 'one' ? 'task_one_all' : x.kind === 'svc1' ? 'task_svc_one' : 'task_svc_all', { r: t('grp_' + x.role) }))}</span>`).join('')}</div>
         ${ed ? `<button class="pchip add" style="flex:none" data-act="se-open" data-date="${date}" data-store="${store}" data-slot="${slot}">${esc(t('se_edit'))}</button>` : edit ? `<span class="tag off" style="flex:none">${esc(t('area_ro'))}</span>` : ''}</div>${rows}</div>`;
     })).join('');
     const isToday = date === bizToday();   // v68：按营业日
@@ -7706,6 +7706,7 @@ function peRender(){
 // v72（老板 2026-10-10）：有收店任务的前场岗位（吧台 / Runner），这家店这天最后一个班谁负责：
 //   排了这个岗位 → 没事；没排、这个班也没有 Runner / 吧台 → 服务员负责（one：一人三岗 / many：服务员一起负责）；
 //   有 Runner 或吧台但没这个岗位 → decide：要排班员定谁兼；一个服务员都没有 → none
+//   v113（老板 2026-10-28，数据库 v82）：只有吧台的任务要定谁兼；Runner 的任务没排 Runner 就是服务员负责（svc1：一个服务员 / many）
 function taskRoleIssues(d, date){
   const out = [];
   STORES.forEach(store => {
@@ -7716,8 +7717,8 @@ function taskRoleIssues(d, date){
     if (!list.length) return;   // 这个班没排人：「没排服务员」已经提示
     roles.forEach(r => {
       if (list.some(x => rolesOf(x).includes(r))) return;
-      const helpers = list.some(x => rolesOf(x).some(k => k === 'runner' || k === 'bar')), svc = list.filter(x => rolesOf(x).includes('service')).length;
-      out.push({ store, slot, role: r, kind: helpers ? 'decide' : svc === 1 ? 'one' : svc > 1 ? 'many' : 'none' });
+      const others = list.some(x => rolesOf(x).some(k => k === 'runner' || k === 'bar')), helpers = r === 'bar' && others, svc = list.filter(x => rolesOf(x).includes('service')).length;
+      out.push({ store, slot, role: r, kind: helpers ? 'decide' : svc === 1 ? (others ? 'svc1' : 'one') : svc > 1 ? 'many' : 'none' });
     });
   });
   return out;
