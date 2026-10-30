@@ -191,6 +191,13 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .tsr-m{flex:1;min-width:0} .tsr-n{font-weight:600} .tsr-s{font-size:14px;color:var(--muted)} .tsr-s.negc{color:var(--neg)}
 .tsr-a{display:flex;gap:14px;margin-top:2px}
 .tsr-box{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:4px 14px}
+/* v114：老板「今天」最上面：拍全天报告 + 两家店一起点信封 */
+.hrep-card{margin:0 0 14px}
+.hrep-card > .row .btn{font-size:16px}
+.hrep-job{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.hrep-job:first-of-type{margin-top:6px}
+.hrep-job > span:first-child{flex:1;min-width:0}
+.hrep-job .x{flex:none;border:0;background:none;color:var(--muted);font-size:18px;padding:0 4px}
 /* v105：老板「管理 → 任务」看板：每家店 × 区域一块；收废油步骤条 */
 .tb{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:12px 14px 6px;margin:10px 0}
 .tb-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
@@ -740,6 +747,7 @@ zh: {
   // v72：收店任务谁负责
   task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', task_svc_one:'服务员负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
+  hrep_take:'📷 拍全天报告', hrep_env:'💵 点信封（{n}）', hrep_env0:'💵 信封都点完了', hrep_hint:'不用选店和日子：拍完 AI 从报告上认出是哪家店、哪天。先拍上半部分，再拍下半部分（报告短的一张也行）。', hrep_reading:'全天报告识别中…', hrep_saved:'报告已保存', hrep_done:'已自动核对完成', hrep_check:'报告要你看一眼', hrep_look:'去看', hrep_unknown:'认不出是哪家店或哪天：请把报告顶部（店名、日期）拍清楚再拍一次', hrep_retake:'重拍', hrep_close:'关掉', hrep_saved_toast:'{s} · {d} 的全天报告已保存', hrep_check_toast:'{s} · {d} 的全天报告要你看一眼（在「今天」页）', hrep_env_title:'点信封 · 两家店', hrep_env_store:'{n} 个信封', hrep_env_none:'两家店的信封都点完了。',   // v114
   tb_today:'今天', tb_tomorrow:'明天', tb_later:'以后（{n}）', tb_past:'前几天（{n}）', tb_none:'这天没有任务。', tb_later_none:'以后还没有任务。点「＋ 新任务」加一个。', tb_past_none:'最近 7 天没有某一天的任务。', tb_lead_none:'还没设负责人', tl_sum:'负责人（已设 {a} / {b}）', oil_s1:'检查', oil_s2:'填收油日期', oil_s3:'拿到门口', oil_s4:'拿回地下室',   // v105
   tdl_title:'今天的任务', tdl_count:'做完 {a} / {b}', tdl_all:'都做完了 ✓', tdl_none:'今天没有任务', tdl_g_over:'要补做', tdl_g_arrival:'到店后', tdl_g_closing:'收店时 · 下班前做', tdl_g_closing_now:'收店时 · 快下班了，现在做', tdl_part:'做了 {a}/{b}', tdl_up:'接下来', tdl_photo:'要拍照', tdl_today:'今天', tdl_tomorrow:'明天', td_other:'其他要做的（{n}）', td_other0:'其他', tsr_open:'还没做 · {p}', tsr_open0:'还没做', tsr_missed:'没做 · {p}', tsr_nobody:'没人负责：没排{r}',   // v103
   tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
@@ -1212,6 +1220,7 @@ de: {
   // v72：Wer erledigt die Feierabend-Aufgabe
   task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', task_svc_one:'Service übernimmt {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
+  hrep_take:'📷 Tagesbericht fotografieren', hrep_env:'💵 Umschläge zählen ({n})', hrep_env0:'💵 Alle Umschläge gezählt', hrep_hint:'Filiale und Tag musst du nicht wählen: Die KI erkennt sie auf dem Bericht. Erst den oberen, dann den unteren Teil fotografieren (bei kurzem Bericht reicht ein Foto).', hrep_reading:'Tagesbericht wird gelesen …', hrep_saved:'Bericht gespeichert', hrep_done:'automatisch abgeschlossen', hrep_check:'Bericht bitte prüfen', hrep_look:'Ansehen', hrep_unknown:'Filiale oder Tag nicht erkennbar: Bitte den oberen Teil (Name, Datum) scharf fotografieren und nochmal versuchen', hrep_retake:'Neu fotografieren', hrep_close:'Schließen', hrep_saved_toast:'Tagesbericht {s} · {d} gespeichert', hrep_check_toast:'Tagesbericht {s} · {d} bitte prüfen (Seite „Heute“)', hrep_env_title:'Umschläge zählen · beide Filialen', hrep_env_store:'{n} Umschläge', hrep_env_none:'In beiden Filialen sind alle Umschläge gezählt.',   // v114
   tb_today:'Heute', tb_tomorrow:'Morgen', tb_later:'Später ({n})', tb_past:'Vorher ({n})', tb_none:'An diesem Tag keine Aufgaben.', tb_later_none:'Später noch keine Aufgaben. Mit „＋ Neue Aufgabe“ anlegen.', tb_past_none:'Keine Aufgaben an einem Tag in den letzten 7 Tagen.', tb_lead_none:'Noch niemand verantwortlich', tl_sum:'Verantwortliche ({a} von {b} festgelegt)', oil_s1:'Prüfen', oil_s2:'Abholtermin eintragen', oil_s3:'Raus zur Tür', oil_s4:'Zurück in den Keller',   // v105
   tdl_title:'Heute zu erledigen', tdl_count:'{a} von {b} erledigt', tdl_all:'Alles erledigt ✓', tdl_none:'Heute keine Aufgaben', tdl_g_over:'Nachholen', tdl_g_arrival:'Nach Ankunft', tdl_g_closing:'Feierabend · vor dem Gehen', tdl_g_closing_now:'Feierabend · jetzt erledigen', tdl_part:'{a}/{b} erledigt', tdl_up:'Demnächst', tdl_photo:'Foto nötig', tdl_today:'Heute', tdl_tomorrow:'Morgen', td_other:'Sonst noch zu tun ({n})', td_other0:'Sonstiges', tsr_open:'Offen · {p}', tsr_open0:'Offen', tsr_missed:'Nicht erledigt · {p}', tsr_nobody:'Niemand zuständig: kein(e) {r} eingeplant',   // v103
   tk_close:'Feierabend: {n} · {s}', tk_close_later:'Vor Feierabend erledigen', tk_close_now:'Bald Feierabend – jetzt erledigen', tk_close_over:'Gestern nicht erledigt – heute nachholen',
@@ -2260,6 +2269,7 @@ async function viewToday(){
   if (state.taskOpen) return renderTaskRun();      // v71：正在做收店任务
   if (state.onbOpen) return renderOnbForm();       // v107：正在填新人带教
   if (state.recon) return viewReconDay();          // v42：核对页（门店 × 日期）
+  if (state.envAll && state.me.is_admin) return viewEnvAll();   // v114：两家店一起点信封
   if (state.me.is_admin) return viewReconHome();   // v42：老板首页 = 每日核对
   // v68：有上次的内容就先显示，同时向服务器要新的（一起要，不再一个接一个）；内容变了再重画
   const shown = !!state.tasks;
@@ -3014,13 +3024,87 @@ function reconStripHTML(S, sel){
     return `<button data-act="recon-home-go" data-d="${d}" class="${d === sel ? 'on' : ''}" aria-label="${esc(dayLabel(d))}"><span class="rs-d">${esc(t('wd')[wdIdx(d)])}</span><span class="rs-n num">${+d.slice(8)}</span><span class="rs-s">${dots}</span></button>`; }).join('')}</div>
     <div class="rs-legend">${esc(t('rs_legend'))}</div>`;
 }
+// ============ v114（老板 2026-10-30）：「今天」最上面直接拍全天报告（不先选店、选日子：识别服务 bon v16 从报告上认出门店和日子），
+// 识别在后台，可以接着拍下一张或去点信封；读好了验算通过就自动存进那家店那天（同核对页 v59），有问题就「去看」进那家店的核对页。
+// 「点信封（N）」= 两家店所有还没点的信封，按店分组，不用先选店。原来的店卡片照旧（看结果、写说明、手动输入）。
+const hrepPend = () => (state.envPendAll || []).reduce((a, x) => a + (+x.n || 0), 0);
+function hrepCardHTML(){
+  const C = state.hrepCap, jobs = state.hrepJobs || [], n = hrepPend();
+  const rph = (k, label) => `<div class="field"><label>${esc(label)}</label><label class="photo ${C[k] ? 'has' : ''}">${C[k] ? `<img src="${C[k]}" alt="">` : `<span>${esc(t('take_photo'))}</span>`}
+    <input type="file" accept="image/*" capture="environment" data-hrephoto="${k}" hidden></label></div>`;
+  const cap = C ? `<div class="sheet" style="margin-top:10px"><div class="small muted" style="margin-bottom:8px">${esc(t('hrep_hint'))}</div>${rph('top', t('rpp_top'))}${rph('bottom', t('rpp_bottom'))}
+      ${C.top && !C.bottom ? `<button class="btn" data-act="hrep-go">${esc(t('rpp_go1'))}</button>` : ''}
+      <div class="row" style="margin-top:8px"><button class="btn ghost" data-act="hrep-cancel">${esc(t('cancel'))}</button></div></div>` : '';
+  const x = J => `<button class="x" data-act="hrep-x" data-id="${J.id}" aria-label="${esc(t('hrep_close'))}">×</button>`, where = J => storeTag(J.store) + ' ' + esc(dayLabel(J.day)) + ' · ';
+  const line = J => J.status === 'busy' ? `<div class="hrep-job"><span>${esc(t('hrep_reading'))} <span class="num muted" id="hrep-secs-${J.id}"></span></span></div>`
+    : J.status === 'saved' ? `<div class="hrep-job"><span><span class="pos">✓</span> ${where(J)}${esc(t('hrep_saved') + (J.done ? ' · ' + t('hrep_done') : ''))}</span>${x(J)}</div>`
+    : J.status === 'check' ? `<div class="hrep-job"><span class="warnc">⚠ ${where(J)}${esc(t('hrep_check'))}${J.err ? ` <span class="small">（${esc(J.err)}）</span>` : ''}</span><button class="link" data-act="hrep-look" data-id="${J.id}">${esc(t('hrep_look'))}</button>${x(J)}</div>`
+    : J.status === 'unknown' ? `<div class="hrep-job"><span class="negc">✗ ${esc((J.problems || []).length ? J.problems.join(' ') : t('hrep_unknown'))}</span><button class="link" data-act="hrep-start">${esc(t('hrep_retake'))}</button>${x(J)}</div>`
+    : `<div class="hrep-job"><span class="negc">✗ ${esc(J.err || t('err_GENERIC'))}</span>${x(J)}</div>`;
+  return `<div class="hrep-card" id="hrep-card"><div class="row" style="gap:8px">${C ? '' : `<button class="btn" data-act="hrep-start">${esc(t('hrep_take'))}</button>`}
+    <button class="btn ${n && !C ? 'ghost' : 'ghost'}" data-act="env-all">${esc(n ? t('hrep_env', { n }) : t('hrep_env0'))}</button></div>${cap}${jobs.map(line).join('')}</div>`;
+}
+const hrepOnHome = () => state.tab === 'today' && state.me && state.me.is_admin && !state.recon && !state.envAll && !state.taskOpen && !state.viewAs;
+function hrepPaint(){ const el = $('#hrep-card'); if (el && hrepOnHome()) el.outerHTML = hrepCardHTML(); }
+function hrepBegin(){
+  const C = state.hrepCap; if (!C || !C.top) return;
+  const J = { id: Date.now().toString(36), top: C.top, bottom: C.bottom || null, status: 'busy' };
+  state.hrepJobs = [J, ...(state.hrepJobs || []).filter(j => j.status !== 'saved')].slice(0, 6); state.hrepCap = null;
+  hrepRead(J);
+}
+async function hrepRead(J){
+  hrepPaint(); readTimer(() => J.status === 'busy', 'hrep-secs-' + J.id);
+  let r = null;
+  try { r = await callFn({ action: 'report', top: J.top.split(',')[1], bottom: J.bottom ? J.bottom.split(',')[1] : null }); }   // bon v16：不带门店和日子
+  catch(e){ J.status = 'err'; J.err = errText(e); return hrepPaint(); }
+  const d = (r.result || {}).derived || {};
+  J.store = r.store || d.store || null; J.day = r.day || d.day || null;
+  if (!r.read_id || !J.store || !J.day){ J.status = 'unknown'; J.problems = rppProblems({ checks: r.checks || {}, derived: d }); return hrepPaint(); }
+  J.form = { read_id: r.read_id, checks: r.checks, derived: d, report_id: d.report_id, schluss_cents: d.schluss_cents, card_tip_cents: d.card_tip_cents,
+    payments_cents: d.payments_cents, sales_cents: d.sales_cents, start: d.start, end: d.end };
+  J.status = 'check';
+  if (r.checks && r.checks.ok){   // 同核对页 v59：验算通过就直接保存，能全部对上就自动核对完成
+    try {
+      await rpc('recon_report_save_x', { ...tok(), p_replace: null, p_store: J.store, p_day: J.day, p_report_id: d.report_id,
+        p_schluss_cents: d.schluss_cents, p_card_tip_cents: d.card_tip_cents, p_payments_cents: d.payments_cents, p_sales_cents: d.sales_cents,
+        p_start: d.start ? d.start.replace('T', ' ') : null, p_end: d.end ? d.end.replace('T', ' ') : null, p_read_id: r.read_id });
+      J.status = 'saved'; J.done = await autoComplete(J.store, J.day);
+    } catch(e){ J.err = errText(e); }   // 保存不了（例如编号已录过）：「去看」摆出表格
+  }
+  const vars = { s: J.store, d: dayLabel(J.day) };
+  if (hrepOnHome()) keepScroll(render);   // 刷新店卡片（报告那一行、核对状态）
+  else toast(t(J.status === 'saved' ? 'hrep_saved_toast' : 'hrep_check_toast', vars), J.status !== 'saved');
+}
+// 两家店一起点信封：还没点的信封按店分组（组里按日子），信封卡片和点法同核对页
+async function viewEnvAll(){
+  const back = `<button class="link" data-act="env-all-close">${esc(t('rk_back'))}</button>`;
+  $('#main').innerHTML = back + `<div class="loading">${esc(t('loading'))}</div>`;
+  let pend, ovs, envs;
+  try {
+    pend = await rpc('envelopes_pending_list', { ...tok(), p_before: null }) || [];
+    const weeks = [...new Set(pend.map(x => mondayOf(x.day)))];
+    [ovs, envs] = await Promise.all([Promise.all(weeks.map(w => rpc('week_overview', { ...tok(), p_week_start: w }))),
+      Promise.all(weeks.map(w => soft(rpc('week_envelopes', { ...tok(), p_week_start: w }), null)))]);
+  } catch(e){ $('#main').innerHTML = back + `<div class="empty">${esc(errText(e))}</div>`; return; }
+  state.envPendAll = pend;
+  const keys = new Set(pend.map(x => x.day + '|' + x.store)), entries = ovs.flatMap(o => o.entries || []).filter(e => keys.has(e.date + '|' + e.store));
+  const env = { groups: envs.flatMap(v => (v && v.groups) || []) }, bons = entries.filter(e => e.is_bon);
+  await Promise.all([loadXfer(bons.map(e => e.entry_id)), loadCntMethods(bons.filter(e => e.counted_cents != null).map(e => e.entry_id)), gmLoad(bons.map(e => 'bon:e:' + e.entry_id))]);
+  if (state.tab !== 'today' || !state.envAll) return;
+  const html = STORES.map(st => { const n = pend.filter(x => x.store === st).reduce((a, x) => a + (+x.n || 0), 0);
+    return n ? `<h3>${storeTag(st)} ${esc(t('hrep_env_store', { n }))}</h3>` + envelopeBlockHTML(entries.filter(e => e.store === st), env, true) : ''; }).join('');
+  $('#main').innerHTML = back + `<h2 style="margin:6px 0 4px">${esc(t('hrep_env_title'))}</h2>` + (html || `<div class="list"><div class="empty">${esc(t('hrep_env_none'))}</div></div>`);
+}
+// 点了一个信封以后：在核对页按那一页；在「两家店一起点」按这个信封的店和日子，能全部对上就自动核对完成
+const cntCtx = id => state.recon || (state.envAll && state.entryCache[id] ? { store: state.entryCache[id].store, day: state.entryCache[id].date } : null);
 async function viewReconHome(){
   if (!state.cacheShown) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;   // v96
   let o, S, H;
   try {
     const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // v102：刚启动时已经要过，不再要一次
     [H, , , state.areaStatus, state.disputesOpen] = await Promise.all([reconHome(state.reconDay), fresh ? null : loadTasks(), loadWeekTodo(),
-      soft(rpc('area_status', tok()), null), soft(rpc('list_disputes', { ...tok(), p_status: 'open' }), [])]);   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
+      soft(rpc('area_status', tok()), null), soft(rpc('list_disputes', { ...tok(), p_status: 'open' }), []),
+      soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null).then(x => { if (x) state.envPendAll = x; })]);   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
     S = H.S; o = H.o; state.reconTasks = H.tasks;
   }
   catch(e){ $('#main').innerHTML = `<div class="empty">${esc(errText(e))}</div>`; return; }
@@ -3030,7 +3114,7 @@ async function viewReconHome(){
   state.reconDay = o.day;
   const stores = o.stores.slice().sort((a, b) => rcProblem(b) - rcProblem(a));
   const mine = viewTasks().filter(x => x.status !== 'done');
-  $('#main').innerHTML = `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
+  $('#main').innerHTML = hrepCardHTML() + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
       <div class="wl">${esc(t('rk_home'))}<small>${(() => { const n = Math.round((parseD(o.today) - parseD(o.day)) / 864e5); return n >= 0 && n <= 2 ? esc(t('rk_rel' + n)) + ' · ' : ''; })()}${esc(dayLabel(o.day))}</small></div>
       <button data-act="recon-home-day" data-d="1" aria-label="${esc(t('rk_next'))}" ${o.day >= o.today ? 'disabled' : ''}>›</button></div>
     ${o.day !== o.today ? `<div style="text-align:center;margin:-6px 0 12px"><button class="link" data-act="recon-home-today">${esc(t('rk_go_today'))}</button></div>` : ''}`
@@ -4730,7 +4814,7 @@ function shellHTML(){
 function viewKey(){
   const m = state.me; if (!m || state.viewAs) return null;
   const pre = m.id + '|' + state.lang + '|';
-  if (state.tab === 'today' && m.is_admin && !state.recon && !state.taskOpen && !state.lockOpen && !state.expNew) return pre + 'today|' + (state.reconDay || '');
+  if (state.tab === 'today' && m.is_admin && !state.recon && !state.envAll && !state.taskOpen && !state.lockOpen && !state.expNew) return pre + 'today|' + (state.reconDay || '');
   if (state.tab === 'week' && !state.rcWeek) return pre + 'week|' + state.week;
   if (state.tab === 'plan' && !state.planTimes) return pre + 'plan|' + state.planWeek + '|' + state.planSub + '|' + (state.planArea || '');
   if (state.tab === 'today' && !m.is_admin && !state.taskOpen && !state.recon && !state.lockOpen) return pre + 'today';   // v102：员工的「今天」（启动时先显示）
@@ -5471,7 +5555,7 @@ function entriesByGroupHTML(entries, opts){
 }
 // ---------- 待点收的信封：按日期 × 门店分组，显示按排班谁还没交 ----------
 // env = week_envelopes 的结果（数据库还没升级到 v16 时为 null，只按录入分组，不显示排班）
-function envelopeBlockHTML(entries, env){
+function envelopeBlockHTML(entries, env, noHead){   // v114：noHead = 不要「待点收」标题
   const info = {}, groups = {};
   const key = (d, st) => d + '|' + st;
   const grp = (d, st) => groups[key(d, st)] = groups[key(d, st)] || { date: d, store: st, entries: [], sched: null };
@@ -5514,7 +5598,7 @@ function envelopeBlockHTML(entries, env){
   const allDone = !nTodo && entries.some(e => e.is_bon);
   if (!nTodo && !allDone) return '';
   const todoAll = entries.filter(isTodo), counted = entries.filter(e => e.is_bon && !isTodo(e)).sort((a, b) => String(cntInfo(b).at || '').localeCompare(String(cntInfo(a).at || '')) || newestFirst(a, b));
-  return h3i(esc(t('to_count', { n: nTodo })) + (allDone ? `<span class="done" title="${esc(t('all_counted'))}">✓</span>` : ''), nTodo ? t('to_count_hint') : '')
+  return (noHead ? '' : h3i(esc(t('to_count', { n: nTodo })) + (allDone ? `<span class="done" title="${esc(t('all_counted'))}">✓</span>` : ''), nTodo ? t('to_count_hint') : ''))
     + (nTodo ? `<div class="grp-sum">${esc(t('env_sum', { n: nTodo, x: eur(todoAll.reduce((a, e) => a + e.wallet_cents, 0)) }))}</div>` : '')
     + html
     + (counted.length ? `<details class="fold"><summary>${esc(t('env_done_grp', { n: counted.length }))}</summary><div class="inner"><div class="list">${counted.map(e => entryItem(e, { head: 'server' })).join('')}</div></div></details>` : '');
@@ -7929,7 +8013,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(state.weekTodo || await loadWeekTodo());   // v56；v96：有上次的结果就不等（周结页自己会取最新的）
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.libView = null; if (!state.me.is_admin) state.sop = null; state.recon = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.planTimes = null; state.libView = null; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -8152,6 +8236,14 @@ document.addEventListener('click', async ev => {
     case 'rep-new': state.repForm = {}; state.repPhoto = null; refreshRep(); break;
     case 'rep-cancel': state.repForm = null; state.repPhoto = null; keepScroll(viewReconDay); break;
     // v50：拍全天报告
+    case 'hrep-start': state.hrepCap = { top: null, bottom: null }; hrepPaint(); break;   // v114：「今天」直接拍全天报告
+    case 'hrep-cancel': state.hrepCap = null; hrepPaint(); break;
+    case 'hrep-go': hrepBegin(); break;
+    case 'hrep-x': state.hrepJobs = (state.hrepJobs || []).filter(j => j.id !== el.dataset.id); hrepPaint(); break;
+    case 'hrep-look': { const J = (state.hrepJobs || []).find(j => j.id === el.dataset.id); if (!J) break;
+      state.hrepJobs = state.hrepJobs.filter(j => j !== J); state.recon = { store: J.store, day: J.day }; state.repForm = J.form; state.repPhoto = null; window.scrollTo(0, 0); render(); break; }
+    case 'env-all': state.envAll = true; window.scrollTo(0, 0); render(); break;   // v114：两家店一起点信封
+    case 'env-all-close': state.envAll = null; window.scrollTo(0, 0); render(); break;
     case 'rpp-start': state.repForm = null; state.repPhoto = { key: state.recon.store + state.recon.day, store: state.recon.store, day: state.recon.day, top: null, bottom: null, busy: false, err: null, seq: 0 }; refreshRep(); break;
     case 'rpp-cancel': state.repPhoto = null; refreshRep(); break;
     case 'rk-rep-go': { const x = $('#rk-rep'); if (x) x.scrollIntoView({ behavior: 'smooth', block: 'start' }); break; }
@@ -9135,13 +9227,13 @@ document.addEventListener('click', async ev => {
       const inp = document.getElementById('cnt-' + el.dataset.id), v = parseEur(inp && inp.value);
       if (!inp || inp.value.trim() === '' || isNaN(v)) return toast(t('bad_amount'), true);
       el.disabled = true;
-      try { const r = await countEnvelope(el.dataset.id, 'manual', v);
-        toast(r.match ? t('counted_ok') : t('counted_bad'), !r.match); if (state.recon) await autoComplete(state.recon.store, state.recon.day); keepScroll(render); } catch(e){ toast(errText(e), true); el.disabled = false; }
+      try { const c = cntCtx(el.dataset.id), r = await countEnvelope(el.dataset.id, 'manual', v);
+        toast(r.match ? t('counted_ok') : t('counted_bad'), !r.match); if (c) await autoComplete(c.store, c.day); keepScroll(render); } catch(e){ toast(errText(e), true); el.disabled = false; }   // v114：两家店一起点时也自动核对完成
       break;
     }
     case 'cnt-ok': {
       el.disabled = true;
-      try { await countEnvelope(el.dataset.id, 'confirm'); toast(t('counted_ok')); if (state.recon) await autoComplete(state.recon.store, state.recon.day); keepScroll(render); } catch(e){ toast(errText(e), true); el.disabled = false; }
+      try { const c = cntCtx(el.dataset.id); await countEnvelope(el.dataset.id, 'confirm'); toast(t('counted_ok')); if (c) await autoComplete(c.store, c.day); keepScroll(render); } catch(e){ toast(errText(e), true); el.disabled = false; }   // v114
       break;
     }
     case 'cnt-diff': {
@@ -9405,6 +9497,12 @@ document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.annimg && ev.target.files && ev.target.files[0]){   // v64：公告的图
     annKeep(); try { state.annForm.image = await compressImage(ev.target.files[0], 1400, 0.82); state.annForm.keep = true; } catch(e){ toast(t('err_GENERIC'), true); return; }
     keepScroll(render); return;
+  }
+  if (ev.target.dataset && ev.target.dataset.hrephoto && ev.target.files && ev.target.files[0]){   // v114：「今天」直接拍全天报告
+    const C = state.hrepCap; if (!C) return;
+    try { C[ev.target.dataset.hrephoto] = await compressImage(ev.target.files[0]); } catch(e){ toast(t('err_GENERIC'), true); return; }
+    if (C.top && C.bottom) hrepBegin(); else hrepPaint();
+    return;
   }
   if (ev.target.dataset && ev.target.dataset.rphoto && ev.target.files && ev.target.files[0]){   // v50：全天报告
     const P = state.repPhoto; if (!P) return;
