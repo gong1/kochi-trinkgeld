@@ -890,7 +890,7 @@ zh: {
   pay_sum:'待发放 {n} 人 · 共 {x}', pay_sum_in:'待收回 {n} 人 · 共 {x}', pay_all_done:'这周都发完了 ✓',
   grp_todo_pay:'待发放（{n}）', grp_wait_sign:'已发放、等签收（{n}）', grp_done:'已完成（{n}）', grp_zero:'无需发放（{n}）',
   waited:'已等 {n} 天', waited_0:'今天发放', paid_undo:'已发放：{n}', undo:'撤销', undone:'已撤销',
-  env_sum:'待点收 {n} 个 · 合计 {x}', env_done_grp:'已点收（{n}）', miss_multi:'{n} 个班没交',
+  env_sum:'待点收 {n} 个 · 合计 {x}', env_sum_split:'员工申报现金 {x} = 小费合计 {y} + 交店里 {z}', env_sum_split_sh:'员工申报现金 {x} = 小费合计 {y} + 交店里 {z} − 短款 {s}', env_done_grp:'已点收（{n}）', miss_multi:'{n} 个班没交',
   req_done_grp:'已处理（{n}）', req_approved:'已批准', req_rejected:'已拒绝', staff_off_grp:'已停用（{n}）',
   fb_done_grp:'已处理（{n}）', arc_done_grp:'已存档（{n}）', todo_title:'我的待办（{n}）', rc_wait_max:'最久已等 {n} 天',
   se_edit:'编辑', se_sum:'这个班：', se_dual:'兼岗：{n}（{r}）· 同一班次做服务，不拿别人的 Runner / 吧台份额', se_none:'（没人）',
@@ -1364,7 +1364,7 @@ de: {
   pay_sum:'Auszuzahlen: {n} · {x}', pay_sum_in:'Einzusammeln: {n} · {x}', pay_all_done:'Diese Woche alles ausgezahlt ✓',
   grp_todo_pay:'Auszuzahlen ({n})', grp_wait_sign:'Ausgezahlt, Quittung offen ({n})', grp_done:'Erledigt ({n})', grp_zero:'Keine Auszahlung ({n})',
   waited:'wartet seit {n} Tagen', waited_0:'heute ausgezahlt', paid_undo:'Ausgezahlt: {n}', undo:'Rückgängig', undone:'Rückgängig gemacht',
-  env_sum:'Zu zählen: {n} · {x}', env_done_grp:'Gezählt ({n})', miss_multi:'{n} Schichten ohne Bon',
+  env_sum:'Zu zählen: {n} · {x}', env_sum_split:'Angegebenes Bargeld {x} = Trinkgeld gesamt {y} + an den Laden {z}', env_sum_split_sh:'Angegebenes Bargeld {x} = Trinkgeld gesamt {y} + an den Laden {z} − Fehlbetrag {s}', env_done_grp:'Gezählt ({n})', miss_multi:'{n} Schichten ohne Bon',
   req_done_grp:'Erledigt ({n})', req_approved:'Genehmigt', req_rejected:'Abgelehnt', staff_off_grp:'Inaktiv ({n})',
   fb_done_grp:'Erledigt ({n})', arc_done_grp:'Archiviert ({n})', todo_title:'Meine Aufgaben ({n})', rc_wait_max:'längste Wartezeit {n} Tage',
   se_edit:'Bearbeiten', se_sum:'Diese Schicht:', se_dual:'Doppelrolle: {n} ({r}) · Service in derselben Schicht, kein Runner-/Bar-Anteil anderer', se_none:'(niemand)',
@@ -5565,6 +5565,9 @@ function entriesByGroupHTML(entries, opts){
 }
 // ---------- 待点收的信封：按日期 × 门店分组，显示按排班谁还没交 ----------
 // env = week_envelopes 的结果（数据库还没升级到 v16 时为 null，只按录入分组，不显示排班）
+// v116（老板 2026-10-30）：几个信封合起来：员工申报的现金 = 小费合计 + 交店里
+const envSumText = list => { const sum = f => list.reduce((a, e) => a + (+f(e) || 0), 0), sh = sum(e => e.shortage_cents);   // 有短款时：申报 = 小费 + 交店里 − 短款
+  return t(sh ? 'env_sum_split_sh' : 'env_sum_split', { x: eur(sum(e => e.wallet_cents)), y: eur(sum(e => e.card_cents + e.cash_cents)), z: eur(sum(e => e.schluss_cents)), s: eur(sh) }); };
 function envelopeBlockHTML(entries, env, noHead){   // v114：noHead = 不要「待点收」标题
   const info = {}, groups = {};
   const key = (d, st) => d + '|' + st;
@@ -5593,7 +5596,7 @@ function envelopeBlockHTML(entries, env, noHead){   // v114：noHead = 不要「
       const sh = sc.shifts || [], missing = sh.filter(x => !x.covered);
       const elsewhere = sh.filter(x => x.covered && !(x.covered_stores || []).includes(g.store));
       line = sh.length ? t('env_line', { s: sh.length, c: sh.length - missing.length, n: bons.length }) : t('env_line_noshift', { n: bons.length });
-      if (missing.length) miss = `<div class="grp-m ${sc.overdue ? 'negc' : 'muted'}">${esc(t(sc.overdue ? 'env_missing_late' : 'env_missing', { list: people(missing) }))}${[...new Map(missing.filter(x => x.staff_id).map(x => [x.staff_id, x])).values()].map(x => pxBtn(x.staff_id, x.name, g.date, g.store)).join('')}</div>`;   // v92：📷 代交
+      if (missing.length) miss = `<div class="grp-m ${sc.overdue ? 'negc' : 'muted'}">${esc(t(sc.overdue ? 'env_missing_late' : 'env_missing', { list: '' }))}${people(missing, p => esc(p.name + ' ' + slotsText(p.slots)) + pxBtn(p.x.staff_id, p.name, g.date, g.store))}</div>`;   // v92：📷 代交；v116：📷 跟在各自的名字后面
       if (elsewhere.length) other = `<div class="grp-m muted">${esc(t('env_elsewhere', { list: people(elsewhere,
         p => t('env_elsewhere_one', { n: p.name + ' ' + slotsText(p.slots), s: (p.x.covered_stores || []).join(' / ') })) }))}</div>`;
       if (!todo.length && !missing.length && !elsewhere.length) return '';
@@ -5601,8 +5604,9 @@ function envelopeBlockHTML(entries, env, noHead){   // v114：noHead = 不要「
       if (!todo.length) return '';
       if (sc) line = t('env_line_nosched', { n: bons.length });
     }
+    const gs = todo.length > 1 ? `<div class="grp-s num">${esc(envSumText(todo))}</div>` : '';   // v116：这一组的申报现金 = 小费 + 交店里（只有一个信封时卡片上就有）
     return `<div class="grp"><div class="grp-t">${esc(dayLabel(g.date))}${storeTag(g.store)}${!todo.length && bons.length ? ` <span class="tag ok" title="${esc(t('env_counted_all'))}">✓</span>` : ''}</div>
-        ${line ? `<div class="grp-s">${esc(line)}</div>` : ''}${miss}${other}</div>
+        ${line ? `<div class="grp-s">${esc(line)}</div>` : ''}${gs}${miss}${other}</div>
       ${todo.length ? `<div class="list">${todo.map(e => envelopeCard(e, info[e.entry_id], g.store)).join('')}</div>` : ''}`;
   }).join('');
   const allDone = !nTodo && entries.some(e => e.is_bon);
