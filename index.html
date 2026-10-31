@@ -750,7 +750,19 @@ zh: {
   // v71：收店任务
   hrep_take:'📷 拍全天报告', hrep_env:'💵 点信封（{n}）', hrep_env0:'💵 信封都点完了', hrep_hint:'不用选店和日子：拍完 AI 从报告上认出是哪家店、哪天。先拍上半部分，再拍下半部分（报告短的一张也行）。', hrep_reading:'全天报告识别中…', hrep_saved:'报告已保存', hrep_done:'已自动核对完成', hrep_check:'报告要你看一眼', hrep_look:'去看', hrep_unknown:'认不出是哪家店或哪天：请把报告顶部（店名、日期）拍清楚再拍一次', hrep_retake:'重拍', hrep_close:'关掉', hrep_saved_toast:'{s} · {d} 的全天报告已保存', hrep_check_toast:'{s} · {d} 的全天报告要你看一眼（在「今天」页）', hrep_env_title:'点信封 · 两家店', hrep_env_store:'{n} 个信封', hrep_env_none:'两家店的信封都点完了。',   // v114
   tb_today:'今天', tb_tomorrow:'明天', tb_later:'以后（{n}）', tb_past:'前几天（{n}）', tb_none:'这天没有任务。', tb_later_none:'以后还没有任务。点「＋ 新任务」加一个。', tb_past_none:'最近 7 天没有某一天的任务。', tb_lead_none:'还没设负责人', tl_sum:'负责人（已设 {a} / {b}）', oil_s1:'检查', oil_s2:'填收油日期', oil_s3:'拿到门口', oil_s4:'拿回地下室',   // v105
-  tf_title_new:'新任务', tf_title_edit:'改任务', tf_what:'做什么', tf_who:'谁做', tf_w_person:'某个人', tf_w_role:'按岗位', tf_w_area:'区域里谁在班', tf_area_front:'前场谁在班', tf_area_kitchen:'后厨谁在班', tf_repeat:'多久一次', tf_once:'一次', tf_daily:'每天', tf_when:'什么时候', tf_store:'哪家店', tf_how:'怎么算完成', tf_ph_check:'打勾', tf_ph_photo:'拍照', tf_ph_learn:'拍照（新人先拍，熟了抽查）', tf_ph_always:'每次都拍', tf_more:'中德文（可改）', tf_tag:'店（只当标签，不影响谁做）', tf_need_role:'请选哪个岗位。', tf_need_store:'请选哪家店。', tf_saved:'任务已保存', tf_saved_n:'已建 {n} 个任务（每家店一个）', tf_person_hint:'指定的人那天任何时候都能做，不看排班；过了那天没做算「没做」，第二天还能补做。', tf_person_daily:'每天的任务现在只能按岗位或按区域；指定某个人的每天任务下一步再做。', tf_role_hint:'那天这家店排了这个岗位的人做，一人做了就算完；没排这个岗位，就由这个区域上班的人做。', tf_area_hint:'那天这家店这个区域上班的人，谁做都算。', tf_role_hint_daily:'每天由那天这家店排了这个岗位的人做，一人做了就算完（Runner 没排就由服务员做）；那天没排这个岗位就没人负责，看板上标红。', tf_daily_hint:'从今天开始每天都有；没做第二天还能补做。', tf_store_hint:'两家都选 = 每家店各建一个。', tf_store_one:'改的时候只能选一家。', tf_cancel_q:'取消「{n}」（{d}）？', tf_cancelled:'已取消', tb_list:'清单', tc_title:'每天的任务', tc_hint:'每天都要做的任务，按店和区域。可以改、停用（以前的记录都留着）。一次性的任务在「以后 / 前几天」里。', tc_none:'还没有每天的任务。', tc_rate:'近 14 天做完 {a} / {b} 天', tc_rate0:'近 14 天还没轮到', tc_items:'{n} 项', tc_off_grp:'已停用（{n}）', tc_disable:'停用', tc_enable:'重新启用', tc_disable_q:'停用「{n}」？停用后员工不再看到，以前的记录都留着，以后可以重新启用。', tc_disabled:'已停用', tc_enabled:'已重新启用', tc_mine:'我区域每天的任务（{n}）', tc_ai:'AI 看照片',   // v119：任务模块统一第一步
+  tf_week:'每周', tf_month:'每月', tf_quarter:'每季度', tf_year:'每年', tf_start:'从哪天开始出现', tf_per_new:'这一期的开始日已经过了，今天就出现；还没到，就等到那天。',
+  tf_per_week:'每周{d}', tf_per_month:'每月 {d} 号', tf_per_quarter:'每季度第 {m} 个月 {d} 号', tf_per_year:'每年 {m} 月 {d} 日',
+  tf_qm:'第 {m} 个月', tf_day_n:'{d} 号', tf_month_n:'{m} 月',
+  tf_end_week:'周日', tf_end_month:'月底', tf_end_quarter:'季度最后一天', tf_end_year:'12 月 31 日',
+  tf_per_hint_role:'{s}起，那几天这家店排了这个岗位 / 区域的人都会看到，一人做完就算完，这一期里不再出现；{e}截止，没做就一直挂着（标「逾期」），直到有人做完。',
+  tf_per_hint_person:'{s}起他每天都看到（不看排班），做完这一期就不再出现；{e}截止，没做就一直挂着（标「逾期」）。',
+  tf_role_hint_per:'这一期里，哪天这家店排了这个岗位的人，他们就看到；一人做完就算完（Runner 没排就由服务员做）。',
+  tf_per_late:'逾期 {n} 天', tf_per_last:'今天是最后一天', tf_per_due:'截止 {d}', tf_per_missed:'到期没做 · {p}', tf_per_done_late:'晚了 {n} 天',
+  tf_saved_rep:'已保存：{n} · {r}', tdl_g_period:'这几天内做完', tb_wait:'这天没人上班', tk_per:'{r}：{n} · {s}',
+  tk_adm_wait:'{n}：还没做，这天没人上班（{d}）', tk_adm_per_missed:'{n}：到期没做（{p}）', tk_close_photo_period:'这个任务要拍照',
+  tc_rate_week:'近 {b} 周按时做完 {a} 周', tc_rate_month:'近 {b} 个月按时做完 {a} 个月', tc_rate_quarter:'近 {b} 个季度按时做完 {a} 个', tc_rate_year:'近 {b} 年按时做完 {a} 年',
+  tc_rate0_per:'还没到第一期的截止日', tc_done_today:'今天做完了 ✓', tc_next:'下次 {d}', tc_people:'指定的人', tc_on_shift:'有班的日子',
+  tf_title_new:'新任务', tf_title_edit:'改任务', tf_what:'做什么', tf_who:'谁做', tf_w_person:'某个人', tf_w_role:'按岗位', tf_w_area:'区域里谁在班', tf_area_front:'前场谁在班', tf_area_kitchen:'后厨谁在班', tf_repeat:'多久一次', tf_once:'一次', tf_daily:'每天', tf_when:'什么时候', tf_store:'哪家店', tf_how:'怎么算完成', tf_ph_check:'打勾', tf_ph_photo:'拍照', tf_ph_learn:'拍照（新人先拍，熟了抽查）', tf_ph_always:'每次都拍', tf_more:'中德文（可改）', tf_tag:'店（只当标签，不影响谁做）', tf_need_role:'请选哪个岗位。', tf_need_store:'请选哪家店。', tf_saved:'任务已保存', tf_saved_n:'已建 {n} 个任务（每家店一个）', tf_person_hint:'指定的人那天任何时候都能做，不看排班；过了那天没做算「没做」，第二天还能补做。', tf_person_daily:'只在他有班的日子出现（哪家店都算），那天任何时候都能做；没班那天不算。没做第二天还能补做。', tf_role_hint:'那天这家店排了这个岗位的人做，一人做了就算完；没排这个岗位，就由这个区域上班的人做。', tf_area_hint:'那天这家店这个区域上班的人，谁做都算。', tf_role_hint_daily:'每天由那天这家店排了这个岗位的人做，一人做了就算完（Runner 没排就由服务员做）；那天没排这个岗位就没人负责，看板上标红。', tf_daily_hint:'从今天开始每天都有；没做第二天还能补做。', tf_store_hint:'两家都选 = 每家店各建一个。', tf_store_one:'改的时候只能选一家。', tf_cancel_q:'取消「{n}」（{d}）？', tf_cancelled:'已取消', tb_list:'清单', tc_title:'重复的任务', tc_hint:'每天、每周、每月、每季度、每年的任务，按店和区域；指定某个人的在最下面。可以改、停用（以前的记录都留着）。一次性的任务在「以后 / 前几天」里。', tc_none:'还没有重复的任务。', tc_rate:'近 14 天做完 {a} / {b} 天', tc_rate0:'近 14 天还没轮到', tc_items:'{n} 项', tc_off_grp:'已停用（{n}）', tc_disable:'停用', tc_enable:'重新启用', tc_disable_q:'停用「{n}」？停用后员工不再看到，以前的记录都留着，以后可以重新启用。', tc_disabled:'已停用', tc_enabled:'已重新启用', tc_mine:'我区域重复的任务（{n}）', tc_ai:'AI 看照片',   // v119：任务模块统一第一步
   tk_once_anytime:'全天', tdl_g_named:'今天要做', nm_me:'我自己', nm_search:'搜索名字', nm_day:'哪天', nm_today:'今天', nm_tomorrow:'明天', nm_pick:'选日期', nm_text_ph:'例如：把凳子从 Bismarck 搬到 Flingern', nm_store_none:'不挂店', nm_zh:'中文名', nm_de:'德文名', nm_ai:'AI 写中德文', nm_ai_busy:'AI 正在写…', nm_ai_hint:'不填的话，保存时 AI 自动把上面那句话写成中德文；AI 出错就直接用原句。', nm_save:'保存', nm_saving:'正在保存…', nm_saved_self:'记下了：{d} 你自己做', nm_saved:'已交代给 {n}（{d}）', nm_need_who:'请选谁做。', nm_need_day:'请选哪天。', nm_block:'点名任务', nm_person:'{a} 件 · 做完 {b}', nm_by:'{n} 交代', nm_open:'还没做', nm_missed:'没做', nm_up:'还没到那天', nm_mine_title:'我安排的任务（{n}）', nm_mine_hint:'你安排的一次性任务（给某个人、某个岗位或区域）。做的人在自己的「今天」里看到；做完你在这里看到 ✓ 和照片。', nm_sub_by:'{n} 交代的', nm_done_line:'{n} 做完了', nm_when_hint:'那天任何时候都能做；过了那天还没做算「没做」，第二天还能补做。',   // v118：点名任务
   tdl_title:'今天的任务', tdl_count:'做完 {a} / {b}', tdl_all:'都做完了 ✓', tdl_none:'今天没有任务', tdl_g_over:'要补做', tdl_g_arrival:'到店后', tdl_g_closing:'收店时 · 下班前做', tdl_g_closing_now:'收店时 · 快下班了，现在做', tdl_part:'做了 {a}/{b}', tdl_up:'接下来', tdl_photo:'要拍照', tdl_today:'今天', tdl_tomorrow:'明天', td_other:'其他要做的（{n}）', td_other0:'其他', tsr_open:'还没做 · {p}', tsr_open0:'还没做', tsr_missed:'没做 · {p}', tsr_nobody:'没人负责：没排{r}',   // v103
   tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
@@ -1226,7 +1238,19 @@ de: {
   // v71：Feierabend-Aufgaben
   hrep_take:'📷 Tagesbericht fotografieren', hrep_env:'💵 Umschläge zählen ({n})', hrep_env0:'💵 Alle Umschläge gezählt', hrep_hint:'Filiale und Tag musst du nicht wählen: Die KI erkennt sie auf dem Bericht. Erst den oberen, dann den unteren Teil fotografieren (bei kurzem Bericht reicht ein Foto).', hrep_reading:'Tagesbericht wird gelesen …', hrep_saved:'Bericht gespeichert', hrep_done:'automatisch abgeschlossen', hrep_check:'Bericht bitte prüfen', hrep_look:'Ansehen', hrep_unknown:'Filiale oder Tag nicht erkennbar: Bitte den oberen Teil (Name, Datum) scharf fotografieren und nochmal versuchen', hrep_retake:'Neu fotografieren', hrep_close:'Schließen', hrep_saved_toast:'Tagesbericht {s} · {d} gespeichert', hrep_check_toast:'Tagesbericht {s} · {d} bitte prüfen (Seite „Heute“)', hrep_env_title:'Umschläge zählen · beide Filialen', hrep_env_store:'{n} Umschläge', hrep_env_none:'In beiden Filialen sind alle Umschläge gezählt.',   // v114
   tb_today:'Heute', tb_tomorrow:'Morgen', tb_later:'Später ({n})', tb_past:'Vorher ({n})', tb_none:'An diesem Tag keine Aufgaben.', tb_later_none:'Später noch keine Aufgaben. Mit „＋ Neue Aufgabe“ anlegen.', tb_past_none:'Keine Aufgaben an einem Tag in den letzten 7 Tagen.', tb_lead_none:'Noch niemand verantwortlich', tl_sum:'Verantwortliche ({a} von {b} festgelegt)', oil_s1:'Prüfen', oil_s2:'Abholtermin eintragen', oil_s3:'Raus zur Tür', oil_s4:'Zurück in den Keller',   // v105
-  tf_title_new:'Neue Aufgabe', tf_title_edit:'Aufgabe ändern', tf_what:'Was', tf_who:'Wer', tf_w_person:'Eine Person', tf_w_role:'Nach Position', tf_w_area:'Wer im Bereich Dienst hat', tf_area_front:'Wer im Service Dienst hat', tf_area_kitchen:'Wer in der Küche Dienst hat', tf_repeat:'Wie oft', tf_once:'Einmal', tf_daily:'Täglich', tf_when:'Wann', tf_store:'Filiale', tf_how:'Erledigt durch', tf_ph_check:'Abhaken', tf_ph_photo:'Foto', tf_ph_learn:'Foto (Neue zuerst, später Stichproben)', tf_ph_always:'Immer Foto', tf_more:'Text DE/ZH (änderbar)', tf_tag:'Filiale (nur als Hinweis, ändert nicht, wer es macht)', tf_need_role:'Bitte eine Position wählen.', tf_need_store:'Bitte eine Filiale wählen.', tf_saved:'Aufgabe gespeichert', tf_saved_n:'{n} Aufgaben angelegt (je Filiale eine)', tf_person_hint:'Die Person kann es den ganzen Tag erledigen, unabhängig vom Dienstplan; nicht erledigt bis Tagesende = „nicht erledigt“, am nächsten Tag noch nachholbar.', tf_person_daily:'Tägliche Aufgaben gibt es vorerst nur nach Position oder Bereich; tägliche Aufgaben für eine Person kommen im nächsten Schritt.', tf_role_hint:'Wer an dem Tag in dieser Filiale auf dieser Position eingeplant ist; eine Person reicht. Ist die Position nicht besetzt, macht es, wer im Bereich Dienst hat.', tf_area_hint:'Wer an dem Tag in dieser Filiale in diesem Bereich Dienst hat – egal wer.', tf_role_hint_daily:'Jeden Tag macht es, wer in dieser Filiale auf dieser Position eingeplant ist; eine Person reicht (ohne Runner macht es der Service). Ist die Position an dem Tag nicht besetzt, ist niemand zuständig – rot im Überblick.', tf_daily_hint:'Ab heute jeden Tag; nicht erledigt = am nächsten Tag nachholen.', tf_store_hint:'Beide gewählt = je Filiale eine Aufgabe.', tf_store_one:'Beim Ändern nur eine Filiale.', tf_cancel_q:'„{n}“ ({d}) absagen?', tf_cancelled:'Abgesagt', tb_list:'Liste', tc_title:'Tägliche Aufgaben', tc_hint:'Aufgaben für jeden Tag, nach Filiale und Bereich. Ändern oder deaktivieren (Verlauf bleibt). Einmalige Aufgaben stehen unter „Später / Vorher“.', tc_none:'Noch keine täglichen Aufgaben.', tc_rate:'Letzte 14 Tage: {a} von {b} Tagen erledigt', tc_rate0:'Letzte 14 Tage noch nicht dran', tc_items:'{n} Punkte', tc_off_grp:'Deaktiviert ({n})', tc_disable:'Deaktivieren', tc_enable:'Wieder aktivieren', tc_disable_q:'„{n}“ deaktivieren? Das Team sieht sie dann nicht mehr; der Verlauf bleibt, später wieder aktivierbar.', tc_disabled:'Deaktiviert', tc_enabled:'Wieder aktiviert', tc_mine:'Tägliche Aufgaben in meinem Bereich ({n})', tc_ai:'KI prüft Foto',   // v119
+  tf_week:'Wöchentlich', tf_month:'Monatlich', tf_quarter:'Vierteljährlich', tf_year:'Jährlich', tf_start:'Ab wann sichtbar', tf_per_new:'Ist der Starttag in diesem Zeitraum schon vorbei, erscheint es ab heute; sonst ab dem Starttag.',
+  tf_per_week:'jede Woche ab {d}', tf_per_month:'jeden Monat ab dem {d}.', tf_per_quarter:'jedes Quartal ab dem {d}. im {m}. Monat', tf_per_year:'jedes Jahr ab dem {d}.{m}.',
+  tf_qm:'{m}. Monat', tf_day_n:'{d}.', tf_month_n:'Monat {m}',
+  tf_end_week:'Sonntag', tf_end_month:'Monatsende', tf_end_quarter:'Quartalsende', tf_end_year:'31.12.',
+  tf_per_hint_role:'Wiederholung: {s}. Ab dann sehen es alle, die in dieser Filiale auf dieser Position / in diesem Bereich eingeplant sind; eine Person reicht, danach verschwindet es bis zum nächsten Mal. Frist: {e}; nicht erledigt bleibt es stehen („überfällig“), bis es jemand macht.',
+  tf_per_hint_person:'Wiederholung: {s}. Ab dann sieht die Person es jeden Tag (unabhängig vom Dienstplan); erledigt verschwindet es bis zum nächsten Mal. Frist: {e}; nicht erledigt bleibt es stehen („überfällig“).',
+  tf_role_hint_per:'In diesem Zeitraum sehen es alle, die an einem Tag in dieser Filiale auf dieser Position eingeplant sind; eine Person reicht (ohne Runner macht es der Service).',
+  tf_per_late:'{n} Tage überfällig', tf_per_last:'Heute letzter Tag', tf_per_due:'Frist {d}', tf_per_missed:'Frist verpasst · {p}', tf_per_done_late:'{n} Tage zu spät',
+  tf_saved_rep:'Gespeichert: {n} · {r}', tdl_g_period:'In den nächsten Tagen erledigen', tb_wait:'An diesem Tag niemand im Dienst', tk_per:'{r}: {n} · {s}',
+  tk_adm_wait:'{n}: noch offen, an diesem Tag niemand im Dienst ({d})', tk_adm_per_missed:'{n}: Frist verpasst ({p})', tk_close_photo_period:'Mit Foto',
+  tc_rate_week:'Letzte {b} Wochen: {a} pünktlich erledigt', tc_rate_month:'Letzte {b} Monate: {a} pünktlich erledigt', tc_rate_quarter:'Letzte {b} Quartale: {a} pünktlich erledigt', tc_rate_year:'Letzte {b} Jahre: {a} pünktlich erledigt',
+  tc_rate0_per:'Erste Frist noch nicht erreicht', tc_done_today:'Heute erledigt ✓', tc_next:'Nächstes Mal {d}', tc_people:'Bestimmte Personen', tc_on_shift:'an Diensttagen',
+  tf_title_new:'Neue Aufgabe', tf_title_edit:'Aufgabe ändern', tf_what:'Was', tf_who:'Wer', tf_w_person:'Eine Person', tf_w_role:'Nach Position', tf_w_area:'Wer im Bereich Dienst hat', tf_area_front:'Wer im Service Dienst hat', tf_area_kitchen:'Wer in der Küche Dienst hat', tf_repeat:'Wie oft', tf_once:'Einmal', tf_daily:'Täglich', tf_when:'Wann', tf_store:'Filiale', tf_how:'Erledigt durch', tf_ph_check:'Abhaken', tf_ph_photo:'Foto', tf_ph_learn:'Foto (Neue zuerst, später Stichproben)', tf_ph_always:'Immer Foto', tf_more:'Text DE/ZH (änderbar)', tf_tag:'Filiale (nur als Hinweis, ändert nicht, wer es macht)', tf_need_role:'Bitte eine Position wählen.', tf_need_store:'Bitte eine Filiale wählen.', tf_saved:'Aufgabe gespeichert', tf_saved_n:'{n} Aufgaben angelegt (je Filiale eine)', tf_person_hint:'Die Person kann es den ganzen Tag erledigen, unabhängig vom Dienstplan; nicht erledigt bis Tagesende = „nicht erledigt“, am nächsten Tag noch nachholbar.', tf_person_daily:'Erscheint nur an Tagen, an denen die Person Dienst hat (egal welche Filiale), und kann dann den ganzen Tag erledigt werden; Tage ohne Dienst zählen nicht. Nicht erledigt = am nächsten Tag nachholen.', tf_role_hint:'Wer an dem Tag in dieser Filiale auf dieser Position eingeplant ist; eine Person reicht. Ist die Position nicht besetzt, macht es, wer im Bereich Dienst hat.', tf_area_hint:'Wer an dem Tag in dieser Filiale in diesem Bereich Dienst hat – egal wer.', tf_role_hint_daily:'Jeden Tag macht es, wer in dieser Filiale auf dieser Position eingeplant ist; eine Person reicht (ohne Runner macht es der Service). Ist die Position an dem Tag nicht besetzt, ist niemand zuständig – rot im Überblick.', tf_daily_hint:'Ab heute jeden Tag; nicht erledigt = am nächsten Tag nachholen.', tf_store_hint:'Beide gewählt = je Filiale eine Aufgabe.', tf_store_one:'Beim Ändern nur eine Filiale.', tf_cancel_q:'„{n}“ ({d}) absagen?', tf_cancelled:'Abgesagt', tb_list:'Liste', tc_title:'Wiederkehrende Aufgaben', tc_hint:'Täglich, wöchentlich, monatlich, vierteljährlich, jährlich – nach Filiale und Bereich; Aufgaben für bestimmte Personen ganz unten. Ändern oder deaktivieren (Verlauf bleibt). Einmalige Aufgaben stehen unter „Später / Vorher“.', tc_none:'Noch keine wiederkehrenden Aufgaben.', tc_rate:'Letzte 14 Tage: {a} von {b} Tagen erledigt', tc_rate0:'Letzte 14 Tage noch nicht dran', tc_items:'{n} Punkte', tc_off_grp:'Deaktiviert ({n})', tc_disable:'Deaktivieren', tc_enable:'Wieder aktivieren', tc_disable_q:'„{n}“ deaktivieren? Das Team sieht sie dann nicht mehr; der Verlauf bleibt, später wieder aktivierbar.', tc_disabled:'Deaktiviert', tc_enabled:'Wieder aktiviert', tc_mine:'Wiederkehrende Aufgaben in meinem Bereich ({n})', tc_ai:'KI prüft Foto',   // v119
   tk_once_anytime:'Ganztägig', tdl_g_named:'Heute zu tun', nm_me:'Ich selbst', nm_search:'Name suchen', nm_day:'Wann', nm_today:'Heute', nm_tomorrow:'Morgen', nm_pick:'Datum wählen', nm_text_ph:'z. B. Hocker von Bismarck nach Flingern bringen', nm_store_none:'keine', nm_zh:'Name (Chinesisch)', nm_de:'Name (Deutsch)', nm_ai:'Mit KI auf DE/ZH schreiben', nm_ai_busy:'KI schreibt …', nm_ai_hint:'Leer lassen: Beim Speichern schreibt die KI den Satz oben auf Deutsch und Chinesisch; bei einem KI-Fehler wird der Satz unverändert gespeichert.', nm_save:'Speichern', nm_saving:'Wird gespeichert …', nm_saved_self:'Gespeichert: {d} machst du selbst', nm_saved:'An {n} vergeben ({d})', nm_need_who:'Bitte wählen, wer es macht.', nm_need_day:'Bitte einen Tag wählen.', nm_block:'Persönliche Aufgaben', nm_person:'{a} Aufgabe(n) · {b} erledigt', nm_by:'von {n}', nm_open:'noch offen', nm_missed:'nicht erledigt', nm_up:'noch nicht dran', nm_mine_title:'Von mir geplant ({n})', nm_mine_hint:'Deine einmaligen Aufgaben (für eine Person, eine Position oder einen Bereich). Wer sie macht, sieht sie unter „Heute“; erledigt siehst du hier ✓ und das Foto.', nm_sub_by:'von {n}', nm_done_line:'{n} erledigt', nm_when_hint:'Den ganzen Tag möglich; wer es bis Tagesende nicht macht, hat es „nicht erledigt“ – am nächsten Tag kann es noch nachgeholt werden.',   // v118
   tdl_title:'Heute zu erledigen', tdl_count:'{a} von {b} erledigt', tdl_all:'Alles erledigt ✓', tdl_none:'Heute keine Aufgaben', tdl_g_over:'Nachholen', tdl_g_arrival:'Nach Ankunft', tdl_g_closing:'Feierabend · vor dem Gehen', tdl_g_closing_now:'Feierabend · jetzt erledigen', tdl_part:'{a}/{b} erledigt', tdl_up:'Demnächst', tdl_photo:'Foto nötig', tdl_today:'Heute', tdl_tomorrow:'Morgen', td_other:'Sonst noch zu tun ({n})', td_other0:'Sonstiges', tsr_open:'Offen · {p}', tsr_open0:'Offen', tsr_missed:'Nicht erledigt · {p}', tsr_nobody:'Niemand zuständig: kein(e) {r} eingeplant',   // v103
   tk_close:'Feierabend: {n} · {s}', tk_close_later:'Vor Feierabend erledigen', tk_close_now:'Bald Feierabend – jetzt erledigen', tk_close_over:'Gestern nicht erledigt – heute nachholen',
@@ -2241,7 +2265,7 @@ function taskCardHTML(k){
   }
   if (k.kind === 'closing'){   // v71：收店任务；v95：某一天的任务（收店时 / 到店后）
     const nd = d.need || {}, n = d.items.length, got = d.items.filter(i => i.done).length;
-    const title = (d.named ? toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d) + (d.store ? ' · ' + d.store : '') : d.once ? t('tk_once', { w: toWhen(d), n: toName(d), s: d.store }) : t('tk_close', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store })) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
+    const title = (isPer(d) && !d.named ? t('tk_per', { r: perLabel(d), n: toName(d), s: d.store }) : d.named ? toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d) + (d.store ? ' · ' + d.store : '') : d.once ? t('tk_once', { w: toWhen(d), n: toName(d), s: d.store }) : t('tk_close', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store })) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
     const sub = t(k.status === 'overdue' ? 'tk_close_over' : d.once && d.timing === 'arrival' ? 'tk_once_now_arrival' : k.status === 'now' ? 'tk_close_now' : 'tk_close_later') + ' · ' + tkHow(nd) + toByLead(d)
       + (d.ask && got === n && !d.answer ? ' · ' + t('tk_ask_pending') : '');   // v101
     return card(cls, esc(title) + (got ? ` <span class="muted small num">${got}/${n}</span>` : ''), sub,
@@ -3314,8 +3338,8 @@ function renderTaskRun(){
       <div class="acts" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px">${acts}</div></div>`;
   }).join('');
   $('#main').innerHTML = `<button class="link" data-act="task-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>
-    <h2 style="margin-top:0">${esc((c.once ? toWhen(c) + (state.lang === 'de' ? ': ' : '：') : '') + nm(c))} ${storeTag(c.store)}</h2>
-    <div class="infobox">${esc(tkHow(c.need))}${c.day !== (state.tasks || {}).day ? ' · ' + esc(dayLabel(c.day)) : ''}</div>
+    <h2 style="margin-top:0">${esc((c.once ? toWhen(c) + (state.lang === 'de' ? ': ' : '：') : isPer(c) ? perLabel(c) + (state.lang === 'de' ? ': ' : '：') : '') + nm(c))} ${storeTag(c.store)}</h2>
+    <div class="infobox">${esc(tkHow(c.need))}${c.day !== (state.tasks || {}).day ? ' · ' + esc(dayLabel(c.day)) : ''}${perDue(c) ? ' · ' + esc(perDue(c).txt) : ''}</div>
     ${c.completed_at ? `<div class="infobox" style="border-color:var(--celadon)">✓ ${esc(t('tk_run_done', { t: fmtDateTime(c.completed_at), n: c.completed_by || '' }))}</div>` : ''}
     <div class="list">${rows}</div>` + tkAskHTML(c);
 }
@@ -3348,6 +3372,18 @@ async function taskUpload(input){
 const FROLES = ['service', 'runner', 'bar'];
 const toName = x => state.lang === 'de' ? x.name_de : x.name_zh;
 const toWhen = x => t('tk_once_' + (x.timing === 'arrival' ? 'arrival' : x.timing === 'anytime' ? 'anytime' : 'closing'));   // v118：点名任务 = 全天
+// v120：周期任务（数据库 v86）：「每周一」「每月 5 号」…；这一期：逾期 N 天（红）/ 今天最后一天（橙）/ 截止哪天
+const WDAYS = { zh: ['一', '二', '三', '四', '五', '六', '日'], de: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] };
+const isPer = x => ['week', 'month', 'quarter', 'year'].includes(x.repeat);
+function perLabel(x){
+  const d = +x.repeat_day || 1, m = +x.repeat_month || 1;
+  if (x.repeat === 'week') return t('tf_per_week', { d: WDAYS[state.lang === 'de' ? 'de' : 'zh'][d - 1] });
+  return isPer(x) ? t('tf_per_' + x.repeat, { d, m }) : t('tf_daily');
+}
+function perDue(x, day){ const p = x.period; if (!p || !p.open) return null;
+  if (+p.late > 0) return { txt: t('tf_per_late', { n: p.late }), cls: 'bad' };
+  if (p.end === (day || bizToday())) return { txt: t('tf_per_last'), cls: 'warn' };
+  return { txt: t('tf_per_due', { d: dayLabel(p.end) }), cls: '' }; }
 const nmByTxt = d => d.named && d.by && state.me && d.by.id !== state.me.id ? t('nm_sub_by', { n: d.by.name }) : '';   // v118：谁交代的
 const toByLead = d => d.once && d.assignee && state.me && d.assignee.id === state.me.id && d.lead && d.lead.id !== state.me.id ? ' · ' + t('tk_by_lead', { n: d.lead.name }) : '';
 const toAreaStaff = (list, area) => (list || []).filter(s => s.is_active && !s.is_kitchen && (area === 'kitchen' ? KROLES : FROLES).includes(s.main_role || 'service'));
@@ -3369,24 +3405,25 @@ function tdlHTML(cl, up){
   if (!cl.length && !up.length) return '';
   const stores = new Set([...cl, ...up].map(k => k.data.store).filter(Boolean)), st = d => stores.size > 1 ? ' ' + storeTag(d.store) : '';   // v119：没挂店的点名任务不算
   const row = k => {
-    const d = k.data, done = k.status === 'done', bad = k.status === 'overdue', its = d.items || [], n = its.length, got = its.filter(i => i.done).length;
+    const d = k.data, done = k.status === 'done', pd = isPer(d) && !done ? perDue(d) : null, bad = k.status === 'overdue' || !!(pd && pd.cls === 'bad'), its = d.items || [], n = its.length, got = its.filter(i => i.done).length;   // v120：周期任务写截止 / 逾期
     const sub = done ? [fmtTime(d.completed_at), d.completed_by && d.completed_by !== state.me.name ? d.completed_by : '', d.answer ? askAns(d) : ''].filter(Boolean).join(' · ')
-      : [bad ? t('tk_close_over') : d.day !== (state.tasks || {}).day ? dayLabel(d.day) : '', got && got < n ? t('tdl_part', { a: got, b: n }) : '',
+      : [k.status === 'overdue' ? t('tk_close_over') : pd ? pd.txt : d.day !== (state.tasks || {}).day ? dayLabel(d.day) : '', got && got < n ? t('tdl_part', { a: got, b: n }) : '',
          d.ask && n && got === n && !d.answer ? t('tk_ask_pending') : '', toByLead(d).replace(/^ · /, ''), nmByTxt(d)].filter(Boolean).join(' · ');
-    const inner = `<span class="tdl-cb">${done ? '✓' : ''}</span><span class="tdl-m"><span class="tdl-n">${esc(toName(d))}${st(d)}</span>${sub ? `<span class="tdl-s${bad ? ' bad' : ''}">${esc(sub)}</span>` : ''}</span>`
+    const inner = `<span class="tdl-cb">${done ? '✓' : ''}</span><span class="tdl-m"><span class="tdl-n">${esc(toName(d))}${st(d)}</span>${sub ? `<span class="tdl-s${bad ? ' bad' : pd && pd.cls === 'warn' ? ' warnc' : ''}">${esc(sub)}</span>` : ''}</span>`
       + (done ? '' : ((d.need || {}).mode === 'photo' ? `<span class="tdl-i" title="${esc(t('tdl_photo'))}">📷</span>` : '') + '<span class="tdl-i" aria-hidden="true">›</span>');
     return done ? `<div class="tdl-r fin">${inner}</div>` : `<button class="tdl-r${bad ? ' bad' : ''}" data-act="task-open" data-def="${d.def_id}" data-day="${d.day}">${inner}</button>`;
   };
   const ord = list => list.filter(k => k.status !== 'done').concat(list.filter(k => k.status === 'done'));
   const grp = (cls, label, list) => list.length ? `<div class="tdl-g ${cls}">${esc(label)}</div>` + ord(list).map(row).join('') : '';
   const over = cl.filter(k => k.status === 'overdue'), rest = cl.filter(k => k.status !== 'overdue');
-  const nmd = rest.filter(k => k.data.named), arr = rest.filter(k => !k.data.named && k.data.timing === 'arrival'), clo = rest.filter(k => !k.data.named && k.data.timing !== 'arrival'), cloNow = clo.some(k => k.status === 'now');   // v118：点名任务单独一组「今天要做」
+  const per = rest.filter(k => isPer(k.data)), r2 = rest.filter(k => !isPer(k.data));   // v120：周期任务单独一组「这几天内做完」
+  const nmd = r2.filter(k => k.data.named), arr = r2.filter(k => !k.data.named && k.data.timing === 'arrival'), clo = r2.filter(k => !k.data.named && k.data.timing !== 'arrival'), cloNow = clo.some(k => k.status === 'now');   // v118：点名任务单独一组「今天要做」
   const nd = cl.filter(k => k.status === 'done').length;
   const head = `<div class="tdl-h"><b>${esc(t('tdl_title'))}</b><span class="small ${cl.length && nd === cl.length ? 'pos' : 'muted'}">${esc(!cl.length ? t('tdl_none') : nd === cl.length ? t('tdl_all') : t('tdl_count', { a: nd, b: cl.length }))}</span></div>`
     + (cl.length ? `<div class="tdl-bar"><i style="width:${Math.round(100 * nd / cl.length)}%"></i></div>` : '');
   const ups = up.slice().sort((a, b) => String(a.data.day).localeCompare(String(b.data.day))).map(k => { const d = k.data;
     return `<div class="tdl-up">${esc(dayWord(d.day) + ' · ' + toWhen(d) + ' · ' + toName(d))}${d.important ? ' 📷' : ''}${st(d)}${toByLead(d) ? ` · ${esc(toByLead(d).replace(/^ · /, ''))}` : ''}${nmByTxt(d) ? ` · ${esc(nmByTxt(d))}` : ''}</div>`; }).join('');
-  return `<div class="tdl">${head}${grp('bad', t('tdl_g_over'), over)}${grp('now', t('tdl_g_named'), nmd)}${grp('', t('tdl_g_arrival'), arr)}${grp(cloNow ? 'now' : '', t(cloNow ? 'tdl_g_closing_now' : 'tdl_g_closing'), clo)}${ups ? `<div class="tdl-g">${esc(t('tdl_up'))}</div>` + ups : ''}</div>`;
+  return `<div class="tdl">${head}${grp('bad', t('tdl_g_over'), over)}${grp('now', t('tdl_g_named'), nmd)}${grp('', t('tdl_g_period'), per)}${grp('', t('tdl_g_arrival'), arr)}${grp(cloNow ? 'now' : '', t(cloNow ? 'tdl_g_closing_now' : 'tdl_g_closing'), clo)}${ups ? `<div class="tdl-g">${esc(t('tdl_up'))}</div>` + ups : ''}</div>`;
 }
 // v103：任务状态行（主管「我管的区域」、负责人「我负责的任务」共用）：颜色点（绿 做完 · 黄 还没做 · 红 没人做 / 漏做 · 灰 还没到那天）+ 名字 + 谁、什么状态 + 操作。sub 是已经转义的 HTML
 function tsrRow(name, dot, sub, subCls, acts){
@@ -3403,9 +3440,13 @@ function tsrLeadActs(def, day){
 // 主管「我管的区域」卡片里今天的任务（area_today）：以前每项一行（「检查废油桶：–」），现在一个任务一行
 function tsrAreaHTML(list){
   return `<div style="margin-top:8px">${list.map(x => {
-    const nm = esc((x.once ? toWhen(x) + ' · ' : '') + toName(x)) + (x.once && x.important ? ' 📷' : ''), ppl = (x.people || []).map(p => p.name).join('、');
+    const nm = esc((x.once ? toWhen(x) + ' · ' : '') + toName(x)) + (x.once && x.important ? ' 📷' : '') + (isPer(x) ? ` <span class="tag">${esc(perLabel(x))}</span>` : ''), ppl = (x.people || []).map(p => p.name).join('、');
     const photo = (x.items || []).map(i => i.last).find(l => l && l.evidence === 'photo'), aiBad = (x.items || []).some(i => i.last && i.last.ai && i.last.ai.ok === false);
-    const [dot, sub] = x.status === 'done' ? ['ok', '✓ ' + [x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : ''].filter(Boolean).join(' · ')]
+    const pd = perDue(x);   // v120：周期任务
+    const [dot, sub] = x.status === 'wait' ? ['', t('tb_wait') + (pd ? ' · ' + pd.txt : '')]
+      : x.status === 'missed' && isPer(x) ? ['bad', t('tf_per_missed', { p: ppl || '–' })]
+      : x.status !== 'done' && pd ? [pd.cls === 'bad' ? 'bad' : 'todo', (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + ' · ' + pd.txt]
+      : x.status === 'done' ? ['ok', '✓ ' + [x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : ''].filter(Boolean).join(' · ')]
       : x.status === 'nobody' ? ['bad', x.once ? t('to_nobody') : t('tsr_nobody', { r: t('grp_' + x.role) })]
       : x.status === 'missed' ? ['bad', t('tsr_missed', { p: ppl || '–' })]
       : ['todo', (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + (x.ask && !x.answer && (x.items || []).length && x.items.every(i => i.last) ? ' · ' + t('tk_ask_pending') : '')];   // 拍好了还没回答
@@ -3461,11 +3502,15 @@ const toArea = x => x.area || (isKRole(x.role) ? 'kitchen' : 'front');
 // 看板里的一行：x 来自 admin_tasks_day（今天、明天）；某一天的任务另外在 admin_tasks_once 里找到同一条（o），用来写谁做、交给…、改、取消
 function toBoardRow(x){
   const o = x.once ? (state.toList || []).find(v => v.def_id === x.def_id) : null;
-  const nm = esc(toWhen(x) + ' · ' + toName(x)) + (x.once && x.important ? ' 📷' : '') + (x.flow_id ? ` <span class="tag">${esc(t('oil_tag'))}</span>` : '');
-  const ppl = (x.people || []).map(p => p.name).join('、'), its = x.items || [];
+  const nm = esc(toWhen(x) + ' · ' + toName(x)) + (x.once && x.important ? ' 📷' : '') + (x.flow_id ? ` <span class="tag">${esc(t('oil_tag'))}</span>` : '')
+    + (isPer(x) ? ` <span class="tag">${esc(perLabel(x))}</span>` : '');   // v120
+  const ppl = (x.people || []).map(p => p.name).join('、'), its = x.items || [], pd = perDue(x);
   const photo = its.map(i => i.last).find(l => l && l.evidence === 'photo'), aiBad = its.some(i => i.last && i.last.ai && i.last.ai.ok === false);
   let dot = 'todo', sub, cls = '';
-  if (x.status === 'done'){ dot = 'ok'; sub = '✓ ' + [x.completed_by, fmtTime(x.completed_at), askAns(x)].filter(Boolean).join(' · '); }
+  if (x.status === 'done'){ dot = 'ok'; sub = '✓ ' + [x.completed_by, fmtTime(x.completed_at), askAns(x), pd && +x.period.late ? t('tf_per_done_late', { n: x.period.late }) : ''].filter(Boolean).join(' · '); }
+  else if (x.status === 'wait'){ dot = ''; sub = t('tb_wait') + (pd ? ' · ' + pd.txt : ''); }   // v120：周期任务今天没人上班，不标红
+  else if (x.status === 'missed' && isPer(x)){ dot = 'bad'; cls = 'negc'; sub = t('tf_per_missed', { p: ppl || '–' }); }
+  else if (pd){ dot = pd.cls === 'bad' ? 'bad' : 'todo'; cls = pd.cls === 'bad' ? 'negc' : pd.cls === 'warn' ? 'warnc' : ''; sub = (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + ' · ' + pd.txt; }
   else if (x.status === 'missed'){ dot = 'bad'; cls = 'negc'; sub = t('tsr_missed', { p: ppl || '–' }); }
   else if (x.status === 'nobody' && !o){ dot = 'bad'; cls = 'negc'; sub = t('tsr_nobody', { r: t('grp_' + x.role) }); }
   else { if (o && toNobody(o)) { dot = 'bad'; cls = 'warnc'; }
@@ -3476,7 +3521,7 @@ function toBoardRow(x){
   return tsrRow(nm, dot, esc(sub) + (aiBad ? ` <span class="negc">· ${esc(t('tk_adm_ai_bad'))}</span>` : ''), cls, acts);
 }
 function toBoardHTML(day){
-  const all = ((state.toDays || {})[day] || []).filter(x => x.status !== 'closed'), rank = x => x.status === 'done' ? 3 : ['missed', 'nobody'].includes(x.status) ? 0 : 1;
+  const all = ((state.toDays || {})[day] || []).filter(x => x.status !== 'closed'), rank = x => x.status === 'done' ? 3 : x.status === 'wait' ? 2 : ['missed', 'nobody'].includes(x.status) ? 0 : 1;
   const blocks = STORES.flatMap(st => ['kitchen', 'front'].map(a => ({ st, a, list: all.filter(x => x.store === st && toArea(x) === a).sort((p, q) => rank(p) - rank(q)) }))).filter(b => b.list.length);
   if (!blocks.length) return ((state.named || {}).tasks || []).some(x => x.day === day) ? '' : `<div class="list"><div class="empty">${esc(t('tb_none'))}</div></div>`;   // v118
   return blocks.map(b => {
@@ -3539,16 +3584,18 @@ const tfAreas = () => [...new Set(tfManage().map(m => m.area))];
 const tfStoresFor = a => STORES.filter(st => tfManage().some(m => m.area === a && m.store === st));
 const tfArea = e => e.who === 'role' ? (e.role ? (isKRole(e.role) ? 'kitchen' : 'front') : '') : e.area;
 function tfSync(){ const e = state.tfEdit; if (!e) return;
-  [['text', 'tf-text'], ['zh', 'tf-zh'], ['de', 'tf-de'], ['day', 'tf-date']].forEach(([k, id]) => { const el = document.getElementById(id); if (el && (k !== 'day' || e.dayMode === 'pick')) e[k] = el.value; });
+  [['text', 'tf-text'], ['zh', 'tf-zh'], ['de', 'tf-de'], ['day', 'tf-date'], ['rd', 'tf-rd'], ['rm', 'tf-rm']].forEach(([k, id]) => { const el = document.getElementById(id); if (el && (k !== 'day' || e.dayMode === 'pick')) e[k] = el.value; });   // v120：周期从哪天开始
   e.more = !!(document.querySelector('#tf-form details') || {}).open; }
 // 从看板 / 清单 / 列表里的一条，变成表单
 function tfFrom(x){
-  const bd = bizToday(), who = x.who_kind || (x.named ? 'person' : 'role'), repeat = x.repeat || (x.day && (x.once || x.named) ? 'once' : 'daily');
-  const photo = x.photo || (x.check_only ? 'check' : repeat === 'once' ? (x.important ? 'photo' : 'check') : (x.important ? 'always' : 'photo'));
+  const bd = bizToday(), who = x.who_kind || (x.named ? 'person' : 'role');
+  const repeat = isPer(x) || ['once', 'daily'].includes(x.repeat) ? x.repeat : x.day && (x.once || (x.named && x.once !== false)) ? 'once' : 'daily';   // v120：周期
+  let photo = x.photo || (x.check_only ? 'check' : repeat === 'once' ? (x.important ? 'photo' : 'check') : (x.important ? 'always' : 'photo'));
+  if (photo === 'always' && repeat !== 'daily') photo = 'photo';
   return { id: x.def_id, who, staff: (x.assignee || {}).id || '', role: who === 'role' ? x.role : '', area: x.area || toArea(x), repeat, lockRepeat: true,
     day: x.day || '', dayMode: !x.day || x.day === addDays(bd, 1) ? 'tomorrow' : x.day === bd ? 'today' : 'pick',
     timing: x.timing === 'arrival' ? 'arrival' : 'closing', stores: who === 'person' ? [] : (x.store ? [x.store] : []), tag: who === 'person' ? (x.store || '') : '',
-    photo, text: toName(x), text0: toName(x), zh: x.name_zh, de: x.name_de, zh0: x.name_zh, de0: x.name_de, multi: (x.items || 1) > 1 };
+    photo, text: toName(x), text0: toName(x), zh: x.name_zh, de: x.name_de, zh0: x.name_zh, de0: x.name_de, multi: (x.items || 1) > 1, rd: +x.repeat_day || 1, rm: +x.repeat_month || 1 };
 }
 function tfFind(id){ return [...((state.tfCat || {}).daily || []), ...(state.toList || []), ...((state.named || {}).tasks || []), ...((state.led || {}).tasks || [])].find(v => v.def_id === id); }
 function tfFormHTML(){
@@ -3560,20 +3607,28 @@ function tfFormHTML(){
   let who = '';
   if (e.who === 'person') who = (staff.length > 12 ? `<input class="input" id="tf-q" placeholder="${esc(t('nm_search'))}" autocomplete="off" style="margin-bottom:8px">` : '')
     + `<div class="chips" id="tf-chips" style="margin-bottom:12px">${staff.map(p => chip('tf-staff', 'id', p.id, p.id === e.staff, p.me ? t('nm_me') : p.name, ` data-n="${esc(p.name.toLowerCase())}"`)).join('')}</div>`;
-  else if (e.who === 'role') who = areas.map(a => `<div class="small muted" style="margin:0 0 4px">${esc(t('area_' + a))}</div><div class="chips" style="margin-bottom:10px">${(a === 'kitchen' ? KROLES : FROLES).map(r => chip('tf-role', 'r', r, e.role === r, t('grp_' + r))).join('')}</div>`).join('') + hint(t(e.repeat === 'daily' ? 'tf_role_hint_daily' : 'tf_role_hint'));
+  else if (e.who === 'role') who = areas.map(a => `<div class="small muted" style="margin:0 0 4px">${esc(t('area_' + a))}</div><div class="chips" style="margin-bottom:10px">${(a === 'kitchen' ? KROLES : FROLES).map(r => chip('tf-role', 'r', r, e.role === r, t('grp_' + r))).join('')}</div>`).join('') + hint(t(e.repeat === 'daily' ? 'tf_role_hint_daily' : e.repeat === 'once' ? 'tf_role_hint' : 'tf_role_hint_per'));
   else who = seg('area', areas.map(a => [a, t('tf_area_' + a)])) + hint(t('tf_area_hint'));
   const stores = area ? tfStoresFor(area) : [];
   const where = e.who === 'person' ? '' : lbl(t('tf_store')) + `<div class="chips" style="margin-bottom:6px">${stores.map(st => chip('tf-store', 'st', st, e.stores.includes(st), st)).join('')}</div>`
     + hint(t(e.id ? 'tf_store_one' : 'tf_store_hint'));
-  const daily = e.repeat === 'daily';
+  const daily = e.repeat === 'daily', per = isPer(e), opt = (k, v, txt) => `<option value="${v}"${String(e[k]) === String(v) ? ' selected' : ''}>${esc(txt)}</option>`;
+  // v120：多久一次（改的时候：一次的不能变重复，重复的不能变一次）；周期任务从哪天开始出现
+  const reps = e.lockRepeat ? (e.repeat === 'once' ? ['once'] : ['daily', 'week', 'month', 'quarter', 'year']) : ['once', 'daily', 'week', 'month', 'quarter', 'year'];
+  const repHTML = `<div class="chips" style="margin-bottom:12px">${reps.map(v => `<button type="button" class="chip${e.repeat === v ? ' on' : ''}" data-act="tf-set" data-k="repeat" data-v="${v}"${e.lockRepeat && e.repeat === 'once' ? ' disabled' : ''}>${esc(t('tf_' + v))}</button>`).join('')}</div>`;
+  const perHTML = !per ? '' : lbl(t('tf_start')) + (e.repeat === 'week'
+      ? `<div class="chips" style="margin-bottom:12px">${[1, 2, 3, 4, 5, 6, 7].map(d => `<button type="button" class="chip${+e.rd === d ? ' on' : ''}" data-act="tf-set" data-k="rd" data-v="${d}">${esc(WDAYS[state.lang === 'de' ? 'de' : 'zh'][d - 1])}</button>`).join('')}</div>`
+      : (e.repeat === 'quarter' ? seg('rm', [1, 2, 3].map(m => [m, t('tf_qm', { m })])) : '')
+        + `<div class="row" style="gap:8px;margin-bottom:12px">${e.repeat === 'year' ? `<select class="input" id="tf-rm" aria-label="${esc(t('tf_start'))}" style="flex:1">${[...Array(12)].map((_, i) => opt('rm', i + 1, t('tf_month_n', { m: i + 1 }))).join('')}</select>` : ''}
+          <select class="input" id="tf-rd" aria-label="${esc(t('tf_start'))}" style="flex:1">${[...Array(28)].map((_, i) => opt('rd', i + 1, t('tf_day_n', { d: i + 1 }))).join('')}</select></div>`)
+    + hint(t(e.who === 'person' ? 'tf_per_hint_person' : 'tf_per_hint_role', { s: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm }), e: t('tf_end_' + e.repeat) }) + (e.id ? '' : ' ' + t('tf_per_new')));
   return `<div class="sheet" id="tf-form"><h3 style="margin-top:0">${esc(t(e.id ? 'tf_title_edit' : 'tf_title_new'))}</h3>
     <div class="field"><label for="tf-text">${esc(t('tf_what'))}</label><input class="input" id="tf-text" maxlength="200" autocomplete="off" placeholder="${esc(t('nm_text_ph'))}" value="${esc(e.text || '')}"></div>
-    ${lbl(t('tf_who'))}${seg('who', [['person', t('tf_w_person')], ['role', t('tf_w_role')], ['area', t('tf_w_area')]].filter(([k]) => k === 'person' ? !(e.lockRepeat && e.repeat === 'daily') : areas.length))}${who}
-    ${lbl(t('tf_repeat'))}${seg('repeat', [['once', t('tf_once')], ['daily', t('tf_daily')]], e.lockRepeat)}
-    ${e.who === 'person' && !e.lockRepeat ? hint(t('tf_person_daily')) : ''}
-    ${daily ? hint(t('tf_daily_hint')) : lbl(t('nm_day')) + seg('dayMode', [['today', t('nm_today')], ['tomorrow', t('nm_tomorrow')], ['pick', t('nm_pick')]])
+    ${lbl(t('tf_who'))}${seg('who', [['person', t('tf_w_person')], ['role', t('tf_w_role')], ['area', t('tf_w_area')]].filter(([k]) => k === 'person' || areas.length))}${who}
+    ${lbl(t('tf_repeat'))}${repHTML}
+    ${daily ? hint(t(e.who === 'person' ? 'tf_person_daily' : 'tf_daily_hint')) : per ? perHTML : lbl(t('nm_day')) + seg('dayMode', [['today', t('nm_today')], ['tomorrow', t('nm_tomorrow')], ['pick', t('nm_pick')]])
       + (e.dayMode === 'pick' ? `<div class="field"><input class="input" type="date" id="tf-date" min="${bd}" value="${esc(e.day || '')}" aria-label="${esc(t('nm_pick'))}"></div>` : '')}
-    ${e.who === 'person' ? hint(t('tf_person_hint')) : lbl(t('tf_when')) + seg('timing', [['arrival', t('tk_once_arrival')], ['closing', t('tk_once_closing')]])}
+    ${e.who === 'person' ? (e.repeat === 'once' ? hint(t('tf_person_hint')) : '') : lbl(t('tf_when')) + seg('timing', [['arrival', t('tk_once_arrival')], ['closing', t('tk_once_closing')]])}
     ${where}
     ${lbl(t('tf_how'))}${seg('photo', daily ? [['photo', t('tf_ph_learn')], ['always', t('tf_ph_always')], ['check', t('tf_ph_check')]] : [['photo', '📷 ' + t('tf_ph_photo')], ['check', '✓ ' + t('tf_ph_check')]])}
     <details class="fold" style="margin-bottom:12px"${e.more ? ' open' : ''}><summary>${esc(t('tf_more'))}</summary><div class="inner">
@@ -3587,27 +3642,34 @@ function tfFormHTML(){
 }
 // 任务清单：每天的任务按 店 × 区域；停用的折叠在最下面。mine = 负责人「今天」里（不分块标题外的说明）
 function tcRow(x){
-  const who = x.who_kind === 'area' ? t('tf_area_' + x.area) : t('grp_' + x.role), r = x.rate || {};
-  const sub = [who, toWhen(x), t('tf_ph_' + (x.photo === 'photo' ? 'learn' : x.photo)), x.items > 1 ? t('tc_items', { n: x.items }) : '',
-    r.total ? t('tc_rate', { a: r.done, b: r.total }) : t('tc_rate0')].filter(Boolean).join(' · ');
+  const per = isPer(x), person = x.who_kind === 'person', r = x.rate || {}, pd = per && x.active ? perDue(x) : null;   // v120：周期任务、指定某个人的
+  const who = person ? (x.assignee || {}).name || '?' : x.who_kind === 'area' ? t('tf_area_' + x.area) : t('grp_' + x.role);
+  const ph = per ? (x.photo === 'check' ? 'check' : 'photo') : x.photo === 'photo' ? 'learn' : x.photo;
+  const now = !per || !x.active ? '' : x.done_today ? t('tc_done_today') : pd ? pd.txt : x.period && x.period.next ? t('tc_next', { d: dayLabel(x.period.next) }) : '';
+  const sub = [who, perLabel(x), person ? (per ? '' : t('tc_on_shift')) : toWhen(x), t('tf_ph_' + ph), x.items > 1 ? t('tc_items', { n: x.items }) : '',
+    per ? (r.total ? t('tc_rate_' + x.repeat, { a: r.done, b: r.total }) : t('tc_rate0_per')) : r.total ? t('tc_rate', { a: r.done, b: r.total }) : t('tc_rate0'), now].filter(Boolean).join(' · ');
   const acts = x.can_edit && nmCan() ? (x.active ? `<button class="link" data-act="tf-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="tc-on" data-def="${x.def_id}" data-on="0">${esc(t('tc_disable'))}</button>`
     : `<button class="link" data-act="tc-on" data-def="${x.def_id}" data-on="1">${esc(t('tc_enable'))}</button>`) : '';
   const bad = x.active && r.total && r.done < r.total;
-  return tsrRow(esc(toName(x)), !x.active ? '' : bad ? 'todo' : r.total ? 'ok' : '', esc(sub), '', acts);
+  return tsrRow(esc(toName(x)) + (x.store && person ? ' ' + storeTag(x.store) : ''), !x.active ? '' : pd && pd.cls === 'bad' ? 'bad' : bad ? 'todo' : r.total ? 'ok' : '', esc(sub), pd && pd.cls === 'bad' ? 'negc' : '', acts);
 }
 function tcListHTML(mine){
   const D = (state.tfCat || {}).daily || [], on = D.filter(x => x.active), off = D.filter(x => !x.active);
   if (!D.length) return `<div class="list"><div class="empty">${esc(t('tc_none'))}</div></div>`;
-  const blocks = STORES.flatMap(st => ['kitchen', 'front'].map(a => ({ st, a, list: on.filter(x => x.store === st && x.area === a) }))).filter(b => b.list.length);
+  const blocks = STORES.flatMap(st => ['kitchen', 'front'].map(a => ({ st, a, list: on.filter(x => x.who_kind !== 'person' && x.store === st && x.area === a) }))).filter(b => b.list.length);
+  const ppl = on.filter(x => x.who_kind === 'person');   // v120：指定某个人的每天 / 周期任务
   return (mine ? '' : h3i(esc(t('tc_title')), t('tc_hint')))
     + blocks.map(b => `<div class="tb"><div class="tb-h"><div>${storeTag(b.st)} <strong>${esc(t('area_' + b.a))}</strong></div><span class="small muted">${b.list.length}</span></div>${b.list.map(tcRow).join('')}</div>`).join('')
+    + (ppl.length ? `<div class="tb"><div class="tb-h"><strong>${esc(t('tc_people'))}</strong><span class="small muted">${ppl.length}</span></div>${ppl.map(tcRow).join('')}</div>` : '')
     + (off.length ? `<details class="fold" style="margin-top:10px"><summary>${esc(t('tc_off_grp', { n: off.length }))}</summary><div class="inner"><div class="tsr-box">${off.map(x => tcRow(x)).join('')}</div></div></details>` : '');
 }
 // 一行：颜色点（绿 做完 · 黄 今天还没做 · 红 没做 · 灰 还没到那天）+ 事情 + 状态 + 看照片 / 改 / 取消
 function nmRow(x, showWho){
   const done = x.status === 'done', bad = x.status === 'missed', l = ((x.items || [])[0] || {}).last;
-  const nm = (showWho ? `<strong>${esc((x.assignee || {}).name || '?')}</strong> · ` : '') + esc(toName(x)) + (x.important ? ' 📷' : '') + (x.store ? ' ' + storeTag(x.store) : '');
-  const sub = (done ? '✓ ' + [x.completed_by, fmtDateTime(x.completed_at)].filter(Boolean).join(' · ') : t(bad ? 'nm_missed' : x.status === 'upcoming' ? 'nm_up' : 'nm_open'))
+  const pd = done ? null : perDue(x);
+  const nm = (showWho ? `<strong>${esc((x.assignee || {}).name || '?')}</strong> · ` : '') + esc(toName(x)) + (x.important ? ' 📷' : '') + (x.store ? ' ' + storeTag(x.store) : '')
+    + (x.once === false ? ` <span class="tag">${esc(perLabel(x))}</span>` : '');   // v120：指定某个人的每天 / 周期任务
+  const sub = (done ? '✓ ' + [x.completed_by, fmtDateTime(x.completed_at)].filter(Boolean).join(' · ') : t(bad ? 'nm_missed' : x.status === 'upcoming' ? 'nm_up' : 'nm_open') + (pd ? ' · ' + pd.txt : ''))
     + (x.by && x.by.id !== state.me.id ? ' · ' + t('nm_by', { n: x.by.name }) : '');
   const acts = (l && l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '')
     + (x.can_edit && nmCan() ? `<button class="link" data-act="tf-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="tf-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>` : '');
@@ -3715,15 +3777,18 @@ function oilHTML(){
 function tkHandled(x){ const ms = x.messages || []; return !ms.length ? null : ms.every(m => m.read_at) ? 'done' : 'wait'; }
 const tkRed = x => ['missed', 'nobody'].includes(x.status) && !tkHandled(x);
 function tkAdminLine(x){
-  const nm = (x.once ? toWhen(x) + ' · ' : '') + (state.lang === 'de' ? x.name_de : x.name_zh), ppl = (x.people || []).map(p => p.name).join('、');   // v95
+  const nm = (x.once ? toWhen(x) + ' · ' : isPer(x) ? perLabel(x) + ' · ' : '') + (state.lang === 'de' ? x.name_de : x.name_zh), ppl = (x.people || []).map(p => p.name).join('、');   // v95；v120：周期任务
   const h = tkHandled(x), ms = x.messages || [], who = list => [...new Set(list.map(m => m.to))].join('、');
   const st = h === 'done' ? ' · ' + t('tkm_st_done', { n: who(ms), t: fmtDateTime(ms.map(m => m.read_at).sort().pop()) })
     : h === 'wait' ? ' · ' + t('tkm_st_wait', { n: who(ms.filter(m => !m.read_at)) }) : '';
   const x0 = h ? '' : '✗ ';   // 已经留言处理的，不再打 ✗
   if (x.status === 'done') return '✓ ' + t('tk_adm_done', { n: nm, b: x.completed_by || '', t: fmtDateTime(x.completed_at) }) + (x.answer ? ' · ' + askAns(x) : '') + st;   // v101：带问题的写上回答
   if (x.status === 'nobody') return x0 + t(x.once ? 'tk_adm_nobody_once' : 'tk_adm_nobody', { n: nm, r: t('grp_' + x.role) }) + st;
+  if (x.status === 'missed' && isPer(x)) return x0 + t('tk_adm_per_missed', { n: nm, p: ppl || '–' }) + st;   // v120：到期没做
   if (x.status === 'missed') return x0 + t('tk_adm_missed', { n: nm, p: ppl || '–' }) + st;
-  return t('tk_adm_open', { n: nm, p: ppl || '–' }) + st;
+  const pd = perDue(x);
+  if (x.status === 'wait') return t('tk_adm_wait', { n: nm, d: pd ? pd.txt : '' }) + st;
+  return t('tk_adm_open', { n: nm, p: ppl || '–' }) + (pd ? ' · ' + pd.txt : '') + st;
 }
 // v81（老板 2026-10-13 决定）：等员工做事的地方「💬 发消息」：窗口自动带上他欠什么（ctx），老板写关键词 → AI 写中德文 → 改 → 发送。
 // about = 这件事（receipt:周一 / bon:门店:日期 / ann:公告 / lib:资料 / expense:付款），老板那边显示最后一次「已发 · 未读 / 已读」
@@ -8211,7 +8276,7 @@ document.addEventListener('click', async ev => {
       if (!state.tfCat) await tfLoad();
       const a = tfAreas()[0] || 'front';
       state.tfEdit = { who: 'person', staff: '', role: '', area: a, repeat: 'once', dayMode: 'tomorrow', day: addDays(bizToday(), 1), timing: 'closing',
-        stores: tfStoresFor(a).length === 1 ? tfStoresFor(a) : [], tag: '', photo: 'photo', text: '', zh: '', de: '' };
+        stores: tfStoresFor(a).length === 1 ? tfStoresFor(a) : [], tag: '', photo: 'photo', text: '', zh: '', de: '', rd: 1, rm: 1 };
       if (state.tab === 'admin') toRedraw(); else renderToday(); window.scrollTo(0, 0); break;
     }
     case 'tf-edit': {
@@ -8229,9 +8294,8 @@ document.addEventListener('click', async ev => {
       const k = el.dataset.k, v = el.dataset.v;
       if (k === 'dayMode'){ e.dayMode = v; if (v === 'today') e.day = bizToday(); else if (v === 'tomorrow') e.day = addDays(bizToday(), 1); else if (!e.day || e.day < bizToday()) e.day = addDays(bizToday(), 2); }
       else e[k] = v;
-      if (k === 'who' && v === 'person' && !e.lockRepeat) e.repeat = 'once';   // 某个人的每天任务下一步再做
-      if (k === 'repeat' && v === 'daily' && e.who === 'person') e.who = tfAreas().length ? 'role' : 'person';
-      if (k === 'repeat' && e.repeat === 'once' && e.photo === 'always') e.photo = 'photo';
+      if (k === 'repeat' && e.repeat !== 'daily' && e.photo === 'always') e.photo = 'photo';   // v120：一次 / 周期只有 拍照 / 打勾
+      if (k === 'repeat' && e.repeat === 'week' && +e.rd > 7) e.rd = 1;
       if (e.repeat === 'once' && !e.day){ e.day = addDays(bizToday(), 1); e.dayMode = 'tomorrow'; }
       if (k === 'who' || k === 'area'){ const ok = tfStoresFor(tfArea(e)); e.stores = e.stores.filter(st => ok.includes(st)); if (!e.stores.length && ok.length === 1) e.stores = ok.slice(); }
       tfRedraw(); break;
@@ -8261,13 +8325,15 @@ document.addEventListener('click', async ev => {
         if (!zh && !de) zh = txt;
       }
       try {
-        const person = e.who === 'person';
+        const person = e.who === 'person', per = isPer(e), once = e.repeat === 'once';
         const r = await rpc('task_save', { ...tok(), p_id: e.id || null, p_who: e.who, p_staff_id: person ? e.staff : null, p_role: e.who === 'role' ? e.role : null,
-          p_area: e.who === 'area' ? e.area : null, p_repeat: e.repeat, p_day: e.repeat === 'once' ? e.day : null, p_timing: person ? null : e.timing,
-          p_stores: person ? (e.tag ? [e.tag] : []) : e.stores, p_name_zh: zh, p_name_de: de, p_photo: e.photo });
-        if (r && person && !r.self) callPush('task_assign', { def_id: r.id });   // 推给被指定的人（push v12；换了人才会再推）
+          p_area: e.who === 'area' ? e.area : null, p_repeat: e.repeat, p_day: once ? e.day : null,
+          p_rep_month: per && ['quarter', 'year'].includes(e.repeat) ? +e.rm : null, p_rep_day: per ? +e.rd : null, p_timing: person ? null : e.timing,   // v120：周期从哪天开始
+          p_stores: person ? (e.tag ? [e.tag] : []) : e.stores, p_name_zh: zh, p_name_de: de, p_photo: per && e.photo === 'always' ? 'photo' : e.photo });
+        if (r && person && once && !r.self) callPush('task_assign', { def_id: r.id });   // 推给被指定的人（push v12 只推一次性的；换了人才会再推）
         state.tfEdit = null;
-        toast(person ? (r.self ? t('nm_saved_self', { d: dayLabel(e.day) }) : t('nm_saved', { n: r.to || '', d: dayLabel(e.day) }))
+        toast(person && once ? (r.self ? t('nm_saved_self', { d: dayLabel(e.day) }) : t('nm_saved', { n: r.to || '', d: dayLabel(e.day) }))
+          : person ? t('tf_saved_rep', { n: r.self ? t('nm_me') : r.to || '', r: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm }) })
           : (r.ids || []).length > 1 ? t('tf_saved_n', { n: r.ids.length }) : t('tf_saved'));
         await Promise.all([nmLoad(), tfLoad(), loadTasks()]); render(); window.scrollTo(0, 0);
       } catch(err){ e.busy = false; toast(errText(err), true); if (state.tfEdit === e) tfRedraw(); }
@@ -9639,6 +9705,7 @@ document.addEventListener('click', async ev => {
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.id === 'tf-rd' || ev.target.id === 'tf-rm'){ tfSync(); tfRedraw(); return; }   // v120：周期从哪天开始，说明跟着变
   if (ev.target.id === 'e-date'){ bonEditDate(ev.target.value); return; }   // v112：老板改 Bon 日期
   if (ev.target.dataset && ev.target.dataset.sopphoto && ev.target.files && ev.target.files[0]){ const f = ev.target.files[0]; ev.target.value = ''; sopPhotoChosen(f); return; }   // v111：SOP 照片
   if (ev.target.dataset && ev.target.dataset.invphoto && ev.target.files && ev.target.files[0]){   // v91：物品 / 储位照片
