@@ -756,7 +756,9 @@ zh: {
   oc_mine_hint:'带你的同事每个班会标「会了 / 还要练」。点一条可以看 SOP，学过的可以再看一遍。', oc_open_sop:'看 SOP', oc_taught_opt:'（上面打了勾可以不写）',
   oc_empty:'还没有清单：这个区域和岗位还没有确认过的 SOP。', oca_add:'＋ 加上', oca_add_pick:'从别的 SOP 里加一条', oca_rm:'去掉', oca_rm_q:'从清单里去掉「{n}」？（标过的记录留着）',
   oca_hint:'自动包括这个区域「整个区域都要会」的和{r}的 SOP；新确认的会自动加进来，撤下的会去掉。', oca_hist_none:'还没教过',
-  gap_title:'带教人说 SOP 里没有的 / 不对的（{n}）', gap_hint:'带教人评价新同事时写的。写进 SOP 或处理好了就点掉。', gap_write:'写一条', gap_done:'处理好了', gap_done_ok:'好的，已处理',
+  gap_title:'SOP 里可能缺的（{n}）', gap_hint:'带教人评价新同事时写的，和 AI 从新同事「还不清楚 / 没人教」的回答里找到的（不写是谁说的）。写进 SOP 或处理好了就点掉。',
+  gap_ai:'✨ AI 发现', gap_about:'关于「{n}」', gap_add:'补充这一条', gap_wrong:'不是缺的', gap_wrong_ok:'好的，不再显示', gap_scan:'✨ 用最近 30 天的回答查一遍', gap_scan_busy:'AI 正在查…',
+  gap_scan_hint:'AI 拿新同事说「还不清楚 / 没人教」的和现有的 SOP 比，约 2–5 欧分。以后每次交自评会自动查。', gap_scan_done:'AI 看了 {a} 个新同事的回答，新找到 {b} 条。', gap_write:'写一条', gap_done:'处理好了', gap_done_ok:'好的，已处理',
   tb_stats:'统计', ts_r4w:'近 4 周', ts_rmonth:'本月', ts_rlast:'上月', ts_period:'{a} – {b}（今天还没过完，不算）',
   ts_hint:'只统计，不打分。漏做分开写：只有他负责的（自己）和几个人一起负责的（一起）。店没开、没人负责的不算到个人。只有你能看到。',
   ts_ai:'✨ AI 点评', ts_ai_again:'✨ 重新点评', ts_ai_busy:'AI 正在看…', ts_ai_hint:'每个人一句、每个任务一句，约 2–5 欧分。AI 只写点评，数字以表为准。', ts_ai_at:'AI 点评 · {t}',
@@ -1272,7 +1274,9 @@ de: {
   oc_mine_hint:'Deine Einarbeiter*innen markieren nach jeder Schicht „Kann es / Noch üben“. Tippe auf einen Punkt, um die SOP zu sehen.', oc_open_sop:'SOP ansehen', oc_taught_opt:'(freiwillig, wenn oben abgehakt)',
   oc_empty:'Noch keine Checkliste: für diesen Bereich und diese Position gibt es noch keine bestätigten SOPs.', oca_add:'＋ Hinzufügen', oca_add_pick:'Andere SOP hinzufügen', oca_rm:'Entfernen', oca_rm_q:'„{n}“ aus der Checkliste entfernen? (Bisherige Häkchen bleiben gespeichert)',
   oca_hint:'Enthält automatisch die SOPs für den ganzen Bereich und für {r}; neu bestätigte kommen dazu, zurückgezogene fallen weg.', oca_hist_none:'Noch nicht gezeigt',
-  gap_title:'Hinweise aus der Einarbeitung: fehlt / falsch in SOPs ({n})', gap_hint:'Von Einarbeiter*innen bei der Bewertung geschrieben. Nach dem Einarbeiten in eine SOP abhaken.', gap_write:'SOP schreiben', gap_done:'Erledigt', gap_done_ok:'Ok, erledigt.',
+  gap_title:'Möglicherweise fehlt in den SOPs ({n})', gap_hint:'Von Einarbeiter*innen geschrieben oder von der KI aus „unklar / nicht gezeigt“-Antworten neuer Kolleg*innen gefunden (ohne Namen). Nach dem Einarbeiten in eine SOP abhaken.',
+  gap_ai:'✨ KI-Fund', gap_about:'zu „{n}“', gap_add:'Diese SOP ergänzen', gap_wrong:'Fehlt nicht', gap_wrong_ok:'Ok, wird nicht mehr angezeigt', gap_scan:'✨ Antworten der letzten 30 Tage prüfen', gap_scan_busy:'KI prüft …',
+  gap_scan_hint:'Die KI vergleicht, was neue Kolleg*innen „unklar / nicht gezeigt“ nennen, mit den SOPs. Ca. 2–5 Cent. Danach automatisch bei jeder Selbsteinschätzung.', gap_scan_done:'KI hat Antworten von {a} neuen Kolleg*innen gelesen, {b} neue Funde.', gap_write:'SOP schreiben', gap_done:'Erledigt', gap_done_ok:'Ok, erledigt.',
   tb_stats:'Statistik', ts_r4w:'Letzte 4 Wochen', ts_rmonth:'Dieser Monat', ts_rlast:'Letzter Monat', ts_period:'{a} – {b} (heute zählt noch nicht)',
   ts_hint:'Nur Zahlen, keine Bewertung. Nicht Erledigtes getrennt: allein zuständig und gemeinsam mit anderen zuständig. Tage ohne Öffnung / ohne Zuständige zählen nicht für Personen. Nur du siehst das.',
   ts_ai:'✨ KI-Kommentar', ts_ai_again:'✨ Neu kommentieren', ts_ai_busy:'KI liest …', ts_ai_hint:'Ein Satz pro Person und Aufgabe, ca. 2–5 Cent. Die KI kommentiert nur, maßgeblich sind die Zahlen.', ts_ai_at:'KI-Kommentar · {t}',
@@ -2576,9 +2580,12 @@ function renderSopList(){
       ${x.status === 'rejected' && x.note ? `<div class="meta negc">${esc(t('sop_reject_why', { m: x.note }))}</div>` : ''}
       ${x.status === 'rejected' ? `<div class="acts"><button class="link" data-act="sop-fix" data-v="${x.version_id}">${esc(t('sop_fix'))}</button></div>` : ''}</div>`).join('')}</div>` : '';
   host.innerHTML = (state.me.is_admin ? sopAdminTopHTML() : `<button class="link" data-act="sop-back-more" style="margin:2px 0 10px">← ${esc(t('back'))}</button><h2 style="margin-top:0">${esc(t('sop_title'))}</h2>`)
-    + ((S.gaps || []).length ? h3i(esc(t('gap_title', { n: S.gaps.length })), t('gap_hint')) + `<div class="list">${S.gaps.map(g => `<div class="item"><div>${esc(g.text)}</div>
-        <div class="meta small muted">${esc(g.by || '')} · ${esc(dayLabel(g.day))} · ${esc(t('area_' + g.area))}</div>
-        <div class="acts"><button class="link" data-act="sop-gap-write" data-id="${g.entry_id}">${esc(t('gap_write'))}</button><button class="link" data-act="sop-gap-done" data-id="${g.entry_id}">${esc(t('gap_done'))}</button></div></div>`).join('')}</div>` : '')   // v124
+    + ((S.gaps || []).length || state.me.is_admin ? h3i(esc(t('gap_title', { n: (S.gaps || []).length })), t('gap_hint'))   // v124；v125：也有 AI 发现的（不写是谁）
+      + (state.me.is_admin && !state.viewAs ? `<button class="btn ghost sm" style="width:auto;margin:0 0 6px" data-act="sop-gap-scan" ${S.scanBusy ? 'disabled' : ''}>${esc(t(S.scanBusy ? 'gap_scan_busy' : 'gap_scan'))}</button><div class="small muted" style="margin-bottom:8px">${esc(t('gap_scan_hint'))}</div>` : '')
+      + `<div class="list">${(S.gaps || []).map(g => { const ai = g.kind === 'ai', txt = ai ? (state.lang === 'de' ? g.text_de || g.text_zh : g.text_zh || g.text_de) : g.text;
+        return `<div class="item"><div>${ai ? `<span class="tag m">${esc(t('gap_ai'))}</span> ` : ''}${esc(txt)}</div>
+        <div class="meta small muted">${[ai ? '' : g.by || '', dayLabel(g.day), t('area_' + g.area), g.sop_title ? t('gap_about', { n: sopTitle(g.sop_title) }) : ''].filter(Boolean).map(esc).join(' · ')}</div>
+        <div class="acts"><button class="link" data-act="sop-gap-write" data-id="${g.id || g.entry_id}">${esc(t(g.sop_item_id ? 'gap_add' : 'gap_write'))}</button><button class="link" data-act="sop-gap-done" data-id="${g.id || g.entry_id}">${esc(t('gap_done'))}</button>${ai ? `<button class="link" data-act="sop-gap-wrong" data-id="${g.id}">${esc(t('gap_wrong'))}</button>` : ''}</div></div>`; }).join('')}</div>` : '')
     + (canW ? `<button class="btn" data-act="sop-new" style="margin:4px 0 12px">${esc(t('sop_new'))}</button>` : '') + mineHTML
     + `<div class="seg sm" style="margin:12px 0 10px">${['front', 'kitchen'].map(a => `<button data-act="sop-area" data-a="${a}" class="${S.area === a ? 'on' : ''}">${esc(t('area_' + a))}</button>`).join('')}</div>
       <input class="input" id="sop-q" placeholder="${esc(t('sop_search'))}" value="${esc(S.q || '')}" style="margin-bottom:10px">`
@@ -8896,18 +8903,36 @@ document.addEventListener('click', async ev => {
       el.disabled = true;
       try { const r = await rpc('sop_submit', { ...tok(), p_item: E.item_id || null, p_area: E.area, p_topic: E.topic || null, p_new_topic: nt, p_content: E.draft,
           p_raw: E.raw || null, p_photos: E.photos || [], p_ai: E.ai || null, p_note: E.note || null });
-        if (E.gapId) soft(rpc('sop_gap_done', { ...tok(), p_entry: E.gapId, p_note: 'SOP' }), null);   // v124：从「带教人说缺的」写的
+        if (E.gap) soft(E.gap.kind === 'ai' ? rpc('sop_ai_gap_done', { ...tok(), p_id: E.gap.id, p_kind: 'done' }) : rpc('sop_gap_done', { ...tok(), p_entry: E.gap.id, p_note: 'SOP' }), null);   // v124 / v125：从「SOP 里可能缺的」写的
         S.edit = null; S.tree = null; toast(t('sop_sent'));
         if (state.me.is_admin) sopGo('list'); else sopGo('item', { id: r.item_id }); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
-    case 'sop-gap-write': { const g = (sopS().gaps || []).find(x => x.entry_id === el.dataset.id); if (!g) break; sopEditStart({ area: g.area, raw: g.text, gapId: g.entry_id }); break; }
-    case 'sop-gap-done': {
+    case 'sop-gap-write': {   // v125：AI 发现的、连着一条 SOP 的 → 打开那一条的「补充 / 修改」，带着这句话
+      const g = (sopS().gaps || []).find(x => (x.id || x.entry_id) === el.dataset.id); if (!g) break;
+      const raw = g.kind === 'ai' ? (state.lang === 'de' ? g.text_de || g.text_zh : g.text_zh || g.text_de) : g.text, gap = { kind: g.kind || 'mentor', id: g.id || g.entry_id };
+      if (!g.sop_item_id){ sopEditStart({ area: g.area, raw, gap }); break; }
       el.disabled = true;
-      try { await rpc('sop_gap_done', { ...tok(), p_entry: el.dataset.id, p_note: null }); const S = sopS(); S.gaps = (S.gaps || []).filter(x => x.entry_id !== el.dataset.id); toast(t('gap_done_ok')); renderSopList(); }
+      try { const x = await rpc('sop_item', { ...tok(), p_item: g.sop_item_id }), src = x.pending || x.cur; if (!src) throw new Error('NOT_FOUND');
+        sopEditStart({ item_id: x.id, area: x.area, base: src.content, baseTitle: sopTitle(src.content), baseTopic: src.topic_id || (x.cur && x.cur.topic_id) || '', photos: (src.photos || []).slice(),
+          topic: src.topic_id || '', newTopic: src.new_topic || null, raw, gap }); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
+    }
+    case 'sop-gap-done': case 'sop-gap-wrong': {
+      const g = (sopS().gaps || []).find(x => (x.id || x.entry_id) === el.dataset.id); if (!g) break; el.disabled = true;
+      try { if (g.kind === 'ai') await rpc('sop_ai_gap_done', { ...tok(), p_id: g.id, p_kind: act === 'sop-gap-wrong' ? 'wrong' : 'done' });
+        else await rpc('sop_gap_done', { ...tok(), p_entry: g.entry_id, p_note: null });
+        const S = sopS(); S.gaps = (S.gaps || []).filter(x => x !== g); toast(t(act === 'sop-gap-wrong' ? 'gap_wrong_ok' : 'gap_done_ok')); renderSopList(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'sop-gap-scan': {   // v125：老板：用最近 30 天的自评查一遍
+      const S = sopS(); if (S.scanBusy) break; S.scanBusy = true; renderSopList();
+      try { const r = await callTasks({ action: 'sop_gap_scan' }); toast(t('gap_scan_done', { a: r.plans || 0, b: r.saved || 0 })); S.gaps = await soft(rpc('sop_gaps', tok()), S.gaps); }
+      catch(e){ toast(errText(e), true); }
+      S.scanBusy = false; if (sopShown()) renderSopList(); break;
     }
     case 'sop-archive': {
       const x = sopS().item; if (!x || !confirm(t('sop_archive_q'))) break; el.disabled = true;
