@@ -775,6 +775,7 @@ zh: {
   tf_sop:'按哪条 SOP 做（选填）', tf_sop_none:'不连 SOP', tf_sop_ai:'AI 按 SOP 的标准看照片（每张约 1 欧分）', tf_sop_gone_opt:'（已撤下）',
   tf_sop_hint:'员工做任务时能看这条 SOP；SOP 改了新版、你确认后，任务里自动是新版。',
   nm_new_view:'＋ 新任务（查看模式下不能用）',   // v129
+  tp_more:'📝 任务', tp_title:'任务', tp_none:'还没有安排的一次性任务。',   // v130
   // v128：任务附照片、附链接、交回结果（数据库 v93 / 文件服务 tasks v22 / 推送 push v13）
   tf_att:'📷 附照片（选填）', tf_att_add:'＋ 加照片', tf_att_busy:'正在上传…', tf_att_rm:'去掉', tf_att_hint:'员工打开任务就能看到，例如拍一下要清洁的地方，告诉他就是这里。最多 4 张。',
   tf_link:'🔗 附链接（选填）', tf_link_hint:'员工点开前会提示这是外部网站。不要把密码写进链接或任务里，密码当面说。',
@@ -1320,6 +1321,7 @@ de: {
   tf_sop:'Nach welcher SOP (optional)', tf_sop_none:'Keine SOP', tf_sop_ai:'KI prüft das Foto nach den SOP-Standards (ca. 1 Cent pro Foto)', tf_sop_gone_opt:' (zurückgezogen)',
   tf_sop_hint:'Beim Erledigen sieht man diese SOP; neue, von dir bestätigte Versionen erscheinen automatisch.',
   nm_new_view:'+ Neue Aufgabe (im Ansichtsmodus nicht verfügbar)',   // v129
+  tp_more:'📝 Aufgaben', tp_title:'Aufgaben', tp_none:'Noch keine einmaligen Aufgaben geplant.',   // v130
   // v128
   tf_att:'📷 Fotos anhängen (optional)', tf_att_add:'+ Foto hinzufügen', tf_att_busy:'Wird hochgeladen …', tf_att_rm:'Entfernen', tf_att_hint:'Wer die Aufgabe öffnet, sieht die Fotos – z. B. die Stelle, die geputzt werden soll. Höchstens 4.',
   tf_link:'🔗 Link anhängen (optional)', tf_link_hint:'Vor dem Öffnen wird gewarnt, dass es eine externe Seite ist. Keine Passwörter in Link oder Aufgabe schreiben – Passwörter persönlich sagen.',
@@ -3949,7 +3951,7 @@ async function nmLoad(){ state.named = await soft(rpc('task_named_list', tok()),
 // 只有一个「＋ 新任务」：做什么 + 谁做（某个人 / 按岗位 / 区域里谁在班）+ 多久一次（一次 / 每天）+ 什么时候 + 哪家店 + 怎么算完成。
 // 老板和任务负责人（只限自己负责的店 + 区域）都用这一个表单；「任务清单」里改、停用每天的任务
 async function tfLoad(){ state.tfCat = await soft(rpc('task_catalog', tok()), state.tfCat || null); }
-function tfRedraw(){ if (state.tab === 'admin') keepScroll(toRedraw); else keepScroll(renderToday); }
+function tfRedraw(){ if (state.tab === 'admin') keepScroll(toRedraw); else keepScroll(tfView); }
 // 我能建哪些店 + 区域的任务（老板：全部）
 const tfManage = () => ((state.tfCat || {}).manage || []);
 const tfAreas = () => [...new Set(tfManage().map(m => m.area))];
@@ -4127,12 +4129,23 @@ function tfTopHTML(){
   return nmCan() ? `<button class="btn ghost" data-act="tf-new" style="margin:0 0 12px">${esc(t('to_new'))}</button>`
     : `<div class="small muted" style="margin:0 0 12px">${esc(t('nm_new_view'))}</div>`;
 }
-function nmMineHTML(){
+// v130：「更多 → 📝 任务」：负责人和主管的任务页（「＋ 新任务」、我安排的、我区域重复的）
+function viewTaskPage(){
+  const back = (act, label) => `<button class="link" data-act="${act}" style="margin:2px 0 10px">← ${esc(label)}</button>`;
+  if (state.tfEdit){ $('#main').innerHTML = back('tf-close', t('back')) + tfFormHTML(); return; }
+  $('#main').innerHTML = back('tp-close', t('more_title')) + `<h2 style="margin-top:4px">${esc(t('tp_title'))}</h2>` + tfTopHTML() + nmMineHTML(true);
+}
+// 任务表单画在哪：管理页 / 「更多 → 任务」页 / 「今天」
+const tfView = () => state.tab === 'more' && state.taskPage ? viewTaskPage() : renderToday();
+function nmMineHTML(page){   // v130：page = 「更多 → 📝 任务」页（重复的任务直接展开）
   if (!nmLeadOnly()) return '';   // 查看模式也列出来（只看，没有按钮）
   const bd = bizToday(), L = ((state.named || {}).tasks || []).filter(x => x.day >= addDays(bd, -1)), days = [...new Set(L.map(x => x.day))].sort();
   return h3i(esc(t('nm_mine_title', { n: L.filter(x => x.status !== 'done').length })), t('nm_mine_hint'))
     + days.map(dy => `<div class="tdl-g">${esc(dayWord(dy))}</div><div class="tsr-box">${L.filter(x => x.day === dy).map(x => nmRow(x, true)).join('')}</div>`).join('')
-    + (() => { const D = (state.tfCat || {}).daily || []; if (!D.length) return '';   // v119：我区域每天的任务（折叠）
+    + (page && !days.length ? `<div class="list"><div class="empty">${esc(t('tp_none'))}</div></div>` : '')
+    + (() => { const D = (state.tfCat || {}).daily || [];
+        if (page) return `<h3>${esc(t('tc_mine', { n: D.filter(x => x.active).length }))}</h3>` + tcListHTML(true);
+        if (!D.length) return '';   // v119：我区域每天的任务（折叠）
         return `<details class="fold" style="margin-top:10px"><summary>${esc(t('tc_mine', { n: D.filter(x => x.active).length }))}</summary><div class="inner">${tcListHTML(true)}</div></details>`; })();
 }
 
@@ -4318,11 +4331,12 @@ async function lockUpload(input){
 function viewMore(){
   if (state.libView) return viewLibrary();   // v79：资料
   if (state.sop) return viewSop();   // v111：SOP
+  if (state.taskPage) return viewTaskPage();   // v130：任务
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
   $('#main').innerHTML = `<h2 style="margin-top:4px">${esc(t('more_title'))}</h2><div class="more">
     ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
-    ${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
+    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
@@ -8698,7 +8712,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(state.weekTodo || await loadWeekTodo());   // v56；v96：有上次的结果就不等（周结页自己会取最新的）
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -8759,13 +8773,13 @@ document.addEventListener('click', async ev => {
       state.tfEdit = { who: 'person', staff: '', role: '', area: a, repeat: 'once', dayMode: 'tomorrow', day: addDays(bizToday(), 1), timing: 'closing',
         stores: tfStoresFor(a).length === 1 ? tfStoresFor(a) : [], tag: '', photo: 'photo', text: '', zh: '', de: '', rd: 1, rm: 1, sop: '', sopAi: true };
       await tfSopsLoad();   // v121
-      if (state.tab === 'admin') toRedraw(); else renderToday(); window.scrollTo(0, 0); break;
+      if (state.tab === 'admin') toRedraw(); else tfView(); window.scrollTo(0, 0); break;
     }
     case 'tf-edit': {
       const x = tfFind(el.dataset.def); if (!x) break;
       if (!state.tfCat) await tfLoad();
       await tfSopsLoad();   // v121
-      state.tfEdit = tfFrom(x); if (state.tab === 'admin') toRedraw(); else renderToday(); window.scrollTo(0, 0); break;
+      state.tfEdit = tfFrom(x); if (state.tab === 'admin') toRedraw(); else tfView(); window.scrollTo(0, 0); break;
     }
     case 'tf-close': state.tfEdit = null; if (state.tab === 'admin') keepScroll(toRedraw); else render(); break;
     case 'tf-staff': { const e = state.tfEdit; if (!e) break; tfSync(); e.staff = el.dataset.id; tfRedraw(); break; }
@@ -9120,6 +9134,8 @@ document.addEventListener('click', async ev => {
     }
     // v111：SOP
     case 'more-sop': state.sop = { view: 'list', q: '' }; render(); window.scrollTo(0, 0); break;
+    case 'more-task': state.taskPage = true; state.tfEdit = null; if (!state.tfCat) await tfLoad(); render(); window.scrollTo(0, 0); break;   // v130
+    case 'tp-close': state.taskPage = false; state.tfEdit = null; render(); window.scrollTo(0, 0); break;
     case 'sop-admin': state.sop = { view: 'list', q: '' }; state.done = null; state.recon = null; state.tab = 'admin'; state.adminSub = 'sop'; render(); window.scrollTo(0, 0); break;
     case 'sop-back-more': state.sop = null; render(); window.scrollTo(0, 0); break;
     case 'sop-list': sopS().edit = null; sopGo('list'); break;
