@@ -6646,6 +6646,14 @@ function distHTML(dist){
       <button class="btn ghost" style="margin-top:12px" data-act="dist-print">${esc(t('dist_print'))}</button></div>
     <div id="wk-dist" style="scroll-margin-top:70px"></div>${h3i(esc(t('dist_title')), lines.some(l => l.payout_euros < 0) ? t('dist_pay_hint') : '')}${distGroupsHTML(dist, row, signed, days)}`;
 }
+// 这周的钱是谁发的（老板、有小费管理员时）：周分配表和「发放 / 签收还没完成」列表共用（v133）
+function payerSelHTML(){
+  const payers = state.payers || [];
+  if (state.payer === undefined) state.payer = payers.length ? payers[0].id : '';   // v41：默认小费管理员
+  return state.me.is_admin && payers.length ? `<div class="sheet" style="padding:10px 12px"><div class="small muted" style="margin-bottom:6px">${esc(t('pay_by'))}</div>
+      <div class="seg sm">${payers.map(x => `<button data-act="pay-by" data-id="${x.id}" class="${state.payer === x.id ? 'on' : ''}">${esc(t('pay_by_tm', { n: x.name }))}</button>`).join('')}<button data-act="pay-by" data-id="" class="${state.payer ? '' : 'on'}">${esc(t('pay_by_me'))}</button></div>
+      <div class="small muted" style="margin-top:6px">${esc(t('pay_by_hint'))}</div></div>` : '';
+}
 // 发放列表分组：待发放（金额大在前）→ 已发放等签收（等得久在前）→ 已完成（折叠）→ 无需发放（折叠）
 function distGroupsHTML(dist, row, signed, days){
   const L = dist.lines, abs = l => Math.abs(l.payout_euros), byPaid = (a, b) => String(a.done_at).localeCompare(String(b.done_at));
@@ -6658,11 +6666,7 @@ function distGroupsHTML(dist, row, signed, days){
   const head = pend.length ? [outs.length ? t('pay_sum', { n: outs.length, x: sum(outs) }) : '', ins.length ? t('pay_sum_in', { n: ins.length, x: sum(ins) }) : ''].filter(Boolean).join(' · ') : t('pay_all_done');
   const list = a => `<div class="list">${a.map(row).join('')}</div>`;
   const fold = (title, a) => a.length ? `<details class="fold"><summary>${esc(title)}</summary><div class="inner">${list(a)}</div></details>` : '';
-  const payers = state.payers || [];
-  if (state.payer === undefined) state.payer = payers.length ? payers[0].id : '';   // v41：默认小费管理员
-  const payerSel = state.me.is_admin && pend.length && payers.length ? `<div class="sheet" style="padding:10px 12px"><div class="small muted" style="margin-bottom:6px">${esc(t('pay_by'))}</div>
-      <div class="seg sm">${payers.map(x => `<button data-act="pay-by" data-id="${x.id}" class="${state.payer === x.id ? 'on' : ''}">${esc(t('pay_by_tm', { n: x.name }))}</button>`).join('')}<button data-act="pay-by" data-id="" class="${state.payer ? '' : 'on'}">${esc(t('pay_by_me'))}</button></div>
-      <div class="small muted" style="margin-top:6px">${esc(t('pay_by_hint'))}</div></div>` : '';
+  const payerSel = pend.length ? payerSelHTML() : '';
   return `<div class="grp-sum ${pend.length ? '' : 'pos'}">${esc(head)}</div>` + payerSel
     + (pend.length ? `<div class="grp"><div class="grp-t">${esc(t('grp_todo_pay', { n: pend.length }))}</div></div>${list(pend)}` : '')
     + (wait.length ? `<div class="grp"><div class="grp-t">${esc(t('grp_wait_sign', { n: wait.length }))}</div></div>${list(wait)}` : '')
@@ -6677,12 +6681,17 @@ async function rcOpenHTML(){
   if (!list.length) return '';
   const weeks = {}; list.forEach(l => (weeks[l.week_start] = weeks[l.week_start] || []).push(l));
   await gmLoad(Object.keys(weeks).map(w => 'receipt:' + w));   // v81
-  return h3i(esc(t('rc_open_title', { n: list.length })), t('rc_open_hint')) + Object.keys(weeks).sort().map(w => {
+  // v133（老板 2026-11-02 反馈）：还没发放的人在这里直接勾「已发放」，不用先进那一周的周分配表；发放人同周分配表（上面选）
+  const canPay = l => !l.done && l.payout_euros !== 0 && !(l.staff_id === state.me.id && !state.me.is_admin);
+  if (state.me.is_admin && !state.payers) state.payers = await soft(rpc('settle_payers', tok()), []) || [];
+  const sel = list.some(canPay) ? payerSelHTML() : '';
+  return h3i(esc(t('rc_open_title', { n: list.length })), t('rc_open_hint')) + sel + Object.keys(weeks).sort().map(w => {
     const dd = l => l.done && l.done_at ? Math.max(0, Math.floor((Date.now() - new Date(l.done_at)) / 864e5)) : -1;
     const ls = weeks[w].slice().sort((a, b) => dd(b) - dd(a) || Math.abs(b.payout_euros) - Math.abs(a.payout_euros)), mx = Math.max(...ls.map(dd));
-    return `<details class="fold"><summary>${esc(t('rc_open_week', { w: ls[0].kw, n: ls.length }))}${mx >= 0 ? ` <span class="tag ${mx > 3 ? 'bad' : 'pend'}">${esc(t('rc_wait_max', { n: mx }))}</span>` : ''}<span class="muted">${esc(dm(w))}–${esc(dm(addDays(w, 6)))}</span></summary><div class="inner"><div class="list">
+    return `<details class="fold" data-rcw="${w}"${(state.rcOpen || {})[w] ? ' open' : ''}><summary>${esc(t('rc_open_week', { w: ls[0].kw, n: ls.length }))}${mx >= 0 ? ` <span class="tag ${mx > 3 ? 'bad' : 'pend'}">${esc(t('rc_wait_max', { n: mx }))}</span>` : ''}<span class="muted">${esc(dm(w))}–${esc(dm(addDays(w, 6)))}</span></summary><div class="inner"><div class="list">
       ${ls.map(l => `<div class="item"><div class="top"><div><strong>${esc(l.name)}</strong>${rsLabel(l.receipt)}${dd(l) >= 0 ? `<span class="tag ${dd(l) > 3 ? 'bad' : 'pend'}">${esc(dd(l) ? t('waited', { n: dd(l) }) : t('waited_0'))}</span>` : ''}</div>
         <div class="amt num ${l.payout_euros < 0 ? 'negc' : ''}">${eur(Math.abs(l.payout_euros) * 100)}<span class="lbl">${esc(t(l.payout_euros < 0 ? 'dist_lbl_pay' : 'dist_lbl_get'))}</span></div></div>
+        ${canPay(l) ? `<label class="check" style="margin-top:6px"><input type="checkbox" data-act="settled" data-staff="${l.staff_id}" data-week="${w}" data-name="${esc(l.name)}" aria-label="${esc(t('dist_paid'))}"><span>${esc(t('dist_paid'))}</span></label>` : ''}
         ${l.done && !l.is_kitchen && l.receipt && l.receipt.status === 'todo' ? `<div class="acts">${gmBtn(l.staff_id, l.name, 'receipt:' + w, gmReceiptCtx(l, w, dd(l)))}</div>` : ''}</div>`).join('')}
       </div><button class="link" data-act="week-go" data-week="${w}">${esc(t('dist_title'))} ›</button></div></details>`; }).join('');
 }
@@ -10574,7 +10583,7 @@ document.addEventListener('change', async ev => {
     render();
   }
   if (el.dataset && el.dataset.act === 'settled'){
-    const on = el.checked, sid = el.dataset.staff, wk = state.week, item = el.closest('.item');
+    const on = el.checked, sid = el.dataset.staff, wk = el.dataset.week || state.week, item = el.closest('.item');   // v133：列表里的是别的周
     try {
       if (state.me.is_admin && on && state.payer) await rpc('mark_settled_for', { ...tok(), p_week_start: wk, p_staff_id: sid, p_done: on, p_payer: state.payer });
       else await rpc('mark_settled', { ...tok(), p_week_start: wk, p_staff_id: sid, p_done: on });
@@ -10588,6 +10597,8 @@ document.addEventListener('change', async ev => {
     catch(e){ el.checked = !el.checked; toast(errText(e), true); }
   }
 });
+// v133：「发放 / 签收还没完成」里打开的周，重画后照样打开（例如选了谁发的钱）
+document.addEventListener('toggle', ev => { const w = ev.target.dataset && ev.target.dataset.rcw; if (w) (state.rcOpen = state.rcOpen || {})[w] = ev.target.open; }, true);
 document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'inv-q'){ invS().q = ev.target.value; invQueue(); }   // v91
