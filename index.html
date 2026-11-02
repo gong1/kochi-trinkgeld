@@ -800,6 +800,12 @@ zh: {
   tf_per_hint_role:'{s}起，那几天这家店排了这个岗位 / 区域的人都会看到，一人做完就算完，这一期里不再出现；{e}截止，没做就一直挂着（标「逾期」），直到有人做完。',
   tf_per_hint_person:'{s}起他每天都看到（不看排班），做完这一期就不再出现；{e}截止，没做就一直挂着（标「逾期」）。',
   tf_role_hint_per:'这一期里，哪天这家店排了这个岗位的人，他们就看到；一人做完就算完（Runner 没排就由服务员做）。',
+  tf_times:'这一期做几次', tf_times_n:'{n} 次', tf_pern_week:'每周 {n} 次', tf_pern_month:'每月 {n} 次', tf_pern_quarter:'每季度 {n} 次', tf_pern_year:'每年 {n} 次',   // v132
+  tf_times_hint:'从这一期第一天起就出现；做了一次，第二天不出现，隔一天再出现（剩下的天数不够时就不隔）。一天最多算一次，做满 {n} 次这一期就不再出现。',
+  tf_makeup:'这一期没做完怎么办', tf_mk_yes:'要补', tf_mk_no:'过掉',
+  tf_mk_yes_hint:'差的次数一直挂着（标「逾期」），补完了下一期才开始。适合一定要做的，例如冰柜 Wartung。',
+  tf_mk_no_hint:'这一期结束就过掉，记下少做了几次，下一期重新算。适合过了就没法补的，例如日常清洁。快来不及时标红提醒。',
+  tf_per_left:'还差 {n} 次 · 截止 {d}', tf_per_tight:'还差 {n} 次，只剩 {d} 天', tf_per_last_n:'今天最后一天，还差 {n} 次', tf_per_late_n:'逾期 {d} 天 · 还差 {n} 次', tc_miss:'少做 {n} 次',
   tf_per_late:'逾期 {n} 天', tf_per_last:'今天是最后一天', tf_per_due:'截止 {d}', tf_per_missed:'到期没做 · {p}', tf_per_done_late:'晚了 {n} 天',
   tf_saved_rep:'已保存：{n} · {r}', tdl_g_period:'这几天内做完', tb_wait:'这天没人上班', tk_per:'{r}：{n} · {s}',
   tk_adm_wait:'{n}：还没做，这天没人上班（{d}）', tk_adm_per_missed:'{n}：到期没做（{p}）', tk_close_photo_period:'这个任务要拍照',
@@ -1346,6 +1352,12 @@ de: {
   tf_per_hint_role:'Wiederholung: {s}. Ab dann sehen es alle, die in dieser Filiale auf dieser Position / in diesem Bereich eingeplant sind; eine Person reicht, danach verschwindet es bis zum nächsten Mal. Frist: {e}; nicht erledigt bleibt es stehen („überfällig“), bis es jemand macht.',
   tf_per_hint_person:'Wiederholung: {s}. Ab dann sieht die Person es jeden Tag (unabhängig vom Dienstplan); erledigt verschwindet es bis zum nächsten Mal. Frist: {e}; nicht erledigt bleibt es stehen („überfällig“).',
   tf_role_hint_per:'In diesem Zeitraum sehen es alle, die an einem Tag in dieser Filiale auf dieser Position eingeplant sind; eine Person reicht (ohne Runner macht es der Service).',
+  tf_times:'Wie oft pro Zeitraum', tf_times_n:'{n}×', tf_pern_week:'{n}× pro Woche', tf_pern_month:'{n}× pro Monat', tf_pern_quarter:'{n}× pro Quartal', tf_pern_year:'{n}× pro Jahr',   // v132
+  tf_times_hint:'Sichtbar ab dem ersten Tag des Zeitraums; nach einem Mal am nächsten Tag nicht, erst am Tag danach wieder (reichen die restlichen Tage nicht, ohne Pause). Pro Tag zählt höchstens ein Mal; nach {n} Mal verschwindet es bis zum nächsten Zeitraum.',
+  tf_makeup:'Nicht geschafft – was dann?', tf_mk_yes:'Nachholen', tf_mk_no:'Verfällt',
+  tf_mk_yes_hint:'Was fehlt, bleibt stehen („überfällig“), bis es nachgeholt ist; erst dann beginnt der nächste Zeitraum. Für Pflichtaufgaben, z. B. Wartung der Kühltruhe.',
+  tf_mk_no_hint:'Am Ende des Zeitraums verfällt es; wie oft es gefehlt hat, wird notiert, der nächste Zeitraum beginnt bei 0. Für Dinge, die man nicht nachholen kann, z. B. tägliche Reinigung. Wird es knapp, ist es rot markiert.',
+  tf_per_left:'noch {n}× · Frist {d}', tf_per_tight:'noch {n}×, nur noch {d} Tage', tf_per_last_n:'Heute letzter Tag, noch {n}×', tf_per_late_n:'{d} Tage überfällig · noch {n}×', tc_miss:'{n}× zu wenig',
   tf_per_late:'{n} Tage überfällig', tf_per_last:'Heute letzter Tag', tf_per_due:'Frist {d}', tf_per_missed:'Frist verpasst · {p}', tf_per_done_late:'{n} Tage zu spät',
   tf_saved_rep:'Gespeichert: {n} · {r}', tdl_g_period:'In den nächsten Tagen erledigen', tb_wait:'An diesem Tag niemand im Dienst', tk_per:'{r}: {n} · {s}',
   tk_adm_wait:'{n}: noch offen, an diesem Tag niemand im Dienst ({d})', tk_adm_per_missed:'{n}: Frist verpasst ({p})', tk_close_photo_period:'Mit Foto',
@@ -1853,6 +1865,7 @@ const ERR_ZH = {
   TASK_NEED_RESULT: '这个任务要交回结果（照片、截图或 PDF），不能直接打勾。请打开任务，加文件后点「交回结果」。',   // v128
   TASK_LINK_BAD: '链接不对：只能是 http:// 或 https:// 开头的网址，里面不能带用户名和密码。请检查后再保存。',
   TASK_RESULT_ONCE: '「交回结果」只能用在一次性的任务上。每天 / 每周的任务请选拍照或打勾。',
+  TASK_TIMES_BAD: '「几次」不对：只有每周 / 每月 / 每季度 / 每年的任务能选几次（每周最多 7 次）。每天要做两次的，请建两个任务（例如一个到店后、一个收店时）。',
   TASK_FILE_BAD: '文件不对（附照片最多 4 张，交回结果最多 3 个）。请重新选文件再试。',
   TASK_FILE_TYPE: '只能传照片或 PDF。别的格式请先截图再传。',
   TASK_FILE_TOO_BIG: '文件太大：PDF 最大 10 MB。请换小一点的文件，或者截图后再传。',
@@ -2068,6 +2081,7 @@ const ERR_DE = {
   TASK_NEED_RESULT: 'Für diese Aufgabe muss ein Ergebnis abgegeben werden (Foto, Screenshot oder PDF) – nur abhaken geht nicht. Bitte die Aufgabe öffnen, Datei hinzufügen und „Ergebnis abgeben“ tippen.',   // v128
   TASK_LINK_BAD: 'Ungültiger Link: nur Adressen mit http:// oder https://, ohne Benutzername und Passwort. Bitte prüfen und erneut speichern.',
   TASK_RESULT_ONCE: '„Ergebnis abgeben“ gibt es nur bei einmaligen Aufgaben. Für tägliche / wöchentliche Aufgaben bitte Foto oder Abhaken wählen.',
+  TASK_TIMES_BAD: '„Wie oft“ passt nicht: nur wöchentliche / monatliche / vierteljährliche / jährliche Aufgaben können mehrmals sein (pro Woche höchstens 7×). Für zweimal täglich bitte zwei Aufgaben anlegen (z. B. eine nach Ankunft, eine zum Schluss).',
   TASK_FILE_BAD: 'Dateien ungültig (höchstens 4 Fotos zur Aufgabe, höchstens 3 Ergebnis-Dateien). Bitte neu auswählen.',
   TASK_FILE_TYPE: 'Nur Fotos oder PDF. Andere Formate bitte als Screenshot hochladen.',
   TASK_FILE_TOO_BIG: 'Datei zu groß: PDF höchstens 10 MB. Bitte eine kleinere Datei oder einen Screenshot nehmen.',
@@ -3706,11 +3720,18 @@ const WDAYS = { zh: ['一', '二', '三', '四', '五', '六', '日'], de: ['Mo'
 const isPer = x => ['week', 'month', 'quarter', 'year'].includes(x.repeat);
 function perLabel(x){
   const d = +x.repeat_day || 1, m = +x.repeat_month || 1;
+  const n = +(x.times || (x.period || {}).times || 1);   // v132：每周 3 次（员工的任务卡片从 period 里拿）
+  if (isPer(x) && n > 1) return t('tf_pern_' + x.repeat, { n });
   if (x.repeat === 'week') return t('tf_per_week', { d: WDAYS[state.lang === 'de' ? 'de' : 'zh'][d - 1] });
   return isPer(x) ? t('tf_per_' + x.repeat, { d, m }) : t('tf_daily');
 }
 function perDue(x, day){ const p = x.period; if (!p || !p.open) return null;
-  if (+p.late > 0) return { txt: t('tf_per_late', { n: p.late }), cls: 'bad' };
+  // v132（数据库 v96）：几次、不补的任务：还差几次；不补的快来不及标红
+  const many = +p.times > 1, left = +p.left || 0, dl = +p.days_left || 0;
+  if (+p.late > 0) return { txt: many ? t('tf_per_late_n', { d: p.late, n: left }) : t('tf_per_late', { n: p.late }), cls: 'bad' };
+  if (p.makeup === false && left && dl && (dl === 1 || (many && dl <= left + 1)))
+    return { txt: dl === 1 ? (many ? t('tf_per_last_n', { n: left }) : t('tf_per_last')) : t('tf_per_tight', { n: left, d: dl }), cls: 'bad' };
+  if (many && left) return { txt: p.end === (day || bizToday()) ? t('tf_per_last_n', { n: left }) : t('tf_per_left', { n: left, d: dayLabel(p.end) }), cls: p.end === (day || bizToday()) ? 'warn' : '' };
   if (p.end === (day || bizToday())) return { txt: t('tf_per_last'), cls: 'warn' };
   return { txt: t('tf_per_due', { d: dayLabel(p.end) }), cls: '' }; }
 const nmByTxt = d => d.named && d.by && state.me && d.by.id !== state.me.id ? t('nm_sub_by', { n: d.by.name }) : '';   // v118：谁交代的
@@ -3977,7 +3998,7 @@ function tfFrom(x){
   return { id: x.def_id, photos: ((x.att || {}).photos || []).slice(), link: (x.att || {}).link || '', who, staff: (x.assignee || {}).id || '', role: who === 'role' ? x.role : '', area: x.area || toArea(x), repeat, lockRepeat: true,
     day: x.day || '', dayMode: !x.day || x.day === addDays(bd, 1) ? 'tomorrow' : x.day === bd ? 'today' : 'pick',
     timing: x.timing === 'arrival' ? 'arrival' : 'closing', stores: who === 'person' ? [] : (x.store ? [x.store] : []), tag: who === 'person' ? (x.store || '') : '',
-    photo, text: toName(x), text0: toName(x), zh: x.name_zh, de: x.name_de, zh0: x.name_zh, de0: x.name_de, multi: (x.items || 1) > 1, rd: +x.repeat_day || 1, rm: +x.repeat_month || 1,
+    photo, text: toName(x), text0: toName(x), zh: x.name_zh, de: x.name_de, zh0: x.name_zh, de0: x.name_de, multi: (x.items || 1) > 1, rd: +x.repeat_day || 1, rm: +x.repeat_month || 1, times: +x.times || 1, makeup: x.makeup !== false,   // v132
     sop: (x.sop || {}).item_id || '', sopTitle: x.sop ? sopTitle(x.sop) : '', sopAi: x.sop ? !!x.sop_ai : true };   // v121：连的 SOP
 }
 // v121：任务连 SOP（数据库 v87）。表单里的 SOP 列表用 sop_tree（所有人都能读）
@@ -4047,12 +4068,19 @@ function tfFormHTML(){
   // v120：多久一次（改的时候：一次的不能变重复，重复的不能变一次）；周期任务从哪天开始出现
   const reps = e.lockRepeat ? (e.repeat === 'once' ? ['once'] : ['daily', 'week', 'month', 'quarter', 'year']) : ['once', 'daily', 'week', 'month', 'quarter', 'year'];
   const repHTML = `<div class="chips" style="margin-bottom:12px">${reps.map(v => `<button type="button" class="chip${e.repeat === v ? ' on' : ''}" data-act="tf-set" data-k="repeat" data-v="${v}"${e.lockRepeat && e.repeat === 'once' ? ' disabled' : ''}>${esc(t('tf_' + v))}</button>`).join('')}</div>`;
-  const perHTML = !per ? '' : lbl(t('tf_start')) + (e.repeat === 'week'
+  // v132：这一期做几次（2 次以上不用选哪天开始）+ 没做完要补还是过掉
+  if (e.makeup === undefined) e.makeup = true;   // 新建的、AI 填的：默认 1 次、要补
+  const times = +e.times || 1, mkOn = e.makeup !== false, maxT = e.repeat === 'week' ? 7 : 10;
+  const timesHTML = !per ? '' : lbl(t('tf_times')) + `<div class="chips" style="margin-bottom:12px">${[...Array(maxT)].map((_, i) => `<button type="button" class="chip${times === i + 1 ? ' on' : ''}" data-act="tf-set" data-k="times" data-v="${i + 1}">${esc(t('tf_times_n', { n: i + 1 }))}</button>`).join('')}</div>`
+    + (times > 1 ? hint(t('tf_times_hint', { n: times })) : '');
+  const mkHTML = !per ? '' : lbl(t('tf_makeup')) + seg('makeup', [['true', t('tf_mk_yes')], ['false', t('tf_mk_no')]]) + hint(t(mkOn ? 'tf_mk_yes_hint' : 'tf_mk_no_hint'));
+  const perHTML = !per ? '' : times > 1 ? timesHTML + mkHTML : timesHTML + lbl(t('tf_start')) + (e.repeat === 'week'
       ? `<div class="chips" style="margin-bottom:12px">${[1, 2, 3, 4, 5, 6, 7].map(d => `<button type="button" class="chip${+e.rd === d ? ' on' : ''}" data-act="tf-set" data-k="rd" data-v="${d}">${esc(WDAYS[state.lang === 'de' ? 'de' : 'zh'][d - 1])}</button>`).join('')}</div>`
       : (e.repeat === 'quarter' ? seg('rm', [1, 2, 3].map(m => [m, t('tf_qm', { m })])) : '')
         + `<div class="row" style="gap:8px;margin-bottom:12px">${e.repeat === 'year' ? `<select class="input" id="tf-rm" aria-label="${esc(t('tf_start'))}" style="flex:1">${[...Array(12)].map((_, i) => opt('rm', i + 1, t('tf_month_n', { m: i + 1 }))).join('')}</select>` : ''}
           <select class="input" id="tf-rd" aria-label="${esc(t('tf_start'))}" style="flex:1">${[...Array(28)].map((_, i) => opt('rd', i + 1, t('tf_day_n', { d: i + 1 }))).join('')}</select></div>`)
-    + hint(t(e.who === 'person' ? 'tf_per_hint_person' : 'tf_per_hint_role', { s: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm }), e: t('tf_end_' + e.repeat) }) + (e.id ? '' : ' ' + t('tf_per_new')));
+    + (mkOn ? hint(t(e.who === 'person' ? 'tf_per_hint_person' : 'tf_per_hint_role', { s: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm }), e: t('tf_end_' + e.repeat) }) + (e.id ? '' : ' ' + t('tf_per_new'))) : e.id ? '' : hint(t('tf_per_new')))
+    + mkHTML;
   const missTxt = (e.miss || []).filter(k => empty[k] && empty[k]()).map(k => t('tf_m_' + k)).join('、');
   const say = e.id ? '' : `<div class="field" style="margin-bottom:6px"><label for="tf-say">${esc(t('tf_say'))}</label><textarea class="input" id="tf-say" rows="2" maxlength="1000" placeholder="${esc(t('tf_say_ph'))}">${esc(e.say || '')}</textarea></div>
     <button class="btn ghost" type="button" data-act="tf-parse" ${e.parsing ? 'disabled' : ''}>${esc(t(e.parsing ? 'tf_parsing' : 'tf_parse'))}</button>
@@ -4090,7 +4118,7 @@ function tcRow(x){
   const now = !per || !x.active ? '' : x.done_today ? t('tc_done_today') : pd ? pd.txt : x.period && x.period.next ? t('tc_next', { d: dayLabel(x.period.next) }) : '';
   const sop = !x.sop ? '' : x.sop.gone ? t('tc_sop_gone', { n: sopTitle(x.sop) }) : t('tc_sop', { n: sopTitle(x.sop) }) + (x.sop_ai && x.photo !== 'check' ? ' · ' + t('tc_sop_ai') : '');   // v121
   const sub = [who, perLabel(x), person ? (per ? '' : t('tc_on_shift')) : toWhen(x), t('tf_ph_' + ph), x.items > 1 ? t('tc_items', { n: x.items }) : '', sop,
-    per ? (r.total ? t('tc_rate_' + x.repeat, { a: r.done, b: r.total }) : t('tc_rate0_per')) : r.total ? t('tc_rate', { a: r.done, b: r.total }) : t('tc_rate0'), now].filter(Boolean).join(' · ');
+    per ? (r.total ? t('tc_rate_' + x.repeat, { a: r.done, b: r.total }) + (+r.times > 1 && r.miss ? ' · ' + t('tc_miss', { n: r.miss }) : '') : t('tc_rate0_per')) : r.total ? t('tc_rate', { a: r.done, b: r.total }) : t('tc_rate0'), now].filter(Boolean).join(' · ');   // v132：少做几次
   const acts = x.can_edit && nmCan() ? (x.active ? `<button class="link" data-act="tf-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="tc-on" data-def="${x.def_id}" data-on="0">${esc(t('tc_disable'))}</button>`
     : `<button class="link" data-act="tc-on" data-def="${x.def_id}" data-on="1">${esc(t('tc_enable'))}</button>`) : '';
   const bad = x.active && r.total && r.done < r.total;
@@ -8836,10 +8864,11 @@ document.addEventListener('click', async ev => {
       const e = state.tfEdit; if (!e) break; tfSync();
       const k = el.dataset.k, v = el.dataset.v;
       if (k === 'dayMode'){ e.dayMode = v; if (v === 'today') e.day = bizToday(); else if (v === 'tomorrow') e.day = addDays(bizToday(), 1); else if (!e.day || e.day < bizToday()) e.day = addDays(bizToday(), 2); }
-      else e[k] = v;
+      else e[k] = k === 'makeup' ? v === 'true' : k === 'times' ? +v : v;   // v132
       if (k === 'repeat' && e.repeat !== 'daily' && e.photo === 'always') e.photo = 'photo';   // v120：一次 / 周期只有 拍照 / 打勾
       if (k === 'repeat' && e.repeat !== 'once' && e.photo === 'result') e.photo = 'photo';   // v128：交回结果只给一次性的任务
       if (k === 'repeat' && e.repeat === 'week' && +e.rd > 7) e.rd = 1;
+      if (k === 'repeat' && +e.times > (e.repeat === 'week' ? 7 : 10)) e.times = e.repeat === 'week' ? 7 : 10;   // v132
       if (e.repeat === 'once' && !e.day){ e.day = addDays(bizToday(), 1); e.dayMode = 'tomorrow'; }
       if (k === 'who' || k === 'area'){ const ok = tfStoresFor(tfArea(e)); e.stores = e.stores.filter(st => ok.includes(st)); if (!e.stores.length && ok.length === 1) e.stores = ok.slice(); }
       tfRedraw(); break;
@@ -8890,12 +8919,13 @@ document.addEventListener('click', async ev => {
           p_stores: person ? (e.tag ? [e.tag] : []) : e.stores, p_name_zh: zh, p_name_de: de,
           p_photo: e.photo === 'result' ? 'check' : per && e.photo === 'always' ? 'photo' : e.photo,
           p_sop_item: e.sop || null, p_sop_ai: !!(e.sop && !['check', 'result'].includes(e.photo) && e.sopAi),   // v121：连 SOP、AI 按 SOP 看照片
-          p_extra: { photos: e.photos || [], link: link || null, result: e.photo === 'result' && once } });   // v128：附照片、链接、交回结果
+          p_extra: { photos: e.photos || [], link: link || null, result: e.photo === 'result' && once,   // v128：附照片、链接、交回结果
+                     times: per ? (+e.times || 1) : 1, makeup: per ? e.makeup !== false : true } });   // v132：几次、没做完要不要补
         if (e.sop) state.sopSug = (state.sopSug || []).filter(x => x.sop_item_id !== e.sop);
         if (r && person && once && !r.self) callPush('task_assign', { def_id: r.id });   // 推给被指定的人（push v12 只推一次性的；换了人才会再推）
         state.tfEdit = null;
         toast(person && once ? (r.self ? t('nm_saved_self', { d: dayLabel(e.day) }) : t('nm_saved', { n: r.to || '', d: dayLabel(e.day) }))
-          : person ? t('tf_saved_rep', { n: r.self ? t('nm_me') : r.to || '', r: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm }) })
+          : person ? t('tf_saved_rep', { n: r.self ? t('nm_me') : r.to || '', r: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm, times: e.times }) })
           : (r.ids || []).length > 1 ? t('tf_saved_n', { n: r.ids.length }) : t('tf_saved'));
         await Promise.all([nmLoad(), tfLoad(), loadTasks()]); render(); window.scrollTo(0, 0);
       } catch(err){ e.busy = false; toast(errText(err), true); if (state.tfEdit === e) tfRedraw(); }
