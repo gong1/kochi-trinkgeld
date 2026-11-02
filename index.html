@@ -670,7 +670,7 @@ zh: {
   lib_new:'+ 新资料', lib_kind_file:'文件（PDF / 照片）', lib_kind_text:'文字（在这里写）', lib_f_cat:'类别', lib_f_store:'哪家店', lib_store_both:'两家',
   lib_f_aud:'给谁看', lib_f_must:'要员工确认看过（发布时推送到手机，首页提醒到确认为止）', lib_f_tz:'标题（中文）', lib_f_td:'标题（德文）',
   lib_f_bz:'正文（中文）', lib_f_bd:'正文（德文）', lib_f_files:'文件（PDF 或照片，每个最大 25 MB；每个选一下语言）', lib_f_add_file:'＋ 选文件',
-  lib_f_photos:'照片（可选）', lib_f_add_photo:'＋ 加照片', lib_f_remove:'去掉', lib_f_kept:'沿用上一版',
+  lib_f_photos:'照片（可选）', lib_f_add_photo:'＋ 加照片', lib_f_remove:'去掉', lib_f_kept:'沿用上一版', lib_f_replaced:'上一版的 {n} 已换掉（新加了同一语言的文件）', lib_f_back:'放回',
   lib_f_replaces:'换新版：{n}（第 {v} 版）。发布后旧的标「已过期」，员工只看到新的；没去掉的文件沿用，不用重新上传。',
   lib_publish:'发布', lib_uploading:'正在上传 {a} / {b}……', lib_published:'已发布，已推送给 {n} 人（开了手机通知的人会收到）。', lib_published0:'已发布。',
   lib_too_big:'{n} 太大了（{s}），每个文件最大 25 MB。请让设计师导出一份「网页版 / 屏幕版」PDF。', lib_bad_type:'{n} 不是 PDF 或图片。',
@@ -1222,7 +1222,7 @@ de: {
   lib_new:'+ Neue Unterlage', lib_kind_file:'Datei (PDF / Foto)', lib_kind_text:'Text (hier schreiben)', lib_f_cat:'Kategorie', lib_f_store:'Restaurant', lib_store_both:'Beide',
   lib_f_aud:'Für wen', lib_f_must:'Lesebestätigung nötig (Push beim Veröffentlichen, Hinweis auf „Heute“ bis zur Bestätigung)', lib_f_tz:'Titel (Chinesisch)', lib_f_td:'Titel (Deutsch)',
   lib_f_bz:'Text (Chinesisch)', lib_f_bd:'Text (Deutsch)', lib_f_files:'Dateien (PDF oder Foto, je max. 25 MB; Sprache wählen)', lib_f_add_file:'＋ Datei wählen',
-  lib_f_photos:'Fotos (optional)', lib_f_add_photo:'＋ Foto hinzufügen', lib_f_remove:'Entfernen', lib_f_kept:'aus der letzten Version',
+  lib_f_photos:'Fotos (optional)', lib_f_add_photo:'＋ Foto hinzufügen', lib_f_remove:'Entfernen', lib_f_kept:'aus der letzten Version', lib_f_replaced:'{n} aus der letzten Version ersetzt (neue Datei in derselben Sprache)', lib_f_back:'Zurückholen',
   lib_f_replaces:'Neue Version von: {n} (Version {v}). Die alte wird „abgelaufen“, Mitarbeiter sehen nur die neue; nicht entfernte Dateien werden übernommen.',
   lib_publish:'Veröffentlichen', lib_uploading:'Wird hochgeladen {a} / {b} …', lib_published:'Veröffentlicht, Push an {n} Personen (wer Benachrichtigungen an hat, bekommt sie).', lib_published0:'Veröffentlicht.',
   lib_too_big:'{n} ist zu groß ({s}); max. 25 MB pro Datei. Bitte eine „Web/Bildschirm“-Version des PDFs exportieren lassen.', lib_bad_type:'{n} ist kein PDF und kein Bild.',
@@ -7802,6 +7802,9 @@ function libDetHTML(x, D){
       + gmBtn(p.id, p.name, 'lib:' + x.id, t(x.must_confirm ? 'gm_ctx_lib' : 'gm_ctx_lib_open', { n: annT(x, 'title'), v: x.version }), true)).join('、') : esc(t(x.must_confirm ? 'lib_all_ok' : 'lib_all_open'))}</div>` : ''}
     ${ppl.filter(p => p.confirmed_at || p.opened_at).map(p => `<div class="small muted">${esc(p.name)} ${p.confirmed_at ? '✓ ' + esc(fmtDateTime(p.confirmed_at)) : '👁 ' + esc(fmtDateTime(p.opened_at))}</div>`).join('')}</div>`;
 }
+// v134（老板 2026-11-02 反馈）：更新时新加了某种语言的文件 → 上一版同一语言的文件算换掉（不发布），可以「放回」；语言改了跟着变
+const libReplaced = (F, f) => !!(F.replaces && f.path && !f.file && !f.restored && F.files.some(n => n.file && n.lang === f.lang));
+const libFilesOut = F => F.files.filter(f => !libReplaced(F, f));
 function libRowHTML(f, i, k){
   return `<div class="item" style="padding:8px 10px"><div class="top"><div style="min-width:0"><strong style="word-break:break-all">${esc(f.name)}</strong>
       <span class="muted small">${esc(libSize(f.size || f.bytes))}${f.path && !f.file ? ' · ' + esc(t('lib_f_kept')) : ''}</span></div>
@@ -7819,7 +7822,8 @@ function libFormHTML(F){
     <div class="seg sm" style="margin:6px 0 10px">${['both', 'Flingern', 'Bismarck'].map(k => `<button data-act="lib-store" data-k="${k}" class="${F.store === k ? 'on' : ''}">${esc(k === 'both' ? t('lib_store_both') : k)}</button>`).join('')}</div>
     <div class="field"><label for="lib-tz">${esc(t('lib_f_tz'))}</label><input class="input" id="lib-tz" value="${v('title_zh')}"></div>
     <div class="field"><label for="lib-td">${esc(t('lib_f_td'))}</label><input class="input" id="lib-td" value="${v('title_de')}"></div>
-    ${F.kind === 'file' ? `<div class="grp-t">${esc(t('lib_f_files'))}</div><div class="list" style="margin:6px 0">${F.files.map((f, i) => libRowHTML(f, i, 'files')).join('')}</div>
+    ${F.kind === 'file' ? `<div class="grp-t">${esc(t('lib_f_files'))}</div><div class="list" style="margin:6px 0">${F.files.map((f, i) => libReplaced(F, f) ? '' : libRowHTML(f, i, 'files')).join('')}</div>
+        ${F.files.map((f, i) => libReplaced(F, f) ? `<div class="small muted" style="margin:0 0 6px">${esc(t('lib_f_replaced', { n: f.name }))} <button class="link" type="button" data-act="lib-f-back" data-i="${i}">${esc(t('lib_f_back'))}</button></div>` : '').join('')}
         <label class="btn ghost" style="cursor:pointer">${esc(t('lib_f_add_file'))}<input type="file" accept="application/pdf,image/*" multiple data-libfile="1" hidden></label>
         ${libAiHTML(F)}
         <div class="field"><label for="lib-bz">${esc(t('lib_f_note_zh'))}</label><textarea class="input tkm-ta" id="lib-bz" rows="6">${v('body_zh')}</textarea></div>
@@ -7969,9 +7973,9 @@ async function libPublish(){
   libKeep(); const F = state.libForm; if (!F || F.busy) return;
   if (F.aiBusy) return toast(t('lib_ai_wait'), true);
   if (!(F.title_zh || '').trim() && !(F.title_de || '').trim()) return toast(t('err_LIB_EMPTY'), true);
-  if (F.kind === 'file' && !F.files.length) return toast(t('err_LIB_EMPTY'), true);
+  if (F.kind === 'file' && !libFilesOut(F).length) return toast(t('err_LIB_EMPTY'), true);
   if (F.kind === 'text' && !(F.body_zh || '').trim() && !(F.body_de || '').trim()) return toast(t('err_LIB_EMPTY'), true);
-  const list = F.kind === 'file' ? F.files : F.photos, old = F.kind === 'file' && !F.replaces ? F.old : [];
+  const list = F.kind === 'file' ? libFilesOut(F) : F.photos, old = F.kind === 'file' && !F.replaces ? F.old : [];   // v134：换掉的上一版文件不发布
   const fl = (xs, photo) => xs.map(f => ({ path: f.path, name: f.name, lang: photo ? 'photo' : f.lang, mime: f.type || f.mime || null, bytes: f.size || f.bytes || null }));
   try {
     if ([...list, ...old].some(f => !f.path)){
@@ -9645,6 +9649,7 @@ document.addEventListener('click', async ev => {
     case 'lib-kind': libKeep(); state.libForm.kind = el.dataset.k; keepScroll(render); break;
     case 'lib-store': libKeep(); state.libForm.store = el.dataset.k; state.libForm.touched.store = true; keepScroll(render); break;
     case 'lib-aud': libKeep(); state.libForm.audience = el.dataset.k; keepScroll(render); break;
+    case 'lib-f-back': { libKeep(); const f = state.libForm && state.libForm.files[+el.dataset.i]; if (f) f.restored = true; keepScroll(render); break; }   // v134：放回上一版的文件
     case 'lib-f-rm': libKeep(); state.libForm[el.dataset.k].splice(+el.dataset.i, 1); if (el.dataset.k !== 'photos') state.libForm.changes = null; keepScroll(render); break;
     case 'lib-publish': libPublish(); break;
     case 'lib-ai-run': libAiRun(el.dataset.fresh === '1'); break;   // v80
@@ -10473,6 +10478,7 @@ document.addEventListener('click', async ev => {
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.classList && ev.target.classList.contains('lib-lang') && state.libForm && state.libForm.replaces){ libKeep(); keepScroll(render); return; }   // v134：语言改了，换掉哪份跟着变
   if (ev.target.id === 'tf-rd' || ev.target.id === 'tf-rm'){ tfSync(); tfRedraw(); return; }   // v120：周期从哪天开始，说明跟着变
   if (ev.target.id === 'tf-sop'){ const e = state.tfEdit; if (!e) return; const was = e.sop; tfSync();   // v121：选了 SOP：名字空着就用 SOP 的标题，AI 看照片默认开（1A）
     if (e.sop && e.sop !== was){ e.sopAi = true; const it = ((state.tfSops || {}).topics || []).flatMap(tp => tp.items || []).find(i => i.id === e.sop);
@@ -10512,7 +10518,7 @@ document.addEventListener('change', async ev => {
       if (f.size > 25 * 1048576){ toast(t('lib_too_big', { n: f.name, s: libSize(f.size) }), true); continue; }
       let file = f, type = f.type;
       if (type !== 'application/pdf') try { file = await (await fetch(await compressImage(f, 2400, 0.85))).blob(); type = 'image/jpeg'; } catch(e){ toast(t('err_GENERIC'), true); continue; }
-      to.push({ file, name: f.name, size: file.size, type, lang: libGuessLang(f.name, old ? [] : F.files) });
+      to.push({ file, name: f.name, size: file.size, type, lang: libGuessLang(f.name, old ? [] : F.replaces ? F.files.filter(x => x.file) : F.files) });   // v134：更新时只看这次新加的
     }
     ev.target.value = ''; F.changes = null; await keepScroll(render); libAiRun(); return;
   }
