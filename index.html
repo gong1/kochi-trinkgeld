@@ -498,7 +498,7 @@ zh: {
   be_date_btn:'改日期', be_date_lbl:'新日期', be_date_hint:'只有老板能改。改了日期，Runner / 吧台按新日期的排班重新选好，小费按新日期重新分；点收不变。',
   be_date_reason:'为什么改日期（会记进日志）', be_date_reason_ph:'例如：AI 把 28 号读成了 26 号',
   be_date_sched:'{d}{s}的排班：Runner {r}，吧台 {b}。已按这个选好，请看一眼。', be_date_nosched:'{d} 的排班还没发布：Runner / 吧台请自己选。',
-  be_date_cancel:'不改日期', be_date_saved:'日期已改成 {d}', be_date_ai:'AI 读的是 {d}，{n} 改过',
+  be_date_cancel:'不改日期', be_rid_lbl:'报告编号', be_rid_btn:'改编号', be_rid_new:'纸上的报告编号', be_rid_hint:'只有老板能改。对着照片（或纸上的 Bon）把「Identifikationsnummer für Bericht」改对。只改编号，钱和分配都不变。', be_rid_reason:'为什么改（会记进日志）', be_rid_reason_ph:'例：对过照片，纸上是 X1181788.480', be_rid_save:'保存编号', be_rid_cancel:'不改编号', be_rid_saved:'报告编号已改成 {r}', be_rid_conflict:'（和另一张冲突，临时加了日期）', be_date_saved:'日期已改成 {d}', be_date_ai:'AI 读的是 {d}，{n} 改过',
   act_bon_entry_date:'改 Bon 日期', ad_date_from:'原来的日期', ad_date_into:'改成', ad_ai_date:'AI 读的日期',
   // v111：SOP
   admin_sop:'SOP', sop_more:'📋 SOP', sop_title:'SOP', sop_new:'＋ 写一条 SOP（说一段就行）', sop_mine:'我写的（{n}）', sop_st_pending:'等老板确认', sop_st_rejected:'被退回', sop_st_approved:'已确认', sop_st_superseded:'被新的一版取代',
@@ -913,7 +913,7 @@ zh: {
   wait_read:'正在识别单据，请稍等', need_retake:'请先重拍单据', retake_all:'全部重拍', bon_numbers:'单据数字（自动识别，不能修改）',
   done_review:'这张单据识别有疑问，老板会看照片核对。信封照常放。', review_title:'待核对的 Bon（识别未通过）', review_save:'核对完毕，保存',
   reviewed:'已保存，分成已重新计算', review_first:'这周还有待核对的 Bon，请老板先在「审批」里处理', review_hint:'看照片后改正下面两个数字，分成和差额会按原来的钱包金额重新计算。',
-  prob_CARD_TIP_MISMATCH:'刷卡小费在单据上几处不一致', prob_CLOSING_MISMATCH:'Schlussbestand 验算不符', prob_NO_CLOSING:'没有读到 Schlussbestand', prob_UNREADABLE:'有看不清的项目', same_today:'同今天其他人：{n}', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
+  prob_CARD_TIP_MISMATCH:'刷卡小费在单据上几处不一致', prob_RID_CONFLICT:'报告编号和 {a} {b} 的 Bon 一样，有一张读错了：请对照两张的照片，在读错的那张的修改页里改编号', prob_CLOSING_MISMATCH:'Schlussbestand 验算不符', prob_NO_CLOSING:'没有读到 Schlussbestand', prob_UNREADABLE:'有看不清的项目', same_today:'同今天其他人：{n}', own_device:'这是我自己的手机，保持登录', own_device_hint:'店里的 iPad 和手机不要勾选。', own_short:'个人设备', done_ok:'完成',
   pick_runner:'请选择 Runner，没有就点「无 Runner」', pick_bar:'请选择吧台，没有就点「无吧台」', not_chosen:'未选择',
   edit_reason:'修改理由', edit_reason_hint:'录入超过 10 分钟后的修改，需要老板批准', submit_request:'提交修改申请',
   request_sent:'已提交，等老板批准', ask_del_reason:'删除理由（需要老板批准）', pending_tag:'待批准',
@@ -1044,7 +1044,7 @@ de: {
   be_date_btn:'Datum ändern', be_date_lbl:'Neues Datum', be_date_hint:'Nur der Chef kann das. Mit neuem Datum werden Runner / Bar nach dem Dienstplan dieses Tages neu gewählt und das Trinkgeld neu verteilt; „gezählt“ bleibt.',
   be_date_reason:'Warum wird das Datum geändert? (kommt ins Protokoll)', be_date_reason_ph:'z. B. KI hat 28 als 26 gelesen',
   be_date_sched:'Dienstplan {d}{s}: Runner {r}, Bar {b}. So vorausgewählt – bitte kurz prüfen.', be_date_nosched:'Der Dienstplan für {d} ist noch nicht veröffentlicht: Runner / Bar bitte selbst wählen.',
-  be_date_cancel:'Datum nicht ändern', be_date_saved:'Datum geändert auf {d}', be_date_ai:'KI las {d}, korrigiert von {n}',
+  be_date_cancel:'Datum nicht ändern', be_rid_lbl:'Berichtsnummer', be_rid_btn:'Nummer ändern', be_rid_new:'Berichtsnummer auf dem Papier', be_rid_hint:'Nur der Chef kann das. Die „Identifikationsnummer für Bericht“ nach dem Foto (oder dem Papier-Bon) korrigieren. Nur die Nummer ändert sich, Beträge und Verteilung bleiben.', be_rid_reason:'Warum (kommt ins Protokoll)', be_rid_reason_ph:'z. B. Foto geprüft, auf dem Papier steht X1181788.480', be_rid_save:'Nummer speichern', be_rid_cancel:'Nummer nicht ändern', be_rid_saved:'Berichtsnummer geändert auf {r}', be_rid_conflict:' (Konflikt mit einem anderen Bon, vorläufig mit Datum)', be_date_saved:'Datum geändert auf {d}', be_date_ai:'KI las {d}, korrigiert von {n}',
   act_bon_entry_date:'Bon-Datum geändert', ad_date_from:'Altes Datum', ad_date_into:'Neu', ad_ai_date:'Von KI gelesen',
   // v111：SOP
   admin_sop:'SOP', sop_more:'📋 SOP', sop_title:'SOP', sop_new:'＋ SOP schreiben (einfach erzählen)', sop_mine:'Meine ({n})', sop_st_pending:'wartet auf den Chef', sop_st_rejected:'zurückgegeben', sop_st_approved:'bestätigt', sop_st_superseded:'durch neue Fassung ersetzt',
@@ -1459,7 +1459,7 @@ de: {
   wait_read:'Bon wird noch ausgelesen, bitte kurz warten', need_retake:'Bitte zuerst den Bon neu fotografieren', retake_all:'Alles neu fotografieren', bon_numbers:'Zahlen vom Bon (automatisch erkannt, nicht änderbar)',
   done_review:'Bei diesem Bon gab es Unklarheiten – der Chef prüft das Foto. Umschlag bitte wie immer abgeben.', review_title:'Zu prüfende Bons (Auslesen nicht bestanden)', review_save:'Geprüft, speichern',
   reviewed:'Gespeichert, Verteilung neu berechnet', review_first:'Diese Woche gibt es noch zu prüfende Bons – bitte zuerst unter „Freigaben“ erledigen', review_hint:'Foto ansehen und die beiden Zahlen korrigieren. Verteilung und Fehlbetrag werden mit dem ursprünglichen Portemonnaie-Betrag neu berechnet.',
-  prob_CARD_TIP_MISMATCH:'Kartentrinkgeld an mehreren Stellen unterschiedlich', prob_CLOSING_MISMATCH:'Schlussbestand rechnerisch falsch', prob_NO_CLOSING:'Schlussbestand nicht gelesen', prob_UNREADABLE:'Unleserliche Felder', same_today:'Wie die anderen heute: {n}', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
+  prob_CARD_TIP_MISMATCH:'Kartentrinkgeld an mehreren Stellen unterschiedlich', prob_RID_CONFLICT:'Gleiche Berichtsnummer wie der Bon von {b} vom {a} – einer ist falsch gelesen: bitte beide Fotos vergleichen und beim falschen Bon unter „Ändern“ die Nummer korrigieren', prob_CLOSING_MISMATCH:'Schlussbestand rechnerisch falsch', prob_NO_CLOSING:'Schlussbestand nicht gelesen', prob_UNREADABLE:'Unleserliche Felder', same_today:'Wie die anderen heute: {n}', own_device:'Das ist mein eigenes Handy – angemeldet bleiben', own_device_hint:'Bei iPads und Handys des Restaurants nicht ankreuzen.', own_short:'Eigenes Gerät', done_ok:'Fertig',
   pick_runner:'Bitte Runner wählen – oder „Kein Runner"', pick_bar:'Bitte Bar wählen – oder „Keine Bar"', not_chosen:'nicht gewählt',
   edit_reason:'Grund der Änderung', edit_reason_hint:'Änderungen später als 10 Minuten nach dem Eintragen muss der Chef freigeben', submit_request:'Änderung beantragen',
   request_sent:'Beantragt. Wartet auf Freigabe durch den Chef.', ask_del_reason:'Grund für das Löschen (Freigabe durch den Chef nötig)', pending_tag:'wartet auf Freigabe',
@@ -1707,6 +1707,9 @@ const ERR_ZH = {
   BON_DATE_CHOICE: '只能改成今天或昨天。都不对请点「都不对，重拍」把顶部的日期拍清楚；重拍还不行，请把 Bon 交给老板录入。',
   BON_NEWDATE_BAD: '新日期不对：不能是今天以后的日子。请重新选日期。',
   BON_DATE_REASON: '请写一句为什么改日期（会记进日志）。',
+  BON_RID_BAD: '报告编号的格式不对。应该像 X1181788.480 这样（字母 X、数字、一个点、数字），请对着纸上的「Identifikationsnummer für Bericht」再输一次。',
+  BON_RID_REASON: '请写一句为什么改报告编号（会记进日志）。',
+  BON_RID_TAKEN: '这个报告编号已经在 {d} {n} 的 Bon 上了。请先打开那张 Bon 对照片，那张读错的话先把它的编号改对，再回来改这张。',
   BON_DATE_PENDING: '这张 Bon 还有一个员工的修改申请没处理：请先在「管理 → 审批」里批准或拒绝，再改日期。',
   SOP_NOT_WRITER: '你不能写这个区域的 SOP：只有老板、区域主管和老板指定的 SOP 编写人能写。需要的话请找老板。',
   SOP_EMPTY: '内容不够：要有标题和至少一个步骤。先说一段，再点「✨ AI 整理」。',
@@ -1919,6 +1922,9 @@ const ERR_DE = {
   BON_DATE_CHOICE: 'Nur heute oder gestern möglich. Stimmt beides nicht, „Beides falsch – neu fotografieren“ tippen und das Datum oben scharf fotografieren; klappt es dann nicht, den Bon dem Chef zum Eintragen geben.',
   BON_NEWDATE_BAD: 'Neues Datum ungültig: Es darf nicht in der Zukunft liegen. Bitte ein anderes Datum wählen.',
   BON_DATE_REASON: 'Bitte kurz schreiben, warum das Datum geändert wird (kommt ins Protokoll).',
+  BON_RID_BAD: 'Die Berichtsnummer hat ein falsches Format. Sie sieht so aus: X1181788.480 (X, Ziffern, ein Punkt, Ziffern). Bitte nach der „Identifikationsnummer für Bericht“ auf dem Papier neu eingeben.',
+  BON_RID_REASON: 'Bitte kurz schreiben, warum die Berichtsnummer geändert wird (kommt ins Protokoll).',
+  BON_RID_TAKEN: 'Diese Berichtsnummer steht schon beim Bon von {n} vom {d}. Bitte zuerst diesen Bon öffnen und mit dem Foto vergleichen; ist er falsch gelesen, dort zuerst die Nummer korrigieren, dann hier.',
   BON_DATE_PENDING: 'Für diesen Bon wartet noch ein Änderungsantrag: bitte erst unter „Verwaltung → Freigaben“ annehmen oder ablehnen, dann das Datum ändern.',
   SOP_NOT_WRITER: 'Du kannst für diesen Bereich keine SOP schreiben: nur der Chef, Bereichsleitungen und vom Chef bestimmte SOP-Schreiber. Bei Bedarf den Chef fragen.',
   SOP_EMPTY: 'Zu wenig Inhalt: Titel und mindestens ein Schritt nötig. Erst erzählen, dann „✨ KI ordnen“ tippen.',
@@ -5945,6 +5951,42 @@ async function bonEditDate(v){
   } else { f.runners = (f.origRunners || []).slice(); f.bars = (f.origBars || []).slice(); }
   keepScroll(render);
 }
+// v131：老板改一张 Bon 的报告编号（AI 读错、占了别的 Bon 的号时）：只改编号，钱和分配不变
+const bonEditCanRid = () => !!(state.me.is_admin && !state.viewAs && state.form.isBon && state.form.entryId);
+async function bonEditRidLoad(){
+  const f = state.form;
+  try { const r = await rpc('admin_bon_report_id', { ...tok(), p_entry_id: f.entryId, p_report_id: null, p_reason: null }); f.rid = (r && r.report_id) || ''; }
+  catch(e){ f.rid = ''; }
+  if (state.form === f) keepScroll(render);
+}
+function bonEditRidRow(){
+  const f = state.form; if (!bonEditCanRid() || f.rid === null) return '';
+  const tmp = /#/.test(f.rid || '');
+  return `<div class="li"><span class="muted">${esc(t('be_rid_lbl'))}</span><strong>${esc((f.rid || '—').replace(/#.*$/, ''))}${tmp ? `<span class="muted small">${esc(t('be_rid_conflict'))}</span>` : ''}
+    ${f.ridOpen ? '' : ` <button class="link" data-act="be-rid-open">${esc(t('be_rid_btn'))}</button>`}</strong></div>`;
+}
+function bonEditRidBox(){
+  const f = state.form; if (!bonEditCanRid() || !f.ridOpen) return '';
+  return `<div style="margin-top:10px"><div class="small muted" style="margin-bottom:6px">${esc(t('be_rid_hint'))}</div>
+    ${f.entryId ? `<div class="acts" style="margin-bottom:6px"><button class="link" data-act="photos" data-id="${f.entryId}">${esc(t('photos'))}</button></div>` : ''}
+    <div class="field"><label for="e-rid">${esc(t('be_rid_new'))}</label><input class="input num" id="e-rid" value="${esc(f.ridNew)}" autocomplete="off" autocapitalize="characters" placeholder="X1181788.480"></div>
+    <div class="field"><label for="e-ridreason">${esc(t('be_rid_reason'))}</label><input class="input" id="e-ridreason" value="${esc(f.ridReason)}" placeholder="${esc(t('be_rid_reason_ph'))}"></div>
+    <div class="row"><button class="btn ghost" data-act="be-rid-cancel">${esc(t('be_rid_cancel'))}</button><button class="btn" data-act="be-rid-save">${esc(t('be_rid_save'))}</button></div></div>`;
+}
+async function bonEditRidSave(btn){
+  const f = state.form; if (!bonEditCanRid()) return;
+  if (!f.ridReason.trim()) return toast(t('err_BON_RID_REASON'), true);
+  if (btn) btn.disabled = true;
+  try {
+    const r = await rpc('admin_bon_report_id', { ...tok(), p_entry_id: f.entryId, p_report_id: f.ridNew, p_reason: f.ridReason.trim() });
+    f.rid = r.report_id; f.ridOpen = false; f.ridNew = ''; f.ridReason = '';
+    toast(t('be_rid_saved', { r: r.report_id })); keepScroll(render);
+  } catch(e){
+    const m = /^BON_RID_TAKEN:([0-9-]+):(.*)$/.exec(String(e && e.message || ''));
+    toast(m ? t('err_BON_RID_TAKEN', { d: dayLabel(m[1]), n: m[2] }) : errText(e), true);
+    if (btn) btn.disabled = false;
+  }
+}
 function viewBonEdit(){
   const f = state.form;
   $('#main').innerHTML = `
@@ -5954,9 +5996,10 @@ function viewBonEdit(){
     <div class="sheet"><div class="sum num">
       <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${esc(f.store)}</strong></div>
       ${bonEditDateRow()}
+      ${bonEditRidRow()}
       <div class="li"><span class="muted">${esc(t('schluss'))}</span><strong>${eur(f.schluss)}</strong></div>
       <div class="li"><span class="muted">${esc(t('card_tip'))}</span><strong>${eur(f.card)}</strong></div>
-    </div>${bonEditDateBox()}</div>
+    </div>${bonEditDateBox()}${bonEditRidBox()}</div>
     <div class="field"><label for="e-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="e-wallet" inputmode="decimal" value="${esc(f.wallet)}"></div></div>
     <div class="field"><label>${esc(t('runner'))}</label><div class="chips">${chipsHTML('runner')}</div></div>
     <div class="field"><label>${esc(t('bar'))}</label><div class="chips">${chipsHTML('bar')}</div></div>
@@ -6350,10 +6393,13 @@ function loadIntoForm(id){
       wallet: money(e.wallet_cents), runners: helpers('runner'), bars: helpers('bar'), entryId: id,
       aiDate: e.ai_date || null, dateFixBy: e.date_fix_by || null, origWallet: e.wallet_cents, origRunners: helpers('runner'), origBars: helpers('bar'),   // v112：老板改日期
       newDate: null, dateOpen: false, dateReason: '', dateSched: null,
+      rid: null, ridOpen: false, ridNew: '', ridReason: '',   // v131：老板改报告编号
       direct: !!e.direct, reason: '', ack: false, server: null,
       selfEdit: !!e.direct && (!e.server || e.server === state.me.name),
       extras: Object.fromEntries(extrasOf(id).map(x => [x.staff_id, x.extra_cents])) };
-    state.entryCtx = { back: state.tab }; state.tab = 'entry'; LS.set('tab', 'entry'); render(); window.scrollTo(0, 0); return;
+    state.entryCtx = { back: state.tab }; state.tab = 'entry'; LS.set('tab', 'entry'); render(); window.scrollTo(0, 0);
+    if (bonEditCanRid()) bonEditRidLoad();
+    return;
   }
   state.form = { date: e.date, store: e.store, card: eurInput(e.card_cents), cash: eurInput(e.cash_cents),
     runners: helpers('runner'), bars: helpers('bar'), server: server && server !== state.me.id ? server : null, entryId: id,
@@ -7318,7 +7364,7 @@ function requestCard(r){
 }
 function reviewCard(r){
   const id = r.entry_id;
-  const probs = (r.problems || []).map(p => { const k = String(p).split(':')[0]; const x = t('prob_' + k); return x === 'prob_' + k ? p : x; }).join('；');
+  const probs = (r.problems || []).map(p => { const [k, a, b] = String(p).split(':'); const x = t('prob_' + k, k === 'RID_CONFLICT' ? { a: a ? dayLabel(a) : '?', b: b || '?' } : null); return x === 'prob_' + k ? p : x; }).join('；');   // v131：编号冲突带日期、名字
   return `<div class="item">
     <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong>${bonTime(r) ? ` <span class="muted num">${esc(bonTime(r))}</span>` : ''}${storeTag(r.store)} <span class="muted">${esc(r.server)}</span></div>
       <div class="amt num">${esc(t('lbl_wallet'))} ${eur(r.wallet_cents)}</div></div>
@@ -9668,6 +9714,9 @@ document.addEventListener('click', async ev => {
       render(); break;
     }
     case 'entry-edit': loadIntoForm(el.dataset.id); break;
+    case 'be-rid-open': state.form.ridOpen = true; state.form.ridNew = (state.form.rid || '').replace(/#.*$/, ''); keepScroll(render); setTimeout(() => { const n = $('#e-rid'); if (n) n.focus(); }, 50); break;   // v131
+    case 'be-rid-cancel': state.form.ridOpen = false; state.form.ridNew = ''; state.form.ridReason = ''; keepScroll(render); break;
+    case 'be-rid-save': bonEditRidSave(el); break;
     case 'be-date-open': state.form.dateOpen = true; keepScroll(render); setTimeout(() => { const n = $('#e-date'); if (n) n.focus(); }, 50); break;   // v112
     case 'be-date-cancel': state.form.dateOpen = false; state.form.dateReason = ''; bonEditDate(null); break;
     // v65：金额不一致的信封 → 打开这张 Bon 的修改页，钱包先填好点出的金额
@@ -10518,6 +10567,8 @@ document.addEventListener('input', ev => {
   if (ev.target.classList && ev.target.classList.contains('xr')) extrasSlide(ev.target);
   if (id === 'f-reason') state.form.reason = ev.target.value;
   if (id === 'e-dreason') state.form.dateReason = ev.target.value;   // v112
+  if (id === 'e-rid') state.form.ridNew = ev.target.value;   // v131
+  if (id === 'e-ridreason') state.form.ridReason = ev.target.value;
   if (id === 'b-wallet'){ const b = state.bon; b.wallet = ev.target.value; b.ack = false; if (b.walletDone){ b.walletDone = false; refreshBonSum(); } }
   if (id === 'e-wallet'){ state.form.wallet = ev.target.value; state.form.ack = false; refreshBonSum(); }
   if (id === 'f-card' || id === 'f-cash'){
