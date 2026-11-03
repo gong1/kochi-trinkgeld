@@ -958,6 +958,9 @@ zh: {
   bg_retake1:'重拍第一张', bg_retake2:'重拍第二张', bg_confirm:'我确认拍全了，继续', bg_confirmed:'好的，已记下',
   bg_f_header:'没拍到开头', bg_f_footer:'没拍到结尾', bg_f_overlap:'两张没接上', bg_photo_flag:'⚠ AI：{m}', bg_photo_conf:'员工确认拍全了（{t}）',
   photo_top:'① 第一张：从最上面拍到「Zahlungen」', photo_bottom:'② 第二张：从「Zahlungen」拍到最下面', take_photo:'📷 点这里拍照',
+  bo_hint:'竖着拍，整张单子占满屏幕', bo_busy:'AI 在看这张照片…', bo_rotated:'已经自动转正。不对的话点「↻ 转一下」。', bo_rot:'↻ 转一下', bo_gallery:'从相册选', bo_retake:'重拍这张',
+  bo_swapped:'两张照片拍反了，已经帮你对调。', bo_not_report:'这张好像不是收银机打出来的 Nutzerbericht，请拍那张报告。', bo_blurry:'这张看不清（糊了、太暗或太小）：请拿稳手机、光线亮一点再拍。',
+  bo_no_top:'第一张没拍到开头（标题和日期那几行）：请从最上面开始拍。', bo_no_bottom:'第二张没拍到结尾（最下面 Lightspeed 那一行）：请拍到最下面。',
   read_bon:'识别单据', reading:'正在识别，请稍等…', bon_result:'识别结果，请核对', employee:'员工',
   schluss:'交店里（Schlussbestand Bar）', card_tip:'刷卡小费', edit_flag_hint:'识别有误可以直接改，改过的记录会被标记，照片会存档。',
   checks_bad:'单据上的数字前后对不上，请仔细核对，必要时重拍。', store_unknown:'识别不出门店或员工，请重拍顶部。',
@@ -1523,6 +1526,9 @@ de: {
   bg_retake1:'Foto 1 neu', bg_retake2:'Foto 2 neu', bg_confirm:'Ich habe alles fotografiert – weiter', bg_confirmed:'Ok, vermerkt',
   bg_f_header:'Anfang fehlt', bg_f_footer:'Ende fehlt', bg_f_overlap:'Fotos schließen nicht an', bg_photo_flag:'⚠ KI: {m}', bg_photo_conf:'Mitarbeiter*in bestätigt: vollständig ({t})',
   photo_top:'① Foto 1: von ganz oben bis „Zahlungen“', photo_bottom:'② Foto 2: ab „Zahlungen“ bis ganz unten', take_photo:'📷 Hier tippen für Foto',
+  bo_hint:'Hochkant fotografieren, der Bon füllt den Bildschirm', bo_busy:'KI prüft das Foto …', bo_rotated:'Automatisch gedreht. Falls falsch: „↻ Drehen“ tippen.', bo_rot:'↻ Drehen', bo_gallery:'Aus Galerie wählen', bo_retake:'Dieses Foto neu',
+  bo_swapped:'Die zwei Fotos waren vertauscht – automatisch getauscht.', bo_not_report:'Das sieht nicht nach dem Nutzerbericht aus der Kasse aus. Bitte diesen Bericht fotografieren.', bo_blurry:'Foto schwer lesbar (unscharf, zu dunkel oder zu klein): Handy ruhig halten, mehr Licht, neu fotografieren.',
+  bo_no_top:'Auf Foto 1 fehlt der Anfang (Überschrift und Datum): bitte ganz oben anfangen.', bo_no_bottom:'Auf Foto 2 fehlt das Ende (unterste Zeile mit „Lightspeed“): bitte bis ganz unten fotografieren.',
   read_bon:'Bon auslesen', reading:'Wird ausgelesen, bitte warten …', bon_result:'Erkannt – bitte prüfen', employee:'Mitarbeiter',
   schluss:'An den Laden (Schlussbestand Bar)', card_tip:'Kartentrinkgeld', edit_flag_hint:'Falls falsch erkannt, bitte korrigieren. Korrekturen werden markiert, das Foto wird gespeichert.',
   checks_bad:'Die Zahlen auf dem Bon passen nicht zusammen. Bitte genau prüfen oder neu fotografieren.', store_unknown:'Filiale oder Mitarbeiter nicht erkannt. Bitte den oberen Teil neu fotografieren.',
@@ -1677,6 +1683,19 @@ function compressImage(file, maxSide, quality){
     };
     img.onerror = e => { URL.revokeObjectURL(url); reject(e); };
     img.src = url;
+  });
+}
+// v139：照片（dataURL）顺时针转 90 / 180 / 270 度；max = 顺便缩小（给 AI 先看一眼用小图）
+function rotateImage(url, deg, max, quality){
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const s = Math.min(1, (max || 99999) / Math.max(img.width, img.height)), w = Math.round(img.width * s), h = Math.round(img.height * s);
+      const side = deg === 90 || deg === 270, c = document.createElement('canvas'); c.width = side ? h : w; c.height = side ? w : h;
+      const g = c.getContext('2d'); g.translate(c.width / 2, c.height / 2); g.rotate((deg || 0) * Math.PI / 180); g.drawImage(img, -w / 2, -h / 2, w, h);
+      resolve(c.toDataURL('image/jpeg', quality || 0.85));
+    };
+    img.onerror = reject; img.src = url;
   });
 }
 // v40：门店清单任务的照片服务（Edge Function「tasks」）
@@ -2228,7 +2247,7 @@ const state = {
   adminSub: 'requests', staffEdit: null, staffList: [],
   entryMode: 'bon', bon: blankBon(), viewAs: null, planWeek: addDays(mondayOf(today()), 7), planSub: 'edit', plan: null, shiftEdit: null
 };
-function blankBon(){ return { top: null, bottom: null, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null, sched: null, dateAns: null }; }
+function blankBon(){ return { top: null, bottom: null, ori: {}, read: null, wallet: '', walletDone: false, shownAt: 0, ack: false, busy: false, seq: 0, fails: 0, readErr: null, dayHelp: null, sched: null, dateAns: null }; }
 function blankForm(){
   return { date: bizToday(), store: LS.get('store', STORES[0]), card: '', cash: '', runners: null, bars: null, server: null, entryId: null, direct: true, reason: '', extras: {} };   // v102：默认日期按营业日（凌晨 5 点前录入算前一天）
 }
@@ -6148,13 +6167,49 @@ function bonGuide(o){
     + bonGuideSVG() + `<div class="small muted" style="margin:8px 0 12px">${esc(t('bg_hint'))}</div>` + btns;
   if (!dlg.open) dlg.showModal();
 }
+// v139：一张 Bon 照片：拍照框（B：先写怎么拍）、↻ 转一下、AI 先看一眼的结果和提醒、C：从相册选（不带 capture，安卓也能选）
+function bonPhHTML(k){
+  const b = state.bon, o = b.ori[k] || {}, warn = bonOriWarn(b, k);
+  return `<label>${esc(t(k === 'top' ? 'photo_top' : 'photo_bottom'))}${k === 'top' ? ` <button type="button" class="link small" style="font-weight:400" data-act="bon-guide">${esc(t('bg_how'))}</button>` : ''}${b[k] && !o.busy ? ` <button type="button" class="link small" style="font-weight:400" data-act="bon-rot" data-k="${k}">${esc(t('bo_rot'))}</button>` : ''}</label>
+    <label class="photo ${b[k] ? 'has' : ''}">${b[k] ? `<img src="${b[k]}" alt="">` : `<span style="text-align:center">${esc(t('take_photo'))}<small style="display:block;font-weight:400;color:var(--muted);margin-top:4px">${esc(t('bo_hint'))}</small></span>`}
+    <input type="file" accept="image/*" capture="environment" data-photo="${k}" hidden></label>
+    ${o.busy ? `<div class="small muted" style="margin-top:4px">${esc(t('bo_busy'))}</div>` : o.rot ? `<div class="small muted" style="margin-top:4px">${esc(t('bo_rotated'))}</div>` : ''}
+    ${warn ? `<div class="warnbox" style="margin:6px 0 0">${esc(warn)} <button type="button" class="link" data-act="bon-retake-one" data-k="${k}">${esc(t('bo_retake'))}</button></div>` : ''}
+    <label class="link small" style="display:inline-block;margin-top:4px;cursor:pointer">${esc(t('bo_gallery'))}<input type="file" accept="image/*" data-photo="${k}" hidden></label>`;
+}
+function bonPhotosRefresh(){ ['top', 'bottom'].forEach(k => { const el = $('#bon-ph-' + k); if (el) el.innerHTML = bonPhHTML(k); }); }
+// v139（识别服务 bon v19）：每拍一张，AI 先看一眼小图：要转几度才正、是不是报告、拍到的是哪一部分、清不清楚。看不出来（出错、超时）就照原样，
+//   读完再按识别结果转（readBon）。员工拍第二张时第一张在后台看；识别等两张都看完再开始。
+async function bonOrient(b, k){
+  const src = b[k], o = b.ori[k] = { busy: true };
+  let r = null;
+  try {
+    const small = await rotateImage(src, 0, 800, 0.8);
+    r = await Promise.race([callFn({ action: 'orient', image: small.split(',')[1] }), new Promise((_, no) => setTimeout(() => no(new Error('TIMEOUT')), 15000))]);
+  } catch(e){ r = null; }
+  if (state.bon !== b || b.ori[k] !== o) return;   // 照片已更换
+  if (r && r.rotate){ try { const u = await rotateImage(src, r.rotate); if (state.bon !== b || b.ori[k] !== o) return; b[k] = u; o.rot = r.rotate; } catch(e){} }
+  o.busy = false; o.res = r || null;
+  const a = b.ori.top, z = b.ori.bottom;   // 两张都看过：上下拍反了就对调
+  if (a && z && a.res && z.res && !a.busy && !z.busy && a.res.part === 'bottom' && z.res.part === 'top'){
+    [b.top, b.bottom] = [b.bottom, b.top]; [b.ori.top, b.ori.bottom] = [z, a]; toast(t('bo_swapped'));
+  }
+  bonPhotosRefresh();
+}
+function bonOriWarn(b, k){
+  const o = b.ori[k]; if (!o || o.busy || !o.res) return '';
+  const r = o.res, other = b.ori[k === 'top' ? 'bottom' : 'top'];
+  if (r.is_report === false) return t('bo_not_report');
+  if (r.sharp === false) return t('bo_blurry');
+  if (k === 'top' && (r.part === 'middle' || (r.part === 'bottom' && other && !other.busy))) return t('bo_no_top');   // 只拍了第一张时先不说（拍完第二张可能对调）
+  if (k === 'bottom' && (r.part === 'middle' || r.part === 'top')) return t('bo_no_bottom');
+  return '';
+}
 const bonCoverBad = b => !!(b && b.read && b.read.checks && b.read.checks.cover_ok === false && !b.coverOk);
 function viewBonNew(){
   const b = state.bon;
-  const ph = (k, label, how) => `<div class="field"><label>${esc(label)}${how ? ` <button type="button" class="link small" style="font-weight:400" data-act="bon-guide">${esc(t('bg_how'))}</button>` : ''}</label>
-    <label class="photo ${b[k]?'has':''}">${b[k] ? `<img src="${b[k]}" alt="">` : `<span>${esc(t('take_photo'))}</span>`}
-    <input type="file" accept="image/*" capture="environment" data-photo="${k}" hidden></label></div>`;
-  let html = entryHeadHTML() + modeSeg() + (!b.top && !b.bottom ? `<div class="infobox" style="margin-top:0">${esc(t('bon_steps'))}${state.me.is_admin && !state.viewAs ? '<br>' + esc(t('px_intro')) : ''}</div>` : '') + ph('top', t('photo_top'), true) + ph('bottom', t('photo_bottom'));   // v92
+  const ph = k => `<div class="field" id="bon-ph-${k}">${bonPhHTML(k)}</div>`;   // v139
+  let html = entryHeadHTML() + modeSeg() + (!b.top && !b.bottom ? `<div class="infobox" style="margin-top:0">${esc(t('bon_steps'))}${state.me.is_admin && !state.viewAs ? '<br>' + esc(t('px_intro')) : ''}</div>` : '') + ph('top') + ph('bottom');   // v92
   if (b.top && b.bottom){
     html += `<div id="bon-status">${bonStatusHTML()}</div>
       <div class="field"><label for="b-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="b-wallet" inputmode="decimal" autocomplete="off" placeholder="0,00" value="${esc(b.wallet)}"></div>
@@ -6287,11 +6342,22 @@ async function readBon(){
   const my = ++b.seq;
   b.busy = true; b.readErr = null; b.read = null; b.dayHelp = null; b.sched = null; b.ack = false; b.dateAns = null; b.coverOk = false; refreshBonParts();
   readTimer(() => b.busy && state.bon === b && my === b.seq, 'read-secs');
+  await Promise.all(['top', 'bottom'].map(k => b.ori[k] && b.ori[k].p).filter(Boolean));   // v139：等 AI 先看完（转正以后再识别）
+  if (state.bon !== b || my !== b.seq || !b.top || !b.bottom) return;
   let r = null, err = null;
   const pxc = state.me.is_admin && !state.viewAs ? { proxy: true, staff_id: ((state.entryCtx || {}).proxy || {}).staff || null } : {};   // v92：老板代交
   try { r = await callFn({ action: 'read', top: b.top.split(',')[1], bottom: b.bottom.split(',')[1], ...pxc }); }
   catch(e){ err = errText(e); }
   if (state.bon !== b || my !== b.seq) return;   // 照片已更换，丢弃旧结果
+  // v139 备用办法：先看一眼没转（或没看出来），整张读不出来，识别说照片是歪的：按它说的转好，自动再读一次（只一次）
+  const pr = r && r.result && r.result.photo_rotate, dr = (r && r.result && r.result.derived) || {};
+  if (r && !dr.report_id && !dr.user_id && !b.autoRot && Array.isArray(pr) && pr.some(x => [90, 180, 270].includes(+x))){
+    b.autoRot = true;
+    try { for (const [i, k] of [[0, 'top'], [1, 'bottom']]) if ([90, 180, 270].includes(+pr[i])){ b[k] = await rotateImage(b[k], +pr[i]); b.ori[k] = { rot: +pr[i] }; } }
+    catch(e){}
+    if (state.bon !== b || my !== b.seq) return;
+    bonPhotosRefresh(); return readBon();
+  }
   if (r){
     const d = r.result.derived || {};
     b.read = r;
@@ -10162,15 +10228,22 @@ document.addEventListener('click', async ev => {
       state.entryMode = 'bon'; state.bon = blankBon(); state.form = blankForm(); state.done = null; state.tab = 'entry'; render(); window.scrollTo(0, 0); break;
     }
     case 'bon-read': readBon(); break;
+    case 'bon-rot': {   // v139：员工自己把照片转 90 度；连点几下时等停下来 1.5 秒再识别
+      const b = state.bon, k = el.dataset.k; if (!b[k] || (b.ori[k] && b.ori[k].busy)) break;
+      try { b[k] = await rotateImage(b[k], 90); } catch(e){ break; }
+      b.ori[k] = { manual: true }; b.read = null; b.readErr = null; b.busy = false; b.seq++; b.autoRot = true; render();
+      clearTimeout(b.rotT); if (b.top && b.bottom) b.rotT = setTimeout(() => { if (state.bon === b) readBon(); }, 1500);
+      break;
+    }
     case 'bon-guide': bonGuide(null); break;   // v126
     case 'bon-retake-one': { const b = state.bon, dlg = $('#photoDlg'); if (dlg && dlg.open) dlg.close();
-      b[el.dataset.k] = null; b.read = null; b.readErr = null; b.busy = false; b.coverOk = false; b.seq++; render();
+      b[el.dataset.k] = null; delete b.ori[el.dataset.k]; b.read = null; b.readErr = null; b.busy = false; b.coverOk = false; b.seq++; render();
       const inp = document.querySelector(`input[data-photo="${el.dataset.k}"]`); if (inp) inp.click(); break; }
     case 'bon-cover-ok': { const b = state.bon; if (!b.read) break; el.disabled = true;
       try { await rpc('bon_cover_confirm', { ...tok(), p_read: b.read.read_id }); b.coverOk = true; const dlg = $('#photoDlg'); if (dlg && dlg.open) dlg.close(); toast(t('bg_confirmed')); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break; }
-    case 'bon-retake': { const b = state.bon; b.top = null; b.bottom = null; b.read = null; b.readErr = null; b.busy = false; b.dateAns = null; b.seq++; render(); window.scrollTo(0, 0); break; }
+    case 'bon-retake': { const b = state.bon; b.top = null; b.bottom = null; b.ori = {}; b.read = null; b.readErr = null; b.busy = false; b.dateAns = null; b.seq++; render(); window.scrollTo(0, 0); break; }
     case 'bon-date': bonDateAnswer(el.dataset.d || null); break;   // v112：日期对吗
     case 'bon-date-again': state.bon.dateAns = null; refreshBonParts(); break;
     case 'review-save': {
@@ -10863,10 +10936,11 @@ document.addEventListener('change', async ev => {
   }
   const el = ev.target;
   if (el.dataset && el.dataset.photo && el.files && el.files[0]){
-    const b = state.bon, firstPair = !(b.top && b.bottom);
-    try { b[el.dataset.photo] = await compressImage(el.files[0]); }
+    const b = state.bon, firstPair = !(b.top && b.bottom), k = el.dataset.photo;
+    try { b[k] = await compressImage(el.files[0]); }
     catch(e){ toast(t('err_GENERIC'), true); return; }
-    b.read = null; b.readErr = null; b.seq++; b.busy = false;
+    b.read = null; b.readErr = null; b.seq++; b.busy = false; b.autoRot = false;
+    const p = bonOrient(b, k); b.ori[k].p = p;   // v139：AI 先看一眼（后台）
     render();
     if (b.top && b.bottom){
       readBon();   // 自动开始识别
