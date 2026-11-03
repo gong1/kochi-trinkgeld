@@ -25,7 +25,7 @@
   --font:"Source Sans 3","PingFang SC","Hiragino Sans GB","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
+html,body{margin:0;height:100%;overscroll-behavior-y:none}   /* v138：iPhone 滑到头时整页回弹，底部菜单被一起拖动、挡住内容（老板 2026-11-03 反馈） */
 body{background:var(--paper);color:var(--ink);font:17px/1.45 var(--font);-webkit-font-smoothing:antialiased}
 .num{font-variant-numeric:tabular-nums}
 button,input,select{font:inherit;color:inherit}
