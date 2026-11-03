@@ -354,6 +354,7 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .tag.bad{background:#F8E1DA;color:var(--neg)}
 .tag.ok{background:var(--celadon-soft);color:var(--celadon-deep)}
 #photoDlg img{display:block;width:100%;margin-bottom:10px;border-radius:6px}
+.rpe-pre{max-height:55vh;overflow:auto;white-space:pre-wrap;word-break:break-word;font-size:12px;line-height:1.4;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px;margin:0 0 12px}   /* v135：邮件报告原件的文字 */
 .login .err{color:#F2B39B;min-height:24px;margin-top:10px}
 
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);transform:translateX(-50%);
@@ -748,6 +749,7 @@ zh: {
   // v72：收店任务谁负责
   task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', task_svc_one:'服务员负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
+  rpe_tag:'✉ 邮件自动导入', rpe_by:'{t}', rpe_file:'原件', rpe_dl:'下载 PDF', rpe_dlg_title:'全天报告原件 · {s} · {d}', rpe_dlg_hint:'Lightspeed 每天发来的 Geschäftsbericht，{t} 自动导入。下面是 PDF 里的文字；要原样的 PDF 点「下载 PDF」。', rpe_replace_q:'{s} {d} 已经有从邮件自动导入的全天报告（应交现金 {a} · 刷卡小费 {b}）。\n\n要用{w}替换它吗？邮件那份会标「被取代」，记录保留。', rpe_w_photo:'这次拍的照片', rpe_w_manual:'手动输入的数字', rpe_job:'这天已经有邮件导入的报告（应交现金 {a}）', rpe_job_replace:'用照片替换', rpe_h_bad:'✉ 邮件里的报告读不出来：{p}。请拍照录入。', rpe_h_none:'✉ 邮件里还没有这天的报告（最后检查 {t}）。', rpe_h_empty:'✉ 邮件里的报告这天没有收款（0 张单）：请看一眼收银机是不是关错了班，或拍照录入。', rpe_h_err:'✉ 读取邮件出错：{e}（{t}）。这天的报告没导入，请拍照录入，并告诉 Claude。', rpe_h_unknown:'✉ 邮件里有 {n} 个 PDF 认不出是哪家店、哪天（{p}）。', rpe_e_MAIL_LOGIN:'登录不了专用邮箱（应用密码可能改了或被删了）', rpe_e_MAIL_FETCH:'取邮件失败', rpe_e_MAIL_SECRET:'自动任务里没设邮箱', rpe_p_STORE:'认不出门店', rpe_p_DAY:'读不出日子', rpe_p_NOT_WHOLE_DAY:'不是全天的报告', rpe_p_PAYMENTS_MISSING:'「Einnahmen nach Zahlungsart」那一段读不出来', rpe_p_PAYMENTS_LINE:'付款方式那一段有读不懂的行', rpe_p_TOTALS_MISSING:'合计（Einnahmen mit / ohne Trinkgeld）读不出来', rpe_p_METHOD:'「{n}」的金额、小费对不上', rpe_p_SUM:'各付款方式加起来和合计对不上', rpe_p_NUMBERS:'数字不完整', rpe_p_DAY_FUTURE:'是今天的（还在营业）', rpe_p_TOO_EARLY:'邮件在营业结束前就发出了，可能不是全天的', rpe_p_NO_ADMIN:'系统里找不到老板账号',   // v135
   hrep_take:'📷 拍全天报告', hrep_env:'💵 点信封（{n}）', hrep_env0:'💵 信封都点完了', hrep_hint:'不用选店和日子：拍完 AI 从报告上认出是哪家店、哪天。先拍上半部分，再拍下半部分（报告短的一张也行）。', hrep_reading:'全天报告识别中…', hrep_saved:'报告已保存', hrep_done:'已自动核对完成', hrep_check:'报告要你看一眼', hrep_look:'去看', hrep_unknown:'认不出是哪家店或哪天：请把报告顶部（店名、日期）拍清楚再拍一次', hrep_retake:'重拍', hrep_close:'关掉', hrep_saved_toast:'{s} · {d} 的全天报告已保存', hrep_check_toast:'{s} · {d} 的全天报告要你看一眼（在「今天」页）', hrep_env_title:'点信封 · 两家店', hrep_env_store:'{n} 个信封', hrep_env_none:'两家店的信封都点完了。',   // v114
   tb_today:'今天', tb_tomorrow:'明天', tb_later:'以后（{n}）', tb_past:'前几天（{n}）', tb_none:'这天没有任务。', tb_later_none:'以后还没有任务。点「＋ 新任务」加一个。', tb_past_none:'最近 7 天没有某一天的任务。', tb_lead_none:'还没设负责人', tl_sum:'负责人（已设 {a} / {b}）', oil_s1:'检查', oil_s2:'填收油日期', oil_s3:'拿到门口', oil_s4:'拿回地下室',   // v105
   onb_q_mentor_sop_gap:'SOP 里没有的 / 不对的？（这一栏会给 SOP 编写人看）', oc_title:'带教清单', oc_can:'会了', oc_practice:'还要练', oc_todo:'还没教', oc_none_today:'今天没教',
@@ -1300,6 +1302,7 @@ de: {
   // v72：Wer erledigt die Feierabend-Aufgabe
   task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', task_svc_one:'Service übernimmt {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
+  rpe_tag:'✉ automatisch per E-Mail', rpe_by:'{t}', rpe_file:'Original', rpe_dl:'PDF herunterladen', rpe_dlg_title:'Tagesbericht (Original) · {s} · {d}', rpe_dlg_hint:'Täglicher Geschäftsbericht von Lightspeed, automatisch importiert am {t}. Unten der Text aus dem PDF; das Original-PDF über „PDF herunterladen“.', rpe_replace_q:'Für {s} {d} gibt es schon einen automatisch per E-Mail importierten Tagesbericht (Abgabe {a} · Kartentrinkgeld {b}).\n\nDurch {w} ersetzen? Der E-Mail-Bericht wird als „ersetzt“ markiert, der Eintrag bleibt gespeichert.', rpe_w_photo:'das neue Foto', rpe_w_manual:'die von Hand eingegebenen Zahlen', rpe_job:'Für diesen Tag gibt es schon einen E-Mail-Bericht (Abgabe {a})', rpe_job_replace:'Durch Foto ersetzen', rpe_h_bad:'✉ Bericht aus der E-Mail nicht lesbar: {p}. Bitte fotografieren.', rpe_h_none:'✉ Noch kein Bericht für diesen Tag in der E-Mail (zuletzt geprüft {t}).', rpe_h_empty:'✉ Laut E-Mail-Bericht keine Zahlungen an diesem Tag (0 Belege): Bitte prüfen, ob an der Kasse die falsche Schicht geschlossen wurde, oder fotografieren.', rpe_h_err:'✉ Fehler beim Lesen der E-Mails: {e} ({t}). Der Bericht wurde nicht importiert – bitte fotografieren und Claude Bescheid geben.', rpe_h_unknown:'✉ {n} PDF in den E-Mails: Filiale oder Tag nicht erkennbar ({p}).', rpe_e_MAIL_LOGIN:'Anmeldung am Postfach fehlgeschlagen (App-Passwort geändert oder gelöscht?)', rpe_e_MAIL_FETCH:'E-Mails konnten nicht geladen werden', rpe_e_MAIL_SECRET:'Postfach im automatischen Ablauf nicht eingerichtet', rpe_p_STORE:'Filiale nicht erkennbar', rpe_p_DAY:'Datum nicht lesbar', rpe_p_NOT_WHOLE_DAY:'kein Bericht für den ganzen Tag', rpe_p_PAYMENTS_MISSING:'Abschnitt „Einnahmen nach Zahlungsart“ nicht lesbar', rpe_p_PAYMENTS_LINE:'unbekannte Zeile bei den Zahlungsarten', rpe_p_TOTALS_MISSING:'Summen (Einnahmen mit / ohne Trinkgeld) nicht lesbar', rpe_p_METHOD:'„{n}“: Betrag und Trinkgeld passen nicht zusammen', rpe_p_SUM:'Summe der Zahlungsarten passt nicht zur Gesamtsumme', rpe_p_NUMBERS:'Zahlen unvollständig', rpe_p_DAY_FUTURE:'ist von heute (noch geöffnet)', rpe_p_TOO_EARLY:'E-Mail kam vor Geschäftsschluss – evtl. nicht der ganze Tag', rpe_p_NO_ADMIN:'kein Chef-Konto gefunden',   // v135
   hrep_take:'📷 Tagesbericht fotografieren', hrep_env:'💵 Umschläge zählen ({n})', hrep_env0:'💵 Alle Umschläge gezählt', hrep_hint:'Filiale und Tag musst du nicht wählen: Die KI erkennt sie auf dem Bericht. Erst den oberen, dann den unteren Teil fotografieren (bei kurzem Bericht reicht ein Foto).', hrep_reading:'Tagesbericht wird gelesen …', hrep_saved:'Bericht gespeichert', hrep_done:'automatisch abgeschlossen', hrep_check:'Bericht bitte prüfen', hrep_look:'Ansehen', hrep_unknown:'Filiale oder Tag nicht erkennbar: Bitte den oberen Teil (Name, Datum) scharf fotografieren und nochmal versuchen', hrep_retake:'Neu fotografieren', hrep_close:'Schließen', hrep_saved_toast:'Tagesbericht {s} · {d} gespeichert', hrep_check_toast:'Tagesbericht {s} · {d} bitte prüfen (Seite „Heute“)', hrep_env_title:'Umschläge zählen · beide Filialen', hrep_env_store:'{n} Umschläge', hrep_env_none:'In beiden Filialen sind alle Umschläge gezählt.',   // v114
   tb_today:'Heute', tb_tomorrow:'Morgen', tb_later:'Später ({n})', tb_past:'Vorher ({n})', tb_none:'An diesem Tag keine Aufgaben.', tb_later_none:'Später noch keine Aufgaben. Mit „＋ Neue Aufgabe“ anlegen.', tb_past_none:'Keine Aufgaben an einem Tag in den letzten 7 Tagen.', tb_lead_none:'Noch niemand verantwortlich', tl_sum:'Verantwortliche ({a} von {b} festgelegt)', oil_s1:'Prüfen', oil_s2:'Abholtermin eintragen', oil_s3:'Raus zur Tür', oil_s4:'Zurück in den Keller',   // v105
   onb_q_mentor_sop_gap:'Fehlt etwas in den SOPs oder stimmt etwas nicht? (Das sehen die SOP-Schreibenden)', oc_title:'Einarbeitungs-Checkliste', oc_can:'Kann es', oc_practice:'Noch üben', oc_todo:'Noch nicht gezeigt', oc_none_today:'Heute nicht',
@@ -1882,6 +1885,7 @@ const ERR_ZH = {
   INVALID_KIND: '类型不对，请选「门」或「窗户组」。',
   PAYER_INVALID: '选的发放人不是在职的小费管理员。请刷新页面后重新选择。',
   REPORT_DUPLICATE: '这个报告编号已经录过了。如果数字录错了，请在已录的报告上点「修正」。',
+  REPORT_EMAIL_EXISTS: '这一天已经有从邮件自动导入的全天报告，不能再加一张（会算两遍）。要用这次的替换它：点「保存」，确认替换。',   // v135
   REPORT_ID_REQUIRED: '请填报告编号（报告顶部的 Identifikationsnummer für Bericht）。',
   RECON_ENVELOPES: '这一天还有信封没点，先点完信封再核对完成。',
   RECON_NO_REPORT: '还没录全天报告，先录入报告再核对完成。',
@@ -2098,6 +2102,7 @@ const ERR_DE = {
   INVALID_KIND: 'Falsche Art – bitte „Tür“ oder „Fenstergruppe“ wählen.',
   PAYER_INVALID: 'Der gewählte Auszahler ist kein aktiver Tip-Manager. Bitte Seite neu laden und neu wählen.',
   REPORT_DUPLICATE: 'Diese Berichtsnummer ist schon erfasst. Bei falschen Zahlen bitte beim erfassten Bericht „Korrigieren“ tippen.',
+  REPORT_EMAIL_EXISTS: 'Für diesen Tag gibt es schon einen automatisch per E-Mail importierten Tagesbericht – ein zweiter würde doppelt zählen. Zum Ersetzen „Speichern“ tippen und bestätigen.',   // v135
   REPORT_ID_REQUIRED: 'Bitte die Berichtsnummer eintragen (oben: Identifikationsnummer für Bericht).',
   RECON_ENVELOPES: 'An diesem Tag sind noch Umschläge nicht gezählt. Erst zählen, dann abschließen.',
   RECON_NO_REPORT: 'Noch kein Schichtbericht erfasst. Erst Bericht erfassen, dann abschließen.',
@@ -3176,6 +3181,29 @@ function reconAllOk(r){
 }
 // v60：核对完成后离开核对页，回到每日核对首页（停在这一天，能看到另一家店还剩什么）
 function reconLeave(){ const d = state.recon && state.recon.day; state.recon = null; state.repForm = null; if (d) state.reconDay = d; window.scrollTo(0, 0); render(); }
+// v135（数据库 v97，老板 2026-11-03 选 2A）：这一天已经有邮件导入的全天报告时，再存一张会报 REPORT_EMAIL_EXISTS。
+// ask = true：问老板要不要用这次的替换它，点了就带 p_replace 再存一次；不替换 → 抛 CANCELLED（不提示）。ask = false：照样抛出，调用的地方自己处理。
+async function repSaveX(args, ask){
+  try { return await rpc('recon_report_save_x', args); }
+  catch(e){
+    if (String(e && e.message) !== 'REPORT_EMAIL_EXISTS' || args.p_replace || !ask) throw e;
+    const r = await rpc('recon_day', { ...tok(), p_store: args.p_store, p_day: args.p_day });
+    const x = (r.reports || []).find(y => y.source === 'email'); if (!x) throw e;
+    if (!confirm(t('rpe_replace_q', { s: args.p_store, d: dayLabel(args.p_day), a: eurSigned(x.schluss_cents), b: eur(x.card_tip_cents), w: t(args.p_read_id ? 'rpe_w_photo' : 'rpe_w_manual') })))
+      throw new Error('CANCELLED');
+    return await rpc('recon_report_save_x', { ...args, p_replace: x.id });
+  }
+}
+// v135：邮件导入的问题写成一句话（problems 是 report_import.py 的代码）
+const rpeProblems = ps => (ps || []).map(p => p.startsWith('METHOD:') ? t('rpe_p_METHOD', { n: p.slice(7) }) : t('rpe_p_' + p)).filter((x, i, a) => a.indexOf(x) === i).join(state.lang === 'de' ? '; ' : '；');
+// v135：这家店这天还没有报告时，邮件那边是什么情况（首页店卡片、核对页第一步）；还没开始自动导入就不说
+function rpeHint(store, day){
+  const I = state.repImp; if (!I || !I.first_run || day >= bizToday() || day < addDays(I.first_run.slice(0, 10), -1)) return '';
+  const it = (I.items || []).find(x => x.store === store && x.day === day);
+  if (it) return it.status === 'bad' ? t('rpe_h_bad', { p: rpeProblems(it.problems) }) : it.status === 'empty' ? t('rpe_h_empty') : '';
+  const lr = I.last_run;
+  return lr && lr.error ? t('rpe_h_err', { e: t('rpe_e_' + lr.error), t: fmtDateTime(lr.at) }) : t('rpe_h_none', { t: lr ? fmtDateTime(lr.at) : '–' });
+}
 async function autoComplete(store, day){
   try {
     const r = await rpc('recon_day', { ...tok(), p_store: store, p_day: day });
@@ -3263,6 +3291,7 @@ function rcCardHTML(r){
     ${r.changed_after ? `<div class="negc small" style="margin:4px 0">${esc(t('rk_changed'))}</div>` : done ? `<div class="pos small" style="margin:4px 0">${esc(t('rk_done', { n: r.completed_by, t: fmtDateTime(r.completed_at) }))}</div>` : ''}
     <div class="sum" style="margin-top:6px">
       ${line('rk_cash', rcStatusText(r), r.status === 'diff' || (r.status === 'no_report' && r.day < bizToday()))}
+      ${(h => h ? `<div class="small warnc" style="margin:0 0 4px">${esc(h)}</div>` : '')(r.status === 'no_report' ? rpeHint(r.store, r.day) : '')}
       ${line('rk_env', (r.envelopes_todo ? t('rk_env_todo', { n: r.envelopes_todo }) : r.envelopes ? t('rk_env_done', { n: r.envelopes }) : t('rk_env_none')) + (r.envelopes_diff ? ' · ' + t('rk_env_diff', { n: r.envelopes_diff }) : '')
         + (env.length ? ' · ' + t('rk_env_total', { x: eur(envSum) }) : ''), !!(r.envelopes_todo || r.envelopes_diff))}${envRows}
       ${LOCK_ON ? line('rk_lock', rcLockText(r) + (done && r.lock && +r.lock.done_count < +r.lock.total ? t('rk_lock_done') : ''), !done && r.lock && +r.lock.done_count < +r.lock.total) : ''}
@@ -3321,10 +3350,13 @@ function hrepCardHTML(){
   const line = J => J.status === 'busy' ? `<div class="hrep-job"><span>${esc(t('hrep_reading'))} <span class="num muted" id="hrep-secs-${J.id}"></span></span></div>`
     : J.status === 'saved' ? `<div class="hrep-job"><span><span class="pos">✓</span> ${where(J)}${esc(t('hrep_saved') + (J.done ? ' · ' + t('hrep_done') : ''))}</span>${x(J)}</div>`
     : J.status === 'check' ? `<div class="hrep-job"><span class="warnc">⚠ ${where(J)}${esc(t('hrep_check'))}${J.err ? ` <span class="small">（${esc(J.err)}）</span>` : ''}</span><button class="link" data-act="hrep-look" data-id="${J.id}">${esc(t('hrep_look'))}</button>${x(J)}</div>`
+    : J.status === 'email' ? `<div class="hrep-job"><span class="warnc">⚠ ${where(J)}${esc(t('rpe_job', { a: eurSigned(J.email.schluss_cents) }))}</span><button class="link" data-act="hrep-email-rep" data-id="${J.id}">${esc(t('rpe_job_replace'))}</button><button class="link" data-act="hrep-look" data-id="${J.id}">${esc(t('hrep_look'))}</button>${x(J)}</div>`   // v135
     : J.status === 'unknown' ? `<div class="hrep-job"><span class="negc">✗ ${esc((J.problems || []).length ? J.problems.join(' ') : t('hrep_unknown'))}</span><button class="link" data-act="hrep-start">${esc(t('hrep_retake'))}</button>${x(J)}</div>`
     : `<div class="hrep-job"><span class="negc">✗ ${esc(J.err || t('err_GENERIC'))}</span>${x(J)}</div>`;
+  const unk = ((state.repImp || {}).unknown || []);   // v135：邮件里认不出门店 / 日子的 PDF
   return `<div class="hrep-card" id="hrep-card"><div class="row" style="gap:8px">${C ? '' : `<button class="btn" data-act="hrep-start">${esc(t('hrep_take'))}</button>`}
-    <button class="btn ${n && !C ? 'ghost' : 'ghost'}" data-act="env-all">${esc(n ? t('hrep_env', { n }) : t('hrep_env0'))}</button></div>${cap}${jobs.map(line).join('')}</div>`;
+    <button class="btn ${n && !C ? 'ghost' : 'ghost'}" data-act="env-all">${esc(n ? t('hrep_env', { n }) : t('hrep_env0'))}</button></div>${cap}${jobs.map(line).join('')}
+    ${unk.length ? `<div class="small warnc" style="margin-top:8px">${esc(t('rpe_h_unknown', { n: unk.length, p: rpeProblems(unk[0].problems) }))}</div>` : ''}</div>`;
 }
 const hrepOnHome = () => state.tab === 'today' && state.me && state.me.is_admin && !state.recon && !state.envAll && !state.taskOpen && !state.viewAs;
 function hrepPaint(){ const el = $('#hrep-card'); if (el && hrepOnHome()) el.outerHTML = hrepCardHTML(); }
@@ -3352,7 +3384,12 @@ async function hrepRead(J){
         p_schluss_cents: d.schluss_cents, p_card_tip_cents: d.card_tip_cents, p_payments_cents: d.payments_cents, p_sales_cents: d.sales_cents,
         p_start: d.start ? d.start.replace('T', ' ') : null, p_end: d.end ? d.end.replace('T', ' ') : null, p_read_id: r.read_id });
       J.status = 'saved'; J.done = await autoComplete(J.store, J.day);
-    } catch(e){ J.err = errText(e); }   // 保存不了（例如编号已录过）：「去看」摆出表格
+    } catch(e){
+      if (String(e && e.message) === 'REPORT_EMAIL_EXISTS'){   // v135：这天已经有邮件导入的报告 → 问要不要用照片替换（不在后台弹窗）
+        const rd = await soft(rpc('recon_day', { ...tok(), p_store: J.store, p_day: J.day }), null), x = rd && (rd.reports || []).find(y => y.source === 'email');
+        if (x){ J.status = 'email'; J.email = x; } else J.err = errText(e);
+      } else J.err = errText(e);
+    }   // 保存不了（例如编号已录过）：「去看」摆出表格
   }
   const vars = { s: J.store, d: dayLabel(J.day) };
   if (hrepOnHome()) keepScroll(render);   // 刷新店卡片（报告那一行、核对状态）
@@ -3387,7 +3424,8 @@ async function viewReconHome(){
     const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // v102：刚启动时已经要过，不再要一次
     [H, , , state.areaStatus, state.disputesOpen] = await Promise.all([reconHome(state.reconDay), fresh ? null : loadTasks(), loadWeekTodo(),
       soft(rpc('area_status', tok()), null), soft(rpc('list_disputes', { ...tok(), p_status: 'open' }), []),
-      soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null).then(x => { if (x) state.envPendAll = x; })]);   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
+      soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null).then(x => { if (x) state.envPendAll = x; }),
+      soft(rpc('recon_imports', { ...tok(), p_from: addDays(bizToday(), -8) }), null).then(x => { state.repImp = x; })]);   // v135：邮件自动导入的情况   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
     S = H.S; o = H.o; state.reconTasks = H.tasks;
   }
   catch(e){ $('#main').innerHTML = `<div class="empty">${esc(errText(e))}</div>`; return; }
@@ -3459,8 +3497,9 @@ async function viewReconDay(){
   const repHTML = (r.reports.length ? `<div class="list">${r.reports.map(x => `<div class="item"><div class="top"><div><strong>${esc(x.report_id)}</strong>${storeTag(R.store)}
         <div class="meta num">${x.start ? esc(fmtDateTime(x.start)) + ' – ' + esc(fmtDateTime(x.end)) : ''}</div></div></div>
         ${kvHTML([[t('rk_schluss'), eurSigned(x.schluss_cents)], [t('rk_card'), eur(x.card_tip_cents)], [t('rk_pay'), x.payments_cents == null ? '–' : eur(x.payments_cents)]])}
-        <div class="meta small">${esc(t('rk_rep_by', { n: x.by, t: fmtDateTime(x.at) }))}${x.source === 'photo' ? ` <span class="tag m">${esc(t('rpp_tag'))}</span>` : ''}</div>
-        <div class="acts">${x.source === 'photo' ? `<button class="link" data-act="rep-photo" data-id="${x.id}">${esc(t('photos'))}</button>` : ''}<button class="link" data-act="rep-fix" data-id="${x.id}">${esc(t('rk_rep_fix'))}</button><button class="link danger" data-act="rep-void" data-id="${x.id}" data-rid="${esc(x.report_id)}">${esc(t('rk_rep_void'))}</button></div></div>`).join('')}</div>` : '')
+        <div class="meta small">${x.source === 'email' ? esc(t('rpe_by', { t: fmtDateTime(x.at) })) + ` <span class="tag m">${esc(t('rpe_tag'))}</span>` : esc(t('rk_rep_by', { n: x.by, t: fmtDateTime(x.at) })) + (x.source === 'photo' ? ` <span class="tag m">${esc(t('rpp_tag'))}</span>` : '')}</div>
+        <div class="acts">${x.source === 'photo' ? `<button class="link" data-act="rep-photo" data-id="${x.id}">${esc(t('photos'))}</button>` : x.source === 'email' ? `<button class="link" data-act="rep-file" data-id="${x.id}">${esc(t('rpe_file'))}</button>` : ''}<button class="link" data-act="rep-fix" data-id="${x.id}">${esc(t('rk_rep_fix'))}</button><button class="link danger" data-act="rep-void" data-id="${x.id}" data-rid="${esc(x.report_id)}">${esc(t('rk_rep_void'))}</button></div></div>`).join('')}</div>` : '')
+    + (!r.reports.length && rpeHint(R.store, R.day) ? `<div class="warnbox" style="margin:8px 0">${esc(rpeHint(R.store, R.day))}</div>` : '')   // v135
     + (F ? form : P ? photoHTML : `<button class="btn ${r.reports.length ? 'ghost' : ''}" data-act="rpp-start" style="margin:8px 0">${esc(t('rpp_take'))}</button>
         <div style="text-align:center;margin:-2px 0 8px"><button class="link" data-act="rep-new">${esc(t('rpp_manual'))}</button></div>`);
   return step(1, t('rk_s_rep'), r.reports.length > 0) + repHTML;
@@ -9142,6 +9181,18 @@ document.addEventListener('click', async ev => {
     case 'hrep-cancel': state.hrepCap = null; hrepPaint(); break;
     case 'hrep-go': hrepBegin(); break;
     case 'hrep-x': state.hrepJobs = (state.hrepJobs || []).filter(j => j.id !== el.dataset.id); hrepPaint(); break;
+    case 'hrep-email-rep': {   // v135：首页拍的报告，用照片替换邮件导入的那份
+      const J = (state.hrepJobs || []).find(j => j.id === el.dataset.id); if (!J || !J.email || !J.form) break;
+      const d = J.form;
+      try {
+        await rpc('recon_report_save_x', { ...tok(), p_replace: J.email.id, p_store: J.store, p_day: J.day, p_report_id: d.report_id,
+          p_schluss_cents: d.schluss_cents, p_card_tip_cents: d.card_tip_cents, p_payments_cents: d.payments_cents, p_sales_cents: d.sales_cents,
+          p_start: d.start ? d.start.replace('T', ' ') : null, p_end: d.end ? d.end.replace('T', ' ') : null, p_read_id: d.read_id });
+        J.status = 'saved'; J.email = null; J.done = await autoComplete(J.store, J.day);
+        if (hrepOnHome()) keepScroll(render); else hrepPaint();
+      } catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'hrep-look': { const J = (state.hrepJobs || []).find(j => j.id === el.dataset.id); if (!J) break;
       state.hrepJobs = state.hrepJobs.filter(j => j !== J); state.recon = { store: J.store, day: J.day }; state.repForm = J.form; state.repPhoto = null; window.scrollTo(0, 0); render(); break; }
     case 'env-all': state.envAll = true; window.scrollTo(0, 0); render(); break;   // v114：两家店一起点信封
@@ -9160,6 +9211,22 @@ document.addEventListener('click', async ev => {
       } catch(e){ toast(errText(e), true); }
       break;
     }
+    case 'rep-file': {   // v135：邮件导入的报告的原件（数据库里存的 PDF + 读出的文字）
+      try {
+        const r = await rpc('recon_report_file', { ...tok(), p_id: el.dataset.id });
+        const bin = atob(r.pdf_b64 || ''), u8 = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+        if (state.rpeUrl) URL.revokeObjectURL(state.rpeUrl);
+        state.rpeUrl = URL.createObjectURL(new Blob([u8], { type: 'application/pdf' }));
+        const txt = (r.text || '').split('\n').map(l => l.trim().replace(/\s{3,}/g, '   ')).join('\n').replace(/\n{3,}/g, '\n\n').trim();
+        const dlg = $('#photoDlg');
+        dlg.innerHTML = `<h3 style="margin:0 0 6px">${esc(t('rpe_dlg_title', { s: r.store || '', d: r.day ? dayLabel(r.day) : '' }))}</h3>
+          <div class="small muted" style="margin-bottom:8px">${esc(t('rpe_dlg_hint', { t: fmtDateTime(r.at) }))}</div><pre class="rpe-pre">${esc(txt)}</pre>
+          <div class="row"><a class="btn ghost" href="${state.rpeUrl}" download="${esc(r.file_name || 'Geschaeftsbericht.pdf')}">${esc(t('rpe_dl'))}</a><button class="btn" data-act="photo-close">${esc(t('close'))}</button></div>`;
+        dlg.showModal();
+      } catch(e){ toast(errText(e), true); }
+      break;
+    }
     case 'rep-fix': {
       try { const r = await rpc('recon_day', { ...tok(), p_store: state.recon.store, p_day: state.recon.day });
         const x = r.reports.find(y => y.id === el.dataset.id); if (!x) break;
@@ -9171,9 +9238,9 @@ document.addEventListener('click', async ev => {
       const sch = num('#rp-schluss'), card = num('#rp-card'), pay = num('#rp-pay'), sales = num('#rp-sales');
       if ([sch, card, pay, sales].some(v => v !== null && isNaN(v)) || sch === null || card === null) return toast(t('bad_amount'), true);
       const ts = id => $(id).value ? $(id).value.replace('T', ' ') + ':00' : null;
-      try { await rpc('recon_report_save_x', { ...tok(), p_replace: F.replace || null, p_store: state.recon.store, p_day: state.recon.day, p_report_id: $('#rp-id').value,
-              p_schluss_cents: sch, p_card_tip_cents: card, p_payments_cents: pay, p_sales_cents: sales, p_start: ts('#rp-start'), p_end: ts('#rp-end'), p_read_id: F.read_id || null });
-        state.repForm = null; toast(t('saved')); await autoComplete(state.recon.store, state.recon.day); if (state.recon) keepScroll(viewReconDay); } catch(e){ toast(errText(e), true); }
+      try { await repSaveX({ ...tok(), p_replace: F.replace || null, p_store: state.recon.store, p_day: state.recon.day, p_report_id: $('#rp-id').value,
+              p_schluss_cents: sch, p_card_tip_cents: card, p_payments_cents: pay, p_sales_cents: sales, p_start: ts('#rp-start'), p_end: ts('#rp-end'), p_read_id: F.read_id || null }, true);   // v135：邮件报告已有时问要不要替换
+        state.repForm = null; toast(t('saved')); await autoComplete(state.recon.store, state.recon.day); if (state.recon) keepScroll(viewReconDay); } catch(e){ if (e.message !== 'CANCELLED') toast(errText(e), true); }
       break;
     }
     case 'rep-void': {
