@@ -739,7 +739,14 @@ zh: {
   stt_btn:'⏰ 班次时间', stt_title:'班次时间', stt_back:'← 返回排班', stt_edit:'改', stt_days:'哪几天用这组时间（点一下选中 / 取消）',
   stt_hint:'新排进班的人用这里的时间；兼岗取最早开始、最晚结束。改了以后：还没发布的周里、时间还是旧的班会跟着改；已发布的周不动（要改就点名字单独改）。',
   stt_last:'最后修改：{n} · {t}', stt_saved:'已保存。', stt_saved_n:'已保存。还没发布的周里 {n} 个班改成了新时间。', stt_no_day:'请至少选一天。',
-  stt_late:'下班时间最晚 23:59（不过 0 点）。', se_time:'时间',
+  stt_late:'下班时间最晚 23:59（不过 0 点）。',
+  // v141（数据库 v103，老板 2026-11-05）：前场班次时间里选中的日子 = 有这个班；取消选中 = 从明天起没有这个班
+  stt_days_front:'哪几天有这个班、用这组时间（点一下选中 / 取消）。原来选中的取消掉 = 从明天起这几天前场没有这个班（厨房不受影响）；点上现在没有这个班的日子 = 恢复。',
+  stt_off_line:'没有{sl}：{d}（从 {f} 起）', stt_off_now:'现在没有这个班：{d}（从 {f} 起）。点上就恢复。',
+  stt_close_q:'{s} 前场{d}从 {f} 起不再有{sl}（厨房不受影响）。\n\n这几天以后前场不能排{sl}，员工也看不到这个班。以后想恢复，在这里把日子点回来就行。\n\n确定吗？',
+  stt_blocked:'没有保存：下面这几天已经排了前场的人，不能取消{sl}。请先在排班里把他们去掉，再来取消。', stt_blocked_row:'{d}：{n}',
+  stt_closed_ok:'已保存：{d}从 {f} 起没有{sl}了。', stt_opened_ok:'已保存：{d}又有{sl}了（从 {f} 起）。',
+  err_SLOT_CLOSED:'这天这个班已经取消了（在「⏰ 班次时间」里取消的），不能排人。要排的话，先在「⏰ 班次时间」里把这天点回来。', se_time:'时间',
   // v74：反馈截图
   fb_shot_hint:'截图不对？用手机自己截屏，再点「换一张 / 从相册选截图」。', fb_dlg_shiftDlg:'排班编辑窗口', fb_dlg_photoDlg:'弹出窗口', fb_dlg_pinDlg:'PIN 窗口',
   fb_view_note:'（查看 {n} 时）', fb_view_hint:'以你自己的名义发送，注明是查看 {n} 时看到的。',
@@ -1307,7 +1314,14 @@ de: {
   stt_btn:'⏰ Schichtzeiten', stt_title:'Schichtzeiten', stt_back:'← Zurück zum Dienstplan', stt_edit:'Ändern', stt_days:'An welchen Tagen gelten diese Zeiten? (antippen = wählen / abwählen)',
   stt_hint:'Neu eingeplante Personen bekommen diese Zeiten; bei Doppelrolle frühester Beginn bis spätestes Ende. Nach einer Änderung werden in noch nicht veröffentlichten Wochen die Schichten mit der alten Zeit angepasst; veröffentlichte Wochen bleiben unverändert (dort per Tipp auf den Namen ändern).',
   stt_last:'Zuletzt geändert: {n} · {t}', stt_saved:'Gespeichert.', stt_saved_n:'Gespeichert. In noch nicht veröffentlichten Wochen wurden {n} Schichten auf die neue Zeit gesetzt.', stt_no_day:'Bitte mindestens einen Tag wählen.',
-  stt_late:'Ende spätestens 23:59 (nicht über Mitternacht).', se_time:'Zeit',
+  stt_late:'Ende spätestens 23:59 (nicht über Mitternacht).',
+  // v141 (DB v103)
+  stt_days_front:'An welchen Tagen gibt es diese Schicht mit diesen Zeiten? (antippen = wählen / abwählen) Bisher gewählte Tage abwählen = ab morgen gibt es an diesen Tagen vorne diese Schicht nicht mehr (Küche bleibt unverändert); Tage ohne diese Schicht antippen = wieder einführen.',
+  stt_off_line:'Keine Schicht „{sl}“: {d} (ab {f})', stt_off_now:'Zurzeit ohne diese Schicht: {d} (ab {f}). Antippen = wieder einführen.',
+  stt_close_q:'{s} Service: ab {f} keine Schicht „{sl}“ mehr am {d} (Küche bleibt unverändert).\n\nAn diesen Tagen kann vorne dann niemand mehr für „{sl}“ eingeplant werden, und die Mitarbeiter sehen die Schicht nicht mehr. Wieder einführen: hier die Tage wieder antippen.\n\nFortfahren?',
+  stt_blocked:'Nicht gespeichert: An diesen Tagen ist vorne schon jemand eingeplant, deshalb kann die Schicht „{sl}“ nicht entfallen. Bitte zuerst im Dienstplan austragen, dann erneut versuchen.', stt_blocked_row:'{d}: {n}',
+  stt_closed_ok:'Gespeichert: am {d} ab {f} keine Schicht „{sl}“ mehr.', stt_opened_ok:'Gespeichert: am {d} gibt es wieder die Schicht „{sl}“ (ab {f}).',
+  err_SLOT_CLOSED:'Diese Schicht entfällt an diesem Tag (in „⏰ Schichtzeiten“ abgewählt), deshalb kann niemand eingeplant werden. Zum Einplanen den Tag zuerst in „⏰ Schichtzeiten“ wieder antippen.', se_time:'Zeit',
   // v74：Feedback-Screenshot
   fb_shot_hint:'Screenshot stimmt nicht? Mach mit dem Handy selbst einen Screenshot und tippe auf „Anderen Screenshot wählen“.', fb_dlg_shiftDlg:'Dienstplan-Fenster', fb_dlg_photoDlg:'Pop-up-Fenster', fb_dlg_pinDlg:'PIN-Fenster',
   fb_view_note:'(in der Ansicht als {n})', fb_view_hint:'Wird in deinem Namen gesendet, mit Hinweis „Ansicht als {n}“.',
@@ -7890,7 +7904,12 @@ function sttHTML(){
   for (const store of STORES){
     h += `<div class="sheet">`;
     for (const slot of SLOTS){
-      const rows = (d.slots || []).filter(x => x.store === store && x.slot === slot); if (!rows.length) continue;
+      const all = (d.slots || []).filter(x => x.store === store && x.slot === slot); if (!all.length) continue;
+      const rows = all.filter(x => kit || x.open !== false), off = kit ? [] : all.filter(x => x.open === false);   // v141：前场取消了的日子单独列
+      const ed = planStoreOk(kit ? 'kitchen' : 'front', store), froms = [...new Set(off.map(x => x.closed_from || ''))].sort();
+      const offHTML = froms.map(f => { const ds = off.filter(x => (x.closed_from || '') === f).map(x => x.weekday);
+        return `<div class="stt-row"><div><strong class="muted">${esc(t('stt_off_line', { sl: slotLabel(slot), d: wdRange(ds), f: f ? dayLabel(f) : '' }))}</strong></div>
+          ${ed ? `<button class="pchip add" style="flex:none" data-act="stt-edit" data-store="${store}" data-slot="${slot}" data-days="" data-ref="${ds[0]}">${esc(t('stt_edit'))}</button>` : ''}</div>`; }).join('');
       const groups = [];   // 时间完全一样的几天合成一行
       rows.forEach(x => { const k = JSON.stringify(RS.map(r => x.times[r])) + (kit && !x.set ? '·unset' : ''), g = groups.find(g => g.k === k);
         if (g) g.days.push(x.weekday); else groups.push({ k, days: [x.weekday], times: x.times, unset: kit && !x.set }); });
@@ -7898,7 +7917,7 @@ function sttHTML(){
         ${groups.map(g => `<div class="stt-row"><div><strong>${esc(wdRange(g.days))}</strong>
           <div class="stt-t">${RS.map(r => `<span>${esc(t('grp_' + r))} <b class="num">${esc(g.times[r].start)}–${esc(g.times[r].end)}</b></span>`).join('')}</div>
           ${g.unset ? `<div class="small muted">${esc(t('kstt_unset'))}</div>` : ''}</div>
-          ${planStoreOk(kit ? 'kitchen' : 'front', store) ? `<button class="pchip add" style="flex:none" data-act="stt-edit" data-store="${store}" data-slot="${slot}" data-days="${g.days.join(',')}">${esc(t('stt_edit'))}</button>` : ''}</div>`).join('')}</div>`;   // v82
+          ${planStoreOk(kit ? 'kitchen' : 'front', store) ? `<button class="pchip add" style="flex:none" data-act="stt-edit" data-store="${store}" data-slot="${slot}" data-days="${g.days.join(',')}">${esc(t('stt_edit'))}</button>` : ''}</div>`).join('')}${offHTML}</div>`;   // v82；v141：取消了的日子
     }
     h += `</div>`;
   }
@@ -7909,8 +7928,11 @@ function sttDlgRender(){
   const e = state.sttEd, L = I18N[state.lang] || I18N.zh, RS = state.stt.area === 'kitchen' ? KROLES : ROLES;   // v85
   const have = new Set(state.stt.slots.filter(x => x.store === e.store && x.slot === e.slot).map(x => x.weekday));   // 这家店这个班有的那几天
   $('#shiftDlg').innerHTML = `<h2 style="margin-top:0">${storeTag(e.store)} ${esc(slotLabel(e.slot))} · ${esc(t('stt_title'))}</h2>
-    <div class="small muted" style="margin-bottom:8px">${esc(t('stt_days'))}</div>
+    ${e.blocked ? `<div class="infobox negc" style="margin:8px 0">${esc(t('stt_blocked', { sl: slotLabel(e.slot) }))}${e.blocked.map(b => '<br>' + esc(t('stt_blocked_row', { d: dayLabel(b.date), n: (b.names || []).join(state.lang === 'de' ? ', ' : '、') }))).join('')}</div>` : ''}
+    <div class="small muted" style="margin-bottom:8px">${esc(t(state.stt.area === 'kitchen' ? 'stt_days' : 'stt_days_front'))}</div>
     <div class="sdchips">${[1, 2, 3, 4, 5, 6, 7].map(n => `<button type="button" class="sdchip ${e.days.includes(n) ? 'on' : ''}" aria-pressed="${e.days.includes(n)}" data-act="stt-day" data-d="${n}" ${have.has(n) ? '' : 'disabled'}>${esc(L.wd[n - 1])}</button>`).join('')}</div>
+    ${(() => { const off = state.stt.area === 'kitchen' ? [] : state.stt.slots.filter(x => x.store === e.store && x.slot === e.slot && x.open === false);   // v141
+       return off.length ? `<div class="small muted" style="margin:6px 0 0">${esc(t('stt_off_now', { d: wdRange(off.map(x => x.weekday)), f: off[0].closed_from ? dayLabel(off[0].closed_from) : '' }))}</div>` : ''; })()}
     ${RS.map(r => `<div class="stt-role"><span class="rl">${esc(t('grp_' + r))}</span>
       <input class="input num" type="time" id="stt-s-${r}" value="${esc(e.times[r].start)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_start'))}"><span>–</span>
       <input class="input num" type="time" id="stt-e-${r}" value="${esc(e.times[r].end)}" aria-label="${esc(t('grp_' + r) + ' ' + t('sd_end'))}"></div>`).join('')}
@@ -10408,9 +10430,10 @@ document.addEventListener('click', async ev => {
     case 'stt-open': state.planTimes = true; state.stt = null; planRender(); window.scrollTo(0, 0); await sttLoad(); planRender(); break;
     case 'stt-back': state.planTimes = null; window.scrollTo(0, 0); viewPlan(); break;   // 重新读排班（班次时间可能改了）
     case 'stt-edit': {
-      const days = el.dataset.days.split(',').map(Number), row = (state.stt.slots || []).find(x => x.store === el.dataset.store && x.slot === el.dataset.slot && x.weekday === days[0]);
+      const days = el.dataset.days ? el.dataset.days.split(',').map(Number) : [], ref = days.length ? days[0] : +el.dataset.ref;   // v141：没有这个班的那一行 days 为空
+      const row = (state.stt.slots || []).find(x => x.store === el.dataset.store && x.slot === el.dataset.slot && x.weekday === ref);
       if (!row) break;
-      state.sttEd = { store: el.dataset.store, slot: el.dataset.slot, days, times: JSON.parse(JSON.stringify(row.times)) };
+      state.sttEd = { store: el.dataset.store, slot: el.dataset.slot, days, days0: days.slice(), times: JSON.parse(JSON.stringify(row.times)) };
       sttDlgRender(); const dlg = $('#shiftDlg'); if (!dlg.open) dlg.showModal(); break;
     }
     case 'stt-day': {   // 只改按钮样子，不重画（保留已改的时间）
@@ -10421,15 +10444,30 @@ document.addEventListener('click', async ev => {
     case 'stt-save': {
       const e = state.sttEd, kit = state.stt.area === 'kitchen', RS = kit ? KROLES : ROLES;   // v85：厨房四个岗位，存到 kshift_times_set
       RS.forEach(r => { e.times[r] = { start: $('#stt-s-' + r).value, end: $('#stt-e-' + r).value }; });
-      if (!e.days.length) return toast(t('stt_no_day'), true);
-      if (RS.some(r => kit ? !kTimeOk(e.times[r].start, e.times[r].end) : (!e.times[r].start || !e.times[r].end || e.times[r].end <= e.times[r].start)))
+      // v141（数据库 v103）：前场——原来选中、现在取消的日子 = 从明天起没有这个班；点上现在没有这个班的日子 = 恢复
+      const offSet = new Set(kit ? [] : (state.stt.slots || []).filter(x => x.store === e.store && x.slot === e.slot && x.open === false).map(x => x.weekday));
+      const close = kit ? [] : (e.days0 || []).filter(n => !e.days.includes(n) && !offSet.has(n)), open = e.days.filter(n => offSet.has(n));
+      if (!e.days.length && !close.length) return toast(t('stt_no_day'), true);
+      if (e.days.length && RS.some(r => kit ? !kTimeOk(e.times[r].start, e.times[r].end) : (!e.times[r].start || !e.times[r].end || e.times[r].end <= e.times[r].start)))
         return toast(t(kit ? 'err_INVALID_KTIME' : 'err_INVALID_TIME'), true);   // v86：厨房可以过半夜，前场照旧
+      const sl = slotLabel(e.slot), from = addDays(new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(new Date()), 1);
+      if (close.length && !confirm(t('stt_close_q', { s: e.store, d: wdRange(close), f: dayLabel(from), sl }))) return;
       el.disabled = true;
-      try { const r = kit ? await rpc('kshift_times_set', { ...tok(), p_store: e.store, p_part: e.slot, p_weekdays: e.days, p_times: e.times })
-                          : await rpc('shift_times_set', { ...tok(), p_store: e.store, p_slot: e.slot, p_weekdays: e.days, p_times: e.times });
-        $('#shiftDlg').close(); state.sttEd = null;
-        const n = r && (kit ? r.parts_updated : r.shifts_updated);
-        toast(n ? t(kit ? 'kstt_saved_n' : 'stt_saved_n', { n }) : t('stt_saved'));
+      try {
+        if (kit){
+          const r = await rpc('kshift_times_set', { ...tok(), p_store: e.store, p_part: e.slot, p_weekdays: e.days, p_times: e.times });
+          $('#shiftDlg').close(); state.sttEd = null;
+          toast(r && r.parts_updated ? t('kstt_saved_n', { n: r.parts_updated }) : t('stt_saved'));
+        } else {
+          const r = await rpc('shift_slot_save', { ...tok(), p_store: e.store, p_slot: e.slot, p_close: close, p_open: open, p_days: e.days, p_times: e.times }) || {};
+          if (r.blocked){ e.blocked = r.blocked; sttDlgRender(); return; }   // 已经排了人：窗口不关，列出来
+          $('#shiftDlg').close(); state.sttEd = null;
+          const msg = [];
+          if ((r.closed || []).length) msg.push(t('stt_closed_ok', { d: wdRange(r.closed), f: dayLabel(r.from), sl }));
+          if ((r.opened || []).length) msg.push(t('stt_opened_ok', { d: wdRange(r.opened), f: dayLabel(r.from), sl }));
+          if (r.shifts_updated) msg.push(t('stt_saved_n', { n: r.shifts_updated }));
+          toast(msg.length ? msg.join(' ') : t('stt_saved'));
+        }
         await sttLoad(); planRender(); }
       catch(err){ toast(errText(err), true); el.disabled = false; }
       break;
