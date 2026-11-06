@@ -787,6 +787,22 @@ zh: {
   stk_tr_h:'记一笔调拨', stk_tr_hint:'从一家店拿饮料到另一家店：拿的人记一笔，两家店的库存一起改。', stk_tr_dir:'从哪家店到哪家店', stk_tr_add:'＋ 再加一种', stk_tr_note:'备注（可以不写）', stk_tr_note_ph:'例如：Bismarck 晚上不够了',
   stk_tr_save:'保存调拨', stk_tr_saved:'调拨已记下，两家店的库存都改了', stk_tr_need_item:'有一行还没选饮料。请选好，或者点 ✕ 去掉这一行。',
   stk_tr_packs:'{n} {u}（{b} 瓶）', stk_tr_units:'{n} 瓶', stk_pack:'箱', stk_unit:'瓶', stk_undo:'撤销', stk_tr_undo_q:'撤销这次调拨？两家店的数量会改回来。请写一句原因：', stk_tr_undone:'调拨已撤销',
+  // v143（数据库 v104 / 文件服务 tasks v25，老板 2026-11-06）：库管；AI 拍一层认饮料；库存、盘点、报损
+  kp_title:'库管（物品 / 饮料）', kp_front:'前厅库管', kp_kitchen:'后厨库管', kp_hint:'库管能在自己的店加房间、货架、抽屉，录物品、放位置；前厅库管还能确认送货单、盘点饮料。排班、小费的权限不变。', kp_tag:'库管',
+  kp_new_area:'＋ 新房间', kp_area_rules_lock:'能不能放食品 / 化学品、潮不潮：新建时设好，以后只有老板能改。',
+  kp_unplaced:'{s}：还没放位置的饮料 {n} 种', kp_unplaced_h:'{s} 还没放位置的饮料', kp_unplaced_hint:'点一种饮料 → 「再放一个位置」选它在这家店放在哪。也可以到货架那一层，「📷 拍这一层」让 AI 认。',
+  sh_btn:'📷 拍这一层，AI 认出放了哪些饮料', sh_busy:'AI 正在看照片……', sh_h:'AI 在照片里认出：', sh_none:'AI 没认出饮料清单里的饮料。可以拍近一点再试，或者用「放已有的物品」自己选。',
+  sh_count:'大约 {n} 瓶', sh_crates:'{n} 箱', sh_unsure:'不太确定', sh_here:'已经放在这里', sh_other:'清单里没有的：{x}', sh_save:'放进这一层（{n} 种）', sh_saved:'已放进这一层：{n} 种', sh_fail:'AI 没看成（网络或 AI 出错）。照片已经存了，可以再拍一次，或者自己选。', sh_close:'关掉',
+  stk_loss_new:'🗑 报损（打碎 / 过期 / 员工喝）', stk_levels_btn:'📊 库存和盘点',
+  ls_h:'报损', ls_hint:'打碎的、过期的、员工喝的饮料在这里记，库存会减掉。', ls_store:'在哪家店', ls_drink:'哪种饮料', ls_qty:'几个', ls_reason:'原因', ls_note:'说明', ls_note_ph:'其他原因要写一句', ls_save:'记下报损',
+  ls_r_broken:'打碎', ls_r_expired:'过期', ls_r_staff:'员工喝', ls_r_other:'其他', ls_saved:'报损已记下', ls_need_drink:'请选是哪种饮料。', ls_card:'报损 · {r}', ls_undo_q:'撤销这条报损？数量会加回来。请写一句原因：', ls_undone:'报损已撤销',
+  lv_h:'📊 库存和盘点', lv_hint:'应有 = 上次盘点 + 收货 ± 调拨 − 报损 − 卖掉（Lightspeed 销售到 {d}）。第一次盘点就是起始库存。', lv_no_count:'还没盘点过：先盘点一次，以后才有「应有」。',
+  lv_start:'📝 开始盘点', lv_resume:'📝 继续盘点（{n} 个数已填 · {who} 开始）', lv_col_base:'上次', lv_col_in:'进', lv_col_out:'出', lv_col_sold:'卖', lv_col_now:'应有',
+  lv_counts_h:'最近的盘点', lv_first:'起始库存', lv_diff_n:'{n} 种对不上', lv_diff_ok:'都对上了', lv_ai_btn:'🤖 AI 写小结', lv_ai_busy:'AI 正在写……', lv_ai_fail:'AI 没写成，可以再点一次。',
+  lv_res_h:'{d} 的盘点 · {n}', lv_res_counted:'数出', lv_res_expected:'应有', lv_res_diff:'差',
+  ct_h:'盘点 · {s}', ct_hint:'按顺序走：每个位置数一下每种饮料有几瓶（整箱的点「+1 箱」）。填完自动保存，可以分几次做。最后点「完成盘点」。', ct_place_none:'这家店还没有放了饮料的位置：先请库管把饮料放到位置上，或者都填在「别的地方」。',
+  ct_others:'别的地方（没有固定位置的、放在别处的）', ct_others_hint:'这里的数和上面的加在一起。', ct_add_box:'+1 箱', ct_bottles:'瓶', ct_saved:'已保存', ct_finish:'✓ 完成盘点', ct_finish_q:'完成盘点？{n} 种饮料一个数都没填，按 0 算。完成以后不能再改。', ct_finish_q0:'完成盘点？完成以后不能再改。',
+  ct_done:'盘点完成：{n} 种饮料', ct_cancel:'放弃这次盘点', ct_cancel_q:'放弃这次盘点？已填的数不算。请写一句原因：', ct_cancelled:'这次盘点已放弃', ct_bad_qty:'数量要是 0 或更大的数。',
   hrep_take:'📷 拍全天报告', hrep_env:'💵 点信封（{n}）', hrep_env0:'💵 信封都点完了', hrep_hint:'不用选店和日子：拍完 AI 从报告上认出是哪家店、哪天。先拍上半部分，再拍下半部分（报告短的一张也行）。', hrep_reading:'全天报告识别中…', hrep_saved:'报告已保存', hrep_done:'已自动核对完成', hrep_check:'报告要你看一眼', hrep_look:'去看', hrep_unknown:'认不出是哪家店或哪天：请把报告顶部（店名、日期）拍清楚再拍一次', hrep_retake:'重拍', hrep_close:'关掉', hrep_saved_toast:'{s} · {d} 的全天报告已保存', hrep_check_toast:'{s} · {d} 的全天报告要你看一眼（在「今天」页）', hrep_env_title:'点信封 · 两家店', hrep_env_store:'{n} 个信封', hrep_env_none:'两家店的信封都点完了。',   // v114
   tb_today:'今天', tb_tomorrow:'明天', tb_later:'以后（{n}）', tb_past:'前几天（{n}）', tb_none:'这天没有任务。', tb_later_none:'以后还没有任务。点「＋ 新任务」加一个。', tb_past_none:'最近 7 天没有某一天的任务。', tb_lead_none:'还没设负责人', tl_sum:'负责人（已设 {a} / {b}）', oil_s1:'检查', oil_s2:'填收油日期', oil_s3:'拿到门口', oil_s4:'拿回地下室',   // v105
   onb_q_mentor_sop_gap:'SOP 里没有的 / 不对的？（这一栏会给 SOP 编写人看）', oc_title:'带教清单', oc_can:'会了', oc_practice:'还要练', oc_todo:'还没教', oc_none_today:'今天没教',
@@ -1380,6 +1396,22 @@ de: {
   stk_tr_h:'Umlagerung eintragen', stk_tr_hint:'Getränke von einer Filiale in die andere: Wer sie mitnimmt, trägt es ein – der Bestand beider Filialen ändert sich zusammen.', stk_tr_dir:'Von welcher Filiale wohin', stk_tr_add:'＋ Weiteres Getränk', stk_tr_note:'Notiz (optional)', stk_tr_note_ph:'z. B. Bismarck hat abends nicht genug',
   stk_tr_save:'Umlagerung speichern', stk_tr_saved:'Umlagerung eingetragen – Bestand beider Filialen geändert', stk_tr_need_item:'In einer Zeile fehlt das Getränk. Bitte wählen oder die Zeile mit ✕ entfernen.',
   stk_tr_packs:'{n} {u} ({b} Fl.)', stk_tr_units:'{n} Fl.', stk_pack:'Kiste', stk_unit:'Flasche', stk_undo:'Stornieren', stk_tr_undo_q:'Diese Umlagerung stornieren? Die Mengen beider Filialen werden zurückgesetzt. Bitte kurz den Grund schreiben:', stk_tr_undone:'Umlagerung storniert',
+  // v143 (DB v104 / tasks v25)
+  kp_title:'Lagerverantwortung (Artikel / Getränke)', kp_front:'Lager Service', kp_kitchen:'Lager Küche', kp_hint:'Lagerverantwortliche können in ihrer Filiale Räume, Regale und Schubladen anlegen, Artikel erfassen und einräumen; Lager Service bestätigt außerdem Lieferscheine und zählt die Getränke. Dienstplan- und Trinkgeldrechte ändern sich nicht.', kp_tag:'Lager',
+  kp_new_area:'＋ Neuer Raum', kp_area_rules_lock:'Lebensmittel / Chemie / feucht: beim Anlegen festlegen, später ändert nur der Chef.',
+  kp_unplaced:'{s}: {n} Getränke ohne Platz', kp_unplaced_h:'{s}: Getränke ohne Platz', kp_unplaced_hint:'Getränk antippen → „Noch einen Platz“ und wählen, wo es in dieser Filiale steht. Oder am Regal „📷 Diese Ebene fotografieren“, die KI erkennt sie.',
+  sh_btn:'📷 Diese Ebene fotografieren – KI erkennt die Getränke', sh_busy:'Die KI schaut sich das Foto an …', sh_h:'Die KI erkennt auf dem Foto:', sh_none:'Die KI erkennt kein Getränk aus der Liste. Näher fotografieren oder mit „Vorhandenen Artikel einräumen“ selbst wählen.',
+  sh_count:'ca. {n} Fl.', sh_crates:'{n} Kisten', sh_unsure:'unsicher', sh_here:'steht schon hier', sh_other:'Nicht in der Liste: {x}', sh_save:'Hier einräumen ({n})', sh_saved:'Eingeräumt: {n} Getränke', sh_fail:'Die KI hat es nicht geschafft (Netz- oder KI-Fehler). Das Foto ist gespeichert – nochmal fotografieren oder selbst wählen.', sh_close:'Schließen',
+  stk_loss_new:'🗑 Schwund (kaputt / abgelaufen / Personal)', stk_levels_btn:'📊 Bestand und Inventur',
+  ls_h:'Schwund', ls_hint:'Kaputte, abgelaufene oder vom Personal getrunkene Getränke hier eintragen – der Bestand wird verringert.', ls_store:'Filiale', ls_drink:'Getränk', ls_qty:'Menge', ls_reason:'Grund', ls_note:'Bemerkung', ls_note_ph:'Bei „Sonstiges“ bitte kurz schreiben',
+  ls_save:'Schwund eintragen', ls_r_broken:'Kaputt', ls_r_expired:'Abgelaufen', ls_r_staff:'Personal getrunken', ls_r_other:'Sonstiges', ls_saved:'Schwund eingetragen', ls_need_drink:'Bitte das Getränk wählen.', ls_card:'Schwund · {r}', ls_undo_q:'Diesen Schwund stornieren? Die Menge wird wieder dazugezählt. Bitte kurz den Grund schreiben:', ls_undone:'Schwund storniert',
+  lv_h:'📊 Bestand und Inventur', lv_hint:'Soll = letzte Inventur + Lieferungen ± Umlagerungen − Schwund − Verkauf (Lightspeed bis {d}). Die erste Inventur ist der Anfangsbestand.', lv_no_count:'Noch keine Inventur: einmal zählen, danach gibt es einen Sollbestand.',
+  lv_start:'📝 Inventur starten', lv_resume:'📝 Inventur fortsetzen ({n} Werte · begonnen von {who})', lv_col_base:'Letzte', lv_col_in:'Rein', lv_col_out:'Raus', lv_col_sold:'Verk.', lv_col_now:'Soll',
+  lv_counts_h:'Letzte Inventuren', lv_first:'Anfangsbestand', lv_diff_n:'{n} Abweichungen', lv_diff_ok:'Alles stimmt', lv_ai_btn:'🤖 KI-Zusammenfassung', lv_ai_busy:'Die KI schreibt …', lv_ai_fail:'Die KI hat es nicht geschafft – bitte nochmal tippen.',
+  lv_res_h:'Inventur {d} · {n}', lv_res_counted:'Gezählt', lv_res_expected:'Soll', lv_res_diff:'Diff.',
+  ct_h:'Inventur · {s}', ct_hint:'Der Reihe nach: an jedem Platz zählen, wie viele Flaschen je Getränk da sind (volle Kiste: „+1 Kiste“). Alles wird sofort gespeichert, du kannst unterbrechen. Am Ende „Inventur abschließen“.', ct_place_none:'In dieser Filiale hat noch kein Platz Getränke: zuerst die Getränke einräumen lassen oder alles unter „Andere Stellen“ eintragen.',
+  ct_others:'Andere Stellen (ohne festen Platz oder woanders)', ct_others_hint:'Diese Zahlen werden zu denen oben addiert.', ct_add_box:'+1 Kiste', ct_bottles:'Fl.', ct_saved:'Gespeichert', ct_finish:'✓ Inventur abschließen', ct_finish_q:'Inventur abschließen? Bei {n} Getränken ist nichts eingetragen – zählt als 0. Danach nicht mehr änderbar.', ct_finish_q0:'Inventur abschließen? Danach nicht mehr änderbar.',
+  ct_done:'Inventur abgeschlossen: {n} Getränke', ct_cancel:'Diese Inventur verwerfen', ct_cancel_q:'Diese Inventur verwerfen? Die eingetragenen Zahlen zählen nicht. Bitte kurz den Grund schreiben:', ct_cancelled:'Inventur verworfen', ct_bad_qty:'Die Menge muss 0 oder größer sein.',
   hrep_take:'📷 Tagesbericht fotografieren', hrep_env:'💵 Umschläge zählen ({n})', hrep_env0:'💵 Alle Umschläge gezählt', hrep_hint:'Filiale und Tag musst du nicht wählen: Die KI erkennt sie auf dem Bericht. Erst den oberen, dann den unteren Teil fotografieren (bei kurzem Bericht reicht ein Foto).', hrep_reading:'Tagesbericht wird gelesen …', hrep_saved:'Bericht gespeichert', hrep_done:'automatisch abgeschlossen', hrep_check:'Bericht bitte prüfen', hrep_look:'Ansehen', hrep_unknown:'Filiale oder Tag nicht erkennbar: Bitte den oberen Teil (Name, Datum) scharf fotografieren und nochmal versuchen', hrep_retake:'Neu fotografieren', hrep_close:'Schließen', hrep_saved_toast:'Tagesbericht {s} · {d} gespeichert', hrep_check_toast:'Tagesbericht {s} · {d} bitte prüfen (Seite „Heute“)', hrep_env_title:'Umschläge zählen · beide Filialen', hrep_env_store:'{n} Umschläge', hrep_env_none:'In beiden Filialen sind alle Umschläge gezählt.',   // v114
   tb_today:'Heute', tb_tomorrow:'Morgen', tb_later:'Später ({n})', tb_past:'Vorher ({n})', tb_none:'An diesem Tag keine Aufgaben.', tb_later_none:'Später noch keine Aufgaben. Mit „＋ Neue Aufgabe“ anlegen.', tb_past_none:'Keine Aufgaben an einem Tag in den letzten 7 Tagen.', tb_lead_none:'Noch niemand verantwortlich', tl_sum:'Verantwortliche ({a} von {b} festgelegt)', oil_s1:'Prüfen', oil_s2:'Abholtermin eintragen', oil_s3:'Raus zur Tür', oil_s4:'Zurück in den Keller',   // v105
   onb_q_mentor_sop_gap:'Fehlt etwas in den SOPs oder stimmt etwas nicht? (Das sehen die SOP-Schreibenden)', oc_title:'Einarbeitungs-Checkliste', oc_can:'Kann es', oc_practice:'Noch üben', oc_todo:'Noch nicht gezeigt', oc_none_today:'Heute nicht',
@@ -1881,6 +1913,11 @@ const ERR_ZH = {
   INV_TR_QTY: '数量要大于 0。请改一下。',
   INV_TR_NO_PACK: '这种饮料没有填「1 箱 = 几瓶」，只能按瓶记。请改成按瓶，或者让老板在饮料库存里补上包装。',
   INV_TR_DONE: '这次调拨已经撤销过了。请返回刷新再看。',
+  INV_KEEPER_BAD: '这个账号不能当库管：停用的账号和厨房小费账户不行。',   // v143
+  INV_LOSS_NOTE: '原因选「其他」时要写一句说明。',
+  INV_COUNT_DONE: '这次盘点已经完成或放弃了（可能在别的手机上）。请返回刷新再看。',
+  INV_COUNT_EMPTY: '还一个数都没填，不能完成。请先数一下再完成；不想盘点了就点「放弃这次盘点」。',
+  INV_COUNT_QTY: '数量要是 0 或更大的数。请改一下。',
   AUTH_REQUIRED: '登录已过期（超过有效时间，或已在别处退出）。请重新登录。',
   FORBIDDEN: '你的账号没有这个操作的权限。如果你认为应该有，请找老板在「员工」里调整。',
   EDIT_WINDOW_CLOSED: '已经过了可以直接修改的时间。请用「申请修改」写明原因，由老板批准。',
@@ -2113,6 +2150,11 @@ const ERR_DE = {
   INV_TR_QTY: 'Die Menge muss größer als 0 sein. Bitte korrigieren.',
   INV_TR_NO_PACK: 'Für dieses Getränk ist „1 Kiste = wie viele Flaschen“ nicht eingetragen – bitte in Flaschen eintragen oder den Chef bitten, die Verpackung zu ergänzen.',
   INV_TR_DONE: 'Diese Umlagerung wurde schon storniert. Bitte zurück und neu laden.',
+  INV_KEEPER_BAD: 'Dieses Konto kann nicht Lagerverantwortung sein (inaktiv oder Küchen-Trinkgeldkonto).',   // v143
+  INV_LOSS_NOTE: 'Bei Grund „Sonstiges“ bitte kurz beschreiben.',
+  INV_COUNT_DONE: 'Diese Inventur ist schon abgeschlossen oder verworfen (evtl. auf einem anderen Handy). Bitte zurück und neu laden.',
+  INV_COUNT_EMPTY: 'Noch nichts eingetragen – abschließen geht nicht. Erst zählen; sonst „Diese Inventur verwerfen“.',
+  INV_COUNT_QTY: 'Die Menge muss 0 oder größer sein. Bitte korrigieren.',
   AUTH_REQUIRED: 'Deine Anmeldung ist abgelaufen. Bitte neu anmelden.',
   FORBIDDEN: 'Dafür hat dein Konto keine Berechtigung. Falls nötig, bitte den Chef bitten, deine Rechte anzupassen.',
   EDIT_WINDOW_CLOSED: 'Die Zeit für direkte Änderungen ist vorbei. Bitte über „Änderung beantragen“ mit Begründung einreichen – der Chef gibt frei.',
@@ -2604,7 +2646,7 @@ async function viewToday(){
   const [, env, , at] = await Promise.all([fresh ? null : loadTasks(),
     state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo(),
     isSup() ? soft(rpc('area_today', { ...tok(), p_day: bizToday() }), null) : null,   // v83：区域主管的总览
-    isSup() ? invTodoLoad() : null]);   // v94：物品待办
+    isSup() || invIsKeeper() ? invTodoLoad() : null]);   // v94：物品待办；v143：库管
   state.envPend = env || null; state.areaToday = at || null;
   if (state.tab !== 'today' || state.recon || !state.me) return;   // 等的时候已经切到别的页
   if (state.onbOpen) return;   // v107：等的时候打开了填写页
@@ -2700,7 +2742,7 @@ function renderToday(){
   const tm = tmTodoCards(), msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message' && !isCl(x));
   const nOther = rest.filter(x => x.status !== 'later').length + tm.length, hasList = !!(cl.length || upCl.length);
   const doneO = done.filter(x => !isCl(x));
-  $('#main').innerHTML = invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
+  $('#main').innerHTML = invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
     + msgs.map(taskCardHTML).join('') + tdlHTML(cl, upCl) + ocMineHTML()
     + (rest.length || tm.length ? `<h3>${esc(nOther ? t(hasList ? 'td_other' : 'td_mine', { n: nOther }) : t(hasList ? 'td_other0' : 'td_mine_ok'))}</h3>` + tm.join('') + rest.map(taskCardHTML).join('')
       : hasList || msgs.length ? '' : `<h3>${esc(t('td_mine_ok'))}</h3><div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
@@ -4630,6 +4672,10 @@ async function viewInv(){
   if (S.view === 'stock') return viewInvStock();   // v142：饮料收货 · 调拨
   if (S.view === 'rc') return renderInvRc();
   if (S.view === 'tr') return renderInvTr();
+  if (S.view === 'loss') return renderInvLoss();   // v143
+  if (S.view === 'levels') return viewInvLevels();
+  if (S.view === 'count') return viewInvCount();
+  if (S.view === 'unplaced') return renderInvUnplaced();
   if (S.view === 'settings' || S.view === 'aform' || S.view === 'cform') return viewInvSettings();
   return viewInvHome();
 }
@@ -4640,7 +4686,7 @@ async function viewInvHome(){
   const [h, mine, , drk] = await Promise.all([soft(rpc('inv_home', tok()), null), soft(rpc('inv_inbox_mine', tok()), null), invTodoLoad(),
     boss ? soft(rpc('inv_drinks', tok()), null) : null]);   // v94：待办、我登记的；v137：老板的饮料库存（几件要处理）
   if (state.tab !== 'inv' || invS().view !== 'home') return;
-  if (h) S.home = h; if (mine) S.ibMine = mine; if (drk) S.drinks = drk; refreshInvBadge();
+  if (h) S.home = h; if (mine) S.ibMine = mine; if (drk) S.drinks = drk; if (h){ state.invKeep = h.keeper || []; invKeeperMark(state.invKeep.length > 0); if (state.invKeep.length && !state.invTodo) await invTodoLoad(); } refreshInvBadge();
   renderInvHome();
   if (S.q.trim()) invSearch();
 }
@@ -4652,6 +4698,7 @@ function renderInvHome(){
     ${invTodoLines(state.invTodo).length ? `<div class="list">${invTodoLines(state.invTodo).join('')}</div>` : ''}
     ${H.admin ? `<div class="list"><div class="item" data-act="inv-drinks" style="cursor:pointer"><strong>${esc(t('drk_btn'))}</strong>${drkTodo() ? ` <span class="tag pend">${esc(t('drk_btn_todo', { n: drkTodo() }))}</span>` : ''}</div></div>` : ''}
     ${H.sup ? `<button class="btn ghost" data-act="inv-new" style="margin-bottom:6px">${esc(t('inv_new'))}</button>` : ''}
+    ${!H.admin && (H.area_new || []).length && !state.viewAs ? `<button class="btn ghost" data-act="kp-area-new" style="margin-bottom:6px">${esc(t('kp_new_area'))}</button>` : ''}
     <button class="btn ghost" data-act="inv-ib-new" style="margin-bottom:6px">${esc(t('inv_ib_btn'))}</button>
     <button class="btn ghost" data-act="inv-stock" style="margin-bottom:6px">${esc(t('stk_btn'))}${state.invTodo && state.invTodo.rc_open ? ` <span class="tag pend">${state.invTodo.rc_open}</span>` : ''}</button>
     ${(S.ibMine || []).length ? `<button class="link" data-act="inv-ib-mine" style="margin:0 0 6px">${esc(t('inv_ib_mine', { n: S.ibMine.length }))}</button>` : ''}
@@ -4755,7 +4802,7 @@ function renderInvArea(){
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
     <h2 style="margin:4px 0 2px">${storeTag(A.store)} ${esc(invName(A))} <span class="muted num" style="font-size:16px">${esc(A.code)}</span></h2>
     <div style="margin-bottom:10px">${invAreaTags(A)}</div>${invTrShow('area', A)}
-    ${state.me.is_admin ? `<button class="btn ghost" data-act="inv-area-edit" style="margin-bottom:8px">${esc(t('inv_area_edit'))}</button>` : ''}
+    ${state.me.is_admin || (invKeepArea(A.store, A.owner) && !state.viewAs && !A.inbox && A.active !== false) ? `<button class="btn ghost" data-act="inv-area-edit" style="margin-bottom:8px">${esc(t('inv_area_edit'))}</button>` : ''}
     ${edit && !A.inbox ? `<button class="btn ghost" data-act="inv-unit-new" style="margin-bottom:8px">${esc(t('inv_add_unit'))}</button>` : ''}
     ${edit ? `<button class="btn ghost" data-act="inv-lab-area" data-id="${A.id}" style="margin-bottom:12px">${esc(t('inv_lab_btn'))}</button>` : ''}
     ${units.length ? units.map(unitHTML).join('') : `<div class="list"><div class="empty">${esc(t('inv_area_empty'))}</div></div>`}
@@ -4795,6 +4842,7 @@ function renderInvPlace(){
     ${P.holds || its.length ? `<h3>${esc(t('inv_here', { n: its.length }))}</h3><div class="list">${its.length ? its.map(x => `<div class="item" data-act="inv-item" data-id="${x.id}" style="cursor:pointer"><div class="inv-row">${invImg(x.photo_t, 'sm')}<div class="inv-txt">
         <strong>${esc(invName(x))}</strong>${x.main ? '' : ` <span class="tag off">${esc(t('inv_not_main'))}</span>`}<div class="meta">${esc(invOther(x))}</div>${invWarnLine(x.warn, { area_zh: A.name_zh, area_de: A.name_de, code: P.code })}</div></div></div>`).join('')
         : `<div class="empty">${esc(t(P.temp ? 'inv_temp_hint' : 'inv_here_none'))}</div>`}</div>` : ''}
+    ${edit && P.holds && !P.temp && !A.inbox ? shelfHTML(P) : ''}
     ${edit && P.holds && !P.temp && !A.inbox ? `<button class="btn ghost" data-act="inv-put-new" style="margin-bottom:8px">${esc(t('inv_put_new'))}</button><button class="btn ghost" data-act="inv-put-old">${esc(t('inv_put_old'))}</button>` : ''}
     ${P.can_edit ? `<button class="link" data-act="inv-unit-edit" data-id="${P.id}" style="margin-top:12px">${esc(t('inv_u_edit_btn'))}</button>` : ''}`;
   invLoadPhotos();
@@ -5201,13 +5249,13 @@ function invSetFld(G, k, label, attrs){ return `<div class="field"><label for="i
 function invSetChk(G, k, label){ return `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invs="${k}"${G[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`; }
 function renderInvAreaForm(){
   invTrKeep();   // v100：重画前记下特点框里的字
-  const G = invS().sform;
+  const G = invS().sform, boss = state.me.is_admin;   // v143：库管也能建 / 改自己的房间
   $('#main').innerHTML = `<button class="link" data-act="inv-aform-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(G.id ? invName(G) + ' · ' + G.code : t('inv_set_new_area'))}</h2>
-    ${G.id ? '' : `<div class="seg sm" style="margin-bottom:12px">${STORES.map(s => `<button data-act="inv-s-store" data-store="${s}" class="${G.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>${invSetFld(G, 'code', t('inv_a_code'), 'autocapitalize="characters" maxlength="3"')}`}
+    ${G.id ? '' : `<div class="seg sm" style="margin-bottom:12px">${(boss ? STORES : STORES.filter(s => ((invS().home || {}).area_new || []).includes(s))).map(s => `<button data-act="inv-s-store" data-store="${s}" class="${G.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>${invSetFld(G, 'code', t('inv_a_code'), 'autocapitalize="characters" maxlength="3"')}`}
     ${invSetFld(G, 'name_zh', t('inv_f_zh'))}${invSetFld(G, 'name_de', t('inv_f_de'))}
-    <div class="field"><label>${esc(t('inv_a_owner'))}</label><div class="seg sm">${['front', 'kitchen', 'shared'].map(k => `<button data-act="inv-s-owner" data-k="${k}" class="${G.owner === k ? 'on' : ''}">${esc(t('inv_owner_' + k))}</button>`).join('')}</div></div>
-    ${invSetChk(G, 'damp', t('inv_a_damp'))}${invSetChk(G, 'food_ok', t('inv_a_food'))}${invSetChk(G, 'chem_ok', t('inv_a_chem'))}
-    ${invSetFld(G, 'sort', t('inv_a_sort'), 'inputmode="numeric"')}${G.id && !G.inbox ? invSetChk(G, 'active', t('inv_a_active')) : ''}
+    <div class="field"><label>${esc(t('inv_a_owner'))}</label><div class="seg sm">${['front', 'kitchen', 'shared'].filter(k => boss || invKeepArea(G.store, k)).map(k => `<button data-act="inv-s-owner" data-k="${k}" class="${G.owner === k ? 'on' : ''}">${esc(t('inv_owner_' + k))}</button>`).join('')}</div></div>
+    ${boss || !G.id ? invSetChk(G, 'damp', t('inv_a_damp')) + invSetChk(G, 'food_ok', t('inv_a_food')) + invSetChk(G, 'chem_ok', t('inv_a_chem')) : `<div class="small muted" style="margin-bottom:8px">${invAreaTags(G)}<br>${esc(t('kp_area_rules_lock'))}</div>`}
+    ${invSetFld(G, 'sort', t('inv_a_sort'), 'inputmode="numeric"')}${boss && G.id && !G.inbox ? invSetChk(G, 'active', t('inv_a_active')) : ''}
     <div class="small muted" style="margin-bottom:10px">${esc(t('inv_a_hint'))}</div>
     ${G.tr ? invTrHTML('area', G.tr) : ''}
     <button class="btn" data-act="inv-aform-save">${esc(t('inv_save'))}</button>`;
@@ -5412,10 +5460,16 @@ function invLabKeep(){
 // ---------- 第三、四步（v94，数据库 v66 / 文件服务 tasks v9）：待归位区、搜不到的词、储位 3 个月确认 ----------
 function invDue(p){ return !!(p && p.photo && p.checked_at && Date.now() - new Date(p.checked_at).getTime() > 90 * 864e5); }
 // 主管 / 老板的物品待办（「今天」卡片、物品页最上面、底部「物品」上的数字）
-async function invTodoLoad(){ const m = state.me || {}; if (!(m.is_admin || isSup())) { state.invTodo = null; return null; } state.invTodo = await soft(rpc('inv_todo', tok()), state.invTodo || null); return state.invTodo; }
+async function invTodoLoad(){ const m = state.me || {}; if (!(m.is_admin || isSup() || invIsKeeper())) { state.invTodo = null; return null; } state.invTodo = await soft(rpc('inv_todo', tok()), state.invTodo || null);
+  if (state.invTodo && 'keeper' in state.invTodo) invKeeperMark(!!state.invTodo.keeper); else if (state.invTodo && state.invTodo.sup === false) invKeeperMark(false); return state.invTodo; }
+// v143：库管（数据库 v104）。网页记住「我是库管」，「今天」页和底部「物品」才去要物品待办；物品页 / 待办会更新它
+function invIsKeeper(){ try { return !state.viewAs && LS.get('invKeeper:' + ((state.me || {}).id || '')) === true; } catch(e){ return false; } }
+function invKeeperMark(on){ if (state.viewAs || !state.me) return; try { LS.set('invKeeper:' + state.me.id, !!on); } catch(e){} }
+function invKeepArea(store, owner){ const K = (invS().home || {}).keeper || state.invKeep || []; return owner === 'front' || owner === 'kitchen' ? K.some(k => k.side === owner && k.store === store) : K.some(k => k.store === store); }
 function invTodoLines(T){
   if (!T || !T.sup) return [];
   const out = [];
+  (T.unplaced || []).forEach(u => out.push(`<div class="item" data-act="kp-unplaced" data-store="${u.store}" style="cursor:pointer">🍹 ${esc(t('kp_unplaced', { s: u.store, n: u.n }))}</div>`));   // v143
   if (T.rc_open) out.push(`<div class="item" data-act="inv-stock" style="cursor:pointer"><strong>🧾 ${esc(t('stk_todo', { n: T.rc_open }))}</strong></div>`);   // v142
   if (T.inbox_open) out.push(`<div class="item" data-act="inv-ib-list" style="cursor:pointer"><strong>📦 ${esc(t('inv_ib_todo', { n: T.inbox_open }))}</strong>${T.inbox_late ? ` <span class="tag bad">${esc(t('inv_ib_late_n', { n: T.inbox_late }))}</span>` : ''}</div>`);
   (T.due || []).forEach(d => out.push(`<div class="item" data-act="inv-area" data-id="${d.area}" style="cursor:pointer">🔄 ${storeTag(d.store)} ${esc(t('inv_due_line', { a: invName(d), n: d.n }))}</div>`));
@@ -5726,11 +5780,13 @@ function renderInvStock(){
   const S = invS(), D = S.stock; if (!D) return;
   const W = stkCanWrite(), open = D.open || [], ms = x => new Date(x).getTime() || 0;
   const hist = [...(D.receipts || []).map(r => ({ at: ms(r.done_at || r.cancelled_at || r.created_at), html: stkRcCard(r) })),
-                ...(D.transfers || []).map((x, i) => ({ at: ms(x.created_at), html: stkTrCard(x, i) }))].sort((a, b) => b.at - a.at);
+                ...(D.transfers || []).map((x, i) => ({ at: ms(x.created_at), html: stkTrCard(x, i) })),
+                ...(D.losses || []).map((x, i) => ({ at: ms(x.created_at), html: lsCard(x, i) }))].sort((a, b) => b.at - a.at);   // v143：报损
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('stk_title'))}</h2>
     <div class="small muted" style="margin-bottom:10px">${esc(t('stk_hint'))}</div>
     ${!(D.drinks || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('stk_no_drinks'))}</div>` : ''}
-    ${W ? `<button class="btn" data-act="stk-rc-new" style="margin-bottom:6px">${esc(t('stk_rc_new'))}</button><button class="btn ghost" data-act="stk-tr-new" style="margin-bottom:10px">${esc(t('stk_tr_new'))}</button>` : ''}
+    ${W ? `<button class="btn" data-act="stk-rc-new" style="margin-bottom:6px">${esc(t('stk_rc_new'))}</button><button class="btn ghost" data-act="stk-tr-new" style="margin-bottom:6px">${esc(t('stk_tr_new'))}</button><button class="btn ghost" data-act="ls-new" style="margin-bottom:10px">${esc(t('stk_loss_new'))}</button>` : ''}
+    ${(D.count_stores || []).length ? `<button class="btn ghost" data-act="lv-open" style="margin-bottom:10px">${esc(t('stk_levels_btn'))}</button>` : ''}
     ${open.length ? `<h3>${esc(t(open.some(r => r.can_confirm) ? 'stk_open_h_sup' : 'stk_open_h', { n: open.length }))}</h3><div class="list">${open.map(stkRcCard).join('')}</div>` : ''}
     <h3>${esc(t('stk_hist_h'))}</h3><div class="list">${hist.map(h => h.html).join('') || `<div class="empty">${esc(t('stk_hist_none'))}</div>`}</div>`;
   invLoadPhotos();
@@ -5932,6 +5988,198 @@ async function stkTrCancel(i){
   if (!note.trim()) return toast(t('err_INV_CANCEL_NOTE'), true);
   try { await rpc('inv_transfer_cancel', { ...tok(), p_id: x.id, p_note: note }); await keepScroll(() => stkReload(t('stk_tr_undone'))); }
   catch(e){ toast(errText(e), true); }
+}
+
+// ---------- v143（数据库 v104 / 文件服务 tasks v25，老板 2026-11-06）：库管待办、AI 拍一层认饮料、报损、库存和盘点 ----------
+function renderInvUnplaced(){
+  const S = invS(), u = ((state.invTodo || {}).unplaced || []).find(x => x.store === S.ustore);
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('kp_unplaced_h', { s: S.ustore || '' }))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('kp_unplaced_hint'))}</div>
+    <div class="list">${u && u.items.length ? u.items.map(x => `<div class="item" data-act="inv-item" data-id="${x.id}" style="cursor:pointer"><div class="inv-row">${invImg(x.photo_t, 'sm')}<div class="inv-txt"><strong>${esc(invName(x))}</strong><div class="meta">${esc(invOther(x))}</div></div></div></div>`).join('')
+      : `<div class="empty">✓</div>`}</div>`;
+  invLoadPhotos();
+}
+// 拍一层认饮料：照片存成这个位置的照片，AI 从饮料清单里认，库管勾选后放进去
+function shelfHTML(P){
+  const S = invS(), X = S.shelf && S.shelf.place === P.id ? S.shelf : null;
+  const btn = `<label class="btn ghost" style="display:flex;align-items:center;justify-content:center;margin:8px 0">${esc(t('sh_btn'))}<input type="file" accept="image/*" capture="environment" data-invphoto="shelf" hidden></label>`;
+  if (!X) return btn;
+  if (X.busy) return `<div class="sheet" style="margin:8px 0">🤖 ${esc(t('sh_busy'))}</div>`;
+  const here = new Set((P.items || []).map(x => x.id)), D = (S.stock || {}).drinks || [];
+  const name = id => invName(D.find(d => d.id === id) || {}) || '?';
+  const rows = (X.items || []).map(x => `<label class="check" style="margin:6px 0"><input type="checkbox" data-shsel="${x.item_id}" ${X.sel[x.item_id] ? 'checked' : ''} ${here.has(x.item_id) ? 'disabled' : ''}>
+      ${esc(name(x.item_id))} <span class="small muted">${esc([x.count != null ? t('sh_count', { n: x.count }) : '', x.crates ? t('sh_crates', { n: x.crates }) : ''].filter(Boolean).join(' · '))}</span>
+      ${x.sure ? '' : ` <span class="tag pend">${esc(t('sh_unsure'))}</span>`}${here.has(x.item_id) ? ` <span class="tag ok">${esc(t('sh_here'))}</span>` : ''}</label>`).join('');
+  const n = Object.keys(X.sel).filter(k => X.sel[k] && !here.has(k)).length;
+  return `<div class="sheet" style="margin:8px 0">${X.error ? `<div class="small" style="color:var(--copper)">${esc(X.error)}</div>`
+      : `<strong>🤖 ${esc(t('sh_h'))}</strong>${rows || `<div class="small muted">${esc(t('sh_none'))}</div>`}
+      ${(X.other || []).length ? `<div class="small muted" style="margin-top:6px">${esc(t('sh_other', { x: X.other.join('、') }))}</div>` : ''}
+      ${X.note ? `<div class="small" style="color:var(--copper);margin-top:6px">${esc(X.note)}</div>` : ''}
+      ${n ? `<button class="btn" data-act="sh-save" style="margin-top:8px">${esc(t('sh_save', { n }))}</button>` : ''}`}
+    <button class="link" data-act="sh-close" style="margin-top:6px">${esc(t('sh_close'))}</button></div>${btn}`;
+}
+async function shelfPhoto(file){
+  const S = invS(), P = S.place; if (!P) return;
+  let prep; try { prep = await invPrep(file); } catch(e){ toast(t('err_GENERIC'), true); return; }
+  const X = S.shelf = { place: P.id, busy: true, items: [], other: [], sel: {} }; keepScroll(renderInvPlace);
+  try {
+    if (!S.stock) S.stock = await rpc('inv_stock_home', tok());
+    const up = await invUpload('p', prep);
+    await rpc('inv_place_photo', { ...tok(), p_place: P.id, p_photo: up.photo, p_photo_t: up.photo_t });
+    try {
+      const r = await callTasks({ action: 'inv_ai_shelf', path: up.photo });
+      X.items = r.items || []; X.other = r.other || []; X.note = (state.lang === 'de' ? r.note_de : r.note_zh) || '';
+      X.items.forEach(x => { X.sel[x.item_id] = true; });
+    } catch(e){ X.error = t('sh_fail'); }
+  } catch(e){ X.error = errText(e); }
+  X.busy = false; S.home = null; S.area = null;
+  if (state.tab === 'inv' && S.view === 'place' && S.id === P.id){ const keep = S.shelf; await keepScroll(viewInvPlace); S.shelf = keep; keepScroll(renderInvPlace); }
+}
+async function shelfSave(btn){
+  const S = invS(), P = S.place, X = S.shelf; if (!P || !X) return;
+  const here = new Set((P.items || []).map(x => x.id)), ids = Object.keys(X.sel).filter(k => X.sel[k] && !here.has(k));
+  btn.disabled = true; let n = 0;
+  for (const id of ids){ try { await rpc('inv_place_item', { ...tok(), p_item: id, p_place: P.id, p_main: false, p_force: false, p_note: null }); n++; }
+    catch(e){ const m = String(e && e.message || ''); let c = null; if (m.startsWith('INV_CONFLICT:')) try { c = (JSON.parse(m.slice(13)).conflicts || [])[0]; } catch(_){}
+      toast(c ? invConflictText(c, state.lang) : errText(e), true); } }
+  S.shelf = null; S.home = null; S.area = null; if (n) toast(t('sh_saved', { n })); invTodoLoad().then(refreshInvBadge);
+  keepScroll(viewInvPlace);
+}
+// 报损
+const LS_REASONS = ['broken', 'expired', 'staff', 'other'];
+function lsCard(x, i){
+  const what = `${invName(x) || '?'} ${x.unit === 'pack' ? t('stk_tr_packs', { n: drkNum(x.qty_note), u: drkUnit(x.pack_unit) || t('stk_pack'), b: drkNum(x.qty) }) : t('stk_tr_units', { n: drkNum(x.qty) })}`;
+  return `<div class="item"><div class="top"><div>${storeTag(x.store)} <strong>${esc(t('ls_card', { r: t('ls_r_' + x.reason) }))}</strong>${x.cancelled_at ? ` <span class="tag off">${esc(t('stk_st_cancel'))}</span>` : ''}
+    <div>${esc(what)}</div><div class="meta">${esc([x.created_name, fmtDateTime(x.created_at), x.note].filter(Boolean).join(' · '))}</div>
+    ${x.cancelled_at ? `<div class="small muted">${esc(t('stk_cancelled_by', { n: x.cancelled_name || '', r: x.cancel_note || '' }))}</div>` : ''}</div>
+    ${x.can_cancel && stkCanWrite() ? `<button class="link danger" data-act="ls-cancel" data-i="${i}">${esc(t('stk_undo'))}</button>` : ''}</div></div>`;
+}
+function lsNew(){ const S = invS(); S.ls = { store: invMyStore() || STORES[0], item_id: '', qty_note: '1', unit: 'unit', reason: 'staff', note: '' }; invGo('loss'); }
+function lsKeep(){ const L = invS().ls; if (!L) return; const q = document.getElementById('ls-qty'), n = document.getElementById('ls-note'); if (q) L.qty_note = q.value; if (n) L.note = n.value; }
+function renderInvLoss(){
+  const S = invS(), L = S.ls, D = S.stock || {}; if (!L){ S.view = 'stock'; return viewInvStock(); }
+  const drinks = (D.drinks || []).slice().sort((a, b) => invName(a).localeCompare(invName(b))), d = stkDrink(L.item_id);
+  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(t('ls_h'))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('ls_hint'))}</div>
+    <div class="field"><label>${esc(t('ls_store'))}</label><div class="seg sm">${STORES.map(s => `<button data-act="ls-store" data-store="${s}" class="${L.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div></div>
+    <div class="field"><label for="ls-item">${esc(t('ls_drink'))}</label><select class="input" id="ls-item"><option value="">${esc(t('stk_l_pick'))}</option>
+      ${drinks.map(x => `<option value="${x.id}"${x.id === L.item_id ? ' selected' : ''}>${esc(invName(x))}${drkPack(x) ? ' · ' + esc(drkPack(x)) : ''}</option>`).join('')}</select></div>
+    <div class="field"><label for="ls-qty">${esc(t('ls_qty'))}</label><div class="row" style="gap:8px;align-items:center"><input class="input" id="ls-qty" style="width:90px" inputmode="decimal" value="${esc(L.qty_note)}">
+      ${d && d.pack_qty ? `<div class="seg sm">${['unit', 'pack'].map(k => `<button data-act="ls-unit" data-u="${k}" class="${L.unit === k ? 'on' : ''}">${esc(k === 'pack' ? drkUnit(d.pack_unit) || t('stk_pack') : drkUnit(d.unit) || t('stk_unit'))}</button>`).join('')}</div>` : `<span>${esc(d ? drkUnit(d.unit) || t('stk_unit') : '')}</span>`}</div></div>
+    <div class="field"><label>${esc(t('ls_reason'))}</label><div class="seg sm" style="flex-wrap:wrap">${LS_REASONS.map(r => `<button data-act="ls-reason" data-r="${r}" class="${L.reason === r ? 'on' : ''}">${esc(t('ls_r_' + r))}</button>`).join('')}</div></div>
+    <div class="field"><label for="ls-note">${esc(t('ls_note'))}</label><input class="input" id="ls-note" value="${esc(L.note)}" placeholder="${esc(t('ls_note_ph'))}"></div>
+    <button class="btn" data-act="ls-save">${esc(t('ls_save'))}</button>`;
+}
+async function lsSave(btn){
+  const S = invS(), L = S.ls; if (!L) return; lsKeep();
+  if (!L.item_id) return toast(t('ls_need_drink'), true);
+  if (!(stkNum(L.qty_note) > 0)) return toast(t('err_INV_TR_QTY'), true);
+  if (L.reason === 'other' && !L.note.trim()) return toast(t('err_INV_LOSS_NOTE'), true);
+  const d = stkDrink(L.item_id); btn.disabled = true;
+  try { await rpc('inv_loss_save', { ...tok(), p_store: L.store, p_item: L.item_id, p_qty_note: stkNum(L.qty_note), p_unit: d && d.pack_qty ? L.unit : 'unit', p_reason: L.reason, p_note: L.note || null });
+    S.ls = null; S.stock = null; LS.set('invStore', L.store); toast(t('ls_saved')); invGo('stock'); }
+  catch(e){ btn.disabled = false; toast(errText(e), true); }
+}
+async function lsCancel(i){
+  const S = invS(), x = ((S.stock || {}).losses || [])[i]; if (!x) return;
+  const note = prompt(t('ls_undo_q')); if (note === null) return; if (!note.trim()) return toast(t('err_INV_CANCEL_NOTE'), true);
+  try { await rpc('inv_loss_cancel', { ...tok(), p_id: x.id, p_note: note }); await keepScroll(() => stkReload(t('ls_undone'))); } catch(e){ toast(errText(e), true); }
+}
+// 库存和盘点
+async function viewInvLevels(){
+  const S = invS();
+  if (!S.levels) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`; else renderInvLevels();
+  let L; try { L = await rpc('inv_stock_levels', tok()); } catch(e){ if (!S.levels) $('#main').innerHTML = `<button class="link" data-act="inv-stock">${esc(t('stk_back'))}</button><div class="empty">${esc(errText(e))}</div>`; else toast(errText(e), true); return; }
+  if (state.tab !== 'inv' || S.view !== 'levels') return;
+  S.levels = L; renderInvLevels();
+}
+function lvCountHTML(c, st){
+  const off = (c.results || []).filter(r => r.diff != null && Math.abs(+r.diff) >= 0.5);
+  const ai = c.ai ? `<div class="small" style="white-space:pre-line;margin:6px 0">🤖 ${esc(state.lang === 'de' ? (c.ai.de || c.ai.zh) : (c.ai.zh || c.ai.de))}</div>` : '';
+  const busy = invS().lvAi === c.id;
+  const rows = (c.results || []).filter(r => +r.counted !== 0 || (r.expected != null && +r.expected !== 0));
+  return `<details class="fold"><summary>${esc(t('lv_res_h', { d: dayLabel(c.day), n: c.first ? t('lv_first') : off.length ? t('lv_diff_n', { n: off.length }) : t('lv_diff_ok') }))} <span class="small muted">· ${esc(c.done_name || '')}</span></summary><div class="inner">
+    ${ai}${!c.first && !c.ai && !state.viewAs ? `<button class="link" data-act="lv-ai" data-id="${c.id}"${busy ? ' disabled' : ''}>${esc(t(busy ? 'lv_ai_busy' : 'lv_ai_btn'))}</button>` : ''}
+    <div class="sheet scroll"><table class="num"><tr><th></th><th class="r">${esc(t('lv_res_counted'))}</th>${c.first ? '' : `<th class="r">${esc(t('lv_res_expected'))}</th><th class="r">${esc(t('lv_res_diff'))}</th>`}</tr>
+    ${rows.map(r => `<tr><td style="text-align:left">${esc(invName(r))}</td><td class="r">${drkNum(r.counted)}</td>${c.first ? '' : `<td class="r">${r.expected == null ? '—' : drkNum(r.expected)}</td>
+      <td class="r" style="${r.diff != null && Math.abs(+r.diff) >= 0.5 ? 'color:var(--copper);font-weight:600' : ''}">${r.diff == null ? '—' : (+r.diff > 0 ? '+' : '') + drkNum(r.diff)}</td>`}</tr>`).join('')}</table></div></div></details>`;
+}
+function renderInvLevels(){
+  const S = invS(), L = S.levels; if (!L) return;
+  const W = stkCanWrite();
+  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><h2 style="margin-top:4px">${esc(t('lv_h'))}</h2>
+    ${(L.stores || []).map(st => { const counted = (st.counts || []).length > 0;
+      return `<h3>${storeTag(st.store)}</h3><div class="small muted" style="margin-bottom:6px">${esc(t('lv_hint', { d: st.last_sales_day ? dayLabel(st.last_sales_day) : '—' }))}</div>
+      ${W ? `<button class="btn${st.open ? '' : ' ghost'}" data-act="ct-start" data-store="${st.store}" style="margin-bottom:8px">${esc(st.open ? t('lv_resume', { n: st.open.lines, who: st.open.started_name || '' }) : t('lv_start'))}</button>` : ''}
+      ${counted ? `<div class="sheet scroll" style="margin-bottom:8px"><table class="num"><tr><th></th><th class="r">${esc(t('lv_col_base'))}</th><th class="r">${esc(t('lv_col_in'))}</th><th class="r">${esc(t('lv_col_out'))}</th><th class="r">${esc(t('lv_col_sold'))}</th><th class="r">${esc(t('lv_col_now'))}</th></tr>
+        ${(st.items || []).map(x => { const k = x.calc || {}; if (k.base == null) return '';
+          const inn = (+k.receipts || 0) + Math.max(0, +k.transfers || 0), out = Math.min(0, +k.transfers || 0) + (+k.losses || 0);
+          return `<tr><td style="text-align:left">${esc(invName(x))}</td><td class="r">${drkNum(k.base_qty)}</td><td class="r">${inn ? '+' + drkNum(inn) : '·'}</td><td class="r">${out ? drkNum(out) : '·'}</td><td class="r">${+k.sales ? '−' + drkNum(k.sales) : '·'}</td>
+            <td class="r"><strong style="${+k.expected < 0 ? 'color:var(--copper)' : ''}">${drkNum(k.expected)}</strong></td></tr>`; }).join('')}</table></div>`
+        : `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('lv_no_count'))}</div>`}
+      ${counted ? `<div class="small muted" style="margin:4px 0">${esc(t('lv_counts_h'))}</div>${st.counts.map(c => lvCountHTML(c, st)).join('')}` : ''}`; }).join('')}`;
+}
+async function lvAi(id){
+  const S = invS(); S.lvAi = id; renderInvLevels();
+  try { await callTasks({ action: 'inv_ai_count', count_id: id }); } catch(e){ toast(t('lv_ai_fail'), true); }
+  S.lvAi = null; if (state.tab === 'inv' && S.view === 'levels') viewInvLevels();
+}
+async function ctStart(store){
+  const S = invS();
+  try { const id = await rpc('inv_count_start', { ...tok(), p_store: store }); S.count = null; S.countId = id; invGo('count'); } catch(e){ toast(errText(e), true); }
+}
+async function viewInvCount(){
+  const S = invS();
+  if (!S.count) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let C; try { C = await rpc('inv_count', { ...tok(), p_id: S.countId }); } catch(e){ $('#main').innerHTML = `<button class="link" data-act="lv-open">${esc(t('inv_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'count') return;
+  S.count = C; renderInvCount();
+}
+function ctRow(x, placeId){
+  const ed = invS().count.status === 'open' && stkCanWrite(), key = (placeId || 'x') + ':' + x.id;
+  return `<div class="row" style="gap:8px;align-items:center;margin:6px 0;flex-wrap:wrap"><span style="flex:1;min-width:120px">${esc(invName(x))}${x.pack_qty ? ` <small class="muted">· ${esc(drkPack(x))}</small>` : ''}</span>
+    <input class="input" style="width:80px" inputmode="decimal" data-ct="${key}" data-place="${placeId || ''}" data-item="${x.id}" value="${x.qty == null ? '' : esc(drkNum(x.qty))}" ${ed ? '' : 'disabled'}>
+    <span class="small">${esc(t('ct_bottles'))}</span>${ed && x.pack_qty ? `<button class="link" data-act="ct-box" data-key="${key}" data-n="${x.pack_qty}">${esc(t('ct_add_box'))}</button>` : ''}
+    <span class="small muted" id="ct-ok-${esc(key)}"></span></div>`;
+}
+function renderInvCount(){
+  const S = invS(), C = S.count; if (!C) return;
+  const ed = C.status === 'open' && stkCanWrite();
+  $('#main').innerHTML = `<button class="link" data-act="lv-open" style="margin:2px 0 6px">← ${esc(t('lv_h'))}</button><h2 style="margin-top:4px">${esc(t('ct_h', { s: C.store }))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('ct_hint'))}</div>
+    ${(C.places || []).length ? (C.places || []).map(p => `<div class="sheet" style="margin-bottom:10px"><div class="inv-row" style="align-items:center">${invImg(p.photo_t, 'sm')}<div class="inv-txt">
+        <strong>${esc(invName(p, 'area'))} · ${esc(invName(p, 'unit'))}</strong><div class="small muted">${esc(p.code)}${p.pos ? ' · ' + esc(invPosText(p.pos)) : ''}</div></div></div>
+        ${(p.items || []).map(x => ctRow(x, p.id)).join('')}</div>`).join('') : `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('ct_place_none'))}</div>`}
+    <h3>${esc(t('ct_others'))}</h3><div class="small muted">${esc(t('ct_others_hint'))}</div><div class="sheet" style="margin-bottom:10px">${(C.others || []).map(x => ctRow(x, null)).join('')}</div>
+    ${ed ? `<button class="btn" data-act="ct-finish">${esc(t('ct_finish'))}</button><button class="link danger" data-act="ct-cancel" style="margin-top:12px">${esc(t('ct_cancel'))}</button>` : ''}`;
+  invLoadPhotos();
+}
+async function ctSave(inp){
+  const S = invS(), C = S.count; if (!C) return;
+  const v = inp.value.trim(), q = v === '' ? null : stkNum(v);
+  if (v !== '' && !(q >= 0)) { toast(t('ct_bad_qty'), true); return; }
+  const ok = document.getElementById('ct-ok-' + inp.dataset.ct);
+  try { await rpc('inv_count_set', { ...tok(), p_id: C.id, p_place: inp.dataset.place || null, p_item: inp.dataset.item, p_qty: q });
+    const tgt = inp.dataset.place ? ((C.places || []).find(p => p.id === inp.dataset.place) || {}).items || [] : C.others || [];
+    const x = tgt.find(i => i.id === inp.dataset.item); if (x) x.qty = q;
+    if (ok) ok.textContent = '✓ ' + t('ct_saved'); }
+  catch(e){ toast(errText(e), true); }
+}
+async function ctFinish(btn){
+  const S = invS(), C = S.count; if (!C) return;
+  const counted = new Set([...(C.places || []).flatMap(p => (p.items || []).filter(x => x.qty != null).map(x => x.id)), ...(C.others || []).filter(x => x.qty != null).map(x => x.id)]);
+  const missing = (C.others || []).filter(x => !counted.has(x.id)).length;
+  if (!confirm(missing ? t('ct_finish_q', { n: missing }) : t('ct_finish_q0'))) return;
+  btn.disabled = true;
+  try { const r = await rpc('inv_count_finish', { ...tok(), p_id: C.id }); toast(t('ct_done', { n: r.items }));
+    S.count = null; S.levels = null; invGo('levels');
+    callTasks({ action: 'inv_ai_count', count_id: C.id }).then(() => { if (state.tab === 'inv' && invS().view === 'levels') viewInvLevels(); }, () => {}); }
+  catch(e){ btn.disabled = false; toast(errText(e), true); }
+}
+async function ctCancel(){
+  const S = invS(), C = S.count; if (!C) return;
+  const note = prompt(t('ct_cancel_q')); if (note === null) return; if (!note.trim()) return toast(t('err_INV_CANCEL_NOTE'), true);
+  try { await rpc('inv_count_cancel', { ...tok(), p_id: C.id, p_note: note }); S.count = null; S.levels = null; toast(t('ct_cancelled')); invGo('levels'); } catch(e){ toast(errText(e), true); }
 }
 
 // 一个收银商品配到哪样饮料：饮料清单里的 / 物品里找 / 新建
@@ -7829,6 +8077,7 @@ async function viewAdmin(){
       const list = await rpc('admin_list_staff', tok());
       try { const pr = await rpc('admin_sched_profiles', tok()) || []; list.forEach(s => { const x = pr.find(y => y.id === s.id); if (x){ s.in_schedule = x.in_schedule; s.skills = x.skills; } }); } catch(e){}   // v21 之前没有
       try { const ids = await rpc('admin_expense_staff', tok()) || []; list.forEach(x => x.can_expense = ids.includes(x.id)); } catch(e){}   // v45 之前没有
+      try { const ks = await rpc('admin_keepers', tok()) || []; list.forEach(x => { x.keeps = ks.filter(k => k.staff_id === x.id).map(k => ({ side: k.side, store: k.store })); }); } catch(e){}   // v143：库管
       state.staffList = list;
       let pm = null; try { pm = await rpc('push_status', tok()) || {}; } catch(e){}   // v27 之前没有
       const pushTag = s => !pm ? '' : pm[s.id] ? `<span class="tag ok">${esc(pm[s.id] > 1 ? t('push_on_n', { n: pm[s.id] }) : t('push_on_tag'))}</span>` : `<span class="tag off">${esc(t('push_off_tag'))}</span>`;
@@ -7961,6 +8210,14 @@ async function areaSet(id, area, stores, confirmed){
     return await rpc('admin_area_set', { ...tok(), p_staff_id: id, p_area: area, p_stores: stores, p_confirm: true });
   }
 }
+// v143：库管（物品 / 饮料）：每家店前厅 / 后厨，可以多人
+function keeperPermHTML(s){
+  const has = (side, st) => (s.keeps || []).some(x => x.side === side && x.store === st);
+  return `<div style="margin:4px 0 12px"><strong>${esc(t('kp_title'))}</strong>
+    ${['front', 'kitchen'].map(side => `<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:6px 0"><span style="min-width:80px">${esc(t('kp_' + side))}</span>
+      ${STORES.map(st => `<label class="check" style="display:inline-flex;margin:0"><input type="checkbox" class="s-keep" data-side="${side}" data-store="${st}" ${has(side, st) ? 'checked' : ''}> ${esc(st)}</label>`).join('')}</div>`).join('')}
+    <div class="small muted">${esc(t('kp_hint'))}</div></div>`;
+}
 function staffForm(s){
   // 网页 v35：分成 岗位 / 权限 / 账号 三块；主岗位和会做的岗位合并成「不会 → 会 → 主要」
   const isNew = !s.id, active = isNew || s.is_active;
@@ -7977,7 +8234,7 @@ function staffForm(s){
       ${s.in_schedule === undefined && !isNew ? '' : `<div class="field" style="margin-top:12px">${cb('s-insched', t('sp_in'), isNew || s.in_schedule !== false)}
         <div class="small muted">${esc(t('sp_in_hint'))}</div></div>`}</div>
     ${sec('sec_perm')}
-    ${s.is_kitchen ? '' : areaPermHTML(s)}
+    ${s.is_kitchen ? '' : areaPermHTML(s)}${s.is_kitchen || isNew ? '' : keeperPermHTML(s)}
     ${cb('s-mgr', t('is_manager'), s.is_tip_manager)}<div class="small muted" style="margin:-4px 0 10px 28px">${esc(t('perm_tm_hint'))}</div>
     <label class="check" style="opacity:.55"><input type="checkbox" disabled> ${esc(t('perm_recon'))}</label><div class="small muted" style="margin:-4px 0 10px 28px">${esc(t('perm_recon_hint'))}</div>
     ${cb('s-admin', t('is_admin'), s.is_admin)}<div class="small muted" style="margin:-4px 0 10px 28px">${esc(t('perm_admin_hint'))}</div>
@@ -10525,6 +10782,9 @@ document.addEventListener('click', async ev => {
           p_is_active: $('#s-active').checked, p_is_kitchen: $('#s-kitchen').checked, p_is_tip_manager: $('#s-mgr').checked, p_is_admin: $('#s-admin').checked });
         if (!$('#s-kitchen').checked && rb) await rpc('admin_set_main_role', { ...tok(), p_id: newId || s.id, p_role: rb.dataset.r });
         for (const a of chg) await areaSet(newId || s.id, a, want(a), ask);   // v82
+        if (document.querySelector('.s-keep')) for (const side of ['front', 'kitchen']){   // v143：库管
+          const w = [...document.querySelectorAll(`.s-keep[data-side="${side}"]:checked`)].map(x => x.dataset.store).sort(), h = (s.keeps || []).filter(x => x.side === side).map(x => x.store).sort();
+          if (w.join() !== h.join()) await rpc('admin_keeper_set', { ...tok(), p_staff_id: newId || s.id, p_side: side, p_stores: w }); }
         if (ask && !adds) await rpc('admin_role_ack', { ...tok(), p_staff_id: newId || s.id });   // 只是新勾了小费管理员：记一笔「已确认」
         if ($('#s-exp') && $('#s-exp').checked !== !!s.can_expense) await rpc('admin_set_expense', { ...tok(), p_id: newId || s.id, p_on: $('#s-exp').checked });   // v67
         if ($('#s-insched')){ const main = rb ? rb.dataset.r : null;
@@ -11026,6 +11286,24 @@ document.addEventListener('click', async ev => {
     case 'stk-tr-delline': { stkTrKeep(); const T = invS().tr; if (T){ T.lines.splice(+el.dataset.i, 1); keepScroll(renderInvTr); } break; }
     case 'stk-tr-save': stkTrSave(el); break;
     case 'stk-tr-cancel': stkTrCancel(+el.dataset.i); break;
+    case 'kp-unplaced': { const S = invS(); S.ustore = el.dataset.store; invGo('unplaced'); break; }   // v143
+    case 'kp-area-new': { const S = invS(), H = S.home || {}, st = (H.area_new || [])[0] || STORES[0], K = (H.keeper || []).filter(k => k.store === st);
+      S.sform = { id: null, store: st, code: '', name_zh: '', name_de: '', owner: K.length === 1 ? K[0].side : 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true, tr: invTrNew(null), back: { view: 'home' } };
+      S.view = 'aform'; render(); window.scrollTo(0, 0); break; }
+    case 'sh-close': { const S = invS(); S.shelf = null; keepScroll(renderInvPlace); break; }
+    case 'sh-save': shelfSave(el); break;
+    case 'ls-new': lsNew(); break;
+    case 'ls-store': { lsKeep(); const L = invS().ls; if (L){ L.store = el.dataset.store; keepScroll(renderInvLoss); } break; }
+    case 'ls-unit': { lsKeep(); const L = invS().ls; if (L){ L.unit = el.dataset.u; keepScroll(renderInvLoss); } break; }
+    case 'ls-reason': { lsKeep(); const L = invS().ls; if (L){ L.reason = el.dataset.r; keepScroll(renderInvLoss); } break; }
+    case 'ls-save': lsSave(el); break;
+    case 'ls-cancel': lsCancel(+el.dataset.i); break;
+    case 'lv-open': { const S = invS(); S.count = null; invGo('levels'); break; }
+    case 'lv-ai': lvAi(el.dataset.id); break;
+    case 'ct-start': ctStart(el.dataset.store); break;
+    case 'ct-box': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp){ inp.value = drkNum((stkNum(inp.value) || 0) + (+el.dataset.n)); ctSave(inp); } break; }
+    case 'ct-finish': ctFinish(el); break;
+    case 'ct-cancel': ctCancel(); break;
     case 'drk-open': invGo('drink', el.dataset.id); break;
     case 'drk-sugg-new': { const g = ((invS().drinks || {}).suggest || [])[+el.dataset.i]; if (g) drkSugg(g, 'create'); break; }
     case 'drk-sugg-link': { const g = ((invS().drinks || {}).suggest || [])[+el.dataset.i]; if (g) drkSugg(g, 'link', el.dataset.id); break; }
@@ -11226,9 +11504,12 @@ document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.sopphoto && ev.target.files && ev.target.files[0]){ const f = ev.target.files[0]; ev.target.value = ''; sopPhotoChosen(f); return; }   // v111：SOP 照片
   if (ev.target.dataset && ev.target.dataset.invphoto && ev.target.files && ev.target.files[0]){   // v91：物品 / 储位照片
     const f = ev.target.files[0], k = ev.target.dataset.invphoto; ev.target.value = '';
-    if (k === 'item') invPhotoChosen(f); else if (k === 'inbox') invIbPhoto(f); else if (k === 'receipt') stkRcPhoto(f); else invPlacePhoto(f);   // v94：待归位照片；v142：送货单
+    if (k === 'item') invPhotoChosen(f); else if (k === 'inbox') invIbPhoto(f); else if (k === 'receipt') stkRcPhoto(f); else if (k === 'shelf') shelfPhoto(f); else invPlacePhoto(f);   // v143：拍一层认饮料   // v94：待归位照片；v142：送货单
     return;
   }
+  if (ev.target.dataset && ev.target.dataset.ct){ ctSave(ev.target); return; }   // v143：盘点的数，改完就存
+  if (ev.target.dataset && ev.target.dataset.shsel){ const X = invS().shelf; if (X){ X.sel[ev.target.dataset.shsel] = ev.target.checked; keepScroll(renderInvPlace); } return; }
+  if (ev.target.id === 'ls-item'){ lsKeep(); const L = invS().ls; if (L){ L.item_id = ev.target.value; const d = stkDrink(L.item_id); if (!(d && d.pack_qty)) L.unit = 'unit'; keepScroll(renderInvLoss); } return; }
   if (ev.target.dataset && ev.target.dataset.rcl === 'item'){ stkRcLinePick(+ev.target.dataset.i, ev.target.value); return; }   // v142：送货单这一行配哪样饮料
   if (ev.target.dataset && ev.target.dataset.trl === 'item'){ stkTrKeep(); const T = invS().tr, l = T && T.lines[+ev.target.dataset.i];
     if (l){ l.item_id = ev.target.value; const d = stkDrink(l.item_id); l.unit = d && d.pack_qty ? 'pack' : 'unit'; keepScroll(renderInvTr); } return; }
