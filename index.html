@@ -9739,13 +9739,13 @@ document.addEventListener('click', async ev => {
     case 'oil-day': (state.oilDay = state.oilDay || {})[el.dataset.store] = el.dataset.k; keepScroll(toRedraw); break;
     case 'oil-start': {
       const st = el.dataset.store, day = ((state.oilDay || {})[st] || 'today') === 'tomorrow' ? addDays(bizToday(), 1) : bizToday(); el.disabled = true;
-      try { await rpc('admin_oil_start', { ...tok(), p_store: st, p_day: day }); toast(t('oil_started')); keepScroll(render); }
+      try { await rpc('admin_oil_start', { ...tok(), p_store: st, p_day: day }); toast(t('oil_started')); callPush('task_due'); keepScroll(render); }   // v146：检查任务马上推给要做的人
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
     case 'oil-date': {
       const v = ($('#oil-date-' + el.dataset.id) || {}).value; if (!v) return toast(t('err_OIL_DATE'), true); el.disabled = true;
-      try { await rpc('admin_oil_date', { ...tok(), p_flow: el.dataset.id, p_date: v }); toast(t('oil_date_saved')); keepScroll(render); }
+      try { await rpc('admin_oil_date', { ...tok(), p_flow: el.dataset.id, p_date: v }); toast(t('oil_date_saved')); callPush('task_due'); keepScroll(render); }   // v146：拿出去 / 拿回来的任务马上推
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
@@ -9842,6 +9842,7 @@ document.addEventListener('click', async ev => {
                      times: per ? (+e.times || 1) : 1, makeup: per ? e.makeup !== false : true } });   // v132：几次、没做完要不要补
         if (e.sop) state.sopSug = (state.sopSug || []).filter(x => x.sop_item_id !== e.sop);
         if (r && person && once && !r.self) callPush('task_assign', { def_id: r.id });   // 推给被指定的人（push v12 只推一次性的；换了人才会再推）
+        if (r && once && !person) callPush('task_due');   // v146（数据库 v107 / push v14）：按岗位 / 区域的一次性任务马上推给那天要做的人（排班已发布时）
         state.tfEdit = null;
         toast(person && once ? (r.self ? t('nm_saved_self', { d: dayLabel(e.day) }) : t('nm_saved', { n: r.to || '', d: dayLabel(e.day) }))
           : person ? t('tf_saved_rep', { n: r.self ? t('nm_me') : r.to || '', r: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm, times: e.times }) })
