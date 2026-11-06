@@ -3543,8 +3543,10 @@ function hrepCardHTML(){
     : J.status === 'unknown' ? `<div class="hrep-job"><span class="negc">✗ ${esc((J.problems || []).length ? J.problems.join(' ') : t('hrep_unknown'))}</span><button class="link" data-act="hrep-start">${esc(t('hrep_retake'))}</button>${x(J)}</div>`
     : `<div class="hrep-job"><span class="negc">✗ ${esc(J.err || t('err_GENERIC'))}</span>${x(J)}</div>`;
   const unk = ((state.repImp || {}).unknown || []);   // v135：邮件里认不出门店 / 日子的 PDF
-  return `<div class="hrep-card" id="hrep-card"><div class="row" style="gap:8px">${C ? '' : `<button class="btn" data-act="hrep-start">${esc(t('hrep_take'))}</button>`}
-    <button class="btn ${n && !C ? 'ghost' : 'ghost'}" data-act="env-all">${esc(n ? t('hrep_env', { n }) : t('hrep_env0'))}</button></div>${cap}${jobs.map(line).join('')}
+  // v148（老板 2026-11-06）：全天报告基本每天都从邮件自动导入了，首页不再放「📷 拍全天报告」，只留「点信封」。
+  //   邮件没导入的那天，店卡片上写「✉ 邮件里还没有这天的报告……」，点进核对页照旧能拍、能手动输入。（拍到一半的照片照旧显示在这里）
+  return `<div class="hrep-card" id="hrep-card"><div class="row" style="gap:8px">
+    <button class="btn ghost" data-act="env-all">${esc(n ? t('hrep_env', { n }) : t('hrep_env0'))}</button></div>${cap}${jobs.map(line).join('')}
     ${unk.length ? `<div class="small warnc" style="margin-top:8px">${esc(t('rpe_h_unknown', { n: unk.length, p: rpeProblems(unk[0].problems) }))}</div>` : ''}</div>`;
 }
 const hrepOnHome = () => state.tab === 'today' && state.me && state.me.is_admin && !state.recon && !state.envAll && !state.taskOpen && !state.viewAs;
