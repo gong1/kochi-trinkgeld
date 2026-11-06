@@ -752,6 +752,13 @@ zh: {
   fb_view_note:'（查看 {n} 时）', fb_view_hint:'以你自己的名义发送，注明是查看 {n} 时看到的。',
   // v73：公告认真读、推送情况
   an_wait:'请先读完 · {s}', an_scroll:'请滑到最下面', an_push_pub:'已发布。推送到了 {a} 人的手机（共 {b} 人要确认）。', an_push_remind:'已再提醒。推送到了 {a} 人的手机（还有 {b} 人没确认）。', an_push_off:'{n} 人没开手机通知，收不到推送，请当面提醒，或者让他们在「更多」里开启通知：{m}', an_nopush:'（没开通知）',
+  // v147（数据库 v108）：问几个人
+  qa_new:'＋ 问几个人', qa_title:'问几个人', qa_hint:'同一个问题发给几个人，各自回答：点「是 / 不是」或者写字。只有他自己和你看得到，回答会推送给你。',
+  qa_req:'问题（用哪种语言写都行）', qa_req_ph:'例如：之前有没有遇到过客人拿礼品卡来、余额却是零？没遇到过请点「不是」；遇到过请点「是」，写下日期和情况。',
+  qa_ai:'✨ AI 写成中德文', qa_ai_busy:'AI 正在写…', qa_ai_hint:'不用 AI 就直接发上面这句。AI 写的是草稿，可能写短了，发之前看一眼，要改就改。',
+  qa_zh:'发出去的中文', qa_de:'发出去的德文', qa_to:'发给谁', qa_none:'清空', qa_send:'发送', qa_sent:'已发给 {n} 人，也推送到了他们的手机',
+  qa_no_text:'请先写问题。', qa_no_one:'请先选发给谁。', qa_sec:'问询', qa_n:'已回答 {a} / {b}', qa_wait:'还没回答', qa_by:'{n} 问于 {t}', qa_show:'看回答', qa_hide:'收起',
+  qa_ctx:'这不是等员工做事：老板要把同一个问题同时问几个员工，每个人在 App 里点「是 / 不是」或者写字回答。把老板写的问题原样写成中文和德文，保留所有要点和怎么回答的说明，可以超过 3 句，不要缩短，不要加新内容。',
   an_kind_duty:'新义务（必须确认）', an_kind_info:'普通（看过就行）', an_kind_hint_duty:'员工在「今天」上看到，有空时看完并确认；发布 24 小时后还没确认的人，打开 App 会先显示这条，确认后才能用。', an_kind_hint_info:'员工在「今天」上看到，看完点「知道了」就算看过；不会挡住 App。', an_tag_duty:'新义务', an_tag_info:'普通', an_read_n:'已看 {a} / {b} 人', an_waiting_read:'还没看：{m}', an_remind_read_n:'提醒还没看的 {n} 人', an_tk:'📢 公告要确认：{n}', an_tk_sub:'有空时看完并确认。{t} 前还没确认，打开 App 会先显示这条。', an_tk_info:'📢 新公告：{n}', an_tk_info_sub:'有空时看一眼。', an_tk_btn:'去看', an_later:'稍后再看', an_ok:'知道了 / OK', an_due_hint:'请在 {t} 前确认', an_overdue_hint:'这条已经超过 24 小时没确认，确认后才能继续用 App。', an_read_at:'已看 {t}', an_done_box:'📢 还有 {n} 条公告要看。现在有空，就看一下吧。', an_done_go:'现在看',   // v115
   // v72：收店任务谁负责
   task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', task_svc_one:'服务员负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
@@ -1364,6 +1371,13 @@ de: {
   fb_view_note:'(in der Ansicht als {n})', fb_view_hint:'Wird in deinem Namen gesendet, mit Hinweis „Ansicht als {n}“.',
   // v73：Mitteilungen gründlich lesen, Push-Status
   an_wait:'Bitte zuerst lesen · {s}', an_scroll:'Bitte bis ganz unten scrollen', an_push_pub:'Veröffentlicht. Push an {a} Handys gesendet ({b} müssen bestätigen).', an_push_remind:'Erinnerung gesendet. Push an {a} Handys ({b} noch nicht bestätigt).', an_push_off:'{n} haben keine Benachrichtigungen aktiviert und bekommen keinen Push – bitte persönlich ansprechen oder unter „Mehr“ aktivieren lassen: {m}', an_nopush:' (keine Benachrichtigungen)',
+  // v147 (DB v108)
+  qa_new:'＋ Mehrere fragen', qa_title:'Mehrere Personen fragen', qa_hint:'Eine Frage an mehrere Personen, jede antwortet für sich: „Ja / Nein“ tippen oder schreiben. Nur die Person und du sehen es; Antworten kommen als Push zu dir.',
+  qa_req:'Frage (Sprache egal)', qa_req_ph:'z. B.: Hattet ihr schon einmal einen Gast mit Geschenkkarte und 0 € Guthaben? Wenn nein: „Nein“ tippen; wenn ja: „Ja“ tippen und Datum und Ablauf schreiben.',
+  qa_ai:'✨ KI: Chinesisch + Deutsch', qa_ai_busy:'KI schreibt …', qa_ai_hint:'Ohne KI wird der Satz oben so gesendet. Die KI schreibt nur einen Entwurf, evtl. gekürzt – vor dem Senden kurz prüfen und ggf. ändern.',
+  qa_zh:'Gesendet auf Chinesisch', qa_de:'Gesendet auf Deutsch', qa_to:'An wen', qa_none:'Keine', qa_send:'Senden', qa_sent:'An {n} Personen gesendet, auch als Push aufs Handy',
+  qa_no_text:'Bitte zuerst die Frage schreiben.', qa_no_one:'Bitte zuerst auswählen, an wen.', qa_sec:'Fragen', qa_n:'{a} von {b} beantwortet', qa_wait:'noch keine Antwort', qa_by:'{n} gefragt am {t}', qa_show:'Antworten', qa_hide:'Zuklappen',
+  qa_ctx:'Keine offene Aufgabe: Der Chef stellt mehreren Mitarbeitenden dieselbe Frage, jede Person antwortet in der App mit „Ja / Nein“ oder einem Text. Die Frage des Chefs unverändert auf Chinesisch und Deutsch schreiben, alle Punkte und die Hinweise zum Antworten behalten, gern mehr als 3 Sätze, nicht kürzen, nichts hinzufügen.',
   an_kind_duty:'Neue Pflicht (bestätigen)', an_kind_info:'Info (nur lesen)', an_kind_hint_duty:'Erscheint unter „Heute“; lesen und bestätigen, wenn Zeit ist. Wer 24 Stunden nach dem Veröffentlichen noch nicht bestätigt hat, sieht sie beim Öffnen der App zuerst und kann erst nach der Bestätigung weiter.', an_kind_hint_info:'Erscheint unter „Heute“; nach dem Lesen „OK“ tippen – gilt dann als gelesen. Blockiert die App nie.', an_tag_duty:'Pflicht', an_tag_info:'Info', an_read_n:'{a} / {b} gelesen', an_waiting_read:'Noch nicht gelesen: {m}', an_remind_read_n:'Die {n} erinnern, die noch nicht gelesen haben', an_tk:'📢 Mitteilung bestätigen: {n}', an_tk_sub:'Lesen und bestätigen, wenn du Zeit hast. Ohne Bestätigung bis {t} erscheint sie beim Öffnen der App zuerst.', an_tk_info:'📢 Neue Mitteilung: {n}', an_tk_info_sub:'Bei Gelegenheit kurz lesen.', an_tk_btn:'Lesen', an_later:'Später', an_ok:'OK / 知道了', an_due_hint:'Bitte bis {t} bestätigen', an_overdue_hint:'Diese Mitteilung ist seit über 24 Stunden unbestätigt – erst nach der Bestätigung geht es in der App weiter.', an_read_at:'gelesen {t}', an_done_box:'📢 Noch {n} Mitteilung(en) zu lesen. Jetzt ist ein guter Moment.', an_done_go:'Jetzt lesen',   // v115
   // v72：Wer erledigt die Feierabend-Aufgabe
   task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', task_svc_one:'Service übernimmt {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
@@ -2042,6 +2056,7 @@ const ERR_ZH = {
   RECON_NO_REPORT: '还没录全天报告，先录入报告再核对完成。',
   RECON_DIFF_NOTE: '还有差额，请先写差额说明（差在哪里、怎么处理的），再核对完成。',
   MESSAGE_EMPTY: '留言是空的。请选一句常用的，或者自己写一句。',
+  ASK_NO_STAFF: '没有可以发的人：请选在职的员工（厨房共用账号和你自己不算）。',   // v147
   EXPENSE_FORBIDDEN: '你还没有记垫付的权限。需要的话请找老板在「员工」里打开。',
   EXPENSE_PHOTO_REQUIRED: '每一笔垫付都要有照片：拍小票，或者拍买的东西。',
   EXPENSE_AMOUNT: '金额不对：要大于 0，一笔最多 100 €。',
@@ -2279,6 +2294,7 @@ const ERR_DE = {
   RECON_NO_REPORT: 'Noch kein Schichtbericht erfasst. Erst Bericht erfassen, dann abschließen.',
   RECON_DIFF_NOTE: 'Es gibt noch eine Differenz. Bitte erst eine Erklärung schreiben, dann abschließen.',
   MESSAGE_EMPTY: 'Die Nachricht ist leer. Bitte einen Vorschlag wählen oder selbst etwas schreiben.',
+  ASK_NO_STAFF: 'Niemand zum Senden: bitte aktive Mitarbeitende wählen (Küchenkonto und du selbst zählen nicht).',   // v147
   EXPENSE_FORBIDDEN: 'Du darfst noch keine Auslagen erfassen. Bitte den Chef bitten, es unter „Mitarbeiter“ einzuschalten.',
   EXPENSE_PHOTO_REQUIRED: 'Jede Auslage braucht ein Foto: vom Kassenbon oder von der gekauften Sache.',
   EXPENSE_AMOUNT: 'Betrag ungültig: größer als 0 und höchstens 100 € pro Posten.',
@@ -8076,7 +8092,8 @@ async function viewAdmin(){
     } else if (state.adminSub === 'expense'){   // v67：垫付
       el().innerHTML = await expAdminHTML();
     } else if (state.adminSub === 'notice'){   // v64：公告
-      state.annList = await rpc('admin_announce_list', tok()) || [];
+      [state.annList, state.askList, state.pushMap] = await Promise.all([rpc('admin_announce_list', tok()).then(x => x || []),   // v147：问几个人
+        soft(rpc('admin_asks', tok()), []), soft(rpc('push_status', tok()), state.pushMap || null)]);
       el().innerHTML = annAdminHTML();
     } else if (state.adminSub === 'library'){   // v79：资料
       state.libAdmin = await rpc('admin_library_list', tok()) || [];
@@ -8907,6 +8924,7 @@ const annT = (a, k) => (state.lang === 'de' ? a[k + '_de'] || a[k + '_zh'] : a[k
 const annAud = a => t('an_aud_' + a.audience);
 function annAdminHTML(){
   const F = state.annForm, L = state.annList || [];
+  if (state.askForm) return askFormHTML(state.askForm);   // v147
   if (F) return annFormHTML(F);
   const card = a => { const D = (state.annDetail || {})[a.id], info = a.kind === 'info';   // v115：普通的写「已看」
     const ppl = D ? D.people || [] : [], wait = ppl.filter(p => !p.acked_at);
@@ -8922,9 +8940,44 @@ function annAdminHTML(){
         ${!a.replaced && +a.acked < +a.targets ? `<button class="link" data-act="an-remind" data-id="${a.id}">${esc(t(info ? 'an_remind_read_n' : 'an_remind_n', { n: a.targets - a.acked }))}</button>` : ''}</div></div>`; };
   // v89（老板 2026-10-15）：所有人都确认了的、已被取代的，收进下面折叠的一组（已完成的折叠在下）
   const open = L.filter(a => !a.replaced && +a.acked < +a.targets), done = L.filter(a => !open.includes(a));
-  return `<button class="btn ghost" data-act="an-new" style="margin-bottom:14px">${esc(t('an_new'))}</button>`
+  return `<div class="row" style="gap:8px;margin-bottom:14px"><button class="btn ghost" data-act="an-new">${esc(t('an_new'))}</button><button class="btn ghost" data-act="qa-new">${esc(t('qa_new'))}</button></div>`   // v147
     + `<div class="list">${open.map(card).join('') || `<div class="empty">${esc(t(L.length ? 'an_all_acked' : 'an_none'))}</div>`}</div>`
-    + (done.length ? `<details class="fold"><summary>${esc(t('an_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(card).join('')}</div></div></details>` : '');
+    + (done.length ? `<details class="fold"><summary>${esc(t('an_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(card).join('')}</div></div></details>` : '')
+    + askListHTML();   // v147
+}
+// ============ 问几个人（v147，数据库 v108，老板 2026-11-06）：同一个问题发给几个人，各自回答（老板的问题 = staff_messages.needs_answer）============
+const QA_KITCHEN = ['hot', 'cold', 'skewer', 'clean'];
+function qaPeople(){ return (state.qaStaff || []).filter(s => s.is_active !== false && !s.is_kitchen && s.id !== state.me.id); }
+function askFormHTML(F){
+  const ppl = qaPeople(), on = id => (F.ids || []).includes(id), drafted = !!(F.zh || F.de);
+  return `<div class="sheet"><h3 style="margin-top:0">${esc(t('qa_title'))}</h3><div class="small muted" style="margin-bottom:10px">${esc(t('qa_hint'))}</div>
+    <div class="field"><label for="qa-req">${esc(t('qa_req'))}</label><textarea class="input" id="qa-req" rows="4" placeholder="${esc(t('qa_req_ph'))}">${esc(F.req || '')}</textarea></div>
+    ${F.busy ? `<div class="loading">${esc(t('qa_ai_busy'))}</div>` : `<button class="btn ghost" data-act="qa-ai">${esc(t('qa_ai'))}</button>`}
+    <div class="small muted" style="margin:6px 0 10px">${esc(t('qa_ai_hint'))}</div>
+    ${drafted ? `<div class="field"><label for="qa-zh">${esc(t('qa_zh'))}</label><textarea class="input" id="qa-zh" rows="4">${esc(F.zh || '')}</textarea></div>
+      <div class="field"><label for="qa-de">${esc(t('qa_de'))}</label><textarea class="input" id="qa-de" rows="4">${esc(F.de || '')}</textarea></div>` : ''}
+    <div class="grp-t">${esc(t('qa_to'))}</div>
+    <div class="seg sm" style="margin:6px 0">${['front', 'kitchen', 'all', 'none'].map(k => `<button data-act="qa-pick" data-k="${k}">${esc(k === 'none' ? t('qa_none') : t('an_aud_' + k))}</button>`).join('')}</div>
+    <div class="small" style="margin:6px 0">${ppl.length ? ppl.map(x => `<label class="check" style="display:inline-flex;margin:0 12px 6px 0"><input type="checkbox" class="qa-who" value="${x.id}" ${on(x.id) ? 'checked' : ''}> ${esc(x.name)}</label>`).join('') : `<span class="muted">${esc(t('loading'))}</span>`}</div>
+    <div class="row" style="margin-top:10px"><button class="btn ghost" data-act="qa-cancel">${esc(t('cancel'))}</button><button class="btn" data-act="qa-send" ${F.sending ? 'disabled' : ''}>${esc(t('qa_send'))}</button></div></div>`;
+}
+function askKeep(){
+  const F = state.askForm; if (!F) return;
+  [['req', 'qa-req'], ['zh', 'qa-zh'], ['de', 'qa-de']].forEach(([k, id]) => { const e = document.getElementById(id); if (e) F[k] = e.value; });
+  const boxes = document.querySelectorAll('.qa-who'); if (boxes.length) F.ids = [...boxes].filter(x => x.checked).map(x => x.value);
+}
+function askListHTML(){
+  const L = state.askList || []; if (!L.length) return '';
+  const card = a => { const open = (state.qaOpen || {})[a.id], ppl = a.people || [], pm = state.pushMap;
+    const txt = (state.lang === 'de' ? a.text_de || a.text_zh : a.text_zh || a.text_de) || '';
+    return `<div class="item"><div class="top"><div style="flex:1"><div style="white-space:pre-wrap">${esc(open || txt.length <= 80 ? txt : txt.slice(0, 80) + '…')}</div>
+        <div class="meta">${esc(t('qa_by', { n: a.by || '', t: fmtDateTime(a.created_at) }))}</div></div>
+        <span class="tag ${+a.answered >= +a.total ? 'ok' : 'pend'}">${esc(t('qa_n', { a: a.answered, b: a.total }))}</span></div>
+      ${open ? `<div style="margin-top:8px">${ppl.map(p => `<div class="meta" style="white-space:pre-wrap"><strong>${esc(p.name)}</strong>${state.lang === 'de' ? ': ' : '：'}${p.answered_at
+        ? esc(p.answer || '') + ` <span class="muted">· ${esc(fmtDateTime(p.answered_at))}</span>`
+        : `<span class="negc">${esc(t('qa_wait'))}</span>${pm && !pm[p.staff_id] ? `<span class="muted">${esc(t('an_nopush'))}</span>` : ''}`}</div>`).join('')}</div>` : ''}
+      <div class="acts"><button class="link" data-act="qa-detail" data-id="${a.id}">${esc(t(open ? 'qa_hide' : 'qa_show'))}</button></div></div>`; };
+  return `<h3 style="margin-top:20px">${esc(t('qa_sec'))}</h3><div class="list">${L.map(card).join('')}</div>`;
 }
 // v73：推送公告，然后告诉老板：推到了几个人的手机、谁没开手机通知（这些人要当面提醒）
 async function annPushReport(id, remind){
@@ -10647,6 +10700,39 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'an-new': state.annForm = { audience: 'front', keep: true }; keepScroll(render); break;
+    case 'qa-new': {   // v147：问几个人
+      state.askForm = { ids: [] }; state.annForm = null; render(); window.scrollTo(0, 0);
+      if (!state.qaStaff){ state.qaStaff = await soft(rpc('admin_list_staff', tok()), []); if (state.askForm) keepScroll(render); }
+      break;
+    }
+    case 'qa-cancel': state.askForm = null; keepScroll(render); break;
+    case 'qa-pick': {
+      askKeep(); const F = state.askForm, k = el.dataset.k;
+      F.ids = k === 'none' ? [] : qaPeople().filter(x => k === 'all' || (k === 'kitchen') === QA_KITCHEN.includes(x.main_role)).map(x => x.id);
+      keepScroll(render); break;
+    }
+    case 'qa-ai': {
+      askKeep(); const F = state.askForm; if (!(F.req || '').trim()) return toast(t('qa_no_text'), true);
+      F.busy = true; keepScroll(render);
+      try { const r = await callTasks({ action: 'msg_draft', name: '', context: t('qa_ctx'), note: F.req.trim() }); F.zh = r.text_zh || F.zh || ''; F.de = r.text_de || F.de || ''; }
+      catch(e){ toast(errText(e), true); }
+      F.busy = false; if (state.askForm === F) keepScroll(render);
+      break;
+    }
+    case 'qa-send': {
+      askKeep(); const F = state.askForm;
+      const zh = (F.zh || '').trim() || (F.de ? '' : (F.req || '').trim()), de = (F.de || '').trim();
+      if (!zh && !de) return toast(t('qa_no_text'), true);
+      if (!(F.ids || []).length) return toast(t('qa_no_one'), true);
+      F.sending = true; el.disabled = true;
+      try { const r = await rpc('admin_ask_send', { ...tok(), p_text_zh: zh || null, p_text_de: de || null, p_staff_ids: F.ids });
+        await Promise.all((r.message_ids || []).map(id => callPush('message', { message_id: id })));   // 每人一条推送（推送服务现有的 message）
+        state.askForm = null; state.qaOpen = { ...(state.qaOpen || {}), [r.ask_id]: true };
+        toast(t('qa_sent', { n: r.n })); render(); window.scrollTo(0, 0); }
+      catch(e){ F.sending = false; el.disabled = false; toast(errText(e), true); }
+      break;
+    }
+    case 'qa-detail': state.qaOpen = { ...(state.qaOpen || {}), [el.dataset.id]: !(state.qaOpen || {})[el.dataset.id] }; keepScroll(render); break;
     case 'an-cancel': state.annForm = null; keepScroll(render); break;
     case 'an-aud': annKeep(); state.annForm.audience = el.dataset.k; keepScroll(render); break;
     case 'an-kind': annKeep(); state.annForm.kind = el.dataset.k; keepScroll(render); break;   // v115
