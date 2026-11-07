@@ -752,6 +752,22 @@ zh: {
   fb_view_note:'（查看 {n} 时）', fb_view_hint:'以你自己的名义发送，注明是查看 {n} 时看到的。',
   // v73：公告认真读、推送情况
   an_wait:'请先读完 · {s}', an_scroll:'请滑到最下面', an_push_pub:'已发布。推送到了 {a} 人的手机（共 {b} 人要确认）。', an_push_remind:'已再提醒。推送到了 {a} 人的手机（还有 {b} 人没确认）。', an_push_off:'{n} 人没开手机通知，收不到推送，请当面提醒，或者让他们在「更多」里开启通知：{m}', an_nopush:'（没开通知）',
+  // v149（数据库 v109，老板 2026-11-07）：任务要做到、有证据、没做大家都知道
+  ta_check_note:'会被抽查。确认了却没做，接下来 14 天你所有的任务都要每次拍照。', tk_close_photo_false_14:'要拍照（抽查发现确认了却没做，到 {u} 为止所有任务每次都拍）',
+  ta_miss_t:'漏做 · {d}：{n}', ta_miss_sub:'这个月已漏做 {k} 次。每个任务都要做到，漏做会记进你的任务记录。', ta_miss_made:'已补做 ✓', ta_make_up:'现在补做', ta_ack:'知道了',
+  ta_false_t:'抽查发现没做 · {d}：{n}', ta_false_sub:'你确认做了这个任务，但 {b} 查的时候没做。到 {u} 为止，你所有的任务每次都要拍照。', ta_false_note:'查的人写：{x}', ta_photo:'看照片',
+  ta_aud_t:'🔍 抽查 · {s}：{n}', ta_aud_sub:'{p} {t} 确认做了（{d}）。请去看一眼、拍照，选「属实 / 不属实」。{due} 前。', ta_aud_go:'去抽查',
+  ta_aud_title:'抽查：{n}', ta_aud_who:'{p} {t} 确认做了 · {s} · {d}', ta_aud_items:'要看的：{x}', ta_aud_photo:'📷 拍照（属实、不属实都要拍）',
+  ta_aud_ok:'属实：做了', ta_aud_false:'不属实：没做', ta_aud_unclear:'看不出来', ta_aud_note:'写一句（不属实必须写：哪里没做）',
+  ta_aud_false_q:'确定不属实？{p} 会收到通知，接下来 14 天所有任务都要拍照。', ta_aud_saved:'抽查已记下', ta_aud_btn:'🔍 抽查', ta_aud_uploading:'正在上传照片…',
+  ta_rec_more:'📊 我的任务记录', ta_rec_title:'我的任务记录', ta_rec_period:'{a} – {b}（今天还没过完，不算）', ta_rec_rate:'完成率 {p}%',
+  ta_rec_line:'轮到 {a} 次 · 自己做完 {b} · 别人做了 {c} · 其中补做 {d}', ta_rec_miss:'漏做 {a} 次（只有你负责 {b}，和别人一起 {c}）', ta_rec_ack:'漏做提醒 {a} 条，点了「知道了」{b} 条',
+  ta_rec_ai:'照片被 AI 指出问题 {a} 次，点「AI 看错了」{b} 次', ta_rec_audit:'被抽查：属实 {a} 次，不属实 {b} 次', ta_rec_help:'帮别人做 {a} 次',
+  ta_rec_photo:'到 {u} 为止，你所有的任务每次都要拍照（抽查不属实）。', ta_rec_misses:'漏做明细', ta_rec_audits:'抽查结果', ta_rec_none:'这段时间还没有轮到你的任务。',
+  ta_rec_hint:'每个任务都要做到；漏做、抽查不属实都会记下来，算进以后的评价。', ta_res_ok:'属实', ta_res_false:'不属实', ta_res_unclear:'看不出来',
+  ta_home_miss:'昨天漏做（{n}）', ta_home_miss_hint:'每个人都收到了推送和红卡，要点「知道了」。点 💬 给他留言（可以用 AI 起草）。', ta_home_acked:'✓ 已确认', ta_home_unacked:'还没确认',
+  ta_home_made:'已补做', ta_home_false:'抽查不属实（最近 7 天）', ta_home_false_row:'{p} · {n} · {s}{d}（{b} 查）', ta_home_open:'还在等抽查：{n} 个',
+  ts_p_audit:'补做 {m} · 被抽查：属实 {a}，不属实 {b} · 漏做提醒已确认 {c} / {d}',
   // v147（数据库 v108）：问几个人
   qa_new:'＋ 问几个人', qa_title:'问几个人', qa_hint:'同一个问题发给几个人，各自回答：点「是 / 不是」或者写字。只有他自己和你看得到，回答会推送给你。',
   qa_req:'问题（用哪种语言写都行）', qa_req_ph:'例如：之前有没有遇到过客人拿礼品卡来、余额却是零？没遇到过请点「不是」；遇到过请点「是」，写下日期和情况。',
@@ -887,7 +903,7 @@ zh: {
   admin_perf:'速度记录', pf_title:'速度记录（只存在这台手机上）', pf_hint:'每次打开页面、每次向服务器要数据花了多久。正常用一两天后点「复制」粘贴给 Claude，或者截图。', pf_views:'打开页面（最近 30 次）', pf_reqs:'向服务器要的数据（按平均时间，慢的在前）', pf_row:'{c} 次 · 平均 {a} 秒 · 最慢 {m} 秒{e}', pf_err:' · 出错 {n} 次', pf_cached:'先显示了上次的', pf_none:'还没有记录。', pf_copy:'复制', pf_clear:'清空记录', pf_copied:'已复制，可以粘贴给 Claude', pf_cleared:'记录已清空', pf_copy_fail:'没能复制：请截图', 
   admin_tasks:'任务', tl_title:'负责人', tl_hint:'每家店前场、后厨各设一个负责人：某一天的任务先归他管，他可以交给这个区域的某个人；没交的话，到那天按「默认交给」当天排的岗位（例如清洁）。负责人在自己的「今天」里看到这些任务。', tl_lead:'负责人', tl_role:'默认交给（当天排的岗位）', tl_none:'— 还没设 —', tl_by:'{n} · {t}', tl_saved:'负责人已保存', to_new:'＋ 新任务', to_title_new:'新任务（某一天做）', to_title_edit:'改任务', to_day:'哪天', to_when:'什么时候做', to_text:'做什么（写一句话，中文或德文都行）', to_text_ph:'例如：把油桶从地下室拿到门口，明天早上 ReFood 来收油', to_ai:'✨ AI 写成中德文', to_ai_busy:'AI 正在写…', to_ai_hint:'AI 写好任务名和说明，你可以改。不用 AI 也可以直接填下面。', to_name_zh:'任务名（中文）', to_name_de:'任务名（德文）', to_hint_zh:'说明（中文，可不填）', to_hint_de:'说明（德文，可不填）', to_how:'怎么算做完', to_check:'打勾', to_photo:'拍照', to_save:'保存任务', to_saved:'任务已保存', to_list:'某一天的任务', to_list_hint:'最近 7 天和以后的。谁做：交给的人那天上班就是他；不然按默认交给当天排的岗位；也没排就是那天这个区域上班的人，谁做都算。负责人和老板随时也能做。', to_none:'还没有某一天的任务。点「＋ 新任务」加一个。', to_lead:'负责：{n}', to_lead_none:'这个区域还没设负责人（在下面设）', to_who_assignee:'交给 {n}', to_who_assignee_off:'交给 {n}，但他那天没排班 → {p}', to_who_default:'按默认：当天的{r}（{p}）', to_who_default0:'按默认：当天的{r}', to_who_area:'当天没排{r} → 那天上班的都算（{p}）', to_nobody:'那天这个区域没人上班', to_unpub:'排班还没发布，发布后才知道是谁', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ 没做', to_assign:'交给…', to_edit:'改', to_cancel:'取消任务', to_cancel_q:'取消这个任务？（{n}，{d}）', to_cancelled:'任务已取消', tk_once:'{w}：{n} · {s}', tk_once_closing:'收店时', tk_once_arrival:'到店后', tk_once_now_arrival:'到店后先做', tk_close_photo_once:'这个任务要拍照', tk_by_lead:'{n} 交给你的', td_upcoming:'接下来（{n}）', ld_title:'我负责的任务（{n}）', ld_hint:'你是这个区域的任务负责人。可以把任务交给某个人（他会在自己的「今天」里看到）；不交的话，到那天按默认交给当天排的岗位。你自己也随时可以做。', ld_self:'我自己做', ld_assign_title:'交给谁', ld_default:'按默认：当天排的{r}', ld_on:'那天上班', ld_off:'那天没排班', ld_assign_hint:'交给的人那天没排班的话，到时候还是按默认交给当天的{r}。', ld_assigned:'已交给 {n}', ld_reset:'已改回默认', tk_adm_nobody_once:'{n}：那天没人上班',
   tk_close_go:'开始', tk_close_cont:'继续', tk_close_done:'{n} · {s} 做完了', tk_gone:'这个任务已经没有了。点「今天」回去。',
-  tk_item_by:'{t} · {n}', tk_item_checked:'打勾', tk_item_override:'说 AI 看错了', tk_retake:'📷 重拍', tk_photo:'📷 拍照', tk_check:'✓ 做好了',
+  tk_item_by:'{t} · {n}', tk_item_checked:'打勾', tk_item_override:'说 AI 看错了', tk_retake:'📷 重拍', tk_photo:'📷 拍照', tk_check:'✓ 我确认做了',
   tk_override:'AI 看错了，继续', tk_override_q:'确定是 AI 看错了吗？老板会看到你点了这个。', tk_run_done:'做完了（{t} · {n}）',
   tk_uploading_ai:'照片上传中，AI 在看…', tk_ai_problem:'AI 看出问题了，请看提示', tk_all_done:'收店任务做完了 ✓ 谢谢！', tk_before_leave:'走之前还有：{x}',
   tk_adm_title:'任务', tk_adm_done:'{n}（{b} · {t}）', tk_adm_nobody:'{n}：没人负责（没排{r}，或者排了 Runner 但没定谁做{r}）', tk_adm_missed:'{n} 没做（{p}）', tk_adm_open:'{n}：还没做（{p}）',
@@ -1371,6 +1387,22 @@ de: {
   fb_view_note:'(in der Ansicht als {n})', fb_view_hint:'Wird in deinem Namen gesendet, mit Hinweis „Ansicht als {n}“.',
   // v73：Mitteilungen gründlich lesen, Push-Status
   an_wait:'Bitte zuerst lesen · {s}', an_scroll:'Bitte bis ganz unten scrollen', an_push_pub:'Veröffentlicht. Push an {a} Handys gesendet ({b} müssen bestätigen).', an_push_remind:'Erinnerung gesendet. Push an {a} Handys ({b} noch nicht bestätigt).', an_push_off:'{n} haben keine Benachrichtigungen aktiviert und bekommen keinen Push – bitte persönlich ansprechen oder unter „Mehr“ aktivieren lassen: {m}', an_nopush:' (keine Benachrichtigungen)',
+  // v149 (DB v109)
+  ta_check_note:'Wird stichprobenartig geprüft. Bestätigt, aber nicht erledigt → 14 Tage lang bei allen Aufgaben jedes Mal ein Foto.', tk_close_photo_false_14:'Mit Foto (Stichprobe: bestätigt, aber nicht erledigt – bis {u} bei allen Aufgaben)',
+  ta_miss_t:'Nicht erledigt · {d}: {n}', ta_miss_sub:'Diesen Monat schon {k}× nicht erledigt. Jede Aufgabe zählt – Nicht Erledigtes kommt in dein Aufgaben-Protokoll.', ta_miss_made:'Nachgeholt ✓', ta_make_up:'Jetzt nachholen', ta_ack:'Verstanden',
+  ta_false_t:'Stichprobe: nicht erledigt · {d}: {n}', ta_false_sub:'Du hast diese Aufgabe als erledigt bestätigt, bei der Prüfung durch {b} war sie aber nicht erledigt. Bis {u} bei allen Aufgaben jedes Mal ein Foto.', ta_false_note:'Notiz der Prüfung: {x}', ta_photo:'Foto ansehen',
+  ta_aud_t:'🔍 Stichprobe · {s}: {n}', ta_aud_sub:'{p} hat um {t} bestätigt ({d}). Bitte nachsehen, ein Foto machen und „stimmt / stimmt nicht“ wählen. Bis {due}.', ta_aud_go:'Prüfen',
+  ta_aud_title:'Stichprobe: {n}', ta_aud_who:'{p} hat um {t} bestätigt · {s} · {d}', ta_aud_items:'Zu prüfen: {x}', ta_aud_photo:'📷 Foto (bei „stimmt“ und „stimmt nicht“ nötig)',
+  ta_aud_ok:'Stimmt: erledigt', ta_aud_false:'Stimmt nicht: nicht erledigt', ta_aud_unclear:'Nicht erkennbar', ta_aud_note:'Notiz (bei „stimmt nicht“ Pflicht: was fehlt)',
+  ta_aud_false_q:'Wirklich „stimmt nicht“? {p} wird benachrichtigt und muss 14 Tage lang bei allen Aufgaben ein Foto machen.', ta_aud_saved:'Stichprobe gespeichert', ta_aud_btn:'🔍 Prüfen', ta_aud_uploading:'Foto wird hochgeladen …',
+  ta_rec_more:'📊 Mein Aufgaben-Protokoll', ta_rec_title:'Mein Aufgaben-Protokoll', ta_rec_period:'{a} – {b} (heute zählt noch nicht)', ta_rec_rate:'Erledigt: {p} %',
+  ta_rec_line:'{a}× zuständig · selbst erledigt {b} · von anderen {c} · davon nachgeholt {d}', ta_rec_miss:'Nicht erledigt: {a}× (nur du {b}, gemeinsam {c})', ta_rec_ack:'Hinweise: {a}, davon „Verstanden“ {b}',
+  ta_rec_ai:'KI-Hinweise zu Fotos: {a}, „KI irrt sich“: {b}', ta_rec_audit:'Stichproben: stimmt {a}×, stimmt nicht {b}×', ta_rec_help:'Für andere erledigt: {a}×',
+  ta_rec_photo:'Bis {u}: bei allen Aufgaben jedes Mal ein Foto (Stichprobe nicht bestanden).', ta_rec_misses:'Nicht erledigt – Details', ta_rec_audits:'Stichproben', ta_rec_none:'In diesem Zeitraum warst du noch für keine Aufgabe zuständig.',
+  ta_rec_hint:'Jede Aufgabe zählt: Nicht Erledigtes und nicht bestandene Stichproben werden festgehalten und fließen in die spätere Bewertung ein.', ta_res_ok:'stimmt', ta_res_false:'stimmt nicht', ta_res_unclear:'nicht erkennbar',
+  ta_home_miss:'Gestern nicht erledigt ({n})', ta_home_miss_hint:'Jede Person bekommt Push und rote Karte und muss „Verstanden“ tippen. 💬 für eine Nachricht (KI-Entwurf möglich).', ta_home_acked:'✓ bestätigt', ta_home_unacked:'noch nicht bestätigt',
+  ta_home_made:'nachgeholt', ta_home_false:'Stichprobe nicht bestanden (letzte 7 Tage)', ta_home_false_row:'{p} · {n} · {s}{d} (geprüft von {b})', ta_home_open:'Offene Stichproben: {n}',
+  ts_p_audit:'Nachgeholt {m} · Stichproben: stimmt {a}, stimmt nicht {b} · Hinweise bestätigt {c} / {d}',
   // v147 (DB v108)
   qa_new:'＋ Mehrere fragen', qa_title:'Mehrere Personen fragen', qa_hint:'Eine Frage an mehrere Personen, jede antwortet für sich: „Ja / Nein“ tippen oder schreiben. Nur die Person und du sehen es; Antworten kommen als Push zu dir.',
   qa_req:'Frage (Sprache egal)', qa_req_ph:'z. B.: Hattet ihr schon einmal einen Gast mit Geschenkkarte und 0 € Guthaben? Wenn nein: „Nein“ tippen; wenn ja: „Ja“ tippen und Datum und Ablauf schreiben.',
@@ -1506,7 +1538,7 @@ de: {
   admin_perf:'Ladezeiten', pf_title:'Ladezeiten (nur auf diesem Gerät gespeichert)', pf_hint:'Wie lange jede Seite und jede Datenabfrage gedauert hat. Nach ein, zwei Tagen „Kopieren“ tippen und an Claude schicken – oder einen Screenshot machen.', pf_views:'Seiten geöffnet (letzte 30)', pf_reqs:'Datenabfragen (nach Durchschnitt, langsamste zuerst)', pf_row:'{c}× · Ø {a} s · langsamste {m} s{e}', pf_err:' · {n} Fehler', pf_cached:'zuerst alte Ansicht', pf_none:'Noch keine Einträge.', pf_copy:'Kopieren', pf_clear:'Löschen', pf_copied:'Kopiert – du kannst es an Claude schicken', pf_cleared:'Gelöscht', pf_copy_fail:'Kopieren ging nicht – bitte Screenshot', 
   admin_tasks:'Aufgaben', tl_title:'Verantwortliche', tl_hint:'Pro Filiale je eine verantwortliche Person für Service und Küche: Aufgaben für einen bestimmten Tag gehen zuerst an sie; sie kann sie jemandem aus ihrem Bereich zuteilen. Sonst macht es am Tag die eingeplante Standard-Position (z. B. Reinigung). Die Verantwortlichen sehen diese Aufgaben unter „Heute“.', tl_lead:'Verantwortlich', tl_role:'Standard (eingeplante Position am Tag)', tl_none:'— noch niemand —', tl_by:'{n} · {t}', tl_saved:'Verantwortliche gespeichert', to_new:'＋ Neue Aufgabe', to_title_new:'Neue Aufgabe (an einem Tag)', to_title_edit:'Aufgabe ändern', to_day:'Tag', to_when:'Wann', to_text:'Was ist zu tun (ein Satz, Deutsch oder Chinesisch)', to_text_ph:'z. B. Ölfass aus dem Keller vor die Tür stellen, morgen früh holt ReFood das Altfett ab', to_ai:'✨ Mit KI zweisprachig schreiben', to_ai_busy:'KI schreibt …', to_ai_hint:'Die KI schreibt Name und Hinweis, du kannst alles ändern. Ohne KI einfach unten ausfüllen.', to_name_zh:'Name (Chinesisch)', to_name_de:'Name (Deutsch)', to_hint_zh:'Hinweis (Chinesisch, optional)', to_hint_de:'Hinweis (Deutsch, optional)', to_how:'Wie erledigt', to_check:'Abhaken', to_photo:'Foto', to_save:'Aufgabe speichern', to_saved:'Aufgabe gespeichert', to_list:'Aufgaben an einem Tag', to_list_hint:'Die letzten 7 Tage und alles danach. Wer: die zugeteilte Person, wenn sie an dem Tag arbeitet; sonst die eingeplante Standard-Position; sonst alle aus dem Bereich, die an dem Tag arbeiten. Verantwortliche und Chef können jederzeit selbst erledigen.', to_none:'Noch keine Aufgaben an einem Tag. Mit „＋ Neue Aufgabe“ anlegen.', to_lead:'Verantwortlich: {n}', to_lead_none:'Für diesen Bereich ist noch niemand verantwortlich (unten festlegen)', to_who_assignee:'An {n}', to_who_assignee_off:'An {n}, aber an dem Tag nicht eingeplant → {p}', to_who_default:'Standard: {r} am Tag ({p})', to_who_default0:'Standard: {r} am Tag', to_who_area:'kein(e) {r} eingeplant → alle, die an dem Tag arbeiten ({p})', to_nobody:'an dem Tag arbeitet niemand aus dem Bereich', to_unpub:'Dienstplan noch nicht veröffentlicht – erst danach steht fest, wer', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ nicht erledigt', to_assign:'Zuteilen …', to_edit:'Ändern', to_cancel:'Aufgabe absagen', to_cancel_q:'Diese Aufgabe absagen? ({n}, {d})', to_cancelled:'Aufgabe abgesagt', tk_once:'{w}: {n} · {s}', tk_once_closing:'Bei Feierabend', tk_once_arrival:'Bei Dienstbeginn', tk_once_now_arrival:'Gleich bei Dienstbeginn erledigen', tk_close_photo_once:'Mit Foto', tk_by_lead:'von {n} zugeteilt', td_upcoming:'Demnächst ({n})', ld_title:'Meine Bereichsaufgaben ({n})', ld_hint:'Du bist für die Aufgaben in diesem Bereich verantwortlich. Du kannst eine Aufgabe jemandem zuteilen (die Person sieht sie unter „Heute“); sonst macht es am Tag die eingeplante Standard-Position. Du kannst sie auch jederzeit selbst erledigen.', ld_self:'Selbst erledigen', ld_assign_title:'Wem zuteilen', ld_default:'Standard: {r} am Tag', ld_on:'arbeitet an dem Tag', ld_off:'an dem Tag nicht eingeplant', ld_assign_hint:'Ist die Person an dem Tag nicht eingeplant, macht es am Tag trotzdem die Standard-Position ({r}).', ld_assigned:'An {n} zugeteilt', ld_reset:'Zurück auf Standard', tk_adm_nobody_once:'{n}: an dem Tag arbeitet niemand',
   tk_close_go:'Starten', tk_close_cont:'Weiter', tk_close_done:'{n} · {s} erledigt', tk_gone:'Diese Aufgabe gibt es nicht mehr. Zurück zu „Heute“.',
-  tk_item_by:'{t} · {n}', tk_item_checked:'abgehakt', tk_item_override:'„KI irrt sich“', tk_retake:'📷 Neu fotografieren', tk_photo:'📷 Foto', tk_check:'✓ Erledigt',
+  tk_item_by:'{t} · {n}', tk_item_checked:'abgehakt', tk_item_override:'„KI irrt sich“', tk_retake:'📷 Neu fotografieren', tk_photo:'📷 Foto', tk_check:'✓ Bestätigt: erledigt',
   tk_override:'KI irrt sich – weiter', tk_override_q:'Sicher, dass die KI sich irrt? Der Chef sieht, dass du das gewählt hast.', tk_run_done:'Erledigt ({t} · {n})',
   tk_uploading_ai:'Foto wird hochgeladen, die KI schaut…', tk_ai_problem:'Die KI sieht ein Problem – bitte Hinweis lesen', tk_all_done:'Feierabend-Aufgabe erledigt ✓ Danke!', tk_before_leave:'Vor dem Gehen noch: {x}',
   tk_adm_title:'Aufgaben', tk_adm_done:'{n} ({b} · {t})', tk_adm_nobody:'{n}: niemand zuständig (kein(e) {r} eingeplant oder nicht festgelegt, wer {r} übernimmt)', tk_adm_missed:'{n} nicht erledigt ({p})', tk_adm_open:'{n}: noch offen ({p})',
@@ -2057,6 +2089,9 @@ const ERR_ZH = {
   RECON_DIFF_NOTE: '还有差额，请先写差额说明（差在哪里、怎么处理的），再核对完成。',
   MESSAGE_EMPTY: '留言是空的。请选一句常用的，或者自己写一句。',
   ASK_NO_STAFF: '没有可以发的人：请选在职的员工（厨房共用账号和你自己不算）。',   // v147
+  AUDIT_DAY: '只能抽查今天或昨天的任务。', AUDIT_NOT_DONE: '这个任务还没做完，不用抽查（没做的会记成漏做）。', AUDIT_HAS_PHOTO: '这个任务拍了照片，照片就是证据，不用抽查。',
+  AUDIT_EXISTS: '这个任务这天已经有人在抽查了。', AUDIT_SELF: '不能抽查自己确认的任务。', AUDIT_DONE: '这次抽查已经有结果了。',
+  AUDIT_EXPIRED: '这次抽查已经过期（第二天 12:00 前要查）。', AUDIT_PHOTO_REQUIRED: '请先拍一张照片：属实、不属实都要有照片作证据。', AUDIT_NOTE_REQUIRED: '不属实要写一句：哪里没做。',   // v149
   EXPENSE_FORBIDDEN: '你还没有记垫付的权限。需要的话请找老板在「员工」里打开。',
   EXPENSE_PHOTO_REQUIRED: '每一笔垫付都要有照片：拍小票，或者拍买的东西。',
   EXPENSE_AMOUNT: '金额不对：要大于 0，一笔最多 100 €。',
@@ -2295,6 +2330,9 @@ const ERR_DE = {
   RECON_DIFF_NOTE: 'Es gibt noch eine Differenz. Bitte erst eine Erklärung schreiben, dann abschließen.',
   MESSAGE_EMPTY: 'Die Nachricht ist leer. Bitte einen Vorschlag wählen oder selbst etwas schreiben.',
   ASK_NO_STAFF: 'Niemand zum Senden: bitte aktive Mitarbeitende wählen (Küchenkonto und du selbst zählen nicht).',   // v147
+  AUDIT_DAY: 'Nur Aufgaben von heute oder gestern können geprüft werden.', AUDIT_NOT_DONE: 'Die Aufgabe ist noch nicht erledigt – keine Prüfung nötig (Nicht Erledigtes wird ohnehin erfasst).', AUDIT_HAS_PHOTO: 'Die Aufgabe hat ein Foto – das ist der Nachweis, keine Prüfung nötig.',
+  AUDIT_EXISTS: 'Diese Aufgabe wird an diesem Tag schon geprüft.', AUDIT_SELF: 'Eigene Bestätigungen kann man nicht prüfen.', AUDIT_DONE: 'Diese Stichprobe ist schon erledigt.',
+  AUDIT_EXPIRED: 'Diese Stichprobe ist abgelaufen (Prüfung bis 12:00 am Folgetag).', AUDIT_PHOTO_REQUIRED: 'Bitte zuerst ein Foto machen – bei „stimmt“ und „stimmt nicht“ als Nachweis nötig.', AUDIT_NOTE_REQUIRED: 'Bei „stimmt nicht“ bitte kurz schreiben, was fehlt.',   // v149
   EXPENSE_FORBIDDEN: 'Du darfst noch keine Auslagen erfassen. Bitte den Chef bitten, es unter „Mitarbeiter“ einzuschalten.',
   EXPENSE_PHOTO_REQUIRED: 'Jede Auslage braucht ein Foto: vom Kassenbon oder von der gekauften Sache.',
   EXPENSE_AMOUNT: 'Betrag ungültig: größer als 0 und höchstens 100 € pro Posten.',
@@ -2539,15 +2577,17 @@ function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 async function loadTasks(){
   if (!state.me || state.me.is_kitchen){ state.tasks = null; state.closing = null; return; }
   const NO = Symbol();
-  const [tk, cl, lb, ld, ob, oc, nm, cat] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
+  const [tk, cl, lb, ld, ob, oc, nm, cat, ms, au] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
     state.me.is_admin ? null : soft(rpc('my_library', tok()), null),   // v79：资料（要确认的放进「今天」）
     (state.me.leads || []).length && !state.me.is_admin ? soft(rpc('my_led_tasks', tok()), null) : null,   // v95：我负责的任务
     state.me.is_admin ? null : soft(rpc('onb_mine', tok()), null),   // v107：新人带教（新同事的自评、带教人的评价）
     state.me.is_admin ? null : soft(rpc('onb_check_mine', tok()), null),   // v124：我的带教清单
     nmLeadOnly() ? soft(rpc('task_named_list', tok()), null) : null,   // v118：负责人交代的事
-    nmLeadOnly() ? soft(rpc('task_catalog', tok()), null) : null]);   // v119：负责人区域每天的任务、能建什么
+    nmLeadOnly() ? soft(rpc('task_catalog', tok()), null) : null,   // v119：负责人区域每天的任务、能建什么
+    soft(rpc('my_task_misses', tok()), null), soft(rpc('my_audits', tok()), null)]);   // v149：漏做 / 不实确认的红卡、派给我的抽查
   if (tk === NO) state.tasks = null; else { state.tasks = tk; state.tasksAt = Date.now(); }
   state.closing = cl || []; state.lib = lb; state.led = ld; state.onb = ob || []; state.onbChkMine = oc;
+  state.misses = ms || []; state.audits = au || [];   // v149
   if (nmLeadOnly()){ state.named = nm; state.tfCat = cat; }
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
@@ -2765,7 +2805,7 @@ function renderToday(){
   const tm = tmTodoCards(), msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message' && !isCl(x));
   const nOther = rest.filter(x => x.status !== 'later').length + tm.length, hasList = !!(cl.length || upCl.length);
   const doneO = done.filter(x => !isCl(x));
-  $('#main').innerHTML = invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
+  $('#main').innerHTML = missCardsHTML() + audCardsHTML() + invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
     + msgs.map(taskCardHTML).join('') + tdlHTML(cl, upCl) + ocMineHTML()
     + (rest.length || tm.length ? `<h3>${esc(nOther ? t(hasList ? 'td_other' : 'td_mine', { n: nOther }) : t(hasList ? 'td_other0' : 'td_mine_ok'))}</h3>` + tm.join('') + rest.map(taskCardHTML).join('')
       : hasList || msgs.length ? '' : `<h3>${esc(t('td_mine_ok'))}</h3><div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
@@ -3617,7 +3657,8 @@ async function viewReconHome(){
       soft(rpc('area_status', tok()), null), soft(rpc('list_disputes', { ...tok(), p_status: 'open' }), []),
       soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null).then(x => { if (x) state.envPendAll = x; }),
       soft(rpc('recon_imports', { ...tok(), p_from: addDays(bizToday(), -8) }), null).then(x => { state.repImp = x; }),
-      soft(rpc('admin_task_flows', tok()), null).then(x => { state.homeFlows = x; })]);   // v144：收废油的检查晚了要标红   // v135：邮件自动导入的情况   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
+      soft(rpc('admin_task_flows', tok()), null).then(x => { state.homeFlows = x; }),
+      soft(rpc('admin_misses', { ...tok(), p_day: null }), null).then(x => { state.taMiss = x; })]);   // v149：昨天漏做、抽查不属实   // v144：收废油的检查晚了要标红   // v135：邮件自动导入的情况   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
     S = H.S; o = H.o; state.reconTasks = H.tasks;
   }
   catch(e){ $('#main').innerHTML = `<div class="empty">${esc(errText(e))}</div>`; return; }
@@ -3627,7 +3668,7 @@ async function viewReconHome(){
   state.reconDay = o.day;
   const stores = o.stores.slice().sort((a, b) => rcProblem(b) - rcProblem(a));
   const mine = viewTasks().filter(x => x.status !== 'done' && x.kind !== 'closing'), myCl = viewTasks().filter(x => x.kind === 'closing');   // v118：老板自己的点名任务放进上面的「今天的任务」清单
-  $('#main').innerHTML = oilLateHTML() + hrepCardHTML() + tdlHTML(myCl.filter(x => x.scope !== 'upcoming'), myCl.filter(x => x.scope === 'upcoming')) + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
+  $('#main').innerHTML = oilLateHTML() + audCardsHTML() + missCardsHTML() + taHomeHTML() + hrepCardHTML() + tdlHTML(myCl.filter(x => x.scope !== 'upcoming'), myCl.filter(x => x.scope === 'upcoming')) + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
       <div class="wl">${esc(t('rk_home'))}<small>${(() => { const n = Math.round((parseD(o.today) - parseD(o.day)) / 864e5); return n >= 0 && n <= 2 ? esc(t('rk_rel' + n)) + ' · ' : ''; })()}${esc(dayLabel(o.day))}</small></div>
       <button data-act="recon-home-day" data-d="1" aria-label="${esc(t('rk_next'))}" ${o.day >= o.today ? 'disabled' : ''}>›</button></div>
     ${o.day !== o.today ? `<div style="text-align:center;margin:-6px 0 12px"><button class="link" data-act="recon-home-today">${esc(t('rk_go_today'))}</button></div>` : ''}`
@@ -3788,7 +3829,7 @@ function renderLock(){
 }
 // ============ 收店任务（v71）============
 // 今天要不要拍照、为什么
-function tkHow(nd){ return nd && nd.mode === 'photo' ? t('tk_close_photo_' + (nd.reason || 'learning'), { a: nd.done || 0, b: nd.need || 0 }) : t('tk_close_check'); }
+function tkHow(nd){ return nd && nd.mode === 'photo' ? t('tk_close_photo_' + (nd.reason || 'learning'), { a: nd.done || 0, b: nd.need || 0, u: nd.until ? dayLabel(nd.until) : '' }) : t('tk_close_check'); }   // v149：false_14 到哪天
 // ============ v128：任务附照片、附链接、交回结果（数据库 v93 / 文件服务 tasks v22 / 推送 push v13，老板 2026-11-01）============
 // 文件在私有存储桶 task_files：a/… = 建任务时附的照片，r/… = 员工交回的结果；查看用 1 小时的链接（50 分钟内重用）
 const TF_URLS = {};
@@ -3907,7 +3948,7 @@ function renderTaskRun(){
   }).join('');
   $('#main').innerHTML = `<button class="link" data-act="task-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>
     <h2 style="margin-top:0">${esc((c.once ? toWhen(c) + (state.lang === 'de' ? ': ' : '：') : isPer(c) ? perLabel(c) + (state.lang === 'de' ? ': ' : '：') : '') + nm(c))} ${storeTag(c.store)}</h2>
-    <div class="infobox">${esc(c.need_result ? t('tk_how_result') : tkHow(c.need))}${c.day !== (state.tasks || {}).day ? ' · ' + esc(dayLabel(c.day)) : ''}${perDue(c) ? ' · ' + esc(perDue(c).txt) : ''}</div>
+    <div class="infobox">${esc(c.need_result ? t('tk_how_result') : tkHow(c.need))}${!photoRun && !c.need_result ? '<br><span class="small">' + esc(t('ta_check_note')) + '</span>' : ''}${c.day !== (state.tasks || {}).day ? ' · ' + esc(dayLabel(c.day)) : ''}${perDue(c) ? ' · ' + esc(perDue(c).txt) : ''}</div>
     ${c.sop && !c.sop.gone ? (() => { const S = state.tkSop && state.tkSop.id === c.sop.item_id ? state.tkSop : null, cur = S && S.x && S.x.cur;   // v121：按哪条 SOP 做
       return `<button class="btn ghost" data-act="tk-sop" data-id="${c.sop.item_id}" style="margin:0 0 10px">${esc(S ? t('tk_sop_hide') : t('tk_sop_btn'))}</button>`
         + (cur ? `<div class="sheet" style="margin-bottom:10px"><strong>${esc(sopTitle(cur.content))}</strong>${sopBodyHTML(cur.content, cur.photos)}</div>` : S ? `<div class="loading">${esc(t('loading'))}</div>` : ''); })() : ''}
@@ -4176,7 +4217,8 @@ function tsHTML(){
     const lines = [t('ts_p_line', { a: p.turns, b: p.done, c: p.done_other }),
       miss ? t('ts_p_miss', { a: p.missed_solo, b: p.missed_shared }) + (+p.late ? t('ts_p_late', { n: p.late }) : '') : '',
       +p.helped ? t('ts_p_help', { n: p.helped }) : '', +p.ai_flag || +p.ai_override ? t('ts_p_ai', { a: p.ai_flag, b: p.ai_override }) : '',
-      +p.msgs ? t('ts_p_msg', { a: p.msgs, b: p.msgs_read }) : ''].filter(Boolean);
+      +p.msgs ? t('ts_p_msg', { a: p.msgs, b: p.msgs_read }) : '',
+      +p.made_up || +p.audit_ok || +p.audit_false || +p.miss_notes ? t('ts_p_audit', { m: +p.made_up || 0, a: +p.audit_ok || 0, b: +p.audit_false || 0, c: +p.miss_acked || 0, d: +p.miss_notes || 0 }) : ''].filter(Boolean);   // v149
     const ms = (p.misses || []).map(m => `<div class="meta small">${esc((m.pe ? t('ts_m_period', { a: dm(m.day), b: dm(m.pe) }) : dayLabel(m.day)) + ' · ' + (state.lang === 'de' ? m.name_de : m.name_zh) + (m.store ? ' · ' + m.store : '')
       + ' · ' + (m.solo ? t('ts_m_solo') : t('ts_m_with', { m: (m.with || []).join(state.lang === 'de' ? ', ' : '、') })) + (m.msg ? ' · ' + t('ts_m_msg') : ''))}</div>`).join('');
     return `<div class="item"><div class="top"><div><strong>${esc(p.name)}</strong> <span class="small muted">${esc(t('grp_' + (p.role || 'service')))}</span></div>
@@ -4578,7 +4620,8 @@ function tkAdminHTML(list, ro){   // v83：ro = 区域主管只看（没有留�
         + (l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') : '–'}</div>`; }).join('')}
     ${(x.messages || []).map(m => `<div class="meta">${esc(t('tkm_line', { t: fmtDateTime(m.at), n: m.to }))} · <span class="${m.read_at ? '' : 'negc'}">${esc(m.read_at ? t('tkm_read', { t: fmtDateTime(m.read_at) }) : t('tkm_unread'))}</span>
       <div class="small muted" style="white-space:pre-wrap">${esc(state.lang === 'de' ? m.text_de : m.text_zh)}</div></div>`).join('')}
-    ${ro ? '' : `<div class="acts" style="flex-wrap:wrap">${tkMsgPeople(x).map(p => `<button class="link" data-act="tkm-open" data-def="${x.def_id}" data-day="${x.day}" data-id="${p.id}" data-name="${esc(p.name)}">${esc(t('tkm_btn', { n: p.name }))}</button>`).join('')}</div>`}
+    ${ro ? '' : `<div class="acts" style="flex-wrap:wrap">${x.status === 'done' && (x.items || []).length && x.items.every(it => it.last && it.last.evidence === 'check') && x.day >= addDays(bizToday(), -1)
+        ? `<button class="link" data-act="aud-start" data-def="${x.def_id}" data-day="${x.day}">${esc(t('ta_aud_btn'))}</button>` : ''}${tkMsgPeople(x).map(p => `<button class="link" data-act="tkm-open" data-def="${x.def_id}" data-day="${x.day}" data-id="${p.id}" data-name="${esc(p.name)}">${esc(t('tkm_btn', { n: p.name }))}</button>`).join('')}</div>`}
   </div>`).join('')}</div>`;
 }
 async function lockUpload(input){
@@ -4604,11 +4647,12 @@ function viewMore(){
   if (state.libView) return viewLibrary();   // v79：资料
   if (state.sop) return viewSop();   // v111：SOP
   if (state.taskPage) return viewTaskPage();   // v130：任务
+  if (state.taRec) return viewTaRec();   // v149：我的任务记录
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
   $('#main').innerHTML = `<h2 style="margin-top:4px">${esc(t('more_title'))}</h2><div class="more">
     ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
-    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
+    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
@@ -8947,6 +8991,107 @@ function annAdminHTML(){
     + (done.length ? `<details class="fold"><summary>${esc(t('an_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(card).join('')}</div></div></details>` : '')
     + askListHTML();   // v147
 }
+// ============ 任务考核（v149，数据库 v109，老板 2026-11-07）============
+// 漏做 / 不实确认的红卡（要点「知道了」）、派给我的抽查、抽查窗口（拍照 + 属实 / 不属实 / 看不出来）、我的任务记录、老板首页「昨天漏做」
+const taNm = x => (state.lang === 'de' ? x.name_de || x.name_zh : x.name_zh || x.name_de) || '';
+const taSep = () => state.lang === 'de' ? ', ' : '、';
+const tkFindRun = (def, day) => (state.closing || []).find(x => x.def_id === def && x.day === day && x.status !== 'upcoming');
+function missCardsHTML(){
+  const L = state.misses || []; if (!L.length) return '';
+  if (L.some(m => m.audit && m.audit.photo_path)) setTimeout(tfLoadFiles);
+  const what = m => taNm(m) + (m.store ? ' · ' + m.store : '');
+  return L.map(m => {
+    if (m.kind === 'false_confirm'){ const A = m.audit || {};
+      return `<div class="task bad"><div class="task-t">${esc(t('ta_false_t', { d: dayLabel(m.day), n: what(m) }))}</div>
+        <div class="task-s">${esc(t('ta_false_sub', { b: A.by || '?', u: m.until ? dayLabel(m.until) : '' }))}${A.note ? '<br>' + esc(t('ta_false_note', { x: A.note })) : ''}</div>
+        ${A.photo_path ? tfThumbs([A.photo_path]) : ''}
+        ${state.viewAs ? '' : `<div class="task-b"><button class="btn" data-act="miss-ack" data-id="${m.id}">${esc(t('ta_ack'))}</button></div>`}</div>`; }
+    const run = m.can_make_up ? tkFindRun(m.def_id, m.day) : null;
+    return `<div class="task bad"><div class="task-t">${esc(t('ta_miss_t', { d: dayLabel(m.day), n: what(m) }))}</div>
+      <div class="task-s">${esc(t('ta_miss_sub', { k: m.month_n || 1 }))}${m.made_up ? ' · ' + esc(t('ta_miss_made')) : ''}</div>
+      ${state.viewAs ? '' : `<div class="task-b">${run ? `<button class="btn" data-act="miss-make" data-def="${m.def_id}" data-day="${m.day}">${esc(t('ta_make_up'))}</button>` : ''}
+        <button class="btn ${run ? 'ghost' : ''}" data-act="miss-ack" data-id="${m.id}">${esc(t('ta_ack'))}</button></div>`}</div>`;
+  }).join('');
+}
+function audCardsHTML(){
+  const L = state.audits || []; if (!L.length) return '';
+  return L.map(a => `<div class="task"><div class="task-t">${esc(t('ta_aud_t', { s: a.store || '', n: taNm(a) }))}</div>
+    <div class="task-s">${esc(t('ta_aud_sub', { p: (a.staff || []).join(taSep()), t: a.confirmed_at ? fmtTime(a.confirmed_at) : '', d: dayLabel(a.day), due: fmtDateTime(a.due_at) }))}</div>
+    ${state.viewAs ? '' : `<div class="task-b"><button class="btn" data-act="aud-open" data-id="${a.id}">${esc(t('ta_aud_go'))}</button></div>`}</div>`).join('');
+}
+function audDlgRender(){
+  const D = state.audDlg; if (!D) return; const a = D.a;
+  $('#photoDlg').innerHTML = `<h2 style="margin-top:0">${esc(t('ta_aud_title', { n: taNm(a) }))}</h2>
+    <div class="small muted" style="margin-bottom:8px">${esc(t('ta_aud_who', { p: (a.staff || []).join(taSep()), t: a.confirmed_at ? fmtTime(a.confirmed_at) : '', s: a.store || '', d: dayLabel(a.day) }))}</div>
+    ${(a.items || []).length ? `<div class="small" style="margin-bottom:8px">${esc(t('ta_aud_items', { x: a.items.map(taNm).join(taSep()) }))}</div>` : ''}
+    <label class="photo ${D.preview ? 'has' : ''}" style="margin-bottom:10px">${D.preview ? `<img src="${D.preview}" alt="">` : `<span>${esc(t('ta_aud_photo'))}</span>`}<input type="file" accept="image/*" capture="environment" data-audphoto="1" hidden></label>
+    ${D.busy ? `<div class="loading">${esc(D.busy)}</div>` : ''}
+    <div class="field"><label for="aud-note">${esc(t('ta_aud_note'))}</label><textarea class="input" id="aud-note" rows="2" maxlength="500">${esc(D.note || '')}</textarea></div>
+    <div class="row" style="flex-wrap:wrap;gap:8px"><button class="btn" style="flex:1 1 40%" data-act="aud-done" data-r="ok" ${D.busy ? 'disabled' : ''}>${esc(t('ta_aud_ok'))}</button>
+      <button class="btn ghost negc" style="flex:1 1 40%" data-act="aud-done" data-r="false" ${D.busy ? 'disabled' : ''}>${esc(t('ta_aud_false'))}</button>
+      <button class="btn ghost" style="flex:1 1 100%" data-act="aud-done" data-r="unclear" ${D.busy ? 'disabled' : ''}>${esc(t('ta_aud_unclear'))}</button></div>
+    <button class="btn ghost" style="margin-top:10px" data-act="photo-close">${esc(t('cancel'))}</button>`;
+}
+// 抽查的照片：压缩 → 文件服务给的上传链接（task_files r/…，同「交回结果」）→ 交结果时带上路径
+async function audPhoto(input){
+  const D = state.audDlg, f = input.files && input.files[0]; if (!D || !f) return;
+  D.note = ($('#aud-note') || {}).value || D.note || ''; D.busy = t('ta_aud_uploading'); audDlgRender();
+  try {
+    const img = await compressImage(f, 1600, 0.8), blob = await (await fetch(img)).blob();
+    const r = await callTasks({ action: 'task_upload_urls', kind: 'res', files: [{ type: 'image/jpeg', size: blob.size }] });
+    const u = (r.files || [])[0]; if (!u) throw new Error('TASK_UPLOAD_FAILED');
+    const { error } = await sb.storage.from('task_files').uploadToSignedUrl(u.path, u.token, blob, { contentType: 'image/jpeg' });
+    if (error) throw new Error('TASK_UPLOAD_FAILED');
+    D.photo = u.path; D.preview = img; TF_URLS[u.path] = { url: img, at: Date.now() };
+  } catch(e){ toast(errText(e), true); }
+  D.busy = null; if (state.audDlg === D) audDlgRender();
+}
+// 老板首页：昨天漏做（谁、确认了没有、💬 留言）、最近 7 天抽查不属实、还在等的抽查
+function taHomeHTML(){
+  const M = state.taMiss; if (!M) return '';
+  const ms = M.misses || [], fs = M.false || []; let h = '';
+  if (ms.length) h += `<div class="sheet" style="margin-bottom:12px"><div class="grp-t negc">${esc(t('ta_home_miss', { n: ms.length }))}</div>
+    <div class="small muted" style="margin:2px 0 6px">${esc(t('ta_home_miss_hint'))}</div>
+    ${ms.map(x => `<div class="meta" style="margin:8px 0"><strong>${esc(taNm(x))}</strong>${x.store ? storeTag(x.store) : ''}${x.made_up ? ` <span class="pos small">${esc(t('ta_home_made'))}</span>` : ''}
+      <div>${(x.people || []).map(p => `${esc(p.name)} <span class="small ${p.acked_at ? 'pos' : 'muted'}">${esc(p.acked_at ? t('ta_home_acked') : t('ta_home_unacked'))}</span>${state.viewAs ? ''
+        : ` <button class="link" data-act="miss-msg" data-def="${x.def_id}" data-day="${x.day}" data-id="${p.staff_id}" data-name="${esc(p.name)}" data-store="${esc(x.store || '')}" data-task="${esc(taNm(x))}">💬</button>`}`).join(' · ')}</div></div>`).join('')}</div>`;
+  if (fs.length) h += `<div class="sheet" style="margin-bottom:12px"><div class="grp-t negc">${esc(t('ta_home_false'))}</div>
+    ${fs.map(a => `<div class="meta" style="margin:8px 0">${esc(t('ta_home_false_row', { p: (a.staff || []).join(taSep()), n: taNm(a), s: a.store ? a.store + ' ' : '', d: dayLabel(a.day), b: a.done_by || '?' }))}
+      ${a.note ? `<div class="small muted">${esc(a.note)}</div>` : ''}${a.photo_path ? tfThumbs([a.photo_path]) : ''}</div>`).join('')}</div>`;
+  if (+M.audits_open) h += `<div class="small muted" style="margin:-4px 0 12px">${esc(t('ta_home_open', { n: M.audits_open }))}</div>`;
+  if (fs.some(a => a.photo_path)) setTimeout(tfLoadFiles);
+  return h;
+}
+// 员工「更多 → 📊 我的任务记录」：本月（1 号看上个月），今天不算
+async function viewTaRec(){
+  const back = `<button class="link" data-act="ta-rec-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button><h2 style="margin-top:0">${esc(t('ta_rec_title'))}</h2>`;
+  if (!state.taRec.data){
+    $('#main').innerHTML = back + `<div class="loading">${esc(t('loading'))}</div>`;
+    try { state.taRec.data = await rpc('my_task_record', tok()); } catch(e){ $('#main').innerHTML = back + `<div class="empty">${esc(errText(e))}</div>`; return; }
+    if (!state.taRec || state.tab !== 'more') return;
+  }
+  const R = state.taRec.data, p = R.me || {}, n = k => +(p[k] || 0), turns = n('turns');
+  const pc = turns ? Math.round((n('done') + n('done_other')) / turns * 100) : 0, miss = n('missed_solo') + n('missed_shared');
+  const line = (txt, bad) => txt ? `<div class="meta${bad ? ' negc' : ''}">${esc(txt)}</div>` : '';
+  let h = back + `<div class="small muted" style="margin-bottom:8px">${esc(t('ta_rec_period', { a: dayLabel(R.from), b: dayLabel(R.to) }))}</div>`
+    + `<div class="infobox" style="margin-bottom:10px">${esc(t('ta_rec_hint'))}</div>`
+    + (R.photo_until ? `<div class="warnbox" style="margin-bottom:10px">${esc(t('ta_rec_photo', { u: dayLabel(R.photo_until) }))}</div>` : '');
+  if (!turns && !n('helped')) return void ($('#main').innerHTML = h + `<div class="list"><div class="empty">${esc(t('ta_rec_none'))}</div></div>`);
+  h += `<div class="sheet"><div class="grp-t ${miss ? (n('missed_solo') ? 'negc' : 'warnc') : 'pos'}">${esc(t('ta_rec_rate', { p: pc }))}</div>
+    ${line(t('ta_rec_line', { a: turns, b: n('done'), c: n('done_other'), d: n('made_up') }))}
+    ${miss ? line(t('ta_rec_miss', { a: miss, b: n('missed_solo'), c: n('missed_shared') }), n('missed_solo') > 0) : ''}
+    ${n('miss_notes') ? line(t('ta_rec_ack', { a: n('miss_notes'), b: n('miss_acked') })) : ''}
+    ${n('ai_flag') || n('ai_override') ? line(t('ta_rec_ai', { a: n('ai_flag'), b: n('ai_override') })) : ''}
+    ${n('audit_ok') || n('audit_false') ? line(t('ta_rec_audit', { a: n('audit_ok'), b: n('audit_false') }), n('audit_false') > 0) : ''}
+    ${n('helped') ? line(t('ta_rec_help', { a: n('helped') })) : ''}</div>`;
+  const ms = p.misses || [];
+  if (ms.length) h += `<h3>${esc(t('ta_rec_misses'))}</h3><div class="list">${ms.map(m => `<div class="item"><div>${esc((m.pe ? t('ts_m_period', { a: dm(m.day), b: dm(m.pe) }) : dayLabel(m.day)) + ' · ' + taNm(m) + (m.store ? ' · ' + m.store : ''))}</div>
+    <div class="meta small">${esc(m.solo ? t('ts_m_solo') : t('ts_m_with', { m: (m.with || []).join(taSep()) }))}</div></div>`).join('')}</div>`;
+  const au = R.audits || [];
+  if (au.length) h += `<h3>${esc(t('ta_rec_audits'))}</h3><div class="list">${au.map(a => `<div class="item"><div>${esc(dayLabel(a.day) + ' · ' + taNm(a) + (a.store ? ' · ' + a.store : ''))}</div>
+    <div class="meta small ${a.result === 'false' ? 'negc' : a.result === 'ok' ? 'pos' : ''}">${esc(t('ta_res_' + a.result) + (a.note ? ' · ' + a.note : ''))}</div></div>`).join('')}</div>`;
+  $('#main').innerHTML = h;
+}
 // ============ 问几个人（v147，数据库 v108，老板 2026-11-06）：同一个问题发给几个人，各自回答（老板的问题 = staff_messages.needs_answer）============
 const QA_KITCHEN = ['hot', 'cold', 'skewer', 'clean'];
 function qaPeople(){ return (state.qaStaff || []).filter(s => s.is_active !== false && !s.is_kitchen && s.id !== state.me.id); }
@@ -9988,10 +10133,48 @@ document.addEventListener('click', async ev => {
       catch(err){ toast(errText(err), true); el.disabled = false; }
       break;
     }
+    case 'miss-ack': {   // v149：漏做 / 不实确认「知道了」
+      el.disabled = true;
+      try { await rpc('task_miss_ack', { ...tok(), p_id: el.dataset.id }); state.misses = (state.misses || []).filter(m => m.id !== el.dataset.id); keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'miss-make': state.taskOpen = { def: el.dataset.def, day: el.dataset.day }; render(); window.scrollTo(0, 0); break;   // v149：补做
+    case 'miss-msg': {   // v149：老板首页「昨天漏做」里给某人留言（同核对页的 💬）
+      const d = el.dataset; state.tkMsg = { def: d.def, day: d.day, store: d.store, task: d.task, staff: d.id, name: d.name, note: '', zh: '', de: '', busy: false };
+      tkmRender(); const dlg = $('#photoDlg'); if (!dlg.open) dlg.showModal(); break;
+    }
+    case 'aud-open': {   // v149：派给我的抽查
+      const a = (state.audits || []).find(x => x.id === el.dataset.id); if (!a) break;
+      state.audDlg = { a }; audDlgRender(); const dlg = $('#photoDlg'); if (!dlg.open) dlg.showModal(); break;
+    }
+    case 'aud-start': {   // v149：老板 / 主管 / 负责人自己点「🔍 抽查」
+      el.disabled = true;
+      try { const a = await rpc('task_audit_start', { ...tok(), p_def: el.dataset.def, p_day: el.dataset.day });
+        state.audDlg = { a }; audDlgRender(); const dlg = $('#photoDlg'); if (!dlg.open) dlg.showModal(); }
+      catch(e){ toast(errText(e), true); }
+      el.disabled = false; break;
+    }
+    case 'aud-done': {
+      const D = state.audDlg; if (!D || D.busy) break; D.note = ($('#aud-note') || {}).value || '';
+      const r = el.dataset.r;
+      if (r !== 'unclear' && !D.photo) return toast(errText(new Error('AUDIT_PHOTO_REQUIRED')), true);
+      if (r === 'false' && !D.note.trim()) return toast(errText(new Error('AUDIT_NOTE_REQUIRED')), true);
+      if (r === 'false' && !confirm(t('ta_aud_false_q', { p: (D.a.staff || []).join(taSep()) }))) break;
+      el.disabled = true;
+      try { await rpc('task_audit_done', { ...tok(), p_id: D.a.id, p_result: r, p_note: D.note.trim() || null, p_photo: D.photo || null });
+        $('#photoDlg').close(); state.audDlg = null; toast(t('ta_aud_saved'));
+        if (r === 'false') callPush('task_due');   // 推给被查的人和老板
+        await loadTasks(); if (state.recon) keepScroll(viewReconDay); else keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'ta-rec': state.taRec = {}; render(); window.scrollTo(0, 0); break;   // v149：我的任务记录
+    case 'ta-rec-close': state.taRec = null; render(); window.scrollTo(0, 0); break;
     case 'task-check': {
       const c = tkOpenRun(); if (!c) break; el.disabled = true;
       try { const st = await rpc('task_item_check', { ...tok(), p_def: c.def_id, p_item: el.dataset.item, p_day: c.day }); await loadTasks();
-        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); annAfterWork(); render(); window.scrollTo(0, 0); } else { toast(t('saved')); keepScroll(render); } }
+        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); callPush('task_due'); annAfterWork(); render(); window.scrollTo(0, 0); } else { toast(t('saved')); keepScroll(render); } }   // v149：抽查到的话马上推给查的人
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
@@ -10052,7 +10235,7 @@ document.addEventListener('click', async ev => {
       el.disabled = true;
       try { const mid = await rpc('admin_task_message', { ...tok(), p_def: m.def, p_day: m.day, p_staff_id: m.staff, p_text_zh: m.zh, p_text_de: m.de });
         callPush('message', { message_id: mid }); $('#photoDlg').close(); state.tkMsg = null; toast(t('tkm_sent', { n: m.name }));
-        if (state.recon) keepScroll(viewReconDay); }
+        if (state.recon) keepScroll(viewReconDay); else if (state.tab === 'today') keepScroll(render); }   // v149：老板首页「昨天漏做」里发的
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
@@ -11631,6 +11814,7 @@ document.addEventListener('change', async ev => {
     Object.assign(F, { unit_id: u ? u.id : null, place: u && u.holds && !(u.slots || []).length ? u.id : null, lastUsed: false }); invRepaintPicker(); return; }
   if (ev.target.dataset && ev.target.dataset.lockcp){ lockUpload(ev.target); return; }
   if (ev.target.dataset && ev.target.dataset.taskitem){ taskUpload(ev.target); return; }   // v71
+  if (ev.target.dataset && ev.target.dataset.audphoto){ audPhoto(ev.target); return; }   // v149：抽查的照片
   if (ev.target.dataset && ev.target.dataset.tfatt && ev.target.files && ev.target.files.length){ const fs = [...ev.target.files]; ev.target.value = ''; tfAttChosen(fs); return; }   // v128：附照片
   if (ev.target.dataset && ev.target.dataset.tkres && ev.target.files && ev.target.files.length){ const fs = [...ev.target.files]; ev.target.value = ''; tkResChosen(fs); return; }   // v128：交回结果
   if (ev.target.dataset && ev.target.dataset.expimg && ev.target.files && ev.target.files[0]){   // v67：垫付照片
