@@ -752,6 +752,19 @@ zh: {
   fb_view_note:'（查看 {n} 时）', fb_view_hint:'以你自己的名义发送，注明是查看 {n} 时看到的。',
   // v73：公告认真读、推送情况
   an_wait:'请先读完 · {s}', an_scroll:'请滑到最下面', an_push_pub:'已发布。推送到了 {a} 人的手机（共 {b} 人要确认）。', an_push_remind:'已再提醒。推送到了 {a} 人的手机（还有 {b} 人没确认）。', an_push_off:'{n} 人没开手机通知，收不到推送，请当面提醒，或者让他们在「更多」里开启通知：{m}', an_nopush:'（没开通知）',
+  // v150（数据库 v110 / 文件服务 tasks v27，老板 2026-11-07）：任务和入职培训、SOP 连起来
+  tk_close_photo_onboarding:'要拍照（带教期间所有任务每次都拍；独立上岗考核通过后按平常的规则）',
+  oc_task_ok:'任务里按 SOP 做对 {a} 次', oc_task_bad:'有问题 {b} 次', oc_task_suggest:'✓ 任务里已经做对 {a} 次，可以标「会了」', oc_task_suggest_mine:'✓ 任务里已经做对 {a} 次，带你的同事可以给你标「会了」',
+  oe_tr_title:'任务记录（{a}–{b}）', oe_tr_line:'轮到 {t} 次，做完 {d} 次（{p}%）', oe_tr_miss:'漏做 {m} 次（自己 {s}，一起 {h}）', oe_tr_made:'第二天补做 {n} 次', oe_tr_ai:'照片 AI 指出问题 {f} 次', oe_tr_false:'确认了却没做 {x} 次',
+  oe_tr_ok:'合格', oe_tr_bad:'不合格', oe_tr_few:'次数太少，还看不出来', oe_tr_none:'带教开始以后还没有任务记录。',
+  oe_tr_hint:'带教期间所有任务每次都要拍照。完成率 ≥ 90%、没有「确认了却没做」，才提醒「可以考核了」（轮到不到 5 次不挡）。',
+  oe_tr_blocked:'清单 / 推荐已经够了，但任务记录不合格，所以先不提醒。也可以现在就考。',
+  oe_pass_bad_q:'{n} 的任务记录不合格（完成率 {p}%，确认了却没做 {x} 次）。还是要让他通过吗？',
+  ts_t_prob:'照片 AI 指出问题 {a} 次', ts_t_audit:'抽查不属实 {b} 次', ts_sop:'✨ 查 SOP', ts_sop_busy:'AI 正在查…', ts_sop_at:'查 SOP · {t}',
+  ts_sop_v_sop:'主要是 SOP 的问题', ts_sop_v_partly:'SOP 缺一点', ts_sop_v_not_sop:'不是 SOP 的问题', ts_sop_gaps:'已放进 SOP 页面「SOP 里可能缺的」：',
+  ts_sop_hint:'老出问题的任务可以点「✨ 查 SOP」：AI 看这个任务的问题和它连着的 SOP，判断是不是 SOP 没写清楚；缺的放进 SOP 页面。约 1–3 欧分。',
+  ts_sop_done:'查好了', ts_sop_saved:'查好了，{n} 条放进了 SOP 页面',
+  gap_from_task:'来自任务「{n}」',
   // v149（数据库 v109，老板 2026-11-07）：任务要做到、有证据、没做大家都知道
   ta_check_note:'会被抽查。确认了却没做，接下来 14 天你所有的任务都要每次拍照。', tk_close_photo_false_14:'要拍照（抽查发现确认了却没做，到 {u} 为止所有任务每次都拍）',
   ta_miss_t:'漏做 · {d}：{n}', ta_miss_sub:'这个月已漏做 {k} 次。每个任务都要做到，漏做会记进你的任务记录。', ta_miss_made:'已补做 ✓', ta_make_up:'现在补做', ta_ack:'知道了',
@@ -834,7 +847,7 @@ zh: {
   oc_mine_hint:'带你的同事每个班会标「会了 / 还要练」。点一条可以看 SOP，学过的可以再看一遍。', oc_open_sop:'看 SOP', oc_taught_opt:'（上面打了勾可以不写）',
   oc_empty:'还没有清单：这个区域和岗位还没有确认过的 SOP。', oca_add:'＋ 加上', oca_add_pick:'从别的 SOP 里加一条', oca_rm:'去掉', oca_rm_q:'从清单里去掉「{n}」？（标过的记录留着）',
   oca_hint:'自动包括这个区域「整个区域都要会」的和{r}的 SOP；新确认的会自动加进来，撤下的会去掉。', oca_hist_none:'还没教过',
-  gap_title:'SOP 里可能缺的（{n}）', gap_hint:'带教人评价新同事时写的，和 AI 从新同事「还不清楚 / 没人教」的回答里找到的（不写是谁说的）。写进 SOP 或处理好了就点掉。',
+  gap_title:'SOP 里可能缺的（{n}）', gap_hint:'带教人评价新同事时写的，AI 从新同事「还不清楚 / 没人教」的回答里找到的，和 AI 从老出问题的任务里找到的（不写是谁说的）。写进 SOP 或处理好了就点掉。',
   gap_ai:'✨ AI 发现', gap_about:'关于「{n}」', gap_add:'补充这一条', gap_wrong:'不是缺的', gap_wrong_ok:'好的，不再显示', gap_scan:'✨ 用最近 30 天的回答查一遍', gap_scan_busy:'AI 正在查…',
   gap_scan_hint:'AI 拿新同事说「还不清楚 / 没人教」的和现有的 SOP 比，约 2–5 欧分。以后每次交自评会自动查。', gap_scan_done:'AI 看了 {a} 个新同事的回答，新找到 {b} 条。', gap_write:'写一条', gap_done:'处理好了', gap_done_ok:'好的，已处理',
   tb_stats:'统计', ts_r4w:'近 4 周', ts_rmonth:'本月', ts_rlast:'上月', ts_period:'{a} – {b}（今天还没过完，不算）',
@@ -1011,7 +1024,7 @@ zh: {
   up:'上移', down:'下移', people:'人员', amount_total:'金额',
   oe_title:'独立上岗考核', oe_ready_all:'带教清单全部「会了」', oe_ready_rec:'{n} 推荐（{d}）：{w}', oe_ready_none:'还没到提醒：清单还没全部会了，也还没有带教人推荐。也可以现在就考。',
   oe_todo:'{n} 可以考核了（独立上岗）', oe_tag:'可以考核了', oe_passed:'✓ 独立上岗 {d}（{n} 考核）',
-  oe_ai:'✨ AI 上岗评估', oe_ai_again:'✨ 重新评估', oe_ai_busy:'AI 正在看…', oe_ai_hint:'AI 看这个人所有天的回答和清单，写稳了的、还弱的、建议现场看哪几条。只给你看，约 2–5 欧分。', oe_ai_at:'AI 评估 · {t}',
+  oe_ai:'✨ AI 上岗评估', oe_ai_again:'✨ 重新评估', oe_ai_busy:'AI 正在看…', oe_ai_hint:'AI 看这个人所有天的回答、清单和任务记录，写稳了的、还弱的、建议现场看哪几条。只给你看，约 2–5 欧分。', oe_ai_at:'AI 评估 · {t}',
   oe_strong:'稳了', oe_weak:'还弱', oe_check:'现场重点看', oe_conf:'说法对不上',
   oe_start:'开始现场考核', oe_form_hint:'在他上班时看他做这几条，每条点「通过」或「再练」。默认选了标「关键」的和 AI 建议的，可以加减。', oe_pass:'通过', oe_practice:'再练', oe_note_ph:'一句（可不写）',
   oe_note:'总评（可不写，通过时会写给新同事）', oe_do_pass:'通过，可以独立上岗', oe_do_cont:'还要再练，继续带教', oe_done_pass:'已通过，带教结束。已通知 {n}。', oe_done_cont:'已记下，「再练」的几条发给了带教人。',
@@ -1387,6 +1400,19 @@ de: {
   fb_view_note:'(in der Ansicht als {n})', fb_view_hint:'Wird in deinem Namen gesendet, mit Hinweis „Ansicht als {n}“.',
   // v73：Mitteilungen gründlich lesen, Push-Status
   an_wait:'Bitte zuerst lesen · {s}', an_scroll:'Bitte bis ganz unten scrollen', an_push_pub:'Veröffentlicht. Push an {a} Handys gesendet ({b} müssen bestätigen).', an_push_remind:'Erinnerung gesendet. Push an {a} Handys ({b} noch nicht bestätigt).', an_push_off:'{n} haben keine Benachrichtigungen aktiviert und bekommen keinen Push – bitte persönlich ansprechen oder unter „Mehr“ aktivieren lassen: {m}', an_nopush:' (keine Benachrichtigungen)',
+  // v150 (DB v110 / tasks v27)
+  tk_close_photo_onboarding:'Mit Foto (während der Einarbeitung bei allen Aufgaben jedes Mal; nach der Prüfung gelten die normalen Regeln)',
+  oc_task_ok:'In Aufgaben {a}× richtig nach SOP', oc_task_bad:'{b}× mit Problem', oc_task_suggest:'✓ In Aufgaben schon {a}× richtig – „Kann es“ möglich', oc_task_suggest_mine:'✓ In Aufgaben schon {a}× richtig – deine Einarbeiter*innen können „Kann es“ markieren',
+  oe_tr_title:'Aufgaben ({a}–{b})', oe_tr_line:'{t}× zuständig, {d}× erledigt ({p} %)', oe_tr_miss:'{m}× nicht erledigt (allein {s}, gemeinsam {h})', oe_tr_made:'{n}× am Folgetag nachgeholt', oe_tr_ai:'{f}× Foto-Problem laut KI', oe_tr_false:'{x}× bestätigt, aber nicht erledigt',
+  oe_tr_ok:'in Ordnung', oe_tr_bad:'nicht in Ordnung', oe_tr_few:'zu wenige Male, noch keine Aussage', oe_tr_none:'Seit Beginn der Einarbeitung noch keine Aufgaben.',
+  oe_tr_hint:'Während der Einarbeitung bei allen Aufgaben jedes Mal ein Foto. Erinnerung „Prüfung möglich“ erst ab 90 % erledigt und ohne „bestätigt, aber nicht erledigt“ (unter 5 Mal zählt nicht).',
+  oe_tr_blocked:'Checkliste / Empfehlung reichen, aber die Aufgaben sind nicht in Ordnung – daher noch keine Erinnerung. Prüfen geht trotzdem.',
+  oe_pass_bad_q:'Die Aufgaben von {n} sind nicht in Ordnung ({p} % erledigt, {x}× bestätigt, aber nicht erledigt). Trotzdem bestehen lassen?',
+  ts_t_prob:'{a}× Foto-Problem (KI)', ts_t_audit:'{b}× Stichprobe: stimmt nicht', ts_sop:'✨ SOP prüfen', ts_sop_busy:'KI prüft …', ts_sop_at:'SOP-Prüfung · {t}',
+  ts_sop_v_sop:'Vor allem die SOP', ts_sop_v_partly:'SOP fehlt ein Detail', ts_sop_v_not_sop:'Nicht die SOP', ts_sop_gaps:'Auf die SOP-Seite („Möglicherweise fehlt“) gesetzt:',
+  ts_sop_hint:'Bei Aufgaben mit vielen Problemen „✨ SOP prüfen“ antippen: Die KI vergleicht die Probleme mit der verknüpften SOP – ist sie unklar? Fehlendes kommt auf die SOP-Seite. Ca. 1–3 Cent.',
+  ts_sop_done:'Geprüft', ts_sop_saved:'Geprüft – {n} Punkt(e) auf die SOP-Seite gesetzt',
+  gap_from_task:'aus Aufgabe „{n}“',
   // v149 (DB v109)
   ta_check_note:'Wird stichprobenartig geprüft. Bestätigt, aber nicht erledigt → 14 Tage lang bei allen Aufgaben jedes Mal ein Foto.', tk_close_photo_false_14:'Mit Foto (Stichprobe: bestätigt, aber nicht erledigt – bis {u} bei allen Aufgaben)',
   ta_miss_t:'Nicht erledigt · {d}: {n}', ta_miss_sub:'Diesen Monat schon {k}× nicht erledigt. Jede Aufgabe zählt – Nicht Erledigtes kommt in dein Aufgaben-Protokoll.', ta_miss_made:'Nachgeholt ✓', ta_make_up:'Jetzt nachholen', ta_ack:'Verstanden',
@@ -1469,7 +1495,7 @@ de: {
   oc_mine_hint:'Deine Einarbeiter*innen markieren nach jeder Schicht „Kann es / Noch üben“. Tippe auf einen Punkt, um die SOP zu sehen.', oc_open_sop:'SOP ansehen', oc_taught_opt:'(freiwillig, wenn oben abgehakt)',
   oc_empty:'Noch keine Checkliste: für diesen Bereich und diese Position gibt es noch keine bestätigten SOPs.', oca_add:'＋ Hinzufügen', oca_add_pick:'Andere SOP hinzufügen', oca_rm:'Entfernen', oca_rm_q:'„{n}“ aus der Checkliste entfernen? (Bisherige Häkchen bleiben gespeichert)',
   oca_hint:'Enthält automatisch die SOPs für den ganzen Bereich und für {r}; neu bestätigte kommen dazu, zurückgezogene fallen weg.', oca_hist_none:'Noch nicht gezeigt',
-  gap_title:'Möglicherweise fehlt in den SOPs ({n})', gap_hint:'Von Einarbeiter*innen geschrieben oder von der KI aus „unklar / nicht gezeigt“-Antworten neuer Kolleg*innen gefunden (ohne Namen). Nach dem Einarbeiten in eine SOP abhaken.',
+  gap_title:'Möglicherweise fehlt in den SOPs ({n})', gap_hint:'Von Einarbeiter*innen geschrieben, von der KI aus „unklar / nicht gezeigt“-Antworten neuer Kolleg*innen oder aus Aufgaben mit vielen Problemen gefunden (ohne Namen). Nach dem Einarbeiten in eine SOP abhaken.',
   gap_ai:'✨ KI-Fund', gap_about:'zu „{n}“', gap_add:'Diese SOP ergänzen', gap_wrong:'Fehlt nicht', gap_wrong_ok:'Ok, wird nicht mehr angezeigt', gap_scan:'✨ Antworten der letzten 30 Tage prüfen', gap_scan_busy:'KI prüft …',
   gap_scan_hint:'Die KI vergleicht, was neue Kolleg*innen „unklar / nicht gezeigt“ nennen, mit den SOPs. Ca. 2–5 Cent. Danach automatisch bei jeder Selbsteinschätzung.', gap_scan_done:'KI hat Antworten von {a} neuen Kolleg*innen gelesen, {b} neue Funde.', gap_write:'SOP schreiben', gap_done:'Erledigt', gap_done_ok:'Ok, erledigt.',
   tb_stats:'Statistik', ts_r4w:'Letzte 4 Wochen', ts_rmonth:'Dieser Monat', ts_rlast:'Letzter Monat', ts_period:'{a} – {b} (heute zählt noch nicht)',
@@ -1646,7 +1672,7 @@ de: {
   up:'Nach oben', down:'Nach unten', people:'Personen', amount_total:'Betrag',
   oe_title:'Prüfung: selbstständig arbeiten', oe_ready_all:'Checkliste komplett „Kann es“', oe_ready_rec:'{n} empfiehlt ({d}): {w}', oe_ready_none:'Noch keine Erinnerung: Checkliste nicht komplett, keine Empfehlung. Prüfen geht trotzdem jederzeit.',
   oe_todo:'{n} kann geprüft werden (selbstständig arbeiten)', oe_tag:'Prüfung möglich', oe_passed:'✓ Selbstständig seit {d} (geprüft von {n})',
-  oe_ai:'✨ KI-Einschätzung', oe_ai_again:'✨ Neu einschätzen', oe_ai_busy:'KI liest …', oe_ai_hint:'Die KI liest alle Antworten und die Checkliste: was sitzt, was schwach ist, was du vor Ort prüfen solltest. Nur für dich, ca. 2–5 Cent.', oe_ai_at:'KI-Einschätzung · {t}',
+  oe_ai:'✨ KI-Einschätzung', oe_ai_again:'✨ Neu einschätzen', oe_ai_busy:'KI liest …', oe_ai_hint:'Die KI liest alle Antworten, die Checkliste und die Aufgaben: was sitzt, was schwach ist, was du vor Ort prüfen solltest. Nur für dich, ca. 2–5 Cent.', oe_ai_at:'KI-Einschätzung · {t}',
   oe_strong:'Sitzt', oe_weak:'Noch schwach', oe_check:'Vor Ort prüfen', oe_conf:'Widersprüche',
   oe_start:'Prüfung vor Ort starten', oe_form_hint:'Schau in einer Schicht zu und tippe pro Punkt „Bestanden“ oder „Üben“. Vorausgewählt: „Wichtig“-Punkte und KI-Vorschläge – anpassbar.', oe_pass:'Bestanden', oe_practice:'Üben', oe_note_ph:'Kurz (optional)',
   oe_note:'Gesamtnotiz (optional, geht bei Bestehen an die Person)', oe_do_pass:'Bestanden – arbeitet selbstständig', oe_do_cont:'Noch üben – Einarbeitung weiter', oe_done_pass:'Bestanden, Einarbeitung beendet. {n} ist informiert.', oe_done_cont:'Gespeichert; die „Üben“-Punkte gingen an die Einarbeiter*innen.',
@@ -2910,7 +2936,7 @@ function renderSopList(){
       + (state.me.is_admin && !state.viewAs ? `<button class="btn ghost sm" style="width:auto;margin:0 0 6px" data-act="sop-gap-scan" ${S.scanBusy ? 'disabled' : ''}>${esc(t(S.scanBusy ? 'gap_scan_busy' : 'gap_scan'))}</button><div class="small muted" style="margin-bottom:8px">${esc(t('gap_scan_hint'))}</div>` : '')
       + `<div class="list">${(S.gaps || []).map(g => { const ai = g.kind === 'ai', txt = ai ? (state.lang === 'de' ? g.text_de || g.text_zh : g.text_zh || g.text_de) : g.text;
         return `<div class="item"><div>${ai ? `<span class="tag m">${esc(t('gap_ai'))}</span> ` : ''}${esc(txt)}</div>
-        <div class="meta small muted">${[ai ? '' : g.by || '', dayLabel(g.day), t('area_' + g.area), g.sop_title ? t('gap_about', { n: sopTitle(g.sop_title) }) : ''].filter(Boolean).map(esc).join(' · ')}</div>
+        <div class="meta small muted">${[ai ? '' : g.by || '', g.day ? dayLabel(g.day) : '', t('area_' + g.area), g.sop_title ? t('gap_about', { n: sopTitle(g.sop_title) }) : '', g.task ? t('gap_from_task', { n: toName(g.task) + (g.task.store ? ' · ' + g.task.store : '') }) : ''].filter(Boolean).map(esc).join(' · ')}</div>
         <div class="acts"><button class="link" data-act="sop-gap-write" data-id="${g.id || g.entry_id}">${esc(t(g.sop_item_id ? 'gap_add' : 'gap_write'))}</button><button class="link" data-act="sop-gap-done" data-id="${g.id || g.entry_id}">${esc(t('gap_done'))}</button>${ai ? `<button class="link" data-act="sop-gap-wrong" data-id="${g.id}">${esc(t('gap_wrong'))}</button>` : ''}</div></div>`; }).join('')}</div>` : '')
     + (canW ? `<button class="btn" data-act="sop-new" style="margin:4px 0 12px">${esc(t('sop_new'))}</button>` : '') + mineHTML
     + `<div class="seg sm" style="margin:12px 0 10px">${['front', 'kitchen'].map(a => `<button data-act="sop-area" data-a="${a}" class="${S.area === a ? 'on' : ''}">${esc(t('area_' + a))}</button>`).join('')}</div>
@@ -3083,12 +3109,16 @@ const ocTopic = i => state.lang === 'de' ? i.topic_de || i.topic_zh || '' : i.to
 function ocGroups(items, row){ const g = []; (items || []).forEach(i => { const k = ocTopic(i); let x = g.find(v => v.k === k); if (!x) g.push(x = { k, list: [] }); x.list.push(i); });
   return g.map(x => `<div class="tdl-g">${esc(x.k)}</div>` + x.list.map(row).join('')).join(''); }
 function ocSumHTML(C){ return `<div class="small"><strong>${esc(t('oc_sum', { a: C.can, b: C.practice, c: C.todo, n: C.total }))}</strong></div><div class="tdl-bar" style="margin:6px 0"><i style="width:${C.total ? Math.round(100 * C.can / C.total) : 0}%"></i></div>`; }
+// v150：任务里的证据（连着这条 SOP 的任务，新同事带教开始以后做对 / 有问题几次）；做对 3 次、还没标「会了」→ 提示
+function ocTaskHTML(i, mine){ if (!+i.task_ok && !+i.task_bad) return '';
+  return `<div class="small ${i.suggest ? 'pos' : 'muted'}" style="margin-top:2px">${esc(i.suggest ? t(mine ? 'oc_task_suggest_mine' : 'oc_task_suggest', { a: i.task_ok })
+    : [t('oc_task_ok', { a: +i.task_ok || 0 }), +i.task_bad ? t('oc_task_bad', { b: i.task_bad }) : ''].filter(Boolean).join(' · '))}</div>`; }
 // 带教人评价页上面的清单（点「会了 / 还要练」；再点一下取消）
 function ocMentorHTML(o){
   const C = (state.onbChk || {})[o.plan]; if (!C) return `<div class="loading">${esc(t('loading'))}</div>`;
   if (!C.total) return '';
   const chk = o.a.chk || {};
-  const row = i => `<div style="padding:6px 0;border-bottom:1px solid var(--line)"><div><strong>${esc(sopTitle(i))}</strong> <span class="small muted">${esc(t('oc_now', { s: ocSt(i.status) }))}${i.last ? ' · ' + esc(dm(i.last.day) + ' ' + i.last.by) : ''}</span></div>
+  const row = i => `<div style="padding:6px 0;border-bottom:1px solid var(--line)"><div><strong>${esc(sopTitle(i))}</strong> <span class="small muted">${esc(t('oc_now', { s: ocSt(i.status) }))}${i.last ? ' · ' + esc(dm(i.last.day) + ' ' + i.last.by) : ''}</span></div>${ocTaskHTML(i)}
     <div class="chips" style="margin-top:4px">${['can', 'practice'].map(v => `<button type="button" class="chip${chk[i.id] === v ? ' on' : ''}" data-act="onb-chk" data-id="${i.id}" data-v="${v}">${esc(ocSt(v))}</button>`).join('')}</div></div>`;
   return `<div class="field"><label>${esc(t('oc_title'))}</label><div class="small muted" style="margin-bottom:6px">${esc(t('oc_hint_mentor'))}</div>${ocSumHTML(C)}${ocGroups(C.items, row)}</div>`;
 }
@@ -3098,7 +3128,7 @@ function ocMineHTML(){ const C = state.onbChkMine; if (!C || !C.total) return ''
     <button class="btn ghost sm" style="width:auto" data-act="oc-open">${esc(t('oc_mine_btn'))}</button></div>${ocSumHTML(C)}</div>`; }
 function renderOcMine(){ const C = state.onbChkMine || { items: [] };
   const row = i => `<div class="tsr"><span class="tsr-d ${i.status === 'can' ? 'ok' : i.status === 'practice' ? 'todo' : ''}"></span><div class="tsr-m"><div class="tsr-n">${esc(sopTitle(i))} ${ocTag(i.status)}</div>
-    ${i.last ? `<div class="tsr-s">${esc(dayLabel(i.last.day) + ' · ' + i.last.by)}</div>` : ''}<div class="tsr-a"><button class="link" data-act="sop-open" data-id="${i.id}">${esc(t('oc_open_sop'))}</button></div></div></div>`;
+    ${i.last ? `<div class="tsr-s">${esc(dayLabel(i.last.day) + ' · ' + i.last.by)}</div>` : ''}${ocTaskHTML(i, true)}<div class="tsr-a"><button class="link" data-act="sop-open" data-id="${i.id}">${esc(t('oc_open_sop'))}</button></div></div></div>`;
   $('#main').innerHTML = `<button class="link" data-act="oc-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button><h2 style="margin-top:0">${esc(t('oc_mine_title'))}</h2>
     <div class="infobox">${esc(t('oc_mine_hint'))}</div>${ocSumHTML(C)}<div class="tsr-box">${ocGroups(C.items, row) || `<div class="empty">${esc(t('oc_empty'))}</div>`}</div>`; }
 // 老板：带教详情里的清单（每条谁哪天标的；去掉、加上）
@@ -3106,7 +3136,8 @@ function renderOcMine(){ const C = state.onbChkMine || { items: [] };
 function exHTML(D){
   const P = D.plan, ended = !!P.ended_at, R = D.ready || {}, C = D.checklist || { items: [] }, A = D.exam_ai, E = state.onbExam, X = D.exams || [];
   const li = xs => (xs || []).length ? `<ul style="margin:2px 0 6px 18px;padding:0">${xs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
-  const ready = ended ? '' : `<div class="meta">${R.all_can || (R.recs || []).length ? [R.all_can ? '✓ ' + t('oe_ready_all') : '', ...(R.recs || []).map(r => '✓ ' + t('oe_ready_rec', { n: r.name, d: dm(r.day), w: r.why || '' }))].filter(Boolean).map(esc).join('<br>') : esc(t('oe_ready_none'))}</div>`;
+  const ready = ended ? '' : `<div class="meta">${R.all_can || (R.recs || []).length ? [R.all_can ? '✓ ' + t('oe_ready_all') : '', ...(R.recs || []).map(r => '✓ ' + t('oe_ready_rec', { n: r.name, d: dm(r.day), w: r.why || '' }))].filter(Boolean).map(esc).join('<br>') : esc(t('oe_ready_none'))}</div>`
+    + (!ended && (R.all_can || (R.recs || []).length) && !R.on ? `<div class="meta negc">${esc(t('oe_tr_blocked'))}</div>` : '') + (ended ? '' : exTrHTML(D.task_record));   // v150：任务记录
   const ai = ended ? '' : `<div class="sheet" style="margin:8px 0">${A ? `<div class="small muted">${esc(t('oe_ai_at', { t: fmtDateTime(A.at) }))}</div><div style="margin:4px 0">${esc(A.out.summary_zh || '')}</div>
       ${(A.out.strong_zh || []).length ? `<strong class="small">${esc(t('oe_strong'))}</strong>${li(A.out.strong_zh)}` : ''}${(A.out.weak_zh || []).length ? `<strong class="small">${esc(t('oe_weak'))}</strong>${li(A.out.weak_zh)}` : ''}
       ${(A.out.check_zh || []).length ? `<strong class="small">${esc(t('oe_check'))}</strong>${li(A.out.check_zh)}` : ''}${(A.out.conflicts_zh || []).length ? `<strong class="small negc">${esc(t('oe_conf'))}</strong>${li(A.out.conflicts_zh)}` : ''}` : ''}
@@ -3127,11 +3158,19 @@ function exHTML(D){
       ${(x.items || []).map(i => `<div class="meta small">${esc((state.lang === 'de' ? i.title_de || i.title_zh : i.title_zh || i.title_de) + (state.lang === 'de' ? ': ' : '：') + t(i.result === 'pass' ? 'oe_pass' : 'oe_practice') + (i.note ? ' · ' + i.note : ''))}</div>`).join('')}${x.note ? `<div class="meta">${esc(x.note)}</div>` : ''}</div>`).join('')}</div></div></details>` : '';
   return `<h3 style="margin:14px 0 6px">${esc(t('oe_title'))}</h3>${ready}${ai}${!ended && !E && !state.viewAs ? `<button class="btn" style="margin:4px 0" data-act="oex-open">${esc(t('oe_start'))}</button>` : ''}${form}${hist}`;
 }
+// v150（数据库 v110）：新同事带教期间最近 2 周的任务记录（合格 = 完成率 ≥ 90%、没有不实确认；轮到不到 5 次 = 看不出来）
+function exTrHTML(r){ if (!r) return '';
+  const tag = `<span class="tag ${r.status === 'ok' ? 'ok' : r.status === 'bad' ? 'bad' : 'off'}">${esc(t(r.status === 'ok' ? 'oe_tr_ok' : r.status === 'bad' ? 'oe_tr_bad' : 'oe_tr_few'))}</span>`;
+  const miss = +r.missed_solo + +r.missed_shared;
+  const lines = +r.turns ? [[t('oe_tr_line', { t: r.turns, d: r.done, p: r.rate ?? 0 }), r.status === 'bad' && +r.rate < 90 ? 'negc' : ''], [miss ? t('oe_tr_miss', { m: miss, s: r.missed_solo, h: r.missed_shared }) : ''],
+    [+r.made_up ? t('oe_tr_made', { n: r.made_up }) : ''], [+r.ai_flag ? t('oe_tr_ai', { f: r.ai_flag }) : ''], [+r.false_n ? t('oe_tr_false', { x: r.false_n }) : '', 'negc']].filter(l => l[0]) : [[t('oe_tr_none')]];
+  return `<div class="sheet" style="margin:8px 0"><div><strong>${esc(t('oe_tr_title', { a: dm(r.from), b: dm(r.to) }))}</strong> ${tag}</div>
+    ${lines.map(l => `<div class="meta small ${l[1] || ''}">${esc(l[0])}</div>`).join('')}<div class="small muted" style="margin-top:4px">${esc(t('oe_tr_hint'))}</div></div>`; }
 function exKeep(){ const E = state.onbExam; if (!E) return; document.querySelectorAll('[data-exn]').forEach(n => { (E.items[n.dataset.exn] = E.items[n.dataset.exn] || {}).note = n.value; }); const nt = $('#ex-note'); if (nt) E.note = nt.value; }
 function ocAdminHTML(C, ended){
   if (!C) return '';
   const hist = i => (i.history || []).length ? i.history.map(h => dm(h.day) + ' ' + h.by + ' ' + ocSt(h.status)).join(' → ') : t('oca_hist_none');
-  const row = i => tsrRow(esc(sopTitle(i)) + ' ' + ocTag(i.status), i.status === 'can' ? 'ok' : i.status === 'practice' ? 'todo' : '', esc(hist(i)), '',
+  const row = i => tsrRow(esc(sopTitle(i)) + ' ' + ocTag(i.status), i.status === 'can' ? 'ok' : i.status === 'practice' ? 'todo' : '', esc(hist(i)) + ocTaskHTML(i), '',
     ended ? '' : `<button class="link" data-act="sop-open" data-id="${i.id}">${esc(t('oc_open_sop'))}</button><button class="link danger" data-act="oca-rm" data-id="${i.id}" data-name="${esc(sopTitle(i))}">${esc(t('oca_rm'))}</button>`);
   const have = new Set((C.items || []).map(i => i.id)), T = state.onbSops || { topics: [] };
   const opts = (T.topics || []).flatMap(tp => (tp.items || []).filter(i => !have.has(i.id)).map(i => `<option value="${i.id}">${esc(t('area_' + tp.area) + ' · ' + sopTopicName(tp) + ' · ' + sopTitle(i))}</option>`)).join('');
@@ -4227,16 +4266,23 @@ function tsHTML(){
       ${a ? `<div class="meta small" style="margin-top:4px">✨ ${esc(L(a))}</div>` : ''}
       ${ms ? `<details class="fold" style="margin-top:6px"><summary>${esc(t('ts_misses', { n: miss }))}</summary><div class="inner">${ms}</div></details>` : ''}</div>`; };
   const task = x => { const a = aiT(x.def_id), w = (x.wd || []).map((n, i) => n ? wd(i) + ' ×' + n : '').filter(Boolean);
-    const sub = [x.n ? t('ts_t_line', { a: x.done, b: x.n, p: pct(x.done, x.n) }) : '', +x.nobody ? t('ts_t_nobody', { n: x.nobody }) : '', w.length ? t('ts_t_wd', { m: w.join(state.lang === 'de' ? ', ' : '、') }) : ''].filter(Boolean).join(' · ');
+    const sub = [x.n ? t('ts_t_line', { a: x.done, b: x.n, p: pct(x.done, x.n) }) : '', +x.nobody ? t('ts_t_nobody', { n: x.nobody }) : '', w.length ? t('ts_t_wd', { m: w.join(state.lang === 'de' ? ', ' : '、') }) : '',
+      +x.ai_flag ? t('ts_t_prob', { a: x.ai_flag }) : '', +x.audit_false ? t('ts_t_audit', { b: x.audit_false }) : ''].filter(Boolean).join(' · ');   // v150
+    // v150：老出问题的任务：「✨ 查 SOP」和最近一次的结果
+    const prob = +x.n > +x.done || +x.ai_flag || +x.audit_false, sc = (D.sop_checks || {})[x.def_id], busy = (T.sopBusy || {})[x.def_id];
+    const scHTML = sc && sc.out ? `<div class="small" style="margin-top:4px"><span class="tag ${sc.out.verdict === 'not_sop' ? 'off' : 'pend'}">${esc(t('ts_sop_v_' + (sc.out.verdict || 'not_sop')))}</span> <span class="muted">${esc(t('ts_sop_at', { t: fmtDateTime(sc.at) }))}</span></div>
+      <div class="small" style="margin-top:2px">${esc(state.lang === 'de' ? sc.out.why_de || sc.out.why_zh : sc.out.why_zh || sc.out.why_de)}</div>
+      ${(sc.out.gaps || []).length ? `<div class="small muted" style="margin-top:2px">${esc(t('ts_sop_gaps'))}</div>${sc.out.gaps.map(g => `<div class="small">· ${esc(state.lang === 'de' ? g.text_de || g.text_zh : g.text_zh || g.text_de)}</div>`).join('')}` : ''}` : '';
     return tsrRow(esc(toName(x)) + (x.store ? ' ' + storeTag(x.store) : '') + ` <span class="tag">${esc(x.kind === 'once' ? t('tf_once') : perLabel({ repeat: x.kind }))}</span>`,
-      !x.n ? '' : x.done === x.n ? 'ok' : pct(x.done, x.n) < 70 ? 'bad' : 'todo', esc(sub) + (a ? `<div class="small" style="margin-top:2px">✨ ${esc(L(a))}</div>` : ''), '', ''); };
+      !x.n ? '' : x.done === x.n ? 'ok' : pct(x.done, x.n) < 70 ? 'bad' : 'todo', esc(sub) + (a ? `<div class="small" style="margin-top:2px">✨ ${esc(L(a))}</div>` : '') + scHTML, '',
+      prob && !state.viewAs ? `<button class="link" data-act="ts-sop" data-id="${x.def_id}" ${busy ? 'disabled' : ''}>${esc(t(busy ? 'ts_sop_busy' : 'ts_sop'))}</button>` : ''); };
   const area = a => `<div class="item"><div class="top"><div>${a.store ? storeTag(a.store) + ' ' : ''}<strong>${esc(a.area === 'person' ? t('ts_area_person') : t('area_' + a.area))}</strong></div>
       <span class="small num">${esc(t('ts_t_line', { a: a.done, b: a.n, p: pct(a.done, a.n) }))}</span></div>
       <div class="meta small muted">${(a.weeks || []).map(w => esc(t('ts_week', { n: isoWeek(w.w) }) + ' ' + pct(w.done, w.n) + '%')).join(' · ')}</div></div>`;
   return seg + `<div class="small muted" style="margin-bottom:4px">${esc(t('ts_period', { a: dayLabel(D.from), b: dayLabel(D.to) }))}</div>`
     + `<div class="small muted" style="margin-bottom:10px">${esc(t('ts_hint'))}</div>` + aiBox
     + (P.length ? `<h3>${esc(t('ts_people'))}</h3><div class="list">${P.map(person).join('')}</div>` : '')
-    + (tasks.length ? `<h3>${esc(t('ts_tasks'))}</h3><div class="tsr-box">${tasks.filter(x => x.n || +x.nobody).map(task).join('')}</div>` : '')
+    + (tasks.length ? `<h3>${esc(t('ts_tasks'))}</h3><div class="small muted" style="margin-bottom:6px">${esc(t('ts_sop_hint'))}</div><div class="tsr-box">${tasks.filter(x => x.n || +x.nobody).map(task).join('')}</div>` : '')
     + (areas.length ? `<h3>${esc(t('ts_areas'))}</h3><div class="list">${areas.map(area).join('')}</div>` : '');
 }
 function toRedraw(){ const el = $('#asub'); if (el && state.tab === 'admin' && state.adminSub === 'tasks') el.innerHTML = toAdminRender(); }
@@ -10105,6 +10151,15 @@ document.addEventListener('click', async ev => {
     // v95：某一天的任务（老板「管理 → 任务」、负责人「交给…」）
     case 'to-view': state.toView = el.dataset.k; if (el.dataset.k === 'stats') tsLoad(); else keepScroll(toRedraw); break;   // v123：统计每次切过来重新算
     case 'ts-range': (state.ts = state.ts || {}).k = el.dataset.k; tsLoad(); break;
+    case 'ts-sop': {   // v150：「✨ 查 SOP」（文件服务 tasks v27）
+      const T = state.ts, D = T && T.data, id = el.dataset.id; if (!D || !id || (T.sopBusy || {})[id]) break;
+      (T.sopBusy = T.sopBusy || {})[id] = true; keepScroll(toRedraw);
+      try { const r = await callTasks({ action: 'task_sop_check', def_id: id, from: D.from, to: D.to });
+        if (state.ts === T && T.data === D) D.sop_checks = { ...(D.sop_checks || {}), [id]: { out: r.out, at: r.at, from: r.from, to: r.to } };
+        toast(+r.gaps_saved ? t('ts_sop_saved', { n: r.gaps_saved }) : t('ts_sop_done')); }
+      catch(err){ toast(errText(err), true); }
+      delete T.sopBusy[id]; if (state.toView === 'stats') keepScroll(toRedraw); break;
+    }
     case 'ts-ai': {
       const T = state.ts, D = T && T.data; if (!D || T.aiBusy) break;
       T.aiBusy = true; keepScroll(toRedraw);
@@ -10590,6 +10645,8 @@ document.addEventListener('click', async ev => {
       const D = state.onbDet, E = state.onbExam; if (!D || !E) break; exKeep();
       const items = Object.entries(E.items).filter(([, v]) => v.on).map(([item, v]) => ({ item, result: v.result, note: v.note || null }));
       if (!items.length || items.some(x => !x.result)) return toast(t('err_ONB_EXAM_EMPTY'), true);
+      const tr = D.task_record;   // v150：任务记录不合格还要通过 → 再确认一次
+      if (el.dataset.d === 'pass' && tr && tr.status === 'bad' && !confirm(t('oe_pass_bad_q', { n: D.plan.name, p: tr.rate ?? 0, x: tr.false_n || 0 }))) break;
       el.disabled = true;
       try { const r = await rpc('admin_onb_exam', { ...tok(), p_plan: D.plan.id, p_items: items, p_note: E.note || null, p_decision: el.dataset.d });
         (r.messages || []).forEach(id => callPush('message', { message_id: id }));
