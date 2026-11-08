@@ -946,7 +946,16 @@ zh: {
   bon_autofix_uid:'Bon 上的工号读错了，系统已按你的工号改成 {b}，不用重拍。',
   px_title:'代 {n} 交 Bon', px_btn:'代 {n} 交 Bon（拍他的 Bon）', px_intro:'也可以代员工交：拍谁的 Bon 都行，系统按 Bon 上的工号认出是谁的。',
   px_owner:'这是 {n} 的 Bon（工号 {u}），会记到 {n} 名下。', px_mine:'这是你自己的 Bon。',
-  px_other:'这张 Bon 上的工号 {u} 是 {o} 的，不是 {n} 的。请确认记给谁：', px_unknown:'认不出是谁的：工号 {u} 在 {s} 还没绑定。请选是谁的（选了就把这个工号绑定给他）：',
+  px_other:'这张 Bon 上的工号 {u} 是 {o} 的，不是 {n} 的。请确认记给谁：', px_unknown:'认不出是谁的：工号 {u} 在 {s} 还没绑定。请选这张 Bon 记给谁：',
+  bs_no_id:'Bon 上的名字和工号没读到。请选这张 Bon 记给谁：', bs_moved:'Bon 上印的是 {o}（工号 {u}），这张会记给 {p}。', bs_bind:'以后这个工号（{u}）就绑定给 {n}（不勾 = 只算这一张，绑定不变）',
+  bs_fix_title:'老板手动确认', bs_fix_hint:'对着照片看下面几项，不对就改，不用重拍。提交时会再问一次。', bs_retake:'单据上的数字前后对不上，或者有的地方没读到。可以重拍，也可以在下面改好直接提交。',
+  bs_store:'门店', bs_date:'日期', bs_rid:'报告编号（读不出可以空着）', bs_choose_store:'— 请选门店 —', bs_need_store:'请先选门店。', bs_need_date:'请先选日期。', bs_need_num:'请把 Schlussbestand 和刷卡小费填好（没有就填 0）。',
+  bs_numbers:'单据数字（老板确认）', bs_q_title:'这张 Bon 有下面的问题，继续吗？', bs_q_go:'我看过了，继续提交', bs_q_back:'返回改一下', bs_bind_line:'提交后，工号 {u} 绑定给 {n}；原来的绑定会解除。',
+  bs_w_READ:'识别没通过：{x}', bs_w_COVER:'AI 说两张照片好像没拍全。', bs_w_NO_RID:'没有报告编号：这张 Bon 再交一次时，系统查不出重复。', bs_w_OTHER_STAFF:'Bon 上的工号 {u} 绑在 {o} 名下，这张记给 {n}。', bs_w_OWN_OTHER:'{n} 绑的工号是 {h}，这张 Bon 上是 {u}。',
+  bs_w_DATE_OLD:'日期 {d} 已经超过 14 天。', bs_w_DUP:'{d} 已经有一张同样编号的 Bon（{o}，信封 {x}），可能是同一张交了两次。存下来会标「待核对」，周结前必须处理。', bs_done_self:'已保存（信封 {x}）。', bs_read_err:'一直识别不成功的话，可以切到上面的「手动录入」（这次的照片不会存）。',
+  bs_k_READ:'识别没通过', bs_k_COVER:'没拍全', bs_k_NO_RID:'没有报告编号', bs_k_OTHER_STAFF:'工号是别人的', bs_k_OWN_OTHER:'他绑了别的工号', bs_k_DATE_OLD:'超过 14 天', bs_k_DUP:'编号重复', tag_boss_ok:'老板手动确认',
+  act_bon_entry_boss:'老板交 Bon', ad_skipped:'跳过的检查', ad_bind:'绑定工号',
+  prob_NO_REPORT_ID:'没读到报告编号', prob_NO_USER_ID:'没读到工号', prob_NO_DATE:'没读到日期', prob_NO_STORE:'没读到门店', prob_REPORT_OPEN:'报告还开着（没有 Entstempeln）', prob_DATE_ODD:'日期不在最近 14 天里', prob_BLOCK_MISMATCH:'刷卡区块的数字对不上', prob_PAYMENTS_MISMATCH:'收款合计对不上', prob_NO_PAYMENTS:'没读到收款', prob_NOT_SHIFT_REPORT:'拍的不是收银机报告', prob_NOT_USER_REPORT:'拍的不是员工报告（Nutzerbericht）', prob_USER_ID_ODD:'工号读出来不像工号，可能读错了', prob_RID_DUP:'报告编号和 {a} {b} 的 Bon 一样，可能是同一张交了两次（老板确认后存的）：对照两张照片，真的重复就删掉一张，不是就改编号',
   px_for:'记给谁', px_choose:'— 请选 —', px_me:'我自己', px_need_pick:'请先选这张 Bon 记给谁。',
   px_wallet_hint:'「钱包现金合计」填信封里的钱（你数出来的）。提交后记到 {n} 名下，标「老板代交」，并发消息告诉 {n}。',
   px_counted:'我已经数过信封，金额就是这个（同时算点收）', px_no_extras:'代交时不能多给 Runner / 吧台（这是员工自己决定的）。',
@@ -1598,7 +1607,16 @@ de: {
   bon_autofix_uid:'Die Mitarbeiternummer auf dem Bon wurde falsch gelesen und automatisch auf deine Nummer {b} korrigiert – kein neues Foto nötig.',
   px_title:'Bon für {n} abgeben', px_btn:'Bon für {n} abgeben (Foto)', px_intro:'Du kannst auch für Mitarbeiter abgeben: Fotografiere ihren Bon, das System erkennt an der Nummer, wem er gehört.',
   px_owner:'Das ist der Bon von {n} (Nummer {u}) – er wird {n} zugeordnet.', px_mine:'Das ist dein eigener Bon.',
-  px_other:'Die Nummer {u} auf diesem Bon gehört {o}, nicht {n}. Bitte wählen, wem er zugeordnet wird:', px_unknown:'Nicht erkannt: Nummer {u} ist in {s} noch niemandem zugeordnet. Bitte wählen, wem der Bon gehört (die Nummer wird dann mit ihm verknüpft):',
+  px_other:'Die Nummer {u} auf diesem Bon gehört {o}, nicht {n}. Bitte wählen, wem er zugeordnet wird:', px_unknown:'Nicht erkannt: Nummer {u} ist in {s} noch niemandem zugeordnet. Bitte wählen, wem dieser Bon zugeordnet wird:',
+  bs_no_id:'Name und Nummer auf dem Bon wurden nicht gelesen. Bitte wählen, wem dieser Bon zugeordnet wird:', bs_moved:'Auf dem Bon steht {o} (Nummer {u}) – er wird {p} zugeordnet.', bs_bind:'Diese Nummer ({u}) ab jetzt mit {n} verknüpfen (ohne Häkchen: nur dieser Bon, die Verknüpfung bleibt)',
+  bs_fix_title:'Vom Chef bestätigen', bs_fix_hint:'Bitte mit dem Foto vergleichen und wenn nötig korrigieren – kein neues Foto nötig. Beim Absenden fragt die App noch einmal.', bs_retake:'Die Zahlen auf dem Bon passen nicht zusammen oder etwas wurde nicht gelesen. Du kannst neu fotografieren oder unten korrigieren und direkt absenden.',
+  bs_store:'Filiale', bs_date:'Datum', bs_rid:'Berichtsnummer (leer lassen, wenn nicht lesbar)', bs_choose_store:'— Filiale wählen —', bs_need_store:'Bitte zuerst die Filiale wählen.', bs_need_date:'Bitte zuerst das Datum wählen.', bs_need_num:'Bitte Schlussbestand und Kartentrinkgeld eintragen (sonst 0).',
+  bs_numbers:'Zahlen vom Bon (vom Chef bestätigt)', bs_q_title:'Bei diesem Bon gibt es folgende Probleme. Trotzdem weiter?', bs_q_go:'Geprüft – trotzdem absenden', bs_q_back:'Zurück und ändern', bs_bind_line:'Nach dem Absenden ist die Nummer {u} mit {n} verknüpft; die bisherige Verknüpfung wird gelöst.',
+  bs_w_READ:'Prüfung nicht bestanden: {x}', bs_w_COVER:'Laut KI sind die beiden Fotos vielleicht nicht vollständig.', bs_w_NO_RID:'Keine Berichtsnummer: Wird dieser Bon noch einmal abgegeben, erkennt das System die Doppelung nicht.', bs_w_OTHER_STAFF:'Die Nummer {u} auf dem Bon ist mit {o} verknüpft; dieser Bon wird {n} zugeordnet.', bs_w_OWN_OTHER:'{n} ist mit der Nummer {h} verknüpft, auf diesem Bon steht {u}.',
+  bs_w_DATE_OLD:'Das Datum {d} liegt mehr als 14 Tage zurück.', bs_w_DUP:'Am {d} gibt es schon einen Bon mit dieser Nummer ({o}, Umschlag {x}) – vielleicht wurde derselbe Bon zweimal abgegeben. Er wird als „zu prüfen“ markiert und muss vor dem Wochenabschluss geklärt werden.', bs_done_self:'Gespeichert (Umschlag {x}).', bs_read_err:'Klappt das Auslesen gar nicht, oben auf „Manuell“ wechseln (die Fotos werden dann nicht gespeichert).',
+  bs_k_READ:'Prüfung nicht bestanden', bs_k_COVER:'nicht vollständig fotografiert', bs_k_NO_RID:'keine Berichtsnummer', bs_k_OTHER_STAFF:'Nummer gehört jemand anderem', bs_k_OWN_OTHER:'andere Nummer verknüpft', bs_k_DATE_OLD:'älter als 14 Tage', bs_k_DUP:'Nummer doppelt', tag_boss_ok:'Vom Chef bestätigt',
+  act_bon_entry_boss:'Bon durch Chef abgegeben', ad_skipped:'Übersprungene Prüfungen', ad_bind:'Nummer verknüpft',
+  prob_NO_REPORT_ID:'Berichtsnummer nicht gelesen', prob_NO_USER_ID:'Mitarbeiternummer nicht gelesen', prob_NO_DATE:'Datum nicht gelesen', prob_NO_STORE:'Filiale nicht gelesen', prob_REPORT_OPEN:'Bericht noch offen (nicht ausgestempelt)', prob_DATE_ODD:'Datum nicht in den letzten 14 Tagen', prob_BLOCK_MISMATCH:'Zahlen im Kartenblock passen nicht', prob_PAYMENTS_MISMATCH:'Summe der Zahlungen passt nicht', prob_NO_PAYMENTS:'Zahlungen nicht gelesen', prob_NOT_SHIFT_REPORT:'Kein Kassenbericht fotografiert', prob_NOT_USER_REPORT:'Kein Nutzerbericht fotografiert', prob_USER_ID_ODD:'Mitarbeiternummer sieht falsch aus, wahrscheinlich falsch gelesen', prob_RID_DUP:'Gleiche Berichtsnummer wie der Bon von {b} vom {a} – vielleicht wurde er zweimal abgegeben (vom Chef bestätigt): bitte beide Fotos vergleichen; wirklich doppelt → einen löschen, sonst die Nummer ändern',
   px_for:'Zuordnen zu', px_choose:'— bitte wählen —', px_me:'Ich selbst', px_need_pick:'Bitte zuerst wählen, wem der Bon zugeordnet wird.',
   px_wallet_hint:'„Bargeld im Portemonnaie“: das Geld im Umschlag eintragen (von dir gezählt). Der Eintrag wird {n} zugeordnet, als „vom Chef abgegeben“ markiert, und {n} bekommt eine Nachricht.',
   px_counted:'Umschlag gezählt, Betrag stimmt (gleich als gezählt markieren)', px_no_extras:'Beim Abgeben für andere gibt es kein Extra für Runner / Bar (das entscheidet der Mitarbeiter selbst).',
@@ -2126,6 +2144,8 @@ const ERR_ZH = {
   AUDIT_DAY: '只能抽查今天或昨天的任务。', AUDIT_NOT_DONE: '这个任务还没做完，不用抽查（没做的会记成漏做）。', AUDIT_HAS_PHOTO: '这个任务拍了照片，照片就是证据，不用抽查。',
   AUDIT_EXISTS: '这个任务这天已经有人在抽查了。', AUDIT_SELF: '不能抽查自己确认的任务。', AUDIT_DONE: '这次抽查已经有结果了。',
   AUDIT_EXPIRED: '这次抽查已经过期（第二天 12:00 前要查）。', AUDIT_PHOTO_REQUIRED: '请先拍一张照片：属实、不属实都要有照片作证据。', AUDIT_NOTE_REQUIRED: '不属实要写一句：哪里没做。',   // v149
+  BON_WEEK_LOCKED: '这一天所在的周已经周结锁定，钱已经算完，不能再加 Bon。日期填错了就改日期；确实是这一周的钱，请在周结页「记调整」。',
+  BON_NEED_DATE: '这张 Bon 没有日期。请在「老板手动确认」里选好日期再提交。',
   TASK_EACH_BAD: '「每个服务员下班前」只能是：按岗位 = 服务员、每天、收店时，也不能「交回结果」。请改一下再保存。',
   AUDIT_EACH_LEAVE: '「每个服务员下班前」的任务不能事后抽查：每个人做完时系统会随机抽查。要看就看照片，或者当场看一眼。',   // v152
   EXPENSE_FORBIDDEN: '你还没有记垫付的权限。需要的话请找老板在「员工」里打开。',
@@ -2369,6 +2389,8 @@ const ERR_DE = {
   AUDIT_DAY: 'Nur Aufgaben von heute oder gestern können geprüft werden.', AUDIT_NOT_DONE: 'Die Aufgabe ist noch nicht erledigt – keine Prüfung nötig (Nicht Erledigtes wird ohnehin erfasst).', AUDIT_HAS_PHOTO: 'Die Aufgabe hat ein Foto – das ist der Nachweis, keine Prüfung nötig.',
   AUDIT_EXISTS: 'Diese Aufgabe wird an diesem Tag schon geprüft.', AUDIT_SELF: 'Eigene Bestätigungen kann man nicht prüfen.', AUDIT_DONE: 'Diese Stichprobe ist schon erledigt.',
   AUDIT_EXPIRED: 'Diese Stichprobe ist abgelaufen (Prüfung bis 12:00 am Folgetag).', AUDIT_PHOTO_REQUIRED: 'Bitte zuerst ein Foto machen – bei „stimmt“ und „stimmt nicht“ als Nachweis nötig.', AUDIT_NOTE_REQUIRED: 'Bei „stimmt nicht“ bitte kurz schreiben, was fehlt.',   // v149
+  BON_WEEK_LOCKED: 'Die Woche dieses Tages ist abgeschlossen, das Geld ist schon verteilt – es kann kein Bon mehr dazukommen. Ist das Datum falsch, bitte ändern; sonst im Wochenabschluss eine Ausgleichsbuchung eintragen.',
+  BON_NEED_DATE: 'Dieser Bon hat kein Datum. Bitte unter „Vom Chef bestätigen“ das Datum wählen und erneut absenden.',
   TASK_EACH_BAD: '„Jede Servicekraft vor dem Gehen“ geht nur mit: Position Service, täglich, bei Feierabend, ohne „Ergebnis abgeben“. Bitte anpassen und erneut speichern.',
   AUDIT_EACH_LEAVE: 'Aufgaben „Jede Servicekraft vor dem Gehen“ können nicht nachträglich geprüft werden – beim Erledigen prüft das System per Zufall. Bitte Fotos ansehen oder direkt vor Ort schauen.',   // v152
   EXPENSE_FORBIDDEN: 'Du darfst noch keine Auslagen erfassen. Bitte den Chef bitten, es unter „Mitarbeiter“ einzuschalten.',
@@ -6713,7 +6735,7 @@ function bonState(){
   return b.fails >= 3 ? 'review' : 'retake';
 }
 function bonNumbersHTML(d){
-  return `<div style="margin-bottom:12px"><div class="muted small" style="margin-bottom:4px">${esc(t('bon_numbers'))}</div><div class="sum num">
+  return `<div style="margin-bottom:12px"><div class="muted small" style="margin-bottom:4px">${esc(t(bonNeedFix() ? 'bs_numbers' : 'bon_numbers'))}</div><div class="sum num">
       <div class="li"><span class="muted">${esc(t('store'))}</span><strong>${d.store ? storeTag(d.store) : '?'}</strong></div>
       <div class="li"><span class="muted">${esc(t('date'))}</span><strong>${d.work_date ? esc(bonDayText(bonWorkDate())) : '?'}${(state.bon.dateAns || {}).changed ? ` <span class="muted small">${esc(t('bon_date_ai', { d: dm(d.work_date) }))}</span>` : ''}</strong></div>
       <div class="li"><span class="muted">${esc(t('employee'))}</span><strong>${esc(d.user_name || '?')} <span class="muted small">(${esc(d.user_id || '?')})</span></strong></div>
@@ -6731,9 +6753,9 @@ function bonDateOnly(){ return bonOnly('DATE_ODD'); }
 function bonOnly(...pre){ const ps = (((state.bon.read || {}).checks || {}).problems || []); return ps.length > 0 && ps.every(p => pre.some(x => String(p).startsWith(x))); }
 // v112：读出的日期不是今天（营业日）时先问一句；老板代交时和点进来的那一天比
 function bonDateExpect(){ const c = (state.entryCtx || {}).proxy; return bonPxActive() && c && c.date ? c.date : bizToday(); }
-function bonDateAsk(){ const d = bonDerived(), st = bonState(); return !!(d && d.work_date && (st === 'ok' || st === 'review') && d.work_date !== bonDateExpect()); }
+function bonDateAsk(){ if (bonNeedFix()) return false; const d = bonDerived(), st = bonState(); return !!(d && d.work_date && (st === 'ok' || st === 'review') && d.work_date !== bonDateExpect()); }
 function bonDateNeed(){ return bonDateAsk() && !state.bon.dateAns; }
-function bonWorkDate(){ const a = state.bon.dateAns; return (a && a.date) || (bonDerived() || {}).work_date; }
+function bonWorkDate(){ if (bonNeedFix()) return bonFixData().date || null; const a = state.bon.dateAns; return (a && a.date) || (bonDerived() || {}).work_date; }
 // 可以改成哪几天：员工只能今天、昨天；老板代交时还有点进来的那一天
 function bonDateOpts(){
   const d = (bonDerived() || {}).work_date, bd = bizToday(), c = (state.entryCtx || {}).proxy;
@@ -6790,24 +6812,92 @@ function pxBtn(id, name, date, store){
   return `<button class="link" type="button" data-act="px-open" data-staff="${esc(id)}" data-name="${esc(name)}" data-date="${esc(date)}" data-store="${esc(store)}" title="${esc(t('px_btn', { n: name }))}" aria-label="${esc(t('px_btn', { n: name }))}" style="white-space:nowrap;margin-left:2px">📷</button>`;
 }
 function bonPxHTML(){
-  const p = bonPx(), d = bonDerived(), b = state.bon; if (!p || !d || !b.read || b.busy) return '';
-  const me = state.me, o = p.owner, c = p.ctx;
+  const p = bonPx(), b = state.bon; if (!p || !b.read || b.busy) return '';
+  const d = bonDerived() || {}, me = state.me, o = p.owner, c = p.ctx, active = bonPxActive();
   let msg, cls = 'infobox';
-  if (o && c && c.staff && o.id !== c.staff){ msg = t('px_other', { o: o.name, n: c.name, u: d.user_id || '?' }); cls = 'warnbox'; }
+  if (o && active && o.id !== p.pick){ msg = t('bs_moved', { o: o.name, u: d.user_id || '?', p: staffName(p.pick) }); cls = 'warnbox'; }   // v153：Bon 上是别人的工号，也能放到这个人名下
+  else if (o && c && c.staff && o.id !== c.staff){ msg = t('px_other', { o: o.name, n: c.name, u: d.user_id || '?' }); cls = 'warnbox'; }
   else if (o) msg = o.id === me.id ? t('px_mine') : t('px_owner', { n: o.name, u: d.user_id || '?' });
-  else { msg = t('px_unknown', { u: d.user_id || '?', s: d.store || '' }); cls = 'warnbox'; }
+  else { msg = d.user_id ? t('px_unknown', { u: d.user_id, s: d.store || '?' }) : t('bs_no_id'); cls = 'warnbox'; }
   const opts = [[me.id, t('px_me')], ...state.staff.filter(x => x.id !== me.id).map(x => [x.id, x.name])];
-  const active = bonPxActive();
+  const canBind = active && d.user_id && (!o || o.id !== p.pick);   // v153：默认不动绑定，勾了才绑定 / 换绑
   return `<div class="${cls}" id="px-box">${esc(msg)}
     <div class="field" style="margin:8px 0 0"><label for="px-pick">${esc(t('px_for'))}</label><select class="input" id="px-pick"><option value="">${esc(t('px_choose'))}</option>
       ${opts.map(([id, n]) => `<option value="${esc(id)}" ${p.pick === id ? 'selected' : ''}>${esc(n)}</option>`).join('')}</select></div>
     ${active ? `<div class="small" style="margin-top:6px">${esc(t('px_wallet_hint', { n: staffName(p.pick) }))}</div>
-      <label class="check" style="margin-top:6px"><input type="checkbox" id="px-counted" ${b.pxCounted !== false ? 'checked' : ''}> ${esc(t('px_counted'))}</label>` : ''}</div>`;
+      <label class="check" style="margin-top:6px"><input type="checkbox" id="px-counted" ${b.pxCounted !== false ? 'checked' : ''}> ${esc(t('px_counted'))}</label>` : ''}
+    ${canBind ? `<label class="check" style="margin-top:2px"><input type="checkbox" id="px-bind" ${b.pxBind ? 'checked' : ''}> ${esc(t('bs_bind', { u: d.user_id, n: staffName(p.pick) }))}</label>` : ''}</div>`;
+}
+// v153（老板 2026-11-08）：老板交 Bon（代交或自己的）识别没通过时不用重拍：对着照片改，提交时确认一次（数据库 v113 admin_bon_boss_submit）
+const bonBoss = () => !!bonPx();
+function bonNeedFix(){ const b = state.bon; return bonBoss() && !!b.read && !b.busy && ['unknown', 'open', 'retake', 'review'].includes(bonState()); }
+function bonFixData(){
+  const b = state.bon; if (b.fix) return b.fix;
+  const d = bonDerived() || {}, c = (state.entryCtx || {}).proxy || {};
+  return b.fix = { store: d.store || c.store || '', date: d.work_date || c.date || '', rid: d.report_id || '',
+    schluss: d.schluss_cents == null ? '' : money(d.schluss_cents), card: d.card_cents == null ? '' : money(d.card_cents) };
+}
+function bonEff(){   // 交 Bon 用的数字：老板手动确认时用他看过、改过的
+  const d = bonDerived(); if (!bonNeedFix()) return d;
+  const x = bonFixData(), sc = parseSigned(x.schluss), cc = parseEur(x.card);
+  return { ...(d || {}), store: x.store || null, work_date: x.date || null, report_id: x.rid || null, schluss_cents: isNaN(sc) ? 0 : sc, card_cents: isNaN(cc) ? 0 : cc };
+}
+function bonFixWhere(k, v){   // 老板改了门店 / 日期：按新的一天重新读当天的 Runner / 吧台
+  const b = state.bon, x = bonFixData(); x[k] = v; b.walletDone = false; b.ack = false;
+  if (x.store && x.date) bonLoadDay(b, x.date, x.store).then(() => { if (state.bon !== b) return; bonAutoPick(); refreshBonParts(); });
+  else refreshBonParts();
+}
+function bonBossFixHTML(){
+  if (!bonNeedFix()) return '';
+  const x = bonFixData();
+  const num = (id, lbl, v) => `<div class="field" style="margin:8px 0 0"><label for="${id}">${esc(lbl)}</label><div class="money"><input class="input num" id="${id}" inputmode="text" autocomplete="off" placeholder="0,00" value="${esc(v)}"></div></div>`;
+  return `<div class="warnbox" id="bon-fix"><strong>${esc(t('bs_fix_title'))}</strong><div class="small" style="margin-top:4px">${esc(t('bs_fix_hint'))}</div>
+    <div class="field" style="margin:8px 0 0"><label for="bf-store">${esc(t('bs_store'))}</label><select class="input" id="bf-store"><option value="">${esc(t('bs_choose_store'))}</option>${['Flingern', 'Bismarck'].map(s => `<option value="${s}" ${x.store === s ? 'selected' : ''}>${s}</option>`).join('')}</select></div>
+    <div class="field" style="margin:8px 0 0"><label for="bf-date">${esc(t('bs_date'))}</label><input class="input" type="date" id="bf-date" value="${esc(x.date)}" max="${esc(today())}"></div>
+    <div class="field" style="margin:8px 0 0"><label for="bf-rid">${esc(t('bs_rid'))}</label><input class="input num" id="bf-rid" autocomplete="off" autocapitalize="characters" placeholder="X1181788.480" value="${esc(x.rid)}"></div>
+    ${num('bf-schluss', t('schluss'), x.schluss)}${num('bf-card', t('card_tip'), x.card)}</div>`;
+}
+const BON_BOSS_RETRY = ['BON_OTHER_STAFF', 'DUPLICATE_BON', 'BON_DATE_ODD', 'BON_UNREADABLE', 'STORE_UNKNOWN'];   // 老板自己的 Bon 被这些挡住时，也可以确认后继续
+function bsWarnText(w, r){
+  const ctx = { u: w.uid || '?', o: w.owner || w.name || '?', n: r.name, h: w.had || '?', d: w.date ? dayLabel(w.date) : '?', x: w.wallet_cents == null ? '?' : eur(w.wallet_cents) };
+  if (w.k === 'READ') ctx.x = (w.problems || []).map(p => { const k = String(p).split(':')[0], x = t('prob_' + k); return x === 'prob_' + k ? k : x; }).join(state.lang === 'de' ? '; ' : '；');
+  return t('bs_w_' + w.k, ctx);
+}
+function bonBossAsk(r){
+  const dlg = $('#photoDlg'), b = state.bon; if (!dlg) return;
+  const row = (l, v) => `<div class="li"><span class="muted">${esc(l)}</span><strong>${v}</strong></div>`;
+  dlg.innerHTML = `<h2 style="margin-top:0;padding-right:84px">${esc(t('bs_q_title'))}</h2>
+    <div class="warnbox" style="margin:0 0 10px">${(r.warnings || []).map(w => esc(bsWarnText(w, r))).join('<br>')}</div>
+    <div class="sum num" style="margin-bottom:12px">${row(t('px_for'), esc(r.name))}${row(t('bs_store'), storeTag(r.store))}${row(t('bs_date'), esc(dayLabel(r.date)))}${row(t('be_rid_lbl'), esc(r.report_id || '—'))}
+      ${row(t('envelope'), eur(r.wallet_cents))}${row(t('schluss'), eur(r.schluss_cents))}${row(t('card_tip'), eur(r.card_cents))}</div>
+    ${b.pxBind && r.user_id && bonPxActive() ? `<div class="small" style="margin-bottom:10px">${esc(t('bs_bind_line', { u: r.user_id, n: r.name }))}</div>` : ''}
+    <button class="btn" data-act="bon-boss-go">${esc(t('bs_q_go'))}</button>
+    <button class="btn ghost" style="margin-top:8px" data-act="photo-close">${esc(t('bs_q_back'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+}
+async function bonBossSave(confirmed){
+  const b = state.bon, f = state.form, x = bonNeedFix() ? bonFixData() : null, d = bonEff(), pick = b.pxPick || state.me.id, other = pick !== state.me.id, w = parseEur(b.wallet);
+  const btn = document.querySelector('[data-act="bon-submit"]'); if (btn) btn.disabled = true;
+  let r;
+  try {
+    r = await rpc('admin_bon_boss_submit', { ...tok(), p_read_id: b.read.read_id, p_staff_id: pick, p_card_cents: d.card_cents || 0, p_schluss_cents: d.schluss_cents || 0, p_wallet_cents: w,
+      p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack, p_counted: other && b.pxCounted !== false, p_bind: other && !!b.pxBind, p_confirmed: !!confirmed,
+      p_store: x ? x.store : null, p_date: x ? x.date : null, p_report_id: x ? x.rid.trim() : null });
+  } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; return; }
+  if (btn) btn.disabled = false;
+  if (state.bon !== b) return;
+  if (r.status === 'confirm') return bonBossAsk(r);   // 有问题：列给老板看，确认了再存
+  if (r.message_id) callPush('message', { message_id: r.message_id });
+  toast(other ? t(r.counted ? 'px_done_cnt' : 'px_done', { n: r.name, x: eur(w) }) : t('bs_done_self', { x: eur(w) }));
+  const back = (state.entryCtx || {}).back;
+  state.bon = blankBon(); state.form = blankForm(); state.entryCtx = null;
+  if (back && back !== 'entry' && tabs().includes(back)) state.tab = back;
+  render(); window.scrollTo(0, 0);
 }
 function bonNewSummary(){
-  const b = state.bon, f = state.form, d = bonDerived(), st = bonState();
+  const b = state.bon, f = state.form, d = bonEff(), st = bonState();
   if (!b.walletDone || String(b.wallet).trim() === '') return `<div class="muted small">${esc(t('show_after_wallet'))}</div>`;
-  if (!d || st === 'unknown' || st === 'open') return `<div class="sum num"><div class="li big"><span>${esc(t('envelope'))}</span><span>${isNaN(parseEur(b.wallet)) ? '–' : eur(parseEur(b.wallet))}</span></div></div>`;
+  if (!bonNeedFix() && (!d || st === 'unknown' || st === 'open')) return `<div class="sum num"><div class="li big"><span>${esc(t('envelope'))}</span><span>${isNaN(parseEur(b.wallet)) ? '–' : eur(parseEur(b.wallet))}</span></div></div>`;
   return bonNumbersHTML(d) + bonSummary(d.schluss_cents || 0, d.card_cents || 0, b.wallet, f.runners, f.bars);
 }
 // v48：识别不通过时，按出错类型告诉员工怎么重拍
@@ -6824,7 +6914,7 @@ function bonStatusHTML(){
   const b = state.bon, d = bonDerived(), st = bonState();
   let h = '';
   if (st === 'reading') h += `<div class="infobox">${esc(t('reading_bg'))} <span class="num" id="read-secs"></span></div>`;
-  if (st === 'error') h += `<div class="errbox">${esc(b.readErr)}<div style="margin-top:8px"><button class="btn ghost" data-act="bon-read">${esc(t('read_retry'))}</button></div></div>`;
+  if (st === 'error') h += `<div class="errbox">${esc(b.readErr)}<div style="margin-top:8px"><button class="btn ghost" data-act="bon-read">${esc(t('read_retry'))}</button></div>${bonBoss() ? `<div class="small" style="margin-top:8px">${esc(t('bs_read_err'))}</div>` : ''}</div>`;
   if (st === 'unknown') h += `<div class="errbox">${esc(t('store_unknown'))}</div>`;
   if (st === 'open'){   // bon v8 起分得清「报告还开着」和「顶部没读到编号」
     const ps = (b.read.checks || {}).problems || [];
@@ -6835,9 +6925,11 @@ function bonStatusHTML(){
   if (st === 'ok' && d && (d.fixes || []).includes('date_year')) h += `<div class="infobox">${esc(t('bon_autofix_date', { d: bonDayText(d.work_date) }))}</div>`;   // v87
   const dOnly = bonDateOnly(), dTxt = d && d.work_date ? bonDayText(d.work_date) : '?';   // v87：只有日期不对时直接说日期
   const uOnly = bonOnly('USER_ID_MISMATCH', 'USER_ID_ODD');   // v90：只有工号对不上
-  if (st === 'retake') h += `<div class="warnbox">${esc(dOnly ? t('checks_retake_date', { n: b.fails, d: dTxt }) : uOnly ? t('checks_retake_id', { n: b.fails }) : t('checks_retake', { n: b.fails }))}${dOnly ? '' : bonFixHTML()}</div>`;
-  if (st === 'review') h += `<div class="warnbox">${esc(dOnly ? t('checks_review_date', { d: dTxt }) : uOnly ? t('checks_review_id') : t('checks_review'))}${dOnly ? '' : bonFixHTML()}</div>`;
-  return h + bonDateHTML() + bonPxHTML();   // v92：老板代交；v112：日期对吗
+  const bossFix = bonNeedFix();   // v153：老板不用重拍
+  if (bossFix && (st === 'retake' || st === 'review')) h += `<div class="warnbox">${esc(t('bs_retake'))}${bonFixHTML()}</div>`;
+  if (st === 'retake' && !bossFix) h += `<div class="warnbox">${esc(dOnly ? t('checks_retake_date', { n: b.fails, d: dTxt }) : uOnly ? t('checks_retake_id', { n: b.fails }) : t('checks_retake', { n: b.fails }))}${dOnly ? '' : bonFixHTML()}</div>`;
+  if (st === 'review' && !bossFix) h += `<div class="warnbox">${esc(dOnly ? t('checks_review_date', { d: dTxt }) : uOnly ? t('checks_review_id') : t('checks_review'))}${dOnly ? '' : bonFixHTML()}</div>`;
+  return h + bonDateHTML() + bonPxHTML() + bonBossFixHTML();   // v92：老板代交；v112：日期对吗
 }
 function schedInfoHTML(){
   const sc = state.bon.sched, f = state.form;
@@ -7067,7 +7159,7 @@ function readTimer(isBusy, id){
 async function readBon(){
   const b = state.bon; if (!b.top || !b.bottom) return;
   const my = ++b.seq;
-  b.busy = true; b.readErr = null; b.read = null; b.dayHelp = null; b.sched = null; b.ack = false; b.dateAns = null; b.coverOk = false; refreshBonParts();
+  b.busy = true; b.readErr = null; b.read = null; b.dayHelp = null; b.sched = null; b.ack = false; b.dateAns = null; b.coverOk = false; b.fix = null; b.pxBind = false; refreshBonParts();
   readTimer(() => b.busy && state.bon === b && my === b.seq, 'read-secs');
   await Promise.all(['top', 'bottom'].map(k => b.ori[k] && b.ori[k].p).filter(Boolean));   // v139：等 AI 先看完（转正以后再识别）
   if (state.bon !== b || my !== b.seq || !b.top || !b.bottom) return;
@@ -7096,15 +7188,19 @@ async function readBon(){
     bonAutoPick();
   } else b.readErr = err;
   b.busy = false; refreshBonParts();
-  if (bonCoverBad(b)) bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok });   // v126：识别服务 bon v18 说没拍全
+  if (bonCoverBad(b)) bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok || bonBoss() });   // v126：识别服务 bon v18 说没拍全
 }
 async function submitBon(){
-  const b = state.bon, f = state.form, st = bonState(), d = bonDerived();
+  const b = state.bon, f = state.form, st = bonState(), boss = bonBoss(), fix = bonNeedFix(), d = bonEff();   // v153：老板可以手动确认继续
   if (st === 'reading') return toast(t('wait_read'), true);
   if (st === 'error' || st === 'none') return toast(t('wait_read'), true);
-  if (st === 'open') return toast(t('report_open'), true);
-  if (st === 'unknown' || st === 'retake') return toast(t('need_retake'), true);
-  if (bonCoverBad(b)) return bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok });   // v126：没拍全：重拍或确认拍全了
+  if (st === 'open' && !fix) return toast(t('report_open'), true);
+  if ((st === 'unknown' || st === 'retake') && !fix) return toast(t('need_retake'), true);
+  if (fix){ const x = bonFixData();
+    if (!x.store) return toast(t('bs_need_store'), true);
+    if (!x.date) return toast(t('bs_need_date'), true);
+    if (String(x.schluss).trim() === '' || isNaN(parseSigned(x.schluss)) || String(x.card).trim() === '' || isNaN(parseEur(x.card))) return toast(t('bs_need_num'), true); }
+  if (!boss && bonCoverBad(b)) return bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok });   // v126：没拍全：重拍或确认拍全了
   if (bonDateNeed()){ const q = $('#bon-date-q'); if (q) q.scrollIntoView({ block: 'center', behavior: 'smooth' }); return toast(t('bon_date_need'), true); }   // v112
   const card = d.card_cents || 0, schluss = d.schluss_cents || 0, w = parseEur(b.wallet);
   if (String(b.wallet).trim() === '') return toast(t('enter_wallet'), true);
@@ -7119,25 +7215,15 @@ async function submitBon(){
   const ek = bonPxActive() ? [] : ekLeft();   // v152：每个服务员下班前还没做完 → 问一句（不挡）
   if (ek.length && !confirm(t('ek_bon_q', { x: ek.map(toName).join('、') }))) return;
   const btn = document.querySelector('[data-act="bon-submit"]'); if (btn) btn.disabled = true;
-  if (bonPxActive()){   // v92：老板代交：记到这个员工名下，数过的同时点收，发消息告诉他
-    try {
-      const r = await rpc('admin_bon_entry_for', { ...tok(), p_read_id: b.read.read_id, p_staff_id: b.pxPick, p_card_cents: card, p_schluss_cents: schluss,
-        p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack, p_counted: b.pxCounted !== false });
-      if (r && r.message_id) callPush('message', { message_id: r.message_id });
-      toast(t(r && r.counted ? 'px_done_cnt' : 'px_done', { n: (r && r.name) || staffName(b.pxPick), x: eur(w) }));
-      const back = (state.entryCtx || {}).back;
-      state.bon = blankBon(); state.form = blankForm(); state.entryCtx = null;
-      if (back && back !== 'entry' && tabs().includes(back)) state.tab = back;
-      render(); window.scrollTo(0, 0);
-    } catch(e){ toast(/BON_OTHER_STAFF/.test(String(e && e.message)) ? t('px_other_staff', { n: staffName(b.pxPick) }) : errText(e), true); if (btn) btn.disabled = false; }
-    return;
-  }
+  if (boss && (bonPxActive() || fix || bonCoverBad(b))) return bonBossSave(false);   // v153：代交、识别没通过、没拍全：走老板确认（数据库 v113）
   try {
     await rpc('submit_bon_entry_x', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
       p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack, p_extras: extrasPayload() });
     state.done = { wallet: w, date: f.date, review: st === 'review', cash: d.cash_share };
     state.bon = blankBon(); state.form = blankForm(); await Promise.all([loadMyBon(), loadTasks()]); render(); window.scrollTo(0, 0);   // v71：也刷新收店任务
-  } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
+  } catch(e){
+    if (boss && BON_BOSS_RETRY.includes(String(e && e.message))) return bonBossSave(false);   // v153：老板自己的 Bon 被挡住：列出问题，确认后继续
+    toast(errText(e), true); if (btn) btn.disabled = false; }
 }
 async function saveBonEdit(){
   const f = state.form, w = parseEur(f.wallet);
@@ -7268,6 +7354,7 @@ function entryTags(e){
   }
   const tags = (e.is_late ? `<span class="tag late">${esc(t('late'))}</span>` : '')
     + (e.ai_date ? `<span class="tag late" title="${esc(t('tag_datefix_by', { n: e.date_fix_by || '?' }))}">${esc(t('tag_datefix', { d: dm(e.ai_date) }))}</span>` : '')   // v112
+    + (e.boss_skipped && e.boss_skipped.length ? `<span class="tag late" title="${esc(e.boss_skipped.map(x => t('bs_k_' + x.k)).join('、'))}">${esc(t('tag_boss_ok'))}</span>` : '')   // v153
     + (e.pending ? `<span class="tag pend">${esc(t('pending_tag'))}</span>` : '')
     + (e.manual_edit ? `<span class="tag bad">${esc(t('tag_manual'))}</span>` : '')
     + (e.shortage_cents ? `<span class="tag bad">${esc(t('tag_short', { n: eur(e.shortage_cents) }))}${e.shortage_bearer === 'store' ? ' · ' + esc(t('bearer_is_store')) : ''}</span>` : '')
@@ -8308,6 +8395,7 @@ function auditDetail(d){
     if (k === 'role') return t('role_' + v);
     if (k === 'slot') return slotLabel(v);
     if (k === 'method') return t('tag_counted_' + v);
+    if (k === 'skipped' && Array.isArray(v)) return v.map(x => t('bs_k_' + x)).join('、') || '–';   // v153
     if (Array.isArray(v)) return v.filter(x => typeof x !== 'object' && !isId(x)).join('、') || '–';
     if (typeof v === 'object') return '(' + Object.entries(v).filter(([kk, vv]) => !skip(kk, vv) && typeof vv !== 'object').map(([kk, vv]) => lbl(kk) + ' ' + val(kk, vv)).join(' · ') + ')';
     return String(v);
@@ -8439,7 +8527,7 @@ function requestCard(r){
 }
 function reviewCard(r){
   const id = r.entry_id;
-  const probs = (r.problems || []).map(p => { const [k, a, b] = String(p).split(':'); const x = t('prob_' + k, k === 'RID_CONFLICT' ? { a: a ? dayLabel(a) : '?', b: b || '?' } : null); return x === 'prob_' + k ? p : x; }).join('；');   // v131：编号冲突带日期、名字
+  const probs = (r.problems || []).map(p => { const [k, a, b] = String(p).split(':'); const x = t('prob_' + k, k === 'RID_CONFLICT' || k === 'RID_DUP' ? { a: a ? dayLabel(a) : '?', b: b || '?' } : null); return x === 'prob_' + k ? p : x; }).join('；');   // v131：编号冲突带日期、名字
   return `<div class="item">
     <div class="top"><div><strong>${esc(dayLabel(r.date))}</strong>${bonTime(r) ? ` <span class="muted num">${esc(bonTime(r))}</span>` : ''}${storeTag(r.store)} <span class="muted">${esc(r.server)}</span></div>
       <div class="amt num">${esc(t('lbl_wallet'))} ${eur(r.wallet_cents)}</div></div>
@@ -11214,6 +11302,7 @@ document.addEventListener('click', async ev => {
     case 'bon-retake-one': { const b = state.bon, dlg = $('#photoDlg'); if (dlg && dlg.open) dlg.close();
       b[el.dataset.k] = null; delete b.ori[el.dataset.k]; b.read = null; b.readErr = null; b.busy = false; b.coverOk = false; b.seq++; render();
       const inp = document.querySelector(`input[data-photo="${el.dataset.k}"]`); if (inp) inp.click(); break; }
+    case 'bon-boss-go': { const dlg = $('#photoDlg'); if (dlg && dlg.open) dlg.close(); bonBossSave(true); break; }   // v153：我看过了，继续提交
     case 'bon-cover-ok': { const b = state.bon; if (!b.read) break; el.disabled = true;
       try { await rpc('bon_cover_confirm', { ...tok(), p_read: b.read.read_id }); b.coverOk = true; const dlg = $('#photoDlg'); if (dlg && dlg.open) dlg.close(); toast(t('bg_confirmed')); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
@@ -11896,8 +11985,10 @@ document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.invlab){ invLabKeep(); const B = invS().lab; if (B){ B.sel[ev.target.dataset.invlab] = ev.target.checked; B.file = null; keepScroll(renderInvLabels); } return; }   // v93
   if (['inv-lab-start', 'inv-lab-border', 'inv-lab-copies', 'inv-lab-offy', 'inv-lab-offx'].includes(ev.target.id)){ invLabKeep(); const B = invS().lab; if (B){ B.file = null; keepScroll(renderInvLabels); } return; }
   if (ev.target.id === 'invf-cat'){ invFormKeep(); invCatChanged(ev.target.value); return; }
-  if (ev.target.id === 'px-pick'){ state.bon.pxPick = ev.target.value || null; state.bon.sched = null; refreshBonParts(); return; }   // v92：代交记给谁
+  if (ev.target.id === 'px-pick'){ state.bon.pxPick = ev.target.value || null; state.bon.sched = null; state.bon.pxBind = false; refreshBonParts(); return; }   // v92：代交记给谁
   if (ev.target.id === 'px-counted'){ state.bon.pxCounted = ev.target.checked; return; }
+  if (ev.target.id === 'px-bind'){ state.bon.pxBind = ev.target.checked; return; }   // v153
+  if (ev.target.id === 'bf-store' || ev.target.id === 'bf-date'){ bonFixWhere(ev.target.id === 'bf-store' ? 'store' : 'date', ev.target.value); return; }
   if (ev.target.dataset && ev.target.dataset.invf === 'damp'){ const F = invS().form; if (F){ F.damp = ev.target.checked; F.dampTouched = true; } return; }
   if (ev.target.id === 'inv-pa'){ invFormKeep(); const F = invS().form; if (!F) return; const a = (invS().pick || []).find(x => x.id === ev.target.value);
     Object.assign(F, { area: a ? a.id : null, store: a ? a.store : F.store, unit_id: null, place: null, lastUsed: false }); invRepaintPicker(); return; }
@@ -12028,6 +12119,7 @@ document.addEventListener('input', ev => {
   if (id === 'e-rid') state.form.ridNew = ev.target.value;   // v131
   if (id === 'e-ridreason') state.form.ridReason = ev.target.value;
   if (id === 'b-wallet'){ const b = state.bon; b.wallet = ev.target.value; b.ack = false; if (b.walletDone){ b.walletDone = false; refreshBonSum(); } }
+  if (id === 'bf-rid' || id === 'bf-schluss' || id === 'bf-card'){ const b = state.bon; bonFixData()[id.slice(3)] = ev.target.value; b.ack = false; if (b.walletDone){ b.walletDone = false; refreshBonSum(); } }   // v153
   if (id === 'e-wallet'){ state.form.wallet = ev.target.value; state.form.ack = false; refreshBonSum(); }
   if (id === 'f-card' || id === 'f-cash'){
     state.form[id === 'f-card' ? 'card' : 'cash'] = ev.target.value;
