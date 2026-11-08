@@ -956,6 +956,9 @@ zh: {
   bs_k_READ:'识别没通过', bs_k_COVER:'没拍全', bs_k_NO_RID:'没有报告编号', bs_k_OTHER_STAFF:'工号是别人的', bs_k_OWN_OTHER:'他绑了别的工号', bs_k_DATE_OLD:'超过 14 天', bs_k_DUP:'编号重复', tag_boss_ok:'老板手动确认',
   act_bon_entry_boss:'老板交 Bon', ad_skipped:'跳过的检查', ad_bind:'绑定工号',
   prob_NO_REPORT_ID:'没读到报告编号', prob_NO_USER_ID:'没读到工号', prob_NO_DATE:'没读到日期', prob_NO_STORE:'没读到门店', prob_REPORT_OPEN:'报告还开着（没有 Entstempeln）', prob_DATE_ODD:'日期不在最近 14 天里', prob_BLOCK_MISMATCH:'刷卡区块的数字对不上', prob_PAYMENTS_MISMATCH:'收款合计对不上', prob_NO_PAYMENTS:'没读到收款', prob_NOT_SHIFT_REPORT:'拍的不是收银机报告', prob_NOT_USER_REPORT:'拍的不是员工报告（Nutzerbericht）', prob_USER_ID_ODD:'工号读出来不像工号，可能读错了', prob_RID_DUP:'报告编号和 {a} {b} 的 Bon 一样，可能是同一张交了两次（老板确认后存的）：对照两张照片，真的重复就删掉一张，不是就改编号',
+  admin_bonfails:'Bon 报错', ba_intro:'最近 14 天员工交 Bon 时的报错。只用来查问题，不算进评价。提交被挡住的记录从 2026-11-08 上线后才有。', ba_open_h:'没交上（{n}）', ba_done_h:'后来交上了（{n}）', ba_none:'最近 14 天没有报错记录。', ba_tries:'试过 {n} 次', ba_read_bad:'{t} 识别没通过：{x}', ba_read_err:'{t} 识别没成功：{x}', ba_blocked:'{t} 提交被挡：{x}', ba_unknown:'原因没记下', ba_photo:'照片', ba_photo_none:'这一次的照片没有了。',
+  ba_c_BON_OTHER_STAFF:'工号和账号对不上', ba_c_DUPLICATE_BON:'这张 Bon 已经交过', ba_c_BON_DATE_ODD:'日期不在最近 14 天里', ba_c_FUTURE_DATE:'日期在将来', ba_c_BON_UNREADABLE:'名字、工号、日期或编号没读到', ba_c_STORE_UNKNOWN:'认不出门店或员工', ba_c_REPORT_OPEN:'报告还开着，或没读到编号', ba_c_NEED_RETAKE:'系统要求重拍', ba_c_COVER:'照片没拍全', ba_c_WEEK_LOCKED:'这一周已经锁定', ba_c_NO_RATE:'还没设分配比例', ba_c_READ_USED:'这组照片已经提交过', ba_c_TOO_MANY_READS:'今天的识别次数用完了', ba_c_BON_FAILED:'识别服务出错', ba_c_PHOTO_TOO_LARGE:'照片太大', ba_c_UPLOAD_FAILED:'照片上传失败', ba_c_NETWORK:'网络问题', ba_c_OTHER:'其他错误',
+  prob_USER_ID_MISMATCH:'读出的工号和他绑定的工号不一样',
   px_for:'记给谁', px_choose:'— 请选 —', px_me:'我自己', px_need_pick:'请先选这张 Bon 记给谁。',
   px_wallet_hint:'「钱包现金合计」填信封里的钱（你数出来的）。提交后记到 {n} 名下，标「老板代交」，并发消息告诉 {n}。',
   px_counted:'我已经数过信封，金额就是这个（同时算点收）', px_no_extras:'代交时不能多给 Runner / 吧台（这是员工自己决定的）。',
@@ -1617,6 +1620,9 @@ de: {
   bs_k_READ:'Prüfung nicht bestanden', bs_k_COVER:'nicht vollständig fotografiert', bs_k_NO_RID:'keine Berichtsnummer', bs_k_OTHER_STAFF:'Nummer gehört jemand anderem', bs_k_OWN_OTHER:'andere Nummer verknüpft', bs_k_DATE_OLD:'älter als 14 Tage', bs_k_DUP:'Nummer doppelt', tag_boss_ok:'Vom Chef bestätigt',
   act_bon_entry_boss:'Bon durch Chef abgegeben', ad_skipped:'Übersprungene Prüfungen', ad_bind:'Nummer verknüpft',
   prob_NO_REPORT_ID:'Berichtsnummer nicht gelesen', prob_NO_USER_ID:'Mitarbeiternummer nicht gelesen', prob_NO_DATE:'Datum nicht gelesen', prob_NO_STORE:'Filiale nicht gelesen', prob_REPORT_OPEN:'Bericht noch offen (nicht ausgestempelt)', prob_DATE_ODD:'Datum nicht in den letzten 14 Tagen', prob_BLOCK_MISMATCH:'Zahlen im Kartenblock passen nicht', prob_PAYMENTS_MISMATCH:'Summe der Zahlungen passt nicht', prob_NO_PAYMENTS:'Zahlungen nicht gelesen', prob_NOT_SHIFT_REPORT:'Kein Kassenbericht fotografiert', prob_NOT_USER_REPORT:'Kein Nutzerbericht fotografiert', prob_USER_ID_ODD:'Mitarbeiternummer sieht falsch aus, wahrscheinlich falsch gelesen', prob_RID_DUP:'Gleiche Berichtsnummer wie der Bon von {b} vom {a} – vielleicht wurde er zweimal abgegeben (vom Chef bestätigt): bitte beide Fotos vergleichen; wirklich doppelt → einen löschen, sonst die Nummer ändern',
+  admin_bonfails:'Bon-Fehler', ba_intro:'Fehler beim Bon-Abgeben der letzten 14 Tage. Nur zur Fehlersuche, zählt nicht für die Bewertung. Blockierte Abgaben werden erst seit dem Update vom 08.11.2026 gespeichert.', ba_open_h:'Nicht abgegeben ({n})', ba_done_h:'Später abgegeben ({n})', ba_none:'Keine Fehler in den letzten 14 Tagen.', ba_tries:'Versuche: {n}', ba_read_bad:'{t} Prüfung nicht bestanden: {x}', ba_read_err:'{t} Auslesen fehlgeschlagen: {x}', ba_blocked:'{t} Abgabe blockiert: {x}', ba_unknown:'Grund nicht gespeichert', ba_photo:'Fotos', ba_photo_none:'Die Fotos dieses Versuchs sind nicht mehr da.',
+  ba_c_BON_OTHER_STAFF:'Nummer passt nicht zum Konto', ba_c_DUPLICATE_BON:'Bon wurde schon abgegeben', ba_c_BON_DATE_ODD:'Datum nicht in den letzten 14 Tagen', ba_c_FUTURE_DATE:'Datum in der Zukunft', ba_c_BON_UNREADABLE:'Name, Nummer, Datum oder Berichtsnummer nicht gelesen', ba_c_STORE_UNKNOWN:'Filiale oder Mitarbeiter nicht erkannt', ba_c_REPORT_OPEN:'Bericht noch offen oder Nummer nicht gelesen', ba_c_NEED_RETAKE:'Neues Foto verlangt', ba_c_COVER:'Fotos nicht vollständig', ba_c_WEEK_LOCKED:'Woche ist abgeschlossen', ba_c_NO_RATE:'Noch keine Anteile festgelegt', ba_c_READ_USED:'Fotos wurden schon abgeschickt', ba_c_TOO_MANY_READS:'Heutige Auslese-Versuche aufgebraucht', ba_c_BON_FAILED:'Fehler im Auslese-Dienst', ba_c_PHOTO_TOO_LARGE:'Foto zu groß', ba_c_UPLOAD_FAILED:'Foto-Upload fehlgeschlagen', ba_c_NETWORK:'Netzwerkproblem', ba_c_OTHER:'Anderer Fehler',
+  prob_USER_ID_MISMATCH:'Gelesene Nummer weicht von der verknüpften Nummer ab',
   px_for:'Zuordnen zu', px_choose:'— bitte wählen —', px_me:'Ich selbst', px_need_pick:'Bitte zuerst wählen, wem der Bon zugeordnet wird.',
   px_wallet_hint:'„Bargeld im Portemonnaie“: das Geld im Umschlag eintragen (von dir gezählt). Der Eintrag wird {n} zugeordnet, als „vom Chef abgegeben“ markiert, und {n} bekommt eine Nachricht.',
   px_counted:'Umschlag gezählt, Betrag stimmt (gleich als gezählt markieren)', px_no_extras:'Beim Abgeben für andere gibt es kein Extra für Runner / Bar (das entscheidet der Mitarbeiter selbst).',
@@ -3598,7 +3604,7 @@ function rcCardHTML(r){
         + (env.length ? ' · ' + t('rk_env_total', { x: eur(envSum) }) : ''), !!(r.envelopes_todo || r.envelopes_diff))}${envRows}
       ${LOCK_ON ? line('rk_lock', rcLockText(r) + (done && r.lock && +r.lock.done_count < +r.lock.total ? t('rk_lock_done') : ''), !done && r.lock && +r.lock.done_count < +r.lock.total) : ''}
       <div class="li"><span class="muted">${esc(t('rk_bon'))}</span><span class="${miss.length ? 'negc' : ''}">${esc(t('rk_bon_line', { a: nb - miss.length, b: nb }))}${miss.length
-        ? ' · ' + esc(t('rk_bon_miss', { m: '' })) + miss.map(m => esc(m.name) + gmBtn(m.staff_id, m.name, 'bon:' + r.store + ':' + r.day, bonCtx(m), true) + pxBtn(m.staff_id, m.name, r.day, r.store)).join('、') : ''}</span></div>
+        ? ' · ' + esc(t('rk_bon_miss', { m: '' })) + miss.map(m => esc(m.name) + gmBtn(m.staff_id, m.name, 'bon:' + r.store + ':' + r.day, bonCtx(m), true) + pxBtn(m.staff_id, m.name, r.day, r.store) + baLink(m.staff_id, r.day)).join('、') : ''}</span></div>
       ${tks.length ? `<div class="li tkl"><span class="muted">${esc(t('rk_tasks'))}</span><span>${tks.map(x => `<div class="${tkRed(x) ? 'negc' : ''}">${esc(tkAdminLine(x))}</div>`).join('')}</span></div>` : ''}
     </div></div>`;
 }
@@ -3726,7 +3732,7 @@ async function viewReconHome(){
   let o, S, H;
   try {
     const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // v102：刚启动时已经要过，不再要一次
-    [H, , , state.areaStatus, state.disputesOpen] = await Promise.all([reconHome(state.reconDay), fresh ? null : loadTasks(), loadWeekTodo(),
+    [H, , , state.areaStatus, state.disputesOpen] = await Promise.all([Promise.all([reconHome(state.reconDay), loadBonAtt()]).then(x => x[0]), fresh ? null : loadTasks(), loadWeekTodo(),
       soft(rpc('area_status', tok()), null), soft(rpc('list_disputes', { ...tok(), p_status: 'open' }), []),
       soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null).then(x => { if (x) state.envPendAll = x; }),
       soft(rpc('recon_imports', { ...tok(), p_from: addDays(bizToday(), -8) }), null).then(x => { state.repImp = x; }),
@@ -6807,6 +6813,47 @@ function bonPx(){
   const d = bonDerived(); return { ctx: (state.entryCtx || {}).proxy || null, owner: (d && d.owner) || null, pick: state.bon.pxPick || null };
 }
 const bonPxActive = () => { const p = bonPx(); return !!(p && p.pick && p.pick !== state.me.id); };
+// v154：员工交 Bon 的报错（老板看）：state.bonAtt = 最近 14 天每人每天一条
+async function loadBonAtt(){
+  if (!state.me || !state.me.is_admin || state.viewAs) return;
+  try { state.bonAtt = await rpc('admin_bon_attempts', { ...tok(), p_from: addDays(bizToday(), -13) }) || []; } catch(e){ state.bonAtt = state.bonAtt || []; }
+}
+const baFind = (id, day) => (state.bonAtt || []).find(x => x.staff_id === id && x.day === day);
+function baLink(id, day){
+  const g = baFind(id, day); if (!g || !state.me.is_admin || state.viewAs) return '';
+  return `<button class="link small" type="button" data-act="ba-open" data-staff="${esc(id)}" data-day="${esc(day)}" style="white-space:nowrap;margin-left:4px">⚠ ${esc(t('ba_tries', { n: g.tries }))}</button>`;
+}
+function baCode(c){ const x = t('ba_c_' + c); if (x !== 'ba_c_' + c) return x; const y = t('err_' + c); return y !== 'err_' + c ? y : c; }
+function baProbs(ps){
+  const a = (ps || []).map(p => { const k = String(p).split(':')[0], x = t('prob_' + k); return x === 'prob_' + k ? k : x; });
+  return a.length ? a.join(state.lang === 'de' ? '; ' : '；') : t('ba_unknown');
+}
+function baLine(a){
+  const x = a.kind === 'read_bad' ? baProbs(a.problems) : baCode(a.code), k = a.kind === 'read_bad' ? 'ba_read_bad' : a.kind === 'read_error' ? 'ba_read_err' : 'ba_blocked';
+  return `<div class="small" style="margin-top:4px">${esc(t(k, { t: fmtTime(a.at), x }))}${a.read_id && a.has_photo ? ` <button class="link small" type="button" data-act="ba-photo" data-id="${esc(a.read_id)}">${esc(t('ba_photo'))}</button>` : ''}</div>`;
+}
+function baDialog(id, day){
+  const g = baFind(id, day), dlg = $('#photoDlg'); if (!g || !dlg) return;
+  dlg.innerHTML = `<h2 style="margin-top:0;padding-right:84px">${esc(g.name)}</h2><div class="muted small">${esc(dayLabel(g.day))}${g.store ? ' ' + storeTag(g.store) : ''} · ${esc(t('ba_tries', { n: g.tries }))}</div>
+    <div style="margin:10px 0 14px">${g.attempts.map(baLine).join('')}</div><button class="btn" data-act="photo-close">${esc(t('close'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+}
+async function baPhoto(id){
+  try {
+    const r = await callFn({ action: 'read_photo', read_id: id }), dlg = $('#photoDlg'), imgs = [r.photo_top, r.photo_bottom].filter(Boolean);
+    dlg.innerHTML = (imgs.length ? imgs.map(u => `<img src="${esc(u)}" alt="">`).join('') : `<div class="muted" style="margin-bottom:12px">${esc(t('ba_photo_none'))}</div>`) + `<button class="btn" data-act="photo-close">${esc(t('close'))}</button>`;
+    if (!dlg.open) dlg.showModal();
+  } catch(e){ toast(errText(e), true); }
+}
+async function baListHTML(){
+  await loadBonAtt();
+  const all = state.bonAtt || [], card = g => `<div class="item"><div class="top"><div><strong>${esc(g.name)}</strong> <span class="muted num">${esc(dayLabel(g.day))}</span>${g.store ? storeTag(g.store) : ''}${!g.submitted && g.store ? pxBtn(g.staff_id, g.name, g.day, g.store) : ''}</div><div class="meta">${esc(t('ba_tries', { n: g.tries }))}</div></div>${g.attempts.map(baLine).join('')}</div>`;
+  const open = all.filter(g => !g.submitted), done = all.filter(g => g.submitted);
+  return `<div class="muted small" style="margin-bottom:12px">${esc(t('ba_intro'))}</div>`
+    + (all.length ? '' : `<div class="empty">${esc(t('ba_none'))}</div>`)
+    + (open.length ? `<h3 style="margin-top:0">${esc(t('ba_open_h', { n: open.length }))}</h3><div class="list">${open.map(card).join('')}</div>` : '')
+    + (done.length ? `<details style="margin-top:16px"><summary style="cursor:pointer;font-weight:600">${esc(t('ba_done_h', { n: done.length }))}</summary><div class="list" style="margin-top:8px">${done.map(card).join('')}</div></details>` : '');
+}
 function pxBtn(id, name, date, store){
   if (!id || !state.me || !state.me.is_admin || state.viewAs || id === state.me.id) return '';
   return `<button class="link" type="button" data-act="px-open" data-staff="${esc(id)}" data-name="${esc(name)}" data-date="${esc(date)}" data-store="${esc(store)}" title="${esc(t('px_btn', { n: name }))}" aria-label="${esc(t('px_btn', { n: name }))}" style="white-space:nowrap;margin-left:2px">📷</button>`;
@@ -6856,6 +6903,13 @@ function bonBossFixHTML(){
     <div class="field" style="margin:8px 0 0"><label for="bf-date">${esc(t('bs_date'))}</label><input class="input" type="date" id="bf-date" value="${esc(x.date)}" max="${esc(today())}"></div>
     <div class="field" style="margin:8px 0 0"><label for="bf-rid">${esc(t('bs_rid'))}</label><input class="input num" id="bf-rid" autocomplete="off" autocapitalize="characters" placeholder="X1181788.480" value="${esc(x.rid)}"></div>
     ${num('bf-schluss', t('schluss'), x.schluss)}${num('bf-card', t('card_tip'), x.card)}</div>`;
+}
+// v154（老板 2026-11-08）：员工交 Bon 被挡住时记一条（数据库 v114），老板在「Bon 没交」旁边和「管理 → Bon 报错」看。记不上也不影响员工
+function bonFailNote(stage, code, readId){
+  if (!state.me || state.viewAs || state.me.is_admin) return;
+  const m = String(code || ''), c = /^[A-Z][A-Z0-9_]{1,39}$/.test(m) ? m : /fetch|network|Failed/i.test(m) ? 'NETWORK' : 'OTHER';
+  if (['AUTH_REQUIRED', 'MUST_CHANGE_PIN', 'VIEW_ONLY'].includes(c)) return;
+  rpc('bon_fail_note', { ...tok(), p_stage: stage, p_code: c, p_read_id: readId || null }).catch(() => {});
 }
 const BON_BOSS_RETRY = ['BON_OTHER_STAFF', 'DUPLICATE_BON', 'BON_DATE_ODD', 'BON_UNREADABLE', 'STORE_UNKNOWN'];   // 老板自己的 Bon 被这些挡住时，也可以确认后继续
 function bsWarnText(w, r){
@@ -7166,7 +7220,7 @@ async function readBon(){
   let r = null, err = null;
   const pxc = state.me.is_admin && !state.viewAs ? { proxy: true, staff_id: ((state.entryCtx || {}).proxy || {}).staff || null } : {};   // v92：老板代交
   try { r = await callFn({ action: 'read', top: b.top.split(',')[1], bottom: b.bottom.split(',')[1], ...pxc }); }
-  catch(e){ err = errText(e); }
+  catch(e){ err = errText(e); bonFailNote('read', e && e.message); }   // v154
   if (state.bon !== b || my !== b.seq) return;   // 照片已更换，丢弃旧结果
   // v139 备用办法：先看一眼没转（或没看出来），整张读不出来，识别说照片是歪的：按它说的转好，自动再读一次（只一次）
   const pr = r && r.result && r.result.photo_rotate, dr = (r && r.result && r.result.derived) || {};
@@ -7194,12 +7248,14 @@ async function submitBon(){
   const b = state.bon, f = state.form, st = bonState(), boss = bonBoss(), fix = bonNeedFix(), d = bonEff();   // v153：老板可以手动确认继续
   if (st === 'reading') return toast(t('wait_read'), true);
   if (st === 'error' || st === 'none') return toast(t('wait_read'), true);
-  if (st === 'open' && !fix) return toast(t('report_open'), true);
-  if ((st === 'unknown' || st === 'retake') && !fix) return toast(t('need_retake'), true);
+  const rid = b.read && b.read.read_id;   // v154：被挡住的记下来
+  if (st === 'open' && !fix){ bonFailNote('submit', 'REPORT_OPEN', rid); return toast(t('report_open'), true); }
+  if ((st === 'unknown' || st === 'retake') && !fix){ bonFailNote('submit', st === 'unknown' ? 'STORE_UNKNOWN' : 'NEED_RETAKE', rid); return toast(t('need_retake'), true); }
   if (fix){ const x = bonFixData();
     if (!x.store) return toast(t('bs_need_store'), true);
     if (!x.date) return toast(t('bs_need_date'), true);
     if (String(x.schluss).trim() === '' || isNaN(parseSigned(x.schluss)) || String(x.card).trim() === '' || isNaN(parseEur(x.card))) return toast(t('bs_need_num'), true); }
+  if (!boss && bonCoverBad(b)) bonFailNote('submit', 'COVER', rid);
   if (!boss && bonCoverBad(b)) return bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok });   // v126：没拍全：重拍或确认拍全了
   if (bonDateNeed()){ const q = $('#bon-date-q'); if (q) q.scrollIntoView({ block: 'center', behavior: 'smooth' }); return toast(t('bon_date_need'), true); }   // v112
   const card = d.card_cents || 0, schluss = d.schluss_cents || 0, w = parseEur(b.wallet);
@@ -7223,6 +7279,7 @@ async function submitBon(){
     state.bon = blankBon(); state.form = blankForm(); await Promise.all([loadMyBon(), loadTasks()]); render(); window.scrollTo(0, 0);   // v71：也刷新收店任务
   } catch(e){
     if (boss && BON_BOSS_RETRY.includes(String(e && e.message))) return bonBossSave(false);   // v153：老板自己的 Bon 被挡住：列出问题，确认后继续
+    bonFailNote('submit', e && e.message, rid);   // v154
     toast(errText(e), true); if (btn) btn.disabled = false; }
 }
 async function saveBonEdit(){
@@ -8224,7 +8281,7 @@ function staffOptions(withKitchen){
 }
 
 // ============ 管理（超级管理员）============
-const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['rates', 'report', 'deleted', 'audit', 'perf']);   // v96：速度记录   // v69：锁门检查点暂时隐藏
+const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['bonfails', 'rates', 'report', 'deleted', 'audit', 'perf']);   // v96：速度记录   // v69：锁门检查点暂时隐藏
 // v61：「管理」上的待办数字分到「审批」「反馈」两个按钮上（反馈 = 未处理的反馈，审批 = 其余：修改申请、待核对的 Bon、工号绑定、忘记 PIN）
 async function adminCounts(){
   let total = state.me.pending_requests || 0;
@@ -8297,6 +8354,8 @@ async function viewAdmin(){
       await viewSop();
     } else if (state.adminSub === 'onb'){   // v107：新人带教
       el().innerHTML = await onbAdminLoad();
+    } else if (state.adminSub === 'bonfails'){   // v154：员工交 Bon 的报错
+      el().innerHTML = await baListHTML();
     } else if (state.adminSub === 'perf'){   // v96：速度记录
       el().innerHTML = perfHTML();
     } else if (state.adminSub === 'expense'){   // v67：垫付
@@ -11586,6 +11645,8 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'photo-close': $('#photoDlg').close(); break;
+    case 'ba-open': baDialog(el.dataset.staff, el.dataset.day); break;   // v154
+    case 'ba-photo': baPhoto(el.dataset.id); break;
     case 'print-go': printGo(); break;
     case 'pdf-make': pdfMake(el); break;
     case 'pdf-share': pdfShare(); break;
