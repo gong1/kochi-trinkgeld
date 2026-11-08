@@ -75,6 +75,10 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font-weight:600}
 .chip.on{background:var(--celadon-deep);border-color:var(--celadon-deep);color:#fff}
 .chip.on.bar{background:#3E6B84;border-color:#3E6B84}
+.dchip{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px;font-size:13px;font-weight:600;color:var(--muted)}
+.dchip.ok{border-color:var(--celadon-deep);color:var(--celadon-deep)}
+.dchip.pend{background:#FFF4DC;border-color:#E0A93B;color:#8A5A00}
+.dchip.bad{border-color:var(--copper);color:var(--copper)}
 
 .btn{display:block;width:100%;height:52px;border:0;border-radius:var(--r-s);background:var(--ink);color:#fff;font-weight:700;font-size:17px}
 .btn:disabled{opacity:.4;cursor:not-allowed}
@@ -956,6 +960,22 @@ zh: {
   bs_k_READ:'识别没通过', bs_k_COVER:'没拍全', bs_k_NO_RID:'没有报告编号', bs_k_OTHER_STAFF:'工号是别人的', bs_k_OWN_OTHER:'他绑了别的工号', bs_k_DATE_OLD:'超过 14 天', bs_k_DUP:'编号重复', tag_boss_ok:'老板手动确认',
   act_bon_entry_boss:'老板交 Bon', ad_skipped:'跳过的检查', ad_bind:'绑定工号',
   prob_NO_REPORT_ID:'没读到报告编号', prob_NO_USER_ID:'没读到工号', prob_NO_DATE:'没读到日期', prob_NO_STORE:'没读到门店', prob_REPORT_OPEN:'报告还开着（没有 Entstempeln）', prob_DATE_ODD:'日期不在最近 14 天里', prob_BLOCK_MISMATCH:'刷卡区块的数字对不上', prob_PAYMENTS_MISMATCH:'收款合计对不上', prob_NO_PAYMENTS:'没读到收款', prob_NOT_SHIFT_REPORT:'拍的不是收银机报告', prob_NOT_USER_REPORT:'拍的不是员工报告（Nutzerbericht）', prob_USER_ID_ODD:'工号读出来不像工号，可能读错了', prob_RID_DUP:'报告编号和 {a} {b} 的 Bon 一样，可能是同一张交了两次（老板确认后存的）：对照两张照片，真的重复就删掉一张，不是就改编号',
+  admin_docs:'证件', doc_more:'🪪 我的证件', doc_title:'我的证件', doc_lead:'在餐饮行业工作，这两份证件必须交给店里。', doc_due:'请在 {t} 前交齐。', doc_late:'期限（{t}）已经过了，请尽快交。', doc_none:'现在不用交证件。',
+  doc_t_ifsg:'Gesundheitsamt 证书（§43 IfSG）', doc_t_haccp:'Hygieneschulung（HACCP 证书）', doc_s_ifsg:'§43', doc_s_haccp:'HACCP',
+  doc_st_missing:'还没交', doc_st_pending:'等老板确认', doc_st_ok:'已确认', doc_st_rejected:'退回了', doc_st_exempt:'不用交', doc_st_expired:'过期了',
+  doc_reason:'退回原因：{r}', doc_valid:'有效到 {t}', doc_sub_at:'{t} 交的', doc_how:'怎么办',
+  doc_what_ifsg:'卫生局关于传染病规定的培训和证明。第一次在餐饮上岗前必须有，上岗时证书不能超过 3 个月。证书长期有效，办过一次就行。',
+  doc_what_haccp:'食品卫生培训：清洁、温度控制、防止污染。每年要重做一次。',
+  doc_steps_ifsg:'准备：带摄像头的手机、平板或电脑；带照片的证件（身份证、护照、居留卡等）；邮箱；网上付款方式（PayPal、信用卡等，网站上写 30 €）。\n打开下面的网站，选一种你懂的语言，注册后预约线上课程，约 30 分钟。\n学完马上下载证书（PDF）。证书只能在网站账号里下载 3 个月。\n在下面上传。',
+  doc_old_ifsg:'以前办过：直接上传旧证书。旧证书找不到、又是 2024 年 10 月 1 日以前办的：到卫生局 Anmeldung（Kölner Straße 180）补办，6 €。周一到周四 8–16 点，周五 8–13 点。',
+  doc_steps_haccp:'打开下面的网站，选「Hygiene & HACCP in der Gastronomie」。\n免费，在线约 30–60 分钟，最后有一个测试。\n下载证书（PDF）。\n在下面上传。',
+  doc_link_ifsg:'🔗 打开卫生局课程网站', doc_link_haccp:'🔗 打开 Metro 培训网站', doc_add:'＋ 加照片或 PDF', doc_up:'正在上传…', doc_max:'最多 3 个文件', doc_note_ph:'说一句（选填）', doc_send:'交给老板', doc_busy:'正在提交…', doc_sent:'交好了，等老板确认', doc_need_file:'请先加证书的照片或 PDF', doc_again:'换一份重新交', doc_rm:'去掉',
+  doc_tk:'🪪 你还缺 {n} 份证件', doc_tk_rej:'有一份被退回了', doc_tk_sub:'请在 {t} 前办好、上传', doc_tk_late:'期限 {t} 已过，请尽快办好、上传', doc_tk_btn:'去看怎么办',
+  da_nostart:'还没开始收。先把 Lark 或纸质上已经交过的人标好（点名字下面的按钮，选「已交」），再点「开始提醒」。开始之前员工看不到，也不推送。', da_start:'开始提醒（{n} 人还缺）', da_start_q:'开始后，还缺证件的 {n} 个人会收到推送（9 点到 20 点之间；晚上点的话第二天早上推），「今天」上出现提醒，14 天期限从今天算。开始后不能撤回。确定吗？', da_started:'已经开始提醒了',
+  da_sum:'待确认 {a} 份 · 还缺 {b} 人 · 齐了 {c} 人', da_pending:'等你确认（{n}）', da_missing:'还缺（{n} 人）', da_done:'齐了（{n} 人）', da_due:'期限 {t}', da_late:'已过期限 {t}', da_nopush:'没开通知，要当面说', da_view:'看',
+  da_marked:'老板标的已交', da_by:'{n} · {t}', da_ai:'AI（只是提示）：', da_name_no:'⚠ 证件上的名字是「{n}」，看起来不是这个人。', da_kind_no:'⚠ AI 觉得这不是这份证件。', da_3m:'⚠ 证书日期比账号早 3 个月以上。如果这是这个人第一份餐饮工作，第一次上岗时证书不能超过 3 个月，要重办。',
+  da_date:'证书日期（选填）', da_date_h:'填了日期，一年后到期要重做。', da_ok:'✓ 确认', da_reject:'退回', da_mark:'已交（Lark / 纸质）', da_exempt:'不用交', da_reset:'改回「还没交」', da_reset_q:'改回「还没交」后，这个人又会收到提醒。确定吗？',
+  da_r_ph:'退回原因（员工会看到）', da_r_send:'退回给员工', da_x_ph:'为什么不用交（必填）', da_x_send:'保存', da_m_send:'保存为已交', da_m_note:'备注（选填，例如「Lark 上交的」）', da_files_opt:'有文件就传上来（选填）', da_saved:'保存了',
   admin_bonfails:'Bon 报错', ba_intro:'最近 14 天员工交 Bon 时的报错。只用来查问题，不算进评价。提交被挡住的记录从 2026-11-08 上线后才有。', ba_open_h:'没交上（{n}）', ba_done_h:'后来交上了（{n}）', ba_none:'最近 14 天没有报错记录。', ba_tries:'试过 {n} 次', ba_read_bad:'{t} 识别没通过：{x}', ba_read_err:'{t} 识别没成功：{x}', ba_blocked:'{t} 提交被挡：{x}', ba_unknown:'原因没记下', ba_photo:'照片', ba_photo_none:'这一次的照片没有了。',
   ba_c_BON_OTHER_STAFF:'工号和账号对不上', ba_c_DUPLICATE_BON:'这张 Bon 已经交过', ba_c_BON_DATE_ODD:'日期不在最近 14 天里', ba_c_FUTURE_DATE:'日期在将来', ba_c_BON_UNREADABLE:'名字、工号、日期或编号没读到', ba_c_STORE_UNKNOWN:'认不出门店或员工', ba_c_REPORT_OPEN:'报告还开着，或没读到编号', ba_c_NEED_RETAKE:'系统要求重拍', ba_c_COVER:'照片没拍全', ba_c_WEEK_LOCKED:'这一周已经锁定', ba_c_NO_RATE:'还没设分配比例', ba_c_READ_USED:'这组照片已经提交过', ba_c_TOO_MANY_READS:'今天的识别次数用完了', ba_c_BON_FAILED:'识别服务出错', ba_c_PHOTO_TOO_LARGE:'照片太大', ba_c_UPLOAD_FAILED:'照片上传失败', ba_c_NETWORK:'网络问题', ba_c_OTHER:'其他错误',
   prob_USER_ID_MISMATCH:'读出的工号和他绑定的工号不一样',
@@ -1620,6 +1640,22 @@ de: {
   bs_k_READ:'Prüfung nicht bestanden', bs_k_COVER:'nicht vollständig fotografiert', bs_k_NO_RID:'keine Berichtsnummer', bs_k_OTHER_STAFF:'Nummer gehört jemand anderem', bs_k_OWN_OTHER:'andere Nummer verknüpft', bs_k_DATE_OLD:'älter als 14 Tage', bs_k_DUP:'Nummer doppelt', tag_boss_ok:'Vom Chef bestätigt',
   act_bon_entry_boss:'Bon durch Chef abgegeben', ad_skipped:'Übersprungene Prüfungen', ad_bind:'Nummer verknüpft',
   prob_NO_REPORT_ID:'Berichtsnummer nicht gelesen', prob_NO_USER_ID:'Mitarbeiternummer nicht gelesen', prob_NO_DATE:'Datum nicht gelesen', prob_NO_STORE:'Filiale nicht gelesen', prob_REPORT_OPEN:'Bericht noch offen (nicht ausgestempelt)', prob_DATE_ODD:'Datum nicht in den letzten 14 Tagen', prob_BLOCK_MISMATCH:'Zahlen im Kartenblock passen nicht', prob_PAYMENTS_MISMATCH:'Summe der Zahlungen passt nicht', prob_NO_PAYMENTS:'Zahlungen nicht gelesen', prob_NOT_SHIFT_REPORT:'Kein Kassenbericht fotografiert', prob_NOT_USER_REPORT:'Kein Nutzerbericht fotografiert', prob_USER_ID_ODD:'Mitarbeiternummer sieht falsch aus, wahrscheinlich falsch gelesen', prob_RID_DUP:'Gleiche Berichtsnummer wie der Bon von {b} vom {a} – vielleicht wurde er zweimal abgegeben (vom Chef bestätigt): bitte beide Fotos vergleichen; wirklich doppelt → einen löschen, sonst die Nummer ändern',
+  admin_docs:'Nachweise', doc_more:'🪪 Meine Nachweise', doc_title:'Meine Nachweise', doc_lead:'Wer in der Gastronomie arbeitet, muss diese zwei Nachweise im Restaurant abgeben.', doc_due:'Bitte bis {t} abgeben.', doc_late:'Die Frist ({t}) ist vorbei. Bitte so schnell wie möglich abgeben.', doc_none:'Du musst gerade keine Nachweise abgeben.',
+  doc_t_ifsg:'Gesundheitsamt-Bescheinigung (§43 IfSG)', doc_t_haccp:'Hygieneschulung (HACCP-Zertifikat)', doc_s_ifsg:'§43', doc_s_haccp:'HACCP',
+  doc_st_missing:'fehlt', doc_st_pending:'wartet auf Bestätigung', doc_st_ok:'bestätigt', doc_st_rejected:'zurückgegeben', doc_st_exempt:'nicht nötig', doc_st_expired:'abgelaufen',
+  doc_reason:'Grund: {r}', doc_valid:'gültig bis {t}', doc_sub_at:'abgegeben {t}', doc_how:'So geht es',
+  doc_what_ifsg:'Belehrung und Bescheinigung des Gesundheitsamts zum Infektionsschutz. Sie muss vor dem ersten Arbeitstag in der Gastronomie vorliegen und darf dann höchstens 3 Monate alt sein. Sie gilt unbefristet, einmal reicht.',
+  doc_what_haccp:'Schulung zur Lebensmittelhygiene: Reinigung, Temperaturkontrolle, Schutz vor Verunreinigung. Muss jedes Jahr wiederholt werden.',
+  doc_steps_ifsg:'Bereitlegen: Handy, Tablet oder Computer mit Kamera; Ausweis mit Foto (Personalausweis, Reisepass, Aufenthaltstitel o. Ä.); E-Mail-Adresse; Online-Zahlungsmittel (PayPal, Kreditkarte o. Ä., laut Website 30 €).\nUnten die Website öffnen, eine Sprache wählen, die du verstehst, registrieren und den Online-Kurs buchen. Dauer ca. 30 Minuten.\nDie Bescheinigung (PDF) sofort herunterladen. Sie steht nur 3 Monate in deinem Konto bereit.\nUnten hochladen.',
+  doc_old_ifsg:'Schon einmal gemacht: Einfach die alte Bescheinigung hochladen. Verloren und vor dem 1. Oktober 2024 gemacht: Zweitausfertigung für 6 € in der Anmeldung des Gesundheitsamts, Kölner Straße 180. Mo–Do 8–16 Uhr, Fr 8–13 Uhr.',
+  doc_steps_haccp:'Unten die Website öffnen und „Hygiene & HACCP in der Gastronomie“ wählen.\nKostenlos, online ca. 30–60 Minuten, am Ende ein Test.\nDas Zertifikat (PDF) herunterladen.\nUnten hochladen.',
+  doc_link_ifsg:'🔗 Kurs des Gesundheitsamts öffnen', doc_link_haccp:'🔗 METRO-Training öffnen', doc_add:'＋ Foto oder PDF hinzufügen', doc_up:'Wird hochgeladen …', doc_max:'Höchstens 3 Dateien', doc_note_ph:'Kurze Notiz (optional)', doc_send:'An den Chef senden', doc_busy:'Wird gesendet …', doc_sent:'Abgegeben, wartet auf Bestätigung', doc_need_file:'Bitte zuerst ein Foto oder PDF des Nachweises hinzufügen', doc_again:'Neu abgeben', doc_rm:'entfernen',
+  doc_tk:'🪪 Fehlende Nachweise: {n}', doc_tk_rej:'Einer wurde zurückgegeben', doc_tk_sub:'Bitte bis {t} erledigen und hochladen', doc_tk_late:'Frist {t} ist vorbei, bitte schnell erledigen und hochladen', doc_tk_btn:'Ansehen',
+  da_nostart:'Noch nicht gestartet. Zuerst alle markieren, die schon über Lark oder auf Papier abgegeben haben (Button unter dem Namen, dann „Abgegeben“). Danach „Erinnerungen starten“. Vorher sehen die Mitarbeitenden nichts und bekommen keine Push-Nachricht.', da_start:'Erinnerungen starten ({n} fehlen)', da_start_q:'Danach bekommen {n} Personen eine Push-Nachricht (zwischen 9 und 20 Uhr, abends erst am nächsten Morgen), unter „Heute“ erscheint eine Erinnerung, und die Frist von 14 Tagen beginnt heute. Das lässt sich nicht zurücknehmen. Sicher?', da_started:'Erinnerungen laufen',
+  da_sum:'{a} zu bestätigen · {b} Personen fehlen · {c} vollständig', da_pending:'Zu bestätigen ({n})', da_missing:'Fehlt noch ({n} Personen)', da_done:'Vollständig ({n} Personen)', da_due:'Frist {t}', da_late:'Frist {t} vorbei', da_nopush:'Keine Push-Nachrichten, bitte persönlich sagen', da_view:'Ansehen',
+  da_marked:'Vom Chef als abgegeben markiert', da_by:'{n} · {t}', da_ai:'KI (nur ein Hinweis): ', da_name_no:'⚠ Auf dem Dokument steht „{n}“, das scheint eine andere Person zu sein.', da_kind_no:'⚠ Die KI hält das nicht für diesen Nachweis.', da_3m:'⚠ Die Bescheinigung ist mehr als 3 Monate älter als das Konto. Falls dies die erste Stelle in der Gastronomie ist: Sie darf beim ersten Arbeitstag höchstens 3 Monate alt sein und muss neu gemacht werden.',
+  da_date:'Datum des Nachweises (optional)', da_date_h:'Mit Datum läuft er nach einem Jahr ab und muss wiederholt werden.', da_ok:'✓ Bestätigen', da_reject:'Zurückgeben', da_mark:'Abgegeben (Lark / Papier)', da_exempt:'Nicht nötig', da_reset:'Zurück auf „fehlt“', da_reset_q:'Nach „fehlt“ bekommt diese Person wieder Erinnerungen. Sicher?',
+  da_r_ph:'Grund (sieht die Person)', da_r_send:'Zurückgeben', da_x_ph:'Warum nicht nötig (Pflicht)', da_x_send:'Speichern', da_m_send:'Als abgegeben speichern', da_m_note:'Notiz (optional, z. B. „über Lark“)', da_files_opt:'Datei hochladen, falls vorhanden (optional)', da_saved:'Gespeichert',
   admin_bonfails:'Bon-Fehler', ba_intro:'Fehler beim Bon-Abgeben der letzten 14 Tage. Nur zur Fehlersuche, zählt nicht für die Bewertung. Blockierte Abgaben werden erst seit dem Update vom 08.11.2026 gespeichert.', ba_open_h:'Nicht abgegeben ({n})', ba_done_h:'Später abgegeben ({n})', ba_none:'Keine Fehler in den letzten 14 Tagen.', ba_tries:'Versuche: {n}', ba_read_bad:'{t} Prüfung nicht bestanden: {x}', ba_read_err:'{t} Auslesen fehlgeschlagen: {x}', ba_blocked:'{t} Abgabe blockiert: {x}', ba_unknown:'Grund nicht gespeichert', ba_photo:'Fotos', ba_photo_none:'Die Fotos dieses Versuchs sind nicht mehr da.',
   ba_c_BON_OTHER_STAFF:'Nummer passt nicht zum Konto', ba_c_DUPLICATE_BON:'Bon wurde schon abgegeben', ba_c_BON_DATE_ODD:'Datum nicht in den letzten 14 Tagen', ba_c_FUTURE_DATE:'Datum in der Zukunft', ba_c_BON_UNREADABLE:'Name, Nummer, Datum oder Berichtsnummer nicht gelesen', ba_c_STORE_UNKNOWN:'Filiale oder Mitarbeiter nicht erkannt', ba_c_REPORT_OPEN:'Bericht noch offen oder Nummer nicht gelesen', ba_c_NEED_RETAKE:'Neues Foto verlangt', ba_c_COVER:'Fotos nicht vollständig', ba_c_WEEK_LOCKED:'Woche ist abgeschlossen', ba_c_NO_RATE:'Noch keine Anteile festgelegt', ba_c_READ_USED:'Fotos wurden schon abgeschickt', ba_c_TOO_MANY_READS:'Heutige Auslese-Versuche aufgebraucht', ba_c_BON_FAILED:'Fehler im Auslese-Dienst', ba_c_PHOTO_TOO_LARGE:'Foto zu groß', ba_c_UPLOAD_FAILED:'Foto-Upload fehlgeschlagen', ba_c_NETWORK:'Netzwerkproblem', ba_c_OTHER:'Anderer Fehler',
   prob_USER_ID_MISMATCH:'Gelesene Nummer weicht von der verknüpften Nummer ab',
@@ -2126,6 +2162,14 @@ const ERR_ZH = {
   TASK_TIMES_BAD: '「几次」不对：只有每周 / 每月 / 每季度 / 每年的任务能选几次（每周最多 7 次）。每天要做两次的，请建两个任务（例如一个到店后、一个收店时）。',
   TASK_FILE_BAD: '文件不对（附照片最多 4 张，交回结果最多 3 个）。请重新选文件再试。',
   TASK_FILE_TYPE: '只能传照片或 PDF。别的格式请先截图再传。',
+  DOC_FILE_BAD: '文件不对。请重新选择证书的照片或 PDF（最多 3 个）。',
+  DOC_NOT_STARTED: '老板还没开始收证件，现在不用交。',
+  DOC_ALREADY_OK: '这份证件已经确认了，不用再交。有变化请找老板。',
+  DOC_TOO_MANY: '今天交得太多了。请明天再试，着急就找老板。',
+  DOC_STATE: '这份证件的状态刚刚变了。请关掉窗口、重新打开再看。',
+  DOC_REASON: '请写原因，员工才知道下一步怎么办。',
+  DOC_DATE_BAD: '证书日期不对：不能是将来的日子，也不能早于 1990 年。请对着证书改一下。',
+  DOC_ALREADY_STARTED: '已经开始提醒了，不用再点。',
   TASK_FILE_TOO_BIG: '文件太大：PDF 最大 10 MB。请换小一点的文件，或者截图后再传。',
   TASK_UPLOAD_FAILED: '上传没成功，可能是网络不好。请稍后再试；还不行就点「反馈」告诉老板。',
   TASK_SOP_GONE: '这条 SOP 已撤下或还没确认，不能连。请选别的 SOP，或者不连。',
@@ -2371,6 +2415,14 @@ const ERR_DE = {
   TASK_TIMES_BAD: '„Wie oft“ passt nicht: nur wöchentliche / monatliche / vierteljährliche / jährliche Aufgaben können mehrmals sein (pro Woche höchstens 7×). Für zweimal täglich bitte zwei Aufgaben anlegen (z. B. eine nach Ankunft, eine zum Schluss).',
   TASK_FILE_BAD: 'Dateien ungültig (höchstens 4 Fotos zur Aufgabe, höchstens 3 Ergebnis-Dateien). Bitte neu auswählen.',
   TASK_FILE_TYPE: 'Nur Fotos oder PDF. Andere Formate bitte als Screenshot hochladen.',
+  DOC_FILE_BAD: 'Die Datei passt nicht. Bitte ein Foto oder PDF des Nachweises neu auswählen (höchstens 3).',
+  DOC_NOT_STARTED: 'Die Nachweise werden noch nicht eingesammelt. Du musst gerade nichts abgeben.',
+  DOC_ALREADY_OK: 'Dieser Nachweis ist schon bestätigt. Bei Änderungen bitte an den Chef wenden.',
+  DOC_TOO_MANY: 'Heute wurde zu oft abgegeben. Bitte morgen noch einmal versuchen oder an den Chef wenden.',
+  DOC_STATE: 'Der Status hat sich gerade geändert. Bitte das Fenster schließen und neu öffnen.',
+  DOC_REASON: 'Bitte einen Grund schreiben, damit die Person weiß, was zu tun ist.',
+  DOC_DATE_BAD: 'Das Datum stimmt nicht: Es darf nicht in der Zukunft und nicht vor 1990 liegen. Bitte mit dem Nachweis vergleichen.',
+  DOC_ALREADY_STARTED: 'Die Erinnerungen laufen schon.',
   TASK_FILE_TOO_BIG: 'Datei zu groß: PDF höchstens 10 MB. Bitte eine kleinere Datei oder einen Screenshot nehmen.',
   TASK_UPLOAD_FAILED: 'Hochladen hat nicht geklappt, vielleicht schlechtes Netz. Bitte später erneut versuchen; sonst über „Feedback“ melden.',
   TASK_SOP_GONE: 'Diese SOP ist zurückgezogen oder noch nicht bestätigt. Bitte eine andere SOP wählen oder keine.',
@@ -2643,17 +2695,19 @@ function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 async function loadTasks(){
   if (!state.me || state.me.is_kitchen){ state.tasks = null; state.closing = null; return; }
   const NO = Symbol();
-  const [tk, cl, lb, ld, ob, oc, nm, cat, ms, au] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
+  const [tk, cl, lb, ld, ob, oc, nm, cat, ms, au, dc] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
     state.me.is_admin ? null : soft(rpc('my_library', tok()), null),   // v79：资料（要确认的放进「今天」）
     (state.me.leads || []).length && !state.me.is_admin ? soft(rpc('my_led_tasks', tok()), null) : null,   // v95：我负责的任务
     state.me.is_admin ? null : soft(rpc('onb_mine', tok()), null),   // v107：新人带教（新同事的自评、带教人的评价）
     state.me.is_admin ? null : soft(rpc('onb_check_mine', tok()), null),   // v124：我的带教清单
     nmLeadOnly() ? soft(rpc('task_named_list', tok()), null) : null,   // v118：负责人交代的事
     nmLeadOnly() ? soft(rpc('task_catalog', tok()), null) : null,   // v119：负责人区域每天的任务、能建什么
-    soft(rpc('my_task_misses', tok()), null), soft(rpc('my_audits', tok()), null)]);   // v149：漏做 / 不实确认的红卡、派给我的抽查
+    soft(rpc('my_task_misses', tok()), null), soft(rpc('my_audits', tok()), null),
+    state.me.is_admin ? null : soft(rpc('my_docs', tok()), null)]);   // v156：证件   // v149：漏做 / 不实确认的红卡、派给我的抽查
   if (tk === NO) state.tasks = null; else { state.tasks = tk; state.tasksAt = Date.now(); }
   state.closing = cl || []; state.lib = lb; state.led = ld; state.onb = ob || []; state.onbChkMine = oc;
   state.misses = ms || []; state.audits = au || [];   // v149
+  state.myDocs = dc;   // v156
   if (nmLeadOnly()){ state.named = nm; state.tfCat = cat; }
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
@@ -2689,6 +2743,8 @@ function viewTasks(){
   (state.annPending || []).forEach(a => out.push({ kind: 'ann', scope: 'personal', day: bt, status: annOverdue(a) ? 'overdue' : 'now', data: a }));
   // v107：新人带教（今天学得怎么样 / 评价新同事）
   (state.onb || []).forEach(x => out.push({ kind: 'onb', scope: 'personal', day: x.day, due: x.closes, status: x.status, data: x }));
+  // v156：还缺的证件（老板点了「开始提醒」以后）
+  if (state.myDocs && state.myDocs.started && state.myDocs.docs.some(docTodo)) out.push({ kind: 'doc', scope: 'personal', day: bt, status: state.myDocs.late ? 'overdue' : 'now', data: state.myDocs });
   return out;
 }
 function taskCount(st){ const ts = viewTasks(); return ts.filter(x => st ? x.status === st : ['overdue', 'now'].includes(x.status)).length; }
@@ -2700,6 +2756,11 @@ function taskCardHTML(k){
   const d = k.data || {}, card = (cls, title, sub, btns) => `<div class="task ${cls}"><div class="task-t">${title}</div>${sub ? `<div class="task-s">${esc(sub)}</div>` : ''}${btns ? `<div class="task-b">${btns}</div>` : ''}</div>`;
   const cls = k.status === 'overdue' ? 'bad' : k.status === 'later' ? 'later' : '';
   if (k.kind === 'onb') return onbCardHTML(k);   // v107
+  if (k.kind === 'doc'){   // v156
+    const L = d.docs.filter(docTodo);
+    return card(cls, esc(t('doc_tk', { n: L.length })), (L.some(x => x.status === 'rejected') ? t('doc_tk_rej') + ' · ' : '') + t(d.late ? 'doc_tk_late' : 'doc_tk_sub', { t: dayLabel(d.deadline) }),
+      `<button class="btn" data-act="more-docs">${esc(t('doc_tk_btn'))}</button>`);
+  }
   if (k.kind === 'ann')   // v115
     return card(cls, esc(t(d.kind === 'info' ? 'an_tk_info' : 'an_tk', { n: annT(d, 'title') })), d.kind === 'info' ? t('an_tk_info_sub') : t('an_tk_sub', { t: fmtDateTime(d.due_at) }),
       `<button class="btn" data-act="${state.viewAs ? 'more-ann' : 'an-open'}" data-id="${d.id}">${esc(t('an_tk_btn'))}</button>`);
@@ -4741,7 +4802,137 @@ async function lockUpload(input){
     render();
   } catch(e){ toast(errText(e), true); render(); }
 }
+// ============ 员工证件（v156，数据库 v115 / 文件服务 tasks v29 / 推送 push v15，老板 2026-11-08）============
+const DOC_TYPES = ['ifsg', 'haccp'], DOC_URLS = {};
+const DOC_LINKS = { ifsg: 'https://duesseldorf.mindlane.de/veranstaltungen?my_target_group=false&page=1&ordering=begin', haccp: 'https://www.metro.de/wissen/etraining/haccp' };
+const DOC_REASONS = [['看不清，请重新拍清楚', 'unscharf, bitte neu und deutlich aufnehmen'], ['不是这份证件', 'das ist nicht der richtige Nachweis'], ['上面的名字不对', 'der Name stimmt nicht'], ['没拍全', 'nicht vollständig aufgenommen']];
+function docTodo(x){ return ['missing', 'rejected', 'expired'].includes(x.status); }
+function docPendingN(D){ return ((D || {}).rows || []).reduce((a, r) => a + DOC_TYPES.filter(k => r[k].status === 'pending').length, 0); }
+const docF = k => { const M = state.docForm = state.docForm || {}; return M[k] = M[k] || { files: [], note: '' }; };
+const docFileOut = f => ({ path: f.path, kind: f.kind, name: f.name, bytes: f.bytes });
+async function docLoadFiles(){
+  const now = Date.now(), fresh = p => DOC_URLS[p] && now - DOC_URLS[p].at < 50 * 60e3;
+  const need = [...new Set([...document.querySelectorAll('[data-df]')].map(e => e.dataset.df).filter(p => !fresh(p)))];
+  if (need.length) try { const r = await callTasks({ action: 'doc_file_urls', paths: need.slice(0, 30) }); Object.entries(r.urls || {}).forEach(([p, u]) => { if (u) DOC_URLS[p] = { url: u, at: now }; }); } catch(e){}
+  document.querySelectorAll('[data-df]').forEach(e => { const u = DOC_URLS[e.dataset.df]; if (!u) return;
+    if (e.tagName === 'IMG'){ if (e.getAttribute('src') !== u.url) e.src = u.url; } else if (e.getAttribute('href') !== u.url){ e.href = u.url; e.classList.remove('off'); } });
+}
+function docFilesHTML(files){
+  return (files || []).length ? `<div class="sop-ph">${files.map(f => f.kind === 'pdf'
+    ? `<div><a class="link off" data-df="${esc(f.path)}" target="_blank" rel="noopener">📄 ${esc(f.name || 'PDF')}</a></div>`
+    : `<div><a class="off" data-df="${esc(f.path)}" target="_blank" rel="noopener"><img data-df="${esc(f.path)}" alt=""></a></div>`).join('')}</div>` : '';
+}
+// 选好的、还没交的文件 + 加文件的按钮。key = 证件种类，或 @（老板的窗口）
+function docPickHTML(key, F){
+  return `${(F.files || []).map((f, i) => `<div class="small" style="margin:6px 0">${f.preview ? `<img src="${esc(f.preview)}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:6px;vertical-align:middle;margin-right:8px">` : '📄 '}${esc(f.name || '')} <button type="button" class="link danger" data-act="doc-rm" data-k="${key}" data-i="${i}">${esc(t('doc_rm'))}</button></div>`).join('')}
+    ${(F.files || []).length < 3 ? `<label class="btn ghost" style="margin:8px 0;display:flex;align-items:center;justify-content:center"${F.up ? ' disabled' : ''}>${esc(F.up ? t('doc_up') : t('doc_add'))}<input type="file" accept="image/*,application/pdf" multiple hidden data-docfile="${key}"${F.up ? ' disabled' : ''}></label>` : ''}`;
+}
+async function docChosen(key, files){
+  const inDlg = key === '@', F = inDlg ? state.docDlg : docF(key); if (!F) return; F.files = F.files || [];
+  const redraw = () => { if (inDlg){ if (state.docDlg) docDlgDraw(); } else if (state.docPage) viewDocs(); };
+  const todo = [...files].slice(0, 3 - F.files.length); if (!todo.length) return toast(t('doc_max'), true);
+  if (todo.some(f => f.type === 'application/pdf' && f.size > 10 * 1024 * 1024)) return toast(errText(new Error('TASK_FILE_TOO_BIG')), true);
+  if (todo.some(f => f.type !== 'application/pdf' && !/^image\//.test(f.type))) return toast(errText(new Error('TASK_FILE_TYPE')), true);
+  if (inDlg) docDlgKeep();
+  F.up = true; redraw();
+  try {
+    const prep = await Promise.all(todo.map(async f => { if (f.type === 'application/pdf') return { kind: 'pdf', blob: f, type: 'application/pdf', name: f.name };
+      const u = await compressImage(f, 2000, 0.85); return { kind: 'photo', blob: await (await fetch(u)).blob(), type: 'image/jpeg', name: f.name, preview: u }; }));
+    const r = await callTasks({ action: 'doc_upload_urls', files: prep.map(x => ({ type: x.type, size: x.blob.size })) });
+    for (let i = 0; i < (r.files || []).length; i++){ const u = r.files[i], x = prep[i];
+      const { error } = await sb.storage.from('staff_docs').uploadToSignedUrl(u.path, u.token, x.blob, { contentType: x.type });
+      if (error) throw new Error('TASK_UPLOAD_FAILED');
+      F.files.push({ path: u.path, kind: x.kind, name: (x.name || '').slice(0, 120), bytes: x.blob.size, preview: x.preview }); }
+  } catch(err){ toast(errText(err), true); }
+  F.up = false; redraw();
+}
+// 员工：更多 → 我的证件（「今天」的卡片也进这里）
+function docGuideHTML(k, open){
+  const old = k === 'ifsg' ? `<div class="small muted" style="margin-top:8px">${esc(t('doc_old_ifsg'))}</div>` : '';
+  return `<details ${open ? 'open' : ''} style="margin:8px 0"><summary style="font-weight:600;cursor:pointer">${esc(t('doc_how'))}</summary>
+    <div class="small" style="margin:8px 0">${esc(t('doc_what_' + k))}</div>
+    <ol class="small" style="margin:8px 0;padding-left:20px">${t('doc_steps_' + k).split('\n').map(x => `<li style="margin-bottom:4px">${esc(x)}</li>`).join('')}</ol>
+    <button class="btn ghost" data-act="tk-link" data-url="${esc(DOC_LINKS[k])}">${esc(t('doc_link_' + k))}</button>${old}</details>`;
+}
+function docCardHTML(x){
+  const k = x.type, F = docF(k), todo = docTodo(x), form = todo || F.open, busy = F.busy || F.up, cls = { ok: 'm', exempt: 'off', pending: 'pend', rejected: 'bad', expired: 'bad' }[x.status] || 'bad';
+  return `<div class="list"><div class="item"><div class="top"><div><strong>${esc(t('doc_t_' + k))}</strong><span class="tag ${cls}">${esc(t('doc_st_' + x.status))}</span></div></div>
+    ${x.status === 'rejected' ? `<div class="small negc" style="margin-top:6px">${esc(t('doc_reason', { r: x.reason || '' }))}</div>` : ''}
+    ${x.valid_until ? `<div class="meta num">${esc(t('doc_valid', { t: dayLabel(x.valid_until) }))}</div>` : ''}
+    ${x.status === 'pending' && x.submitted_at ? `<div class="meta num">${esc(t('doc_sub_at', { t: fmtDateTime(x.submitted_at) }))}</div>` : ''}
+    ${['pending', 'ok'].includes(x.status) ? docFilesHTML(x.files) : ''}
+    ${x.status === 'ok' || x.status === 'exempt' ? '' : docGuideHTML(k, todo)}
+    ${form ? `${docPickHTML(k, F)}<input class="input" id="docNote-${k}" maxlength="500" placeholder="${esc(t('doc_note_ph'))}" value="${esc(F.note || '')}" style="margin:6px 0">
+      <button class="btn" data-act="doc-send" data-type="${k}" ${busy ? 'disabled' : ''}>${esc(t(F.busy ? 'doc_busy' : 'doc_send'))}</button>`
+      : x.status === 'pending' ? `<button class="link" data-act="doc-again" data-type="${k}">${esc(t('doc_again'))}</button>` : ''}
+  </div></div>`;
+}
+function docKeep(){ DOC_TYPES.forEach(k => { const e = $('#docNote-' + k); if (e) docF(k).note = e.value; }); }
+function viewDocs(){
+  docKeep();
+  const D = state.myDocs || {}, back = `<button class="link" data-act="doc-close" style="margin:2px 0 10px">← ${esc(t('more_title'))}</button>`;
+  $('#main').innerHTML = back + `<h2 style="margin-top:4px">${esc(t('doc_title'))}</h2>` + (D.started ? `<div class="small muted" style="margin-bottom:6px">${esc(t('doc_lead'))}</div>
+    ${D.docs.some(docTodo) ? `<div class="small ${D.late ? 'negc' : ''}" style="margin-bottom:12px">${esc(t(D.late ? 'doc_late' : 'doc_due', { t: dayLabel(D.deadline) }))}</div>` : ''}${D.docs.map(docCardHTML).join('')}` : `<div class="empty">${esc(t('doc_none'))}</div>`);
+  docLoadFiles();
+}
+// 老板：管理 → 证件
+const docCls = s => ({ ok: 'ok', exempt: 'ok', pending: 'pend', rejected: 'bad', expired: 'bad' }[s] || '');
+const docChip = (r, k) => `<button class="dchip ${docCls(r[k].status)}" data-act="doc-open" data-id="${r.id}" data-type="${k}">${esc(t('doc_s_' + k))} · ${esc(t('doc_st_' + r[k].status))}</button>`;
+function docsAdminHTML(){
+  const D = state.docAdm || {}, R = D.rows || [], P = [], M = [], OK = [];
+  R.forEach(r => { DOC_TYPES.forEach(k => { if (r[k].status === 'pending') P.push({ r, k }); });
+    if (DOC_TYPES.some(k => docTodo(r[k]))) M.push(r); else if (DOC_TYPES.every(k => ['ok', 'exempt'].includes(r[k].status))) OK.push(r); });
+  P.sort((a, b) => String(a.r[a.k].submitted_at).localeCompare(String(b.r[b.k].submitted_at)));
+  M.sort((a, b) => (b.past_due ? 1 : 0) - (a.past_due ? 1 : 0) || String(a.deadline).localeCompare(String(b.deadline)));
+  const row = (r, due) => `<div class="item"><strong>${esc(r.name)}</strong><div class="chips" style="gap:6px;margin-top:6px">${DOC_TYPES.map(k => docChip(r, k)).join('')}</div>
+    ${due && D.started_at && !r.is_admin ? `<div class="meta num ${r.past_due ? 'negc' : ''}" style="margin-top:6px">${esc(t(r.past_due ? 'da_late' : 'da_due', { t: dayLabel(r.deadline) }))}${r.push ? '' : ' · ' + esc(t('da_nopush'))}</div>` : ''}</div>`;
+  return `${D.started_at ? `<div class="small muted" style="margin-bottom:10px">${esc(t('da_sum', { a: P.length, b: M.length, c: OK.length }))}</div>`
+      : `<div class="infobox" style="text-align:left">${esc(t('da_nostart'))}<button class="btn" data-act="doc-start" data-n="${M.length}" style="margin-top:10px">${esc(t('da_start', { n: M.length }))}</button></div>`}
+    ${P.length ? `<h3 style="margin:14px 0 6px">${esc(t('da_pending', { n: P.length }))}</h3><div class="list">${P.map(({ r, k }) => `<div class="item"><div class="top"><div><strong>${esc(r.name)}</strong> · ${esc(t('doc_s_' + k))}</div><button class="link" data-act="doc-open" data-id="${r.id}" data-type="${k}">${esc(t('da_view'))}</button></div><div class="meta num">${esc(fmtDateTime(r[k].submitted_at))}</div></div>`).join('')}</div>` : ''}
+    ${M.length ? `<h3 style="margin:14px 0 6px">${esc(t('da_missing', { n: M.length }))}</h3><div class="list">${M.map(r => row(r, true)).join('')}</div>` : ''}
+    ${OK.length ? `<details style="margin-top:14px"><summary style="font-weight:600;cursor:pointer">${esc(t('da_done', { n: OK.length }))}</summary><div class="list" style="margin-top:8px">${OK.map(r => row(r, false)).join('')}</div></details>` : ''}`;
+}
+function docDlgKeep(){ const S = state.docDlg; if (!S) return; const d = $('#docDate'), x = $('#docTxt'); if (d) S.date = d.value; if (x) S.txt = x.value; }
+function docDlgDraw(){
+  const S = state.docDlg, dlg = $('#photoDlg'); if (!S) return;
+  const r = ((state.docAdm || {}).rows || []).find(x => x.id === S.id), x = r && r[S.type]; if (!x){ state.docDlg = null; if (dlg.open) dlg.close(); return; }
+  docDlgKeep();
+  const A = x.ai || {}, st = x.status, k = S.type, busy = S.busy || S.up;
+  if (S.date === undefined) S.date = x.issued_on || A.date || '';
+  const dateF = `<label class="small muted" style="display:block;margin-top:8px">${esc(t('da_date'))}</label><input class="input" type="date" id="docDate" value="${esc(S.date || '')}">${k === 'haccp' ? `<div class="small muted">${esc(t('da_date_h'))}</div>` : ''}`;
+  const started = (state.docAdm || {}).started_at, created = new Date(r.created_at), dt3 = new Date(created); dt3.setMonth(dt3.getMonth() - 3);
+  const warn3 = k === 'ifsg' && S.date && started && created >= new Date(started) && new Date(S.date) < dt3;
+  const ai = x.ai ? `<div class="infobox" style="text-align:left;margin:10px 0"><div class="small">${esc(t('da_ai'))}${esc(state.lang === 'de' ? A.say_de : A.say_zh)}</div>
+    ${A.name_match === 'no' ? `<div class="small negc">${esc(t('da_name_no', { n: A.holder || '' }))}</div>` : ''}${A.kind && A.kind !== k ? `<div class="small negc">${esc(t('da_kind_no'))}</div>` : ''}</div>` : '';
+  const btn = (act, label, cls, extra) => `<button class="btn ${cls || ''}" data-act="${act}" ${extra || ''} ${busy ? 'disabled' : ''} style="margin-top:8px">${esc(label)}</button>`;
+  let acts = '';
+  if (S.mode === 'reject') acts = `<div class="chips" style="gap:6px;margin-top:10px">${DOC_REASONS.map((p, i) => `<button class="dchip" data-act="doc-r-pick" data-i="${i}">${esc(p[state.lang === 'de' ? 1 : 0])}</button>`).join('')}</div>
+      <textarea class="input" id="docTxt" rows="2" maxlength="300" placeholder="${esc(t('da_r_ph'))}" style="margin-top:8px">${esc(S.txt || '')}</textarea>${btn('doc-reject-send', t('da_r_send'))}${btn('doc-mode', t('cancel'), 'ghost', 'data-m=""')}`;
+  else if (S.mode === 'exempt') acts = `<textarea class="input" id="docTxt" rows="2" maxlength="300" placeholder="${esc(t('da_x_ph'))}" style="margin-top:10px">${esc(S.txt || '')}</textarea>${btn('doc-exempt-send', t('da_x_send'))}${btn('doc-mode', t('cancel'), 'ghost', 'data-m=""')}`;
+  else if (S.mode === 'mark') acts = `${dateF}<div class="small muted" style="margin-top:10px">${esc(t('da_files_opt'))}</div>${docPickHTML('@', S)}<textarea class="input" id="docTxt" rows="2" maxlength="300" placeholder="${esc(t('da_m_note'))}" style="margin-top:8px">${esc(S.txt || '')}</textarea>${btn('doc-mark-send', t('da_m_send'))}${btn('doc-mode', t('cancel'), 'ghost', 'data-m=""')}`;
+  else if (st === 'pending') acts = dateF + btn('doc-ok', t('da_ok')) + btn('doc-mode', t('da_reject'), 'ghost', 'data-m="reject"');
+  else if (st === 'ok') acts = btn('doc-mode', t('da_reject'), 'ghost', 'data-m="reject"') + btn('doc-reset', t('da_reset'), 'ghost');
+  else if (st === 'exempt') acts = btn('doc-reset', t('da_reset'), 'ghost');
+  else acts = btn('doc-mode', t('da_mark'), '', 'data-m="mark"') + btn('doc-mode', t('da_exempt'), 'ghost', 'data-m="exempt"') + (st === 'expired' || st === 'rejected' ? btn('doc-reset', t('da_reset'), 'ghost') : '');
+  dlg.innerHTML = `<h3 style="margin-top:0">${esc(r.name)} · ${esc(t('doc_t_' + k))}</h3>
+    <div class="small"><span class="tag ${docCls(st) === 'ok' ? 'm' : docCls(st) || 'off'}" style="margin-left:0">${esc(t('doc_st_' + st))}</span> ${x.at ? `<span class="muted num">${esc(t('da_by', { n: x.by || '', t: fmtDateTime(x.at) }))}</span>` : ''}</div>
+    ${st === 'rejected' ? `<div class="small negc" style="margin-top:6px">${esc(t('doc_reason', { r: x.reason || '' }))}</div>` : ''}${st === 'exempt' ? `<div class="small muted" style="margin-top:6px">${esc(x.reason || '')}</div>` : ''}
+    ${x.valid_until ? `<div class="small muted num">${esc(t('doc_valid', { t: dayLabel(x.valid_until) }))}</div>` : x.issued_on ? `<div class="small muted num">${esc(dayLabel(x.issued_on))}</div>` : ''}
+    ${x.source === 'boss_mark' && st === 'ok' ? `<div class="small muted">${esc(t('da_marked'))}</div>` : ''}
+    ${st === 'missing' ? '' : docFilesHTML(x.files)}${st !== 'missing' && x.note ? `<div class="small" style="margin-top:6px">${esc(x.note)}</div>` : ''}
+    ${st === 'missing' ? '' : ai}${warn3 ? `<div class="small negc" style="margin:6px 0">${esc(t('da_3m'))}</div>` : ''}${acts}
+    <button class="btn ghost" data-act="doc-dlg-close" style="margin-top:12px">${esc(t('close'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+  docLoadFiles();
+}
+async function docDlgDo(fn){
+  const S = state.docDlg; if (!S || S.busy || S.up) return; docDlgKeep(); S.busy = true; docDlgDraw();
+  try { await fn(S); state.docDlg = null; $('#photoDlg').close(); toast(t('da_saved')); await keepScroll(render); }
+  catch(err){ if (state.docDlg){ S.busy = false; docDlgDraw(); } toast(errText(err), true); }
+}
+
 function viewMore(){
+  if (state.docPage) return viewDocs();   // v156：证件
   if (state.libView) return viewLibrary();   // v79：资料
   if (state.sop) return viewSop();   // v111：SOP
   if (state.taskPage) return viewTaskPage();   // v130：任务
@@ -4750,7 +4941,7 @@ function viewMore(){
   $('#main').innerHTML = `<h2 style="margin-top:4px">${esc(t('more_title'))}</h2><div class="more">
     ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
-    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
+    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${!state.me.is_admin && state.myDocs && state.myDocs.started ? b('more-docs', t('doc_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
@@ -8287,10 +8478,10 @@ const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['bonfails', 'rates', 'repor
 // v61：「管理」上的待办数字分到「审批」「反馈」两个按钮上（反馈 = 未处理的反馈，审批 = 其余：修改申请、待核对的 Bon、工号绑定、忘记 PIN）
 async function adminCounts(){
   let total = state.me.pending_requests || 0;
-  const [m2, fl, ol, sp] = await Promise.all([soft(rpc('me', tok()), null), soft(rpc('admin_feedback_list', tok()), null), soft(rpc('admin_onb_list', tok()), null), soft(rpc('admin_sop_pending', tok()), null)]);   // v68：一起要；v107：新人带教；v111：SOP
+  const [m2, fl, ol, sp, dc] = await Promise.all([soft(rpc('me', tok()), null), soft(rpc('admin_feedback_list', tok()), null), soft(rpc('admin_onb_list', tok()), null), soft(rpc('admin_sop_pending', tok()), null), soft(rpc('admin_docs', tok()), null)]);   // v68：一起要；v107：新人带教；v111：SOP
   if (m2){ total = m2.pending_requests || 0; refreshBadge(total); }
   const fb = (fl || []).filter(x => x.status === 'open').length;
-  return { requests: Math.max(0, total - fb), feedback: fb, onb: (ol || []).filter(p => !p.ended_at).reduce((a, p) => a + (+p.unread || 0), 0), sop: (sp || []).length };
+  return { requests: Math.max(0, total - fb), feedback: fb, onb: (ol || []).filter(p => !p.ended_at).reduce((a, p) => a + (+p.unread || 0), 0), sop: (sp || []).length, docs: docPendingN(state.docAdm = dc) };
 }
 // v68：不常用的功能从右上角「⋯」搬到「管理」页最下面（「⋯」只留通知、反馈、改 PIN、退出）
 function admMoreHTML(){
@@ -8301,7 +8492,7 @@ function admMoreHTML(){
     + b('inv-settings', '', t('inv_set_h')) + ADMIN_MORE.map(k => b('admin-more', `data-sub="${k}"`, t('admin_' + k), state.adminSub === k)).join('') + `</div>`;
 }
 async function viewAdmin(){
-  const subs = ['requests', 'feedback', 'notice', 'library', 'sop', 'tasks', 'expense', 'staff', 'onb', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
+  const subs = ['requests', 'feedback', 'notice', 'library', 'sop', 'tasks', 'expense', 'staff', 'docs', 'onb', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
   const segHTML = c => `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}${c && c[s] ? ` <span class="tag pend" style="margin:0 0 0 4px">${c[s]}</span>` : ''}</button>`).join('')}</div>`;
   $('#main').innerHTML = segHTML(state.adminCounts) + `<div id="asub"><div class="loading">${esc(t('loading'))}</div></div>` + admMoreHTML();
   // v102：上面的数字和下面的内容一起要（以前先等数字）
@@ -8354,6 +8545,8 @@ async function viewAdmin(){
       if (state.oilFocus){ const c = document.getElementById('oil-card-' + state.oilFocus); state.oilFocus = null; if (c) c.scrollIntoView({ block: 'start' }); }   // v144
     } else if (state.adminSub === 'sop'){   // v111：SOP
       await viewSop();
+    } else if (state.adminSub === 'docs'){   // v156：证件
+      await cP; if (!state.docAdm) state.docAdm = await rpc('admin_docs', tok()); el().innerHTML = docsAdminHTML(); if (state.docDlg) docDlgDraw();
     } else if (state.adminSub === 'onb'){   // v107：新人带教
       el().innerHTML = await onbAdminLoad();
     } else if (state.adminSub === 'bonfails'){   // v154：员工交 Bon 的报错
@@ -10133,7 +10326,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(state.weekTodo || await loadWeekTodo());   // v56；v96：有上次的结果就不等（周结页自己会取最新的）
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; state.docPage = false; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -10634,6 +10827,35 @@ document.addEventListener('click', async ev => {
     }
     // v111：SOP
     case 'more-sop': state.sop = { view: 'list', q: '' }; render(); window.scrollTo(0, 0); break;
+    case 'more-docs': state.tab = 'more'; state.docPage = true; state.libView = null; state.sop = null; state.taskPage = false; state.taRec = null; try { state.myDocs = await rpc('my_docs', tok()); } catch(err){ toast(errText(err), true); } render(); window.scrollTo(0, 0); break;   // v156：证件
+    case 'doc-close': docKeep(); state.docPage = false; render(); window.scrollTo(0, 0); break;
+    case 'doc-again': docKeep(); docF(el.dataset.type).open = true; viewDocs(); break;
+    case 'doc-rm': if (el.dataset.k === '@'){ const S = state.docDlg; if (S){ S.files.splice(+el.dataset.i, 1); docDlgDraw(); } } else { docF(el.dataset.k).files.splice(+el.dataset.i, 1); viewDocs(); } break;
+    case 'doc-send': {
+      const k = el.dataset.type, F = docF(k); if (F.busy || F.up) break; docKeep();
+      if (!F.files.length) return toast(t('doc_need_file'), true);
+      F.busy = true; viewDocs();
+      try {
+        const r = await rpc('doc_submit', { ...tok(), p_type: k, p_files: F.files.map(docFileOut), p_note: (F.note || '').trim() || null });
+        if (r && r.event_id){ callPush('doc_due'); callTasks({ action: 'doc_ai', event_id: r.event_id }).catch(() => {}); }   // 推给老板；AI 读证件（只给老板看）
+        delete state.docForm[k]; state.myDocs = await rpc('my_docs', tok()); toast(t('doc_sent')); viewDocs(); window.scrollTo(0, 0);
+      } catch(err){ F.busy = false; viewDocs(); toast(errText(err), true); }
+      break;
+    }
+    case 'doc-start': {
+      if (!confirm(t('da_start_q', { n: el.dataset.n }))) break;
+      try { await rpc('admin_doc_start', tok()); callPush('doc_due'); toast(t('da_started')); await keepScroll(render); } catch(err){ toast(errText(err), true); }
+      break;
+    }
+    case 'doc-open': $('#photoDlg').innerHTML = ''; state.docDlg = { id: el.dataset.id, type: el.dataset.type, files: [] }; docDlgDraw(); break;   // 先清空：上一个窗口留下的输入框会被当成这一个的
+    case 'doc-dlg-close': state.docDlg = null; $('#photoDlg').close(); break;
+    case 'doc-mode': { const S = state.docDlg; if (!S) break; docDlgKeep(); S.mode = el.dataset.m || null; S.txt = ''; docDlgDraw(); break; }
+    case 'doc-r-pick': { const S = state.docDlg, p = DOC_REASONS[+el.dataset.i]; if (!S || !p) break; S.txt = p[0] + ' / ' + p[1]; const x = $('#docTxt'); if (x) x.value = S.txt; break; }
+    case 'doc-ok': docDlgDo(S => rpc('admin_doc_decide', { ...tok(), p_staff: S.id, p_type: S.type, p_decision: 'ok', p_reason: null, p_issued: S.date || null })); break;
+    case 'doc-reject-send': docDlgDo(async S => { await rpc('admin_doc_decide', { ...tok(), p_staff: S.id, p_type: S.type, p_decision: 'reject', p_reason: S.txt || null, p_issued: null }); callPush('doc_due'); }); break;
+    case 'doc-mark-send': docDlgDo(async S => { const r = await rpc('admin_doc_mark', { ...tok(), p_staff: S.id, p_type: S.type, p_files: S.files.map(docFileOut), p_note: S.txt || null, p_issued: S.date || null }); if (S.files.length && r && r.event_id) callTasks({ action: 'doc_ai', event_id: r.event_id }).catch(() => {}); }); break;
+    case 'doc-exempt-send': docDlgDo(S => rpc('admin_doc_exempt', { ...tok(), p_staff: S.id, p_type: S.type, p_reason: S.txt || null })); break;
+    case 'doc-reset': if (confirm(t('da_reset_q'))) docDlgDo(S => rpc('admin_doc_reset', { ...tok(), p_staff: S.id, p_type: S.type })); break;
     case 'more-task': state.taskPage = true; state.tfEdit = null; if (!state.tfCat) await tfLoad(); render(); window.scrollTo(0, 0); break;   // v130
     case 'tp-close': state.taskPage = false; state.tfEdit = null; render(); window.scrollTo(0, 0); break;
     case 'sop-admin': state.sop = { view: 'list', q: '' }; state.done = null; state.recon = null; state.tab = 'admin'; state.adminSub = 'sop'; render(); window.scrollTo(0, 0); break;
@@ -12061,6 +12283,7 @@ document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.taskitem){ taskUpload(ev.target); return; }   // v71
   if (ev.target.dataset && ev.target.dataset.audphoto){ audPhoto(ev.target); return; }   // v149：抽查的照片
   if (ev.target.dataset && ev.target.dataset.tfatt && ev.target.files && ev.target.files.length){ const fs = [...ev.target.files]; ev.target.value = ''; tfAttChosen(fs); return; }   // v128：附照片
+  if (ev.target.dataset && ev.target.dataset.docfile && ev.target.files && ev.target.files.length){ const fs = [...ev.target.files], k = ev.target.dataset.docfile; ev.target.value = ''; docChosen(k, fs); return; }   // v156
   if (ev.target.dataset && ev.target.dataset.tkres && ev.target.files && ev.target.files.length){ const fs = [...ev.target.files]; ev.target.value = ''; tkResChosen(fs); return; }   // v128：交回结果
   if (ev.target.dataset && ev.target.dataset.expimg && ev.target.files && ev.target.files[0]){   // v67：垫付照片
     let photo; try { photo = await compressImage(ev.target.files[0], 1400, 0.8); } catch(e){ toast(t('err_GENERIC'), true); return; }
