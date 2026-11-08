@@ -947,7 +947,7 @@ zh: {
   px_title:'代 {n} 交 Bon', px_btn:'代 {n} 交 Bon（拍他的 Bon）', px_intro:'也可以代员工交：拍谁的 Bon 都行，系统按 Bon 上的工号认出是谁的。',
   px_owner:'这是 {n} 的 Bon（工号 {u}），会记到 {n} 名下。', px_mine:'这是你自己的 Bon。',
   px_other:'这张 Bon 上的工号 {u} 是 {o} 的，不是 {n} 的。请确认记给谁：', px_unknown:'认不出是谁的：工号 {u} 在 {s} 还没绑定。请选这张 Bon 记给谁：',
-  bs_no_id:'Bon 上的名字和工号没读到。请选这张 Bon 记给谁：', bs_moved:'Bon 上印的是 {o}（工号 {u}），这张会记给 {p}。', bs_bind:'以后这个工号（{u}）就绑定给 {n}（不勾 = 只算这一张，绑定不变）',
+  bo_cover_note:'AI 觉得两张照片可能没拍全，但数字都对得上，可以直接提交。', bs_no_id:'Bon 上的名字和工号没读到。请选这张 Bon 记给谁：', bs_moved:'Bon 上印的是 {o}（工号 {u}），这张会记给 {p}。', bs_bind:'以后这个工号（{u}）就绑定给 {n}（不勾 = 只算这一张，绑定不变）',
   bs_fix_title:'老板手动确认', bs_fix_hint:'对着照片看下面几项，不对就改，不用重拍。提交时会再问一次。', bs_retake:'单据上的数字前后对不上，或者有的地方没读到。可以重拍，也可以在下面改好直接提交。',
   bs_store:'门店', bs_date:'日期', bs_rid:'报告编号（读不出可以空着）', bs_choose_store:'— 请选门店 —', bs_need_store:'请先选门店。', bs_need_date:'请先选日期。', bs_need_num:'请把 Schlussbestand 和刷卡小费填好（没有就填 0）。',
   bs_numbers:'单据数字（老板确认）', bs_q_title:'这张 Bon 有下面的问题，继续吗？', bs_q_go:'我看过了，继续提交', bs_q_back:'返回改一下', bs_bind_line:'提交后，工号 {u} 绑定给 {n}；原来的绑定会解除。',
@@ -1611,7 +1611,7 @@ de: {
   px_title:'Bon für {n} abgeben', px_btn:'Bon für {n} abgeben (Foto)', px_intro:'Du kannst auch für Mitarbeiter abgeben: Fotografiere ihren Bon, das System erkennt an der Nummer, wem er gehört.',
   px_owner:'Das ist der Bon von {n} (Nummer {u}) – er wird {n} zugeordnet.', px_mine:'Das ist dein eigener Bon.',
   px_other:'Die Nummer {u} auf diesem Bon gehört {o}, nicht {n}. Bitte wählen, wem er zugeordnet wird:', px_unknown:'Nicht erkannt: Nummer {u} ist in {s} noch niemandem zugeordnet. Bitte wählen, wem dieser Bon zugeordnet wird:',
-  bs_no_id:'Name und Nummer auf dem Bon wurden nicht gelesen. Bitte wählen, wem dieser Bon zugeordnet wird:', bs_moved:'Auf dem Bon steht {o} (Nummer {u}) – er wird {p} zugeordnet.', bs_bind:'Diese Nummer ({u}) ab jetzt mit {n} verknüpfen (ohne Häkchen: nur dieser Bon, die Verknüpfung bleibt)',
+  bo_cover_note:'Die KI meint, die Fotos seien vielleicht nicht vollständig – die Zahlen stimmen aber, du kannst direkt absenden.', bs_no_id:'Name und Nummer auf dem Bon wurden nicht gelesen. Bitte wählen, wem dieser Bon zugeordnet wird:', bs_moved:'Auf dem Bon steht {o} (Nummer {u}) – er wird {p} zugeordnet.', bs_bind:'Diese Nummer ({u}) ab jetzt mit {n} verknüpfen (ohne Häkchen: nur dieser Bon, die Verknüpfung bleibt)',
   bs_fix_title:'Vom Chef bestätigen', bs_fix_hint:'Bitte mit dem Foto vergleichen und wenn nötig korrigieren – kein neues Foto nötig. Beim Absenden fragt die App noch einmal.', bs_retake:'Die Zahlen auf dem Bon passen nicht zusammen oder etwas wurde nicht gelesen. Du kannst neu fotografieren oder unten korrigieren und direkt absenden.',
   bs_store:'Filiale', bs_date:'Datum', bs_rid:'Berichtsnummer (leer lassen, wenn nicht lesbar)', bs_choose_store:'— Filiale wählen —', bs_need_store:'Bitte zuerst die Filiale wählen.', bs_need_date:'Bitte zuerst das Datum wählen.', bs_need_num:'Bitte Schlussbestand und Kartentrinkgeld eintragen (sonst 0).',
   bs_numbers:'Zahlen vom Bon (vom Chef bestätigt)', bs_q_title:'Bei diesem Bon gibt es folgende Probleme. Trotzdem weiter?', bs_q_go:'Geprüft – trotzdem absenden', bs_q_back:'Zurück und ändern', bs_bind_line:'Nach dem Absenden ist die Nummer {u} mit {n} verknüpft; die bisherige Verknüpfung wird gelöst.',
@@ -6976,6 +6976,7 @@ function bonStatusHTML(){
   }
   if (st === 'ok' && d && (d.fixes || []).some(x => x !== 'date_year' && x !== 'user_id_bound')) h += `<div class="infobox">${esc(t('bon_autofix'))}</div>`;
   if (st === 'ok' && d && (d.fixes || []).includes('user_id_bound')) h += `<div class="infobox">${esc(t('bon_autofix_uid', { b: d.user_id }))}</div>`;   // v90
+  if (st === 'ok' && bonCoverBad(b)) h += `<div class="infobox">${esc(t('bo_cover_note'))}</div>`;   // v155
   if (st === 'ok' && d && (d.fixes || []).includes('date_year')) h += `<div class="infobox">${esc(t('bon_autofix_date', { d: bonDayText(d.work_date) }))}</div>`;   // v87
   const dOnly = bonDateOnly(), dTxt = d && d.work_date ? bonDayText(d.work_date) : '?';   // v87：只有日期不对时直接说日期
   const uOnly = bonOnly('USER_ID_MISMATCH', 'USER_ID_ODD');   // v90：只有工号对不上
@@ -7074,6 +7075,7 @@ function bonOriWarn(b, k){
   return '';
 }
 const bonCoverBad = b => !!(b && b.read && b.read.checks && b.read.checks.cover_ok === false && !b.coverOk);
+const bonCoverStop = b => bonCoverBad(b) && !b.read.checks.ok;   // v155（老板 2026-11-08）：数字验算全对时只提醒一句，不弹窗打断（Fabian 11-07 第一次就全对，被弹窗叫去重拍，最后没交成）
 // v152（数据库 v112）：交 Bon 前：我今天「每个服务员下班前」还没做的（先做完再打卡）
 const ekLeft = () => state.viewAs ? [] : (state.closing || []).filter(c => c.each_leave && c.status !== 'done' && c.day === (state.tasks || {}).day);
 function ekBonHTML(){ const L = ekLeft(); if (!L.length) return '';
@@ -7242,7 +7244,7 @@ async function readBon(){
     bonAutoPick();
   } else b.readErr = err;
   b.busy = false; refreshBonParts();
-  if (bonCoverBad(b)) bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok || bonBoss() });   // v126：识别服务 bon v18 说没拍全
+  if (bonCoverStop(b)) bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok || bonBoss() });   // v126：识别服务 bon v18 说没拍全
 }
 async function submitBon(){
   const b = state.bon, f = state.form, st = bonState(), boss = bonBoss(), fix = bonNeedFix(), d = bonEff();   // v153：老板可以手动确认继续
@@ -7255,8 +7257,8 @@ async function submitBon(){
     if (!x.store) return toast(t('bs_need_store'), true);
     if (!x.date) return toast(t('bs_need_date'), true);
     if (String(x.schluss).trim() === '' || isNaN(parseSigned(x.schluss)) || String(x.card).trim() === '' || isNaN(parseEur(x.card))) return toast(t('bs_need_num'), true); }
-  if (!boss && bonCoverBad(b)) bonFailNote('submit', 'COVER', rid);
-  if (!boss && bonCoverBad(b)) return bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok });   // v126：没拍全：重拍或确认拍全了
+  if (!boss && bonCoverStop(b)) bonFailNote('submit', 'COVER', rid);
+  if (!boss && bonCoverStop(b)) return bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok });   // v126：没拍全：重拍或确认拍全了
   if (bonDateNeed()){ const q = $('#bon-date-q'); if (q) q.scrollIntoView({ block: 'center', behavior: 'smooth' }); return toast(t('bon_date_need'), true); }   // v112
   const card = d.card_cents || 0, schluss = d.schluss_cents || 0, w = parseEur(b.wallet);
   if (String(b.wallet).trim() === '') return toast(t('enter_wallet'), true);
@@ -7271,7 +7273,7 @@ async function submitBon(){
   const ek = bonPxActive() ? [] : ekLeft();   // v152：每个服务员下班前还没做完 → 问一句（不挡）
   if (ek.length && !confirm(t('ek_bon_q', { x: ek.map(toName).join('、') }))) return;
   const btn = document.querySelector('[data-act="bon-submit"]'); if (btn) btn.disabled = true;
-  if (boss && (bonPxActive() || fix || bonCoverBad(b))) return bonBossSave(false);   // v153：代交、识别没通过、没拍全：走老板确认（数据库 v113）
+  if (boss && (bonPxActive() || fix)) return bonBossSave(false);   // v153：代交、识别没通过：走老板确认（数据库 v113）
   try {
     await rpc('submit_bon_entry_x', { ...tok(), p_read_id: b.read.read_id, p_card_cents: card, p_schluss_cents: schluss,
       p_wallet_cents: w, p_runner_ids: f.runners, p_bar_ids: f.bars, p_shortage_ack: !!b.ack, p_extras: extrasPayload() });
