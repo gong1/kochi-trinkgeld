@@ -752,6 +752,10 @@ zh: {
   fb_view_note:'（查看 {n} 时）', fb_view_hint:'以你自己的名义发送，注明是查看 {n} 时看到的。',
   // v73：公告认真读、推送情况
   an_wait:'请先读完 · {s}', an_scroll:'请滑到最下面', an_push_pub:'已发布。推送到了 {a} 人的手机（共 {b} 人要确认）。', an_push_remind:'已再提醒。推送到了 {a} 人的手机（还有 {b} 人没确认）。', an_push_off:'{n} 人没开手机通知，收不到推送，请当面提醒，或者让他们在「更多」里开启通知：{m}', an_nopush:'（没开通知）',
+  // v152（数据库 v112，老板 2026-11-08）：每个服务员下班前（每人一份）
+  tf_w_each:'每个服务员下班前', tf_each_hint:'那天在这家店上班的每个服务员下班前都要做一次（午班、晚班都算）。每个人自己算：一个人做了不等于别人也做了。交 Bon 时会提醒。适合擦小料台这种谁走谁收的事。',
+  tc_each:'每个服务员下班前（每人一份）', ek_tag:'每个人都要做', ek_line:'每人一份：{a} / {b} 人做完', ek_left:'还没做：{n}', ek_card:'下班前：{n} · {s}',
+  ek_bon_title:'下班前要做（每个人都要做，先做完再打卡）', ek_bon_go:'去做', ek_bon_q:'下班前的还没做完：{x}。还是先交 Bon 吗？没做的明天会记漏做。',
   // v150（数据库 v110 / 文件服务 tasks v27，老板 2026-11-07）：任务和入职培训、SOP 连起来
   tk_close_photo_onboarding:'要拍照（带教期间所有任务每次都拍；独立上岗考核通过后按平常的规则）',
   oc_task_ok:'任务里按 SOP 做对 {a} 次', oc_task_bad:'有问题 {b} 次', oc_task_suggest:'✓ 任务里已经做对 {a} 次，可以标「会了」', oc_task_suggest_mine:'✓ 任务里已经做对 {a} 次，带你的同事可以给你标「会了」',
@@ -1400,6 +1404,10 @@ de: {
   fb_view_note:'(in der Ansicht als {n})', fb_view_hint:'Wird in deinem Namen gesendet, mit Hinweis „Ansicht als {n}“.',
   // v73：Mitteilungen gründlich lesen, Push-Status
   an_wait:'Bitte zuerst lesen · {s}', an_scroll:'Bitte bis ganz unten scrollen', an_push_pub:'Veröffentlicht. Push an {a} Handys gesendet ({b} müssen bestätigen).', an_push_remind:'Erinnerung gesendet. Push an {a} Handys ({b} noch nicht bestätigt).', an_push_off:'{n} haben keine Benachrichtigungen aktiviert und bekommen keinen Push – bitte persönlich ansprechen oder unter „Mehr“ aktivieren lassen: {m}', an_nopush:' (keine Benachrichtigungen)',
+  // v152 (DB v112)
+  tf_w_each:'Jede Servicekraft vor dem Gehen', tf_each_hint:'Jede Servicekraft, die an dem Tag in dieser Filiale arbeitet, erledigt das einmal vor dem Gehen (Mittag und Abend). Jede Person zählt für sich: Wenn eine es macht, gilt es nicht für die anderen. Beim Bon-Abgeben kommt eine Erinnerung. Passend z. B. für die Saucenstation: Wer geht, räumt auf.',
+  tc_each:'Jede Servicekraft vor dem Gehen (jede Person)', ek_tag:'Jede Person', ek_line:'Jede Person: {a} / {b} erledigt', ek_left:'Noch offen: {n}', ek_card:'Vor dem Gehen: {n} · {s}',
+  ek_bon_title:'Vor dem Gehen erledigen (jede Person – erst erledigen, dann ausstempeln)', ek_bon_go:'Erledigen', ek_bon_q:'Vor dem Gehen noch offen: {x}. Trotzdem jetzt den Bon abgeben? Was fehlt, zählt morgen als nicht erledigt.',
   // v150 (DB v110 / tasks v27)
   tk_close_photo_onboarding:'Mit Foto (während der Einarbeitung bei allen Aufgaben jedes Mal; nach der Prüfung gelten die normalen Regeln)',
   oc_task_ok:'In Aufgaben {a}× richtig nach SOP', oc_task_bad:'{b}× mit Problem', oc_task_suggest:'✓ In Aufgaben schon {a}× richtig – „Kann es“ möglich', oc_task_suggest_mine:'✓ In Aufgaben schon {a}× richtig – deine Einarbeiter*innen können „Kann es“ markieren',
@@ -2118,6 +2126,8 @@ const ERR_ZH = {
   AUDIT_DAY: '只能抽查今天或昨天的任务。', AUDIT_NOT_DONE: '这个任务还没做完，不用抽查（没做的会记成漏做）。', AUDIT_HAS_PHOTO: '这个任务拍了照片，照片就是证据，不用抽查。',
   AUDIT_EXISTS: '这个任务这天已经有人在抽查了。', AUDIT_SELF: '不能抽查自己确认的任务。', AUDIT_DONE: '这次抽查已经有结果了。',
   AUDIT_EXPIRED: '这次抽查已经过期（第二天 12:00 前要查）。', AUDIT_PHOTO_REQUIRED: '请先拍一张照片：属实、不属实都要有照片作证据。', AUDIT_NOTE_REQUIRED: '不属实要写一句：哪里没做。',   // v149
+  TASK_EACH_BAD: '「每个服务员下班前」只能是：按岗位 = 服务员、每天、收店时，也不能「交回结果」。请改一下再保存。',
+  AUDIT_EACH_LEAVE: '「每个服务员下班前」的任务不能事后抽查：每个人做完时系统会随机抽查。要看就看照片，或者当场看一眼。',   // v152
   EXPENSE_FORBIDDEN: '你还没有记垫付的权限。需要的话请找老板在「员工」里打开。',
   EXPENSE_PHOTO_REQUIRED: '每一笔垫付都要有照片：拍小票，或者拍买的东西。',
   EXPENSE_AMOUNT: '金额不对：要大于 0，一笔最多 100 €。',
@@ -2359,6 +2369,8 @@ const ERR_DE = {
   AUDIT_DAY: 'Nur Aufgaben von heute oder gestern können geprüft werden.', AUDIT_NOT_DONE: 'Die Aufgabe ist noch nicht erledigt – keine Prüfung nötig (Nicht Erledigtes wird ohnehin erfasst).', AUDIT_HAS_PHOTO: 'Die Aufgabe hat ein Foto – das ist der Nachweis, keine Prüfung nötig.',
   AUDIT_EXISTS: 'Diese Aufgabe wird an diesem Tag schon geprüft.', AUDIT_SELF: 'Eigene Bestätigungen kann man nicht prüfen.', AUDIT_DONE: 'Diese Stichprobe ist schon erledigt.',
   AUDIT_EXPIRED: 'Diese Stichprobe ist abgelaufen (Prüfung bis 12:00 am Folgetag).', AUDIT_PHOTO_REQUIRED: 'Bitte zuerst ein Foto machen – bei „stimmt“ und „stimmt nicht“ als Nachweis nötig.', AUDIT_NOTE_REQUIRED: 'Bei „stimmt nicht“ bitte kurz schreiben, was fehlt.',   // v149
+  TASK_EACH_BAD: '„Jede Servicekraft vor dem Gehen“ geht nur mit: Position Service, täglich, bei Feierabend, ohne „Ergebnis abgeben“. Bitte anpassen und erneut speichern.',
+  AUDIT_EACH_LEAVE: 'Aufgaben „Jede Servicekraft vor dem Gehen“ können nicht nachträglich geprüft werden – beim Erledigen prüft das System per Zufall. Bitte Fotos ansehen oder direkt vor Ort schauen.',   // v152
   EXPENSE_FORBIDDEN: 'Du darfst noch keine Auslagen erfassen. Bitte den Chef bitten, es unter „Mitarbeiter“ einzuschalten.',
   EXPENSE_PHOTO_REQUIRED: 'Jede Auslage braucht ein Foto: vom Kassenbon oder von der gekauften Sache.',
   EXPENSE_AMOUNT: 'Betrag ungültig: größer als 0 und höchstens 100 € pro Posten.',
@@ -2680,7 +2692,7 @@ function taskCardHTML(k){
   }
   if (k.kind === 'closing'){   // v71：收店任务；v95：某一天的任务（收店时 / 到店后）
     const nd = d.need || {}, n = d.items.length, got = d.items.filter(i => i.done).length;
-    const title = (isPer(d) && !d.named ? t('tk_per', { r: perLabel(d), n: toName(d), s: d.store }) : d.named ? toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d) + (d.store ? ' · ' + d.store : '') : d.once ? t('tk_once', { w: toWhen(d), n: toName(d), s: d.store }) : t('tk_close', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store })) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
+    const title = (d.each_leave ? t('ek_card', { n: toName(d), s: d.store }) : isPer(d) && !d.named ? t('tk_per', { r: perLabel(d), n: toName(d), s: d.store }) : d.named ? toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d) + (d.store ? ' · ' + d.store : '') : d.once ? t('tk_once', { w: toWhen(d), n: toName(d), s: d.store }) : t('tk_close', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store })) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
     const sub = (k.status === 'overdue' && d.late_days ? t('tk_late_n', { n: d.late_days, d: dayLabel(d.day) })   // v144：收废油的检查晚了几天（数据库 v105）
       : t(k.status === 'overdue' ? 'tk_close_over' : d.once && d.timing === 'arrival' ? 'tk_once_now_arrival' : k.status === 'now' ? 'tk_close_now' : 'tk_close_later')) + ' · ' + tkHow(nd) + toByLead(d)
       + (d.ask && got === n && !d.answer ? ' · ' + t('tk_ask_pending') : '');   // v101
@@ -4016,7 +4028,7 @@ async function taskUpload(input){
     const r = await callTasks({ action: 'task_photo', def_id: c.def_id, item_id: it.id, day: c.day, image: img });
     await loadTasks();
     if (r && r.ai && r.ai.ok === false) toast(t('tk_ai_problem'), true);
-    else if (r && r.state && r.state.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); annAfterWork(); }   // v115：做完了，有空看公告
+    else if (r && r.state && r.state.completed_at){ tkLeave(); toast(t('tk_all_done')); annAfterWork(); }   // v115：做完了，有空看公告；v152：回到来的地方
     else toast(t('lk_saved', { n: state.lang === 'de' ? it.name_de : it.name_zh }));
     render();
   } catch(e){ toast(errText(e), true); render(); }
@@ -4069,7 +4081,7 @@ function tdlHTML(cl, up){
     const d = k.data, done = k.status === 'done', pd = isPer(d) && !done ? perDue(d) : null, bad = k.status === 'overdue' || !!(pd && pd.cls === 'bad'), its = d.items || [], n = its.length, got = its.filter(i => i.done).length;   // v120：周期任务写截止 / 逾期
     const sub = done ? [fmtTime(d.completed_at), d.completed_by && d.completed_by !== state.me.name ? d.completed_by : '', d.answer ? askAns(d) : ''].filter(Boolean).join(' · ')
       : [k.status === 'overdue' ? (d.late_days ? t('tk_late_n', { n: d.late_days, d: dayLabel(d.day) }) : t('tk_close_over')) : pd ? pd.txt : d.day !== (state.tasks || {}).day ? dayLabel(d.day) : '', got && got < n ? t('tdl_part', { a: got, b: n }) : '',
-         d.ask && n && got === n && !d.answer ? t('tk_ask_pending') : '', toByLead(d).replace(/^ · /, ''), nmByTxt(d)].filter(Boolean).join(' · ');
+         d.ask && n && got === n && !d.answer ? t('tk_ask_pending') : '', toByLead(d).replace(/^ · /, ''), nmByTxt(d), d.each_leave ? t('ek_tag') : ''].filter(Boolean).join(' · ');   // v152
     const inner = `<span class="tdl-cb">${done ? '✓' : ''}</span><span class="tdl-m"><span class="tdl-n">${esc(toName(d))}${st(d)}</span>${sub ? `<span class="tdl-s${bad ? ' bad' : pd && pd.cls === 'warn' ? ' warnc' : ''}">${esc(sub)}</span>` : ''}</span>`
       + (done && !d.need_result ? '' : (d.need_result ? (done ? '' : `<span class="tdl-i" title="${esc(t('tdl_result'))}">📎</span>`) : (d.need || {}).mode === 'photo' ? `<span class="tdl-i" title="${esc(t('tdl_photo'))}">📷</span>` : '') + '<span class="tdl-i" aria-hidden="true">›</span>');
     return done && !d.need_result ? `<div class="tdl-r fin">${inner}</div>` : `<button class="tdl-r${bad ? ' bad' : ''}${done ? ' fin' : ''}" data-act="task-open" data-def="${d.def_id}" data-day="${d.day}">${inner}</button>`;
@@ -4104,7 +4116,8 @@ function tsrAreaHTML(list){
     const nm = esc((x.once ? toWhen(x) + ' · ' : '') + toName(x)) + (x.once && x.important ? ' 📷' : '') + (isPer(x) ? ` <span class="tag">${esc(perLabel(x))}</span>` : ''), ppl = (x.people || []).map(p => p.name).join('、');
     const photo = (x.items || []).map(i => i.last).find(l => l && l.evidence === 'photo'), aiBad = (x.items || []).some(i => i.last && i.last.ai && i.last.ai.ok === false);
     const pd = perDue(x);   // v120：周期任务
-    const [dot, sub] = x.status === 'wait' ? ['', t('tb_wait') + (pd ? ' · ' + pd.txt : '')]
+    const [dot, sub] = x.each_leave && !['nobody', 'closed'].includes(x.status) ? [x.status === 'done' ? 'ok' : x.status === 'missed' ? 'bad' : 'todo', eachLine(x)]   // v152
+      : x.status === 'wait' ? ['', t('tb_wait') + (pd ? ' · ' + pd.txt : '')]
       : x.status === 'missed' && isPer(x) ? ['bad', t('tf_per_missed', { p: ppl || '–' })]
       : x.status !== 'done' && pd ? [pd.cls === 'bad' ? 'bad' : 'todo', (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + ' · ' + pd.txt]
       : x.status === 'done' ? ['ok', '✓ ' + [x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : ''].filter(Boolean).join(' · ')]
@@ -4168,7 +4181,8 @@ function toBoardRow(x){
   const ppl = (x.people || []).map(p => p.name).join('、'), its = x.items || [], pd = perDue(x);
   const photo = its.map(i => i.last).find(l => l && l.evidence === 'photo'), aiBad = its.some(i => i.last && i.last.ai && i.last.ai.ok === false);
   let dot = 'todo', sub, cls = '';
-  if (x.status === 'done'){ dot = 'ok'; sub = '✓ ' + [x.completed_by, fmtTime(x.completed_at), askAns(x), pd && +x.period.late ? t('tf_per_done_late', { n: x.period.late }) : ''].filter(Boolean).join(' · '); }
+  if (x.each_leave && !['nobody', 'closed'].includes(x.status)){ dot = x.status === 'done' ? 'ok' : x.status === 'missed' ? 'bad' : 'todo'; cls = x.status === 'missed' ? 'negc' : ''; sub = eachLine(x); }   // v152
+  else if (x.status === 'done'){ dot = 'ok'; sub = '✓ ' + [x.completed_by, fmtTime(x.completed_at), askAns(x), pd && +x.period.late ? t('tf_per_done_late', { n: x.period.late }) : ''].filter(Boolean).join(' · '); }
   else if (x.status === 'wait'){ dot = ''; sub = t('tb_wait') + (pd ? ' · ' + pd.txt : ''); }   // v120：周期任务今天没人上班，不标红
   else if (x.status === 'missed' && isPer(x)){ dot = 'bad'; cls = 'negc'; sub = t('tf_per_missed', { p: ppl || '–' }); }
   else if (pd){ dot = pd.cls === 'bad' ? 'bad' : 'todo'; cls = pd.cls === 'bad' ? 'negc' : pd.cls === 'warn' ? 'warnc' : ''; sub = (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + ' · ' + pd.txt; }
@@ -4302,14 +4316,14 @@ function tfRedraw(){ if (state.tab === 'admin') keepScroll(toRedraw); else keepS
 const tfManage = () => ((state.tfCat || {}).manage || []);
 const tfAreas = () => [...new Set(tfManage().map(m => m.area))];
 const tfStoresFor = a => STORES.filter(st => tfManage().some(m => m.area === a && m.store === st));
-const tfArea = e => e.who === 'role' ? (e.role ? (isKRole(e.role) ? 'kitchen' : 'front') : '') : e.area;
+const tfArea = e => e.who === 'each' ? 'front' : e.who === 'role' ? (e.role ? (isKRole(e.role) ? 'kitchen' : 'front') : '') : e.area;   // v152：每个服务员下班前 = 前场
 function tfSync(){ const e = state.tfEdit; if (!e) return;
   [['text', 'tf-text'], ['zh', 'tf-zh'], ['de', 'tf-de'], ['day', 'tf-date'], ['rd', 'tf-rd'], ['rm', 'tf-rm'], ['sop', 'tf-sop'], ['say', 'tf-say'], ['link', 'tf-link']].forEach(([k, id]) => { const el = document.getElementById(id); if (el && (k !== 'day' || e.dayMode === 'pick')) e[k] = el.value; });   // v120：周期从哪天开始；v121：SOP
   const sa = document.getElementById('tf-sopai'); if (sa) e.sopAi = sa.checked;
   e.more = !!(document.querySelector('#tf-form details') || {}).open; }
 // 从看板 / 清单 / 列表里的一条，变成表单
 function tfFrom(x){
-  const bd = bizToday(), who = x.who_kind || (x.named ? 'person' : 'role');
+  const bd = bizToday(), who = x.each_leave ? 'each' : x.who_kind || (x.named ? 'person' : 'role');   // v152
   const repeat = isPer(x) || ['once', 'daily'].includes(x.repeat) ? x.repeat : x.day && (x.once || (x.named && x.once !== false)) ? 'once' : 'daily';   // v120：周期
   let photo = x.photo || (x.check_only ? 'check' : repeat === 'once' ? (x.important ? 'photo' : 'check') : (x.important ? 'always' : 'photo'));
   if (photo === 'always' && repeat !== 'daily') photo = 'photo';
@@ -4372,13 +4386,14 @@ function tfFormHTML(){
   const seg = (k, opts, dis) => `<div class="seg sm" style="margin-bottom:12px">${opts.map(([v, lbl]) => `<button type="button" data-act="tf-set" data-k="${k}" data-v="${v}" class="${String(e[k]) === String(v) ? 'on' : ''}"${dis ? ' disabled' : ''}>${esc(lbl)}</button>`).join('')}</div>`;
   const lbl = txt => `<div class="small muted" style="margin-bottom:6px">${esc(txt)}</div>`, hint = txt => `<div class="small muted" style="margin:-6px 0 12px">${esc(txt)}</div>`;
   // v122：AI 填表时这一项没说、现在还空着 → 标橙「还没说」
-  const empty = { who: () => e.who === 'person' ? !e.staff : e.who === 'role' ? !e.role : !e.area, day: () => e.repeat === 'once' && !e.day, timing: () => !e.timing, stores: () => !e.stores.length, photo: () => !e.photo };
+  const empty = { who: () => e.who === 'each' ? false : e.who === 'person' ? !e.staff : e.who === 'role' ? !e.role : !e.area, day: () => e.repeat === 'once' && !e.day, timing: () => !e.timing, stores: () => !e.stores.length, photo: () => !e.photo };
   const lblM = (k, txt) => (e.miss || []).includes(k) && empty[k]() ? `<div class="small warnc" style="margin-bottom:6px">${esc(txt)} · ${esc(t('tf_missing'))}</div>` : lbl(txt);
   const chip = (act, k, v, on, txt, extra) => `<button type="button" class="chip${on ? ' on' : ''}" data-act="${act}" data-${k}="${v}"${extra || ''}>${esc(txt)}</button>`;
   let who = '';
   if (e.who === 'person') who = (staff.length > 12 ? `<input class="input" id="tf-q" placeholder="${esc(t('nm_search'))}" autocomplete="off" style="margin-bottom:8px">` : '')
     + `<div class="chips" id="tf-chips" style="margin-bottom:12px">${staff.map(p => chip('tf-staff', 'id', p.id, p.id === e.staff, p.me ? t('nm_me') : p.name, ` data-n="${esc(p.name.toLowerCase())}"`)).join('')}</div>`;
   else if (e.who === 'role') who = areas.map(a => `<div class="small muted" style="margin:0 0 4px">${esc(t('area_' + a))}</div><div class="chips" style="margin-bottom:10px">${(a === 'kitchen' ? KROLES : FROLES).map(r => chip('tf-role', 'r', r, e.role === r, t('grp_' + r))).join('')}</div>`).join('') + hint(t(e.repeat === 'daily' ? 'tf_role_hint_daily' : e.repeat === 'once' ? 'tf_role_hint' : 'tf_role_hint_per'));
+  else if (e.who === 'each') who = hint(t('tf_each_hint'));   // v152
   else who = seg('area', areas.map(a => [a, t('tf_area_' + a)])) + hint(t('tf_area_hint'));
   const stores = area ? tfStoresFor(area) : [];
   const where = e.who === 'person' ? '' : lblM('stores', t('tf_store')) + `<div class="chips" style="margin-bottom:6px">${stores.map(st => chip('tf-store', 'st', st, e.stores.includes(st), st)).join('')}</div>`
@@ -4407,11 +4422,12 @@ function tfFormHTML(){
     ${e.parsed ? `<div class="${missTxt || e.outside || e.moreN > 1 ? 'warnbox' : 'infobox'}" style="margin:0 0 12px">${esc(t('tf_parsed'))}${missTxt ? '<br>' + esc(t('tf_parsed_miss', { m: missTxt })) : ''}${e.moreN > 1 ? '<br>' + esc(t('tf_parsed_more', { n: e.moreN })) : ''}${e.outside ? '<br>' + esc(t('tf_parsed_out')) : ''}</div>` : ''}`;
   return `<div class="sheet" id="tf-form"><h3 style="margin-top:0">${esc(t(e.id ? 'tf_title_edit' : 'tf_title_new'))}</h3>${say}
     <div class="field"><label for="tf-text">${esc(t('tf_what'))}</label><input class="input" id="tf-text" maxlength="200" autocomplete="off" placeholder="${esc(t('nm_text_ph'))}" value="${esc(e.text || '')}"></div>
-    ${lblM('who', t('tf_who'))}${seg('who', [['person', t('tf_w_person')], ['role', t('tf_w_role')], ['area', t('tf_w_area')]].filter(([k]) => k === 'person' || areas.length))}${who}
-    ${lbl(t('tf_repeat'))}${repHTML}
-    ${daily ? hint(t(e.who === 'person' ? 'tf_person_daily' : 'tf_daily_hint')) : per ? perHTML : lblM('day', t('nm_day')) + seg('dayMode', [['today', t('nm_today')], ['tomorrow', t('nm_tomorrow')], ['pick', t('nm_pick')]])
+    ${lblM('who', t('tf_who'))}${seg('who', [['person', t('tf_w_person')], ['role', t('tf_w_role')], ['area', t('tf_w_area')], ['each', t('tf_w_each')]]
+      .filter(([k]) => k === 'person' || (k === 'each' ? areas.includes('front') && !(e.lockRepeat && e.repeat === 'once') : areas.length)))}${who}
+    ${e.who === 'each' ? '' : lbl(t('tf_repeat')) + repHTML}
+    ${e.who === 'each' ? '' : daily ? hint(t(e.who === 'person' ? 'tf_person_daily' : 'tf_daily_hint')) : per ? perHTML : lblM('day', t('nm_day')) + seg('dayMode', [['today', t('nm_today')], ['tomorrow', t('nm_tomorrow')], ['pick', t('nm_pick')]])
       + (e.dayMode === 'pick' ? `<div class="field"><input class="input" type="date" id="tf-date" min="${bd}" value="${esc(e.day || '')}" aria-label="${esc(t('nm_pick'))}"></div>` : '')}
-    ${e.who === 'person' ? (e.repeat === 'once' ? hint(t('tf_person_hint')) : '') : lblM('timing', t('tf_when')) + seg('timing', [['arrival', t('tk_once_arrival')], ['closing', t('tk_once_closing')]])}
+    ${e.who === 'person' ? (e.repeat === 'once' ? hint(t('tf_person_hint')) : '') : e.who === 'each' ? '' : lblM('timing', t('tf_when')) + seg('timing', [['arrival', t('tk_once_arrival')], ['closing', t('tk_once_closing')]])}
     ${where}
     ${lblM('photo', t('tf_how'))}${(opts => `<div class="chips" style="margin-bottom:12px">${opts.map(([v, l]) => `<button type="button" class="chip${e.photo === v ? ' on' : ''}" data-act="tf-set" data-k="photo" data-v="${v}">${esc(l)}</button>`).join('')}</div>`)(   // v121：德文窄屏放不下一排，改成可以换行
       daily ? [['photo', t('tf_ph_learn')], ['always', t('tf_ph_always')], ['check', t('tf_ph_check')]] : [['photo', '📷 ' + t('tf_ph_photo')], ['check', '✓ ' + t('tf_ph_check')], ...(e.repeat === 'once' ? [['result', t('tf_ph_result')]] : [])])}
@@ -4432,7 +4448,7 @@ function tfFormHTML(){
 // 任务清单：每天的任务按 店 × 区域；停用的折叠在最下面。mine = 负责人「今天」里（不分块标题外的说明）
 function tcRow(x){
   const per = isPer(x), person = x.who_kind === 'person', r = x.rate || {}, pd = per && x.active ? perDue(x) : null;   // v120：周期任务、指定某个人的
-  const who = person ? (x.assignee || {}).name || '?' : x.who_kind === 'area' ? t('tf_area_' + x.area) : t('grp_' + x.role);
+  const who = x.each_leave ? t('tc_each') : person ? (x.assignee || {}).name || '?' : x.who_kind === 'area' ? t('tf_area_' + x.area) : t('grp_' + x.role);   // v152
   const ph = per ? (x.photo === 'check' ? 'check' : 'photo') : x.photo === 'photo' ? 'learn' : x.photo;
   const now = !per || !x.active ? '' : x.done_today ? t('tc_done_today') : pd ? pd.txt : x.period && x.period.next ? t('tc_next', { d: dayLabel(x.period.next) }) : '';
   const sop = !x.sop ? '' : x.sop.gone ? t('tc_sop_gone', { n: sopTitle(x.sop) }) : t('tc_sop', { n: sopTitle(x.sop) }) + (x.sop_ai && x.photo !== 'check' ? ' · ' + t('tc_sop_ai') : '');   // v121
@@ -4597,6 +4613,7 @@ function tkAdminLine(x){
   const x0 = h ? '' : '✗ ';   // 已经留言处理的，不再打 ✗
   if (x.status === 'done') return '✓ ' + t('tk_adm_done', { n: nm, b: x.completed_by || '', t: fmtDateTime(x.completed_at) }) + (x.answer ? ' · ' + askAns(x) : '') + st;   // v101：带问题的写上回答
   if (x.status === 'nobody') return x0 + t(x.once ? 'tk_adm_nobody_once' : 'tk_adm_nobody', { n: nm, r: t('grp_' + x.role) }) + st;
+  if (x.each_leave) return (x.status === 'done' ? '✓ ' : x.status === 'missed' ? x0 : '') + nm + ' · ' + eachLine(x) + st;   // v152
   if (x.status === 'missed' && isPer(x)) return x0 + t('tk_adm_per_missed', { n: nm, p: ppl || '–' }) + st;   // v120：到期没做
   if (x.status === 'missed') return x0 + t('tk_adm_missed', { n: nm, p: ppl || '–' }) + st;
   const pd = perDue(x);
@@ -4637,9 +4654,16 @@ function gmRender(read = true){
 }
 // v76：可以留言给谁：这天负责的人 + 做了某一项的人
 function tkMsgPeople(x){
-  const out = (x.people || []).map(p => ({ id: p.id, name: p.name }));
-  (x.items || []).forEach(it => { const l = it.last; if (l && l.by_id && !out.some(p => p.id === l.by_id)) out.push({ id: l.by_id, name: l.by || '?' }); });
+  const done = new Set((x.each_done || []).map(p => p.id));   // v152：每个服务员下班前：只给还没做的人留言
+  const out = (x.people || []).filter(p => !x.each_leave || !done.has(p.id)).map(p => ({ id: p.id, name: p.name }));
+  if (!x.each_leave) (x.items || []).forEach(it => { const l = it.last; if (l && l.by_id && !out.some(p => p.id === l.by_id)) out.push({ id: l.by_id, name: l.by || '?' }); });
   return out;
+}
+// v152（数据库 v112）：每个服务员下班前（每人一份）：几个人做完了、谁做了几点、谁还没做
+function eachLine(x){
+  const ppl = x.people || [], done = (x.each_done || []).filter(p => ppl.some(q => q.id === p.id)), ids = new Set(done.map(p => p.id)), left = ppl.filter(p => !ids.has(p.id));
+  return [t('ek_line', { a: done.length, b: x.each_total ?? ppl.length }), done.length ? '✓ ' + done.map(p => p.name + ' ' + fmtTime(p.at)).join('、') : '',
+    left.length ? t('ek_left', { n: left.map(p => p.name).join('、') }) : ''].filter(Boolean).join(' · ');
 }
 // v76：给员工留言的窗口：老板写一句哪里不对 →「AI 起草」中德文 → 改 → 发送
 function tkmRender(read = true){
@@ -4666,7 +4690,7 @@ function tkAdminHTML(list, ro){   // v83：ro = 区域主管只看（没有留�
         + (l.evidence === 'photo' ? ` <button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') : '–'}</div>`; }).join('')}
     ${(x.messages || []).map(m => `<div class="meta">${esc(t('tkm_line', { t: fmtDateTime(m.at), n: m.to }))} · <span class="${m.read_at ? '' : 'negc'}">${esc(m.read_at ? t('tkm_read', { t: fmtDateTime(m.read_at) }) : t('tkm_unread'))}</span>
       <div class="small muted" style="white-space:pre-wrap">${esc(state.lang === 'de' ? m.text_de : m.text_zh)}</div></div>`).join('')}
-    ${ro ? '' : `<div class="acts" style="flex-wrap:wrap">${x.status === 'done' && (x.items || []).length && x.items.every(it => it.last && it.last.evidence === 'check') && x.day >= addDays(bizToday(), -1)
+    ${ro ? '' : `<div class="acts" style="flex-wrap:wrap">${x.status === 'done' && !x.each_leave && (x.items || []).length && x.items.every(it => it.last && it.last.evidence === 'check') && x.day >= addDays(bizToday(), -1)
         ? `<button class="link" data-act="aud-start" data-def="${x.def_id}" data-day="${x.day}">${esc(t('ta_aud_btn'))}</button>` : ''}${tkMsgPeople(x).map(p => `<button class="link" data-act="tkm-open" data-def="${x.def_id}" data-day="${x.day}" data-id="${p.id}" data-name="${esc(p.name)}">${esc(t('tkm_btn', { n: p.name }))}</button>`).join('')}</div>`}
   </div>`).join('')}</div>`;
 }
@@ -6904,10 +6928,15 @@ function bonOriWarn(b, k){
   return '';
 }
 const bonCoverBad = b => !!(b && b.read && b.read.checks && b.read.checks.cover_ok === false && !b.coverOk);
+// v152（数据库 v112）：交 Bon 前：我今天「每个服务员下班前」还没做的（先做完再打卡）
+const ekLeft = () => state.viewAs ? [] : (state.closing || []).filter(c => c.each_leave && c.status !== 'done' && c.day === (state.tasks || {}).day);
+function ekBonHTML(){ const L = ekLeft(); if (!L.length) return '';
+  return `<div class="warnbox" style="text-align:left;margin-top:0"><strong>${esc(t('ek_bon_title'))}</strong>${L.map(c => `<div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+    <span style="flex:1">${esc(toName(c))}${(c.need || {}).mode === 'photo' ? ' 📷' : ''}</span><button class="btn ghost sm" style="width:auto" data-act="task-open" data-def="${c.def_id}" data-day="${c.day}">${esc(t('ek_bon_go'))}</button></div>`).join('')}</div>`; }
 function viewBonNew(){
   const b = state.bon;
   const ph = k => `<div class="field" id="bon-ph-${k}">${bonPhHTML(k)}</div>`;   // v139
-  let html = entryHeadHTML() + modeSeg() + (!b.top && !b.bottom ? `<div class="infobox" style="margin-top:0">${esc(t('bon_steps'))}${state.me.is_admin && !state.viewAs ? '<br>' + esc(t('px_intro')) : ''}</div>` : '') + ph('top') + ph('bottom');   // v92
+  let html = entryHeadHTML() + modeSeg() + (bonPxActive() ? '' : ekBonHTML()) + (!b.top && !b.bottom ? `<div class="infobox" style="margin-top:0">${esc(t('bon_steps'))}${state.me.is_admin && !state.viewAs ? '<br>' + esc(t('px_intro')) : ''}</div>` : '') + ph('top') + ph('bottom');   // v92
   if (b.top && b.bottom){
     html += `<div id="bon-status">${bonStatusHTML()}</div>
       <div class="field"><label for="b-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="b-wallet" inputmode="decimal" autocomplete="off" placeholder="0,00" value="${esc(b.wallet)}"></div>
@@ -7087,6 +7116,8 @@ async function submitBon(){
   const short = card - (w - schluss) > 0;
   if (short && !b.ack) return toast(t('shortage_msg', { n: eur(card - (w - schluss)) }), true);
   if (bonPx() && !b.pxPick) return toast(t('px_need_pick'), true);   // v92
+  const ek = bonPxActive() ? [] : ekLeft();   // v152：每个服务员下班前还没做完 → 问一句（不挡）
+  if (ek.length && !confirm(t('ek_bon_q', { x: ek.map(toName).join('、') }))) return;
   const btn = document.querySelector('[data-act="bon-submit"]'); if (btn) btn.disabled = true;
   if (bonPxActive()){   // v92：老板代交：记到这个员工名下，数过的同时点收，发消息告诉他
     try {
@@ -9227,6 +9258,8 @@ function annOpen(id){
   if (i > 0) P.unshift(P.splice(i, 1)[0]);   // 点的那条先看
   state.annOpen = true; state.annTotal = P.length; window.scrollTo(0, 0); render();
 }
+// v152：离开任务页：从交 Bon 页打开的回到交 Bon（拍好的 Bon 照片还在）
+function tkLeave(){ const b = (state.taskOpen || {}).back; state.taskOpen = null; if (b === 'entry') state.tab = 'entry'; }
 function annAfterWork(){ if ((state.annPending || []).length && !state.viewAs){ state.annOpen = true; state.annTotal = state.annPending.length; } }   // 交完 Bon / 做完收店任务
 // v73（老板 2026-10-10）：一条一条认真读——「我已阅读并知晓」要滑到最下面、并且停留一会儿（按字数，3–15 秒）才能点
 function annGuardCheck(){
@@ -9971,8 +10004,8 @@ document.addEventListener('click', async ev => {
     }
     case 'lock-open': state.lockOpen = el.dataset.store; renderToday(); window.scrollTo(0, 0); break;
     // v71：收店任务
-    case 'task-open': state.tkSop = null; state.taskOpen = { def: el.dataset.def, day: el.dataset.day }; state.done = null; state.recon = null; state.tab = 'today'; render(); window.scrollTo(0, 0); break;
-    case 'task-close': state.taskOpen = null; render(); window.scrollTo(0, 0); break;
+    case 'task-open': state.tkSop = null; state.taskOpen = { def: el.dataset.def, day: el.dataset.day, back: state.tab === 'entry' && !state.done ? 'entry' : null }; state.done = null; state.recon = null; state.tab = 'today'; render(); window.scrollTo(0, 0); break;   // v152：从交 Bon 页来的，做完 / 返回回到交 Bon
+    case 'task-close': tkLeave(); render(); window.scrollTo(0, 0); break;
     // v101：回答带问题的任务（检查废油桶）；回答后推送给老板（push v11）
     case 'task-answer': {
       const c = tkOpenRun(); if (!c) break; el.disabled = true;
@@ -10035,6 +10068,7 @@ document.addEventListener('click', async ev => {
       if (k === 'repeat' && e.repeat === 'week' && +e.rd > 7) e.rd = 1;
       if (k === 'repeat' && +e.times > (e.repeat === 'week' ? 7 : 10)) e.times = e.repeat === 'week' ? 7 : 10;   // v132
       if (e.repeat === 'once' && !e.day){ e.day = addDays(bizToday(), 1); e.dayMode = 'tomorrow'; }
+      if (k === 'who' && v === 'each'){ e.repeat = 'daily'; e.timing = 'closing'; e.role = 'service'; if (e.photo === 'result') e.photo = 'photo'; }   // v152：每个服务员下班前 = 每天、收店时
       if (k === 'who' || k === 'area'){ const ok = tfStoresFor(tfArea(e)); e.stores = e.stores.filter(st => ok.includes(st)); if (!e.stores.length && ok.length === 1) e.stores = ok.slice(); }
       tfRedraw(); break;
     }
@@ -10077,15 +10111,15 @@ document.addEventListener('click', async ev => {
         if (!zh && !de) zh = txt;
       }
       try {
-        const person = e.who === 'person', per = isPer(e), once = e.repeat === 'once';
-        const r = await rpc('task_save', { ...tok(), p_id: e.id || null, p_who: e.who, p_staff_id: person ? e.staff : null, p_role: e.who === 'role' ? e.role : null,
-          p_area: e.who === 'area' ? e.area : null, p_repeat: e.repeat, p_day: once ? e.day : null,
-          p_rep_month: per && ['quarter', 'year'].includes(e.repeat) ? +e.rm : null, p_rep_day: per ? +e.rd : null, p_timing: person ? null : e.timing,   // v120：周期从哪天开始
+        const person = e.who === 'person', per = isPer(e), once = e.repeat === 'once', each = e.who === 'each';   // v152
+        const r = await rpc('task_save', { ...tok(), p_id: e.id || null, p_who: each ? 'role' : e.who, p_staff_id: person ? e.staff : null, p_role: each ? 'service' : e.who === 'role' ? e.role : null,
+          p_area: e.who === 'area' ? e.area : null, p_repeat: each ? 'daily' : e.repeat, p_day: once ? e.day : null,
+          p_rep_month: per && ['quarter', 'year'].includes(e.repeat) ? +e.rm : null, p_rep_day: per ? +e.rd : null, p_timing: person ? null : each ? 'closing' : e.timing,   // v120：周期从哪天开始
           p_stores: person ? (e.tag ? [e.tag] : []) : e.stores, p_name_zh: zh, p_name_de: de,
           p_photo: e.photo === 'result' ? 'check' : per && e.photo === 'always' ? 'photo' : e.photo,
           p_sop_item: e.sop || null, p_sop_ai: !!(e.sop && !['check', 'result'].includes(e.photo) && e.sopAi),   // v121：连 SOP、AI 按 SOP 看照片
           p_extra: { photos: e.photos || [], link: link || null, result: e.photo === 'result' && once,   // v128：附照片、链接、交回结果
-                     times: per ? (+e.times || 1) : 1, makeup: per ? e.makeup !== false : true } });   // v132：几次、没做完要不要补
+                     times: per ? (+e.times || 1) : 1, makeup: per ? e.makeup !== false : true, each } });   // v152：每个服务员下班前   // v132：几次、没做完要不要补
         if (e.sop) state.sopSug = (state.sopSug || []).filter(x => x.sop_item_id !== e.sop);
         if (r && person && once && !r.self) callPush('task_assign', { def_id: r.id });   // 推给被指定的人（push v12 只推一次性的；换了人才会再推）
         if (r && once && !person) callPush('task_due');   // v146（数据库 v107 / push v14）：按岗位 / 区域的一次性任务马上推给那天要做的人（排班已发布时）
@@ -10229,14 +10263,14 @@ document.addEventListener('click', async ev => {
     case 'task-check': {
       const c = tkOpenRun(); if (!c) break; el.disabled = true;
       try { const st = await rpc('task_item_check', { ...tok(), p_def: c.def_id, p_item: el.dataset.item, p_day: c.day }); await loadTasks();
-        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); callPush('task_due'); annAfterWork(); render(); window.scrollTo(0, 0); } else { toast(t('saved')); keepScroll(render); } }   // v149：抽查到的话马上推给查的人
+        if (st && st.completed_at){ tkLeave(); toast(t('tk_all_done')); callPush('task_due'); annAfterWork(); render(); window.scrollTo(0, 0); } else { toast(t('saved')); keepScroll(render); } }   // v149：抽查到的话马上推给查的人
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
     case 'task-override': {
       if (!confirm(t('tk_override_q'))) break; el.disabled = true;
       try { const st = await rpc('task_item_override', { ...tok(), p_row: el.dataset.id }); await loadTasks();
-        if (st && st.completed_at){ state.taskOpen = null; toast(t('tk_all_done')); annAfterWork(); render(); window.scrollTo(0, 0); } else keepScroll(render); }
+        if (st && st.completed_at){ tkLeave(); toast(t('tk_all_done')); annAfterWork(); render(); window.scrollTo(0, 0); } else keepScroll(render); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
