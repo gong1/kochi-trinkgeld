@@ -1913,10 +1913,13 @@ function enApply(pairs){   // 只换页面上的文字，不重新读数据；�
   for (let n = w.nextNode(); n; n = w.nextNode()){ const v = n.nodeValue; if (v.length < 2) continue;
     const y = v.replace(re, m => map.get(m)); if (y !== v) n.nodeValue = y; }
 }
-// v161（老板 2026-11-10）：语言都在语言切换那里：列出另外两种，点一下就换（v159 把 English 单独放在登录页和「更多」，老板页头根本没有）
+// v162（老板 2026-11-10）：全系统只有一个语言按钮：显示现在的语言，点开选中文 / Deutsch / English
 const LANGS = [['zh', '中文'], ['de', 'Deutsch'], ['en', 'English']];
-const langOthers = () => LANGS.filter(x => x[0] !== (state.en ? 'en' : state.lang));
-const langBtns = () => langOthers().map(([k, n], i) => `<button class="hbtn" type="button" data-act="set-lang" data-l="${k}"${i ? ' style="margin-left:6px"' : ''}>${n}</button>`).join('');
+const langNow = () => state.en ? 'en' : state.lang;
+const langBtn = cls => `<button class="${cls || 'hbtn'}" type="button"${cls ? ' style="width:auto"' : ''} data-act="lang-menu">${(LANGS.find(x => x[0] === langNow()) || LANGS[0])[1]} ▾</button>`;
+function langMenu(){ const dlg = $('#photoDlg'); state.menu = false;
+  dlg.innerHTML = '<div style="font-weight:700;padding:2px 64px 10px 2px">语言 · Sprache · Language</div>' + LANGS.map(([k, n]) => `<button class="btn${k === langNow() ? '' : ' ghost'}" type="button" style="margin:4px 0" data-act="set-lang" data-l="${k}">${k === langNow() ? '✓ ' : ''}${n}</button>`).join('');
+  dlg.showModal(); }
 function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function today(){ return ymd(new Date()); }
 function parseD(s){ const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); }
@@ -5023,7 +5026,7 @@ function viewMore(){
   if (state.taskPage) return viewTaskPage();   // v130：任务
   if (state.taRec) return viewTaRec();   // v149：我的任务记录
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
-  $('#main').innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0 12px"><h2 style="margin:0">${esc(t('more_title'))}</h2><span style="display:flex;gap:6px">${langOthers().map(([k, n]) => `<button class="btn ghost sm" style="width:auto" type="button" data-act="set-lang" data-l="${k}">${n}</button>`).join('')}</span></div><div class="more">
+  $('#main').innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0 12px"><h2 style="margin:0">${esc(t('more_title'))}</h2>${langBtn('btn ghost sm')}</div><div class="more">
     ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
     ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${!state.me.is_admin && state.myDocs && state.myDocs.started ? b('more-docs', t('doc_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${''}${b('logout', t('logout'))}</div>`;
@@ -6753,7 +6756,7 @@ function shellHTML(){
     <header>
       <div class="brand">${esc(t('app'))}<small>${esc(m.name)}${state.personal ? ' · ' + esc(t('own_short')) : ''}</small></div>
       ${navTabs().includes('more') ? `<button class="hbtn" data-act="fb-open">${esc(t('hdr_fb'))}</button>`   // v68：有「更多」页的人，页头只留「反馈」（截当前这一页）
-      : `${langBtns()}
+      : `${langBtn()}
       <button class="hbtn" data-act="menu" aria-label="Menu" aria-expanded="${state.menu}">⋯</button>`}
       ${menuHTML()}
     </header>
@@ -6799,7 +6802,7 @@ async function renderLogin(){
   }
   const p = state.loginPick;
   $('#app').innerHTML = `<div class="login">
-    <div style="display:flex;justify-content:space-between;align-items:center"><strong>Kochi</strong><span>${langBtns()}</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center"><strong>Kochi</strong><span>${langBtn()}</span></div>
     ${p ? `
       <h1>${esc(p.name)}</h1><p>PIN</p>
       <form class="pinbox" data-form="login">
@@ -6867,7 +6870,7 @@ async function doLogin(){
 
 function renderSetPin(){
   $('#app').innerHTML = `<div class="login">
-    <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(state.me.name)}</strong><span>${langBtns()}</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(state.me.name)}</strong><span>${langBtn()}</span></div>
     <h1>${esc(t('set_pin_title'))}</h1><p>${esc(t('set_pin_sub'))}</p>
     <p class="small" style="background:rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;line-height:1.5">${esc(t('pin_safe'))}</p>
     <form class="pinbox" data-form="setpin">
@@ -9708,7 +9711,7 @@ function renderAnnounce(){
     state.annGuard = { id: a.id, until: Date.now() + 1000 * Math.min(15, Math.max(3, Math.round(len / 25))), scrolled: false };
   }
   $('#app').innerHTML = `<div class="login" style="max-width:640px">
-    <div style="display:flex;justify-content:space-between;align-items:center"><strong>📢 ${esc(t('an_title'))}${total > 1 ? ' · ' + esc(t('an_of', { a: total - n + 1, b: total })) : ''}</strong><span>${late ? '' : `<button class="hbtn" data-act="an-later">${esc(t('an_later'))}</button> `}${langBtns()}</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center"><strong>📢 ${esc(t('an_title'))}${total > 1 ? ' · ' + esc(t('an_of', { a: total - n + 1, b: total })) : ''}</strong><span>${late ? '' : `<button class="hbtn" data-act="an-later">${esc(t('an_later'))}</button> `}${langBtn()}</span></div>
     ${info ? '' : `<div class="small ${late ? 'negc' : 'muted'}" style="margin-top:8px">${esc(late ? t('an_overdue_hint') : t('an_due_hint', { t: fmtDateTime(a.due_at) }))}</div>`}
     <h1 style="margin-top:14px">${esc(annT(a, 'title'))}</h1>
     <div style="white-space:pre-wrap;font-size:17px;line-height:1.6;margin:12px 0">${esc(annT(a, 'body'))}</div>
@@ -10362,7 +10365,9 @@ document.addEventListener('click', async ev => {
   const el = ev.target.closest('[data-act]'); if (!el) { if (state.menu && !ev.target.closest('.menu')) setMenu(false); return; }   // v74：不重画整页
   const act = el.dataset.act, f = state.form;
   switch (act){
-    case 'set-lang': { state.menu = false;   // v161
+    case 'lang-menu': langMenu(); break;   // v162
+    case 'set-lang': { state.menu = false; { const d = $('#photoDlg'); if (d && d.open) d.close(); }   // v161；v162：从同一个按钮点开选
+      if (el.dataset.l === langNow()) break;
       if (el.dataset.l === 'en'){ try { await loadEn(); } catch(e){ toast(errText(e), true); break; } state.en = true; state.lang = 'de'; }
       else { state.en = false; state.lang = el.dataset.l; }
       LS.set('en', state.en); LS.set('lang', state.lang); render(); break; }
