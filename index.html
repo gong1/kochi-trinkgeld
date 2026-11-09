@@ -56,6 +56,7 @@ h3{font-size:16px;margin:18px 0 8px;color:var(--muted);font-weight:600}
 .row{display:flex;gap:10px;align-items:center}
 .row > *{flex:1;min-width:0}
 .input{min-width:0}
+body.en #main::after{content:"Tasks, notices and SOPs are translated by AI. German and Chinese are the official versions.";display:block;margin:18px 0 4px;font-size:12px;color:var(--muted);text-align:center}
 .sheet{background:var(--card);border-radius:var(--r-m);padding:16px;margin-bottom:14px;border:1px solid var(--line)}
 
 .field{margin-bottom:14px}
@@ -1878,6 +1879,40 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
   return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=1'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+// v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
+const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
+const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
+function enT(x){
+  if (!state.en) return x;
+  if (Array.isArray(x)) return x.map(enT);
+  if (typeof x !== 'string') return x;
+  const v = x.trim(); if (!/[A-Za-zÄÖÜäöüß\u4e00-\u9fff]{2}/.test(v)) return x;
+  if (EN_TX[v]) return EN_TX[v];
+  if (v.length <= 5000 && Date.now() >= enWaitUntil){ enQ.add(v); clearTimeout(enTimer); enTimer = setTimeout(enFlush, 200); }
+  return x;
+}
+async function enFlush(){
+  if (enBusy || !enQ.size || !state.token) return;
+  const batch = []; let n = 0;
+  for (const v of enQ){ if (batch.length >= 30 || (batch.length && n + v.length > 12000)) break; batch.push(v); n += v.length; }
+  batch.forEach(v => enQ.delete(v)); enBusy = true;
+  try {
+    const r = await callTasks({ action: 'translate_en', texts: batch }), pairs = [];
+    batch.forEach((v, i) => { const y = String((r.t || [])[i] || '').trim(); if (y){ EN_TX[v] = y; if (y !== v) pairs.push([v, y]); } });
+    const keys = Object.keys(EN_TX); if (keys.length > 3000) keys.slice(0, keys.length - 3000).forEach(k => delete EN_TX[k]);
+    try { localStorage.setItem('en_tx', JSON.stringify(EN_TX)); } catch(e){}
+    enApply(pairs);
+  } catch(e){ enWaitUntil = Date.now() + 60000; enQ.clear(); }   // AI 或网络出错：先显示德语，一分钟后再试
+  enBusy = false;
+  if (enQ.size) enFlush();
+}
+function enApply(pairs){   // 只换页面上的文字，不重新读数据；长的先配，一次换完（一个名字包含另一个名字时不会换两遍）
+  if (!pairs.length) return;
+  const map = new Map(pairs), re = new RegExp([...map.keys()].sort((x, y) => y.length - x.length).map(x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'g');
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let n = w.nextNode(); n; n = w.nextNode()){ const v = n.nodeValue; if (v.length < 2) continue;
+    const y = v.replace(re, m => map.get(m)); if (y !== v) n.nodeValue = y; }
+}
 const enBtn = () => state.en ? '' : '<button class="hbtn" data-act="lang-en" style="margin-right:6px">English</button>';
 function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function today(){ return ymd(new Date()); }
@@ -2789,7 +2824,7 @@ function taskCardHTML(k){
   }
   if (k.kind === 'closing'){   // v71：收店任务；v95：某一天的任务（收店时 / 到店后）
     const nd = d.need || {}, n = d.items.length, got = d.items.filter(i => i.done).length;
-    const title = (d.each_leave ? t('ek_card', { n: toName(d), s: d.store }) : isPer(d) && !d.named ? t('tk_per', { r: perLabel(d), n: toName(d), s: d.store }) : d.named ? toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d) + (d.store ? ' · ' + d.store : '') : d.once ? t('tk_once', { w: toWhen(d), n: toName(d), s: d.store }) : t('tk_close', { n: state.lang === 'de' ? d.name_de : d.name_zh, s: d.store })) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
+    const title = (d.each_leave ? t('ek_card', { n: toName(d), s: d.store }) : isPer(d) && !d.named ? t('tk_per', { r: perLabel(d), n: toName(d), s: d.store }) : d.named ? toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d) + (d.store ? ' · ' + d.store : '') : d.once ? t('tk_once', { w: toWhen(d), n: toName(d), s: d.store }) : t('tk_close', { n: state.lang === 'de' ? enT(d.name_de) : d.name_zh, s: d.store })) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
     const sub = (k.status === 'overdue' && d.late_days ? t('tk_late_n', { n: d.late_days, d: dayLabel(d.day) })   // v144：收废油的检查晚了几天（数据库 v105）
       : t(k.status === 'overdue' ? 'tk_close_over' : d.once && d.timing === 'arrival' ? 'tk_once_now_arrival' : k.status === 'now' ? 'tk_close_now' : 'tk_close_later')) + ' · ' + tkHow(nd) + toByLead(d)
       + (d.ask && got === n && !d.answer ? ' · ' + t('tk_ask_pending') : '');   // v101
@@ -2803,7 +2838,7 @@ function taskCardHTML(k){
       `<button class="btn" data-act="lock-open" data-store="${esc(d.store)}">${esc(+d.done_count ? t('lk_cont', { a: d.done_count, b: d.total }) : t('lk_start'))}</button>`);
   }
   if (k.kind === 'message'){
-    const txt = state.lang === 'de' ? d.text_de : d.text_zh;
+    const txt = state.lang === 'de' ? enT(d.text_de) : d.text_zh;
     const title = d.ask ? t('msg_q_title') : d.feedback ? t('msg_fb_title') : d.task ? t('msg_task_title') : t('msg_title');   // v76
     const btns = d.ask
       ? `<textarea class="input" id="ans-${d.id}" rows="2" placeholder="${esc(t('msg_ans_ph'))}" style="margin-top:8px"></textarea>
@@ -2812,7 +2847,7 @@ function taskCardHTML(k){
           <button class="btn" style="flex:1 1 100%" data-act="msg-ans" data-id="${d.id}">${esc(t('msg_ans_send'))}</button></div>`
       : `<div class="task-b"><button class="btn" data-act="msg-read" data-id="${d.id}">${esc(t(d.task ? 'msg_ok_task' : 'msg_ok'))}</button></div>`;
     return `<div class="task msg"><div class="task-t">${d.ask ? '❓' : '💬'} ${esc(title)}</div><div style="margin-top:4px;white-space:pre-wrap">${esc(txt)}</div>
-      <div class="task-s">${d.entry ? esc(t('msg_about', { d: dayLabel(d.entry.date), s: d.entry.store })) + ' · ' : ''}${d.task ? esc((state.lang === 'de' ? d.task.name_de : d.task.name_zh) + ' · ' + d.task.store + ' · ' + dayLabel(d.task.day)) + ' · ' : ''}${esc(fmtDateTime(d.at))}</div>
+      <div class="task-s">${d.entry ? esc(t('msg_about', { d: dayLabel(d.entry.date), s: d.entry.store })) + ' · ' : ''}${d.task ? esc((state.lang === 'de' ? enT(d.task.name_de) : d.task.name_zh) + ' · ' + d.task.store + ' · ' + dayLabel(d.task.day)) + ' · ' : ''}${esc(fmtDateTime(d.at))}</div>
       ${btns}</div>`;
   }
   if (k.kind === 'notices') return `<div class="task"><div class="task-t">${esc(t('tk_notice'))}</div>${noticeHTML({ id: d.ids.join(','), kind: d.kind, week_start: d.week_start, items: d.items })}</div>`;   // v68
@@ -2995,9 +3030,9 @@ function sopS(){ return state.sop || (state.sop = { view: 'list', q: '' }); }
 function sopHost(){ return state.me.is_admin ? $('#asub') : $('#main'); }
 function sopShown(){ return state.me.is_admin ? (state.tab === 'admin' && state.adminSub === 'sop') : (state.tab === 'more' && !!state.sop); }
 function sopGo(view, extra){ const S = sopS(); S.view = view; Object.assign(S, extra || {}); if (state.me.is_admin){ state.tab = 'admin'; state.adminSub = 'sop'; } else state.tab = 'more'; render(); window.scrollTo(0, 0); }
-function sopT(c, k){ const zh = c && c[k + '_zh'], de = c && c[k + '_de']; return state.lang === 'de' ? (de && (Array.isArray(de) ? de.length : de) ? de : zh) : (zh && (Array.isArray(zh) ? zh.length : zh) ? zh : de); }
+function sopT(c, k){ const zh = c && c[k + '_zh'], de = c && c[k + '_de']; return state.lang === 'de' ? enT(de && (Array.isArray(de) ? de.length : de) ? de : zh) : (zh && (Array.isArray(zh) ? zh.length : zh) ? zh : de); }
 function sopTitle(x){ return sopT(x, 'title') || ''; }
-function sopTopicName(tp){ return tp ? (state.lang === 'de' ? tp.name_de || tp.name_zh : tp.name_zh || tp.name_de) : ''; }
+function sopTopicName(tp){ return tp ? (state.lang === 'de' ? enT(tp.name_de || tp.name_zh) : tp.name_zh || tp.name_de) : ''; }
 function sopRoleName(r){ return r ? t('grp_' + r) : t('sop_role_all'); }
 function sopMyArea(){ return (state.me.main_role && ['hot', 'cold', 'skewer', 'clean'].includes(state.me.main_role)) ? 'kitchen' : 'front'; }
 // 照片：页面上还没有链接的，一次要
@@ -3081,7 +3116,7 @@ function sopAdminTopHTML(){
 }
 function sopPendCard(v){
   const S = sopS(), c = v.content || {}, tp = v.topic, nt = v.new_topic, rej = S.rejecting === v.version_id, ai = v.ai || {};
-  const topicLine = tp ? sopRoleName(tp.role) + ' · ' + sopTopicName(tp) : t('sop_newtopic', { r: sopRoleName(nt && nt.role), n: (nt && (state.lang === 'de' ? nt.name_de || nt.name_zh : nt.name_zh || nt.name_de)) || '' });
+  const topicLine = tp ? sopRoleName(tp.role) + ' · ' + sopTopicName(tp) : t('sop_newtopic', { r: sopRoleName(nt && nt.role), n: (nt && (state.lang === 'de' ? enT(nt.name_de || nt.name_zh) : nt.name_zh || nt.name_de)) || '' });
   return `<div class="item sop-pend"><div class="top"><div><strong>${esc(sopTitle(c))}</strong><span class="tag">${esc(t('area_' + v.area))}</span><span class="tag pend">${esc(v.cur ? t('sop_is_edit', { n: v.n }) : t('sop_is_new'))}</span></div>
       <div class="meta small muted num">${esc(v.by || '')} · ${esc(fmtDateTime(v.at))}</div></div>
     <div class="meta">${esc(topicLine)}</div>
@@ -3218,7 +3253,7 @@ function onbWhy(x){
 // v124（SOP 第二步，数据库 v89）：带教清单 = 确认过的 SOP。带教人评价时每条点「会了 / 还要练」；新同事在「今天」看进度；老板在带教详情里看、加、去掉
 const ocSt = st => st === 'can' ? t('oc_can') : st === 'practice' ? t('oc_practice') : t('oc_todo');
 const ocTag = st => `<span class="tag ${st === 'can' ? 'ok' : st === 'practice' ? 'pend' : 'off'}">${esc(ocSt(st))}</span>`;
-const ocTopic = i => state.lang === 'de' ? i.topic_de || i.topic_zh || '' : i.topic_zh || i.topic_de || '';
+const ocTopic = i => state.lang === 'de' ? enT(i.topic_de || i.topic_zh || '') : i.topic_zh || i.topic_de || '';
 function ocGroups(items, row){ const g = []; (items || []).forEach(i => { const k = ocTopic(i); let x = g.find(v => v.k === k); if (!x) g.push(x = { k, list: [] }); x.list.push(i); });
   return g.map(x => `<div class="tdl-g">${esc(x.k)}</div>` + x.list.map(row).join('')).join(''); }
 function ocSumHTML(C){ return `<div class="small"><strong>${esc(t('oc_sum', { a: C.can, b: C.practice, c: C.todo, n: C.total }))}</strong></div><div class="tdl-bar" style="margin:6px 0"><i style="width:${C.total ? Math.round(100 * C.can / C.total) : 0}%"></i></div>`; }
@@ -3268,7 +3303,7 @@ function exHTML(D){
       <button class="link" style="margin-top:8px" data-act="oex-cancel">${esc(t('cancel'))}</button></div>`;
   }
   const hist = X.length ? `<details class="fold" style="margin-top:8px"${ended ? ' open' : ''}><summary>${esc(t('oe_hist', { n: X.length }))}</summary><div class="inner"><div class="list">${X.map(x => `<div class="item"><div class="top"><div><strong>${esc(dayLabel(String(x.at).slice(0, 10)))}</strong> <span class="tag ${x.decision === 'pass' ? 'ok' : 'pend'}">${esc(t(x.decision === 'pass' ? 'oe_d_pass' : 'oe_d_cont'))}</span></div><div class="meta small muted">${esc(x.by || '')}</div></div>
-      ${(x.items || []).map(i => `<div class="meta small">${esc((state.lang === 'de' ? i.title_de || i.title_zh : i.title_zh || i.title_de) + (state.lang === 'de' ? ': ' : '：') + t(i.result === 'pass' ? 'oe_pass' : 'oe_practice') + (i.note ? ' · ' + i.note : ''))}</div>`).join('')}${x.note ? `<div class="meta">${esc(x.note)}</div>` : ''}</div>`).join('')}</div></div></details>` : '';
+      ${(x.items || []).map(i => `<div class="meta small">${esc((state.lang === 'de' ? enT(i.title_de || i.title_zh) : i.title_zh || i.title_de) + (state.lang === 'de' ? ': ' : '：') + t(i.result === 'pass' ? 'oe_pass' : 'oe_practice') + (i.note ? ' · ' + i.note : ''))}</div>`).join('')}${x.note ? `<div class="meta">${esc(x.note)}</div>` : ''}</div>`).join('')}</div></div></details>` : '';
   return `<h3 style="margin:14px 0 6px">${esc(t('oe_title'))}</h3>${ready}${ai}${!ended && !E && !state.viewAs ? `<button class="btn" style="margin:4px 0" data-act="oex-open">${esc(t('oe_start'))}</button>` : ''}${form}${hist}`;
 }
 // v150（数据库 v110）：新同事带教期间最近 2 周的任务记录（合格 = 完成率 ≥ 90%、没有不实确认；轮到不到 5 次 = 看不出来）
@@ -3415,7 +3450,7 @@ function onbAiHTML(r){
   const a = r.ai, busy = state.onbAiBusy === r.day, D = state.onbDet, nx = D.next;
   const run = k => `<button class="link" data-act="onba-ai" data-day="${r.day}" ${busy ? 'disabled' : ''}>${esc(t(busy ? 'onb_ai_busy' : k))}</button>`;
   if (!a) return `<div class="acts">${run('onb_ai_run')}</div>`;
-  const o = a.out || {}, li = xs => `<ul>${xs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`, next = state.lang === 'de' ? (o.next_de || o.next_zh) : (o.next_zh || o.next_de);
+  const o = a.out || {}, li = xs => `<ul>${xs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`, next = state.lang === 'de' ? enT((o.next_de || o.next_zh)) : (o.next_zh || o.next_de);
   // v109：发给下个班实际同班的带教人；没有就自己选
   const nm = nx && (nx.mentors || []).length ? nx.mentors : null;
   const sendBtn = D.plan.ended_at ? '' : nm ? ` <button class="link" data-act="onba-msg" data-day="${r.day}" data-to="${nm.map(m => m.staff_id).join(',')}" data-ai="1">${esc(t('onb_ai_send_next', { d: dayLabel(nx.day), m: nm.map(m => m.name).join(state.lang === 'de' ? ', ' : '、') }))}</button>`
@@ -3481,7 +3516,7 @@ function onbDetailHTML(){
   if (F.end) form = `<div class="sheet"><div class="field"><label for="onb-end">${esc(t('onb_end_note'))}</label><textarea class="input" id="onb-end" rows="2" maxlength="1000"></textarea></div>${btns('onba-end-save', t('onb_end_btn'))}</div>`;
   const dayHTML = r => {
     const tag = r.src === 'extra' ? t('onb_src_extra') : r.src === 'answer' ? t('onb_src_answer') : '', ms = r.mentors || [];
-    const msgs = (r.msgs || []).map(m => `<div class="small muted" style="margin-top:6px">💬 ${esc(m.to)} · ${esc(fmtDateTime(m.at))} · ${esc(t(m.read_at ? 'onb_read' : 'onb_unread'))}${state.lang === 'de' ? ': ' : '：'}${esc(state.lang === 'de' ? m.text_de : m.text_zh)}</div>`).join('');
+    const msgs = (r.msgs || []).map(m => `<div class="small muted" style="margin-top:6px">💬 ${esc(m.to)} · ${esc(fmtDateTime(m.at))} · ${esc(t(m.read_at ? 'onb_read' : 'onb_unread'))}${state.lang === 'de' ? ': ' : '：'}${esc(state.lang === 'de' ? enT(m.text_de) : m.text_zh)}</div>`).join('');
     const boxOpen = (F.msg && F.msg.day === r.day) || (F.ask && F.ask.day === r.day);
     return `<div class="item"><div class="top"><div><strong>${esc(dayLabel(r.day))}</strong>${storeTag(r.store)}${r.start ? ` <span class="muted num">${esc(r.start)}–${esc(r.end)}</span>` : ''}${tag ? `<span class="tag">${esc(tag)}</span>` : ''}${(r.unread || []).length ? `<span class="tag pend">${esc(t('onb_new_tag', { n: r.unread.length }))}</span>` : ''}</div></div>
       <div class="meta">${esc(ms.length ? t('onb_revs', { m: ms.map(m => m.name).join(state.lang === 'de' ? ', ' : '、') }) : t('onb_m_away'))}</div>
@@ -4064,7 +4099,7 @@ function tkAttHTML(c){
 // 一份交回的结果：文件（照片小图、PDF 按钮）、一句话、谁什么时候；aiShow = 给老板 / 建的人看 AI 的提示
 function tkResItemHTML(r, aiShow){
   const ph = (r.files || []).filter(f => f.kind === 'photo').map(f => f.path), pdf = (r.files || []).filter(f => f.kind === 'pdf');
-  const ai = r.ai, aiLine = !aiShow ? '' : ai ? `<div class="meta ${ai.verdict === 'done' ? 'pos' : ai.verdict === 'not_done' ? 'negc' : 'warnc'}">${esc(t('tk_res_ai_' + (ai.verdict || 'unsure')))}${(state.lang === 'de' ? ai.say_de : ai.say_zh) ? ' · ' + esc(state.lang === 'de' ? ai.say_de : ai.say_zh) : ''}</div>`
+  const ai = r.ai, aiLine = !aiShow ? '' : ai ? `<div class="meta ${ai.verdict === 'done' ? 'pos' : ai.verdict === 'not_done' ? 'negc' : 'warnc'}">${esc(t('tk_res_ai_' + (ai.verdict || 'unsure')))}${(state.lang === 'de' ? ai.say_de : ai.say_zh) ? ' · ' + esc(state.lang === 'de' ? enT(ai.say_de) : ai.say_zh) : ''}</div>`
     : `<div class="meta muted">${esc(t('tk_res_ai_none'))}</div>`;
   return `<div class="item"><div class="meta">${esc([r.by, fmtDateTime(r.at)].filter(Boolean).join(' · '))}</div>
     ${r.note ? `<div style="white-space:pre-wrap;margin:4px 0">${esc(r.note)}</div>` : ''}${tfThumbs(ph)}
@@ -4115,13 +4150,13 @@ function tkOpenRun(){ const o = state.taskOpen; return o && ((state.closing || [
 function renderTaskRun(){
   const c = tkOpenRun();
   if (!c){ state.taskOpen = null; $('#main').innerHTML = `<div class="empty">${esc(t('tk_gone'))}</div>`; return; }
-  const nm = x => state.lang === 'de' ? x.name_de : x.name_zh, hint = x => state.lang === 'de' ? x.hint_de : x.hint_zh;
+  const nm = x => state.lang === 'de' ? enT(x.name_de) : x.name_zh, hint = x => state.lang === 'de' ? enT(x.hint_de) : x.hint_zh;
   const photoRun = c.need && c.need.mode === 'photo';
   const cam = (it, label, cls) => `<label class="btn ${cls || ''} tk-cam" style="flex:1 1 45%">${esc(label)}<input type="file" accept="image/*" capture="environment" data-taskitem="${it.id}" hidden></label>`;
   const rows = c.items.map((it, i) => {
     const l = it.last, flagged = l && l.ai && l.ai.ok === false && !l.override, photo = photoRun && !it.check_only;   // v77：只打勾的项（如 Rest 垃圾桶）不拍照
     const st = it.done ? `<div class="meta num"><span class="pos">✓</span> ${esc(t('tk_item_by', { t: fmtDateTime(l.done_at), n: l.by || '' }))}${l.evidence === 'check' && !c.need_result ? ' · ' + esc(t('tk_item_checked')) : ''}${l.override ? ' · ' + esc(tkRevTag(l)) : ''}</div>` : '';
-    const msgs = flagged ? (l.ai.msgs || []).map(m => `<div>⚠ ${esc(state.lang === 'de' ? m.de : m.zh)}</div>`).join('') : '';
+    const msgs = flagged ? (l.ai.msgs || []).map(m => `<div>⚠ ${esc(state.lang === 'de' ? enT(m.de) : m.zh)}</div>`).join('') : '';
     const acts = flagged ? cam(it, t('tk_retake')) + `<button class="btn ghost" style="flex:1 1 45%" data-act="task-override" data-id="${l.row_id}">${esc(t('tk_override'))}</button>`
       : c.need_result ? ''   // v128：交回结果在下面
       : it.done ? (l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') + (photo ? cam(it, t('tk_retake'), 'ghost sm') : '')
@@ -4162,14 +4197,14 @@ async function taskUpload(input){
     await loadTasks();
     if (r && r.ai && r.ai.ok === false) toast(t('tk_ai_problem'), true);
     else if (r && r.state && r.state.completed_at){ tkLeave(); toast(t('tk_all_done')); annAfterWork(); }   // v115：做完了，有空看公告；v152：回到来的地方
-    else toast(t('lk_saved', { n: state.lang === 'de' ? it.name_de : it.name_zh }));
+    else toast(t('lk_saved', { n: state.lang === 'de' ? enT(it.name_de) : it.name_zh }));
     render();
   } catch(e){ toast(errText(e), true); render(); }
 }
 // ============ 任务模块第二步（v95，数据库 v68 / 文件服务 tasks v10，老板 2026-10-19）：某一天的任务 + 负责人 ============
 // 老板在「管理 → 任务」加某一天的任务、设每家店前场 / 后厨的负责人；负责人在「今天」把任务交给某个人；做的人在「今天」做
 const FROLES = ['service', 'runner', 'bar'];
-const toName = x => state.lang === 'de' ? x.name_de : x.name_zh;
+const toName = x => state.lang === 'de' ? enT(x.name_de) : x.name_zh;
 const toWhen = x => t('tk_once_' + (x.timing === 'arrival' ? 'arrival' : x.timing === 'anytime' ? 'anytime' : 'closing'));   // v118：点名任务 = 全天
 // v120：周期任务（数据库 v86）：「每周一」「每月 5 号」…；这一期：逾期 N 天（红）/ 今天最后一天（橙）/ 截止哪天
 const WDAYS = { zh: ['一', '二', '三', '四', '五', '六', '日'], de: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'] };
@@ -4677,8 +4712,8 @@ function perfText(){
 }
 // ============ 任务模块第三步：收废油（v101，数据库 v75 / push v11，老板 2026-10-21）============
 // 带问题的任务（例如检查废油桶）：问题、员工的回答
-const askQ = x => x && x.ask ? x.ask[state.lang === 'de' ? 'q_de' : 'q_zh'] : '';
-const askOpt = (x, a) => x && x.ask ? x.ask[a + '_' + (state.lang === 'de' ? 'de' : 'zh')] : '';
+const askQ = x => x && x.ask ? enT(x.ask[state.lang === 'de' ? 'q_de' : 'q_zh']) : '';
+const askOpt = (x, a) => x && x.ask ? enT(x.ask[a + '_' + (state.lang === 'de' ? 'de' : 'zh')]) : '';
 const askAns = x => x && x.ask && x.answer ? askOpt(x, x.answer) : '';
 // AI 看照片看到的（检查废油桶：油面大约多高、过没过 1/3）
 function aiSaw(seen){
@@ -4742,7 +4777,7 @@ function oilHTML(){
 function tkHandled(x){ const ms = x.messages || []; return !ms.length ? null : ms.every(m => m.read_at) ? 'done' : 'wait'; }
 const tkRed = x => ['missed', 'nobody'].includes(x.status) && !tkHandled(x);
 function tkAdminLine(x){
-  const nm = (x.once ? toWhen(x) + ' · ' : isPer(x) ? perLabel(x) + ' · ' : '') + (state.lang === 'de' ? x.name_de : x.name_zh), ppl = (x.people || []).map(p => p.name).join('、');   // v95；v120：周期任务
+  const nm = (x.once ? toWhen(x) + ' · ' : isPer(x) ? perLabel(x) + ' · ' : '') + (state.lang === 'de' ? enT(x.name_de) : x.name_zh), ppl = (x.people || []).map(p => p.name).join('、');   // v95；v120：周期任务
   const h = tkHandled(x), ms = x.messages || [], who = list => [...new Set(list.map(m => m.to))].join('、');
   const st = h === 'done' ? ' · ' + t('tkm_st_done', { n: who(ms), t: fmtDateTime(ms.map(m => m.read_at).sort().pop()) })
     : h === 'wait' ? ' · ' + t('tkm_st_wait', { n: who(ms.filter(m => !m.read_at)) }) : '';
@@ -6683,7 +6718,7 @@ async function invTrSave(kind, id){   // 保存（只在改过的时候）
 
 // ============ 渲染入口 ============
 function render(){
-  document.documentElement.lang = state.en ? 'en' : state.lang === 'de' ? 'de' : 'zh';
+  document.documentElement.lang = state.en ? 'en' : state.lang === 'de' ? 'de' : 'zh'; document.body.classList.toggle('en', !!state.en);   // v160
   if (!state.token){ renderLogin(); return; }
   if (state.me && state.me.must_change_pin && !state.viewAs){ renderSetPin(); return; }
   if (state.annOpen && !annQueue().length) state.annOpen = false;
@@ -9197,7 +9232,7 @@ function renderLibItem(){
   const x = state.libItem; if (!x || state.libView !== x.id || state.tab !== 'more') return;
   const docs = (x.files || []).filter(f => f.lang !== 'photo'), photos = (x.files || []).filter(f => f.lang === 'photo'), u = x.urls || {};
   const lang = state.libLang || (state.lang === 'de' ? 'de' : 'zh'), other = lang === 'de' ? 'zh' : 'de';
-  const body = x['body_' + lang] || x['body_' + other] || '', can = x.kind === 'text' || !!x.opened_at;   // v80：文件资料也可以有说明（这次变了什么）
+  const body = enT(x['body_' + lang] || x['body_' + other] || ''), can = x.kind === 'text' || !!x.opened_at;   // v80：文件资料也可以有说明（这次变了什么）
   $('#main').innerHTML = `<button class="link" data-act="lib-list" style="margin:2px 0 8px">${esc(t('lib_back'))}</button>
     <h2 style="margin:4px 0 2px">${libTitle(x)}</h2>
     <div class="meta" style="margin-bottom:12px">${esc(t('lib_cat_' + x.category))} · ${esc(t('lib_ver', { n: x.version, d: libDay(x) }))}</div>
@@ -9294,7 +9329,7 @@ function libCand(F){
     .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0] || null;
 }
 function libAiHTML(F){
-  const newM = libNewMain(F), R = newM.length ? F.reads[newM[0].path] : null, L = c => state.lang === 'de' ? c.de || c.zh : c.zh || c.de;
+  const newM = libNewMain(F), R = newM.length ? F.reads[newM[0].path] : null, L = c => state.lang === 'de' ? enT(c.de || c.zh) : c.zh || c.de;
   let h = '';
   if (!newM.length) h = `<div class="small muted">${esc(t('lib_ai_hint'))}</div>`;
   else if (F.aiBusy) h = `<div class="loading" style="margin:6px 0">${esc(F.aiBusy)}</div>`;
@@ -9434,7 +9469,7 @@ async function libPublish(){
   } catch(e){ F.busy = null; toast(errText(e), true); keepScroll(render); }
 }
 // ============ 公告（v64，老板 2026-10-09 决定）============
-const annT = (a, k) => (state.lang === 'de' ? a[k + '_de'] || a[k + '_zh'] : a[k + '_zh'] || a[k + '_de']) || '';
+const annT = (a, k) => (state.lang === 'de' ? enT(a[k + '_de'] || a[k + '_zh']) : a[k + '_zh'] || a[k + '_de']) || '';
 const annAud = a => t('an_aud_' + a.audience);
 function annAdminHTML(){
   const F = state.annForm, L = state.annList || [];
@@ -9461,7 +9496,7 @@ function annAdminHTML(){
 }
 // ============ 任务考核（v149，数据库 v109，老板 2026-11-07）============
 // 漏做 / 不实确认的红卡（要点「知道了」）、派给我的抽查、抽查窗口（拍照 + 属实 / 不属实 / 看不出来）、我的任务记录、老板首页「昨天漏做」
-const taNm = x => (state.lang === 'de' ? x.name_de || x.name_zh : x.name_zh || x.name_de) || '';
+const taNm = x => (state.lang === 'de' ? enT(x.name_de || x.name_zh) : x.name_zh || x.name_de) || '';
 const taSep = () => state.lang === 'de' ? ', ' : '、';
 const tkFindRun = (def, day) => (state.closing || []).find(x => x.def_id === def && x.day === day && x.status !== 'upcoming');
 function missCardsHTML(){
@@ -9584,7 +9619,7 @@ function askKeep(){
 function askListHTML(){
   const L = state.askList || []; if (!L.length) return '';
   const card = a => { const open = (state.qaOpen || {})[a.id], ppl = a.people || [], pm = state.pushMap;
-    const txt = (state.lang === 'de' ? a.text_de || a.text_zh : a.text_zh || a.text_de) || '';
+    const txt = (state.lang === 'de' ? enT(a.text_de || a.text_zh) : a.text_zh || a.text_de) || '';
     return `<div class="item"><div class="top"><div style="flex:1"><div style="white-space:pre-wrap">${esc(open || txt.length <= 80 ? txt : txt.slice(0, 80) + '…')}</div>
         <div class="meta">${esc(t('qa_by', { n: a.by || '', t: fmtDateTime(a.created_at) }))}</div></div>
         <span class="tag ${+a.answered >= +a.total ? 'ok' : 'pend'}">${esc(t('qa_n', { a: a.answered, b: a.total }))}</span></div>
