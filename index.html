@@ -1096,7 +1096,7 @@ zh: {
   sched_line:'按排班（{s}）：Runner {r} · 吧台 {b}', sched_auto:'已按排班自动选好，和实际不一样请直接点名字增减。', sched_empty:'排班里这个班没有排{r}，请自己选；确实没有就点「{none}」。', and_word:'和',
   miss_banner:'你有 {n} 个班还没交 Bon：{list}。请尽快拍照交上；如果那天没有上班，请告诉排班员把班删掉。', miss_go:'去交 Bon',
   env_line:'排班 {s} 个班 · 已交 {c} 个班（{n} 个信封）', env_line_nosched:'这天没有发布排班 · 已交 {n} 个信封', env_line_noshift:'这家店这天没有排服务班 · 已交 {n} 个信封',
-  env_missing:'还没交：{list}', env_missing_late:'逾期没交：{list}', env_elsewhere:'在别的店交了：{list}', env_elsewhere_one:'{n}（已在 {s} 交）',
+  env_missing:'还没交：{list}', env_missing_late:'逾期没交：{list}', rk_bon_waived:'{m} 没交（钱对得上，不用管）', em_title:'还没交 Bon（{n}）', em_hint:'有信封要点的那几天，这些人排了班还没交。可以帮忙拍照或录入；当天的钱和全天报告对上以后就不用管了。', em_photo:'📷 帮忙拍照', em_manual:'✍️ 帮忙录入', px_m_title:'帮 {n} 录入 Bon', at_prev:'前一天', at_next:'后一天', at_title_day:'我管的区域', at_roster_none_d:'这天厨房没有排人', at_no_tasks_d:'这天没有任务', env_elsewhere:'在别的店交了：{list}', env_elsewhere_one:'{n}（已在 {s} 交）',
   env_should:'信封应有', env_unsched:'未排班', env_shift_at:'排在 {s}', env_guess:'班次按提交先后推断', env_bon_time:'Bon {a}–{b}', env_counted_all:'这组的信封都已点收 ✓',
   pay_sum:'待发放 {n} 人 · 共 {x}', pay_sum_in:'待收回 {n} 人 · 共 {x}', pay_all_done:'这周都发完了 ✓',
   grp_todo_pay:'待发放（{n}）', grp_wait_sign:'已发放、等签收（{n}）', grp_done:'已完成（{n}）', grp_zero:'无需发放（{n}）',
@@ -1776,7 +1776,7 @@ de: {
   sched_line:'Laut Dienstplan ({s}): Runner {r} · Bar {b}', sched_auto:'Automatisch nach Dienstplan ausgewählt. Wenn es anders war, einfach Namen an- oder abwählen.', sched_empty:'Für diese Schicht ist im Dienstplan niemand als {r} eingeplant – bitte selbst wählen; wenn wirklich niemand da war, „{none}“ tippen.', and_word:' und ',
   miss_banner:'Dein Bon fehlt noch ({n}): {list}. Bitte so bald wie möglich einreichen. Falls du an dem Tag nicht gearbeitet hast, sag bitte der Dienstplanung Bescheid, damit die Schicht gelöscht wird.', miss_go:'Bon eintragen',
   env_line:'Geplant {s} Schichten · abgegeben {c} ({n} Umschläge)', env_line_nosched:'Kein veröffentlichter Dienstplan · {n} Umschläge abgegeben', env_line_noshift:'Kein Service eingeplant · {n} Umschläge abgegeben',
-  env_missing:'Fehlt noch: {list}', env_missing_late:'Überfällig: {list}', env_elsewhere:'Im anderen Restaurant abgegeben: {list}', env_elsewhere_one:'{n} (in {s} abgegeben)',
+  env_missing:'Fehlt noch: {list}', env_missing_late:'Überfällig: {list}', rk_bon_waived:'{m}: kein Bon (Geld stimmt, nichts zu tun)', em_title:'Noch kein Bon ({n})', em_hint:'An den Tagen mit offenen Umschlägen waren diese Personen eingeplant und haben noch keinen Bon abgegeben. Du kannst das Foto machen oder von Hand eintragen. Sobald das Geld mit dem Tagesbericht übereinstimmt, ist nichts mehr zu tun.', em_photo:'📷 Foto machen', em_manual:'✍️ Von Hand eintragen', px_m_title:'Bon für {n} eintragen', at_prev:'Vortag', at_next:'Nächster Tag', at_title_day:'Meine Bereiche', at_roster_none_d:'An diesem Tag niemand in der Küche eingeplant', at_no_tasks_d:'An diesem Tag keine Aufgaben', env_elsewhere:'Im anderen Restaurant abgegeben: {list}', env_elsewhere_one:'{n} (in {s} abgegeben)',
   env_should:'Soll im Umschlag', env_unsched:'nicht eingeplant', env_shift_at:'eingeplant in {s}', env_guess:'Schicht nach Abgabe-Reihenfolge geschätzt', env_bon_time:'Bon {a}–{b}', env_counted_all:'Alle Umschläge dieser Gruppe gezählt ✓',
   pay_sum:'Auszuzahlen: {n} · {x}', pay_sum_in:'Einzusammeln: {n} · {x}', pay_all_done:'Diese Woche alles ausgezahlt ✓',
   grp_todo_pay:'Auszuzahlen ({n})', grp_wait_sign:'Ausgezahlt, Quittung offen ({n})', grp_done:'Erledigt ({n})', grp_zero:'Keine Auszahlung ({n})',
@@ -2835,7 +2835,7 @@ async function viewToday(){
   const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // 刚启动时已经要过
   const [, env, , at] = await Promise.all([fresh ? null : loadTasks(),
     state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo(),
-    isSup() ? soft(rpc('area_today', { ...tok(), p_day: bizToday() }), null) : null,   // v83：区域主管的总览
+    isSup() ? soft(rpc('area_today', { ...tok(), p_day: state.areaDay || bizToday() }), null) : null,   // v83：区域主管的总览
     isSup() || invIsKeeper() ? invTodoLoad() : null]);   // v94：物品待办；v143：库管
   state.envPend = env || null; state.areaToday = at || null;
   if (state.tab !== 'today' || state.recon || !state.me) return;   // 等的时候已经切到别的页
@@ -2945,23 +2945,27 @@ function renderToday(){
 // v83：区域主管的「今天」：自己管的区域、门店各一张卡片（Bon 交了几张 / 谁没交、厨房谁上班、收店任务、下周排班、待通知）；没有现金数字
 function areaTodayHTML(A){
   if (!A || !isSup() || !(A.cards || []).length) return '';
+  const past = A.day < bizToday();   // v157（Li 2026-11-09 反馈）：可以翻看以前的日子：谁做的、几点、照片
   const li = (k, v, cls) => `<div class="li"><span class="muted">${esc(t(k))}</span><span class="${cls || ''}">${v}</span></div>`;
   const card = c => {
     let h = '';
-    if (c.area === 'front'){ const b = c.bons || {}, miss = b.missing || [], past = A.day < bizToday();
+    if (c.area === 'front'){ const b = c.bons || {}, miss = b.missing || [];
       h += li('rk_bon', esc(t('rk_bon_line', { a: +b.expected - miss.length, b: +b.expected })) + (miss.length ? ' · ' + esc(t('rk_bon_miss', { m: miss.map(m => m.name).join('、') })) + (past ? '' : ' ' + esc(t('at_bon_open'))) : ''), past && miss.length ? 'negc' : ''); }
     else { const R = c.roster || [];   // v84：有午 / 晚段的按段列（谁、岗位、时间），以前的「全天」班照旧
       const line = (lbl, ent) => `<div class="small" style="padding:3px 0"><strong>${esc(lbl)}</strong> ${esc(KROLES.filter(r => ent.some(v => v.roles.includes(r))).map(r => t('grp_' + r) + ' ' + ent.filter(v => v.roles.includes(r)).map(v => v.name + (v.start ? ' ' + v.start + '–' + v.end : '')).join('、')).join(' · '))}</div>`;
       const ent = pt => R.flatMap(x => (x.parts || []).filter(q => q.part === pt).map(q => ({ name: x.name, roles: q.roles, start: q.start, end: q.end })));
       const old = R.filter(x => !(x.parts || []).length).map(x => ({ name: x.name, roles: [x.role] }));
       h += R.length ? KPARTS.filter(pt => ent(pt).length).map(pt => line(slotLabel(pt), ent(pt))).join('') + (old.length ? line(t('k_allday'), old) : '')
-        : `<div class="small" style="padding:3px 0">${esc(t('at_roster_none'))}</div>`; }
-    h += `<div class="small ${c.next_published ? 'muted' : 'negc'}" style="padding:3px 0">${esc(t(c.next_published ? 'as_pub_yes' : 'as_pub_no'))}${+c.pending ? ` · <span class="negc">${esc(t('as_pend', { n: c.pending }))}</span>` : ''}</div>`;
+        : `<div class="small" style="padding:3px 0">${esc(t(past ? 'at_roster_none_d' : 'at_roster_none'))}</div>`; }
+    if (!past) h += `<div class="small ${c.next_published ? 'muted' : 'negc'}" style="padding:3px 0">${esc(t(c.next_published ? 'as_pub_yes' : 'as_pub_no'))}${+c.pending ? ` · <span class="negc">${esc(t('as_pend', { n: c.pending }))}</span>` : ''}</div>`;
     const tk = (c.tasks || []).filter(x => x.status !== 'closed');
     return `<div class="task later"><div class="task-t">${storeTag(c.store)} ${esc(t('area_' + c.area))}</div><div class="sum" style="margin-top:6px">${h}</div>
-      ${tk.length ? tsrAreaHTML(tk) : `<div class="small muted" style="margin-top:6px">${esc(t(c.area === 'kitchen' ? 'at_no_ktasks' : 'at_no_tasks'))}</div>`}</div>`;
+      ${tk.length ? tsrAreaHTML(tk) : `<div class="small muted" style="margin-top:6px">${esc(t(past ? 'at_no_tasks_d' : c.area === 'kitchen' ? 'at_no_ktasks' : 'at_no_tasks'))}</div>`}</div>`;
   };
-  return `<h3 style="margin-top:4px">${esc(t('at_title'))}</h3>` + A.cards.map(card).join('');
+  const go = (d, txt) => `<button class="link" type="button" style="flex:none;white-space:nowrap" data-act="area-day" data-d="${d}">${esc(txt)}</button>`;
+  return `<div id="area-today"><h3 style="margin-top:4px">${esc(t(past ? 'at_title_day' : 'at_title'))}</h3>
+    <div class="row" style="align-items:center;margin:0 0 8px">${go(-1, '‹ ' + t('at_prev'))}<strong style="flex:1;text-align:center">${esc(dayLabel(A.day))}</strong>${past ? go(1, t('at_next') + ' ›') : ''}</div>`
+    + A.cards.map(card).join('') + '</div>';
 }
 // v83：老板「今天」：两边主管的情况（每个区域、每家店：谁管、收店任务 7 天完成率、今天没完成的、下周排班、待通知）
 function areaStatusHTML(S){
@@ -3543,8 +3547,9 @@ function refreshRep(){
 }
 // v59（老板 2026-10-06 决定）：全部对上就自动「核对完成」：钱（应交现金、刷卡小费）对上、信封都点完且金额都和申报一致、
 // 排了班的人都交了 Bon、锁门巡查拍完了。任何一项不对就停下来，由老板看、写说明、自己点「核对完成」。
+const reconMiss = r => r.status === 'ok' ? [] : (r.missing_bons || []);   // v157（数据库 v116，老板 2026-11-06 反馈）：钱和全天报告对上了，没交 Bon 的人不算缺（多半那天没买单）
 function reconAllOk(r){
-  return r.status === 'ok' && (r.reports || []).length > 0 && !r.envelopes_todo && !r.envelopes_diff && !(r.missing_bons || []).length
+  return r.status === 'ok' && (r.reports || []).length > 0 && !r.envelopes_todo && !r.envelopes_diff && !reconMiss(r).length
     && !(LOCK_ON && r.lock && +r.lock.done_count < +r.lock.total) && !(r.completed_at && !r.changed_after);   // v69
 }
 // v60：核对完成后离开核对页，回到每日核对首页（停在这一天，能看到另一家店还剩什么）
@@ -3634,7 +3639,7 @@ function rcProblem(r){
   if (r.completed_at && !r.changed_after) return 0;
   if (r.day >= bizToday() && r.status === 'no_report') return 0;   // 今天还在营业：不算问题
   return (['diff', 'no_report'].includes(r.status) ? 2 : 0) + (r.envelopes_todo || r.envelopes_diff ? 1 : 0) + (r.changed_after ? 2 : 0)
-    + (LOCK_ON && r.lock && +r.lock.done_count < +r.lock.total ? 1 : 0) + ((r.missing_bons || []).length ? 1 : 0);   // v69
+    + (LOCK_ON && r.lock && +r.lock.done_count < +r.lock.total ? 1 : 0) + (reconMiss(r).length ? 1 : 0);   // v69
 }
 function rcLockText(r){
   const l = r.lock; if (!l) return t('rk_lock_none');
@@ -3648,7 +3653,7 @@ function rcCardHTML(r){
   if (['before', 'idle'].includes(r.status) && !bad && !r.envelopes && !(LOCK_ON && r.lock) && !r.expected_bons && !(r.missing_bons || []).length && !r.changed_after && !tks.length)
     return `<div class="task later" data-act="recon-open" data-store="${esc(r.store)}" data-day="${r.day}" style="cursor:pointer"><div class="task-t">${storeTag(r.store)} ${esc(dayLabel(r.day))} <span class="muted small" style="font-weight:400">· ${esc(r.status === 'before' ? rcStatusText(r) : t('rk_closed'))}</span></div></div>`;
   const line = (k, v, red) => `<div class="li"><span class="muted">${esc(t(k))}</span><span class="${red ? 'negc' : ''}">${esc(v)}</span></div>`;
-  const nb = r.expected_bons, miss = r.missing_bons || [];
+  const nb = r.expected_bons, miss = reconMiss(r), waived = r.status === 'ok' ? (r.missing_bons || []) : [];   // v157
   // v81：每个信封的金额（员工申报的钱包金额）和合计；点出来不一样的标红
   const env = r.envelope_list || [], envSum = env.reduce((a, e) => a + (+e.wallet_cents || 0), 0);
   const envRows = env.map(e => { const c = e.counted_cents, ok = c != null && +c === +e.wallet_cents;
@@ -3664,7 +3669,7 @@ function rcCardHTML(r){
       ${line('rk_env', (r.envelopes_todo ? t('rk_env_todo', { n: r.envelopes_todo }) : r.envelopes ? t('rk_env_done', { n: r.envelopes }) : t('rk_env_none')) + (r.envelopes_diff ? ' · ' + t('rk_env_diff', { n: r.envelopes_diff }) : '')
         + (env.length ? ' · ' + t('rk_env_total', { x: eur(envSum) }) : ''), !!(r.envelopes_todo || r.envelopes_diff))}${envRows}
       ${LOCK_ON ? line('rk_lock', rcLockText(r) + (done && r.lock && +r.lock.done_count < +r.lock.total ? t('rk_lock_done') : ''), !done && r.lock && +r.lock.done_count < +r.lock.total) : ''}
-      <div class="li"><span class="muted">${esc(t('rk_bon'))}</span><span class="${miss.length ? 'negc' : ''}">${esc(t('rk_bon_line', { a: nb - miss.length, b: nb }))}${miss.length
+      <div class="li"><span class="muted">${esc(t('rk_bon'))}</span><span class="${miss.length ? 'negc' : ''}">${esc(t('rk_bon_line', { a: nb - miss.length - waived.length, b: nb }))}${waived.length ? ` · <span class="muted">${esc(t('rk_bon_waived', { m: waived.map(m => m.name).join('、') }))}</span>` : ''}${miss.length
         ? ' · ' + esc(t('rk_bon_miss', { m: '' })) + miss.map(m => esc(m.name) + gmBtn(m.staff_id, m.name, 'bon:' + r.store + ':' + r.day, bonCtx(m), true) + pxBtn(m.staff_id, m.name, r.day, r.store) + baLink(m.staff_id, r.day)).join('、') : ''}</span></div>
       ${tks.length ? `<div class="li tkl"><span class="muted">${esc(t('rk_tasks'))}</span><span>${tks.map(x => `<div class="${tkRed(x) ? 'negc' : ''}">${esc(tkAdminLine(x))}</div>`).join('')}</span></div>` : ''}
     </div></div>`;
@@ -3767,6 +3772,21 @@ async function hrepRead(J){
   else toast(t(J.status === 'saved' ? 'hrep_saved_toast' : 'hrep_check_toast', vars), J.status !== 'saved');
 }
 // 两家店一起点信封：还没点的信封按店分组（组里按日子），信封卡片和点法同核对页
+// v157（老板 2026-11-08 反馈）：两家店一起点信封：有信封要点的那几天，两家店排了班还没交 Bon 的人放在最上面，每人两个按钮（拍照 / 手动录入）。
+// 钱已经和全天报告对上的（money_ok，数据库 v116）不列；今天的班还没结束的不列。
+function envMissingHTML(groups, days){
+  const clock = x => { const [h, m] = String(x).split(':').map(Number), v = h * 60 + m; return v < 300 ? v + 1440 : v; };   // 凌晨 5 点前算前一天的晚上
+  const now = clock(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date()));
+  const ended = (g, x) => g.date < bizToday() || clock(x.end) <= now, rows = [];
+  groups.filter(g => days.has(g.date) && g.published && !g.money_ok).sort((a, b) => a.date.localeCompare(b.date) || a.store.localeCompare(b.store)).forEach(g => {
+    const per = {};
+    (g.shifts || []).filter(x => !x.covered && ended(g, x)).forEach(x => (per[x.staff_id] = per[x.staff_id] || { id: x.staff_id, name: x.name, slots: [] }).slots.push(x.slot));
+    Object.values(per).forEach(p => { const data = `data-staff="${esc(p.id)}" data-name="${esc(p.name)}" data-date="${esc(g.date)}" data-store="${esc(g.store)}"`;
+      rows.push(`<div class="item"><div class="top"><div><strong>${esc(p.name)}</strong> ${storeTag(g.store)}<div class="meta">${esc(dayLabel(g.date))} · ${esc(slotsText(p.slots))}</div></div></div>
+        ${p.id === state.me.id ? '' : `<div class="acts" style="margin-top:8px"><button class="btn ghost sm" style="width:auto" type="button" data-act="px-open" ${data}>${esc(t('em_photo'))}</button><button class="btn ghost sm" style="width:auto" type="button" data-act="px-manual" ${data}>${esc(t('em_manual'))}</button></div>`}</div>`); });
+  });
+  return rows.length ? h3i(esc(t('em_title', { n: rows.length })), t('em_hint'), 'negc') + `<div class="list">${rows.join('')}</div>` : '';
+}
 async function viewEnvAll(){
   const back = `<button class="link" data-act="env-all-close">${esc(t('rk_back'))}</button>`;
   $('#main').innerHTML = back + `<div class="loading">${esc(t('loading'))}</div>`;
@@ -3784,7 +3804,7 @@ async function viewEnvAll(){
   if (state.tab !== 'today' || !state.envAll) return;
   const html = STORES.map(st => { const n = pend.filter(x => x.store === st).reduce((a, x) => a + (+x.n || 0), 0);
     return n ? `<h3>${storeTag(st)} ${esc(t('hrep_env_store', { n }))}</h3>` + envelopeBlockHTML(entries.filter(e => e.store === st), env, true) : ''; }).join('');
-  $('#main').innerHTML = back + `<h2 style="margin:6px 0 4px">${esc(t('hrep_env_title'))}</h2>` + (html || `<div class="list"><div class="empty">${esc(t('hrep_env_none'))}</div></div>`);
+  $('#main').innerHTML = back + `<h2 style="margin:6px 0 4px">${esc(t('hrep_env_title'))}</h2>` + envMissingHTML(env.groups, new Set(pend.map(x => x.day))) + (html || `<div class="list"><div class="empty">${esc(t('hrep_env_none'))}</div></div>`);
 }
 // 点了一个信封以后：在核对页按那一页；在「两家店一起点」按这个信封的店和日子，能全部对上就自动核对完成
 const cntCtx = id => state.recon || (state.envAll && state.entryCache[id] ? { store: state.entryCache[id].store, day: state.entryCache[id].date } : null);
@@ -3803,7 +3823,7 @@ async function viewReconHome(){
   }
   catch(e){ $('#main').innerHTML = `<div class="empty">${esc(errText(e))}</div>`; return; }
   if (H.msgs){ state.gmState = state.gmState || {}; H.msgs.forEach(x => { state.gmState[gmKey(x.about, x.staff_id)] = x; }); }   // v102：留言状态一起带回来了
-  else await gmLoad(o.stores.filter(r => (r.missing_bons || []).length).map(r => 'bon:' + r.store + ':' + o.day));   // v81
+  else await gmLoad(o.stores.filter(r => reconMiss(r).length).map(r => 'bon:' + r.store + ':' + o.day));   // v81
   if (state.tab !== 'today' || state.recon) return;   // 等的时候已经换了页
   state.reconDay = o.day;
   const stores = o.stores.slice().sort((a, b) => rcProblem(b) - rcProblem(a));
@@ -3902,11 +3922,11 @@ async function viewReconDay(){
     if (df.schluss_cents) stops.push(t('rk_stop_cash', { x: eurSigned(df.schluss_cents) }));
     if (df.card_cents) stops.push(t('rk_stop_card', { x: eurSigned(df.card_cents) }));
     if (r.envelopes_diff) stops.push(t('rk_stop_envdiff', { n: r.envelopes_diff }));
-    if ((r.missing_bons || []).length) stops.push(t('rk_stop_missing', { m: r.missing_bons.map(m => m.name).join('、') }));
+    if (reconMiss(r).length) stops.push(t('rk_stop_missing', { m: reconMiss(r).map(m => m.name).join('、') }));
     if (LOCK_ON && r.lock && +r.lock.done_count < +r.lock.total) stops.push(t('rk_stop_lock', { m: r.lock.missing.map(c => state.lang === 'de' ? c.name_de : c.name_zh).join('、') }));
   }
   const stopHTML = stops.length ? `<div class="errbox"><strong>${esc(t('rk_stop_title'))}</strong>${stops.map(x => `<div style="margin-top:4px">· ${esc(x)}</div>`).join('')}<div style="margin-top:6px">${esc(t('rk_stop_end'))}</div></div>` : '';
-  const allDone = edit && r.status === 'ok' && !r.envelopes_todo && !r.envelopes_diff && !(r.missing_bons || []).length && !(r.completed_at && !r.changed_after);
+  const allDone = edit && r.status === 'ok' && !r.envelopes_todo && !r.envelopes_diff && !reconMiss(r).length && !(r.completed_at && !r.changed_after);
   const repReady = edit && envDone && ((state.repForm && state.repForm.read_id) || (state.repPhoto && state.repPhoto.key === R.store + R.day && state.repPhoto.form))
     ? `<div class="infobox" style="display:flex;align-items:center;gap:12px"><span style="flex:1">${esc(t('rk_rep_ready'))}</span><button class="btn" style="flex:none;width:auto;height:40px;padding:0 16px;font-size:15px" data-act="rk-rep-go">${esc(t('rk_rep_go'))}</button></div>` : '';
   // v55（老板 2026-10-05 决定）：每人一列、合计、全天报告、差；钱（应交现金、刷卡小费）对上就算对上，收款只作参考
@@ -6756,7 +6776,7 @@ async function doLogin(){
   }
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   state.loginErr = ''; state.loginInfo = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
-  state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
+  state.areaDay = null; state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
   if (!r.me.must_change_pin){
     splash();   // v68
     // v102：me、启动数据、老板的上周检查一起要（以前一个等一个）；登录返回的 me 没有区域主管 / 负责人，是主管的话按新的再要一次
@@ -7261,8 +7281,8 @@ function bonOriWarn(b, k){
   const r = o.res, other = b.ori[k === 'top' ? 'bottom' : 'top'];
   if (r.is_report === false) return t('bo_not_report');
   if (r.sharp === false) return t('bo_blurry');
-  if (k === 'top' && (r.part === 'middle' || (r.part === 'bottom' && other && !other.busy))) return t('bo_no_top');   // 只拍了第一张时先不说（拍完第二张可能对调）
-  if (k === 'bottom' && (r.part === 'middle' || r.part === 'top')) return t('bo_no_bottom');
+  if (k === 'top' && r.part === 'bottom' && other && !other.busy) return t('bo_no_top');   // 只拍了第一张时先不说（拍完第二张可能对调）。v157（老板 2026-11-08 反馈）：不再说「只拍到中间」：小图上 AI 常看错，开头明明拍到了；真没拍到，完整识别读不出编号时照样叫重拍
+  if (k === 'bottom' && r.part === 'top') return t('bo_no_bottom');   // v157：同上
   return '';
 }
 const bonCoverBad = b => !!(b && b.read && b.read.checks && b.read.checks.cover_ok === false && !b.coverOk);
@@ -7689,10 +7709,10 @@ function envelopeBlockHTML(entries, env, noHead){   // v114：noHead = 不要「
     if (!todo.length) return '';   // 没有信封要点的组不列（还没交的人在页面顶部的提醒里）
     let line = '', miss = '', other = '';
     if (sc && sc.published){
-      const sh = sc.shifts || [], missing = sh.filter(x => !x.covered);
+      const sh = sc.shifts || [], uncov = sh.filter(x => !x.covered), missing = sc.money_ok ? [] : uncov;   // v157（数据库 v116）：钱和全天报告对上就不算缺
       const elsewhere = sh.filter(x => x.covered && !(x.covered_stores || []).includes(g.store));
-      line = sh.length ? t('env_line', { s: sh.length, c: sh.length - missing.length, n: bons.length }) : t('env_line_noshift', { n: bons.length });
-      if (missing.length) miss = `<div class="grp-m ${sc.overdue ? 'negc' : 'muted'}">${esc(t(sc.overdue ? 'env_missing_late' : 'env_missing', { list: '' }))}${people(missing, p => esc(p.name + ' ' + slotsText(p.slots)) + pxBtn(p.x.staff_id, p.name, g.date, g.store))}</div>`;   // v92：📷 代交；v116：📷 跟在各自的名字后面
+      line = sh.length ? t('env_line', { s: sh.length, c: sh.length - uncov.length, n: bons.length }) : t('env_line_noshift', { n: bons.length });
+      if (missing.length && !noHead) miss = `<div class="grp-m ${sc.overdue ? 'negc' : 'muted'}">${esc(t(sc.overdue ? 'env_missing_late' : 'env_missing', { list: '' }))}${people(missing, p => esc(p.name + ' ' + slotsText(p.slots)) + pxBtn(p.x.staff_id, p.name, g.date, g.store))}</div>`;   // v92：📷 代交；v116：📷 跟在各自的名字后面
       if (elsewhere.length) other = `<div class="grp-m muted">${esc(t('env_elsewhere', { list: people(elsewhere,
         p => t('env_elsewhere_one', { n: p.name + ' ' + slotsText(p.slots), s: (p.x.covered_stores || []).join(' / ') })) }))}</div>`;
       if (!todo.length && !missing.length && !elsewhere.length) return '';
@@ -7812,7 +7832,9 @@ async function saveEntry(){
     LS.set('store', f.store);
     const keep = { date: f.date, store: f.store };
     state.form = { ...blankForm(), ...keep }; await loadMyBon();
-    toast(r && r.status === 'pending' ? t('request_sent') : t('saved')); render();
+    toast(r && r.status === 'pending' ? t('request_sent') : t('saved'));
+    if (state.entryCtx && state.entryCtx.pxManual){ const back = state.entryCtx.back; state.entryCtx = null; state.entryMode = 'bon'; state.form = blankForm(); state.tab = back; }   // v157：帮忙录入存好后回到点信封
+    render();
   } catch(e){ toast(errText(e), true); if (btn) btn.disabled = false; }
 }
 
@@ -8415,7 +8437,7 @@ async function viewWeek(){
     const canLock = addDays(state.week, 7) <= today();
     const nets = ov.nets.length ? `<details class="fold" style="margin-top:18px"><summary>${esc(t('nets_fold', { n: ov.nets.length }))}</summary><div class="inner">
         <div class="hint">${esc(t('nets_hint'))}</div>
-        <div class="list">${ov.nets.map(n => `<div class="item"><div class="top"><div>${esc(n.name)}</div>
+        <div class="list">${[...ov.nets].sort((a, b) => b.net_cents - a.net_cents).map(n => `<div class="item"><div class="top"><div>${esc(n.name)}</div>
           <div class="amt num ${n.net_cents>0?'pos':'negc'}">${n.net_cents>0?'+':''}${eur(n.net_cents)}</div></div></div>`).join('')}</div></div></details>` : '';
     html += `${countBlock}
       ${handover}
@@ -10326,7 +10348,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(state.weekTodo || await loadWeekTodo());   // v56；v96：有上次的结果就不等（周结页自己会取最新的）
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; state.docPage = false; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; state.docPage = false; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.areaDay = null; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -10341,6 +10363,7 @@ document.addEventListener('click', async ev => {
     case 'miss-go': state.entryCtx = { title: el.dataset.title || '', back: state.tab }; state.done = null; state.tab = 'entry'; state.menu = false; render(); window.scrollTo(0, 0); break;
     case 'entry-back': {   // v68：交 Bon 页「← 返回」，回到进来的那一页
       const back = (state.entryCtx && state.entryCtx.back) || navTabs()[0];
+      if (state.entryCtx && state.entryCtx.pxManual){ state.entryMode = 'bon'; state.form = blankForm(); }   // v157
       state.entryCtx = null; state.done = null; state.tab = tabs().includes(back) && back !== 'entry' ? back : navTabs()[0];
       if (navTabs().includes(state.tab)) LS.set('tab', state.tab); render(); window.scrollTo(0, 0); break;
     }
@@ -11572,6 +11595,17 @@ document.addEventListener('click', async ev => {
     case 'px-open': {   // v92：老板代交 Bon（从「Bon 没交：某人」点 📷 进来）
       state.entryCtx = { title: t('px_title', { n: el.dataset.name }), back: state.tab, proxy: { staff: el.dataset.staff, name: el.dataset.name, date: el.dataset.date, store: el.dataset.store } };
       state.entryMode = 'bon'; state.bon = blankBon(); state.form = blankForm(); state.done = null; state.tab = 'entry'; render(); window.scrollTo(0, 0); break;
+    }
+    case 'area-day': {   // v157：主管翻看以前的日子（只换这一块，不重新读整页）
+      const A = state.areaToday; if (!A) break;
+      const nd = addDays(A.day, +el.dataset.d); if (nd > bizToday()) break;
+      try { const r = await rpc('area_today', { ...tok(), p_day: nd }); state.areaToday = r; state.areaDay = nd === bizToday() ? null : nd; const box = $('#area-today'); if (box) box.outerHTML = areaTodayHTML(r); } catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'px-manual': {   // v157：点信封页「帮忙录入」：手动录入，人、日期、店都填好
+      const f = blankForm(); f.server = el.dataset.staff; f.date = el.dataset.date; f.store = el.dataset.store;
+      state.entryCtx = { title: t('px_m_title', { n: el.dataset.name }), back: state.tab, pxManual: true };
+      state.entryMode = 'manual'; state.bon = blankBon(); state.form = f; state.done = null; state.tab = 'entry'; render(); window.scrollTo(0, 0); break;
     }
     case 'bon-read': readBon(); break;
     case 'bon-rot': {   // v139：员工自己把照片转 90 度；连点几下时等停下来 1.5 秒再识别
