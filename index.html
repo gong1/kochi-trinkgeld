@@ -1872,8 +1872,13 @@ if (!LS.get('personal', false)){ LS.del('token'); LS.del('me'); } // 清除旧�
 const authStore = () => state.personal ? LS : SS;
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function t(k, vars){ let s = (I18N[state.lang] || I18N.zh)[k]; if (s === undefined) s = k; if (vars) for (const [a,b] of Object.entries(vars)) s = s.split('{'+a+'}').join(b); return s; }
+// v159（老板 2026-11-09）：英文只是一层显示：按钮和提示换成 en.js 里的英文，数据照旧按德语取（选英文时 state.lang 保持 'de'）；en.js 里没有的显示德语
+function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k] !== undefined ? EN[k] : (I18N[state.lang] || I18N.zh)[k]; if (s === undefined) s = k; if (vars) for (const [a,b] of Object.entries(vars)) s = s.split('{'+a+'}').join(b); return s; }
 
+let enLoading = null;
+function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=1'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+const enBtn = () => state.en ? '' : '<button class="hbtn" data-act="lang-en" style="margin-right:6px">English</button>';
 function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function today(){ return ymd(new Date()); }
 function parseD(s){ const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); }
@@ -2531,7 +2536,8 @@ function perfAdd(x){
 
 // ============ 状态 ============
 const state = {
-  lang: LS.get('lang', (navigator.language||'').startsWith('de') ? 'de' : 'zh'),
+  en: !!LS.get('en', false),   // v159
+  lang: LS.get('en', false) ? 'de' : LS.get('lang', (navigator.language||'').startsWith('de') ? 'de' : 'zh'),
   personal: LS.get('personal', false),
   token: LS.get('personal', false) ? LS.get('token', null) : SS.get('token', null),
   me: LS.get('personal', false) ? LS.get('me', null) : SS.get('me', null),
@@ -4982,7 +4988,7 @@ function viewMore(){
   $('#main').innerHTML = `<h2 style="margin-top:4px">${esc(t('more_title'))}</h2><div class="more">
     ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
-    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${!state.me.is_admin && state.myDocs && state.myDocs.started ? b('more-docs', t('doc_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang'))}${b('logout', t('logout'))}</div>`;
+    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${!state.me.is_admin && state.myDocs && state.myDocs.started ? b('more-docs', t('doc_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${b('lang', t('lang')) + (state.en ? '' : b('lang-en', 'English'))}${b('logout', t('logout'))}</div>`;
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
@@ -6677,7 +6683,7 @@ async function invTrSave(kind, id){   // 保存（只在改过的时候）
 
 // ============ 渲染入口 ============
 function render(){
-  document.documentElement.lang = state.lang === 'de' ? 'de' : 'zh';
+  document.documentElement.lang = state.en ? 'en' : state.lang === 'de' ? 'de' : 'zh';
   if (!state.token){ renderLogin(); return; }
   if (state.me && state.me.must_change_pin && !state.viewAs){ renderSetPin(); return; }
   if (state.annOpen && !annQueue().length) state.annOpen = false;
@@ -6755,7 +6761,7 @@ async function renderLogin(){
   }
   const p = state.loginPick;
   $('#app').innerHTML = `<div class="login">
-    <div style="display:flex;justify-content:space-between;align-items:center"><strong>Kochi</strong><button class="hbtn" data-act="lang">${esc(t('lang'))}</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center"><strong>Kochi</strong><span>${enBtn()}<button class="hbtn" data-act="lang">${esc(t('lang'))}</button></span></div>
     ${p ? `
       <h1>${esc(p.name)}</h1><p>PIN</p>
       <form class="pinbox" data-form="login">
@@ -6823,7 +6829,7 @@ async function doLogin(){
 
 function renderSetPin(){
   $('#app').innerHTML = `<div class="login">
-    <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(state.me.name)}</strong><button class="hbtn" data-act="lang">${esc(t('lang'))}</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center"><strong>${esc(state.me.name)}</strong><span>${enBtn()}<button class="hbtn" data-act="lang">${esc(t('lang'))}</button></span></div>
     <h1>${esc(t('set_pin_title'))}</h1><p>${esc(t('set_pin_sub'))}</p>
     <p class="small" style="background:rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;line-height:1.5">${esc(t('pin_safe'))}</p>
     <form class="pinbox" data-form="setpin">
@@ -8335,7 +8341,7 @@ ${rows}</table>`;
 }
 // ============ 月度存档（v20）============
 function monthLabel(m, lang){ const [y, mo] = String(m).split('-').map(Number);
-  return (lang || state.lang) === 'de' ? new Date(y, mo - 1, 1).toLocaleDateString('de-DE', { month: 'long', year: 'numeric' }) : `${y}年${mo}月`; }
+  return (lang || state.lang) === 'de' ? new Date(y, mo - 1, 1).toLocaleDateString(!lang && state.en ? 'en-GB' : 'de-DE', { month: 'long', year: 'numeric' }) : `${y}年${mo}月`; }
 async function loadArchives(){ try { return await rpc('month_archive_state', tok()) || []; } catch(e){ return null; } }   // v20 之前：null
 function arcRemindText(a){
   const m = monthLabel(a.month), note = a.open ? t('arc_open_note', { n: a.open }) : '';
@@ -10318,7 +10324,10 @@ document.addEventListener('click', async ev => {
   const el = ev.target.closest('[data-act]'); if (!el) { if (state.menu && !ev.target.closest('.menu')) setMenu(false); return; }   // v74：不重画整页
   const act = el.dataset.act, f = state.form;
   switch (act){
-    case 'lang': state.lang = state.lang === 'zh' ? 'de' : 'zh'; LS.set('lang', state.lang); state.menu = false; render(); break;
+    case 'lang': if (state.en){ state.en = false; LS.set('en', false); state.lang = 'zh'; } else state.lang = state.lang === 'zh' ? 'de' : 'zh'; LS.set('lang', state.lang); state.menu = false; render(); break;
+    case 'lang-en': state.menu = false;   // v159：只有按钮和提示换成英文
+      try { await loadEn(); state.en = true; state.lang = 'de'; LS.set('en', true); LS.set('lang', 'de'); render(); } catch(e){ toast(errText(e), true); }
+      break;
     case 'menu': setMenu(!state.menu); break;   // v74：页头固定在顶上，菜单在原地打开，不跳
     case 'logout': case 'done-logout': signOut(); break;
     case 'done-more': state.done = null; render(); break;
@@ -12551,6 +12560,7 @@ setInterval(() => {
 function invHashQr(live){ const m = location.hash.match(/[#&]q=([A-Za-z0-9]{8})\b/); if (!m) return; state.pendingQr = m[1].toUpperCase(); history.replaceState(null, '', location.pathname + location.search); if (live) invPending(); }
 invHashQr(false); window.addEventListener('hashchange', () => invHashQr(true));   // 启动时只记下，等页面画好（render）再打开
 (async () => {
+  if (state.en){ try { await loadEn(); } catch(e){} }   // v159：选了英文的手机先读英文表，读不到就显示德语
   if (state.token){
     if (!bootShell()) splash();   // v68；v102：有上次的内容就先显示（页面最上面的细线 = 正在更新）
     // v102：me 和启动数据一起要（以前一个等一个）；手机上没存 me、或者权限变了，再按新的要一次
