@@ -1000,7 +1000,7 @@ zh: {
   entries:'本周全部录入', adj_title:'记一笔调整', adj_from:'谁付', adj_to:'付给谁', amount:'金额', reason:'原因', add:'记入',
   adj_added:'调整已记入', lock:'锁定本周，生成结算单', lock_confirm:'锁定后本周记录不能再改。确定吗？',
   lock_wait:'这周结束后（下周一起）才能锁定', pay_in:'交给小费管理员', pay_out:'从小费管理员领取', no_move:'无需交接',
-  float:'小费管理员手里保管的零头', admin_staff:'员工', admin_rates:'比例', admin_report:'报表', admin_audit:'日志', admin_deleted:'已删除',
+  float:'小费管理员手里保管的零头', admin_staff:'员工', admin_staff_list:'名单', admin_rates:'比例', admin_report:'报表', admin_audit:'日志', admin_deleted:'已删除',
   del_all:'全部', del_self:'员工自己删的', del_none:'没有删除记录', del_tag_self:'员工自己删除', del_tag_self_min:'员工自己删除 · 录入后 {m} 分钟',
   del_tag_approved:'申请后批准', del_tag_admin:'管理员删除', del_tag_resub:'已重新录入', del_by:'{n} 删除 · {t}',
   del_req:'{n} 申请删除 · {t}', del_appr:'{n} 批准 · {t}', del_reason:'理由：{r}', del_hint:'所有被删除的录入，最近的在前（最多 200 条）。员工录入后 10 分钟内可以不经批准删掉自己的，这类标红。「已重新录入」表示同一人同一天同一家店现在还有录入，可以和删掉的对比。',
@@ -1681,7 +1681,7 @@ de: {
   entries:'Alle Einträge dieser Woche', adj_title:'Korrektur buchen', adj_from:'Wer zahlt', adj_to:'An wen', amount:'Betrag', reason:'Grund', add:'Buchen',
   adj_added:'Korrektur gebucht', lock:'Woche abschließen und Abrechnung erstellen', lock_confirm:'Danach kann diese Woche nicht mehr geändert werden. Fortfahren?',
   lock_wait:'Abschluss ab Montag nach Wochenende möglich', pay_in:'An Tip-Manager abgeben', pay_out:'Vom Tip-Manager erhalten', no_move:'Nichts zu übergeben',
-  float:'Rest, den der Tip-Manager verwahrt', admin_staff:'Mitarbeiter', admin_rates:'Anteile', admin_report:'Bericht', admin_audit:'Protokoll', admin_deleted:'Gelöscht',
+  float:'Rest, den der Tip-Manager verwahrt', admin_staff:'Mitarbeiter', admin_staff_list:'Liste', admin_rates:'Anteile', admin_report:'Bericht', admin_audit:'Protokoll', admin_deleted:'Gelöscht',
   del_all:'Alle', del_self:'Selbst gelöscht', del_none:'Keine gelöschten Einträge', del_tag_self:'Selbst gelöscht', del_tag_self_min:'Selbst gelöscht · {m} Min. nach Eintrag',
   del_tag_approved:'Nach Antrag freigegeben', del_tag_admin:'Vom Admin gelöscht', del_tag_resub:'Neu eingetragen', del_by:'Gelöscht von {n} · {t}',
   del_req:'Löschung beantragt von {n} · {t}', del_appr:'Freigegeben von {n} · {t}', del_reason:'Grund: {r}', del_hint:'Alle gelöschten Einträge, neueste zuerst (max. 200). Innerhalb von 10 Minuten nach dem Eintragen können Mitarbeiter ihren eigenen Eintrag ohne Freigabe löschen – diese sind rot markiert. „Neu eingetragen“: Für dieselbe Person, denselben Tag und dasselbe Restaurant gibt es jetzt einen Eintrag – zum Vergleichen.',
@@ -1881,7 +1881,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=3'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=4'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -8676,11 +8676,17 @@ function admMoreHTML(){
     + b('inv-settings', '', t('inv_set_h')) + ADMIN_MORE.map(k => b('admin-more', `data-sub="${k}"`, t('admin_' + k), state.adminSub === k)).join('') + `</div>`;
 }
 async function viewAdmin(){
-  const subs = ['requests', 'feedback', 'ai', 'notice', 'library', 'sop', 'tasks', 'expense', 'staff', 'docs', 'onb', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
-  const segHTML = c => `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}${c && c[s] ? ` <span class="tag pend" style="margin:0 0 0 4px">${c[s]}</span>` : ''}</button>`).join('')}</div>`;
+  const subs = ['requests', 'feedback', 'ai', 'notice', 'library', 'sop', 'tasks', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
+  // v165（老板 2026-11-10）：新人、证件、垫付收进「员工」：顶部只留「员工」（数字是这四项加起来），进去最上面一排切换
+  const STAFF_GRP = ['staff', 'onb', 'docs', 'expense'], inGrp = STAFF_GRP.includes(state.adminSub);
+  const tag = n => n ? ` <span class="tag pend" style="margin:0 0 0 4px">${n}</span>` : '';
+  const segHTML = c => `<div id="aseg"><div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s || (s === 'staff' && inGrp) ?'on':''}">${esc(t('admin_'+s))}${tag(s === 'staff' ? STAFF_GRP.reduce((a, k) => a + (c && +c[k] || 0), 0) : c && c[s])}</button>`).join('')}</div>`
+    + (inGrp ? `<div class="seg sm" style="margin:-6px 0 16px">${STAFF_GRP.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t(s === 'staff' ? 'admin_staff_list' : 'admin_' + s))}${tag(c && c[s])}</button>`).join('')}</div>` : '') + '</div>';
+  const segOn = () => { const o = $('#aseg .seg .on'); if (o) o.scrollIntoView({ block: 'nearest', inline: 'center' }); };   // v165：选中的标签滚到看得见的地方
   $('#main').innerHTML = segHTML(state.adminCounts) + `<div id="asub"><div class="loading">${esc(t('loading'))}</div></div>` + admMoreHTML();
+  segOn();
   // v102：上面的数字和下面的内容一起要（以前先等数字）
-  const segSet = c => { const b = state.tab === 'admin' && $('#main') && $('#main').querySelector('.seg [data-act="admin-sub"]'); if (b) b.parentElement.outerHTML = segHTML(c); };
+  const segSet = c => { const b = state.tab === 'admin' && $('#aseg'); if (b){ b.outerHTML = segHTML(c); segOn(); } };
   const cP = adminCounts().then(c => { state.adminCounts = c; segSet(c); return c; });
   // 从别的页点「管理」进来：审批没有待办、反馈有 → 直接打开反馈（这时要先等数字）
   if (state.adminPick){ state.adminPick = false; const c = await cP; if (!c.requests && c.feedback && state.adminSub === 'requests'){ state.adminSub = 'feedback'; segSet(c); } }
@@ -9887,7 +9893,7 @@ function h3i(title, hint, cls){
 // 员工最早能看的日期（v28：30 天前；老板、排班员不限）。数据库同样限制，这里只是让「‹」停住
 // v68：排班页默认打开哪一周——排班员打开下周（要排班），其他人打开本周（看自己的班）
 function planWeekDefault(){ const w = mondayOf(today()); return isSched() ? addDays(w, 7) : w; }
-function planMin(){ return isSched() ? null : (state.plan && state.plan.min_date) || addDays(today(), -30); }
+function planMin(){ return isSched() ? null : (state.plan && state.plan.min_date) || mondayOf(today()); }   // v165（数据库 v120）：员工最早看到本周
 function planNav(){
   const w = state.planWeek, min = planMin();
   return `<div class="weeknav"><button data-act="plan-prev" aria-label="prev" ${min && addDays(w, -1) < min ? 'disabled' : ''}>‹</button>
