@@ -490,6 +490,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
+const WEB_VER = 'v163';   // v163：操作记录里写的网页版本
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -922,6 +923,7 @@ zh: {
   oil_late:'⚠ 检查晚了 {n} 天（{d} 就该做），还没人做。今天上班的后厨可以补做；不要了就点「这次不收」或「取消这一轮」。',
   oil_late_home:'⚠ 收废油 · {s}：检查晚了 {n} 天（{d} 就该做），还没人做', oil_go:'去看', tk_late_n:'{d} 就该做，晚了 {n} 天，今天请补做', tk_ask_first:'先拍照，再回答：{q}', tk_answered:'已回答：{a}', tk_ask_pending:'拍好了，还要回答一个问题', tk_answer_done:'谢谢！已经告诉老板了', 
   plan_hours:'工时', hr_info:'这一页只有后厨主管自己看得到。只按排班算：每一段的上下班时间加起来，不扣休息，不是打卡记录。一天超过 10 小时、一周超过 48 小时会标出来（德国工时法的上限），只是提醒。', hr_lastweek:'上周', hr_thisweek:'本周', hr_lastmonth:'上个月', hr_thismonth:'本月', hr_custom:'自选', hr_from:'从', hr_to:'到', hr_go:'查看', hr_all:'两家店', hr_sum:'{a} – {b} · 合计 {h} 小时 · {n} 人', hr_h:'{h} 小时', hr_row:'{d} 个班 · 平均每班 {a} 小时', hr_unpub:'其中 {h} 小时还没发布', hr_old:'其中 {h} 小时是 10月13日以前的整天班（那时没有分午班 / 晚班，可能偏多）', hr_warn_day:'⚠ {n} 天超过 10 小时', hr_warn_week:'⚠ 第 {w} 周 {h} 小时（超过 48）', hr_none:'这段时间没有厨房排班。', hr_unpub_tag:'未发布', hr_old_tag:'整天班', hr_more:'点名字看每天的明细', 
+  admin_ai:'AI 建议', ais_title:'AI 建议', ais_hint:'Claude 每天 10 点看 App 的使用记录（谁在哪一步报错、反复点同一个按钮、哪里慢、做到一半放弃），每周深看一次，把发现写成建议放在这里：依据是什么、建议怎么改、多大改动。点「采纳」Claude 就去做，上线后在这里写「效果」；「不做」也记下来，以后不再提同一条。可以写一句话给 Claude。', ais_open_h:'等你决定 {n} 条', ais_acc_h:'已采纳、等 Claude 做 {n} 条', ais_done_h:'已上线 {n} 条', ais_decl_h:'不做 {n} 条', ais_none:'还没有建议。Claude 每天 10 点体检后会把发现放在这里。', ais_basis:'依据', ais_prop:'建议', ais_note:'你的话', ais_effect:'效果', ais_note_ph:'一句话给 Claude（可不填）', ais_accept:'采纳', ais_decline:'不做', ais_reopen:'重新考虑', ais_saved:'已记下，Claude 下次体检时会看到', ais_st_accepted:'已采纳 · 等 Claude 做', ais_st_done:'已上线 {v}', ais_st_verified:'已验证效果', ais_st_declined:'不做', ais_kind_bug:'出错', ais_kind_ux:'不顺手', ais_kind_rule:'规则', ais_kind_automation:'可自动化', ais_kind_other:'其他', act_ai_suggest_decide:'AI 建议：老板决定', act_ai_suggest_import:'AI 建议：写入', act_ui_log_purge:'操作记录：清理一年前的', act_ui_log_fail:'操作记录：存不进去',   // v163
   admin_perf:'速度记录', pf_title:'速度记录（只存在这台手机上）', pf_hint:'每次打开页面、每次向服务器要数据花了多久。正常用一两天后点「复制」粘贴给 Claude，或者截图。', pf_views:'打开页面（最近 30 次）', pf_reqs:'向服务器要的数据（按平均时间，慢的在前）', pf_row:'{c} 次 · 平均 {a} 秒 · 最慢 {m} 秒{e}', pf_err:' · 出错 {n} 次', pf_cached:'先显示了上次的', pf_none:'还没有记录。', pf_copy:'复制', pf_clear:'清空记录', pf_copied:'已复制，可以粘贴给 Claude', pf_cleared:'记录已清空', pf_copy_fail:'没能复制：请截图', 
   admin_tasks:'任务', tl_title:'负责人', tl_hint:'每家店前场、后厨各设一个负责人：某一天的任务先归他管，他可以交给这个区域的某个人；没交的话，到那天按「默认交给」当天排的岗位（例如清洁）。负责人在自己的「今天」里看到这些任务。', tl_lead:'负责人', tl_role:'默认交给（当天排的岗位）', tl_none:'— 还没设 —', tl_by:'{n} · {t}', tl_saved:'负责人已保存', to_new:'＋ 新任务', to_title_new:'新任务（某一天做）', to_title_edit:'改任务', to_day:'哪天', to_when:'什么时候做', to_text:'做什么（写一句话，中文或德文都行）', to_text_ph:'例如：把油桶从地下室拿到门口，明天早上 ReFood 来收油', to_ai:'✨ AI 写成中德文', to_ai_busy:'AI 正在写…', to_ai_hint:'AI 写好任务名和说明，你可以改。不用 AI 也可以直接填下面。', to_name_zh:'任务名（中文）', to_name_de:'任务名（德文）', to_hint_zh:'说明（中文，可不填）', to_hint_de:'说明（德文，可不填）', to_how:'怎么算做完', to_check:'打勾', to_photo:'拍照', to_save:'保存任务', to_saved:'任务已保存', to_list:'某一天的任务', to_list_hint:'最近 7 天和以后的。谁做：交给的人那天上班就是他；不然按默认交给当天排的岗位；也没排就是那天这个区域上班的人，谁做都算。负责人和老板随时也能做。', to_none:'还没有某一天的任务。点「＋ 新任务」加一个。', to_lead:'负责：{n}', to_lead_none:'这个区域还没设负责人（在下面设）', to_who_assignee:'交给 {n}', to_who_assignee_off:'交给 {n}，但他那天没排班 → {p}', to_who_default:'按默认：当天的{r}（{p}）', to_who_default0:'按默认：当天的{r}', to_who_area:'当天没排{r} → 那天上班的都算（{p}）', to_nobody:'那天这个区域没人上班', to_unpub:'排班还没发布，发布后才知道是谁', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ 没做', to_assign:'交给…', to_edit:'改', to_cancel:'取消任务', to_cancel_q:'取消这个任务？（{n}，{d}）', to_cancelled:'任务已取消', tk_once:'{w}：{n} · {s}', tk_once_closing:'收店时', tk_once_arrival:'到店后', tk_once_now_arrival:'到店后先做', tk_close_photo_once:'这个任务要拍照', tk_by_lead:'{n} 交给你的', td_upcoming:'接下来（{n}）', ld_title:'我负责的任务（{n}）', ld_hint:'你是这个区域的任务负责人。可以把任务交给某个人（他会在自己的「今天」里看到）；不交的话，到那天按默认交给当天排的岗位。你自己也随时可以做。', ld_self:'我自己做', ld_assign_title:'交给谁', ld_default:'按默认：当天排的{r}', ld_on:'那天上班', ld_off:'那天没排班', ld_assign_hint:'交给的人那天没排班的话，到时候还是按默认交给当天的{r}。', ld_assigned:'已交给 {n}', ld_reset:'已改回默认', tk_adm_nobody_once:'{n}：那天没人上班',
   tk_close_go:'开始', tk_close_cont:'继续', tk_close_done:'{n} · {s} 做完了', tk_gone:'这个任务已经没有了。点「今天」回去。',
@@ -1602,6 +1604,7 @@ de: {
   oil_late:'⚠ Prüfung {n} Tag(e) überfällig (fällig am {d}), noch nicht erledigt. Wer heute in der Küche arbeitet, kann sie nachholen; sonst „Diesmal nicht abholen“ oder „Diese Runde absagen“ tippen.',
   oil_late_home:'⚠ Altfett · {s}: Prüfung {n} Tag(e) überfällig (fällig am {d}), noch nicht erledigt', oil_go:'Ansehen', tk_late_n:'Fällig am {d} – {n} Tag(e) überfällig, bitte heute nachholen', tk_ask_first:'Erst fotografieren, dann beantworten: {q}', tk_answered:'Beantwortet: {a}', tk_ask_pending:'Foto ist da – noch eine Frage beantworten', tk_answer_done:'Danke! Der Chef ist informiert.', 
   plan_hours:'Stunden', hr_info:'Diese Seite sieht nur die Küchenleitung selbst. Nur nach Dienstplan: Beginn bis Ende jeder Schicht zusammengezählt, ohne Pausenabzug – keine Zeiterfassung. Über 10 Std. am Tag bzw. 48 Std. pro Woche wird markiert (Grenzen des Arbeitszeitgesetzes) – nur als Hinweis.', hr_lastweek:'Letzte Woche', hr_thisweek:'Diese Woche', hr_lastmonth:'Letzter Monat', hr_thismonth:'Dieser Monat', hr_custom:'Zeitraum', hr_from:'Von', hr_to:'Bis', hr_go:'Anzeigen', hr_all:'Beide', hr_sum:'{a} – {b} · gesamt {h} Std. · {n} Personen', hr_h:'{h} Std.', hr_row:'{d} Schichten · Ø {a} Std. pro Schicht', hr_unpub:'davon {h} Std. noch nicht veröffentlicht', hr_old:'davon {h} Std. aus Ganztagsschichten vor dem 13.10. (damals ohne Mittag/Abend, evtl. zu hoch)', hr_warn_day:'⚠ an {n} Tag(en) über 10 Std.', hr_warn_week:'⚠ KW {w}: {h} Std. (über 48)', hr_none:'In diesem Zeitraum keine Küchenschichten.', hr_unpub_tag:'nicht veröffentlicht', hr_old_tag:'Ganztag', hr_more:'Auf den Namen tippen für die einzelnen Tage', 
+  admin_ai:'KI-Vorschläge', ais_title:'KI-Vorschläge', ais_hint:'Claude schaut täglich um 10 Uhr in die Nutzungsaufzeichnung der App (wo Fehler auftreten, wiederholtes Tippen, langsame Seiten, abgebrochene Abläufe), einmal pro Woche gründlicher, und legt die Erkenntnisse hier als Vorschläge ab: Grundlage, Vorschlag, Umfang. „Annehmen“ → Claude setzt es um und trägt nach dem Start die Wirkung ein; „Nicht machen“ wird gemerkt und nicht erneut vorgeschlagen. Du kannst Claude einen Satz dazu schreiben.', ais_open_h:'Wartet auf deine Entscheidung: {n}', ais_acc_h:'Angenommen, Claude setzt um: {n}', ais_done_h:'Umgesetzt: {n}', ais_decl_h:'Nicht machen: {n}', ais_none:'Noch keine Vorschläge. Claude legt sie nach dem täglichen Check um 10 Uhr hier ab.', ais_basis:'Grundlage', ais_prop:'Vorschlag', ais_note:'Deine Anmerkung', ais_effect:'Wirkung', ais_note_ph:'Ein Satz an Claude (optional)', ais_accept:'Annehmen', ais_decline:'Nicht machen', ais_reopen:'Neu überlegen', ais_saved:'Gespeichert – Claude sieht es beim nächsten Check', ais_st_accepted:'Angenommen · Claude setzt um', ais_st_done:'Umgesetzt {v}', ais_st_verified:'Wirkung geprüft', ais_st_declined:'Nicht machen', ais_kind_bug:'Fehler', ais_kind_ux:'Unhandlich', ais_kind_rule:'Regel', ais_kind_automation:'Automatisierbar', ais_kind_other:'Sonstiges', act_ai_suggest_decide:'KI-Vorschlag: Entscheidung des Chefs', act_ai_suggest_import:'KI-Vorschlag: eingetragen', act_ui_log_purge:'Nutzungsaufzeichnung: älter als ein Jahr gelöscht', act_ui_log_fail:'Nutzungsaufzeichnung: konnte nicht gespeichert werden',   // v163
   admin_perf:'Ladezeiten', pf_title:'Ladezeiten (nur auf diesem Gerät gespeichert)', pf_hint:'Wie lange jede Seite und jede Datenabfrage gedauert hat. Nach ein, zwei Tagen „Kopieren“ tippen und an Claude schicken – oder einen Screenshot machen.', pf_views:'Seiten geöffnet (letzte 30)', pf_reqs:'Datenabfragen (nach Durchschnitt, langsamste zuerst)', pf_row:'{c}× · Ø {a} s · langsamste {m} s{e}', pf_err:' · {n} Fehler', pf_cached:'zuerst alte Ansicht', pf_none:'Noch keine Einträge.', pf_copy:'Kopieren', pf_clear:'Löschen', pf_copied:'Kopiert – du kannst es an Claude schicken', pf_cleared:'Gelöscht', pf_copy_fail:'Kopieren ging nicht – bitte Screenshot', 
   admin_tasks:'Aufgaben', tl_title:'Verantwortliche', tl_hint:'Pro Filiale je eine verantwortliche Person für Service und Küche: Aufgaben für einen bestimmten Tag gehen zuerst an sie; sie kann sie jemandem aus ihrem Bereich zuteilen. Sonst macht es am Tag die eingeplante Standard-Position (z. B. Reinigung). Die Verantwortlichen sehen diese Aufgaben unter „Heute“.', tl_lead:'Verantwortlich', tl_role:'Standard (eingeplante Position am Tag)', tl_none:'— noch niemand —', tl_by:'{n} · {t}', tl_saved:'Verantwortliche gespeichert', to_new:'＋ Neue Aufgabe', to_title_new:'Neue Aufgabe (an einem Tag)', to_title_edit:'Aufgabe ändern', to_day:'Tag', to_when:'Wann', to_text:'Was ist zu tun (ein Satz, Deutsch oder Chinesisch)', to_text_ph:'z. B. Ölfass aus dem Keller vor die Tür stellen, morgen früh holt ReFood das Altfett ab', to_ai:'✨ Mit KI zweisprachig schreiben', to_ai_busy:'KI schreibt …', to_ai_hint:'Die KI schreibt Name und Hinweis, du kannst alles ändern. Ohne KI einfach unten ausfüllen.', to_name_zh:'Name (Chinesisch)', to_name_de:'Name (Deutsch)', to_hint_zh:'Hinweis (Chinesisch, optional)', to_hint_de:'Hinweis (Deutsch, optional)', to_how:'Wie erledigt', to_check:'Abhaken', to_photo:'Foto', to_save:'Aufgabe speichern', to_saved:'Aufgabe gespeichert', to_list:'Aufgaben an einem Tag', to_list_hint:'Die letzten 7 Tage und alles danach. Wer: die zugeteilte Person, wenn sie an dem Tag arbeitet; sonst die eingeplante Standard-Position; sonst alle aus dem Bereich, die an dem Tag arbeiten. Verantwortliche und Chef können jederzeit selbst erledigen.', to_none:'Noch keine Aufgaben an einem Tag. Mit „＋ Neue Aufgabe“ anlegen.', to_lead:'Verantwortlich: {n}', to_lead_none:'Für diesen Bereich ist noch niemand verantwortlich (unten festlegen)', to_who_assignee:'An {n}', to_who_assignee_off:'An {n}, aber an dem Tag nicht eingeplant → {p}', to_who_default:'Standard: {r} am Tag ({p})', to_who_default0:'Standard: {r} am Tag', to_who_area:'kein(e) {r} eingeplant → alle, die an dem Tag arbeiten ({p})', to_nobody:'an dem Tag arbeitet niemand aus dem Bereich', to_unpub:'Dienstplan noch nicht veröffentlicht – erst danach steht fest, wer', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ nicht erledigt', to_assign:'Zuteilen …', to_edit:'Ändern', to_cancel:'Aufgabe absagen', to_cancel_q:'Diese Aufgabe absagen? ({n}, {d})', to_cancelled:'Aufgabe abgesagt', tk_once:'{w}: {n} · {s}', tk_once_closing:'Bei Feierabend', tk_once_arrival:'Bei Dienstbeginn', tk_once_now_arrival:'Gleich bei Dienstbeginn erledigen', tk_close_photo_once:'Mit Foto', tk_by_lead:'von {n} zugeteilt', td_upcoming:'Demnächst ({n})', ld_title:'Meine Bereichsaufgaben ({n})', ld_hint:'Du bist für die Aufgaben in diesem Bereich verantwortlich. Du kannst eine Aufgabe jemandem zuteilen (die Person sieht sie unter „Heute“); sonst macht es am Tag die eingeplante Standard-Position. Du kannst sie auch jederzeit selbst erledigen.', ld_self:'Selbst erledigen', ld_assign_title:'Wem zuteilen', ld_default:'Standard: {r} am Tag', ld_on:'arbeitet an dem Tag', ld_off:'an dem Tag nicht eingeplant', ld_assign_hint:'Ist die Person an dem Tag nicht eingeplant, macht es am Tag trotzdem die Standard-Position ({r}).', ld_assigned:'An {n} zugeteilt', ld_reset:'Zurück auf Standard', tk_adm_nobody_once:'{n}: an dem Tag arbeitet niemand',
   tk_close_go:'Starten', tk_close_cont:'Weiter', tk_close_done:'{n} · {s} erledigt', tk_gone:'Diese Aufgabe gibt es nicht mehr. Zurück zu „Heute“.',
@@ -1878,7 +1881,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=1'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=2'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2030,6 +2033,7 @@ function toast(msg, isErr){
   const n = document.createElement('div'); n.className = 'toast' + (isErr ? ' err' : ''); n.textContent = msg;
   n.setAttribute('role', 'status'); toastPlace(n);
   if (isErr && !($('#fbDlg') || {}).open) state.lastErr = { msg: String(msg), at: Date.now() };   // v86：点「反馈」时一起发给老板（反馈窗口自己的提示不算）
+  if (isErr) UL.e(msg);   // v163：操作记录
   // 报错提示较长：按字数延长显示时间（至少 6 秒），点一下即可关闭
   n.addEventListener('click', () => n.remove());
   clearTimeout(toastTimer); toastTimer = setTimeout(() => n.remove(), isErr ? Math.max(6000, String(msg).length * 110) : 3200);
@@ -2194,6 +2198,9 @@ const ERR_ZH = {
   TASK_PHOTO_REQUIRED: '今天这个任务要拍照，不能只打勾。请拍照。',
   TASK_DAY_CLOSED: '这一天已经过了，不能再补做。',
   TASK_AI_DONE: '这张照片已经确认过了。回到「今天」重新打开就能看到最新的。',
+  SUGGEST_DONE: '这条建议已经上线了，不能再改决定。要撤回请在对话里告诉 Claude。',   // v163
+  INVALID_STATUS: '只能选「采纳」「不做」或「重新考虑」。请刷新页面再试。',
+  NOTE_TOO_LONG: '给 Claude 的话最多 500 字，请缩短。',
   TASK_PHOTO_FIRST: '先拍照（把上面每一项做完），再回答问题。',
   OIL_OPEN: '这家店已经有一轮收废油在进行：先把那一轮做完、点「这次不收」或「取消这一轮」，再开始新的。',
   OIL_DAY: '检查只能安排在今天到 7 天以内。',
@@ -2448,6 +2455,9 @@ const ERR_DE = {
   TASK_PHOTO_REQUIRED: 'Heute ist ein Foto nötig, Abhaken reicht nicht. Bitte fotografieren.',
   TASK_DAY_CLOSED: 'Dieser Tag ist vorbei, nachholen geht nicht mehr.',
   TASK_AI_DONE: 'Dieses Foto wurde schon geprüft. Bitte „Heute“ neu öffnen, dann siehst du den aktuellen Stand.',
+  SUGGEST_DONE: 'Dieser Vorschlag ist schon umgesetzt, die Entscheidung lässt sich nicht mehr ändern. Zum Zurücknehmen bitte Claude im Gespräch sagen.',   // v163
+  INVALID_STATUS: 'Nur „Annehmen“, „Nicht machen“ oder „Neu überlegen“ sind möglich. Bitte Seite neu laden.',
+  NOTE_TOO_LONG: 'Die Anmerkung an Claude darf höchstens 500 Zeichen haben, bitte kürzen.',
   TASK_PHOTO_FIRST: 'Erst fotografieren (alle Punkte oben erledigen), dann die Frage beantworten.',
   OIL_OPEN: 'Für diese Filiale läuft schon eine Altfett-Runde: Erst diese abschließen, „Diesmal nicht abholen“ oder „Diese Runde absagen“ tippen, dann eine neue starten.',
   OIL_DAY: 'Die Prüfung geht nur heute bis in 7 Tagen.',
@@ -2558,6 +2568,7 @@ async function rpc(fn, args){
   const t0 = performance.now();
   const { data, error } = await sb.rpc(fn, args || {});
   perfAdd({ k: 'r', n: fn, ms: Math.round(performance.now() - t0), ok: !error });   // v96：速度记录
+  UL.r(fn, Math.round(performance.now() - t0), error && error.message);   // v163：操作记录
   if (error){
     const code = String(error.message || '').trim();
     if (code === 'AUTH_REQUIRED'){ if (state.viewAs && state.token === state.viewAs.token){ exitView(); throw new Error(code); } logoutLocal(); render(); }
@@ -2567,6 +2578,31 @@ async function rpc(fn, args){
   return data;
 }
 const tok = () => ({ p_token: state.token });
+// ============ v163：App 的眼睛（操作记录，数据库 v118，老板 2026-11-10：「AI 大脑」第一层）============
+// 每次打开 / 登录算一个会话：记打开了哪页、按了什么、每个请求成功还是报错和花了多久、报错提示、切后台 / 回前台。
+// 不记任何输入的内容、不记 PIN、不记金额。分段发回服务器（每 45 秒 / 满 150 条 / 切后台 / 退出时）；存不进去也不打扰员工。
+// 老板以员工视角查看时记在老板名下、注明看的是谁。Claude 每天用只读导出看这些记录（health.yml），建议放在「管理 → AI 建议」。
+const UL = {
+  sid: null, seq: 0, buf: [], t0: 0, page: null,
+  start(){ this.sid = (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); })); this.seq = 0; this.buf = []; this.t0 = Date.now(); this.page = null; },
+  push(e){ if (!state.token || !this.sid) return; if (!this.buf.length) this.t0 = Date.now(); this.buf.push([Date.now() - this.t0, ...e]); if (this.buf.length >= 150) this.flush(); },
+  a(act, el){ const d = el && el.dataset, x = d && (d.tab || d.sub || d.l || d.k); this.push(x ? ['a', act, String(x).slice(0, 40)] : ['a', act]); },
+  r(fn, ms, err){ if (fn !== 'ui_log_save') this.push(['r', fn, ms, err ? String(err).slice(0, 60) : null]); },
+  e(msg){ this.push(['e', String(msg).slice(0, 100)]); },
+  p(){ try { const id = fbPage(); if (id !== this.page){ this.page = id; this.push(['p', id]); } } catch(e){} },
+  flush(){
+    if (!this.buf.length || !state.token || !this.sid) return;
+    const events = this.buf; this.buf = []; this.seq++;
+    const v = state.viewAs;
+    const body = JSON.stringify({ p_token: v ? v.adminToken : state.token, p_session: this.sid, p_seq: this.seq,
+      p_meta: { device: state.personal ? 'personal' : 'shared', ua: navigator.userAgent.slice(0, 160), ver: WEB_VER, lang: state.en ? 'en' : state.lang, t0: new Date(this.t0).toISOString(), view_as: v ? v.id : null },
+      p_events: events });
+    // 直接用 fetch（keepalive：切后台 / 关页面时也能发完），不走 rpc()，所以不会进速度记录、不会因为 AUTH_REQUIRED 退出登录
+    try { fetch(SUPABASE_URL + '/rest/v1/rpc/ui_log_save', { method: 'POST', keepalive: true, headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' }, body }).catch(() => {}); } catch(e){}
+  }
+};
+setInterval(() => UL.flush(), 45000);
+window.addEventListener('pagehide', () => UL.flush());
 // v96：速度记录（老板「管理 → 其他功能 → 速度记录」）：每个请求、每次打开页面花了多久。只记老板的，只存在这台手机上（最多 400 条）
 function perfAll(){ if (!state.perf) state.perf = LS.get('kochi_perf', []) || []; return state.perf; }
 function perfAdd(x){
@@ -4716,6 +4752,31 @@ function perfText(){
     + views.map(v => `${bt(v.at)} ${v.n} ${sec(v.ms)}s${v.c ? ' (cached)' : ''}`).join('\n') + '\n--\n'
     + reqs.map(b => `${b.n}: ${b.c}x avg ${sec(b.sum / b.c)}s max ${sec(b.max)}s${b.err ? ' err ' + b.err : ''}`).join('\n');
 }
+// ============ v163：AI 建议（数据库 v118，老板 2026-11-10：「AI 大脑」第三层）============
+// Claude 每天体检、每周深看后提的改进建议：老板看依据和改法，点「采纳」或「不做」（可以写一句话）；采纳的 Claude 做，上线后写效果。
+// 待定在上（新的在前）→ 已采纳等做 → 已上线（折叠）→ 不做（折叠）。依据和建议是中文（给老板看的）；标题中德文。
+function aiSugHTML(){
+  const all = state.aiSug || [], de = state.lang === 'de';
+  const kindTag = k => `<span class="tag ${k === 'bug' ? 'bad' : k === 'automation' ? 'ok' : ''}">${esc(t('ais_kind_' + k))}</span>`;
+  const stTag = s => s.status === 'accepted' ? `<span class="tag pend">${esc(t('ais_st_accepted'))}</span>` : s.status === 'done' ? `<span class="tag ok">${esc(t('ais_st_done', { v: s.done_version || '' }))}</span>`
+    : s.status === 'verified' ? `<span class="tag ok">${esc(t('ais_st_verified'))}</span>` : s.status === 'declined' ? `<span class="tag off">${esc(t('ais_st_declined'))}</span>` : '';
+  const card = s => `<div class="item" id="ais-${esc(s.id)}"><div class="top"><div><strong>${esc(de ? s.title_de : s.title_zh)}</strong> ${kindTag(s.kind)} ${stTag(s)}</div><div class="meta small muted num">${esc(fmtDateTime(s.created_at))}</div></div>
+      ${de ? `<div class="meta muted">${esc(s.title_zh)}</div>` : ''}
+      <div class="meta" style="margin-top:6px"><strong>${esc(t('ais_basis'))}</strong>：${esc(s.basis_zh)}</div>
+      <div class="meta" style="margin-top:4px"><strong>${esc(t('ais_prop'))}</strong>：${esc(s.proposal_zh)}${s.effort ? ` <span class="muted">（${esc(s.effort)}）</span>` : ''}</div>
+      ${s.note ? `<div class="meta" style="margin-top:4px"><strong>${esc(t('ais_note'))}</strong>：${esc(s.note)}</div>` : ''}
+      ${s.decided_by ? `<div class="meta small muted num">${esc(s.decided_by)} · ${esc(fmtDateTime(s.decided_at))}</div>` : ''}
+      ${s.effect_zh ? `<div class="meta" style="margin-top:4px"><strong>${esc(t('ais_effect'))}</strong>：${esc(s.effect_zh)}</div>` : ''}
+      ${s.status === 'open' ? `<div class="field" style="margin:8px 0 0"><input class="input" id="ais-note-${esc(s.id)}" maxlength="500" placeholder="${esc(t('ais_note_ph'))}"></div>
+        <div class="acts"><button class="btn" data-act="aisug-decide" data-id="${esc(s.id)}" data-st="accepted">${esc(t('ais_accept'))}</button><button class="btn ghost" data-act="aisug-decide" data-id="${esc(s.id)}" data-st="declined">${esc(t('ais_decline'))}</button></div>`
+      : s.status === 'accepted' ? `<div class="acts"><button class="link danger" data-act="aisug-decide" data-id="${esc(s.id)}" data-st="declined">${esc(t('ais_decline'))}</button></div>`
+      : s.status === 'declined' ? `<div class="acts"><button class="link" data-act="aisug-decide" data-id="${esc(s.id)}" data-st="open">${esc(t('ais_reopen'))}</button></div>` : ''}</div>`;
+  const grp = (k, list, fold) => !list.length ? '' : fold ? `<details class="fold" style="margin-top:14px"><summary>${esc(t(k, { n: list.length }))}</summary><div class="inner"><div class="list">${list.map(card).join('')}</div></div></details>`
+    : `<h3>${esc(t(k, { n: list.length }))}</h3><div class="list">${list.map(card).join('')}</div>`;
+  const open = all.filter(s => s.status === 'open'), acc = all.filter(s => s.status === 'accepted'), done = all.filter(s => s.status === 'done' || s.status === 'verified'), decl = all.filter(s => s.status === 'declined');
+  return h3i(esc(t('ais_title')), t('ais_hint')) + (all.length ? '' : `<div class="empty">${esc(t('ais_none'))}</div>`)
+    + grp('ais_open_h', open, false) + grp('ais_acc_h', acc, false) + grp('ais_done_h', done, true) + grp('ais_decl_h', decl, true);
+}
 // ============ 任务模块第三步：收废油（v101，数据库 v75 / push v11，老板 2026-10-21）============
 // 带问题的任务（例如检查废油桶）：问题、员工的回答
 const askQ = x => x && x.ask ? enT(x.ask[state.lang === 'de' ? 'q_de' : 'q_zh']) : '';
@@ -6732,6 +6793,7 @@ function render(){
   if (!tabs().includes(state.tab)) state.tab = navTabs()[0];
   if (state.pendingQr) setTimeout(invPending, 0);   // v93：从标签的网址打开
   $('#app').innerHTML = shellHTML();
+  UL.p();   // v163：操作记录
   if (state.rcWeek) return viewReceipt();
   // v96（老板 2026-10-20）：从底部切到今天（老板）/ 周结 / 排班时，先显示上次的内容，后台取最新的，取到再换上（页面最上面一条细线表示正在更新）
   // v102：上次的内容也存在手机上（vcGet / vcPut），关掉 App 再打开也先显示
@@ -6843,6 +6905,7 @@ async function doLogin(){
     try { await rpc('mark_session_personal', { p_token: r.token }); state.personal = true; LS.set('personal', true); } catch(e){}
   }
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
+  UL.start();   // v163：操作记录从登录开始
   state.loginErr = ''; state.loginInfo = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
   state.areaDay = null; state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
   if (!r.me.must_change_pin){
@@ -8568,10 +8631,11 @@ const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['bonfails', 'rates', 'repor
 // v61：「管理」上的待办数字分到「审批」「反馈」两个按钮上（反馈 = 未处理的反馈，审批 = 其余：修改申请、待核对的 Bon、工号绑定、忘记 PIN）
 async function adminCounts(){
   let total = state.me.pending_requests || 0;
-  const [m2, fl, ol, sp, dc] = await Promise.all([soft(rpc('me', tok()), null), soft(rpc('admin_feedback_list', tok()), null), soft(rpc('admin_onb_list', tok()), null), soft(rpc('admin_sop_pending', tok()), null), soft(rpc('admin_docs', tok()), null)]);   // v68：一起要；v107：新人带教；v111：SOP
+  const [m2, fl, ol, sp, dc, ai] = await Promise.all([soft(rpc('me', tok()), null), soft(rpc('admin_feedback_list', tok()), null), soft(rpc('admin_onb_list', tok()), null), soft(rpc('admin_sop_pending', tok()), null), soft(rpc('admin_docs', tok()), null), soft(rpc('admin_suggestions', tok()), null)]);   // v163：AI 建议
+  if (ai) state.aiSug = ai;   // v68：一起要；v107：新人带教；v111：SOP
   if (m2){ total = m2.pending_requests || 0; refreshBadge(total); }
   const fb = (fl || []).filter(x => x.status === 'open').length;
-  return { requests: Math.max(0, total - fb), feedback: fb, onb: (ol || []).filter(p => !p.ended_at).reduce((a, p) => a + (+p.unread || 0), 0), sop: (sp || []).length, docs: docPendingN(state.docAdm = dc) };
+  return { requests: Math.max(0, total - fb), feedback: fb, onb: (ol || []).filter(p => !p.ended_at).reduce((a, p) => a + (+p.unread || 0), 0), sop: (sp || []).length, docs: docPendingN(state.docAdm = dc), ai: (ai || []).filter(x => x.status === 'open').length };
 }
 // v68：不常用的功能从右上角「⋯」搬到「管理」页最下面（「⋯」只留通知、反馈、改 PIN、退出）
 function admMoreHTML(){
@@ -8582,7 +8646,7 @@ function admMoreHTML(){
     + b('inv-settings', '', t('inv_set_h')) + ADMIN_MORE.map(k => b('admin-more', `data-sub="${k}"`, t('admin_' + k), state.adminSub === k)).join('') + `</div>`;
 }
 async function viewAdmin(){
-  const subs = ['requests', 'feedback', 'notice', 'library', 'sop', 'tasks', 'expense', 'staff', 'docs', 'onb', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
+  const subs = ['requests', 'feedback', 'ai', 'notice', 'library', 'sop', 'tasks', 'expense', 'staff', 'docs', 'onb', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
   const segHTML = c => `<div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t('admin_'+s))}${c && c[s] ? ` <span class="tag pend" style="margin:0 0 0 4px">${c[s]}</span>` : ''}</button>`).join('')}</div>`;
   $('#main').innerHTML = segHTML(state.adminCounts) + `<div id="asub"><div class="loading">${esc(t('loading'))}</div></div>` + admMoreHTML();
   // v102：上面的数字和下面的内容一起要（以前先等数字）
@@ -8643,6 +8707,9 @@ async function viewAdmin(){
       el().innerHTML = await baListHTML();
     } else if (state.adminSub === 'perf'){   // v96：速度记录
       el().innerHTML = perfHTML();
+    } else if (state.adminSub === 'ai'){   // v163：AI 建议（数据库 v118）
+      await cP; if (!state.aiSug) state.aiSug = await rpc('admin_suggestions', tok()) || [];
+      el().innerHTML = aiSugHTML();
     } else if (state.adminSub === 'expense'){   // v67：垫付
       el().innerHTML = await expAdminHTML();
     } else if (state.adminSub === 'notice'){   // v64：公告
@@ -10364,6 +10431,7 @@ function openPinDialog(){
 document.addEventListener('click', async ev => {
   const el = ev.target.closest('[data-act]'); if (!el) { if (state.menu && !ev.target.closest('.menu')) setMenu(false); return; }   // v74：不重画整页
   const act = el.dataset.act, f = state.form;
+  UL.a(act, el);   // v163：操作记录（只记按钮的名字，不记输入的内容）
   switch (act){
     case 'lang-menu': langMenu(); break;   // v162
     case 'set-lang': { state.menu = false; { const d = $('#photoDlg'); if (d && d.open) d.close(); }   // v161；v162：从同一个按钮点开选
@@ -11591,6 +11659,17 @@ document.addEventListener('click', async ev => {
     case 'oil-go': state.tab = 'admin'; state.adminSub = 'tasks'; state.oilFocus = el.dataset.store; render(); window.scrollTo(0, 0); break;   // v144：打开后滚到这家店的收废油卡片
     case 'admin-sub': state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; state.onbPlan = null; state.onbForm = null; state.onbNew = false; if (el.dataset.sub === 'sop') state.sop = { view: 'list', q: '' }; render(); break;
     case 'admin-more': state.done = null; state.rcWeek = null; state.tab = 'admin'; state.adminSub = el.dataset.sub; state.staffEdit = null; state.menu = false; render(); break;
+    case 'aisug-decide': {   // v163：AI 建议：采纳 / 不做 / 重新考虑（可带一句话）
+      const id = el.dataset.id, inp = document.getElementById('ais-note-' + id);
+      el.disabled = true;
+      try {
+        state.aiSug = await rpc('admin_suggestion_decide', { ...tok(), p_id: id, p_status: el.dataset.st, p_note: inp && inp.value.trim() ? inp.value.trim() : null }) || [];
+        toast(t('ais_saved'));
+        const a = $('#asub'); if (a && state.tab === 'admin' && state.adminSub === 'ai') a.innerHTML = aiSugHTML();   // 原地刷新，停在原来的位置
+        const n = state.aiSug.filter(x => x.status === 'open').length, b = $('#main') && $('#main').querySelector('.seg [data-sub="ai"]');
+        if (b){ const tg = b.querySelector('.tag'); if (tg && n) tg.textContent = n; else if (tg) tg.remove(); else if (n) b.insertAdjacentHTML('beforeend', ` <span class="tag pend" style="margin:0 0 0 4px">${n}</span>`); }
+      } catch(e){ el.disabled = false; toast(errText(e), true); }
+      break; }
     case 'del-filter': state.delFilter = el.dataset.k; render(); break;
     case 'staff-new': state.staffEdit = {}; render(); break;
     case 'area-conv': {   // v82：旧排班员转为区域主管：选门店（默认两家）
@@ -12559,6 +12638,7 @@ async function exitView(){
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 async function signOut(){
+  UL.flush(); UL.sid = null;   // v163：退出前把这段记录发出去（登录过期时服务器安静地不存）
   if (state.pushOn && !state.viewAs) await pushOff(true);   // 退出登录：关闭这台手机的通知
   if (state.viewAs){ const v = state.viewAs; state.viewAs = null; try { await sb.rpc('logout', { p_token: v.token }); } catch(e){} state.token = v.adminToken; state.me = v.adminMe; }
   const tk = state.token;
@@ -12580,7 +12660,8 @@ function showIdleBar(n){
 ['pointerdown', 'keydown', 'input', 'change', 'scroll', 'touchstart'].forEach(ev =>
   document.addEventListener(ev, () => { lastAct = Date.now(); hideIdleBar(); }, { passive: true, capture: true }));
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden){ hiddenAt = Date.now(); return; }
+  if (document.hidden){ UL.push(['h']); UL.flush(); hiddenAt = Date.now(); return; }   // v163：切后台时把记录发出去
+  UL.push(['v']);
   const away = hiddenAt ? (Date.now() - hiddenAt) / 1000 : 0; hiddenAt = null;
   if (state.token && !state.personal && away > idleLimit()) signOut(); else lastAct = Date.now();
   if (state.token && state.me && !state.me.is_admin && !state.viewAs && away > 30) loadAnnouncements().then(() => { if (annQueue().length) render(); else if (state.tab === 'today' && !state.taskOpen && !state.onbOpen && !state.lockOpen && !state.done) keepScroll(render); });   // v64；v115：新公告放进「今天」
@@ -12605,6 +12686,7 @@ invHashQr(false); window.addEventListener('hashchange', () => invHashQr(true)); 
 (async () => {
   if (state.en){ try { await loadEn(); } catch(e){} }   // v159：选了英文的手机先读英文表，读不到就显示德语
   if (state.token){
+    UL.start();   // v163：打开 App 就是一个新会话
     if (!bootShell()) splash();   // v68；v102：有上次的内容就先显示（页面最上面的细线 = 正在更新）
     // v102：me 和启动数据一起要（以前一个等一个）；手机上没存 me、或者权限变了，再按新的要一次
     const sig = state.me ? meSig(state.me) : null;
