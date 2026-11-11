@@ -490,7 +490,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v171';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v172';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -856,6 +856,7 @@ zh: {
   lv_res_h:'{d} 的盘点 · {n}', lv_res_counted:'数出', lv_res_expected:'应有', lv_res_diff:'差',
   ct_frac_t:'开了的那一瓶', ct_add_other:'＋ 加别的饮料（这家店平时没有的）', ct_add_pick:'— 选饮料 —', lv_col_value:'值', lv_total:'合计', lv_value_gap:'{n} 种没有进价，没算进去', lv_res_value:'差的钱', lv_res_value_sum:'差的钱合计 {v}',   // v168
   drk_u_Kasten:'箱', ord_btn:'🛒 订货', ord_title:'🛒 订货', ord_hint:'订货日这里出订货建议：要补多少 = 目标库存 −（现在应有 − 到送货那天还会卖掉的）。改好数量点「确认订货单」，再照着清单去供应商那边下单。App 不会自己下单。', ord_days:'订货日 {o} · 送货日 {d}', ord_next:'下次送货 {d}', ord_today:'今天是订货日', ord_no_count:'这家店还没盘点过：建议只按一周的销量，不扣现有库存。先做一次盘点会更准。', ord_no_target:'{n} 种酒还没设目标库存，不会出现在建议里。', ord_targets_btn:'🎯 目标库存', ord_start:'出订货建议', ord_resume:'继续没确认的订货单（{n} 行）', ord_recent:'最近的订货单', ord_st_confirmed:'已确认', ord_st_cancelled:'已撤销', ord_st_open:'还没确认', ord_row:'{d} 送货 · {s}', ord_by:'{n} · {t}', ord_days_edit:'改订货日、送货日', ord_day_order:'订货日', ord_day_delivery:'送货日', ord_day_none:'不提醒', ord_days_save:'保存', ord_days_saved:'保存了', ord_unlinked_h:'供应商的商品里还没配饮料的（{n}）', ord_unlinked_hint:'配上 App 里的饮料以后才会出现在订货建议里。App 里没有的先在「🍹 饮料库存」新建。', ord_link_pick:'— 配到哪件饮料 —', ord_linked:'配好了', ord_o_title:'订货单 · {s} · {p}', ord_o_delivery:'送货日 {d}', ord_calc:'目标 {t} · 应有 {s} · 到货前还会卖 {u} → 要补 {n}', ord_calc_nc:'每周卖 {w}（还没盘点，按一周的销量）', ord_calc_nt:'还没设目标库存', ord_sug:'建议 {n}', ord_art:'编号 {a}', ord_rest:'其余 {n} 种（这次不用订）', ord_confirm:'✓ 确认订货单', ord_confirm_q:'确认这张订货单？{n} 种。确认以后请照着清单去 {p} 下单。', ord_confirmed:'订货单确认了。请照着清单下单。', ord_cancel:'撤销这张订货单', ord_cancel_q:'撤销这张订货单的原因（如果已经在供应商那边下了单，要自己去那边改）：', ord_cancelled:'订货单撤销了', ord_saved:'已保存', ord_list_h:'下单清单（照着在供应商那边下单）', ord_copy:'复制清单', ord_copied:'清单已复制', ord_portal:'打开 {p} 的下单页面', ord_cmp_h:'到货对订单', ord_cmp_none:'确认以后还没有入库的送货单。送货那天拍 Lieferschein 确认入库，这里就会对比。', ord_cmp_ok:'送到 {g}，和订的一样 ✓', ord_cmp_less:'订 {o}，送到 {g}，少 {d}', ord_cmp_more:'订 {o}，送到 {g}，多 {d}', ord_cmp_extra:'没订但送来了：{l}', ord_t_title:'🎯 目标库存 · {s} · {p}', ord_t_hint:'目标库存 = 送完货以后这家店应该有几瓶。建议值 = 最近 4 周平均每周销量 × 1,5。改了自动保存；清空 = 不设（不出现在订货建议里）。', ord_t_week:'每周卖 {w}', ord_t_sug:'建议 {n}', ord_t_stock:'现在应有 {n}', ord_t_fill:'空着的都按建议填', ord_t_filled:'填了 {n} 种', ord_t_nothere:'这家店平时没有', ord_due:'今天要订 {p}（{s}，{d} 送货）',   // v169
+  aih_r_h:'💡 建议改配方（{n}）', aih_r_hint:'按最近两次盘点算出来的：整瓶卖的当作准的，剩下的差算在按杯卖的上面。点「采纳」才改，以后的库存按新配方扣。', aih_r_line:'一杯建议从 {o} {u} 改成 {n} {u}', aih_r_why_less:'{a} 到 {b}：{name} 按杯卖了 {g} 杯，盘点少了 {d} 瓶，说明实际倒得比配方多。', aih_r_why_more:'{a} 到 {b}：{name} 按杯卖了 {g} 杯，盘点多了 {d} 瓶，说明实际倒得比配方少。', aih_r_ok:'采纳：改成 {n} {u}', aih_r_done:'配方改好了：{a}', aih_no:'忽略', aih_seen:'知道了', aih_dismissed:'这一条不再提醒', aih_t_h:'💡 建议（{n}）', aih_t_target:'目标库存 {t}，按现在的销量建议 {s}（每周卖 {w}）', aih_t_short:'照现在的卖法，{d} 送货前会卖完（应有 {k}，每周卖 {w}）。这次多订一点，或者提前订。', aih_t_over:'库存够卖 {n} 周（应有 {k}，每周卖 {w}）。这次可以不订，或者把目标库存调低。', aih_t_ok:'采纳：目标改成 {n}', aih_t_done:'目标库存改好了', aih_span:'这家店只有 {n} 天的销量数据，每周销量是按这几天折算的；满 14 天才会出「调目标库存」的建议。',   // v170
   ct_h:'盘点 · {s}', ct_hint:'按顺序走：每个位置数一下每种饮料有几瓶（整箱的点「+1 箱」）。没开的数整瓶；开了的那一瓶估一下，点 ¼、½ 或 ¾。填完自动保存，可以分几次做。最后点「完成盘点」。', ct_place_none:'这家店还没有放了饮料的位置：先请库管把饮料放到位置上，或者都填在「别的地方」。',
   ct_others:'别的地方（没有固定位置的、放在别处的）', ct_others_hint:'这里的数和上面的加在一起。', ct_add_box:'+1 箱', ct_bottles:'瓶', ct_saved:'已保存', ct_finish:'✓ 完成盘点', ct_finish_q:'完成盘点？{n} 种饮料一个数都没填，按 0 算。完成以后不能再改。', ct_finish_q0:'完成盘点？完成以后不能再改。',
   ct_done:'盘点完成：{n} 种饮料', ct_cancel:'放弃这次盘点', ct_cancel_q:'放弃这次盘点？已填的数不算。请写一句原因：', ct_cancelled:'这次盘点已放弃', ct_bad_qty:'数量要是 0 或更大的数。',
@@ -1547,6 +1548,7 @@ de: {
   lv_res_h:'Inventur {d} · {n}', lv_res_counted:'Gezählt', lv_res_expected:'Soll', lv_res_diff:'Diff.',
   ct_frac_t:'Angebrochene Flasche', ct_add_other:'＋ Anderes Getränk hinzufügen (sonst nicht in dieser Filiale)', ct_add_pick:'— Getränk wählen —', lv_col_value:'Wert', lv_total:'Summe', lv_value_gap:'{n} ohne Einkaufspreis, nicht mitgerechnet', lv_res_value:'Differenz €', lv_res_value_sum:'Differenz gesamt {v}',   // v168
   drk_u_Kasten:'Kasten', ord_btn:'🛒 Bestellen', ord_title:'🛒 Bestellen', ord_hint:'Am Bestelltag gibt es hier einen Vorschlag: Bedarf = Sollbestand − (jetziger Bestand − Verkauf bis zum Liefertag). Mengen anpassen, „Bestellung bestätigen“ tippen und dann nach der Liste beim Lieferanten bestellen. Die App bestellt nicht selbst.', ord_days:'Bestelltag {o} · Liefertag {d}', ord_next:'nächste Lieferung {d}', ord_today:'Heute ist Bestelltag', ord_no_count:'In dieser Filiale gab es noch keine Inventur: Der Vorschlag richtet sich nur nach dem Wochenverkauf, ohne den vorhandenen Bestand. Mit einer Inventur wird er genauer.', ord_no_target:'{n} Getränke haben noch keinen Sollbestand und erscheinen nicht im Vorschlag.', ord_targets_btn:'🎯 Sollbestand', ord_start:'Bestellvorschlag erstellen', ord_resume:'Offene Bestellung fortsetzen ({n} Zeilen)', ord_recent:'Letzte Bestellungen', ord_st_confirmed:'bestätigt', ord_st_cancelled:'storniert', ord_st_open:'offen', ord_row:'Lieferung {d} · {s}', ord_by:'{n} · {t}', ord_days_edit:'Bestelltag, Liefertag ändern', ord_day_order:'Bestelltag', ord_day_delivery:'Liefertag', ord_day_none:'keine Erinnerung', ord_days_save:'Speichern', ord_days_saved:'Gespeichert', ord_unlinked_h:'Lieferantenartikel ohne Getränk ({n})', ord_unlinked_hint:'Erst nach der Zuordnung zu einem Getränk der App erscheinen sie im Bestellvorschlag. Fehlt das Getränk, bitte zuerst unter „🍹 Getränkebestand“ anlegen.', ord_link_pick:'— Getränk zuordnen —', ord_linked:'Zugeordnet', ord_o_title:'Bestellung · {s} · {p}', ord_o_delivery:'Liefertag {d}', ord_calc:'Soll {t} · Bestand {s} · Verkauf bis Lieferung {u} → Bedarf {n}', ord_calc_nc:'pro Woche {w} (noch keine Inventur, nach Wochenverkauf)', ord_calc_nt:'noch kein Sollbestand', ord_sug:'Vorschlag {n}', ord_art:'Art.-Nr. {a}', ord_rest:'Übrige {n} (diesmal nichts nötig)', ord_confirm:'✓ Bestellung bestätigen', ord_confirm_q:'Diese Bestellung bestätigen? {n} Artikel. Danach bitte nach der Liste bei {p} bestellen.', ord_confirmed:'Bestellung bestätigt. Bitte nach der Liste bestellen.', ord_cancel:'Bestellung stornieren', ord_cancel_q:'Grund für die Stornierung (wurde beim Lieferanten schon bestellt, bitte dort selbst ändern):', ord_cancelled:'Bestellung storniert', ord_saved:'gespeichert', ord_list_h:'Bestellliste (danach beim Lieferanten bestellen)', ord_copy:'Liste kopieren', ord_copied:'Liste kopiert', ord_portal:'Bestellseite von {p} öffnen', ord_cmp_h:'Lieferung und Bestellung', ord_cmp_none:'Seit der Bestätigung wurde noch kein Lieferschein eingebucht. Am Liefertag den Lieferschein fotografieren und einbuchen, dann wird hier verglichen.', ord_cmp_ok:'{g} geliefert, wie bestellt ✓', ord_cmp_less:'bestellt {o}, geliefert {g}, es fehlen {d}', ord_cmp_more:'bestellt {o}, geliefert {g}, {d} zu viel', ord_cmp_extra:'Nicht bestellt, aber geliefert: {l}', ord_t_title:'🎯 Sollbestand · {s} · {p}', ord_t_hint:'Sollbestand = so viele Flaschen sollen nach der Lieferung da sein. Vorschlag = durchschnittlicher Wochenverkauf der letzten 4 Wochen × 1,5. Änderungen werden sofort gespeichert; leer = kein Sollbestand (erscheint nicht im Bestellvorschlag).', ord_t_week:'pro Woche {w}', ord_t_sug:'Vorschlag {n}', ord_t_stock:'Bestand jetzt {n}', ord_t_fill:'Leere mit Vorschlag füllen', ord_t_filled:'{n} ausgefüllt', ord_t_nothere:'sonst nicht in dieser Filiale', ord_due:'Heute bei {p} bestellen ({s}, Lieferung {d})',   // v169
+  aih_r_h:'💡 Vorschlag: Rezept ändern ({n})', aih_r_hint:'Aus den letzten beiden Inventuren berechnet: Flaschenverkäufe gelten als genau, die restliche Differenz wird dem Glasverkauf zugerechnet. Erst „Übernehmen“ ändert das Rezept; danach wird der Bestand nach dem neuen Rezept abgezogen.', aih_r_line:'Pro Glas statt {o} {u} besser {n} {u}', aih_r_why_less:'{a} bis {b}: {name} – {g} Gläser verkauft, bei der Inventur fehlten {d} Flaschen. Es wird also mehr eingeschenkt als im Rezept.', aih_r_why_more:'{a} bis {b}: {name} – {g} Gläser verkauft, bei der Inventur waren {d} Flaschen mehr da. Es wird also weniger eingeschenkt als im Rezept.', aih_r_ok:'Übernehmen: {n} {u}', aih_r_done:'Rezept geändert: {a}', aih_no:'Ignorieren', aih_seen:'Verstanden', aih_dismissed:'Dieser Hinweis kommt nicht mehr', aih_t_h:'💡 Vorschläge ({n})', aih_t_target:'Sollbestand {t}, nach dem aktuellen Verkauf besser {s} (pro Woche {w})', aih_t_short:'Beim jetzigen Verkauf ist es vor der Lieferung am {d} ausverkauft (Bestand {k}, pro Woche {w}). Diesmal mehr bestellen oder früher bestellen.', aih_t_over:'Der Bestand reicht für {n} Wochen (Bestand {k}, pro Woche {w}). Diesmal nichts bestellen oder den Sollbestand senken.', aih_t_ok:'Übernehmen: Sollbestand {n}', aih_t_done:'Sollbestand geändert', aih_span:'Für diese Filiale gibt es erst {n} Tage Verkaufsdaten; der Wochenverkauf ist daraus hochgerechnet. Vorschläge zum Sollbestand gibt es ab 14 Tagen.',   // v170
   ct_h:'Inventur · {s}', ct_hint:'Der Reihe nach: an jedem Platz zählen, wie viele Flaschen je Getränk da sind (volle Kiste: „+1 Kiste“). Volle Flaschen ganz zählen; die angebrochene schätzen und ¼, ½ oder ¾ antippen. Alles wird sofort gespeichert, du kannst unterbrechen. Am Ende „Inventur abschließen“.', ct_place_none:'In dieser Filiale hat noch kein Platz Getränke: zuerst die Getränke einräumen lassen oder alles unter „Andere Stellen“ eintragen.',
   ct_others:'Andere Stellen (ohne festen Platz oder woanders)', ct_others_hint:'Diese Zahlen werden zu denen oben addiert.', ct_add_box:'+1 Kiste', ct_bottles:'Fl.', ct_saved:'Gespeichert', ct_finish:'✓ Inventur abschließen', ct_finish_q:'Inventur abschließen? Bei {n} Getränken ist nichts eingetragen – zählt als 0. Danach nicht mehr änderbar.', ct_finish_q0:'Inventur abschließen? Danach nicht mehr änderbar.',
   ct_done:'Inventur abgeschlossen: {n} Getränke', ct_cancel:'Diese Inventur verwerfen', ct_cancel_q:'Diese Inventur verwerfen? Die eingetragenen Zahlen zählen nicht. Bitte kurz den Grund schreiben:', ct_cancelled:'Inventur verworfen', ct_bad_qty:'Die Menge muss 0 oder größer sein.',
@@ -1901,7 +1903,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=10'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=11'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -6215,6 +6217,7 @@ async function viewInvDrinks(){
   let D; try { D = await rpc('inv_drinks', tok()); } catch(e){ if (!S.drinks) $('#main').innerHTML = `<button class="link" data-act="inv-home">${esc(t('inv_back'))}</button><div class="empty">${esc(errText(e))}</div>`; else toast(errText(e), true); return; }
   if (state.tab !== 'inv' || S.view !== 'drinks') return;
   S.drinks = D; renderInvDrinks();
+  soft(rpc('inv_recipe_hints', tok()), []).then(h => { const had = (S.rHints || []).length; S.rHints = h || []; if (state.tab === 'inv' && S.view === 'drinks' && (S.rHints.length || had)) keepScroll(() => renderInvDrinks()); });   // v170：改配方的建议
 }
 function drkImportsHTML(D){
   const rows = (D.imports || []).map(i => {
@@ -6281,7 +6284,7 @@ function renderInvDrinks(){
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('drk_title'))}</h2>
     <div class="small muted" style="margin-bottom:10px">${esc(t('drk_step'))}</div>
     <div class="row" style="gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn ghost" data-act="inv-stock">${esc(t('stk_btn'))}</button><button class="btn ghost" data-act="drk-menu">${esc(t('drk_menu_btn'))}</button></div>
-    ${drkImportsHTML(D)}${drkSuggHTML(D)}${drkListHTML(D)}${drkUnlinkedHTML(D)}`;
+    ${drkImportsHTML(D)}${aihRecipeHTML()}${drkSuggHTML(D)}${drkListHTML(D)}${drkUnlinkedHTML(D)}`;
 }
 function drkEditKeep(){ const E = invS().dEdit; if (!E) return; document.querySelectorAll('[data-drke]').forEach(e => { E[e.dataset.drke] = e.value; }); }
 async function drkReload(msg){ const S = invS(); if (msg) toast(msg); try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){ toast(errText(e), true); }
@@ -6323,6 +6326,25 @@ function renderInvDrink(){
       : `<div class="list"><div class="empty">${esc(t('drk_d_nodays'))}</div></div>`}
     <button class="link danger" data-act="drk-off" style="margin-top:14px">${esc(t('drk_d_off'))}</button>`;
 }
+// ---------- v170：饮料进销存第 4 步（数据库 v125，老板 2026-11-11）：App 提建议——盘点后改配方（老板）、调目标库存 / 会断货 / 压货（管库存的）。都要人点采纳 ----------
+function aihRecipeHTML(){
+  const H = invS().rHints || []; if (!H.length) return '';
+  return `<h3>${esc(t('aih_r_h', { n: H.length }))}</h3><div class="small muted" style="margin-bottom:8px">${esc(t('aih_r_hint'))}</div><div class="list" style="margin-bottom:12px">${H.map((h, i) => `<div class="item"><strong>${esc(h.article)}</strong> ${storeTag(h.store)}
+      <div class="meta">${esc(t('aih_r_line', { o: drkNum(h.old), n: drkNum(h.new), u: h.unit }))}</div>
+      <div class="small muted">${esc(t(+h.diff < 0 ? 'aih_r_why_less' : 'aih_r_why_more', { a: dayLabel(h.base_day), b: dayLabel(h.day), g: drkNum(h.item_glasses), d: drkNum(Math.abs(+h.diff)), name: invName(h) }))}</div>
+      ${state.viewAs ? '' : `<div class="acts"><button class="link" data-act="aih-r-ok" data-i="${i}">${esc(t('aih_r_ok', { n: drkNum(h.new), u: h.unit }))}</button><button class="link" data-act="aih-no" data-key="${esc(h.key)}">${esc(t('aih_no'))}</button></div>`}</div>`).join('')}</div>`;
+}
+function aihTargetHTML(store){
+  const T = invS().tHints; if (!T) return '';
+  const st = (T.stores || []).find(x => x.store === store), H = (T.hints || []).map((h, i) => ({ ...h, i })).filter(h => h.store === store), W = stkCanWrite();
+  const span = st && st.span != null && st.span < 14 ? `<div class="small muted" style="margin-bottom:6px">${esc(t('aih_span', { n: st.span }))}</div>` : '';
+  if (!H.length) return span;
+  const row = h => { const txt = h.kind === 'target' ? t('aih_t_target', { t: drkNum(h.target), s: drkNum(h.sug), w: drkNum(h.week) })
+      : h.kind === 'short' ? t('aih_t_short', { d: dayLabel(h.delivery_day), k: drkNum(h.stock), w: drkNum(h.week) }) : t('aih_t_over', { n: drkNum(h.weeks), k: drkNum(h.stock), w: drkNum(h.week) });
+    return `<div class="item"><strong>${esc(invName(h))}</strong><div class="meta" style="${h.kind === 'short' ? 'color:var(--copper)' : ''}">${h.kind === 'short' ? '⚠ ' : ''}${esc(txt)}</div>
+      ${W ? `<div class="acts">${h.kind === 'target' ? `<button class="link" data-act="aih-t-ok" data-i="${h.i}">${esc(t('aih_t_ok', { n: drkNum(h.sug) }))}</button>` : ''}<button class="link" data-act="aih-no" data-key="${esc(h.key)}">${esc(t(h.kind === 'target' ? 'aih_no' : 'aih_seen'))}</button></div>` : ''}</div>`; };
+  return span + `<div class="small" style="font-weight:600;margin:4px 0">${esc(t('aih_t_h', { n: H.length }))}</div><div class="list" style="margin-bottom:10px">${H.map(row).join('')}</div>`;
+}
 // ---------- v169：饮料进销存第 3 步（数据库 v124，老板 2026-11-11）：订货——订货建议、目标库存、订货单、到货对订单。App 不下单，人照着清单去供应商那边下 ----------
 function ordDow(n){ return n ? t('wd')[n - 1] : '—'; }
 function ordUnit(l){ const u = drkUnit(l.order_unit) || l.order_unit; return +l.unit_qty > 1 ? `${u}（${drkNum(l.unit_qty)}）` : u; }
@@ -6333,6 +6355,7 @@ async function viewInvOrders(){
   let D; try { D = await rpc('inv_order_home', tok()); } catch(e){ $('#main').innerHTML = `<button class="link" data-act="inv-stock">${esc(t('stk_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
   if (state.tab !== 'inv' || S.view !== 'orders') return;
   S.ord = D; renderInvOrders();
+  soft(rpc('inv_target_hints', tok()), null).then(h => { S.tHints = h; if (h && state.tab === 'inv' && S.view === 'orders') keepScroll(() => renderInvOrders()); });   // v170：目标库存的建议
 }
 function ordOrderRow(o){
   const n = (o.lines || []).filter(l => +l.qty > 0).length;
@@ -6358,7 +6381,7 @@ function renderInvOrders(){
   const un = D.unlinked || [];
   $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><h2 style="margin-top:4px">${esc(t('ord_title'))}</h2>
     <div class="small muted" style="margin-bottom:10px">${esc(t('ord_hint'))}</div>
-    ${(D.stores || []).map(st => `<h3>${storeTag(st.store)}</h3>${(st.suppliers || []).map(sp => sup(st, sp)).join('')}`).join('')}
+    ${(D.stores || []).map(st => `<h3>${storeTag(st.store)}</h3>${aihTargetHTML(st.store)}${(st.suppliers || []).map(sp => sup(st, sp)).join('')}`).join('')}
     ${un.length ? `<details class="fold"><summary>${esc(t('ord_unlinked_h', { n: un.length }))}</summary><div class="inner"><div class="small muted" style="margin-bottom:8px">${esc(t('ord_unlinked_hint'))}</div>
       ${un.map(x => `<div style="margin-bottom:10px"><div>${esc(x.name)} <span class="small muted">· ${esc(t('ord_art', { a: x.art_no }))} · ${esc(ordUnit(x))}</span></div>
         <select class="input" data-ordlink="${x.id}" aria-label="${esc(t('ord_link_pick'))}" style="margin-top:4px"><option value="">${esc(t('ord_link_pick'))}</option>${(D.drinks || []).map(d => `<option value="${d.id}">${esc(invName(d))}</option>`).join('')}</select></div>`).join('')}</div></details>` : ''}`;
@@ -12656,6 +12679,18 @@ document.addEventListener('click', async ev => {
     case 'ls-cancel': lsCancel(+el.dataset.i); break;
     case 'lv-open': { const S = invS(); S.count = null; invGo('levels'); break; }
     case 'lv-ai': lvAi(el.dataset.id); break;
+    // v170：建议——采纳 / 忽略
+    case 'aih-r-ok': { const S = invS(), h = (S.rHints || [])[+el.dataset.i]; if (!h) break;
+      try { await rpc('inv_recipe_save', { ...tok(), p_article: h.article, p_store: h.rstore || null, p_lines: [{ item_id: h.item, qty: h.new, unit: h.unit }], p_price_cents: h.price_cents, p_on_menu: h.on_menu !== false }); }
+      catch(e){ toast(drkErr(e), true); break; }
+      S.rHints = S.rHints.filter(x => x !== h); await keepScroll(() => drkReload(t('aih_r_done', { a: h.article }))); break; }
+    case 'aih-t-ok': { const S = invS(), h = ((S.tHints || {}).hints || [])[+el.dataset.i]; if (!h) break;
+      try { await rpc('inv_target_save', { ...tok(), p_store: h.store, p_item: h.item, p_qty: h.sug }); } catch(e){ toast(errText(e), true); break; }
+      toast(t('aih_t_done')); S.ord = null; await keepScroll(() => viewInvOrders()); break; }
+    case 'aih-no': { const S = invS(), key = el.dataset.key;
+      try { await rpc('inv_hint_dismiss', { ...tok(), p_key: key }); } catch(e){ toast(errText(e), true); break; }
+      S.rHints = (S.rHints || []).filter(x => x.key !== key); if (S.tHints) S.tHints.hints = (S.tHints.hints || []).filter(x => x.key !== key);
+      toast(t('aih_dismissed')); keepScroll(() => S.view === 'orders' ? renderInvOrders() : renderInvDrinks()); break; }
     // v169：订货
     case 'ord-home': { const S = invS(); S.ordCur = null; S.otg = null; invGo('orders'); break; }
     case 'ord-start': { const S = invS(); let o; try { o = await rpc('inv_order_start', { ...tok(), p_store: el.dataset.store, p_supplier: el.dataset.sup }); } catch(e){ toast(errText(e), true); break; }
