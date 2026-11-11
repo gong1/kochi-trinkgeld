@@ -490,7 +490,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v168';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v169';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -848,6 +848,7 @@ zh: {
   lv_counts_h:'最近的盘点', lv_first:'起始库存', lv_diff_n:'{n} 种对不上', lv_diff_ok:'都对上了', lv_ai_btn:'🤖 AI 写小结', lv_ai_busy:'AI 正在写……', lv_ai_fail:'AI 没写成，可以再点一次。',
   lv_res_h:'{d} 的盘点 · {n}', lv_res_counted:'数出', lv_res_expected:'应有', lv_res_diff:'差',
   ct_frac_t:'开了的那一瓶', ct_add_other:'＋ 加别的饮料（这家店平时没有的）', ct_add_pick:'— 选饮料 —', lv_col_value:'值', lv_total:'合计', lv_value_gap:'{n} 种没有进价，没算进去', lv_res_value:'差的钱', lv_res_value_sum:'差的钱合计 {v}',   // v168
+  drk_u_Kasten:'箱', ord_btn:'🛒 订货', ord_title:'🛒 订货', ord_hint:'订货日这里出订货建议：要补多少 = 目标库存 −（现在应有 − 到送货那天还会卖掉的）。改好数量点「确认订货单」，再照着清单去供应商那边下单。App 不会自己下单。', ord_days:'订货日 {o} · 送货日 {d}', ord_next:'下次送货 {d}', ord_today:'今天是订货日', ord_no_count:'这家店还没盘点过：建议只按一周的销量，不扣现有库存。先做一次盘点会更准。', ord_no_target:'{n} 种酒还没设目标库存，不会出现在建议里。', ord_targets_btn:'🎯 目标库存', ord_start:'出订货建议', ord_resume:'继续没确认的订货单（{n} 行）', ord_recent:'最近的订货单', ord_st_confirmed:'已确认', ord_st_cancelled:'已撤销', ord_st_open:'还没确认', ord_row:'{d} 送货 · {s}', ord_by:'{n} · {t}', ord_days_edit:'改订货日、送货日', ord_day_order:'订货日', ord_day_delivery:'送货日', ord_day_none:'不提醒', ord_days_save:'保存', ord_days_saved:'保存了', ord_unlinked_h:'供应商的商品里还没配饮料的（{n}）', ord_unlinked_hint:'配上 App 里的饮料以后才会出现在订货建议里。App 里没有的先在「🍹 饮料库存」新建。', ord_link_pick:'— 配到哪件饮料 —', ord_linked:'配好了', ord_o_title:'订货单 · {s} · {p}', ord_o_delivery:'送货日 {d}', ord_calc:'目标 {t} · 应有 {s} · 到货前还会卖 {u} → 要补 {n}', ord_calc_nc:'每周卖 {w}（还没盘点，按一周的销量）', ord_calc_nt:'还没设目标库存', ord_sug:'建议 {n}', ord_art:'编号 {a}', ord_rest:'其余 {n} 种（这次不用订）', ord_confirm:'✓ 确认订货单', ord_confirm_q:'确认这张订货单？{n} 种。确认以后请照着清单去 {p} 下单。', ord_confirmed:'订货单确认了。请照着清单下单。', ord_cancel:'撤销这张订货单', ord_cancel_q:'撤销这张订货单的原因（如果已经在供应商那边下了单，要自己去那边改）：', ord_cancelled:'订货单撤销了', ord_saved:'已保存', ord_list_h:'下单清单（照着在供应商那边下单）', ord_copy:'复制清单', ord_copied:'清单已复制', ord_portal:'打开 {p} 的下单页面', ord_cmp_h:'到货对订单', ord_cmp_none:'确认以后还没有入库的送货单。送货那天拍 Lieferschein 确认入库，这里就会对比。', ord_cmp_ok:'送到 {g}，和订的一样 ✓', ord_cmp_less:'订 {o}，送到 {g}，少 {d}', ord_cmp_more:'订 {o}，送到 {g}，多 {d}', ord_cmp_extra:'没订但送来了：{l}', ord_t_title:'🎯 目标库存 · {s} · {p}', ord_t_hint:'目标库存 = 送完货以后这家店应该有几瓶。建议值 = 最近 4 周平均每周销量 × 1,5。改了自动保存；清空 = 不设（不出现在订货建议里）。', ord_t_week:'每周卖 {w}', ord_t_sug:'建议 {n}', ord_t_stock:'现在应有 {n}', ord_t_fill:'空着的都按建议填', ord_t_filled:'填了 {n} 种', ord_t_nothere:'这家店平时没有', ord_due:'今天要订 {p}（{s}，{d} 送货）',   // v169
   ct_h:'盘点 · {s}', ct_hint:'按顺序走：每个位置数一下每种饮料有几瓶（整箱的点「+1 箱」）。没开的数整瓶；开了的那一瓶估一下，点 ¼、½ 或 ¾。填完自动保存，可以分几次做。最后点「完成盘点」。', ct_place_none:'这家店还没有放了饮料的位置：先请库管把饮料放到位置上，或者都填在「别的地方」。',
   ct_others:'别的地方（没有固定位置的、放在别处的）', ct_others_hint:'这里的数和上面的加在一起。', ct_add_box:'+1 箱', ct_bottles:'瓶', ct_saved:'已保存', ct_finish:'✓ 完成盘点', ct_finish_q:'完成盘点？{n} 种饮料一个数都没填，按 0 算。完成以后不能再改。', ct_finish_q0:'完成盘点？完成以后不能再改。',
   ct_done:'盘点完成：{n} 种饮料', ct_cancel:'放弃这次盘点', ct_cancel_q:'放弃这次盘点？已填的数不算。请写一句原因：', ct_cancelled:'这次盘点已放弃', ct_bad_qty:'数量要是 0 或更大的数。',
@@ -1531,6 +1532,7 @@ de: {
   lv_counts_h:'Letzte Inventuren', lv_first:'Anfangsbestand', lv_diff_n:'{n} Abweichungen', lv_diff_ok:'Alles stimmt', lv_ai_btn:'🤖 KI-Zusammenfassung', lv_ai_busy:'Die KI schreibt …', lv_ai_fail:'Die KI hat es nicht geschafft – bitte nochmal tippen.',
   lv_res_h:'Inventur {d} · {n}', lv_res_counted:'Gezählt', lv_res_expected:'Soll', lv_res_diff:'Diff.',
   ct_frac_t:'Angebrochene Flasche', ct_add_other:'＋ Anderes Getränk hinzufügen (sonst nicht in dieser Filiale)', ct_add_pick:'— Getränk wählen —', lv_col_value:'Wert', lv_total:'Summe', lv_value_gap:'{n} ohne Einkaufspreis, nicht mitgerechnet', lv_res_value:'Differenz €', lv_res_value_sum:'Differenz gesamt {v}',   // v168
+  drk_u_Kasten:'Kasten', ord_btn:'🛒 Bestellen', ord_title:'🛒 Bestellen', ord_hint:'Am Bestelltag gibt es hier einen Vorschlag: Bedarf = Sollbestand − (jetziger Bestand − Verkauf bis zum Liefertag). Mengen anpassen, „Bestellung bestätigen“ tippen und dann nach der Liste beim Lieferanten bestellen. Die App bestellt nicht selbst.', ord_days:'Bestelltag {o} · Liefertag {d}', ord_next:'nächste Lieferung {d}', ord_today:'Heute ist Bestelltag', ord_no_count:'In dieser Filiale gab es noch keine Inventur: Der Vorschlag richtet sich nur nach dem Wochenverkauf, ohne den vorhandenen Bestand. Mit einer Inventur wird er genauer.', ord_no_target:'{n} Getränke haben noch keinen Sollbestand und erscheinen nicht im Vorschlag.', ord_targets_btn:'🎯 Sollbestand', ord_start:'Bestellvorschlag erstellen', ord_resume:'Offene Bestellung fortsetzen ({n} Zeilen)', ord_recent:'Letzte Bestellungen', ord_st_confirmed:'bestätigt', ord_st_cancelled:'storniert', ord_st_open:'offen', ord_row:'Lieferung {d} · {s}', ord_by:'{n} · {t}', ord_days_edit:'Bestelltag, Liefertag ändern', ord_day_order:'Bestelltag', ord_day_delivery:'Liefertag', ord_day_none:'keine Erinnerung', ord_days_save:'Speichern', ord_days_saved:'Gespeichert', ord_unlinked_h:'Lieferantenartikel ohne Getränk ({n})', ord_unlinked_hint:'Erst nach der Zuordnung zu einem Getränk der App erscheinen sie im Bestellvorschlag. Fehlt das Getränk, bitte zuerst unter „🍹 Getränkebestand“ anlegen.', ord_link_pick:'— Getränk zuordnen —', ord_linked:'Zugeordnet', ord_o_title:'Bestellung · {s} · {p}', ord_o_delivery:'Liefertag {d}', ord_calc:'Soll {t} · Bestand {s} · Verkauf bis Lieferung {u} → Bedarf {n}', ord_calc_nc:'pro Woche {w} (noch keine Inventur, nach Wochenverkauf)', ord_calc_nt:'noch kein Sollbestand', ord_sug:'Vorschlag {n}', ord_art:'Art.-Nr. {a}', ord_rest:'Übrige {n} (diesmal nichts nötig)', ord_confirm:'✓ Bestellung bestätigen', ord_confirm_q:'Diese Bestellung bestätigen? {n} Artikel. Danach bitte nach der Liste bei {p} bestellen.', ord_confirmed:'Bestellung bestätigt. Bitte nach der Liste bestellen.', ord_cancel:'Bestellung stornieren', ord_cancel_q:'Grund für die Stornierung (wurde beim Lieferanten schon bestellt, bitte dort selbst ändern):', ord_cancelled:'Bestellung storniert', ord_saved:'gespeichert', ord_list_h:'Bestellliste (danach beim Lieferanten bestellen)', ord_copy:'Liste kopieren', ord_copied:'Liste kopiert', ord_portal:'Bestellseite von {p} öffnen', ord_cmp_h:'Lieferung und Bestellung', ord_cmp_none:'Seit der Bestätigung wurde noch kein Lieferschein eingebucht. Am Liefertag den Lieferschein fotografieren und einbuchen, dann wird hier verglichen.', ord_cmp_ok:'{g} geliefert, wie bestellt ✓', ord_cmp_less:'bestellt {o}, geliefert {g}, es fehlen {d}', ord_cmp_more:'bestellt {o}, geliefert {g}, {d} zu viel', ord_cmp_extra:'Nicht bestellt, aber geliefert: {l}', ord_t_title:'🎯 Sollbestand · {s} · {p}', ord_t_hint:'Sollbestand = so viele Flaschen sollen nach der Lieferung da sein. Vorschlag = durchschnittlicher Wochenverkauf der letzten 4 Wochen × 1,5. Änderungen werden sofort gespeichert; leer = kein Sollbestand (erscheint nicht im Bestellvorschlag).', ord_t_week:'pro Woche {w}', ord_t_sug:'Vorschlag {n}', ord_t_stock:'Bestand jetzt {n}', ord_t_fill:'Leere mit Vorschlag füllen', ord_t_filled:'{n} ausgefüllt', ord_t_nothere:'sonst nicht in dieser Filiale', ord_due:'Heute bei {p} bestellen ({s}, Lieferung {d})',   // v169
   ct_h:'Inventur · {s}', ct_hint:'Der Reihe nach: an jedem Platz zählen, wie viele Flaschen je Getränk da sind (volle Kiste: „+1 Kiste“). Volle Flaschen ganz zählen; die angebrochene schätzen und ¼, ½ oder ¾ antippen. Alles wird sofort gespeichert, du kannst unterbrechen. Am Ende „Inventur abschließen“.', ct_place_none:'In dieser Filiale hat noch kein Platz Getränke: zuerst die Getränke einräumen lassen oder alles unter „Andere Stellen“ eintragen.',
   ct_others:'Andere Stellen (ohne festen Platz oder woanders)', ct_others_hint:'Diese Zahlen werden zu denen oben addiert.', ct_add_box:'+1 Kiste', ct_bottles:'Fl.', ct_saved:'Gespeichert', ct_finish:'✓ Inventur abschließen', ct_finish_q:'Inventur abschließen? Bei {n} Getränken ist nichts eingetragen – zählt als 0. Danach nicht mehr änderbar.', ct_finish_q0:'Inventur abschließen? Danach nicht mehr änderbar.',
   ct_done:'Inventur abgeschlossen: {n} Getränke', ct_cancel:'Diese Inventur verwerfen', ct_cancel_q:'Diese Inventur verwerfen? Die eingetragenen Zahlen zählen nicht. Bitte kurz den Grund schreiben:', ct_cancelled:'Inventur verworfen', ct_bad_qty:'Die Menge muss 0 oder größer sein.',
@@ -1885,7 +1887,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=7'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=8'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2097,6 +2099,11 @@ const ERR_ZH = {
   INV_RECIPE_QTY: '第 {n} 行的数量要填大于 0 的数。请改一下再保存。',   // v166
   INV_RECIPE_UNIT: '第 {n} 行按 ml / g 扣，但这件饮料还没填「每瓶多少」（或单位不一样）。请先在这件饮料的页面填好，或者改成按「个」。',   // v166
   INV_DRINK_BAD: '每瓶多少和进价要填大于 0 的数，每瓶多少还要选 ml 或 g。请改一下再保存。',   // v166
+  INV_ORDER_NO_DAY: '这家店这个供应商还没设送货日，出不了订货建议。请老板在订货页里设好送货日。',   // v169
+  INV_ORDER_DONE: '这张订货单已经确认或撤销了，不能再改。请返回订货页重新看。',   // v169
+  INV_ORDER_QTY: '数量要填 0 或更大的整数（几个订货单位）。请改一下。',   // v169
+  INV_ORDER_EMPTY: '订货单里一行数量都没有，不能确认。请先填要订的数量，或者撤销这张订货单。',   // v169
+  INV_TARGET_BAD: '目标库存要填 0 或更大的数。请改一下。',   // v169
   INV_FACTOR: '「卖 1 个 = 几个」要填大于 0 的数（瓶装饮料一般是 1）。请改一下再保存。',
   INV_PHOTO_BAD: '照片没有传上去（网络断了或照片有问题）。请重拍一次。',
   INV_CODE_TAKEN: '这个编号已经有了（停用过的编号也不能再用）。请换一个号码，或者号码空着让系统接着编。',
@@ -2360,6 +2367,11 @@ const ERR_DE = {
   INV_RECIPE_QTY: 'Zeile {n}: Die Menge muss größer als 0 sein. Bitte korrigieren und erneut speichern.',   // v166
   INV_RECIPE_UNIT: 'Zeile {n}: Abzug in ml / g, aber beim Getränk fehlt der Flascheninhalt (oder die Einheit passt nicht). Bitte zuerst beim Getränk eintragen oder auf „Stück“ umstellen.',   // v166
   INV_DRINK_BAD: 'Inhalt und Einkaufspreis müssen Zahlen größer als 0 sein; beim Inhalt bitte ml oder g wählen. Bitte korrigieren und erneut speichern.',   // v166
+  INV_ORDER_NO_DAY: 'Für diese Filiale und diesen Lieferanten ist noch kein Liefertag eingestellt, deshalb gibt es keinen Vorschlag. Bitte den Chef den Liefertag auf der Bestellseite einstellen lassen.',   // v169
+  INV_ORDER_DONE: 'Diese Bestellung ist schon bestätigt oder storniert und kann nicht mehr geändert werden. Bitte zurück zur Bestellseite.',   // v169
+  INV_ORDER_QTY: 'Die Menge muss eine ganze Zahl ab 0 sein (Bestelleinheiten). Bitte korrigieren.',   // v169
+  INV_ORDER_EMPTY: 'In der Bestellung steht noch keine Menge, deshalb kann sie nicht bestätigt werden. Bitte Mengen eintragen oder die Bestellung stornieren.',   // v169
+  INV_TARGET_BAD: 'Der Sollbestand muss eine Zahl ab 0 sein. Bitte korrigieren.',   // v169
   INV_FACTOR: '„1 verkauft = wie viele“ muss größer als 0 sein (bei Flaschen meist 1). Bitte korrigieren und erneut speichern.',
   INV_PHOTO_BAD: 'Das Foto wurde nicht hochgeladen (keine Verbindung oder Fotoproblem). Bitte noch einmal fotografieren.',
   INV_CODE_TAKEN: 'Diese Nummer gibt es schon (auch deaktivierte Nummern werden nicht wieder vergeben). Bitte andere Nummer oder leer lassen.',
@@ -5207,6 +5219,9 @@ async function viewInv(){
   if (S.view === 'tr') return renderInvTr();
   if (S.view === 'loss') return renderInvLoss();   // v143
   if (S.view === 'levels') return viewInvLevels();
+  if (S.view === 'orders') return viewInvOrders();   // v169：订货
+  if (S.view === 'order') return renderInvOrder();
+  if (S.view === 'otargets') return viewInvOtargets();
   if (S.view === 'count') return viewInvCount();
   if (S.view === 'unplaced') return renderInvUnplaced();
   if (S.view === 'settings' || S.view === 'aform' || S.view === 'cform') return viewInvSettings();
@@ -6004,6 +6019,7 @@ function invTodoLines(T){
   const out = [];
   (T.unplaced || []).forEach(u => out.push(`<div class="item" data-act="kp-unplaced" data-store="${u.store}" style="cursor:pointer">🍹 ${esc(t('kp_unplaced', { s: u.store, n: u.n }))}</div>`));   // v143
   if (T.rc_open) out.push(`<div class="item" data-act="inv-stock" style="cursor:pointer"><strong>🧾 ${esc(t('stk_todo', { n: T.rc_open }))}</strong></div>`);   // v142
+  (T.order_due || []).forEach(d => out.push(`<div class="item" data-act="ord-home" style="cursor:pointer"><strong>🛒 ${esc(t('ord_due', { p: d.supplier, s: d.store, d: dayLabel(d.delivery_day) }))}</strong></div>`));   // v169
   if (T.inbox_open) out.push(`<div class="item" data-act="inv-ib-list" style="cursor:pointer"><strong>📦 ${esc(t('inv_ib_todo', { n: T.inbox_open }))}</strong>${T.inbox_late ? ` <span class="tag bad">${esc(t('inv_ib_late_n', { n: T.inbox_late }))}</span>` : ''}</div>`);
   (T.due || []).forEach(d => out.push(`<div class="item" data-act="inv-area" data-id="${d.area}" style="cursor:pointer">🔄 ${storeTag(d.store)} ${esc(t('inv_due_line', { a: invName(d), n: d.n }))}</div>`));
   if (T.misses) out.push(`<div class="item" data-act="inv-misses" style="cursor:pointer">🔍 ${esc(t('inv_miss_todo', { n: T.misses }))}</div>`);
@@ -6013,7 +6029,7 @@ function invTodoCardHTML(T){   // 「今天」页：主管（老板的「今天�
   const L = invTodoLines(T); if (!L.length) return '';
   return `<h3>${esc(t('inv_todo_h'))}</h3><div class="list">${L.join('')}</div>`;
 }
-function invBadge(){ const T = state.invTodo, n = T ? (T.inbox_open || 0) + (T.rc_open || 0) : 0; return n ? ` <span class="tag ${T.inbox_late ? 'bad' : 'pend'}">${n}</span>` : ''; }   // v142：加上等确认的送货单
+function invBadge(){ const T = state.invTodo, n = T ? (T.inbox_open || 0) + (T.rc_open || 0) + (T.order_due || []).length : 0; return n ? ` <span class="tag ${T.inbox_late ? 'bad' : 'pend'}">${n}</span>` : ''; }   // v142：加上等确认的送货单
 
 // 待归位：员工登记
 function invIbNew(){ const S = invS(); S.ibf = { store: invMyStore() || STORES[0], note: '', photo: null }; invGo('ibnew'); }
@@ -6282,6 +6298,113 @@ function renderInvDrink(){
       : `<div class="list"><div class="empty">${esc(t('drk_d_nodays'))}</div></div>`}
     <button class="link danger" data-act="drk-off" style="margin-top:14px">${esc(t('drk_d_off'))}</button>`;
 }
+// ---------- v169：饮料进销存第 3 步（数据库 v124，老板 2026-11-11）：订货——订货建议、目标库存、订货单、到货对订单。App 不下单，人照着清单去供应商那边下 ----------
+function ordDow(n){ return n ? t('wd')[n - 1] : '—'; }
+function ordUnit(l){ const u = drkUnit(l.order_unit) || l.order_unit; return +l.unit_qty > 1 ? `${u}（${drkNum(l.unit_qty)}）` : u; }
+function ordStatus(o){ return t('ord_st_' + o.status); }
+async function viewInvOrders(){
+  const S = invS();
+  if (!S.ord) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`; else renderInvOrders();
+  let D; try { D = await rpc('inv_order_home', tok()); } catch(e){ $('#main').innerHTML = `<button class="link" data-act="inv-stock">${esc(t('stk_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'orders') return;
+  S.ord = D; renderInvOrders();
+}
+function ordOrderRow(o){
+  const n = (o.lines || []).filter(l => +l.qty > 0).length;
+  return `<div class="item" data-act="ord-open" data-id="${o.id}" style="cursor:pointer"><div class="top"><div><strong>${esc(t('ord_row', { d: dayLabel(o.delivery_day), s: ordStatus(o) }))}</strong>
+    <div class="meta">${esc(t('ord_by', { n: o.confirmed_name || o.created_name || '', t: fmtDateTime(o.confirmed_at || o.cancelled_at || o.created_at) }))} · ${n}</div></div><span class="muted">›</span></div></div>`;
+}
+function renderInvOrders(){
+  const S = invS(), D = S.ord; if (!D) return;
+  const W = stkCanWrite();
+  const dowSel = (id, v, none) => `<select class="input" id="${id}" style="width:auto">${none ? `<option value="">${esc(t('ord_day_none'))}</option>` : ''}${[1, 2, 3, 4, 5, 6, 7].map(n => `<option value="${n}"${+v === n ? ' selected' : ''}>${esc(ordDow(n))}</option>`).join('')}</select>`;
+  const sup = (st, sp) => `<div class="sheet" style="margin-bottom:10px"><strong>${esc(sp.name)}</strong>
+      <div class="small muted" style="margin:4px 0">${esc(t('ord_days', { o: ordDow(sp.order_dow), d: ordDow(sp.delivery_dow) }))}${sp.next_delivery ? ' · ' + esc(t('ord_next', { d: dayLabel(sp.next_delivery) })) : ''}</div>
+      ${sp.order_today ? `<div class="small" style="color:var(--celadon-deep);font-weight:600;margin-bottom:4px">${esc(t('ord_today'))}</div>` : ''}
+      ${!st.counted ? `<div class="small" style="color:var(--copper);margin-bottom:4px">${esc(t('ord_no_count'))}</div>` : ''}
+      ${+sp.no_target ? `<div class="small" style="color:var(--copper);margin-bottom:4px">${esc(t('ord_no_target', { n: sp.no_target }))}</div>` : ''}
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin-top:6px">${W && sp.delivery_dow ? `<button class="btn${sp.open ? '' : ' ghost'}" data-act="ord-start" data-store="${st.store}" data-sup="${sp.id}">${esc(sp.open ? t('ord_resume', { n: (sp.open.lines || []).filter(l => +l.qty > 0).length }) : t('ord_start'))}</button>` : ''}
+        <button class="btn ghost" data-act="ord-targets" data-store="${st.store}" data-sup="${sp.id}">${esc(t('ord_targets_btn'))}</button></div>
+      ${D.admin && W ? `<details class="fold" style="margin-top:8px"><summary>${esc(t('ord_days_edit'))}</summary><div class="inner"><div class="row" style="gap:8px;flex-wrap:wrap;align-items:center">
+        <label class="small" for="ord-do-${st.store}-${sp.id}">${esc(t('ord_day_order'))}</label>${dowSel(`ord-do-${st.store}-${sp.id}`, sp.order_dow, true)}
+        <label class="small" for="ord-dd-${st.store}-${sp.id}">${esc(t('ord_day_delivery'))}</label>${dowSel(`ord-dd-${st.store}-${sp.id}`, sp.delivery_dow || 5, false)}
+        <button class="btn ghost" data-act="ord-days-save" data-store="${st.store}" data-sup="${sp.id}">${esc(t('ord_days_save'))}</button></div></div></details>` : ''}
+      ${(sp.orders || []).length ? `<div class="small muted" style="margin:10px 0 4px">${esc(t('ord_recent'))}</div><div class="list">${sp.orders.map(ordOrderRow).join('')}</div>` : ''}</div>`;
+  const un = D.unlinked || [];
+  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><h2 style="margin-top:4px">${esc(t('ord_title'))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('ord_hint'))}</div>
+    ${(D.stores || []).map(st => `<h3>${storeTag(st.store)}</h3>${(st.suppliers || []).map(sp => sup(st, sp)).join('')}`).join('')}
+    ${un.length ? `<details class="fold"><summary>${esc(t('ord_unlinked_h', { n: un.length }))}</summary><div class="inner"><div class="small muted" style="margin-bottom:8px">${esc(t('ord_unlinked_hint'))}</div>
+      ${un.map(x => `<div style="margin-bottom:10px"><div>${esc(x.name)} <span class="small muted">· ${esc(t('ord_art', { a: x.art_no }))} · ${esc(ordUnit(x))}</span></div>
+        <select class="input" data-ordlink="${x.id}" aria-label="${esc(t('ord_link_pick'))}" style="margin-top:4px"><option value="">${esc(t('ord_link_pick'))}</option>${(D.drinks || []).map(d => `<option value="${d.id}">${esc(invName(d))}</option>`).join('')}</select></div>`).join('')}</div></details>` : ''}`;
+}
+function ordFind(id){ const D = invS().ord || {}; for (const st of D.stores || []) for (const sp of st.suppliers || []) { if (sp.open && sp.open.id === id) return sp.open; const o = (sp.orders || []).find(x => x.id === id); if (o) return o; } return null; }
+function ordPortal(o){ if (o.portal) return o.portal; const D = invS().ord || {}; for (const st of D.stores || []) for (const sp of st.suppliers || []) if (sp.id === o.supplier_id) return sp.portal || ''; return ''; }
+function ordListText(o){ return (o.lines || []).filter(l => +l.qty > 0).map(l => `${l.art_no}\t${drkNum(l.qty)} ${l.order_unit}\t${l.sname}`).join('\n'); }
+function ordLineHTML(l, ed){
+  const calc = l.target == null ? t('ord_calc_nt') : l.stock == null ? t('ord_calc_nc', { w: drkNum(l.week) }) : t('ord_calc', { t: drkNum(l.target), s: drkNum(l.stock), u: drkNum(l.until), n: drkNum(Math.max(0, +l.need || 0)) });
+  return `<div style="margin:12px 0"><div><strong>${esc(invName(l))}</strong></div><div class="small muted">${esc(l.sname)} · ${esc(t('ord_art', { a: l.art_no }))}</div>
+    <div class="small muted">${esc(calc)}</div>
+    <div class="row" style="gap:8px;align-items:center;margin-top:4px"><input class="input" style="width:80px;flex:0 0 80px" inputmode="numeric" data-ordq="${l.si}" aria-label="${esc(invName(l))}" value="${esc(drkNum(l.qty))}" ${ed ? '' : 'disabled'}>
+      <span class="small">${esc(ordUnit(l))}</span><span class="small muted">${esc(t('ord_sug', { n: drkNum(l.suggest) }))}</span><span class="small muted" id="ord-ok-${l.si}"></span></div></div>`;
+}
+function renderInvOrder(){
+  const S = invS(), o = S.ordCur; if (!o){ S.view = 'orders'; return viewInvOrders(); }
+  const W = stkCanWrite(), ed = o.status === 'open' && W, L = o.lines || [];
+  const head = `<button class="link" data-act="ord-home" style="margin:2px 0 6px">← ${esc(t('ord_title'))}</button><h2 style="margin-top:4px">${esc(t('ord_o_title', { s: o.store, p: o.supplier }))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('ord_o_delivery', { d: dayLabel(o.delivery_day) }))} · ${esc(ordStatus(o))}${o.cancel_note ? ' · ' + esc(o.cancel_note) : ''}</div>`;
+  if (o.status === 'open'){
+    const main = L.filter(l => +l.qty > 0 || +l.suggest > 0), rest = L.filter(l => !(+l.qty > 0 || +l.suggest > 0));
+    $('#main').innerHTML = head + `${o.no_count ? `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('ord_no_count'))}</div>` : ''}
+      <div class="sheet" style="margin-bottom:10px">${main.map(l => ordLineHTML(l, ed)).join('') || `<div class="empty">—</div>`}</div>
+      ${rest.length ? `<details class="fold"><summary>${esc(t('ord_rest', { n: rest.length }))}</summary><div class="inner">${rest.map(l => ordLineHTML(l, ed)).join('')}</div></details>` : ''}
+      ${ed ? `<button class="btn" data-act="ord-confirm" style="margin-top:10px">${esc(t('ord_confirm'))}</button><button class="link danger" data-act="ord-cancel" style="margin-top:12px">${esc(t('ord_cancel'))}</button>` : ''}`;
+    return;
+  }
+  const lines = L.filter(l => +l.qty > 0), got = o.got || {}, portal = ordPortal(o);
+  const cmp = l => { const ord = +l.qty * +l.unit_qty, g = +got[l.item] || 0; if (!+o.receipts) return '';
+    return `<div class="small" style="${Math.abs(g - ord) < 0.01 ? 'color:var(--celadon-deep)' : 'color:var(--copper);font-weight:600'}">${esc(Math.abs(g - ord) < 0.01 ? t('ord_cmp_ok', { g: drkNum(g) }) : g < ord ? t('ord_cmp_less', { o: drkNum(ord), g: drkNum(g), d: drkNum(ord - g) }) : t('ord_cmp_more', { o: drkNum(ord), g: drkNum(g), d: drkNum(g - ord) }))}</div>`; };
+  $('#main').innerHTML = head + `<div class="sheet" style="margin-bottom:10px">${lines.map(l => `<div style="margin:10px 0"><strong>${esc(drkNum(l.qty))} ${esc(ordUnit(l))}</strong> · ${esc(invName(l))}
+        <div class="small muted">${esc(l.sname)} · ${esc(t('ord_art', { a: l.art_no }))}</div>${o.status === 'confirmed' ? cmp(l) : ''}</div>`).join('') || `<div class="empty">—</div>`}</div>
+    ${o.status === 'confirmed' ? `<h3>${esc(t('ord_cmp_h'))}</h3>${+o.receipts ? ((o.extra || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('ord_cmp_extra', { l: o.extra.map(x => `${invName(x)} ${drkNum(x.qty)}`).join('、') }))}</div>` : '') : `<div class="small muted" style="margin-bottom:10px">${esc(t('ord_cmp_none'))}</div>`}
+      <h3>${esc(t('ord_list_h'))}</h3><pre class="sheet" style="white-space:pre-wrap;font-size:.85em;margin-bottom:8px" id="ord-list">${esc(ordListText(o))}</pre>
+      <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="ord-copy">${esc(t('ord_copy'))}</button>${portal ? `<a class="btn ghost" href="${esc(portal)}" target="_blank" rel="noopener">${esc(t('ord_portal', { p: o.supplier }))}</a>` : ''}</div>
+      ${W ? `<button class="link danger" data-act="ord-cancel" style="margin-top:14px">${esc(t('ord_cancel'))}</button>` : ''}` : ''}`;
+}
+async function ordSaveQty(inp){
+  const S = invS(), o = S.ordCur; if (!o || o.status !== 'open') return;
+  const q = stkNum(inp.value === '' ? '0' : inp.value); if (!(q >= 0) || q !== Math.floor(q)){ toast(t('err_INV_ORDER_QTY'), true); return; }
+  try { await rpc('inv_order_set', { ...tok(), p_id: o.id, p_si: inp.dataset.ordq, p_qty: q }); } catch(e){ toast(errText(e), true); return; }
+  const l = (o.lines || []).find(x => x.si === inp.dataset.ordq); if (l) l.qty = q;
+  const ok = document.getElementById('ord-ok-' + inp.dataset.ordq); if (ok){ ok.textContent = '✓ ' + t('ord_saved'); setTimeout(() => { if (ok.isConnected) ok.textContent = ''; }, 1500); }
+}
+async function viewInvOtargets(){
+  const S = invS(), G = S.otg; if (!G){ S.view = 'orders'; return viewInvOrders(); }
+  if (!G.rows) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let R; try { R = await rpc('inv_order_targets', { ...tok(), p_store: G.store, p_supplier: G.supplier }); } catch(e){ $('#main').innerHTML = `<button class="link" data-act="ord-home">← ${esc(t('ord_title'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'otargets' || S.otg !== G) return;
+  G.rows = R || []; renderInvOtargets();
+}
+function renderInvOtargets(){
+  const S = invS(), G = S.otg; if (!G || !G.rows) return;
+  const W = stkCanWrite(), row = x => `<div style="margin:12px 0"><div><strong>${esc(invName(x))}</strong>${x.here ? '' : ` <span class="small muted">· ${esc(t('ord_t_nothere'))}</span>`}</div>
+      <div class="small muted">${esc([t('ord_t_week', { w: drkNum(x.week) }), x.sug != null ? t('ord_t_sug', { n: drkNum(x.sug) }) : '', x.stock != null ? t('ord_t_stock', { n: drkNum(x.stock) }) : '', ordUnit(x)].filter(Boolean).join(' · '))}</div>
+      <div class="row" style="gap:8px;align-items:center;margin-top:4px"><input class="input" style="width:90px;flex:0 0 90px" inputmode="decimal" data-otg="${x.item}" aria-label="${esc(invName(x))}" value="${x.target == null ? '' : esc(drkNum(x.target))}" ${W ? '' : 'disabled'}>
+        <span class="small">${esc(drkUnit(x.unit) || t('ct_bottles'))}</span><span class="small muted" id="otg-ok-${x.item}"></span></div></div>`;
+  const here = G.rows.filter(x => x.here || x.target != null), other = G.rows.filter(x => !(x.here || x.target != null));
+  $('#main').innerHTML = `<button class="link" data-act="ord-home" style="margin:2px 0 6px">← ${esc(t('ord_title'))}</button><h2 style="margin-top:4px">${esc(t('ord_t_title', { s: G.store, p: G.name || '' }))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('ord_t_hint'))}</div>
+    ${W ? `<button class="btn ghost" data-act="ord-t-fill" style="margin-bottom:10px">${esc(t('ord_t_fill'))}</button>` : ''}
+    <div class="sheet" style="margin-bottom:10px">${here.map(row).join('') || `<div class="empty">—</div>`}</div>
+    ${other.length ? `<details class="fold"><summary>${esc(t('ord_t_nothere'))}（${other.length}）</summary><div class="inner">${other.map(row).join('')}</div></details>` : ''}`;
+}
+async function ordSaveTarget(inp){
+  const S = invS(), G = S.otg; if (!G) return;
+  const v = inp.value.trim(), q = v === '' ? null : stkNum(v); if (v !== '' && !(q >= 0)){ toast(t('err_INV_TARGET_BAD'), true); return; }
+  try { await rpc('inv_target_save', { ...tok(), p_store: G.store, p_item: inp.dataset.otg, p_qty: q }); } catch(e){ toast(errText(e), true); return; }
+  const r = (G.rows || []).find(x => x.item === inp.dataset.otg); if (r) r.target = q; S.ord = null;
+  const ok = document.getElementById('otg-ok-' + inp.dataset.otg); if (ok){ ok.textContent = '✓ ' + t('ord_saved'); setTimeout(() => { if (ok.isConnected) ok.textContent = ''; }, 1500); }
+}
 // ---------- v166：饮料进销存第 1 步（数据库 v121，老板 2026-11-11）：每瓶多少 / 进价 / 供应商、配方（按杯、几种原料、每家店可以不一样）、酒水单和成本 ----------
 function drkContent(x){ return x && x.content_qty ? `${drkNum(x.content_qty)} ${x.content_unit}` : ''; }
 function drkNum4(n){ return String(Math.round((+n || 0) * 10000) / 10000).replace('.', ','); }
@@ -6414,7 +6537,7 @@ function renderInvStock(){
     <div class="small muted" style="margin-bottom:10px">${esc(t('stk_hint'))}</div>
     ${!(D.drinks || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('stk_no_drinks'))}</div>` : ''}
     ${W ? `<button class="btn" data-act="stk-rc-new" style="margin-bottom:6px">${esc(t('stk_rc_new'))}</button><button class="btn ghost" data-act="stk-tr-new" style="margin-bottom:6px">${esc(t('stk_tr_new'))}</button><button class="btn ghost" data-act="ls-new" style="margin-bottom:10px">${esc(t('stk_loss_new'))}</button>` : ''}
-    ${(D.count_stores || []).length ? `<button class="btn ghost" data-act="lv-open" style="margin-bottom:10px">${esc(t('stk_levels_btn'))}</button>` : ''}
+    ${(D.count_stores || []).length ? `<button class="btn ghost" data-act="lv-open" style="margin-bottom:10px">${esc(t('stk_levels_btn'))}</button><button class="btn ghost" data-act="ord-home" style="margin-bottom:10px">${esc(t('ord_btn'))}${((state.invTodo || {}).order_due || []).length ? ` <span class="tag pend">!</span>` : ''}</button>` : ''}
     ${open.length ? `<h3>${esc(t(open.some(r => r.can_confirm) ? 'stk_open_h_sup' : 'stk_open_h', { n: open.length }))}</h3><div class="list">${open.map(stkRcCard).join('')}</div>` : ''}
     <h3>${esc(t('stk_hist_h'))}</h3><div class="list">${hist.map(h => h.html).join('') || `<div class="empty">${esc(t('stk_hist_none'))}</div>`}</div>`;
   invLoadPhotos();
@@ -12421,6 +12544,28 @@ document.addEventListener('click', async ev => {
     case 'ls-cancel': lsCancel(+el.dataset.i); break;
     case 'lv-open': { const S = invS(); S.count = null; invGo('levels'); break; }
     case 'lv-ai': lvAi(el.dataset.id); break;
+    // v169：订货
+    case 'ord-home': { const S = invS(); S.ordCur = null; S.otg = null; invGo('orders'); break; }
+    case 'ord-start': { const S = invS(); let o; try { o = await rpc('inv_order_start', { ...tok(), p_store: el.dataset.store, p_supplier: el.dataset.sup }); } catch(e){ toast(errText(e), true); break; }
+      S.ordCur = o; S.ord = null; invGo('order'); invTodoLoad().then(refreshInvBadge); break; }
+    case 'ord-open': { const S = invS(), o = ordFind(el.dataset.id); if (o){ S.ordCur = o; invGo('order'); } break; }
+    case 'ord-targets': { const S = invS(), D = S.ord || {}; let name = ''; (D.stores || []).forEach(st => (st.suppliers || []).forEach(sp => { if (sp.id === el.dataset.sup) name = sp.name; }));
+      S.otg = { store: el.dataset.store, supplier: el.dataset.sup, name, rows: null }; invGo('otargets'); break; }
+    case 'ord-t-fill': { const S = invS(), G = S.otg; if (!G) break; let n; try { n = await rpc('inv_targets_fill', { ...tok(), p_store: G.store, p_supplier: G.supplier }); } catch(e){ toast(errText(e), true); break; }
+      toast(t('ord_t_filled', { n: n || 0 })); S.ord = null; await keepScroll(() => viewInvOtargets()); break; }
+    case 'ord-confirm': { const S = invS(), o = S.ordCur; if (!o) break; const n = (o.lines || []).filter(l => +l.qty > 0).length;
+      if (!n){ toast(t('err_INV_ORDER_EMPTY'), true); break; } if (!confirm(t('ord_confirm_q', { n, p: o.supplier }))) break;
+      let r; try { r = await rpc('inv_order_confirm', { ...tok(), p_id: o.id }); } catch(e){ toast(errText(e), true); break; }
+      S.ordCur = r; S.ord = null; toast(t('ord_confirmed')); renderInvOrder(); window.scrollTo(0, 0); invTodoLoad().then(refreshInvBadge); break; }
+    case 'ord-cancel': { const S = invS(), o = S.ordCur; if (!o) break; let note = null;
+      if (o.status === 'confirmed'){ note = prompt(t('ord_cancel_q')); if (note === null) break; if (!note.trim()){ toast(t('err_INV_CANCEL_NOTE'), true); break; } }
+      else if (!confirm(t('ord_cancel') + '?')) break;
+      try { await rpc('inv_order_cancel', { ...tok(), p_id: o.id, p_note: note }); } catch(e){ toast(errText(e), true); break; }
+      S.ordCur = null; S.ord = null; toast(t('ord_cancelled')); invGo('orders'); invTodoLoad().then(refreshInvBadge); break; }
+    case 'ord-copy': { const o = invS().ordCur; if (!o) break; const m = ordListText(o); try { await navigator.clipboard.writeText(m); toast(t('ord_copied')); } catch(e){ prompt(t('ord_copy'), m); } break; }
+    case 'ord-days-save': { const S = invS(), od = document.getElementById(`ord-do-${el.dataset.store}-${el.dataset.sup}`), dd = document.getElementById(`ord-dd-${el.dataset.store}-${el.dataset.sup}`); if (!od || !dd) break;
+      try { await rpc('inv_supplier_store_save', { ...tok(), p_supplier: el.dataset.sup, p_store: el.dataset.store, p_order_dow: od.value ? +od.value : null, p_delivery_dow: +dd.value }); } catch(e){ toast(errText(e), true); break; }
+      toast(t('ord_days_saved')); S.ord = null; await viewInvOrders(); invTodoLoad().then(refreshInvBadge); break; }
     case 'ct-start': ctStart(el.dataset.store); break;
     case 'ct-frac': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp){ inp.value = drkNum(Math.floor(stkNum(inp.value) || 0) + (+el.dataset.f)); ctSave(inp); } break; }   // v168：开了的那一瓶 ¼ ½ ¾（整瓶数不变，换掉零头）
     case 'ct-box': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp){ inp.value = drkNum((stkNum(inp.value) || 0) + (+el.dataset.n)); ctSave(inp); } break; }
@@ -12649,6 +12794,11 @@ document.addEventListener('click', async ev => {
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.dataset && ev.target.dataset.ordq){ ordSaveQty(ev.target); return; }   // v169：订货单的数量、目标库存、供应商商品配饮料
+  if (ev.target.dataset && ev.target.dataset.otg){ ordSaveTarget(ev.target); return; }
+  if (ev.target.dataset && ev.target.dataset.ordlink){ const id = ev.target.dataset.ordlink, item = ev.target.value; if (!item) return;
+    try { await rpc('inv_supplier_item_link', { ...tok(), p_id: id, p_item: item }); } catch(e){ toast(errText(e), true); return; }
+    toast(t('ord_linked')); invS().ord = null; await keepScroll(() => viewInvOrders()); return; }
   if (ev.target.dataset && ev.target.dataset.ctadd){ const C = invS().count, id = ev.target.value, x = C && (C.rest || []).find(r => r.id === id);   // v168：盘点时加一件这家店平时没有的饮料
     if (x){ C.rest = C.rest.filter(r => r.id !== id); (C.others = C.others || []).push({ ...x, qty: null }); await keepScroll(() => renderInvCount()); const inp = document.querySelector(`[data-ct="x:${id}"]`); if (inp) inp.focus(); } return; }
   if (ev.target.dataset && ev.target.dataset.rcpchg){ rcpKeep(); keepScroll(() => renderInvRecipe()); return; }   // v166：配方里换了饮料，单位跟着变
