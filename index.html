@@ -490,7 +490,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v163';   // v163：操作记录里写的网页版本
+const WEB_VER = 'v166';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -803,15 +803,16 @@ zh: {
   task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', task_svc_one:'服务员负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
   rpe_tag:'✉ 邮件自动导入', rpe_by:'{t}', rpe_file:'原件', rpe_dl:'下载 PDF', rpe_dlg_title:'全天报告原件 · {s} · {d}', rpe_dlg_hint:'Lightspeed 每天发来的 Geschäftsbericht，{t} 自动导入。下面是 PDF 里的文字；要原样的 PDF 点「下载 PDF」。', rpe_replace_q:'{s} {d} 已经有从邮件自动导入的全天报告（应交现金 {a} · 刷卡小费 {b}）。\n\n要用{w}替换它吗？邮件那份会标「被取代」，记录保留。', rpe_w_photo:'这次拍的照片', rpe_w_manual:'手动输入的数字', rpe_job:'这天已经有邮件导入的报告（应交现金 {a}）', rpe_job_replace:'用照片替换', rpe_h_bad:'✉ 邮件里的报告读不出来：{p}。请拍照录入。', rpe_h_none:'✉ 邮件里还没有这天的报告（最后检查 {t}）。', rpe_h_empty:'✉ 邮件里的报告这天没有收款（0 张单）：请看一眼收银机是不是关错了班，或拍照录入。', rpe_h_err:'✉ 读取邮件出错：{e}（{t}）。这天的报告没导入，请拍照录入，并告诉 Claude。', rpe_h_unknown:'✉ 邮件里有 {n} 个 PDF 认不出是哪家店、哪天（{p}）。', rpe_e_MAIL_LOGIN:'登录不了专用邮箱（应用密码可能改了或被删了）', rpe_e_MAIL_FETCH:'取邮件失败', rpe_e_MAIL_SECRET:'自动任务里没设邮箱', rpe_e_DISPATCH_NO_TOKEN:'数据库里还没有叫 GitHub 用的钥匙（Supabase → Vault 的 github_dispatch_token），自动取邮件停着', rpe_e_DISPATCH_FAILED:'GitHub 的钥匙不能用了（可能过期或被删了），自动取邮件停着', rpe_p_STORE:'认不出门店', rpe_p_DAY:'读不出日子', rpe_p_NOT_WHOLE_DAY:'不是全天的报告', rpe_p_PAYMENTS_MISSING:'「Einnahmen nach Zahlungsart」那一段读不出来', rpe_p_PAYMENTS_LINE:'付款方式那一段有读不懂的行', rpe_p_TOTALS_MISSING:'合计（Einnahmen mit / ohne Trinkgeld）读不出来', rpe_p_METHOD:'「{n}」的金额、小费对不上', rpe_p_SUM:'各付款方式加起来和合计对不上', rpe_p_NUMBERS:'数字不完整', rpe_p_DAY_FUTURE:'是今天的（还在营业）', rpe_p_TOO_EARLY:'邮件在营业结束前就发出了，可能不是全天的', rpe_p_NO_ADMIN:'系统里找不到老板账号',   // v135
-  drk_btn:'🍹 饮料库存', drk_btn_todo:'{n} 件要处理', drk_title:'🍹 饮料库存', drk_step:'每天早上自动读 Lightspeed 发来的 Produktbericht，算每样饮料卖了几瓶（送的、0 元套餐里的也算）。收货、调拨在「📦 饮料收货 · 调拨」；盘点是下一步。', drk_back:'← 饮料库存',
+  drk_btn:'🍹 饮料库存', drk_btn_todo:'{n} 件要处理', drk_title:'🍹 饮料库存', drk_step:'每天早上自动读 Lightspeed 发来的 Produktbericht，按配方算每样饮料卖了几瓶（按杯卖的按 ml 折成瓶；送的、0 元套餐里的也算）。收货、调拨、盘点在「📦 饮料收货 · 调拨」。', drk_back:'← 饮料库存',
   drk_imp_last:'最新：{d}', drk_imp_none:'还没收到 Lightspeed 的销售报告（Produktbericht）', drk_imp_bad:'{d} 的报告读不出来：{p}（{f}）。请告诉 Claude。', drk_imp_err:'读取邮件出错：{e}（{t}）。请告诉 Claude。', drk_imp_unknown:'{n} 个 CSV 认不出是哪家店、哪天（{p}）',
+  drk_menu_btn:'🍷 酒水单和成本', drk_m_title:'🍷 酒水单和成本', drk_m_hint:'每个收银商品卖 1 个扣什么、成本多少。毛利 =（卖价 − 成本）÷ 卖价，和 Lightspeed 的算法一样：卖价含税，进价不含税。点一行改配方。', drk_m_col_a:'商品', drk_m_col_p:'卖价', drk_m_col_c:'成本', drk_m_col_m:'毛利', drk_m_on:'酒水单上的（{n}）', drk_m_off:'不在酒水单上的（{n}）', drk_m_offtag:'不在酒水单上', drk_m_none:'这家店还没有配好的商品。请先在饮料库存页确认建议，或者给「还没配」的商品配配方。', drk_m_nocost:'缺进价', drk_m_nofactor:'有原料还没填每瓶多少，卖了不扣库存', drk_m_till:'收银实际卖 {p}', drk_m_sold:'30 天卖 {n}', drk_m_shared:'两家店共用', drk_m_old:'整瓶卖的、套餐里的（按「卖 1 个 = 几瓶」配的，{n} 个）', drk_rc_h:'配方：{a}', drk_rc_store:'给哪家店', drk_rc_both:'两家店都用', drk_rc_store_hint:'一家店有自己的配方就用自己的，没有才用两家店共用的。', drk_rc_price:'酒水单上的卖价（€，可以不填）', drk_rc_onmenu:'在酒水单上', drk_rc_lines:'卖 1 个，扣这些', drk_rc_item:'饮料', drk_rc_pick:'— 选饮料 —', drk_rc_qty:'数量', drk_rc_u_unit:'个（整瓶）', drk_rc_add:'＋ 加一种原料', drk_rc_del:'去掉这行', drk_rc_save:'保存配方', drk_rc_end:'去掉这个配方', drk_rc_end_q:'去掉「{a}」的配方吗？以后卖它不再按这个配方扣库存。', drk_rc_saved:'配方保存了：{a}', drk_rc_ended:'配方去掉了：{a}', drk_rc_hint:'按 ml 扣的，这件饮料要先填「每瓶多少 ml」。一杯 150 ml 的酒一般填 170 ml（含倒酒的损耗）。改配方只影响上一次盘点以后的库存数，已经盘完的结果不变。', drk_rc_guess:'下面是按名字猜的，请检查再保存。', drk_rc_need:'请至少选一种饮料并填大于 0 的数量，再保存。', drk_rc_nocontent:'这件饮料还没填每瓶多少，只能按「个」扣。要按 ml 扣，先去这件饮料的页面填。', drk_rc_btn:'配配方（按杯、几种原料）', drk_rc_edit:'改配方', drk_i_content:'每瓶多少', drk_i_cost:'进价（每瓶，不含税，€）', drk_i_supplier:'供应商', drk_i_none:'没填', drk_i_edit:'改每瓶多少、进价、供应商', drk_i_saved:'保存了', drk_i_cost_new:'最近一张送货单上的进价是 {n}，和现在的 {o} 差很多，没有自动改。', drk_i_cost_use:'用 {n}', drk_d_use:'卖 1 个扣 {q}', drk_sg_uses:'配方（{s}）', drk_sg_auto:'「全部按建议」会用已有的：{n}', drk_sg_auto_new:'「全部按建议」会新建', drk_sugg_all_done:'处理好了：新建 {c} 件，用已有的 {l} 件',   // v166
   drk_p_HEADER:'表头不认识', drk_p_STORE:'认不出门店', drk_p_DAY:'读不出日子', drk_p_GROUPS:'分不出 Warengruppe', drk_p_SUM:'各行加起来和门店合计对不上', drk_p_LINES:'有的行没有名字或数量', drk_p_NUMBERS:'数字不完整', drk_p_DAY_FUTURE:'是今天的（还在营业）', drk_p_TOO_EARLY:'邮件在营业结束前就发出了', drk_p_PARSE_ERROR:'读法出错',
-  drk_sugg_h:'待确认 {n} 个', drk_sugg_hint:'Claude 按 Lightspeed 里的库存物品和配方整理的瓶装 / 罐装饮料：卖 1 个 = 1 瓶。确认后就开始算。', drk_sugg_all:'全部确认（{n} 个，新建）', drk_sugg_all_q:'把下面 {n} 个都新建成饮料吗？（物品里有相似的那几个不在里面，要你一个个选）',
+  drk_sugg_h:'待确认 {n} 个', drk_sugg_hint:'Claude 按 Lightspeed 里的库存物品、配方和酒水单整理的。带「配方」的是 Bismarck 的酒：按瓶卖扣 1 瓶，按杯卖扣 170 ml，shot 扣 60 ml。确认后就开始算；每瓶多少、进价、配方以后都可以改。', drk_sugg_all:'全部按建议（{n} 条）', drk_sugg_all_q:'{n} 条建议全部按建议处理吗？能对上已有饮料的用已有的（每条下面写着），其余新建。处理完可以在每件饮料里再改，也可以把两件合并。',
   drk_pos:'收银机：{a}', drk_cost:'进价 {c} / {u}', drk_sold7:'最近 7 天卖了 {n}', drk_match_h:'物品里已经有相似的：', drk_use:'用这件', drk_is_drink:'已在饮料清单', drk_linked_warn:'已经配过：{a} → {n}（确认后改成这一件）',
   drk_ok_new:'确认：新建饮料', drk_edit:'改名字 / 包装', drk_reject:'不要', drk_reject_q:'不要「{n}」吗？它的收银商品会出现在「还没配」里，可以以后再配。', drk_done_new:'已新建：{n}', drk_done_link:'已配到：{n}', drk_done_rej:'已去掉建议',
   drk_f_de:'德文名', drk_f_zh:'中文名', drk_f_unit:'单位（Flasche、Dose……）', drk_f_pack:'包装（Kiste、Karton、Tray……）', drk_f_qty:'1 包装 = 几个', drk_f_save:'保存并确认', drk_f_cancel:'取消',
   drk_list_h:'饮料 {n} 种', drk_list_none:'还没有饮料：先确认上面的建议，或把下面「还没配」的收银商品配上。', drk_col_last:'最新一天', drk_col_day:'最新', drk_col_7:'7 天', drk_col_28:'28 天', drk_last_days:'最新一天：{s}',
-  drk_un_h:'还没配的饮料 {n} 个', drk_un_hint:'收银机上饮料类的商品，最近 30 天卖过、还没配到库存饮料。扎啤、杯装酒、店里调的（Schorle、Lemonade……）先标「不管库存」，以后再做。', drk_un_30:'30 天：{s}', drk_link:'配到饮料', drk_ignore:'不管库存', drk_ignored_h:'不管库存的 {n} 个', drk_unignore:'改回「还没配」', drk_ignored_done:'已标「不管库存」', drk_back_un:'已改回「还没配」',
+  drk_un_h:'还没配的饮料 {n} 个', drk_un_hint:'收银机上饮料类的商品，最近 30 天卖过、还没配。整瓶卖的点「配到饮料」；按杯卖的、用几种原料的点「配配方」；店里调的（Schorle、Eistee……）先标「不管库存」。', drk_un_30:'30 天：{s}', drk_link:'配到饮料', drk_ignore:'不管库存', drk_ignored_h:'不管库存的 {n} 个', drk_unignore:'改回「还没配」', drk_ignored_done:'已标「不管库存」', drk_back_un:'已改回「还没配」',
   drk_d_pos_h:'收银机商品', drk_d_factor:'卖 1 个 = {f} {u}', drk_d_unlink:'去掉', drk_d_unlink_q:'把「{a}」从这件饮料去掉吗？它会回到「还没配」。', drk_d_days_h:'每天卖了几个（最近 28 天）', drk_d_nodays:'最近 28 天还没有销售数据。', drk_d_item:'打开物品页（改名字、照片、放在哪）', drk_d_off:'不再管这件的库存', drk_d_off_q:'「{n}」不再管库存吗？它的收银商品回到「还没配」，物品本身留着。', drk_d_off_done:'已不再管库存', drk_d_sum:'合计',
   drk_l_h:'「{a}」配到哪样饮料？', drk_l_factor:'卖 1 个 =', drk_l_factor_u:'个基本单位（瓶 / 罐）', drk_l_drinks:'饮料清单里的', drk_l_search:'物品里找', drk_l_q_ph:'找物品：名字、别名……', drk_l_new:'新建饮料', drk_l_new_btn:'新建并配上', drk_l_done:'「{a}」已配到 {n}', drk_l_none:'物品里没找到「{q}」，可以在下面新建。',
   drk_u_Flasche:'瓶', drk_u_Dose:'罐', drk_u_Kiste:'箱', drk_u_Karton:'箱', drk_u_Tray:'托', drk_u_Fass:'桶', drk_u_Packung:'包', drk_u_Stück:'个',   // v137
@@ -1484,15 +1485,16 @@ de: {
   task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', task_svc_one:'Service übernimmt {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
   rpe_tag:'✉ automatisch per E-Mail', rpe_by:'{t}', rpe_file:'Original', rpe_dl:'PDF herunterladen', rpe_dlg_title:'Tagesbericht (Original) · {s} · {d}', rpe_dlg_hint:'Täglicher Geschäftsbericht von Lightspeed, automatisch importiert am {t}. Unten der Text aus dem PDF; das Original-PDF über „PDF herunterladen“.', rpe_replace_q:'Für {s} {d} gibt es schon einen automatisch per E-Mail importierten Tagesbericht (Abgabe {a} · Kartentrinkgeld {b}).\n\nDurch {w} ersetzen? Der E-Mail-Bericht wird als „ersetzt“ markiert, der Eintrag bleibt gespeichert.', rpe_w_photo:'das neue Foto', rpe_w_manual:'die von Hand eingegebenen Zahlen', rpe_job:'Für diesen Tag gibt es schon einen E-Mail-Bericht (Abgabe {a})', rpe_job_replace:'Durch Foto ersetzen', rpe_h_bad:'✉ Bericht aus der E-Mail nicht lesbar: {p}. Bitte fotografieren.', rpe_h_none:'✉ Noch kein Bericht für diesen Tag in der E-Mail (zuletzt geprüft {t}).', rpe_h_empty:'✉ Laut E-Mail-Bericht keine Zahlungen an diesem Tag (0 Belege): Bitte prüfen, ob an der Kasse die falsche Schicht geschlossen wurde, oder fotografieren.', rpe_h_err:'✉ Fehler beim Lesen der E-Mails: {e} ({t}). Der Bericht wurde nicht importiert – bitte fotografieren und Claude Bescheid geben.', rpe_h_unknown:'✉ {n} PDF in den E-Mails: Filiale oder Tag nicht erkennbar ({p}).', rpe_e_MAIL_LOGIN:'Anmeldung am Postfach fehlgeschlagen (App-Passwort geändert oder gelöscht?)', rpe_e_MAIL_FETCH:'E-Mails konnten nicht geladen werden', rpe_e_MAIL_SECRET:'Postfach im automatischen Ablauf nicht eingerichtet', rpe_e_DISPATCH_NO_TOKEN:'In der Datenbank fehlt der GitHub-Schlüssel (Supabase → Vault: github_dispatch_token), der automatische E-Mail-Abruf steht', rpe_e_DISPATCH_FAILED:'GitHub-Schlüssel funktioniert nicht mehr (abgelaufen oder gelöscht?), der automatische E-Mail-Abruf steht', rpe_p_STORE:'Filiale nicht erkennbar', rpe_p_DAY:'Datum nicht lesbar', rpe_p_NOT_WHOLE_DAY:'kein Bericht für den ganzen Tag', rpe_p_PAYMENTS_MISSING:'Abschnitt „Einnahmen nach Zahlungsart“ nicht lesbar', rpe_p_PAYMENTS_LINE:'unbekannte Zeile bei den Zahlungsarten', rpe_p_TOTALS_MISSING:'Summen (Einnahmen mit / ohne Trinkgeld) nicht lesbar', rpe_p_METHOD:'„{n}“: Betrag und Trinkgeld passen nicht zusammen', rpe_p_SUM:'Summe der Zahlungsarten passt nicht zur Gesamtsumme', rpe_p_NUMBERS:'Zahlen unvollständig', rpe_p_DAY_FUTURE:'ist von heute (noch geöffnet)', rpe_p_TOO_EARLY:'E-Mail kam vor Geschäftsschluss – evtl. nicht der ganze Tag', rpe_p_NO_ADMIN:'kein Chef-Konto gefunden',   // v135
-  drk_btn:'🍹 Getränkebestand', drk_btn_todo:'{n} offen', drk_title:'🍹 Getränkebestand', drk_step:'Jeden Morgen wird der Produktbericht von Lightspeed automatisch gelesen und gezählt, wie viele Flaschen je Getränk verkauft wurden (auch offerierte und 0-€-Paketartikel). Wareneingang und Umlagerung: „📦 Wareneingang · Umlagerung“; Inventur folgt im nächsten Schritt.', drk_back:'← Getränkebestand',
+  drk_btn:'🍹 Getränkebestand', drk_btn_todo:'{n} offen', drk_title:'🍹 Getränkebestand', drk_step:'Jeden Morgen wird der Produktbericht von Lightspeed automatisch gelesen und nach Rezept gezählt, wie viele Flaschen je Getränk verkauft wurden (Gläser werden über ml in Flaschen umgerechnet; auch offerierte und 0-€-Paketartikel). Wareneingang, Umlagerung und Zählung: „📦 Wareneingang · Umlagerung“.', drk_back:'← Getränkebestand',
   drk_imp_last:'Neuester Tag: {d}', drk_imp_none:'Noch kein Verkaufsbericht (Produktbericht) von Lightspeed angekommen', drk_imp_bad:'Bericht vom {d} nicht lesbar: {p} ({f}). Bitte Claude Bescheid geben.', drk_imp_err:'Fehler beim Lesen der E-Mails: {e} ({t}). Bitte Claude Bescheid geben.', drk_imp_unknown:'{n} CSV: Filiale oder Tag nicht erkennbar ({p})',
+  drk_menu_btn:'🍷 Getränkekarte & Kosten', drk_m_title:'🍷 Getränkekarte & Kosten', drk_m_hint:'Was 1 verkaufter Kassenartikel verbraucht und was er kostet. Marge = (Preis − Kosten) ÷ Preis, wie in Lightspeed: Preis brutto, Einkauf netto. Zeile antippen, um das Rezept zu ändern.', drk_m_col_a:'Artikel', drk_m_col_p:'Preis', drk_m_col_c:'Kosten', drk_m_col_m:'Marge', drk_m_on:'Auf der Karte ({n})', drk_m_off:'Nicht auf der Karte ({n})', drk_m_offtag:'nicht auf der Karte', drk_m_none:'Für diese Filiale ist noch nichts zugeordnet. Bitte zuerst im Getränkebestand die Vorschläge bestätigen oder Artikeln unter „Noch nicht zugeordnet“ ein Rezept geben.', drk_m_nocost:'Einkaufspreis fehlt', drk_m_nofactor:'Bei einer Zutat fehlt der Flascheninhalt – der Verkauf wird nicht abgezogen', drk_m_till:'an der Kasse für {p} verkauft', drk_m_sold:'30 Tage: {n}', drk_m_shared:'beide Filialen', drk_m_old:'Flaschenweise und in Paketen (als „1 verkauft = x Flaschen“ zugeordnet, {n})', drk_rc_h:'Rezept: {a}', drk_rc_store:'Für welche Filiale', drk_rc_both:'Beide Filialen', drk_rc_store_hint:'Hat eine Filiale ein eigenes Rezept, gilt das eigene; sonst das gemeinsame.', drk_rc_price:'Preis auf der Karte (€, optional)', drk_rc_onmenu:'Steht auf der Karte', drk_rc_lines:'1 verkauft verbraucht', drk_rc_item:'Getränk', drk_rc_pick:'— Getränk wählen —', drk_rc_qty:'Menge', drk_rc_u_unit:'Stück (ganze Flasche)', drk_rc_add:'＋ Zutat hinzufügen', drk_rc_del:'Zeile entfernen', drk_rc_save:'Rezept speichern', drk_rc_end:'Rezept entfernen', drk_rc_end_q:'Rezept für „{a}“ entfernen? Der Verkauf wird dann nicht mehr nach diesem Rezept abgezogen.', drk_rc_saved:'Rezept gespeichert: {a}', drk_rc_ended:'Rezept entfernt: {a}', drk_rc_hint:'Für den Abzug in ml muss beim Getränk zuerst der Flascheninhalt (ml) eingetragen sein. Für ein Glas mit 150 ml meist 170 ml eintragen (inkl. Schankverlust). Ein geändertes Rezept wirkt nur auf den Bestand seit der letzten Zählung; abgeschlossene Zählungen bleiben unverändert.', drk_rc_guess:'Nach dem Namen geraten – bitte prüfen und dann speichern.', drk_rc_need:'Bitte mindestens ein Getränk wählen und eine Menge größer als 0 eintragen, dann speichern.', drk_rc_nocontent:'Bei diesem Getränk fehlt der Flascheninhalt, deshalb nur Abzug in „Stück“. Für ml bitte zuerst auf der Seite des Getränks eintragen.', drk_rc_btn:'Rezept (Glas, mehrere Zutaten)', drk_rc_edit:'Rezept ändern', drk_i_content:'Inhalt pro Flasche', drk_i_cost:'Einkaufspreis (pro Flasche, netto, €)', drk_i_supplier:'Lieferant', drk_i_none:'fehlt', drk_i_edit:'Inhalt, Einkaufspreis, Lieferant ändern', drk_i_saved:'Gespeichert', drk_i_cost_new:'Auf dem letzten Lieferschein steht {n}. Das weicht stark von {o} ab und wurde nicht automatisch übernommen.', drk_i_cost_use:'{n} übernehmen', drk_d_use:'1 verkauft = {q}', drk_sg_uses:'Rezepte ({s})', drk_sg_auto:'„Alle wie vorgeschlagen“ verwendet das vorhandene Getränk: {n}', drk_sg_auto_new:'„Alle wie vorgeschlagen“ legt es neu an', drk_sugg_all_done:'Erledigt: {c} neu angelegt, {l} vorhandene verwendet',   // v166
   drk_p_HEADER:'Kopfzeile unbekannt', drk_p_STORE:'Filiale nicht erkennbar', drk_p_DAY:'Datum nicht lesbar', drk_p_GROUPS:'Warengruppen nicht erkennbar', drk_p_SUM:'Summe der Zeilen passt nicht zur Filialsumme', drk_p_LINES:'Zeilen ohne Namen oder Menge', drk_p_NUMBERS:'Zahlen unvollständig', drk_p_DAY_FUTURE:'ist von heute (noch geöffnet)', drk_p_TOO_EARLY:'E-Mail kam vor Geschäftsschluss', drk_p_PARSE_ERROR:'Lesefehler',
-  drk_sugg_h:'{n} zu bestätigen', drk_sugg_hint:'Von Claude aus den Lagerartikeln und Rezepten in Lightspeed zusammengestellt (Flaschen / Dosen): 1 verkauft = 1 Flasche. Nach dem Bestätigen wird gezählt.', drk_sugg_all:'Alle bestätigen ({n}, neu anlegen)', drk_sugg_all_q:'Alle {n} unten als Getränk neu anlegen? (Die mit ähnlichen vorhandenen Artikeln sind nicht dabei – bitte einzeln wählen.)',
+  drk_sugg_h:'{n} zu bestätigen', drk_sugg_hint:'Von Claude aus den Lagerartikeln, Rezepten und der Getränkekarte in Lightspeed zusammengestellt. Einträge mit „Rezepte“ sind Weine und Spirituosen für Bismarck: Flasche = 1 Flasche, Glas = 170 ml, Shot = 60 ml. Nach dem Bestätigen wird gezählt; Inhalt, Einkaufspreis und Rezepte lassen sich später ändern.', drk_sugg_all:'Alle wie vorgeschlagen ({n})', drk_sugg_all_q:'Alle {n} Vorschläge wie vorgeschlagen übernehmen? Passt ein vorhandenes Getränk, wird es verwendet (steht unter jedem Eintrag), sonst wird neu angelegt. Danach lässt sich jedes Getränk noch ändern oder mit einem anderen zusammenführen.',
   drk_pos:'Kasse: {a}', drk_cost:'EK {c} / {u}', drk_sold7:'Letzte 7 Tage verkauft: {n}', drk_match_h:'Ähnliche vorhandene Artikel:', drk_use:'Diesen nehmen', drk_is_drink:'schon in der Getränkeliste', drk_linked_warn:'Schon zugeordnet: {a} → {n} (wird nach dem Bestätigen geändert)',
   drk_ok_new:'Bestätigen: neu anlegen', drk_edit:'Name / Gebinde ändern', drk_reject:'Nicht nehmen', drk_reject_q:'„{n}“ nicht nehmen? Die Kassenartikel erscheinen dann unter „Noch nicht zugeordnet“ und können später zugeordnet werden.', drk_done_new:'Neu angelegt: {n}', drk_done_link:'Zugeordnet: {n}', drk_done_rej:'Vorschlag entfernt',
   drk_f_de:'Name (Deutsch)', drk_f_zh:'Name (Chinesisch)', drk_f_unit:'Einheit (Flasche, Dose …)', drk_f_pack:'Gebinde (Kiste, Karton, Tray …)', drk_f_qty:'1 Gebinde = wie viele', drk_f_save:'Speichern und bestätigen', drk_f_cancel:'Abbrechen',
   drk_list_h:'{n} Getränke', drk_list_none:'Noch keine Getränke: Bitte die Vorschläge oben bestätigen oder unten Kassenartikel zuordnen.', drk_col_last:'Neuester Tag', drk_col_day:'Zuletzt', drk_col_7:'7 Tage', drk_col_28:'28 Tage', drk_last_days:'Neuester Tag: {s}',
-  drk_un_h:'{n} Getränke noch nicht zugeordnet', drk_un_hint:'Getränke-Kassenartikel, die in den letzten 30 Tagen verkauft wurden, aber noch keinem Lagergetränk zugeordnet sind. Fassbier, Wein im Glas und Selbstgemischtes (Schorle, Lemonade …) vorerst als „Kein Bestand“ markieren – kommt später.', drk_un_30:'30 Tage: {s}', drk_link:'Zuordnen', drk_ignore:'Kein Bestand', drk_ignored_h:'{n} ohne Bestandsführung', drk_unignore:'Zurück zu „Noch nicht zugeordnet“', drk_ignored_done:'Als „Kein Bestand“ markiert', drk_back_un:'Wieder „Noch nicht zugeordnet“',
+  drk_un_h:'{n} Getränke noch nicht zugeordnet', drk_un_hint:'Getränke-Kassenartikel, die in den letzten 30 Tagen verkauft wurden und noch nicht zugeordnet sind. Flaschenweise verkaufte: „Zuordnen“. Glasweise verkaufte oder solche mit mehreren Zutaten: „Rezept“. Selbstgemischtes (Schorle, Eistee …) vorerst als „Kein Bestand“ markieren.', drk_un_30:'30 Tage: {s}', drk_link:'Zuordnen', drk_ignore:'Kein Bestand', drk_ignored_h:'{n} ohne Bestandsführung', drk_unignore:'Zurück zu „Noch nicht zugeordnet“', drk_ignored_done:'Als „Kein Bestand“ markiert', drk_back_un:'Wieder „Noch nicht zugeordnet“',
   drk_d_pos_h:'Kassenartikel', drk_d_factor:'1 verkauft = {f} {u}', drk_d_unlink:'Entfernen', drk_d_unlink_q:'„{a}“ von diesem Getränk entfernen? Er kommt zurück zu „Noch nicht zugeordnet“.', drk_d_days_h:'Verkauft pro Tag (letzte 28 Tage)', drk_d_nodays:'Noch keine Verkaufsdaten in den letzten 28 Tagen.', drk_d_item:'Artikelseite öffnen (Name, Foto, Lagerplatz)', drk_d_off:'Bestand für diesen Artikel nicht mehr führen', drk_d_off_q:'Für „{n}“ keinen Bestand mehr führen? Die Kassenartikel gehen zurück zu „Noch nicht zugeordnet“, der Artikel selbst bleibt.', drk_d_off_done:'Bestand wird nicht mehr geführt', drk_d_sum:'Summe',
   drk_l_h:'„{a}“ welchem Getränk zuordnen?', drk_l_factor:'1 verkauft =', drk_l_factor_u:'Grundeinheiten (Flasche / Dose)', drk_l_drinks:'Aus der Getränkeliste', drk_l_search:'In den Artikeln suchen', drk_l_q_ph:'Artikel suchen: Name, Alias …', drk_l_new:'Neues Getränk', drk_l_new_btn:'Anlegen und zuordnen', drk_l_done:'„{a}“ zugeordnet: {n}', drk_l_none:'„{q}“ nicht gefunden – unten neu anlegen.',
   drk_u_Flasche:'Flasche', drk_u_Dose:'Dose', drk_u_Kiste:'Kiste', drk_u_Karton:'Karton', drk_u_Tray:'Tray', drk_u_Fass:'Fass', drk_u_Packung:'Packung', drk_u_Stück:'Stück',   // v137
@@ -1881,7 +1883,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=4'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=5'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2088,6 +2090,11 @@ const ERR_ZH = {
   INV_ITEM_OFF: '这件东西已经停用或合并到别的物品了。请返回刷新再看。',
   INV_SUGG_DONE: '这条建议已经处理过了（可能在别的手机上）。请返回刷新再看。',   // v137
   INV_NO_DRINK_CAT: '物品分类里找不到「饮料」，新建不了饮料。请在「⚙ 物品设置 → 分类」里看一下，或告诉 Claude。',
+  INV_RECIPE_EMPTY: '配方里还没有原料。请至少选一种饮料并填数量，再保存。',   // v166
+  INV_RECIPE_ITEM: '第 {n} 行的饮料不对：没选、已经停用，或者同一种饮料选了两次。请改这一行再保存。',   // v166
+  INV_RECIPE_QTY: '第 {n} 行的数量要填大于 0 的数。请改一下再保存。',   // v166
+  INV_RECIPE_UNIT: '第 {n} 行按 ml / g 扣，但这件饮料还没填「每瓶多少」（或单位不一样）。请先在这件饮料的页面填好，或者改成按「个」。',   // v166
+  INV_DRINK_BAD: '每瓶多少和进价要填大于 0 的数，每瓶多少还要选 ml 或 g。请改一下再保存。',   // v166
   INV_FACTOR: '「卖 1 个 = 几个」要填大于 0 的数（瓶装饮料一般是 1）。请改一下再保存。',
   INV_PHOTO_BAD: '照片没有传上去（网络断了或照片有问题）。请重拍一次。',
   INV_CODE_TAKEN: '这个编号已经有了（停用过的编号也不能再用）。请换一个号码，或者号码空着让系统接着编。',
@@ -2345,6 +2352,11 @@ const ERR_DE = {
   INV_ITEM_OFF: 'Dieser Artikel ist deaktiviert oder wurde zusammengeführt. Bitte zurück und neu laden.',
   INV_SUGG_DONE: 'Dieser Vorschlag wurde schon bearbeitet (evtl. auf einem anderen Handy). Bitte zurück und neu laden.',   // v137
   INV_NO_DRINK_CAT: 'Die Artikelkategorie „Getränke“ fehlt – Getränk kann nicht angelegt werden. Bitte unter „⚙ Artikel-Einstellungen → Kategorien“ prüfen oder Claude Bescheid geben.',
+  INV_RECIPE_EMPTY: 'Das Rezept hat noch keine Zutat. Bitte mindestens ein Getränk wählen und die Menge eintragen, dann speichern.',   // v166
+  INV_RECIPE_ITEM: 'Zeile {n}: Getränk fehlt, ist deaktiviert oder doppelt gewählt. Bitte die Zeile korrigieren und erneut speichern.',   // v166
+  INV_RECIPE_QTY: 'Zeile {n}: Die Menge muss größer als 0 sein. Bitte korrigieren und erneut speichern.',   // v166
+  INV_RECIPE_UNIT: 'Zeile {n}: Abzug in ml / g, aber beim Getränk fehlt der Flascheninhalt (oder die Einheit passt nicht). Bitte zuerst beim Getränk eintragen oder auf „Stück“ umstellen.',   // v166
+  INV_DRINK_BAD: 'Inhalt und Einkaufspreis müssen Zahlen größer als 0 sein; beim Inhalt bitte ml oder g wählen. Bitte korrigieren und erneut speichern.',   // v166
   INV_FACTOR: '„1 verkauft = wie viele“ muss größer als 0 sein (bei Flaschen meist 1). Bitte korrigieren und erneut speichern.',
   INV_PHOTO_BAD: 'Das Foto wurde nicht hochgeladen (keine Verbindung oder Fotoproblem). Bitte noch einmal fotografieren.',
   INV_CODE_TAKEN: 'Diese Nummer gibt es schon (auch deaktivierte Nummern werden nicht wieder vergeben). Bitte andere Nummer oder leer lassen.',
@@ -5184,6 +5196,8 @@ async function viewInv(){
   if (S.view === 'drinks') return viewInvDrinks();   // v137：饮料库存
   if (S.view === 'drink') return viewInvDrink();
   if (S.view === 'dlink') return renderInvDlink();
+  if (S.view === 'dmenu') return renderInvDmenu();   // v166：酒水单和成本
+  if (S.view === 'recipe') return renderInvRecipe();
   if (S.view === 'stock') return viewInvStock();   // v142：饮料收货 · 调拨
   if (S.view === 'rc') return renderInvRc();
   if (S.view === 'tr') return renderInvTr();
@@ -6169,10 +6183,15 @@ function drkImportsHTML(D){
 }
 function drkSuggHTML(D){
   const L = D.suggest || []; if (!L.length) return '';
-  const S = invS(), plain = L.filter(g => !(g.matches || []).length);
+  const S = invS();
   const card = (g, i) => {
     const E = S.dEdit && S.dEdit.id === g.id ? S.dEdit : null;
     const cost = g.cost_cents ? ' · ' + t('drk_cost', { c: eur(g.cost_cents), u: drkUnit(g.unit) || '1' }) : '';
+    // v166：每瓶多少 / 供应商、配方、给老板的一句话、「全部按建议」会怎么处理
+    const info = [drkContent(g), g.supplier].filter(Boolean).join(' · ');
+    const uses = (g.uses || []).length ? `<div class="meta">${esc(t('drk_sg_uses', { s: [...new Set(g.uses.map(u => u.store || t('drk_m_shared')))].join(' / ') }))}<br>${g.uses.map(u => esc(`${u.article} = ${drkQtyU(u.qty, u.unit || 'unit', g)}${u.price_cents != null ? ' · ' + eur(u.price_cents) : ''}${u.on_menu === false ? ' · ' + t('drk_m_offtag') : ''}`)).join('<br>')}</div>` : '';
+    const note = g.note ? `<div class="small" style="color:var(--copper);margin-top:4px">${esc(g.note)}</div>` : '';
+    const auto = `<div class="small muted" style="margin-top:4px">${esc(g.auto ? t('drk_sg_auto', { n: invName(g.auto) }) : t('drk_sg_auto_new'))}</div>`;
     const linked = (g.linked || []).filter(l => l.item).map(l => esc(t('drk_linked_warn', { a: l.article, n: invName(l) }))).join('<br>');
     const matches = (g.matches || []).length ? `<div class="small" style="margin-top:6px">${esc(t('drk_match_h'))}${g.matches.map(m => `<div class="row" style="gap:8px;align-items:center;margin-top:4px">
         <span>${esc(invName(m))}${m.drink ? ` <span class="tag m">${esc(t('drk_is_drink'))}</span>` : ''}${drkPack(m) ? ` <span class="muted">· ${esc(drkPack(m))}</span>` : ''}</span>
@@ -6181,13 +6200,13 @@ function drkSuggHTML(D){
         .map(([k, l, a]) => `<div class="field"><label for="drk-e-${k}">${esc(t(l))}</label><input class="input" id="drk-e-${k}" data-drke="${k}" value="${esc(E[k] == null ? '' : E[k])}" ${a || ''}></div>`).join('')}
         <div class="row" style="gap:8px"><button class="btn" data-act="drk-sugg-save" data-i="${i}">${esc(t('drk_f_save'))}</button><button class="btn ghost" data-act="drk-sugg-cancel">${esc(t('drk_f_cancel'))}</button></div></div>` : '';
     return `<div class="item"><strong>${esc(invName(g))}</strong>${invOther(g) ? ` <span class="small muted">${esc(invOther(g))}</span>` : ''}
-      <div class="meta">${esc(t('drk_pos', { a: (g.articles || []).map((a, k) => a + (g.factors && g.factors[k] != null && +g.factors[k] !== 1 ? ' ×' + drkNum(g.factors[k]) : '')).join(' · ') }))}</div>
-      <div class="meta">${esc([drkPack(g), t('drk_sold7', { n: drkNum(g.sold7) })].filter(Boolean).join(' · '))}${esc(cost)}</div>
-      ${linked ? `<div class="small" style="color:var(--copper);margin-top:4px">${linked}</div>` : ''}${matches}${form}
+      ${(g.uses || []).length ? uses : `<div class="meta">${esc(t('drk_pos', { a: (g.articles || []).map((a, k) => a + (g.factors && g.factors[k] != null && +g.factors[k] !== 1 ? ' ×' + drkNum(g.factors[k]) : '')).join(' · ') }))}</div>`}
+      <div class="meta">${esc([drkPack(g), info, (g.uses || []).length ? '' : t('drk_sold7', { n: drkNum(g.sold7) })].filter(Boolean).join(' · '))}${esc(cost)}</div>
+      ${note}${linked ? `<div class="small" style="color:var(--copper);margin-top:4px">${linked}</div>` : ''}${matches}${auto}${form}
       ${E ? '' : `<div class="acts"><button class="link" data-act="drk-sugg-new" data-i="${i}">${esc(t('drk_ok_new'))}</button><button class="link" data-act="drk-sugg-edit" data-i="${i}">${esc(t('drk_edit'))}</button><button class="link danger" data-act="drk-sugg-rej" data-i="${i}">${esc(t('drk_reject'))}</button></div>`}</div>`;
   };
   return `<h3>${esc(t('drk_sugg_h', { n: L.length }))}</h3><div class="small muted" style="margin-bottom:8px">${esc(t('drk_sugg_hint'))}</div>
-    ${plain.length > 1 ? `<button class="btn ghost" data-act="drk-sugg-all" style="margin-bottom:8px">${esc(t('drk_sugg_all', { n: plain.length }))}</button>` : ''}
+    ${L.length > 1 ? `<button class="btn ghost" data-act="drk-sugg-all" style="margin-bottom:8px">${esc(t('drk_sugg_all', { n: L.length }))}</button>` : ''}
     <div class="list">${L.map(card).join('')}</div>`;
 }
 function drkListHTML(D){
@@ -6207,7 +6226,7 @@ function drkUnlinkedHTML(D){
   const un = U.length ? `<h3>${esc(t('drk_un_h', { n: U.length }))}</h3><div class="small muted" style="margin-bottom:8px">${esc(t('drk_un_hint'))}</div>
     <div class="list">${U.map((u, i) => `<div class="item"><strong>${esc(u.article)}</strong> <span class="small muted">${esc(u.grp || '')}</span>
       <div class="meta">${esc(t('drk_un_30', { s: `Flingern ${drkNum(u.f)} · Bismarck ${drkNum(u.b)}` }))}</div>
-      <div class="acts"><button class="link" data-act="drk-link" data-i="${i}">${esc(t('drk_link'))}</button><button class="link" data-act="drk-ignore" data-i="${i}">${esc(t('drk_ignore'))}</button></div></div>`).join('')}</div>` : '';
+      <div class="acts"><button class="link" data-act="drk-link" data-i="${i}">${esc(t('drk_link'))}</button><button class="link" data-act="drk-rc-new" data-i="${i}">${esc(t('drk_rc_btn'))}</button><button class="link" data-act="drk-ignore" data-i="${i}">${esc(t('drk_ignore'))}</button></div></div>`).join('')}</div>` : '';
   const ig = I.length ? `<details class="fold"><summary>${esc(t('drk_ignored_h', { n: I.length }))}</summary><div class="inner"><div class="list">${I.map((x, i) => `<div class="item"><div class="top"><div>${esc(x.article)}<div class="meta">${esc(x.by || '')} · ${esc(fmtDateTime(x.at))}</div></div>
       <button class="link" data-act="drk-unignore" data-i="${i}">${esc(t('drk_unignore'))}</button></div></div>`).join('')}</div></div></details>` : '';
   return un + ig;
@@ -6216,12 +6235,12 @@ function renderInvDrinks(){
   const S = invS(), D = S.drinks; if (!D) return;
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('drk_title'))}</h2>
     <div class="small muted" style="margin-bottom:10px">${esc(t('drk_step'))}</div>
-    <button class="btn ghost" data-act="inv-stock" style="margin-bottom:10px">${esc(t('stk_btn'))}</button>
+    <div class="row" style="gap:8px;flex-wrap:wrap;margin-bottom:10px"><button class="btn ghost" data-act="inv-stock">${esc(t('stk_btn'))}</button><button class="btn ghost" data-act="drk-menu">${esc(t('drk_menu_btn'))}</button></div>
     ${drkImportsHTML(D)}${drkSuggHTML(D)}${drkListHTML(D)}${drkUnlinkedHTML(D)}`;
 }
 function drkEditKeep(){ const E = invS().dEdit; if (!E) return; document.querySelectorAll('[data-drke]').forEach(e => { E[e.dataset.drke] = e.value; }); }
 async function drkReload(msg){ const S = invS(); if (msg) toast(msg); try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){ toast(errText(e), true); }
-  if (state.tab === 'inv' && S.view === 'drinks') renderInvDrinks(); else if (state.tab === 'inv' && S.view === 'drink') renderInvDrink(); }
+  if (state.tab === 'inv' && S.view === 'drinks') renderInvDrinks(); else if (state.tab === 'inv' && S.view === 'drink') renderInvDrink(); else if (state.tab === 'inv' && S.view === 'dmenu') renderInvDmenu(); }
 async function drkSugg(g, action, item, data){
   const name = action === 'link' ? invName(((g.matches || []).find(m => m.id === item)) || {}) : invName(data && (data.name_de || data.name_zh) ? data : g);
   try { await rpc('inv_drink_suggest_handle', { ...tok(), p_id: g.id, p_action: action, p_item: item || null, p_data: data || null }); }
@@ -6246,9 +6265,11 @@ function renderInvDrink(){
   const cell = (day, st) => { const r = (x.days || []).find(d => d.day === day && d.store === st); return r ? drkNum(r.qty) : '—'; };
   $('#main').innerHTML = `<button class="link" data-act="inv-drinks" style="margin:2px 0 6px">${esc(t('drk_back'))}</button><h2 style="margin-top:4px">${esc(invName(x))}</h2>
     ${invOther(x) ? `<div class="small muted">${esc(invOther(x))}</div>` : ''}${drkPack(x) ? `<div class="small" style="margin:4px 0">${esc(drkPack(x))}</div>` : ''}
+    ${drkInfoHTML(x)}
     <button class="link" data-act="inv-item" data-id="${x.id}" style="margin:4px 0 8px">${esc(t('drk_d_item'))}</button>
-    <h3>${esc(t('drk_d_pos_h'))}</h3><div class="list">${(x.links || []).map((l, i) => `<div class="item"><div class="top"><div><strong>${esc(l.article)}</strong><div class="meta">${esc(t('drk_d_factor', { f: drkNum(l.factor), u: drkUnit(x.unit) || '' }))}</div></div>
-      <button class="link danger" data-act="drk-unlink" data-i="${i}">${esc(t('drk_d_unlink'))}</button></div></div>`).join('') || `<div class="empty">—</div>`}</div>
+    <h3>${esc(t('drk_d_pos_h'))}</h3><div class="list">${drkUses(x).map(u => { const li = u.link ? (x.links || []).findIndex(l => l.id === u.link) : -1;
+      return `<div class="item"><div class="top"><div><strong>${esc(u.article)}</strong> ${u.recipe ? u.stores.map(storeTag).join(' ') : ''}<div class="meta">${esc(t('drk_d_use', { q: drkQtyU(u.qty, u.unit, x) }))}${u.factor == null ? ` · <span style="color:var(--copper)">${esc(t('drk_m_nofactor'))}</span>` : ''}</div></div>
+      ${u.recipe ? `<button class="link" data-act="drk-rc-open" data-store="${esc(u.stores[0])}" data-article="${esc(u.article)}">${esc(t('drk_rc_edit'))}</button>` : li >= 0 ? `<button class="link danger" data-act="drk-unlink" data-i="${li}">${esc(t('drk_d_unlink'))}</button>` : ''}</div></div>`; }).join('') || `<div class="empty">—</div>`}</div>
     <h3>${esc(t('drk_d_days_h'))}</h3>
     ${days.length ? `<div class="sheet scroll"><table class="num"><tr><th></th>${STORES.map(st => `<th class="r">${storeTag(st)}</th>`).join('')}</tr>
       <tr><td style="text-align:left"><strong>${esc(t('drk_col_7'))}</strong></td>${STORES.map(st => `<td class="r"><strong>${drkNum(X.sum(x, st, 7))}</strong></td>`).join('')}</tr>
@@ -6257,6 +6278,94 @@ function renderInvDrink(){
       : `<div class="list"><div class="empty">${esc(t('drk_d_nodays'))}</div></div>`}
     <button class="link danger" data-act="drk-off" style="margin-top:14px">${esc(t('drk_d_off'))}</button>`;
 }
+// ---------- v166：饮料进销存第 1 步（数据库 v121，老板 2026-11-11）：每瓶多少 / 进价 / 供应商、配方（按杯、几种原料、每家店可以不一样）、酒水单和成本 ----------
+function drkContent(x){ return x && x.content_qty ? `${drkNum(x.content_qty)} ${x.content_unit}` : ''; }
+function drkNum4(n){ return String(Math.round((+n || 0) * 10000) / 10000).replace('.', ','); }
+function drkQtyU(qty, unit, item){ return unit === 'unit' ? `${drkNum4(qty)} ${drkUnit((item && item.unit) || '') || t('drk_rc_u_unit')}` : `${drkNum4(qty)} ${unit}`; }
+function drkCents(v){ const c = String(v == null ? '' : v).trim(); if (c === '') return ''; const n = Math.round(parseFloat(c.replace(',', '.')) * 100); return n >= 0 ? n : NaN; }
+function drkErr(e){ const m = String(e && e.message || '').match(/^(INV_RECIPE_[A-Z]+):(\d+)$/); return m ? t('err_' + m[1], { n: m[2] }) : errText(e); }
+// 一件饮料的「卖什么会扣它」：同一个配方 / 连接在两家店各有一行，合成一行
+function drkUses(x){ const seen = {}, out = []; (x.uses || []).forEach(u => { const k = u.recipe || u.link; if (seen[k]) seen[k].stores.push(u.store); else { seen[k] = { ...u, stores: [u.store] }; out.push(seen[k]); } }); return out; }
+function drkInfoHTML(x){
+  const S = invS(), E = S.dInfo && S.dInfo.id === x.id ? S.dInfo : null;
+  if (E) return `<div class="sheet" style="margin:8px 0">
+    <div class="field"><label for="drk-i-content">${esc(t('drk_i_content'))}</label><div class="row" style="gap:8px"><input class="input" id="drk-i-content" data-drki="content_qty" value="${esc(E.content_qty)}" inputmode="decimal" placeholder="750" style="flex:1;min-width:0"><select class="input" data-drki="content_unit" aria-label="${esc(t('drk_i_content'))}" style="width:90px">${['ml', 'g'].map(u => `<option value="${u}"${E.content_unit === u ? ' selected' : ''}>${u}</option>`).join('')}</select></div></div>
+    <div class="field"><label for="drk-i-cost">${esc(t('drk_i_cost'))}</label><input class="input" id="drk-i-cost" data-drki="cost" value="${esc(E.cost)}" inputmode="decimal" placeholder="6,40"></div>
+    <div class="field"><label for="drk-i-sup">${esc(t('drk_i_supplier'))}</label><input class="input" id="drk-i-sup" data-drki="supplier" value="${esc(E.supplier)}" maxlength="80"></div>
+    <div class="row" style="gap:8px"><button class="btn" data-act="drk-i-save">${esc(t('drk_f_save'))}</button><button class="btn ghost" data-act="drk-i-cancel">${esc(t('drk_f_cancel'))}</button></div></div>`;
+  const row = (l, v) => `<div class="row" style="justify-content:space-between;gap:8px;margin:2px 0"><span class="muted">${esc(l)}</span><span>${v ? esc(v) : `<span style="color:var(--copper)">${esc(t('drk_i_none'))}</span>`}</span></div>`;
+  const cn = x.cost_new;
+  return `<div class="sheet" style="margin:8px 0">${row(t('drk_i_content'), drkContent(x))}${row(t('drk_i_cost'), x.cost_cents != null ? eur(x.cost_cents) : '')}${row(t('drk_i_supplier'), x.supplier || '')}
+    ${cn ? `<div class="small" style="color:var(--copper);margin-top:6px">⚠ ${esc(t('drk_i_cost_new', { n: eur(cn.cost_cents), o: x.cost_cents != null ? eur(x.cost_cents) : '—' }))} <button class="link" data-act="drk-i-cost-use">${esc(t('drk_i_cost_use', { n: eur(cn.cost_cents) }))}</button></div>` : ''}
+    <button class="link" data-act="drk-i-edit" style="margin-top:6px">${esc(t('drk_i_edit'))}</button></div>`;
+}
+// 酒水单和成本：每家店每个配了的收银商品
+function drkMargin(m){ const p = m.price_cents != null ? m.price_cents : m.till_cents; return p > 0 && m.cost_cents != null ? Math.round((p - m.cost_cents) / p * 100) : null; }
+function renderInvDmenu(){
+  const S = invS(), D = S.drinks; if (!D){ S.view = 'drinks'; return viewInvDrinks(); }
+  const st = STORES.includes(S.mStore) ? S.mStore : (S.mStore = 'Bismarck');
+  const all = (D.menu || []).map((m, i) => ({ ...m, i })).filter(m => m.store === st);
+  const rowHTML = m => { const price = m.price_cents != null ? m.price_cents : m.till_cents, mg = drkMargin(m);
+    const rec = (m.lines || []).map(l => `${drkQtyU(l.qty, l.unit, (D.drinks || []).find(d => d.id === l.item))} ${invName(l)}`).join(' + ');
+    const warn = [(m.lines || []).some(l => l.factor == null) ? t('drk_m_nofactor') : '', m.cost_cents == null && !(m.lines || []).some(l => l.factor == null) ? t('drk_m_nocost') : '',
+                  m.price_cents != null && m.till_cents != null && Math.abs(m.till_cents - m.price_cents) > 1 ? t('drk_m_till', { p: eur(m.till_cents) }) : ''].filter(Boolean).join(' · ');
+    return `<tr data-act="drk-rc-menu" data-i="${m.i}" style="cursor:pointer"><td style="text-align:left"><strong>${esc(m.article)}</strong><br><small class="muted">${esc(rec)}${m.recipe && m.shared ? ' · ' + esc(t('drk_m_shared')) : ''}${+m.sold30 ? ' · ' + esc(t('drk_m_sold', { n: drkNum(m.sold30) })) : ''}</small>${warn ? `<br><small style="color:var(--copper)">⚠ ${esc(warn)}</small>` : ''}</td>
+      <td class="r" style="white-space:nowrap">${price != null ? eur(price) : '—'}</td><td class="r" style="white-space:nowrap">${m.cost_cents != null ? eur(m.cost_cents) : '—'}</td><td class="r" style="white-space:nowrap">${mg != null ? mg + ' %' : '—'}</td></tr>`; };
+  const table = (L, h) => L.length ? `<h3>${esc(h)}</h3><div class="sheet scroll" style="margin-bottom:12px"><table class="num"><tr><th style="text-align:left">${esc(t('drk_m_col_a'))}</th><th class="r">${esc(t('drk_m_col_p'))}</th><th class="r">${esc(t('drk_m_col_c'))}</th><th class="r" style="white-space:nowrap">${esc(t('drk_m_col_m'))}</th></tr>${L.map(rowHTML).join('')}</table></div>` : '';
+  // 三段：酒水单上的配方、不在酒水单上的配方、还是按 v98「卖 1 个 = 几瓶」配的（套餐里的、整瓶卖的，没有填卖价，收起来）
+  const on = all.filter(m => m.recipe && m.on_menu !== false), off = all.filter(m => m.recipe && m.on_menu === false), old = all.filter(m => !m.recipe);
+  $('#main').innerHTML = `<button class="link" data-act="inv-drinks" style="margin:2px 0 6px">${esc(t('drk_back'))}</button><h2 style="margin-top:4px">${esc(t('drk_m_title'))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('drk_m_hint'))}</div>
+    <div class="seg" style="margin-bottom:12px">${STORES.map(x => `<button class="${x === st ? 'on' : ''}" data-act="drk-menu-store" data-store="${x}">${esc(x)}</button>`).join('')}</div>
+    ${all.length ? table(on, t('drk_m_on', { n: on.length })) + table(off, t('drk_m_off', { n: off.length }))
+      + (old.length ? `<details class="fold"${on.length + off.length ? '' : ' open'}><summary>${esc(t('drk_m_old', { n: old.length }))}</summary><div class="inner">${table(old, '').replace('<h3></h3>', '')}</div></details>` : '')
+      : `<div class="list"><div class="empty">${esc(t('drk_m_none'))}</div></div>`}`;
+}
+// 配方编辑。S.rcp = {article, store（'' = 两家店）, id（现有配方）, price, on_menu, lines: [{item_id, qty, unit}], from, guess}
+function rcpOpen(m, from){
+  const S = invS();
+  S.rcp = { article: m.article, store: m.recipe && !m.shared ? m.store : '', id: m.recipe || null, price: m.price_cents != null ? eurInput(m.price_cents) || '0' : '', on_menu: m.on_menu !== false,
+            lines: (m.lines || []).map(l => ({ item_id: l.item, qty: drkNum4(l.qty), unit: l.unit })), from: from || 'dmenu', backId: S.id, guess: false };
+  if (!S.rcp.lines.length) S.rcp.lines.push({ item_id: '', qty: '1', unit: 'unit' });
+  invGo('recipe');
+}
+// 还没配的商品：按名字猜（名字里有哪件饮料的词；Glas / 150 ml = 170 ml，shot / 50 ml = 60 ml，其余 1 个）
+function rcpNew(article, store, from){
+  const S = invS(), D = S.drinks || {}, a = String(article || '').toLowerCase();
+  let best = null, bs = 0;
+  (D.drinks || []).forEach(x => { const w = String(x.name_de || '').toLowerCase().split(/[^a-z0-9äöüßàèéìòùâêîôûç’']+/).filter(v => v.length >= 3 && !/^\d/.test(v));
+    const sc = w.filter(v => a.includes(v)).length; if (sc > bs){ bs = sc; best = x; } });
+  const glass = /glas|150\s*ml/i.test(article), shot = !glass && /shot|50\s*ml/i.test(article), byMl = !!best && best.content_unit === 'ml' && (glass || shot);
+  S.rcp = { article, store: store || '', id: null, price: '', on_menu: true, from: from || 'drinks', guess: !!best,
+            lines: [best ? { item_id: best.id, qty: byMl ? (shot ? '60' : '170') : '1', unit: byMl ? 'ml' : 'unit' } : { item_id: '', qty: '1', unit: 'unit' }] };
+  invGo('recipe');
+}
+function rcpKeep(){
+  const R = invS().rcp; if (!R) return;
+  document.querySelectorAll('[data-rcp]').forEach(e => { const k = e.dataset.rcp, i = e.dataset.i;
+    if (i != null){ if (R.lines[+i]) R.lines[+i][k] = e.value; } else R[k] = e.type === 'checkbox' ? e.checked : e.value; });
+}
+function renderInvRecipe(){
+  const S = invS(), R = S.rcp, D = S.drinks; if (!R || !D){ S.view = 'drinks'; return viewInvDrinks(); }
+  const drinks = (D.drinks || []).slice().sort((a, b) => invName(a).localeCompare(invName(b)));
+  const line = (l, i) => { const x = drinks.find(d => d.id === l.item_id);
+    const units = ['unit'].concat(x && x.content_unit ? [x.content_unit] : []); if (!units.includes(l.unit)) l.unit = 'unit';
+    return `<div class="sheet" style="margin-bottom:8px"><div class="field"><label for="rcp-item-${i}">${esc(t('drk_rc_item'))}</label><select class="input" id="rcp-item-${i}" data-rcp="item_id" data-i="${i}" data-rcpchg="1"><option value="">${esc(t('drk_rc_pick'))}</option>${drinks.map(d => `<option value="${d.id}"${d.id === l.item_id ? ' selected' : ''}>${esc(invName(d))}${drkContent(d) ? ' · ' + esc(drkContent(d)) : ''}</option>`).join('')}</select></div>
+      <div class="row" style="gap:8px;align-items:flex-end"><div class="field" style="flex:1;min-width:0;margin-bottom:0"><label for="rcp-qty-${i}">${esc(t('drk_rc_qty'))}</label><input class="input" id="rcp-qty-${i}" data-rcp="qty" data-i="${i}" value="${esc(l.qty)}" inputmode="decimal"></div>
+      <select class="input" data-rcp="unit" data-i="${i}" aria-label="${esc(t('drk_rc_qty'))}" style="width:150px">${units.map(u => `<option value="${u}"${u === l.unit ? ' selected' : ''}>${esc(u === 'unit' ? t('drk_rc_u_unit') : u)}</option>`).join('')}</select></div>
+      ${x && !x.content_unit ? `<div class="small muted" style="margin-top:6px">${esc(t('drk_rc_nocontent'))}</div>` : ''}
+      ${R.lines.length > 1 ? `<button class="link danger" data-act="drk-rc-del" data-i="${i}" style="margin-top:6px">${esc(t('drk_rc_del'))}</button>` : ''}</div>`; };
+  $('#main').innerHTML = `<button class="link" data-act="drk-rc-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(t('drk_rc_h', { a: R.article }))}</h2>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('drk_rc_hint'))}</div>
+    ${R.guess ? `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('drk_rc_guess'))}</div>` : ''}
+    <div class="field"><label for="rcp-store">${esc(t('drk_rc_store'))}</label><select class="input" id="rcp-store" data-rcp="store">${[''].concat(STORES).map(x => `<option value="${x}"${x === R.store ? ' selected' : ''}>${esc(x || t('drk_rc_both'))}</option>`).join('')}</select><div class="small muted" style="margin-top:4px">${esc(t('drk_rc_store_hint'))}</div></div>
+    <h3>${esc(t('drk_rc_lines'))}</h3>${R.lines.map(line).join('')}
+    <button class="btn ghost" data-act="drk-rc-add" style="margin-bottom:12px">${esc(t('drk_rc_add'))}</button>
+    <div class="field"><label for="rcp-price">${esc(t('drk_rc_price'))}</label><input class="input" id="rcp-price" data-rcp="price" value="${esc(R.price)}" inputmode="decimal" placeholder="6,90"></div>
+    <label class="row" style="gap:8px;align-items:center;margin-bottom:12px"><input type="checkbox" data-rcp="on_menu"${R.on_menu ? ' checked' : ''}> ${esc(t('drk_rc_onmenu'))}</label>
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn" data-act="drk-rc-save">${esc(t('drk_rc_save'))}</button>${R.id ? `<button class="btn ghost danger" data-act="drk-rc-end">${esc(t('drk_rc_end'))}</button>` : ''}</div>`;
+}
+function rcpBack(){ const S = invS(), R = S.rcp || {}, to = R.from || 'drinks'; S.rcp = null; invGo(to, to === 'drink' ? R.backId : null); }
 // ---------- v142：饮料库存第二步（数据库 v101 / 文件服务 tasks v24，老板 2026-11-05）：收货（拍送货单 → AI 读 → 前场主管 / 老板确认入库）、两家店之间调拨 ----------
 function stkCanWrite(){ return !state.viewAs; }
 function stkDrink(id){ return id ? ((invS().stock || {}).drinks || []).find(d => d.id === id) || null : null; }
@@ -12253,7 +12362,7 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'inv-misses': invGo('misses'); break;
-    case 'inv-drinks': { const S = invS(); S.dEdit = null; S.dl = null; invGo('drinks'); break; }   // v137：饮料库存
+    case 'inv-drinks': { const S = invS(); S.dEdit = null; S.dl = null; S.dInfo = null; S.rcp = null; invGo('drinks'); break; }   // v137：饮料库存
     case 'inv-stock': { const S = invS(); S.rc = null; S.tr = null; invGo('stock'); break; }   // v142：饮料收货 · 调拨
     case 'stk-rc-new': stkRcNew(); break;
     case 'stk-rc-open': stkRcOpen(el.dataset.id); break;
@@ -12301,10 +12410,43 @@ document.addEventListener('click', async ev => {
     case 'drk-sugg-save': { drkEditKeep(); const S = invS(), E = S.dEdit, g = ((S.drinks || {}).suggest || [])[+el.dataset.i]; if (!E || !g) break;
       if (!E.name_de.trim() && !E.name_zh.trim()){ toast(t('err_INV_NAME_EMPTY'), true); break; }
       drkSugg(g, 'create', null, { name_de: E.name_de, name_zh: E.name_zh, unit: E.unit, pack_unit: E.pack_unit, pack_qty: String(E.pack_qty || '').replace(',', '.') }); break; }
-    case 'drk-sugg-all': { const S = invS(), L = ((S.drinks || {}).suggest || []).filter(g => !(g.matches || []).length);
+    case 'drk-sugg-all': { const S = invS(), L = (S.drinks || {}).suggest || [];   // v166：全部按建议（能对上已有饮料的用已有的，其余新建）
       if (!L.length || !confirm(t('drk_sugg_all_q', { n: L.length }))) break;
-      let n = 0; for (const g of L){ try { await rpc('inv_drink_suggest_handle', { ...tok(), p_id: g.id, p_action: 'create', p_item: null, p_data: null }); n++; } catch(e){ toast(errText(e), true); break; } }
-      await drkReload(t('drk_done_new', { n: n })); break; }
+      let r; try { r = await rpc('inv_drink_suggest_all', tok()); } catch(e){ toast(errText(e), true); break; }
+      await drkReload(t('drk_sugg_all_done', { c: (r || {}).created || 0, l: (r || {}).linked || 0 })); break; }
+    // v166：酒水单和成本、配方、饮料的每瓶多少 / 进价 / 供应商
+    case 'drk-menu': invGo('dmenu'); break;
+    case 'drk-menu-store': invS().mStore = el.dataset.store; renderInvDmenu(); break;
+    case 'drk-rc-menu': { const m = ((invS().drinks || {}).menu || [])[+el.dataset.i]; if (m) rcpOpen(m, 'dmenu'); break; }
+    case 'drk-rc-open': { const m = ((invS().drinks || {}).menu || []).find(x => x.store === el.dataset.store && x.article === el.dataset.article); if (m) rcpOpen(m, 'drink'); break; }
+    case 'drk-rc-new': { const u = ((invS().drinks || {}).unlinked || [])[+el.dataset.i]; if (u) rcpNew(u.article, +u.f > 0 && +u.b > 0 ? '' : +u.b > 0 ? 'Bismarck' : +u.f > 0 ? 'Flingern' : '', 'drinks'); break; }
+    case 'drk-rc-cancel': rcpBack(); break;
+    case 'drk-rc-add': { rcpKeep(); const R = invS().rcp; if (!R || R.lines.length >= 12) break; R.lines.push({ item_id: '', qty: '1', unit: 'unit' }); keepScroll(() => renderInvRecipe()); break; }
+    case 'drk-rc-del': { rcpKeep(); const R = invS().rcp; if (!R) break; R.lines.splice(+el.dataset.i, 1); keepScroll(() => renderInvRecipe()); break; }
+    case 'drk-rc-save': { rcpKeep(); const S = invS(), R = S.rcp; if (!R) break;
+      const lines = R.lines.filter(l => l.item_id).map(l => ({ item_id: l.item_id, qty: String(l.qty || '').trim(), unit: l.unit || 'unit' }));
+      if (!lines.length || lines.some(l => !(parseFloat(l.qty.replace(',', '.')) > 0))){ toast(t('drk_rc_need'), true); break; }
+      const pc = drkCents(R.price); if (Number.isNaN(pc)){ toast(t('err_INV_BAD'), true); break; }
+      try { await rpc('inv_recipe_save', { ...tok(), p_article: R.article, p_store: R.store || null, p_lines: lines, p_price_cents: pc === '' ? null : pc, p_on_menu: !!R.on_menu }); }
+      catch(e){ toast(drkErr(e), true); break; }
+      const a = R.article; try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){}
+      toast(t('drk_rc_saved', { a })); rcpBack(); break; }
+    case 'drk-rc-end': { const S = invS(), R = S.rcp; if (!R || !R.id || !confirm(t('drk_rc_end_q', { a: R.article }))) break;
+      try { await rpc('inv_recipe_end', { ...tok(), p_id: R.id }); } catch(e){ toast(errText(e), true); break; }
+      const a = R.article; try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){}
+      toast(t('drk_rc_ended', { a })); rcpBack(); break; }
+    case 'drk-i-edit': { const S = invS(), x = ((S.drinks || {}).drinks || []).find(d => d.id === S.id); if (!x) break;
+      S.dInfo = { id: x.id, content_qty: x.content_qty != null ? drkNum4(x.content_qty) : '', content_unit: x.content_unit || 'ml', cost: x.cost_cents != null ? (x.cost_cents / 100).toFixed(2).replace('.', ',') : '', supplier: x.supplier || '' };
+      keepScroll(() => renderInvDrink()); break; }
+    case 'drk-i-cancel': invS().dInfo = null; keepScroll(() => renderInvDrink()); break;
+    case 'drk-i-save': { const S = invS(), E = S.dInfo; if (!E) break; document.querySelectorAll('[data-drki]').forEach(e => { E[e.dataset.drki] = e.value; });
+      const cc = drkCents(E.cost); if (Number.isNaN(cc)){ toast(t('err_INV_DRINK_BAD'), true); break; }
+      try { await rpc('inv_drink_save', { ...tok(), p_item: E.id, p_data: { content_qty: String(E.content_qty || '').trim(), content_unit: E.content_unit, cost_cents: cc, supplier: E.supplier } }); }
+      catch(e){ toast(errText(e), true); break; }
+      S.dInfo = null; await keepScroll(() => drkReload(t('drk_i_saved'))); break; }
+    case 'drk-i-cost-use': { const S = invS(), x = ((S.drinks || {}).drinks || []).find(d => d.id === S.id); if (!x || !x.cost_new) break;
+      try { await rpc('inv_drink_save', { ...tok(), p_item: x.id, p_data: { cost_cents: x.cost_new.cost_cents } }); } catch(e){ toast(errText(e), true); break; }
+      await keepScroll(() => drkReload(t('drk_i_saved'))); break; }
     case 'drk-link': { const u = ((invS().drinks || {}).unlinked || [])[+el.dataset.i]; if (u) drkLinkOpen(u.article); break; }
     case 'drk-ignore': { const u = ((invS().drinks || {}).unlinked || [])[+el.dataset.i]; if (!u) break;
       if (await drkLinkSave(u.article, 'ignore')) keepScroll(() => drkReload(t('drk_ignored_done'))); break; }
@@ -12480,6 +12622,7 @@ document.addEventListener('click', async ev => {
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.dataset && ev.target.dataset.rcpchg){ rcpKeep(); keepScroll(() => renderInvRecipe()); return; }   // v166：配方里换了饮料，单位跟着变
   if (ev.target.classList && ev.target.classList.contains('lib-lang') && state.libForm && state.libForm.replaces){ libKeep(); keepScroll(render); return; }   // v134：语言改了，换掉哪份跟着变
   if (ev.target.id === 'tf-rd' || ev.target.id === 'tf-rm'){ tfSync(); tfRedraw(); return; }   // v120：周期从哪天开始，说明跟着变
   if (ev.target.id === 'tf-sop'){ const e = state.tfEdit; if (!e) return; const was = e.sop; tfSync();   // v121：选了 SOP：名字空着就用 SOP 的标题，AI 看照片默认开（1A）
