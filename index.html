@@ -490,7 +490,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v166';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v167';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -1015,7 +1015,7 @@ zh: {
   set_pin_sub:'第一次登录，请把初始 PIN 换成只有你知道的 6 位数字。', pin_rule:'不能用 888888、6 个相同数字、123456 或 654321',
   admin_login:'管理员 / 厨房登录', staff_login:'返回员工登录', no_runner:'无 Runner', no_bar:'无吧台',
   grp_service:'服务', grp_runner:'Runner', grp_bar:'吧台', grp_kitchen:'厨房小费账户', grp_kstaff:'厨房', grp_hot:'热菜', grp_cold:'冷菜', grp_skewer:'出串', grp_clean:'清洁', is_kitchen_scheduler:'后厨排班员', rt_row_front:'前场', rt_row_kitchen:'厨房', main_role:'主岗位', main_role_hint:'Runner 和吧台登录后只看账本，不能录入。主岗位也决定登录页分组和选人顺序，不影响分账。',
-  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'在信封上写好名字和日期，放进保险柜。', done_logout:'完成，退出', done_more:'再录一张', report_open:'这张单据没有报告编号，报告还没有关闭（单据上写着「Der Bericht ist noch offen」），金额可能不完整。请先在收银机上 Entstempeln（打卡下班），然后打印 Abschlussbericht，再用新打印的单据拍照。如果单据已经是 Entstempeln 后打印的，请重拍顶部，确保拍到「Identifikationsnummer für Bericht」。',
+  idle_warn:'{n} 秒后自动退出，点任意处继续', done_title:'已提交', done_env:'请把钱包里全部现金 {n} 放进信封', done_steps:'把今天的 Bon（打印的报告）和现金一起放进信封，信封上不用写字，直接投进保险柜。', hint_env_no_label:'📣 从今天起：信封上不用再写名字、日期和金额。把你今天的 Bon（打印的报告）和钱包里的全部现金一起放进信封，直接投进保险柜。现金照常点清楚，在 App 里输入。', hint_ok:'知道了', done_logout:'完成，退出', done_more:'再录一张', report_open:'这张单据没有报告编号，报告还没有关闭（单据上写着「Der Bericht ist noch offen」），金额可能不完整。请先在收银机上 Entstempeln（打卡下班），然后打印 Abschlussbericht，再用新打印的单据拍照。如果单据已经是 Entstempeln 后打印的，请重拍顶部，确保拍到「Identifikationsnummer für Bericht」。',
   cash_hint:'今天你的现金收款占 {p}%，超过 10%。以后请多鼓励客人刷卡付款，并用大的刷卡机收款，方便入账。谢谢！',
   fb_menu:'反馈问题', fb_title:'反馈问题 / 建议', fb_desc:'哪里不好用、出了什么问题，或者有什么建议？', fb_desc_ph:'例如：我点提交后一直在转圈……',
   fb_shot:'当前页面截图（会一起发给老板）', fb_shot_none:'没能自动截图。可以从相册选一张截图。', fb_shot_pick:'换一张 / 从相册选截图', fb_shot_remove:'不附截图',
@@ -1697,7 +1697,7 @@ de: {
   set_pin_sub:'Erste Anmeldung: Bitte ersetze die Start-PIN durch eine 6-stellige PIN, die nur du kennst.', pin_rule:'Nicht erlaubt: 888888, sechs gleiche Ziffern, 123456, 654321',
   admin_login:'Admin- / Küchen-Anmeldung', staff_login:'Zurück zur Mitarbeiter-Anmeldung', no_runner:'Kein Runner', no_bar:'Keine Bar',
   grp_service:'Service', grp_runner:'Runner', grp_bar:'Bar', grp_kitchen:'Küchen-Trinkgeldkonto', grp_kstaff:'Küche', grp_hot:'Warme Küche', grp_cold:'Kalte Küche', grp_skewer:'Spieße', grp_clean:'Reinigung', is_kitchen_scheduler:'Küchen-Dienstplanung', rt_row_front:'Service', rt_row_kitchen:'Küche', main_role:'Hauptposition', main_role_hint:'Runner und Bar sehen nach der Anmeldung nur ihr Konto und können nichts eintragen. Die Hauptposition bestimmt auch die Gruppen auf der Anmeldeseite und die Reihenfolge bei der Auswahl – keine Auswirkung auf die Verteilung.',
-  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Namen und Datum auf den Umschlag schreiben und in den Tresor legen.', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', report_open:'Auf diesem Bon fehlt die Berichtsnummer – der Bericht ist noch offen („Der Bericht ist noch offen“) und die Beträge können unvollständig sein. Bitte zuerst an der Kasse ausstempeln, dann den Abschlussbericht drucken und den neuen Bon fotografieren. Wurde der Bon schon nach dem Ausstempeln gedruckt, bitte das obere Foto neu machen, sodass die „Identifikationsnummer für Bericht“ zu sehen ist.',
+  idle_warn:'Automatische Abmeldung in {n} Sek. – tippen zum Weitermachen', done_title:'Abgeschickt', done_env:'Bitte das gesamte Bargeld ({n}) in den Umschlag legen', done_steps:'Den heutigen Bon (ausgedruckten Bericht) und das Bargeld zusammen in den Umschlag legen, nichts draufschreiben, direkt in den Tresor.', hint_env_no_label:'📣 Ab heute: Auf den Umschlag musst du nichts mehr schreiben (kein Name, kein Datum, kein Betrag). Deinen heutigen Bon (den ausgedruckten Bericht) und das ganze Bargeld aus dem Portemonnaie zusammen in den Umschlag und direkt in den Tresor. Das Bargeld wie bisher zählen und in der App eingeben.', hint_ok:'Verstanden', done_logout:'Fertig, abmelden', done_more:'Weiteren Bon eintragen', report_open:'Auf diesem Bon fehlt die Berichtsnummer – der Bericht ist noch offen („Der Bericht ist noch offen“) und die Beträge können unvollständig sein. Bitte zuerst an der Kasse ausstempeln, dann den Abschlussbericht drucken und den neuen Bon fotografieren. Wurde der Bon schon nach dem Ausstempeln gedruckt, bitte das obere Foto neu machen, sodass die „Identifikationsnummer für Bericht“ zu sehen ist.',
   cash_hint:'Heute lag dein Baranteil bei {p} % – mehr als 10 %. Bitte Gäste künftig zur Kartenzahlung ermutigen und dafür das große Kartenterminal nutzen, das erleichtert die Buchhaltung. Danke!',
   fb_menu:'Feedback', fb_title:'Feedback / Vorschlag', fb_desc:'Was funktioniert nicht gut, welches Problem gab es, oder was schlägst du vor?', fb_desc_ph:'z. B.: Nach „Absenden“ dreht sich nur der Kreis …',
   fb_shot:'Screenshot der aktuellen Seite (wird mitgeschickt)', fb_shot_none:'Automatischer Screenshot hat nicht geklappt. Du kannst einen Screenshot aus der Galerie wählen.', fb_shot_pick:'Anderen Screenshot wählen', fb_shot_remove:'Ohne Screenshot',
@@ -1883,7 +1883,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=5'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=6'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2204,6 +2204,7 @@ const ERR_ZH = {
   TASK_TOO_EARLY: '你的班还没开始（或者还没到这个任务的日子），还不能做这个任务。',
   TASK_PHOTO_REQUIRED: '今天这个任务要拍照，不能只打勾。请拍照。',
   TASK_DAY_CLOSED: '这一天已经过了，不能再补做。',
+  HINT_CODE: '提示代码不对，请刷新页面再试。',
   TASK_AI_DONE: '这张照片已经确认过了。回到「今天」重新打开就能看到最新的。',
   SUGGEST_DONE: '这条建议已经上线了，不能再改决定。要撤回请在对话里告诉 Claude。',   // v163
   INVALID_STATUS: '只能选「采纳」「不做」或「重新考虑」。请刷新页面再试。',
@@ -2466,6 +2467,7 @@ const ERR_DE = {
   TASK_TOO_EARLY: 'Deine Schicht hat noch nicht begonnen (oder der Tag der Aufgabe ist noch nicht da) – die Aufgabe geht erst danach.',
   TASK_PHOTO_REQUIRED: 'Heute ist ein Foto nötig, Abhaken reicht nicht. Bitte fotografieren.',
   TASK_DAY_CLOSED: 'Dieser Tag ist vorbei, nachholen geht nicht mehr.',
+  HINT_CODE: 'Ungültiger Hinweis-Code. Bitte Seite neu laden und nochmal versuchen.',
   TASK_AI_DONE: 'Dieses Foto wurde schon geprüft. Bitte „Heute“ neu öffnen, dann siehst du den aktuellen Stand.',
   SUGGEST_DONE: 'Dieser Vorschlag ist schon umgesetzt, die Entscheidung lässt sich nicht mehr ändern. Zum Zurücknehmen bitte Claude im Gespräch sagen.',   // v163
   INVALID_STATUS: 'Nur „Annehmen“, „Nicht machen“ oder „Neu überlegen“ sind möglich. Bitte Seite neu laden.',
@@ -7016,7 +7018,7 @@ async function doLogin(){
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   UL.start();   // v163：操作记录从登录开始
   state.loginErr = ''; state.loginInfo = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
-  state.areaDay = null; state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
+  state.areaDay = null; state.hintAcks = undefined; state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
   if (!r.me.must_change_pin){
     splash();   // v68
     // v102：me、启动数据、老板的上周检查一起要（以前一个等一个）；登录返回的 me 没有区域主管 / 负责人，是主管的话按新的再要一次
@@ -7532,10 +7534,19 @@ const ekLeft = () => state.viewAs ? [] : (state.closing || []).filter(c => c.eac
 function ekBonHTML(){ const L = ekLeft(); if (!L.length) return '';
   return `<div class="warnbox" style="text-align:left;margin-top:0"><strong>${esc(t('ek_bon_title'))}</strong>${L.map(c => `<div style="display:flex;align-items:center;gap:8px;margin-top:6px">
     <span style="flex:1">${esc(toName(c))}${(c.need || {}).mode === 'photo' ? ' 📷' : ''}</span><button class="btn ghost sm" style="width:auto" data-act="task-open" data-def="${c.def_id}" data-day="${c.day}">${esc(t('ek_bon_go'))}</button></div>`).join('')}</div>`; }
+// v167（数据库 v122，老板 2026-11-11）：一次性提示：信封上不用写字了（当天的 Bon 和现金一起放进去）。交 Bon 页最上面提示一次，点「知道了」以后这个人不再看到
+//   （记在人名下：员工多用店里共用的 iPad，记在设备上会被别人点掉）
+function hintCardHTML(code){
+  if (state.hintAcks === undefined){ state.hintAcks = null;
+    soft(rpc('my_hint_acks', tok()), []).then(a => { state.hintAcks = a || []; if (state.tab === 'entry' && !state.hintAcks.includes(code)) render(); }); }
+  const A = state.hintAcks; if (!A || A.includes(code)) return '';
+  return `<div class="warnbox" style="text-align:left;margin-top:0"><div>${esc(t('hint_' + code))}</div>
+    <button class="btn sm" style="width:auto;margin-top:8px" type="button" data-act="hint-ack" data-code="${code}">${esc(t('hint_ok'))}</button></div>`;
+}
 function viewBonNew(){
   const b = state.bon;
   const ph = k => `<div class="field" id="bon-ph-${k}">${bonPhHTML(k)}</div>`;   // v139
-  let html = entryHeadHTML() + modeSeg() + (bonPxActive() ? '' : ekBonHTML()) + (!b.top && !b.bottom ? `<div class="infobox" style="margin-top:0">${esc(t('bon_steps'))}${state.me.is_admin && !state.viewAs ? '<br>' + esc(t('px_intro')) : ''}</div>` : '') + ph('top') + ph('bottom');   // v92
+  let html = entryHeadHTML() + modeSeg() + (bonPxActive() ? '' : hintCardHTML('env_no_label') + ekBonHTML()) + (!b.top && !b.bottom ? `<div class="infobox" style="margin-top:0">${esc(t('bon_steps'))}${state.me.is_admin && !state.viewAs ? '<br>' + esc(t('px_intro')) : ''}</div>` : '') + ph('top') + ph('bottom');   // v92
   if (b.top && b.bottom){
     html += `<div id="bon-status">${bonStatusHTML()}</div>
       <div class="field"><label for="b-wallet">${esc(t('wallet'))}</label><div class="money"><input class="input num" id="b-wallet" inputmode="decimal" autocomplete="off" placeholder="0,00" value="${esc(b.wallet)}"></div>
@@ -10582,6 +10593,12 @@ document.addEventListener('click', async ev => {
     case 'tip-stats': state.tipStats = true; state.tipYear = null; viewTipStats(); window.scrollTo(0, 0); break;   // v164
     case 'tip-stats-close': state.tipStats = false; render(); break;
     case 'tip-year': if (el.dataset.y){ state.tipYear = el.dataset.y; viewTipStats(); } break;
+    case 'hint-ack': {   // v167：一次性提示点「知道了」
+      el.disabled = true;
+      try { state.hintAcks = await rpc('hint_ack', { ...tok(), p_code: el.dataset.code }) || []; keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
     case 'set-lang': { state.menu = false; { const d = $('#photoDlg'); if (d && d.open) d.close(); }   // v161；v162：从同一个按钮点开选
       if (el.dataset.l === langNow()) break;
       if (el.dataset.l === 'en'){ try { await loadEn(); } catch(e){ toast(errText(e), true); break; } state.en = true; state.lang = 'de'; }
@@ -12815,7 +12832,7 @@ async function exitView(){
   try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
-  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null; state.tfEdit = null; state.named = null; state.tfCat = null;   // v70；v118：点名任务；v119
+  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.hintAcks = undefined; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null; state.tfEdit = null; state.named = null; state.tfCat = null;   // v70；v118：点名任务；v119
   state.inv = null; await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
