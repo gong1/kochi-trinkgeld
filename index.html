@@ -490,7 +490,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v167';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v168';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -847,7 +847,8 @@ zh: {
   lv_start:'📝 开始盘点', lv_resume:'📝 继续盘点（{n} 个数已填 · {who} 开始）', lv_col_base:'上次', lv_col_in:'进', lv_col_out:'出', lv_col_sold:'卖', lv_col_now:'应有',
   lv_counts_h:'最近的盘点', lv_first:'起始库存', lv_diff_n:'{n} 种对不上', lv_diff_ok:'都对上了', lv_ai_btn:'🤖 AI 写小结', lv_ai_busy:'AI 正在写……', lv_ai_fail:'AI 没写成，可以再点一次。',
   lv_res_h:'{d} 的盘点 · {n}', lv_res_counted:'数出', lv_res_expected:'应有', lv_res_diff:'差',
-  ct_h:'盘点 · {s}', ct_hint:'按顺序走：每个位置数一下每种饮料有几瓶（整箱的点「+1 箱」）。填完自动保存，可以分几次做。最后点「完成盘点」。', ct_place_none:'这家店还没有放了饮料的位置：先请库管把饮料放到位置上，或者都填在「别的地方」。',
+  ct_frac_t:'开了的那一瓶', ct_add_other:'＋ 加别的饮料（这家店平时没有的）', ct_add_pick:'— 选饮料 —', lv_col_value:'值', lv_total:'合计', lv_value_gap:'{n} 种没有进价，没算进去', lv_res_value:'差的钱', lv_res_value_sum:'差的钱合计 {v}',   // v168
+  ct_h:'盘点 · {s}', ct_hint:'按顺序走：每个位置数一下每种饮料有几瓶（整箱的点「+1 箱」）。没开的数整瓶；开了的那一瓶估一下，点 ¼、½ 或 ¾。填完自动保存，可以分几次做。最后点「完成盘点」。', ct_place_none:'这家店还没有放了饮料的位置：先请库管把饮料放到位置上，或者都填在「别的地方」。',
   ct_others:'别的地方（没有固定位置的、放在别处的）', ct_others_hint:'这里的数和上面的加在一起。', ct_add_box:'+1 箱', ct_bottles:'瓶', ct_saved:'已保存', ct_finish:'✓ 完成盘点', ct_finish_q:'完成盘点？{n} 种饮料一个数都没填，按 0 算。完成以后不能再改。', ct_finish_q0:'完成盘点？完成以后不能再改。',
   ct_done:'盘点完成：{n} 种饮料', ct_cancel:'放弃这次盘点', ct_cancel_q:'放弃这次盘点？已填的数不算。请写一句原因：', ct_cancelled:'这次盘点已放弃', ct_bad_qty:'数量要是 0 或更大的数。',
   hrep_take:'📷 拍全天报告', hrep_env:'💵 点信封（{n}）', hrep_env0:'💵 信封都点完了', hrep_hint:'不用选店和日子：拍完 AI 从报告上认出是哪家店、哪天。先拍上半部分，再拍下半部分（报告短的一张也行）。', hrep_reading:'全天报告识别中…', hrep_saved:'报告已保存', hrep_done:'已自动核对完成', hrep_check:'报告要你看一眼', hrep_look:'去看', hrep_unknown:'认不出是哪家店或哪天：请把报告顶部（店名、日期）拍清楚再拍一次', hrep_retake:'重拍', hrep_close:'关掉', hrep_saved_toast:'{s} · {d} 的全天报告已保存', hrep_check_toast:'{s} · {d} 的全天报告要你看一眼（在「今天」页）', hrep_env_title:'点信封 · 两家店', hrep_env_store:'{n} 个信封', hrep_env_none:'两家店的信封都点完了。',   // v114
@@ -1529,7 +1530,8 @@ de: {
   lv_start:'📝 Inventur starten', lv_resume:'📝 Inventur fortsetzen ({n} Werte · begonnen von {who})', lv_col_base:'Letzte', lv_col_in:'Rein', lv_col_out:'Raus', lv_col_sold:'Verk.', lv_col_now:'Soll',
   lv_counts_h:'Letzte Inventuren', lv_first:'Anfangsbestand', lv_diff_n:'{n} Abweichungen', lv_diff_ok:'Alles stimmt', lv_ai_btn:'🤖 KI-Zusammenfassung', lv_ai_busy:'Die KI schreibt …', lv_ai_fail:'Die KI hat es nicht geschafft – bitte nochmal tippen.',
   lv_res_h:'Inventur {d} · {n}', lv_res_counted:'Gezählt', lv_res_expected:'Soll', lv_res_diff:'Diff.',
-  ct_h:'Inventur · {s}', ct_hint:'Der Reihe nach: an jedem Platz zählen, wie viele Flaschen je Getränk da sind (volle Kiste: „+1 Kiste“). Alles wird sofort gespeichert, du kannst unterbrechen. Am Ende „Inventur abschließen“.', ct_place_none:'In dieser Filiale hat noch kein Platz Getränke: zuerst die Getränke einräumen lassen oder alles unter „Andere Stellen“ eintragen.',
+  ct_frac_t:'Angebrochene Flasche', ct_add_other:'＋ Anderes Getränk hinzufügen (sonst nicht in dieser Filiale)', ct_add_pick:'— Getränk wählen —', lv_col_value:'Wert', lv_total:'Summe', lv_value_gap:'{n} ohne Einkaufspreis, nicht mitgerechnet', lv_res_value:'Differenz €', lv_res_value_sum:'Differenz gesamt {v}',   // v168
+  ct_h:'Inventur · {s}', ct_hint:'Der Reihe nach: an jedem Platz zählen, wie viele Flaschen je Getränk da sind (volle Kiste: „+1 Kiste“). Volle Flaschen ganz zählen; die angebrochene schätzen und ¼, ½ oder ¾ antippen. Alles wird sofort gespeichert, du kannst unterbrechen. Am Ende „Inventur abschließen“.', ct_place_none:'In dieser Filiale hat noch kein Platz Getränke: zuerst die Getränke einräumen lassen oder alles unter „Andere Stellen“ eintragen.',
   ct_others:'Andere Stellen (ohne festen Platz oder woanders)', ct_others_hint:'Diese Zahlen werden zu denen oben addiert.', ct_add_box:'+1 Kiste', ct_bottles:'Fl.', ct_saved:'Gespeichert', ct_finish:'✓ Inventur abschließen', ct_finish_q:'Inventur abschließen? Bei {n} Getränken ist nichts eingetragen – zählt als 0. Danach nicht mehr änderbar.', ct_finish_q0:'Inventur abschließen? Danach nicht mehr änderbar.',
   ct_done:'Inventur abgeschlossen: {n} Getränke', ct_cancel:'Diese Inventur verwerfen', ct_cancel_q:'Diese Inventur verwerfen? Die eingetragenen Zahlen zählen nicht. Bitte kurz den Grund schreiben:', ct_cancelled:'Inventur verworfen', ct_bad_qty:'Die Menge muss 0 oder größer sein.',
   hrep_take:'📷 Tagesbericht fotografieren', hrep_env:'💵 Umschläge zählen ({n})', hrep_env0:'💵 Alle Umschläge gezählt', hrep_hint:'Filiale und Tag musst du nicht wählen: Die KI erkennt sie auf dem Bericht. Erst den oberen, dann den unteren Teil fotografieren (bei kurzem Bericht reicht ein Foto).', hrep_reading:'Tagesbericht wird gelesen …', hrep_saved:'Bericht gespeichert', hrep_done:'automatisch abgeschlossen', hrep_check:'Bericht bitte prüfen', hrep_look:'Ansehen', hrep_unknown:'Filiale oder Tag nicht erkennbar: Bitte den oberen Teil (Name, Datum) scharf fotografieren und nochmal versuchen', hrep_retake:'Neu fotografieren', hrep_close:'Schließen', hrep_saved_toast:'Tagesbericht {s} · {d} gespeichert', hrep_check_toast:'Tagesbericht {s} · {d} bitte prüfen (Seite „Heute“)', hrep_env_title:'Umschläge zählen · beide Filialen', hrep_env_store:'{n} Umschläge', hrep_env_none:'In beiden Filialen sind alle Umschläge gezählt.',   // v114
@@ -1883,7 +1885,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=6'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=7'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -6724,11 +6726,14 @@ function lvCountHTML(c, st){
   const ai = c.ai ? `<div class="small" style="white-space:pre-line;margin:6px 0">🤖 ${esc(state.lang === 'de' ? (c.ai.de || c.ai.zh) : (c.ai.zh || c.ai.de))}</div>` : '';
   const busy = invS().lvAi === c.id;
   const rows = (c.results || []).filter(r => +r.counted !== 0 || (r.expected != null && +r.expected !== 0));
+  const money = !!(invS().levels || {}).money && !c.first, dv = r => r.diff != null && r.cost_cents != null ? Math.round(+r.diff * r.cost_cents) : null;   // v168：差的钱（老板）
+  const dsum = money ? rows.reduce((a, r) => a + (dv(r) || 0), 0) : 0;
   return `<details class="fold"><summary>${esc(t('lv_res_h', { d: dayLabel(c.day), n: c.first ? t('lv_first') : off.length ? t('lv_diff_n', { n: off.length }) : t('lv_diff_ok') }))} <span class="small muted">· ${esc(c.done_name || '')}</span></summary><div class="inner">
     ${ai}${!c.first && !c.ai && !state.viewAs ? `<button class="link" data-act="lv-ai" data-id="${c.id}"${busy ? ' disabled' : ''}>${esc(t(busy ? 'lv_ai_busy' : 'lv_ai_btn'))}</button>` : ''}
-    <div class="sheet scroll"><table class="num"><tr><th></th><th class="r">${esc(t('lv_res_counted'))}</th>${c.first ? '' : `<th class="r">${esc(t('lv_res_expected'))}</th><th class="r">${esc(t('lv_res_diff'))}</th>`}</tr>
+    <div class="sheet scroll"><table class="num"><tr><th></th><th class="r">${esc(t('lv_res_counted'))}</th>${c.first ? '' : `<th class="r">${esc(t('lv_res_expected'))}</th><th class="r">${esc(t('lv_res_diff'))}</th>`}${money ? `<th class="r" style="white-space:nowrap">${esc(t('lv_res_value'))}</th>` : ''}</tr>
     ${rows.map(r => `<tr><td style="text-align:left">${esc(invName(r))}</td><td class="r">${drkNum(r.counted)}</td>${c.first ? '' : `<td class="r">${r.expected == null ? '—' : drkNum(r.expected)}</td>
-      <td class="r" style="${r.diff != null && Math.abs(+r.diff) >= 0.5 ? 'color:var(--copper);font-weight:600' : ''}">${r.diff == null ? '—' : (+r.diff > 0 ? '+' : '') + drkNum(r.diff)}</td>`}</tr>`).join('')}</table></div></div></details>`;
+      <td class="r" style="${r.diff != null && Math.abs(+r.diff) >= 0.5 ? 'color:var(--copper);font-weight:600' : ''}">${r.diff == null ? '—' : (+r.diff > 0 ? '+' : '') + drkNum(r.diff)}</td>`}${money ? `<td class="r" style="white-space:nowrap">${dv(r) == null ? (r.diff != null && +r.diff !== 0 ? '—' : '·') : !dv(r) ? '·' : (dv(r) > 0 ? '+' : '') + eurSigned(dv(r))}</td>` : ''}</tr>`).join('')}</table></div>
+    ${money ? `<div class="small" style="margin-top:6px">${esc(t('lv_res_value_sum', { v: (dsum > 0 ? '+' : '') + eurSigned(dsum) }))}</div>` : ''}</div></details>`;
 }
 function renderInvLevels(){
   const S = invS(), L = S.levels; if (!L) return;
@@ -6737,11 +6742,13 @@ function renderInvLevels(){
     ${(L.stores || []).map(st => { const counted = (st.counts || []).length > 0;
       return `<h3>${storeTag(st.store)}</h3><div class="small muted" style="margin-bottom:6px">${esc(t('lv_hint', { d: st.last_sales_day ? dayLabel(st.last_sales_day) : '—' }))}</div>
       ${W ? `<button class="btn${st.open ? '' : ' ghost'}" data-act="ct-start" data-store="${st.store}" style="margin-bottom:8px">${esc(st.open ? t('lv_resume', { n: st.open.lines, who: st.open.started_name || '' }) : t('lv_start'))}</button>` : ''}
-      ${counted ? `<div class="sheet scroll" style="margin-bottom:8px"><table class="num"><tr><th></th><th class="r">${esc(t('lv_col_base'))}</th><th class="r">${esc(t('lv_col_in'))}</th><th class="r">${esc(t('lv_col_out'))}</th><th class="r">${esc(t('lv_col_sold'))}</th><th class="r">${esc(t('lv_col_now'))}</th></tr>
+      ${counted ? `<div class="sheet scroll" style="margin-bottom:8px"><table class="num"><tr><th></th><th class="r">${esc(t('lv_col_base'))}</th><th class="r">${esc(t('lv_col_in'))}</th><th class="r">${esc(t('lv_col_out'))}</th><th class="r">${esc(t('lv_col_sold'))}</th><th class="r">${esc(t('lv_col_now'))}</th>${L.money ? `<th class="r">${esc(t('lv_col_value'))}</th>` : ''}</tr>
         ${(st.items || []).map(x => { const k = x.calc || {}; if (k.base == null) return '';
           const inn = (+k.receipts || 0) + Math.max(0, +k.transfers || 0), out = Math.min(0, +k.transfers || 0) + (+k.losses || 0);
           return `<tr><td style="text-align:left">${esc(invName(x))}</td><td class="r">${drkNum(k.base_qty)}</td><td class="r">${inn ? '+' + drkNum(inn) : '·'}</td><td class="r">${out ? drkNum(out) : '·'}</td><td class="r">${+k.sales ? '−' + drkNum(k.sales) : '·'}</td>
-            <td class="r"><strong style="${+k.expected < 0 ? 'color:var(--copper)' : ''}">${drkNum(k.expected)}</strong></td></tr>`; }).join('')}</table></div>`
+            <td class="r"><strong style="${+k.expected < 0 ? 'color:var(--copper)' : ''}">${drkNum(k.expected)}</strong></td>${L.money ? `<td class="r" style="white-space:nowrap">${x.cost_cents == null ? (+k.expected > 0 ? '—' : '·') : +k.expected > 0 ? eur(Math.round(+k.expected * x.cost_cents)) : '·'}</td>` : ''}</tr>`; }).join('')}
+        ${L.money ? (() => { const its = (st.items || []).filter(x => (x.calc || {}).base != null), tot = its.reduce((a, x) => a + (x.cost_cents == null ? 0 : Math.round(Math.max(0, +x.calc.expected) * x.cost_cents)), 0), gap = its.filter(x => x.cost_cents == null && +x.calc.expected > 0).length;
+          return `<tr><td style="text-align:left" colspan="5"><strong>${esc(t('lv_total'))}</strong>${gap ? `<br><small style="color:var(--copper)">${esc(t('lv_value_gap', { n: gap }))}</small>` : ''}</td><td></td><td class="r" style="white-space:nowrap"><strong>${eur(tot)}</strong></td></tr>`; })() : ''}</table></div>`
         : `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('lv_no_count'))}</div>`}
       ${counted ? `<div class="small muted" style="margin:4px 0">${esc(t('lv_counts_h'))}</div>${st.counts.map(c => lvCountHTML(c, st)).join('')}` : ''}`; }).join('')}`;
 }
@@ -6763,9 +6770,10 @@ async function viewInvCount(){
 }
 function ctRow(x, placeId){
   const ed = invS().count.status === 'open' && stkCanWrite(), key = (placeId || 'x') + ':' + x.id;
-  return `<div class="row" style="gap:8px;align-items:center;margin:6px 0;flex-wrap:wrap"><span style="flex:1;min-width:120px">${esc(invName(x))}${x.pack_qty ? ` <small class="muted">· ${esc(drkPack(x))}</small>` : ''}</span>
-    <input class="input" style="width:80px" inputmode="decimal" data-ct="${key}" data-place="${placeId || ''}" data-item="${x.id}" value="${x.qty == null ? '' : esc(drkNum(x.qty))}" ${ed ? '' : 'disabled'}>
-    <span class="small">${esc(t('ct_bottles'))}</span>${ed && x.pack_qty ? `<button class="link" data-act="ct-box" data-key="${key}" data-n="${x.pack_qty}">${esc(t('ct_add_box'))}</button>` : ''}
+  return `<div class="row" style="gap:6px 10px;align-items:center;margin:10px 0;flex-wrap:wrap"><span style="flex:1 1 100%">${esc(invName(x))}${x.pack_qty ? ` <small class="muted">· ${esc(drkPack(x))}</small>` : ''}</span>
+    <input class="input" style="width:80px;flex:0 0 80px" inputmode="decimal" data-ct="${key}" data-place="${placeId || ''}" data-item="${x.id}" value="${x.qty == null ? '' : esc(drkNum(x.qty))}" ${ed ? '' : 'disabled'}>
+    <span class="small">${esc(t('ct_bottles'))}</span>${ed && x.pack_qty ? `<button class="link" data-act="ct-box" data-key="${key}" data-n="${x.pack_qty}" style="white-space:nowrap;flex:0 0 auto">${esc(t('ct_add_box'))}</button>` : ''}
+    ${ed ? [['¼', 0.25], ['½', 0.5], ['¾', 0.75]].map(([l, f]) => `<button class="link" data-act="ct-frac" data-key="${key}" data-f="${f}" title="${esc(t('ct_frac_t'))}" aria-label="${esc(t('ct_frac_t'))} ${l}" style="flex:0 0 auto;padding:6px 8px;font-size:1.05em">${l}</button>`).join('') : ''}
     <span class="small muted" id="ct-ok-${esc(key)}"></span></div>`;
 }
 function renderInvCount(){
@@ -6776,7 +6784,8 @@ function renderInvCount(){
     ${(C.places || []).length ? (C.places || []).map(p => `<div class="sheet" style="margin-bottom:10px"><div class="inv-row" style="align-items:center">${invImg(p.photo_t, 'sm')}<div class="inv-txt">
         <strong>${esc(invName(p, 'area'))} · ${esc(invName(p, 'unit'))}</strong><div class="small muted">${esc(p.code)}${p.pos ? ' · ' + esc(invPosText(p.pos)) : ''}</div></div></div>
         ${(p.items || []).map(x => ctRow(x, p.id)).join('')}</div>`).join('') : `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('ct_place_none'))}</div>`}
-    <h3>${esc(t('ct_others'))}</h3><div class="small muted">${esc(t('ct_others_hint'))}</div><div class="sheet" style="margin-bottom:10px">${(C.others || []).map(x => ctRow(x, null)).join('')}</div>
+    <h3>${esc(t('ct_others'))}</h3><div class="small muted">${esc(t('ct_others_hint'))}</div><div class="sheet" style="margin-bottom:10px">${(C.others || []).map(x => ctRow(x, null)).join('')}
+      ${ed && (C.rest || []).length ? `<select class="input" data-ctadd="1" aria-label="${esc(t('ct_add_other'))}" style="margin-top:8px"><option value="">${esc(t('ct_add_other'))}</option>${C.rest.map(x => `<option value="${x.id}">${esc(invName(x))}</option>`).join('')}</select>` : ''}</div>
     ${ed ? `<button class="btn" data-act="ct-finish">${esc(t('ct_finish'))}</button><button class="link danger" data-act="ct-cancel" style="margin-top:12px">${esc(t('ct_cancel'))}</button>` : ''}`;
   invLoadPhotos();
 }
@@ -12413,6 +12422,7 @@ document.addEventListener('click', async ev => {
     case 'lv-open': { const S = invS(); S.count = null; invGo('levels'); break; }
     case 'lv-ai': lvAi(el.dataset.id); break;
     case 'ct-start': ctStart(el.dataset.store); break;
+    case 'ct-frac': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp){ inp.value = drkNum(Math.floor(stkNum(inp.value) || 0) + (+el.dataset.f)); ctSave(inp); } break; }   // v168：开了的那一瓶 ¼ ½ ¾（整瓶数不变，换掉零头）
     case 'ct-box': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp){ inp.value = drkNum((stkNum(inp.value) || 0) + (+el.dataset.n)); ctSave(inp); } break; }
     case 'ct-finish': ctFinish(el); break;
     case 'ct-cancel': ctCancel(); break;
@@ -12639,6 +12649,8 @@ document.addEventListener('click', async ev => {
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.dataset && ev.target.dataset.ctadd){ const C = invS().count, id = ev.target.value, x = C && (C.rest || []).find(r => r.id === id);   // v168：盘点时加一件这家店平时没有的饮料
+    if (x){ C.rest = C.rest.filter(r => r.id !== id); (C.others = C.others || []).push({ ...x, qty: null }); await keepScroll(() => renderInvCount()); const inp = document.querySelector(`[data-ct="x:${id}"]`); if (inp) inp.focus(); } return; }
   if (ev.target.dataset && ev.target.dataset.rcpchg){ rcpKeep(); keepScroll(() => renderInvRecipe()); return; }   // v166：配方里换了饮料，单位跟着变
   if (ev.target.classList && ev.target.classList.contains('lib-lang') && state.libForm && state.libForm.replaces){ libKeep(); keepScroll(render); return; }   // v134：语言改了，换掉哪份跟着变
   if (ev.target.id === 'tf-rd' || ev.target.id === 'tf-rm'){ tfSync(); tfRedraw(); return; }   // v120：周期从哪天开始，说明跟着变
