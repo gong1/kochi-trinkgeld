@@ -520,7 +520,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v175';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v176';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -7891,7 +7891,7 @@ async function bonOrient(b, k){
   const src = b[k], o = b.ori[k] = { busy: true };
   let r = null;
   try {
-    const small = await rotateImage(src, 0, 800, 0.8);
+    const small = await rotateImage(src, 0, 1200, 0.8);   // v176（老板 2026-11-12 反馈：倒着拍的 Bon 没认出）：800 像素时细长的 Bon 上字太小，AI 看不出方向；1200 更清楚
     r = await Promise.race([callFn({ action: 'orient', image: small.split(',')[1] }), new Promise((_, no) => setTimeout(() => no(new Error('TIMEOUT')), 15000))]);
   } catch(e){ r = null; }
   if (state.bon !== b || b.ori[k] !== o) return;   // 照片已更换
@@ -8064,6 +8064,9 @@ function readTimer(isBusy, id){
     if (el) el.textContent = t('read_secs', { n }) + (n >= 15 ? ' ' + t('reading_slow') : '');
   }, 1000);
 }
+// v176：识别结果好不好：通过 = 0，没通过 = 问题的个数，出错 = 最差
+const bonReadOk = r => !!(r && r.checks && r.checks.ok);
+const bonProbN = r => !r ? 1e9 : bonReadOk(r) ? 0 : Math.max(1, ((r.checks && r.checks.problems) || []).length);
 async function readBon(){
   const b = state.bon; if (!b.top || !b.bottom) return;
   const my = ++b.seq;
@@ -8076,14 +8079,21 @@ async function readBon(){
   try { r = await callFn({ action: 'read', top: b.top.split(',')[1], bottom: b.bottom.split(',')[1], ...pxc }); }
   catch(e){ err = errText(e); bonFailNote('read', e && e.message); }   // v154
   if (state.bon !== b || my !== b.seq) return;   // 照片已更换，丢弃旧结果
-  // v139 备用办法：先看一眼没转（或没看出来），整张读不出来，识别说照片是歪的：按它说的转好，自动再读一次（只一次）
-  const pr = r && r.result && r.result.photo_rotate, dr = (r && r.result && r.result.derived) || {};
-  if (r && !dr.report_id && !dr.user_id && !b.autoRot && Array.isArray(pr) && pr.some(x => [90, 180, 270].includes(+x))){
-    b.autoRot = true;
+  // v139 备用办法：先看一眼没转（或没看出来），识别说照片是歪的：按它说的转好，自动再读一次（只一次）
+  // v176（老板 2026-11-12 反馈：一张倒着拍的 Bon 没认出）：以前只有整张读不出来（没有编号也没有工号）才转；倒着的照片常常读出一部分、
+  //   只是数字对不上，就不转了。现在识别没通过都按它说的转；转之前的照片和结果先留着，转了反而更差（问题更多、出错）就换回来
+  const pr = r && r.result && r.result.photo_rotate;
+  if (r && !bonReadOk(r) && !b.autoRot && Array.isArray(pr) && pr.some(x => [90, 180, 270].includes(+x))){
+    b.autoRot = { top: b.top, bottom: b.bottom, ori: { ...b.ori }, r };
     try { for (const [i, k] of [[0, 'top'], [1, 'bottom']]) if ([90, 180, 270].includes(+pr[i])){ b[k] = await rotateImage(b[k], +pr[i]); b.ori[k] = { rot: +pr[i] }; } }
     catch(e){}
     if (state.bon !== b || my !== b.seq) return;
     bonPhotosRefresh(); return readBon();
+  }
+  const prev = b.autoRot && b.autoRot.r;   // v176：这是转了以后再读的结果：比转之前差就换回原来的照片和结果
+  if (prev){
+    const a = b.autoRot; a.r = null;
+    if (bonProbN(r) > bonProbN(prev)){ b.top = a.top; b.bottom = a.bottom; b.ori = a.ori; r = prev; err = null; bonPhotosRefresh(); }
   }
   if (r){
     const d = r.result.derived || {};
