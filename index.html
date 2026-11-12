@@ -462,6 +462,20 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .inv-scan{position:relative;background:#000;border-radius:var(--r-s);overflow:hidden;aspect-ratio:3/4;max-height:60vh}
 .inv-scan video{width:100%;height:100%;object-fit:cover;display:block}
 .inv-scan-box{position:absolute;inset:18% 12%;border:3px solid rgba(255,255,255,.85);border-radius:12px}
+.qp-bar{position:sticky;z-index:5;background:var(--paper);padding:8px 0;margin:0 0 6px;border-bottom:1px solid var(--line)}
+.qp-bar .row{gap:8px}
+.qp-bar .qp-cur{flex:1;min-width:0;font-weight:700;font-size:16px;line-height:1.25}
+.qp-bar .qp-cur small{display:block;font-weight:400;color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qp-bar button{flex:none;height:40px;padding:0 12px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:600;font-size:14px}
+.qp-bar button:disabled{opacity:.4}
+.qp-row{display:flex;align-items:center;gap:10px;width:100%;min-height:50px;padding:8px 14px;border:0;border-bottom:1px solid var(--line);background:var(--card);text-align:left;font-size:16px;line-height:1.25;color:var(--ink)}
+.qp-row:last-child{border-bottom:0}
+.qp-row:disabled{opacity:.5}
+.qp-row .qp-n{flex:1;min-width:0;display:flex;flex-direction:column}
+.qp-row .qp-n small{color:var(--muted);font-size:13px}
+.qp-row .qp-x{flex:none;font-size:20px;font-weight:700;color:var(--celadon-deep)}
+.qp-row.here .qp-x{font-size:14px;color:var(--neg)}
+.qp-sec{font-size:15px;color:var(--muted);font-weight:600;margin:14px 0 6px}
 .stabs-row{display:flex;align-items:center;gap:10px;margin:4px 0 10px}
 .stabs-row h2{margin:0;flex:1;min-width:0}
 .stabs{display:flex;align-items:center;gap:6px;flex:0 1 auto;min-width:0}
@@ -506,7 +520,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v174';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v175';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -840,6 +854,11 @@ zh: {
   drk_l_h:'「{a}」配到哪样饮料？', drk_l_factor:'卖 1 个 =', drk_l_factor_u:'个基本单位（瓶 / 罐）', drk_l_drinks:'饮料清单里的', drk_l_search:'物品里找', drk_l_q_ph:'找物品：名字、别名……', drk_l_new:'新建饮料', drk_l_new_btn:'新建并配上', drk_l_done:'「{a}」已配到 {n}', drk_l_none:'物品里没找到「{q}」，可以在下面新建。',
   drk_u_Flasche:'瓶', drk_u_Dose:'罐', drk_u_Kiste:'箱', drk_u_Karton:'箱', drk_u_Tray:'托', drk_u_Fass:'桶', drk_u_Packung:'包', drk_u_Stück:'个',   // v137
   // v142（数据库 v101 / 文件服务 tasks v24，老板 2026-11-05）：饮料收货（拍送货单 → AI 读 → 前场主管 / 老板确认入库）、两家店之间调拨
+  // v175：快速放位置
+  qp_btn:'放位置', qp_h:'放位置', qp_hint:'站在货架前：先选一次位置，再点放在这里的饮料。走到下一层，点「下一层」接着点。', qp_where:'① 放到哪里', qp_room:'这个房间没有货架：东西直接放在整个房间里。',
+  qp_cur:'现在放到', qp_cur_none:'还没选位置', qp_need:'请先在上面选好位置（房间 → 货架 → 层），再点饮料。', qp_prev:'上一层', qp_next:'下一层', qp_change:'改位置',
+  qp_here_h:'这个位置现在有（{n}）', qp_take:'拿走', qp_un_h:'② 点一下放进去 · 还没放位置的 {n} 种', qp_un_none:'✓ 这家店的饮料都有位置了。', qp_q:'找饮料…', qp_no_match:'没有找到「{q}」。',
+  qp_more:'已经有位置的 {n} 种（要多放一个位置的，在这里点）', qp_more_hide:'收起已经有位置的', qp_empty:'这家店还没有饮料：老板要先在「🍹 饮料 → 📈 销量和清单」里确认饮料。', qp_no_area:'你在这家店还没有可以维护的储区（要老板授权区域主管或库管）。',
   // v173：门店标签 + 自动选店、饮料格子
   geo_btn:'按定位选门店', geo_hit:'📍 你在 {s}，已切到这家店。', geo_far:'📍 定位不在两家店附近（离 {s} 约 {d}），所以按排班或上次选的显示：{c}。要换请点上面的门店标签。',
   geo_denied:'定位没有被允许，所以不能自动选门店。请在手机「设置」里给浏览器 / 这个 App 打开「位置」，再点一次 📍；或者直接点门店标签。', geo_fail:'这次没定到位置（信号弱或超时）。请到窗边再点一次 📍，或者直接点门店标签。', geo_none:'这台设备不能定位。请直接点门店标签选门店。',
@@ -1536,6 +1555,11 @@ de: {
   drk_l_h:'„{a}“ welchem Getränk zuordnen?', drk_l_factor:'1 verkauft =', drk_l_factor_u:'Grundeinheiten (Flasche / Dose)', drk_l_drinks:'Aus der Getränkeliste', drk_l_search:'In den Artikeln suchen', drk_l_q_ph:'Artikel suchen: Name, Alias …', drk_l_new:'Neues Getränk', drk_l_new_btn:'Anlegen und zuordnen', drk_l_done:'„{a}“ zugeordnet: {n}', drk_l_none:'„{q}“ nicht gefunden – unten neu anlegen.',
   drk_u_Flasche:'Flasche', drk_u_Dose:'Dose', drk_u_Kiste:'Kiste', drk_u_Karton:'Karton', drk_u_Tray:'Tray', drk_u_Fass:'Fass', drk_u_Packung:'Packung', drk_u_Stück:'Stück',   // v137
   // v142 (DB v101 / tasks v24)
+  // v175
+  qp_btn:'Einräumen', qp_h:'Einräumen', qp_hint:'Am Regal stehen: einmal den Platz wählen, dann die Getränke antippen, die hier stehen. Für die nächste Ebene „Nächste“ tippen und weitermachen.', qp_where:'① Wohin', qp_room:'Dieser Raum hat kein Regal: Die Sachen liegen einfach im ganzen Raum.',
+  qp_cur:'Aktueller Platz', qp_cur_none:'Noch kein Platz gewählt', qp_need:'Bitte zuerst oben den Platz wählen (Raum → Regal → Ebene), dann die Getränke antippen.', qp_prev:'Vorige', qp_next:'Nächste', qp_change:'Platz ändern',
+  qp_here_h:'An diesem Platz ({n})', qp_take:'Entfernen', qp_un_h:'② Antippen zum Einräumen · {n} Getränke ohne Platz', qp_un_none:'✓ Alle Getränke dieser Filiale haben einen Platz.', qp_q:'Getränk suchen…', qp_no_match:'„{q}“ nicht gefunden.',
+  qp_more:'{n} Getränke haben schon einen Platz (für einen weiteren Platz hier antippen)', qp_more_hide:'Getränke mit Platz ausblenden', qp_empty:'In dieser Filiale gibt es noch keine Getränke: Der Chef muss sie zuerst unter „🍹 Getränke → 📈 Verkauf & Liste“ bestätigen.', qp_no_area:'Du verwaltest in dieser Filiale noch keinen Bereich (Freigabe als Bereichsleitung oder Lagerverantwortliche:r durch den Chef nötig).',
   // v173
   geo_btn:'Filiale per Standort wählen', geo_hit:'📍 Du bist in {s} – diese Filiale ist jetzt ausgewählt.', geo_far:'📍 Der Standort ist bei keiner Filiale (ca. {d} bis {s}). Angezeigt wird deshalb {c} (laut Dienstplan oder letzter Auswahl). Zum Wechseln oben auf die Filiale tippen.',
   geo_denied:'Der Standort ist nicht erlaubt, deshalb kann die Filiale nicht automatisch gewählt werden. Bitte in den Einstellungen des Handys für den Browser / diese App „Standort“ erlauben und noch einmal auf 📍 tippen – oder oben direkt die Filiale antippen.', geo_fail:'Der Standort konnte nicht ermittelt werden (schwaches Signal oder Zeitüberschreitung). Bitte am Fenster noch einmal auf 📍 tippen oder oben direkt die Filiale antippen.', geo_none:'Dieses Gerät kann keinen Standort ermitteln. Bitte oben direkt die Filiale antippen.',
@@ -1927,7 +1951,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=13'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=14'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -5263,7 +5287,7 @@ function storeTabsHTML(){
   const cur = curStore(), byGeo = !!storeOk(state.geoStore) && cur === state.geoStore;
   return `<div class="stabs"><div class="seg">${STORES.map(x => `<button data-act="store-pick" data-store="${x}" class="${x === cur ? 'on' : ''}">${esc(x)}</button>`).join('')}</div>${geoCan() ? `<button class="stabs-geo${byGeo ? ' on' : ''}${geoBusy ? ' busy' : ''}" data-act="store-geo" title="${esc(t('geo_btn'))}" aria-label="${esc(t('geo_btn'))}">📍</button>` : ''}</div>`;
 }
-function storeChanged(){ if (state.tab === 'inv' && invS().view === 'home' && invS().home) keepScroll(renderInvHome); else if (state.tab === 'inv' && invS().view === 'stock' && invS().stock) keepScroll(renderInvStock); else render(); }
+function storeChanged(){ if (state.tab === 'inv' && invS().view === 'qplace'){ invS().qp = null; render(); } else if (state.tab === 'inv' && invS().view === 'home' && invS().home) keepScroll(renderInvHome); else if (state.tab === 'inv' && invS().view === 'stock' && invS().stock) keepScroll(renderInvStock); else render(); }
 function storePick(x){ if (!storeOk(x)) return; state.storeSel = { s: x, at: Date.now(), auto: autoStore() }; LS.set('curStore', x); storeChanged(); }
 // ask = true：点了 📍（浏览器会问一次能不能用位置）；ask = false：以前允许过才悄悄定位，10 分钟内不重复
 async function geoStoreCheck(ask){
@@ -5322,6 +5346,7 @@ async function viewInv(){
   if (S.view === 'otargets') return viewInvOtargets();
   if (S.view === 'count') return viewInvCount();
   if (S.view === 'unplaced') return renderInvUnplaced();
+  if (S.view === 'qplace') return viewInvQplace();   // v175：快速放位置
   if (S.view === 'settings' || S.view === 'aform' || S.view === 'cform') return viewInvSettings();
   return viewInvHome();
 }
@@ -5361,7 +5386,7 @@ function drkTilesHTML(full){
   const tile = (act, ico, label, badge, attr, main) => `<button class="tile${main ? ' main' : ''}" data-act="${act}"${attr || ''}><i>${ico}</i>${esc(label)}${badge ? `<span class="tag pend">${badge}</span>` : ''}</button>`;
   const a = [W && cs.includes(st) ? tile('ct-start', '📋', t('dt_count'), '', ` data-store="${st}"`, true) : '', W ? tile('stk-rc-new', '📷', t('dt_rc'), '', '', true) : '',
     cs.length ? tile('ord-home', '🛒', t('dt_order'), (T.order_due || []).length ? '!' : '', '', true) : '', full ? '' : tile('inv-stock', '⋯', t('dt_more'), (T.rc_open || 0) + todo || '')].join('');
-  const b = full ? [cs.length ? tile('lv-open', '📊', t('dt_levels')) : '', W ? tile('stk-tr-new', '🔁', t('dt_tr')) : '', W ? tile('ls-new', '🗑', t('dt_loss')) : ''].join('') : '';
+  const b = full ? [cs.length ? tile('lv-open', '📊', t('dt_levels')) : '', W ? tile('stk-tr-new', '🔁', t('dt_tr')) : '', W ? tile('ls-new', '🗑', t('dt_loss')) : '', cs.includes(st) ? tile('qp-open', '📍', t('qp_btn')) : ''].join('') : '';   // v175：放位置
   const c = full && admin ? tile('drk-menu', '🍷', t('dt_menu')) + tile('inv-drinks', '📈', t('dt_sales'), todo || '') : '';
   return `${full ? '' : `<div class="tiles-h">${esc(t('dt_h'))} · ${esc(st)}</div>`}${a ? `<div class="tiles">${a}</div>` : ''}${b ? `<div class="tiles-h">${esc(t('dt_other_h'))}</div><div class="tiles">${b}</div>` : ''}${c ? `<div class="tiles-h">${esc(t('dt_boss_h'))}</div><div class="tiles">${c}</div>` : ''}`;
 }
@@ -6888,6 +6913,95 @@ function renderInvUnplaced(){
     <div class="list">${u && u.items.length ? u.items.map(x => `<div class="item" data-act="inv-item" data-id="${x.id}" style="cursor:pointer"><div class="inv-row">${invImg(x.photo_t, 'sm')}<div class="inv-txt"><strong>${esc(invName(x))}</strong><div class="meta">${esc(invOther(x))}</div></div></div></div>`).join('')
       : `<div class="empty">✓</div>`}</div>`;
   invLoadPhotos();
+}
+// ---------- v175（数据库 v128，老板 2026-11-12：「给饮料添加位置太麻烦」）：快速放位置 ----------
+// 先选一次位置（房间 → 货架 → 层），下面是这家店的饮料，点一下就放进当前位置（inv_place_item），不跳页；走到下一层点「下一层」。
+function qpS(){ const S = invS(); return S.qp || (S.qp = { store: curStore(), area: null, unit_id: null, place: null, q: '', data: null, busy: null, more: false }); }
+function qpAreas(){ const Q = qpS(); return (invS().pick || []).filter(a => a.store === Q.store); }
+function qpFind(placeId){
+  for (const a of qpAreas()) for (const u of a.units || []){
+    if (u.id === placeId && u.holds) return { a, u, s: null };
+    const sl = (u.slots || []).find(x => x.id === placeId); if (sl) return { a, u, s: sl };
+  }
+  return null;
+}
+function qpPlaceSet(id){ const Q = qpS(); Q.place = id; LS.set('qpLast:' + Q.store, id); }
+function qpUnitSet(u){ const Q = qpS(), sl = u.slots || []; if (!sl.length && u.holds) qpPlaceSet(u.id); else if (sl.length === 1) qpPlaceSet(sl[0].id); }   // 只有一层 / 不分层：直接选上
+async function viewInvQplace(){
+  const S = invS(), Q = qpS(), back = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>`;
+  if (Q.data) renderInvQplace(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  let pick, data;
+  try { [pick, data] = await Promise.all([soft(rpc('inv_pick', tok()), S.pick || []), rpc('inv_quick_place', { ...tok(), p_store: Q.store })]); }
+  catch(e){ if (state.tab === 'inv' && S.view === 'qplace') $('#main').innerHTML = `${back}<div class="stabs-row"><h2>${esc(t('qp_h'))}</h2>${storeTabsHTML()}</div><div class="empty">${esc(errText(e))}</div>`; return; }
+  if (state.tab !== 'inv' || S.view !== 'qplace' || S.qp !== Q) return;
+  S.pick = pick; Q.data = data;
+  if (!Q.area){ const last = LS.get('qpLast:' + Q.store, null), h = last && qpFind(last); if (h) Object.assign(Q, { area: h.a.id, unit_id: h.u.id, place: last }); }   // 上次放到哪
+  if (Q.place && !qpFind(Q.place)) Q.place = null;
+  renderInvQplace();
+}
+function qpListsHTML(){
+  const Q = qpS(), D = Q.data || {}, W = stkCanWrite(), drinks = D.drinks || [], q = Q.q.trim().toLowerCase();
+  const match = x => !q || [x.name_de, x.name_zh].some(v => v && String(v).toLowerCase().includes(q));
+  const at = x => (x.places || []).some(p => p.place === Q.place);
+  const un = drinks.filter(x => !(x.places || []).length && match(x)), placed = drinks.filter(x => (x.places || []).length && !(Q.place && at(x)) && match(x));
+  const row = x => `<button class="qp-row" data-act="qp-put" data-id="${x.id}"${W && !Q.busy ? '' : ' disabled'}><span class="qp-n"><strong>${esc(invName(x))}</strong>${(x.places || []).length ? `<small class="num">${esc(x.places.map(p => p.code).join(' · '))}</small>` : drkPack(x) ? `<small>${esc(drkPack(x))}</small>` : ''}</span>${W ? '<span class="qp-x">＋</span>' : ''}</button>`;
+  const nUn = drinks.filter(x => !(x.places || []).length).length, nPl = drinks.filter(x => (x.places || []).length && !(Q.place && at(x))).length;
+  return `<div class="qp-sec">${esc(t('qp_un_h', { n: nUn }))}</div>
+    <div class="list">${un.length ? un.map(row).join('') : `<div class="empty">${esc(nUn ? t('qp_no_match', { q: Q.q.trim() }) : t('qp_un_none'))}</div>`}</div>
+    ${nPl ? `<button class="link" data-act="qp-more" style="margin:0 0 8px;white-space:normal;text-align:left">${esc(t(Q.more || q ? 'qp_more_hide' : 'qp_more', { n: nPl }))}</button>${Q.more || q ? `<div class="list">${placed.length ? placed.map(row).join('') : `<div class="empty">${esc(t('qp_no_match', { q: Q.q.trim() }))}</div>`}</div>` : ''}` : ''}`;
+}
+function renderInvQplace(){
+  const S = invS(), Q = qpS(), D = Q.data; if (!D) return;
+  const W = stkCanWrite(), areas = qpAreas(), A = areas.find(a => a.id === Q.area), U = A && (A.units || []).find(u => u.id === Q.unit_id);
+  const room = !!A && !(A.units || []).length;   // v127：没有货架的房间，整个房间当一个位置
+  const h = Q.place && qpFind(Q.place), code = h ? (h.s ? h.s.code : h.u.code) : '', sl = h && h.s ? (h.u.slots || []) : [], si = sl.findIndex(x => x.id === Q.place);
+  const drinks = D.drinks || [], here = Q.place ? drinks.filter(x => (x.places || []).some(p => p.place === Q.place)) : [];
+  const chip = (act, id, label, on) => `<button class="chip${on ? ' on' : ''}" data-act="${act}" data-id="${id}">${esc(label)}</button>`;
+  const where = h ? `${invName(h.a)} · ${invName(h.u)}${h.s && sl.length > 1 ? ' · ' + invPosText({ row: h.s.slot.charCodeAt(0) - 64, rows: Math.max(...sl.map(x => x.slot.charCodeAt(0) - 64)) }, true) : ''}` : room ? invName(A) : '';
+  const hdr = document.querySelector('header'), top = hdr ? hdr.offsetHeight : 0;
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
+    <div class="stabs-row"><h2>${esc(t('qp_h'))}</h2>${storeTabsHTML()}</div>
+    <div class="small muted" style="margin-bottom:8px">${esc(t('qp_hint'))}</div>
+    ${!drinks.length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('qp_empty'))}</div>` : ''}
+    <div class="qp-sec">${esc(t('qp_where'))}</div>
+    ${areas.length ? `<div class="chips" style="margin-bottom:8px">${areas.map(a => chip('qp-area', a.id, invName(a), A && a.id === A.id)).join('')}</div>` : `<div class="empty">${esc(t('qp_no_area'))}</div>`}
+    ${room ? `<div class="infobox">${esc(t('qp_room'))}</div>` : ''}
+    ${A && !room ? `<div class="chips" style="margin-bottom:8px">${A.units.map(u => chip('qp-unit', u.id, u.kind === 'spot' ? invName(u) : `${u.code.split('-').slice(2).join('-')} ${invName(u)}`.trim(), U && u.id === U.id)).join('')}</div>` : ''}
+    ${U && (U.slots || []).length > 1 ? `<div style="margin-bottom:8px">${invSlotPicker(U, Q).split('data-act="inv-pick-slot"').join('data-act="qp-slot"')}</div>` : ''}
+    <div class="qp-bar" style="top:${top}px"><div class="row"><div class="qp-cur">${h || room ? `${esc(t('qp_cur'))} <span class="num">${esc(code)}</span><small>${esc(where)}</small>` : `<span style="color:var(--copper)">${esc(t('qp_cur_none'))}</span>`}</div>
+      ${sl.length > 1 ? `<button data-act="qp-step" data-d="-1"${si > 0 ? '' : ' disabled'}>‹ ${esc(t('qp_prev'))}</button><button data-act="qp-step" data-d="1"${si < sl.length - 1 ? '' : ' disabled'}>${esc(t('qp_next'))} ›</button>` : `<button data-act="qp-top">${esc(t('qp_change'))}</button>`}</div></div>
+    ${h ? `<div class="qp-sec">${esc(t('qp_here_h', { n: here.length }))}</div>${here.length ? `<div class="list">${here.map(x => { const lk = x.places.find(p => p.place === Q.place);
+        return `<div class="qp-row here"><span class="qp-n"><strong>${esc(invName(x))}</strong></span>${W ? `<button class="link danger" data-act="qp-take" data-id="${x.id}" data-link="${lk.link}"${Q.busy ? ' disabled' : ''}>${esc(t('qp_take'))}</button>` : ''}</div>`; }).join('')}</div>` : ''}` : ''}
+    ${drinks.length ? `<input type="search" class="input" id="qp-q" placeholder="${esc(t('qp_q'))}" value="${esc(Q.q)}" autocomplete="off" style="margin-top:10px">` : ''}
+    <div id="qp-lists">${qpListsHTML()}</div>`;
+}
+async function qpPut(id, force, note){
+  const S = invS(), Q = qpS(), D = Q.data; if (!D || Q.busy || !stkCanWrite()) return;
+  const x = (D.drinks || []).find(d => d.id === id); if (!x) return;
+  if (!Q.place){
+    const A = qpAreas().find(a => a.id === Q.area);
+    if (!A || (A.units || []).length){ toast(t('qp_need'), true); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    Q.busy = id;   // 没有货架的房间：先建好「整个房间」这个位置（v127）
+    try { const pid = await rpc('inv_area_spot', { ...tok(), p_area: A.id }); S.pick = await soft(rpc('inv_pick', tok()), S.pick); const h = qpFind(pid); if (h){ Q.unit_id = h.u.id; qpPlaceSet(pid); } }
+    catch(e){ Q.busy = null; toast(errText(e), true); S.pick = await soft(rpc('inv_pick', tok()), S.pick); keepScroll(renderInvQplace); return; }
+    Q.busy = null; if (!Q.place){ keepScroll(renderInvQplace); return; }
+  }
+  if ((x.places || []).some(p => p.place === Q.place)) return;
+  Q.busy = id; const b = document.getElementById('qp-lists'); if (b) b.innerHTML = qpListsHTML();
+  try {
+    const link = await rpc('inv_place_item', { ...tok(), p_item: id, p_place: Q.place, p_main: false, p_force: !!force, p_note: note || null });
+    const h = qpFind(Q.place); (x.places = x.places || []).push({ link, place: Q.place, code: h ? (h.s ? h.s.code : h.u.code) : '', main: !x.places.length });
+    S.home = null; S.area = null; S.place = null; S.item = null; S.count = null;
+  } catch(e){ Q.busy = null; if (!invConflict(e, n => qpPut(id, true, n))) toast(errText(e), true); keepScroll(renderInvQplace); return; }
+  Q.busy = null; if (state.tab === 'inv' && S.view === 'qplace') keepScroll(renderInvQplace);
+}
+async function qpTake(id, link){
+  const S = invS(), Q = qpS(), D = Q.data; if (!D || Q.busy || !stkCanWrite()) return;
+  const x = (D.drinks || []).find(d => d.id === id); if (!x) return;
+  Q.busy = id;
+  try { await rpc('inv_unplace', { ...tok(), p_link: link }); x.places = (x.places || []).filter(p => p.link !== link); S.home = null; S.area = null; S.place = null; S.item = null; S.count = null; }
+  catch(e){ toast(errText(e), true); }
+  Q.busy = null; if (state.tab === 'inv' && S.view === 'qplace') keepScroll(renderInvQplace);
 }
 // 拍一层认饮料：照片存成这个位置的照片，AI 从饮料清单里认，库管勾选后放进去
 function shelfHTML(P){
@@ -12756,7 +12870,17 @@ document.addEventListener('click', async ev => {
     case 'stk-tr-delline': { stkTrKeep(); const T = invS().tr; if (T){ T.lines.splice(+el.dataset.i, 1); keepScroll(renderInvTr); } break; }
     case 'stk-tr-save': stkTrSave(el); break;
     case 'stk-tr-cancel': stkTrCancel(+el.dataset.i); break;
-    case 'kp-unplaced': { const S = invS(); S.ustore = el.dataset.store; invGo('unplaced'); break; }   // v143
+    case 'kp-unplaced': { const S = invS(); if (storeOk(el.dataset.store) && el.dataset.store !== curStore()){ state.storeSel = { s: el.dataset.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', el.dataset.store); } S.qp = null; invGo('qplace'); break; }   // v143；v175：直接进快速放位置
+    case 'qp-open': { invS().qp = null; invGo('qplace'); break; }
+    case 'qp-area': { const Q = qpS(), a = qpAreas().find(x => x.id === el.dataset.id); if (!a) break; const u1 = (a.units || []).length === 1 ? a.units[0] : null;
+      Object.assign(Q, { area: a.id, unit_id: u1 ? u1.id : null, place: null }); if (u1) qpUnitSet(u1); keepScroll(renderInvQplace); break; }
+    case 'qp-unit': { const Q = qpS(), a = qpAreas().find(x => x.id === Q.area), u = a && (a.units || []).find(x => x.id === el.dataset.id); if (!u) break; Q.unit_id = u.id; Q.place = null; qpUnitSet(u); keepScroll(renderInvQplace); break; }
+    case 'qp-slot': { qpPlaceSet(el.dataset.id); keepScroll(renderInvQplace); break; }
+    case 'qp-step': { const Q = qpS(), h = Q.place && qpFind(Q.place), sl = h && h.s ? (h.u.slots || []) : [], i = sl.findIndex(x => x.id === Q.place), n = sl[i + (+el.dataset.d)]; if (n){ qpPlaceSet(n.id); keepScroll(renderInvQplace); } break; }
+    case 'qp-top': window.scrollTo({ top: 0, behavior: 'smooth' }); break;
+    case 'qp-more': { const Q = qpS(); Q.more = !Q.more; keepScroll(renderInvQplace); break; }
+    case 'qp-put': qpPut(el.dataset.id); break;
+    case 'qp-take': qpTake(el.dataset.id, el.dataset.link); break;
     case 'kp-area-new': { const S = invS(), H = S.home || {}, st = (H.area_new || [])[0] || STORES[0], K = (H.keeper || []).filter(k => k.store === st);
       S.sform = { id: null, store: st, code: '', name_zh: '', name_de: '', owner: K.length === 1 ? K[0].side : 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true, tr: invTrNew(null), back: { view: 'home' } };
       S.view = 'aform'; render(); window.scrollTo(0, 0); break; }
@@ -13185,6 +13309,7 @@ document.addEventListener('toggle', ev => { const w = ev.target.dataset && ev.ta
 document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'inv-q'){ invS().q = ev.target.value; invQueue(); }   // v91
+  if (id === 'qp-q'){ qpS().q = ev.target.value; const b = document.getElementById('qp-lists'); if (b) b.innerHTML = qpListsHTML(); return; }   // v175
   if (id === 'inv-pq'){ const K = invS().pickItem; if (K){ K.q = ev.target.value; clearTimeout(invPickTimer); invPickTimer = setTimeout(invPickSearch, 250); } }
   if (id === 'drk-l-q'){ const L = invS().dl; if (L){ L.q = ev.target.value; clearTimeout(drkLinkTimer); drkLinkTimer = setTimeout(drkLinkSearch, 250); } }   // v137
   if (ev.target.dataset && (ev.target.dataset.rcl === 'qty_note' || ev.target.dataset.rcl === 'per_unit')){   // v142：送货单数量，边改边算瓶数
