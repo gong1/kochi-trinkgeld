@@ -462,6 +462,29 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .inv-scan{position:relative;background:#000;border-radius:var(--r-s);overflow:hidden;aspect-ratio:3/4;max-height:60vh}
 .inv-scan video{width:100%;height:100%;object-fit:cover;display:block}
 .inv-scan-box{position:absolute;inset:18% 12%;border:3px solid rgba(255,255,255,.85);border-radius:12px}
+.ct-bar{position:sticky;z-index:5;background:var(--paper);padding:8px 0 6px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.ct-top{display:flex;gap:6px;align-items:center}
+.ct-prog{flex:1;min-width:0;font-weight:700;font-size:15px;line-height:1.2}
+.ct-bar button{flex:none;height:40px;padding:0 10px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap}
+.ct-bar button.on{background:var(--celadon-deep);border-color:var(--celadon-deep);color:#fff}
+.ct-bar button.go{background:var(--ink);border-color:var(--ink);color:#fff}
+.ct-jump{display:flex;gap:6px;overflow-x:auto;margin-top:6px;padding-bottom:2px}
+.ct-jump button{height:34px;border-radius:999px;padding:0 12px}
+.ct-row{padding:9px 0;border-top:1px solid var(--line)}
+.ct-row:first-of-type{border-top:0}
+.ct-name{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;line-height:1.3}
+.ct-name > span:first-child{flex:1;min-width:0}
+.ct-in{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:5px}
+.ct-in .input{width:64px;flex:0 0 64px;padding:0 8px;text-align:center}
+.ct-f{flex:none;width:38px;height:44px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:700;font-size:16px;padding:0;color:var(--ink)}
+.ct-f.box{width:44px;font-size:13px;font-weight:600;white-space:nowrap}
+.ct-ok{flex:none;font-size:15px;color:var(--celadon-deep);font-weight:700}
+.ct-ok.bad{flex:1 1 100%;font-weight:400}
+.ct-place.ct-done .ct-tick{display:inline}
+.ct-tick{display:none;color:var(--celadon-deep);font-weight:700}
+.ct-hide{display:none !important}
+.ct-miss{display:flex;flex-wrap:wrap;gap:6px;max-height:40vh;overflow:auto;margin:10px 0}
+.ct-miss button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:14px;color:var(--ink)}
 .rc-bar{position:sticky;z-index:5;background:var(--paper);border-top:1px solid var(--line);padding:8px 0 6px;margin-top:10px}
 .rc-bar .row{gap:8px;align-items:stretch}
 .rc-bar .btn{height:auto;min-height:50px;padding:6px 8px;line-height:1.2;margin:0}
@@ -535,7 +558,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v178';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v179';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -869,6 +892,11 @@ zh: {
   drk_l_h:'「{a}」配到哪样饮料？', drk_l_factor:'卖 1 个 =', drk_l_factor_u:'个基本单位（瓶 / 罐）', drk_l_drinks:'饮料清单里的', drk_l_search:'物品里找', drk_l_q_ph:'找物品：名字、别名……', drk_l_new:'新建饮料', drk_l_new_btn:'新建并配上', drk_l_done:'「{a}」已配到 {n}', drk_l_none:'物品里没找到「{q}」，可以在下面新建。',
   drk_u_Flasche:'瓶', drk_u_Dose:'罐', drk_u_Kiste:'箱', drk_u_Karton:'箱', drk_u_Tray:'托', drk_u_Fass:'桶', drk_u_Packung:'包', drk_u_Stück:'个',   // v137
   // v142（数据库 v101 / 文件服务 tasks v24，老板 2026-11-05）：饮料收货（拍送货单 → AI 读 → 前场主管 / 老板确认入库）、两家店之间调拨
+  // v179：盘点更快更准（B 包）
+  ct_prog:'已填 {n} / {m} 种', ct_only:'只看没填的', ct_finish_short:'✓ 完成', ct_x:'别的地方', ct_q:'找饮料…', ct_info:'{d} · {who} 开始', ct_hint2:'要在开门前盘：盘点当天卖掉的会从这个数里扣。',
+  ct_old:'这次盘点是 {d} 开始的，一直没完成。里面的数是那天填的，「应有」也按那天算。', ct_old_keep:'接着做', ct_old_restart:'放弃，重新开始', ct_restart_q:'放弃 {d} 那次没完成的盘点、重新开始？已填的数不算。', ct_restart_note:'旧的没完成的盘点，重新开始',
+  ct_miss_h:'还有 {n} 种饮料一个数都没填', ct_miss_hint:'没填的按 0 算。点名字可以回去补。完成以后不能再改。', ct_miss_go:'这些都是 0，完成盘点', ct_miss_back:'回去补', ct_done2:'盘点完成。结果在最上面。',
+  ct_add_more:'＋ 这里还有别的饮料（有位置的也放在别处了 / 这家店平时没有的）', ct_add_g1:'有固定位置的饮料', ct_add_g2:'这家店平时没有的', ct_minus_box:'−1 箱', lv_ai_wait:'🤖 AI 正在写小结……', lv_no_store:'{s} 的库存和盘点，只有这家店的库管、前场主管和老板能看。请点上面换一家店。',
   // v178：收货更顺（A 包）
   stk_l_other_btn:'不进库存', stk_l_pfand_btn:'押金 / 空箱', stk_l_sure_btn:'✓ 对的', stk_rc_unread:'新拍的第 {n} 页还没读进来。', stk_rc_unread_btn:'让 AI 读新拍的页（你改过的行会被换掉）',
   stk_rc_leave_q:'不保存就离开吗？拍的照片和读出来的行会丢掉。', stk_rc_leave_q2:'改过的地方还没保存。不保存就离开吗？', stk_del_line:'这一行已去掉', stk_del_ph:'这张照片已去掉', stk_rc_resumed:'接着上次没登记完的送货单。不要了就点左上角「← 取消」。',
@@ -915,7 +943,7 @@ zh: {
   ct_frac_t:'开了的那一瓶', ct_add_other:'＋ 加别的饮料（这家店平时没有的）', ct_add_pick:'— 选饮料 —', lv_col_value:'值', lv_total:'合计', lv_value_gap:'{n} 种没有进价，没算进去', lv_res_value:'差的钱', lv_res_value_sum:'差的钱合计 {v}',   // v168
   drk_u_Kasten:'箱', ord_btn:'🛒 订货', ord_title:'🛒 订货', ord_hint:'订货日这里出订货建议：要补多少 = 目标库存 −（现在应有 − 到送货那天还会卖掉的）。改好数量点「确认订货单」，再照着清单去供应商那边下单。App 不会自己下单。', ord_days:'订货日 {o} · 送货日 {d}', ord_next:'下次送货 {d}', ord_today:'今天是订货日', ord_no_count:'这家店还没盘点过：建议只按一周的销量，不扣现有库存。先做一次盘点会更准。', ord_no_target:'{n} 种酒还没设目标库存，不会出现在建议里。', ord_targets_btn:'🎯 目标库存', ord_start:'出订货建议', ord_resume:'继续没确认的订货单（{n} 行）', ord_recent:'最近的订货单', ord_st_confirmed:'已确认', ord_st_cancelled:'已撤销', ord_st_open:'还没确认', ord_row:'{d} 送货 · {s}', ord_by:'{n} · {t}', ord_days_edit:'改订货日、送货日', ord_day_order:'订货日', ord_day_delivery:'送货日', ord_day_none:'不提醒', ord_days_save:'保存', ord_days_saved:'保存了', ord_unlinked_h:'供应商的商品里还没配饮料的（{n}）', ord_unlinked_hint:'配上 App 里的饮料以后才会出现在订货建议里。App 里没有的先在「🍹 饮料 → 📈 销量和清单」新建。', ord_link_pick:'— 配到哪件饮料 —', ord_linked:'配好了', ord_o_title:'订货单 · {s} · {p}', ord_o_delivery:'送货日 {d}', ord_calc:'目标 {t} · 应有 {s} · 到货前还会卖 {u} → 要补 {n}', ord_calc_nc:'每周卖 {w}（还没盘点，按一周的销量）', ord_calc_nt:'还没设目标库存', ord_sug:'建议 {n}', ord_art:'编号 {a}', ord_rest:'其余 {n} 种（这次不用订）', ord_confirm:'✓ 确认订货单', ord_confirm_q:'确认这张订货单？{n} 种。确认以后请照着清单去 {p} 下单。', ord_confirmed:'订货单确认了。请照着清单下单。', ord_cancel:'撤销这张订货单', ord_cancel_q:'撤销这张订货单的原因（如果已经在供应商那边下了单，要自己去那边改）：', ord_cancelled:'订货单撤销了', ord_saved:'已保存', ord_list_h:'下单清单（照着在供应商那边下单）', ord_copy:'复制清单', ord_copied:'清单已复制', ord_portal:'打开 {p} 的下单页面', ord_cmp_h:'到货对订单', ord_cmp_none:'确认以后还没有入库的送货单。送货那天拍 Lieferschein 确认入库，这里就会对比。', ord_cmp_ok:'送到 {g}，和订的一样 ✓', ord_cmp_less:'订 {o}，送到 {g}，少 {d}', ord_cmp_more:'订 {o}，送到 {g}，多 {d}', ord_cmp_extra:'没订但送来了：{l}', ord_t_title:'🎯 目标库存 · {s} · {p}', ord_t_hint:'目标库存 = 送完货以后这家店应该有几瓶。建议值 = 最近 4 周平均每周销量 × 1,5。改了自动保存；清空 = 不设（不出现在订货建议里）。', ord_t_week:'每周卖 {w}', ord_t_sug:'建议 {n}', ord_t_stock:'现在应有 {n}', ord_t_fill:'空着的都按建议填', ord_t_filled:'填了 {n} 种', ord_t_nothere:'这家店平时没有', ord_due:'今天要订 {p}（{s}，{d} 送货）',   // v169
   aih_r_h:'💡 建议改配方（{n}）', aih_r_hint:'按最近两次盘点算出来的：整瓶卖的当作准的，剩下的差算在按杯卖的上面。点「采纳」才改，以后的库存按新配方扣。', aih_r_line:'一杯建议从 {o} {u} 改成 {n} {u}', aih_r_why_less:'{a} 到 {b}：{name} 按杯卖了 {g} 杯，盘点少了 {d} 瓶，说明实际倒得比配方多。', aih_r_why_more:'{a} 到 {b}：{name} 按杯卖了 {g} 杯，盘点多了 {d} 瓶，说明实际倒得比配方少。', aih_r_ok:'采纳：改成 {n} {u}', aih_r_done:'配方改好了：{a}', aih_no:'忽略', aih_seen:'知道了', aih_dismissed:'这一条不再提醒', aih_t_h:'💡 建议（{n}）', aih_t_target:'目标库存 {t}，按现在的销量建议 {s}（每周卖 {w}）', aih_t_short:'照现在的卖法，{d} 送货前会卖完（应有 {k}，每周卖 {w}）。这次多订一点，或者提前订。', aih_t_over:'库存够卖 {n} 周（应有 {k}，每周卖 {w}）。这次可以不订，或者把目标库存调低。', aih_t_ok:'采纳：目标改成 {n}', aih_t_done:'目标库存改好了', aih_span:'这家店只有 {n} 天的销量数据，每周销量是按这几天折算的；满 14 天才会出「调目标库存」的建议。',   // v170
-  ct_h:'盘点 · {s}', ct_hint:'按顺序走：每个位置数一下每种饮料有几瓶（整箱的点「+1 箱」）。没开的数整瓶；开了的那一瓶估一下，点 ¼、½ 或 ¾。填完自动保存，可以分几次做。最后点「完成盘点」。', ct_place_none:'这家店还没有放了饮料的位置：先请库管把饮料放到位置上，或者都填在「别的地方」。',
+  ct_h:'盘点 · {s}', ct_hint:'按顺序走：每个位置数一下每种饮料有几瓶（整箱的点「+📦」，多点了点「−📦」）。没开的数整瓶；开了的那一瓶估一下，点 ¼、½ 或 ¾。填完自动保存，可以分几次做。最后点「完成盘点」。', ct_place_none:'这家店还没有放了饮料的位置：先请库管把饮料放到位置上，或者都填在「别的地方」。',
   ct_others:'别的地方（没有固定位置的、放在别处的）', ct_others_hint:'这里的数和上面的加在一起。', ct_add_box:'+1 箱', ct_bottles:'瓶', ct_saved:'已保存', ct_fail:'✗ 没存上 · 点这里重试', ct_unsaved:'还有 {n} 个数没存上（那一行有红色的「没存上」）。请到有信号的地方点一下重试，都存上了再完成盘点。', ct_finish:'✓ 完成盘点', ct_finish_q:'完成盘点？{n} 种饮料一个数都没填，按 0 算。完成以后不能再改。', ct_finish_q0:'完成盘点？完成以后不能再改。',
   ct_done:'盘点完成：{n} 种饮料', ct_cancel:'放弃这次盘点', ct_cancel_q:'放弃这次盘点？已填的数不算。请写一句原因：', ct_cancelled:'这次盘点已放弃', ct_bad_qty:'数量要是 0 或更大的数。',
   hrep_take:'📷 拍全天报告', hrep_env:'💵 点信封（{n}）', hrep_env0:'💵 信封都点完了', hrep_hint:'不用选店和日子：拍完 AI 从报告上认出是哪家店、哪天。先拍上半部分，再拍下半部分（报告短的一张也行）。', hrep_reading:'全天报告识别中…', hrep_saved:'报告已保存', hrep_done:'已自动核对完成', hrep_check:'报告要你看一眼', hrep_look:'去看', hrep_unknown:'认不出是哪家店或哪天：请把报告顶部（店名、日期）拍清楚再拍一次', hrep_retake:'重拍', hrep_close:'关掉', hrep_saved_toast:'{s} · {d} 的全天报告已保存', hrep_check_toast:'{s} · {d} 的全天报告要你看一眼（在「今天」页）', hrep_env_title:'点信封 · 两家店', hrep_env_store:'{n} 个信封', hrep_env_none:'两家店的信封都点完了。',   // v114
@@ -1574,6 +1602,11 @@ de: {
   drk_l_h:'„{a}“ welchem Getränk zuordnen?', drk_l_factor:'1 verkauft =', drk_l_factor_u:'Grundeinheiten (Flasche / Dose)', drk_l_drinks:'Aus der Getränkeliste', drk_l_search:'In den Artikeln suchen', drk_l_q_ph:'Artikel suchen: Name, Alias …', drk_l_new:'Neues Getränk', drk_l_new_btn:'Anlegen und zuordnen', drk_l_done:'„{a}“ zugeordnet: {n}', drk_l_none:'„{q}“ nicht gefunden – unten neu anlegen.',
   drk_u_Flasche:'Flasche', drk_u_Dose:'Dose', drk_u_Kiste:'Kiste', drk_u_Karton:'Karton', drk_u_Tray:'Tray', drk_u_Fass:'Fass', drk_u_Packung:'Packung', drk_u_Stück:'Stück',   // v137
   // v142 (DB v101 / tasks v24)
+  // v179
+  ct_prog:'{n} / {m} Getränke gezählt', ct_only:'Nur leere', ct_finish_short:'✓ Fertig', ct_x:'Andere Stellen', ct_q:'Getränk suchen…', ct_info:'{d} · begonnen von {who}', ct_hint2:'Vor dem Öffnen zählen: Was am Zähltag verkauft wird, wird von dieser Zahl abgezogen.',
+  ct_old:'Diese Inventur wurde am {d} begonnen und nie abgeschlossen. Die Zahlen sind von diesem Tag, auch der Sollbestand wird für diesen Tag gerechnet.', ct_old_keep:'Weitermachen', ct_old_restart:'Verwerfen, neu beginnen', ct_restart_q:'Die nicht abgeschlossene Inventur vom {d} verwerfen und neu beginnen? Die eingetragenen Zahlen zählen nicht.', ct_restart_note:'Alte, nicht abgeschlossene Inventur – neu begonnen',
+  ct_miss_h:'{n} Getränke haben noch keine Zahl', ct_miss_hint:'Ohne Zahl zählt als 0. Namen antippen, um nachzutragen. Nach dem Abschließen kann nichts mehr geändert werden.', ct_miss_go:'Die sind alle 0 – Inventur abschließen', ct_miss_back:'Zurück und nachtragen', ct_done2:'Inventur abgeschlossen. Das Ergebnis steht ganz oben.',
+  ct_add_more:'＋ Hier steht noch ein anderes Getränk (hat woanders einen Platz / gibt es hier sonst nicht)', ct_add_g1:'Getränke mit festem Platz', ct_add_g2:'In dieser Filiale sonst nicht vorhanden', ct_minus_box:'−1 Kiste', lv_ai_wait:'🤖 Die KI schreibt die Zusammenfassung …', lv_no_store:'Bestand und Inventur von {s} sehen nur Lagerverantwortliche dieser Filiale, die Service-Leitung und der Chef. Bitte oben die andere Filiale wählen.',
   // v178
   stk_l_other_btn:'Nicht in den Bestand', stk_l_pfand_btn:'Pfand / Leergut', stk_l_sure_btn:'✓ Stimmt', stk_rc_unread:'Die neue Seite {n} ist noch nicht gelesen.', stk_rc_unread_btn:'KI die neue Seite lesen lassen (deine Änderungen werden ersetzt)',
   stk_rc_leave_q:'Ohne Speichern verlassen? Fotos und gelesene Zeilen gehen verloren.', stk_rc_leave_q2:'Die Änderungen sind noch nicht gespeichert. Ohne Speichern verlassen?', stk_del_line:'Zeile entfernt', stk_del_ph:'Foto entfernt', stk_rc_resumed:'Weiter mit dem angefangenen Lieferschein. Nicht mehr gebraucht: oben links „← Abbrechen“.',
@@ -1620,7 +1653,7 @@ de: {
   ct_frac_t:'Angebrochene Flasche', ct_add_other:'＋ Anderes Getränk hinzufügen (sonst nicht in dieser Filiale)', ct_add_pick:'— Getränk wählen —', lv_col_value:'Wert', lv_total:'Summe', lv_value_gap:'{n} ohne Einkaufspreis, nicht mitgerechnet', lv_res_value:'Differenz €', lv_res_value_sum:'Differenz gesamt {v}',   // v168
   drk_u_Kasten:'Kasten', ord_btn:'🛒 Bestellen', ord_title:'🛒 Bestellen', ord_hint:'Am Bestelltag gibt es hier einen Vorschlag: Bedarf = Sollbestand − (jetziger Bestand − Verkauf bis zum Liefertag). Mengen anpassen, „Bestellung bestätigen“ tippen und dann nach der Liste beim Lieferanten bestellen. Die App bestellt nicht selbst.', ord_days:'Bestelltag {o} · Liefertag {d}', ord_next:'nächste Lieferung {d}', ord_today:'Heute ist Bestelltag', ord_no_count:'In dieser Filiale gab es noch keine Inventur: Der Vorschlag richtet sich nur nach dem Wochenverkauf, ohne den vorhandenen Bestand. Mit einer Inventur wird er genauer.', ord_no_target:'{n} Getränke haben noch keinen Sollbestand und erscheinen nicht im Vorschlag.', ord_targets_btn:'🎯 Sollbestand', ord_start:'Bestellvorschlag erstellen', ord_resume:'Offene Bestellung fortsetzen ({n} Zeilen)', ord_recent:'Letzte Bestellungen', ord_st_confirmed:'bestätigt', ord_st_cancelled:'storniert', ord_st_open:'offen', ord_row:'Lieferung {d} · {s}', ord_by:'{n} · {t}', ord_days_edit:'Bestelltag, Liefertag ändern', ord_day_order:'Bestelltag', ord_day_delivery:'Liefertag', ord_day_none:'keine Erinnerung', ord_days_save:'Speichern', ord_days_saved:'Gespeichert', ord_unlinked_h:'Lieferantenartikel ohne Getränk ({n})', ord_unlinked_hint:'Erst nach der Zuordnung zu einem Getränk der App erscheinen sie im Bestellvorschlag. Fehlt das Getränk, bitte zuerst unter „🍹 Getränke → 📈 Verkauf & Liste“ anlegen.', ord_link_pick:'— Getränk zuordnen —', ord_linked:'Zugeordnet', ord_o_title:'Bestellung · {s} · {p}', ord_o_delivery:'Liefertag {d}', ord_calc:'Soll {t} · Bestand {s} · Verkauf bis Lieferung {u} → Bedarf {n}', ord_calc_nc:'pro Woche {w} (noch keine Inventur, nach Wochenverkauf)', ord_calc_nt:'noch kein Sollbestand', ord_sug:'Vorschlag {n}', ord_art:'Art.-Nr. {a}', ord_rest:'Übrige {n} (diesmal nichts nötig)', ord_confirm:'✓ Bestellung bestätigen', ord_confirm_q:'Diese Bestellung bestätigen? {n} Artikel. Danach bitte nach der Liste bei {p} bestellen.', ord_confirmed:'Bestellung bestätigt. Bitte nach der Liste bestellen.', ord_cancel:'Bestellung stornieren', ord_cancel_q:'Grund für die Stornierung (wurde beim Lieferanten schon bestellt, bitte dort selbst ändern):', ord_cancelled:'Bestellung storniert', ord_saved:'gespeichert', ord_list_h:'Bestellliste (danach beim Lieferanten bestellen)', ord_copy:'Liste kopieren', ord_copied:'Liste kopiert', ord_portal:'Bestellseite von {p} öffnen', ord_cmp_h:'Lieferung und Bestellung', ord_cmp_none:'Seit der Bestätigung wurde noch kein Lieferschein eingebucht. Am Liefertag den Lieferschein fotografieren und einbuchen, dann wird hier verglichen.', ord_cmp_ok:'{g} geliefert, wie bestellt ✓', ord_cmp_less:'bestellt {o}, geliefert {g}, es fehlen {d}', ord_cmp_more:'bestellt {o}, geliefert {g}, {d} zu viel', ord_cmp_extra:'Nicht bestellt, aber geliefert: {l}', ord_t_title:'🎯 Sollbestand · {s} · {p}', ord_t_hint:'Sollbestand = so viele Flaschen sollen nach der Lieferung da sein. Vorschlag = durchschnittlicher Wochenverkauf der letzten 4 Wochen × 1,5. Änderungen werden sofort gespeichert; leer = kein Sollbestand (erscheint nicht im Bestellvorschlag).', ord_t_week:'pro Woche {w}', ord_t_sug:'Vorschlag {n}', ord_t_stock:'Bestand jetzt {n}', ord_t_fill:'Leere mit Vorschlag füllen', ord_t_filled:'{n} ausgefüllt', ord_t_nothere:'sonst nicht in dieser Filiale', ord_due:'Heute bei {p} bestellen ({s}, Lieferung {d})',   // v169
   aih_r_h:'💡 Vorschlag: Rezept ändern ({n})', aih_r_hint:'Aus den letzten beiden Inventuren berechnet: Flaschenverkäufe gelten als genau, die restliche Differenz wird dem Glasverkauf zugerechnet. Erst „Übernehmen“ ändert das Rezept; danach wird der Bestand nach dem neuen Rezept abgezogen.', aih_r_line:'Pro Glas statt {o} {u} besser {n} {u}', aih_r_why_less:'{a} bis {b}: {name} – {g} Gläser verkauft, bei der Inventur fehlten {d} Flaschen. Es wird also mehr eingeschenkt als im Rezept.', aih_r_why_more:'{a} bis {b}: {name} – {g} Gläser verkauft, bei der Inventur waren {d} Flaschen mehr da. Es wird also weniger eingeschenkt als im Rezept.', aih_r_ok:'Übernehmen: {n} {u}', aih_r_done:'Rezept geändert: {a}', aih_no:'Ignorieren', aih_seen:'Verstanden', aih_dismissed:'Dieser Hinweis kommt nicht mehr', aih_t_h:'💡 Vorschläge ({n})', aih_t_target:'Sollbestand {t}, nach dem aktuellen Verkauf besser {s} (pro Woche {w})', aih_t_short:'Beim jetzigen Verkauf ist es vor der Lieferung am {d} ausverkauft (Bestand {k}, pro Woche {w}). Diesmal mehr bestellen oder früher bestellen.', aih_t_over:'Der Bestand reicht für {n} Wochen (Bestand {k}, pro Woche {w}). Diesmal nichts bestellen oder den Sollbestand senken.', aih_t_ok:'Übernehmen: Sollbestand {n}', aih_t_done:'Sollbestand geändert', aih_span:'Für diese Filiale gibt es erst {n} Tage Verkaufsdaten; der Wochenverkauf ist daraus hochgerechnet. Vorschläge zum Sollbestand gibt es ab 14 Tagen.',   // v170
-  ct_h:'Inventur · {s}', ct_hint:'Der Reihe nach: an jedem Platz zählen, wie viele Flaschen je Getränk da sind (volle Kiste: „+1 Kiste“). Volle Flaschen ganz zählen; die angebrochene schätzen und ¼, ½ oder ¾ antippen. Alles wird sofort gespeichert, du kannst unterbrechen. Am Ende „Inventur abschließen“.', ct_place_none:'In dieser Filiale hat noch kein Platz Getränke: zuerst die Getränke einräumen lassen oder alles unter „Andere Stellen“ eintragen.',
+  ct_h:'Inventur · {s}', ct_hint:'Der Reihe nach: an jedem Platz zählen, wie viele Flaschen je Getränk da sind (volle Kiste: „+📦“, zu viel getippt: „−📦“). Volle Flaschen ganz zählen; die angebrochene schätzen und ¼, ½ oder ¾ antippen. Alles wird sofort gespeichert, du kannst unterbrechen. Am Ende „Inventur abschließen“.', ct_place_none:'In dieser Filiale hat noch kein Platz Getränke: zuerst die Getränke einräumen lassen oder alles unter „Andere Stellen“ eintragen.',
   ct_others:'Andere Stellen (ohne festen Platz oder woanders)', ct_others_hint:'Diese Zahlen werden zu denen oben addiert.', ct_add_box:'+1 Kiste', ct_bottles:'Fl.', ct_saved:'Gespeichert', ct_fail:'✗ Nicht gespeichert · hier tippen', ct_unsaved:'{n} Zahlen sind noch nicht gespeichert (rote Markierung „Nicht gespeichert“ in der Zeile). Bitte bei besserem Empfang darauf tippen und erst danach die Inventur abschließen.', ct_finish:'✓ Inventur abschließen', ct_finish_q:'Inventur abschließen? Bei {n} Getränken ist nichts eingetragen – zählt als 0. Danach nicht mehr änderbar.', ct_finish_q0:'Inventur abschließen? Danach nicht mehr änderbar.',
   ct_done:'Inventur abgeschlossen: {n} Getränke', ct_cancel:'Diese Inventur verwerfen', ct_cancel_q:'Diese Inventur verwerfen? Die eingetragenen Zahlen zählen nicht. Bitte kurz den Grund schreiben:', ct_cancelled:'Inventur verworfen', ct_bad_qty:'Die Menge muss 0 oder größer sein.',
   hrep_take:'📷 Tagesbericht fotografieren', hrep_env:'💵 Umschläge zählen ({n})', hrep_env0:'💵 Alle Umschläge gezählt', hrep_hint:'Filiale und Tag musst du nicht wählen: Die KI erkennt sie auf dem Bericht. Erst den oberen, dann den unteren Teil fotografieren (bei kurzem Bericht reicht ein Foto).', hrep_reading:'Tagesbericht wird gelesen …', hrep_saved:'Bericht gespeichert', hrep_done:'automatisch abgeschlossen', hrep_check:'Bericht bitte prüfen', hrep_look:'Ansehen', hrep_unknown:'Filiale oder Tag nicht erkennbar: Bitte den oberen Teil (Name, Datum) scharf fotografieren und nochmal versuchen', hrep_retake:'Neu fotografieren', hrep_close:'Schließen', hrep_saved_toast:'Tagesbericht {s} · {d} gespeichert', hrep_check_toast:'Tagesbericht {s} · {d} bitte prüfen (Seite „Heute“)', hrep_env_title:'Umschläge zählen · beide Filialen', hrep_env_store:'{n} Umschläge', hrep_env_none:'In beiden Filialen sind alle Umschläge gezählt.',   // v114
@@ -1974,7 +2007,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=16'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=17'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -5310,7 +5343,8 @@ function storeTabsHTML(){
   const cur = curStore(), byGeo = !!storeOk(state.geoStore) && cur === state.geoStore;
   return `<div class="stabs"><div class="seg">${STORES.map(x => `<button data-act="store-pick" data-store="${x}" class="${x === cur ? 'on' : ''}">${esc(x)}</button>`).join('')}</div>${geoCan() ? `<button class="stabs-geo${byGeo ? ' on' : ''}${geoBusy ? ' busy' : ''}" data-act="store-geo" title="${esc(t('geo_btn'))}" aria-label="${esc(t('geo_btn'))}">📍</button>` : ''}</div>`;
 }
-function storeChanged(){ if (state.tab === 'inv' && invS().view === 'qplace'){ invS().qp = null; render(); } else if (state.tab === 'inv' && invS().view === 'home' && invS().home) keepScroll(renderInvHome); else if (state.tab === 'inv' && invS().view === 'stock' && invS().stock) keepScroll(renderInvStock); else render(); }
+function storeChanged(){ if (state.tab === 'inv' && invS().view === 'levels' && invS().levels) keepScroll(renderInvLevels);   // v179：库存表
+  else if (state.tab === 'inv' && invS().view === 'qplace'){ invS().qp = null; render(); } else if (state.tab === 'inv' && invS().view === 'home' && invS().home) keepScroll(renderInvHome); else if (state.tab === 'inv' && invS().view === 'stock' && invS().stock) keepScroll(renderInvStock); else render(); }
 function storePick(x){ if (!storeOk(x)) return; state.storeSel = { s: x, at: Date.now(), auto: autoStore() }; LS.set('curStore', x); storeChanged(); }
 // ask = true：点了 📍（浏览器会问一次能不能用位置）；ask = false：以前允许过才悄悄定位，10 分钟内不重复
 async function geoStoreCheck(ask){
@@ -7175,8 +7209,9 @@ function lvCountHTML(c, st){
   const rows = (c.results || []).filter(r => +r.counted !== 0 || (r.expected != null && +r.expected !== 0));
   const money = !!(invS().levels || {}).money && !c.first, dv = r => r.diff != null && r.cost_cents != null ? Math.round(+r.diff * r.cost_cents) : null;   // v168：差的钱（老板）
   const dsum = money ? rows.reduce((a, r) => a + (dv(r) || 0), 0) : 0;
-  return `<details class="fold"><summary>${esc(t('lv_res_h', { d: dayLabel(c.day), n: c.first ? t('lv_first') : off.length ? t('lv_diff_n', { n: off.length }) : t('lv_diff_ok') }))} <span class="small muted">· ${esc(c.done_name || '')}</span></summary><div class="inner">
-    ${ai}${!c.first && !c.ai && !state.viewAs ? `<button class="link" data-act="lv-ai" data-id="${c.id}"${busy ? ' disabled' : ''}>${esc(t(busy ? 'lv_ai_busy' : 'lv_ai_btn'))}</button>` : ''}
+  const S0 = invS(), isNew = S0.lvNew === c.id, wait = S0.lvWait === c.id && !c.ai && !c.first;   // v179：刚完成的那次打开着；AI 小结还在写就说一声
+  return `<details class="fold" data-lvc="${c.id}"${isNew || (S0.lvOpen || {})[c.id] ? ' open' : ''}><summary>${esc(t('lv_res_h', { d: dayLabel(c.day), n: c.first ? t('lv_first') : off.length ? t('lv_diff_n', { n: off.length }) : t('lv_diff_ok') }))} <span class="small muted">· ${esc(c.done_name || '')}</span></summary><div class="inner">
+    ${ai}${wait ? `<div class="small muted" style="margin:6px 0">${esc(t('lv_ai_wait'))}</div>` : ''}${!c.first && !c.ai && !state.viewAs && !wait ? `<button class="link" data-act="lv-ai" data-id="${c.id}"${busy ? ' disabled' : ''}>${esc(t(busy ? 'lv_ai_busy' : 'lv_ai_btn'))}</button>` : ''}
     <div class="sheet scroll"><table class="num"><tr><th></th><th class="r">${esc(t('lv_res_counted'))}</th>${c.first ? '' : `<th class="r">${esc(t('lv_res_expected'))}</th><th class="r">${esc(t('lv_res_diff'))}</th>`}${money ? `<th class="r" style="white-space:nowrap">${esc(t('lv_res_value'))}</th>` : ''}</tr>
     ${rows.map(r => `<tr><td style="text-align:left">${esc(invName(r))}</td><td class="r">${drkNum(r.counted)}</td>${c.first ? '' : `<td class="r">${r.expected == null ? '—' : drkNum(r.expected)}</td>
       <td class="r" style="${r.diff != null && Math.abs(+r.diff) >= 0.5 ? 'color:var(--copper);font-weight:600' : ''}">${r.diff == null ? '—' : (+r.diff > 0 ? '+' : '') + drkNum(r.diff)}</td>`}${money ? `<td class="r" style="white-space:nowrap">${dv(r) == null ? (r.diff != null && +r.diff !== 0 ? '—' : '·') : !dv(r) ? '·' : (dv(r) > 0 ? '+' : '') + eurSigned(dv(r))}</td>` : ''}</tr>`).join('')}</table></div>
@@ -7184,20 +7219,21 @@ function lvCountHTML(c, st){
 }
 function renderInvLevels(){
   const S = invS(), L = S.levels; if (!L) return;
-  const W = stkCanWrite();
-  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><h2 style="margin-top:4px">${esc(t('lv_h'))}</h2>
-    ${(L.stores || []).map(st => { const counted = (st.counts || []).length > 0;
-      return `<h3>${storeTag(st.store)}</h3><div class="small muted" style="margin-bottom:6px">${esc(t('lv_hint', { d: st.last_sales_day ? dayLabel(st.last_sales_day) : '—' }))}</div>
-      ${W ? `<button class="btn${st.open ? '' : ' ghost'}" data-act="ct-start" data-store="${st.store}" style="margin-bottom:8px">${esc(st.open ? t('lv_resume', { n: st.open.lines, who: st.open.started_name || '' }) : t('lv_start'))}</button>` : ''}
-      ${counted ? `<div class="sheet scroll" style="margin-bottom:8px"><table class="num"><tr><th></th><th class="r">${esc(t('lv_col_base'))}</th><th class="r">${esc(t('lv_col_in'))}</th><th class="r">${esc(t('lv_col_out'))}</th><th class="r">${esc(t('lv_col_sold'))}</th><th class="r">${esc(t('lv_col_now'))}</th>${L.money ? `<th class="r">${esc(t('lv_col_value'))}</th>` : ''}</tr>
+  const W = stkCanWrite(), cur = curStore(), st = (L.stores || []).find(x => x.store === cur);   // v179：门店标签，只显示选中的那家店
+  const head = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><div class="stabs-row"><h2>${esc(t('lv_h'))}</h2>${storeTabsHTML()}</div>`;
+  if (!st){ $('#main').innerHTML = `${head}<div class="empty">${esc(t('lv_no_store', { s: cur }))}</div>`; return; }
+  const counted = (st.counts || []).length > 0;
+  $('#main').innerHTML = `${head}<div class="small muted" style="margin-bottom:6px">${esc(t('lv_hint', { d: st.last_sales_day ? dayLabel(st.last_sales_day) : '—' }))}</div>
+      ${W ? `<button class="btn${st.open ? '' : ' ghost'}" data-act="ct-start" data-store="${st.store}" style="margin-bottom:10px">${esc(st.open ? t('lv_resume', { n: st.open.lines, who: st.open.started_name || '' }) : t('lv_start'))}</button>` : ''}
+      ${counted ? `<div class="small muted" style="margin:4px 0">${esc(t('lv_counts_h'))}</div>${st.counts.map(c => lvCountHTML(c, st)).join('')}` : ''}
+      ${counted ? `<div class="sheet scroll" style="margin:10px 0 8px"><table class="num"><tr><th></th><th class="r">${esc(t('lv_col_base'))}</th><th class="r">${esc(t('lv_col_in'))}</th><th class="r">${esc(t('lv_col_out'))}</th><th class="r">${esc(t('lv_col_sold'))}</th><th class="r">${esc(t('lv_col_now'))}</th>${L.money ? `<th class="r">${esc(t('lv_col_value'))}</th>` : ''}</tr>
         ${(st.items || []).map(x => { const k = x.calc || {}; if (k.base == null) return '';
           const inn = (+k.receipts || 0) + Math.max(0, +k.transfers || 0), out = Math.min(0, +k.transfers || 0) + (+k.losses || 0);
           return `<tr><td style="text-align:left">${esc(invName(x))}</td><td class="r">${drkNum(k.base_qty)}</td><td class="r">${inn ? '+' + drkNum(inn) : '·'}</td><td class="r">${out ? drkNum(out) : '·'}</td><td class="r">${+k.sales ? '−' + drkNum(k.sales) : '·'}</td>
             <td class="r"><strong style="${+k.expected < 0 ? 'color:var(--copper)' : ''}">${drkNum(k.expected)}</strong></td>${L.money ? `<td class="r" style="white-space:nowrap">${x.cost_cents == null ? (+k.expected > 0 ? '—' : '·') : +k.expected > 0 ? eur(Math.round(+k.expected * x.cost_cents)) : '·'}</td>` : ''}</tr>`; }).join('')}
         ${L.money ? (() => { const its = (st.items || []).filter(x => (x.calc || {}).base != null), tot = its.reduce((a, x) => a + (x.cost_cents == null ? 0 : Math.round(Math.max(0, +x.calc.expected) * x.cost_cents)), 0), gap = its.filter(x => x.cost_cents == null && +x.calc.expected > 0).length;
           return `<tr><td style="text-align:left" colspan="5"><strong>${esc(t('lv_total'))}</strong>${gap ? `<br><small style="color:var(--copper)">${esc(t('lv_value_gap', { n: gap }))}</small>` : ''}</td><td></td><td class="r" style="white-space:nowrap"><strong>${eur(tot)}</strong></td></tr>`; })() : ''}</table></div>`
-        : `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('lv_no_count'))}</div>`}
-      ${counted ? `<div class="small muted" style="margin:4px 0">${esc(t('lv_counts_h'))}</div>${st.counts.map(c => lvCountHTML(c, st)).join('')}` : ''}`; }).join('')}`;
+        : `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('lv_no_count'))}</div>`}`;
 }
 async function lvAi(id){
   const S = invS(); S.lvAi = id; renderInvLevels();
@@ -7206,7 +7242,7 @@ async function lvAi(id){
 }
 async function ctStart(store){
   const S = invS();
-  try { const id = await rpc('inv_count_start', { ...tok(), p_store: store }); S.count = null; S.countId = id; invGo('count'); } catch(e){ toast(errText(e), true); }
+  try { const id = await rpc('inv_count_start', { ...tok(), p_store: store }); S.count = null; S.countId = id; S.ctAt = null; S.ctOnly = false; S.ctQ = ''; S.ctQOn = false; invGo('count'); return true; } catch(e){ toast(errText(e), true); return false; }
 }
 async function viewInvCount(){
   const S = invS();
@@ -7220,36 +7256,67 @@ async function viewInvCount(){
       const r = pl === 'x' ? (C.rest || []).find(x => x.id === it) : null;
       if (r){ C.rest = C.rest.filter(x => x.id !== it); (C.others = C.others || []).push({ ...r, qty: null }); } else delete bad[k]; }); }
   S.count = C; renderInvCount();
+  if (S.ctAt !== C.id){ S.ctAt = C.id;   // v179：刚进来（或接着做）：滑到第一个还没填完的位置
+    const old = C.status === 'open' && stkCanWrite() && C.day && C.day < bizToday() && S.ctOldOk !== C.id;   // 黄色提示在：先让人看到
+    if (!old && ctFilled(C).size) ctJumpTo(document.querySelector('.ct-place:not(.ct-done)')); }
 }
 function ctRow(x, placeId){
-  const ed = invS().count.status === 'open' && stkCanWrite(), key = (placeId || 'x') + ':' + x.id;
-  return `<div class="row" style="gap:6px 10px;align-items:center;margin:10px 0;flex-wrap:wrap"><span style="flex:1 1 100%">${esc(invName(x))}${x.pack_qty ? ` <small class="muted">· ${esc(drkPack(x))}</small>` : ''}</span>
-    <input class="input" style="width:80px;flex:0 0 80px" inputmode="decimal" data-ct="${key}" data-place="${placeId || ''}" data-item="${x.id}" value="${key in ctBad() ? esc(ctBad()[key]) : x.qty == null ? '' : esc(drkNum(x.qty))}" ${ed ? '' : 'disabled'}>
-    <span class="small">${esc(t('ct_bottles'))}</span>${ed && x.pack_qty ? `<button class="link" data-act="ct-box" data-key="${key}" data-n="${x.pack_qty}" style="white-space:nowrap;flex:0 0 auto">${esc(t('ct_add_box'))}</button>` : ''}
-    ${ed ? [['¼', 0.25], ['½', 0.5], ['¾', 0.75]].map(([l, f]) => `<button class="link" data-act="ct-frac" data-key="${key}" data-f="${f}" title="${esc(t('ct_frac_t'))}" aria-label="${esc(t('ct_frac_t'))} ${l}" style="flex:0 0 auto;padding:6px 8px;font-size:1.05em">${l}</button>`).join('') : ''}
-    <span class="small muted" id="ct-ok-${esc(key)}">${ctBadMark(key)}</span></div>`;
+  const ed = invS().count.status === 'open' && stkCanWrite(), key = (placeId || 'x') + ':' + x.id, bad = key in ctBad();
+  // v179：一行名字（右边是 ✓ / 没存上），一行数字框和按钮：¼ ½ ¾、−📦 +📦（一箱）；按钮够大，行不会被挤歪
+  return `<div class="ct-row" data-ctrow="${key}" data-item="${x.id}" data-n="${esc((x.name_de || '') + ' ' + (x.name_zh || ''))}" data-filled="${x.qty != null && !bad ? 1 : 0}">
+    <div class="ct-name"><span>${esc(invName(x))}${x.pack_qty ? ` <small class="muted">· ${esc(drkPack(x))}</small>` : ''}</span><span class="ct-ok${bad ? ' bad' : ''}" id="ct-ok-${esc(key)}">${ctBadMark(key)}</span></div>
+    <div class="ct-in"><input class="input" inputmode="decimal" enterkeyhint="next" placeholder="${esc(t('ct_bottles'))}" aria-label="${esc(invName(x))}" data-ct="${key}" data-place="${placeId || ''}" data-item="${x.id}" value="${bad ? esc(ctBad()[key]) : x.qty == null ? '' : esc(drkNum(x.qty))}" ${ed ? '' : 'disabled'}>
+      ${ed ? [['¼', 0.25], ['½', 0.5], ['¾', 0.75]].map(([l, f]) => `<button class="ct-f" data-act="ct-frac" data-key="${key}" data-f="${f}" title="${esc(t('ct_frac_t'))}" aria-label="${esc(t('ct_frac_t'))} ${l}">${l}</button>`).join('') : ''}
+      ${ed && x.pack_qty ? `<button class="ct-f box" data-act="ct-box" data-key="${key}" data-n="-${x.pack_qty}" title="${esc(t('ct_minus_box'))}" aria-label="${esc(t('ct_minus_box'))}">−📦</button><button class="ct-f box" data-act="ct-box" data-key="${key}" data-n="${x.pack_qty}" title="${esc(t('ct_add_box'))}" aria-label="${esc(t('ct_add_box'))}">+📦</button>` : ''}</div></div>`;
 }
 // v177：没存上的数记在这里（key → 输入框里的字），行上显示红色的「没存上」，重画页面也不丢
 function ctBad(){ const S = invS(), m = S.ctBad = S.ctBad || {}; return m[S.countId] = m[S.countId] || {}; }   // 每次盘点各记各的（开另一家店的盘点不会冲掉）
 function ctBadMark(key){ return key in ctBad() ? `<button class="link danger" data-act="ct-retry" data-key="${esc(key)}" style="white-space:normal;text-align:left">${esc(t('ct_fail'))}</button>` : ''; }
+// v179：哪些饮料已经有数（任何一个位置填了就算）；一共几种
+function ctFilled(C){ const f = new Set(); (C.places || []).forEach(p => (p.items || []).forEach(x => { if (x.qty != null) f.add(x.id); })); (C.others || []).forEach(x => { if (x.qty != null) f.add(x.id); }); return f; }
+function ctAllIds(C){ const a = new Set(); (C.places || []).forEach(p => (p.items || []).forEach(x => a.add(x.id))); (C.others || []).forEach(x => a.add(x.id)); return a; }
+function ctArea(p){ return String(p.code || '').split('-')[1] || ''; }
+// 「别的地方」只列：没有固定位置的、这里已经填了数的、手动加进来的（有位置的饮料上面已经列过，不再列第二遍）
+function ctOthersShown(C){ const S = invS(), show = (S.ctShow = S.ctShow || {})[C.id] || {}; return (C.others || []).filter(x => !x.placed || x.qty != null || show[x.id] || ('x:' + x.id) in ctBad()); }
+// 进度、每个位置的 ✓、「只看没填的」和搜索：直接改页面上已有的东西，不整页重画（重画会把正在打的数弄丢）
+function ctRefresh(){
+  const S = invS(), C = S.count; if (!C || S.view !== 'count') return;
+  const f = ctFilled(C), a = ctAllIds(C), pg = document.getElementById('ct-prog');
+  if (pg) pg.textContent = t('ct_prog', { n: f.size, m: a.size });
+  const only = !!S.ctOnly, q = String(S.ctQ || '').trim().toLowerCase();
+  document.querySelectorAll('.ct-row').forEach(r => { const hide = (only && r.dataset.filled === '1' && !r.dataset.keep) || (q && !String(r.dataset.n || '').toLowerCase().includes(q)); r.classList.toggle('ct-hide', !!hide); });
+  document.querySelectorAll('.ct-place').forEach(b => { const rows = [...b.querySelectorAll('.ct-row')];
+    b.classList.toggle('ct-done', rows.length > 0 && rows.every(r => r.dataset.filled === '1'));
+    b.classList.toggle('ct-hide', !b.querySelector('[data-ctadd]') && (only || !!q) && rows.length > 0 && rows.every(r => r.classList.contains('ct-hide'))); });
+}
+function ctJumpTo(el){ if (!el) return; const hd = document.querySelector('header'), bar = document.querySelector('.ct-bar'); el.scrollIntoView({ block: 'start' }); window.scrollBy(0, -((hd ? hd.offsetHeight : 0) + (bar ? bar.offsetHeight : 0) + 8)); }
 function renderInvCount(){
   const S = invS(), C = S.count; if (!C) return;
-  const ed = C.status === 'open' && stkCanWrite();
-  $('#main').innerHTML = `<button class="link" data-act="lv-open" style="margin:2px 0 6px">← ${esc(t('lv_h'))}</button><h2 style="margin-top:4px">${esc(t('ct_h', { s: C.store }))}</h2>
-    <div class="small muted" style="margin-bottom:10px">${esc(t('ct_hint'))}</div>
-    ${(C.places || []).length ? (C.places || []).map(p => `<div class="sheet" style="margin-bottom:10px"><div class="inv-row" style="align-items:center">${invImg(p.photo_t, 'sm')}<div class="inv-txt">
-        <strong>${esc(invName(p, 'area'))} · ${esc(invName(p, 'unit'))}</strong><div class="small muted">${esc(p.code)}${p.pos ? ' · ' + esc(invPosText(p.pos)) : ''}</div></div></div>
+  const ed = C.status === 'open' && stkCanWrite(), hd = document.querySelector('header'), top = hd ? hd.offsetHeight : 0;
+  const areas = []; (C.places || []).forEach(p => { const k = ctArea(p); if (k && !areas.some(a => a.k === k)) areas.push({ k, name: invName(p, 'area') }); });
+  const others = ctOthersShown(C), shownIds = new Set(others.map(x => x.id)), more = (C.others || []).filter(x => !shownIds.has(x.id));
+  const old = ed && C.day && C.day < bizToday() && S.ctOldOk !== C.id;   // 以前哪天开始、一直没完成的盘点
+  $('#main').innerHTML = `<button class="link" data-act="lv-open" style="margin:2px 0 6px">← ${esc(t('lv_h'))}</button><h2 style="margin:4px 0 2px">${esc(t('ct_h', { s: C.store }))}</h2>
+    <div class="small muted" style="margin-bottom:8px">${esc(t('ct_info', { d: C.day ? dayLabel(C.day) : '', who: C.started_name || '' }))}</div>
+    ${old ? `<div class="infobox" style="background:#FFF1C9;color:#6B5200">${esc(t('ct_old', { d: dayLabel(C.day) }))}<div class="rc-quick"><button data-act="ct-old-keep">${esc(t('ct_old_keep'))}</button><button data-act="ct-restart">${esc(t('ct_old_restart'))}</button></div></div>` : ''}
+    <div class="small muted" style="margin-bottom:8px">${esc(t('ct_hint'))} ${esc(t('ct_hint2'))}</div>
+    <div class="ct-bar" style="top:${top}px"><div class="ct-top"><div class="ct-prog" id="ct-prog"></div>
+        <button data-act="ct-search" class="${S.ctQOn ? 'on' : ''}" aria-label="${esc(t('ct_q'))}">🔍</button><button data-act="ct-only" class="${S.ctOnly ? 'on' : ''}">${esc(t('ct_only'))}</button>${ed ? `<button class="go" data-act="ct-finish">${esc(t('ct_finish_short'))}</button>` : ''}</div>
+      ${S.ctQOn ? `<input type="search" class="input" id="ct-q" placeholder="${esc(t('ct_q'))}" value="${esc(S.ctQ || '')}" autocomplete="off" style="margin-top:6px">` : ''}
+      <div class="ct-jump">${areas.map(a => `<button data-act="ct-jump" data-a="${esc(a.k)}">${esc(a.name)}</button>`).join('')}<button data-act="ct-jump" data-a="x">${esc(t('ct_x'))}</button></div></div>
+    ${(C.places || []).length ? (C.places || []).map(p => `<div class="sheet ct-place" data-cta="${esc(ctArea(p))}" style="margin-bottom:10px"><div class="inv-row" style="align-items:center">${invImg(p.photo_t, 'sm')}<div class="inv-txt">
+        <strong>${esc(invName(p, 'area'))} · ${esc(invName(p, 'unit'))}</strong> <span class="ct-tick">✓</span><div class="small muted">${esc(p.code)}${p.pos ? ' · ' + esc(invPosText(p.pos)) : ''}</div></div></div>
         ${(p.items || []).map(x => ctRow(x, p.id)).join('')}</div>`).join('') : `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('ct_place_none'))}</div>`}
-    <h3>${esc(t('ct_others'))}</h3><div class="small muted">${esc(t('ct_others_hint'))}</div><div class="sheet" style="margin-bottom:10px">${(C.others || []).map(x => ctRow(x, null)).join('')}
-      ${ed && (C.rest || []).length ? `<select class="input" data-ctadd="1" aria-label="${esc(t('ct_add_other'))}" style="margin-top:8px"><option value="">${esc(t('ct_add_other'))}</option>${C.rest.map(x => `<option value="${x.id}">${esc(invName(x))}</option>`).join('')}</select>` : ''}</div>
+    <div data-cta="x"><h3>${esc(t('ct_others'))}</h3><div class="small muted">${esc(t('ct_others_hint'))}</div><div class="sheet ct-place" style="margin-bottom:10px">${others.map(x => ctRow(x, null)).join('')}
+      ${ed && (more.length || (C.rest || []).length) ? `<select class="input" data-ctadd="1" aria-label="${esc(t('ct_add_more'))}" style="margin-top:8px"><option value="">${esc(t('ct_add_more'))}</option>${more.length ? `<optgroup label="${esc(t('ct_add_g1'))}">${more.map(x => `<option value="${x.id}">${esc(invName(x))}</option>`).join('')}</optgroup>` : ''}${(C.rest || []).length ? `<optgroup label="${esc(t('ct_add_g2'))}">${C.rest.map(x => `<option value="${x.id}">${esc(invName(x))}</option>`).join('')}</optgroup>` : ''}</select>` : ''}</div></div>
     ${ed ? `<button class="btn" data-act="ct-finish">${esc(t('ct_finish'))}</button><button class="link danger" data-act="ct-cancel" style="margin-top:12px">${esc(t('ct_cancel'))}</button>` : ''}`;
-  invLoadPhotos();
+  invLoadPhotos(); ctRefresh();
 }
 async function ctSave(inp){
   const S = invS(), C = S.count; if (!C) return;
   const v = inp.value.trim(), q = v === '' ? null : stkNum(v);
   if (v !== '' && !(q != null && q >= 0)) { toast(t('ct_bad_qty'), true); return; }   // v177：打的不是数字（stkNum 给 null）以前会被当成「清空」存掉
-  const key = inp.dataset.ct, bad = ctBad(), mark = h => { const ok = document.getElementById('ct-ok-' + key); if (ok) ok.innerHTML = h; };
+  const key = inp.dataset.ct, bad = ctBad(), mark = h => { const ok = document.getElementById('ct-ok-' + key); if (ok){ ok.innerHTML = h; ok.classList.toggle('bad', h.includes('ct-retry')); } };
   const seq = S.ctSeq = S.ctSeq || {}, n = seq[key] = (seq[key] || 0) + 1;   // v177：同一个数连着改几次，只认最后一次的结果
   mark('…');
   const run = async () => {
@@ -7257,8 +7324,9 @@ async function ctSave(inp){
       const C2 = invS().count && invS().count.id === C.id ? invS().count : C;   // 保存期间页面重读过：数记到现在的那份数据里
       const tgt = inp.dataset.place ? ((C2.places || []).find(p => p.id === inp.dataset.place) || {}).items || [] : C2.others || [];
       const x = tgt.find(i => i.id === inp.dataset.item); if (x) x.qty = q;
-      if (seq[key] === n){ delete bad[key]; mark('✓ ' + esc(t('ct_saved'))); } }
+      if (seq[key] === n){ delete bad[key]; mark(`<span title="${esc(t('ct_saved'))}">✓</span>`); } }
     catch(e){ if (seq[key] === n){ bad[key] = v; mark(ctBadMark(key)); toast(errText(e), true); } }
+    if (seq[key] === n){ const row = document.querySelector('[data-ctrow="' + key + '"]'); if (row){ row.dataset.filled = v !== '' && !(key in bad) ? '1' : '0'; row.dataset.keep = '1'; } ctRefresh(); }   // v179：进度、✓、「只看没填的」跟着变
     const el = document.querySelector('[data-ct="' + key + '"]');   // 保存期间页面重画过：把刚才填的数放回现在页面上的那一格
     if (seq[key] === n && el && el !== inp && el !== document.activeElement) el.value = v;
   };
@@ -7270,21 +7338,45 @@ async function ctFinish(btn){
   const act0 = document.activeElement; if (act0 && act0.dataset && act0.dataset.ct) act0.blur();   // v177：手还停在最后一格：先让它存
   btn.disabled = true; await new Promise(r => setTimeout(r, 0)); await Promise.all(Object.values(S.ctChain || {})); btn.disabled = false;   // 等正在存的数都有结果
   if (invS().count !== C) return;
-  const counted = new Set([...(C.places || []).flatMap(p => (p.items || []).filter(x => x.qty != null).map(x => x.id)), ...(C.others || []).filter(x => x.qty != null).map(x => x.id)]);
-  const missing = (C.others || []).filter(x => !counted.has(x.id)).length;
   const nBad = Object.keys(ctBad()).length;   // v177：有数没存上，先不让完成
   if (nBad) return toast(t('ct_unsaved', { n: nBad }), true);
-  if (!confirm(missing ? t('ct_finish_q', { n: missing }) : t('ct_finish_q0'))) return;
-  btn.disabled = true;
-  try { const r = await rpc('inv_count_finish', { ...tok(), p_id: C.id }); toast(t('ct_done', { n: r.items }));
-    S.count = null; S.levels = null; invGo('levels');
-    callTasks({ action: 'inv_ai_count', count_id: C.id }).then(() => { if (state.tab === 'inv' && invS().view === 'levels') viewInvLevels(); }, () => {}); }
-  catch(e){ btn.disabled = false; toast(errText(e), true); }
+  // v179：先读一遍服务器上的数（同事可能在另一部手机上数了地下室），再列出一个数都没填的饮料
+  btn.disabled = true; let C2; try { C2 = await rpc('inv_count', { ...tok(), p_id: C.id }); } catch(e){ btn.disabled = false; toast(errText(e), true); return; }
+  btn.disabled = false; if (invS().count !== C || S.view !== 'count') return;
+  const f = ctFilled(C2), miss = (C2.others || []).filter(x => !f.has(x.id));
+  if (!Object.keys(ctBad()).length){ S.count = C2; keepScroll(renderInvCount); }   // 页面换成刚读到的数（同事在另一部手机上填的也显示出来）
+  if (!miss.length){ if (confirm(t('ct_finish_q0'))) ctFinishGo(); return; }
+  const dlg = $('#photoDlg');
+  dlg.innerHTML = `<h2 style="margin-top:0">${esc(t('ct_miss_h', { n: miss.length }))}</h2><div class="small muted">${esc(t('ct_miss_hint'))}</div>
+    <div class="ct-miss">${miss.map(x => `<button data-act="ct-miss" data-id="${x.id}">${esc(invName(x))}</button>`).join('')}</div>
+    <button class="btn ghost" data-act="ct-miss-back" style="margin-bottom:8px">${esc(t('ct_miss_back'))}</button><button class="btn" data-act="ct-finish-go">${esc(t('ct_miss_go'))}</button>`;
+  if (!dlg.open) dlg.showModal();
 }
-async function ctCancel(){
+async function ctFinishGo(){
+  const S = invS(), C = S.count; if (!C || S.ctFin) return;
+  S.ctFin = true;
+  try { await rpc('inv_count_finish', { ...tok(), p_id: C.id }); const dlg = $('#photoDlg'); if (dlg.open) dlg.close(); toast(t('ct_done2'));
+    if (storeOk(C.store) && C.store !== curStore()){ state.storeSel = { s: C.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', C.store); }   // 库存表按门店标签显示：切到刚盘的这家店
+    S.count = null; S.levels = null; S.lvNew = C.id; S.lvWait = C.id; invGo('levels');
+    callTasks({ action: 'inv_ai_count', count_id: C.id }).then(() => {}, () => {}).then(() => { if (S.lvWait === C.id) S.lvWait = null; if (state.tab === 'inv' && invS().view === 'levels') viewInvLevels(); }); }
+  catch(e){ toast(errText(e), true); }
+  S.ctFin = false;
+}
+// 从「还有 N 种没填」的名单点一种饮料：关掉名单，跳到它的那一行
+function ctMissJump(id){
+  const S = invS(), C = S.count, dlg = $('#photoDlg'); if (dlg.open) dlg.close(); if (!C) return;
+  S.ctOnly = false; S.ctQ = ''; S.ctQOn = false; (S.ctShow = S.ctShow || {})[C.id] = { ...((S.ctShow || {})[C.id] || {}), [id]: true };
+  renderInvCount();
+  const row = document.querySelector('.ct-row[data-item="' + id + '"]'); if (!row) return;
+  ctJumpTo(row); row.classList.add('rc-flash'); setTimeout(() => row.classList.remove('rc-flash'), 1900);
+  const inp = row.querySelector('input'); if (inp && !inp.disabled) inp.focus({ preventScroll: true });
+}
+async function ctCancel(restart){
   const S = invS(), C = S.count; if (!C) return;
-  const note = prompt(t('ct_cancel_q')); if (note === null) return; if (!note.trim()) return toast(t('err_INV_CANCEL_NOTE'), true);
-  try { await rpc('inv_count_cancel', { ...tok(), p_id: C.id, p_note: note }); S.count = null; S.levels = null; toast(t('ct_cancelled')); invGo('levels'); } catch(e){ toast(errText(e), true); }
+  let note;
+  if (restart){ if (!confirm(t('ct_restart_q', { d: dayLabel(C.day) }))) return; note = t('ct_restart_note'); }   // v179：旧的没完成的盘点：一下重新开始，原因自动写上
+  else { note = prompt(t('ct_cancel_q')); if (note === null) return; if (!note.trim()) return toast(t('err_INV_CANCEL_NOTE'), true); }
+  try { await rpc('inv_count_cancel', { ...tok(), p_id: C.id, p_note: note }); S.count = null; S.levels = null; toast(t('ct_cancelled')); if (!restart || !(await ctStart(C.store))) invGo('levels'); } catch(e){ toast(errText(e), true); }
 }
 
 // 一个收银商品配到哪样饮料：饮料清单里的 / 物品里找 / 新建
@@ -13051,9 +13143,17 @@ document.addEventListener('click', async ev => {
     case 'ct-start': ctStart(el.dataset.store); break;
     case 'ct-frac': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp){ inp.value = drkNum(Math.floor(stkNum(inp.value) || 0) + (+el.dataset.f)); ctSave(inp); } break; }   // v168：开了的那一瓶 ¼ ½ ¾（整瓶数不变，换掉零头）
     case 'ct-retry': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp) ctSave(inp); break; }   // v177：没存上的数，点了再存一次
-    case 'ct-box': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp){ inp.value = drkNum((stkNum(inp.value) || 0) + (+el.dataset.n)); ctSave(inp); } break; }
+    case 'ct-box': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp && !(+el.dataset.n < 0 && inp.value.trim() === '')){ inp.value = drkNum(Math.max(0, (stkNum(inp.value) || 0) + (+el.dataset.n))); ctSave(inp); } break; }   // v179：也可以 −1 箱，不会小于 0；空着的格子点 −📦 不动
     case 'ct-finish': ctFinish(el); break;
-    case 'ct-cancel': ctCancel(); break;
+    case 'ct-cancel': ctCancel(false); break;
+    case 'ct-restart': ctCancel(true); break;
+    case 'ct-old-keep': { const S = invS(), C = S.count; if (!C) break; S.ctOldOk = C.id; renderInvCount(); if (ctFilled(C).size) ctJumpTo(document.querySelector('.ct-place:not(.ct-done)')); break; }
+    case 'ct-only': { const S = invS(); S.ctOnly = !S.ctOnly; el.classList.toggle('on', S.ctOnly); document.querySelectorAll('.ct-row[data-keep]').forEach(r => { delete r.dataset.keep; }); ctRefresh(); break; }
+    case 'ct-search': { const S = invS(); S.ctQOn = !S.ctQOn; if (!S.ctQOn) S.ctQ = ''; keepScroll(renderInvCount); const q = document.getElementById('ct-q'); if (q) q.focus(); break; }
+    case 'ct-jump': ctJumpTo(el.dataset.a === 'x' ? document.querySelector('[data-cta="x"]') : document.querySelector('.ct-place[data-cta="' + el.dataset.a + '"]:not(.ct-hide)')); break;
+    case 'ct-miss': ctMissJump(el.dataset.id); break;
+    case 'ct-miss-back': { const dlg = $('#photoDlg'); if (dlg.open) dlg.close(); break; }
+    case 'ct-finish-go': ctFinishGo(); break;
     case 'drk-open': invGo('drink', el.dataset.id); break;
     case 'drk-sugg-new': { const g = ((invS().drinks || {}).suggest || [])[+el.dataset.i]; if (g) drkSugg(g, 'create'); break; }
     case 'drk-sugg-link': { const g = ((invS().drinks || {}).suggest || [])[+el.dataset.i]; if (g) drkSugg(g, 'link', el.dataset.id); break; }
@@ -13278,6 +13378,8 @@ document.addEventListener('click', async ev => {
   }
 });
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
+  if (ev.key === 'Enter' && ev.target.dataset && ev.target.dataset.ct){ ev.preventDefault();   // v179：盘点时回车 = 到下一格
+    const all = [...document.querySelectorAll('[data-ct]')].filter(e => e.offsetParent && !e.disabled), i = all.indexOf(ev.target); ev.target.blur(); if (all[i + 1]) all[i + 1].focus(); return; }
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.ordq){ ordSaveQty(ev.target); return; }   // v169：订货单的数量、目标库存、供应商商品配饮料
@@ -13286,7 +13388,11 @@ document.addEventListener('change', async ev => {
     try { await rpc('inv_supplier_item_link', { ...tok(), p_id: id, p_item: item }); } catch(e){ toast(errText(e), true); return; }
     toast(t('ord_linked')); invS().ord = null; await keepScroll(() => viewInvOrders()); return; }
   if (ev.target.dataset && ev.target.dataset.ctadd){ const C = invS().count, id = ev.target.value, x = C && (C.rest || []).find(r => r.id === id);   // v168：盘点时加一件这家店平时没有的饮料
-    if (x){ C.rest = C.rest.filter(r => r.id !== id); (C.others = C.others || []).push({ ...x, qty: null }); await keepScroll(() => renderInvCount()); const inp = document.querySelector(`[data-ct="x:${id}"]`); if (inp) inp.focus(); } return; }
+    if (x){ C.rest = C.rest.filter(r => r.id !== id); (C.others = C.others || []).push({ ...x, qty: null }); await keepScroll(() => renderInvCount()); const inp = document.querySelector(`[data-ct="x:${id}"]`); if (inp) inp.focus(); return; }
+    if (C && id && (C.others || []).some(r => r.id === id)){   // v179：有固定位置的饮料也放在别处了：在「别的地方」加一行
+      const S = invS(); (S.ctShow = S.ctShow || {})[C.id] = { ...((S.ctShow || {})[C.id] || {}), [id]: true };
+      await keepScroll(() => renderInvCount()); const inp = document.querySelector(`[data-ct="x:${id}"]`); if (inp) inp.focus(); }
+    return; }
   if (ev.target.dataset && ev.target.dataset.rcpchg){ rcpKeep(); keepScroll(() => renderInvRecipe()); return; }   // v166：配方里换了饮料，单位跟着变
   if (ev.target.classList && ev.target.classList.contains('lib-lang') && state.libForm && state.libForm.replaces){ libKeep(); keepScroll(render); return; }   // v134：语言改了，换掉哪份跟着变
   if (ev.target.id === 'tf-rd' || ev.target.id === 'tf-rm'){ tfSync(); tfRedraw(); return; }   // v120：周期从哪天开始，说明跟着变
@@ -13427,10 +13533,13 @@ document.addEventListener('change', async ev => {
   }
 });
 // v133：「发放 / 签收还没完成」里打开的周，重画后照样打开（例如选了谁发的钱）
-document.addEventListener('toggle', ev => { const w = ev.target.dataset && ev.target.dataset.rcw; if (w) (state.rcOpen = state.rcOpen || {})[w] = ev.target.open; }, true);
+document.addEventListener('toggle', ev => { const w = ev.target.dataset && ev.target.dataset.rcw; if (w) (state.rcOpen = state.rcOpen || {})[w] = ev.target.open;
+  const c = ev.target.dataset && ev.target.dataset.lvc; if (c){ const S = invS(); (S.lvOpen = S.lvOpen || {})[c] = ev.target.open; if (!ev.target.open && S.lvNew === c) S.lvNew = null; }   // v179：盘点结果打开着的，页面刷新后还打开着
+}, true);
 document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'inv-q'){ invS().q = ev.target.value; invQueue(); }   // v91
+  if (id === 'ct-q'){ invS().ctQ = ev.target.value; ctRefresh(); return; }   // v179：盘点页找饮料
   if (id === 'qp-q'){ qpS().q = ev.target.value; const b = document.getElementById('qp-lists'); if (b) b.innerHTML = qpListsHTML(); return; }   // v175
   if (id === 'inv-pq'){ const K = invS().pickItem; if (K){ K.q = ev.target.value; clearTimeout(invPickTimer); invPickTimer = setTimeout(invPickSearch, 250); } }
   if (id === 'drk-l-q'){ const L = invS().dl; if (L){ L.q = ev.target.value; clearTimeout(drkLinkTimer); drkLinkTimer = setTimeout(drkLinkSearch, 250); } }   // v137
