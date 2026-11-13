@@ -472,6 +472,25 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .ord-tick.on .ord-t{color:var(--muted);text-decoration:line-through}
 .ord-tick .ord-t{flex:1;min-width:0}
 .ord-tick small{display:inline-block;width:100%;color:var(--muted);font-size:13px}
+.dp-btn{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:48px;padding:8px 12px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-size:16px;line-height:1.25;text-align:left;color:var(--ink);margin-top:4px}
+.dp-btn.none{color:var(--celadon-deep);font-weight:600}
+.dp-btn small{display:block;color:var(--muted);font-size:13px}
+.dp-btn > span:first-child{flex:1;min-width:0}
+.dp-list{max-height:46vh;overflow:auto;border:1px solid var(--line);border-radius:var(--r-s);margin:8px 0 10px}
+.dp-list .qp-sec, .ls-list .qp-sec{margin:0;padding:6px 14px;font-size:13px;background:var(--paper);border-bottom:1px solid var(--line)}
+.qp-row.on{background:var(--celadon-soft)}
+.undo-b{flex:none;height:40px;padding:0 12px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;color:var(--neg);font-weight:600;font-size:14px;white-space:nowrap}
+.undo-b:disabled{opacity:.5}
+.ls-bar .ls-cur{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:16px;line-height:1.25}
+.ls-bar .ls-cur strong{flex:1;min-width:0}
+.ls-bar .ct-in{margin:0 0 8px;flex-wrap:nowrap}
+.ct-in .seg{flex:none}
+.ct-in .seg.sm button{padding:10px 12px}
+.ls-bar .ct-in .seg{flex:1;min-width:0}
+.hist-day{display:flex;align-items:center;gap:8px;width:100%;border:0;border-bottom:1px solid var(--line);background:var(--card);padding:13px 14px;font-size:15px;line-height:1.3;text-align:left;color:var(--ink)}
+.hist-day span:first-child{flex:1;min-width:0}
+.chips.sm{gap:6px}
+.chips.sm .chip{padding:6px 12px;font-size:14px}
 .ct-bar{position:sticky;z-index:5;background:var(--paper);padding:8px 0 6px;margin-bottom:8px;border-bottom:1px solid var(--line)}
 .ct-top{display:flex;gap:6px;align-items:center}
 .ct-prog{flex:1;min-width:0;font-weight:700;font-size:15px;line-height:1.2}
@@ -568,7 +587,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v180';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v181';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -888,7 +907,7 @@ zh: {
   task_decide:'谁做{r}？点这里选', task_one_all:'一人三岗（含{r}任务）', task_svc_all:'服务员一起负责{r}任务', task_svc_one:'服务员负责{r}任务', pl_pub_decide:'还有 {k} 个班排了 Runner 但没定谁做吧台：点那个班上红色的「谁做吧台？」选一下。',
   // v71：收店任务
   rpe_tag:'✉ 邮件自动导入', rpe_by:'{t}', rpe_file:'原件', rpe_dl:'下载 PDF', rpe_dlg_title:'全天报告原件 · {s} · {d}', rpe_dlg_hint:'Lightspeed 每天发来的 Geschäftsbericht，{t} 自动导入。下面是 PDF 里的文字；要原样的 PDF 点「下载 PDF」。', rpe_replace_q:'{s} {d} 已经有从邮件自动导入的全天报告（应交现金 {a} · 刷卡小费 {b}）。\n\n要用{w}替换它吗？邮件那份会标「被取代」，记录保留。', rpe_w_photo:'这次拍的照片', rpe_w_manual:'手动输入的数字', rpe_job:'这天已经有邮件导入的报告（应交现金 {a}）', rpe_job_replace:'用照片替换', rpe_h_bad:'✉ 邮件里的报告读不出来：{p}。请拍照录入。', rpe_h_none:'✉ 邮件里还没有这天的报告（最后检查 {t}）。', rpe_h_empty:'✉ 邮件里的报告这天没有收款（0 张单）：请看一眼收银机是不是关错了班，或拍照录入。', rpe_h_err:'✉ 读取邮件出错：{e}（{t}）。这天的报告没导入，请拍照录入，并告诉 Claude。', rpe_h_unknown:'✉ 邮件里有 {n} 个 PDF 认不出是哪家店、哪天（{p}）。', rpe_e_MAIL_LOGIN:'登录不了专用邮箱（应用密码可能改了或被删了）', rpe_e_MAIL_FETCH:'取邮件失败', rpe_e_MAIL_SECRET:'自动任务里没设邮箱', rpe_e_DISPATCH_NO_TOKEN:'数据库里还没有叫 GitHub 用的钥匙（Supabase → Vault 的 github_dispatch_token），自动取邮件停着', rpe_e_DISPATCH_FAILED:'GitHub 的钥匙不能用了（可能过期或被删了），自动取邮件停着', rpe_p_STORE:'认不出门店', rpe_p_DAY:'读不出日子', rpe_p_NOT_WHOLE_DAY:'不是全天的报告', rpe_p_PAYMENTS_MISSING:'「Einnahmen nach Zahlungsart」那一段读不出来', rpe_p_PAYMENTS_LINE:'付款方式那一段有读不懂的行', rpe_p_TOTALS_MISSING:'合计（Einnahmen mit / ohne Trinkgeld）读不出来', rpe_p_METHOD:'「{n}」的金额、小费对不上', rpe_p_SUM:'各付款方式加起来和合计对不上', rpe_p_NUMBERS:'数字不完整', rpe_p_DAY_FUTURE:'是今天的（还在营业）', rpe_p_TOO_EARLY:'邮件在营业结束前就发出了，可能不是全天的', rpe_p_NO_ADMIN:'系统里找不到老板账号',   // v135
-  drk_btn:'📈 销量和饮料清单', drk_btn_todo:'{n} 件要处理', drk_title:'📈 销量和饮料清单', drk_step:'每天早上自动读 Lightspeed 发来的 Produktbericht，按配方算每样饮料卖了几瓶（按杯卖的按 ml 折成瓶；送的、0 元套餐里的也算）。收货、调拨、盘点在「🍹 饮料」。', drk_back:'← 销量和饮料清单',
+  drk_btn:'📈 销量和饮料清单', drk_btn_todo:'{n} 件要处理', drk_title:'📈 销量和清单', drk_step:'每天早上自动读 Lightspeed 发来的 Produktbericht，按配方算每样饮料卖了几瓶（按杯卖的按 ml 折成瓶；送的、0 元套餐里的也算）。收货、调拨、盘点在「🍹 饮料」。', drk_back:'← 销量和饮料清单',
   drk_imp_last:'最新：{d}', drk_imp_none:'还没收到 Lightspeed 的销售报告（Produktbericht）', drk_imp_bad:'{d} 的报告读不出来：{p}（{f}）。请告诉 Claude。', drk_imp_err:'读取邮件出错：{e}（{t}）。请告诉 Claude。', drk_imp_unknown:'{n} 个 CSV 认不出是哪家店、哪天（{p}）',
   drk_menu_btn:'🍷 酒水单和成本', drk_m_title:'🍷 酒水单和成本', drk_m_hint:'每个收银商品卖 1 个扣什么、成本多少。毛利 =（卖价 − 成本）÷ 卖价，和 Lightspeed 的算法一样：卖价含税，进价不含税。点一行改配方。', drk_m_col_a:'商品', drk_m_col_p:'卖价', drk_m_col_c:'成本', drk_m_col_m:'毛利', drk_m_on:'酒水单上的（{n}）', drk_m_off:'不在酒水单上的（{n}）', drk_m_offtag:'不在酒水单上', drk_m_none:'这家店还没有配好的商品。请先在饮料库存页确认建议，或者给「还没配」的商品配配方。', drk_m_nocost:'缺进价', drk_m_nofactor:'有原料还没填每瓶多少，卖了不扣库存', drk_m_till:'收银实际卖 {p}', drk_m_sold:'30 天卖 {n}', drk_m_shared:'两家店共用', drk_m_old:'整瓶卖的、套餐里的（按「卖 1 个 = 几瓶」配的，{n} 个）', drk_rc_h:'配方：{a}', drk_rc_store:'给哪家店', drk_rc_both:'两家店都用', drk_rc_store_hint:'一家店有自己的配方就用自己的，没有才用两家店共用的。', drk_rc_price:'酒水单上的卖价（€，可以不填）', drk_rc_onmenu:'在酒水单上', drk_rc_lines:'卖 1 个，扣这些', drk_rc_item:'饮料', drk_rc_pick:'— 选饮料 —', drk_rc_qty:'数量', drk_rc_u_unit:'个（整瓶）', drk_rc_add:'＋ 加一种原料', drk_rc_del:'去掉这行', drk_rc_save:'保存配方', drk_rc_end:'去掉这个配方', drk_rc_end_q:'去掉「{a}」的配方吗？以后卖它不再按这个配方扣库存。', drk_rc_saved:'配方保存了：{a}', drk_rc_ended:'配方去掉了：{a}', drk_rc_hint:'按 ml 扣的，这件饮料要先填「每瓶多少 ml」。一杯 150 ml 的酒一般填 170 ml（含倒酒的损耗）。改配方只影响上一次盘点以后的库存数，已经盘完的结果不变。', drk_rc_guess:'下面是按名字猜的，请检查再保存。', drk_rc_need:'请至少选一种饮料并填大于 0 的数量，再保存。', drk_rc_nocontent:'这件饮料还没填每瓶多少，只能按「个」扣。要按 ml 扣，先去这件饮料的页面填。', drk_rc_btn:'配配方（按杯、几种原料）', drk_rc_edit:'改配方', drk_i_content:'每瓶多少', drk_i_cost:'进价（每瓶，不含税，€）', drk_i_supplier:'供应商', drk_i_none:'没填', drk_i_edit:'改每瓶多少、进价、供应商', drk_i_saved:'保存了', drk_i_cost_new:'最近一张送货单上的进价是 {n}，和现在的 {o} 差很多，没有自动改。', drk_i_cost_use:'用 {n}', drk_d_use:'卖 1 个扣 {q}', drk_sg_uses:'配方（{s}）', drk_sg_auto:'「全部按建议」会用已有的：{n}', drk_sg_auto_new:'「全部按建议」会新建', drk_sugg_all_done:'处理好了：新建 {c} 件，用已有的 {l} 件',   // v166
   drk_p_HEADER:'表头不认识', drk_p_STORE:'认不出门店', drk_p_DAY:'读不出日子', drk_p_GROUPS:'分不出 Warengruppe', drk_p_SUM:'各行加起来和门店合计对不上', drk_p_LINES:'有的行没有名字或数量', drk_p_NUMBERS:'数字不完整', drk_p_DAY_FUTURE:'是今天的（还在营业）', drk_p_TOO_EARLY:'邮件在营业结束前就发出了', drk_p_PARSE_ERROR:'读法出错',
@@ -904,6 +923,11 @@ zh: {
   // v142（数据库 v101 / 文件服务 tasks v24，老板 2026-11-05）：饮料收货（拍送货单 → AI 读 → 前场主管 / 老板确认入库）、两家店之间调拨
   // v180：订货更顺（C 包）
   ord_no_store:'{s} 的订货只有这家店的库管、前场主管和老板能看。请点上面换一家店。', ord_resume_d:'继续 {d} 没确认的订货单（{n} 行）', aih_short_n:'{n} 条会断货', ord_o_made:'{d} · {n} 出的建议',
+  dp_h:'选饮料', dp_like:'名字像送货单上这一行的', dp_recent:'这台手机最近选过', dp_all:'全部饮料 {n} 种', dp_close:'不选了', dp_gone:'这一行刚才变了（照片重新读过）。请再点一次选饮料。',
+  ls_done_h:'刚记的', ls_go:'记下 · {r} · {q}', ls_now:'已记下：{x}', ls_note_ph2:'备注（选「其他」要写一句）', ls_x:'换一种',
+  undo_h:'为什么撤销？', undo_r_wrong:'记错了', undo_r_dup:'重复了', undo_r_other:'其他…', undo_note_ph:'写一句原因', undo_need:'请先写一句原因。', undo_go:'撤销', undo_no:'不撤销',
+  stk_hf_all:'全部', stk_hf_rc:'收货', stk_hf_tr:'调拨', stk_hf_ls:'报损', stk_hist_none_f:'最近 30 天没有这一类记录。', stk_hist_day:'{d} · 报损 {n} 条 · 共 {b} 瓶', stk_hist_day0:'{d} · 报损 {n} 条，都已撤销',
+  stk_tr_pick:'＋ 选饮料', stk_tr_dup:'这种饮料已经在单子里了，直接改它的数量。',
   ord_stale:'这张订货建议是 {d} 出的，数量是按那天的库存算的。', ord_recalc:'按今天的库存重新算', ord_recalc_q:'按今天的库存重新算这张订货建议？', ord_recalc_q2:'按今天的库存重新算？你手改过的数量会换成新的建议。', ord_recalced:'已按今天的库存重新算。',
   ord_sum:'要订 {n} 种 · 共 {q} 件', ord_main_none:'这次没有要订的：库存够，或者目标库存还没设。', ord_rest_nt:'其中 {n} 种没设目标库存，App 算不出要不要订。', ord_to_targets:'去设目标库存', ord_done_n:'这台手机上已标 {k} / {n} 行输好（输好一行点一下；只记在这台手机上）', ord_use_sug:'用建议 {n}', ord_unsaved:'有一行的数量没存上，格子里已经放回上次存好的数。请看一眼，没问题再点确认。',
   // v179：盘点更快更准（B 包）
@@ -923,10 +947,10 @@ zh: {
   // v173：门店标签 + 自动选店、饮料格子
   geo_btn:'按定位选门店', geo_hit:'📍 你在 {s}，已切到这家店。', geo_far:'📍 定位不在两家店附近（离 {s} 约 {d}），所以按排班或上次选的显示：{c}。要换请点上面的门店标签。',
   geo_denied:'定位没有被允许，所以不能自动选门店。请在手机「设置」里给浏览器 / 这个 App 打开「位置」，再点一次 📍；或者直接点门店标签。', geo_fail:'这次没定到位置（信号弱或超时）。请到窗边再点一次 📍，或者直接点门店标签。', geo_none:'这台设备不能定位。请直接点门店标签选门店。',
-  dt_h:'🍹 饮料', dt_count:'盘点', dt_rc:'收货', dt_order:'订货', dt_more:'更多', dt_levels:'库存表', dt_tr:'调拨', dt_loss:'报损', dt_menu:'酒水单和成本', dt_sales:'销量和清单', dt_how:'ℹ 说明', dt_boss_h:'只有老板', dt_other_h:'不常用',
+  dt_h:'🍹 饮料', dt_count:'盘点', dt_rc:'收货', dt_order:'订货', dt_more:'更多', dt_levels:'库存表', dt_tr:'调拨', dt_loss:'报损', dt_menu:'酒水单和成本', dt_sales:'销量和清单', dt_how:'ℹ 说明', dt_boss_h:'只有老板', dt_other_h:'其他',
   stk_btn:'🍹 饮料', stk_title:'🍹 饮料', stk_back:'← 饮料', stk_hint:'送货到了：拍送货单，AI 读出每样几箱、几瓶，前场主管或老板确认后入库。两家店之间拿饮料：记一笔调拨。',
   stk_todo:'{n} 张送货单等你确认入库', stk_no_drinks:'饮料清单还是空的：老板要先在「物品 → 🍹 饮料 → 📈 销量和清单」里确认饮料，收货时才能配上。',
-  stk_rc_new:'📷 登记收货（拍送货单）', stk_tr_new:'🔁 记一笔调拨（两家店之间）', stk_open_h:'等主管确认（{n}）', stk_open_h_sup:'等确认入库（{n}）', stk_hist_h:'最近 30 天', stk_hist_none:'最近 30 天还没有收货和调拨。',
+  stk_rc_new:'📷 登记收货（拍送货单）', stk_tr_new:'🔁 记一笔调拨（两家店之间）', stk_open_h:'等主管确认（{n}）', stk_open_h_sup:'等确认入库（{n}）', stk_hist_h:'最近 30 天', stk_hist_none:'{s} 最近 30 天还没有收货、调拨和报损。',
   stk_st_open:'等确认', stk_st_done:'已入库', stk_st_cancel:'已撤销', stk_rc_noname:'送货单', stk_rc_meta:'{d} · {n} 瓶 · {by} 登记', stk_cancelled_by:'{n} 撤销：{r}',
   stk_rc_new_h:'登记收货', stk_rc_hint:'把送货单拍清楚（整张、放平、光线够）。几页就拍几张，最多 5 张。AI 读完你核对一下：黄色的行要看一眼。', stk_rc_by:'{n} 登记 · {t}', stk_rc_done_by:'{n} 确认入库 · {t}',
   stk_rc_take:'📷 拍送货单', stk_rc_more_page:'＋ 再拍一页', stk_ai_busy:'AI 正在读送货单……（大约 20 秒）', stk_ai_read:'🤖 让 AI 读送货单', stk_ai_again:'🤖 AI 重新读（包括新拍的页）',
@@ -936,11 +960,11 @@ zh: {
   stk_l_need_item:'⚠ 选是哪种饮料；不是我们管的东西就选「不进库存」。', stk_l_need_qty:'⚠ 填数量和每个几瓶。', stk_l_unsure:'⚠ AI 不太确定，请对一下送货单。', stk_l_price:'单价 {c}', stk_l_total:'这行 {c}', stk_l_calc:'{q} {u} × {p} = {n} 瓶', stk_l_add:'＋ 加一行', stk_l_qty_hint:'数量 × 每个几瓶',
   stk_rc_note:'备注（可以不写）', stk_rc_sum:'进库存：{n} 行，共 {b} 瓶', stk_rc_total:'送货单合计 {c}', stk_rc_bad:'还有 {n} 行要改（黄色的）', stk_wait:'照片还在上传或 AI 还在读，请等一下。',
   stk_rc_save_staff:'保存，交给主管确认', stk_rc_save_sup:'先保存，以后再确认', stk_rc_confirm:'✓ 确认入库', stk_rc_cancel:'撤销这张单', stk_rc_undo:'撤销入库',
-  stk_rc_cancel_q:'撤销这张送货单？请写一句原因（例如「拍重复了」）：', stk_rc_undo_q:'这张单已经入库了，撤销会把加进去的数量减回来。请写一句原因：',
+  stk_rc_cancel_q:'撤销这张送货单？', stk_rc_undo_q:'这张单已经入库了，撤销会把加进去的数量减回来。',
   stk_rc_saved_new:'已登记，等主管确认（{n} 瓶）', stk_rc_saved:'已保存', stk_rc_done:'已入库：{n} 瓶', stk_rc_cancelled:'已撤销', stk_rc_fix:'第 {n} 行还没配饮料或没有数量（黄色的）。请先改好，或者选「不进库存」。',
   stk_tr_h:'记一笔调拨', stk_tr_hint:'从一家店拿饮料到另一家店：拿的人记一笔，两家店的库存一起改。', stk_tr_dir:'从哪家店到哪家店', stk_tr_add:'＋ 再加一种', stk_tr_note:'备注（可以不写）', stk_tr_note_ph:'例如：Bismarck 晚上不够了',
   stk_tr_save:'保存调拨', stk_tr_saved:'调拨已记下，两家店的库存都改了', stk_tr_need_item:'有一行还没选饮料。请选好，或者点 ✕ 去掉这一行。',
-  stk_tr_packs:'{n} {u}（{b} 瓶）', stk_tr_units:'{n} 瓶', stk_pack:'箱', stk_unit:'瓶', stk_undo:'撤销', stk_tr_undo_q:'撤销这次调拨？两家店的数量会改回来。请写一句原因：', stk_tr_undone:'调拨已撤销',
+  stk_tr_packs:'{n} {u}（{b} 瓶）', stk_tr_units:'{n} 瓶', stk_pack:'箱', stk_unit:'瓶', stk_undo:'撤销', stk_tr_undo_q:'撤销这次调拨？两家店的数量会改回来。', stk_tr_undone:'调拨已撤销',
   // v143（数据库 v104 / 文件服务 tasks v25，老板 2026-11-06）：库管；AI 拍一层认饮料；库存、盘点、报损
   kp_title:'库管（物品 / 饮料）', kp_front:'前厅库管', kp_kitchen:'后厨库管', kp_hint:'库管能在自己的店加房间、货架、抽屉，录物品、放位置；前厅库管还能确认送货单、盘点饮料。排班、小费的权限不变。', kp_tag:'库管',
   kp_new_area:'＋ 新房间', kp_area_rules_lock:'能不能放食品 / 化学品、潮不潮：新建时设好，以后只有老板能改。',
@@ -949,8 +973,8 @@ zh: {
   sh_count:'大约 {n} 瓶', sh_crates:'{n} 箱', sh_unsure:'不太确定', sh_here:'已经放在这里', sh_other:'清单里没有的：{x}', sh_save:'放进这一层（{n} 种）', sh_saved:'已放进这一层：{n} 种', sh_fail:'AI 没看成（网络或 AI 出错）。照片已经存了，可以再拍一次，或者自己选。', sh_close:'关掉',
   stk_loss_new:'🗑 报损（打碎 / 过期 / 员工喝）', stk_levels_btn:'📊 库存和盘点',
   ls_h:'报损', ls_hint:'打碎的、过期的、员工喝的饮料在这里记，库存会减掉。', ls_store:'在哪家店', ls_drink:'哪种饮料', ls_qty:'几个', ls_reason:'原因', ls_note:'说明', ls_note_ph:'其他原因要写一句', ls_save:'记下报损',
-  ls_r_broken:'打碎', ls_r_expired:'过期', ls_r_staff:'员工喝', ls_r_other:'其他', ls_saved:'报损已记下', ls_need_drink:'请选是哪种饮料。', ls_card:'报损 · {r}', ls_undo_q:'撤销这条报损？数量会加回来。请写一句原因：', ls_undone:'报损已撤销',
-  lv_h:'📊 库存和盘点', lv_hint:'应有 = 上次盘点 + 收货 ± 调拨 − 报损 − 卖掉（Lightspeed 销售到 {d}）。第一次盘点就是起始库存。', lv_no_count:'还没盘点过：先盘点一次，以后才有「应有」。',
+  ls_r_broken:'打碎', ls_r_expired:'过期', ls_r_staff:'员工喝', ls_r_other:'其他', ls_saved:'报损已记下', ls_need_drink:'请选是哪种饮料。', ls_card:'报损 · {r}', ls_undo_q:'撤销这条报损？数量会加回来。', ls_undone:'报损已撤销',
+  lv_h:'📊 库存表', lv_hint:'应有 = 上次盘点 + 收货 ± 调拨 − 报损 − 卖掉（Lightspeed 销售到 {d}）。第一次盘点就是起始库存。', lv_no_count:'还没盘点过：先盘点一次，以后才有「应有」。',
   lv_start:'📝 开始盘点', lv_resume:'📝 继续盘点（{n} 个数已填 · {who} 开始）', lv_col_base:'上次', lv_col_in:'进', lv_col_out:'出', lv_col_sold:'卖', lv_col_now:'应有',
   lv_counts_h:'最近的盘点', lv_first:'起始库存', lv_diff_n:'{n} 种对不上', lv_diff_ok:'都对上了', lv_ai_btn:'🤖 AI 写小结', lv_ai_busy:'AI 正在写……', lv_ai_fail:'AI 没写成，可以再点一次。',
   lv_res_h:'{d} 的盘点 · {n}', lv_res_counted:'数出', lv_res_expected:'应有', lv_res_diff:'差',
@@ -1602,7 +1626,7 @@ de: {
   task_decide:'Wer macht {r}? Hier wählen', task_one_all:'Eine Person, alle Rollen (inkl. {r}-Aufgabe)', task_svc_all:'Service gemeinsam für {r}-Aufgabe', task_svc_one:'Service übernimmt {r}-Aufgabe', pl_pub_decide:'{k} Schichten haben einen Runner, aber niemand ist für die Bar eingetragen: bitte beim roten „Wer macht Bar?“ auswählen.',
   // v71：Feierabend-Aufgaben
   rpe_tag:'✉ automatisch per E-Mail', rpe_by:'{t}', rpe_file:'Original', rpe_dl:'PDF herunterladen', rpe_dlg_title:'Tagesbericht (Original) · {s} · {d}', rpe_dlg_hint:'Täglicher Geschäftsbericht von Lightspeed, automatisch importiert am {t}. Unten der Text aus dem PDF; das Original-PDF über „PDF herunterladen“.', rpe_replace_q:'Für {s} {d} gibt es schon einen automatisch per E-Mail importierten Tagesbericht (Abgabe {a} · Kartentrinkgeld {b}).\n\nDurch {w} ersetzen? Der E-Mail-Bericht wird als „ersetzt“ markiert, der Eintrag bleibt gespeichert.', rpe_w_photo:'das neue Foto', rpe_w_manual:'die von Hand eingegebenen Zahlen', rpe_job:'Für diesen Tag gibt es schon einen E-Mail-Bericht (Abgabe {a})', rpe_job_replace:'Durch Foto ersetzen', rpe_h_bad:'✉ Bericht aus der E-Mail nicht lesbar: {p}. Bitte fotografieren.', rpe_h_none:'✉ Noch kein Bericht für diesen Tag in der E-Mail (zuletzt geprüft {t}).', rpe_h_empty:'✉ Laut E-Mail-Bericht keine Zahlungen an diesem Tag (0 Belege): Bitte prüfen, ob an der Kasse die falsche Schicht geschlossen wurde, oder fotografieren.', rpe_h_err:'✉ Fehler beim Lesen der E-Mails: {e} ({t}). Der Bericht wurde nicht importiert – bitte fotografieren und Claude Bescheid geben.', rpe_h_unknown:'✉ {n} PDF in den E-Mails: Filiale oder Tag nicht erkennbar ({p}).', rpe_e_MAIL_LOGIN:'Anmeldung am Postfach fehlgeschlagen (App-Passwort geändert oder gelöscht?)', rpe_e_MAIL_FETCH:'E-Mails konnten nicht geladen werden', rpe_e_MAIL_SECRET:'Postfach im automatischen Ablauf nicht eingerichtet', rpe_e_DISPATCH_NO_TOKEN:'In der Datenbank fehlt der GitHub-Schlüssel (Supabase → Vault: github_dispatch_token), der automatische E-Mail-Abruf steht', rpe_e_DISPATCH_FAILED:'GitHub-Schlüssel funktioniert nicht mehr (abgelaufen oder gelöscht?), der automatische E-Mail-Abruf steht', rpe_p_STORE:'Filiale nicht erkennbar', rpe_p_DAY:'Datum nicht lesbar', rpe_p_NOT_WHOLE_DAY:'kein Bericht für den ganzen Tag', rpe_p_PAYMENTS_MISSING:'Abschnitt „Einnahmen nach Zahlungsart“ nicht lesbar', rpe_p_PAYMENTS_LINE:'unbekannte Zeile bei den Zahlungsarten', rpe_p_TOTALS_MISSING:'Summen (Einnahmen mit / ohne Trinkgeld) nicht lesbar', rpe_p_METHOD:'„{n}“: Betrag und Trinkgeld passen nicht zusammen', rpe_p_SUM:'Summe der Zahlungsarten passt nicht zur Gesamtsumme', rpe_p_NUMBERS:'Zahlen unvollständig', rpe_p_DAY_FUTURE:'ist von heute (noch geöffnet)', rpe_p_TOO_EARLY:'E-Mail kam vor Geschäftsschluss – evtl. nicht der ganze Tag', rpe_p_NO_ADMIN:'kein Chef-Konto gefunden',   // v135
-  drk_btn:'📈 Verkauf und Getränkeliste', drk_btn_todo:'{n} offen', drk_title:'📈 Verkauf und Getränkeliste', drk_step:'Jeden Morgen wird der Produktbericht von Lightspeed automatisch gelesen und nach Rezept gezählt, wie viele Flaschen je Getränk verkauft wurden (Gläser werden über ml in Flaschen umgerechnet; auch offerierte und 0-€-Paketartikel). Wareneingang, Umlagerung und Zählung: „🍹 Getränke“.', drk_back:'← Verkauf und Getränkeliste',
+  drk_btn:'📈 Verkauf und Getränkeliste', drk_btn_todo:'{n} offen', drk_title:'📈 Verkauf & Liste', drk_step:'Jeden Morgen wird der Produktbericht von Lightspeed automatisch gelesen und nach Rezept gezählt, wie viele Flaschen je Getränk verkauft wurden (Gläser werden über ml in Flaschen umgerechnet; auch offerierte und 0-€-Paketartikel). Wareneingang, Umlagerung und Zählung: „🍹 Getränke“.', drk_back:'← Verkauf und Getränkeliste',
   drk_imp_last:'Neuester Tag: {d}', drk_imp_none:'Noch kein Verkaufsbericht (Produktbericht) von Lightspeed angekommen', drk_imp_bad:'Bericht vom {d} nicht lesbar: {p} ({f}). Bitte Claude Bescheid geben.', drk_imp_err:'Fehler beim Lesen der E-Mails: {e} ({t}). Bitte Claude Bescheid geben.', drk_imp_unknown:'{n} CSV: Filiale oder Tag nicht erkennbar ({p})',
   drk_menu_btn:'🍷 Getränkekarte & Kosten', drk_m_title:'🍷 Getränkekarte & Kosten', drk_m_hint:'Was 1 verkaufter Kassenartikel verbraucht und was er kostet. Marge = (Preis − Kosten) ÷ Preis, wie in Lightspeed: Preis brutto, Einkauf netto. Zeile antippen, um das Rezept zu ändern.', drk_m_col_a:'Artikel', drk_m_col_p:'Preis', drk_m_col_c:'Kosten', drk_m_col_m:'Marge', drk_m_on:'Auf der Karte ({n})', drk_m_off:'Nicht auf der Karte ({n})', drk_m_offtag:'nicht auf der Karte', drk_m_none:'Für diese Filiale ist noch nichts zugeordnet. Bitte zuerst unter „📈 Verkauf & Liste“ die Vorschläge bestätigen oder Artikeln unter „Noch nicht zugeordnet“ ein Rezept geben.', drk_m_nocost:'Einkaufspreis fehlt', drk_m_nofactor:'Bei einer Zutat fehlt der Flascheninhalt – der Verkauf wird nicht abgezogen', drk_m_till:'an der Kasse für {p} verkauft', drk_m_sold:'30 Tage: {n}', drk_m_shared:'beide Filialen', drk_m_old:'Flaschenweise und in Paketen (als „1 verkauft = x Flaschen“ zugeordnet, {n})', drk_rc_h:'Rezept: {a}', drk_rc_store:'Für welche Filiale', drk_rc_both:'Beide Filialen', drk_rc_store_hint:'Hat eine Filiale ein eigenes Rezept, gilt das eigene; sonst das gemeinsame.', drk_rc_price:'Preis auf der Karte (€, optional)', drk_rc_onmenu:'Steht auf der Karte', drk_rc_lines:'1 verkauft verbraucht', drk_rc_item:'Getränk', drk_rc_pick:'— Getränk wählen —', drk_rc_qty:'Menge', drk_rc_u_unit:'Stück (ganze Flasche)', drk_rc_add:'＋ Zutat hinzufügen', drk_rc_del:'Zeile entfernen', drk_rc_save:'Rezept speichern', drk_rc_end:'Rezept entfernen', drk_rc_end_q:'Rezept für „{a}“ entfernen? Der Verkauf wird dann nicht mehr nach diesem Rezept abgezogen.', drk_rc_saved:'Rezept gespeichert: {a}', drk_rc_ended:'Rezept entfernt: {a}', drk_rc_hint:'Für den Abzug in ml muss beim Getränk zuerst der Flascheninhalt (ml) eingetragen sein. Für ein Glas mit 150 ml meist 170 ml eintragen (inkl. Schankverlust). Ein geändertes Rezept wirkt nur auf den Bestand seit der letzten Zählung; abgeschlossene Zählungen bleiben unverändert.', drk_rc_guess:'Nach dem Namen geraten – bitte prüfen und dann speichern.', drk_rc_need:'Bitte mindestens ein Getränk wählen und eine Menge größer als 0 eintragen, dann speichern.', drk_rc_nocontent:'Bei diesem Getränk fehlt der Flascheninhalt, deshalb nur Abzug in „Stück“. Für ml bitte zuerst auf der Seite des Getränks eintragen.', drk_rc_btn:'Rezept (Glas, mehrere Zutaten)', drk_rc_edit:'Rezept ändern', drk_i_content:'Inhalt pro Flasche', drk_i_cost:'Einkaufspreis (pro Flasche, netto, €)', drk_i_supplier:'Lieferant', drk_i_none:'fehlt', drk_i_edit:'Inhalt, Einkaufspreis, Lieferant ändern', drk_i_saved:'Gespeichert', drk_i_cost_new:'Auf dem letzten Lieferschein steht {n}. Das weicht stark von {o} ab und wurde nicht automatisch übernommen.', drk_i_cost_use:'{n} übernehmen', drk_d_use:'1 verkauft = {q}', drk_sg_uses:'Rezepte ({s})', drk_sg_auto:'„Alle wie vorgeschlagen“ verwendet das vorhandene Getränk: {n}', drk_sg_auto_new:'„Alle wie vorgeschlagen“ legt es neu an', drk_sugg_all_done:'Erledigt: {c} neu angelegt, {l} vorhandene verwendet',   // v166
   drk_p_HEADER:'Kopfzeile unbekannt', drk_p_STORE:'Filiale nicht erkennbar', drk_p_DAY:'Datum nicht lesbar', drk_p_GROUPS:'Warengruppen nicht erkennbar', drk_p_SUM:'Summe der Zeilen passt nicht zur Filialsumme', drk_p_LINES:'Zeilen ohne Namen oder Menge', drk_p_NUMBERS:'Zahlen unvollständig', drk_p_DAY_FUTURE:'ist von heute (noch geöffnet)', drk_p_TOO_EARLY:'E-Mail kam vor Geschäftsschluss', drk_p_PARSE_ERROR:'Lesefehler',
@@ -1618,6 +1642,11 @@ de: {
   // v142 (DB v101 / tasks v24)
   // v180
   ord_no_store:'Bestellungen für {s} sehen nur Lagerverantwortliche dieser Filiale, die Service-Leitung und der Chef. Bitte oben die andere Filiale wählen.', ord_resume_d:'Weiter mit dem offenen Vorschlag vom {d} ({n} Zeilen)', aih_short_n:'{n} gehen aus', ord_o_made:'{d} · Vorschlag von {n}',
+  dp_h:'Getränk wählen', dp_like:'Passt zu dieser Zeile auf dem Lieferschein', dp_recent:'Auf diesem Handy zuletzt gewählt', dp_all:'Alle {n} Getränke', dp_close:'Abbrechen', dp_gone:'Diese Zeile hat sich gerade geändert (Foto neu gelesen). Bitte das Getränk noch einmal wählen.',
+  ls_done_h:'Gerade eingetragen', ls_go:'Eintragen · {r} · {q}', ls_now:'Eingetragen: {x}', ls_note_ph2:'Bemerkung (bei „Sonstiges“ Pflicht)', ls_x:'Anderes',
+  undo_h:'Warum stornieren?', undo_r_wrong:'Falsch eingetragen', undo_r_dup:'Doppelt eingetragen', undo_r_other:'Anderer Grund…', undo_note_ph:'Grund kurz schreiben', undo_need:'Bitte zuerst kurz den Grund schreiben.', undo_go:'Stornieren', undo_no:'Nicht stornieren',
+  stk_hf_all:'Alle', stk_hf_rc:'Lieferungen', stk_hf_tr:'Umlagerungen', stk_hf_ls:'Schwund', stk_hist_none_f:'Keine Einträge dieser Art in den letzten 30 Tagen.', stk_hist_day:'{d} · Schwund {n}× · zusammen {b} Fl.', stk_hist_day0:'{d} · Schwund {n}× – alles storniert',
+  stk_tr_pick:'＋ Getränk wählen', stk_tr_dup:'Dieses Getränk steht schon auf der Liste – bitte dort die Menge ändern.',
   ord_stale:'Dieser Bestellvorschlag ist vom {d}; die Mengen sind mit dem Bestand von diesem Tag gerechnet.', ord_recalc:'Mit dem heutigen Bestand neu rechnen', ord_recalc_q:'Diesen Bestellvorschlag mit dem heutigen Bestand neu rechnen?', ord_recalc_q2:'Mit dem heutigen Bestand neu rechnen? Deine geänderten Mengen werden durch den neuen Vorschlag ersetzt.', ord_recalced:'Mit dem heutigen Bestand neu gerechnet.',
   ord_sum:'{n} Artikel · zusammen {q} Stück', ord_main_none:'Diesmal ist nichts zu bestellen: Der Bestand reicht – oder der Sollbestand ist noch nicht eingetragen.', ord_rest_nt:'{n} davon haben keinen Sollbestand – die App kann nicht rechnen, ob bestellt werden muss.', ord_to_targets:'Sollbestand eintragen', ord_done_n:'{k} / {n} Zeilen auf diesem Gerät abgehakt (nach jeder Zeile antippen; wird nur auf diesem Gerät gemerkt)', ord_use_sug:'Vorschlag {n} nehmen', ord_unsaved:'Bei einer Zeile wurde die Menge nicht gespeichert; im Feld steht wieder die zuletzt gespeicherte Zahl. Bitte kurz prüfen und dann noch einmal bestätigen.',
   // v179
@@ -1637,10 +1666,10 @@ de: {
   // v173
   geo_btn:'Filiale per Standort wählen', geo_hit:'📍 Du bist in {s} – diese Filiale ist jetzt ausgewählt.', geo_far:'📍 Der Standort ist bei keiner Filiale (ca. {d} bis {s}). Angezeigt wird deshalb {c} (laut Dienstplan oder letzter Auswahl). Zum Wechseln oben auf die Filiale tippen.',
   geo_denied:'Der Standort ist nicht erlaubt, deshalb kann die Filiale nicht automatisch gewählt werden. Bitte in den Einstellungen des Handys für den Browser / diese App „Standort“ erlauben und noch einmal auf 📍 tippen – oder oben direkt die Filiale antippen.', geo_fail:'Der Standort konnte nicht ermittelt werden (schwaches Signal oder Zeitüberschreitung). Bitte am Fenster noch einmal auf 📍 tippen oder oben direkt die Filiale antippen.', geo_none:'Dieses Gerät kann keinen Standort ermitteln. Bitte oben direkt die Filiale antippen.',
-  dt_h:'🍹 Getränke', dt_count:'Inventur', dt_rc:'Lieferung', dt_order:'Bestellen', dt_more:'Mehr', dt_levels:'Bestand', dt_tr:'Umlagerung', dt_loss:'Schwund', dt_menu:'Karte & Kosten', dt_sales:'Verkauf & Liste', dt_how:'ℹ Erklärung', dt_boss_h:'Nur Chef', dt_other_h:'Seltener',
+  dt_h:'🍹 Getränke', dt_count:'Inventur', dt_rc:'Lieferung', dt_order:'Bestellen', dt_more:'Mehr', dt_levels:'Bestand', dt_tr:'Umlagerung', dt_loss:'Schwund', dt_menu:'Karte & Kosten', dt_sales:'Verkauf & Liste', dt_how:'ℹ Erklärung', dt_boss_h:'Nur Chef', dt_other_h:'Weitere',
   stk_btn:'🍹 Getränke', stk_title:'🍹 Getränke', stk_back:'← Getränke', stk_hint:'Lieferung da: Lieferschein fotografieren, die KI liest Kisten und Flaschen; die Service-Leitung oder der Chef bestätigt, dann ist es im Bestand. Getränke zwischen den Filialen: Umlagerung eintragen.',
   stk_todo:'{n} Lieferschein(e) warten auf deine Bestätigung', stk_no_drinks:'Die Getränkeliste ist noch leer: Der Chef muss zuerst unter „Artikel → 🍹 Getränke → 📈 Verkauf & Liste“ die Getränke bestätigen.',
-  stk_rc_new:'📷 Wareneingang (Lieferschein fotografieren)', stk_tr_new:'🔁 Umlagerung eintragen (zwischen Filialen)', stk_open_h:'Wartet auf Bestätigung ({n})', stk_open_h_sup:'Zu bestätigen ({n})', stk_hist_h:'Letzte 30 Tage', stk_hist_none:'In den letzten 30 Tagen keine Lieferungen und Umlagerungen.',
+  stk_rc_new:'📷 Wareneingang (Lieferschein fotografieren)', stk_tr_new:'🔁 Umlagerung eintragen (zwischen Filialen)', stk_open_h:'Wartet auf Bestätigung ({n})', stk_open_h_sup:'Zu bestätigen ({n})', stk_hist_h:'Letzte 30 Tage', stk_hist_none:'{s}: in den letzten 30 Tagen keine Lieferungen, Umlagerungen oder Schwund.',
   stk_st_open:'Wartet', stk_st_done:'Eingebucht', stk_st_cancel:'Storniert', stk_rc_noname:'Lieferschein', stk_rc_meta:'{d} · {n} Fl. · erfasst von {by}', stk_cancelled_by:'{n} hat storniert: {r}',
   stk_rc_new_h:'Wareneingang erfassen', stk_rc_hint:'Lieferschein gut fotografieren (ganz, flach, hell). Pro Seite ein Foto, höchstens 5. Danach prüfen: gelbe Zeilen bitte anschauen.', stk_rc_by:'Erfasst von {n} · {t}', stk_rc_done_by:'Eingebucht von {n} · {t}',
   stk_rc_take:'📷 Lieferschein fotografieren', stk_rc_more_page:'＋ Weitere Seite', stk_ai_busy:'Die KI liest den Lieferschein … (ca. 20 Sekunden)', stk_ai_read:'🤖 KI liest den Lieferschein', stk_ai_again:'🤖 KI neu lesen lassen (mit neuen Seiten)',
@@ -1650,11 +1679,11 @@ de: {
   stk_l_need_item:'⚠ Getränk wählen; wenn wir es nicht führen: „Nicht in den Bestand“.', stk_l_need_qty:'⚠ Menge und Flaschen pro Einheit eintragen.', stk_l_unsure:'⚠ Die KI ist unsicher – bitte mit dem Lieferschein vergleichen.', stk_l_price:'Einzelpreis {c}', stk_l_total:'Zeile {c}', stk_l_calc:'{q} {u} × {p} = {n} Fl.', stk_l_add:'＋ Zeile hinzufügen', stk_l_qty_hint:'Menge × Flaschen pro Einheit',
   stk_rc_note:'Notiz (optional)', stk_rc_sum:'In den Bestand: {n} Zeilen, zusammen {b} Fl.', stk_rc_total:'Summe Lieferschein {c}', stk_rc_bad:'Noch {n} Zeile(n) zu korrigieren (gelb)', stk_wait:'Fotos werden noch hochgeladen oder die KI liest noch. Bitte kurz warten.',
   stk_rc_save_staff:'Speichern, Leitung bestätigt', stk_rc_save_sup:'Erst speichern, später bestätigen', stk_rc_confirm:'✓ Einbuchen', stk_rc_cancel:'Lieferschein stornieren', stk_rc_undo:'Einbuchung stornieren',
-  stk_rc_cancel_q:'Diesen Lieferschein stornieren? Bitte kurz den Grund schreiben (z. B. „doppelt fotografiert“):', stk_rc_undo_q:'Dieser Lieferschein ist schon eingebucht; Stornieren zieht die Mengen wieder ab. Bitte kurz den Grund schreiben:',
+  stk_rc_cancel_q:'Diesen Lieferschein stornieren?', stk_rc_undo_q:'Dieser Lieferschein ist schon eingebucht; Stornieren zieht die Mengen wieder ab.',
   stk_rc_saved_new:'Erfasst – wartet auf Bestätigung ({n} Fl.)', stk_rc_saved:'Gespeichert', stk_rc_done:'Eingebucht: {n} Fl.', stk_rc_cancelled:'Storniert', stk_rc_fix:'Zeile {n}: Getränk oder Menge fehlt (gelb). Bitte korrigieren oder „Nicht in den Bestand“ wählen.',
   stk_tr_h:'Umlagerung eintragen', stk_tr_hint:'Getränke von einer Filiale in die andere: Wer sie mitnimmt, trägt es ein – der Bestand beider Filialen ändert sich zusammen.', stk_tr_dir:'Von welcher Filiale wohin', stk_tr_add:'＋ Weiteres Getränk', stk_tr_note:'Notiz (optional)', stk_tr_note_ph:'z. B. Bismarck hat abends nicht genug',
   stk_tr_save:'Umlagerung speichern', stk_tr_saved:'Umlagerung eingetragen – Bestand beider Filialen geändert', stk_tr_need_item:'In einer Zeile fehlt das Getränk. Bitte wählen oder die Zeile mit ✕ entfernen.',
-  stk_tr_packs:'{n} {u} ({b} Fl.)', stk_tr_units:'{n} Fl.', stk_pack:'Kiste', stk_unit:'Flasche', stk_undo:'Stornieren', stk_tr_undo_q:'Diese Umlagerung stornieren? Die Mengen beider Filialen werden zurückgesetzt. Bitte kurz den Grund schreiben:', stk_tr_undone:'Umlagerung storniert',
+  stk_tr_packs:'{n} {u} ({b} Fl.)', stk_tr_units:'{n} Fl.', stk_pack:'Kiste', stk_unit:'Flasche', stk_undo:'Stornieren', stk_tr_undo_q:'Diese Umlagerung stornieren? Die Mengen beider Filialen werden zurückgesetzt.', stk_tr_undone:'Umlagerung storniert',
   // v143 (DB v104 / tasks v25)
   kp_title:'Lagerverantwortung (Artikel / Getränke)', kp_front:'Lager Service', kp_kitchen:'Lager Küche', kp_hint:'Lagerverantwortliche können in ihrer Filiale Räume, Regale und Schubladen anlegen, Artikel erfassen und einräumen; Lager Service bestätigt außerdem Lieferscheine und zählt die Getränke. Dienstplan- und Trinkgeldrechte ändern sich nicht.', kp_tag:'Lager',
   kp_new_area:'＋ Neuer Raum', kp_area_rules_lock:'Lebensmittel / Chemie / feucht: beim Anlegen festlegen, später ändert nur der Chef.',
@@ -1663,8 +1692,8 @@ de: {
   sh_count:'ca. {n} Fl.', sh_crates:'{n} Kisten', sh_unsure:'unsicher', sh_here:'steht schon hier', sh_other:'Nicht in der Liste: {x}', sh_save:'Hier einräumen ({n})', sh_saved:'Eingeräumt: {n} Getränke', sh_fail:'Die KI hat es nicht geschafft (Netz- oder KI-Fehler). Das Foto ist gespeichert – nochmal fotografieren oder selbst wählen.', sh_close:'Schließen',
   stk_loss_new:'🗑 Schwund (kaputt / abgelaufen / Personal)', stk_levels_btn:'📊 Bestand und Inventur',
   ls_h:'Schwund', ls_hint:'Kaputte, abgelaufene oder vom Personal getrunkene Getränke hier eintragen – der Bestand wird verringert.', ls_store:'Filiale', ls_drink:'Getränk', ls_qty:'Menge', ls_reason:'Grund', ls_note:'Bemerkung', ls_note_ph:'Bei „Sonstiges“ bitte kurz schreiben',
-  ls_save:'Schwund eintragen', ls_r_broken:'Kaputt', ls_r_expired:'Abgelaufen', ls_r_staff:'Personal getrunken', ls_r_other:'Sonstiges', ls_saved:'Schwund eingetragen', ls_need_drink:'Bitte das Getränk wählen.', ls_card:'Schwund · {r}', ls_undo_q:'Diesen Schwund stornieren? Die Menge wird wieder dazugezählt. Bitte kurz den Grund schreiben:', ls_undone:'Schwund storniert',
-  lv_h:'📊 Bestand und Inventur', lv_hint:'Soll = letzte Inventur + Lieferungen ± Umlagerungen − Schwund − Verkauf (Lightspeed bis {d}). Die erste Inventur ist der Anfangsbestand.', lv_no_count:'Noch keine Inventur: einmal zählen, danach gibt es einen Sollbestand.',
+  ls_save:'Schwund eintragen', ls_r_broken:'Kaputt', ls_r_expired:'Abgelaufen', ls_r_staff:'Personal getrunken', ls_r_other:'Sonstiges', ls_saved:'Schwund eingetragen', ls_need_drink:'Bitte das Getränk wählen.', ls_card:'Schwund · {r}', ls_undo_q:'Diesen Schwund stornieren? Die Menge wird wieder dazugezählt.', ls_undone:'Schwund storniert',
+  lv_h:'📊 Bestand', lv_hint:'Soll = letzte Inventur + Lieferungen ± Umlagerungen − Schwund − Verkauf (Lightspeed bis {d}). Die erste Inventur ist der Anfangsbestand.', lv_no_count:'Noch keine Inventur: einmal zählen, danach gibt es einen Sollbestand.',
   lv_start:'📝 Inventur starten', lv_resume:'📝 Inventur fortsetzen ({n} Werte · begonnen von {who})', lv_col_base:'Letzte', lv_col_in:'Rein', lv_col_out:'Raus', lv_col_sold:'Verk.', lv_col_now:'Soll',
   lv_counts_h:'Letzte Inventuren', lv_first:'Anfangsbestand', lv_diff_n:'{n} Abweichungen', lv_diff_ok:'Alles stimmt', lv_ai_btn:'🤖 KI-Zusammenfassung', lv_ai_busy:'Die KI schreibt …', lv_ai_fail:'Die KI hat es nicht geschafft – bitte nochmal tippen.',
   lv_res_h:'Inventur {d} · {n}', lv_res_counted:'Gezählt', lv_res_expected:'Soll', lv_res_diff:'Diff.',
@@ -2025,7 +2054,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=18'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=19'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2254,7 +2283,7 @@ const ERR_ZH = {
   INV_AI_FAILED: 'AI 没看成。不影响保存：自己填名字就行。',
   INV_RC_PHOTO: '要先拍送货单（至少 1 张）才能保存。请点「📷 拍送货单」。',   // v142
   INV_RC_DONE: '这张送货单已经确认或撤销了（可能在别的手机上）。请返回刷新再看。',
-  INV_RC_LIMIT: '你 24 小时内已经登记了 20 笔（送货单或调拨）。如果真的还有，请找老板。',
+  INV_RC_LIMIT: '你 24 小时内登记得太多了（送货单、调拨最多 20 笔，报损最多 30 条）。如果真的还有，请找老板。',
   INV_RC_EMPTY: '这张单上没有要进库存的饮料（都是押金或「不进库存」的行）。不用入库的话请「撤销这张单」并写原因。',
   INV_RC_NO_ITEM: '第 {n} 行还没配饮料（或配的饮料已经不管库存了）。请选好饮料，或者改成「不进库存」。',
   INV_RC_QTY: '第 {n} 行没有数量。请填数量和每个几瓶。',
@@ -2528,7 +2557,7 @@ const ERR_DE = {
   INV_AI_FAILED: 'Die KI hat es nicht geschafft. Speichern geht trotzdem – Namen einfach selbst eintragen.',
   INV_RC_PHOTO: 'Zum Speichern zuerst den Lieferschein fotografieren (mindestens 1 Foto). Bitte „📷 Lieferschein fotografieren“ tippen.',   // v142
   INV_RC_DONE: 'Dieser Lieferschein wurde schon bestätigt oder storniert (evtl. auf einem anderen Handy). Bitte zurück und neu laden.',
-  INV_RC_LIMIT: 'Du hast in 24 Stunden schon 20 Einträge (Lieferscheine oder Umlagerungen) gemacht. Wenn es wirklich mehr sind, bitte den Chef fragen.',
+  INV_RC_LIMIT: 'Du hast in 24 Stunden zu viele Einträge gemacht (höchstens 20 Lieferscheine oder Umlagerungen, 30 Schwund-Einträge). Wenn es wirklich mehr sind, bitte den Chef fragen.',
   INV_RC_EMPTY: 'Auf diesem Lieferschein ist kein Getränk für den Bestand (nur Pfand oder „Nicht in den Bestand“). Wenn nichts einzubuchen ist: „Lieferschein stornieren“ mit Grund.',
   INV_RC_NO_ITEM: 'Zeile {n}: Kein Getränk zugeordnet (oder das Getränk wird nicht mehr im Bestand geführt). Bitte Getränk wählen oder „Nicht in den Bestand“.',
   INV_RC_QTY: 'Zeile {n}: Menge fehlt. Bitte Menge und Flaschen pro Einheit eintragen.',
@@ -5361,7 +5390,8 @@ function storeTabsHTML(){
   const cur = curStore(), byGeo = !!storeOk(state.geoStore) && cur === state.geoStore;
   return `<div class="stabs"><div class="seg">${STORES.map(x => `<button data-act="store-pick" data-store="${x}" class="${x === cur ? 'on' : ''}">${esc(x)}</button>`).join('')}</div>${geoCan() ? `<button class="stabs-geo${byGeo ? ' on' : ''}${geoBusy ? ' busy' : ''}" data-act="store-geo" title="${esc(t('geo_btn'))}" aria-label="${esc(t('geo_btn'))}">📍</button>` : ''}</div>`;
 }
-function storeChanged(){ if (state.tab === 'inv' && invS().view === 'orders' && invS().ord) keepScroll(renderInvOrders);   // v180：订货
+function storeChanged(){ if (state.tab === 'inv' && invS().view === 'loss' && invS().ls){ lsKeep(); keepScroll(renderInvLoss); }   // v181：报损
+  else if (state.tab === 'inv' && invS().view === 'orders' && invS().ord) keepScroll(renderInvOrders);   // v180：订货
   else if (state.tab === 'inv' && invS().view === 'levels' && invS().levels) keepScroll(renderInvLevels);   // v179：库存表
   else if (state.tab === 'inv' && invS().view === 'qplace'){ invS().qp = null; render(); } else if (state.tab === 'inv' && invS().view === 'home' && invS().home) keepScroll(renderInvHome); else if (state.tab === 'inv' && invS().view === 'stock' && invS().stock) keepScroll(renderInvStock); else render(); }
 function storePick(x){ if (!storeOk(x)) return; state.storeSel = { s: x, at: Date.now(), auto: autoStore() }; LS.set('curStore', x); storeChanged(); }
@@ -5460,8 +5490,11 @@ function drkTilesHTML(full){
   const S = invS(), T = state.invTodo || {}, D = S.stock || {}, st = curStore(), W = stkCanWrite(), cs = D.count_stores || [];
   const admin = !!((S.home || {}).admin || D.admin), todo = admin ? drkTodo() : 0;
   const tile = (act, ico, label, badge, attr, main) => `<button class="tile${main ? ' main' : ''}" data-act="${act}"${attr || ''}><i>${ico}</i>${esc(label)}${badge ? `<span class="tag pend">${badge}</span>` : ''}</button>`;
-  const a = [W && cs.includes(st) ? tile('ct-start', '📋', t('dt_count'), '', ` data-store="${st}"`, true) : '', W ? (stkRcDraft() ? tile('stk-rc-resume', '📷', t('dt_rc'), '…', '', true) : `<label class="tile main" for="rc-shoot" style="cursor:pointer"><i>📷</i>${esc(t('dt_rc'))}</label>`) : '',   // v178：直接开相机；有没登记完的就回到那一张
-    cs.length ? tile('ord-home', '🛒', t('dt_order'), (T.order_due || []).length ? '!' : '', '', true) : '', full ? '' : tile('inv-stock', '⋯', t('dt_more'), (T.rc_open || 0) + todo || '')].join('');
+  const a0 = [W && cs.includes(st) ? tile('ct-start', '📋', t('dt_count'), '', ` data-store="${st}"`, true) : '', W ? (stkRcDraft() ? tile('stk-rc-resume', '📷', t('dt_rc'), '…', '', true) : `<label class="tile main" for="rc-shoot" style="cursor:pointer"><i>📷</i>${esc(t('dt_rc'))}</label>`) : '',   // v178：直接开相机；有没登记完的就回到那一张
+    cs.length ? tile('ord-home', '🛒', t('dt_order'), (T.order_due || []).length ? '!' : '', '', true) : ''].filter(Boolean);
+  // v181：首页最多 4 个格子；没有「盘点 / 订货」的人（普通员工）空出来的位置放「报损」（员工喝的饮料每天都要记）
+  if (!full){ if (W && a0.length < 3) a0.push(tile('ls-new', '🗑', t('dt_loss'))); a0.push(tile('inv-stock', '⋯', t('dt_more'), (T.rc_open || 0) + todo || '')); }
+  const a = a0.join('');
   const b = full ? [cs.length ? tile('lv-open', '📊', t('dt_levels')) : '', W ? tile('stk-tr-new', '🔁', t('dt_tr')) : '', W ? tile('ls-new', '🗑', t('dt_loss')) : '', cs.includes(st) ? tile('qp-open', '📍', t('qp_btn')) : ''].join('') : '';   // v175：放位置
   const c = full && admin ? tile('drk-menu', '🍷', t('dt_menu')) + tile('inv-drinks', '📈', t('dt_sales'), todo || '') : '';
   return `${full ? '' : `<div class="tiles-h">${esc(t('dt_h'))} · ${esc(st)}</div>`}${a ? `<div class="tiles">${a}</div>` : ''}${b ? `<div class="tiles-h">${esc(t('dt_other_h'))}</div><div class="tiles">${b}</div>` : ''}${c ? `<div class="tiles-h">${esc(t('dt_boss_h'))}</div><div class="tiles">${c}</div>` : ''}`;
@@ -6797,21 +6830,32 @@ function stkTrCard(x, i){
     <div>${esc((x.lines || []).map(stkTrLine).join(' · '))}</div>
     <div class="meta">${esc([x.created_name, fmtDateTime(x.created_at), x.note].filter(Boolean).join(' · '))}</div>
     ${x.cancelled_at ? `<div class="small muted">${esc(t('stk_cancelled_by', { n: x.cancelled_name || '', r: x.cancel_note || '' }))}</div>` : ''}</div>
-    ${x.can_cancel && stkCanWrite() ? `<button class="link danger" data-act="stk-tr-cancel" data-i="${i}">${esc(t('stk_undo'))}</button>` : ''}</div></div>`;
+    ${x.can_cancel && stkCanWrite() ? `<button class="undo-b" data-act="stk-tr-cancel" data-i="${i}">${esc(t('stk_undo'))}</button>` : ''}</div></div>`;
 }
 function renderInvStock(){
   const S = invS(), D = S.stock; if (!D) return;
   const W = stkCanWrite(), open = D.open || [], ms = x => new Date(x).getTime() || 0;
   const st = curStore();   // v173：记录只看选中的门店（调拨：从这家店出或进）；等确认的送货单两家店都显示
-  const hist = [...(D.receipts || []).filter(r => r.store === st).map(r => ({ at: ms(r.done_at || r.cancelled_at || r.created_at), html: stkRcCard(r) })),
-                ...(D.transfers || []).map((x, i) => ({ x, at: ms(x.created_at), html: stkTrCard(x, i) })).filter(h => h.x.from_store === st || h.x.to_store === st),
-                ...(D.losses || []).map((x, i) => ({ x, at: ms(x.created_at), html: lsCard(x, i) })).filter(h => h.x.store === st)].sort((a, b) => b.at - a.at);   // v143：报损
+  // v181：记录可以只看一类（这台手机记住）；看「全部」时同一天的报损合成一行，点开才列每一条（员工喝的饮料一天十来条，不再把送货单淹没）
+  const hf0 = LS.get('stkHist', 'all'), hf = ['all', 'rc', 'tr', 'ls'].includes(hf0) ? hf0 : 'all', ho = S.histOpen || {};
+  const rcs = (D.receipts || []).filter(r => r.store === st).map(r => ({ at: ms(r.done_at || r.cancelled_at || r.created_at), html: stkRcCard(r) }));
+  const trs = (D.transfers || []).map((x, i) => ({ x, at: ms(x.created_at), html: stkTrCard(x, i) })).filter(h => h.x.from_store === st || h.x.to_store === st);
+  const lss = (D.losses || []).map((x, i) => ({ x, at: ms(x.created_at), html: lsCard(x, i) })).filter(h => h.x.store === st);   // v143：报损
+  const cutDay = (D.losses || []).length >= 60 ? ymd(new Date(ms(D.losses[D.losses.length - 1].created_at))) : null;   // 服务器只给最新 60 条：最老的那一天可能不全，不合成一行（合计会偏小）
+  const lsDays = () => { const days = {}; lss.forEach(h => { const k = ymd(new Date(h.at)); (days[k] = days[k] || []).push(h); });
+    return Object.keys(days).flatMap(k => { const a = days[k].sort((x, y) => y.at - x.at); if (a.length === 1 || k === cutDay) return a;
+      const live = a.filter(h => !h.x.cancelled_at), b = live.reduce((n, h) => n + (+h.x.qty || 0), 0);
+      return [{ at: a[0].at, html: `<button class="hist-day" data-act="stk-hist-day" data-d="${k}" aria-expanded="${ho[k] ? 'true' : 'false'}"><span>🗑 ${esc(live.length ? t('stk_hist_day', { d: dayLabel(k), n: live.length, b: drkNum(b) }) : t('stk_hist_day0', { d: dayLabel(k), n: a.length }))}</span><span class="muted">${ho[k] ? '▾' : '▸'}</span></button>${ho[k] ? a.map(h => h.html).join('') : ''}` }]; }); };
+  const hist = (hf === 'rc' ? rcs : hf === 'tr' ? trs : hf === 'ls' ? lss : [...rcs, ...trs, ...lsDays()]).sort((a, b) => b.at - a.at);
+  const hfBtn = (k, n) => `<button class="chip${hf === k ? ' on' : ''}" data-act="stk-hist" data-k="${k}">${esc(t('stk_hf_' + k))}${n ? ' ' + n : ''}</button>`;
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><div class="stabs-row"><h2>${esc(t('stk_title'))}</h2>${storeTabsHTML()}</div>
     ${!(D.drinks || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('stk_no_drinks'))}</div>` : ''}
     ${open.length ? `<h3 style="margin-top:6px">${esc(t(open.some(r => r.can_confirm) ? 'stk_open_h_sup' : 'stk_open_h', { n: open.length }))}</h3><div class="list">${open.map(stkRcCard).join('')}</div>` : ''}
     ${drkTilesHTML(true)}
     <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('stk_hint'))}</div></details>
-    <h3>${esc(t('stk_hist_h'))} ${storeTag(st)}</h3><div class="list">${hist.map(h => h.html).join('') || `<div class="empty">${esc(t('stk_hist_none'))}</div>`}</div>`;
+    <h3>${esc(t('stk_hist_h'))} ${storeTag(st)}</h3>
+    ${rcs.length + trs.length + lss.length ? `<div class="chips sm" style="margin-bottom:8px">${hfBtn('all')}${hfBtn('rc', rcs.length)}${hfBtn('tr', trs.length)}${hfBtn('ls', lss.length)}</div>` : ''}
+    <div class="list">${hist.map(h => h.html).join('') || `<div class="empty">${esc(hf === 'all' || !(rcs.length + trs.length + lss.length) ? t('stk_hist_none', { s: st }) : t('stk_hist_none_f'))}</div>`}</div>`;
   invLoadPhotos();
 }
 // 送货单：新建 / 打开
@@ -6870,10 +6914,9 @@ function renderInvRc(){
       <div class="field" style="flex:1.4"><label for="stk-rc-date">${esc(t('stk_rc_date'))}</label><input class="input" type="date" id="stk-rc-date" value="${esc(R.doc_date || '')}"></div></div>
       ${R.doc_no ? `<div class="small muted" style="margin:-4px 0 8px">${esc(t('stk_rc_no', { n: R.doc_no }))}</div>` : ''}`
     : `<div class="small" style="margin-bottom:8px">${storeTag(R.store)} ${esc([R.doc_date ? dayLabel(R.doc_date) : '', R.doc_no ? t('stk_rc_no', { n: R.doc_no }) : ''].filter(Boolean).join(' · '))}</div>`;
-  const sel = (l, i) => `<select class="input" data-rcl="item" data-i="${i}" style="margin-top:4px"><option value="">${esc(t('stk_l_pick'))}</option>
-      ${drinks.map(d => `<option value="${d.id}"${l.kind === 'item' && l.item_id === d.id ? ' selected' : ''}>${esc(invName(d))}${drkPack(d) ? ' · ' + esc(drkPack(d)) : ''}</option>`).join('')}
-      ${l.kind === 'item' && l.item_id && !stkDrink(l.item_id) ? `<option value="${esc(l.item_id)}" selected>${esc(invName(l) || '?')}</option>` : ''}
-      <option value="other"${l.kind === 'other' ? ' selected' : ''}>${esc(t('stk_l_other'))}</option><option value="pfand"${l.kind === 'pfand' ? ' selected' : ''}>${esc(t('stk_l_pfand'))}</option></select>`;
+  // v181：选饮料不再用长下拉，点一下开「选饮料」窗口（能搜索，名字像送货单上这一行的排最前面）
+  const sel = (l, i) => { const d = l.kind === 'item' ? stkDrink(l.item_id) : null, nm = l.kind === 'other' ? t('stk_l_other') : l.kind === 'pfand' ? t('stk_l_pfand') : l.item_id ? (d ? invName(d) : invName(l) || '?') : '';
+    return `<button class="dp-btn${nm ? '' : ' none'}" data-act="stk-rc-pick" data-i="${i}"><span>${esc(nm || t('stk_tr_pick'))}${d && drkPack(d) ? `<small>${esc(drkPack(d))}</small>` : ''}</span><span class="muted">▾</span></button>`; };
   const line = (l, i) => {
     const bad = stkLineBad(l), q = stkLineQty(l);
     const price = [l.price_cents != null ? t('stk_l_price', { c: eur(l.price_cents) }) : '', l.total_cents != null ? t('stk_l_total', { c: eur(l.total_cents) }) : ''].filter(Boolean).join(' · ');
@@ -6904,7 +6947,7 @@ function renderInvRc(){
   const acts = !stkCanWrite() ? `<div class="sheet" id="stk-rc-sum" style="margin:10px 0">${stkRcSumHTML(R, false)}</div>` : `<div class="rc-bar" style="bottom:${navH}px"><div class="rc-sum" id="stk-rc-sum">${stkRcSumHTML(R, ed)}</div>
       ${ed ? `<div class="row">${sup ? `<button class="btn" data-act="stk-rc-confirm"${busy ? ' disabled' : ''}>${esc(t('stk_rc_confirm'))}</button><button class="btn ghost" data-act="stk-rc-save"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_short'))}</button>`
       : `<button class="btn" data-act="stk-rc-save"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_staff'))}</button>`}</div>` : ''}</div>
-    ${R.can_cancel && !R.isNew ? `<button class="link danger" data-act="stk-rc-cancel" style="margin-top:12px">${esc(t(R.status === 'done' ? 'stk_rc_undo' : 'stk_rc_cancel'))}</button>` : ''}`;
+    ${R.can_cancel && !R.isNew ? `<button class="btn ghost danger" data-act="stk-rc-cancel" style="margin-top:14px">${esc(t(R.status === 'done' ? 'stk_rc_undo' : 'stk_rc_cancel'))}</button>` : ''}`;
   const back = `<button class="link" data-act="stk-rc-back" style="margin:2px 0 6px">${esc(t(ed && R.isNew ? 'inv_cancel' : 'stk_back'))}</button>`;
   if (ed && R.isNew && !R.photos.length && !R.lines.length){   // v178：还没拍照：只有拍照这一步，不摆一张空表
     $('#main').innerHTML = `${back}<h2 style="margin-top:4px">${esc(t('stk_rc_new_h'))}</h2><div class="small muted" style="margin-bottom:12px">${esc(t('stk_rc_first'))}</div>${photos}`;
@@ -6999,61 +7042,123 @@ async function stkRcSave(btn, confirmToo){
     invGo('stock'); invTodoLoad().then(refreshInvBadge);
   } catch(e){ R.saving = false; lock(false); toast(stkErr(e), true); if (S.rc === R && S.view === 'rc') keepScroll(renderInvRc); }
 }
-async function stkRcCancel(){
+function stkRcCancel(){
   const S = invS(), R = S.rc; if (!R || !R.id) return;
-  const note = prompt(t(R.status === 'done' ? 'stk_rc_undo_q' : 'stk_rc_cancel_q')); if (note === null) return;
-  if (!note.trim()) return toast(t('err_INV_CANCEL_NOTE'), true);
-  try { await rpc('inv_receipt_cancel', { ...tok(), p_id: R.id, p_note: note }); S.rc = null; S.stock = null; toast(t('stk_rc_cancelled')); invGo('stock'); invTodoLoad().then(refreshInvBadge); }
-  catch(e){ toast(errText(e), true); }
+  undoAsk(t(R.status === 'done' ? 'stk_rc_undo_q' : 'stk_rc_cancel_q'), async note => {
+    try { await rpc('inv_receipt_cancel', { ...tok(), p_id: R.id, p_note: note }); }
+    catch(e){ toast(errText(e), true); return; }
+    const here = state.tab === 'inv' && invS().view === 'rc' && invS().rc === R;
+    if (invS().rc === R) S.rc = null;
+    toast(t('stk_rc_cancelled')); if (here){ S.stock = null; invGo('stock'); } invTodoLoad().then(refreshInvBadge);
+  });
+}
+// ---------- v181：D 包（老板 2026-11-13）——共用的「选饮料」名单和窗口、撤销原因用按钮 ----------
+// 这台手机最近选过的饮料（报损、调拨、送货单共用），排在名单最前面
+function dpRecent(){ const a = LS.get('drkRecent', []); return Array.isArray(a) ? a : []; }
+function dpRemember(id){ if (id) LS.set('drkRecent', [id, ...dpRecent().filter(x => x !== id)].slice(0, 8)); }
+function dpText(d){ return (String(d.name_zh || '') + ' ' + String(d.name_de || '')).toLowerCase(); }
+// q = 搜索的字（每个词都要有）；hint = 送货单上那一行的字（名字里有相同词的排最前面）
+function dpGroups(q, hint){
+  const all = ((invS().stock || {}).drinks || []).slice().sort((a, b) => invName(a).localeCompare(invName(b)));
+  const ws = String(q || '').toLowerCase().split(/\s+/).filter(Boolean);
+  if (ws.length) return { like: [], top: [], rest: all.filter(d => { const x = dpText(d); return ws.every(w => x.includes(w)); }), n: all.length };
+  const hw = String(hint || '').toLowerCase().split(/[^0-9a-zäöüß\u4e00-\u9fff]+/).filter(w => w.length >= 3 && !/^\d+$/.test(w)), sc = d => { const x = dpText(d); return hw.filter(w => x.includes(w)).length; };
+  const like = hw.length ? all.filter(d => sc(d) > 0).sort((a, b) => sc(b) - sc(a)).slice(0, 5) : [];
+  const top = dpRecent().map(id => all.find(d => d.id === id)).filter(d => d && !like.includes(d));
+  return { like, top, rest: all, n: all.length };
+}
+function dpRowsHTML(act, q, hint, cur){
+  const G = dpGroups(q, hint), row = d => `<button class="qp-row${d.id === cur ? ' on' : ''}" data-act="${act}" data-id="${d.id}"><span class="qp-n"><strong>${esc(invName(d))}</strong>${drkPack(d) ? `<small>${esc(drkPack(d))}</small>` : ''}</span>${d.id === cur ? '<span class="qp-x">✓</span>' : ''}</button>`;
+  if (!G.n) return `<div class="empty">${esc(t('stk_no_drinks'))}</div>`;
+  if (String(q || '').trim()) return G.rest.length ? G.rest.map(row).join('') : `<div class="empty">${esc(t('qp_no_match', { q: String(q).trim() }))}</div>`;
+  return `${G.like.length ? `<div class="qp-sec">${esc(t('dp_like'))}</div>${G.like.map(row).join('')}` : ''}${G.top.length ? `<div class="qp-sec">${esc(t('dp_recent'))}</div>${G.top.map(row).join('')}` : ''}<div class="qp-sec">${esc(t('dp_all', { n: G.n }))}</div>${G.rest.map(row).join('')}`;
+}
+// P = { hint: 送货单上那行字, cur: 现在选的, extra: [[值, 按钮上的字], …], on(值) }；标题先拿到焦点，手机不会一打开就弹出键盘
+function drkPickOpen(P){
+  state.dp = Object.assign({ q: '', at: Date.now() }, P); const dlg = $('#photoDlg');
+  dlg.innerHTML = `<h2 style="margin-top:0;outline:0" tabindex="-1" autofocus>${esc(t('dp_h'))}</h2>${P.hint ? `<div class="small muted">${esc(t('stk_l_on_note', { x: P.hint }))}</div>` : ''}
+    <input type="search" class="input" id="dp-q" placeholder="${esc(t('qp_q'))}" autocomplete="off" style="margin-top:8px">
+    <div class="dp-list" id="dp-list">${dpRowsHTML('dp-pick', '', P.hint, P.cur)}</div>
+    ${(P.extra || []).length ? `<div class="rc-quick" style="margin:0 0 12px">${P.extra.map(x => `<button data-act="dp-pick" data-id="${esc(x[0])}">${esc(x[1])}</button>`).join('')}</div>` : ''}
+    <button class="btn ghost" data-act="dp-close">${esc(t('dp_close'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+}
+function drkPickDone(v){ const P = state.dp, dlg = $('#photoDlg'); state.dp = null; if (dlg.open) dlg.close(); if (!P || !v) return; if (stkDrink(v)) dpRemember(v); P.on(v); }
+// 数量的 −/＋：减到 0 以下就不动（没填或填错时从 1 开始）
+function stepQty(cur, d){ const c = stkNum(cur), v = Math.round(((c || 0) + d) * 1000) / 1000; return v > 0 ? v : (c > 0 ? c : 1); }
+// 撤销（送货单、调拨、报损）：原因点一下就行，「其他」才打字；原因照样存进记录
+function undoAsk(q, go){
+  state.undoQ = { go, at: Date.now() }; const dlg = $('#photoDlg');
+  dlg.innerHTML = `<h2 style="margin-top:0;outline:0" tabindex="-1" autofocus>${esc(t('undo_h'))}</h2><div class="small muted" style="margin-bottom:12px">${esc(q)}</div>
+    <button class="btn ghost" data-act="undo-r" data-r="wrong" style="margin-bottom:8px">${esc(t('undo_r_wrong'))}</button>
+    <button class="btn ghost" data-act="undo-r" data-r="dup" style="margin-bottom:8px">${esc(t('undo_r_dup'))}</button>
+    <button class="btn ghost" data-act="undo-other" id="undo-ob" style="margin-bottom:8px">${esc(t('undo_r_other'))}</button>
+    <div id="undo-box" hidden><input class="input" id="undo-note" placeholder="${esc(t('undo_note_ph'))}" maxlength="300" autocomplete="off" style="margin-bottom:8px"><button class="btn" data-act="undo-r" data-r="other" style="margin-bottom:8px">${esc(t('undo_go'))}</button></div>
+    <button class="link" data-act="undo-no" style="display:block;margin:6px auto 0;min-height:40px">${esc(t('undo_no'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+}
+function undoPick(r){
+  const U = state.undoQ; if (!U || Date.now() - U.at < 400) return;   // 窗口刚打开：连点的第二下不算
+  const note = r === 'other' ? String((document.getElementById('undo-note') || {}).value || '').trim() : t('undo_r_' + r);
+  if (!note){ toast(t('undo_need'), true); const n = document.getElementById('undo-note'); if (n) n.focus(); return; }
+  state.undoQ = null; const dlg = $('#photoDlg'); if (dlg.open) dlg.close(); U.go(note);
 }
 // 调拨
-async function stkTrNew(){ const S = invS(), st = invMyStore() || STORES[0]; await stkReady(); if (state.tab !== 'inv') return; S.tr = { from: st, to: STORES.find(s => s !== st), lines: [{ item_id: '', qty_note: '', unit: 'pack' }], note: '' }; invGo('tr'); }
+async function stkTrNew(){ const S = invS(), st = invMyStore() || STORES[0]; await stkReady(); if (state.tab !== 'inv') return; S.tr = { from: st, to: STORES.find(s => s !== st), lines: [], note: '' }; invGo('tr'); }
 function stkTrKeep(){
   const T = invS().tr; if (!T) return;
   document.querySelectorAll('[data-trl="qty_note"]').forEach(e => { const l = T.lines[+e.dataset.i]; if (l) l.qty_note = e.value; });
   const n = document.getElementById('stk-tr-note'); if (n) T.note = n.value;
 }
 function stkTrBottles(l){ const d = stkDrink(l.item_id), q = stkNum(l.qty_note); if (!d || q == null) return null; return l.unit === 'pack' && d.pack_qty ? q * d.pack_qty : q; }
+// v181：选饮料用窗口；i = 行号（换这一行的饮料），-1 = 加一行。选好才加行，数量先填 1（有「1 箱 = 几瓶」的按箱）
+function stkTrPick(i){
+  stkTrKeep(); const T = invS().tr; if (!T) return; const l = i >= 0 ? T.lines[i] : null;
+  drkPickOpen({ cur: l ? l.item_id : null, on: v => {
+    const d = stkDrink(v); if (!d || invS().tr !== T || state.tab !== 'inv' || invS().view !== 'tr') return; stkTrKeep();
+    const same = T.lines.find(x => x.item_id === v);
+    if (same && same !== l){ toast(t('stk_tr_dup')); return; }
+    if (l && T.lines.includes(l)){ if (l.item_id !== v){ l.item_id = v; l.unit = d.pack_qty ? 'pack' : 'unit'; } }
+    else T.lines.push({ item_id: v, qty_note: '1', unit: d.pack_qty ? 'pack' : 'unit' });
+    keepScroll(renderInvTr); } });
+}
 function renderInvTr(){
   const S = invS(), T = S.tr, D = S.stock || {}; if (!T){ S.view = 'stock'; return viewInvStock(); }
-  const drinks = (D.drinks || []).slice().sort((a, b) => invName(a).localeCompare(invName(b)));
   const line = (l, i) => {
     const d = stkDrink(l.item_id), b = stkTrBottles(l);
-    return `<div class="item"><div class="row" style="gap:6px;align-items:center"><select class="input" data-trl="item" data-i="${i}" style="flex:1"><option value="">${esc(t('stk_l_pick'))}</option>
-      ${drinks.map(x => `<option value="${x.id}"${x.id === l.item_id ? ' selected' : ''}>${esc(invName(x))}${drkPack(x) ? ' · ' + esc(drkPack(x)) : ''}</option>`).join('')}</select>
-      ${T.lines.length > 1 ? `<button class="link danger" data-act="stk-tr-delline" data-i="${i}">✕</button>` : ''}</div>
-      <div class="row" style="gap:6px;align-items:center;margin-top:6px;flex-wrap:wrap"><input class="input" style="width:80px" inputmode="decimal" data-trl="qty_note" data-i="${i}" value="${esc(l.qty_note)}">
+    return `<div class="item"><div class="row" style="gap:6px;align-items:center"><button class="dp-btn" data-act="stk-tr-pick" data-i="${i}" style="flex:1;margin:0"><span>${esc(d ? invName(d) : '?')}${d && drkPack(d) ? `<small>${esc(drkPack(d))}</small>` : ''}</span><span class="muted">▾</span></button>
+      <button class="link danger rc-x" data-act="stk-tr-delline" data-i="${i}" aria-label="✕" style="flex:none">✕</button></div>
+      <div class="ct-in" style="margin-top:8px"><button class="ct-f" data-act="stk-tr-step" data-i="${i}" data-d="-1" aria-label="−1">−</button><input class="input" inputmode="decimal" data-trl="qty_note" data-i="${i}" value="${esc(l.qty_note)}" aria-label="${esc(d ? invName(d) : '')}"><button class="ct-f" data-act="stk-tr-step" data-i="${i}" data-d="1" aria-label="+1">＋</button>
       ${d && d.pack_qty ? `<div class="seg sm">${['pack', 'unit'].map(k => `<button data-act="stk-tr-unit" data-i="${i}" data-u="${k}" class="${l.unit === k ? 'on' : ''}">${esc(k === 'pack' ? drkUnit(d.pack_unit) || t('stk_pack') : drkUnit(d.unit) || t('stk_unit'))}</button>`).join('')}</div>`
         : `<span>${esc(d ? drkUnit(d.unit) || t('stk_unit') : '')}</span>`}
       <span id="stk-tq-${i}">${b != null ? '= ' + esc(t('stk_l_bottles', { n: drkNum(b) })) : ''}</span></div></div>`;
   };
   $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(t('stk_tr_h'))}</h2>
-    <div class="small muted" style="margin-bottom:10px">${esc(t('stk_tr_hint'))}</div>
+    <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('stk_tr_hint'))}</div></details>
     <div class="field"><label>${esc(t('stk_tr_dir'))}</label><div class="seg sm">${STORES.map(s => `<button data-act="stk-tr-dir" data-from="${s}" class="${T.from === s ? 'on' : ''}">${esc(s + ' → ' + STORES.find(x => x !== s))}</button>`).join('')}</div></div>
-    ${!drinks.length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('stk_no_drinks'))}</div>` : ''}
-    <div class="list">${T.lines.map(line).join('')}</div>
-    <button class="link" data-act="stk-tr-addline" style="margin:4px 0 8px">${esc(t('stk_tr_add'))}</button>
+    ${!(D.drinks || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('stk_no_drinks'))}</div>` : ''}
+    ${T.lines.length ? `<div class="list">${T.lines.map(line).join('')}</div>` : ''}
+    <button class="dp-btn none" data-act="stk-tr-pick" data-i="-1" style="margin:0 0 12px"><span>${esc(t(T.lines.length ? 'stk_tr_add' : 'stk_tr_pick'))}</span></button>
     <div class="field"><label for="stk-tr-note">${esc(t('stk_tr_note'))}</label><input class="input" id="stk-tr-note" value="${esc(T.note || '')}" placeholder="${esc(t('stk_tr_note_ph'))}"></div>
     <button class="btn" data-act="stk-tr-save">${esc(t('stk_tr_save'))}</button>`;
 }
 async function stkTrSave(btn){
   const S = invS(), T = S.tr; if (!T) return; stkTrKeep();
-  const L = T.lines.filter(l => l.item_id || String(l.qty_note || '').trim());
+  const L = T.lines.filter(l => l.item_id);
   if (!L.length) return toast(t('err_INV_TR_EMPTY'), true);
-  for (const l of L){ if (!l.item_id) return toast(t('stk_tr_need_item'), true); if (!(stkNum(l.qty_note) > 0)) return toast(t('err_INV_TR_QTY'), true); }
+  for (const l of L){ if (!(stkNum(l.qty_note) > 0)) return toast(t('err_INV_TR_QTY'), true); }
   btn.disabled = true;
   try {
     await rpc('inv_transfer_save', { ...tok(), p_from: T.from, p_to: T.to, p_note: T.note || null,
-      p_lines: L.map(l => { const d = stkDrink(l.item_id); return { item_id: l.item_id, qty_note: l.qty_note, unit: d && d.pack_qty ? l.unit : 'unit' }; }) });
+      p_lines: L.map(l => { const d = stkDrink(l.item_id); return { item_id: l.item_id, qty_note: stkNum(l.qty_note), unit: d && d.pack_qty ? l.unit : 'unit' }; }) });
     S.tr = null; S.stock = null; LS.set('invStore', T.from); toast(t('stk_tr_saved')); invGo('stock');
   } catch(e){ btn.disabled = false; toast(errText(e), true); }
 }
-async function stkTrCancel(i){
+function stkTrCancel(i){
   const S = invS(), x = ((S.stock || {}).transfers || [])[i]; if (!x) return;
-  const note = prompt(t('stk_tr_undo_q')); if (note === null) return;
-  if (!note.trim()) return toast(t('err_INV_CANCEL_NOTE'), true);
-  try { await rpc('inv_transfer_cancel', { ...tok(), p_id: x.id, p_note: note }); await keepScroll(() => stkReload(t('stk_tr_undone'))); }
-  catch(e){ toast(errText(e), true); }
+  undoAsk(t('stk_tr_undo_q'), async note => {
+    try { await rpc('inv_transfer_cancel', { ...tok(), p_id: x.id, p_note: note }); await keepScroll(() => stkReload(t('stk_tr_undone'))); }
+    catch(e){ toast(errText(e), true); } });
 }
 
 // ---------- v143（数据库 v104 / 文件服务 tasks v25，老板 2026-11-06）：库管待办、AI 拍一层认饮料、报损、库存和盘点 ----------
@@ -7207,38 +7312,63 @@ function lsCard(x, i){
   return `<div class="item"><div class="top"><div>${storeTag(x.store)} <strong>${esc(t('ls_card', { r: t('ls_r_' + x.reason) }))}</strong>${x.cancelled_at ? ` <span class="tag off">${esc(t('stk_st_cancel'))}</span>` : ''}
     <div>${esc(what)}</div><div class="meta">${esc([x.created_name, fmtDateTime(x.created_at), x.note].filter(Boolean).join(' · '))}</div>
     ${x.cancelled_at ? `<div class="small muted">${esc(t('stk_cancelled_by', { n: x.cancelled_name || '', r: x.cancel_note || '' }))}</div>` : ''}</div>
-    ${x.can_cancel && stkCanWrite() ? `<button class="link danger" data-act="ls-cancel" data-i="${i}">${esc(t('stk_undo'))}</button>` : ''}</div></div>`;
+    ${x.can_cancel && stkCanWrite() ? `<button class="undo-b" data-act="ls-cancel" data-i="${i}">${esc(t('stk_undo'))}</button>` : ''}</div></div>`;
 }
-async function lsNew(){ const S = invS(); await stkReady(); if (state.tab !== 'inv') return; S.ls = { store: invMyStore() || STORES[0], item_id: '', qty_note: '1', unit: 'unit', reason: 'staff', note: '' }; invGo('loss'); }
-function lsKeep(){ const L = invS().ls; if (!L) return; const q = document.getElementById('ls-qty'), n = document.getElementById('ls-note'); if (q) L.qty_note = q.value; if (n) L.note = n.value; }
+// v181：报损页改成「找饮料 → 点一下 → 记下」。记完留在本页，上面列出刚记的（可以马上撤销），接着记下一种；原因记住上次选的；门店跟上面的门店标签
+async function lsNew(){ const S = invS(), from = S.view === 'stock' ? 'stock' : 'home'; await stkReady(); if (state.tab !== 'inv') return;
+  if (!S.stock){ toast(t('err_NETWORK'), true); return render(); }   // 饮料清单没读到（多半是网络）：说清楚，回到原来的页面
+  const r = LS.get('lsReason', 'staff'); S.ls = { from, item_id: '', qty_note: '1', unit: 'unit', reason: LS_REASONS.includes(r) && r !== 'other' ? r : 'staff', note: '', q: '', done: [], busy: false }; invGo('loss'); }
+function lsKeep(){ const L = invS().ls; if (!L) return; const q = document.getElementById('ls-qty'), n = document.getElementById('ls-note'), f = document.getElementById('ls-q'); if (q) L.qty_note = q.value; if (n) L.note = n.value; if (f) L.q = f.value; }
+function lsQtyText(L){ const d = stkDrink(L.item_id), q = stkNum(L.qty_note); if (!d || !(q > 0)) return '';
+  return L.unit === 'pack' && d.pack_qty ? t('stk_tr_packs', { n: drkNum(q), u: drkUnit(d.pack_unit) || t('stk_pack'), b: drkNum(Math.round(q * d.pack_qty * 1000) / 1000) }) : t('stk_tr_units', { n: drkNum(q) }); }
+function lsGoText(L){ return t('ls_go', { r: t('ls_r_' + L.reason), q: lsQtyText(L) || '?' }); }
 function renderInvLoss(){
-  const S = invS(), L = S.ls, D = S.stock || {}; if (!L){ S.view = 'stock'; return viewInvStock(); }
-  const drinks = (D.drinks || []).slice().sort((a, b) => invName(a).localeCompare(invName(b))), d = stkDrink(L.item_id);
-  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(t('ls_h'))}</h2>
-    <div class="small muted" style="margin-bottom:10px">${esc(t('ls_hint'))}</div>
-    <div class="field"><label>${esc(t('ls_store'))}</label><div class="seg sm">${STORES.map(s => `<button data-act="ls-store" data-store="${s}" class="${L.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div></div>
-    <div class="field"><label for="ls-item">${esc(t('ls_drink'))}</label><select class="input" id="ls-item"><option value="">${esc(t('stk_l_pick'))}</option>
-      ${drinks.map(x => `<option value="${x.id}"${x.id === L.item_id ? ' selected' : ''}>${esc(invName(x))}${drkPack(x) ? ' · ' + esc(drkPack(x)) : ''}</option>`).join('')}</select></div>
-    <div class="field"><label for="ls-qty">${esc(t('ls_qty'))}</label><div class="row" style="gap:8px;align-items:center"><input class="input" id="ls-qty" style="width:90px" inputmode="decimal" value="${esc(L.qty_note)}">
-      ${d && d.pack_qty ? `<div class="seg sm">${['unit', 'pack'].map(k => `<button data-act="ls-unit" data-u="${k}" class="${L.unit === k ? 'on' : ''}">${esc(k === 'pack' ? drkUnit(d.pack_unit) || t('stk_pack') : drkUnit(d.unit) || t('stk_unit'))}</button>`).join('')}</div>` : `<span>${esc(d ? drkUnit(d.unit) || t('stk_unit') : '')}</span>`}</div></div>
-    <div class="field"><label>${esc(t('ls_reason'))}</label><div class="seg sm" style="flex-wrap:wrap">${LS_REASONS.map(r => `<button data-act="ls-reason" data-r="${r}" class="${L.reason === r ? 'on' : ''}">${esc(t('ls_r_' + r))}</button>`).join('')}</div></div>
-    <div class="field"><label for="ls-note">${esc(t('ls_note'))}</label><input class="input" id="ls-note" value="${esc(L.note)}" placeholder="${esc(t('ls_note_ph'))}"></div>
-    <button class="btn" data-act="ls-save">${esc(t('ls_save'))}</button>`;
+  const S = invS(), L = S.ls; if (!L){ S.view = 'stock'; return viewInvStock(); }
+  L.store = curStore();   // 记到门店标签上选中的这家店；保存时用这里记下的，页面上显示哪家就记哪家
+  const d = stkDrink(L.item_id), nav = document.querySelector('nav'), navH = nav ? nav.offsetHeight : 0, n = ((S.stock || {}).drinks || []).length;
+  $('#main').innerHTML = `<button class="link" data-act="ls-back" style="margin:2px 0 6px">${esc(t(L.from === 'home' ? 'inv_back' : 'stk_back'))}</button>
+    <div class="stabs-row"><h2>🗑 ${esc(t('ls_h'))}</h2>${storeTabsHTML()}</div>
+    <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('ls_hint'))}</div></details>
+    <div class="chips sm" style="margin-bottom:8px">${LS_REASONS.map(r => `<button class="chip${L.reason === r ? ' on' : ''}" data-act="ls-reason" data-r="${r}">${esc(t('ls_r_' + r))}</button>`).join('')}</div>
+    <input class="input" id="ls-note" value="${esc(L.note)}" placeholder="${esc(t('ls_note_ph2'))}" maxlength="300" autocomplete="off" aria-label="${esc(t('ls_note'))}" style="margin-bottom:10px">
+    ${L.done.length ? `<div class="qp-sec" style="margin-top:4px">${esc(t('ls_done_h'))}</div><div class="list">${L.done.map(x => `<div class="qp-row here"><span class="qp-n"${x.off ? ' style="color:var(--muted);text-decoration:line-through"' : ''}><strong>${esc(x.text)}</strong><small>${esc(x.sub)}</small></span>${x.off ? `<span class="tag off">${esc(t('stk_st_cancel'))}</span>` : `<button class="undo-b" data-act="ls-undo-now" data-id="${x.id}"${x.busy ? ' disabled' : ''}>${esc(t('stk_undo'))}</button>`}</div>`).join('')}</div>` : ''}
+    ${n ? `<input type="search" class="input" id="ls-q" placeholder="${esc(t('qp_q'))}" value="${esc(L.q)}" autocomplete="off">` : ''}
+    <div class="list ls-list" id="ls-list" style="margin-top:8px">${dpRowsHTML('ls-pick', L.q, '', L.item_id)}</div>
+    ${d ? `<div class="rc-bar ls-bar" style="bottom:${navH}px"><div class="ls-cur"><strong>${esc(invName(d))}</strong><button class="link" data-act="ls-unpick">${esc(t('ls_x'))}</button></div>
+      <div class="ct-in"><button class="ct-f" data-act="ls-step" data-d="-1" aria-label="−1">−</button><input class="input" id="ls-qty" inputmode="decimal" value="${esc(L.qty_note)}" aria-label="${esc(t('ls_qty'))}"><button class="ct-f" data-act="ls-step" data-d="1" aria-label="+1">＋</button>
+      ${d.pack_qty ? `<div class="seg sm">${['unit', 'pack'].map(k => `<button data-act="ls-unit" data-u="${k}" class="${L.unit === k ? 'on' : ''}">${esc(k === 'pack' ? drkUnit(d.pack_unit) || t('stk_pack') : drkUnit(d.unit) || t('stk_unit'))}</button>`).join('')}</div>` : `<span>${esc(drkUnit(d.unit) || t('stk_unit'))}</span>`}</div>
+      <div class="row"><button class="btn" data-act="ls-save" id="ls-go"${L.busy ? ' disabled' : ''}>${esc(lsGoText(L))}</button></div></div>` : ''}`;
 }
 async function lsSave(btn){
-  const S = invS(), L = S.ls; if (!L) return; lsKeep();
+  const S = invS(), L = S.ls; if (!L || L.busy) return;
+  if (Date.now() - (L.pickAt || 0) < 500) return;   // 刚点了饮料、下面的条才冒出来：连点的第二下落在「记下」上不算（没看见就记了）
+  lsKeep();
   if (!L.item_id) return toast(t('ls_need_drink'), true);
   if (!(stkNum(L.qty_note) > 0)) return toast(t('err_INV_TR_QTY'), true);
-  if (L.reason === 'other' && !L.note.trim()) return toast(t('err_INV_LOSS_NOTE'), true);
-  const d = stkDrink(L.item_id); btn.disabled = true;
-  try { await rpc('inv_loss_save', { ...tok(), p_store: L.store, p_item: L.item_id, p_qty_note: stkNum(L.qty_note), p_unit: d && d.pack_qty ? L.unit : 'unit', p_reason: L.reason, p_note: L.note || null });
-    S.ls = null; S.stock = null; LS.set('invStore', L.store); toast(t('ls_saved')); invGo('stock'); }
-  catch(e){ btn.disabled = false; toast(errText(e), true); }
+  if (L.reason === 'other' && !L.note.trim()){ toast(t('err_INV_LOSS_NOTE'), true); const e = document.getElementById('ls-note'); if (e) e.focus(); return; }
+  const d = stkDrink(L.item_id), st = storeOk(L.store) ? L.store : curStore(), item = L.item_id, reason = L.reason, note = L.note.trim(), what = `${invName(d) || '?'} · ${lsQtyText(L)}`;
+  L.busy = true; btn.disabled = true; let x;
+  try { x = await rpc('inv_loss_save', { ...tok(), p_store: st, p_item: item, p_qty_note: stkNum(L.qty_note), p_unit: d && d.pack_qty ? L.unit : 'unit', p_reason: reason, p_note: note || null }); }
+  catch(e){ L.busy = false; btn.disabled = false; if (invS().ls === L){ const b = document.getElementById('ls-go'); if (b) b.disabled = false; } toast(errText(e), true); return; }
+  L.busy = false; L.done.unshift({ id: x && x.id, text: what, sub: [t('ls_r_' + reason), st, note].filter(Boolean).join(' · ') });
+  dpRemember(item); if (reason !== 'other') LS.set('lsReason', reason);   // 「其他」不记住：不然下一条又非写说明不可
+  toast(t('ls_now', { x: what }));
+  if (invS().ls !== L || state.tab !== 'inv' || S.view !== 'loss') return;
+  lsKeep(); if (L.item_id === item){ L.item_id = ''; L.qty_note = '1'; L.unit = 'unit'; L.note = ''; L.q = ''; if (L.reason === 'other'){ const r = LS.get('lsReason', 'staff'); L.reason = LS_REASONS.includes(r) && r !== 'other' ? r : 'staff'; } }   // 等的时候没换别的饮料：清掉，准备记下一种
+  renderInvLoss(); window.scrollTo(0, 0);
 }
-async function lsCancel(i){
+// 刚记的那条点「撤销」：就是记错了，不再问原因
+async function lsUndoNow(id){
+  const S = invS(), L = S.ls, x = L && L.done.find(v => v.id === id); if (!x || x.off || x.busy) return;
+  const here = () => invS().ls === L && state.tab === 'inv' && S.view === 'loss';
+  x.busy = true; lsKeep(); keepScroll(renderInvLoss);
+  try { await rpc('inv_loss_cancel', { ...tok(), p_id: id, p_note: t('undo_r_wrong') }); x.off = true; toast(t('ls_undone')); } catch(e){ toast(errText(e), true); }
+  x.busy = false; if (here()){ lsKeep(); keepScroll(renderInvLoss); }
+}
+function lsCancel(i){
   const S = invS(), x = ((S.stock || {}).losses || [])[i]; if (!x) return;
-  const note = prompt(t('ls_undo_q')); if (note === null) return; if (!note.trim()) return toast(t('err_INV_CANCEL_NOTE'), true);
-  try { await rpc('inv_loss_cancel', { ...tok(), p_id: x.id, p_note: note }); await keepScroll(() => stkReload(t('ls_undone'))); } catch(e){ toast(errText(e), true); }
+  undoAsk(t('ls_undo_q'), async note => {
+    try { await rpc('inv_loss_cancel', { ...tok(), p_id: x.id, p_note: note }); await keepScroll(() => stkReload(t('ls_undone'))); } catch(e){ toast(errText(e), true); } });
 }
 // 库存和盘点
 async function viewInvLevels(){
@@ -13124,7 +13254,19 @@ document.addEventListener('click', async ev => {
     case 'stk-tr-new': stkTrNew(); break;
     case 'stk-tr-dir': { stkTrKeep(); const T = invS().tr; if (T){ T.from = el.dataset.from; T.to = STORES.find(s => s !== T.from); keepScroll(renderInvTr); } break; }
     case 'stk-tr-unit': { stkTrKeep(); const T = invS().tr, l = T && T.lines[+el.dataset.i]; if (l){ l.unit = el.dataset.u; keepScroll(renderInvTr); } break; }
-    case 'stk-tr-addline': { stkTrKeep(); const T = invS().tr; if (T){ T.lines.push({ item_id: '', qty_note: '', unit: 'pack' }); keepScroll(renderInvTr); } break; }
+    case 'stk-tr-pick': stkTrPick(+el.dataset.i); break;   // v181：选饮料的窗口
+    case 'stk-tr-step': { const inp = document.querySelector('[data-trl="qty_note"][data-i="' + el.dataset.i + '"]'); if (inp){ inp.value = drkNum(stepQty(inp.value, +el.dataset.d)); inp.dispatchEvent(new Event('input', { bubbles: true })); } break; }
+    case 'stk-rc-pick': { stkRcKeep(); const R = invS().rc, l = R && R.lines[+el.dataset.i]; if (!l) break;   // 窗口开着的时候照片可能重读、行换了：按那一行本身找，找不到就请再选一次
+      drkPickOpen({ hint: l.text || '', cur: l.kind === 'item' ? l.item_id : null, extra: [['other', t('stk_l_other_btn')], ['pfand', t('stk_l_pfand_btn')]],
+        on: v => { const R2 = invS().rc, i = R2 === R ? R.lines.indexOf(l) : -1; if (i < 0 || state.tab !== 'inv' || invS().view !== 'rc'){ toast(t('dp_gone'), true); return; } stkRcLinePick(i, v); } }); break; }
+    case 'dp-pick': if (state.dp && Date.now() - state.dp.at < 400) break;   // 窗口刚打开：连点的第二下不算
+      drkPickDone(el.dataset.id); break;
+    case 'dp-close': { state.dp = null; const d = $('#photoDlg'); if (d.open) d.close(); break; }
+    case 'undo-r': undoPick(el.dataset.r); break;
+    case 'undo-other': { const b = document.getElementById('undo-box'), o = document.getElementById('undo-ob'), n = document.getElementById('undo-note'); if (b) b.hidden = false; if (o) o.style.display = 'none'; if (n) n.focus(); break; }
+    case 'undo-no': { state.undoQ = null; const d = $('#photoDlg'); if (d.open) d.close(); break; }
+    case 'stk-hist': { LS.set('stkHist', el.dataset.k); keepScroll(renderInvStock); break; }
+    case 'stk-hist-day': { const S = invS(); S.histOpen = S.histOpen || {}; S.histOpen[el.dataset.d] = !S.histOpen[el.dataset.d]; keepScroll(renderInvStock); break; }
     case 'stk-tr-delline': { stkTrKeep(); const T = invS().tr; if (T){ T.lines.splice(+el.dataset.i, 1); keepScroll(renderInvTr); } break; }
     case 'stk-tr-save': stkTrSave(el); break;
     case 'stk-tr-cancel': stkTrCancel(+el.dataset.i); break;
@@ -13145,9 +13287,14 @@ document.addEventListener('click', async ev => {
     case 'sh-close': { const S = invS(); S.shelf = null; keepScroll(renderInvPlace); break; }
     case 'sh-save': shelfSave(el); break;
     case 'ls-new': lsNew(); break;
-    case 'ls-store': { lsKeep(); const L = invS().ls; if (L){ L.store = el.dataset.store; keepScroll(renderInvLoss); } break; }
+    case 'ls-back': { const S = invS(), L = S.ls || {}, to = L.from === 'home' ? 'home' : 'stock'; if (to === 'stock' && (L.done || []).length) S.stock = null;   // v181：刚记过报损，回饮料页先读新的，不先显示旧名单
+      S.ls = null; invGo(to); break; }
+    case 'ls-pick': { lsKeep(); const L = invS().ls; if (L && !L.busy && stkDrink(el.dataset.id)){ if (L.item_id !== el.dataset.id){ L.item_id = el.dataset.id; L.qty_note = '1'; L.unit = 'unit'; L.pickAt = Date.now(); } keepScroll(renderInvLoss); } break; }
+    case 'ls-unpick': { lsKeep(); const L = invS().ls; if (L && !L.busy){ L.item_id = ''; keepScroll(renderInvLoss); } break; }
+    case 'ls-step': { const L = invS().ls, inp = document.getElementById('ls-qty'), b = document.getElementById('ls-go'); if (L && inp){ inp.value = drkNum(stepQty(inp.value, +el.dataset.d)); L.qty_note = inp.value; if (b) b.textContent = lsGoText(L); } break; }
+    case 'ls-undo-now': lsUndoNow(el.dataset.id); break;
     case 'ls-unit': { lsKeep(); const L = invS().ls; if (L){ L.unit = el.dataset.u; keepScroll(renderInvLoss); } break; }
-    case 'ls-reason': { lsKeep(); const L = invS().ls; if (L){ L.reason = el.dataset.r; keepScroll(renderInvLoss); } break; }
+    case 'ls-reason': { lsKeep(); const L = invS().ls; if (L){ L.reason = el.dataset.r; await keepScroll(renderInvLoss); if (L.reason === 'other'){ const n = document.getElementById('ls-note'); if (n && !n.value.trim()) n.focus(); } } break; }
     case 'ls-save': lsSave(el); break;
     case 'ls-cancel': lsCancel(+el.dataset.i); break;
     case 'lv-open': { const S = invS(); S.count = null; invGo('levels'); break; }
@@ -13483,10 +13630,6 @@ document.addEventListener('change', async ev => {
   }
   if (ev.target.dataset && ev.target.dataset.ct){ ctSave(ev.target); return; }   // v143：盘点的数，改完就存
   if (ev.target.dataset && ev.target.dataset.shsel){ const X = invS().shelf; if (X){ X.sel[ev.target.dataset.shsel] = ev.target.checked; keepScroll(renderInvPlace); } return; }
-  if (ev.target.id === 'ls-item'){ lsKeep(); const L = invS().ls; if (L){ L.item_id = ev.target.value; const d = stkDrink(L.item_id); if (!(d && d.pack_qty)) L.unit = 'unit'; keepScroll(renderInvLoss); } return; }
-  if (ev.target.dataset && ev.target.dataset.rcl === 'item'){ stkRcLinePick(+ev.target.dataset.i, ev.target.value); return; }   // v142：送货单这一行配哪样饮料
-  if (ev.target.dataset && ev.target.dataset.trl === 'item'){ stkTrKeep(); const T = invS().tr, l = T && T.lines[+ev.target.dataset.i];
-    if (l){ l.item_id = ev.target.value; const d = stkDrink(l.item_id); l.unit = d && d.pack_qty ? 'pack' : 'unit'; keepScroll(renderInvTr); } return; }
   if (ev.target.dataset && ev.target.dataset.invlab){ invLabKeep(); const B = invS().lab; if (B){ B.sel[ev.target.dataset.invlab] = ev.target.checked; B.file = null; keepScroll(renderInvLabels); } return; }   // v93
   if (['inv-lab-start', 'inv-lab-border', 'inv-lab-copies', 'inv-lab-offy', 'inv-lab-offx'].includes(ev.target.id)){ invLabKeep(); const B = invS().lab; if (B){ B.file = null; keepScroll(renderInvLabels); } return; }
   if (ev.target.id === 'invf-cat'){ invFormKeep(); invCatChanged(ev.target.value); return; }
@@ -13616,6 +13759,9 @@ document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'inv-q'){ invS().q = ev.target.value; invQueue(); }   // v91
   if (id === 'ct-q'){ invS().ctQ = ev.target.value; ctRefresh(); return; }   // v179：盘点页找饮料
+  if (id === 'dp-q'){ const P = state.dp, b = document.getElementById('dp-list'); if (P && b){ P.q = ev.target.value; b.innerHTML = dpRowsHTML('dp-pick', P.q, P.hint, P.cur); b.scrollTop = 0; } return; }   // v181：选饮料的窗口
+  if (id === 'ls-q'){ const L = invS().ls, b = document.getElementById('ls-list'); if (L && b){ L.q = ev.target.value; b.innerHTML = dpRowsHTML('ls-pick', L.q, '', L.item_id); } return; }   // v181：报损页找饮料
+  if (id === 'ls-qty'){ const L = invS().ls, b = document.getElementById('ls-go'); if (L){ L.qty_note = ev.target.value; if (b) b.textContent = lsGoText(L); } return; }
   if (id === 'qp-q'){ qpS().q = ev.target.value; const b = document.getElementById('qp-lists'); if (b) b.innerHTML = qpListsHTML(); return; }   // v175
   if (id === 'inv-pq'){ const K = invS().pickItem; if (K){ K.q = ev.target.value; clearTimeout(invPickTimer); invPickTimer = setTimeout(invPickSearch, 250); } }
   if (id === 'drk-l-q'){ const L = invS().dl; if (L){ L.q = ev.target.value; clearTimeout(drkLinkTimer); drkLinkTimer = setTimeout(drkLinkSearch, 250); } }   // v137
