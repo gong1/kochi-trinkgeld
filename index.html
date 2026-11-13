@@ -462,6 +462,20 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .inv-scan{position:relative;background:#000;border-radius:var(--r-s);overflow:hidden;aspect-ratio:3/4;max-height:60vh}
 .inv-scan video{width:100%;height:100%;object-fit:cover;display:block}
 .inv-scan-box{position:absolute;inset:18% 12%;border:3px solid rgba(255,255,255,.85);border-radius:12px}
+.rc-bar{position:sticky;z-index:5;background:var(--paper);border-top:1px solid var(--line);padding:8px 0 6px;margin-top:10px}
+.rc-bar .row{gap:8px;align-items:stretch}
+.rc-bar .btn{height:auto;min-height:50px;padding:6px 8px;line-height:1.2;margin:0}
+.rc-bar .btn.ghost{flex:0 1 40%;font-size:14px;font-weight:600}
+.rc-bar .rc-sum{font-size:14px;margin-bottom:6px}
+.rc-bar .rc-sum button{background:none;border:0;padding:0;color:var(--copper);font-weight:700;font-size:14px;text-decoration:underline}
+.rc-line{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;text-align:left;padding:2px 0;font-size:16px;line-height:1.3;color:var(--ink)}
+.rc-line .rc-n{flex:1;min-width:0}
+.rc-line small{display:block;color:var(--muted);font-size:13px}
+.rc-x{min-width:40px;min-height:40px;font-size:18px;text-align:right}
+.rc-quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.rc-quick button{border:1.5px solid var(--line);background:#fff;border-radius:var(--r-s);padding:9px 12px;font-weight:600;font-size:14px;color:var(--ink)}
+@keyframes rcflash{0%{background:#FFF1C9}100%{background:transparent}}
+.rc-flash{animation:rcflash 1.8s ease-out}
 .qp-bar{position:sticky;z-index:5;background:var(--paper);padding:8px 0;margin:0 0 6px;border-bottom:1px solid var(--line)}
 .qp-bar .row{gap:8px}
 .qp-bar .qp-cur{flex:1;min-width:0;font-weight:700;font-size:16px;line-height:1.25}
@@ -508,6 +522,7 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 </head>
 <body>
 <div id="app"></div>
+<input type="file" id="rc-shoot" accept="image/*" capture="environment" data-invphoto="receipt-new" hidden>
 <dialog id="pinDlg"></dialog>
 <dialog id="photoDlg"></dialog>
 <dialog id="shiftDlg"></dialog>
@@ -520,7 +535,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v177';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v178';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -854,6 +869,10 @@ zh: {
   drk_l_h:'「{a}」配到哪样饮料？', drk_l_factor:'卖 1 个 =', drk_l_factor_u:'个基本单位（瓶 / 罐）', drk_l_drinks:'饮料清单里的', drk_l_search:'物品里找', drk_l_q_ph:'找物品：名字、别名……', drk_l_new:'新建饮料', drk_l_new_btn:'新建并配上', drk_l_done:'「{a}」已配到 {n}', drk_l_none:'物品里没找到「{q}」，可以在下面新建。',
   drk_u_Flasche:'瓶', drk_u_Dose:'罐', drk_u_Kiste:'箱', drk_u_Karton:'箱', drk_u_Tray:'托', drk_u_Fass:'桶', drk_u_Packung:'包', drk_u_Stück:'个',   // v137
   // v142（数据库 v101 / 文件服务 tasks v24，老板 2026-11-05）：饮料收货（拍送货单 → AI 读 → 前场主管 / 老板确认入库）、两家店之间调拨
+  // v178：收货更顺（A 包）
+  stk_l_other_btn:'不进库存', stk_l_pfand_btn:'押金 / 空箱', stk_l_sure_btn:'✓ 对的', stk_rc_unread:'新拍的第 {n} 页还没读进来。', stk_rc_unread_btn:'让 AI 读新拍的页（你改过的行会被换掉）',
+  stk_rc_leave_q:'不保存就离开吗？拍的照片和读出来的行会丢掉。', stk_rc_leave_q2:'改过的地方还没保存。不保存就离开吗？', stk_del_line:'这一行已去掉', stk_del_ph:'这张照片已去掉', stk_rc_resumed:'接着上次没登记完的送货单。不要了就点左上角「← 取消」。',
+  stk_rc_save_short:'先保存', stk_rc_first:'先拍送货单：整张、放平、字要清楚。拍完 AI 会读出每一行，你只要核对。',
   // v175：快速放位置
   qp_btn:'放位置', qp_h:'放位置', qp_hint:'站在货架前：先选一次位置，再点放在这里的饮料。走到下一层，点「下一层」接着点。', qp_where:'① 放到哪里', qp_room:'这个房间没有货架：东西直接放在整个房间里。',
   qp_cur:'现在放到', qp_cur_none:'还没选位置', qp_need:'请先在上面选好位置（房间 → 货架 → 层），再点饮料。', qp_prev:'上一层', qp_next:'下一层', qp_change:'改位置',
@@ -1555,6 +1574,10 @@ de: {
   drk_l_h:'„{a}“ welchem Getränk zuordnen?', drk_l_factor:'1 verkauft =', drk_l_factor_u:'Grundeinheiten (Flasche / Dose)', drk_l_drinks:'Aus der Getränkeliste', drk_l_search:'In den Artikeln suchen', drk_l_q_ph:'Artikel suchen: Name, Alias …', drk_l_new:'Neues Getränk', drk_l_new_btn:'Anlegen und zuordnen', drk_l_done:'„{a}“ zugeordnet: {n}', drk_l_none:'„{q}“ nicht gefunden – unten neu anlegen.',
   drk_u_Flasche:'Flasche', drk_u_Dose:'Dose', drk_u_Kiste:'Kiste', drk_u_Karton:'Karton', drk_u_Tray:'Tray', drk_u_Fass:'Fass', drk_u_Packung:'Packung', drk_u_Stück:'Stück',   // v137
   // v142 (DB v101 / tasks v24)
+  // v178
+  stk_l_other_btn:'Nicht in den Bestand', stk_l_pfand_btn:'Pfand / Leergut', stk_l_sure_btn:'✓ Stimmt', stk_rc_unread:'Die neue Seite {n} ist noch nicht gelesen.', stk_rc_unread_btn:'KI die neue Seite lesen lassen (deine Änderungen werden ersetzt)',
+  stk_rc_leave_q:'Ohne Speichern verlassen? Fotos und gelesene Zeilen gehen verloren.', stk_rc_leave_q2:'Die Änderungen sind noch nicht gespeichert. Ohne Speichern verlassen?', stk_del_line:'Zeile entfernt', stk_del_ph:'Foto entfernt', stk_rc_resumed:'Weiter mit dem angefangenen Lieferschein. Nicht mehr gebraucht: oben links „← Abbrechen“.',
+  stk_rc_save_short:'Erst speichern', stk_rc_first:'Zuerst den Lieferschein fotografieren: ganz, flach, gut lesbar. Danach liest die KI jede Zeile, du prüfst nur noch.',
   // v175
   qp_btn:'Einräumen', qp_h:'Einräumen', qp_hint:'Am Regal stehen: einmal den Platz wählen, dann die Getränke antippen, die hier stehen. Für die nächste Ebene „Nächste“ tippen und weitermachen.', qp_where:'① Wohin', qp_room:'Dieser Raum hat kein Regal: Die Sachen liegen einfach im ganzen Raum.',
   qp_cur:'Aktueller Platz', qp_cur_none:'Noch kein Platz gewählt', qp_need:'Bitte zuerst oben den Platz wählen (Raum → Regal → Ebene), dann die Getränke antippen.', qp_prev:'Vorige', qp_next:'Nächste', qp_change:'Platz ändern',
@@ -1951,7 +1974,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=15'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=16'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -5384,7 +5407,7 @@ function drkTilesHTML(full){
   const S = invS(), T = state.invTodo || {}, D = S.stock || {}, st = curStore(), W = stkCanWrite(), cs = D.count_stores || [];
   const admin = !!((S.home || {}).admin || D.admin), todo = admin ? drkTodo() : 0;
   const tile = (act, ico, label, badge, attr, main) => `<button class="tile${main ? ' main' : ''}" data-act="${act}"${attr || ''}><i>${ico}</i>${esc(label)}${badge ? `<span class="tag pend">${badge}</span>` : ''}</button>`;
-  const a = [W && cs.includes(st) ? tile('ct-start', '📋', t('dt_count'), '', ` data-store="${st}"`, true) : '', W ? tile('stk-rc-new', '📷', t('dt_rc'), '', '', true) : '',
+  const a = [W && cs.includes(st) ? tile('ct-start', '📋', t('dt_count'), '', ` data-store="${st}"`, true) : '', W ? (stkRcDraft() ? tile('stk-rc-resume', '📷', t('dt_rc'), '…', '', true) : `<label class="tile main" for="rc-shoot" style="cursor:pointer"><i>📷</i>${esc(t('dt_rc'))}</label>`) : '',   // v178：直接开相机；有没登记完的就回到那一张
     cs.length ? tile('ord-home', '🛒', t('dt_order'), (T.order_due || []).length ? '!' : '', '', true) : '', full ? '' : tile('inv-stock', '⋯', t('dt_more'), (T.rc_open || 0) + todo || '')].join('');
   const b = full ? [cs.length ? tile('lv-open', '📊', t('dt_levels')) : '', W ? tile('stk-tr-new', '🔁', t('dt_tr')) : '', W ? tile('ls-new', '🗑', t('dt_loss')) : '', cs.includes(st) ? tile('qp-open', '📍', t('qp_btn')) : ''].join('') : '';   // v175：放位置
   const c = full && admin ? tile('drk-menu', '🍷', t('dt_menu')) + tile('inv-drinks', '📈', t('dt_sales'), todo || '') : '';
@@ -6163,7 +6186,7 @@ function invTodoLines(T){
   if (!T || !T.sup) return [];
   const out = [];
   (T.unplaced || []).forEach(u => out.push(`<div class="item" data-act="kp-unplaced" data-store="${u.store}" style="cursor:pointer">🍹 ${esc(t('kp_unplaced', { s: u.store, n: u.n }))}</div>`));   // v143
-  if (T.rc_open) out.push(`<div class="item" data-act="inv-stock" style="cursor:pointer"><strong>🧾 ${esc(t('stk_todo', { n: T.rc_open }))}</strong></div>`);   // v142
+  if (T.rc_open) out.push(`<div class="item" data-act="stk-open-todo" style="cursor:pointer"><strong>🧾 ${esc(t('stk_todo', { n: T.rc_open }))}</strong></div>`);   // v142；v178：只有 1 张就直接打开
   (T.order_due || []).forEach(d => out.push(`<div class="item" data-act="ord-home" style="cursor:pointer"><strong>🛒 ${esc(t('ord_due', { p: d.supplier, s: d.store, d: dayLabel(d.delivery_day) }))}</strong></div>`));   // v169
   if (T.inbox_open) out.push(`<div class="item" data-act="inv-ib-list" style="cursor:pointer"><strong>📦 ${esc(t('inv_ib_todo', { n: T.inbox_open }))}</strong>${T.inbox_late ? ` <span class="tag bad">${esc(t('inv_ib_late_n', { n: T.inbox_late }))}</span>` : ''}</div>`);
   (T.due || []).forEach(d => out.push(`<div class="item" data-act="inv-area" data-id="${d.area}" style="cursor:pointer">🔄 ${storeTag(d.store)} ${esc(t('inv_due_line', { a: invName(d), n: d.n }))}</div>`));
@@ -6705,44 +6728,63 @@ function renderInvStock(){
                 ...(D.losses || []).map((x, i) => ({ x, at: ms(x.created_at), html: lsCard(x, i) })).filter(h => h.x.store === st)].sort((a, b) => b.at - a.at);   // v143：报损
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><div class="stabs-row"><h2>${esc(t('stk_title'))}</h2>${storeTabsHTML()}</div>
     ${!(D.drinks || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('stk_no_drinks'))}</div>` : ''}
+    ${open.length ? `<h3 style="margin-top:6px">${esc(t(open.some(r => r.can_confirm) ? 'stk_open_h_sup' : 'stk_open_h', { n: open.length }))}</h3><div class="list">${open.map(stkRcCard).join('')}</div>` : ''}
     ${drkTilesHTML(true)}
     <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('stk_hint'))}</div></details>
-    ${open.length ? `<h3>${esc(t(open.some(r => r.can_confirm) ? 'stk_open_h_sup' : 'stk_open_h', { n: open.length }))}</h3><div class="list">${open.map(stkRcCard).join('')}</div>` : ''}
     <h3>${esc(t('stk_hist_h'))} ${storeTag(st)}</h3><div class="list">${hist.map(h => h.html).join('') || `<div class="empty">${esc(t('stk_hist_none'))}</div>`}</div>`;
   invLoadPhotos();
 }
 // 送货单：新建 / 打开
-async function stkRcNew(){ const S = invS(); await stkReady(); if (state.tab !== 'inv') return; S.rc = { id: null, isNew: true, store: invMyStore() || STORES[0], supplier: '', doc_no: '', doc_date: '', photos: [], lines: [], total_cents: null, ai: null, note: '', status: 'open', can_edit: true }; invGo('rc'); }
+function stkRcBlank(){ return { id: null, isNew: true, store: invMyStore() || STORES[0], supplier: '', doc_no: '', doc_date: '', photos: [], lines: [], total_cents: null, ai: null, note: '', status: 'open', can_edit: true }; }
+function stkRcDraft(){ const R = invS().rc; return R && R.isNew && (R.photos.length || R.lines.length) ? R : null; }   // v178：没登记完的新送货单（只在这次打开 App 期间留着）
+async function stkRcNew(){ const S = invS(); await stkReady(); if (state.tab !== 'inv') return; if (!stkRcDraft()) S.rc = stkRcBlank(); invGo('rc'); }
+// v178：点「📷 收货」直接开相机；拍完才进送货单页，这时照片已经在传
+async function stkRcShoot(file){ const S = invS(); if (!state.token || !stkCanWrite()) return; state.tab = 'inv'; await stkReady(); if (state.tab !== 'inv') return; if (!stkRcDraft()) S.rc = stkRcBlank(); invGo('rc'); stkRcPhoto(file); }
 async function stkRcOpen(id){
   const S = invS();
+  if (stkRcDraft() && !confirm(t('stk_rc_leave_q'))) return;   // v178：还有一张没登记完的新单：先问
+  $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;   // v178：点了马上有反应
   try { const [r] = await Promise.all([rpc('inv_receipt', { ...tok(), p_id: id }), S.stock ? null : soft(rpc('inv_stock_home', tok()), null).then(d => { if (d && !S.stock) S.stock = d; })]); S.rc = stkRcFrom(r); invGo('rc'); }
-  catch(e){ toast(errText(e), true); }
+  catch(e){ toast(errText(e), true); render(); }
 }
-function stkRcFrom(r){ return { ...r, isNew: false, photos: (r.photos || []).map(p => ({ ...p })), lines: (r.lines || []).map(l => ({ ...l })) }; }
+function stkRcFrom(r){ return { ...r, isNew: false, photos: (r.photos || []).map(p => ({ ...p })), lines: (r.lines || []).map(l => ({ ...l })), readN: (r.photos || []).length }; }
 function stkRcKeep(){
   const R = invS().rc; if (!R) return;
   const v = id => { const e = document.getElementById(id); return e ? e.value : null; };
   const s = v('stk-rc-supplier'), d = v('stk-rc-date'), n = v('stk-rc-note');
-  if (s !== null) R.supplier = s; if (d !== null) R.doc_date = d; if (n !== null) R.note = n;
-  document.querySelectorAll('[data-rcl]').forEach(e => { if (e.dataset.rcl !== 'item'){ const l = R.lines[+e.dataset.i]; if (l) l[e.dataset.rcl] = e.value; } });
+  if (s !== null){ if (s !== (R.supplier || '')) R.supEd = true; R.supplier = s; }   // v178：手改过供应商 / 日期，自动重读不盖掉
+  if (d !== null){ if (d !== (R.doc_date || '')) R.dateEd = true; R.doc_date = d; }
+  if (n !== null) R.note = n;
+  document.querySelectorAll('[data-rcl]').forEach(e => { if (e.dataset.rcl !== 'item'){ const l = R.lines[+e.dataset.i]; if (l){ if (String(l[e.dataset.rcl] == null ? '' : l[e.dataset.rcl]) !== e.value) R.dirty = true; l[e.dataset.rcl] = e.value; } } });
 }
-function stkRcSumHTML(R){
+// v178：跳到要改的那一行（没给行号 = 第一行黄色的），展开、滑过去、闪一下
+function stkRcJump(i){
+  const S = invS(), R = S.rc; if (!R) return;
+  if (i == null) i = R.lines.findIndex(l => stkLineBad(l) || l.sure === false);
+  if (i < 0 || !R.lines[i]) return;
+  stkRcKeep(); R.lines[i].open = true; renderInvRc();
+  const el = document.getElementById('stk-l-' + i); if (!el) return;
+  el.scrollIntoView({ block: 'center' }); el.classList.add('rc-flash'); setTimeout(() => el.classList.remove('rc-flash'), 1900);
+}
+function stkRcSumHTML(R, ed){
   const items = R.lines.filter(l => l.kind === 'item'), tot = items.reduce((a, l) => a + (stkLineQty(l) || 0), 0), nBad = R.lines.filter(stkLineBad).length;
   return `${esc(t('stk_rc_sum', { n: items.length, b: drkNum(tot) }))}${R.total_cents != null ? ' · ' + esc(t('stk_rc_total', { c: eur(R.total_cents) })) : ''}
-    ${nBad ? `<div class="small" style="color:var(--copper)">${esc(t('stk_rc_bad', { n: nBad }))}</div>` : ''}`;
+    ${nBad ? (ed ? `<div><button data-act="stk-rc-jump">${esc(t('stk_rc_bad', { n: nBad }))} ›</button></div>` : `<div class="small" style="color:var(--copper)">${esc(t('stk_rc_bad', { n: nBad }))}</div>`) : ''}`;
 }
 function renderInvRc(){
   const S = invS(), R = S.rc, D = S.stock || {}; if (!R){ S.view = 'stock'; return viewInvStock(); }
   const ed = R.can_edit && stkCanWrite(), sup = stkCanWrite() && (R.isNew ? (D.sup_stores || []).includes(R.store) : R.can_confirm);
   const busy = R.photos.some(p => p.busy) || R.aiBusy || !!R.saving;   // v177：正在保存时重画，按钮也还锁着
   const drinks = (D.drinks || []).slice().sort((a, b) => invName(a).localeCompare(invName(b)));
+  const nPh = R.photos.filter(p => p.photo).length, nRead = R.readN || 0, unread = ed && !busy && nPh > nRead && !!(R.ai || R.lines.length);   // v178：新拍的页还没读
   const photos = `<div class="inv-row" style="flex-wrap:wrap;gap:8px;margin-bottom:8px">${R.photos.map((p, i) => `<div style="position:relative">${p.preview ? `<img class="inv-ph lg" src="${esc(p.preview)}" alt="">` : invImg(p.thumb, 'lg', p.photo)}
-      ${ed && !p.busy ? `<button class="link danger" data-act="stk-rc-delph" data-i="${i}" style="position:absolute;top:-4px;right:2px">✕</button>` : ''}</div>`).join('')}
+      ${ed && !p.busy ? `<button class="link danger rc-x" data-act="stk-rc-delph" data-i="${i}" style="position:absolute;top:-8px;right:-4px">✕</button>` : ''}</div>`).join('')}
     ${ed && R.photos.length < 5 ? `<label class="btn ${R.photos.length ? 'ghost' : ''}" style="display:flex;align-items:center;justify-content:center;flex:1;min-width:150px">${esc(t(R.photos.length ? 'stk_rc_more_page' : 'stk_rc_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="receipt" hidden></label>` : ''}</div>
     ${R.photos.some(p => p.busy) ? `<div class="small muted">${esc(t('inv_uploading'))}</div>` : ''}
     ${R.aiBusy ? `<div class="small muted" style="margin-bottom:6px">🤖 ${esc(t('stk_ai_busy'))}</div>` : ''}
     ${R.aiNote ? `<div class="small" style="color:var(--copper);margin-bottom:6px">🤖 ${esc(R.aiNote)}</div>` : ''}
-    ${ed && R.photos.some(p => p.photo) && !busy ? `<button class="link" data-act="stk-rc-ai" style="margin:0 0 8px">${esc(t(R.ai || R.lines.length ? 'stk_ai_again' : 'stk_ai_read'))}</button>` : ''}`;
+    ${unread ? `<div class="infobox" style="background:#FFF1C9;color:#6B5200">${esc(t('stk_rc_unread', { n: nRead + 1 }))}<br><button class="link" data-act="stk-rc-ai" style="white-space:normal;text-align:left;margin-top:4px">${esc(t('stk_rc_unread_btn'))}</button></div>` : ''}
+    ${ed && R.photos.some(p => p.photo) && !busy && !unread ? `<button class="link" data-act="stk-rc-ai" style="margin:0 0 8px">${esc(t(R.ai || R.lines.length ? 'stk_ai_again' : 'stk_ai_read'))}</button>` : ''}`;
   const head = ed ? `<div class="field"><label>${esc(t('inv_ib_store'))}</label><div class="seg sm">${STORES.map(s => `<button data-act="stk-rc-store" data-store="${s}" class="${R.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div></div>
       <div class="row" style="gap:8px"><div class="field" style="flex:2"><label for="stk-rc-supplier">${esc(t('stk_rc_supplier'))}</label><input class="input" id="stk-rc-supplier" value="${esc(R.supplier || '')}"></div>
       <div class="field" style="flex:1.4"><label for="stk-rc-date">${esc(t('stk_rc_date'))}</label><input class="input" type="date" id="stk-rc-date" value="${esc(R.doc_date || '')}"></div></div>
@@ -6756,12 +6798,17 @@ function renderInvRc(){
     const bad = stkLineBad(l), q = stkLineQty(l);
     const price = [l.price_cents != null ? t('stk_l_price', { c: eur(l.price_cents) }) : '', l.total_cents != null ? t('stk_l_total', { c: eur(l.total_cents) }) : ''].filter(Boolean).join(' · ');
     const kindTag = l.kind !== 'item' ? ` <span class="tag off">${esc(t(l.kind === 'pfand' ? 'stk_l_pfand' : 'stk_l_other'))}</span>` : '';
-    if (!ed) return `<div class="item"><strong>${esc(l.kind === 'item' ? (invName(l) || l.text || '?') : (l.text || '?'))}</strong>${kindTag}
+    const dn = l.kind === 'item' ? (invName(stkDrink(l.item_id) || l) || l.text || '?') : (l.text || '?');
+    // v178：配好的行收成一行字，点开才改；黄色的行（要改的、AI 不确定的）照旧展开
+    if (ed && !bad && l.sure !== false && !l.open && (l.kind !== 'item' || l.item_id)) return `<div class="item" id="stk-l-${i}"><button class="rc-line" data-act="stk-rc-openline" data-i="${i}"><span class="rc-n"><strong>${i + 1}. ${esc(dn)}</strong>${kindTag}
+      <small>${esc(l.kind === 'item' ? t('stk_l_calc', { q: drkNum(stkNum(l.qty_note)), u: l.unit_note || '', p: drkNum(stkNum(l.per_unit)), n: drkNum(q) }) : (l.qty_note != null && l.qty_note !== '' ? drkNum(stkNum(l.qty_note)) + ' ' + (l.unit_note || '') : ''))}${price ? ' · ' + esc(price) : ''}</small></span><span class="muted">✎</span></button></div>`;
+    if (!ed) return `<div class="item"><strong>${i + 1}. ${esc(l.kind === 'item' ? (invName(l) || l.text || '?') : (l.text || '?'))}</strong>${kindTag}
       ${l.kind === 'item' && l.text ? `<div class="small muted">${esc(t('stk_l_on_note', { x: l.text }))}</div>` : ''}
       <div class="meta">${esc(l.kind === 'item' ? t('stk_l_calc', { q: drkNum(l.qty_note), u: l.unit_note || '', p: drkNum(l.per_unit), n: drkNum(l.qty) }) : (l.qty_note != null ? drkNum(l.qty_note) + ' ' + (l.unit_note || '') : ''))}${price ? ' · ' + esc(price) : ''}</div></div>`;
-    return `<div class="item" style="${bad || l.sure === false ? 'border-left:4px solid var(--copper)' : ''}">
-      <div class="top"><div class="small muted">${esc(l.text ? t('stk_l_on_note', { x: l.text }) : t('stk_l_manual'))}${l.learned ? ` <span class="tag m">${esc(t('stk_l_learned'))}</span>` : ''}</div><button class="link danger" data-act="stk-rc-delline" data-i="${i}">✕</button></div>
+    return `<div class="item" id="stk-l-${i}" style="${bad || l.sure === false ? 'border-left:4px solid var(--copper)' : ''}">
+      <div class="top"><div class="small muted"><strong class="num">${i + 1}.</strong> ${esc(l.text ? t('stk_l_on_note', { x: l.text }) : t('stk_l_manual'))}${l.learned ? ` <span class="tag m">${esc(t('stk_l_learned'))}</span>` : ''}</div><button class="link danger rc-x" data-act="stk-rc-delline" data-i="${i}">✕</button></div>
       ${sel(l, i)}
+      ${(bad && !l.item_id) || l.sure === false ? `<div class="rc-quick">${l.sure === false && !bad ? `<button data-act="stk-rc-sure" data-i="${i}">${esc(t('stk_l_sure_btn'))}</button>` : ''}<button data-act="stk-rc-kind" data-i="${i}" data-k="other">${esc(t('stk_l_other_btn'))}</button><button data-act="stk-rc-kind" data-i="${i}" data-k="pfand">${esc(t('stk_l_pfand_btn'))}</button></div>` : ''}
       ${l.kind === 'item' ? `<div class="row" style="gap:6px;align-items:center;margin-top:6px;flex-wrap:wrap">
         <input class="input" style="width:72px" inputmode="decimal" data-rcl="qty_note" data-i="${i}" value="${esc(l.qty_note == null ? '' : l.qty_note)}" aria-label="${esc(t('stk_l_qty_hint'))}">
         <span style="white-space:nowrap">${esc(l.unit_note || t('stk_l_units'))} ×</span>
@@ -6772,17 +6819,25 @@ function renderInvRc(){
   };
   const who = R.isNew ? `<div class="small muted" style="margin-bottom:10px">${esc(t('stk_rc_hint'))}</div>`
     : `<div class="small muted" style="margin-bottom:8px">${esc(t('stk_rc_by', { n: R.created_name || '', t: fmtDateTime(R.created_at) }))}${R.done_at ? '<br>' + esc(t('stk_rc_done_by', { n: R.done_name || '', t: fmtDateTime(R.done_at) })) : ''}${R.cancelled_at ? '<br>' + esc(t('stk_cancelled_by', { n: R.cancelled_name || '', r: R.cancel_note || '' })) : ''}</div>`;
-  const acts = !stkCanWrite() ? '' : `${ed ? (sup ? `<button class="btn" data-act="stk-rc-confirm"${busy ? ' disabled' : ''}>${esc(t('stk_rc_confirm'))}</button><button class="btn ghost" data-act="stk-rc-save" style="margin-top:6px"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_sup'))}</button>`
-      : `<button class="btn" data-act="stk-rc-save"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_staff'))}</button>`) : ''}
+  // v178：合计和保存 / 确认入库固定在屏幕下面，不用滑到底
+  const nav = document.querySelector('nav'), navH = nav ? nav.offsetHeight : 0;
+  const acts = !stkCanWrite() ? `<div class="sheet" id="stk-rc-sum" style="margin:10px 0">${stkRcSumHTML(R, false)}</div>` : `<div class="rc-bar" style="bottom:${navH}px"><div class="rc-sum" id="stk-rc-sum">${stkRcSumHTML(R, ed)}</div>
+      ${ed ? `<div class="row">${sup ? `<button class="btn" data-act="stk-rc-confirm"${busy ? ' disabled' : ''}>${esc(t('stk_rc_confirm'))}</button><button class="btn ghost" data-act="stk-rc-save"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_short'))}</button>`
+      : `<button class="btn" data-act="stk-rc-save"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_staff'))}</button>`}</div>` : ''}</div>
     ${R.can_cancel && !R.isNew ? `<button class="link danger" data-act="stk-rc-cancel" style="margin-top:12px">${esc(t(R.status === 'done' ? 'stk_rc_undo' : 'stk_rc_cancel'))}</button>` : ''}`;
-  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t(ed ? 'inv_cancel' : 'stk_back'))}</button>
+  const back = `<button class="link" data-act="stk-rc-back" style="margin:2px 0 6px">${esc(t(ed && R.isNew ? 'inv_cancel' : 'stk_back'))}</button>`;
+  if (ed && R.isNew && !R.photos.length && !R.lines.length){   // v178：还没拍照：只有拍照这一步，不摆一张空表
+    $('#main').innerHTML = `${back}<h2 style="margin-top:4px">${esc(t('stk_rc_new_h'))}</h2><div class="small muted" style="margin-bottom:12px">${esc(t('stk_rc_first'))}</div>${photos}`;
+    return;
+  }
+  $('#main').innerHTML = `${back}
     <h2 style="margin-top:4px">${esc(R.isNew ? t('stk_rc_new_h') : stkRcTitle(R))} ${R.isNew ? '' : stkRcStatus(R)}</h2>${who}
     ${photos}${head}
     <h3>${esc(t('stk_lines_h', { n: R.lines.length }))}</h3>
     <div class="list">${R.lines.map(line).join('') || `<div class="empty">${esc(t(R.photos.length ? 'stk_lines_none' : 'stk_lines_first'))}</div>`}</div>
     ${ed ? `<button class="link" data-act="stk-rc-addline" style="margin:4px 0 8px">${esc(t('stk_l_add'))}</button>
       <div class="field"><label for="stk-rc-note">${esc(t('stk_rc_note'))}</label><textarea class="input" id="stk-rc-note" rows="2" style="height:auto;padding:10px 14px">${esc(R.note || '')}</textarea></div>` : (R.note ? `<div class="small" style="margin:6px 0">${esc(R.note)}</div>` : '')}
-    <div class="sheet" id="stk-rc-sum" style="margin:10px 0">${stkRcSumHTML(R)}</div>${acts}`;
+    ${acts}`;
   invLoadPhotos();
 }
 // 送货单照片：大一点（AI 要看清小字），传完第一页自动让 AI 读
@@ -6799,7 +6854,7 @@ async function stkRcPhoto(file){
   ph.busy = false;
   if (S.rc !== R) return;
   if (S.view === 'rc') stkRcKeep();
-  if (ph.photo && !R.ai && !R.lines.length && !R.photos.some(p => p.busy)) return stkRcAi(true);   // 第一页传完自动读
+  if (ph.photo && !R.photos.some(p => p.busy) && ((!R.ai && !R.lines.length) || (R.isNew && !R.dirty))) return stkRcAi(true);   // 第一页传完自动读；v178：再拍的页，下面的行没手改过也自动重读
   if (S.view === 'rc') keepScroll(renderInvRc);
 }
 async function stkRcAi(auto){
@@ -6810,16 +6865,24 @@ async function stkRcAi(auto){
   try {
     const r = await callTasks({ action: 'inv_ai_receipt', paths, store: R.store });
     if (S.rc !== R) return;
+    if (S.view === 'rc') stkRcKeep();
+    if (auto && R.dirty && R.lines.length){ R.aiBusy = false; if (S.view === 'rc') keepScroll(renderInvRc); return; }   // v178：自动重读的这段时间里手改了行：不换，留黄色提示让人自己点
     R.lines = (r.lines || []).map(l => { const d = stkDrink(l.item_id); return d ? { ...l, name_zh: d.name_zh, name_de: d.name_de } : { ...l }; });
-    if (r.supplier) R.supplier = r.supplier; if (r.doc_no) R.doc_no = r.doc_no; if (r.doc_date) R.doc_date = r.doc_date; if (r.total_cents != null) R.total_cents = r.total_cents;
+    if (r.supplier && !(auto && R.supEd)) R.supplier = r.supplier; if (r.doc_no) R.doc_no = r.doc_no; if (r.doc_date && !(auto && R.dateEd)) R.doc_date = r.doc_date; if (r.total_cents != null) R.total_cents = r.total_cents;
     R.ai = { model: r.model, at: new Date().toISOString(), supplier: r.supplier, doc_no: r.doc_no, doc_date: r.doc_date, total_cents: r.total_cents, lines: r.raw || r.lines };
     R.aiNote = !R.lines.length ? t('stk_ai_none') : ((state.lang === 'de' ? r.note_de : r.note_zh) || '');
+    R.readN = paths.length; R.dirty = false;   // v178：这几页读过了；行是 AI 刚给的，还没手改
+    if (!R.doc_date) R.doc_date = today();   // 日期没读到：先填今天，可以改
   } catch(e){ if (S.rc === R) R.aiNote = String(e && e.message) === 'INV_AI_FAILED' ? t('stk_ai_fail') : errText(e); }
-  R.aiBusy = false; if (S.rc === R && S.view === 'rc') keepScroll(renderInvRc);
+  R.aiBusy = false;
+  if (S.rc !== R) return;
+  if (R.isNew && R.photos.filter(p => p.photo).length > (R.readN || 0) && R.readN === paths.length && !R.dirty && !R.photos.some(p => p.busy)){ if (S.view === 'rc') keepScroll(renderInvRc); return stkRcAi(true); }   // v178：AI 读的时候又拍了一页：读完自动再读一次
+  if (S.view === 'rc') keepScroll(renderInvRc);
 }
 function stkRcLinePick(i, v){
   stkRcKeep(); const R = invS().rc, l = R && R.lines[i]; if (!l) return;
-  if (v === 'other' || v === 'pfand'){ l.kind = v; l.item_id = null; }
+  R.dirty = true;
+  if (v === 'other' || v === 'pfand'){ l.kind = v; l.item_id = null; l.sure = true; }
   else {
     l.kind = 'item'; l.item_id = v || null; const d = stkDrink(v);
     if (d){ l.name_zh = d.name_zh; l.name_de = d.name_de; l.sure = true;
@@ -6840,7 +6903,7 @@ async function stkRcSave(btn, confirmToo){
   if (!R.photos.some(p => p.photo)) return toast(t('err_INV_RC_PHOTO'), true);
   if (R.photos.some(p => p.busy) || R.aiBusy) return toast(t('stk_wait'), true);
   if (confirmToo){
-    const k = R.lines.findIndex(stkLineBad); if (k >= 0) return toast(t('stk_rc_fix', { n: k + 1 }), true);
+    const k = R.lines.findIndex(stkLineBad); if (k >= 0){ toast(t('stk_rc_fix', { n: k + 1 }), true); stkRcJump(k); return; }
     if (!R.lines.some(l => l.kind === 'item')) return toast(t('err_INV_RC_EMPTY'), true);
   }
   if (R.saving) return;   // v177：还在保存就不再存一次（以前只锁被点的那个按钮，再碰到另一个按钮会多存出一张单，确认两次库存就多一倍）
@@ -12893,14 +12956,30 @@ document.addEventListener('click', async ev => {
     }
     case 'inv-misses': invGo('misses'); break;
     case 'inv-drinks': { const S = invS(); S.dEdit = null; S.dl = null; S.dInfo = null; S.rcp = null; invGo('drinks'); break; }   // v137：饮料库存
-    case 'inv-stock': { const S = invS(); S.rc = null; S.tr = null; invGo('stock'); break; }   // v142：饮料收货 · 调拨
+    case 'inv-stock': { const S = invS(); if (!stkRcDraft()) S.rc = null; S.tr = null; invGo('stock'); break; }   // v142：饮料收货 · 调拨；v178：没登记完的新送货单先留着
+    case 'stk-rc-back': { const S = invS(), R = S.rc;   // v178：有没保存的东西先问一句
+      if (R && R.can_edit && stkCanWrite()){ stkRcKeep(); if ((R.isNew ? (R.photos.length || R.lines.length) : R.dirty) && !confirm(t(R.isNew ? 'stk_rc_leave_q' : 'stk_rc_leave_q2'))) break; }
+      S.rc = null; S.tr = null; invGo('stock'); break; }
+    case 'stk-rc-resume': { invGo('rc'); toast(t('stk_rc_resumed')); break; }
+    case 'stk-rc-jump': stkRcJump(null); break;
+    case 'stk-rc-openline': { stkRcKeep(); const R = invS().rc, l = R && R.lines[+el.dataset.i]; if (l){ l.open = true; keepScroll(renderInvRc); } break; }
+    case 'stk-rc-kind': stkRcLinePick(+el.dataset.i, el.dataset.k); break;
+    case 'stk-rc-sure': { stkRcKeep(); const R = invS().rc, l = R && R.lines[+el.dataset.i]; if (l){ l.sure = true; R.dirty = true; keepScroll(renderInvRc); } break; }
+    case 'stk-rc-undo': { const R = invS().rc, U = R && R.undo, here = state.tab === 'inv' && invS().view === 'rc'; if (!U) break; if (here) stkRcKeep(); R.undo = null;
+      if (U.kind === 'line') R.lines.splice(Math.min(U.i, R.lines.length), 0, U.v); else { R.photos.splice(Math.min(U.i, R.photos.length), 0, U.v); R.readN = U.readN; }
+      document.querySelectorAll('.toast').forEach(n => n.remove()); if (here) keepScroll(renderInvRc); break; }
+    case 'stk-open-todo': { const S = invS(), T = state.invTodo || {};   // v178：只有 1 张等确认：待办直接打开这张单
+      S.stock = await soft(rpc('inv_stock_home', tok()), S.stock);   // 先读最新的（旧的名单里可能是已经确认过的单）
+      const op = ((S.stock || {}).open || []).filter(r => r.can_confirm);
+      if (op.length === 1 && +T.rc_open === 1) stkRcOpen(op[0].id); else { if (!stkRcDraft()) S.rc = null; S.tr = null; invGo('stock'); }
+      break; }
     case 'stk-rc-new': stkRcNew(); break;
     case 'stk-rc-open': stkRcOpen(el.dataset.id); break;
     case 'stk-rc-store': { stkRcKeep(); const R = invS().rc; if (R){ R.store = el.dataset.store; keepScroll(renderInvRc); } break; }
-    case 'stk-rc-delph': { stkRcKeep(); const R = invS().rc; if (R){ R.photos.splice(+el.dataset.i, 1); keepScroll(renderInvRc); } break; }
+    case 'stk-rc-delph': { stkRcKeep(); const R = invS().rc; if (R){ const i = +el.dataset.i, v = R.photos.splice(i, 1)[0]; if (v){ R.undo = { kind: 'photo', i, v, readN: R.readN || 0 }; if (i < (R.readN || 0)) R.readN--; } keepScroll(renderInvRc); if (v) toastAction(t('stk_del_ph'), t('stk_undo'), { act: 'stk-rc-undo' }); } break; }   // v178：可以撤销
     case 'stk-rc-ai': stkRcAi(false); break;
-    case 'stk-rc-addline': { stkRcKeep(); const R = invS().rc; if (R){ R.lines.push({ kind: 'item', item_id: null, qty_note: '', unit_note: '', per_unit: '' }); keepScroll(renderInvRc); } break; }
-    case 'stk-rc-delline': { stkRcKeep(); const R = invS().rc; if (R){ R.lines.splice(+el.dataset.i, 1); keepScroll(renderInvRc); } break; }
+    case 'stk-rc-addline': { stkRcKeep(); const R = invS().rc; if (R){ R.dirty = true; R.lines.push({ kind: 'item', item_id: null, qty_note: '', unit_note: '', per_unit: '', open: true }); keepScroll(renderInvRc); } break; }
+    case 'stk-rc-delline': { stkRcKeep(); const R = invS().rc; if (R){ const i = +el.dataset.i, v = R.lines.splice(i, 1)[0]; if (v){ R.dirty = true; R.undo = { kind: 'line', i, v }; } keepScroll(renderInvRc); if (v) toastAction(t('stk_del_line'), t('stk_undo'), { act: 'stk-rc-undo' }); } break; }   // v178：可以撤销
     case 'stk-rc-save': stkRcSave(el, false); break;
     case 'stk-rc-confirm': stkRcSave(el, true); break;
     case 'stk-rc-cancel': stkRcCancel(); break;
@@ -13219,7 +13298,7 @@ document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.sopphoto && ev.target.files && ev.target.files[0]){ const f = ev.target.files[0]; ev.target.value = ''; sopPhotoChosen(f); return; }   // v111：SOP 照片
   if (ev.target.dataset && ev.target.dataset.invphoto && ev.target.files && ev.target.files[0]){   // v91：物品 / 储位照片
     const f = ev.target.files[0], k = ev.target.dataset.invphoto; ev.target.value = '';
-    if (k === 'item') invPhotoChosen(f); else if (k === 'inbox') invIbPhoto(f); else if (k === 'receipt') stkRcPhoto(f); else if (k === 'shelf') shelfPhoto(f); else invPlacePhoto(f);   // v143：拍一层认饮料   // v94：待归位照片；v142：送货单
+    if (k === 'item') invPhotoChosen(f); else if (k === 'inbox') invIbPhoto(f); else if (k === 'receipt') stkRcPhoto(f); else if (k === 'receipt-new') stkRcShoot(f); else if (k === 'shelf') shelfPhoto(f); else invPlacePhoto(f);   // v143：拍一层认饮料   // v94：待归位照片；v142：送货单
     return;
   }
   if (ev.target.dataset && ev.target.dataset.ct){ ctSave(ev.target); return; }   // v143：盘点的数，改完就存
@@ -13357,8 +13436,8 @@ document.addEventListener('input', ev => {
   if (id === 'drk-l-q'){ const L = invS().dl; if (L){ L.q = ev.target.value; clearTimeout(drkLinkTimer); drkLinkTimer = setTimeout(drkLinkSearch, 250); } }   // v137
   if (ev.target.dataset && (ev.target.dataset.rcl === 'qty_note' || ev.target.dataset.rcl === 'per_unit')){   // v142：送货单数量，边改边算瓶数
     const R = invS().rc, i = +ev.target.dataset.i, l = R && R.lines[i];
-    if (l){ l[ev.target.dataset.rcl] = ev.target.value; l.sure = true; const q = stkLineQty(l), s = document.getElementById('stk-q-' + i), m = document.getElementById('stk-rc-sum');
-      if (s) s.textContent = q != null ? t('stk_l_bottles', { n: drkNum(q) }) : '?'; if (m) m.innerHTML = stkRcSumHTML(R); } }
+    if (l){ l[ev.target.dataset.rcl] = ev.target.value; l.sure = true; R.dirty = true; const q = stkLineQty(l), s = document.getElementById('stk-q-' + i), m = document.getElementById('stk-rc-sum');
+      if (s) s.textContent = q != null ? t('stk_l_bottles', { n: drkNum(q) }) : '?'; if (m) m.innerHTML = stkRcSumHTML(R, true); } }
   if (ev.target.dataset && ev.target.dataset.trl === 'qty_note'){ const T = invS().tr, i = +ev.target.dataset.i, l = T && T.lines[i];
     if (l){ l.qty_note = ev.target.value; const b = stkTrBottles(l), s = document.getElementById('stk-tq-' + i); if (s) s.textContent = b != null ? '= ' + t('stk_l_bottles', { n: drkNum(b) }) : ''; } }
   if (id === 'invu-unit_no'){ invUnitKeep(); const b = $('#inv-u-prev'), U = invS().uform; if (b && U) b.textContent = t('inv_u_preview', { c: invUnitPreview(U) }); }
