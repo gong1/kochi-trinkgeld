@@ -462,6 +462,16 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .inv-scan{position:relative;background:#000;border-radius:var(--r-s);overflow:hidden;aspect-ratio:3/4;max-height:60vh}
 .inv-scan video{width:100%;height:100%;object-fit:cover;display:block}
 .inv-scan-box{position:absolute;inset:18% 12%;border:3px solid rgba(255,255,255,.85);border-radius:12px}
+.ord-row{padding:10px 0;border-top:1px solid var(--line)}
+.ord-row:first-child{border-top:0}
+.ord-row small{display:block;color:var(--muted);font-size:13px;line-height:1.35}
+.ord-tick{display:flex;gap:10px;align-items:flex-start;width:100%;border:0;border-top:1px solid var(--line);background:none;text-align:left;padding:10px 0;font-size:16px;line-height:1.3;color:var(--ink)}
+.ord-tick:first-of-type{border-top:0}
+.ord-tick i{flex:none;font-style:normal;width:24px;height:24px;border:2px solid var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff}
+.ord-tick.on i{background:var(--celadon-deep);border-color:var(--celadon-deep)}
+.ord-tick.on .ord-t{color:var(--muted);text-decoration:line-through}
+.ord-tick .ord-t{flex:1;min-width:0}
+.ord-tick small{display:inline-block;width:100%;color:var(--muted);font-size:13px}
 .ct-bar{position:sticky;z-index:5;background:var(--paper);padding:8px 0 6px;margin-bottom:8px;border-bottom:1px solid var(--line)}
 .ct-top{display:flex;gap:6px;align-items:center}
 .ct-prog{flex:1;min-width:0;font-weight:700;font-size:15px;line-height:1.2}
@@ -558,7 +568,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v179';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v180';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -892,6 +902,10 @@ zh: {
   drk_l_h:'「{a}」配到哪样饮料？', drk_l_factor:'卖 1 个 =', drk_l_factor_u:'个基本单位（瓶 / 罐）', drk_l_drinks:'饮料清单里的', drk_l_search:'物品里找', drk_l_q_ph:'找物品：名字、别名……', drk_l_new:'新建饮料', drk_l_new_btn:'新建并配上', drk_l_done:'「{a}」已配到 {n}', drk_l_none:'物品里没找到「{q}」，可以在下面新建。',
   drk_u_Flasche:'瓶', drk_u_Dose:'罐', drk_u_Kiste:'箱', drk_u_Karton:'箱', drk_u_Tray:'托', drk_u_Fass:'桶', drk_u_Packung:'包', drk_u_Stück:'个',   // v137
   // v142（数据库 v101 / 文件服务 tasks v24，老板 2026-11-05）：饮料收货（拍送货单 → AI 读 → 前场主管 / 老板确认入库）、两家店之间调拨
+  // v180：订货更顺（C 包）
+  ord_no_store:'{s} 的订货只有这家店的库管、前场主管和老板能看。请点上面换一家店。', ord_resume_d:'继续 {d} 没确认的订货单（{n} 行）', aih_short_n:'{n} 条会断货', ord_o_made:'{d} · {n} 出的建议',
+  ord_stale:'这张订货建议是 {d} 出的，数量是按那天的库存算的。', ord_recalc:'按今天的库存重新算', ord_recalc_q:'按今天的库存重新算这张订货建议？', ord_recalc_q2:'按今天的库存重新算？你手改过的数量会换成新的建议。', ord_recalced:'已按今天的库存重新算。',
+  ord_sum:'要订 {n} 种 · 共 {q} 件', ord_main_none:'这次没有要订的：库存够，或者目标库存还没设。', ord_rest_nt:'其中 {n} 种没设目标库存，App 算不出要不要订。', ord_to_targets:'去设目标库存', ord_done_n:'这台手机上已标 {k} / {n} 行输好（输好一行点一下；只记在这台手机上）', ord_use_sug:'用建议 {n}', ord_unsaved:'有一行的数量没存上，格子里已经放回上次存好的数。请看一眼，没问题再点确认。',
   // v179：盘点更快更准（B 包）
   ct_prog:'已填 {n} / {m} 种', ct_only:'只看没填的', ct_finish_short:'✓ 完成', ct_x:'别的地方', ct_q:'找饮料…', ct_info:'{d} · {who} 开始', ct_hint2:'要在开门前盘：盘点当天卖掉的会从这个数里扣。',
   ct_old:'这次盘点是 {d} 开始的，一直没完成。里面的数是那天填的，「应有」也按那天算。', ct_old_keep:'接着做', ct_old_restart:'放弃，重新开始', ct_restart_q:'放弃 {d} 那次没完成的盘点、重新开始？已填的数不算。', ct_restart_note:'旧的没完成的盘点，重新开始',
@@ -1602,6 +1616,10 @@ de: {
   drk_l_h:'„{a}“ welchem Getränk zuordnen?', drk_l_factor:'1 verkauft =', drk_l_factor_u:'Grundeinheiten (Flasche / Dose)', drk_l_drinks:'Aus der Getränkeliste', drk_l_search:'In den Artikeln suchen', drk_l_q_ph:'Artikel suchen: Name, Alias …', drk_l_new:'Neues Getränk', drk_l_new_btn:'Anlegen und zuordnen', drk_l_done:'„{a}“ zugeordnet: {n}', drk_l_none:'„{q}“ nicht gefunden – unten neu anlegen.',
   drk_u_Flasche:'Flasche', drk_u_Dose:'Dose', drk_u_Kiste:'Kiste', drk_u_Karton:'Karton', drk_u_Tray:'Tray', drk_u_Fass:'Fass', drk_u_Packung:'Packung', drk_u_Stück:'Stück',   // v137
   // v142 (DB v101 / tasks v24)
+  // v180
+  ord_no_store:'Bestellungen für {s} sehen nur Lagerverantwortliche dieser Filiale, die Service-Leitung und der Chef. Bitte oben die andere Filiale wählen.', ord_resume_d:'Weiter mit dem offenen Vorschlag vom {d} ({n} Zeilen)', aih_short_n:'{n} gehen aus', ord_o_made:'{d} · Vorschlag von {n}',
+  ord_stale:'Dieser Bestellvorschlag ist vom {d}; die Mengen sind mit dem Bestand von diesem Tag gerechnet.', ord_recalc:'Mit dem heutigen Bestand neu rechnen', ord_recalc_q:'Diesen Bestellvorschlag mit dem heutigen Bestand neu rechnen?', ord_recalc_q2:'Mit dem heutigen Bestand neu rechnen? Deine geänderten Mengen werden durch den neuen Vorschlag ersetzt.', ord_recalced:'Mit dem heutigen Bestand neu gerechnet.',
+  ord_sum:'{n} Artikel · zusammen {q} Stück', ord_main_none:'Diesmal ist nichts zu bestellen: Der Bestand reicht – oder der Sollbestand ist noch nicht eingetragen.', ord_rest_nt:'{n} davon haben keinen Sollbestand – die App kann nicht rechnen, ob bestellt werden muss.', ord_to_targets:'Sollbestand eintragen', ord_done_n:'{k} / {n} Zeilen auf diesem Gerät abgehakt (nach jeder Zeile antippen; wird nur auf diesem Gerät gemerkt)', ord_use_sug:'Vorschlag {n} nehmen', ord_unsaved:'Bei einer Zeile wurde die Menge nicht gespeichert; im Feld steht wieder die zuletzt gespeicherte Zahl. Bitte kurz prüfen und dann noch einmal bestätigen.',
   // v179
   ct_prog:'{n} / {m} Getränke gezählt', ct_only:'Nur leere', ct_finish_short:'✓ Fertig', ct_x:'Andere Stellen', ct_q:'Getränk suchen…', ct_info:'{d} · begonnen von {who}', ct_hint2:'Vor dem Öffnen zählen: Was am Zähltag verkauft wird, wird von dieser Zahl abgezogen.',
   ct_old:'Diese Inventur wurde am {d} begonnen und nie abgeschlossen. Die Zahlen sind von diesem Tag, auch der Sollbestand wird für diesen Tag gerechnet.', ct_old_keep:'Weitermachen', ct_old_restart:'Verwerfen, neu beginnen', ct_restart_q:'Die nicht abgeschlossene Inventur vom {d} verwerfen und neu beginnen? Die eingetragenen Zahlen zählen nicht.', ct_restart_note:'Alte, nicht abgeschlossene Inventur – neu begonnen',
@@ -2007,7 +2025,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=17'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=18'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -5343,7 +5361,8 @@ function storeTabsHTML(){
   const cur = curStore(), byGeo = !!storeOk(state.geoStore) && cur === state.geoStore;
   return `<div class="stabs"><div class="seg">${STORES.map(x => `<button data-act="store-pick" data-store="${x}" class="${x === cur ? 'on' : ''}">${esc(x)}</button>`).join('')}</div>${geoCan() ? `<button class="stabs-geo${byGeo ? ' on' : ''}${geoBusy ? ' busy' : ''}" data-act="store-geo" title="${esc(t('geo_btn'))}" aria-label="${esc(t('geo_btn'))}">📍</button>` : ''}</div>`;
 }
-function storeChanged(){ if (state.tab === 'inv' && invS().view === 'levels' && invS().levels) keepScroll(renderInvLevels);   // v179：库存表
+function storeChanged(){ if (state.tab === 'inv' && invS().view === 'orders' && invS().ord) keepScroll(renderInvOrders);   // v180：订货
+  else if (state.tab === 'inv' && invS().view === 'levels' && invS().levels) keepScroll(renderInvLevels);   // v179：库存表
   else if (state.tab === 'inv' && invS().view === 'qplace'){ invS().qp = null; render(); } else if (state.tab === 'inv' && invS().view === 'home' && invS().home) keepScroll(renderInvHome); else if (state.tab === 'inv' && invS().view === 'stock' && invS().stock) keepScroll(renderInvStock); else render(); }
 function storePick(x){ if (!storeOk(x)) return; state.storeSel = { s: x, at: Date.now(), auto: autoStore() }; LS.set('curStore', x); storeChanged(); }
 // ask = true：点了 📍（浏览器会问一次能不能用位置）；ask = false：以前允许过才悄悄定位，10 分钟内不重复
@@ -6221,7 +6240,7 @@ function invTodoLines(T){
   const out = [];
   (T.unplaced || []).forEach(u => out.push(`<div class="item" data-act="kp-unplaced" data-store="${u.store}" style="cursor:pointer">🍹 ${esc(t('kp_unplaced', { s: u.store, n: u.n }))}</div>`));   // v143
   if (T.rc_open) out.push(`<div class="item" data-act="stk-open-todo" style="cursor:pointer"><strong>🧾 ${esc(t('stk_todo', { n: T.rc_open }))}</strong></div>`);   // v142；v178：只有 1 张就直接打开
-  (T.order_due || []).forEach(d => out.push(`<div class="item" data-act="ord-home" style="cursor:pointer"><strong>🛒 ${esc(t('ord_due', { p: d.supplier, s: d.store, d: dayLabel(d.delivery_day) }))}</strong></div>`));   // v169
+  (T.order_due || []).forEach(d => out.push(`<div class="item" data-act="${stkCanWrite() ? 'ord-start' : 'ord-home'}" data-store="${esc(d.store)}" data-sup="${esc(d.supplier_id)}" style="cursor:pointer"><strong>🛒 ${esc(t('ord_due', { p: d.supplier, s: d.store, d: dayLabel(d.delivery_day) }))}</strong></div>`));   // v169
   if (T.inbox_open) out.push(`<div class="item" data-act="inv-ib-list" style="cursor:pointer"><strong>📦 ${esc(t('inv_ib_todo', { n: T.inbox_open }))}</strong>${T.inbox_late ? ` <span class="tag bad">${esc(t('inv_ib_late_n', { n: T.inbox_late }))}</span>` : ''}</div>`);
   (T.due || []).forEach(d => out.push(`<div class="item" data-act="inv-area" data-id="${d.area}" style="cursor:pointer">🔄 ${storeTag(d.store)} ${esc(t('inv_due_line', { a: invName(d), n: d.n }))}</div>`));
   if (T.misses) out.push(`<div class="item" data-act="inv-misses" style="cursor:pointer">🔍 ${esc(t('inv_miss_todo', { n: T.misses }))}</div>`);
@@ -6517,8 +6536,10 @@ function aihTargetHTML(store){
   const row = h => { const txt = h.kind === 'target' ? t('aih_t_target', { t: drkNum(h.target), s: drkNum(h.sug), w: drkNum(h.week) })
       : h.kind === 'short' ? t('aih_t_short', { d: dayLabel(h.delivery_day), k: drkNum(h.stock), w: drkNum(h.week) }) : t('aih_t_over', { n: drkNum(h.weeks), k: drkNum(h.stock), w: drkNum(h.week) });
     return `<div class="item"><strong>${esc(invName(h))}</strong><div class="meta" style="${h.kind === 'short' ? 'color:var(--copper)' : ''}">${h.kind === 'short' ? '⚠ ' : ''}${esc(txt)}</div>
-      ${W ? `<div class="acts">${h.kind === 'target' ? `<button class="link" data-act="aih-t-ok" data-i="${h.i}">${esc(t('aih_t_ok', { n: drkNum(h.sug) }))}</button>` : ''}<button class="link" data-act="aih-no" data-key="${esc(h.key)}">${esc(t(h.kind === 'target' ? 'aih_no' : 'aih_seen'))}</button></div>` : ''}</div>`; };
-  return span + `<div class="small" style="font-weight:600;margin:4px 0">${esc(t('aih_t_h', { n: H.length }))}</div><div class="list" style="margin-bottom:10px">${H.map(row).join('')}</div>`;
+      ${W ? `<div class="rc-quick">${h.kind === 'target' ? `<button data-act="aih-t-ok" data-key="${esc(h.key)}">${esc(t('aih_t_ok', { n: drkNum(h.sug) }))}</button>` : ''}<button data-act="aih-no" data-key="${esc(h.key)}">${esc(t(h.kind === 'target' ? 'aih_no' : 'aih_seen'))}</button></div>` : ''}</div>`; };
+  // v180：建议放在主按钮下面、默认收起（后到的建议不会把「出订货建议」顶走）；有会断货的在标题上写出来
+  const nShort = H.filter(h => h.kind === 'short').length, open = !!(invS().aihOpen || {})[store];
+  return span + `<details class="fold" data-aih="${esc(store)}"${open ? ' open' : ''} style="margin-bottom:10px"><summary>${esc(t('aih_t_h', { n: H.length }))}${nShort ? ` <span style="color:var(--copper)">· ⚠ ${esc(t('aih_short_n', { n: nShort }))}</span>` : ''}</summary><div class="inner"><div class="list">${H.map(row).join('')}</div></div></details>`;
 }
 // ---------- v169：饮料进销存第 3 步（数据库 v124，老板 2026-11-11）：订货——订货建议、目标库存、订货单、到货对订单。App 不下单，人照着清单去供应商那边下 ----------
 function ordDow(n){ return n ? t('wd')[n - 1] : '—'; }
@@ -6537,26 +6558,31 @@ function ordOrderRow(o){
   return `<div class="item" data-act="ord-open" data-id="${o.id}" style="cursor:pointer"><div class="top"><div><strong>${esc(t('ord_row', { d: dayLabel(o.delivery_day), s: ordStatus(o) }))}</strong>
     <div class="meta">${esc(t('ord_by', { n: o.confirmed_name || o.created_name || '', t: fmtDateTime(o.confirmed_at || o.cancelled_at || o.created_at) }))} · ${n}</div></div><span class="muted">›</span></div></div>`;
 }
+function ordDay(o){ return o && o.created_at ? ymd(new Date(o.created_at)) : ''; }   // v180：这张订货建议是哪天出的
+function ordSumText(o){ const L = (o.lines || []).filter(l => +l.qty > 0); return t('ord_sum', { n: L.length, q: drkNum(L.reduce((a, l) => a + (+l.qty || 0), 0)) }); }
 function renderInvOrders(){
   const S = invS(), D = S.ord; if (!D) return;
-  const W = stkCanWrite();
+  const W = stkCanWrite(), cur = curStore(), st = (D.stores || []).find(x => x.store === cur);   // v180：门店标签，只显示选中的那家店
+  const head = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><div class="stabs-row"><h2>${esc(t('ord_title'))}</h2>${storeTabsHTML()}</div>`;
+  if (!st){ $('#main').innerHTML = `${head}<div class="empty">${esc(t('ord_no_store', { s: cur }))}</div>`; return; }
   const dowSel = (id, v, none) => `<select class="input" id="${id}" style="width:auto">${none ? `<option value="">${esc(t('ord_day_none'))}</option>` : ''}${[1, 2, 3, 4, 5, 6, 7].map(n => `<option value="${n}"${+v === n ? ' selected' : ''}>${esc(ordDow(n))}</option>`).join('')}</select>`;
-  const sup = (st, sp) => `<div class="sheet" style="margin-bottom:10px"><strong>${esc(sp.name)}</strong>
+  const sup = sp => { const nOpen = sp.open ? (sp.open.lines || []).filter(l => +l.qty > 0).length : 0, od = ordDay(sp.open), old = sp.open && od && od < today();
+    return `<div class="sheet" style="margin-bottom:10px"><strong>${esc(sp.name)}</strong>
       <div class="small muted" style="margin:4px 0">${esc(t('ord_days', { o: ordDow(sp.order_dow), d: ordDow(sp.delivery_dow) }))}${sp.next_delivery ? ' · ' + esc(t('ord_next', { d: dayLabel(sp.next_delivery) })) : ''}</div>
       ${sp.order_today ? `<div class="small" style="color:var(--celadon-deep);font-weight:600;margin-bottom:4px">${esc(t('ord_today'))}</div>` : ''}
       ${!st.counted ? `<div class="small" style="color:var(--copper);margin-bottom:4px">${esc(t('ord_no_count'))}</div>` : ''}
-      ${+sp.no_target ? `<div class="small" style="color:var(--copper);margin-bottom:4px">${esc(t('ord_no_target', { n: sp.no_target }))}</div>` : ''}
-      <div class="row" style="gap:8px;flex-wrap:wrap;margin-top:6px">${W && sp.delivery_dow ? `<button class="btn${sp.open ? '' : ' ghost'}" data-act="ord-start" data-store="${st.store}" data-sup="${sp.id}">${esc(sp.open ? t('ord_resume', { n: (sp.open.lines || []).filter(l => +l.qty > 0).length }) : t('ord_start'))}</button>` : ''}
-        <button class="btn ghost" data-act="ord-targets" data-store="${st.store}" data-sup="${sp.id}">${esc(t('ord_targets_btn'))}</button></div>
+      ${W && sp.delivery_dow ? `<button class="btn${sp.open || sp.order_today ? '' : ' ghost'}" data-act="ord-start" data-store="${st.store}" data-sup="${sp.id}" style="margin-top:6px;height:auto;min-height:52px;padding:8px 10px;line-height:1.25">${esc(sp.open ? (old ? t('ord_resume_d', { d: dayLabel(od), n: nOpen }) : t('ord_resume', { n: nOpen })) : t('ord_start'))}</button>` : ''}
+      <button class="btn ghost" data-act="ord-targets" data-store="${st.store}" data-sup="${sp.id}" style="margin-top:6px;height:46px;font-size:15px">${esc(t('ord_targets_btn'))}${+sp.no_target ? ` <span class="tag pend">${sp.no_target}</span>` : ''}</button>
+      ${+sp.no_target ? `<div class="small" style="color:var(--copper);margin-top:4px">${esc(t('ord_no_target', { n: sp.no_target }))}</div>` : ''}
       ${D.admin && W ? `<details class="fold" style="margin-top:8px"><summary>${esc(t('ord_days_edit'))}</summary><div class="inner"><div class="row" style="gap:8px;flex-wrap:wrap;align-items:center">
         <label class="small" for="ord-do-${st.store}-${sp.id}">${esc(t('ord_day_order'))}</label>${dowSel(`ord-do-${st.store}-${sp.id}`, sp.order_dow, true)}
         <label class="small" for="ord-dd-${st.store}-${sp.id}">${esc(t('ord_day_delivery'))}</label>${dowSel(`ord-dd-${st.store}-${sp.id}`, sp.delivery_dow || 5, false)}
         <button class="btn ghost" data-act="ord-days-save" data-store="${st.store}" data-sup="${sp.id}">${esc(t('ord_days_save'))}</button></div></div></details>` : ''}
-      ${(sp.orders || []).length ? `<div class="small muted" style="margin:10px 0 4px">${esc(t('ord_recent'))}</div><div class="list">${sp.orders.map(ordOrderRow).join('')}</div>` : ''}</div>`;
+      ${(sp.orders || []).length ? `<div class="small muted" style="margin:10px 0 4px">${esc(t('ord_recent'))}</div><div class="list">${sp.orders.map(ordOrderRow).join('')}</div>` : ''}</div>`; };
   const un = D.unlinked || [];
-  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><h2 style="margin-top:4px">${esc(t('ord_title'))}</h2>
-    <div class="small muted" style="margin-bottom:10px">${esc(t('ord_hint'))}</div>
-    ${(D.stores || []).map(st => `<h3>${storeTag(st.store)}</h3>${aihTargetHTML(st.store)}${(st.suppliers || []).map(sp => sup(st, sp)).join('')}`).join('')}
+  $('#main').innerHTML = `${head}
+    ${(st.suppliers || []).map(sup).join('')}${aihTargetHTML(st.store)}
+    <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('ord_hint'))}</div></details>
     ${un.length ? `<details class="fold"><summary>${esc(t('ord_unlinked_h', { n: un.length }))}</summary><div class="inner"><div class="small muted" style="margin-bottom:8px">${esc(t('ord_unlinked_hint'))}</div>
       ${un.map(x => `<div style="margin-bottom:10px"><div>${esc(x.name)} <span class="small muted">· ${esc(t('ord_art', { a: x.art_no }))} · ${esc(ordUnit(x))}</span></div>
         <select class="input" data-ordlink="${x.id}" aria-label="${esc(t('ord_link_pick'))}" style="margin-top:4px"><option value="">${esc(t('ord_link_pick'))}</option>${(D.drinks || []).map(d => `<option value="${d.id}">${esc(invName(d))}</option>`).join('')}</select></div>`).join('')}</div></details>` : ''}`;
@@ -6566,40 +6592,60 @@ function ordPortal(o){ if (o.portal) return o.portal; const D = invS().ord || {}
 function ordListText(o){ return (o.lines || []).filter(l => +l.qty > 0).map(l => `${l.art_no}\t${drkNum(l.qty)} ${l.order_unit}\t${l.sname}`).join('\n'); }
 function ordLineHTML(l, ed){
   const calc = l.target == null ? t('ord_calc_nt') : l.stock == null ? t('ord_calc_nc', { w: drkNum(l.week) }) : t('ord_calc', { t: drkNum(l.target), s: drkNum(l.stock), u: drkNum(l.until), n: drkNum(Math.max(0, +l.need || 0)) });
-  return `<div style="margin:12px 0"><div><strong>${esc(invName(l))}</strong></div><div class="small muted">${esc(l.sname)} · ${esc(t('ord_art', { a: l.art_no }))}</div>
-    <div class="small muted">${esc(calc)}</div>
-    <div class="row" style="gap:8px;align-items:center;margin-top:4px"><input class="input" style="width:80px;flex:0 0 80px" inputmode="numeric" data-ordq="${l.si}" aria-label="${esc(invName(l))}" value="${esc(drkNum(l.qty))}" ${ed ? '' : 'disabled'}>
-      <span class="small">${esc(ordUnit(l))}</span><span class="small muted">${esc(t('ord_sug', { n: drkNum(l.suggest) }))}</span><span class="small muted" id="ord-ok-${l.si}"></span></div></div>`;
+  const step = +l.step > 0 ? +l.step : 1;   // v180：数量用 −/＋ 改（一次一个订货单位的倍数），也可以直接打字；点「用建议」回到建议的数
+  return `<div class="ord-row"><div><strong>${esc(invName(l))}</strong></div><small>${esc(l.sname)} · ${esc(t('ord_art', { a: l.art_no }))}</small><small>${esc(calc)}</small>
+    <div class="ct-in">${ed ? `<button class="ct-f" data-act="ord-step" data-si="${l.si}" data-d="-${step}" aria-label="−${step}">−</button>` : ''}<input class="input" inputmode="numeric" data-ordq="${l.si}" aria-label="${esc(invName(l))}" value="${esc(drkNum(l.qty))}" ${ed ? '' : 'disabled'}>${ed ? `<button class="ct-f" data-act="ord-step" data-si="${l.si}" data-d="${step}" aria-label="+${step}">＋</button>` : ''}
+      <span class="small">${esc(ordUnit(l))}</span><span id="ord-sg-${l.si}" style="display:contents">${ordSugHTML(l, ed)}</span><span class="ct-ok" id="ord-ok-${l.si}"></span></div></div>`;
 }
+function ordSugHTML(l, ed){ return ed && +l.qty !== +l.suggest ? `<button class="link" data-act="ord-sug" data-si="${l.si}">${esc(t('ord_use_sug', { n: drkNum(l.suggest) }))}</button>` : `<span class="small muted">${esc(t('ord_sug', { n: drkNum(l.suggest) }))}</span>`; }
+function ordTicks(o){ const a = LS.get('ordTick:' + o.id, []); return new Set(Array.isArray(a) ? a : []); }   // v180：照着清单往供应商那边输，输好一行点一下（记在这台设备上）
 function renderInvOrder(){
   const S = invS(), o = S.ordCur; if (!o){ S.view = 'orders'; return viewInvOrders(); }
-  const W = stkCanWrite(), ed = o.status === 'open' && W, L = o.lines || [];
+  const W = stkCanWrite(), ed = o.status === 'open' && W, L = o.lines || [], od = ordDay(o);
   const head = `<button class="link" data-act="ord-home" style="margin:2px 0 6px">← ${esc(t('ord_title'))}</button><h2 style="margin-top:4px">${esc(t('ord_o_title', { s: o.store, p: o.supplier }))}</h2>
-    <div class="small muted" style="margin-bottom:10px">${esc(t('ord_o_delivery', { d: dayLabel(o.delivery_day) }))} · ${esc(ordStatus(o))}${o.cancel_note ? ' · ' + esc(o.cancel_note) : ''}</div>`;
+    <div class="small muted" style="margin-bottom:10px">${esc(t('ord_o_delivery', { d: dayLabel(o.delivery_day) }))} · ${esc(ordStatus(o))}${o.cancel_note ? ' · ' + esc(o.cancel_note) : ''}${od ? '<br>' + esc(t('ord_o_made', { d: dayLabel(od), n: o.created_name || '' })) : ''}</div>`;
   if (o.status === 'open'){
-    const main = L.filter(l => +l.qty > 0 || +l.suggest > 0), rest = L.filter(l => !(+l.qty > 0 || +l.suggest > 0));
-    $('#main').innerHTML = head + `${o.no_count ? `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('ord_no_count'))}</div>` : ''}
-      <div class="sheet" style="margin-bottom:10px">${main.map(l => ordLineHTML(l, ed)).join('') || `<div class="empty">—</div>`}</div>
-      ${rest.length ? `<details class="fold"><summary>${esc(t('ord_rest', { n: rest.length }))}</summary><div class="inner">${rest.map(l => ordLineHTML(l, ed)).join('')}</div></details>` : ''}
-      ${ed ? `<button class="btn" data-act="ord-confirm" style="margin-top:10px">${esc(t('ord_confirm'))}</button><button class="link danger" data-act="ord-cancel" style="margin-top:12px">${esc(t('ord_cancel'))}</button>` : ''}`;
+    const main = L.filter(l => +l.qty > 0 || +l.suggest > 0), rest = L.filter(l => !(+l.qty > 0 || +l.suggest > 0)), nNt = rest.filter(l => l.target == null).length;
+    const nav = document.querySelector('nav'), navH = nav ? nav.offsetHeight : 0;
+    const toT = `<button class="link" data-act="ord-targets" data-store="${esc(o.store)}" data-sup="${esc(o.supplier_id)}" style="white-space:normal;text-align:left">${esc(t('ord_to_targets'))} ›</button>${ed ? ` <button class="link" data-act="ord-recalc" style="white-space:normal;text-align:left">${esc(t('ord_recalc'))}</button>` : ''}`;   // 设完目标回来点「重新算」，这张建议才会变
+    $('#main').innerHTML = head + `${ed && od && od < today() ? `<div class="infobox" style="background:#FFF1C9;color:#6B5200">${esc(t('ord_stale', { d: dayLabel(od) }))}<div class="rc-quick"><button data-act="ord-recalc">${esc(t('ord_recalc'))}</button></div></div>` : ''}
+      ${o.no_count ? `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('ord_no_count'))}</div>` : ''}
+      <div class="sheet" style="margin-bottom:10px">${main.map(l => ordLineHTML(l, ed)).join('') || `<div class="empty">${esc(t('ord_main_none'))}<br>${toT}</div>`}</div>
+      ${rest.length ? `<details class="fold"${S.ordRest === o.id ? ' open' : ''} data-ordrest="${o.id}"><summary>${esc(t('ord_rest', { n: rest.length }))}</summary><div class="inner">${nNt ? `<div class="small" style="color:var(--copper);margin-bottom:6px">${esc(t('ord_rest_nt', { n: nNt }))} ${toT}</div>` : ''}${rest.map(l => ordLineHTML(l, ed)).join('')}</div></details>` : ''}
+      ${ed ? `<div class="rc-bar" style="bottom:${navH}px"><div class="rc-sum" id="ord-sum">${esc(ordSumText(o))}</div><div class="row"><button class="btn" data-act="ord-confirm">${esc(t('ord_confirm'))}</button></div></div>
+        <button class="link danger" data-act="ord-cancel" style="margin-top:12px">${esc(t('ord_cancel'))}</button>` : ''}`;
     return;
   }
-  const lines = L.filter(l => +l.qty > 0), got = o.got || {}, portal = ordPortal(o);
+  const lines = L.filter(l => +l.qty > 0), got = o.got || {}, portal = ordPortal(o), conf = o.status === 'confirmed', ticks = conf ? ordTicks(o) : new Set();
   const cmp = l => { const ord = +l.qty * +l.unit_qty, g = +got[l.item] || 0; if (!+o.receipts) return '';
-    return `<div class="small" style="${Math.abs(g - ord) < 0.01 ? 'color:var(--celadon-deep)' : 'color:var(--copper);font-weight:600'}">${esc(Math.abs(g - ord) < 0.01 ? t('ord_cmp_ok', { g: drkNum(g) }) : g < ord ? t('ord_cmp_less', { o: drkNum(ord), g: drkNum(g), d: drkNum(ord - g) }) : t('ord_cmp_more', { o: drkNum(ord), g: drkNum(g), d: drkNum(g - ord) }))}</div>`; };
-  $('#main').innerHTML = head + `<div class="sheet" style="margin-bottom:10px">${lines.map(l => `<div style="margin:10px 0"><strong>${esc(drkNum(l.qty))} ${esc(ordUnit(l))}</strong> · ${esc(invName(l))}
-        <div class="small muted">${esc(l.sname)} · ${esc(t('ord_art', { a: l.art_no }))}</div>${o.status === 'confirmed' ? cmp(l) : ''}</div>`).join('') || `<div class="empty">—</div>`}</div>
-    ${o.status === 'confirmed' ? `<h3>${esc(t('ord_cmp_h'))}</h3>${+o.receipts ? ((o.extra || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('ord_cmp_extra', { l: o.extra.map(x => `${invName(x)} ${drkNum(x.qty)}`).join('、') }))}</div>` : '') : `<div class="small muted" style="margin-bottom:10px">${esc(t('ord_cmp_none'))}</div>`}
-      <h3>${esc(t('ord_list_h'))}</h3><pre class="sheet" style="white-space:pre-wrap;font-size:.85em;margin-bottom:8px" id="ord-list">${esc(ordListText(o))}</pre>
-      <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="ord-copy">${esc(t('ord_copy'))}</button>${portal ? `<a class="btn ghost" href="${esc(portal)}" target="_blank" rel="noopener">${esc(t('ord_portal', { p: o.supplier }))}</a>` : ''}</div>
+    return `<small style="${Math.abs(g - ord) < 0.01 ? 'color:var(--celadon-deep)' : 'color:var(--copper);font-weight:600'}">${esc(Math.abs(g - ord) < 0.01 ? t('ord_cmp_ok', { g: drkNum(g) }) : g < ord ? t('ord_cmp_less', { o: drkNum(ord), g: drkNum(g), d: drkNum(ord - g) }) : t('ord_cmp_more', { o: drkNum(ord), g: drkNum(g), d: drkNum(g - ord) }))}</small>`; };
+  // v180：确认以后最上面就是「复制清单」和「打开供应商的下单页面」；清单只列一遍，每行可以点一下标成「输好了」
+  const row = l => conf ? `<button class="ord-tick${ticks.has(l.si) ? ' on' : ''}" data-act="ord-tick" data-si="${l.si}"><i>${ticks.has(l.si) ? '✓' : ''}</i><span class="ord-t"><strong>${esc(drkNum(l.qty))} ${esc(ordUnit(l))}</strong> · ${esc(invName(l))}<small>${esc(l.sname)} · ${esc(t('ord_art', { a: l.art_no }))}</small>${cmp(l)}</span></button>`
+    : `<div class="ord-row"><strong>${esc(drkNum(l.qty))} ${esc(ordUnit(l))}</strong> · ${esc(invName(l))}<small>${esc(l.sname)} · ${esc(t('ord_art', { a: l.art_no }))}</small></div>`;
+  $('#main').innerHTML = head + `${conf ? `<div class="small" style="margin-bottom:6px;font-weight:600">${esc(t('ord_list_h'))}</div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin-bottom:8px"><button class="btn" data-act="ord-copy" style="height:48px;font-size:15px">${esc(t('ord_copy'))}</button>${portal ? `<a class="btn ghost" href="${esc(portal)}" target="_blank" rel="noopener" style="height:48px;font-size:15px;display:flex;align-items:center;justify-content:center;text-decoration:none;text-align:center;line-height:1.2">${esc(t('ord_portal', { p: o.supplier }))}</a>` : ''}</div>
+      <div class="small muted" id="ord-done" style="margin-bottom:6px">${esc(t('ord_done_n', { k: lines.filter(l => ticks.has(l.si)).length, n: lines.length }))}</div>` : ''}
+    <div class="sheet" style="margin-bottom:10px">${lines.map(row).join('') || `<div class="empty">—</div>`}</div>
+    ${conf ? `<h3>${esc(t('ord_cmp_h'))}</h3>${+o.receipts ? ((o.extra || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('ord_cmp_extra', { l: o.extra.map(x => `${invName(x)} ${drkNum(x.qty)}`).join('、') }))}</div>` : '') : `<div class="small muted" style="margin-bottom:10px">${esc(t('ord_cmp_none'))}</div>`}
       ${W ? `<button class="link danger" data-act="ord-cancel" style="margin-top:14px">${esc(t('ord_cancel'))}</button>` : ''}` : ''}`;
 }
 async function ordSaveQty(inp){
   const S = invS(), o = S.ordCur; if (!o || o.status !== 'open') return;
-  const q = stkNum(inp.value === '' ? '0' : inp.value); if (!(q >= 0) || q !== Math.floor(q)){ toast(t('err_INV_ORDER_QTY'), true); return; }
-  try { await rpc('inv_order_set', { ...tok(), p_id: o.id, p_si: inp.dataset.ordq, p_qty: q }); } catch(e){ toast(errText(e), true); return; }
-  const l = (o.lines || []).find(x => x.si === inp.dataset.ordq); if (l) l.qty = q;
-  const ok = document.getElementById('ord-ok-' + inp.dataset.ordq); if (ok){ ok.textContent = '✓ ' + t('ord_saved'); setTimeout(() => { if (ok.isConnected) ok.textContent = ''; }, 1500); }
+  const si = inp.dataset.ordq, q = stkNum(inp.value === '' ? '0' : inp.value); if (!(q != null && q >= 0) || q !== Math.floor(q)){ toast(t('err_INV_ORDER_QTY'), true); return; }
+  const mark = h => { const ok = document.getElementById('ord-ok-' + si); if (ok) ok.textContent = h; };
+  const seq = S.ordSeq = S.ordSeq || {}, n = seq[si] = (seq[si] || 0) + 1; mark('…');   // v180：同一行连着点几下 −/＋：一个接一个存，只认最后一次
+  const run = async () => {
+    const here = () => invS().ordCur === o && invS().view === 'order', l = (o.lines || []).find(x => x.si === si);
+    try { await rpc('inv_order_set', { ...tok(), p_id: o.id, p_si: si, p_qty: q });
+      if (l) l.qty = q;
+      if (seq[si] === n && here()){ mark('✓'); const f = document.querySelector('[data-ordq="' + si + '"]'); if (f && f !== document.activeElement) f.value = drkNum(q); } }
+    catch(e){ S.ordFail = (S.ordFail || 0) + 1;
+      if (seq[si] === n){ toast(errText(e), true); if (here()){ mark(''); const f = document.querySelector('[data-ordq="' + si + '"]'); if (l && f && f !== document.activeElement) f.value = drkNum(l.qty); } } }   // 没存上：格子里放回上次存好的数
+    if (here()){ const m = document.getElementById('ord-sum'); if (m) m.textContent = ordSumText(o);   // 合计、「用建议 N」跟着现在存好的数变
+      const g = document.getElementById('ord-sg-' + si); if (g && l && seq[si] === n) g.innerHTML = ordSugHTML(l, true); }
+  };
+  const chain = S.ordChain = S.ordChain || {};
+  await (chain[si] = (chain[si] || Promise.resolve()).then(run, run));
 }
 async function viewInvOtargets(){
   const S = invS(), G = S.otg; if (!G){ S.view = 'orders'; return viewInvOrders(); }
@@ -6613,7 +6659,7 @@ function renderInvOtargets(){
   const W = stkCanWrite(), row = x => `<div style="margin:12px 0"><div><strong>${esc(invName(x))}</strong>${x.here ? '' : ` <span class="small muted">· ${esc(t('ord_t_nothere'))}</span>`}</div>
       <div class="small muted">${esc([t('ord_t_week', { w: drkNum(x.week) }), x.sug != null ? t('ord_t_sug', { n: drkNum(x.sug) }) : '', x.stock != null ? t('ord_t_stock', { n: drkNum(x.stock) }) : '', ordUnit(x)].filter(Boolean).join(' · '))}</div>
       <div class="row" style="gap:8px;align-items:center;margin-top:4px"><input class="input" style="width:90px;flex:0 0 90px" inputmode="decimal" data-otg="${x.item}" aria-label="${esc(invName(x))}" value="${x.target == null ? '' : esc(drkNum(x.target))}" ${W ? '' : 'disabled'}>
-        <span class="small">${esc(drkUnit(x.unit) || t('ct_bottles'))}</span><span class="small muted" id="otg-ok-${x.item}"></span></div></div>`;
+        <span class="small" style="flex:0 0 auto">${esc(drkUnit(x.unit) || t('ct_bottles'))}</span>${W && x.sug != null && +x.sug !== +x.target ? `<button class="link" data-act="ord-t-use" data-item="${x.item}" data-v="${esc(drkNum(x.sug))}" style="flex:0 0 auto">${esc(t('ord_use_sug', { n: drkNum(x.sug) }))}</button>` : ''}<span class="small muted" id="otg-ok-${x.item}"></span></div></div>`;   // v180：建议值点一下就用
   const here = G.rows.filter(x => x.here || x.target != null), other = G.rows.filter(x => !(x.here || x.target != null));
   $('#main').innerHTML = `<button class="link" data-act="ord-home" style="margin:2px 0 6px">← ${esc(t('ord_title'))}</button><h2 style="margin-top:4px">${esc(t('ord_t_title', { s: G.store, p: G.name || '' }))}</h2>
     <div class="small muted" style="margin-bottom:10px">${esc(t('ord_t_hint'))}</div>
@@ -6624,7 +6670,7 @@ function renderInvOtargets(){
 async function ordSaveTarget(inp){
   const S = invS(), G = S.otg; if (!G) return;
   const v = inp.value.trim(), q = v === '' ? null : stkNum(v); if (v !== '' && !(q >= 0)){ toast(t('err_INV_TARGET_BAD'), true); return; }
-  try { await rpc('inv_target_save', { ...tok(), p_store: G.store, p_item: inp.dataset.otg, p_qty: q }); } catch(e){ toast(errText(e), true); return; }
+  try { await rpc('inv_target_save', { ...tok(), p_store: G.store, p_item: inp.dataset.otg, p_qty: q }); } catch(e){ toast(errText(e), true); return false; }
   const r = (G.rows || []).find(x => x.item === inp.dataset.otg); if (r) r.target = q; S.ord = null;
   const ok = document.getElementById('otg-ok-' + inp.dataset.otg); if (ok){ ok.textContent = '✓ ' + t('ord_saved'); setTimeout(() => { if (ok.isConnected) ok.textContent = ''; }, 1500); }
 }
@@ -13111,26 +13157,54 @@ document.addEventListener('click', async ev => {
       try { await rpc('inv_recipe_save', { ...tok(), p_article: h.article, p_store: h.rstore || null, p_lines: [{ item_id: h.item, qty: h.new, unit: h.unit }], p_price_cents: h.price_cents, p_on_menu: h.on_menu !== false }); }
       catch(e){ toast(drkErr(e), true); break; }
       S.rHints = S.rHints.filter(x => x !== h); await keepScroll(() => drkReload(t('aih_r_done', { a: h.article }))); break; }
-    case 'aih-t-ok': { const S = invS(), h = ((S.tHints || {}).hints || [])[+el.dataset.i]; if (!h) break;
-      try { await rpc('inv_target_save', { ...tok(), p_store: h.store, p_item: h.item, p_qty: h.sug }); } catch(e){ toast(errText(e), true); break; }
-      toast(t('aih_t_done')); S.ord = null; await keepScroll(() => viewInvOrders()); break; }
+    case 'aih-t-ok': { const S = invS(), h = ((S.tHints || {}).hints || []).find(x => x.key === el.dataset.key); if (!h || el.disabled) break; el.disabled = true;   // 按 key 找（序号在别的建议消失后会错位）
+      try { await rpc('inv_target_save', { ...tok(), p_store: h.store, p_item: h.item, p_qty: h.sug }); } catch(e){ el.disabled = false; toast(errText(e), true); break; }
+      S.tHints.hints = (S.tHints.hints || []).filter(x => x.key !== h.key);   // v180：点过的这条马上消失，不等整页重读
+      toast(t('aih_t_done')); if (S.view === 'orders') keepScroll(renderInvOrders); S.ord = null; await keepScroll(() => viewInvOrders()); break; }
     case 'aih-no': { const S = invS(), key = el.dataset.key;
       try { await rpc('inv_hint_dismiss', { ...tok(), p_key: key }); } catch(e){ toast(errText(e), true); break; }
       S.rHints = (S.rHints || []).filter(x => x.key !== key); if (S.tHints) S.tHints.hints = (S.tHints.hints || []).filter(x => x.key !== key);
       toast(t('aih_dismissed')); keepScroll(() => S.view === 'orders' ? renderInvOrders() : renderInvDrinks()); break; }
     // v169：订货
     case 'ord-home': { const S = invS(); S.ordCur = null; S.otg = null; invGo('orders'); break; }
-    case 'ord-start': { const S = invS(); let o; try { o = await rpc('inv_order_start', { ...tok(), p_store: el.dataset.store, p_supplier: el.dataset.sup }); } catch(e){ toast(errText(e), true); break; }
-      S.ordCur = o; S.ord = null; invGo('order'); invTodoLoad().then(refreshInvBadge); break; }
+    case 'ord-start': { const S = invS(); if (S.ordBusy) break; S.ordBusy = true; if ('disabled' in el) el.disabled = true;   // v180：点了马上锁住，不会连点出两次
+      let o; try { o = await rpc('inv_order_start', { ...tok(), p_store: el.dataset.store, p_supplier: el.dataset.sup }); } catch(e){ S.ordBusy = false; if ('disabled' in el) el.disabled = false; toast(errText(e), true); break; }
+      if (storeOk(el.dataset.store) && el.dataset.store !== curStore()){ state.storeSel = { s: el.dataset.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', el.dataset.store); }   // 返回总览时看到的是这家店
+      S.ordBusy = false; S.ordCur = o; S.ord = null; S.ordSeq = {}; S.ordChain = {}; invGo('order'); invTodoLoad().then(refreshInvBadge); break; }
+    case 'ord-step': { const inp = document.querySelector('[data-ordq="' + el.dataset.si + '"]'); if (inp && !inp.disabled){ inp.value = drkNum(Math.max(0, Math.round(stkNum(inp.value) || 0) + (+el.dataset.d))); ordSaveQty(inp); } break; }
+    case 'ord-sug': { const o = invS().ordCur, l = o && (o.lines || []).find(x => x.si === el.dataset.si), inp = document.querySelector('[data-ordq="' + el.dataset.si + '"]'); if (l && inp){ inp.value = drkNum(l.suggest); ordSaveQty(inp); } break; }   // 存完 ordSaveQty 自己把这个按钮换回「建议 N」，不整页重画（重画会盖掉别的格子里正在打的数）
+    case 'ord-recalc': { const S = invS(), o = S.ordCur; if (!o || o.status !== 'open' || S.ordBusy) break;   // v180：旧的订货建议按今天的库存重新算（撤掉旧的、出一张新的）
+      if (!confirm(t((o.lines || []).some(l => +l.qty !== +l.suggest) ? 'ord_recalc_q2' : 'ord_recalc_q'))) break;
+      S.ordBusy = true; el.disabled = true;
+      try { await Promise.all(Object.values(S.ordChain || {})); await rpc('inv_order_cancel', { ...tok(), p_id: o.id, p_note: null });
+        const n = await rpc('inv_order_start', { ...tok(), p_store: o.store, p_supplier: o.supplier_id });
+        S.ordCur = n; S.ord = null; S.ordSeq = {}; S.ordChain = {}; toast(t('ord_recalced')); renderInvOrder(); window.scrollTo(0, 0); }
+      catch(e){ toast(String(e && e.message) === 'INV_CANCEL_NOTE' ? errText({ message: 'INV_ORDER_DONE' }) : errText(e), true); S.ordCur = null; S.ord = null; invGo('orders'); }   // INV_CANCEL_NOTE = 这张单已经被别人确认了
+      S.ordBusy = false; invTodoLoad().then(refreshInvBadge); break; }
+    case 'ord-tick': { const o = invS().ordCur; if (!o) break; const k = ordTicks(o), si = el.dataset.si; if (k.has(si)) k.delete(si); else k.add(si); LS.set('ordTick:' + o.id, [...k]);
+      el.classList.toggle('on', k.has(si)); const i = el.querySelector('i'); if (i) i.textContent = k.has(si) ? '✓' : '';
+      const d = document.getElementById('ord-done'), L = (o.lines || []).filter(l => +l.qty > 0); if (d) d.textContent = t('ord_done_n', { k: L.filter(l => k.has(l.si)).length, n: L.length }); break; }
+    case 'ord-t-use': { const inp = document.querySelector('[data-otg="' + el.dataset.item + '"]'); if (!inp || el.disabled) break; el.disabled = true; inp.value = el.dataset.v;
+      const ok = await ordSaveTarget(inp); if (ok !== false) el.remove(); else el.disabled = false; break; }   // 不整页重画（会盖掉别的格子里正在打的数）
     case 'ord-open': { const S = invS(), o = ordFind(el.dataset.id); if (o){ S.ordCur = o; invGo('order'); } break; }
     case 'ord-targets': { const S = invS(), D = S.ord || {}; let name = ''; (D.stores || []).forEach(st => (st.suppliers || []).forEach(sp => { if (sp.id === el.dataset.sup) name = sp.name; }));
+      if (!name && S.ordCur && S.ordCur.supplier_id === el.dataset.sup) name = S.ordCur.supplier || '';
       S.otg = { store: el.dataset.store, supplier: el.dataset.sup, name, rows: null }; invGo('otargets'); break; }
     case 'ord-t-fill': { const S = invS(), G = S.otg; if (!G) break; let n; try { n = await rpc('inv_targets_fill', { ...tok(), p_store: G.store, p_supplier: G.supplier }); } catch(e){ toast(errText(e), true); break; }
       toast(t('ord_t_filled', { n: n || 0 })); S.ord = null; await keepScroll(() => viewInvOtargets()); break; }
-    case 'ord-confirm': { const S = invS(), o = S.ordCur; if (!o) break; const n = (o.lines || []).filter(l => +l.qty > 0).length;
+    case 'ord-confirm': { const S = invS(), o = S.ordCur; if (!o || S.ordBusy) break;
+      const a0 = document.activeElement; if (a0 && a0.dataset && a0.dataset.ordq) a0.blur();   // v180：手还停在数量格里：先让它存
+      const f0 = S.ordFail || 0;
+      S.ordBusy = true; el.disabled = true; await new Promise(r => setTimeout(r, 0)); await Promise.all(Object.values(S.ordChain || {})); S.ordBusy = false; el.disabled = false;
+      if (invS().ordCur !== o) break;
+      if ((S.ordFail || 0) !== f0) break;   // 刚才有数量没存上（红色提示还在）：先让人看一眼
+      const bad = [...document.querySelectorAll('[data-ordq]')].filter(i => { const l = (o.lines || []).find(x => x.si === i.dataset.ordq); return l && stkNum(i.value === '' ? '0' : i.value) !== +l.qty; });
+      if (bad.length){ bad.forEach(i => { const l = (o.lines || []).find(x => x.si === i.dataset.ordq); i.value = drkNum(l.qty); }); bad[0].scrollIntoView({ block: 'center' }); toast(t('ord_unsaved'), true); break; }   // 页面上的数和存好的不一样：放回存好的数，不确认
+      const n = (o.lines || []).filter(l => +l.qty > 0).length;
       if (!n){ toast(t('err_INV_ORDER_EMPTY'), true); break; } if (!confirm(t('ord_confirm_q', { n, p: o.supplier }))) break;
-      let r; try { r = await rpc('inv_order_confirm', { ...tok(), p_id: o.id }); } catch(e){ toast(errText(e), true); break; }
-      S.ordCur = r; S.ord = null; toast(t('ord_confirmed')); renderInvOrder(); window.scrollTo(0, 0); invTodoLoad().then(refreshInvBadge); break; }
+      S.ordBusy = true; el.disabled = true;
+      let r; try { r = await rpc('inv_order_confirm', { ...tok(), p_id: o.id }); } catch(e){ S.ordBusy = false; el.disabled = false; toast(errText(e), true); break; }
+      S.ordBusy = false; S.ordCur = r; S.ord = null; toast(t('ord_confirmed')); renderInvOrder(); window.scrollTo(0, 0); invTodoLoad().then(refreshInvBadge); break; }
     case 'ord-cancel': { const S = invS(), o = S.ordCur; if (!o) break; let note = null;
       if (o.status === 'confirmed'){ note = prompt(t('ord_cancel_q')); if (note === null) break; if (!note.trim()){ toast(t('err_INV_CANCEL_NOTE'), true); break; } }
       else if (!confirm(t('ord_cancel') + '?')) break;
@@ -13534,6 +13608,8 @@ document.addEventListener('change', async ev => {
 });
 // v133：「发放 / 签收还没完成」里打开的周，重画后照样打开（例如选了谁发的钱）
 document.addEventListener('toggle', ev => { const w = ev.target.dataset && ev.target.dataset.rcw; if (w) (state.rcOpen = state.rcOpen || {})[w] = ev.target.open;
+  const ah = ev.target.dataset && ev.target.dataset.aih; if (ah){ const S = invS(); (S.aihOpen = S.aihOpen || {})[ah] = ev.target.open; }   // v180
+  const orr = ev.target.dataset && ev.target.dataset.ordrest; if (orr) invS().ordRest = ev.target.open ? orr : null;
   const c = ev.target.dataset && ev.target.dataset.lvc; if (c){ const S = invS(); (S.lvOpen = S.lvOpen || {})[c] = ev.target.open; if (!ev.target.open && S.lvNew === c) S.lvNew = null; }   // v179：盘点结果打开着的，页面刷新后还打开着
 }, true);
 document.addEventListener('input', ev => {
