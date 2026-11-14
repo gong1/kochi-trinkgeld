@@ -531,6 +531,11 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .rc-flash{animation:rcflash 1.8s ease-out}
 .qp-bar{position:sticky;z-index:5;background:var(--paper);padding:8px 0;margin:0 0 6px;border-bottom:1px solid var(--line)}
 .qp-bar .row{gap:8px}
+.qp-bar .row + .row{margin-top:6px}
+.qp-bar .row.wrap{flex-wrap:wrap}
+.qp-bar .row.wrap > button{flex:1 1 auto}
+.qp-bar .input{height:44px;margin-top:6px}
+.qp-bar:focus-within .row.wrap{display:none}
 .qp-bar .qp-cur{flex:1;min-width:0;font-weight:700;font-size:16px;line-height:1.25}
 .qp-bar .qp-cur small{display:block;font-weight:400;color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .qp-bar button{flex:none;height:40px;padding:0 12px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:600;font-size:14px}
@@ -588,7 +593,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v182';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v183';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -930,6 +935,9 @@ zh: {
   stk_hf_all:'全部', stk_hf_rc:'收货', stk_hf_tr:'调拨', stk_hf_ls:'报损', stk_hist_none_f:'最近 30 天没有这一类记录。', stk_hist_day:'{d} · 报损 {n} 条 · 共 {b} 瓶', stk_hist_day0:'{d} · 报损 {n} 条，都已撤销',
   stk_tr_pick:'＋ 选饮料', stk_tr_dup:'这种饮料已经在单子里了，直接改它的数量。',
   inv_new_q:'＋ 用「{q}」新建物品', inv_q_clear:'✕ 清空搜索，回到物品页', inv_back_res:'← 搜索结果', inv_saving:'正在保存…',
+  inv_save_to:'保存 → 放到 {c}', inv_saved_next:'✓ 已保存：{n} · {c}。可以接着拍下一件（还放这里）。', inv_saved_see:'看这件东西 ›', inv_form_done:'← 完成', inv_fix_sum:'AI 认错了？点这里告诉它',
+  inv_put_done_h:'刚放到 {c} 的', inv_put_more:'接着搜下一件，放完点「← 完成」。', inv_taken:'已拿走', inv_ib_back:'放回 {c}（它在这家店的位置）', inv_ib_all_done:'待归位都处理完了。',
+  qp_prev_cell:'上一格', qp_next_cell:'下一格', qp_next_unit:'下一个柜子', qp_here_n:'这里已有 {n} 种', qp_count:'📋 开始盘点',
   ord_stale:'这张订货建议是 {d} 出的，数量是按那天的库存算的。', ord_recalc:'按今天的库存重新算', ord_recalc_q:'按今天的库存重新算这张订货建议？', ord_recalc_q2:'按今天的库存重新算？你手改过的数量会换成新的建议。', ord_recalced:'已按今天的库存重新算。',
   ord_sum:'要订 {n} 种 · 共 {q} 件', ord_main_none:'这次没有要订的：库存够，或者目标库存还没设。', ord_rest_nt:'其中 {n} 种没设目标库存，App 算不出要不要订。', ord_to_targets:'去设目标库存', ord_done_n:'这台手机上已标 {k} / {n} 行输好（输好一行点一下；只记在这台手机上）', ord_use_sug:'用建议 {n}', ord_unsaved:'有一行的数量没存上，格子里已经放回上次存好的数。请看一眼，没问题再点确认。',
   // v179：盘点更快更准（B 包）
@@ -1650,6 +1658,9 @@ de: {
   stk_hf_all:'Alle', stk_hf_rc:'Lieferungen', stk_hf_tr:'Umlagerungen', stk_hf_ls:'Schwund', stk_hist_none_f:'Keine Einträge dieser Art in den letzten 30 Tagen.', stk_hist_day:'{d} · Schwund {n}× · zusammen {b} Fl.', stk_hist_day0:'{d} · Schwund {n}× – alles storniert',
   stk_tr_pick:'＋ Getränk wählen', stk_tr_dup:'Dieses Getränk steht schon auf der Liste – bitte dort die Menge ändern.',
   inv_new_q:'＋ „{q}“ als neuen Artikel anlegen', inv_q_clear:'✕ Suche leeren, zurück zur Artikelseite', inv_back_res:'← Suchergebnisse', inv_saving:'Wird gespeichert …',
+  inv_save_to:'Speichern → nach {c}', inv_saved_next:'✓ Gespeichert: {n} · {c}. Du kannst gleich den nächsten Artikel fotografieren (gleicher Platz).', inv_saved_see:'Diesen Artikel ansehen ›', inv_form_done:'← Fertig', inv_fix_sum:'KI liegt falsch? Hier korrigieren',
+  inv_put_done_h:'Gerade nach {c} gelegt', inv_put_more:'Gleich den nächsten suchen; am Ende „← Fertig“ tippen.', inv_taken:'Entfernt', inv_ib_back:'Zurück nach {c} (sein Platz in dieser Filiale)', inv_ib_all_done:'Alles Unsortierte ist erledigt.',
+  qp_prev_cell:'Voriges Fach', qp_next_cell:'Nächstes Fach', qp_next_unit:'Nächster Schrank', qp_here_n:'Hier schon {n}', qp_count:'📋 Inventur starten',
   ord_stale:'Dieser Bestellvorschlag ist vom {d}; die Mengen sind mit dem Bestand von diesem Tag gerechnet.', ord_recalc:'Mit dem heutigen Bestand neu rechnen', ord_recalc_q:'Diesen Bestellvorschlag mit dem heutigen Bestand neu rechnen?', ord_recalc_q2:'Mit dem heutigen Bestand neu rechnen? Deine geänderten Mengen werden durch den neuen Vorschlag ersetzt.', ord_recalced:'Mit dem heutigen Bestand neu gerechnet.',
   ord_sum:'{n} Artikel · zusammen {q} Stück', ord_main_none:'Diesmal ist nichts zu bestellen: Der Bestand reicht – oder der Sollbestand ist noch nicht eingetragen.', ord_rest_nt:'{n} davon haben keinen Sollbestand – die App kann nicht rechnen, ob bestellt werden muss.', ord_to_targets:'Sollbestand eintragen', ord_done_n:'{k} / {n} Zeilen auf diesem Gerät abgehakt (nach jeder Zeile antippen; wird nur auf diesem Gerät gemerkt)', ord_use_sug:'Vorschlag {n} nehmen', ord_unsaved:'Bei einer Zeile wurde die Menge nicht gespeichert; im Feld steht wieder die zuletzt gespeicherte Zahl. Bitte kurz prüfen und dann noch einmal bestätigen.',
   // v179
@@ -2057,7 +2068,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=20'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=21'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -5635,16 +5646,16 @@ function renderInvPlace(){
     ${invTrShow('unit', U || P)}${(() => { const UT = (U || P).traits || {}, ps = P.pos; if (!ps) return '';
       const h = UT.bottom_floor && ps.row === ps.rows ? 'inv_tr_hint_bottom' : UT.top_ladder && ps.row === 1 ? 'inv_tr_hint_top' : '';
       return h ? `<div class="infobox" style="background:#FFF1C9;color:#8A6A00">${esc(t(h))}</div>` : ''; })()}
-    ${P.photo ? invImg(P.photo, 'big', P.photo) + `<div class="small muted">${esc(t('inv_photo_by', { n: P.photo_by || '?', t: fmtDateTime(P.photo_at) }))}</div>` : `<div class="inv-noph big" aria-hidden="true">📷</div><div class="small muted">${esc(t('inv_photo_none'))}</div>`}
-    ${P.photo && P.checked_at ? `<div class="small muted">${esc(t('inv_checked_by', { n: P.checked_by || '?', t: fmtDateTime(P.checked_at) }))}${invDue(P) ? ` <span class="tag bad">${esc(t('inv_due_tag'))}</span>` : ''}</div>` : ''}
-    ${edit && P.photo ? `<button class="btn ghost" data-act="inv-place-check" style="margin-top:8px">${esc(t('inv_check'))}</button>${invDue(P) ? `<div class="small muted" style="margin-top:4px">${esc(t('inv_check_hint'))}</div>` : ''}` : ''}
-    ${photoBtn}
+    ${edit && P.holds && !P.temp && !A.inbox ? `<div class="btn2"><button class="btn" data-act="inv-put-old">${esc(t('inv_put_old'))}</button><button class="btn ghost" data-act="inv-put-new">${esc(t('inv_put_new'))}</button></div>` : ''}
     ${slots.length ? `<h3>${esc(t('inv_slots'))}</h3><div class="list">${slots.map(s => invSlotRow(s, edit, P)).join('')}</div>` : ''}
     ${P.holds || its.length ? `<h3>${esc(t('inv_here', { n: its.length }))}</h3><div class="list">${its.length ? its.map(x => `<div class="item" data-act="inv-item" data-id="${x.id}" style="cursor:pointer"><div class="inv-row">${invImg(x.photo_t, 'sm')}<div class="inv-txt">
         <strong>${esc(invName(x))}</strong>${x.main ? '' : ` <span class="tag off">${esc(t('inv_not_main'))}</span>`}<div class="meta">${esc(invOther(x))}</div>${invWarnLine(x.warn, { area_zh: A.name_zh, area_de: A.name_de, code: P.code })}</div></div></div>`).join('')
         : `<div class="empty">${esc(t(P.temp ? 'inv_temp_hint' : 'inv_here_none'))}</div>`}</div>` : ''}
-    ${edit && P.holds && !P.temp && !A.inbox ? shelfHTML(P) : ''}
-    ${edit && P.holds && !P.temp && !A.inbox ? `<button class="btn ghost" data-act="inv-put-new" style="margin-bottom:8px">${esc(t('inv_put_new'))}</button><button class="btn ghost" data-act="inv-put-old">${esc(t('inv_put_old'))}</button>` : ''}
+    <div class="inv-row" style="align-items:center;margin:10px 0 6px">${P.photo ? invImg(P.photo_t || P.photo, 'lg', P.photo) : `<div class="inv-ph inv-noph lg" aria-hidden="true">📷</div>`}<div class="inv-txt small muted">${P.photo ? esc(t('inv_photo_by', { n: P.photo_by || '?', t: fmtDateTime(P.photo_at) })) : esc(t('inv_photo_none'))}
+      ${P.photo && P.checked_at ? `<br>${esc(t('inv_checked_by', { n: P.checked_by || '?', t: fmtDateTime(P.checked_at) }))}${invDue(P) ? ` <span class="tag bad">${esc(t('inv_due_tag'))}</span>` : ''}` : ''}</div></div>
+    ${edit && P.photo ? `<button class="btn ghost" data-act="inv-place-check">${esc(t('inv_check'))}</button>${invDue(P) ? `<div class="small muted" style="margin-top:4px">${esc(t('inv_check_hint'))}</div>` : ''}` : ''}
+    ${photoBtn}
+    ${edit && P.holds && !P.temp && !A.inbox && A.owner !== 'kitchen' ? shelfHTML(P) : ''}
     ${P.can_edit ? `<button class="link" data-act="inv-unit-edit" data-id="${P.id}" style="margin-top:12px">${esc(t('inv_u_edit_btn'))}</button>` : ''}`;
   invLoadPhotos();
 }
@@ -5698,12 +5709,17 @@ async function invFormOpen(mode, preset){
   if (!S.home || (mode !== 'edit' && !S.pick)) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;   // v182：要等服务器，先换成「加载中」
   if (!S.home) S.home = await soft(rpc('inv_home', tok()), null);
   if (mode !== 'edit' && !S.pick) S.pick = await soft(rpc('inv_pick', tok()), []);
-  if (mode !== 'edit' && !F.place){   // 默认：上次用的储位
-    const last = LS.get('invLast', null), hit = last && invPickFind(last);
-    if (hit) Object.assign(F, { store: hit.a.store, area: hit.a.id, unit_id: hit.u.id, place: last, lastUsed: true });
+  if (mode !== 'edit' && !F.place){   // 默认：上次用的位置。v183：只认选中的这家店里的（每家店各记各的，和「放位置」页共用）
+    const sts = [...new Set((S.pick || []).map(a => a.store))], st = F.store && sts.includes(F.store) ? F.store : sts.includes(curStore()) ? curStore() : sts[0] || curStore();   // 门店标签选的那家店里他一个房间都管不了（只管另一家店的主管 / 库管）：用他管的那家
+    const last = LS.get('qpLast:' + st, null), hit = last && invPickFind(last), last0 = LS.get('invLast', null), hit0 = !hit && last0 && invPickFind(last0);
+    if (hit && hit.a.store === st) Object.assign(F, { store: st, area: hit.a.id, unit_id: hit.u.id, place: last, lastUsed: true });
+    else if (hit0 && hit0.a.store === st) Object.assign(F, { store: st, area: hit0.a.id, unit_id: hit0.u.id, place: last0, lastUsed: true });
+    else F.store = st;
   }
   if (mode !== 'edit' && F.place && !F.area){ const hit = invPickFind(F.place); if (hit) Object.assign(F, { store: hit.a.store, area: hit.a.id, unit_id: hit.u.id }); }
   render(); window.scrollTo(0, 0);
+  F.fixedPlace = !!(preset && preset.place);
+  if (F.fixedPlace) return;   // v183：位置已经定好（从某一层点进来、待归位放回原位、接着录下一件）：不自动推荐，想要再点「✨ AI 推荐」
   if ((mode === 'loc' || mode === 'inbox') && S.item) invAiPlace(F);   // v99：已有物品，分类已经知道，直接推荐位置
   else if (mode === 'new' && F.category_id) invAiPlace(F);   // 从待归位来的新物品：AI 已经认出分类
 }
@@ -5724,19 +5740,25 @@ function invAiLine(F){
   if (A.err) return `<div class="infobox" id="inv-ai" style="background:var(--copper-soft);color:var(--copper)">${esc(t('inv_ai_fail'))} <button class="link" data-act="inv-ai-again">${esc(t('inv_ai_again'))}</button></div>`;
   return `<div class="infobox" id="inv-ai">${esc(t(A.res && A.res.sure === false ? 'inv_ai_unsure' : 'inv_ai_ok'))}${A.res && A.res.note_zh ? '<br><span class="small">' + esc(A.res.note_zh) + '</span>' : ''}</div>`;
 }
+// v183：选位置和「放位置」页一样用一排按钮（房间 → 货架 → 层），不再是下拉框；门店先用门店标签上选中的那家
 function invPickerHTML(F){
   const P = invS().pick || [];
   if (!P.length) return `<div class="empty">${esc(t('inv_f_noplace'))}</div>`;
-  const stores = [...new Set(P.map(a => a.store))], st = F.store && stores.includes(F.store) ? F.store : stores[0];
+  const stores = [...new Set(P.map(a => a.store))], st = F.store && stores.includes(F.store) ? F.store : stores.includes(curStore()) ? curStore() : stores[0];
   const areas = P.filter(a => a.store === st), A = areas.find(a => a.id === F.area), U = A && (A.units || []).find(u => u.id === F.unit_id);
-  const opt = (v, label, on) => `<option value="${esc(v)}"${on ? ' selected' : ''}>${esc(label)}</option>`;
-  return `${stores.length > 1 ? `<div class="seg sm" style="margin-bottom:10px">${stores.map(s => `<button data-act="inv-pick-store" data-store="${s}" class="${s === st ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>` : ''}
-    <div class="field"><label for="inv-pa">${esc(t('inv_f_area'))}</label><select class="input" id="inv-pa">${opt('', t('inv_f_pick'), !A)}${areas.map(a => opt(a.id, `${invName(a)} · ${a.code}`, A && a.id === A.id)).join('')}</select></div>
+  const chip = (act, id, label, on) => `<button class="chip${on ? ' on' : ''}" data-act="${act}" data-id="${id}">${esc(label)}</button>`;
+  return `${stores.length > 1 ? `<div class="seg sm" style="margin-bottom:10px">${stores.map(x => `<button data-act="inv-pick-store" data-store="${x}" class="${x === st ? 'on' : ''}">${esc(x)}</button>`).join('')}</div>` : ''}
+    <div class="qp-sec" style="margin-top:4px">${esc(t('inv_f_area'))}</div>
+    <div class="chips" style="margin-bottom:8px">${areas.map(a => chip('inv-pick-area', a.id, invName(a), A && a.id === A.id)).join('')}</div>
     ${A && !(A.units || []).length ? `<div class="infobox">${esc(t('inv_f_room'))}</div><div class="inv-chosen">${esc(t('inv_f_room_chosen', { a: invName(A) }))}</div>` : ''}
-    ${A && (A.units || []).length ? `<div class="field"><label for="inv-pu">${esc(t('inv_f_unit_pick'))}</label><select class="input" id="inv-pu">${opt('', t('inv_f_pick'), !U)}${(A.units || []).map(u => opt(u.id, u.kind === 'spot' ? invName(u) : `${u.code.split('-').slice(2).join('-')} · ${invName(u)}${invName(u, 'use') ? ' (' + invName(u, 'use') + ')' : ''}`, U && u.id === U.id)).join('')}</select></div>` : ''}
-    ${U && (U.slots || []).length ? `<div class="field"><label>${esc(t('inv_f_slot'))}</label>${invSlotPicker(U, F)}</div>` : ''}
+    ${A && (A.units || []).length ? `<div class="qp-sec">${esc(t('inv_f_unit_pick'))}</div><div class="chips" style="margin-bottom:8px">${A.units.map(u => chip('inv-pick-unit', u.id, u.kind === 'spot' ? invName(u) : `${u.code.split('-').slice(2).join('-')} ${invName(u)}`.trim(), U && u.id === U.id)).join('')}</div>` : ''}
+    ${U && (U.slots || []).length > 1 ? `<div class="qp-sec">${esc(t('inv_f_slot'))}</div><div style="margin-bottom:8px">${invSlotPicker(U, F)}</div>` : ''}
     ${F.place ? `<div class="inv-chosen">${esc(t('inv_f_chosen', { c: invPickCode() }))}${F.lastUsed ? ' <span class="small muted">' + esc(t('inv_f_last')) + '</span>' : ''}</div>` : ''}`;
 }
+// 选了货架：不分层的、只有一层的直接选上
+function invPickUnit(F, u){ const sl = u.slots || []; F.unit_id = u.id; F.place = !sl.length && u.holds ? u.id : sl.length === 1 ? sl[0].id : null; }
+// 固定在下面的「保存」按钮上写要放到哪
+function invSaveLabel(F){ if (!F || F.mode === 'edit') return t('inv_save'); const c = invPickCode(), r = invPickRoom(F); return c ? t('inv_save_to', { c }) : r ? t('inv_save_to', { c: invName(r) }) : t('inv_save'); }
 
 // v99：选层 / 格，按真实的架子排：层从上往下竖着排（A 在最上面），格子柜按行和列排成格子
 function invSlotPicker(U, F){
@@ -5777,7 +5799,7 @@ async function invAiPlace(F){
     const P = F.mode === 'new' ? invPayload(F) : { name_de: X.name_de, name_zh: X.name_zh, aliases: X.aliases || [], damp: !!X.damp };
     const inboxStore = F.inbox && ((((S.inbox || {}).open) || []).find(b => b.id === F.inbox) || {}).store;
     const r = await callTasks({ action: 'inv_ai_place', category_id: cat, damp: !!P.damp, item_id: F.mode === 'new' ? null : F.id,
-      name_de: P.name_de, name_zh: P.name_zh, aliases: P.aliases, store: inboxStore || null });
+      name_de: P.name_de, name_zh: P.name_zh, aliases: P.aliases, store: inboxStore || F.store || curStore() });   // v183：只推荐这家店的位置
     A.list = (r.suggestions || []).filter(x => invPickFind(x.id));
   } catch(e){ A.err = 'fail'; }
   A.busy = false; clearInterval(tick);
@@ -5788,15 +5810,17 @@ function renderInvForm(){
   const fld = (k, label, attrs) => `<div class="field"><label for="invf-${k}">${esc(label)}</label><input class="input" id="invf-${k}" data-invf="${k}" value="${esc(F[k] || '')}" ${attrs || ''}></div>`;
   const chk = (k, label) => `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invf="${k}"${F[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`;
   const head = F.mode === 'loc' ? t('inv_loc_h', { n: invName(S.item || {}) }) : F.mode === 'inbox' ? t('inv_ib_place_h', { n: invName(S.item || {}) }) : t(F.mode === 'edit' ? 'inv_edit_h' : 'inv_new_h');
-  const prev = F.photo && (F.photo.preview || F.photo.path_t);
-  $('#main').innerHTML = `<button class="link" data-act="inv-form-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(head)}</h2>
+  const prev = F.photo && (F.photo.preview || F.photo.path_t), nav = document.querySelector('nav'), navH = nav ? nav.offsetHeight : 0;
+  $('#main').innerHTML = `<button class="link" data-act="inv-form-cancel" style="margin:2px 0 6px">${esc(t(F.saved ? 'inv_form_done' : 'inv_cancel'))}</button>
+    ${F.saved ? `<div class="infobox" style="margin-top:0">${esc(t('inv_saved_next', { n: F.saved.name, c: F.saved.code }))} <button class="link" data-act="inv-item" data-id="${F.saved.id}" style="white-space:normal">${esc(t('inv_saved_see'))}</button></div>` : ''}
+    <h2 style="margin-top:4px">${esc(head)}</h2>
     ${F.mode === 'loc' || F.mode === 'inbox' ? '' : `<h3>${esc(t('inv_s1'))}</h3>
     <div class="inv-row" style="align-items:center;margin-bottom:8px">${prev ? (F.photo.preview ? `<img class="inv-ph lg" src="${esc(F.photo.preview)}" alt="">` : invImg(F.photo.path_t, 'lg')) : ''}
       <label class="btn ${prev ? 'ghost' : ''}" style="display:flex;align-items:center;justify-content:center;flex:1">${esc(t(prev ? 'inv_photo_retake' : 'inv_photo_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="item" hidden></label></div>
     ${F.photo && F.photo.busy ? `<div class="small muted" style="margin-bottom:6px">${esc(t('inv_uploading'))}</div>` : ''}
     ${invAiLine(F)}
-    ${F.photo && F.photo.path && !(F.ai && F.ai.busy) && (F.mode === 'new' || F.mode === 'edit') ? `<div class="field" id="inv-fix-box"><label for="inv-ai-fix">${esc(t('inv_fix_lbl'))}</label><textarea class="input" id="inv-ai-fix" rows="2" style="height:auto;padding:10px 14px" placeholder="${esc(t('inv_fix_ph'))}">${esc(F.fix || '')}</textarea>
-      <button class="btn ghost" data-act="inv-ai-fix" style="margin-top:6px">${esc(t('inv_fix_btn'))}</button></div>` : ''}
+    ${F.photo && F.photo.path && !(F.ai && F.ai.busy) && (F.mode === 'new' || F.mode === 'edit') ? `<details class="fold" id="inv-fix-box" style="margin-bottom:10px"${F.fix ? ' open' : ''}><summary>${esc(t('inv_fix_sum'))}</summary><div class="inner"><div class="field" style="margin:0"><label for="inv-ai-fix">${esc(t('inv_fix_lbl'))}</label><textarea class="input" id="inv-ai-fix" rows="2" style="height:auto;padding:10px 14px" placeholder="${esc(t('inv_fix_ph'))}">${esc(F.fix || '')}</textarea>
+      <button class="btn ghost" data-act="inv-ai-fix" style="margin-top:6px">${esc(t('inv_fix_btn'))}</button></div></div></details>` : ''}
     <h3>${esc(t('inv_s2'))}</h3>
     ${fld('name_de', t('inv_f_de'), 'autocomplete="off"')}${fld('name_zh', t('inv_f_zh'), 'autocomplete="off"')}
     ${fld('aliases', t('inv_f_alias'), `placeholder="${esc(t('inv_f_alias_ph'))}" autocomplete="off"`)}
@@ -5807,15 +5831,15 @@ function renderInvForm(){
       ${fld('unit', t('inv_f_unit'))}${fld('pack_unit', t('inv_f_pack'))}${fld('pack_qty', t('inv_f_qty'), 'inputmode="decimal"')}
       <div class="field"><label for="invf-note">${esc(t('inv_f_note'))}</label><textarea class="input" id="invf-note" data-invf="note" rows="2" style="height:auto;padding:10px 14px">${esc(F.note)}</textarea></div>
       ${chk('track_stock', t('inv_f_stock'))}${chk('track_expiry', t('inv_f_expiry'))}</div></details>`}
-    ${F.mode === 'edit' ? '' : `<h3>${esc(t(F.mode === 'loc' || F.mode === 'inbox' ? 'inv_s3_loc' : 'inv_s3'))}</h3>${invAipHTML(F)}<div id="inv-picker">${invPickerHTML(F)}</div>`}
-    <button class="btn" data-act="inv-save" style="margin-top:14px">${esc(t('inv_save'))}</button>`;
+    ${F.mode === 'edit' ? '' : `<h3>${esc(t(F.mode === 'loc' || F.mode === 'inbox' ? 'inv_s3_loc' : 'inv_s3'))}</h3><div id="inv-picker">${invPickerHTML(F)}</div>${invAipHTML(F)}`}
+    <div class="rc-bar" style="bottom:${navH}px"><div class="row"><button class="btn" data-act="inv-save"><span id="inv-save-to">${esc(invSaveLabel(F))}</span></button></div></div>`;   // v183：保存固定在屏幕下面，写着放到哪；AI 推荐放在选位置的按钮下面
   invLoadPhotos();
 }
 function invFormKeep(){   // 重画前把输入框里的内容记下
   const F = invS().form; if (!F) return;
   document.querySelectorAll('[data-invf]').forEach(e => { F[e.dataset.invf] = e.type === 'checkbox' ? e.checked : e.value; });
 }
-function invRepaintPicker(){ const b = $('#inv-picker'), F = invS().form; if (b && F) b.innerHTML = invPickerHTML(F); }
+function invRepaintPicker(){ const b = $('#inv-picker'), F = invS().form; if (b && F) b.innerHTML = invPickerHTML(F); const l = document.getElementById('inv-save-to'); if (l && F) l.textContent = invSaveLabel(F); }
 // 分类选好后：默认怕潮（没手动改过）、默认储区（还没选储位）
 function invCatChanged(id){
   const S = invS(), F = S.form, k = ((S.home || {}).categories || []).find(x => x.id === id); F.category_id = id;
@@ -5858,7 +5882,7 @@ async function invAiRead(F, fix){
     if (R.category_id){ F.category_id = R.category_id; }
     F.damp = !!R.damp; F.dampTouched = false;
     render(); toast(t('inv_fix_done'));
-    if (F.mode === 'new' && R.category_id) invAiPlace(F);
+    if (F.mode === 'new' && R.category_id && !F.fixedPlace) invAiPlace(F);
     return;
   }
   if (R){
@@ -5870,7 +5894,7 @@ async function invAiRead(F, fix){
     if (!F.dampTouched) F.damp = !!R.damp;
   }
   render();
-  if (F.mode === 'new' && F.category_id && !F.aip) invAiPlace(F);   // v99：分类有了就推荐一次位置
+  if (F.mode === 'new' && F.category_id && !F.aip && !F.fixedPlace) invAiPlace(F);   // v99：分类有了就推荐一次位置；v183：位置已经定好的不自动推荐
 }
 function invPayload(F){
   return { name_de: String(F.name_de || '').trim(), name_zh: String(F.name_zh || '').trim(),
@@ -5928,7 +5952,7 @@ async function invSave(force, note){
     }
     if (F.mode === 'loc') await rpc('inv_place_item', { ...tok(), p_item: F.id, p_place: F.place, p_main: false, p_force: !!force, p_note: note || null });
     else { const r = await rpc('inv_item_save', { ...tok(), p_id: F.id, p_item: P, p_place: F.mode === 'new' ? F.place : null, p_main: true, p_force: !!force, p_note: note || null }); id = r.id; }
-    if (F.place){ LS.set('invLast', F.place); const h = invPickFind(F.place); if (h) LS.set('invStore', h.a.store); }
+    if (F.place){ LS.set('invLast', F.place); const h = invPickFind(F.place); if (h){ LS.set('invStore', h.a.store); LS.set('qpLast:' + h.a.store, F.place); } }
     if (F.mode === 'new' && F.inbox){   // v94：待归位 → 新物品：记下去向
       try { await invIbHandle('new_item', id, F.place); toast(t('inv_ib_done')); } catch(e){ toast(errText(e), true); }
       S.form = null; S.res = null; S.item = null; invGo('inbox'); return;
@@ -5936,6 +5960,10 @@ async function invSave(force, note){
     const placedAt = invPickCode();   // v174：先记下编号，下面清掉表单以后就取不到了（以前提示里编号是空的）
     S.form = null; S.res = null; S.item = null; S.place = null; S.area = null; S.home = null;
     toast(F.mode === 'loc' ? t('inv_placed', { c: placedAt || '' }) : t('inv_saved'));
+    if (F.mode === 'new' && !(F.back && F.back.view === 'place')){   // v183：从首页录新物品，存完留在录入页接着拍下一件（还放这里）；上面一行能点去看刚存的这件
+      S.nav = []; await invFormOpen('new', { place: F.place, saved: { id, name: (state.lang === 'de' ? P.name_de || P.name_zh : P.name_zh || P.name_de) || '', code: placedAt || '' }, back: F.back });
+      return;
+    }
     if (F.back && F.back.view === 'place' && F.mode !== 'edit') invGo('place', F.back.id);
     else { if (F.mode === 'new') S.nav = []; invGo('item', id); }
   } catch(e){ if (!invConflict(e, n => invSave(true, n))) toast(errText(e), true); }
@@ -5962,7 +5990,7 @@ function invNavStep(el){
 async function invLock(el, fn){
   if (state.invBusy && Date.now() - state.invBusy < 30000) return;   // 30 秒还没回来（网断了）就不再挡着
   const me = state.invBusy = Date.now(), old = el ? el.innerHTML : '';
-  const free = () => { if (state.invBusy === me && el && el.isConnected){ el.disabled = false; el.innerHTML = old; } };
+  const free = () => { if (state.invBusy === me && el && el.isConnected){ el.disabled = false; el.innerHTML = old; const l = el.querySelector('#inv-save-to'), F = invS().form; if (l && F) l.textContent = invSaveLabel(F); } };
   if (el){ el.disabled = true; el.textContent = t('inv_saving'); }
   const tm = setTimeout(free, 30000);   // 网断了、请求一直不回来：30 秒后按钮自己恢复，可以再点
   try { await fn(); } finally { clearTimeout(tm); free(); if (state.invBusy === me) state.invBusy = 0; }
@@ -5972,11 +6000,14 @@ function renderInvPick(){
   const S = invS(), K = S.pickItem || {};
   const head = K.mode === 'merge' ? t('inv_pick_merge_h', { n: invName(S.item || {}) }) : K.mode === 'alias' ? t('inv_miss_alias_h', { w: K.word }) : t('inv_pick_h');
   const R = K.res, items = ((R && R.items) || []).filter(x => !(K.mode === 'merge' && S.item && x.id === S.item.id));
-  $('#main').innerHTML = `<button class="link" data-act="inv-pick-back" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(head)}</h2>
-    ${K.mode === 'put' && S.place ? `<div class="inv-chosen" style="margin-bottom:8px">${esc(t('inv_f_chosen', { c: S.place.code }))}</div>` : ''}
+  const dn = K.mode === 'put' ? (K.done || []) : [], pc = (K.place || S.place || {}).code || '';
+  $('#main').innerHTML = `<button class="link" data-act="inv-pick-back" style="margin:2px 0 6px">${esc(t(dn.length ? 'inv_form_done' : 'inv_cancel'))}</button><h2 style="margin-top:4px">${esc(head)}</h2>
+    ${K.mode === 'put' && pc ? `<div class="inv-chosen" style="margin-bottom:8px">${esc(t('inv_f_chosen', { c: pc }))}</div>` : ''}
+    ${dn.length ? `<div class="qp-sec" style="margin-top:0">${esc(t('inv_put_done_h', { c: pc }))}</div><div class="list">${dn.map(d => `<div class="qp-row here"><span class="qp-n"${d.off ? ' style="color:var(--muted);text-decoration:line-through"' : ''}><strong>${d.off ? '' : '✓ '}${esc(d.name)}</strong></span>${d.off ? `<span class="tag off">${esc(t('inv_taken'))}</span>` : `<button class="undo-b" data-act="inv-pick-undo" data-link="${esc(d.link)}"${d.busy ? ' disabled' : ''}>${esc(t('stk_undo'))}</button>`}</div>`).join('')}</div>
+      <div class="small muted" style="margin:-6px 0 8px">${esc(t('inv_put_more'))}</div>` : ''}
     <input type="search" class="input" id="inv-pq" placeholder="${esc(t('inv_q_ph'))}" value="${esc(K.q || '')}" autocomplete="off" style="margin-bottom:10px">
     <div id="inv-pres">${!K.q ? '' : !R ? `<div class="empty">${esc(t('inv_searching'))}</div>` : items.length ? `<div class="list">${items.map(x => invItemCard(x, 'inv-pick-it')).join('')}</div>` : `<div class="list"><div class="empty">${esc(t('inv_none', { q: K.q }))}</div></div>`}</div>`;
-  const q = $('#inv-pq'); if (q && K.focus){ K.focus = false; q.focus(); }
+  const q = $('#inv-pq'); if (q && K.focus){ K.focus = false; q.focus(); try { q.setSelectionRange(q.value.length, q.value.length); } catch(e){} }
   invLoadPhotos();
 }
 let invPickTimer = null;
@@ -6408,7 +6439,8 @@ async function viewInvIbItem(){
     ${A.busy ? `<div class="infobox">${esc(t('inv_ai_busy', { s: Math.round((Date.now() - A.at) / 1000) }))}</div>`
       : A.err ? `<div class="infobox" style="background:var(--copper-soft);color:var(--copper)">${esc(t('inv_ib_ai_fail'))}</div>`
       : `<div class="infobox">${esc(t('inv_ib_ai_guess', { n: [A.res.name_zh, A.res.name_de].filter(Boolean).join(' / ') }))}</div>`}
-    ${cand.length ? `<div class="small muted" style="margin:6px 0">${esc(t('inv_ib_cand'))}</div><div class="list">${cand.map(c => invItemCard(c, 'inv-ib-same')).join('')}</div>` : ''}
+    ${cand.length ? `<div class="small muted" style="margin:6px 0">${esc(t('inv_ib_cand'))}</div><div class="list">${cand.map(c => { const ok = (c.locs || []).filter(l => l.store === x.store && l.can_edit), m = ok.find(l => l.main) || ok[0];   // v183：它在这家店已经有位置（而且这个位置归他管）：一下放回去
+        return invItemCard(c, 'inv-ib-same') + (m && !state.viewAs ? `<div class="item" style="padding-top:0"><button class="btn" data-act="inv-ib-back" data-id="${c.id}" data-place="${m.place}" data-code="${esc(m.code)}" style="height:auto;min-height:48px;padding:6px 10px;line-height:1.25">${esc(t('inv_ib_back', { c: m.code }))}</button></div>` : ''); }).join('')}</div>` : ''}
     <button class="btn ghost" data-act="inv-ib-other" style="margin-bottom:8px">${esc(t('inv_ib_other'))}</button>
     <button class="btn ghost" data-act="inv-ib-asnew" style="margin-bottom:8px">${esc(t('inv_ib_asnew'))}</button>
     <button class="btn ghost danger" data-act="inv-ib-discard">${esc(t('inv_ib_discard'))}</button>`;
@@ -7221,7 +7253,8 @@ function qpFind(placeId){
   return null;
 }
 function qpPlaceSet(id){ const Q = qpS(); Q.place = id; LS.set('qpLast:' + Q.store, id); }
-function qpUnitSet(u){ const Q = qpS(), sl = u.slots || []; if (!sl.length && u.holds) qpPlaceSet(u.id); else if (sl.length === 1) qpPlaceSet(sl[0].id); }   // 只有一层 / 不分层：直接选上
+function qpSlots(u){ return ((u && u.slots) || []).slice().sort((a, b) => String(a.slot).localeCompare(String(b.slot), undefined, { numeric: true })); }   // v183：层 / 格按 A、B、C（A1、A2、B1…）排，「下一层 / 下一格」照这个顺序走
+function qpUnitSet(u){ const sl = qpSlots(u); if (!sl.length && u.holds) qpPlaceSet(u.id); else if (sl.length) qpPlaceSet(sl[0].id); }   // 不分层：直接选上；分层的先选第一层 / 第一格（v183）
 async function viewInvQplace(){
   const S = invS(), Q = qpS(), back = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>`;
   if (Q.data) renderInvQplace(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
@@ -7232,6 +7265,7 @@ async function viewInvQplace(){
   S.pick = pick; Q.data = data;
   if (!Q.area){ const last = LS.get('qpLast:' + Q.store, null), h = last && qpFind(last); if (h) Object.assign(Q, { area: h.a.id, unit_id: h.u.id, place: last }); }   // 上次放到哪
   if (Q.place && !qpFind(Q.place)) Q.place = null;
+  if (Q.open == null) Q.open = !Q.place;   // v183：位置已经选好就把选位置的按钮收起来，清单就在眼前
   renderInvQplace();
 }
 function qpListsHTML(){
@@ -7243,31 +7277,37 @@ function qpListsHTML(){
   const nUn = drinks.filter(x => !(x.places || []).length).length, nPl = drinks.filter(x => (x.places || []).length && !(Q.place && at(x))).length;
   return `<div class="qp-sec">${esc(t('qp_un_h', { n: nUn }))}</div>
     <div class="list">${un.length ? un.map(row).join('') : `<div class="empty">${esc(nUn ? t('qp_no_match', { q: Q.q.trim() }) : t('qp_un_none'))}</div>`}</div>
+    ${!nUn && drinks.length && W ? `<button class="btn" data-act="ct-start" data-store="${esc(Q.store)}" style="margin-bottom:12px">${esc(t('qp_count'))}</button>` : ''}
     ${nPl ? `<button class="link" data-act="qp-more" style="margin:0 0 8px;white-space:normal;text-align:left">${esc(t(Q.more || q ? 'qp_more_hide' : 'qp_more', { n: nPl }))}</button>${Q.more || q ? `<div class="list">${placed.length ? placed.map(row).join('') : `<div class="empty">${esc(t('qp_no_match', { q: Q.q.trim() }))}</div>`}</div>` : ''}` : ''}`;
 }
 function renderInvQplace(){
   const S = invS(), Q = qpS(), D = Q.data; if (!D) return;
   const W = stkCanWrite(), areas = qpAreas(), A = areas.find(a => a.id === Q.area), U = A && (A.units || []).find(u => u.id === Q.unit_id);
   const room = !!A && !(A.units || []).length;   // v127：没有货架的房间，整个房间当一个位置
-  const h = Q.place && qpFind(Q.place), code = h ? (h.s ? h.s.code : h.u.code) : '', sl = h && h.s ? (h.u.slots || []) : [], si = sl.findIndex(x => x.id === Q.place);
+  const h = Q.place && qpFind(Q.place), code = h ? (h.s ? h.s.code : h.u.code) : '', sl = h && h.s ? qpSlots(h.u) : [], si = sl.findIndex(x => x.id === Q.place);
   const drinks = D.drinks || [], here = Q.place ? drinks.filter(x => (x.places || []).some(p => p.place === Q.place)) : [];
   const chip = (act, id, label, on) => `<button class="chip${on ? ' on' : ''}" data-act="${act}" data-id="${id}">${esc(label)}</button>`;
-  const where = h ? `${invName(h.a)} · ${invName(h.u)}${h.s && sl.length > 1 ? ' · ' + invPosText({ row: h.s.slot.charCodeAt(0) - 64, rows: Math.max(...sl.map(x => x.slot.charCodeAt(0) - 64)) }, true) : ''}` : room ? invName(A) : '';
+  const rowN = x => x.slot.charCodeAt(0) - 64, colN = x => +String(x.slot).slice(1) || 1, grid = sl.some(x => /\d/.test(x.slot));   // v183：格子柜写「第几行 · 第几格」，按钮叫上一格 / 下一格
+  const where = h ? `${invName(h.a)} · ${invName(h.u)}${h.s && sl.length > 1 ? ' · ' + invPosText({ row: rowN(h.s), rows: Math.max(...sl.map(rowN)), grid, col: colN(h.s), cols: Math.max(...sl.map(colN)) }, true) : ''}` : room ? invName(A) : '';
+  const us = A ? (A.units || []) : [], ui = h ? us.findIndex(u => u.id === h.u.id) : -1, nextU = ui >= 0 ? us.slice(ui + 1).find(u => (u.slots || []).length || u.holds) : null;
+  const open = Q.open || !(h || room), last = sl.length > 1 && si === sl.length - 1;
   const hdr = document.querySelector('header'), top = hdr ? hdr.offsetHeight : 0;
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
     <div class="stabs-row"><h2>${esc(t('qp_h'))}</h2>${storeTabsHTML()}</div>
-    <div class="small muted" style="margin-bottom:8px">${esc(t('qp_hint'))}</div>
+    <details class="fold" style="margin-bottom:8px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('qp_hint'))}</div></details>
     ${!drinks.length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('qp_empty'))}</div>` : ''}
-    <div class="qp-sec">${esc(t('qp_where'))}</div>
+    ${open ? `<div class="qp-sec">${esc(t('qp_where'))}</div>
     ${areas.length ? `<div class="chips" style="margin-bottom:8px">${areas.map(a => chip('qp-area', a.id, invName(a), A && a.id === A.id)).join('')}</div>` : `<div class="empty">${esc(t('qp_no_area'))}</div>`}
     ${room ? `<div class="infobox">${esc(t('qp_room'))}</div>` : ''}
     ${A && !room ? `<div class="chips" style="margin-bottom:8px">${A.units.map(u => chip('qp-unit', u.id, u.kind === 'spot' ? invName(u) : `${u.code.split('-').slice(2).join('-')} ${invName(u)}`.trim(), U && u.id === U.id)).join('')}</div>` : ''}
-    ${U && (U.slots || []).length > 1 ? `<div style="margin-bottom:8px">${invSlotPicker(U, Q).split('data-act="inv-pick-slot"').join('data-act="qp-slot"')}</div>` : ''}
+    ${U && (U.slots || []).length > 1 ? `<div style="margin-bottom:8px">${invSlotPicker(U, Q).split('data-act="inv-pick-slot"').join('data-act="qp-slot"')}</div>` : ''}` : ''}
     <div class="qp-bar" style="top:${top}px"><div class="row"><div class="qp-cur">${h || room ? `${esc(t('qp_cur'))} <span class="num">${esc(code)}</span><small>${esc(where)}</small>` : `<span style="color:var(--copper)">${esc(t('qp_cur_none'))}</span>`}</div>
-      ${sl.length > 1 ? `<button data-act="qp-step" data-d="-1"${si > 0 ? '' : ' disabled'}>‹ ${esc(t('qp_prev'))}</button><button data-act="qp-step" data-d="1"${si < sl.length - 1 ? '' : ' disabled'}>${esc(t('qp_next'))} ›</button>` : `<button data-act="qp-top">${esc(t('qp_change'))}</button>`}</div></div>
-    ${h ? `<div class="qp-sec">${esc(t('qp_here_h', { n: here.length }))}</div>${here.length ? `<div class="list">${here.map(x => { const lk = x.places.find(p => p.place === Q.place);
-        return `<div class="qp-row here"><span class="qp-n"><strong>${esc(invName(x))}</strong></span>${W ? `<button class="link danger" data-act="qp-take" data-id="${x.id}" data-link="${lk.link}"${Q.busy ? ' disabled' : ''}>${esc(t('qp_take'))}</button>` : ''}</div>`; }).join('')}</div>` : ''}` : ''}
-    ${drinks.length ? `<input type="search" class="input" id="qp-q" placeholder="${esc(t('qp_q'))}" value="${esc(Q.q)}" autocomplete="off" style="margin-top:10px">` : ''}
+      ${h || room ? `<button data-act="qp-top">${esc(t('qp_change'))}${open ? ' ▴' : ''}</button>` : ''}</div>
+      ${h ? `<div class="row wrap">${sl.length > 1 ? `<button data-act="qp-step" data-d="-1"${si > 0 ? '' : ' disabled'}>‹ ${esc(t(grid ? 'qp_prev_cell' : 'qp_prev'))}</button>${last && nextU ? `<button data-act="qp-next-unit" data-id="${nextU.id}">${esc(t('qp_next_unit'))} ›</button>` : `<button data-act="qp-step" data-d="1"${last ? ' disabled' : ''}>${esc(t(grid ? 'qp_next_cell' : 'qp_next'))} ›</button>`}` : nextU ? `<button data-act="qp-next-unit" data-id="${nextU.id}">${esc(t('qp_next_unit'))} ›</button>` : ''}
+        <button data-act="qp-here"${here.length ? '' : ' disabled'}>${esc(t('qp_here_n', { n: here.length }))} ${Q.hereOpen && here.length ? '▴' : '▾'}</button></div>` : ''}
+      ${drinks.length ? `<input type="search" class="input" id="qp-q" placeholder="${esc(t('qp_q'))}" value="${esc(Q.q)}" autocomplete="off">` : ''}</div>
+    ${h && Q.hereOpen && here.length ? `<div class="list">${here.map(x => { const lk = x.places.find(p => p.place === Q.place);
+        return `<div class="qp-row here"><span class="qp-n"><strong>${esc(invName(x))}</strong></span>${W ? `<button class="link danger" data-act="qp-take" data-id="${x.id}" data-link="${lk.link}"${Q.busy ? ' disabled' : ''}>${esc(t('qp_take'))}</button>` : ''}</div>`; }).join('')}</div>` : ''}
     <div id="qp-lists">${qpListsHTML()}</div>`;
 }
 async function qpPut(id, force, note){
@@ -13243,6 +13283,16 @@ document.addEventListener('click', async ev => {
     case 'inv-ib-list': invGo('inbox'); break;
     case 'inv-ib-open': invS().ibAi = null; invGo('ibitem', el.dataset.id); break;
     case 'inv-ib-same': invIbPlaceItem(el.dataset.id); break;
+    case 'inv-ib-back': { const S = invS(), ib = S.id, item = el.dataset.id, place = el.dataset.place, code = el.dataset.code;   // v183：放回它在这家店的位置（规矩照旧检查，有冲突才弹出说明），接着打开下一件待归位
+      const open = ((S.inbox || {}).open || []), i = open.findIndex(b => b.id === ib), nx = i >= 0 ? (open[i + 1] || open[i - 1]) : null;
+      const go = async (force, note) => {
+        try { S.form = null; await invIbHandle('placed', item, place, null, force, note); toast(t('inv_placed', { c: code }));
+          const L = await soft(rpc('inv_inbox_list', tok()), null); if (state.tab !== 'inv' || S.view !== 'ibitem' || S.id !== ib) return;
+          if (L) S.inbox = L; const n2 = L && nx && (L.open || []).find(b => b.id === nx.id);
+          if (n2){ S.ibAi = null; invGo('ibitem', n2.id); } else { if (L && !(L.open || []).length) toast(t('inv_ib_all_done')); invGo('inbox'); } }
+        catch(e){ if (!invConflict(e, n => go(true, n))) toast(errText(e), true); }
+      };
+      await invLock(el, () => go()); break; }
     case 'inv-ib-other': { const S = invS(); S.pickItem = { mode: 'ib', q: '', focus: true, back: { view: 'ibitem', id: S.id } }; S.view = 'pick'; render(); window.scrollTo(0, 0); break; }
     case 'inv-ib-asnew': {
       const S = invS(), x = ((S.inbox || {}).open || []).find(b => b.id === S.id), R = S.ibAi && S.ibAi.res; if (!x) break;
@@ -13312,11 +13362,13 @@ document.addEventListener('click', async ev => {
     case 'kp-unplaced': { const S = invS(); if (storeOk(el.dataset.store) && el.dataset.store !== curStore()){ state.storeSel = { s: el.dataset.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', el.dataset.store); } S.qp = null; invGo('qplace'); break; }   // v143；v175：直接进快速放位置
     case 'qp-open': { invS().qp = null; invGo('qplace'); break; }
     case 'qp-area': { const Q = qpS(), a = qpAreas().find(x => x.id === el.dataset.id); if (!a) break; const u1 = (a.units || []).length === 1 ? a.units[0] : null;
-      Object.assign(Q, { area: a.id, unit_id: u1 ? u1.id : null, place: null }); if (u1) qpUnitSet(u1); keepScroll(renderInvQplace); break; }
-    case 'qp-unit': { const Q = qpS(), a = qpAreas().find(x => x.id === Q.area), u = a && (a.units || []).find(x => x.id === el.dataset.id); if (!u) break; Q.unit_id = u.id; Q.place = null; qpUnitSet(u); keepScroll(renderInvQplace); break; }
-    case 'qp-slot': { qpPlaceSet(el.dataset.id); keepScroll(renderInvQplace); break; }
-    case 'qp-step': { const Q = qpS(), h = Q.place && qpFind(Q.place), sl = h && h.s ? (h.u.slots || []) : [], i = sl.findIndex(x => x.id === Q.place), n = sl[i + (+el.dataset.d)]; if (n){ qpPlaceSet(n.id); keepScroll(renderInvQplace); } break; }
-    case 'qp-top': window.scrollTo({ top: 0, behavior: 'smooth' }); break;
+      Object.assign(Q, { area: a.id, unit_id: u1 ? u1.id : null, place: null, hereOpen: false, open: true }); if (u1) qpUnitSet(u1); keepScroll(renderInvQplace); break; }
+    case 'qp-unit': case 'qp-next-unit': { const Q = qpS(), a = qpAreas().find(x => x.id === Q.area), u = a && (a.units || []).find(x => x.id === el.dataset.id); if (!u) break;   // v183：选了货架先选上第一层 / 第一格；「下一个柜子」同样
+      Q.unit_id = u.id; Q.place = null; Q.hereOpen = false; qpUnitSet(u); if (act === 'qp-next-unit') Q.open = false; keepScroll(renderInvQplace); break; }
+    case 'qp-slot': { const Q = qpS(); qpPlaceSet(el.dataset.id); Q.hereOpen = false; Q.open = false; renderInvQplace(); window.scrollTo(0, 0); break; }   // 选好了：选位置的按钮收起来
+    case 'qp-step': { const Q = qpS(), h = Q.place && qpFind(Q.place), sl = h && h.s ? qpSlots(h.u) : [], i = sl.findIndex(x => x.id === Q.place), n = sl[i + (+el.dataset.d)]; if (n){ qpPlaceSet(n.id); Q.hereOpen = false; keepScroll(renderInvQplace); } break; }
+    case 'qp-top': { const Q = qpS(); Q.open = !Q.open; renderInvQplace(); window.scrollTo(0, 0); break; }   // v183：「改位置」= 展开 / 收起选位置的按钮
+    case 'qp-here': { const Q = qpS(); Q.hereOpen = !Q.hereOpen; keepScroll(renderInvQplace); break; }
     case 'qp-more': { const Q = qpS(); Q.more = !Q.more; keepScroll(renderInvQplace); break; }
     case 'qp-put': qpPut(el.dataset.id); break;
     case 'qp-take': qpTake(el.dataset.id, el.dataset.link); break;
@@ -13527,6 +13579,10 @@ document.addEventListener('click', async ev => {
     case 'inv-ai-again': { const F = invS().form; if (F) invAiRead(F); break; }
     case 'inv-pick-store': { invFormKeep(); const F = invS().form; if (!F) break; Object.assign(F, { store: el.dataset.store, area: null, unit_id: null, place: null, lastUsed: false }); invRepaintPicker(); break; }
     case 'inv-pick-slot': { const F = invS().form; if (!F) break; F.place = el.dataset.id; F.lastUsed = false; invRepaintPicker(); break; }
+    case 'inv-pick-area': { invFormKeep(); const F = invS().form, a = F && (invS().pick || []).find(x => x.id === el.dataset.id); if (!a) break;   // v183：选房间；只有一个货架的直接选上
+      Object.assign(F, { area: a.id, store: a.store, unit_id: null, place: null, lastUsed: false }); if ((a.units || []).length === 1) invPickUnit(F, a.units[0]); invRepaintPicker(); break; }
+    case 'inv-pick-unit': { invFormKeep(); const F = invS().form, a = F && (invS().pick || []).find(x => x.id === F.area), u = a && (a.units || []).find(x => x.id === el.dataset.id); if (!u) break;
+      F.lastUsed = false; invPickUnit(F, u); invRepaintPicker(); break; }
     case 'inv-force': {
       const n = (($('#inv-force-note') || {}).value || '').trim(); if (!n){ toast(t('inv_c_note_need'), true); break; }
       $('#photoDlg').close(); const f = state.invRetry; state.invRetry = null; if (f) await invLock(document.querySelector('#main [data-act="inv-save"]'), () => f(n)); break;
@@ -13548,9 +13604,14 @@ document.addEventListener('click', async ev => {
       await invLock(document.querySelector('#main [data-act="inv-save"]'), () => go()); break;
     }
     case 'inv-put-old': case 'inv-merge': {
-      const S = invS(); S.pickItem = { mode: act === 'inv-merge' ? 'merge' : 'put', q: '', focus: true, back: { view: S.view, id: S.id } };
+      const S = invS(); S.pickItem = { mode: act === 'inv-merge' ? 'merge' : 'put', q: '', focus: true, back: { view: S.view, id: S.id }, place: act === 'inv-put-old' && S.place ? { id: S.place.id, code: S.place.code } : null, done: [] };   // v183：记下是哪个位置，放完一件留在这页接着放
       S.view = 'pick'; render(); window.scrollTo(0, 0); break;
     }
+    case 'inv-pick-undo': { const S = invS(), K = S.pickItem, d = K && (K.done || []).find(v => v.link === el.dataset.link); if (!d || d.off || d.busy) break;   // v183：刚放的那件拿走
+      d.busy = true; el.disabled = true;
+      try { await rpc('inv_unplace', { ...tok(), p_link: d.link }); d.off = true; S.home = null; S.res = null; S.place = null; S.item = null; } catch(e){ toast(errText(e), true); }
+      d.busy = false; if (S.pickItem === K && state.tab === 'inv' && S.view === 'pick'){ const q = $('#inv-pq'); if (q) K.q = q.value; renderInvPick(); }
+      break; }
     case 'inv-pick-back': { const S = invS(), b = (S.pickItem || {}).back || { view: 'home' }; S.pickItem = null; invGo(b.view, b.id); break; }
     case 'inv-pick-it': {
       const S = invS(), K = S.pickItem; if (!K) break;
@@ -13567,11 +13628,18 @@ document.addEventListener('click', async ev => {
         catch(e){ toast(errText(e), true); }
         break;
       }
-      const P = S.place; if (!P) break;
-      const go = async (force, note) => {
-        try { await rpc('inv_place_item', { ...tok(), p_item: x.id, p_place: P.id, p_main: false, p_force: !!force, p_note: note || null });
-          toast(t('inv_placed', { c: P.code })); S.pickItem = null; S.home = null; S.res = null; S.place = null; invGo('place', P.id); }
+      const P = K.place || S.place; if (!P || K.busy) break;
+      const q0 = K.q;
+      const go = async (force, note) => {   // v183：放好一件留在这页，上面列出刚放的（可以撤销），接着搜下一件；点「← 完成」才回位置页
+        K.busy = true;
+        try { const link = await rpc('inv_place_item', { ...tok(), p_item: x.id, p_place: P.id, p_main: false, p_force: !!force, p_note: note || null });
+          const had = (x.locs || []).some(l => l.link === link || l.place === P.id) || (K.done || []).some(d => d.link === link);   // 本来就在这里（服务器给回原来那条）：不列进「刚放的」，不然点「撤销」会把原来的位置拿掉
+          S.home = null; S.res = null; S.place = null; S.item = null;
+          if (had) toast(t('sh_here')); else { toast(t('inv_placed', { c: P.code })); (K.done = K.done || []).unshift({ link, name: invName(x) }); }
+          if (K.q === q0){ K.q = ''; K.res = null; } K.focus = true;   // 等的时候已经在打下一件的名字：不清掉
+          if (S.pickItem === K && state.tab === 'inv' && S.view === 'pick') renderInvPick(); }
         catch(e){ if (!invConflict(e, n => go(true, n))) toast(errText(e), true); }
+        K.busy = false;
       };
       go(); break;
     }
@@ -13687,11 +13755,6 @@ document.addEventListener('change', async ev => {
   if (ev.target.id === 'px-bind'){ state.bon.pxBind = ev.target.checked; return; }   // v153
   if (ev.target.id === 'bf-store' || ev.target.id === 'bf-date'){ bonFixWhere(ev.target.id === 'bf-store' ? 'store' : 'date', ev.target.value); return; }
   if (ev.target.dataset && ev.target.dataset.invf === 'damp'){ const F = invS().form; if (F){ F.damp = ev.target.checked; F.dampTouched = true; } return; }
-  if (ev.target.id === 'inv-pa'){ invFormKeep(); const F = invS().form; if (!F) return; const a = (invS().pick || []).find(x => x.id === ev.target.value);
-    const only = a && (a.units || []).length === 1 && a.units[0].kind === 'spot' ? a.units[0] : null;   // v174：这个房间只有「整个房间」一个位置，直接选上
-    Object.assign(F, { area: a ? a.id : null, store: a ? a.store : F.store, unit_id: only ? only.id : null, place: only ? only.id : null, lastUsed: false }); invRepaintPicker(); return; }
-  if (ev.target.id === 'inv-pu'){ invFormKeep(); const F = invS().form; if (!F) return; const a = (invS().pick || []).find(x => x.id === F.area), u = a && (a.units || []).find(x => x.id === ev.target.value);
-    Object.assign(F, { unit_id: u ? u.id : null, place: u && u.holds && !(u.slots || []).length ? u.id : null, lastUsed: false }); invRepaintPicker(); return; }
   if (ev.target.dataset && ev.target.dataset.lockcp){ lockUpload(ev.target); return; }
   if (ev.target.dataset && ev.target.dataset.taskitem){ taskUpload(ev.target); return; }   // v71
   if (ev.target.dataset && ev.target.dataset.bfphoto){ bfPhoto(ev.target); return; }   // v171：老板发现没做的照片
