@@ -492,6 +492,13 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .hist-day span:first-child{flex:1;min-width:0}
 .chips.sm{gap:6px}
 .chips.sm .chip{padding:6px 12px;font-size:14px}
+.drk-grp{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;font-weight:600;color:var(--muted)}
+.drk-grp span{flex:1;min-width:0}
+.drk-grp button{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:var(--r-s);padding:7px 10px;font-weight:600;font-size:13px;color:var(--ink)}
+.drk-un{display:flex;gap:10px;align-items:flex-start}
+.drk-un input[type=checkbox]{flex:none;width:24px;height:24px;margin-top:2px}
+.drk-un > div{flex:1;min-width:0}
+.rc-quick button.main{background:var(--ink);border-color:var(--ink);color:#fff}
 .ct-bar{position:sticky;z-index:5;background:var(--paper);padding:8px 0 6px;margin-bottom:8px;border-bottom:1px solid var(--line)}
 .ct-top{display:flex;gap:6px;align-items:center}
 .ct-prog{flex:1;min-width:0;font-weight:700;font-size:15px;line-height:1.2}
@@ -593,7 +600,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v183';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v184';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -922,7 +929,7 @@ zh: {
   drk_ok_new:'确认：新建饮料', drk_edit:'改名字 / 包装', drk_reject:'不要', drk_reject_q:'不要「{n}」吗？它的收银商品会出现在「还没配」里，可以以后再配。', drk_done_new:'已新建：{n}', drk_done_link:'已配到：{n}', drk_done_rej:'已去掉建议',
   drk_f_de:'德文名', drk_f_zh:'中文名', drk_f_unit:'单位（Flasche、Dose……）', drk_f_pack:'包装（Kiste、Karton、Tray……）', drk_f_qty:'1 包装 = 几个', drk_f_save:'保存并确认', drk_f_cancel:'取消',
   drk_list_h:'饮料 {n} 种', drk_list_none:'还没有饮料：先确认上面的建议，或把下面「还没配」的收银商品配上。', drk_col_last:'最新一天', drk_col_day:'最新', drk_col_7:'7 天', drk_col_28:'28 天', drk_last_days:'最新一天：{s}',
-  drk_un_h:'还没配的饮料 {n} 个', drk_un_hint:'收银机上饮料类的商品，最近 30 天卖过、还没配。整瓶卖的点「配到饮料」；按杯卖的、用几种原料的点「配配方」；店里调的（Schorle、Eistee……）先标「不管库存」。', drk_un_30:'30 天：{s}', drk_link:'配到饮料', drk_ignore:'不管库存', drk_ignored_h:'不管库存的 {n} 个', drk_unignore:'改回「还没配」', drk_ignored_done:'已标「不管库存」', drk_back_un:'已改回「还没配」',
+  drk_un_h:'还没配的收银商品 {n} 个', drk_un_hint:'收银机上饮料类的商品，最近 30 天卖过、还没配。整瓶卖的点「配到饮料」；按杯卖的、用几种原料的点「配配方」；店里调的（Schorle、Eistee……）先标「不管库存」。', drk_un_30:'30 天：{s}', drk_link:'配到饮料', drk_ignore:'不管库存', drk_ignored_h:'不管库存的 {n} 个', drk_unignore:'改回「还没配」', drk_ignored_done:'已标「不管库存」', drk_back_un:'已改回「还没配」',
   drk_d_pos_h:'收银机商品', drk_d_factor:'卖 1 个 = {f} {u}', drk_d_unlink:'去掉', drk_d_unlink_q:'把「{a}」从这件饮料去掉吗？它会回到「还没配」。', drk_d_days_h:'每天卖了几个（最近 28 天）', drk_d_nodays:'最近 28 天还没有销售数据。', drk_d_item:'打开物品页（改名字、照片、放在哪）', drk_d_off:'不再管这件的库存', drk_d_off_q:'「{n}」不再管库存吗？它的收银商品回到「还没配」，物品本身留着。', drk_d_off_done:'已不再管库存', drk_d_sum:'合计',
   drk_l_h:'「{a}」配到哪样饮料？', drk_l_factor:'卖 1 个 =', drk_l_factor_u:'个基本单位（瓶 / 罐）', drk_l_drinks:'饮料清单里的', drk_l_search:'物品里找', drk_l_q_ph:'找物品：名字、别名……', drk_l_new:'新建饮料', drk_l_new_btn:'新建并配上', drk_l_done:'「{a}」已配到 {n}', drk_l_none:'物品里没找到「{q}」，可以在下面新建。',
   drk_u_Flasche:'瓶', drk_u_Dose:'罐', drk_u_Kiste:'箱', drk_u_Karton:'箱', drk_u_Tray:'托', drk_u_Fass:'桶', drk_u_Packung:'包', drk_u_Stück:'个',   // v137
@@ -938,6 +945,9 @@ zh: {
   inv_save_to:'保存 → 放到 {c}', inv_saved_next:'✓ 已保存：{n} · {c}。可以接着拍下一件（还放这里）。', inv_saved_see:'看这件东西 ›', inv_form_done:'← 完成', inv_fix_sum:'AI 认错了？点这里告诉它',
   inv_put_done_h:'刚放到 {c} 的', inv_put_more:'接着搜下一件，放完点「← 完成」。', inv_taken:'已拿走', inv_ib_back:'放回 {c}（它在这家店的位置）', inv_ib_all_done:'待归位都处理完了。',
   qp_prev_cell:'上一格', qp_next_cell:'下一格', qp_next_unit:'下一个柜子', qp_here_n:'这里已有 {n} 种', qp_count:'📋 开始盘点',
+  drk_tab_todo:'待处理', drk_tab_sales:'销量', drk_tab_ign:'不管库存的', drk_todo_none:'✓ {s} 现在没有要处理的。', drk_un_stores:'还没配：{s}', drk_un_other:'另一家店还有 {n} 个，点上面的门店标签看。',
+  drk_grp_none:'没有分组', drk_grp_ign:'整组不管库存（{n}）', drk_grp_q:'把「{g}」这一组的 {n} 个都标成「不管库存」？（之后可以在「不管库存的」里改回来）', drk_sel_ign:'选中的 {n} 个 → 不管库存', drk_sel_clear:'不选了',
+  drk_ign_n:'已标「不管库存」{n} 个', drk_ign_fail:'有 {n} 个没存上，已经放回清单，请再试一次。', drk_guess:'→ 配到 {n}', drk_link_other:'配到别的饮料', drk_undone:'已撤销', drk_done_n:'已处理 {n} 个', drk_todo_line:'{s}：{n} 个收银商品还没配',
   ord_stale:'这张订货建议是 {d} 出的，数量是按那天的库存算的。', ord_recalc:'按今天的库存重新算', ord_recalc_q:'按今天的库存重新算这张订货建议？', ord_recalc_q2:'按今天的库存重新算？你手改过的数量会换成新的建议。', ord_recalced:'已按今天的库存重新算。',
   ord_sum:'要订 {n} 种 · 共 {q} 件', ord_main_none:'这次没有要订的：库存够，或者目标库存还没设。', ord_rest_nt:'其中 {n} 种没设目标库存，App 算不出要不要订。', ord_to_targets:'去设目标库存', ord_done_n:'这台手机上已标 {k} / {n} 行输好（输好一行点一下；只记在这台手机上）', ord_use_sug:'用建议 {n}', ord_unsaved:'有一行的数量没存上，格子里已经放回上次存好的数。请看一眼，没问题再点确认。',
   // v179：盘点更快更准（B 包）
@@ -1645,7 +1655,7 @@ de: {
   drk_ok_new:'Bestätigen: neu anlegen', drk_edit:'Name / Gebinde ändern', drk_reject:'Nicht nehmen', drk_reject_q:'„{n}“ nicht nehmen? Die Kassenartikel erscheinen dann unter „Noch nicht zugeordnet“ und können später zugeordnet werden.', drk_done_new:'Neu angelegt: {n}', drk_done_link:'Zugeordnet: {n}', drk_done_rej:'Vorschlag entfernt',
   drk_f_de:'Name (Deutsch)', drk_f_zh:'Name (Chinesisch)', drk_f_unit:'Einheit (Flasche, Dose …)', drk_f_pack:'Gebinde (Kiste, Karton, Tray …)', drk_f_qty:'1 Gebinde = wie viele', drk_f_save:'Speichern und bestätigen', drk_f_cancel:'Abbrechen',
   drk_list_h:'{n} Getränke', drk_list_none:'Noch keine Getränke: Bitte die Vorschläge oben bestätigen oder unten Kassenartikel zuordnen.', drk_col_last:'Neuester Tag', drk_col_day:'Zuletzt', drk_col_7:'7 Tage', drk_col_28:'28 Tage', drk_last_days:'Neuester Tag: {s}',
-  drk_un_h:'{n} Getränke noch nicht zugeordnet', drk_un_hint:'Getränke-Kassenartikel, die in den letzten 30 Tagen verkauft wurden und noch nicht zugeordnet sind. Flaschenweise verkaufte: „Zuordnen“. Glasweise verkaufte oder solche mit mehreren Zutaten: „Rezept“. Selbstgemischtes (Schorle, Eistee …) vorerst als „Kein Bestand“ markieren.', drk_un_30:'30 Tage: {s}', drk_link:'Zuordnen', drk_ignore:'Kein Bestand', drk_ignored_h:'{n} ohne Bestandsführung', drk_unignore:'Zurück zu „Noch nicht zugeordnet“', drk_ignored_done:'Als „Kein Bestand“ markiert', drk_back_un:'Wieder „Noch nicht zugeordnet“',
+  drk_un_h:'{n} Kassenartikel noch nicht zugeordnet', drk_un_hint:'Getränke-Kassenartikel, die in den letzten 30 Tagen verkauft wurden und noch nicht zugeordnet sind. Flaschenweise verkaufte: „Zuordnen“. Glasweise verkaufte oder solche mit mehreren Zutaten: „Rezept“. Selbstgemischtes (Schorle, Eistee …) vorerst als „Kein Bestand“ markieren.', drk_un_30:'30 Tage: {s}', drk_link:'Zuordnen', drk_ignore:'Kein Bestand', drk_ignored_h:'{n} ohne Bestandsführung', drk_unignore:'Zurück zu „Noch nicht zugeordnet“', drk_ignored_done:'Als „Kein Bestand“ markiert', drk_back_un:'Wieder „Noch nicht zugeordnet“',
   drk_d_pos_h:'Kassenartikel', drk_d_factor:'1 verkauft = {f} {u}', drk_d_unlink:'Entfernen', drk_d_unlink_q:'„{a}“ von diesem Getränk entfernen? Er kommt zurück zu „Noch nicht zugeordnet“.', drk_d_days_h:'Verkauft pro Tag (letzte 28 Tage)', drk_d_nodays:'Noch keine Verkaufsdaten in den letzten 28 Tagen.', drk_d_item:'Artikelseite öffnen (Name, Foto, Platz)', drk_d_off:'Bestand für diesen Artikel nicht mehr führen', drk_d_off_q:'Für „{n}“ keinen Bestand mehr führen? Die Kassenartikel gehen zurück zu „Noch nicht zugeordnet“, der Artikel selbst bleibt.', drk_d_off_done:'Bestand wird nicht mehr geführt', drk_d_sum:'Summe',
   drk_l_h:'„{a}“ welchem Getränk zuordnen?', drk_l_factor:'1 verkauft =', drk_l_factor_u:'Grundeinheiten (Flasche / Dose)', drk_l_drinks:'Aus der Getränkeliste', drk_l_search:'In den Artikeln suchen', drk_l_q_ph:'Artikel suchen: Name, Alias …', drk_l_new:'Neues Getränk', drk_l_new_btn:'Anlegen und zuordnen', drk_l_done:'„{a}“ zugeordnet: {n}', drk_l_none:'„{q}“ nicht gefunden – unten neu anlegen.',
   drk_u_Flasche:'Flasche', drk_u_Dose:'Dose', drk_u_Kiste:'Kiste', drk_u_Karton:'Karton', drk_u_Tray:'Tray', drk_u_Fass:'Fass', drk_u_Packung:'Packung', drk_u_Stück:'Stück',   // v137
@@ -1661,6 +1671,9 @@ de: {
   inv_save_to:'Speichern → nach {c}', inv_saved_next:'✓ Gespeichert: {n} · {c}. Du kannst gleich den nächsten Artikel fotografieren (gleicher Platz).', inv_saved_see:'Diesen Artikel ansehen ›', inv_form_done:'← Fertig', inv_fix_sum:'KI liegt falsch? Hier korrigieren',
   inv_put_done_h:'Gerade nach {c} gelegt', inv_put_more:'Gleich den nächsten suchen; am Ende „← Fertig“ tippen.', inv_taken:'Entfernt', inv_ib_back:'Zurück nach {c} (sein Platz in dieser Filiale)', inv_ib_all_done:'Alles Unsortierte ist erledigt.',
   qp_prev_cell:'Voriges Fach', qp_next_cell:'Nächstes Fach', qp_next_unit:'Nächster Schrank', qp_here_n:'Hier schon {n}', qp_count:'📋 Inventur starten',
+  drk_tab_todo:'Offen', drk_tab_sales:'Verkauf', drk_tab_ign:'Ohne Bestand', drk_todo_none:'✓ {s}: im Moment nichts offen.', drk_un_stores:'Noch nicht zugeordnet: {s}', drk_un_other:'In der anderen Filiale sind noch {n} – oben die Filiale wechseln.',
+  drk_grp_none:'Ohne Warengruppe', drk_grp_ign:'Ganze Gruppe ohne Bestand ({n})', drk_grp_q:'Alle {n} Artikel der Gruppe „{g}“ als „Kein Bestand“ markieren? (Unter „Ohne Bestand“ kann man es zurücknehmen.)', drk_sel_ign:'{n} ausgewählte → Kein Bestand', drk_sel_clear:'Auswahl aufheben',
+  drk_ign_n:'{n} als „Kein Bestand“ markiert', drk_ign_fail:'{n} konnten nicht gespeichert werden und stehen wieder in der Liste. Bitte noch einmal versuchen.', drk_guess:'→ {n} zuordnen', drk_link_other:'Anderes Getränk zuordnen', drk_undone:'Rückgängig gemacht', drk_done_n:'{n} erledigt', drk_todo_line:'{s}: {n} Kassenartikel noch nicht zugeordnet',
   ord_stale:'Dieser Bestellvorschlag ist vom {d}; die Mengen sind mit dem Bestand von diesem Tag gerechnet.', ord_recalc:'Mit dem heutigen Bestand neu rechnen', ord_recalc_q:'Diesen Bestellvorschlag mit dem heutigen Bestand neu rechnen?', ord_recalc_q2:'Mit dem heutigen Bestand neu rechnen? Deine geänderten Mengen werden durch den neuen Vorschlag ersetzt.', ord_recalced:'Mit dem heutigen Bestand neu gerechnet.',
   ord_sum:'{n} Artikel · zusammen {q} Stück', ord_main_none:'Diesmal ist nichts zu bestellen: Der Bestand reicht – oder der Sollbestand ist noch nicht eingetragen.', ord_rest_nt:'{n} davon haben keinen Sollbestand – die App kann nicht rechnen, ob bestellt werden muss.', ord_to_targets:'Sollbestand eintragen', ord_done_n:'{k} / {n} Zeilen auf diesem Gerät abgehakt (nach jeder Zeile antippen; wird nur auf diesem Gerät gemerkt)', ord_use_sug:'Vorschlag {n} nehmen', ord_unsaved:'Bei einer Zeile wurde die Menge nicht gespeichert; im Feld steht wieder die zuletzt gespeicherte Zahl. Bitte kurz prüfen und dann noch einmal bestätigen.',
   // v179
@@ -2068,7 +2081,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=21'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=22'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -5404,7 +5417,8 @@ function storeTabsHTML(){
   const cur = curStore(), byGeo = !!storeOk(state.geoStore) && cur === state.geoStore;
   return `<div class="stabs"><div class="seg">${STORES.map(x => `<button data-act="store-pick" data-store="${x}" class="${x === cur ? 'on' : ''}">${esc(x)}</button>`).join('')}</div>${geoCan() ? `<button class="stabs-geo${byGeo ? ' on' : ''}${geoBusy ? ' busy' : ''}" data-act="store-geo" title="${esc(t('geo_btn'))}" aria-label="${esc(t('geo_btn'))}">📍</button>` : ''}</div>`;
 }
-function storeChanged(){ if (state.tab === 'inv' && invS().view === 'loss' && invS().ls){ lsKeep(); keepScroll(renderInvLoss); }   // v181：报损
+function storeChanged(){ if (state.tab === 'inv' && invS().view === 'drinks' && invS().drinks){ invS().drkSel = {}; keepScroll(() => renderInvDrinks()); }   // v184：销量和清单（还没配的按门店看）
+  else if (state.tab === 'inv' && invS().view === 'loss' && invS().ls){ lsKeep(); keepScroll(renderInvLoss); }   // v181：报损
   else if (state.tab === 'inv' && invS().view === 'orders' && invS().ord) keepScroll(renderInvOrders);   // v180：订货
   else if (state.tab === 'inv' && invS().view === 'levels' && invS().levels) keepScroll(renderInvLevels);   // v179：库存表
   else if (state.tab === 'inv' && invS().view === 'qplace'){ invS().qp = null; render(); } else if (state.tab === 'inv' && invS().view === 'home' && invS().home) keepScroll(renderInvHome); else if (state.tab === 'inv' && invS().view === 'stock' && invS().stock) keepScroll(renderInvStock); else render(); }
@@ -6347,6 +6361,8 @@ function invTodoLines(T){
   if (T.inbox_open) out.push(`<div class="item" data-act="inv-ib-list" style="cursor:pointer"><strong>📦 ${esc(t('inv_ib_todo', { n: T.inbox_open }))}</strong>${T.inbox_late ? ` <span class="tag bad">${esc(t('inv_ib_late_n', { n: T.inbox_late }))}</span>` : ''}</div>`);
   (T.due || []).forEach(d => out.push(`<div class="item" data-act="inv-area" data-id="${d.area}" style="cursor:pointer">🔄 ${storeTag(d.store)} ${esc(t('inv_due_line', { a: invName(d), n: d.n }))}</div>`));
   if (T.misses) out.push(`<div class="item" data-act="inv-misses" style="cursor:pointer">🔍 ${esc(t('inv_miss_todo', { n: T.misses }))}</div>`);
+  if (state.me && state.me.is_admin && !state.viewAs && state.tab === 'inv' && invS().drinks){ const n = drkUnFor(curStore()).length;   // v184：老板在物品首页直接看到，点了到「待处理」
+    if (n) out.push(`<div class="item" data-act="drk-todo" style="cursor:pointer">🍹 ${esc(t('drk_todo_line', { s: curStore(), n }))}</div>`); }
   return out;
 }
 function invTodoCardHTML(T){   // 「今天」页：主管（老板的「今天」是每日核对，看底部「物品」上的数字）
@@ -6493,7 +6509,18 @@ async function viewInvMisses(){
 
 
 // ---------- v137：饮料库存第一步（只给老板）：每天读 Lightspeed 的 Produktbericht，算每样饮料卖了几瓶 ----------
-function drkTodo(){ const D = invS().drinks; return D ? (D.suggest || []).length + (D.unlinked || []).length : 0; }
+// v184：「还没配」按门店看（收银商品在哪家店卖过：f / b）；格子和首页上的数字只算选中的这家店（另一家店的不会一直挂着）
+function drkUnIn(u, st){ return +(st === 'Bismarck' ? u.b : u.f) > 0; }
+function drkUnFor(st){ const D = invS().drinks; return D ? (D.unlinked || []).filter(u => drkUnIn(u, st) || !(+u.f > 0 || +u.b > 0)) : []; }
+function drkTodo(){ const D = invS().drinks; return D ? (D.suggest || []).length + drkUnFor(curStore()).length : 0; }
+// 按名字猜这个收银商品是哪件饮料：饮料德文名里的词全都出现在商品名里（或者至少两个词对上），对上最多的那件；只对上一个词的不猜（「Pfirsich」会把冰茶猜成桃子烧酒）；按杯 / shot 卖的不猜（要配配方）
+function drkGuess(article){
+  const D = invS().drinks || {}, a = String(article || '').toLowerCase(); if (/glas|shot|(^|\D)(150|50)\s*ml/i.test(a)) return null;
+  let best = null, bs = 0;
+  (D.drinks || []).forEach(x => { const w = String(x.name_de || '').toLowerCase().split(/[^a-z0-9äöüßàèéìòùâêîôûç’']+/).filter(v => v.length >= 3 && !/^\d/.test(v));
+    const sc = w.filter(v => a.includes(v)).length; if (sc > bs && (sc >= 2 || sc === w.length)){ bs = sc; best = x; } });
+  return best;
+}
 function drkUnit(u){ return u ? t('drk_u_' + u) !== 'drk_u_' + u ? t('drk_u_' + u) : u : ''; }
 function drkPack(x){
   const parts = [];
@@ -6512,9 +6539,10 @@ function drkStats(D){
 async function viewInvDrinks(){
   const S = invS();
   if (!S.drinks) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`; else renderInvDrinks();
-  let D; try { D = await rpc('inv_drinks', tok()); } catch(e){ if (!S.drinks) $('#main').innerHTML = `<button class="link" data-act="inv-stock">${esc(t('stk_back'))}</button><div class="empty">${esc(errText(e))}</div>`; else toast(errText(e), true); return; }
-  if (state.tab !== 'inv' || S.view !== 'drinks') return;
-  S.drinks = D; renderInvDrinks();
+  const fresh = S.drinks && S.drkAt && Date.now() - S.drkAt < 4000;   // v184：刚保存完已经取过一次，不再取第二次
+  let D = S.drinks; if (!fresh){ try { D = await rpc('inv_drinks', tok()); } catch(e){ if (!S.drinks) $('#main').innerHTML = `<button class="link" data-act="inv-stock">${esc(t('stk_back'))}</button><div class="empty">${esc(errText(e))}</div>`; else toast(errText(e), true); return; }
+    if (state.tab !== 'inv' || S.view !== 'drinks') return;
+    S.drinks = D; keepScroll(() => renderInvDrinks()); refreshInvBadge(); }
   soft(rpc('inv_recipe_hints', tok()), []).then(h => { const had = (S.rHints || []).length; S.rHints = h || []; if (state.tab === 'inv' && S.view === 'drinks' && (S.rHints.length || had)) keepScroll(() => renderInvDrinks()); });   // v170：改配方的建议
 }
 function drkImportsHTML(D){
@@ -6568,21 +6596,75 @@ function drkListHTML(D){
       ${STORES.map(st => `<td class="r">${drkNum(X.sum(x, st, 1))}</td><td class="r">${drkNum(X.sum(x, st, 7))}</td>`).join('')}</tr>`).join('')}</table></div>`;
 }
 function drkUnlinkedHTML(D){
-  const U = D.unlinked || [], I = D.ignored || [];
-  const un = U.length ? `<h3>${esc(t('drk_un_h', { n: U.length }))}</h3><div class="small muted" style="margin-bottom:8px">${esc(t('drk_un_hint'))}</div>
-    <div class="list">${U.map((u, i) => `<div class="item"><strong>${esc(u.article)}</strong> <span class="small muted">${esc(u.grp || '')}</span>
-      <div class="meta">${esc(t('drk_un_30', { s: `Flingern ${drkNum(u.f)} · Bismarck ${drkNum(u.b)}` }))}</div>
-      <div class="acts"><button class="link" data-act="drk-link" data-i="${i}">${esc(t('drk_link'))}</button><button class="link" data-act="drk-rc-new" data-i="${i}">${esc(t('drk_rc_btn'))}</button><button class="link" data-act="drk-ignore" data-i="${i}">${esc(t('drk_ignore'))}</button></div></div>`).join('')}</div>` : '';
-  const ig = I.length ? `<details class="fold"><summary>${esc(t('drk_ignored_h', { n: I.length }))}</summary><div class="inner"><div class="list">${I.map((x, i) => `<div class="item"><div class="top"><div>${esc(x.article)}<div class="meta">${esc(x.by || '')} · ${esc(fmtDateTime(x.at))}</div></div>
-      <button class="link" data-act="drk-unignore" data-i="${i}">${esc(t('drk_unignore'))}</button></div></div>`).join('')}</div></div></details>` : '';
-  return un + ig;
+  const S = invS(), st = curStore(), all = D.unlinked || [], U = all.map((u, i) => ({ u, i })).filter(v => drkUnIn(v.u, st) || !(+v.u.f > 0 || +v.u.b > 0));
+  const other = STORES.filter(x => x !== st).map(x => all.filter(u => drkUnIn(u, x) && !drkUnIn(u, st)).length).reduce((a, b) => a + b, 0);
+  const sel = S.drkSel || {}, groups = {};
+  U.forEach(v => { const g = v.u.grp || ''; (groups[g] = groups[g] || []).push(v); });
+  const card = ({ u, i }) => { const g = drkGuess(u.article);
+    return `<div class="item"><label class="drk-un"><input type="checkbox" data-drksel="${esc(u.article)}"${sel[u.article] ? ' checked' : ''}><div><strong>${esc(u.article)}</strong>
+      <div class="meta">${esc(t('drk_un_30', { s: `Flingern ${drkNum(u.f)} · Bismarck ${drkNum(u.b)}` }))}</div></div></label>
+      <div class="rc-quick">${g ? `<button class="main" data-act="drk-guess" data-i="${i}" data-id="${g.id}">${esc(t('drk_guess', { n: invName(g) }))}</button>` : ''}<button data-act="drk-link" data-i="${i}">${esc(t(g ? 'drk_link_other' : 'drk_link'))}</button><button data-act="drk-rc-new" data-i="${i}">${esc(t('drk_rc_btn'))}</button><button data-act="drk-ignore" data-i="${i}">${esc(t('drk_ignore'))}</button></div></div>`; };
+  const keys = Object.keys(groups).sort((a, b) => (a === '') - (b === '') || a.localeCompare(b));
+  return `<h3>${esc(t('drk_un_h', { n: U.length }))} ${storeTag(st)}</h3>
+    <details class="fold" style="margin-bottom:8px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('drk_un_hint'))}</div></details>
+    ${U.length ? `<div class="list">${keys.map(g => `<div class="drk-grp"><span>${esc(g || t('drk_grp_none'))} · ${groups[g].length}</span>${groups[g].length > 1 ? `<button data-act="drk-grp-ign" data-g="${esc(g)}">${esc(t('drk_grp_ign', { n: groups[g].length }))}</button>` : ''}</div>${groups[g].map(card).join('')}`).join('')}</div>` : `<div class="list"><div class="empty">${esc(t('drk_todo_none', { s: st }))}</div></div>`}
+    ${other ? `<div class="small muted" style="margin:-6px 0 12px">${esc(t('drk_un_other', { n: other }))}</div>` : ''}`;
+}
+function drkIgnoredHTML(D){
+  const I = D.ignored || [];
+  return I.length ? `<div class="list">${I.map((x, i) => `<div class="item"><div class="top"><div>${esc(x.article)}<div class="meta">${esc(x.by || '')} · ${esc(fmtDateTime(x.at))}</div></div>
+      <button class="undo-b" data-act="drk-unignore" data-i="${i}" style="color:var(--ink)">${esc(t('drk_unignore'))}</button></div></div>`).join('')}</div>` : `<div class="list"><div class="empty">—</div></div>`;
+}
+// 选中的几个（勾选框）：底部固定一条「选中的 N 个 → 不管库存」
+function drkSelBarHTML(){
+  const n = drkSelList().length, nav = document.querySelector('nav'), navH = nav ? nav.offsetHeight : 0;
+  return n ? `<div class="rc-bar" id="drk-selbar" style="bottom:${navH}px"><div class="row"><button class="btn" data-act="drk-sel-ign">${esc(t('drk_sel_ign', { n }))}</button><button class="btn ghost" data-act="drk-sel-clear">${esc(t('drk_sel_clear'))}</button></div></div>` : '<div id="drk-selbar"></div>';
+}
+// 「不管库存」和「一键配」都走一个队列：先从清单上去掉（页面不跳），一个个存，全部存完只刷新一次，底部 5 秒可以撤销。
+// 正在存的时候再点别的卡片也算数（排进队里一起存）；jobs = [{ article, mode: 'ignore' | 'item', item, name }]
+async function drkBatch(jobs){
+  const S = invS(), D = S.drinks; if (!D || !jobs.length) return;
+  const arts = jobs.map(j => j.article), have = new Set((D.unlinked || []).map(u => u.article)), take = jobs.filter(j => have.has(j.article)); if (!take.length) return;
+  S.drkUndo = null; document.querySelectorAll('.toast').forEach(n => n.remove());   // 新的一批开始：上一批的「撤销」不留着（不然会撤到别的）
+  D.unlinked = (D.unlinked || []).filter(u => !arts.includes(u.article)); arts.forEach(a => { if (S.drkSel) delete S.drkSel[a]; });
+  const paint = () => { if (state.tab === 'inv' && S.view === 'drinks') return keepScroll(() => renderInvDrinks()); };
+  paint(); (S.drkQ = S.drkQ || []).push(...take);
+  if (S.drkBusy && Date.now() - S.drkBusy < 60000) return;   // 已经有一轮在存：它会把刚排进来的一起存
+  const me = S.drkBusy = Date.now(), ok = [], bad = [];
+  try {
+    do {
+      while (S.drkQ.length){ const j = S.drkQ.shift();
+        const r = await soft(rpc('inv_pos_link_save', { ...tok(), p_article: j.article, p_mode: j.mode, p_item: j.item || null, p_new: null, p_factor: 1 }), null); (r ? ok : bad).push(j); }
+      const d2 = await soft(rpc('inv_drinks', tok()), null);
+      if (d2){ d2.unlinked = (d2.unlinked || []).filter(u => !S.drkQ.some(q => q.article === u.article)); S.drinks = d2; }   // 等的时候又排进来的：先不让它们在清单上闪回来
+    } while (S.drkQ.length);
+  } finally { if (S.drkBusy === me) S.drkBusy = 0; }
+  await paint(); refreshInvBadge();
+  if (bad.length) toast(t('drk_ign_fail', { n: bad.length }), true);
+  else if (ok.length){ S.drkUndo = ok.map(j => j.article);
+    toastAction(ok.length === 1 && ok[0].mode === 'item' ? t('drk_l_done', { a: ok[0].article, n: ok[0].name || '' }) : ok.every(j => j.mode === 'ignore') ? t('drk_ign_n', { n: ok.length }) : t('drk_done_n', { n: ok.length }), t('stk_undo'), { act: 'drk-ign-undo' }); }
+}
+function drkIgnoreMany(arts){ return drkBatch(arts.map(a => ({ article: a, mode: 'ignore' }))); }
+// 勾选了、而且现在就在清单上的（换了门店、已经配掉的不算）
+function drkSelList(){ const m = invS().drkSel || {}; return drkUnFor(curStore()).map(u => u.article).filter(a => m[a]); }
+async function drkIgnoreUndo(){
+  const S = invS(), arts = S.drkUndo || []; if (!arts.length || (S.drkBusy && Date.now() - S.drkBusy < 60000)) return;
+  const me = S.drkBusy = Date.now(); S.drkUndo = null;
+  document.querySelectorAll('.toast').forEach(n => n.remove());
+  try { for (const a of arts) await soft(rpc('inv_pos_link_save', { ...tok(), p_article: a, p_mode: 'none', p_item: null, p_new: null, p_factor: 1 }), null); }
+  finally { if (S.drkBusy === me) S.drkBusy = 0; }
+  await keepScroll(() => drkReload(t('drk_undone'))); refreshInvBadge();
 }
 function renderInvDrinks(){
   const S = invS(), D = S.drinks; if (!D) return;
-  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><h2 style="margin-top:4px">${esc(t('drk_title'))}</h2>
-    <div class="small muted" style="margin-bottom:10px">${esc(t('drk_step'))}</div>
+  const st = curStore(), nTodo = (D.suggest || []).length + drkUnFor(st).length + (S.rHints || []).length, nIgn = (D.ignored || []).length;
+  const tab = ['todo', 'sales', 'ign'].includes(S.drkTab) ? S.drkTab : nTodo ? (S.drkTab = 'todo') : 'sales';   // v184：有要处理的先看「待处理」（没有的时候先看销量，之后来了建议再自己换过去）
+  const tb = (k, label, n) => `<button data-act="drk-tab" data-k="${k}" class="${tab === k ? 'on' : ''}">${esc(label)}${n ? ' ' + n : ''}</button>`;
+  $('#main').innerHTML = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><div class="stabs-row"><h2>${esc(t('drk_title'))}</h2>${storeTabsHTML()}</div>
+    <details class="fold" style="margin-bottom:8px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('drk_step'))}</div></details>
     <button class="btn ghost" data-act="drk-menu" style="margin-bottom:10px">${esc(t('drk_menu_btn'))}</button>
-    ${drkImportsHTML(D)}${aihRecipeHTML()}${drkSuggHTML(D)}${drkListHTML(D)}${drkUnlinkedHTML(D)}`;
+    <div class="seg sm" style="margin-bottom:12px">${tb('todo', t('drk_tab_todo'), nTodo)}${tb('sales', t('drk_tab_sales'))}${tb('ign', t('drk_tab_ign'), nIgn)}</div>
+    ${tab === 'todo' ? `${aihRecipeHTML()}${drkSuggHTML(D)}${drkUnlinkedHTML(D)}${drkSelBarHTML()}` : tab === 'sales' ? `${drkImportsHTML(D)}${drkListHTML(D)}` : drkIgnoredHTML(D)}`;
 }
 function drkEditKeep(){ const E = invS().dEdit; if (!E) return; document.querySelectorAll('[data-drke]').forEach(e => { E[e.dataset.drke] = e.value; }); }
 async function drkReload(msg){ const S = invS(); if (msg) toast(msg); try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){ toast(errText(e), true); }
@@ -6823,7 +6905,7 @@ function renderInvDmenu(){
 }
 // 配方编辑。S.rcp = {article, store（'' = 两家店）, id（现有配方）, price, on_menu, lines: [{item_id, qty, unit}], from, guess}
 function rcpOpen(m, from){
-  const S = invS();
+  const S = invS(); S.backY = window.scrollY;   // v184：保存 / 取消回来停在酒水单上刚才那一行
   S.rcp = { article: m.article, store: m.recipe && !m.shared ? m.store : '', id: m.recipe || null, price: m.price_cents != null ? eurInput(m.price_cents) || '0' : '', on_menu: m.on_menu !== false,
             lines: (m.lines || []).map(l => ({ item_id: l.item, qty: drkNum4(l.qty), unit: l.unit })), from: from || 'dmenu', backId: S.id, guess: false };
   if (!S.rcp.lines.length) S.rcp.lines.push({ item_id: '', qty: '1', unit: 'unit' });
@@ -6831,7 +6913,7 @@ function rcpOpen(m, from){
 }
 // 还没配的商品：按名字猜（名字里有哪件饮料的词；Glas / 150 ml = 170 ml，shot / 50 ml = 60 ml，其余 1 个）
 function rcpNew(article, store, from){
-  const S = invS(), D = S.drinks || {}, a = String(article || '').toLowerCase();
+  const S = invS(), D = S.drinks || {}, a = String(article || '').toLowerCase(); S.backY = window.scrollY;
   let best = null, bs = 0;
   (D.drinks || []).forEach(x => { const w = String(x.name_de || '').toLowerCase().split(/[^a-z0-9äöüßàèéìòùâêîôûç’']+/).filter(v => v.length >= 3 && !/^\d/.test(v));
     const sc = w.filter(v => a.includes(v)).length; if (sc > bs){ bs = sc; best = x; } });
@@ -6865,7 +6947,7 @@ function renderInvRecipe(){
     <label class="row" style="gap:8px;align-items:center;margin-bottom:12px"><input type="checkbox" data-rcp="on_menu"${R.on_menu ? ' checked' : ''}> ${esc(t('drk_rc_onmenu'))}</label>
     <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn" data-act="drk-rc-save">${esc(t('drk_rc_save'))}</button>${R.id ? `<button class="btn ghost danger" data-act="drk-rc-end">${esc(t('drk_rc_end'))}</button>` : ''}</div>`;
 }
-function rcpBack(){ const S = invS(), R = S.rcp || {}, to = R.from || 'drinks'; S.rcp = null; invGo(to, to === 'drink' ? R.backId : null); }
+function rcpBack(){ const S = invS(), R = S.rcp || {}, to = R.from || 'drinks'; S.rcp = null; invGo(to, to === 'drink' ? R.backId : null); if (to !== 'drink') window.scrollTo(0, S.backY || 0); }   // v184：回到清单 / 酒水单上刚才的位置
 // ---------- v142：饮料库存第二步（数据库 v101 / 文件服务 tasks v24，老板 2026-11-05）：收货（拍送货单 → AI 读 → 前场主管 / 老板确认入库）、两家店之间调拨 ----------
 function stkCanWrite(){ return !state.viewAs; }
 // v177：从物品首页的格子直接进收货 / 调拨 / 报损时，饮料清单可能还没读（v173 起普通员工的首页不读 inv_stock_home）：先读好再打开页面
@@ -7635,7 +7717,7 @@ async function ctCancel(restart){
 }
 
 // 一个收银商品配到哪样饮料：饮料清单里的 / 物品里找 / 新建
-function drkLinkOpen(article){ const S = invS(); S.dl = { article, factor: '1', q: '', res: null, nd: article, nz: '', unit: 'Flasche', pack_unit: 'Kiste', pack_qty: '' }; invGo('dlink'); }
+function drkLinkOpen(article){ const S = invS(); S.backY = window.scrollY; S.dl = { article, factor: '1', q: '', res: null, nd: article, nz: '', unit: 'Flasche', pack_unit: 'Kiste', pack_qty: '' }; invGo('dlink'); }
 function drkLinkKeep(){ const L = invS().dl; if (!L) return; document.querySelectorAll('[data-drkl]').forEach(e => { L[e.dataset.drkl] = e.value; }); }
 function renderInvDlink(){
   const S = invS(), L = S.dl, D = S.drinks; if (!L || !D){ S.view = 'drinks'; return viewInvDrinks(); }
@@ -13312,7 +13394,17 @@ document.addEventListener('click', async ev => {
       break;
     }
     case 'inv-misses': invGo('misses'); break;
-    case 'inv-drinks': { const S = invS(); S.dEdit = null; S.dl = null; S.dInfo = null; S.rcp = null; invGo('drinks'); break; }   // v137：饮料库存
+    case 'inv-drinks': { const S = invS(), y = S.dl ? S.backY || 0 : 0; S.dEdit = null; S.dl = null; S.dInfo = null; S.rcp = null; invGo('drinks'); if (y) window.scrollTo(0, y); break; }   // v137：饮料库存；v184：从「配到饮料」取消回来，停在原来的位置
+    case 'drk-tab': { const S = invS(); S.drkTab = el.dataset.k; renderInvDrinks(); break; }
+    case 'drk-todo': { const S = invS(); S.drkTab = 'todo'; S.dEdit = null; S.dl = null; S.dInfo = null; S.rcp = null; invGo('drinks'); break; }
+    case 'drk-grp-ign': { const S = invS(), st = curStore(), g = el.dataset.g || '', L = drkUnFor(st).filter(u => (u.grp || '') === g); if (!L.length) break;
+      if (L.length > 3 && !confirm(t('drk_grp_q', { g: g || t('drk_grp_none'), n: L.length }))) break;
+      drkIgnoreMany(L.map(u => u.article)); break; }
+    case 'drk-sel-ign': { const S = invS(), arts = drkSelList(); S.drkSel = {}; drkIgnoreMany(arts); break; }
+    case 'drk-sel-clear': { const S = invS(); S.drkSel = {}; keepScroll(() => renderInvDrinks()); break; }
+    case 'drk-ign-undo': drkIgnoreUndo(); break;
+    case 'drk-guess': { const S = invS(), D = S.drinks || {}, u = (D.unlinked || [])[+el.dataset.i], x = (D.drinks || []).find(d => d.id === el.dataset.id); if (!u || !x) break;   // 猜好的那件：点一下就配上（卖 1 个 = 1 个）；点错了 5 秒内可以撤销
+      drkBatch([{ article: u.article, mode: 'item', item: x.id, name: invName(x) }]); break; }
     case 'inv-stock': { const S = invS(); if (!stkRcDraft()) S.rc = null; S.tr = null; invGo('stock'); break; }   // v142：饮料收货 · 调拨；v178：没登记完的新送货单先留着
     case 'stk-rc-back': { const S = invS(), R = S.rc;   // v178：有没保存的东西先问一句
       if (R && R.can_edit && stkCanWrite()){ stkRcKeep(); if ((R.isNew ? (R.photos.length || R.lines.length) : R.dirty) && !confirm(t(R.isNew ? 'stk_rc_leave_q' : 'stk_rc_leave_q2'))) break; }
@@ -13496,10 +13588,12 @@ document.addEventListener('click', async ev => {
       const lines = R.lines.filter(l => l.item_id).map(l => ({ item_id: l.item_id, qty: String(l.qty || '').trim(), unit: l.unit || 'unit' }));
       if (!lines.length || lines.some(l => !(parseFloat(l.qty.replace(',', '.')) > 0))){ toast(t('drk_rc_need'), true); break; }
       const pc = drkCents(R.price); if (Number.isNaN(pc)){ toast(t('err_INV_BAD'), true); break; }
-      try { await rpc('inv_recipe_save', { ...tok(), p_article: R.article, p_store: R.store || null, p_lines: lines, p_price_cents: pc === '' ? null : pc, p_on_menu: !!R.on_menu }); }
-      catch(e){ toast(drkErr(e), true); break; }
-      const a = R.article; try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){}
-      toast(t('drk_rc_saved', { a })); rcpBack(); break; }
+      await invLock(el, async () => {   // v184：连点不会存两版
+        try { await rpc('inv_recipe_save', { ...tok(), p_article: R.article, p_store: R.store || null, p_lines: lines, p_price_cents: pc === '' ? null : pc, p_on_menu: !!R.on_menu }); }
+        catch(e){ toast(drkErr(e), true); return; }
+        const a = R.article; try { S.drinks = await rpc('inv_drinks', tok()); S.drkAt = Date.now(); } catch(e){}
+        toast(t('drk_rc_saved', { a })); rcpBack(); refreshInvBadge(); });
+      break; }
     case 'drk-rc-end': { const S = invS(), R = S.rcp; if (!R || !R.id || !confirm(t('drk_rc_end_q', { a: R.article }))) break;
       try { await rpc('inv_recipe_end', { ...tok(), p_id: R.id }); } catch(e){ toast(errText(e), true); break; }
       const a = R.article; try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){}
@@ -13517,8 +13611,7 @@ document.addEventListener('click', async ev => {
       try { await rpc('inv_drink_save', { ...tok(), p_item: x.id, p_data: { cost_cents: x.cost_new.cost_cents } }); } catch(e){ toast(errText(e), true); break; }
       await keepScroll(() => drkReload(t('drk_i_saved'))); break; }
     case 'drk-link': { const u = ((invS().drinks || {}).unlinked || [])[+el.dataset.i]; if (u) drkLinkOpen(u.article); break; }
-    case 'drk-ignore': { const u = ((invS().drinks || {}).unlinked || [])[+el.dataset.i]; if (!u) break;
-      if (await drkLinkSave(u.article, 'ignore')) keepScroll(() => drkReload(t('drk_ignored_done'))); break; }
+    case 'drk-ignore': { const u = ((invS().drinks || {}).unlinked || [])[+el.dataset.i]; if (!u) break; drkIgnoreMany([u.article]); break; }   // v184：卡片马上消失，底部 5 秒可以撤销
     case 'drk-unignore': { const x = ((invS().drinks || {}).ignored || [])[+el.dataset.i]; if (!x) break;
       if (await drkLinkSave(x.article, 'none')) keepScroll(() => drkReload(t('drk_back_un'))); break; }
     case 'drk-unlink': { const S = invS(), x = ((S.drinks || {}).drinks || []).find(d => d.id === S.id), l = x && (x.links || [])[+el.dataset.i]; if (!l) break;
@@ -13529,13 +13622,16 @@ document.addEventListener('click', async ev => {
       S.view = 'drinks'; S.id = null; await drkReload(t('drk_d_off_done')); window.scrollTo(0, 0); break; }
     case 'drk-l-pick': { drkLinkKeep(); const S = invS(), L = S.dl; if (!L) break; const f = drkFactor(L); if (isNaN(f)){ toast(t('err_INV_FACTOR'), true); break; }
       const x = ((S.drinks || {}).drinks || []).find(d => d.id === el.dataset.id) || ((L.res || {}).items || []).find(d => d.id === el.dataset.id);
-      if (!x || !await drkLinkSave(L.article, 'item', x.id, { factor: f })) break;
-      S.dl = null; S.view = 'drinks'; await drkReload(t('drk_l_done', { a: L.article, n: invName(x) })); window.scrollTo(0, 0); break; }
+      if (!x || L.busy) break; L.busy = true;   // v184：连点不会配两次
+      if (!await drkLinkSave(L.article, 'item', x.id, { factor: f })){ L.busy = false; break; }
+      S.dl = null; S.view = 'drinks'; await drkReload(t('drk_l_done', { a: L.article, n: invName(x) })); window.scrollTo(0, S.backY || 0); refreshInvBadge(); break; }
     case 'drk-l-new': { drkLinkKeep(); const S = invS(), L = S.dl; if (!L) break; const f = drkFactor(L); if (isNaN(f)){ toast(t('err_INV_FACTOR'), true); break; }
       if (!L.nd.trim() && !L.nz.trim()){ toast(t('err_INV_NAME_EMPTY'), true); break; }
       const p_new = { name_de: L.nd, name_zh: L.nz, unit: L.unit, pack_unit: L.pack_unit, pack_qty: String(L.pack_qty || '').replace(',', '.') };
-      if (!await drkLinkSave(L.article, 'new', null, { factor: f, p_new })) break;
-      S.dl = null; S.view = 'drinks'; await drkReload(t('drk_l_done', { a: L.article, n: L.nz.trim() && state.lang !== 'de' ? L.nz : (L.nd || L.nz) })); window.scrollTo(0, 0); break; }
+      await invLock(el, async () => {   // v184：点下去马上变灰，连点不会建出两件同名的饮料
+        if (!await drkLinkSave(L.article, 'new', null, { factor: f, p_new })) return;
+        S.dl = null; S.view = 'drinks'; await drkReload(t('drk_l_done', { a: L.article, n: L.nz.trim() && state.lang !== 'de' ? L.nz : (L.nd || L.nz) })); window.scrollTo(0, S.backY || 0); refreshInvBadge(); });
+      break; }
     case 'inv-miss-alias': { const S = invS(), m = (S.misses || [])[+el.dataset.i]; if (!m) break; S.pickItem = { mode: 'alias', word: m.q, q: '', focus: true, back: { view: 'misses' } }; S.view = 'pick'; render(); window.scrollTo(0, 0); break; }
     case 'inv-miss-new': { const m = (invS().misses || [])[+el.dataset.i]; if (!m) break; const cjk = /[一-鿿]/.test(m.q);
       invFormOpen('new', { [cjk ? 'name_zh' : 'name_de']: m.q, back: { view: 'misses' } }); break; }
@@ -13731,6 +13827,8 @@ document.addEventListener('change', async ev => {
       const S = invS(); (S.ctShow = S.ctShow || {})[C.id] = { ...((S.ctShow || {})[C.id] || {}), [id]: true };
       await keepScroll(() => renderInvCount()); const inp = document.querySelector(`[data-ct="x:${id}"]`); if (inp) inp.focus(); }
     return; }
+  if (ev.target.dataset && ev.target.dataset.drksel != null){ const S = invS(); (S.drkSel = S.drkSel || {})[ev.target.dataset.drksel] = ev.target.checked;   // v184：勾选「还没配」的收银商品
+    const b = document.getElementById('drk-selbar'); if (b) b.outerHTML = drkSelBarHTML(); return; }
   if (ev.target.dataset && ev.target.dataset.rcpchg){ rcpKeep(); keepScroll(() => renderInvRecipe()); return; }   // v166：配方里换了饮料，单位跟着变
   if (ev.target.classList && ev.target.classList.contains('lib-lang') && state.libForm && state.libForm.replaces){ libKeep(); keepScroll(render); return; }   // v134：语言改了，换掉哪份跟着变
   if (ev.target.id === 'tf-rd' || ev.target.id === 'tf-rm'){ tfSync(); tfRedraw(); return; }   // v120：周期从哪天开始，说明跟着变
