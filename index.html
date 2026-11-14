@@ -456,6 +456,7 @@ td.r,th.r{text-align:right}
 .inv-noph{display:flex;align-items:center;justify-content:center;font-size:22px;color:#9AA8A3}
 div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)}
 .inv-loc{font-size:14px;margin-top:4px;cursor:pointer}
+.inv-loc[data-act]{display:block;min-height:40px;padding:9px 10px;margin-top:6px;border:1px solid var(--line);border-radius:var(--r-s);background:#fff;font-size:15px;line-height:1.35}
 .inv-code{font-size:30px;font-weight:800;letter-spacing:.5px;margin:4px 0 0}
 .inv-warn{color:var(--neg)}
 .inv-chosen{font-weight:700;font-size:17px;margin:4px 0 8px}
@@ -569,7 +570,7 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .inv-lvbtn.on,.inv-cell.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .inv-grid{display:grid;gap:6px}
 .inv-cell{height:44px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:700}
-.inv-find{display:block;flex:1;min-width:0;height:48px;text-align:left;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;color:var(--muted);font-size:16px}
+.inv-find{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;flex:1;min-width:0;height:48px;text-align:left;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;color:var(--muted);font-size:16px}
 </style>
 </head>
 <body>
@@ -587,7 +588,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v181';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v182';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -661,7 +662,7 @@ zh: {
   onb_todo:'新人带教：{n} 有 {k} 条新回答', onb_todo_go:'去看',
   act_onb_start:'开始带教', act_onb_mentor:'换带教人', act_onb_end:'带教结束', act_onb_day_add:'带教加一天', act_onb_fill:'补记带教回答', act_onb_submit:'交带教回答',
   // v104：储区页上直接改储区
-  inv_area_edit:'✏️ 编辑这个储区（名字、规矩、特点）',
+  inv_area_edit:'✏️ 编辑这个房间（名字、规矩、特点）',
   // v100：房间 / 货架的特点（老板口述，AI 整理；只是提醒）
   inv_tr_h_area:'房间的特点（只是提醒：AI 推荐位置时参考，员工也能看到）', inv_tr_h_unit:'货架的特点（只是提醒：AI 推荐位置时参考，员工也能看到）',
   inv_tr_hint:'站在这里，打字或点键盘上的 🎤 说一段：潮不潮、冷不冷、多久来一次、货架什么材质、能不能放重的、最下层是不是贴地……然后点「✨ AI 整理」，看一眼再保存。',
@@ -681,24 +682,24 @@ zh: {
   // v99：物品——AI 改一改、AI 推荐位置、按真实架子显示层 / 格
   inv_fix_lbl:'AI 认错了？说一句正确的（可以点键盘上的 🎤 直接说）', inv_fix_ph:'例如：这是韩国辣椒酱，不是番茄酱', inv_fix_btn:'✨ 让 AI 改', inv_fix_need:'请先写（或说）一句哪里不对。',
   inv_fix_done:'✓ AI 按你说的改好了，请再看一眼。', inv_aip_btn:'✨ AI 推荐位置', inv_aip_again:'换一批推荐', inv_aip_busy:'AI 正在想放哪里……{s} 秒',
-  inv_aip_h:'AI 推荐（点一下就选上；只推荐不违反规矩的位置）', inv_aip_none:'没有符合规矩、你又能维护的位置。请检查分类和「怕潮」，或者找老板加储位。', inv_aip_fail:'AI 没推荐成，自己选就行。',
+  inv_aip_h:'AI 推荐（点一下就选上；只推荐不违反规矩的位置）', inv_aip_none:'没有符合规矩、你又能维护的位置。请检查分类和「怕潮」，或者找老板加位置。', inv_aip_fail:'AI 没推荐成，自己选就行。',
   inv_aip_need:'先选好分类，AI 才能推荐位置。',
   inv_pos_lv:'从上往下第 {r} 层', inv_pos_lv_of:'从上往下第 {r} 层（共 {n} 层）', inv_pos_top:'最上层', inv_pos_bottom:'最下层',
   inv_pos_grid:'第 {r} 行 · 左起第 {c} 格', inv_pos_grid_of:'第 {r} 行 · 左起第 {c} 格（{n} 行 × {m} 格）',
   // v94：物品第三、四步（待归位、搜不到的词、储位确认）
   inv_ib_btn:'📦 不知道放哪？登记待归位', inv_ib_mine:'我登记的（{n}）', inv_ib_new_h:'登记待归位',
-  inv_ib_new_hint:'不知道该放哪的东西：拍一张照片，写一句话（在哪找到的、是什么），然后放进这家店办公室的「待归位」箱子（F-UNS）。主管会处理，你在「我登记的」里能看到去了哪里。',
+  inv_ib_new_hint:'不知道该放哪的东西：拍一张照片，写一句话（在哪找到的、是什么），然后放进这家店办公室的「待归位」箱子（{c}）。主管会处理，你在「我登记的」里能看到去了哪里。',
   inv_ib_note:'一句话（可以不写）', inv_ib_note_ph:'例如：仓库门口一箱，看不懂是什么酱', inv_ib_store:'在哪家店', inv_ib_save:'登记', inv_ib_need_photo:'请先拍照片。',
-  inv_ib_added:'已登记。请把东西放进办公室的「待归位」箱子。', inv_ib_mine_h:'我登记的待归位', inv_ib_box_hint:'东西请放进这家店办公室的「待归位」箱子（F-UNS）。',
+  inv_ib_added:'已登记。请把东西放进办公室的「待归位」箱子。', inv_ib_mine_h:'我登记的待归位', inv_ib_box_hint:'东西请放进这家店办公室的「待归位」箱子（{c}）。',
   inv_ib_mine_none:'最近 60 天你没有登记过。', inv_ib_done_h:'已处理（{n}）', inv_ib_no_note:'（没写说明）',
   inv_ib_wait:'待处理 · 已等 {d} 天', inv_ib_wait_late:'待处理 · 已等 {d} 天（超过 7 天）', inv_ib_r_placed:'已放到 {c}（{n}）', inv_ib_r_new:'新物品「{n}」，放在 {c}', inv_ib_r_discarded:'已丢弃',
   inv_ib_by:'处理：{n} · {t}', inv_ib_list_h:'待归位（{n}）', inv_ib_list_short:'待归位', inv_ib_list_hint:'员工登记的「不知道放哪的东西」。最早的在上面，超过 7 天的标红。东西在办公室的待归位箱子里。',
   inv_ib_list_none:'现在没有待归位的东西 ✓', inv_ib_todo:'待归位 {n} 件', inv_ib_late_n:'{n} 件超过 7 天',
-  inv_ib_ai_h:'这是什么？', inv_ib_ai_fail:'AI 没看成。自己看照片，选下面的一种处理。', inv_ib_ai_guess:'AI 看照片：可能是「{n}」。', inv_ib_cand:'已经有的物品里像的（点它 = 是这一件，接着选储位）：',
+  inv_ib_ai_h:'这是什么？', inv_ib_ai_fail:'AI 没看成。自己看照片，选下面的一种处理。', inv_ib_ai_guess:'AI 看照片：可能是「{n}」。', inv_ib_cand:'已经有的物品里像的（点它 = 是这一件，接着选位置）：',
   inv_ib_other:'是别的已有物品（搜一下）', inv_ib_asnew:'都不是：录成新物品（照片已带上）', inv_ib_discard:'已丢弃（要写原因）',
   inv_ib_discard_h:'确定已丢弃？', inv_ib_discard_lbl:'原因（必须写，例如：坏了扔掉了 / 是员工私人的，已还给他）', inv_ib_discard_ok:'确认已丢弃', inv_ib_done:'已处理',
   inv_ib_place_h:'「{n}」放到哪里', inv_todo_h:'📦 物品',
-  inv_due_line:'{a}：{n} 个储位 3 个月没确认，该去看看了', inv_due_tag:'该看了', inv_check:'✓ 看过了，没变', inv_checked:'已确认',
+  inv_due_line:'{a}：{n} 个位置 3 个月没确认，该去看看了', inv_due_tag:'该看了', inv_check:'✓ 看过了，没变', inv_checked:'已确认',
   inv_checked_by:'上次确认：{n} · {t}', inv_check_hint:'3 个月要确认一次：去看一眼，没变就点「看过了」，变了就重拍照片。',
   inv_miss_todo:'搜不到的词 {n} 个', inv_miss_h:'最近搜不到的词（{n}）', inv_miss_hint:'员工搜了、什么都没找到的词（最近 60 天，次数多的在前）。是店里有的东西就加成别名或新建物品；店里本来就没有的点「忽略」。能搜到以后自动从这里消失。',
   inv_miss_last:'最后一次 {t}', inv_miss_alias:'加到别名', inv_miss_new:'新建物品', inv_miss_ignore:'忽略', inv_miss_none:'没有搜不到的词 ✓',
@@ -706,7 +707,7 @@ zh: {
   // v93：物品第二步（扫码、标签）
   inv_scan:'📷 扫码', inv_scan_h:'扫码', inv_scan_hint:'把手机对准标签上的二维码，离 20–40 厘米。', inv_scan_loading:'正在打开摄像头……',
   inv_scan_nocam:'打不开摄像头。请在手机「设置」里允许 Kochi Team（或 Safari / Chrome）使用相机；也可以用手机自带的相机扫标签（会打开浏览器，要先登录）。',
-  inv_lab_btn:'🏷 打印标签', inv_lab_item_btn:'🏷 打印这件东西的标签', inv_lab_store_btn:'🏷 打印 {s} 全部储位的标签',
+  inv_lab_btn:'🏷 打印标签', inv_lab_item_btn:'🏷 打印这件东西的标签', inv_lab_store_btn:'🏷 打印 {s} 全部位置的标签',
   inv_lab_h:'打印标签 · {a}', inv_lab_item_h:'打印物品标签（贴在箱子上）',
   inv_lab_paper:'标签纸：A4 每张 10 个（2 列 × 5 行，每个 10,5 × 5,1 cm）。在电脑上打开 PDF，选「实际大小 / 100%」打印，不要选「适合页面」。',
   inv_lab_all:'全选', inv_lab_none:'全不选', inv_lab_n:'{n} 个 · {p} 页', inv_lab_copies:'打几张（同一件东西几个箱子）',
@@ -714,19 +715,19 @@ zh: {
   inv_lab_border:'画出标签边框（第一次先用普通纸试打，叠在标签纸上对着光看准不准）',
   inv_lab_off:'微调位置（这台设备记住）：往下 {y} mm，往右 {x} mm', inv_lab_offy:'往下移（毫米，往上用负数）', inv_lab_offx:'往右移（毫米，往左用负数）',
   inv_lab_make:'生成 PDF', inv_lab_busy:'正在生成第 {a} / {b} 页……', inv_lab_ready:'PDF 好了（{n}）。在电脑上打开打印最准。', inv_lab_share:'打开 / 保存 / 分享 PDF',
-  inv_lab_fail:'生成 PDF 失败：{e}。请检查网络后再试；还不行请截图发给老板。', inv_lab_none_sel:'请至少选一个储位。',
+  inv_lab_fail:'生成 PDF 失败：{e}。请检查网络后再试；还不行请截图发给老板。', inv_lab_none_sel:'请至少选一个位置。',
   // v91：物品
   tab_inv:'物品', inv_more:'📦 物品', inv_title:'物品', inv_q_ph:'找东西：名字、别名、编号……', inv_find:'找东西（物品放在哪里）',
-  inv_new:'＋ 新物品（拍照）', inv_settings:'⚙ 物品设置', inv_store_empty:'还没整理', inv_area_counts:'{p} 个储位 · {i} 件东西', inv_no_photo_n:'还没照片 {n}',
+  inv_new:'＋ 新物品（拍照）', inv_settings:'⚙ 物品设置', inv_store_empty:'还没整理', inv_area_counts:'{p} 个位置 · {i} 件东西', inv_no_photo_n:'还没照片 {n}',
   inv_owner_front:'前场', inv_owner_kitchen:'后厨', inv_owner_shared:'共用', inv_tag_damp:'潮湿', inv_tag_nofood:'不放食品', inv_tag_chem:'放化学品',
-  inv_tag_gas:'瓦斯罐专用', inv_tag_temp:'临时区', inv_tag_off:'已停用', inv_main:'主', inv_main_long:'主储位', inv_not_main:'不是主储位', inv_no_loc:'还没有位置',
+  inv_tag_gas:'瓦斯罐专用', inv_tag_temp:'临时区', inv_tag_off:'已停用', inv_main:'主', inv_main_long:'主位置', inv_not_main:'不是主位置', inv_no_loc:'还没有位置',
   inv_none:'没找到「{q}」。换个叫法试试（中文、德文、别名都行），或者问主管。', inv_none_sup:'是新东西的话，点上面「＋ 新物品」录进去。',
-  inv_places_h:'储位', inv_searching:'正在找……', inv_back:'← 物品', inv_back_more:'← 更多', inv_add_unit:'＋ 加货架 / 柜子', inv_edit:'编辑',
-  inv_unit_off:'已停用（{n}）', inv_items_n:'{n} 件', inv_empty_place:'空着', inv_area_empty:'这里还没有储位。',
+  inv_places_h:'位置', inv_searching:'正在找……', inv_back:'← 物品', inv_back_more:'← 更多', inv_add_unit:'＋ 加货架 / 柜子', inv_edit:'编辑',
+  inv_unit_off:'已停用（{n}）', inv_items_n:'{n} 件', inv_empty_place:'空着', inv_area_empty:'这里还没有位置。',
   inv_photo_none:'还没照片', inv_photo_take:'📷 拍照片', inv_photo_retake:'📷 重拍', inv_photo_by:'照片：{n} · {t}', inv_photo_saved:'照片已保存', inv_uploading:'正在上传照片……',
   inv_here:'这里应该放（{n}）', inv_here_none:'这里还没登记东西。', inv_temp_hint:'临时区：东西只是暂时放这里，不能当固定位置。',
   inv_put_new:'＋ 新物品放这里', inv_put_old:'＋ 已有的物品放这里', inv_slots:'层 / 格', inv_aka:'也叫：{a}', inv_damp:'怕潮',
-  inv_unit_line:'单位：{u}', inv_pack_line:'1 {p} = {n} {u}', inv_locs:'放在哪里', inv_set_main:'设为主储位', inv_unplace:'拿走',
+  inv_unit_line:'单位：{u}', inv_pack_line:'1 {p} = {n} {u}', inv_locs:'放在哪里', inv_set_main:'设为主位置', inv_unplace:'拿走',
   inv_unplace_q:'从 {p} 拿走「{n}」？（这个位置停用，记录留着）', inv_add_loc:'＋ 再放一个位置', inv_edit_item:'编辑物品',
   inv_disable:'停用这件东西', inv_enable:'重新启用', inv_disable_q:'停用「{n}」？停用后搜不到，位置记录留着，以后可以重新启用。',
   inv_merge:'合并到另一件…', inv_merge_q:'把「{a}」合并到「{b}」？「{a}」停用，它的名字变成「{b}」的别名，位置挪过去。不能撤回。', inv_merged:'已合并到「{n}」',
@@ -737,17 +738,17 @@ zh: {
   inv_f_de:'德文名', inv_f_zh:'中文名', inv_f_alias:'别名 / 关键词（用逗号分开，任何语言）', inv_f_alias_ph:'例如：Papierservietten, 纸巾, napkin',
   inv_f_cat:'分类', inv_f_cat_pick:'请选分类', inv_f_damp:'怕潮（纸品、布类、食品、电器、纸质文件）', inv_f_more:'更多资料（可不填）',
   inv_f_unit:'基本单位（瓶、kg、个……）', inv_f_pack:'包装单位（箱、包……）', inv_f_qty:'1 个包装 = 多少基本单位（例如 24）', inv_f_note:'备注',
-  inv_f_stock:'以后要管库存（现在还没用）', inv_f_expiry:'以后要管保质期（现在还没用）', inv_f_area:'储区', inv_f_unit_pick:'货架 / 柜子 / 抽屉',
-  inv_f_slot:'哪一层 / 哪一格（从上往下 A、B、C）', inv_f_pick:'请选', inv_f_chosen:'放在：{c}', inv_f_last:'（上次用的）', inv_f_noplace:'你还没有可以维护的储区（要老板授权区域主管）。',
+  inv_f_stock:'以后要管库存（现在还没用）', inv_f_expiry:'以后要管保质期（现在还没用）', inv_f_area:'房间', inv_f_unit_pick:'货架 / 柜子 / 抽屉',
+  inv_f_slot:'哪一层 / 哪一格（从上往下 A、B、C）', inv_f_pick:'请选', inv_f_chosen:'放在：{c}', inv_f_last:'（上次用的）', inv_f_noplace:'你还没有可以维护的房间（要老板授权区域主管）。',
   inv_save:'保存', inv_cancel:'← 取消', inv_saved:'已保存', inv_need_name:'请写名字（德文或中文至少一个）。', inv_need_cat:'请选分类。',
-  inv_need_place:'请选放在哪里（储区 → 货架 → 层）。', inv_f_room:'这个房间没有货架：东西直接放在整个房间里，不用再选。', inv_f_room_chosen:'放在：{a}（整个房间）', inv_area_empty_tip:'小房间不用加货架：放东西时直接选这个房间就行。', inv_photo_wait:'照片还在上传，请等一下再保存。',
+  inv_need_place:'请选放在哪里（房间 → 货架 → 层）。', inv_f_room:'这个房间没有货架：东西直接放在整个房间里，不用再选。', inv_f_room_chosen:'放在：{a}（整个房间）', inv_area_empty_tip:'小房间不用加货架：放东西时直接选这个房间就行。', inv_photo_wait:'照片还在上传，请等一下再保存。',
   inv_dup_h:'已经有差不多的东西了', inv_dup_q:'是同一件吗？是的话点它，只给它加这个位置，不用新建。', inv_dup_new:'不是，新建一件',
   inv_c_FOOD_AREA:'「{a}」规定不能放食品。请换到能放食品的地方（例如仓库）。', inv_c_CHEM_AREA:'清洁剂 / 化学品只能放在清洁间，「{a}」不行（不能和食品、餐具放在一起）。',
   inv_c_DAMP:'这件东西怕潮，「{a}」潮湿，放久了会坏。请放到干燥的地方。', inv_c_FOOD_FLOOR:'食品不能直接放在地面区（{p}），要放到货架上。',
   inv_c_GAS_PLACE:'瓦斯罐只能放在「瓦斯罐专用」的位置（Flingern：办公室门口储物柜 B1–B3），{p} 不是。', inv_c_GAS_ONLY:'{p} 是瓦斯罐专用的位置，不能放别的东西。',
   inv_c_change:'换一个位置', inv_c_only_boss:'只有老板可以确认后强制保存。', inv_c_force_lbl:'老板：确实要放这里，写一句原因（记进日志）',
   inv_c_force:'我确认，仍然保存', inv_c_note_need:'请写一句原因。', inv_placed:'已放到 {c}',
-  inv_u_new_h:'加货架 / 柜子 · {a}', inv_u_edit_h:'编辑储位 {c}', inv_u_edit_btn:'编辑这个储位', inv_u_type:'类型',
+  inv_u_new_h:'加货架 / 柜子 · {a}', inv_u_edit_h:'编辑位置 {c}', inv_u_edit_btn:'编辑这个位置', inv_u_type:'类型',
   inv_type_R:'货架', inv_type_S:'柜子', inv_type_SL:'抽屉', inv_type_K:'冷藏柜', inv_type_T:'冷冻柜', inv_type_F:'地面区',
   inv_u_no:'号码（空着 = 接着最大的号；停用过的号码不能再用）', inv_u_preview:'编号：{c}', inv_u_name_zh:'名称（中文，例如「窗边铁货架」）', inv_u_name_de:'名称（德文）',
   inv_u_use_zh:'用途（中文，可不填，例如「食品」）', inv_u_use_de:'用途（德文，可不填）', inv_u_layout:'分层', inv_u_lay_none:'不分层',
@@ -755,12 +756,12 @@ zh: {
   inv_u_gas:'瓦斯罐专用（只有老板能改）', inv_u_temp:'临时区：不能当物品的固定位置（只有老板能改）',
   inv_u_add_slots:'加层 / 加一行格子', inv_u_add_hint:'接着往后加：已有 A–D 就加 E……；格子柜加一整行。', inv_u_add_hint0:'现在不分层。加几层（从上往下 A、B……）；要格子就同时填列数。',
   inv_u_add_n:'加几层（几行）', inv_u_cols_opt:'列数（格子才填）', inv_u_added:'加好了 {n} 个',
-  inv_u_off:'停用这个储位', inv_u_off_q:'停用 {c}？编号作废，以后不会再用；层 / 格一起停用。只有老板能重新启用。', inv_u_on:'重新启用',
-  inv_set_h:'物品设置', inv_set_areas:'储区', inv_set_cats:'分类', inv_set_new_area:'＋ 新储区', inv_set_new_cat:'＋ 新分类',
+  inv_u_off:'停用这个位置', inv_u_off_q:'停用 {c}？编号作废，以后不会再用；层 / 格一起停用。只有老板能重新启用。', inv_u_on:'重新启用',
+  inv_set_h:'物品设置', inv_set_areas:'房间', inv_set_cats:'分类', inv_set_new_area:'＋ 新房间', inv_set_new_cat:'＋ 新分类',
   inv_a_code:'代码（3 个字符，例如 TKR）', inv_a_owner:'归属（哪边的区域主管维护）', inv_a_damp:'潮湿（地下室）', inv_a_food:'能放食品', inv_a_chem:'能放化学品（只有清洁间）',
   inv_a_active:'启用', inv_a_sort:'排序（小的在前）', inv_a_hint:'改了规矩以后，已经放着的东西不符合的会标 ⚠（不会自动挪走）。',
   inv_k_nature:'性质（决定放置规则）', inv_nat_food:'食品', inv_nat_chemical:'化学品', inv_nat_gas:'瓦斯罐', inv_nat_other:'其他',
-  inv_k_damp:'新物品默认怕潮', inv_k_area:'默认储区代码（例如 LAG，可空）', inv_k_area_short:'默认 {c}',
+  inv_k_damp:'新物品默认怕潮', inv_k_area:'默认房间代码（例如 LAG，可空）', inv_k_area_short:'默认 {c}',
   inv_pick_h:'选一件已有的物品', inv_pick_merge_h:'「{n}」合并到哪一件？',
   tk_bon_shift_d:'交{sl} Bon · {d} {s} {a}–{b}', tk_bon_day_d:'交 {d} 的 Bon · {s} {sl}',
   // v79：资料库
@@ -928,6 +929,7 @@ zh: {
   undo_h:'为什么撤销？', undo_r_wrong:'记错了', undo_r_dup:'重复了', undo_r_other:'其他…', undo_note_ph:'写一句原因', undo_need:'请先写一句原因。', undo_go:'撤销', undo_no:'不撤销',
   stk_hf_all:'全部', stk_hf_rc:'收货', stk_hf_tr:'调拨', stk_hf_ls:'报损', stk_hist_none_f:'最近 30 天没有这一类记录。', stk_hist_day:'{d} · 报损 {n} 条 · 共 {b} 瓶', stk_hist_day0:'{d} · 报损 {n} 条，都已撤销',
   stk_tr_pick:'＋ 选饮料', stk_tr_dup:'这种饮料已经在单子里了，直接改它的数量。',
+  inv_new_q:'＋ 用「{q}」新建物品', inv_q_clear:'✕ 清空搜索，回到物品页', inv_back_res:'← 搜索结果', inv_saving:'正在保存…',
   ord_stale:'这张订货建议是 {d} 出的，数量是按那天的库存算的。', ord_recalc:'按今天的库存重新算', ord_recalc_q:'按今天的库存重新算这张订货建议？', ord_recalc_q2:'按今天的库存重新算？你手改过的数量会换成新的建议。', ord_recalced:'已按今天的库存重新算。',
   ord_sum:'要订 {n} 种 · 共 {q} 件', ord_main_none:'这次没有要订的：库存够，或者目标库存还没设。', ord_rest_nt:'其中 {n} 种没设目标库存，App 算不出要不要订。', ord_to_targets:'去设目标库存', ord_done_n:'这台手机上已标 {k} / {n} 行输好（输好一行点一下；只记在这台手机上）', ord_use_sug:'用建议 {n}', ord_unsaved:'有一行的数量没存上，格子里已经放回上次存好的数。请看一眼，没问题再点确认。',
   // v179：盘点更快更准（B 包）
@@ -943,7 +945,7 @@ zh: {
   qp_btn:'放位置', qp_h:'放位置', qp_hint:'站在货架前：先选一次位置，再点放在这里的饮料。走到下一层，点「下一层」接着点。', qp_where:'① 放到哪里', qp_room:'这个房间没有货架：东西直接放在整个房间里。',
   qp_cur:'现在放到', qp_cur_none:'还没选位置', qp_need:'请先在上面选好位置（房间 → 货架 → 层），再点饮料。', qp_prev:'上一层', qp_next:'下一层', qp_change:'改位置',
   qp_here_h:'这个位置现在有（{n}）', qp_take:'拿走', qp_un_h:'② 点一下放进去 · 还没放位置的 {n} 种', qp_un_none:'✓ 这家店的饮料都有位置了。', qp_q:'找饮料…', qp_no_match:'没有找到「{q}」。',
-  qp_more:'已经有位置的 {n} 种（要多放一个位置的，在这里点）', qp_more_hide:'收起已经有位置的', qp_empty:'这家店还没有饮料：老板要先在「🍹 饮料 → 📈 销量和清单」里确认饮料。', qp_no_area:'你在这家店还没有可以维护的储区（要老板授权区域主管或库管）。',
+  qp_more:'已经有位置的 {n} 种（要多放一个位置的，在这里点）', qp_more_hide:'收起已经有位置的', qp_empty:'这家店还没有饮料：老板要先在「🍹 饮料 → 📈 销量和清单」里确认饮料。', qp_no_area:'你在这家店还没有可以维护的房间（要老板授权区域主管或库管）。',
   // v173：门店标签 + 自动选店、饮料格子
   geo_btn:'按定位选门店', geo_hit:'📍 你在 {s}，已切到这家店。', geo_far:'📍 定位不在两家店附近（离 {s} 约 {d}），所以按排班或上次选的显示：{c}。要换请点上面的门店标签。',
   geo_denied:'定位没有被允许，所以不能自动选门店。请在手机「设置」里给浏览器 / 这个 App 打开「位置」，再点一次 📍；或者直接点门店标签。', geo_fail:'这次没定到位置（信号弱或超时）。请到窗边再点一次 📍，或者直接点门店标签。', geo_none:'这台设备不能定位。请直接点门店标签选门店。',
@@ -1380,7 +1382,7 @@ de: {
   onb_todo:'Einarbeitung: {k} neue Antworten von/zu {n}', onb_todo_go:'Ansehen',
   act_onb_start:'Einarbeitung gestartet', act_onb_mentor:'Ansprechperson geändert', act_onb_end:'Einarbeitung beendet', act_onb_day_add:'Einarbeitungstag hinzugefügt', act_onb_fill:'Einarbeitung nachgetragen', act_onb_submit:'Einarbeitung ausgefüllt',
   // v104：Bereich direkt auf der Bereichsseite bearbeiten
-  inv_area_edit:'✏️ Diesen Bereich bearbeiten (Name, Regeln, Eigenschaften)',
+  inv_area_edit:'✏️ Diesen Raum bearbeiten (Name, Regeln, Eigenschaften)',
   // v100：Eigenschaften von Räumen / Regalen (vom Chef beschrieben, von der KI geordnet; nur Hinweise)
   inv_tr_h_area:'Eigenschaften des Raums (nur Hinweise: für KI-Platzvorschläge, auch für das Team sichtbar)', inv_tr_h_unit:'Eigenschaften des Regals (nur Hinweise: für KI-Platzvorschläge, auch für das Team sichtbar)',
   inv_tr_hint:'Vor Ort kurz beschreiben (tippen oder 🎤 auf der Tastatur): feucht? kalt? wie oft man hinkommt, Material des Regals, ob Schweres darf, ob die unterste Ebene auf dem Boden steht … dann „✨ KI ordnen“, kurz prüfen und speichern.',
@@ -1400,15 +1402,15 @@ de: {
   // v99：Artikel – KI-Korrektur, KI-Platzvorschlag, Ebenen / Fächer wie im echten Regal
   inv_fix_lbl:'KI liegt falsch? Sag in einem Satz, was richtig ist (auch per 🎤 auf der Tastatur)', inv_fix_ph:'z. B.: Das ist koreanische Chilipaste, kein Ketchup', inv_fix_btn:'✨ KI korrigieren lassen', inv_fix_need:'Bitte zuerst schreiben (oder sagen), was falsch ist.',
   inv_fix_done:'✓ Die KI hat es nach deinen Angaben korrigiert – bitte kurz prüfen.', inv_aip_btn:'✨ KI-Platzvorschlag', inv_aip_again:'Andere Vorschläge', inv_aip_busy:'Die KI überlegt, wohin … {s} Sek.',
-  inv_aip_h:'KI-Vorschläge (antippen zum Auswählen; nur Plätze, die die Regeln erfüllen)', inv_aip_none:'Kein passender Platz, den du verwaltest. Bitte Kategorie und „feuchtigkeitsempfindlich“ prüfen oder den Chef um neue Lagerplätze bitten.', inv_aip_fail:'Die KI hat keinen Vorschlag gemacht – einfach selbst wählen.',
+  inv_aip_h:'KI-Vorschläge (antippen zum Auswählen; nur Plätze, die die Regeln erfüllen)', inv_aip_none:'Kein passender Platz, den du verwaltest. Bitte Kategorie und „feuchtigkeitsempfindlich“ prüfen oder den Chef um neue Plätze bitten.', inv_aip_fail:'Die KI hat keinen Vorschlag gemacht – einfach selbst wählen.',
   inv_aip_need:'Bitte zuerst die Kategorie wählen, dann schlägt die KI einen Platz vor.',
   inv_pos_lv:'{r}. Ebene von oben', inv_pos_lv_of:'{r}. Ebene von oben (von {n})', inv_pos_top:'oberste Ebene', inv_pos_bottom:'unterste Ebene',
   inv_pos_grid:'Reihe {r} · {c}. Fach von links', inv_pos_grid_of:'Reihe {r} · {c}. Fach von links ({n} Reihen × {m} Fächer)',
   // v94：Artikel Schritt 3–4 (Unsortiert, Suchwörter ohne Treffer, Lagerplatz-Kontrolle)
   inv_ib_btn:'📦 Weißt du nicht, wohin? Als unsortiert melden', inv_ib_mine:'Meine Meldungen ({n})', inv_ib_new_h:'Unsortiert melden',
-  inv_ib_new_hint:'Für Sachen, bei denen du nicht weißt, wohin sie gehören: Foto machen, kurz dazuschreiben (wo gefunden, was es ist) und in die Kiste „Unsortiert“ im Büro dieser Filiale legen (F-UNS). Die Bereichsleitung kümmert sich darum; unter „Meine Meldungen“ siehst du, wo es gelandet ist.',
+  inv_ib_new_hint:'Für Sachen, bei denen du nicht weißt, wohin sie gehören: Foto machen, kurz dazuschreiben (wo gefunden, was es ist) und in die Kiste „Unsortiert“ im Büro dieser Filiale legen ({c}). Die Bereichsleitung kümmert sich darum; unter „Meine Meldungen“ siehst du, wo es gelandet ist.',
   inv_ib_note:'Ein Satz (optional)', inv_ib_note_ph:'z. B.: Kiste vor der Lagertür, unbekannte Soße', inv_ib_store:'In welcher Filiale', inv_ib_save:'Melden', inv_ib_need_photo:'Bitte zuerst ein Foto machen.',
-  inv_ib_added:'Gemeldet. Bitte die Sache in die Kiste „Unsortiert“ im Büro legen.', inv_ib_mine_h:'Meine Unsortiert-Meldungen', inv_ib_box_hint:'Die Sachen bitte in die Kiste „Unsortiert“ im Büro dieser Filiale legen (F-UNS).',
+  inv_ib_added:'Gemeldet. Bitte die Sache in die Kiste „Unsortiert“ im Büro legen.', inv_ib_mine_h:'Meine Unsortiert-Meldungen', inv_ib_box_hint:'Die Sachen bitte in die Kiste „Unsortiert“ im Büro dieser Filiale legen ({c}).',
   inv_ib_mine_none:'In den letzten 60 Tagen hast du nichts gemeldet.', inv_ib_done_h:'Erledigt ({n})', inv_ib_no_note:'(ohne Beschreibung)',
   inv_ib_wait:'Offen · seit {d} Tagen', inv_ib_wait_late:'Offen · seit {d} Tagen (über 7 Tage)', inv_ib_r_placed:'Nach {c} geräumt ({n})', inv_ib_r_new:'Neuer Artikel „{n}“, Platz {c}', inv_ib_r_discarded:'Entsorgt',
   inv_ib_by:'Erledigt: {n} · {t}', inv_ib_list_h:'Unsortiert ({n})', inv_ib_list_short:'Unsortiert', inv_ib_list_hint:'Vom Team gemeldete Sachen ohne festen Platz. Älteste oben, über 7 Tage rot markiert. Die Sachen liegen in der Kiste „Unsortiert“ im Büro.',
@@ -1417,7 +1419,7 @@ de: {
   inv_ib_other:'Ein anderer vorhandener Artikel (suchen)', inv_ib_asnew:'Keiner davon: als neuen Artikel erfassen (Foto ist dabei)', inv_ib_discard:'Entsorgt (Grund nötig)',
   inv_ib_discard_h:'Wirklich entsorgt?', inv_ib_discard_lbl:'Grund (Pflicht, z. B.: kaputt, weggeworfen / privat, zurückgegeben)', inv_ib_discard_ok:'Entsorgt bestätigen', inv_ib_done:'Erledigt',
   inv_ib_place_h:'Wohin kommt „{n}“?', inv_todo_h:'📦 Artikel',
-  inv_due_line:'{a}: {n} Lagerplätze seit 3 Monaten nicht kontrolliert – bitte nachsehen', inv_due_tag:'nachsehen', inv_check:'✓ Kontrolliert, unverändert', inv_checked:'Kontrolliert',
+  inv_due_line:'{a}: {n} Plätze seit 3 Monaten nicht kontrolliert – bitte nachsehen', inv_due_tag:'nachsehen', inv_check:'✓ Kontrolliert, unverändert', inv_checked:'Kontrolliert',
   inv_checked_by:'Zuletzt kontrolliert: {n} · {t}', inv_check_hint:'Alle 3 Monate kontrollieren: kurz nachsehen; unverändert → „Kontrolliert“, verändert → neues Foto.',
   inv_miss_todo:'{n} Suchwörter ohne Treffer', inv_miss_h:'Suchwörter ohne Treffer ({n})', inv_miss_hint:'Wörter, nach denen gesucht und nichts gefunden wurde (letzte 60 Tage, häufigste oben). Gibt es die Sache: als anderen Namen hinzufügen oder neuen Artikel anlegen; gibt es sie nicht: „Ignorieren“. Sobald etwas gefunden wird, verschwindet das Wort von hier.',
   inv_miss_last:'zuletzt {t}', inv_miss_alias:'Als anderen Namen hinzufügen', inv_miss_new:'Neuer Artikel', inv_miss_ignore:'Ignorieren', inv_miss_none:'Keine Suchwörter ohne Treffer ✓',
@@ -1433,15 +1435,15 @@ de: {
   inv_lab_border:'Etikettenrahmen drucken (zuerst auf normalem Papier testen und gegen das Licht auf den Bogen legen)',
   inv_lab_off:'Feinjustierung (für dieses Gerät gespeichert): {y} mm nach unten, {x} mm nach rechts', inv_lab_offy:'Nach unten (mm, nach oben negativ)', inv_lab_offx:'Nach rechts (mm, nach links negativ)',
   inv_lab_make:'PDF erstellen', inv_lab_busy:'Seite {a} / {b} wird erstellt …', inv_lab_ready:'PDF fertig ({n}). Am genauesten vom Computer drucken.', inv_lab_share:'PDF öffnen / speichern / teilen',
-  inv_lab_fail:'PDF konnte nicht erstellt werden: {e}. Bitte Verbindung prüfen und erneut versuchen; sonst Screenshot an den Chef.', inv_lab_none_sel:'Bitte mindestens einen Lagerplatz wählen.',
+  inv_lab_fail:'PDF konnte nicht erstellt werden: {e}. Bitte Verbindung prüfen und erneut versuchen; sonst Screenshot an den Chef.', inv_lab_none_sel:'Bitte mindestens einen Platz wählen.',
   // v91：Artikel
-  tab_inv:'Artikel', inv_more:'📦 Artikel', inv_title:'Artikel', inv_q_ph:'Suchen: Name, anderer Name, Lagerplatz …', inv_find:'Suchen (wo liegt was?)',
+  tab_inv:'Artikel', inv_more:'📦 Artikel', inv_title:'Artikel', inv_q_ph:'Suchen: Name, anderer Name, Platz …', inv_find:'Suchen (wo liegt was?)',
   inv_new:'＋ Neuer Artikel (Foto)', inv_settings:'⚙ Artikel-Einstellungen', inv_store_empty:'Noch nicht erfasst', inv_area_counts:'{p} Plätze · {i} Artikel', inv_no_photo_n:'{n} ohne Foto',
   inv_owner_front:'Service', inv_owner_kitchen:'Küche', inv_owner_shared:'gemeinsam', inv_tag_damp:'feucht', inv_tag_nofood:'keine Lebensmittel', inv_tag_chem:'Chemikalien',
   inv_tag_gas:'nur Gaskartuschen', inv_tag_temp:'Zwischenablage', inv_tag_off:'deaktiviert', inv_main:'Haupt', inv_main_long:'Hauptplatz', inv_not_main:'nicht Hauptplatz', inv_no_loc:'Noch kein Platz',
   inv_none:'„{q}“ nicht gefunden. Anders schreiben (Deutsch, Chinesisch, anderer Name) oder die Bereichsleitung fragen.', inv_none_sup:'Neuer Artikel? Oben „＋ Neuer Artikel“ tippen.',
-  inv_places_h:'Lagerplätze', inv_searching:'Suche …', inv_back:'← Artikel', inv_back_more:'← Mehr', inv_add_unit:'＋ Regal / Schrank hinzufügen', inv_edit:'Bearbeiten',
-  inv_unit_off:'Deaktiviert ({n})', inv_items_n:'{n} Artikel', inv_empty_place:'leer', inv_area_empty:'Hier gibt es noch keine Lagerplätze.',
+  inv_places_h:'Plätze', inv_searching:'Suche …', inv_back:'← Artikel', inv_back_more:'← Mehr', inv_add_unit:'＋ Regal / Schrank hinzufügen', inv_edit:'Bearbeiten',
+  inv_unit_off:'Deaktiviert ({n})', inv_items_n:'{n} Artikel', inv_empty_place:'leer', inv_area_empty:'Hier gibt es noch keine Plätze.',
   inv_photo_none:'kein Foto', inv_photo_take:'📷 Foto machen', inv_photo_retake:'📷 Neues Foto', inv_photo_by:'Foto: {n} · {t}', inv_photo_saved:'Foto gespeichert', inv_uploading:'Foto wird hochgeladen …',
   inv_here:'Gehört hierher ({n})', inv_here_none:'Hier ist noch nichts eingetragen.', inv_temp_hint:'Zwischenablage: Sachen liegen hier nur kurz, kein fester Platz.',
   inv_put_new:'＋ Neuen Artikel hierher', inv_put_old:'＋ Vorhandenen Artikel hierher', inv_slots:'Ebenen / Fächer', inv_aka:'Auch: {a}', inv_damp:'feuchtigkeitsempfindlich',
@@ -1456,17 +1458,17 @@ de: {
   inv_f_de:'Name Deutsch', inv_f_zh:'Name Chinesisch', inv_f_alias:'Andere Namen / Suchwörter (mit Komma getrennt, jede Sprache)', inv_f_alias_ph:'z. B. Papierservietten, 纸巾, napkin',
   inv_f_cat:'Kategorie', inv_f_cat_pick:'Kategorie wählen', inv_f_damp:'Feuchtigkeitsempfindlich (Papier, Textilien, Lebensmittel, Elektrogeräte, Dokumente)', inv_f_more:'Weitere Angaben (optional)',
   inv_f_unit:'Grundeinheit (Flasche, kg, Stück …)', inv_f_pack:'Verpackungseinheit (Kiste, Packung …)', inv_f_qty:'1 Verpackung = wie viele Grundeinheiten (z. B. 24)', inv_f_note:'Notiz',
-  inv_f_stock:'Später Bestand führen (noch nicht in Gebrauch)', inv_f_expiry:'Später MHD führen (noch nicht in Gebrauch)', inv_f_area:'Bereich', inv_f_unit_pick:'Regal / Schrank / Schublade',
-  inv_f_slot:'Welche Ebene / welches Fach (von oben A, B, C)', inv_f_pick:'Bitte wählen', inv_f_chosen:'Platz: {c}', inv_f_last:'(zuletzt benutzt)', inv_f_noplace:'Du verwaltest noch keinen Bereich (Freigabe als Bereichsleitung durch den Chef nötig).',
+  inv_f_stock:'Später Bestand führen (noch nicht in Gebrauch)', inv_f_expiry:'Später MHD führen (noch nicht in Gebrauch)', inv_f_area:'Raum', inv_f_unit_pick:'Regal / Schrank / Schublade',
+  inv_f_slot:'Welche Ebene / welches Fach (von oben A, B, C)', inv_f_pick:'Bitte wählen', inv_f_chosen:'Platz: {c}', inv_f_last:'(zuletzt benutzt)', inv_f_noplace:'Du verwaltest noch keinen Raum (Freigabe als Bereichsleitung durch den Chef nötig).',
   inv_save:'Speichern', inv_cancel:'← Abbrechen', inv_saved:'Gespeichert', inv_need_name:'Bitte einen Namen eintragen (Deutsch oder Chinesisch).', inv_need_cat:'Bitte eine Kategorie wählen.',
-  inv_need_place:'Bitte den Platz wählen (Bereich → Regal → Ebene).', inv_f_room:'Dieser Raum hat kein Regal: Die Sachen liegen einfach im ganzen Raum, mehr musst du nicht wählen.', inv_f_room_chosen:'Platz: {a} (ganzer Raum)', inv_area_empty_tip:'Ein kleiner Raum braucht kein Regal: Beim Einräumen einfach diesen Raum wählen.', inv_photo_wait:'Das Foto wird noch hochgeladen – bitte kurz warten.',
+  inv_need_place:'Bitte den Platz wählen (Raum → Regal → Ebene).', inv_f_room:'Dieser Raum hat kein Regal: Die Sachen liegen einfach im ganzen Raum, mehr musst du nicht wählen.', inv_f_room_chosen:'Platz: {a} (ganzer Raum)', inv_area_empty_tip:'Ein kleiner Raum braucht kein Regal: Beim Einräumen einfach diesen Raum wählen.', inv_photo_wait:'Das Foto wird noch hochgeladen – bitte kurz warten.',
   inv_dup_h:'Es gibt schon etwas Ähnliches', inv_dup_q:'Ist es derselbe Artikel? Dann antippen – er bekommt nur diesen Platz dazu, kein neuer Artikel.', inv_dup_new:'Nein, neuen Artikel anlegen',
   inv_c_FOOD_AREA:'„{a}“: Hier dürfen keine Lebensmittel hin. Bitte an einen Ort für Lebensmittel (z. B. Lager).', inv_c_CHEM_AREA:'Reiniger / Chemikalien nur in den Putzraum, nicht in „{a}“ (nicht zusammen mit Lebensmitteln und Geschirr).',
   inv_c_DAMP:'Der Artikel verträgt keine Feuchtigkeit, „{a}“ ist feucht – er geht kaputt. Bitte an einen trockenen Ort.', inv_c_FOOD_FLOOR:'Lebensmittel nicht direkt auf die Bodenfläche ({p}), sondern ins Regal.',
   inv_c_GAS_PLACE:'Gaskartuschen nur an Plätze „nur Gaskartuschen“ (Flingern: Fächerschrank an der Bürotür B1–B3); {p} ist keiner.', inv_c_GAS_ONLY:'{p} ist nur für Gaskartuschen – nichts anderes hinlegen.',
   inv_c_change:'Anderen Platz wählen', inv_c_only_boss:'Nur der Chef kann das bestätigen und trotzdem speichern.', inv_c_force_lbl:'Chef: Wenn es wirklich hierher soll, kurz den Grund schreiben (kommt ins Protokoll)',
   inv_c_force:'Bestätigen und trotzdem speichern', inv_c_note_need:'Bitte einen Grund schreiben.', inv_placed:'Platz {c} eingetragen',
-  inv_u_new_h:'Regal / Schrank hinzufügen · {a}', inv_u_edit_h:'Lagerplatz {c} bearbeiten', inv_u_edit_btn:'Diesen Lagerplatz bearbeiten', inv_u_type:'Art',
+  inv_u_new_h:'Regal / Schrank hinzufügen · {a}', inv_u_edit_h:'Platz {c} bearbeiten', inv_u_edit_btn:'Diesen Platz bearbeiten', inv_u_type:'Art',
   inv_type_R:'Regal', inv_type_S:'Schrank', inv_type_SL:'Schublade', inv_type_K:'Kühlschrank', inv_type_T:'Tiefkühler', inv_type_F:'Bodenfläche',
   inv_u_no:'Nummer (leer = nächste freie; deaktivierte Nummern werden nicht wieder vergeben)', inv_u_preview:'Platznummer: {c}', inv_u_name_zh:'Name Chinesisch (z. B. „窗边铁货架“)', inv_u_name_de:'Name Deutsch (z. B. „Metallregal am Fenster“)',
   inv_u_use_zh:'Zweck Chinesisch (optional)', inv_u_use_de:'Zweck Deutsch (optional, z. B. „Lebensmittel“)', inv_u_layout:'Ebenen', inv_u_lay_none:'ohne Ebenen',
@@ -1474,12 +1476,12 @@ de: {
   inv_u_gas:'Nur Gaskartuschen (nur der Chef kann das ändern)', inv_u_temp:'Zwischenablage: kein fester Platz für Artikel (nur der Chef kann das ändern)',
   inv_u_add_slots:'Ebenen / Fachreihe hinzufügen', inv_u_add_hint:'Es geht hinten weiter: bei A–D kommt E …; bei Fächern eine ganze Reihe.', inv_u_add_hint0:'Noch ohne Ebenen. Wie viele Ebenen (von oben A, B …); für Fächer zusätzlich die Spalten.',
   inv_u_add_n:'Wie viele Ebenen (Reihen)', inv_u_cols_opt:'Spalten (nur für Fächer)', inv_u_added:'{n} hinzugefügt',
-  inv_u_off:'Lagerplatz deaktivieren', inv_u_off_q:'{c} deaktivieren? Die Nummer wird nicht wieder vergeben; Ebenen / Fächer werden mit deaktiviert. Nur der Chef kann wieder aktivieren.', inv_u_on:'Wieder aktivieren',
-  inv_set_h:'Artikel-Einstellungen', inv_set_areas:'Bereiche', inv_set_cats:'Kategorien', inv_set_new_area:'＋ Neuer Bereich', inv_set_new_cat:'＋ Neue Kategorie',
+  inv_u_off:'Platz deaktivieren', inv_u_off_q:'{c} deaktivieren? Die Nummer wird nicht wieder vergeben; Ebenen / Fächer werden mit deaktiviert. Nur der Chef kann wieder aktivieren.', inv_u_on:'Wieder aktivieren',
+  inv_set_h:'Artikel-Einstellungen', inv_set_areas:'Räume', inv_set_cats:'Kategorien', inv_set_new_area:'＋ Neuer Raum', inv_set_new_cat:'＋ Neue Kategorie',
   inv_a_code:'Kürzel (3 Zeichen, z. B. TKR)', inv_a_owner:'Zuständig (welche Bereichsleitung)', inv_a_damp:'Feucht (Keller)', inv_a_food:'Lebensmittel erlaubt', inv_a_chem:'Chemikalien erlaubt (nur Putzraum)',
   inv_a_active:'Aktiv', inv_a_sort:'Reihenfolge (kleiner = weiter oben)', inv_a_hint:'Nach einer Änderung werden vorhandene Artikel, die nicht mehr passen, mit ⚠ markiert (nicht automatisch umgeräumt).',
   inv_k_nature:'Art (bestimmt die Regeln)', inv_nat_food:'Lebensmittel', inv_nat_chemical:'Chemikalie', inv_nat_gas:'Gaskartusche', inv_nat_other:'Sonstiges',
-  inv_k_damp:'Neue Artikel standardmäßig feuchtigkeitsempfindlich', inv_k_area:'Standard-Bereich (Kürzel, z. B. LAG; optional)', inv_k_area_short:'Standard {c}',
+  inv_k_damp:'Neue Artikel standardmäßig feuchtigkeitsempfindlich', inv_k_area:'Standard-Raum (Kürzel, z. B. LAG; optional)', inv_k_area_short:'Standard {c}',
   inv_pick_h:'Vorhandenen Artikel wählen', inv_pick_merge_h:'„{n}“ zusammenführen mit …',
   tk_bon_shift_d:'Bon {sl} einreichen · {d} {s} {a}–{b}', tk_bon_day_d:'Bon vom {d} einreichen · {s} {sl}',
   // v79：Unterlagen
@@ -1636,7 +1638,7 @@ de: {
   drk_f_de:'Name (Deutsch)', drk_f_zh:'Name (Chinesisch)', drk_f_unit:'Einheit (Flasche, Dose …)', drk_f_pack:'Gebinde (Kiste, Karton, Tray …)', drk_f_qty:'1 Gebinde = wie viele', drk_f_save:'Speichern und bestätigen', drk_f_cancel:'Abbrechen',
   drk_list_h:'{n} Getränke', drk_list_none:'Noch keine Getränke: Bitte die Vorschläge oben bestätigen oder unten Kassenartikel zuordnen.', drk_col_last:'Neuester Tag', drk_col_day:'Zuletzt', drk_col_7:'7 Tage', drk_col_28:'28 Tage', drk_last_days:'Neuester Tag: {s}',
   drk_un_h:'{n} Getränke noch nicht zugeordnet', drk_un_hint:'Getränke-Kassenartikel, die in den letzten 30 Tagen verkauft wurden und noch nicht zugeordnet sind. Flaschenweise verkaufte: „Zuordnen“. Glasweise verkaufte oder solche mit mehreren Zutaten: „Rezept“. Selbstgemischtes (Schorle, Eistee …) vorerst als „Kein Bestand“ markieren.', drk_un_30:'30 Tage: {s}', drk_link:'Zuordnen', drk_ignore:'Kein Bestand', drk_ignored_h:'{n} ohne Bestandsführung', drk_unignore:'Zurück zu „Noch nicht zugeordnet“', drk_ignored_done:'Als „Kein Bestand“ markiert', drk_back_un:'Wieder „Noch nicht zugeordnet“',
-  drk_d_pos_h:'Kassenartikel', drk_d_factor:'1 verkauft = {f} {u}', drk_d_unlink:'Entfernen', drk_d_unlink_q:'„{a}“ von diesem Getränk entfernen? Er kommt zurück zu „Noch nicht zugeordnet“.', drk_d_days_h:'Verkauft pro Tag (letzte 28 Tage)', drk_d_nodays:'Noch keine Verkaufsdaten in den letzten 28 Tagen.', drk_d_item:'Artikelseite öffnen (Name, Foto, Lagerplatz)', drk_d_off:'Bestand für diesen Artikel nicht mehr führen', drk_d_off_q:'Für „{n}“ keinen Bestand mehr führen? Die Kassenartikel gehen zurück zu „Noch nicht zugeordnet“, der Artikel selbst bleibt.', drk_d_off_done:'Bestand wird nicht mehr geführt', drk_d_sum:'Summe',
+  drk_d_pos_h:'Kassenartikel', drk_d_factor:'1 verkauft = {f} {u}', drk_d_unlink:'Entfernen', drk_d_unlink_q:'„{a}“ von diesem Getränk entfernen? Er kommt zurück zu „Noch nicht zugeordnet“.', drk_d_days_h:'Verkauft pro Tag (letzte 28 Tage)', drk_d_nodays:'Noch keine Verkaufsdaten in den letzten 28 Tagen.', drk_d_item:'Artikelseite öffnen (Name, Foto, Platz)', drk_d_off:'Bestand für diesen Artikel nicht mehr führen', drk_d_off_q:'Für „{n}“ keinen Bestand mehr führen? Die Kassenartikel gehen zurück zu „Noch nicht zugeordnet“, der Artikel selbst bleibt.', drk_d_off_done:'Bestand wird nicht mehr geführt', drk_d_sum:'Summe',
   drk_l_h:'„{a}“ welchem Getränk zuordnen?', drk_l_factor:'1 verkauft =', drk_l_factor_u:'Grundeinheiten (Flasche / Dose)', drk_l_drinks:'Aus der Getränkeliste', drk_l_search:'In den Artikeln suchen', drk_l_q_ph:'Artikel suchen: Name, Alias …', drk_l_new:'Neues Getränk', drk_l_new_btn:'Anlegen und zuordnen', drk_l_done:'„{a}“ zugeordnet: {n}', drk_l_none:'„{q}“ nicht gefunden – unten neu anlegen.',
   drk_u_Flasche:'Flasche', drk_u_Dose:'Dose', drk_u_Kiste:'Kiste', drk_u_Karton:'Karton', drk_u_Tray:'Tray', drk_u_Fass:'Fass', drk_u_Packung:'Packung', drk_u_Stück:'Stück',   // v137
   // v142 (DB v101 / tasks v24)
@@ -1647,6 +1649,7 @@ de: {
   undo_h:'Warum stornieren?', undo_r_wrong:'Falsch eingetragen', undo_r_dup:'Doppelt eingetragen', undo_r_other:'Anderer Grund…', undo_note_ph:'Grund kurz schreiben', undo_need:'Bitte zuerst kurz den Grund schreiben.', undo_go:'Stornieren', undo_no:'Nicht stornieren',
   stk_hf_all:'Alle', stk_hf_rc:'Lieferungen', stk_hf_tr:'Umlagerungen', stk_hf_ls:'Schwund', stk_hist_none_f:'Keine Einträge dieser Art in den letzten 30 Tagen.', stk_hist_day:'{d} · Schwund {n}× · zusammen {b} Fl.', stk_hist_day0:'{d} · Schwund {n}× – alles storniert',
   stk_tr_pick:'＋ Getränk wählen', stk_tr_dup:'Dieses Getränk steht schon auf der Liste – bitte dort die Menge ändern.',
+  inv_new_q:'＋ „{q}“ als neuen Artikel anlegen', inv_q_clear:'✕ Suche leeren, zurück zur Artikelseite', inv_back_res:'← Suchergebnisse', inv_saving:'Wird gespeichert …',
   ord_stale:'Dieser Bestellvorschlag ist vom {d}; die Mengen sind mit dem Bestand von diesem Tag gerechnet.', ord_recalc:'Mit dem heutigen Bestand neu rechnen', ord_recalc_q:'Diesen Bestellvorschlag mit dem heutigen Bestand neu rechnen?', ord_recalc_q2:'Mit dem heutigen Bestand neu rechnen? Deine geänderten Mengen werden durch den neuen Vorschlag ersetzt.', ord_recalced:'Mit dem heutigen Bestand neu gerechnet.',
   ord_sum:'{n} Artikel · zusammen {q} Stück', ord_main_none:'Diesmal ist nichts zu bestellen: Der Bestand reicht – oder der Sollbestand ist noch nicht eingetragen.', ord_rest_nt:'{n} davon haben keinen Sollbestand – die App kann nicht rechnen, ob bestellt werden muss.', ord_to_targets:'Sollbestand eintragen', ord_done_n:'{k} / {n} Zeilen auf diesem Gerät abgehakt (nach jeder Zeile antippen; wird nur auf diesem Gerät gemerkt)', ord_use_sug:'Vorschlag {n} nehmen', ord_unsaved:'Bei einer Zeile wurde die Menge nicht gespeichert; im Feld steht wieder die zuletzt gespeicherte Zahl. Bitte kurz prüfen und dann noch einmal bestätigen.',
   // v179
@@ -1662,7 +1665,7 @@ de: {
   qp_btn:'Einräumen', qp_h:'Einräumen', qp_hint:'Am Regal stehen: einmal den Platz wählen, dann die Getränke antippen, die hier stehen. Für die nächste Ebene „Nächste“ tippen und weitermachen.', qp_where:'① Wohin', qp_room:'Dieser Raum hat kein Regal: Die Sachen liegen einfach im ganzen Raum.',
   qp_cur:'Aktueller Platz', qp_cur_none:'Noch kein Platz gewählt', qp_need:'Bitte zuerst oben den Platz wählen (Raum → Regal → Ebene), dann die Getränke antippen.', qp_prev:'Vorige', qp_next:'Nächste', qp_change:'Platz ändern',
   qp_here_h:'An diesem Platz ({n})', qp_take:'Entfernen', qp_un_h:'② Antippen zum Einräumen · {n} Getränke ohne Platz', qp_un_none:'✓ Alle Getränke dieser Filiale haben einen Platz.', qp_q:'Getränk suchen…', qp_no_match:'„{q}“ nicht gefunden.',
-  qp_more:'{n} Getränke haben schon einen Platz (für einen weiteren Platz hier antippen)', qp_more_hide:'Getränke mit Platz ausblenden', qp_empty:'In dieser Filiale gibt es noch keine Getränke: Der Chef muss sie zuerst unter „🍹 Getränke → 📈 Verkauf & Liste“ bestätigen.', qp_no_area:'Du verwaltest in dieser Filiale noch keinen Bereich (Freigabe als Bereichsleitung oder Lagerverantwortliche:r durch den Chef nötig).',
+  qp_more:'{n} Getränke haben schon einen Platz (für einen weiteren Platz hier antippen)', qp_more_hide:'Getränke mit Platz ausblenden', qp_empty:'In dieser Filiale gibt es noch keine Getränke: Der Chef muss sie zuerst unter „🍹 Getränke → 📈 Verkauf & Liste“ bestätigen.', qp_no_area:'Du verwaltest in dieser Filiale noch keinen Raum (Freigabe als Bereichsleitung oder Lagerverantwortliche:r durch den Chef nötig).',
   // v173
   geo_btn:'Filiale per Standort wählen', geo_hit:'📍 Du bist in {s} – diese Filiale ist jetzt ausgewählt.', geo_far:'📍 Der Standort ist bei keiner Filiale (ca. {d} bis {s}). Angezeigt wird deshalb {c} (laut Dienstplan oder letzter Auswahl). Zum Wechseln oben auf die Filiale tippen.',
   geo_denied:'Der Standort ist nicht erlaubt, deshalb kann die Filiale nicht automatisch gewählt werden. Bitte in den Einstellungen des Handys für den Browser / diese App „Standort“ erlauben und noch einmal auf 📍 tippen – oder oben direkt die Filiale antippen.', geo_fail:'Der Standort konnte nicht ermittelt werden (schwaches Signal oder Zeitüberschreitung). Bitte am Fenster noch einmal auf 📍 tippen oder oben direkt die Filiale antippen.', geo_none:'Dieses Gerät kann keinen Standort ermitteln. Bitte oben direkt die Filiale antippen.',
@@ -2054,7 +2057,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=19'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=20'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2251,14 +2254,14 @@ const ERR_ZH = {
   INV_INBOX_DONE: '这件已经有人处理过了。请返回刷新。',
   INV_DISCARD_NOTE: '标「已丢弃」要写一句原因。',
   INV_INBOX_LIMIT: '今天登记得太多了（每人每天最多 30 条）。剩下的明天再登记，或者直接问主管。',
-  INV_QR_UNKNOWN: '这个二维码不是 Kochi 的储位 / 物品标签，或者已经不用了。请扫别的，或者在物品页里搜名字。',
-  INV_QR_OFF: '这个储位已经停用了（编号作废）。请告诉主管把这张标签撕掉。',
+  INV_QR_UNKNOWN: '这个二维码不是 Kochi 的位置 / 物品标签，或者已经不用了。请扫别的，或者在物品页里搜名字。',
+  INV_QR_OFF: '这个位置已经停用了（编号作废）。请告诉主管把这张标签撕掉。',
   INV_NAME_EMPTY: '请写名字（德文或中文至少一个）。',
   INV_BAD: '填写的内容不对（例如数字或代码的格式）。请检查后再保存；还不行请截图发给老板。',
   INV_PICK_SLOT: '这个货架 / 柜子分了层，请选是哪一层（哪一格）。',
-  INV_TEMP_PLACE: '这是临时区（待上架 / 待归位），不能当东西的固定位置。请选一个正式的储位。',
+  INV_TEMP_PLACE: '这是临时区（待上架 / 待归位），不能当东西的固定位置。请选一个正式的位置。',
   INV_SPOT_HAS_UNITS: '这个房间已经有货架了，不能整间当一个位置。请在下面选货架和层。',
-  INV_PLACE_OFF: '这个储位已经停用了。请返回刷新，选别的储位。',
+  INV_PLACE_OFF: '这个位置已经停用了。请返回刷新，选别的位置。',
   INV_ITEM_OFF: '这件东西已经停用或合并到别的物品了。请返回刷新再看。',
   INV_SUGG_DONE: '这条建议已经处理过了（可能在别的手机上）。请返回刷新再看。',   // v137
   INV_NO_DRINK_CAT: '物品分类里找不到「饮料」，新建不了饮料。请在「⚙ 物品设置 → 分类」里看一下，或告诉 Claude。',
@@ -2276,8 +2279,8 @@ const ERR_ZH = {
   INV_PHOTO_BAD: '照片没有传上去（网络断了或照片有问题）。请重拍一次。',
   INV_CODE_TAKEN: '这个编号已经有了（停用过的编号也不能再用）。请换一个号码，或者号码空着让系统接着编。',
   INV_FORCE_NOTE: '强制保存要写一句原因。',
-  INV_AREA_FORBIDDEN: '这个储区不归你管：前场的储区由前场主管维护，后厨的由后厨主管维护，共用的两边主管都能维护（只限你被授权的门店）。请找对应的主管或老板。',
-  INV_PLACE_HAS_ITEMS: '这里还放着东西，不能停用。请先在物品页把东西挪到别的储位（「再放一个位置」，再「拿走」）。',
+  INV_AREA_FORBIDDEN: '这个房间不归你管：前场的房间由前场主管维护，后厨的由后厨主管维护，共用的两边主管都能维护（只限你被授权的门店）。请找对应的主管或老板。',
+  INV_PLACE_HAS_ITEMS: '这里还放着东西，不能停用。请先在物品页把东西挪到别的位置（「再放一个位置」，再「拿走」）。',
   INV_MERGE_SELF: '不能合并到它自己。请选另一件。',
   INV_UPLOAD_FAILED: '照片上传失败（服务器没给上传链接）。请检查网络后重拍；还不行请截图发给老板。',
   INV_AI_FAILED: 'AI 没看成。不影响保存：自己填名字就行。',
@@ -2525,14 +2528,14 @@ const ERR_DE = {
   INV_INBOX_DONE: 'Das wurde schon erledigt. Bitte zurück und neu laden.',
   INV_DISCARD_NOTE: 'Für „Entsorgt“ bitte kurz den Grund schreiben.',
   INV_INBOX_LIMIT: 'Heute schon sehr viele Meldungen (max. 30 pro Person und Tag). Den Rest bitte morgen melden oder direkt die Bereichsleitung fragen.',
-  INV_QR_UNKNOWN: 'Dieser QR-Code ist kein Kochi-Etikett für Lagerplatz / Artikel oder nicht mehr gültig. Bitte einen anderen scannen oder unter „Artikel“ nach dem Namen suchen.',
-  INV_QR_OFF: 'Dieser Lagerplatz ist deaktiviert (Nummer ungültig). Bitte der Bereichsleitung sagen, dass das Etikett entfernt werden soll.',
+  INV_QR_UNKNOWN: 'Dieser QR-Code ist kein Kochi-Etikett für Platz / Artikel oder nicht mehr gültig. Bitte einen anderen scannen oder unter „Artikel“ nach dem Namen suchen.',
+  INV_QR_OFF: 'Dieser Platz ist deaktiviert (Nummer ungültig). Bitte der Bereichsleitung sagen, dass das Etikett entfernt werden soll.',
   INV_NAME_EMPTY: 'Bitte einen Namen eintragen (Deutsch oder Chinesisch).',
   INV_BAD: 'Eingabe ungültig (z. B. Zahl oder Kürzel im falschen Format). Bitte prüfen und erneut speichern; sonst Screenshot an den Chef.',
   INV_PICK_SLOT: 'Dieses Regal / dieser Schrank hat Ebenen – bitte die Ebene (das Fach) wählen.',
-  INV_TEMP_PLACE: 'Das ist eine Zwischenablage (Wareneingang / Unsortiert), kein fester Platz. Bitte einen richtigen Lagerplatz wählen.',
+  INV_TEMP_PLACE: 'Das ist eine Zwischenablage (Wareneingang / Unsortiert), kein fester Platz. Bitte einen richtigen Platz wählen.',
   INV_SPOT_HAS_UNITS: 'Dieser Raum hat inzwischen ein Regal und kann nicht mehr als ein einziger Platz benutzt werden. Bitte unten Regal und Ebene wählen.',
-  INV_PLACE_OFF: 'Dieser Lagerplatz ist deaktiviert. Bitte zurück, neu laden und einen anderen wählen.',
+  INV_PLACE_OFF: 'Dieser Platz ist deaktiviert. Bitte zurück, neu laden und einen anderen wählen.',
   INV_ITEM_OFF: 'Dieser Artikel ist deaktiviert oder wurde zusammengeführt. Bitte zurück und neu laden.',
   INV_SUGG_DONE: 'Dieser Vorschlag wurde schon bearbeitet (evtl. auf einem anderen Handy). Bitte zurück und neu laden.',   // v137
   INV_NO_DRINK_CAT: 'Die Artikelkategorie „Getränke“ fehlt – Getränk kann nicht angelegt werden. Bitte unter „⚙ Artikel-Einstellungen → Kategorien“ prüfen oder Claude Bescheid geben.',
@@ -2550,7 +2553,7 @@ const ERR_DE = {
   INV_PHOTO_BAD: 'Das Foto wurde nicht hochgeladen (keine Verbindung oder Fotoproblem). Bitte noch einmal fotografieren.',
   INV_CODE_TAKEN: 'Diese Nummer gibt es schon (auch deaktivierte Nummern werden nicht wieder vergeben). Bitte andere Nummer oder leer lassen.',
   INV_FORCE_NOTE: 'Zum Trotzdem-Speichern bitte einen Grund schreiben.',
-  INV_AREA_FORBIDDEN: 'Für diesen Bereich bist du nicht zuständig: Service-Bereiche pflegt die Service-Leitung, Küchen-Bereiche die Küchen-Leitung, gemeinsame Bereiche beide (nur in deinen freigegebenen Filialen). Bitte die zuständige Leitung oder den Chef fragen.',
+  INV_AREA_FORBIDDEN: 'Für diesen Raum bist du nicht zuständig: Service-Räume pflegt die Service-Leitung, Küchen-Räume die Küchen-Leitung, gemeinsame Räume beide (nur in deinen freigegebenen Filialen). Bitte die zuständige Leitung oder den Chef fragen.',
   INV_PLACE_HAS_ITEMS: 'Hier liegen noch Artikel – Deaktivieren nicht möglich. Bitte die Artikel zuerst umräumen (im Artikel „Weiteren Platz hinzufügen“, dann „Entfernen“).',
   INV_MERGE_SELF: 'Ein Artikel kann nicht mit sich selbst zusammengeführt werden. Bitte einen anderen wählen.',
   INV_UPLOAD_FAILED: 'Foto-Upload fehlgeschlagen (kein Upload-Link vom Server). Bitte Verbindung prüfen und neu fotografieren; sonst Screenshot an den Chef.',
@@ -5476,10 +5479,13 @@ function renderInvHome(){
   if (!H){ $('#main').innerHTML = `<div class="empty">${esc(t('err_GENERIC'))}</div>`; return; }
   $('#main').innerHTML = `${invBackMore()}<div class="stabs-row"><h2>${esc(t('inv_title'))}</h2>${storeTabsHTML()}</div>
     <div class="row" style="gap:8px;margin-bottom:10px"><input type="search" class="input" id="inv-q" placeholder="${esc(t('inv_q_ph'))}" value="${esc(S.q)}" autocomplete="off" enterkeyhint="search"><button class="inv-scanbtn" data-act="inv-scan">${esc(t('inv_scan'))}</button></div>
+    <button class="link" id="inv-clr" data-act="inv-q-clear" style="margin:0 0 8px"${S.q.trim() ? '' : ' hidden'}>${esc(t('inv_q_clear'))}</button>
+    <div id="inv-mid"${S.q.trim() ? ' hidden' : ''}>
     ${invTodoLines(state.invTodo).length ? `<div class="list">${invTodoLines(state.invTodo).join('')}</div>` : ''}
     ${drkTilesHTML(false)}
     <div class="btn2">${H.sup ? `<button class="btn ghost" data-act="inv-new">${esc(t('inv_new'))}</button>` : ''}${!H.admin && (H.area_new || []).length && !state.viewAs ? `<button class="btn ghost" data-act="kp-area-new">${esc(t('kp_new_area'))}</button>` : ''}<button class="btn ghost" data-act="inv-ib-new">${esc(t('inv_ib_btn'))}</button></div>
     ${(S.ibMine || []).length ? `<button class="link" data-act="inv-ib-mine" style="margin:0 0 6px">${esc(t('inv_ib_mine', { n: S.ibMine.length }))}</button>` : ''}
+    </div>
     <div id="inv-res">${S.q.trim() ? invResultsHTML() : invBrowseHTML(H)}</div>
     ${H.admin ? `<button class="link" data-act="inv-settings" style="margin-top:8px">${esc(t('inv_settings'))}</button>` : ''}`;
   if (S.focus){ S.focus = false; const q = $('#inv-q'); if (q){ q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
@@ -5508,6 +5514,8 @@ function invBrowseHTML(H){
       <div class="meta" style="text-align:right;white-space:nowrap">${esc(t('inv_area_counts', { p: a.places, i: a.items }))}${a.can_edit && a.no_photo ? `<br><span class="tag pend" style="margin:3px 0 0">${esc(t('inv_no_photo_n', { n: a.no_photo }))}</span>` : ''}</div></div></div>`).join('')}</div>`;
   }).join('');
 }
+// v182：搜索框里有字时，待办、饮料格子、按钮先收起来（键盘弹出后结果就在搜索框下面）；清空就恢复
+function invMidSync(){ const on = !!invS().q.trim(), m = document.getElementById('inv-mid'), c = document.getElementById('inv-clr'); if (m) m.hidden = on; if (c) c.hidden = !on; }
 let invTimer = null, invLogTimer = null, invSeq = 0;
 function invQueue(){
   clearTimeout(invTimer); clearTimeout(invLogTimer);
@@ -5518,7 +5526,7 @@ async function invSearch(){
   const S = invS(), q = S.q.trim(), seq = ++invSeq, box = () => $('#inv-res');
   if (!q){ S.res = null; if (box() && S.home) box().innerHTML = invBrowseHTML(S.home); return; }
   if (box() && !(S.res && S.res.q)) box().innerHTML = `<div class="empty">${esc(t('inv_searching'))}</div>`;
-  try { const r = await rpc('inv_search', { ...tok(), p_q: q, p_log: false }); if (seq !== invSeq) return; S.res = r; }
+  try { const r = await rpc('inv_search', { ...tok(), p_q: q, p_log: false }); if (seq !== invSeq || !S.q.trim()) return; S.res = r; }
   catch(e){ if (seq === invSeq) toast(errText(e), true); return; }
   if (state.tab === 'inv' && S.view === 'home' && box()){ box().innerHTML = invResultsHTML(); invLoadPhotos(); }
 }
@@ -5559,7 +5567,8 @@ function invResultsHTML(){
   const S = invS(), R = S.res, H = S.home || {};
   if (!R) return `<div class="empty">${esc(t('inv_searching'))}</div>`;
   const items = R.items || [], places = R.places || [];
-  if (!items.length && !places.length) return `<div class="list"><div class="empty">${esc(t('inv_none', { q: R.q }))}${H.sup ? '<br>' + esc(t('inv_none_sup')) : ''}</div></div><button class="btn ghost" data-act="inv-ib-new">${esc(t('inv_ib_btn'))}</button>`;
+  if (!items.length && !places.length) return `<div class="list"><div class="empty">${esc(t('inv_none', { q: R.q }))}</div></div>
+    ${H.sup && !state.viewAs ? `<button class="btn" data-act="inv-new" data-name="${esc(R.q)}" style="height:auto;min-height:52px;padding:8px 10px;line-height:1.25;margin-bottom:8px">${esc(t('inv_new_q', { q: R.q.length > 30 ? R.q.slice(0, 30) + '…' : R.q }))}</button>` : ''}<button class="btn ghost" data-act="inv-ib-new">${esc(t('inv_ib_btn'))}</button>`;   // v182：刚打的词直接带进新物品
   return (items.length ? `<div class="list">${items.map(x => invItemCard(x)).join('')}</div>` : '')
     + (places.length ? `<h3>${esc(t('inv_places_h'))}</h3><div class="list">${places.map(p => `<div class="item" data-act="inv-place" data-id="${p.id}" style="cursor:pointer"><div class="inv-row">${invImg(p.photo_t)}<div class="inv-txt">
         <strong class="num">${esc(p.code)}</strong><div class="meta">${storeTag(p.store)} ${esc(invName(p, 'area'))}${invName(p) ? ' · ' + esc(invName(p)) : ''}</div>
@@ -5618,11 +5627,11 @@ function renderInvPlace(){
   const slots = (P.slots || []).filter(s => s.active || edit);
   const photoBtn = edit ? `<label class="btn ghost" style="display:flex;align-items:center;justify-content:center;margin:8px 0">${esc(t(P.photo ? 'inv_photo_retake' : 'inv_photo_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="place" hidden></label>` : '';
   const its = P.items || [];
-  $('#main').innerHTML = `<button class="link" data-act="inv-area" data-id="${A.id}" style="margin:2px 0 6px">← ${esc(invName(A))}</button>
+  $('#main').innerHTML = `${invNavBack(invNavTop()) || `<button class="link" data-act="inv-area" data-id="${A.id}" style="margin:2px 0 6px">← ${esc(invName(A))}</button>`}
     <div class="inv-code num">${esc(P.code)}</div>
     <div class="inv-row" style="margin:2px 0 4px;align-items:center"><div class="inv-txt"><strong>${esc(title)}</strong>${invPlaceTags(P)}${P.pos ? `<div style="font-weight:600">${esc(invPosText(P.pos, true))}</div>` : ''}</div>${invShelfHTML(P.pos)}</div>
     ${use ? `<div class="meta" style="margin-bottom:4px">${esc(use)}</div>` : ''}
-    <div style="margin-bottom:10px">${storeTag(A.store)} ${invAreaTags(A)}${invTrTags('area', A.traits)}</div>
+    <div style="margin-bottom:10px">${storeTag(A.store)} ${invNavTop() ? `<button class="link" data-act="inv-area" data-id="${A.id}" style="margin-right:6px">${esc(invName(A))} ›</button>` : ''}${invAreaTags(A)}${invTrTags('area', A.traits)}</div>
     ${invTrShow('unit', U || P)}${(() => { const UT = (U || P).traits || {}, ps = P.pos; if (!ps) return '';
       const h = UT.bottom_floor && ps.row === ps.rows ? 'inv_tr_hint_bottom' : UT.top_ladder && ps.row === 1 ? 'inv_tr_hint_top' : '';
       return h ? `<div class="infobox" style="background:#FFF1C9;color:#8A6A00">${esc(t(h))}</div>` : ''; })()}
@@ -5652,22 +5661,23 @@ async function viewInvItem(){
 function renderInvItem(){
   const S = invS(), X = S.item, locs = invSortLocs(X.locs);
   const unitLine = [X.unit ? t('inv_unit_line', { u: X.unit }) : '', X.pack_unit && X.pack_qty ? t('inv_pack_line', { p: X.pack_unit, n: String(+X.pack_qty).replace('.', ','), u: X.unit || '' }) : ''].filter(Boolean).join(' · ');
-  const byStore = STORES.map(st => { const ls = locs.filter(l => l.store === st); if (!ls.length) return '';
+  const cur = curStore(), ib = invNavTop();   // v182：选中的门店排前面；返回回到刚才那一页（某一层 / 另一件东西 / 搜索结果）
+  const byStore = [cur, ...STORES.filter(st => st !== cur)].map(st => { const ls = locs.filter(l => l.store === st); if (!ls.length) return '';
     return ls.map(l => `<div class="item"><div class="inv-row">${invImg(l.photo_t, 'sm')}<div class="inv-txt" data-act="inv-place" data-id="${l.place}" style="cursor:pointer">
       <strong class="num">${esc(l.code)}</strong>${l.main ? ` <span class="tag m">${esc(t('inv_main_long'))}</span>` : ''}
       <div class="meta">${storeTag(l.store)} ${esc(invName(l, 'area'))}${invName(l, 'unit') ? ' · ' + esc(invName(l, 'unit')) : invName(l) ? ' · ' + esc(invName(l)) : ''}</div>
       ${l.pos ? `<div style="font-weight:600;margin-top:2px">${esc(invPosText(l.pos, true))}</div>` : ''}${invWarnLine(l.warn, l)}</div>${invShelfHTML(l.pos)}</div>
       ${l.can_edit && X.active ? `<div class="acts">${l.main ? '' : `<button class="link" data-act="inv-main" data-id="${l.link}">${esc(t('inv_set_main'))}</button>`}<button class="link danger" data-act="inv-unplace" data-id="${l.link}" data-code="${esc(l.code)}">${esc(t('inv_unplace'))}</button></div>` : ''}</div>`).join(''); }).join('');
-  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
-    ${X.photo ? invImg(X.photo, 'big', X.photo) : ''}
-    <h2 style="margin:8px 0 2px">${esc(invName(X))}${X.active ? '' : ` <span class="tag off">${esc(t('inv_off'))}</span>`}</h2>
-    ${invOther(X) ? `<div style="font-size:17px;margin-bottom:4px">${esc(invOther(X))}</div>` : ''}
+  $('#main').innerHTML = `${invNavBack(ib) || `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>`}
+    <div class="inv-row" style="margin:6px 0 4px"><div class="inv-txt"><h2 style="margin:0 0 2px">${esc(invName(X))}${X.active ? '' : ` <span class="tag off">${esc(t('inv_off'))}</span>`}</h2>
+      ${invOther(X) ? `<div style="font-size:17px;margin-bottom:4px">${esc(invOther(X))}</div>` : ''}
+      <div class="meta">${esc(state.lang === 'de' ? X.cat_de : X.cat_zh)}${X.damp ? ` <span class="tag k">${esc(t('inv_damp'))}</span>` : ''}</div></div>${X.photo ? invImg(X.photo_t || X.photo, 'lg', X.photo) : ''}</div>
     ${X.merged_into ? `<div class="infobox">${esc(t('inv_merged', { n: invName(X.merged_into) }))} <button class="link" data-act="inv-item" data-id="${X.merged_into.id}">→</button></div>` : ''}
-    <div class="meta">${esc(state.lang === 'de' ? X.cat_de : X.cat_zh)}${X.damp ? ` <span class="tag k">${esc(t('inv_damp'))}</span>` : ''}</div>
+    <h3 style="margin-top:10px">${esc(t('inv_locs'))}</h3><div class="list">${byStore || `<div class="empty">${esc(t('inv_no_loc'))}</div>`}</div>
     ${(X.aliases || []).length ? `<div class="meta">${esc(t('inv_aka', { a: X.aliases.join(', ') }))}</div>` : ''}
     ${unitLine ? `<div class="meta">${esc(unitLine)}</div>` : ''}
     ${X.note ? `<div class="sheet" style="margin:8px 0;white-space:pre-wrap">${esc(X.note)}</div>` : ''}
-    <h3>${esc(t('inv_locs'))}</h3><div class="list">${byStore || `<div class="empty">${esc(t('inv_no_loc'))}</div>`}</div>
+    ${(X.aliases || []).length || unitLine || X.note ? '<div style="height:8px"></div>' : ''}
     ${X.can_edit && X.active ? `<button class="btn ghost" data-act="inv-add-loc" style="margin-bottom:8px">${esc(t('inv_add_loc'))}</button><button class="btn ghost" data-act="inv-edit-item" style="margin-bottom:8px">${esc(t('inv_edit_item'))}</button><button class="btn ghost" data-act="inv-lab-item">${esc(t('inv_lab_item_btn'))}</button>` : ''}
     ${X.can_admin && !X.merged_into ? `<div class="row" style="gap:16px;margin-top:14px">${X.active ? `<button class="link" data-act="inv-merge">${esc(t('inv_merge'))}</button>` : ''}<button class="link${X.active ? ' danger' : ''}" data-act="inv-active" data-on="${X.active ? '' : '1'}">${esc(t(X.active ? 'inv_disable' : 'inv_enable'))}</button></div>` : ''}
     <div class="small muted" style="margin-top:14px">${esc(t('inv_by', { n: X.created_by || '?', t: fmtDateTime(X.created_at) }))}${X.updated_at ? '<br>' + esc(t('inv_upd', { n: X.updated_by || '?', t: fmtDateTime(X.updated_at) })) : ''}</div>`;
@@ -5685,6 +5695,7 @@ async function invFormOpen(mode, preset){
     track_stock: X ? !!X.track_stock : false, track_expiry: X ? !!X.track_expiry : false,
     store: null, area: null, unit_id: null, place: null, back: { view: S.view, id: S.id }, ...(preset || {}) };
   S.view = 'form'; state.tab = 'inv';
+  if (!S.home || (mode !== 'edit' && !S.pick)) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;   // v182：要等服务器，先换成「加载中」
   if (!S.home) S.home = await soft(rpc('inv_home', tok()), null);
   if (mode !== 'edit' && !S.pick) S.pick = await soft(rpc('inv_pick', tok()), []);
   if (mode !== 'edit' && !F.place){   // 默认：上次用的储位
@@ -5926,10 +5937,36 @@ async function invSave(force, note){
     S.form = null; S.res = null; S.item = null; S.place = null; S.area = null; S.home = null;
     toast(F.mode === 'loc' ? t('inv_placed', { c: placedAt || '' }) : t('inv_saved'));
     if (F.back && F.back.view === 'place' && F.mode !== 'edit') invGo('place', F.back.id);
-    else invGo('item', id);
+    else { if (F.mode === 'new') S.nav = []; invGo('item', id); }
   } catch(e){ if (!invConflict(e, n => invSave(true, n))) toast(errText(e), true); }
 }
 
+// v182：位置页 ↔ 物品页的「返回」记住一路怎么走过来的（S.nav 是一摞：搜索结果 / 某一层 / 某件东西），不再每次扔回首页
+function invNavTop(){ const n = invS().nav || []; return n[n.length - 1] || null; }
+function invNavBack(b){
+  if (!b) return '';
+  if (b.view === 'home') return `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back_res'))}</button>`;
+  return `<button class="link" data-act="${b.view === 'place' ? 'inv-place' : 'inv-item'}" data-id="${b.id}" data-back="1" style="margin:2px 0 6px;white-space:normal;text-align:left">← ${b.view === 'place' ? `<span class="num">${esc(b.label)}</span>` : esc(b.label)}</button>`;
+}
+// 点一个位置 / 一件东西：是「返回」按钮就退一步；从搜索结果、某一层、某件东西点过去就记一步；从别处（房间页、待办）过去就从头记
+function invNavStep(el){
+  const S = invS(); S.nav = S.nav || [];
+  if (el.dataset.back){ S.nav.pop(); return; }
+  const cur = state.tab !== 'inv' ? null : S.view === 'home' && S.q.trim() ? { view: 'home' } : S.view === 'place' && S.place ? { view: 'place', id: S.place.id, label: S.place.code }
+    : S.view === 'item' && S.item ? { view: 'item', id: S.item.id, label: invName(S.item) } : null;
+  if (!cur){ S.nav = []; return; }
+  if (cur.view === 'home') S.nav = [];
+  S.nav.push(cur); if (S.nav.length > 12) S.nav.shift();
+}
+// v182：会写入的按钮点下去马上变灰、写「正在保存…」，存完才恢复；网慢时连点两下不会建出两件物品 / 两个货架 / 多加两层
+async function invLock(el, fn){
+  if (state.invBusy && Date.now() - state.invBusy < 30000) return;   // 30 秒还没回来（网断了）就不再挡着
+  const me = state.invBusy = Date.now(), old = el ? el.innerHTML : '';
+  const free = () => { if (state.invBusy === me && el && el.isConnected){ el.disabled = false; el.innerHTML = old; } };
+  if (el){ el.disabled = true; el.textContent = t('inv_saving'); }
+  const tm = setTimeout(free, 30000);   // 网断了、请求一直不回来：30 秒后按钮自己恢复，可以再点
+  try { await fn(); } finally { clearTimeout(tm); free(); if (state.invBusy === me) state.invBusy = 0; }
+}
 // ---------- 选一件已有的物品（放到这里 / 合并到） ----------
 function renderInvPick(){
   const S = invS(), K = S.pickItem || {};
@@ -5961,7 +5998,8 @@ async function invUnitOpen(placeId){
   if (!placeId){   // 新建：在当前储区
     const A = S.area; S.uform = { id: null, area: A, unit_type: 'R', unit_no: '', name_zh: '', name_de: '', use_zh: '', use_de: '', layout: 'levels', levels: '4', rows: '3', cols: '3', back: { view: 'area', id: A.id } };
   } else {
-    let p; try { p = await rpc('inv_place', { ...tok(), p_id: placeId }); } catch(e){ toast(errText(e), true); return; }
+    $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;   // v182：要等服务器，先换成「加载中」
+    let p; try { p = await rpc('inv_place', { ...tok(), p_id: placeId }); } catch(e){ toast(errText(e), true); render(); return; }
     S.uform = { id: p.id, place: p, area: p.area, name_zh: p.name_zh || '', name_de: p.name_de || '', use_zh: p.use_zh || '', use_de: p.use_de || '',
       special: p.special || '', temp: !!p.temp, add: '1', back: { view: S.view, id: S.id }, tr: p.kind === 'slot' ? null : invTrNew(p) };   // v100：特点记在储存单元上
   }
@@ -6013,7 +6051,7 @@ async function invUnitSave(){
         levels: U.layout === 'levels' ? U.levels : '', rows: U.layout === 'grid' ? U.rows : '', cols: U.layout === 'grid' ? U.cols : '' };
       const id = await rpc('inv_place_save', { ...tok(), p_id: null, p_data: d });
       S.pick = null;   // v177：新货架要出现在「放在哪里」的清单里（以前要重开 App）
-      S.uform = null; S.home = null; toast(t('inv_saved')); invGo('place', id); return;
+      S.uform = null; S.home = null; S.nav = []; toast(t('inv_saved')); invGo('place', id); return;
     }
     const d = { name_zh: U.name_zh, name_de: U.name_de, use_zh: U.use_zh, use_de: U.use_de };
     if (state.me.is_admin){ d.special = U.special ? 'gas' : ''; d.temp = !!U.temp; }
@@ -6033,9 +6071,9 @@ async function viewInvSettings(){
   if (S.view === 'aform') return renderInvAreaForm();
   if (S.view === 'cform') return renderInvCatForm();
   const natTag = n => n === 'other' ? '' : `<span class="tag ${n === 'food' ? 'm' : 'pend'}">${esc(t('inv_nat_' + n))}</span>`;
-  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('inv_set_h'))}</h2>
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><div class="stabs-row"><h2>${esc(t('inv_set_h'))}</h2>${storeTabsHTML()}</div>
     <h3>${esc(t('inv_set_areas'))}</h3>
-    ${STORES.map(st => { const as = (H.areas || []).filter(a => a.store === st); return `<div class="small muted" style="margin:6px 0">${storeTag(st)}</div><div class="list">${as.length ? as.map(a => `<div class="item"><div class="top">
+    ${[curStore()].map(st => { const as = (H.areas || []).filter(a => a.store === st); return `<div class="list">${as.length ? as.map(a => `<div class="item"><div class="top">
       <div><strong>${esc(invName(a))}</strong> <span class="muted small num">${esc(a.code)}</span><div class="meta" style="margin-top:3px">${invAreaTags(a)}</div></div>
       <button class="link" data-act="inv-aform" data-id="${a.id}">${esc(t('inv_edit'))}</button></div></div>`).join('') : `<div class="empty">${esc(t('inv_store_empty'))}</div>`}</div>${as.length ? `<button class="link" data-act="inv-lab-store" data-store="${st}" style="margin:-6px 0 12px">${esc(t('inv_lab_store_btn', { s: st }))}</button>` : ''}`; }).join('')}
     <button class="btn ghost" data-act="inv-aform" data-id="">${esc(t('inv_set_new_area'))}</button>
@@ -6084,7 +6122,7 @@ async function invPlacePhoto(file){
   } catch(e){ toast(errText(e), true); }
 }
 // 「今天」页顶部的「🔍 找东西」和「📷 扫码」（v93）
-function invFindHTML(){ return tabs().includes('inv') && !state.me.is_admin ? `<div class="row" style="gap:8px;margin:0 0 12px"><button class="inv-find" data-act="inv-find">🔍 ${esc(t('inv_find'))}</button><button class="inv-scanbtn" data-act="inv-scan">${esc(t('inv_scan'))}</button></div>` : ''; }
+function invFindHTML(){ return tabs().includes('inv') && !state.me.is_admin ? `<div class="row" style="gap:8px;margin:0 0 12px"><button class="inv-find" data-act="inv-find">🔍 ${esc(t('inv_find'))}</button><button class="inv-scanbtn" data-act="inv-scan">${esc(t('inv_scan'))}</button>${navTabs().includes('inv') ? '' : `<button class="inv-scanbtn" data-act="more-inv">📦 ${esc(t('inv_title'))}</button>`}</div>` : ''; }   // v182：不用先点「更多」，也不弹键盘
 // ---------- 第二步（v93，数据库 v65）：扫码、打印标签 ----------
 // 二维码里是 https://app.kochide.com/#q=<扫码码>（inv_places.qr / inv_items.qr，8 位，固定不变）
 const INV_QR_URL = 'https://app.kochide.com/#q=';
@@ -6095,6 +6133,7 @@ async function invOpenQr(raw){
   try {
     const r = await rpc('inv_qr_find', { ...tok(), p_qr: code });
     const S = invS(); S.res = null;
+    S.nav = [];   // v182：扫码进来的，返回回首页 / 房间
     if (r.kind === 'place'){ S.place = null; invGo('place', r.id); } else { S.item = null; invGo('item', r.id); }
   } catch(e){ toast(errText(e), true); }
 }
@@ -6291,7 +6330,7 @@ function renderInvIbNew(){
   const S = invS(), B = S.ibf; if (!B){ S.view = 'home'; return viewInvHome(); }
   const prev = B.photo && B.photo.preview;
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(t('inv_ib_new_h'))}</h2>
-    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_ib_new_hint'))}</div>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_ib_new_hint', { c: (B.store === 'Bismarck' ? 'B' : 'F') + '-UNS' }))}</div>
     <div class="inv-row" style="align-items:center;margin-bottom:8px">${prev ? `<img class="inv-ph lg" src="${esc(prev)}" alt="">` : ''}
       <label class="btn ${prev ? 'ghost' : ''}" style="display:flex;align-items:center;justify-content:center;flex:1">${esc(t(prev ? 'inv_photo_retake' : 'inv_photo_take'))}<input type="file" accept="image/*" capture="environment" data-invphoto="inbox" hidden></label></div>
     ${B.photo && B.photo.busy ? `<div class="small muted" style="margin-bottom:6px">${esc(t('inv_uploading'))}</div>` : ''}
@@ -6336,7 +6375,7 @@ async function viewInvIbMine(){
   if (state.tab !== 'inv' || S.view !== 'ibmine') return;
   const L = S.ibMine || [], open = L.filter(x => !x.result), done = L.filter(x => x.result);
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><h2 style="margin-top:4px">${esc(t('inv_ib_mine_h'))}</h2>
-    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_ib_box_hint'))}</div>
+    <div class="small muted" style="margin-bottom:10px">${esc(t('inv_ib_box_hint', { c: (curStore() === 'Bismarck' ? 'B' : 'F') + '-UNS' }))}</div>
     ${open.length ? `<div class="list">${open.map(x => invIbCard(x, null, true)).join('')}</div>` : ''}
     ${done.length ? `<h3>${esc(t('inv_ib_done_h', { n: done.length }))}</h3><div class="list">${done.map(x => invIbCard(x, null, true)).join('')}</div>` : ''}
     ${L.length ? '' : `<div class="list"><div class="empty">${esc(t('inv_ib_mine_none'))}</div></div>`}
@@ -11468,7 +11507,7 @@ document.addEventListener('click', async ev => {
     case 'pin-cancel': $('#pinDlg').close(); break;
     case 'login-pick': state.loginPick = { id: el.dataset.id, name: el.dataset.name }; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
     case 'login-back': state.loginPick = null; state.loginErr = ''; state.loginInfo = ''; renderLogin(); break;
-    case 'tab': if (el.dataset.tab === 'inv') Object.assign(invS(), { view: 'home', form: null, uform: null, sform: null, pickItem: null, lab: null });   // v91
+    case 'tab': if (el.dataset.tab === 'inv') Object.assign(invS(), { view: 'home', form: null, uform: null, sform: null, pickItem: null, lab: null, q: '', res: null, nav: [] });   // v91；v182：搜索的词不留
       state.tfEdit = null;   // v118；v119
       if (el.dataset.tab === 'today' && state.tab !== 'today') state.reconDay = null;   // v57
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
@@ -13281,7 +13320,7 @@ document.addEventListener('click', async ev => {
     case 'qp-more': { const Q = qpS(); Q.more = !Q.more; keepScroll(renderInvQplace); break; }
     case 'qp-put': qpPut(el.dataset.id); break;
     case 'qp-take': qpTake(el.dataset.id, el.dataset.link); break;
-    case 'kp-area-new': { const S = invS(), H = S.home || {}, st = (H.area_new || [])[0] || STORES[0], K = (H.keeper || []).filter(k => k.store === st);
+    case 'kp-area-new': { const S = invS(), H = S.home || {}, st = (H.area_new || []).includes(curStore()) ? curStore() : (H.area_new || [])[0] || STORES[0], K = (H.keeper || []).filter(k => k.store === st);   // v182：先用选中的门店
       S.sform = { id: null, store: st, code: '', name_zh: '', name_de: '', owner: K.length === 1 ? K[0].side : 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true, tr: invTrNew(null), back: { view: 'home' } };
       S.view = 'aform'; render(); window.scrollTo(0, 0); break; }
     case 'sh-close': { const S = invS(); S.shelf = null; keepScroll(renderInvPlace); break; }
@@ -13455,7 +13494,9 @@ document.addEventListener('click', async ev => {
     }
     case 'inv-place-check': {
       const P = invS().place; if (!P) break;
-      try { await rpc('inv_place_check', { ...tok(), p_place: P.id, p_note: null }); toast(t('inv_checked')); invS().area = null; invTodoLoad(); keepScroll(viewInvPlace); } catch(e){ toast(errText(e), true); }
+      await invLock(el, async () => {
+        try { await rpc('inv_place_check', { ...tok(), p_place: P.id, p_note: null }); toast(t('inv_checked')); invS().area = null; invTodoLoad(); keepScroll(viewInvPlace); } catch(e){ toast(errText(e), true); }
+      });
       break;
     }
     // v93：扫码、标签
@@ -13468,40 +13509,43 @@ document.addEventListener('click', async ev => {
     case 'inv-lab-make': invLabMake(el); break;
     // v91：物品
     case 'inv-find': { const S = invS(); S.view = 'home'; S.focus = true; state.tab = 'inv'; render(); window.scrollTo(0, 0); break; }
-    case 'more-inv': case 'inv-home': invGo('home'); break;
+    case 'more-inv': Object.assign(invS(), { q: '', res: null }); invS().nav = []; invGo('home'); break;
+    case 'inv-home': invS().nav = []; invGo('home'); break;
     case 'inv-back-more': state.tab = 'more'; render(); window.scrollTo(0, 0); break;
-    case 'inv-area': invGo('area', el.dataset.id); break;
-    case 'inv-place': invGo('place', el.dataset.id); break;
-    case 'inv-item': invGo('item', el.dataset.id); break;
+    case 'inv-area': invS().nav = []; invGo('area', el.dataset.id); break;
+    case 'inv-place': invNavStep(el); invGo('place', el.dataset.id); break;   // v182：记住从哪来，返回回那里
+    case 'inv-item': invNavStep(el); invGo('item', el.dataset.id); break;
     case 'inv-photo-big': invPhotoBig(el.dataset.full); break;
-    case 'inv-new': invFormOpen('new'); break;
+    case 'inv-new': { const nm = (el.dataset.name || '').trim();   // v182：从「没找到」来：名字先填上（有中文字的填中文名，否则填德文名）
+      invFormOpen('new', nm ? (/[\u4e00-\u9fff]/.test(nm) ? { name_zh: nm } : { name_de: nm }) : undefined); break; }
+    case 'inv-q-clear': { const S = invS(), q = $('#inv-q'); S.q = ''; S.res = null; if (q) q.value = ''; invMidSync(); invSearch(); window.scrollTo(0, 0); break; }
     case 'inv-put-new': { const P = invS().place; if (P) invFormOpen('new', { place: P.id }); break; }
     case 'inv-edit-item': invFormOpen('edit'); break;
     case 'inv-add-loc': invFormOpen('loc'); break;
-    case 'inv-save': invSave(); break;
+    case 'inv-save': await invLock(el, () => invSave()); break;
     case 'inv-form-cancel': { const S = invS(), b = (S.form || {}).back || { view: 'home' }; S.form = null; invGo(b.view, b.id); break; }
     case 'inv-ai-again': { const F = invS().form; if (F) invAiRead(F); break; }
     case 'inv-pick-store': { invFormKeep(); const F = invS().form; if (!F) break; Object.assign(F, { store: el.dataset.store, area: null, unit_id: null, place: null, lastUsed: false }); invRepaintPicker(); break; }
     case 'inv-pick-slot': { const F = invS().form; if (!F) break; F.place = el.dataset.id; F.lastUsed = false; invRepaintPicker(); break; }
     case 'inv-force': {
       const n = (($('#inv-force-note') || {}).value || '').trim(); if (!n){ toast(t('inv_c_note_need'), true); break; }
-      $('#photoDlg').close(); const f = state.invRetry; state.invRetry = null; if (f) f(n); break;
+      $('#photoDlg').close(); const f = state.invRetry; state.invRetry = null; if (f) await invLock(document.querySelector('#main [data-act="inv-save"]'), () => f(n)); break;
     }
-    case 'inv-dup-new': { $('#photoDlg').close(); const F = invS().form; if (F){ F.dupChecked = true; invSave(); } break; }
+    case 'inv-dup-new': { $('#photoDlg').close(); const F = invS().form; if (F){ F.dupChecked = true; await invLock(document.querySelector('#main [data-act="inv-save"]'), () => invSave()); } break; }
     case 'inv-dup-same': {   // 是已有的那一件：只给它加这个位置
       $('#photoDlg').close(); const S = invS(), F = S.form, id = el.dataset.id; if (!F) break;
       const code = invPickCode(), place = F.place;
       if (F.inbox){   // v94：待归位登记的东西是已有的这一件
         const go2 = async (force, note) => { try { await invIbHandle('placed', id, place, null, force, note); LS.set('invLast', place); S.form = null; toast(t('inv_ib_done')); invGo('inbox'); }
           catch(e){ if (!invConflict(e, n => go2(true, n))) toast(errText(e), true); } };
-        go2(); break;
+        await invLock(document.querySelector('#main [data-act="inv-save"]'), () => go2()); break;
       }
       const go = async (force, note) => {
         try { await rpc('inv_place_item', { ...tok(), p_item: id, p_place: place, p_main: false, p_force: !!force, p_note: note || null });
-          LS.set('invLast', place); toast(t('inv_placed', { c: code })); S.form = null; S.home = null; S.res = null; invGo('item', id); }
+          LS.set('invLast', place); toast(t('inv_placed', { c: code })); S.form = null; S.home = null; S.res = null; S.nav = []; invGo('item', id); }
         catch(e){ if (!invConflict(e, n => go(true, n))) toast(errText(e), true); }
       };
-      go(); break;
+      await invLock(document.querySelector('#main [data-act="inv-save"]'), () => go()); break;
     }
     case 'inv-put-old': case 'inv-merge': {
       const S = invS(); S.pickItem = { mode: act === 'inv-merge' ? 'merge' : 'put', q: '', focus: true, back: { view: S.view, id: S.id } };
@@ -13519,7 +13563,7 @@ document.addEventListener('click', async ev => {
       }
       if (K.mode === 'merge'){
         const X = S.item; if (!X || !confirm(t('inv_merge_q', { a: invName(X), b: invName(x) }))) break;
-        try { await rpc('inv_item_merge', { ...tok(), p_from: X.id, p_into: x.id }); S.pickItem = null; S.item = null; S.res = null; S.home = null; toast(t('inv_saved')); invGo('item', x.id); }
+        try { await rpc('inv_item_merge', { ...tok(), p_from: X.id, p_into: x.id }); S.pickItem = null; S.item = null; S.res = null; S.home = null; S.nav = []; toast(t('inv_saved')); invGo('item', x.id); }
         catch(e){ toast(errText(e), true); }
         break;
       }
@@ -13547,17 +13591,19 @@ document.addEventListener('click', async ev => {
     case 'inv-unit-cancel': { const S = invS(), b = (S.uform || {}).back || { view: 'home' }; S.uform = null; invGo(b.view, b.id); break; }
     case 'inv-u-type': { invUnitKeep(); invS().uform.unit_type = el.dataset.k; renderInvUnit(); break; }
     case 'inv-u-lay': { invUnitKeep(); invS().uform.layout = el.dataset.k; renderInvUnit(); break; }
-    case 'inv-unit-save': invUnitSave(); break;
+    case 'inv-unit-save': await invLock(el, () => invUnitSave()); break;
     case 'inv-unit-slots': {
       invUnitKeep(); const S = invS(), U = S.uform; if (!U) break;
-      try { const n = await rpc('inv_place_add_slots', { ...tok(), p_unit: U.id, p_count: parseInt(U.add, 10) || 0, p_cols: (U.place.slots || []).length ? null : (parseInt(U.cols, 10) || null) });
-        S.pick = null; toast(t('inv_u_added', { n })); S.home = null; S.area = null; S.uform = null; S.place = null; invGo('place', U.id); }
-      catch(e){ toast(errText(e), true); }
+      await invLock(el, async () => {
+        try { const n = await rpc('inv_place_add_slots', { ...tok(), p_unit: U.id, p_count: parseInt(U.add, 10) || 0, p_cols: (U.place.slots || []).length ? null : (parseInt(U.cols, 10) || null) });
+          S.pick = null; toast(t('inv_u_added', { n })); S.home = null; S.area = null; S.uform = null; S.place = null; invGo('place', U.id); }
+        catch(e){ toast(errText(e), true); }
+      });
       break;
     }
     case 'inv-unit-off': case 'inv-unit-on': {
       const S = invS(), U = S.uform, on = act === 'inv-unit-on'; if (!U || (!on && !confirm(t('inv_u_off_q', { c: U.place.code })))) break;
-      try { await rpc('inv_place_active', { ...tok(), p_id: U.id, p_active: on }); S.pick = null; S.home = null; S.area = null; S.uform = null; S.place = null; toast(t('inv_saved')); invGo(on ? 'place' : 'area', on ? U.id : U.area.id); }
+      try { await rpc('inv_place_active', { ...tok(), p_id: U.id, p_active: on }); S.pick = null; S.home = null; S.area = null; S.uform = null; S.place = null; if (!on) S.nav = []; toast(t('inv_saved')); invGo(on ? 'place' : 'area', on ? U.id : U.area.id); }
       catch(e){ toast(errText(e), true); }
       break;
     }
@@ -13570,7 +13616,7 @@ document.addEventListener('click', async ev => {
     case 'inv-aform-cancel': { const S = invS(), b = (S.sform || {}).back; S.sform = null; if (b) invGo(b.view, b.id); else invGo('settings'); break; }
     case 'inv-aform': {
       const S = invS(), a = el.dataset.id ? ((S.home || {}).areas || []).find(x => x.id === el.dataset.id) : null;
-      S.sform = a ? { ...a, sort: String(a.sort), tr: invTrNew(a) } : { id: null, store: STORES[0], code: '', name_zh: '', name_de: '', owner: 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true, tr: invTrNew(null) };
+      S.sform = a ? { ...a, sort: String(a.sort), tr: invTrNew(a) } : { id: null, store: curStore(), code: '', name_zh: '', name_de: '', owner: 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true, tr: invTrNew(null) };
       S.view = 'aform'; render(); window.scrollTo(0, 0); break;
     }
     case 'inv-cform': {
@@ -13586,10 +13632,13 @@ document.addEventListener('click', async ev => {
       const d = isA ? { store: G.store, code: G.code, name_zh: G.name_zh, name_de: G.name_de, owner: G.owner, damp: !!G.damp, food_ok: !!G.food_ok, chem_ok: !!G.chem_ok, sort: G.sort, active: !!G.active }
         : { name_zh: G.name_zh, name_de: G.name_de, nature: G.nature, damp: !!G.damp, area_code: G.area_code, sort: G.sort, active: !!G.active };
       if (isA) invTrKeep();
-      try { const id = await rpc(isA ? 'inv_area_save' : 'inv_category_save', { ...tok(), p_id: G.id || null, p_data: d }); if (isA) await invTrSave('area', id);   // v100：特点
-        S.pick = null;
-        const back = G.back; S.sform = null; S.home = null; S.area = null; toast(t('inv_saved')); if (isA && back) invGo(back.view, back.id); else invGo('settings'); }
-      catch(e){ toast(errText(e), true); }
+      await invLock(el, async () => {
+        try { const id = await rpc(isA ? 'inv_area_save' : 'inv_category_save', { ...tok(), p_id: G.id || null, p_data: d }); if (isA) await invTrSave('area', id);   // v100：特点
+          S.pick = null;
+          if (isA && !G.id && storeOk(G.store) && G.store !== curStore()){ state.storeSel = { s: G.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', G.store); }
+          const back = G.back; S.sform = null; S.home = null; S.area = null; toast(t('inv_saved')); if (isA && back) invGo(back.view, back.id); else invGo('settings'); }
+        catch(e){ toast(errText(e), true); }
+      });
       break;
     }
     case 'ls-confirm': case 'ls-unbind':
@@ -13757,7 +13806,7 @@ document.addEventListener('toggle', ev => { const w = ev.target.dataset && ev.ta
 }, true);
 document.addEventListener('input', ev => {
   const id = ev.target.id;
-  if (id === 'inv-q'){ invS().q = ev.target.value; invQueue(); }   // v91
+  if (id === 'inv-q'){ invS().q = ev.target.value; invMidSync(); invQueue(); }   // v91；v182
   if (id === 'ct-q'){ invS().ctQ = ev.target.value; ctRefresh(); return; }   // v179：盘点页找饮料
   if (id === 'dp-q'){ const P = state.dp, b = document.getElementById('dp-list'); if (P && b){ P.q = ev.target.value; b.innerHTML = dpRowsHTML('dp-pick', P.q, P.hint, P.cur); b.scrollTop = 0; } return; }   // v181：选饮料的窗口
   if (id === 'ls-q'){ const L = invS().ls, b = document.getElementById('ls-list'); if (L && b){ L.q = ev.target.value; b.innerHTML = dpRowsHTML('ls-pick', L.q, '', L.item_id); } return; }   // v181：报损页找饮料
