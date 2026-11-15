@@ -499,6 +499,7 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .drk-un input[type=checkbox]{flex:none;width:24px;height:24px;margin-top:2px}
 .drk-un > div{flex:1;min-width:0}
 .rc-quick button.main{background:var(--ink);border-color:var(--ink);color:#fff}
+.wk-txt div{padding:3px 0;line-height:1.45}
 .ct-bar{position:sticky;z-index:5;background:var(--paper);padding:8px 0 6px;margin-bottom:8px;border-bottom:1px solid var(--line)}
 .ct-top{display:flex;gap:6px;align-items:center}
 .ct-prog{flex:1;min-width:0;font-weight:700;font-size:15px;line-height:1.2}
@@ -602,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v186';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v187';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -954,6 +955,10 @@ zh: {
   drk_rc_q_unit:'整瓶', drk_rc_q_glass:'一杯 170 ml', drk_rc_q_shot:'shot 60 ml', drk_rc_cq:'每瓶多少 ml', drk_rc_cq_save:'保存每瓶多少', drk_rc_cq_bad:'每瓶多少要填数字，例如 750。', drk_rc_price_bad:'卖价要填数字，例如 6,90。',
   drk_rc_till:'空着 = 按收银机实际卖的价（现在 {p}）', drk_rc_note:'收银商品：{a}', dp_like_art:'名字像这个收银商品的',
   oil_other_open:'{s} 也有一轮收废油在进行（{x}）›', oil_other_late:'⚠ {s} 的收废油检查晚了 {n} 天 ›',
+  dt_week:'每周小结', drk_wk_h:'📝 每周饮料小结', drk_wk_line:'📝 饮料周小结 · {s}（{a}–{b}）', drk_wk_range:'{a}–{b}', drk_wk_auto:'周一中午自动写的', drk_wk_by:'{n} 点「现在生成」',
+  drk_wk_gen:'✨ 现在生成一次（上周）', drk_wk_busy:'AI 正在写……（大约半分钟）', drk_wk_done:'上周的小结写好了', drk_wk_fail:'AI 这次没写成。请过一会儿再点一次；还不行请截图发给 Claude。',
+  drk_wk_none:'{s} 还没有小结。每周一中午自动写上一周的；也可以点上面「现在生成一次」。', drk_wk_off:'{s} 还没开始管饮料库存（还没盘点、收货或订货），所以不会自动写小结；点「现在生成一次」只能写销量。',
+  drk_wk_older:'以前的 {n} 周', drk_wk_hint:'每周一中午，App 把上一周（周一到周日）的数字算好——销量、快断货、压货、收货和订货、报损、盘点、还没处理的——再请 AI 写成最多 10 行。数字都是系统算的，AI 只挑重点、不编数字。库存是写小结那一刻的。只有老板能看。',
   ord_stale:'这张订货建议是 {d} 出的，数量是按那天的库存算的。', ord_recalc:'按今天的库存重新算', ord_recalc_q:'按今天的库存重新算这张订货建议？', ord_recalc_q2:'按今天的库存重新算？你手改过的数量会换成新的建议。', ord_recalced:'已按今天的库存重新算。',
   ord_sum:'要订 {n} 种 · 共 {q} 件', ord_main_none:'这次没有要订的：库存够，或者目标库存还没设。', ord_rest_nt:'其中 {n} 种没设目标库存，App 算不出要不要订。', ord_to_targets:'去设目标库存', ord_done_n:'这台手机上已标 {k} / {n} 行输好（输好一行点一下；只记在这台手机上）', ord_use_sug:'用建议 {n}', ord_unsaved:'有一行的数量没存上，格子里已经放回上次存好的数。请看一眼，没问题再点确认。',
   // v179：盘点更快更准（B 包）
@@ -1684,6 +1689,10 @@ de: {
   drk_rc_q_unit:'Ganze Flasche', drk_rc_q_glass:'Glas 170 ml', drk_rc_q_shot:'Shot 60 ml', drk_rc_cq:'Inhalt pro Flasche in ml', drk_rc_cq_save:'Inhalt speichern', drk_rc_cq_bad:'Der Inhalt muss eine Zahl sein, z. B. 750.', drk_rc_price_bad:'Der Preis muss eine Zahl sein, z. B. 6,90.',
   drk_rc_till:'Leer = Preis aus der Kasse (zurzeit {p})', drk_rc_note:'Kassenartikel: {a}', dp_like_art:'Passt zu diesem Kassenartikel',
   oil_other_open:'{s}: dort läuft auch eine Altfett-Runde ({x}) ›', oil_other_late:'⚠ {s}: Altfett-Prüfung {n} Tag(e) überfällig ›',
+  dt_week:'Wochenbericht', drk_wk_h:'📝 Getränke-Wochenbericht', drk_wk_line:'📝 Getränke-Wochenbericht · {s} ({a}–{b})', drk_wk_range:'{a}–{b}', drk_wk_auto:'Automatisch am Montagmittag', drk_wk_by:'{n} hat „Jetzt erstellen“ getippt',
+  drk_wk_gen:'✨ Jetzt erstellen (letzte Woche)', drk_wk_busy:'KI schreibt … (etwa eine halbe Minute)', drk_wk_done:'Bericht für letzte Woche ist fertig', drk_wk_fail:'Die KI hat es diesmal nicht geschafft. Bitte gleich noch einmal tippen; sonst Screenshot an Claude.',
+  drk_wk_none:'{s}: noch kein Bericht. Jeden Montagmittag wird die Vorwoche automatisch geschrieben; oder oben „Jetzt erstellen“ tippen.', drk_wk_off:'{s} führt noch keinen Getränkebestand (keine Inventur, Lieferung oder Bestellung) – daher kein automatischer Bericht; „Jetzt erstellen“ schreibt nur den Verkauf.',
+  drk_wk_older:'Frühere {n} Wochen', drk_wk_hint:'Jeden Montagmittag rechnet die App die Zahlen der Vorwoche (Mo–So) aus – Verkauf, was bald ausgeht, zu viel Bestand, Lieferungen und Bestellungen, Schwund, Inventur, Offenes – und die KI schreibt daraus höchstens 10 Zeilen. Alle Zahlen kommen vom System; die KI wählt nur aus und erfindet nichts. Der Bestand ist der vom Zeitpunkt des Berichts. Nur der Chef sieht ihn.',
   ord_stale:'Dieser Bestellvorschlag ist vom {d}; die Mengen sind mit dem Bestand von diesem Tag gerechnet.', ord_recalc:'Mit dem heutigen Bestand neu rechnen', ord_recalc_q:'Diesen Bestellvorschlag mit dem heutigen Bestand neu rechnen?', ord_recalc_q2:'Mit dem heutigen Bestand neu rechnen? Deine geänderten Mengen werden durch den neuen Vorschlag ersetzt.', ord_recalced:'Mit dem heutigen Bestand neu gerechnet.',
   ord_sum:'{n} Artikel · zusammen {q} Stück', ord_main_none:'Diesmal ist nichts zu bestellen: Der Bestand reicht – oder der Sollbestand ist noch nicht eingetragen.', ord_rest_nt:'{n} davon haben keinen Sollbestand – die App kann nicht rechnen, ob bestellt werden muss.', ord_to_targets:'Sollbestand eintragen', ord_done_n:'{k} / {n} Zeilen auf diesem Gerät abgehakt (nach jeder Zeile antippen; wird nur auf diesem Gerät gemerkt)', ord_use_sug:'Vorschlag {n} nehmen', ord_unsaved:'Bei einer Zeile wurde die Menge nicht gespeichert; im Feld steht wieder die zuletzt gespeicherte Zahl. Bitte kurz prüfen und dann noch einmal bestätigen.',
   // v179
@@ -2091,7 +2100,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=24'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=25'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -5430,7 +5439,8 @@ function storeTabsHTML(){
   const cur = curStore(), byGeo = !!storeOk(state.geoStore) && cur === state.geoStore;
   return `<div class="stabs"><div class="seg">${STORES.map(x => `<button data-act="store-pick" data-store="${x}" class="${x === cur ? 'on' : ''}">${esc(x)}</button>`).join('')}</div>${geoCan() ? `<button class="stabs-geo${byGeo ? ' on' : ''}${geoBusy ? ' busy' : ''}" data-act="store-geo" title="${esc(t('geo_btn'))}" aria-label="${esc(t('geo_btn'))}">📍</button>` : ''}</div>`;
 }
-function storeChanged(){ if (state.tab === 'admin' && state.adminSub === 'tasks' && $('#asub')){ tfSync(); keepScroll(toRedraw); }   // v186：收废油（先记下正在写的新任务，重画不会把它清掉）
+function storeChanged(){ if (state.tab === 'inv' && invS().view === 'dweek' && invS().week){ keepScroll(renderInvWeek); }   // v187：每周饮料小结
+  else if (state.tab === 'admin' && state.adminSub === 'tasks' && $('#asub')){ tfSync(); keepScroll(toRedraw); }   // v186：收废油（先记下正在写的新任务，重画不会把它清掉）
   else if (state.tab === 'inv' && invS().view === 'otargets' && invS().otg){ const a = document.activeElement; if (a && a.dataset && a.dataset.otg) a.blur(); viewInvOtargets(); }   // v186：目标库存换店（正在打的格子先存进原来那家店）
   else if (state.tab === 'inv' && invS().view === 'dmenu' && invS().drinks){ invS().mFix = null; keepScroll(() => renderInvDmenu()); }   // v185：酒水单
   else if (state.tab === 'inv' && invS().view === 'drinks' && invS().drinks){ invS().drkSel = {}; keepScroll(() => renderInvDrinks()); }   // v184：销量和清单（还没配的按门店看）
@@ -5485,6 +5495,7 @@ async function viewInv(){
   if (S.view === 'drink') return viewInvDrink();
   if (S.view === 'dlink') return renderInvDlink();
   if (S.view === 'dmenu') return renderInvDmenu();   // v166：酒水单和成本
+  if (S.view === 'dweek') return viewInvWeek();   // v187：每周饮料小结
   if (S.view === 'recipe') return renderInvRecipe();
   if (S.view === 'stock') return viewInvStock();   // v142：饮料收货 · 调拨
   if (S.view === 'rc') return renderInvRc();
@@ -5506,10 +5517,11 @@ async function viewInvHome(){
   const boss = state.me && state.me.is_admin && !state.viewAs;
   geoStoreCheck(false);   // v173：以前允许过定位的，悄悄看一下在哪家店
   const stkWho = () => { const m = state.me || {}; return !!(m.is_admin || isSup() || invIsKeeper() || state.viewAs || ((S.home || {}).keeper || []).length); };   // 可能管饮料库存的人才去要（盘点 / 订货的格子）
-  const [h, mine, , drk, stk] = await Promise.all([soft(rpc('inv_home', tok()), null), soft(rpc('inv_inbox_mine', tok()), null), invTodoLoad(),
-    boss ? soft(rpc('inv_drinks', tok()), null) : null, stkWho() ? soft(rpc('inv_stock_home', tok()), null) : null]);   // v94：待办、我登记的；v137：老板的饮料库存（几件要处理）
+  const [h, mine, , drk, stk, wk] = await Promise.all([soft(rpc('inv_home', tok()), null), soft(rpc('inv_inbox_mine', tok()), null), invTodoLoad(),
+    boss ? soft(rpc('inv_drinks', tok()), null) : null, stkWho() ? soft(rpc('inv_stock_home', tok()), null) : null,
+    boss ? soft(rpc('inv_week_list', tok()), null) : null]);   // v187：每周饮料小结   // v94：待办、我登记的；v137：老板的饮料库存（几件要处理）
   if (state.tab !== 'inv' || invS().view !== 'home') return;
-  if (h) S.home = h; if (mine) S.ibMine = mine; if (drk) S.drinks = drk; if (stk) S.stock = stk;
+  if (h) S.home = h; if (mine) S.ibMine = mine; if (drk) S.drinks = drk; if (stk) S.stock = stk; if (wk) S.week = wk;
   if (h){ state.invKeep = h.keeper || []; invKeeperMark(state.invKeep.length > 0); if (state.invKeep.length && !state.invTodo) await invTodoLoad(); } refreshInvBadge();   // v174：v173 把这一句误放进了上一行的注释里（新库管认不出来、看不到库管待办），放回来
   if (!stk && h && stkWho()){ const k = await soft(rpc('inv_stock_home', tok()), null); if (state.tab !== 'inv' || invS().view !== 'home') return; if (k) S.stock = k; }   // 第一次在这台设备上、刚知道是库管
   renderInvHome();
@@ -5543,7 +5555,7 @@ function drkTilesHTML(full){
   if (!full){ if (W && a0.length < 3) a0.push(tile('ls-new', '🗑', t('dt_loss'))); a0.push(tile('inv-stock', '⋯', t('dt_more'), (T.rc_open || 0) + todo || '')); }
   const a = a0.join('');
   const b = full ? [cs.length ? tile('lv-open', '📊', t('dt_levels')) : '', W ? tile('stk-tr-new', '🔁', t('dt_tr')) : '', W ? tile('ls-new', '🗑', t('dt_loss')) : '', cs.includes(st) ? tile('qp-open', '📍', t('qp_btn')) : ''].join('') : '';   // v175：放位置
-  const c = full && admin ? tile('drk-menu', '🍷', t('dt_menu')) + tile('inv-drinks', '📈', t('dt_sales'), todo || '') : '';
+  const c = full && admin ? tile('drk-menu', '🍷', t('dt_menu')) + tile('inv-drinks', '📈', t('dt_sales'), todo || '') + (state.viewAs ? '' : tile('drk-week', '📝', t('dt_week'), wkUnread().length || '')) : '';   // v187
   return `${full ? '' : `<div class="tiles-h">${esc(t('dt_h'))} · ${esc(st)}</div>`}${a ? `<div class="tiles">${a}</div>` : ''}${b ? `<div class="tiles-h">${esc(t('dt_other_h'))}</div><div class="tiles">${b}</div>` : ''}${c ? `<div class="tiles-h">${esc(t('dt_boss_h'))}</div><div class="tiles">${c}</div>` : ''}`;
 }
 function invBrowseHTML(H){
@@ -5790,6 +5802,36 @@ function invPickUnit(F, u){ const sl = u.slots || []; F.unit_id = u.id; F.place 
 // 固定在下面的「保存」按钮上写要放到哪
 function invSaveLabel(F){ if (!F || F.mode === 'edit') return t('inv_save'); const c = invPickCode(), r = invPickRoom(F); return c ? t('inv_save_to', { c }) : r ? t('inv_save_to', { c: invName(r) }) : t('inv_save'); }
 
+// ---------- v187：AI 每周饮料小结（数据库 v130 / 文件服务 tasks v33，老板 2026-11-15：只给老板看、先不推送） ----------
+// 每家店最新一周还没看过的小结（物品首页的待办、格子上的数字）
+function wkUnread(){ const W = invS().week; if (!W) return []; const by = {};
+  (W.notes || []).forEach(n => { if (!by[n.store] || n.week > by[n.store].week) by[n.store] = n; });
+  return Object.values(by).filter(n => !n.read && n.week >= addDays(W.last_week, -7)); }   // 太旧的不再挂在待办里
+async function viewInvWeek(){
+  const S = invS();
+  if (!S.week) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`; else renderInvWeek();
+  const W = await soft(rpc('inv_week_list', tok()), null);
+  if (state.tab !== 'inv' || S.view !== 'dweek') return;
+  if (W) S.week = W; else if (!S.week){ $('#main').innerHTML = `<button class="link" data-act="inv-stock">${esc(t('stk_back'))}</button><div class="empty">${esc(t('err_NETWORK'))}</div>`; return; }
+  keepScroll(renderInvWeek);
+}
+function wkText(n){ const x = state.lang === 'zh' ? (n.zh || n.de) : (n.de || n.zh);
+  return `<div class="wk-txt">${String(x || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => `<div>${esc(l)}</div>`).join('')}</div>`; }
+function wkCard(n, open){
+  const head = `<strong>${esc(t('drk_wk_range', { a: dayLabel(n.week), b: dayLabel(n.week_end) }))}</strong>`, meta = `<div class="meta">${esc(n.by ? t('drk_wk_by', { n: n.by }) : t('drk_wk_auto'))} · ${esc(fmtDateTime(n.at))}</div>`;
+  return open ? `<div class="sheet" style="margin-bottom:10px">${head}${meta}<div style="margin-top:8px">${wkText(n)}</div></div>`
+    : `<details class="fold"><summary>${head}</summary><div class="inner">${meta}<div style="margin-top:6px">${wkText(n)}</div></div></details>`;
+}
+function renderInvWeek(){
+  const S = invS(), W = S.week || {}, st = curStore(), L = (W.notes || []).filter(n => n.store === st).sort((a, b) => a.week < b.week ? 1 : -1), on = (W.stores || []).includes(st);
+  $('#main').innerHTML = `<button class="link" data-act="${S.wkFrom === 'home' ? 'inv-home' : 'inv-stock'}" style="margin:2px 0 6px">${esc(t(S.wkFrom === 'home' ? 'inv_back' : 'stk_back'))}</button>
+    <div class="stabs-row"><h2>${esc(t('drk_wk_h'))}</h2>${storeTabsHTML()}</div>
+    <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('drk_wk_hint'))}</div></details>
+    ${state.viewAs ? '' : `<button class="btn ghost" data-act="drk-week-gen" style="margin-bottom:12px">${esc(t('drk_wk_gen'))}</button>`}
+    ${L.length ? wkCard(L[0], true) + (L.length > 1 ? `<h3>${esc(t('drk_wk_older', { n: L.length - 1 }))}</h3>${L.slice(1).map(n => wkCard(n, false)).join('')}` : '')
+      : `<div class="list"><div class="empty">${esc(t(on ? 'drk_wk_none' : 'drk_wk_off', { s: st }))}</div></div>`}`;
+  if (L.length && !L[0].read && !state.viewAs){ const n = L[0]; n.read = true; soft(rpc('inv_week_read', { ...tok(), p_id: n.id }), null); }   // 打开看到了就算看过（待办那一行不再显示）
+}
 // v99：选层 / 格，按真实的架子排：层从上往下竖着排（A 在最上面），格子柜按行和列排成格子
 function invSlotPicker(U, F){
   const sl = U.slots || [], grid = sl.some(s => /\d/.test(s.slot));
@@ -6382,6 +6424,7 @@ function invTodoLines(T){
   if (T.misses) out.push(`<div class="item" data-act="inv-misses" style="cursor:pointer">🔍 ${esc(t('inv_miss_todo', { n: T.misses }))}</div>`);
   if (state.me && state.me.is_admin && !state.viewAs && state.tab === 'inv' && invS().drinks){ const n = drkUnFor(curStore()).length;   // v184：老板在物品首页直接看到，点了到「待处理」
     if (n) out.push(`<div class="item" data-act="drk-todo" style="cursor:pointer">🍹 ${esc(t('drk_todo_line', { s: curStore(), n }))}</div>`); }
+  if (state.me && state.me.is_admin && !state.viewAs && state.tab === 'inv') wkUnread().forEach(x => out.push(`<div class="item" data-act="drk-week" data-store="${x.store}" style="cursor:pointer"><strong>${esc(t('drk_wk_line', { s: x.store, a: dm(x.week), b: dm(x.week_end) }))}</strong></div>`));   // v187
   return out;
 }
 function invTodoCardHTML(T){   // 「今天」页：主管（老板的「今天」是每日核对，看底部「物品」上的数字）
@@ -13443,6 +13486,17 @@ document.addEventListener('click', async ev => {
     case 'inv-misses': invGo('misses'); break;
     case 'inv-drinks': { const S = invS(), y = S.dl ? S.backY || 0 : 0; S.dEdit = null; S.dl = null; S.dInfo = null; S.rcp = null; invGo('drinks'); if (y) window.scrollTo(0, y); break; }   // v137：饮料库存；v184：从「配到饮料」取消回来，停在原来的位置
     case 'drk-tab': { const S = invS(); S.drkTab = el.dataset.k; renderInvDrinks(); break; }
+    case 'drk-week': { const S = invS(); S.wkFrom = S.view === 'home' ? 'home' : 'stock';   // v187：每周饮料小结
+      if (storeOk(el.dataset.store) && el.dataset.store !== curStore()){ state.storeSel = { s: el.dataset.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', el.dataset.store); }
+      invGo('dweek'); break; }
+    case 'drk-week-gen': { const S = invS(); if (S.wkBusy || state.viewAs) break; const st = curStore(), old = el.textContent;
+      S.wkBusy = true; el.disabled = true; el.textContent = t('drk_wk_busy');
+      try { await callTasks({ action: 'inv_week_ai', store: st }); toast(t('drk_wk_done')); }
+      catch(e){ toast(/INV_AI_FAILED|TASK_FAILED|FunctionsFetchError|fetch/i.test(String(e && e.message)) ? t('drk_wk_fail') : errText(e), true); }
+      S.wkBusy = false; if (el.isConnected){ el.disabled = false; el.textContent = old; }
+      S.week = await soft(rpc('inv_week_list', tok()), S.week);
+      if (state.tab === 'inv' && S.view === 'dweek'){ renderInvWeek(); window.scrollTo(0, 0); }
+      break; }
     case 'drk-todo': { const S = invS(); S.drkTab = 'todo'; S.dEdit = null; S.dl = null; S.dInfo = null; S.rcp = null; invGo('drinks'); break; }
     case 'drk-grp-ign': { const S = invS(), st = curStore(), g = el.dataset.g || '', L = drkUnFor(st).filter(u => (u.grp || '') === g); if (!L.length) break;
       if (L.length > 3 && !confirm(t('drk_grp_q', { g: g || t('drk_grp_none'), n: L.length }))) break;
