@@ -603,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v188';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v190';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -5784,9 +5784,8 @@ async function invFormOpen(mode, preset){
   if (mode !== 'edit' && F.place && !F.area){ const hit = invPickFind(F.place); if (hit) Object.assign(F, { store: hit.a.store, area: hit.a.id, unit_id: hit.u.id }); }
   render(); window.scrollTo(0, 0);
   F.fixedPlace = !!(preset && preset.place);
-  if (F.fixedPlace) return;   // v183：位置已经定好（从某一层点进来、待归位放回原位、接着录下一件）：不自动推荐，想要再点「✨ AI 推荐」
-  if ((mode === 'loc' || mode === 'inbox') && S.item) invAiPlace(F);   // v99：已有物品，分类已经知道，直接推荐位置
-  else if (mode === 'new' && F.category_id) invAiPlace(F);   // 从待归位来的新物品：AI 已经认出分类
+  // v190：打开表单时不再自动请 AI 推荐位置（2026-11-12 一件件放饮料，每打开一次就问一次 AI，一天花了 7 $）；
+  // 默认已经是这家店上次用的位置，要推荐点「✨ AI 推荐位置」
 }
 function invPickFind(placeId){
   for (const a of invS().pick || []) for (const u of a.units || []){
@@ -5976,8 +5975,8 @@ async function invAiRead(F, fix){
     F.aiRes = { ...R, correction: fix }; F.fix = '';
     if (R.category_id){ F.category_id = R.category_id; }
     F.damp = !!R.damp; F.dampTouched = false;
+    if (F.mode === 'new' && R.category_id) F.aip = null;   // v190：分类可能变了，旧的推荐不算；不自动再问，要推荐点「✨ AI 推荐位置」
     render(); toast(t('inv_fix_done'));
-    if (F.mode === 'new' && R.category_id && !F.fixedPlace) invAiPlace(F);
     return;
   }
   if (R){
@@ -5988,8 +5987,7 @@ async function invAiRead(F, fix){
     if (!F.category_id && R.category_id){ render(); invCatChanged(R.category_id); }
     if (!F.dampTouched) F.damp = !!R.damp;
   }
-  render();
-  if (F.mode === 'new' && F.category_id && !F.aip && !F.fixedPlace) invAiPlace(F);   // v99：分类有了就推荐一次位置；v183：位置已经定好的不自动推荐
+  render();   // v190：认出分类以后不再自动请 AI 推荐位置，要推荐点「✨ AI 推荐位置」
 }
 function invPayload(F){
   return { name_de: String(F.name_de || '').trim(), name_zh: String(F.name_zh || '').trim(),
