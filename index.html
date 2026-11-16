@@ -603,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v187';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v188';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -959,6 +959,11 @@ zh: {
   drk_wk_gen:'✨ 现在生成一次（上周）', drk_wk_busy:'AI 正在写……（大约半分钟）', drk_wk_done:'上周的小结写好了', drk_wk_fail:'AI 这次没写成。请过一会儿再点一次；还不行请截图发给 Claude。',
   drk_wk_none:'{s} 还没有小结。每周一中午自动写上一周的；也可以点上面「现在生成一次」。', drk_wk_off:'{s} 还没开始管饮料库存（还没盘点、收货或订货），所以不会自动写小结；点「现在生成一次」只能写销量。',
   drk_wk_older:'以前的 {n} 周', drk_wk_hint:'每周一中午，App 把上一周（周一到周日）的数字算好——销量、快断货、压货、收货和订货、报损、盘点、还没处理的——再请 AI 写成最多 10 行。数字都是系统算的，AI 只挑重点、不编数字。库存是写小结那一刻的。只有老板能看。',
+  ord_si_btn:'🔗 {s} 的商品配了哪些饮料（{n}）›', ord_si_h:'🔗 {s} 的商品和饮料', ord_si_hint:'订货建议按这里配的饮料算。配错了点「改」，不用订的点「去掉」。只影响以后的订货建议，已经确认的订货单不变。',
+  ord_si_q:'找商品、编号或饮料', ord_si_n:'{n} 个商品，{u} 个还没配', ord_si_none:'还没配（订货建议里没有）', ord_si_off:'配的饮料已经停用或不管库存：订货建议里不会出现，请改配。',
+  ord_si_twice:'这件饮料还配了这个供应商的另一个商品：订货建议会算两次。', ord_si_twice_q:'「{d}」已经配给了「{s}」。两个都配，订货建议会算两次。仍然配？',
+  ord_si_change:'改', ord_si_link:'配饮料', ord_si_unlink:'去掉', ord_si_unlink_q:'「{x}」不再配「{d}」？以后的订货建议里就没有这个商品了。', ord_si_unlinked:'已去掉',
+  ord_si_pick_note:'供应商的商品：{x}', dp_like_si:'名字像这个商品的',
   ord_stale:'这张订货建议是 {d} 出的，数量是按那天的库存算的。', ord_recalc:'按今天的库存重新算', ord_recalc_q:'按今天的库存重新算这张订货建议？', ord_recalc_q2:'按今天的库存重新算？你手改过的数量会换成新的建议。', ord_recalced:'已按今天的库存重新算。',
   ord_sum:'要订 {n} 种 · 共 {q} 件', ord_main_none:'这次没有要订的：库存够，或者目标库存还没设。', ord_rest_nt:'其中 {n} 种没设目标库存，App 算不出要不要订。', ord_to_targets:'去设目标库存', ord_done_n:'这台手机上已标 {k} / {n} 行输好（输好一行点一下；只记在这台手机上）', ord_use_sug:'用建议 {n}', ord_unsaved:'有一行的数量没存上，格子里已经放回上次存好的数。请看一眼，没问题再点确认。',
   // v179：盘点更快更准（B 包）
@@ -991,6 +996,11 @@ zh: {
   stk_l_need_item:'⚠ 选是哪种饮料；不是我们管的东西就选「不进库存」。', stk_l_need_qty:'⚠ 填数量和每个几瓶。', stk_l_unsure:'⚠ AI 不太确定，请对一下送货单。', stk_l_price:'单价 {c}', stk_l_total:'这行 {c}', stk_l_calc:'{q} {u} × {p} = {n} 瓶', stk_l_add:'＋ 加一行', stk_l_qty_hint:'数量 × 每个几瓶',
   stk_rc_note:'备注（可以不写）', stk_rc_sum:'进库存：{n} 行，共 {b} 瓶', stk_rc_total:'送货单合计 {c}', stk_rc_bad:'还有 {n} 行要改（黄色的）', stk_wait:'照片还在上传或 AI 还在读，请等一下。',
   stk_rc_save_staff:'保存，交给主管确认', stk_rc_save_sup:'先保存，以后再确认', stk_rc_confirm:'✓ 确认入库', stk_rc_cancel:'撤销这张单', stk_rc_undo:'撤销入库',
+  stk_dup_warn:'这张送货单好像已经登记过。同一张单入两次，库存会多一倍。是同一张：这张不用登记了，点上面「取消」（已经保存的点下面「撤销这张单」）；不是同一张：照常保存。', stk_dup_row:'{d} {n} 登记 · {s}', stk_dup_view:'看看那张 ›',
+  stk_dup_h:'⚠ 这张送货单好像已经登记过', stk_dup_why:'同一张单入两次，库存会多一倍。请先看看下面这张，再决定：',
+  stk_dup_noopen:'这张你打不开（另一家店的，或别人登记的）。请问老板或那家店的主管是不是同一张单。', stk_dup_ok:'不是重复，仍然入库', stk_dup_cancel:'这张是重复的，作废这张',
+  stk_dup_cancel_q:'作废现在这张送货单（原因：重复了）？已经登记的那张不受影响。', stk_dup_later:'先不入库', stk_dup_back:'‹ 回去', stk_dup_close:'关掉',
+  stk_dup_tag:'可能重复', stk_dup_items:'{n} 件饮料 · {b} 瓶', stk_dup_again:'入库前要先查是不是重复，这次没查到（网络不好？）。请再点一次「确认入库」。',
   stk_rc_cancel_q:'撤销这张送货单？', stk_rc_undo_q:'这张单已经入库了，撤销会把加进去的数量减回来。',
   stk_rc_saved_new:'已登记，等主管确认（{n} 瓶）', stk_rc_saved:'已保存', stk_rc_done:'已入库：{n} 瓶', stk_rc_cancelled:'已撤销', stk_rc_fix:'第 {n} 行还没配饮料或没有数量（黄色的）。请先改好，或者选「不进库存」。',
   stk_tr_h:'记一笔调拨', stk_tr_hint:'从一家店拿饮料到另一家店：拿的人记一笔，两家店的库存一起改。', stk_tr_dir:'从哪家店到哪家店', stk_tr_add:'＋ 再加一种', stk_tr_note:'备注（可以不写）', stk_tr_note_ph:'例如：Bismarck 晚上不够了',
@@ -1693,6 +1703,11 @@ de: {
   drk_wk_gen:'✨ Jetzt erstellen (letzte Woche)', drk_wk_busy:'KI schreibt … (etwa eine halbe Minute)', drk_wk_done:'Bericht für letzte Woche ist fertig', drk_wk_fail:'Die KI hat es diesmal nicht geschafft. Bitte gleich noch einmal tippen; sonst Screenshot an Claude.',
   drk_wk_none:'{s}: noch kein Bericht. Jeden Montagmittag wird die Vorwoche automatisch geschrieben; oder oben „Jetzt erstellen“ tippen.', drk_wk_off:'{s} führt noch keinen Getränkebestand (keine Inventur, Lieferung oder Bestellung) – daher kein automatischer Bericht; „Jetzt erstellen“ schreibt nur den Verkauf.',
   drk_wk_older:'Frühere {n} Wochen', drk_wk_hint:'Jeden Montagmittag rechnet die App die Zahlen der Vorwoche (Mo–So) aus – Verkauf, was bald ausgeht, zu viel Bestand, Lieferungen und Bestellungen, Schwund, Inventur, Offenes – und die KI schreibt daraus höchstens 10 Zeilen. Alle Zahlen kommen vom System; die KI wählt nur aus und erfindet nichts. Der Bestand ist der vom Zeitpunkt des Berichts. Nur der Chef sieht ihn.',
+  ord_si_btn:'🔗 {s}: welche Artikel welchem Getränk ({n}) ›', ord_si_h:'🔗 {s}: Artikel und Getränke', ord_si_hint:'Der Bestellvorschlag rechnet mit den Getränken hier. Falsch zugeordnet → „Ändern“, nicht bestellen → „Entfernen“. Gilt nur für künftige Vorschläge; bestätigte Bestellungen bleiben.',
+  ord_si_q:'Artikel, Nummer oder Getränk suchen', ord_si_n:'{n} Artikel, {u} noch ohne Getränk', ord_si_none:'Noch kein Getränk (nicht im Bestellvorschlag)', ord_si_off:'Das Getränk ist deaktiviert oder ohne Bestand: kommt nicht in den Bestellvorschlag – bitte neu zuordnen.',
+  ord_si_twice:'Dieses Getränk hängt noch an einem anderen Artikel dieses Lieferanten: der Vorschlag zählt doppelt.', ord_si_twice_q:'„{d}“ ist schon „{s}“ zugeordnet. Bei beiden zählt der Vorschlag doppelt. Trotzdem zuordnen?',
+  ord_si_change:'Ändern', ord_si_link:'Getränk zuordnen', ord_si_unlink:'Entfernen', ord_si_unlink_q:'„{x}“ nicht mehr „{d}“ zuordnen? Dann ist der Artikel nicht mehr im Bestellvorschlag.', ord_si_unlinked:'Entfernt',
+  ord_si_pick_note:'Artikel des Lieferanten: {x}', dp_like_si:'Ähnlich wie dieser Artikel',
   ord_stale:'Dieser Bestellvorschlag ist vom {d}; die Mengen sind mit dem Bestand von diesem Tag gerechnet.', ord_recalc:'Mit dem heutigen Bestand neu rechnen', ord_recalc_q:'Diesen Bestellvorschlag mit dem heutigen Bestand neu rechnen?', ord_recalc_q2:'Mit dem heutigen Bestand neu rechnen? Deine geänderten Mengen werden durch den neuen Vorschlag ersetzt.', ord_recalced:'Mit dem heutigen Bestand neu gerechnet.',
   ord_sum:'{n} Artikel · zusammen {q} Stück', ord_main_none:'Diesmal ist nichts zu bestellen: Der Bestand reicht – oder der Sollbestand ist noch nicht eingetragen.', ord_rest_nt:'{n} davon haben keinen Sollbestand – die App kann nicht rechnen, ob bestellt werden muss.', ord_to_targets:'Sollbestand eintragen', ord_done_n:'{k} / {n} Zeilen auf diesem Gerät abgehakt (nach jeder Zeile antippen; wird nur auf diesem Gerät gemerkt)', ord_use_sug:'Vorschlag {n} nehmen', ord_unsaved:'Bei einer Zeile wurde die Menge nicht gespeichert; im Feld steht wieder die zuletzt gespeicherte Zahl. Bitte kurz prüfen und dann noch einmal bestätigen.',
   // v179
@@ -1725,6 +1740,11 @@ de: {
   stk_l_need_item:'⚠ Getränk wählen; wenn wir es nicht führen: „Nicht in den Bestand“.', stk_l_need_qty:'⚠ Menge und Flaschen pro Einheit eintragen.', stk_l_unsure:'⚠ Die KI ist unsicher – bitte mit dem Lieferschein vergleichen.', stk_l_price:'Einzelpreis {c}', stk_l_total:'Zeile {c}', stk_l_calc:'{q} {u} × {p} = {n} Fl.', stk_l_add:'＋ Zeile hinzufügen', stk_l_qty_hint:'Menge × Flaschen pro Einheit',
   stk_rc_note:'Notiz (optional)', stk_rc_sum:'In den Bestand: {n} Zeilen, zusammen {b} Fl.', stk_rc_total:'Summe Lieferschein {c}', stk_rc_bad:'Noch {n} Zeile(n) zu korrigieren (gelb)', stk_wait:'Fotos werden noch hochgeladen oder die KI liest noch. Bitte kurz warten.',
   stk_rc_save_staff:'Speichern, Leitung bestätigt', stk_rc_save_sup:'Erst speichern, später bestätigen', stk_rc_confirm:'✓ Einbuchen', stk_rc_cancel:'Lieferschein stornieren', stk_rc_undo:'Einbuchung stornieren',
+  stk_dup_warn:'Dieser Lieferschein scheint schon erfasst zu sein. Doppelt eingebucht = doppelter Bestand. Derselbe: diesen nicht erfassen, oben „Abbrechen“ tippen (schon gespeichert: unten „Lieferschein stornieren“). Ein anderer: normal speichern.', stk_dup_row:'{d} von {n} erfasst · {s}', stk_dup_view:'Ansehen ›',
+  stk_dup_h:'⚠ Dieser Lieferschein scheint schon erfasst', stk_dup_why:'Doppelt eingebucht = doppelter Bestand. Bitte zuerst diesen Lieferschein ansehen und dann entscheiden:',
+  stk_dup_noopen:'Diesen kannst du nicht öffnen (anderes Restaurant oder von jemand anderem erfasst). Bitte den Chef oder die Leitung dort fragen, ob es derselbe Lieferschein ist.', stk_dup_ok:'Kein Duplikat – trotzdem einbuchen', stk_dup_cancel:'Ist doppelt – diesen stornieren',
+  stk_dup_cancel_q:'Diesen Lieferschein stornieren (Grund: doppelt eingetragen)? Der schon erfasste bleibt unverändert.', stk_dup_later:'Noch nicht einbuchen', stk_dup_back:'‹ Zurück', stk_dup_close:'Schließen',
+  stk_dup_tag:'Evtl. doppelt', stk_dup_items:'{n} Getränke · {b} Fl.', stk_dup_again:'Vor dem Einbuchen wird auf Duplikate geprüft – das hat diesmal nicht geklappt (Netz?). Bitte noch einmal „Einbuchen“ tippen.',
   stk_rc_cancel_q:'Diesen Lieferschein stornieren?', stk_rc_undo_q:'Dieser Lieferschein ist schon eingebucht; Stornieren zieht die Mengen wieder ab.',
   stk_rc_saved_new:'Erfasst – wartet auf Bestätigung ({n} Fl.)', stk_rc_saved:'Gespeichert', stk_rc_done:'Eingebucht: {n} Fl.', stk_rc_cancelled:'Storniert', stk_rc_fix:'Zeile {n}: Getränk oder Menge fehlt (gelb). Bitte korrigieren oder „Nicht in den Bestand“ wählen.',
   stk_tr_h:'Umlagerung eintragen', stk_tr_hint:'Getränke von einer Filiale in die andere: Wer sie mitnimmt, trägt es ein – der Bestand beider Filialen ändert sich zusammen.', stk_tr_dir:'Von welcher Filiale wohin', stk_tr_add:'＋ Weiteres Getränk', stk_tr_note:'Notiz (optional)', stk_tr_note_ph:'z. B. Bismarck hat abends nicht genug',
@@ -2100,7 +2120,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=25'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=26'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2330,6 +2350,7 @@ const ERR_ZH = {
   INV_RC_PHOTO: '要先拍送货单（至少 1 张）才能保存。请点「📷 拍送货单」。',   // v142
   INV_RC_DONE: '这张送货单已经确认或撤销了（可能在别的手机上）。请返回刷新再看。',
   INV_RC_LIMIT: '你 24 小时内登记得太多了（送货单、调拨最多 20 笔，报损最多 30 条）。如果真的还有，请找老板。',
+  INV_RC_DUP: '这张送货单好像已经登记过，先没有入库。请看看是不是同一张：不是的话点「不是重复，仍然入库」；是的话把这张作废。',
   INV_RC_EMPTY: '这张单上没有要进库存的饮料（都是押金或「不进库存」的行）。不用入库的话请「撤销这张单」并写原因。',
   INV_RC_NO_ITEM: '第 {n} 行还没配饮料（或配的饮料已经不管库存了）。请选好饮料，或者改成「不进库存」。',
   INV_RC_QTY: '第 {n} 行没有数量。请填数量和每个几瓶。',
@@ -2604,6 +2625,7 @@ const ERR_DE = {
   INV_RC_PHOTO: 'Zum Speichern zuerst den Lieferschein fotografieren (mindestens 1 Foto). Bitte „📷 Lieferschein fotografieren“ tippen.',   // v142
   INV_RC_DONE: 'Dieser Lieferschein wurde schon bestätigt oder storniert (evtl. auf einem anderen Handy). Bitte zurück und neu laden.',
   INV_RC_LIMIT: 'Du hast in 24 Stunden zu viele Einträge gemacht (höchstens 20 Lieferscheine oder Umlagerungen, 30 Schwund-Einträge). Wenn es wirklich mehr sind, bitte den Chef fragen.',
+  INV_RC_DUP: 'Dieser Lieferschein scheint schon erfasst – noch nicht eingebucht. Bitte prüfen, ob es derselbe ist: wenn nicht, „Kein Duplikat – trotzdem einbuchen“; wenn ja, diesen stornieren.',
   INV_RC_EMPTY: 'Auf diesem Lieferschein ist kein Getränk für den Bestand (nur Pfand oder „Nicht in den Bestand“). Wenn nichts einzubuchen ist: „Lieferschein stornieren“ mit Grund.',
   INV_RC_NO_ITEM: 'Zeile {n}: Kein Getränk zugeordnet (oder das Getränk wird nicht mehr im Bestand geführt). Bitte Getränk wählen oder „Nicht in den Bestand“.',
   INV_RC_QTY: 'Zeile {n}: Menge fehlt. Bitte Menge und Flaschen pro Einheit eintragen.',
@@ -5505,6 +5527,7 @@ async function viewInv(){
   if (S.view === 'orders') return viewInvOrders();   // v169：订货
   if (S.view === 'order') return renderInvOrder();
   if (S.view === 'otargets') return viewInvOtargets();
+  if (S.view === 'ordsi') return viewInvOrdSi();   // v188
   if (S.view === 'count') return viewInvCount();
   if (S.view === 'unplaced') return renderInvUnplaced();
   if (S.view === 'qplace') return viewInvQplace();   // v175：快速放位置
@@ -6826,6 +6849,7 @@ function renderInvOrders(){
         <label class="small" for="ord-do-${st.store}-${sp.id}">${esc(t('ord_day_order'))}</label>${dowSel(`ord-do-${st.store}-${sp.id}`, sp.order_dow, true)}
         <label class="small" for="ord-dd-${st.store}-${sp.id}">${esc(t('ord_day_delivery'))}</label>${dowSel(`ord-dd-${st.store}-${sp.id}`, sp.delivery_dow || 5, false)}
         <button class="btn ghost" data-act="ord-days-save" data-store="${st.store}" data-sup="${sp.id}">${esc(t('ord_days_save'))}</button></div></div></details>` : ''}
+      ${D.admin ? `<button class="link" data-act="ord-si" data-sup="${sp.id}" data-name="${esc(sp.name)}" style="margin-top:8px;white-space:normal;text-align:left">${esc(t('ord_si_btn', { s: sp.name, n: +sp.items || 0 }))}</button>` : ''}
       ${(sp.orders || []).length ? `<div class="small muted" style="margin:10px 0 4px">${esc(t('ord_recent'))}</div><div class="list">${sp.orders.map(ordOrderRow).join('')}</div>` : ''}</div>`; };
   const un = D.unlinked || [];
   $('#main').innerHTML = `${head}
@@ -6834,6 +6858,49 @@ function renderInvOrders(){
     ${un.length ? `<details class="fold"><summary>${esc(t('ord_unlinked_h', { n: un.length }))}</summary><div class="inner"><div class="small muted" style="margin-bottom:8px">${esc(t('ord_unlinked_hint'))}</div>
       ${un.map(x => `<div style="margin-bottom:10px"><div>${esc(x.name)} <span class="small muted">· ${esc(t('ord_art', { a: x.art_no }))} · ${esc(ordUnit(x))}</span></div>
         <select class="input" data-ordlink="${x.id}" aria-label="${esc(t('ord_link_pick'))}" style="margin-top:4px"><option value="">${esc(t('ord_link_pick'))}</option>${(D.drinks || []).map(d => `<option value="${d.id}">${esc(invName(d))}</option>`).join('')}</select></div>`).join('')}</div></details>` : ''}`;
+}
+// v188：老板看一个供应商的全部商品配了哪件饮料，配错的「改」、不用订的「去掉」（只影响以后的订货建议）
+async function viewInvOrdSi(){
+  const S = invS(), O = S.osi; if (!O){ S.view = 'orders'; return viewInvOrders(); }
+  if (!O.items) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`; else renderInvOrdSi();
+  try {
+    const [L, D] = await Promise.all([rpc('inv_supplier_items_list', { ...tok(), p_supplier: O.sup }), O.drinks ? null : (S.ord && S.ord.admin ? S.ord : rpc('inv_order_home', tok()))]);
+    if (state.tab !== 'inv' || S.view !== 'ordsi' || S.osi !== O) return;
+    O.items = L.items || []; O.name = L.supplier || O.name; if (D) O.drinks = D.drinks || [];
+  } catch(e){ if (state.tab !== 'inv' || S.view !== 'ordsi' || S.osi !== O) return;
+    $('#main').innerHTML = `<button class="link" data-act="ord-home">← ${esc(t('ord_title'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
+  renderInvOrdSi();
+}
+function ordSiListHTML(O){
+  const q = String(O.q || '').toLowerCase().trim(), cnt = {};
+  O.items.forEach(x => { if (x.item_id) cnt[x.item_id] = (cnt[x.item_id] || 0) + 1; });
+  const list = O.items.filter(x => !q || [x.name, x.art_no, x.name_de, x.name_zh].some(v => String(v || '').toLowerCase().includes(q)));
+  return list.map(x => `<div class="item"><div><strong>${esc(x.name)}</strong></div>
+      <div class="small muted">${esc(t('ord_art', { a: x.art_no }))} · ${esc(ordUnit(x))}</div>
+      <div style="margin-top:4px">→ ${x.item_id ? `<strong>${esc(invName(x) || '?')}</strong>` : `<span style="color:var(--copper)">${esc(t('ord_si_none'))}</span>`}</div>
+      ${x.item_off ? `<div class="small" style="color:var(--copper)">${esc(t('ord_si_off'))}</div>` : ''}
+      ${x.item_id && cnt[x.item_id] > 1 ? `<div class="small" style="color:var(--copper)">${esc(t('ord_si_twice'))}</div>` : ''}
+      <div class="row" style="gap:8px;margin-top:6px"><button class="btn ghost" data-act="ord-si-pick" data-id="${x.id}" style="height:42px;flex:1">${esc(t(x.item_id ? 'ord_si_change' : 'ord_si_link'))}</button>${x.item_id ? `<button class="btn ghost danger" data-act="ord-si-off" data-id="${x.id}" style="height:42px;flex:1">${esc(t('ord_si_unlink'))}</button>` : ''}</div></div>`).join('')
+    || `<div class="empty">${esc(t('qp_no_match', { q: String(O.q || '').trim() }))}</div>`;
+}
+function renderInvOrdSi(){
+  const S = invS(), O = S.osi; if (!O || !O.items) return;
+  $('#main').innerHTML = `<button class="link" data-act="ord-home" style="margin:2px 0 6px">← ${esc(t('ord_title'))}</button>
+    <h2 style="margin-top:4px">${esc(t('ord_si_h', { s: O.name || '' }))}</h2>
+    <div class="small muted" style="margin-bottom:8px">${esc(t('ord_si_hint'))}</div>
+    <input type="search" class="input" id="ord-si-q" placeholder="${esc(t('ord_si_q'))}" value="${esc(O.q || '')}" autocomplete="off" style="margin-bottom:8px">
+    <div class="small muted" style="margin-bottom:6px">${esc(t('ord_si_n', { n: O.items.length, u: O.items.filter(x => !x.item_id).length }))}</div>
+    <div class="list" id="ord-si-list">${ordSiListHTML(O)}</div>`;
+}
+async function ordSiSet(x, v){
+  const S = invS(), O = S.osi; if (!O || O.busy || (v || null) === (x.item_id || null)) return;
+  const other = v && O.items.find(r => r.id !== x.id && r.item_id === v);
+  if (other && !confirm(t('ord_si_twice_q', { d: invName(other) || '?', s: other.name }))) return;
+  O.busy = true;
+  try { await rpc('inv_supplier_item_link', { ...tok(), p_id: x.id, p_item: v || null }); }
+  catch(e){ O.busy = false; toast(errText(e), true); return; }
+  O.busy = false; S.ord = null; toast(t(v ? 'ord_linked' : 'ord_si_unlinked'));
+  if (state.tab === 'inv' && S.view === 'ordsi' && S.osi === O) await keepScroll(() => viewInvOrdSi());
 }
 function ordFind(id){ const D = invS().ord || {}; for (const st of D.stores || []) for (const sp of st.suppliers || []) { if (sp.open && sp.open.id === id) return sp.open; const o = (sp.orders || []).find(x => x.id === id); if (o) return o; } return null; }
 function ordPortal(o){ if (o.portal) return o.portal; const D = invS().ord || {}; for (const st of D.stores || []) for (const sp of st.suppliers || []) if (sp.id === o.supplier_id) return sp.portal || ''; return ''; }
@@ -7061,7 +7128,7 @@ function stkRcStatus(r){ return `<span class="tag ${r.status === 'open' ? 'pend'
 function stkRcCard(r){
   const items = (r.lines || []).filter(l => l.kind === 'item');
   const what = items.slice(0, 3).map(l => `${invName(l) || l.text || '?'} ${drkNum(l.qty || 0)}`).join(' · ') + (items.length > 3 ? ' …' : '');
-  return `<div class="item" data-act="stk-rc-open" data-id="${r.id}" style="cursor:pointer"><div class="top"><div>${storeTag(r.store)} <strong>${esc(stkRcTitle(r))}</strong> ${stkRcStatus(r)}
+  return `<div class="item" data-act="stk-rc-open" data-id="${r.id}" style="cursor:pointer"><div class="top"><div>${storeTag(r.store)} <strong>${esc(stkRcTitle(r))}</strong> ${stkRcStatus(r)}${r.status === 'open' && +r.dups > 0 ? ` <span class="tag off" style="color:var(--copper)">⚠ ${esc(t('stk_dup_tag'))}</span>` : ''}
     <div class="meta">${esc(t('stk_rc_meta', { d: r.doc_date ? dayLabel(r.doc_date) : fmtDateTime(r.created_at), n: drkNum(r.bottles), by: r.created_name || '' }))}</div>
     ${what ? `<div class="small muted">${esc(what)}</div>` : ''}${r.status === 'cancelled' ? `<div class="small muted">${esc(t('stk_cancelled_by', { n: r.cancelled_name || '', r: r.cancel_note || '' }))}</div>` : ''}</div>
     ${(r.photos || [])[0] ? invImg(r.photos[0].thumb) : ''}</div></div>`;
@@ -7110,10 +7177,11 @@ async function stkRcOpen(id){
   const S = invS();
   if (stkRcDraft() && !confirm(t('stk_rc_leave_q'))) return;   // v178：还有一张没登记完的新单：先问
   $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;   // v178：点了马上有反应
-  try { const [r] = await Promise.all([rpc('inv_receipt', { ...tok(), p_id: id }), S.stock ? null : soft(rpc('inv_stock_home', tok()), null).then(d => { if (d && !S.stock) S.stock = d; })]); S.rc = stkRcFrom(r); invGo('rc'); }
+  try { const [r] = await Promise.all([rpc('inv_receipt', { ...tok(), p_id: id }), S.stock ? null : soft(rpc('inv_stock_home', tok()), null).then(d => { if (d && !S.stock) S.stock = d; })]); S.rc = stkRcFrom(r); invGo('rc');
+    if (r.status === 'open' && +r.dups > 0) stkRcDupCheck(S.rc); }   // v188：好像已经登记过
   catch(e){ toast(errText(e), true); render(); }
 }
-function stkRcFrom(r){ return { ...r, isNew: false, photos: (r.photos || []).map(p => ({ ...p })), lines: (r.lines || []).map(l => ({ ...l })), readN: (r.photos || []).length }; }
+function stkRcFrom(r){ return { ...r, dups: [], isNew: false, photos: (r.photos || []).map(p => ({ ...p })), lines: (r.lines || []).map(l => ({ ...l })), readN: (r.photos || []).length }; }
 function stkRcKeep(){
   const R = invS().rc; if (!R) return;
   const v = id => { const e = document.getElementById(id); return e ? e.value : null; };
@@ -7149,6 +7217,7 @@ function renderInvRc(){
     ${R.photos.some(p => p.busy) ? `<div class="small muted">${esc(t('inv_uploading'))}</div>` : ''}
     ${R.aiBusy ? `<div class="small muted" style="margin-bottom:6px">🤖 ${esc(t('stk_ai_busy'))}</div>` : ''}
     ${R.aiNote ? `<div class="small" style="color:var(--copper);margin-bottom:6px">🤖 ${esc(R.aiNote)}</div>` : ''}
+    ${stkDupBoxHTML(R)}
     ${unread ? `<div class="infobox" style="background:#FFF1C9;color:#6B5200">${esc(t('stk_rc_unread', { n: nRead + 1 }))}<br><button class="link" data-act="stk-rc-ai" style="white-space:normal;text-align:left;margin-top:4px">${esc(t('stk_rc_unread_btn'))}</button></div>` : ''}
     ${ed && R.photos.some(p => p.photo) && !busy && !unread ? `<button class="link" data-act="stk-rc-ai" style="margin:0 0 8px">${esc(t(R.ai || R.lines.length ? 'stk_ai_again' : 'stk_ai_read'))}</button>` : ''}`;
   const head = ed ? `<div class="field"><label>${esc(t('inv_ib_store'))}</label><div class="seg sm">${STORES.map(s => `<button data-act="stk-rc-store" data-store="${s}" class="${R.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div></div>
@@ -7238,6 +7307,7 @@ async function stkRcAi(auto){
     R.aiNote = !R.lines.length ? t('stk_ai_none') : ((state.lang === 'de' ? r.note_de : r.note_zh) || '');
     R.readN = paths.length; R.dirty = false;   // v178：这几页读过了；行是 AI 刚给的，还没手改
     if (!R.doc_date) R.doc_date = today();   // 日期没读到：先填今天，可以改
+    stkRcDupCheck(R);   // v188：编号读到了：查一下是不是已经登记过（不等）
   } catch(e){ if (S.rc === R) R.aiNote = String(e && e.message) === 'INV_AI_FAILED' ? t('stk_ai_fail') : errText(e); }
   R.aiBusy = false;
   if (S.rc !== R) return;
@@ -7279,11 +7349,86 @@ async function stkRcSave(btn, confirmToo){
     let r = await rpc('inv_receipt_save', { ...tok(), p_id: R.id || null, p_data: stkRcPayload(R) });
     Object.assign(R, { id: r.id, isNew: false, status: r.status, can_edit: r.can_edit, can_confirm: r.can_confirm, can_cancel: r.can_cancel, created_name: r.created_name, created_at: r.created_at });
     if (confirmToo) r = await rpc('inv_receipt_confirm', { ...tok(), p_id: r.id });
-    S.rc = null; S.stock = null; LS.set('invStore', R.store);
-    toast(t(confirmToo ? 'stk_rc_done' : (R.created_by && R.created_by !== (state.me || {}).id ? 'stk_rc_saved' : 'stk_rc_saved_new'), { n: drkNum(r.bottles) }));
-    invGo('stock'); invTodoLoad().then(refreshInvBadge);
-  } catch(e){ R.saving = false; lock(false); toast(stkErr(e), true); if (S.rc === R && S.view === 'rc') keepScroll(renderInvRc); }
+    stkRcDone(R, r, confirmToo);
+  } catch(e){ R.saving = false; lock(false);
+    if (confirmToo && R.id && String(e && e.message) === 'INV_RC_DUP'){ if (S.rc === R && S.view === 'rc') keepScroll(renderInvRc); stkDupBlock(R); return; }   // v188：好像已经登记过：先挡住，弹窗问
+    toast(stkErr(e), true); if (S.rc === R && S.view === 'rc') keepScroll(renderInvRc); }
 }
+function stkRcDone(R, r, confirmToo){
+  const S = invS(); S.rc = null; S.stock = null; LS.set('invStore', R.store);
+  toast(t(confirmToo ? 'stk_rc_done' : (R.created_by && R.created_by !== (state.me || {}).id ? 'stk_rc_saved' : 'stk_rc_saved_new'), { n: drkNum(r.bottles) }));
+  invGo('stock'); invTodoLoad().then(refreshInvBadge);
+}
+// ---------- v188：送货单防重复（老板 2026-11-16：先挡住，点「不是重复」才入库；数据库 v131） ----------
+// 查这张单是不是已经登记过（编号一样；没编号的看日期 + 合计金额）。只提示，确认入库时数据库再挡一次
+async function stkRcDupCheck(R){
+  if (!R || R.status !== 'open' || !state.token) return;
+  const a = R.doc_no || (R.doc_date && +R.total_cents > 0) ? await soft(rpc('inv_receipt_dups', { ...tok(), p_id: R.id || null, p_data: { store: R.store, supplier: R.supplier || '', doc_no: R.doc_no || '', doc_date: R.doc_date || '', total_cents: R.total_cents } }), null) : [];
+  if (!a || invS().rc !== R) return;
+  const before = stkDupBoxHTML(R); R.dups = a;
+  if (state.tab === 'inv' && invS().view === 'rc' && stkDupBoxHTML(R) !== before){ stkRcKeep(); keepScroll(renderInvRc); }   // 框变了才重画；先存下正在打的字
+}
+function stkDupText(x){ return [t('stk_dup_row', { d: dayLabel(ymd(new Date(x.created_at))), n: x.created_name || '', s: t(x.status === 'done' ? 'stk_st_done' : 'stk_st_open') }),
+  x.doc_no ? t('stk_rc_no', { n: x.doc_no }) : ''].filter(Boolean).join(' · '); }
+function stkDupBoxHTML(R){
+  const dl = R.status === 'open' ? (R.dups || []).filter(x => !x.ok) : []; if (!dl.length) return '';
+  return `<div class="infobox" style="background:#FFF1C9;color:#6B5200">⚠ ${esc(t('stk_dup_warn'))}${dl.map(x => `<div style="margin-top:6px">${storeTag(x.store)} ${esc([x.supplier, stkDupText(x)].filter(Boolean).join(' · '))}
+    ${x.can_open ? `<br><button class="link" data-act="stk-dup-view" data-id="${x.id}" data-inline="1" style="white-space:normal;text-align:left">${esc(t('stk_dup_view'))}</button>` : `<div class="small">${esc(t('stk_dup_noopen'))}</div>`}</div>`).join('')}</div>`;
+}
+// 确认入库被挡：弹窗写清楚是哪一张
+async function stkDupBlock(R){
+  const a = await soft(rpc('inv_receipt_dups', { ...tok(), p_id: R.id, p_data: {} }), null), dl = (a || []).filter(x => !x.ok);
+  if (!dl.length){ toast(t('stk_dup_again'), true); return; }   // 没查到（网络），或者那张刚被作废了：再点一次确认
+  if (invS().rc === R){ R.dups = a; if (state.tab === 'inv' && invS().view === 'rc'){ stkRcKeep(); keepScroll(renderInvRc); } }   // 页面上的黄框也跟着
+  state.dupQ = { R, list: dl, at: Date.now() }; stkDupDlg();
+}
+function stkDupDlg(){
+  const Q = state.dupQ; if (!Q) return; const R = Q.R, dlg = $('#photoDlg');
+  dlg.innerHTML = `<h2 style="margin-top:0;outline:0" tabindex="-1" autofocus>${esc(t('stk_dup_h'))}</h2><div class="small muted" style="margin-bottom:10px">${esc(t('stk_dup_why'))}</div>
+    <div class="list" style="margin-bottom:12px">${Q.list.map(x => `<div class="item"><div>${storeTag(x.store)} <strong>${esc(x.supplier || t('stk_rc_noname'))}</strong> ${stkRcStatus(x)}</div>
+      <div class="meta">${esc(stkDupText(x))}</div>
+      ${x.can_open ? `<button class="btn ghost" data-act="stk-dup-view" data-id="${x.id}" style="margin-top:6px;height:44px">${esc(t('stk_dup_view'))}</button>` : `<div class="small muted">${esc(t('stk_dup_noopen'))}</div>`}</div>`).join('')}</div>
+    <button class="btn ghost" data-act="stk-dup-ok" style="margin-bottom:8px">${esc(t('stk_dup_ok'))}</button>
+    ${R.can_cancel ? `<button class="btn ghost danger" data-act="stk-dup-cancel" style="margin-bottom:8px">${esc(t('stk_dup_cancel'))}</button>` : ''}
+    <button class="link" data-act="stk-dup-close" style="display:block;margin:6px auto 0;min-height:40px">${esc(t('stk_dup_later'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+}
+// 看看那张（在弹窗里看，不离开现在这张单——新登记的还没保存的也不会丢）
+async function stkDupView(id){
+  let r; try { r = await rpc('inv_receipt', { ...tok(), p_id: id }); } catch(e){ toast(errText(e), true); return; }
+  const dlg = $('#photoDlg'), items = (r.lines || []).filter(l => l.kind === 'item');
+  dlg.innerHTML = `<h2 style="margin-top:0;outline:0" tabindex="-1" autofocus>${esc(stkRcTitle(r))} ${stkRcStatus(r)}</h2>
+    <div class="small" style="margin-bottom:4px">${storeTag(r.store)} ${esc([r.doc_date ? dayLabel(r.doc_date) : '', r.doc_no ? t('stk_rc_no', { n: r.doc_no }) : ''].filter(Boolean).join(' · '))}</div>
+    <div class="small muted" style="margin-bottom:8px">${esc(t('stk_rc_by', { n: r.created_name || '', t: fmtDateTime(r.created_at) }))}${r.done_at ? '<br>' + esc(t('stk_rc_done_by', { n: r.done_name || '', t: fmtDateTime(r.done_at) })) : ''}</div>
+    <div class="inv-row" style="flex-wrap:wrap;gap:8px;margin-bottom:8px">${(r.photos || []).map(p => invImg(p.thumb, 'lg')).join('')}</div>
+    <div class="small" style="margin-bottom:4px">${items.map(l => esc(`${invName(l) || l.text || '?'} · ${drkNum(l.qty || 0)}`)).join('<br>')}</div>
+    <div class="small muted" style="margin-bottom:12px">${esc(t('stk_dup_items', { n: items.length, b: drkNum(r.bottles) }))}${r.total_cents != null ? ' · ' + esc(t('stk_rc_total', { c: eur(r.total_cents) })) : ''}</div>
+    ${state.dupQ ? `<button class="btn" data-act="stk-dup-back">${esc(t('stk_dup_back'))}</button>` : `<button class="btn ghost" data-act="stk-dup-close">${esc(t('stk_dup_close'))}</button>`}`;
+  if (!dlg.open) dlg.showModal();
+  invLoadPhotos();
+}
+// 「不是重复，仍然入库」：记下是谁说的，再确认
+async function stkDupOk(btn){
+  const Q = state.dupQ; if (!Q || Date.now() - Q.at < 400) return; const R = Q.R;   // 窗口刚打开：连点的第二下不算
+  if (R.saving) return; R.saving = true; btn.disabled = true;
+  try { await rpc('inv_receipt_dup_ok', { ...tok(), p_id: R.id, p_others: Q.list.map(x => x.id) }); const r = await rpc('inv_receipt_confirm', { ...tok(), p_id: R.id });
+    stkDupClose(); stkRcDone(R, r, true); }
+  catch(e){ R.saving = false; btn.disabled = false;
+    if (String(e && e.message) === 'INV_RC_DUP') return stkDupBlock(R);   // 这时又有人登记了一张一样的：再问一次
+    stkDupClose(); toast(stkErr(e), true); if (invS().rc === R && invS().view === 'rc') keepScroll(renderInvRc); }
+}
+// 「这张是重复的，作废这张」：原因自动写「重复了」
+async function stkDupCancel(btn){
+  const Q = state.dupQ; if (!Q || Date.now() - Q.at < 400) return; const R = Q.R, S = invS();
+  if (!confirm(t('stk_dup_cancel_q'))) return;
+  if (R.saving) return; R.saving = true; btn.disabled = true;
+  try { await rpc('inv_receipt_cancel', { ...tok(), p_id: R.id, p_note: t('undo_r_dup') }); }
+  catch(e){ R.saving = false; btn.disabled = false; toast(errText(e), true); return; }
+  stkDupClose();
+  if (S.rc === R) S.rc = null; S.stock = null; toast(t('stk_rc_cancelled'));
+  if (state.tab === 'inv' && (S.view === 'rc' || S.view === 'stock')) invGo('stock'); invTodoLoad().then(refreshInvBadge);
+}
+function stkDupClose(){ state.dupQ = null; const d = $('#photoDlg'); if (d.open) d.close(); }
 function stkRcCancel(){
   const S = invS(), R = S.rc; if (!R || !R.id) return;
   undoAsk(t(R.status === 'done' ? 'stk_rc_undo_q' : 'stk_rc_cancel_q'), async note => {
@@ -7309,18 +7454,18 @@ function dpGroups(q, hint, list){   // v185：list = 另一份名单（配方编
   const top = dpRecent().map(id => all.find(d => d.id === id)).filter(d => d && !like.includes(d));
   return { like, top, rest: all, n: all.length };
 }
-function dpRowsHTML(act, q, hint, cur, list){
+function dpRowsHTML(act, q, hint, cur, list, like){
   const G = dpGroups(q, hint, list), sub = d => [drkPack(d), list ? drkContent(d) : ''].filter(Boolean).join(' · '), row = d => `<button class="qp-row${d.id === cur ? ' on' : ''}" data-act="${act}" data-id="${d.id}"><span class="qp-n"><strong>${esc(invName(d))}</strong>${sub(d) ? `<small>${esc(sub(d))}</small>` : ''}</span>${d.id === cur ? '<span class="qp-x">✓</span>' : ''}</button>`;
   if (!G.n) return `<div class="empty">${esc(t('stk_no_drinks'))}</div>`;
   if (String(q || '').trim()) return G.rest.length ? G.rest.map(row).join('') : `<div class="empty">${esc(t('qp_no_match', { q: String(q).trim() }))}</div>`;
-  return `${G.like.length ? `<div class="qp-sec">${esc(t(list ? 'dp_like_art' : 'dp_like'))}</div>${G.like.map(row).join('')}` : ''}${G.top.length ? `<div class="qp-sec">${esc(t('dp_recent'))}</div>${G.top.map(row).join('')}` : ''}<div class="qp-sec">${esc(t('dp_all', { n: G.n }))}</div>${G.rest.map(row).join('')}`;
+  return `${G.like.length ? `<div class="qp-sec">${esc(t(like || (list ? 'dp_like_art' : 'dp_like')))}</div>${G.like.map(row).join('')}` : ''}${G.top.length ? `<div class="qp-sec">${esc(t('dp_recent'))}</div>${G.top.map(row).join('')}` : ''}<div class="qp-sec">${esc(t('dp_all', { n: G.n }))}</div>${G.rest.map(row).join('')}`;
 }
 // P = { hint: 送货单上那行字, cur: 现在选的, extra: [[值, 按钮上的字], …], on(值) }；标题先拿到焦点，手机不会一打开就弹出键盘
 function drkPickOpen(P){
   state.dp = Object.assign({ q: '', at: Date.now() }, P); const dlg = $('#photoDlg');
   dlg.innerHTML = `<h2 style="margin-top:0;outline:0" tabindex="-1" autofocus>${esc(t('dp_h'))}</h2>${P.note ? `<div class="small muted">${esc(P.note)}</div>` : P.hint ? `<div class="small muted">${esc(t('stk_l_on_note', { x: P.hint }))}</div>` : ''}
     <input type="search" class="input" id="dp-q" placeholder="${esc(t('qp_q'))}" autocomplete="off" style="margin-top:8px">
-    <div class="dp-list" id="dp-list">${dpRowsHTML('dp-pick', '', P.hint, P.cur, P.list)}</div>
+    <div class="dp-list" id="dp-list">${dpRowsHTML('dp-pick', '', P.hint, P.cur, P.list, P.like)}</div>
     ${(P.extra || []).length ? `<div class="rc-quick" style="margin:0 0 12px">${P.extra.map(x => `<button data-act="dp-pick" data-id="${esc(x[0])}">${esc(x[1])}</button>`).join('')}</div>` : ''}
     <button class="btn ghost" data-act="dp-close">${esc(t('dp_close'))}</button>`;
   if (!dlg.open) dlg.showModal();
@@ -13525,7 +13670,7 @@ document.addEventListener('click', async ev => {
       break; }
     case 'stk-rc-new': stkRcNew(); break;
     case 'stk-rc-open': stkRcOpen(el.dataset.id); break;
-    case 'stk-rc-store': { stkRcKeep(); const R = invS().rc; if (R){ R.store = el.dataset.store; keepScroll(renderInvRc); } break; }
+    case 'stk-rc-store': { stkRcKeep(); const R = invS().rc; if (R){ R.store = el.dataset.store; keepScroll(renderInvRc); stkRcDupCheck(R); } break; }   // v188：换了店重新查重复
     case 'stk-rc-delph': { stkRcKeep(); const R = invS().rc; if (R){ const i = +el.dataset.i, v = R.photos.splice(i, 1)[0]; if (v){ R.undo = { kind: 'photo', i, v, readN: R.readN || 0 }; if (i < (R.readN || 0)) R.readN--; } keepScroll(renderInvRc); if (v) toastAction(t('stk_del_ph'), t('stk_undo'), { act: 'stk-rc-undo' }); } break; }   // v178：可以撤销
     case 'stk-rc-ai': stkRcAi(false); break;
     case 'stk-rc-addline': { stkRcKeep(); const R = invS().rc; if (R){ R.dirty = true; R.lines.push({ kind: 'item', item_id: null, qty_note: '', unit_note: '', per_unit: '', open: true }); keepScroll(renderInvRc); } break; }
@@ -13544,6 +13689,16 @@ document.addEventListener('click', async ev => {
     case 'dp-pick': if (state.dp && Date.now() - state.dp.at < 400) break;   // 窗口刚打开：连点的第二下不算
       drkPickDone(el.dataset.id); break;
     case 'dp-close': { state.dp = null; const d = $('#photoDlg'); if (d.open) d.close(); break; }
+    case 'stk-dup-view': if (el.dataset.inline) state.dupQ = null; stkDupView(el.dataset.id); break;   // v188：好像已经登记过的那张（从页面上的黄框点的：没有「回去」）
+    case 'stk-dup-back': stkDupDlg(); break;
+    case 'stk-dup-ok': stkDupOk(el); break;
+    case 'stk-dup-cancel': stkDupCancel(el); break;
+    case 'stk-dup-close': stkDupClose(); break;
+    case 'ord-si': { const S = invS(); S.osi = { sup: el.dataset.sup, name: el.dataset.name || '', q: '' }; invGo('ordsi'); break; }   // v188：供应商的商品配了哪些饮料
+    case 'ord-si-pick': { const O = invS().osi, x = O && (O.items || []).find(r => r.id === el.dataset.id); if (!x || O.busy) break;
+      drkPickOpen({ list: O.drinks || [], like: 'dp_like_si', hint: x.name, note: t('ord_si_pick_note', { x: x.name }), cur: x.item_id, on: v => ordSiSet(x, v) }); break; }
+    case 'ord-si-off': { const O = invS().osi, x = O && (O.items || []).find(r => r.id === el.dataset.id); if (!x || O.busy) break;
+      if (confirm(t('ord_si_unlink_q', { x: x.name, d: invName(x) || '?' }))) ordSiSet(x, null); break; }
     case 'undo-r': undoPick(el.dataset.r); break;
     case 'undo-other': { const b = document.getElementById('undo-box'), o = document.getElementById('undo-ob'), n = document.getElementById('undo-note'); if (b) b.hidden = false; if (o) o.style.display = 'none'; if (n) n.focus(); break; }
     case 'undo-no': { state.undoQ = null; const d = $('#photoDlg'); if (d.open) d.close(); break; }
@@ -13945,6 +14100,7 @@ document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target
 document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.ordq){ ordSaveQty(ev.target); return; }   // v169：订货单的数量、目标库存、供应商商品配饮料
   if (ev.target.dataset && ev.target.dataset.otg){ ordSaveTarget(ev.target); return; }
+  if (ev.target.id === 'stk-rc-supplier' || ev.target.id === 'stk-rc-date'){ const R = invS().rc; if (R && state.tab === 'inv' && invS().view === 'rc'){ stkRcKeep(); stkRcDupCheck(R); } return; }   // v188：改了供应商 / 日期，重新查重复
   if (ev.target.dataset && ev.target.dataset.ordlink){ const id = ev.target.dataset.ordlink, item = ev.target.value; if (!item) return;
     try { await rpc('inv_supplier_item_link', { ...tok(), p_id: id, p_item: item }); } catch(e){ toast(errText(e), true); return; }
     toast(t('ord_linked')); invS().ord = null; await keepScroll(() => viewInvOrders()); return; }
@@ -14096,7 +14252,8 @@ document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'inv-q'){ invS().q = ev.target.value; invMidSync(); invQueue(); }   // v91；v182
   if (id === 'ct-q'){ invS().ctQ = ev.target.value; ctRefresh(); return; }   // v179：盘点页找饮料
-  if (id === 'dp-q'){ const P = state.dp, b = document.getElementById('dp-list'); if (P && b){ P.q = ev.target.value; b.innerHTML = dpRowsHTML('dp-pick', P.q, P.hint, P.cur, P.list); b.scrollTop = 0; } return; }   // v181：选饮料的窗口
+  if (id === 'ord-si-q'){ const O = invS().osi, b = document.getElementById('ord-si-list'); if (O && O.items && b){ O.q = ev.target.value; b.innerHTML = ordSiListHTML(O); } return; }   // v188
+  if (id === 'dp-q'){ const P = state.dp, b = document.getElementById('dp-list'); if (P && b){ P.q = ev.target.value; b.innerHTML = dpRowsHTML('dp-pick', P.q, P.hint, P.cur, P.list, P.like); b.scrollTop = 0; } return; }   // v181：选饮料的窗口
   if (id === 'ls-q'){ const L = invS().ls, b = document.getElementById('ls-list'); if (L && b){ L.q = ev.target.value; b.innerHTML = dpRowsHTML('ls-pick', L.q, '', L.item_id); } return; }   // v181：报损页找饮料
   if (id === 'ls-qty'){ const L = invS().ls, b = document.getElementById('ls-go'); if (L){ L.qty_note = ev.target.value; if (b) b.textContent = lsGoText(L); } return; }
   if (id === 'qp-q'){ qpS().q = ev.target.value; const b = document.getElementById('qp-lists'); if (b) b.innerHTML = qpListsHTML(); return; }   // v175
