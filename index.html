@@ -603,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v190';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v191';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -2839,11 +2839,62 @@ function errText(e){
   return t('err_GENERIC') + (m ? ' [' + m + ']' : '');
 }
 
-async function rpc(fn, args){
-  const t0 = performance.now();
-  const { data, error } = await sb.rpc(fn, args || {});
+// ============ v191：请求排队 + 合并（体检 2026-11-17：下班高峰数据库卡一下时，每台手机一打开就同时发 20 个请求、慢了又重发同样的，卡顿变成一大片超时）============
+// 1. 每台手机同时最多 RPC_MAX 个请求在路上，多的按发出的先后排队；一个请求 RPC_HOLD_MS 还没回来就不再占位置（不取消它）。
+// 2. 只读的请求（数据库里声明为 stable 的函数，名单 RPC_RO）同名同参数还在路上时不再发第二次，等第一个的结果（每个调用的地方各拿一份拷贝）。
+//    名单按数据库 v132 生成：只放 stable 的函数（stable 的函数不能写数据，合并不会少做事）；新加的只读函数不在名单里也没关系，只是不合并。
+//    做事（不在名单里的请求）开始和结束时 rpcQ.w 各加 1：做完一件事以后再要的数据，不会并到做事以前就发出去的那一个上（拿到旧数据）。
+//    路上那一个过了 RPC_HOLD_MS 还没回来（比如手机换网络、请求卡死）：不再让新的来等它，等着的也改成重新要一次。
+const RPC_MAX = 5, RPC_HOLD_MS = 15000;
+const RPC_RO = new Set(('admin_announce_detail admin_announce_list admin_asks admin_audit admin_bon_attempts admin_bon_date_helpers admin_deleted_list admin_expense_overview admin_expense_person admin_expense_staff '
+  + 'admin_feedback_ai admin_feedback_list admin_feedback_screenshot admin_keepers admin_library_detail admin_library_list admin_list_staff admin_lock_checkpoints admin_messages_about admin_onb_detail admin_onb_list '
+  + 'admin_pin_requests admin_report admin_review_list admin_sched_profiles admin_sop_authors admin_sop_pending admin_suggestions admin_task_ai_list admin_task_flows admin_task_leads admin_task_stats admin_tasks_day '
+  + 'admin_tasks_once announce_image area_status area_today area_week_tips bon_extras count_methods day_helpers entry_extras_list envelopes_pending_list expense_mine expense_photo helper_stats inv_area inv_count '
+  + 'inv_drinks inv_home inv_inbox_list inv_inbox_mine inv_item inv_labels inv_misses inv_order_home inv_order_targets inv_pick inv_place inv_qr_find inv_quick_place inv_receipt inv_receipt_dups inv_recipe_hints '
+  + 'inv_stock_home inv_stock_levels inv_supplier_items_list inv_target_hints inv_todo inv_week_list kitchen_hours ksched_pending library_item list_disputes list_login_staff list_rates list_requests '
+  + 'list_staff lock_rounds_open month_archive_state my_announcements my_audits my_bon_status my_hint_acks my_led_tasks my_library my_notices my_receipts my_store_tasks my_task_misses my_task_record my_tasks '
+  + 'my_tip_totals my_week onb_check_mine onb_checklist onb_mine onb_sched_info push_status receipt_image receipts_open recon_day recon_home recon_imports recon_overview recon_report_file sched_bon_helpers '
+  + 'sched_notices sched_pending_changes sched_tip_check sched_week settle_payers settlement sop_gaps sop_item sop_tree task_catalog task_named_list task_roles week_envelopes week_extras week_overview week_receipts').split(' '));
+// 不是 stable、但对这台手机来说只是「看」的请求（顺带记一下最后在线、补记漏做、记搜不到的词）：不合并，也不算「做事」
+const RPC_LOOK = new Set('me my_docs admin_docs admin_misses admin_task_find_ctx inv_search'.split(' '));
+const rpcQ = { n: 0, wait: [], live: new Map(), w: 0 };
+function rpcSlot(){ if (rpcQ.n < RPC_MAX){ rpcQ.n++; return Promise.resolve(); } return new Promise(r => rpcQ.wait.push(r)); }
+function rpcFree(){ const nx = rpcQ.wait.shift(); if (nx) nx(); else rpcQ.n--; }
+const rpcCopy = x => x === null || typeof x !== 'object' ? x : (typeof structuredClone === 'function' ? structuredClone(x) : JSON.parse(JSON.stringify(x)));
+function rpc(fn, args){
+  if (RPC_LOOK.has(fn)) return rpcSend(fn, args);
+  if (!RPC_RO.has(fn)){   // 做事：开始、结束都算一次「数据变了」
+    rpcQ.w++;
+    const p = rpcSend(fn, args), bump = () => { rpcQ.w++; };
+    p.then(bump, bump);
+    return p;
+  }
+  const k = rpcQ.w + '|' + fn + '|' + JSON.stringify(args || {});
+  const e = rpcQ.live.get(k);
+  if (e && Date.now() - e.at < RPC_HOLD_MS){   // 同样的还在路上：等它，拿一份拷贝；等到它满 RPC_HOLD_MS 还没回来就自己重新要
+    let over = false;
+    const a = e.p.then(x => { over = true; return rpcCopy(x); }, er => { over = true; throw er; });
+    const b = new Promise(r => setTimeout(r, Math.max(0, e.at + RPC_HOLD_MS - Date.now()))).then(() => over ? a : rpc(fn, args));
+    return Promise.race([a, b]);
+  }
+  const p = rpcSend(fn, args), at = Date.now();
+  rpcQ.live.set(k, { p, at });
+  const done = () => { const x = rpcQ.live.get(k); if (x && x.p === p) rpcQ.live.delete(k); };
+  p.then(done, done);
+  setTimeout(done, RPC_HOLD_MS);
+  return p;
+}
+async function rpcSend(fn, args){
+  const q0 = performance.now();
+  await rpcSlot();
+  let freed = false; const free = () => { if (!freed){ freed = true; rpcFree(); } };
+  const hold = setTimeout(free, RPC_HOLD_MS);
+  const t0 = performance.now(), wait = Math.round(t0 - q0);
+  let res;
+  try { res = await sb.rpc(fn, args || {}); } finally { clearTimeout(hold); free(); }
+  const { data, error } = res;
   perfAdd({ k: 'r', n: fn, ms: Math.round(performance.now() - t0), ok: !error });   // v96：速度记录
-  UL.r(fn, Math.round(performance.now() - t0), error && error.message);   // v163：操作记录
+  UL.r(fn, Math.round(performance.now() - t0), error && error.message, wait);   // v163：操作记录；v191：排队等了多久
   if (error){
     const code = String(error.message || '').trim();
     if (code === 'AUTH_REQUIRED'){ if (state.viewAs && state.token === state.viewAs.token){ exitView(); throw new Error(code); } logoutLocal(); render(); }
@@ -2862,7 +2913,7 @@ const UL = {
   start(){ this.sid = (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); })); this.seq = 0; this.buf = []; this.t0 = Date.now(); this.page = null; },
   push(e){ if (!state.token || !this.sid) return; if (!this.buf.length) this.t0 = Date.now(); this.buf.push([Date.now() - this.t0, ...e]); if (this.buf.length >= 150) this.flush(); },
   a(act, el){ const d = el && el.dataset, x = d && (d.tab || d.sub || d.l || d.k); this.push(x ? ['a', act, String(x).slice(0, 40)] : ['a', act]); },
-  r(fn, ms, err){ if (fn !== 'ui_log_save') this.push(['r', fn, ms, err ? String(err).slice(0, 60) : null]); },
+  r(fn, ms, err, wait){ if (fn !== 'ui_log_save') this.push(wait >= 100 ? ['r', fn, ms, err ? String(err).slice(0, 60) : null, wait] : ['r', fn, ms, err ? String(err).slice(0, 60) : null]); },   // v191：排队超过 0.1 秒的多记一个「等了几毫秒」
   e(msg){ this.push(['e', String(msg).slice(0, 100)]); },
   p(){ try { const id = fbPage(); if (id !== this.page){ this.page = id; this.push(['p', id]); } } catch(e){} },
   flush(){
@@ -3052,8 +3103,28 @@ function noticeHTML(n){
 function rateFor(d){ return state.rates.find(r => r.valid_from <= d) || null; }
 
 // ============ 今天（v38）============
-async function loadTasks(){
+// v191：任务数据同时只要一份（每次 8–11 个请求）。还在路上时又被叫：
+//   自动刷新（打开「今天」、老板首页、交 Bon 前看收店任务，传 { join: true }）直接等路上这一份；
+//   做完一件事以后的刷新（勾任务、回答、确认……）要拿到这件事以后的数据：等路上这一份完了再要一次，这时候再叫的都等同一次。
+//   路上那一份开始以后这台手机做过事（rpcQ.w 变了）：自动刷新也不等它，照「做完事以后」排在后面再要一次。
+//   路上那一份过了 RPC_HOLD_MS 还没回来：不再等它，马上重新要（等着的人最多等到那时候）。
+//   要的时候是谁（state.token），回来时换了人（退出、换人登录、老板开始 / 结束查看）就不写进来。
+const TL = { run: null, next: null, at: 0, w: 0 };
+const tlLeft = () => Math.max(0, TL.at + RPC_HOLD_MS - Date.now());
+function loadTasks(o){
+  if (TL.run && !tlLeft()){ TL.run = null; TL.next = null; }   // 卡住了：当它不在
+  if (TL.run && o && o.join && TL.w === rpcQ.w) return Promise.race([TL.run, new Promise(r => setTimeout(r, tlLeft()))]);
+  if (!TL.run) return tlStart();
+  if (!TL.next){
+    const nx = Promise.race([TL.run.then(() => {}, () => {}), new Promise(r => setTimeout(r, tlLeft()))]).then(() => { if (TL.next === nx) TL.next = null; if (TL.run && tlLeft()) return loadTasks(); return tlStart(); });
+    TL.next = nx;
+  }
+  return TL.next;
+}
+function tlStart(){ TL.at = Date.now(); TL.w = rpcQ.w; const p = loadTasks0(); TL.run = p; const end = () => { if (TL.run === p) TL.run = null; }; p.then(end, end); return p; }
+async function loadTasks0(){
   if (!state.me || state.me.is_kitchen){ state.tasks = null; state.closing = null; return; }
+  const who = state.token;
   const NO = Symbol();
   const [tk, cl, lb, ld, ob, oc, nm, cat, ms, au, dc] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
     state.me.is_admin ? null : soft(rpc('my_library', tok()), null),   // v79：资料（要确认的放进「今天」）
@@ -3064,6 +3135,7 @@ async function loadTasks(){
     nmLeadOnly() ? soft(rpc('task_catalog', tok()), null) : null,   // v119：负责人区域每天的任务、能建什么
     soft(rpc('my_task_misses', tok()), null), soft(rpc('my_audits', tok()), null),
     state.me.is_admin ? null : soft(rpc('my_docs', tok()), null)]);   // v156：证件   // v149：漏做 / 不实确认的红卡、派给我的抽查
+  if (state.token !== who || !state.me) return;   // v191：等的时候换了人：不写进来
   if (tk === NO) state.tasks = null; else { state.tasks = tk; state.tasksAt = Date.now(); }
   state.closing = cl || []; state.lib = lb; state.led = ld; state.onb = ob || []; state.onbChkMine = oc;
   state.misses = ms || []; state.audits = au || [];   // v149
@@ -3193,7 +3265,7 @@ async function viewToday(){
   if (shown) renderToday(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
   const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named]);
   const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // 刚启动时已经要过
-  const [, env, , at] = await Promise.all([fresh ? null : loadTasks(),
+  const [, env, , at] = await Promise.all([fresh ? null : loadTasks({ join: true }),   // v191：路上有一份就等它
     state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo(),
     isSup() ? soft(rpc('area_today', { ...tok(), p_day: state.areaDay || bizToday() }), null) : null,   // v83：区域主管的总览
     isSup() || invIsKeeper() ? invTodoLoad() : null]);   // v94：物品待办；v143：库管
@@ -4189,7 +4261,7 @@ async function viewReconHome(){
   let o, S, H;
   try {
     const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // v102：刚启动时已经要过，不再要一次
-    [H, , , state.areaStatus, state.disputesOpen] = await Promise.all([Promise.all([reconHome(state.reconDay), loadBonAtt(), loadAiRev()]).then(x => x[0]), fresh ? null : loadTasks(), loadWeekTodo(),
+    [H, , , state.areaStatus, state.disputesOpen] = await Promise.all([Promise.all([reconHome(state.reconDay), loadBonAtt(), loadAiRev()]).then(x => x[0]), fresh ? null : loadTasks({ join: true }) /* v191 */, loadWeekTodo(),
       soft(rpc('area_status', tok()), null), soft(rpc('list_disputes', { ...tok(), p_status: 'open' }), []),
       soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null).then(x => { if (x) state.envPendAll = x; }),
       soft(rpc('recon_imports', { ...tok(), p_from: addDays(bizToday(), -8) }), null).then(x => { state.repImp = x; }),
@@ -8147,7 +8219,13 @@ function loginNames(){
     return g.length ? `<h2 class="grp">${esc(t('grp_' + k))}</h2>` + btns(g) : '';
   }).join('') + (list.some(s => isKRole(role(s))) ? `<h2 class="grp">${esc(t('grp_kstaff'))}</h2>` + btns(list.filter(s => isKRole(role(s)))) : '');
 }
+// v191：连按两次（回车 + 点按钮）只登录一次；登录和第一次要数据都完了才能再按
 async function doLogin(){
+  if (state.loginBusy) return;
+  state.loginBusy = true;
+  try { await doLogin0(); } finally { state.loginBusy = false; }
+}
+async function doLogin0(){
   const pin = $('#pin').value.trim(), own = !!($('#own') && $('#own').checked);
   const r = await rpc('login', { p_staff_id: state.loginPick.id, p_pin: pin }).catch(e => ({ ok:false, error: e.message }));
   if (!r || !r.ok){ state.loginInfo = ''; state.loginErr = errText({ message: r && r.error }); renderLogin(); return; }
@@ -8887,7 +8965,7 @@ async function submitBon(){
   const short = card - (w - schluss) > 0;
   if (short && !b.ack) return toast(t('shortage_msg', { n: eur(card - (w - schluss)) }), true);
   if (bonPx() && !b.pxPick) return toast(t('px_need_pick'), true);   // v92
-  if (!bonPxActive() && !(state.tasksAt && Date.now() - state.tasksAt < 30000)) await soft(loadTasks(), null);   // v171：同事可能刚做完收店任务
+  if (!bonPxActive() && !(state.tasksAt && Date.now() - state.tasksAt < 30000)) await soft(loadTasks({ join: true }), null);   // v171：同事可能刚做完收店任务；v191：路上有一份就等它
   const ek = bonPxActive() ? [] : ekLeft(), cl = bonPxActive() ? [] : clLeft();   // v152：每个服务员下班前还没做完 → 问一句（不挡）；v171：普通收店任务也问
   if ((ek.length || cl.length) && !confirm(t('bon_left_q', { x: ek.map(c => '· ' + toName(c) + t('bon_left_each')).concat(cl.map(c => '· ' + toName(c) + t('bon_left_one'))).join('\n') }))) return;
   const btn = document.querySelector('[data-act="bon-submit"]'); if (btn) btn.disabled = true;
