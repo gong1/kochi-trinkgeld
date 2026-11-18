@@ -603,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v193';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v194';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -903,6 +903,7 @@ zh: {
   ta_aud_title:'抽查：{n}', ta_aud_who:'{p} {t} 确认做了 · {s} · {d}', ta_aud_items:'要看的：{x}', ta_aud_photo:'📷 拍照（属实、不属实都要拍）',
   ta_aud_ok:'属实：做了', ta_aud_false:'不属实：没做', ta_aud_unclear:'看不出来', ta_aud_note:'写一句（不属实必须写：哪里没做）',
   ta_aud_false_q:'确定不属实？{p} 会收到通知，接下来 14 天所有任务都要拍照。', ta_aud_saved:'抽查已记下', ta_aud_btn:'🔍 抽查', ta_aud_uploading:'正在上传照片…',
+  cd_more:'📝 我的行为记录', cd_page_more:'📝 行为记录', admin_conduct:'行为记录', cd_title:'行为记录', cd_mine_title:'我的行为记录', cd_mine_hint:'主管或老板看到你违反《工作守则》时会在这里记一条。每一条都要点「知道了」，也可以写一句说明。记错了的老板会撤销，撤销的不算数、也不再显示。', cd_mine_none:'没有记录，继续保持！', cd_card_t:'📝 行为记录 · {d} · {s}', cd_by:'{b} 记的', cd_reply_ph:'想说明的可以写在这里（可以不写）', cd_ack:'知道了', cd_acked:'已确认 {t}', cd_open:'还没点「知道了」', cd_reply:'说明：{x}', cd_voided:'已撤销（{b}：{x}），不算数', cd_new:'＋ 记一条', cd_new_hint:'看到有人违反《工作守则》时记下来：写清楚时间和看到了什么。员工下次打开 App 会看到，要点「知道了」。', cd_who:'谁', cd_pick:'请选择', cd_store:'哪家店', cd_day:'哪天（最近 7 天）', cd_rule:'违反了哪一条', cd_note:'看到了什么', cd_note_ph:'例如：19:30 店里有客人，在吧台和同事聊了 10 分钟', cd_save:'记下来', cd_saved:'记下了。{n} 下次打开 App 会看到，要点「知道了」。', cd_need:'请选人、店、哪一条，并写清楚看到了什么。', cd_list_h:'最近 30 天', cd_filter_all:'所有人', cd_none:'最近 30 天没有记录。', cd_void:'撤销', cd_void_q:'为什么撤销这一条？（撤销后员工看不到，也不算数）', cd_void_done:'已撤销。', cd_rules_h:'规矩清单（{n} 条在用）', cd_rules_hint:'记录时从这几条里选。完整的《工作守则》放在资料库，改了这里的规矩，记得也改那份文档。停用的规矩不能再选，以前的记录不变。', cd_rule_zh:'中文', cd_rule_de:'德文', cd_rule_add:'＋ 加一条规矩', cd_rule_off:'停用', cd_rule_on:'启用', cd_rule_offtag:'停用了', cd_rule_saved:'规矩已保存。', cd_count:'📝 本月 {n} 条', cd_count_open:'{n} 条没确认', cd_staff_btn:'📝 行为记录', cd_nobody:'你现在不能给任何人记（只有老板和这个区域、这家店的主管能记）。', cd_view_only:'查看模式：只能看，不能记。',
   ta_rec_more:'📊 我的任务记录', ta_rec_title:'我的任务记录', ta_rec_period:'{a} – {b}（今天还没过完，不算）', ta_rec_rate:'完成率 {p}%',
   ta_rec_line:'轮到 {a} 次 · 自己做完 {b} · 别人做了 {c} · 其中补做 {d}', ta_rec_miss:'漏做 {a} 次（只有你负责 {b}，和别人一起 {c}）', ta_rec_ack:'漏做提醒 {a} 条，点了「知道了」{b} 条',
   ta_rec_ai:'照片被 AI 指出问题 {a} 次，提交后确认有问题 {b} 次', ta_rec_audit:'被抽查：属实 {a} 次，不属实 {b} 次', ta_rec_help:'帮别人做 {a} 次',
@@ -1649,6 +1650,7 @@ de: {
   ta_aud_title:'Stichprobe: {n}', ta_aud_who:'{p} hat um {t} bestätigt · {s} · {d}', ta_aud_items:'Zu prüfen: {x}', ta_aud_photo:'📷 Foto (bei „stimmt“ und „stimmt nicht“ nötig)',
   ta_aud_ok:'Stimmt: erledigt', ta_aud_false:'Stimmt nicht: nicht erledigt', ta_aud_unclear:'Nicht erkennbar', ta_aud_note:'Notiz (bei „stimmt nicht“ Pflicht: was fehlt)',
   ta_aud_false_q:'Wirklich „stimmt nicht“? {p} wird benachrichtigt und muss 14 Tage lang bei allen Aufgaben ein Foto machen.', ta_aud_saved:'Stichprobe gespeichert', ta_aud_btn:'🔍 Prüfen', ta_aud_uploading:'Foto wird hochgeladen …',
+  cd_more:'📝 Mein Verhaltens-Protokoll', cd_page_more:'📝 Verhaltens-Protokoll', admin_conduct:'Verhalten', cd_title:'Verhaltens-Protokoll', cd_mine_title:'Mein Verhaltens-Protokoll', cd_mine_hint:'Wenn die Schichtleitung oder der Chef sieht, dass du gegen die Arbeitsregeln verstößt, wird das hier notiert. Bitte jeden Eintrag mit „Verstanden“ bestätigen; du kannst auch kurz etwas dazu schreiben. Falsche Einträge nimmt der Chef zurück – sie zählen dann nicht und werden nicht mehr angezeigt.', cd_mine_none:'Keine Einträge – weiter so!', cd_card_t:'📝 Verhaltens-Eintrag · {d} · {s}', cd_by:'Notiert von {b}', cd_reply_ph:'Möchtest du etwas dazu sagen? (freiwillig)', cd_ack:'Verstanden', cd_acked:'Bestätigt {t}', cd_open:'Noch nicht bestätigt', cd_reply:'Erklärung: {x}', cd_voided:'Zurückgenommen ({b}: {x}) – zählt nicht', cd_new:'＋ Neuer Eintrag', cd_new_hint:'Wenn jemand gegen die Arbeitsregeln verstößt: notieren, mit Uhrzeit und was genau passiert ist. Die Person sieht es beim nächsten Öffnen der App und muss es bestätigen.', cd_who:'Wer', cd_pick:'Bitte wählen', cd_store:'Filiale', cd_day:'Tag (letzte 7 Tage)', cd_rule:'Welche Regel', cd_note:'Was ist passiert', cd_note_ph:'z. B. 19:30, Gäste im Laden, 10 Minuten an der Bar mit Kollegen geplaudert', cd_save:'Speichern', cd_saved:'Gespeichert. {n} sieht es beim nächsten Öffnen der App und muss es bestätigen.', cd_need:'Bitte Person, Filiale und Regel wählen und beschreiben, was passiert ist.', cd_list_h:'Letzte 30 Tage', cd_filter_all:'Alle', cd_none:'Keine Einträge in den letzten 30 Tagen.', cd_void:'Zurücknehmen', cd_void_q:'Warum zurücknehmen? (Danach sieht die Person den Eintrag nicht mehr und er zählt nicht.)', cd_void_done:'Zurückgenommen.', cd_rules_h:'Regeln ({n} aktiv)', cd_rules_hint:'Beim Notieren wird eine dieser Regeln gewählt. Die vollständigen Arbeitsregeln stehen in den Unterlagen – bei Änderungen bitte dort auch anpassen. Deaktivierte Regeln sind nicht mehr wählbar, alte Einträge bleiben.', cd_rule_zh:'Chinesisch', cd_rule_de:'Deutsch', cd_rule_add:'＋ Regel hinzufügen', cd_rule_off:'Deaktivieren', cd_rule_on:'Aktivieren', cd_rule_offtag:'deaktiviert', cd_rule_saved:'Regel gespeichert.', cd_count:'📝 {n} diesen Monat', cd_count_open:'{n} unbestätigt', cd_staff_btn:'📝 Verhalten', cd_nobody:'Du kannst gerade niemanden notieren (nur der Chef und die Bereichsleitung dieser Filiale).', cd_view_only:'Ansichtsmodus: nur ansehen, nicht notieren.',
   ta_rec_more:'📊 Mein Aufgaben-Protokoll', ta_rec_title:'Mein Aufgaben-Protokoll', ta_rec_period:'{a} – {b} (heute zählt noch nicht)', ta_rec_rate:'Erledigt: {p} %',
   ta_rec_line:'{a}× zuständig · selbst erledigt {b} · von anderen {c} · davon nachgeholt {d}', ta_rec_miss:'Nicht erledigt: {a}× (nur du {b}, gemeinsam {c})', ta_rec_ack:'Hinweise: {a}, davon „Verstanden“ {b}',
   ta_rec_ai:'KI-Hinweise zu Fotos: {a}, vom Chef bestätigt: {b}', ta_rec_audit:'Stichproben: stimmt {a}×, stimmt nicht {b}×', ta_rec_help:'Für andere erledigt: {a}×',
@@ -2124,7 +2126,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=28'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=29'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2453,6 +2455,16 @@ const ERR_ZH = {
   TASK_PHOTO_REQUIRED: '今天这个任务要拍照，不能只打勾。请拍照。',
   TASK_DAY_CLOSED: '这一天已经过了，不能再补做。',
   HINT_CODE: '提示代码不对，请刷新页面再试。',
+  CONDUCT_STORE: '请选哪家店。',
+  CONDUCT_DAY: '日期只能是今天或最近 7 天，不能是以后。请改日期再记。',
+  CONDUCT_RULE: '这条规矩已经停用了。请刷新页面，选别的规矩。',
+  CONDUCT_NOTE: '请写清楚看到了什么（2 到 500 个字）。',
+  CONDUCT_REPLY: '说明太长了，最多 300 个字。请改短再点「知道了」。',
+  CONDUCT_REPLIED: '这一条你已经写过说明了，只能写一次。还有话请直接找主管或老板。',
+  CONDUCT_RANGE: '时间范围不对（最多一年）。请刷新页面再试。',
+  CONDUCT_VOID_REASON: '请写撤销的原因（2 到 200 个字）。',
+  CONDUCT_VOIDED: '这一条已经撤销过了。请刷新页面。',
+  CONDUCT_RULE_TEXT: '规矩的中文和德文都要写（2 到 200 个字）。',
   TASK_AI_DONE: '这张照片已经确认过了。回到「今天」重新打开就能看到最新的。',
   SUGGEST_DONE: '这条建议已经上线了，不能再改决定。要撤回请在对话里告诉 Claude。',   // v163
   INVALID_STATUS: '只能选「采纳」「不做」或「重新考虑」。请刷新页面再试。',
@@ -2729,6 +2741,16 @@ const ERR_DE = {
   TASK_PHOTO_REQUIRED: 'Heute ist ein Foto nötig, Abhaken reicht nicht. Bitte fotografieren.',
   TASK_DAY_CLOSED: 'Dieser Tag ist vorbei, nachholen geht nicht mehr.',
   HINT_CODE: 'Ungültiger Hinweis-Code. Bitte Seite neu laden und nochmal versuchen.',
+  CONDUCT_STORE: 'Bitte Filiale wählen.',
+  CONDUCT_DAY: 'Datum nur heute oder in den letzten 7 Tagen, nicht in der Zukunft. Bitte Datum ändern.',
+  CONDUCT_RULE: 'Diese Regel ist deaktiviert. Bitte Seite neu laden und eine andere wählen.',
+  CONDUCT_NOTE: 'Bitte beschreiben, was passiert ist (2 bis 500 Zeichen).',
+  CONDUCT_REPLY: 'Die Erklärung ist zu lang (höchstens 300 Zeichen). Bitte kürzen und nochmal „Verstanden“ tippen.',
+  CONDUCT_REPLIED: 'Zu diesem Eintrag hast du schon etwas geschrieben (nur einmal möglich). Bitte sprich sonst direkt mit der Schichtleitung oder dem Chef.',
+  CONDUCT_RANGE: 'Ungültiger Zeitraum (höchstens ein Jahr). Bitte Seite neu laden.',
+  CONDUCT_VOID_REASON: 'Bitte einen Grund für die Rücknahme angeben (2 bis 200 Zeichen).',
+  CONDUCT_VOIDED: 'Dieser Eintrag wurde schon zurückgenommen. Bitte Seite neu laden.',
+  CONDUCT_RULE_TEXT: 'Die Regel bitte auf Chinesisch und Deutsch eintragen (2 bis 200 Zeichen).',
   TASK_AI_DONE: 'Dieses Foto wurde schon geprüft. Bitte „Heute“ neu öffnen, dann siehst du den aktuellen Stand.',
   SUGGEST_DONE: 'Dieser Vorschlag ist schon umgesetzt, die Entscheidung lässt sich nicht mehr ändern. Zum Zurücknehmen bitte Claude im Gespräch sagen.',   // v163
   INVALID_STATUS: 'Nur „Annehmen“, „Nicht machen“ oder „Neu überlegen“ sind möglich. Bitte Seite neu laden.',
@@ -2855,7 +2877,7 @@ const RPC_MAX = 5, RPC_HOLD_MS = 15000;
 const RPC_RO = new Set(('admin_announce_detail admin_announce_list admin_asks admin_audit admin_bon_attempts admin_bon_date_helpers admin_deleted_list admin_expense_overview admin_expense_person admin_expense_staff '
   + 'admin_feedback_ai admin_feedback_list admin_feedback_screenshot admin_keepers admin_library_detail admin_library_list admin_list_staff admin_lock_checkpoints admin_messages_about admin_onb_detail admin_onb_list '
   + 'admin_pin_requests admin_report admin_review_list admin_sched_profiles admin_sop_authors admin_sop_pending admin_suggestions admin_task_ai_list admin_task_flows admin_task_leads admin_task_stats admin_tasks_day '
-  + 'admin_tasks_once announce_image area_status area_today area_week_tips bon_extras count_methods day_helpers entry_extras_list envelopes_pending_list expense_mine expense_photo helper_stats inv_area inv_count '
+  + 'admin_tasks_once admin_conduct_counts conduct_list conduct_my conduct_people conduct_rules_list announce_image area_status area_today area_week_tips bon_extras count_methods day_helpers entry_extras_list envelopes_pending_list expense_mine expense_photo helper_stats inv_area inv_count '
   + 'inv_drinks inv_home inv_inbox_list inv_inbox_mine inv_item inv_labels inv_misses inv_order_home inv_order_targets inv_pick inv_place inv_qr_find inv_quick_place inv_receipt inv_receipt_dups inv_recipe_hints '
   + 'inv_stock_home inv_stock_levels inv_supplier_items_list inv_target_hints inv_todo inv_week_list kitchen_hours ksched_pending library_item list_disputes list_login_staff list_rates list_requests '
   + 'list_staff lock_rounds_open month_archive_state my_announcements my_audits my_bon_status my_hint_acks my_led_tasks my_library my_notices my_receipts my_store_tasks my_task_misses my_task_record my_tasks '
@@ -3132,7 +3154,7 @@ async function loadTasks0(){
   if (!state.me || state.me.is_kitchen){ state.tasks = null; state.closing = null; return; }
   const who = state.token;
   const NO = Symbol();
-  const [tk, cl, lb, ld, ob, oc, nm, cat, ms, au, dc] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
+  const [tk, cl, lb, ld, ob, oc, nm, cat, ms, au, dc, cdm] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
     state.me.is_admin ? null : soft(rpc('my_library', tok()), null),   // v79：资料（要确认的放进「今天」）
     (state.me.leads || []).length && !state.me.is_admin ? soft(rpc('my_led_tasks', tok()), null) : null,   // v95：我负责的任务
     state.me.is_admin ? null : soft(rpc('onb_mine', tok()), null),   // v107：新人带教（新同事的自评、带教人的评价）
@@ -3140,12 +3162,14 @@ async function loadTasks0(){
     nmLeadOnly() ? soft(rpc('task_named_list', tok()), null) : null,   // v118：负责人交代的事
     nmLeadOnly() ? soft(rpc('task_catalog', tok()), null) : null,   // v119：负责人区域每天的任务、能建什么
     soft(rpc('my_task_misses', tok()), null), soft(rpc('my_audits', tok()), null),
-    state.me.is_admin ? null : soft(rpc('my_docs', tok()), null)]);   // v156：证件   // v149：漏做 / 不实确认的红卡、派给我的抽查
+    state.me.is_admin ? null : soft(rpc('my_docs', tok()), null),   // v156：证件   // v149：漏做 / 不实确认的红卡、派给我的抽查
+    state.me.is_admin ? null : soft(rpc('conduct_my', tok()), null)]);   // v194：行为记录（没点「知道了」的放「今天」红卡）
   if (state.token !== who || !state.me) return;   // v191：等的时候换了人：不写进来
   if (tk === NO) state.tasks = null; else { state.tasks = tk; state.tasksAt = Date.now(); }
   state.closing = cl || []; state.lib = lb; state.led = ld; state.onb = ob || []; state.onbChkMine = oc;
   state.misses = ms || []; state.audits = au || [];   // v149
   state.myDocs = dc;   // v156
+  if (cdm) state.cdMine = cdm;   // v194：出错时留着上次的
   if (nmLeadOnly()){ state.named = nm; state.tfCat = cat; }
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
@@ -3269,7 +3293,7 @@ async function viewToday(){
   // v68：有上次的内容就先显示，同时向服务器要新的（一起要，不再一个接一个）；内容变了再重画
   const shown = !!state.tasks;
   if (shown) renderToday(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
-  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named]);
+  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named, state.cdMine]);   // v194：新的行为记录也要重画
   const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // 刚启动时已经要过
   const [, env, , at] = await Promise.all([fresh ? null : loadTasks({ join: true }),   // v191：路上有一份就等它
     state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo(),
@@ -3278,7 +3302,7 @@ async function viewToday(){
   state.envPend = env || null; state.areaToday = at || null;
   if (state.tab !== 'today' || state.recon || !state.me) return;   // 等的时候已经切到别的页
   if (state.onbOpen) return;   // v107：等的时候打开了填写页
-  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named]) !== before) renderToday();
+  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named, state.cdMine]) !== before) renderToday();
   refreshTodayBadge();
 }
 // 待处理的疑问（周结页；v89 起老板的「今天」也显示，老板 2026-10-15）：「处理」写怎么处理的
@@ -3370,7 +3394,7 @@ function renderToday(){
   const tm = tmTodoCards(), msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message' && !isCl(x));
   const nOther = rest.filter(x => x.status !== 'later').length + tm.length, hasList = !!(cl.length || upCl.length);
   const doneO = done.filter(x => !isCl(x));
-  $('#main').innerHTML = missCardsHTML() + audCardsHTML() + invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
+  $('#main').innerHTML = cdCardsHTML() + missCardsHTML() + audCardsHTML() + invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
     + msgs.map(taskCardHTML).join('') + tdlHTML(cl, upCl) + ocMineHTML()
     + (rest.length || tm.length ? `<h3>${esc(nOther ? t(hasList ? 'td_other' : 'td_mine', { n: nOther }) : t(hasList ? 'td_other0' : 'td_mine_ok'))}</h3>` + tm.join('') + rest.map(taskCardHTML).join('')
       : hasList || msgs.length ? '' : `<h3>${esc(t('td_mine_ok'))}</h3><div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
@@ -5448,11 +5472,12 @@ function viewMore(){
   if (state.sop) return viewSop();   // v111：SOP
   if (state.taskPage) return viewTaskPage();   // v130：任务
   if (state.taRec) return viewTaRec();   // v149：我的任务记录
+  if (state.cdPage) return viewCdPage();   // v194：行为记录
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
   $('#main').innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0 12px"><h2 style="margin:0">${esc(t('more_title'))}</h2>${langBtn('btn ghost sm')}</div><div class="more">
     ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
-    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${!state.me.is_admin && state.myDocs && state.myDocs.started ? b('more-docs', t('doc_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${''}${b('logout', t('logout'))}</div>`;
+    ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${!state.me.is_admin && state.myDocs && state.myDocs.started ? b('more-docs', t('doc_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('cd-mine', t('cd_more'))}${!state.me.is_admin && cdCanRecord() ? b('cd-rec', t('cd_page_more')) : ''}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${b('pin-open', t('change_pin'))}${''}${b('logout', t('logout'))}</div>`;
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
@@ -8247,7 +8272,7 @@ async function doLogin0(){
   state.token = r.token; state.me = r.me; authStore().set('token', r.token); authStore().set('me', r.me);
   UL.start();   // v163：操作记录从登录开始
   state.loginErr = ''; state.loginInfo = ''; state.loginPick = null; state.loginAdmin = false; state.form = blankForm(); state.tab = tabs()[0];
-  state.areaDay = null; state.hintAcks = undefined; state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
+  state.areaDay = null; state.hintAcks = undefined; state.cdPage = null; state.cdRec = null; state.cdMine = null; state.cdDraft = null; state.adminSub = 'requests'; state.staffEdit = null; state.week = mondayOf(today()); state.done = null; state.bon = blankBon(); state.planWeek = addDays(mondayOf(today()), 7); state.planSub = 'edit'; state.planArea = null; state.entryCtx = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.lockOpen = null;   // v70：planArea 也按这个人重新算；v71：任务页
   if (!r.me.must_change_pin){
     splash();   // v68
     // v102：me、启动数据、老板的上周检查一起要（以前一个等一个）；登录返回的 me 没有区域主管 / 负责人，是主管的话按新的再要一次
@@ -10043,7 +10068,7 @@ function admMoreHTML(){
 async function viewAdmin(){
   const subs = ['requests', 'feedback', 'ai', 'notice', 'library', 'sop', 'tasks', 'staff', 'archive'].concat(ADMIN_MORE.includes(state.adminSub) ? [state.adminSub] : []);   // 不常用的在「⋯」菜单（网页 v31）
   // v165（老板 2026-11-10）：新人、证件、垫付收进「员工」：顶部只留「员工」（数字是这四项加起来），进去最上面一排切换
-  const STAFF_GRP = ['staff', 'onb', 'docs', 'expense'], inGrp = STAFF_GRP.includes(state.adminSub);
+  const STAFF_GRP = ['staff', 'onb', 'docs', 'expense', 'conduct'], inGrp = STAFF_GRP.includes(state.adminSub);
   const tag = n => n ? ` <span class="tag pend" style="margin:0 0 0 4px">${n}</span>` : '';
   const segHTML = c => `<div id="aseg"><div class="seg sm" style="margin-bottom:16px">${subs.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s || (s === 'staff' && inGrp) ?'on':''}">${esc(t('admin_'+s))}${tag(s === 'staff' ? STAFF_GRP.reduce((a, k) => a + (c && +c[k] || 0), 0) : c && c[s])}</button>`).join('')}</div>`
     + (inGrp ? `<div class="seg sm" style="margin:-6px 0 16px">${STAFF_GRP.map(s => `<button data-act="admin-sub" data-sub="${s}" class="${state.adminSub===s?'on':''}">${esc(t(s === 'staff' ? 'admin_staff_list' : 'admin_' + s))}${tag(c && c[s])}</button>`).join('')}</div>` : '') + '</div>';
@@ -10100,6 +10125,8 @@ async function viewAdmin(){
       if (state.oilFocus){ const c = document.getElementById('oil-card-' + state.oilFocus); state.oilFocus = null; if (c) c.scrollIntoView({ block: 'start' }); }   // v144
     } else if (state.adminSub === 'sop'){   // v111：SOP
       await viewSop();
+    } else if (state.adminSub === 'conduct'){   // v194：行为记录
+      el().innerHTML = await cdRecLoad();
     } else if (state.adminSub === 'docs'){   // v156：证件
       await cP; if (!state.docAdm) state.docAdm = await rpc('admin_docs', tok()); el().innerHTML = docsAdminHTML(); if (state.docDlg) docDlgDraw();
     } else if (state.adminSub === 'onb'){   // v107：新人带教
@@ -10133,6 +10160,7 @@ async function viewAdmin(){
       try { const pr = await rpc('admin_sched_profiles', tok()) || []; list.forEach(s => { const x = pr.find(y => y.id === s.id); if (x){ s.in_schedule = x.in_schedule; s.skills = x.skills; } }); } catch(e){}   // v21 之前没有
       try { const ids = await rpc('admin_expense_staff', tok()) || []; list.forEach(x => x.can_expense = ids.includes(x.id)); } catch(e){}   // v45 之前没有
       try { const ks = await rpc('admin_keepers', tok()) || []; list.forEach(x => { x.keeps = ks.filter(k => k.staff_id === x.id).map(k => ({ side: k.side, store: k.store })); }); } catch(e){}   // v143：库管
+      const cdc = await soft(rpc('admin_conduct_counts', tok()), {}) || {};   // v194：本月行为记录几条
       state.staffList = list;
       let pm = null; try { pm = await rpc('push_status', tok()) || {}; } catch(e){}   // v27 之前没有
       const pushTag = s => !pm ? '' : pm[s.id] ? `<span class="tag ok">${esc(pm[s.id] > 1 ? t('push_on_n', { n: pm[s.id] }) : t('push_on_tag'))}</span>` : `<span class="tag off">${esc(t('push_off_tag'))}</span>`;
@@ -10149,8 +10177,10 @@ async function viewAdmin(){
           <button class="mv" style="float:right" data-act="staff-move" data-i="${i}" data-dir="1" aria-label="${esc(t('down'))}" ${i===list.length-1?'disabled':''}>↓</button>
           <button class="mv" style="float:right;margin-right:6px" data-act="staff-move" data-i="${i}" data-dir="-1" aria-label="${esc(t('up'))}" ${i===0?'disabled':''}>↑</button>
           <div style="margin:4px 0 0 -6px">${!s.is_active?`<span class="tag off">${esc(t('inactive'))}</span>`:''}${s.is_kitchen?`<span class="tag k">${esc(t('is_kitchen'))}</span>`:`<span class="tag">${esc(t('grp_' + (s.main_role || 'service')))}</span>`}${s.is_tip_manager?`<span class="tag m">${esc(t('is_manager'))}</span>`:''}${s.is_admin?`<span class="tag m">${esc(t('is_admin'))}</span>`:''}${['front', 'kitchen'].map(a => { const ss = (s.areas || []).filter(x => x.area === a).map(x => x.store[0]); return ss.length ? `<span class="tag m">${esc(t('sup_' + a) + ' ' + ss.join('·'))}</span>` : ''; }).join('')}${s.is_scheduler?`<span class="tag m">${esc(t('is_scheduler'))}</span>`:''}${s.is_kitchen_scheduler?`<span class="tag m">${esc(t('is_kitchen_scheduler'))}</span>`:''}${s.must_change_pin?`<span class="tag pend">${esc(t('needs_pin'))}</span>`:''}${pushTag(s)}</div>${(s.ls_ids || []).length ? `<div class="meta">Lightspeed ${(s.ls_ids).map(b => esc(lsText(b)) + (b.confirmed ? '' : ` <span class="tag pend">${esc(t('ls_pending'))}</span>`)).join(' · ')}</div>` : ''}</div></div>
+          ${cdc[s.id] ? `<div class="meta small ${cdc[s.id].open ? 'warnc' : ''}">${esc(t('cd_count', { n: cdc[s.id].month }) + (cdc[s.id].open ? ' · ' + t('cd_count_open', { n: cdc[s.id].open }) : ''))}</div>` : ''}
           <div class="acts"><button class="link" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button>
-          <button class="link" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button></div></div>`).join('')}</div>`
+          <button class="link" data-act="view-as" data-id="${s.id}" data-name="${esc(s.name)}">${esc(t('view_as'))}</button>
+          ${s.is_admin || s.is_kitchen ? '' : `<button class="link" data-act="cd-staff" data-id="${s.id}">${esc(t('cd_staff_btn'))}</button>`}</div></div>`).join('')}</div>`
         + (list.some(s => !s.is_active) ? `<details class="fold"><summary>${esc(t('staff_off_grp', { n: list.filter(s => !s.is_active).length }))}</summary><div class="inner"><div class="list">${list.filter(s => !s.is_active).map(s => `<div class="item">
             <div class="top"><div><strong>${esc(s.name)}</strong> <span class="tag off">${esc(t('inactive'))}</span></div></div>
             <div class="acts"><button class="link" data-act="staff-edit" data-json="${esc(JSON.stringify(s))}">${esc(t('edit'))}</button></div></div>`).join('')}</div></div></details>` : '');
@@ -10967,6 +10997,102 @@ function annAdminHTML(){
     + `<div class="list">${open.map(card).join('') || `<div class="empty">${esc(t(L.length ? 'an_all_acked' : 'an_none'))}</div>`}</div>`
     + (done.length ? `<details class="fold"><summary>${esc(t('an_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(card).join('')}</div></div></details>` : '')
     + askListHTML();   // v147
+}
+// ============ 行为记录（v194，数据库 v136，老板 2026-11-18）============
+// 老板或这家店这个区域的主管记一条（谁、哪天、哪家店、违反《工作守则》哪一条、看到了什么）；员工在「今天」看到红卡，必须点「知道了」，
+// 可以写一句说明（只能写一次）；记错了只有老板能撤销（写原因，记录留着，员工看不到，不算数）。
+// 员工「更多 → 📝 我的行为记录」；主管「更多 → 📝 行为记录」；老板「管理 → 员工 → 行为记录」，员工列表每人本月几条。这一版不打分。
+const cdTitle = (zh, de) => state.lang === 'de' ? enT(de || zh) : (zh || de);
+const cdWhen = iso => iso ? dm(ymd(new Date(iso))) + ' ' + fmtTime(iso) : '';
+const cdCanRecord = () => !!state.me && !state.me.is_kitchen && (state.me.is_admin || isSup());
+function cdAckHTML(n){
+  return state.viewAs ? '' : `<textarea class="input" id="cd-r-${n.id}" rows="2" maxlength="300" style="margin-top:8px" placeholder="${esc(t('cd_reply_ph'))}">${esc((state.cdDraft || {})[n.id] || '')}</textarea>
+    <div class="task-b"><button class="btn" data-act="cd-ack" data-id="${n.id}">${esc(t('cd_ack'))}</button></div>`;
+}
+function cdCardsHTML(){
+  const L = (state.cdMine || []).filter(n => !n.acked_at); if (!L.length) return '';
+  return L.map(n => `<div class="task bad"><div class="task-t">${esc(t('cd_card_t', { d: dayLabel(n.day), s: n.store }))}</div>
+    <div class="task-s"><strong>${esc(cdTitle(n.rule_zh, n.rule_de))}</strong><br>${esc(n.note)}<br><span class="muted">${esc(t('cd_by', { b: n.by_name || '?' }))}</span></div>${cdAckHTML(n)}</div>`).join('');
+}
+function cdItemHTML(n, mine){
+  const st = n.voided_at ? ['negc', t('cd_voided', { b: n.voided_by_name || '?', x: n.void_reason || '' })]
+    : n.acked_at ? ['pos', t('cd_acked', { t: cdWhen(n.acked_at) })] : ['warnc', t('cd_open')];
+  return `<div class="item"><div class="top"><div><strong>${esc((mine ? '' : (n.staff_name || '?') + ' · ') + dayLabel(n.day))}</strong> ${storeTag(n.store)}</div></div>
+    <div style="margin-top:4px">${esc(cdTitle(n.rule_zh, n.rule_de))}</div>
+    <div class="meta">${esc(n.note)}</div>
+    <div class="meta small muted">${esc(t('cd_by', { b: n.by_name || '?' }) + ' · ' + cdWhen(n.created_at))}</div>
+    ${n.reply ? `<div class="meta small">${esc(t('cd_reply', { x: n.reply }))}</div>` : ''}
+    <div class="meta small ${st[0]}">${esc(st[1])}</div>
+    ${mine && !n.acked_at ? cdAckHTML(n) : ''}
+    ${!mine && state.me.is_admin && !state.viewAs && !n.voided_at ? `<div class="acts"><button class="link" data-act="cd-void" data-id="${n.id}">${esc(t('cd_void'))}</button></div>` : ''}</div>`;
+}
+async function viewCdPage(){
+  const back = h => `<button class="link" data-act="cd-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button><h2 style="margin-top:0">${esc(t(h))}</h2>`;
+  if (state.cdPage === 'rec'){ const p = state.cdPage; $('#main').innerHTML = back('cd_title') + `<div class="loading">${esc(t('loading'))}</div>`;
+    const h = await cdRecLoad(); if (state.cdPage !== p || state.tab !== 'more') return; $('#main').innerHTML = back('cd_title') + h; return; }
+  if (!state.cdMine){
+    $('#main').innerHTML = back('cd_mine_title') + `<div class="loading">${esc(t('loading'))}</div>`;
+    try { state.cdMine = await rpc('conduct_my', tok()) || []; } catch(e){ $('#main').innerHTML = back('cd_mine_title') + `<div class="empty">${esc(errText(e))}</div>`; return; }
+    if (state.cdPage !== 'mine' || state.tab !== 'more') return;
+  }
+  const L = state.cdMine;
+  $('#main').innerHTML = back('cd_mine_title') + `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_mine_hint'))}</div>`
+    + (L.length ? `<div class="list">${L.map(n => cdItemHTML(n, true)).join('')}</div>` : `<div class="list"><div class="empty">${esc(t('cd_mine_none'))}</div></div>`);
+}
+// 老板 / 主管的记录页（老板在「管理 → 员工 → 行为记录」，主管在「更多」）：记一条、最近 30 天、老板管规矩清单
+async function cdRecLoad(){
+  let C = state.cdRec;
+  if (!C || !C.loaded){
+    C = state.cdRec = { filter: (C && C.filter) || '', form: (C && C.form) || null, rulesOpen: !!(C && C.rulesOpen) };
+    try {
+      const [pp, rr, ll] = await Promise.all([rpc('conduct_people', tok()), rpc('conduct_rules_list', tok()),
+        rpc('conduct_list', { ...tok(), p_staff: null, p_from: addDays(today(), -30), p_to: today() })]);
+      Object.assign(C, { people: pp || [], rules: rr || [], list: ll || [], loaded: true });
+    } catch(e){ state.cdRec = null; return `<div class="empty">${esc(errText(e))}</div>`; }
+  }
+  return cdRecHTML();
+}
+function cdGrab(){   // 重画以前把输入框里的内容记下来
+  const F = state.cdRec && state.cdRec.form; if (!F) return;   // 规矩清单的输入框在下面一起记
+  const d = $('#cd-day'), n = $('#cd-note'), w = $('#cd-staff'), C = state.cdRec;
+  C.rdraft = C.rdraft || {}; document.querySelectorAll('#cd-rules input[id^="cd-r"]').forEach(i => { C.rdraft[i.id] = i.value; });
+  if (d) F.day = d.value; if (n) F.note = n.value; if (w) F.staff = w.value;
+}
+function cdRecHTML(){
+  const C = state.cdRec, ppl = C.people || [], rules = (C.rules || []).filter(r => r.active);
+  const F = C.form || (C.form = { staff: C.filter || '', store: '', day: today(), rule: '', note: '' });
+  const who = ppl.find(x => x.id === F.staff), stores = who ? who.stores : [];
+  if (who && stores.length === 1) F.store = stores[0];
+  if (F.store && !stores.includes(F.store)) F.store = '';
+  let h = '';
+  if (state.viewAs) h += `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_view_only'))}</div>`;
+  else if (!ppl.length) h += `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_nobody'))}</div>`;
+  else h += `<div class="sheet"><h3 style="margin-top:0">${esc(t('cd_new'))}</h3><div class="small muted" style="margin-bottom:10px">${esc(t('cd_new_hint'))}</div>
+    <div class="field"><label for="cd-staff">${esc(t('cd_who'))}</label><select class="input" id="cd-staff"><option value="">${esc(t('cd_pick'))}</option>${ppl.map(p => `<option value="${p.id}"${p.id === F.staff ? ' selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>
+    ${who ? `<div class="field"><label>${esc(t('cd_store'))}</label><div class="seg sm">${stores.map(x => `<button type="button" data-act="cd-store" data-s="${x}" class="${F.store === x ? 'on' : ''}">${esc(x)}</button>`).join('')}</div></div>` : ''}
+    <div class="field"><label for="cd-day">${esc(t('cd_day'))}</label><input class="input" type="date" id="cd-day" min="${addDays(today(), -7)}" max="${today()}" value="${esc(F.day || today())}"></div>
+    <div class="field"><label>${esc(t('cd_rule'))}</label><div style="display:flex;flex-direction:column;gap:6px">${rules.map(r => `<button type="button" class="btn ${F.rule === r.id ? '' : 'ghost'}" style="text-align:left;height:auto;padding:10px 12px;font-weight:${F.rule === r.id ? 700 : 400}" data-act="cd-rule" data-id="${r.id}">${esc(cdTitle(r.title_zh, r.title_de))}</button>`).join('')}</div></div>
+    <div class="field"><label for="cd-note">${esc(t('cd_note'))}</label><textarea class="input" id="cd-note" rows="3" maxlength="500" placeholder="${esc(t('cd_note_ph'))}">${esc(F.note || '')}</textarea></div>
+    <button class="btn" data-act="cd-save">${esc(t('cd_save'))}</button></div>`;
+  const names = [...new Map((C.list || []).map(n => [n.staff_id, n.staff_name])).entries()];
+  const L = (C.list || []).filter(n => !C.filter || n.staff_id === C.filter);
+  h += `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin:18px 0 8px"><h3 style="margin:0">${esc(t('cd_list_h'))}</h3>
+      <select class="input" id="cd-filter" style="width:auto"><option value="">${esc(t('cd_filter_all'))}</option>${names.concat(C.filter && !names.some(x => x[0] === C.filter) ? [[C.filter, (ppl.find(p => p.id === C.filter) || {}).name || '?']] : [])
+        .map(([id, nm]) => `<option value="${id}"${id === C.filter ? ' selected' : ''}>${esc(nm)}</option>`).join('')}</select></div>`
+    + `<div class="list">${L.map(n => cdItemHTML(n, false)).join('') || `<div class="empty">${esc(t('cd_none'))}</div>`}</div>`;
+  if (state.me.is_admin && !state.viewAs){
+    const all = C.rules || [], inp = (id, k, v) => `<input class="input" id="cd-r${k}-${id}" maxlength="200" value="${esc(((C.rdraft || {})['cd-r' + k + '-' + id] ?? v) || '')}" placeholder="${esc(t('cd_rule_' + k))}" style="margin-bottom:6px">`;
+    h += `<details class="fold" id="cd-rules"${C.rulesOpen ? ' open' : ''}><summary>${esc(t('cd_rules_h', { n: all.filter(r => r.active).length }))}</summary><div class="inner">
+      <div class="small muted" style="margin-bottom:10px">${esc(t('cd_rules_hint'))}</div>
+      <div class="list">${all.map(r => `<div class="item">${r.active ? '' : `<span class="tag off" style="margin:0 0 6px">${esc(t('cd_rule_offtag'))}</span>`}${inp(r.id, 'zh', r.title_zh)}${inp(r.id, 'de', r.title_de)}
+        <div class="acts"><button class="link" data-act="cd-rule-save" data-id="${r.id}">${esc(t('save'))}</button><button class="link" data-act="cd-rule-toggle" data-id="${r.id}">${esc(t(r.active ? 'cd_rule_off' : 'cd_rule_on'))}</button></div></div>`).join('')}
+      <div class="item">${inp('new', 'zh', '')}${inp('new', 'de', '')}<button class="btn ghost" data-act="cd-rule-save" data-id="">${esc(t('cd_rule_add'))}</button></div></div></div></details>`;
+  }
+  return h;
+}
+function cdRedraw(){   // 记录页重画（老板在管理页，主管在「更多」）
+  if (state.tab === 'admin'){ const el = $('#asub'); if (el && state.cdRec && state.cdRec.loaded) keepScroll(() => { el.innerHTML = cdRecHTML(); }); else render(); }
+  else keepScroll(render);
 }
 // ============ 任务考核（v149，数据库 v109，老板 2026-11-07）============
 // 漏做 / 不实确认的红卡（要点「知道了」）、派给我的抽查、抽查窗口（拍照 + 属实 / 不属实 / 看不出来）、我的任务记录、老板首页「昨天漏做」
@@ -11975,7 +12101,7 @@ document.addEventListener('click', async ev => {
       if (el.dataset.tab === 'admin' && state.tab !== 'admin'){ state.adminPick = true; if (!ADMIN_MORE.includes(state.adminSub)) state.adminSub = 'requests'; }   // v61
       if (el.dataset.tab === 'week' && state.tab !== 'week' && (state.me.is_admin || state.me.is_tip_manager)) state.week = weekToOpen(state.weekTodo || await loadWeekTodo());   // v56；v96：有上次的结果就不等（周结页自己会取最新的）
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; state.docPage = false; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.areaDay = null; state.tipStats = false; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; state.docPage = false; state.cdPage = null; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.areaDay = null; state.tipStats = false; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || mondayOf(today()); state.fromTab = true; render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -12272,6 +12398,45 @@ document.addEventListener('click', async ev => {
         $('#photoDlg').close(); state.audDlg = null; toast(t('ta_aud_saved'));
         if (r === 'false') callPush('task_due');   // 推给被查的人和老板
         await loadTasks(); if (state.recon) keepScroll(viewReconDay); else keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'cd-mine': state.tab = 'more'; state.cdPage = 'mine'; state.cdMine = null; state.taRec = null; state.libView = null; state.sop = null; state.taskPage = false; state.docPage = false; render(); window.scrollTo(0, 0); break;   // v194
+    case 'cd-rec': state.tab = 'more'; state.cdPage = 'rec'; state.cdRec = null; state.taRec = null; state.libView = null; state.sop = null; state.taskPage = false; state.docPage = false; render(); window.scrollTo(0, 0); break;   // v194
+    case 'cd-close': state.cdPage = null; render(); window.scrollTo(0, 0); break;
+    case 'cd-staff': state.cdRec = { filter: el.dataset.id }; state.adminSub = 'conduct'; render(); window.scrollTo(0, 0); break;   // v194：员工列表点「📝 行为记录」
+    case 'cd-store': cdGrab(); state.cdRec.form.store = el.dataset.s; cdRedraw(); break;
+    case 'cd-rule': cdGrab(); state.cdRec.form.rule = el.dataset.id; cdRedraw(); break;
+    case 'cd-save': {
+      cdGrab(); const C = state.cdRec, F = C.form;
+      if (!F.staff || !F.store || !F.rule || String(F.note || '').trim().length < 2) return toast(t('cd_need'), true);
+      el.disabled = true;
+      try {
+        const n = await rpc('conduct_note_add', { ...tok(), p_staff: F.staff, p_store: F.store, p_day: F.day || today(), p_rule: F.rule, p_note: F.note.trim() });
+        C.list = [n].concat(C.list || []); C.form = null; toast(t('cd_saved', { n: n.staff_name || '' })); cdRedraw();
+      } catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'cd-ack': {   // v194：员工点「知道了」（可以带一句说明）
+      const id = el.dataset.id, r = $('#cd-r-' + id), v = r ? r.value.trim() : '';
+      state.cdDraft = {}; document.querySelectorAll('textarea[id^="cd-r-"]').forEach(x => { if (x.value.trim()) state.cdDraft[x.id.slice(5)] = x.value; });   // 别的卡片里写了一半的说明留着
+      el.disabled = true;
+      try { state.cdMine = await rpc('conduct_ack', { ...tok(), p_id: id, p_reply: v || null }) || []; delete state.cdDraft[id]; keepScroll(render); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'cd-void': {   // v194：老板撤销
+      const why = prompt(t('cd_void_q')); if (why === null) break; if (why.trim().length < 2) return toast(t('err_CONDUCT_VOID_REASON'), true);
+      try { const n = await rpc('admin_conduct_void', { ...tok(), p_id: el.dataset.id, p_reason: why.trim() }); const C = state.cdRec; C.list = (C.list || []).map(x => x.id === n.id ? n : x); toast(t('cd_void_done')); cdRedraw(); }
+      catch(e){ toast(errText(e), true); }
+      break;
+    }
+    case 'cd-rule-save': case 'cd-rule-toggle': {   // v194：老板管规矩清单
+      const C = state.cdRec, id = el.dataset.id || '', r = (C.rules || []).find(x => x.id === id), k = id || 'new';
+      const zh = act === 'cd-rule-toggle' ? r.title_zh : ($('#cd-rzh-' + k) || {}).value, de = act === 'cd-rule-toggle' ? r.title_de : ($('#cd-rde-' + k) || {}).value;
+      cdGrab(); el.disabled = true;
+      if (C.rdraft){ delete C.rdraft['cd-rzh-' + k]; delete C.rdraft['cd-rde-' + k]; }
+      try { C.rules = await rpc('admin_conduct_rule_save', { ...tok(), p_id: id || null, p_title_zh: (zh || '').trim(), p_title_de: (de || '').trim(), p_active: act === 'cd-rule-toggle' ? !r.active : (r ? r.active : true) }) || []; C.rulesOpen = true; toast(t('cd_rule_saved')); cdRedraw(); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
@@ -13170,7 +13335,8 @@ document.addEventListener('click', async ev => {
       break;
     case 'oil-go': if (storeOk(el.dataset.store) && el.dataset.store !== curStore()){ state.storeSel = { s: el.dataset.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', el.dataset.store); }   // v186：收废油按门店标签显示，先切到那家店
       state.tab = 'admin'; state.adminSub = 'tasks'; state.oilFocus = el.dataset.store; render(); window.scrollTo(0, 0); break;   // v144：打开后滚到这家店的收废油卡片
-    case 'admin-sub': state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; state.onbPlan = null; state.onbForm = null; state.onbNew = false; if (el.dataset.sub === 'sop') state.sop = { view: 'list', q: '' }; render(); break;
+    case 'admin-sub': if (el.dataset.sub === 'conduct' && state.cdRec) state.cdRec.loaded = false;   // v194：每次点进行为记录都重新取
+      state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; state.onbPlan = null; state.onbForm = null; state.onbNew = false; if (el.dataset.sub === 'sop') state.sop = { view: 'list', q: '' }; render(); break;
     case 'admin-more': state.done = null; state.rcWeek = null; state.tab = 'admin'; state.adminSub = el.dataset.sub; state.staffEdit = null; state.menu = false; render(); break;
     case 'aisug-decide': {   // v163：AI 建议：采纳 / 不做 / 重新考虑（可带一句话）
       const id = el.dataset.id, inp = document.getElementById('ais-note-' + id);
@@ -13250,7 +13416,7 @@ document.addEventListener('click', async ev => {
         state.token = r.token; state.me = await rpc('me', tok());
         state.receipts = []; state.rcWeek = null; state.menu = false; state.staffEdit = null;
         state.week = mondayOf(today()); state.planWeek = planWeekDefault(); state.bon = blankBon(); state.form = blankForm();
-        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null; state.tfEdit = null; state.named = null; state.tfCat = null;   // v70；v118：点名任务；v119：和员工本人登录时一样
+        state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null; state.tfEdit = null; state.named = null; state.tfCat = null; state.cdPage = null; state.cdRec = null; state.cdMine = null; state.cdDraft = null;   // v70；v118：点名任务；v119：和员工本人登录时一样
         await loadCommon(); state.tab = navTabs()[0]; render(); window.scrollTo(0, 0);
       } catch(e){ toast(errText(e), true); }
       break;
@@ -14305,6 +14471,8 @@ document.addEventListener('change', async ev => {
     if (cur) try { await availSet(el.dataset.date, el.dataset.slot, cur.status, el.value); } catch(e){ toast(errText(e), true); }
     return;
   }
+  if (ev.target.id === 'cd-staff' && state.cdRec && state.cdRec.form){ cdGrab(); state.cdRec.form.store = ''; cdRedraw(); return; }   // v194
+  if (ev.target.id === 'cd-filter' && state.cdRec){ cdGrab(); state.cdRec.filter = ev.target.value; cdRedraw(); return; }
   if (ev.target.id === 'b-wallet'){
     const b = state.bon, v = ev.target.value.trim();
     if (v !== '' && isNaN(parseEur(v))) return toast(t('bad_amount'), true);
@@ -14351,7 +14519,8 @@ document.addEventListener('change', async ev => {
   }
 });
 // v133：「发放 / 签收还没完成」里打开的周，重画后照样打开（例如选了谁发的钱）
-document.addEventListener('toggle', ev => { const w = ev.target.dataset && ev.target.dataset.rcw; if (w) (state.rcOpen = state.rcOpen || {})[w] = ev.target.open;
+document.addEventListener('toggle', ev => { if (ev.target.id === 'cd-rules' && state.cdRec) state.cdRec.rulesOpen = ev.target.open;   // v194
+  const w = ev.target.dataset && ev.target.dataset.rcw; if (w) (state.rcOpen = state.rcOpen || {})[w] = ev.target.open;
   const ah = ev.target.dataset && ev.target.dataset.aih; if (ah){ const S = invS(); (S.aihOpen = S.aihOpen || {})[ah] = ev.target.open; }   // v180
   const orr = ev.target.dataset && ev.target.dataset.ordrest; if (orr) invS().ordRest = ev.target.open ? orr : null;
   const c = ev.target.dataset && ev.target.dataset.lvc; if (c){ const S = invS(); (S.lvOpen = S.lvOpen || {})[c] = ev.target.open; if (!ev.target.open && S.lvNew === c) S.lvNew = null; }   // v179：盘点结果打开着的，页面刷新后还打开着
@@ -14416,7 +14585,7 @@ async function exitView(){
   try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
-  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.hintAcks = undefined; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null; state.tfEdit = null; state.named = null; state.tfCat = null;   // v70；v118：点名任务；v119
+  state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.hintAcks = undefined; state.cdPage = null; state.cdRec = null; state.cdMine = null; state.cdDraft = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null; state.tfEdit = null; state.named = null; state.tfCat = null; state.cdPage = null; state.cdRec = null; state.cdMine = null; state.cdDraft = null;   // v70；v118：点名任务；v119
   state.inv = null; await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
