@@ -603,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v194';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v195';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -1089,7 +1089,7 @@ zh: {
   tk_adm_wait:'{n}：还没做，这天没人上班（{d}）', tk_adm_per_missed:'{n}：到期没做（{p}）', tk_close_photo_period:'这个任务要拍照',
   tc_rate_week:'近 {b} 周按时做完 {a} 周', tc_rate_month:'近 {b} 个月按时做完 {a} 个月', tc_rate_quarter:'近 {b} 个季度按时做完 {a} 个', tc_rate_year:'近 {b} 年按时做完 {a} 年',
   tc_rate0_per:'还没到第一期的截止日', tc_done_today:'今天做完了 ✓', tc_next:'下次 {d}', tc_people:'指定的人', tc_on_shift:'有班的日子',
-  tf_slot:'哪个班', tf_slot_last:'最后一个班', tf_slot_lunch:'午班', tf_slot_dinner:'晚班', tf_slot_hint_last:'这家店这天最后一个班（有晚班就是晚班）的人做。', tf_slot_hint_lunch:'午班的人做：午班开始后出现，午班下班前 1 小时提醒。那天没有午班就不用做。', tf_slot_hint_dinner:'晚班的人做。那天没有晚班就不用做。',
+  tf_slot:'哪个班', tf_slot_last:'最后一个班', tf_slot_lunch:'午班', tf_slot_dinner:'晚班', tf_slot_hint_last:'这家店这天最后一个班（有晚班就是晚班）的人做。', tf_slot_hint_lunch:'午班的人做：午班开始后出现，午班下班前 1 小时提醒。那天没有午班就不用做。', tf_slot_hint_dinner:'晚班的人做。那天没有晚班就不用做。', tf_slot_hint_both:'午班、晚班各建一条：午班的人做一次，晚班的人再做一次。哪天没有午班，午班那条就不用做。', tf_slot_multi:'（午班、晚班可以一起选）', cd_draft_kept:'上次没记完的内容还在，接着写就行。',
   tk_slot_lunch_closing:'午班下班时', tk_slot_lunch_arrival:'午班到店后', tk_slot_dinner_closing:'晚班下班时', tk_slot_dinner_arrival:'晚班到店后', task_svcrun:'服务员和 Runner 一起负责{r}任务',
   tf_title_new:'新任务', tf_title_edit:'改任务', tf_what:'做什么', tf_who:'谁做', tf_w_person:'某个人', tf_w_role:'按岗位', tf_w_area:'区域里谁在班', tf_area_front:'前场谁在班', tf_area_kitchen:'后厨谁在班', tf_repeat:'多久一次', tf_once:'一次', tf_daily:'每天', tf_when:'什么时候', tf_store:'哪家店', tf_how:'怎么算完成', tf_ph_check:'打勾', tf_ph_photo:'拍照', tf_ph_learn:'拍照（新人先拍，熟了抽查）', tf_ph_always:'每次都拍', tf_more:'中德文（可改）', tf_tag:'店（只当标签，不影响谁做）', tf_need_role:'请选哪个岗位。', tf_need_store:'请选哪家店。', tf_saved:'任务已保存', tf_saved_n:'已建 {n} 个任务（每家店一个）', tf_person_hint:'指定的人那天任何时候都能做，不看排班；过了那天没做算「没做」，第二天还能补做。', tf_person_daily:'只在他有班的日子出现（哪家店都算），那天任何时候都能做；没班那天不算。没做第二天还能补做。', tf_role_hint:'那天这家店排了这个岗位的人做，一人做了就算完；没排这个岗位，就由这个区域上班的人做。', tf_area_hint:'那天这家店这个区域上班的人，谁做都算。', tf_role_hint_daily:'每天由那天这家店排了这个岗位的人做，一人做了就算完（Runner 没排就由服务员做）；那天没排这个岗位就没人负责，看板上标红。', tf_daily_hint:'从今天开始每天都有；没做第二天还能补做。', tf_store_hint:'两家都选 = 每家店各建一个。', tf_store_one:'改的时候只能选一家。', tf_cancel_q:'取消「{n}」（{d}）？', tf_cancelled:'已取消', tb_list:'清单', tc_title:'重复的任务', tc_hint:'每天、每周、每月、每季度、每年的任务，按店和区域；指定某个人的在最下面。可以改、停用（以前的记录都留着）。一次性的任务在「以后 / 前几天」里。', tc_none:'还没有重复的任务。', tc_rate:'近 14 天做完 {a} / {b} 天', tc_rate0:'近 14 天还没轮到', tc_items:'{n} 项', tc_off_grp:'已停用（{n}）', tc_disable:'停用', tc_enable:'重新启用', tc_disable_q:'停用「{n}」？停用后员工不再看到，以前的记录都留着，以后可以重新启用。', tc_disabled:'已停用', tc_enabled:'已重新启用', tc_mine:'我区域重复的任务（{n}）', tc_ai:'AI 看照片',   // v119：任务模块统一第一步
   tk_once_anytime:'全天', tdl_g_named:'今天要做', nm_me:'我自己', nm_search:'搜索名字', nm_day:'哪天', nm_today:'今天', nm_tomorrow:'明天', nm_pick:'选日期', nm_text_ph:'例如：把凳子从 Bismarck 搬到 Flingern', nm_store_none:'不挂店', nm_zh:'中文名', nm_de:'德文名', nm_ai:'AI 写中德文', nm_ai_busy:'AI 正在写…', nm_ai_hint:'不填的话，保存时 AI 自动把上面那句话写成中德文；AI 出错就直接用原句。', nm_save:'保存', nm_saving:'正在保存…', nm_saved_self:'记下了：{d} 你自己做', nm_saved:'已交代给 {n}（{d}）', nm_need_who:'请选谁做。', nm_need_day:'请选哪天。', nm_block:'点名任务', nm_person:'{a} 件 · 做完 {b}', nm_by:'{n} 交代', nm_open:'还没做', nm_missed:'没做', nm_up:'还没到那天', nm_mine_title:'我安排的任务（{n}）', nm_mine_hint:'你安排的一次性任务（给某个人、某个岗位或区域）。做的人在自己的「今天」里看到；做完你在这里看到 ✓ 和照片。', nm_sub_by:'{n} 交代的', nm_done_line:'{n} 做完了', nm_when_hint:'那天任何时候都能做；过了那天还没做算「没做」，第二天还能补做。',   // v118：点名任务
@@ -1836,7 +1836,7 @@ de: {
   tk_adm_wait:'{n}: noch offen, an diesem Tag niemand im Dienst ({d})', tk_adm_per_missed:'{n}: Frist verpasst ({p})', tk_close_photo_period:'Mit Foto',
   tc_rate_week:'Letzte {b} Wochen: {a} pünktlich erledigt', tc_rate_month:'Letzte {b} Monate: {a} pünktlich erledigt', tc_rate_quarter:'Letzte {b} Quartale: {a} pünktlich erledigt', tc_rate_year:'Letzte {b} Jahre: {a} pünktlich erledigt',
   tc_rate0_per:'Erste Frist noch nicht erreicht', tc_done_today:'Heute erledigt ✓', tc_next:'Nächstes Mal {d}', tc_people:'Bestimmte Personen', tc_on_shift:'an Diensttagen',
-  tf_slot:'Welche Schicht', tf_slot_last:'Letzte Schicht', tf_slot_lunch:'Mittag', tf_slot_dinner:'Abend', tf_slot_hint_last:'Die letzte Schicht der Filiale an diesem Tag (abends, wenn es eine Abendschicht gibt).', tf_slot_hint_lunch:'Die Mittagsschicht: erscheint ab Schichtbeginn, Erinnerung 1 Stunde vor Ende der Mittagsschicht. Ohne Mittagsschicht an dem Tag entfällt sie.', tf_slot_hint_dinner:'Die Abendschicht. Ohne Abendschicht an dem Tag entfällt sie.',
+  tf_slot:'Welche Schicht', tf_slot_last:'Letzte Schicht', tf_slot_lunch:'Mittag', tf_slot_dinner:'Abend', tf_slot_hint_last:'Die letzte Schicht der Filiale an diesem Tag (abends, wenn es eine Abendschicht gibt).', tf_slot_hint_lunch:'Die Mittagsschicht: erscheint ab Schichtbeginn, Erinnerung 1 Stunde vor Ende der Mittagsschicht. Ohne Mittagsschicht an dem Tag entfällt sie.', tf_slot_hint_dinner:'Die Abendschicht. Ohne Abendschicht an dem Tag entfällt sie.', tf_slot_hint_both:'Je eine Aufgabe für Mittag und Abend: die Mittagsschicht macht sie, die Abendschicht noch einmal. Ohne Mittagsschicht an dem Tag entfällt die Mittags-Aufgabe.', tf_slot_multi:'(Mittag und Abend zusammen möglich)', cd_draft_kept:'Dein angefangener Eintrag ist noch da – einfach weiterschreiben.',
   tk_slot_lunch_closing:'Ende Mittagsschicht', tk_slot_lunch_arrival:'Beginn Mittagsschicht', tk_slot_dinner_closing:'Ende Abendschicht', tk_slot_dinner_arrival:'Beginn Abendschicht', task_svcrun:'Service und Runner gemeinsam für {r}-Aufgabe',
   tf_title_new:'Neue Aufgabe', tf_title_edit:'Aufgabe ändern', tf_what:'Was', tf_who:'Wer', tf_w_person:'Eine Person', tf_w_role:'Nach Position', tf_w_area:'Wer im Bereich Dienst hat', tf_area_front:'Wer im Service Dienst hat', tf_area_kitchen:'Wer in der Küche Dienst hat', tf_repeat:'Wie oft', tf_once:'Einmal', tf_daily:'Täglich', tf_when:'Wann', tf_store:'Filiale', tf_how:'Erledigt durch', tf_ph_check:'Abhaken', tf_ph_photo:'Foto', tf_ph_learn:'Foto (Neue zuerst, später Stichproben)', tf_ph_always:'Immer Foto', tf_more:'Text DE/ZH (änderbar)', tf_tag:'Filiale (nur als Hinweis, ändert nicht, wer es macht)', tf_need_role:'Bitte eine Position wählen.', tf_need_store:'Bitte eine Filiale wählen.', tf_saved:'Aufgabe gespeichert', tf_saved_n:'{n} Aufgaben angelegt (je Filiale eine)', tf_person_hint:'Die Person kann es den ganzen Tag erledigen, unabhängig vom Dienstplan; nicht erledigt bis Tagesende = „nicht erledigt“, am nächsten Tag noch nachholbar.', tf_person_daily:'Erscheint nur an Tagen, an denen die Person Dienst hat (egal welche Filiale), und kann dann den ganzen Tag erledigt werden; Tage ohne Dienst zählen nicht. Nicht erledigt = am nächsten Tag nachholen.', tf_role_hint:'Wer an dem Tag in dieser Filiale auf dieser Position eingeplant ist; eine Person reicht. Ist die Position nicht besetzt, macht es, wer im Bereich Dienst hat.', tf_area_hint:'Wer an dem Tag in dieser Filiale in diesem Bereich Dienst hat – egal wer.', tf_role_hint_daily:'Jeden Tag macht es, wer in dieser Filiale auf dieser Position eingeplant ist; eine Person reicht (ohne Runner macht es der Service). Ist die Position an dem Tag nicht besetzt, ist niemand zuständig – rot im Überblick.', tf_daily_hint:'Ab heute jeden Tag; nicht erledigt = am nächsten Tag nachholen.', tf_store_hint:'Beide gewählt = je Filiale eine Aufgabe.', tf_store_one:'Beim Ändern nur eine Filiale.', tf_cancel_q:'„{n}“ ({d}) absagen?', tf_cancelled:'Abgesagt', tb_list:'Liste', tc_title:'Wiederkehrende Aufgaben', tc_hint:'Täglich, wöchentlich, monatlich, vierteljährlich, jährlich – nach Filiale und Bereich; Aufgaben für bestimmte Personen ganz unten. Ändern oder deaktivieren (Verlauf bleibt). Einmalige Aufgaben stehen unter „Später / Vorher“.', tc_none:'Noch keine wiederkehrenden Aufgaben.', tc_rate:'Letzte 14 Tage: {a} von {b} Tagen erledigt', tc_rate0:'Letzte 14 Tage noch nicht dran', tc_items:'{n} Punkte', tc_off_grp:'Deaktiviert ({n})', tc_disable:'Deaktivieren', tc_enable:'Wieder aktivieren', tc_disable_q:'„{n}“ deaktivieren? Das Team sieht sie dann nicht mehr; der Verlauf bleibt, später wieder aktivierbar.', tc_disabled:'Deaktiviert', tc_enabled:'Wieder aktiviert', tc_mine:'Wiederkehrende Aufgaben in meinem Bereich ({n})', tc_ai:'KI prüft Foto',   // v119
   tk_once_anytime:'Ganztägig', tdl_g_named:'Heute zu tun', nm_me:'Ich selbst', nm_search:'Name suchen', nm_day:'Wann', nm_today:'Heute', nm_tomorrow:'Morgen', nm_pick:'Datum wählen', nm_text_ph:'z. B. Hocker von Bismarck nach Flingern bringen', nm_store_none:'keine', nm_zh:'Name (Chinesisch)', nm_de:'Name (Deutsch)', nm_ai:'Mit KI auf DE/ZH schreiben', nm_ai_busy:'KI schreibt …', nm_ai_hint:'Leer lassen: Beim Speichern schreibt die KI den Satz oben auf Deutsch und Chinesisch; bei einem KI-Fehler wird der Satz unverändert gespeichert.', nm_save:'Speichern', nm_saving:'Wird gespeichert …', nm_saved_self:'Gespeichert: {d} machst du selbst', nm_saved:'An {n} vergeben ({d})', nm_need_who:'Bitte wählen, wer es macht.', nm_need_day:'Bitte einen Tag wählen.', nm_block:'Persönliche Aufgaben', nm_person:'{a} Aufgabe(n) · {b} erledigt', nm_by:'von {n}', nm_open:'noch offen', nm_missed:'nicht erledigt', nm_up:'noch nicht dran', nm_mine_title:'Von mir geplant ({n})', nm_mine_hint:'Deine einmaligen Aufgaben (für eine Person, eine Position oder einen Bereich). Wer sie macht, sieht sie unter „Heute“; erledigt siehst du hier ✓ und das Foto.', nm_sub_by:'von {n}', nm_done_line:'{n} erledigt', nm_when_hint:'Den ganzen Tag möglich; wer es bis Tagesende nicht macht, hat es „nicht erledigt“ – am nächsten Tag kann es noch nachgeholt werden.',   // v118
@@ -2126,7 +2126,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=29'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=30'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -4975,6 +4975,8 @@ function sgHTML(){ const L = (state.tfCat || {}).suggest || [];
 function tfFind(id){ return [...((state.tfCat || {}).daily || []), ...(state.toList || []), ...((state.named || {}).tasks || []), ...((state.led || {}).tasks || [])].find(v => v.def_id === id); }
 // v193（数据库 v135）：「哪个班」只给前场按岗位 / 区域的任务
 const tfSlotOk = e => ['role', 'area'].includes(e.who) && tfArea(e) === 'front';
+// v195（老板 2026-11-18：「午班晚班一起选不行吗」）：新建时午班、晚班可以一起选（e.slot = 'both'），保存时各建一条
+const tfSlotOn = (e, v) => v === 'last' ? !['lunch', 'dinner', 'both'].includes(e.slot) : e.slot === v || e.slot === 'both';
 function tfFormHTML(){
   const e = state.tfEdit; if (!e) return '';
   const staff = (state.tfCat || {}).staff || (state.named || {}).staff || [], bd = bizToday(), area = tfArea(e), areas = tfAreas();
@@ -5023,7 +5025,9 @@ function tfFormHTML(){
     ${e.who === 'each' ? '' : daily ? hint(t(e.who === 'person' ? 'tf_person_daily' : 'tf_daily_hint')) : per ? perHTML : lblM('day', t('nm_day')) + seg('dayMode', [['today', t('nm_today')], ['tomorrow', t('nm_tomorrow')], ['pick', t('nm_pick')]])
       + (e.dayMode === 'pick' ? `<div class="field"><input class="input" type="date" id="tf-date" min="${bd}" value="${esc(e.day || '')}" aria-label="${esc(t('nm_pick'))}"></div>` : '')}
     ${e.who === 'person' ? (e.repeat === 'once' ? hint(t('tf_person_hint')) : '') : e.who === 'each' ? '' : lblM('timing', t('tf_when')) + seg('timing', [['arrival', t('tk_once_arrival')], ['closing', t('tk_once_closing')]])}
-    ${tfSlotOk(e) ? lbl(t('tf_slot')) + seg('slot', [['last', t('tf_slot_last')], ['lunch', t('tf_slot_lunch')], ['dinner', t('tf_slot_dinner')]]) + hint(t('tf_slot_hint_' + (e.slot || 'last'))) : ''}
+    ${!tfSlotOk(e) ? '' : e.id ? lbl(t('tf_slot')) + seg('slot', [['last', t('tf_slot_last')], ['lunch', t('tf_slot_lunch')], ['dinner', t('tf_slot_dinner')]]) + hint(t('tf_slot_hint_' + (e.slot === 'both' ? 'lunch' : e.slot || 'last')))
+      : lbl(t('tf_slot') + ' ' + t('tf_slot_multi')) + `<div class="seg sm" style="margin-bottom:12px">${[['last', t('tf_slot_last')], ['lunch', t('tf_slot_lunch')], ['dinner', t('tf_slot_dinner')]].map(([v, l]) => `<button type="button" data-act="tf-slot" data-v="${v}" class="${tfSlotOn(e, v) ? 'on' : ''}">${esc(l)}</button>`).join('')}</div>`
+        + hint(t('tf_slot_hint_' + (e.slot || 'last')))}
     ${where}
     ${lblM('photo', t('tf_how'))}${(opts => `<div class="chips" style="margin-bottom:12px">${opts.map(([v, l]) => `<button type="button" class="chip${e.photo === v ? ' on' : ''}" data-act="tf-set" data-k="photo" data-v="${v}">${esc(l)}</button>`).join('')}</div>`)(   // v121：德文窄屏放不下一排，改成可以换行
       daily ? [['photo', t('tf_ph_learn')], ['always', t('tf_ph_always')], ['check', t('tf_ph_check')]] : [['photo', '📷 ' + t('tf_ph_photo')], ['check', '✓ ' + t('tf_ph_check')], ...(e.repeat === 'once' ? [['result', t('tf_ph_result')]] : [])])}
@@ -11006,6 +11010,7 @@ const cdTitle = (zh, de) => state.lang === 'de' ? enT(de || zh) : (zh || de);
 const cdWhen = iso => iso ? dm(ymd(new Date(iso))) + ' ' + fmtTime(iso) : '';
 const cdCanRecord = () => !!state.me && !state.me.is_kitchen && (state.me.is_admin || isSup());
 function cdAckHTML(n){
+  if (!state.cdDraft) state.cdDraft = LS.get(cdKey('reply'), {}) || {};   // v195
   return state.viewAs ? '' : `<textarea class="input" id="cd-r-${n.id}" rows="2" maxlength="300" style="margin-top:8px" placeholder="${esc(t('cd_reply_ph'))}">${esc((state.cdDraft || {})[n.id] || '')}</textarea>
     <div class="task-b"><button class="btn" data-act="cd-ack" data-id="${n.id}">${esc(t('cd_ack'))}</button></div>`;
 }
@@ -11052,22 +11057,33 @@ async function cdRecLoad(){
   }
   return cdRecHTML();
 }
+// v195（老板 2026-11-18：「刚刚打了半天，结果没了」）：以前只在点按钮时暂存，切到别的页面或页面重画就丢了。
+//   现在每打一个字就存进 state 和这台设备（localStorage，按人分开）；「记下来」成功后才清掉。员工写的说明、规矩清单的输入框也一样。
+const cdKey = k => 'cd_' + k + '_' + ((state.me || {}).id || '');
+function cdSaveDraft(){ const C = state.cdRec; if (C && C.form) LS.set(cdKey('form'), C.form); }
+function cdSaveReplies(){ LS.set(cdKey('reply'), state.cdDraft || {}); }
 function cdGrab(){   // 重画以前把输入框里的内容记下来
   const F = state.cdRec && state.cdRec.form; if (!F) return;   // 规矩清单的输入框在下面一起记
   const d = $('#cd-day'), n = $('#cd-note'), w = $('#cd-staff'), C = state.cdRec;
   C.rdraft = C.rdraft || {}; document.querySelectorAll('#cd-rules input[id^="cd-r"]').forEach(i => { C.rdraft[i.id] = i.value; });
   if (d) F.day = d.value; if (n) F.note = n.value; if (w) F.staff = w.value;
+  cdSaveDraft();
 }
 function cdRecHTML(){
   const C = state.cdRec, ppl = C.people || [], rules = (C.rules || []).filter(r => r.active);
-  const F = C.form || (C.form = { staff: C.filter || '', store: '', day: today(), rule: '', note: '' });
+  if (!C.form){   // v195：这台设备上有没记完的就接着用
+    const D = LS.get(cdKey('form'), null), ok = D && (D.note || '').trim() && (!C.filter || D.staff === C.filter);
+    C.form = ok ? { ...D, day: D.day && D.day >= addDays(today(), -7) && D.day <= today() ? D.day : today() } : { staff: C.filter || '', store: '', day: today(), rule: '', note: '' };
+    C.restored = !!ok;
+  }
+  const F = C.form;
   const who = ppl.find(x => x.id === F.staff), stores = who ? who.stores : [];
   if (who && stores.length === 1) F.store = stores[0];
   if (F.store && !stores.includes(F.store)) F.store = '';
   let h = '';
   if (state.viewAs) h += `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_view_only'))}</div>`;
   else if (!ppl.length) h += `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_nobody'))}</div>`;
-  else h += `<div class="sheet"><h3 style="margin-top:0">${esc(t('cd_new'))}</h3><div class="small muted" style="margin-bottom:10px">${esc(t('cd_new_hint'))}</div>
+  else h += `<div class="sheet"><h3 style="margin-top:0">${esc(t('cd_new'))}</h3><div class="small muted" style="margin-bottom:10px">${esc(t('cd_new_hint'))}</div>${C.restored ? `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_draft_kept'))}</div>` : ''}
     <div class="field"><label for="cd-staff">${esc(t('cd_who'))}</label><select class="input" id="cd-staff"><option value="">${esc(t('cd_pick'))}</option>${ppl.map(p => `<option value="${p.id}"${p.id === F.staff ? ' selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>
     ${who ? `<div class="field"><label>${esc(t('cd_store'))}</label><div class="seg sm">${stores.map(x => `<button type="button" data-act="cd-store" data-s="${x}" class="${F.store === x ? 'on' : ''}">${esc(x)}</button>`).join('')}</div></div>` : ''}
     <div class="field"><label for="cd-day">${esc(t('cd_day'))}</label><input class="input" type="date" id="cd-day" min="${addDays(today(), -7)}" max="${today()}" value="${esc(F.day || today())}"></div>
@@ -12176,6 +12192,12 @@ document.addEventListener('click', async ev => {
     case 'tf-role': { const e = state.tfEdit; if (!e) break; tfSync(); e.role = el.dataset.r; const ok = tfStoresFor(tfArea(e)); e.stores = e.stores.filter(st => ok.includes(st)); if (!e.stores.length && ok.length === 1) e.stores = ok.slice(); tfRedraw(); break; }
     case 'tf-store': { const e = state.tfEdit; if (!e) break; tfSync(); const st = el.dataset.st;
       e.stores = e.id ? [st] : e.stores.includes(st) ? e.stores.filter(x => x !== st) : e.stores.concat(st); tfRedraw(); break; }
+    case 'tf-slot': {   // v195：哪个班（新建时午班、晚班可以一起选）
+      const e = state.tfEdit; if (!e) break; tfSync();
+      const v = el.dataset.v, L = tfSlotOn(e, 'lunch'), D = tfSlotOn(e, 'dinner');
+      const nl = v === 'lunch' ? !L : v === 'last' ? false : L, nd = v === 'dinner' ? !D : v === 'last' ? false : D;
+      e.slot = nl && nd ? 'both' : nl ? 'lunch' : nd ? 'dinner' : 'last'; tfRedraw(); break;
+    }
     case 'tf-set': {
       const e = state.tfEdit; if (!e) break; tfSync();
       const k = el.dataset.k, v = el.dataset.v;
@@ -12230,7 +12252,10 @@ document.addEventListener('click', async ev => {
       }
       try {
         const person = e.who === 'person', per = isPer(e), once = e.repeat === 'once', each = e.who === 'each';   // v152
-        const r = await rpc('task_save', { ...tok(), p_id: e.id || null, p_who: each ? 'role' : e.who, p_staff_id: person ? e.staff : null, p_role: each ? 'service' : e.who === 'role' ? e.role : null,
+        const slots = tfSlotOk(e) && !e.id && e.slot === 'both' ? ['lunch', 'dinner'] : [tfSlotOk(e) && ['lunch', 'dinner'].includes(e.slot) ? e.slot : ''];   // v195
+        let r = null; const ids = [];
+        for (const sl of slots){
+        r = await rpc('task_save', { ...tok(), p_id: e.id || null, p_who: each ? 'role' : e.who, p_staff_id: person ? e.staff : null, p_role: each ? 'service' : e.who === 'role' ? e.role : null,
           p_area: e.who === 'area' ? e.area : null, p_repeat: each ? 'daily' : e.repeat, p_day: once ? e.day : null,
           p_rep_month: per && ['quarter', 'year'].includes(e.repeat) ? +e.rm : null, p_rep_day: per ? +e.rd : null, p_timing: person ? null : each ? 'closing' : e.timing,   // v120：周期从哪天开始
           p_stores: person ? (e.tag ? [e.tag] : []) : e.stores, p_name_zh: zh, p_name_de: de,
@@ -12238,7 +12263,10 @@ document.addEventListener('click', async ev => {
           p_sop_item: e.sop || null, p_sop_ai: !!(e.sop && !['check', 'result'].includes(e.photo) && e.sopAi),   // v121：连 SOP、AI 按 SOP 看照片
           p_extra: { photos: e.photos || [], link: link || null, result: e.photo === 'result' && once,   // v128：附照片、链接、交回结果
                      times: per ? (+e.times || 1) : 1, makeup: per ? e.makeup !== false : true, each,   // v152：每个服务员下班前   // v132：几次、没做完要不要补
-                     slot: tfSlotOk(e) && ['lunch', 'dinner'].includes(e.slot) ? e.slot : '' } });   // v193：哪个班（空 = 最后一个班）
+                     slot: sl } });   // v193：哪个班（空 = 最后一个班）；v195：午班 + 晚班 = 存两次
+        ids.push(...((r && r.ids) || (r && r.id ? [r.id] : [])));
+        }
+        if (slots.length > 1 && r) r.ids = ids;
         if (e.sop) state.sopSug = (state.sopSug || []).filter(x => x.sop_item_id !== e.sop);
         if (r && person && once && !r.self) callPush('task_assign', { def_id: r.id });   // 推给被指定的人（push v12 只推一次性的；换了人才会再推）
         if (r && once && !person) callPush('task_due');   // v146（数据库 v107 / push v14）：按岗位 / 区域的一次性任务马上推给那天要做的人（排班已发布时）
@@ -12405,23 +12433,23 @@ document.addEventListener('click', async ev => {
     case 'cd-rec': state.tab = 'more'; state.cdPage = 'rec'; state.cdRec = null; state.taRec = null; state.libView = null; state.sop = null; state.taskPage = false; state.docPage = false; render(); window.scrollTo(0, 0); break;   // v194
     case 'cd-close': state.cdPage = null; render(); window.scrollTo(0, 0); break;
     case 'cd-staff': state.cdRec = { filter: el.dataset.id }; state.adminSub = 'conduct'; render(); window.scrollTo(0, 0); break;   // v194：员工列表点「📝 行为记录」
-    case 'cd-store': cdGrab(); state.cdRec.form.store = el.dataset.s; cdRedraw(); break;
-    case 'cd-rule': cdGrab(); state.cdRec.form.rule = el.dataset.id; cdRedraw(); break;
+    case 'cd-store': cdGrab(); state.cdRec.form.store = el.dataset.s; cdSaveDraft(); cdRedraw(); break;
+    case 'cd-rule': cdGrab(); state.cdRec.form.rule = el.dataset.id; cdSaveDraft(); cdRedraw(); break;
     case 'cd-save': {
       cdGrab(); const C = state.cdRec, F = C.form;
       if (!F.staff || !F.store || !F.rule || String(F.note || '').trim().length < 2) return toast(t('cd_need'), true);
       el.disabled = true;
       try {
         const n = await rpc('conduct_note_add', { ...tok(), p_staff: F.staff, p_store: F.store, p_day: F.day || today(), p_rule: F.rule, p_note: F.note.trim() });
-        C.list = [n].concat(C.list || []); C.form = null; toast(t('cd_saved', { n: n.staff_name || '' })); cdRedraw();
+        C.list = [n].concat(C.list || []); C.form = null; C.restored = false; LS.del(cdKey('form')); toast(t('cd_saved', { n: n.staff_name || '' })); cdRedraw();
       } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
     case 'cd-ack': {   // v194：员工点「知道了」（可以带一句说明）
       const id = el.dataset.id, r = $('#cd-r-' + id), v = r ? r.value.trim() : '';
-      state.cdDraft = {}; document.querySelectorAll('textarea[id^="cd-r-"]').forEach(x => { if (x.value.trim()) state.cdDraft[x.id.slice(5)] = x.value; });   // 别的卡片里写了一半的说明留着
+      state.cdDraft = state.cdDraft || {}; document.querySelectorAll('textarea[id^="cd-r-"]').forEach(x => { if (x.value.trim()) state.cdDraft[x.id.slice(5)] = x.value; });   // 别的卡片里写了一半的说明留着
       el.disabled = true;
-      try { state.cdMine = await rpc('conduct_ack', { ...tok(), p_id: id, p_reply: v || null }) || []; delete state.cdDraft[id]; keepScroll(render); }
+      try { state.cdMine = await rpc('conduct_ack', { ...tok(), p_id: id, p_reply: v || null }) || []; delete state.cdDraft[id]; cdSaveReplies(); keepScroll(render); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
@@ -14471,7 +14499,7 @@ document.addEventListener('change', async ev => {
     if (cur) try { await availSet(el.dataset.date, el.dataset.slot, cur.status, el.value); } catch(e){ toast(errText(e), true); }
     return;
   }
-  if (ev.target.id === 'cd-staff' && state.cdRec && state.cdRec.form){ cdGrab(); state.cdRec.form.store = ''; cdRedraw(); return; }   // v194
+  if (ev.target.id === 'cd-staff' && state.cdRec && state.cdRec.form){ cdGrab(); state.cdRec.form.store = ''; cdSaveDraft(); cdRedraw(); return; }   // v194
   if (ev.target.id === 'cd-filter' && state.cdRec){ cdGrab(); state.cdRec.filter = ev.target.value; cdRedraw(); return; }
   if (ev.target.id === 'b-wallet'){
     const b = state.bon, v = ev.target.value.trim();
@@ -14527,6 +14555,9 @@ document.addEventListener('toggle', ev => { if (ev.target.id === 'cd-rules' && s
 }, true);
 document.addEventListener('input', ev => {
   const id = ev.target.id;
+  if (id === 'cd-note' || id === 'cd-day'){ const F = state.cdRec && state.cdRec.form; if (F){ F[id === 'cd-note' ? 'note' : 'day'] = ev.target.value; cdSaveDraft(); } return; }   // v195：行为记录每个字都暂存
+  if (id && id.startsWith('cd-r-')){ (state.cdDraft = state.cdDraft || {})[id.slice(5)] = ev.target.value; cdSaveReplies(); return; }
+  if (id && /^cd-r(zh|de)-/.test(id) && state.cdRec){ (state.cdRec.rdraft = state.cdRec.rdraft || {})[id] = ev.target.value; return; }
   if (id === 'inv-q'){ invS().q = ev.target.value; invMidSync(); invQueue(); }   // v91；v182
   if (id === 'ct-q'){ invS().ctQ = ev.target.value; ctRefresh(); return; }   // v179：盘点页找饮料
   if (id === 'ord-si-q'){ const O = invS().osi, b = document.getElementById('ord-si-list'); if (O && O.items && b){ O.q = ev.target.value; b.innerHTML = ordSiListHTML(O); } return; }   // v188
