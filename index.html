@@ -603,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v195';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v196';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -1354,6 +1354,8 @@ zh: {
   
   
   
+  // v196：漏做申诉 + 判定
+  miss_ap_btn:'不是我的问题', miss_ap_close:'收起申诉', miss_ap_until:'{t} 前可以申诉', miss_ap_title:'为什么不是你的问题？', miss_ap_hint:'选一个原因，写清楚发生了什么。主管或老板会看，AI 也会帮着查。过了 48 小时不能再申诉。', miss_r_app:'App 出错', miss_r_supply:'东西缺了或坏了', miss_r_done_other:'别人已经做了', miss_r_left_ok:'主管同意我先走', miss_r_other:'其他', miss_ap_note_ph:'例如：点「做完了」时 App 一直转圈，没有存上', miss_ap_photo:'📷 加一张照片（可以不加）', miss_ap_photo_rm:'去掉', miss_ap_uploading:'照片上传中…', miss_ap_send:'提交申诉', miss_ap_sent:'已提交，等主管或老板判定。', miss_ap_need_reason:'请先选一个原因。', mres_t:'申诉结果 · {d} {n}：', mres_excuse:'不算 ✓', mres_count:'算', mres_excuse_hint:'这次漏做不算进你的任务记录。', mres_count_hint:'这次漏做照样算进你的任务记录。', mres_by:'{b} 判的', mr_cause_staff_ok:'员工没问题', mr_cause_system:'系统问题', mr_cause_other:'其他原因', mr_v_count:'算', mr_v_excuse:'不算', ta_rec_pts:'算进评价的漏做：{a} 次', ta_rec_pts2:'待判定 {a} · 还能申诉 {b} · 不算 {c}', ta_rec_pts_hint:'和别人一起负责的漏做，按人数分（两个人一起 = 各算 ½）。', mst_count:'算', mst_open:'还能申诉到 {t}', mst_open0:'还能申诉', mst_pending:'待判定', mst_excuse:'不算', mst_none:'—', mst_w:'算 {w}', ts_p_pts:'算进评价 {a} 次 · 待判定 {b} · 不算 {c}', mr_home_t:'待判定的漏做（{n}）', mr_home_hint:'员工说不是自己的问题。看说明和 AI 的建议，判「算」或「不算」。判「不算」的漏做哪里都不算。', mr_solo:'只有他负责', mr_with:'和 {m} 一起负责', mr_made:'后来补做了 ✓', mr_auto_not_resp:'系统自动不算：排班后来改了，他那天不负责这个任务', mr_auto_task_late:'系统自动不算：任务是他下班以后才有的', mr_appeal:'申诉（{r}）：{x}', mr_appeal_at:'申诉时间 {t}', mr_ai:'AI 建议：{v} — {w}', mr_ai_wait:'AI 还在看…', mr_ai_go:'让 AI 看', mr_ai_busy:'AI 在看…', mr_note_ph:'判定的理由（可以不写，员工会看到）', mr_d_count:'算', mr_d_staff_ok:'不算 · 员工没问题', mr_d_system:'不算 · 系统问题', mr_d_other:'不算 · 其他', mr_decided:'已判定。员工下次打开 App 会看到结果。', mr_hist:'{b}{a} 判：{v} · {t}', mr_by_admin:'（老板）', mr_redo:'改判', mr_open_until:'还没申诉，{t} 前可以申诉', mr_no_appeal:'员工没有申诉', tb_appeal:'申诉（{n}）', tb_appeal0:'申诉', mr_tab_hint:'员工在漏做后 48 小时内可以申诉。判「不算」（或系统自动不算）的漏做哪里都不算。最近 7 天没申诉的，老板也可以直接判「不算」。', mr_sec_pending:'待判定（{n}）', mr_sec_open:'没申诉的（{n}）', mr_sec_done:'已判定（{n}）', mr_none:'最近 14 天没有要判定的漏做。',
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
@@ -2101,6 +2103,8 @@ de: {
   
   
   
+  // v196: Einspruch gegen „nicht erledigt“
+  miss_ap_btn:'Nicht meine Schuld', miss_ap_close:'Einspruch schließen', miss_ap_until:'Einspruch möglich bis {t}', miss_ap_title:'Warum lag es nicht an dir?', miss_ap_hint:'Grund wählen und kurz beschreiben, was passiert ist. Die Schichtleitung oder der Chef entscheidet, die KI hilft beim Prüfen. Nach 48 Stunden ist kein Einspruch mehr möglich.', miss_r_app:'App-Fehler', miss_r_supply:'Material fehlte oder war kaputt', miss_r_done_other:'Jemand anderes hat es schon gemacht', miss_r_left_ok:'Schichtleitung hat mich früher gehen lassen', miss_r_other:'Anderes', miss_ap_note_ph:'z. B. Beim Tippen auf „Erledigt“ hat die App nur geladen und nichts gespeichert', miss_ap_photo:'📷 Foto hinzufügen (freiwillig)', miss_ap_photo_rm:'Entfernen', miss_ap_uploading:'Foto wird hochgeladen …', miss_ap_send:'Einspruch senden', miss_ap_sent:'Gesendet. Die Schichtleitung oder der Chef entscheidet.', miss_ap_need_reason:'Bitte zuerst einen Grund wählen.', mres_t:'Einspruch · {d} {n}: ', mres_excuse:'zählt nicht ✓', mres_count:'zählt', mres_excuse_hint:'Diese Aufgabe zählt nicht als „nicht erledigt“ in deinem Protokoll.', mres_count_hint:'Diese Aufgabe zählt weiter als „nicht erledigt“ in deinem Protokoll.', mres_by:'Entschieden von {b}', mr_cause_staff_ok:'Mitarbeiter hat recht', mr_cause_system:'Systemproblem', mr_cause_other:'Anderer Grund', mr_v_count:'zählt', mr_v_excuse:'zählt nicht', ta_rec_pts:'Zählt für die Bewertung: {a}× nicht erledigt', ta_rec_pts2:'Wird entschieden {a} · Einspruch noch möglich {b} · zählt nicht {c}', ta_rec_pts_hint:'Gemeinsame Aufgaben werden geteilt (zu zweit = je ½).', mst_count:'zählt', mst_open:'Einspruch bis {t}', mst_open0:'Einspruch möglich', mst_pending:'wird entschieden', mst_excuse:'zählt nicht', mst_none:'—', mst_w:'zählt {w}', ts_p_pts:'Zählt {a}× · wird entschieden {b} · zählt nicht {c}', mr_home_t:'Einsprüche zu entscheiden ({n})', mr_home_hint:'Mitarbeiter sagen, es lag nicht an ihnen. Erklärung und KI-Vorschlag ansehen, dann „zählt“ oder „zählt nicht“ wählen. „Zählt nicht“ zählt nirgends.', mr_solo:'allein zuständig', mr_with:'gemeinsam mit {m}', mr_made:'später nachgeholt ✓', mr_auto_not_resp:'Automatisch nicht gezählt: Dienstplan wurde später geändert, an dem Tag nicht zuständig', mr_auto_task_late:'Automatisch nicht gezählt: Die Aufgabe kam erst nach Schichtende', mr_appeal:'Einspruch ({r}): {x}', mr_appeal_at:'Eingereicht {t}', mr_ai:'KI-Vorschlag: {v} – {w}', mr_ai_wait:'Die KI prüft noch …', mr_ai_go:'KI prüfen lassen', mr_ai_busy:'KI prüft …', mr_note_ph:'Begründung (freiwillig, der Mitarbeiter sieht sie)', mr_d_count:'Zählt', mr_d_staff_ok:'Zählt nicht · Mitarbeiter hat recht', mr_d_system:'Zählt nicht · Systemproblem', mr_d_other:'Zählt nicht · anderer Grund', mr_decided:'Entschieden. Der Mitarbeiter sieht das Ergebnis beim nächsten Öffnen der App.', mr_hist:'{b}{a}: {v} · {t}', mr_by_admin:' (Chef)', mr_redo:'Entscheidung ändern', mr_open_until:'Noch kein Einspruch, möglich bis {t}', mr_no_appeal:'Kein Einspruch', tb_appeal:'Einsprüche ({n})', tb_appeal0:'Einsprüche', mr_tab_hint:'Mitarbeiter können innerhalb von 48 Stunden Einspruch einlegen. „Zählt nicht“ (auch automatisch) zählt nirgends. Ohne Einspruch kann der Chef die letzten 7 Tage auch direkt „zählt nicht“ wählen.', mr_sec_pending:'Zu entscheiden ({n})', mr_sec_open:'Ohne Einspruch ({n})', mr_sec_done:'Entschieden ({n})', mr_none:'Keine Einsprüche in den letzten 14 Tagen.',
   wd:['Mo','Di','Mi','Do','Fr','Sa','So']
 }};
 
@@ -2126,7 +2130,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=30'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=31'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2465,6 +2469,20 @@ const ERR_ZH = {
   CONDUCT_VOID_REASON: '请写撤销的原因（2 到 200 个字）。',
   CONDUCT_VOIDED: '这一条已经撤销过了。请刷新页面。',
   CONDUCT_RULE_TEXT: '规矩的中文和德文都要写（2 到 200 个字）。',
+  // v196：漏做申诉 + 判定
+  MISS_NO_APPEAL: '这种漏做不能申诉（老板发现没做、不实确认都不能申诉）。有疑问请直接找老板。',
+  MISS_APPEALED: '这条你已经申诉过了，每条只能申诉一次。请等主管或老板判定，刷新页面能看到最新状态。',
+  MISS_DECIDED: '这条漏做已经判定过了。请刷新页面看结果；有不同意见请直接找老板。',
+  MISS_APPEAL_LATE: '已经过了 48 小时，不能再申诉了，这次漏做照样算。有特殊情况请直接找老板。',
+  MISS_REASON: '请选一个原因（App 出错、东西缺了或坏了、别人已经做了、主管同意我先走、其他）。',
+  MISS_NOTE: '请写清楚发生了什么（2 到 300 个字）。',
+  MISS_PHOTO: '照片没有传好。请去掉照片重新加一张，或者不加照片直接提交。',
+  MISS_FORBIDDEN: '你不能判定这条漏做（只有老板和这家店这个区域的负责人能判）。请刷新页面。',
+  MISS_ADMIN_DECIDED: '老板已经判过了，负责人不能再改。有不同意见请直接找老板。',
+  MISS_NOT_PENDING: '这条漏做没有在等判定（员工没申诉，或者系统已经判了「不算」）。负责人只能判员工申诉了的；别的请找老板。请刷新页面。',
+  MISS_INVOLVED: '这个任务那天你自己也漏做了，这条只能由老板判定。',
+  MISS_VERDICT: '只能选「算」或「不算」。请刷新页面再试。',
+  MISS_CAUSE: '判「不算」时要选原因：员工没问题、系统问题或其他。请重新点一个按钮。',
   TASK_AI_DONE: '这张照片已经确认过了。回到「今天」重新打开就能看到最新的。',
   SUGGEST_DONE: '这条建议已经上线了，不能再改决定。要撤回请在对话里告诉 Claude。',   // v163
   INVALID_STATUS: '只能选「采纳」「不做」或「重新考虑」。请刷新页面再试。',
@@ -2751,6 +2769,20 @@ const ERR_DE = {
   CONDUCT_VOID_REASON: 'Bitte einen Grund für die Rücknahme angeben (2 bis 200 Zeichen).',
   CONDUCT_VOIDED: 'Dieser Eintrag wurde schon zurückgenommen. Bitte Seite neu laden.',
   CONDUCT_RULE_TEXT: 'Die Regel bitte auf Chinesisch und Deutsch eintragen (2 bis 200 Zeichen).',
+  // v196
+  MISS_NO_APPEAL: 'Hierzu ist kein Einspruch möglich (vom Chef festgestellt oder falsch bestätigt). Bei Fragen bitte direkt mit dem Chef sprechen.',
+  MISS_APPEALED: 'Dazu hast du schon Einspruch eingelegt (nur einmal möglich). Bitte auf die Entscheidung warten; Seite neu laden zeigt den aktuellen Stand.',
+  MISS_DECIDED: 'Darüber wurde schon entschieden. Bitte Seite neu laden; bei anderer Meinung direkt mit dem Chef sprechen.',
+  MISS_APPEAL_LATE: 'Die 48 Stunden sind vorbei, Einspruch nicht mehr möglich – es zählt. In besonderen Fällen bitte direkt mit dem Chef sprechen.',
+  MISS_REASON: 'Bitte einen Grund wählen (App-Fehler, Material fehlte, jemand anderes hat es gemacht, früher gehen erlaubt, Anderes).',
+  MISS_NOTE: 'Bitte beschreiben, was passiert ist (2 bis 300 Zeichen).',
+  MISS_PHOTO: 'Das Foto wurde nicht richtig hochgeladen. Bitte entfernen und neu hinzufügen oder ohne Foto senden.',
+  MISS_FORBIDDEN: 'Darüber kannst du nicht entscheiden (nur der Chef und die Leitung dieser Filiale und dieses Bereichs). Bitte Seite neu laden.',
+  MISS_ADMIN_DECIDED: 'Der Chef hat schon entschieden; die Leitung kann das nicht mehr ändern. Bei anderer Meinung bitte direkt mit dem Chef sprechen.',
+  MISS_NOT_PENDING: 'Hier wartet kein Einspruch auf eine Entscheidung (kein Einspruch, oder das System hat schon „zählt nicht“ entschieden). Die Leitung entscheidet nur über Einsprüche; sonst bitte den Chef fragen. Bitte Seite neu laden.',
+  MISS_INVOLVED: 'Du hast diese Aufgabe an dem Tag selbst nicht erledigt – darüber entscheidet nur der Chef.',
+  MISS_VERDICT: 'Nur „zählt“ oder „zählt nicht“ möglich. Bitte Seite neu laden und nochmal versuchen.',
+  MISS_CAUSE: 'Bei „zählt nicht“ bitte einen Grund wählen: Mitarbeiter hat recht, Systemproblem oder anderer Grund. Bitte nochmal einen Knopf tippen.',
   TASK_AI_DONE: 'Dieses Foto wurde schon geprüft. Bitte „Heute“ neu öffnen, dann siehst du den aktuellen Stand.',
   SUGGEST_DONE: 'Dieser Vorschlag ist schon umgesetzt, die Entscheidung lässt sich nicht mehr ändern. Zum Zurücknehmen bitte Claude im Gespräch sagen.',   // v163
   INVALID_STATUS: 'Nur „Annehmen“, „Nicht machen“ oder „Neu überlegen“ sind möglich. Bitte Seite neu laden.',
@@ -2880,7 +2912,7 @@ const RPC_RO = new Set(('admin_announce_detail admin_announce_list admin_asks ad
   + 'admin_tasks_once admin_conduct_counts conduct_list conduct_my conduct_people conduct_rules_list announce_image area_status area_today area_week_tips bon_extras count_methods day_helpers entry_extras_list envelopes_pending_list expense_mine expense_photo helper_stats inv_area inv_count '
   + 'inv_drinks inv_home inv_inbox_list inv_inbox_mine inv_item inv_labels inv_misses inv_order_home inv_order_targets inv_pick inv_place inv_qr_find inv_quick_place inv_receipt inv_receipt_dups inv_recipe_hints '
   + 'inv_stock_home inv_stock_levels inv_supplier_items_list inv_target_hints inv_todo inv_week_list kitchen_hours ksched_pending library_item list_disputes list_login_staff list_rates list_requests '
-  + 'list_staff lock_rounds_open month_archive_state my_announcements my_audits my_bon_status my_hint_acks my_led_tasks my_library my_notices my_receipts my_store_tasks my_task_misses my_task_record my_tasks '
+  + 'list_staff lock_rounds_open miss_reviews month_archive_state my_announcements my_audits my_bon_status my_hint_acks my_led_tasks my_library my_miss_results my_notices my_receipts my_store_tasks my_task_misses my_task_record my_tasks '
   + 'my_tip_totals my_week onb_check_mine onb_checklist onb_mine onb_sched_info push_status receipt_image receipts_open recon_day recon_home recon_imports recon_overview recon_report_file sched_bon_helpers '
   + 'sched_notices sched_pending_changes sched_tip_check sched_week settle_payers settlement sop_gaps sop_item sop_tree task_catalog task_named_list task_roles week_envelopes week_extras week_overview week_receipts').split(' '));
 // 不是 stable、但对这台手机来说只是「看」的请求（顺带记一下最后在线、补记漏做、记搜不到的词）：不合并，也不算「做事」
@@ -3030,7 +3062,8 @@ function setMenu(on){
 // v68：启动 / 登录后等数据时显示，不再白屏
 function splash(){ $('#app').innerHTML = `<div class="splash" role="status"><b>${esc(t('app'))}</b><span class="muted">${esc(t('loading'))}</span></div>`; }
 function logoutLocal(){ clearTimeout(state.vcT); state.viewCache = null; LS.del('vcache'); SS.del('vcache');   // v102：退出登录清掉存着的页面
-  state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false; }
+  state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false;
+  state.missRev = null; state.missRes = null; state.missAp = null; state.mrNote = null; }   // v196：申诉的数据跟人走，换人登录时不能留着（共用设备）
 // ============ 手机推送（v27）============
 const pushSupported = () => 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
 const isIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent);
@@ -3154,7 +3187,7 @@ async function loadTasks0(){
   if (!state.me || state.me.is_kitchen){ state.tasks = null; state.closing = null; return; }
   const who = state.token;
   const NO = Symbol();
-  const [tk, cl, lb, ld, ob, oc, nm, cat, ms, au, dc, cdm] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
+  const [tk, cl, lb, ld, ob, oc, nm, cat, ms, au, dc, cdm, mrs] = await Promise.all([soft(rpc('my_tasks', tok()), NO), soft(rpc('my_store_tasks', tok()), null),   // v31 之前没有；v71：收店任务
     state.me.is_admin ? null : soft(rpc('my_library', tok()), null),   // v79：资料（要确认的放进「今天」）
     (state.me.leads || []).length && !state.me.is_admin ? soft(rpc('my_led_tasks', tok()), null) : null,   // v95：我负责的任务
     state.me.is_admin ? null : soft(rpc('onb_mine', tok()), null),   // v107：新人带教（新同事的自评、带教人的评价）
@@ -3163,13 +3196,15 @@ async function loadTasks0(){
     nmLeadOnly() ? soft(rpc('task_catalog', tok()), null) : null,   // v119：负责人区域每天的任务、能建什么
     soft(rpc('my_task_misses', tok()), null), soft(rpc('my_audits', tok()), null),
     state.me.is_admin ? null : soft(rpc('my_docs', tok()), null),   // v156：证件   // v149：漏做 / 不实确认的红卡、派给我的抽查
-    state.me.is_admin ? null : soft(rpc('conduct_my', tok()), null)]);   // v194：行为记录（没点「知道了」的放「今天」红卡）
+    state.me.is_admin ? null : soft(rpc('conduct_my', tok()), null),   // v194：行为记录（没点「知道了」的放「今天」红卡）
+    state.me.is_admin ? null : soft(rpc('my_miss_results', tok()), null)]);   // v196：申诉的结果
   if (state.token !== who || !state.me) return;   // v191：等的时候换了人：不写进来
   if (tk === NO) state.tasks = null; else { state.tasks = tk; state.tasksAt = Date.now(); }
   state.closing = cl || []; state.lib = lb; state.led = ld; state.onb = ob || []; state.onbChkMine = oc;
   state.misses = ms || []; state.audits = au || [];   // v149
   state.myDocs = dc;   // v156
   if (cdm) state.cdMine = cdm;   // v194：出错时留着上次的
+  if (mrs) state.missRes = mrs;   // v196
   if (nmLeadOnly()){ state.named = nm; state.tfCat = cat; }
 }
 // v39：同一天、同一家店有几个班（午班 + 晚班）→ 合成一张卡；全部交了才算完成
@@ -3293,16 +3328,17 @@ async function viewToday(){
   // v68：有上次的内容就先显示，同时向服务器要新的（一起要，不再一个接一个）；内容变了再重画
   const shown = !!state.tasks;
   if (shown) renderToday(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
-  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named, state.cdMine]);   // v194：新的行为记录也要重画
+  const before = JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named, state.cdMine, state.missRes, state.missRev]);   // v194：新的行为记录也要重画
   const fresh = state.tasksAt && Date.now() - state.tasksAt < 5000;   // 刚启动时已经要过
   const [, env, , at] = await Promise.all([fresh ? null : loadTasks({ join: true }),   // v191：路上有一份就等它
     state.me.is_tip_manager ? soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null) : null, loadWeekTodo(),
     isSup() ? soft(rpc('area_today', { ...tok(), p_day: state.areaDay || bizToday() }), null) : null,   // v83：区域主管的总览
-    isSup() || invIsKeeper() ? invTodoLoad() : null]);   // v94：物品待办；v143：库管
+    isSup() || invIsKeeper() ? invTodoLoad() : null,   // v94：物品待办；v143：库管
+    !state.me.is_admin && (taskRight(state.me) || isSup()) ? soft(rpc('miss_reviews', { ...tok(), p_days: 14 }), null).then(x => { if (x) state.missRev = x; }) : null]);   // v196：负责人要判的申诉
   state.envPend = env || null; state.areaToday = at || null;
   if (state.tab !== 'today' || state.recon || !state.me) return;   // 等的时候已经切到别的页
   if (state.onbOpen) return;   // v107：等的时候打开了填写页
-  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named, state.cdMine]) !== before) renderToday();
+  if (!shown || JSON.stringify([state.tasks, state.envPend, state.weekTodo, state.areaToday, state.invTodo, state.closing, state.led, state.onb, state.named, state.cdMine, state.missRes, state.missRev]) !== before) renderToday();
   refreshTodayBadge();
 }
 // 待处理的疑问（周结页；v89 起老板的「今天」也显示，老板 2026-10-15）：「处理」写怎么处理的
@@ -3394,7 +3430,7 @@ function renderToday(){
   const tm = tmTodoCards(), msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message' && !isCl(x));
   const nOther = rest.filter(x => x.status !== 'later').length + tm.length, hasList = !!(cl.length || upCl.length);
   const doneO = done.filter(x => !isCl(x));
-  $('#main').innerHTML = cdCardsHTML() + missCardsHTML() + audCardsHTML() + invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
+  $('#main').innerHTML = cdCardsHTML() + missCardsHTML() + missResHTML() + audCardsHTML() + invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (!state.me.is_admin && (taskRight(state.me) || isSup()) ? mrHomeHTML() : '') + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
     + msgs.map(taskCardHTML).join('') + tdlHTML(cl, upCl) + ocMineHTML()
     + (rest.length || tm.length ? `<h3>${esc(nOther ? t(hasList ? 'td_other' : 'td_mine', { n: nOther }) : t(hasList ? 'td_other0' : 'td_mine_ok'))}</h3>` + tm.join('') + rest.map(taskCardHTML).join('')
       : hasList || msgs.length ? '' : `<h3>${esc(t('td_mine_ok'))}</h3><div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
@@ -4296,7 +4332,9 @@ async function viewReconHome(){
       soft(rpc('envelopes_pending_list', { ...tok(), p_before: null }), null).then(x => { if (x) state.envPendAll = x; }),
       soft(rpc('recon_imports', { ...tok(), p_from: addDays(bizToday(), -8) }), null).then(x => { state.repImp = x; }),
       soft(rpc('admin_task_flows', tok()), null).then(x => { state.homeFlows = x; }),
-      soft(rpc('admin_misses', { ...tok(), p_day: null }), null).then(x => { state.taMiss = x; })]);   // v149：昨天漏做、抽查不属实   // v144：收废油的检查晚了要标红   // v135：邮件自动导入的情况   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
+      soft(rpc('admin_misses', { ...tok(), p_day: null }), null).then(x => { state.taMiss = x; }),
+      soft(rpc('miss_reviews', { ...tok(), p_days: 14 }), null).then(x => { if (x) state.missRev = x; })]);   // v196：待判定的漏做申诉
+    // 上面几行：v149：昨天漏做、抽查不属实   // v144：收废油的检查晚了要标红   // v135：邮件自动导入的情况   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
     S = H.S; o = H.o; state.reconTasks = H.tasks;
   }
   catch(e){ $('#main').innerHTML = `<div class="empty">${esc(errText(e))}</div>`; return; }
@@ -4306,7 +4344,7 @@ async function viewReconHome(){
   state.reconDay = o.day;
   const stores = o.stores.slice().sort((a, b) => rcProblem(b) - rcProblem(a));
   const mine = viewTasks().filter(x => x.status !== 'done' && x.kind !== 'closing'), myCl = viewTasks().filter(x => x.kind === 'closing');   // v118：老板自己的点名任务放进上面的「今天的任务」清单
-  $('#main').innerHTML = oilLateHTML() + audCardsHTML() + missCardsHTML() + taHomeHTML() + hrepCardHTML() + aiRevHTML() + tdlHTML(myCl.filter(x => x.scope !== 'upcoming'), myCl.filter(x => x.scope === 'upcoming')) + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
+  $('#main').innerHTML = oilLateHTML() + audCardsHTML() + missCardsHTML() + mrHomeHTML() + taHomeHTML() + hrepCardHTML() + aiRevHTML() + tdlHTML(myCl.filter(x => x.scope !== 'upcoming'), myCl.filter(x => x.scope === 'upcoming')) + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
       <div class="wl">${esc(t('rk_home'))}<small>${(() => { const n = Math.round((parseD(o.today) - parseD(o.day)) / 864e5); return n >= 0 && n <= 2 ? esc(t('rk_rel' + n)) + ' · ' : ''; })()}${esc(dayLabel(o.day))}</small></div>
       <button data-act="recon-home-day" data-d="1" aria-label="${esc(t('rk_next'))}" ${o.day >= o.today ? 'disabled' : ''}>›</button></div>
     ${o.day !== o.today ? `<div style="text-align:center;margin:-6px 0 12px"><button class="link" data-act="recon-home-today">${esc(t('rk_go_today'))}</button></div>` : ''}`
@@ -4755,7 +4793,8 @@ async function toAdminLoad(){
   const [L, list, staff, fl, d0, d1, nm, cat] = await Promise.all([rpc('admin_task_leads', tok()), rpc('admin_tasks_once', tok()), rpc('admin_list_staff', tok()),
     soft(rpc('admin_task_flows', tok()), []),   // v101：收废油
     soft(rpc('admin_tasks_day', { ...tok(), p_day: bd }), []), soft(rpc('admin_tasks_day', { ...tok(), p_day: bd1 }), []),   // v105：看板（今天、明天，每天的任务和某一天的任务）
-    soft(rpc('task_named_list', tok()), null), soft(rpc('task_catalog', tok()), null)]);   // v118：点名任务；v119：任务清单
+    soft(rpc('task_named_list', tok()), null), soft(rpc('task_catalog', tok()), null),   // v118：点名任务；v119：任务清单
+    mrLoad()]);   // v196：申诉（标签上的数字）
   state.named = nm; state.tfCat = cat;
   state.toLeads = L || []; state.toList = list || []; state.toStaff = staff || []; state.toFlows = fl || []; state.toDays = { [bd]: d0 || [], [bd1]: d1 || [] };
   return toAdminRender();
@@ -4814,11 +4853,12 @@ function toAdminRender(){
   const NL = (state.named || {}).tasks || [], later = L.concat(NL).filter(x => x.day > bd1), past = L.concat(NL).filter(x => x.day < bd);   // v118：点名任务也在「以后 / 前几天」里
   const byDay = (list, desc) => { const g = {}; list.forEach(x => (g[x.day] = g[x.day] || []).push(x)); const ks = Object.keys(g).sort(); if (desc) ks.reverse();
     return ks.map(d => `<div class="tdl-g">${esc(dayLabel(d))}</div><div class="tsr-box">${g[d].map(x => x.named ? nmRow(x, true) : toListRow(x)).join('')}</div>`).join(''); };
-  const seg = `<div class="seg sm" style="margin-bottom:8px">${[['today', t('tb_today')], ['tomorrow', t('tb_tomorrow')], ['later', t('tb_later', { n: later.length })], ['past', t('tb_past', { n: past.length })], ['list', t('tb_list')], ['stats', t('tb_stats')]]
+  const seg = `<div class="seg sm" style="margin-bottom:8px">${[['today', t('tb_today')], ['tomorrow', t('tb_tomorrow')], ['later', t('tb_later', { n: later.length })], ['past', t('tb_past', { n: past.length })], ['list', t('tb_list')], ['stats', t('tb_stats')], ['appeal', mrPending().length ? t('tb_appeal', { n: mrPending().length }) : t('tb_appeal0')]]
     .map(([k, lbl]) => `<button data-act="to-view" data-k="${k}" class="${v === k ? 'on' : ''}">${esc(lbl)}</button>`).join('')}</div>`;
   const board = v === 'today' ? nmBlockHTML(bd) + toBoardHTML(bd) : v === 'tomorrow' ? nmBlockHTML(bd1) + toBoardHTML(bd1)   // v118：点名任务在最上面
     : v === 'list' ? tcListHTML()   // v119：任务清单（每天的任务）
     : v === 'stats' ? tsHTML()   // v123：统计
+    : v === 'appeal' ? mrTabHTML()   // v196：漏做申诉
     : v === 'later' ? (byDay(later) || `<div class="list"><div class="empty">${esc(t('tb_later_none'))}</div></div>`)
     : (byDay(past, true) || `<div class="list"><div class="empty">${esc(t('tb_past_none'))}</div></div>`);
   const nLead = (state.toLeads || []).filter(x => x.staff_id).length;
@@ -4863,9 +4903,10 @@ function tsHTML(){
       miss ? t('ts_p_miss', { a: p.missed_solo, b: p.missed_shared }) + (+p.late ? t('ts_p_late', { n: p.late }) : '') : '',
       +p.helped ? t('ts_p_help', { n: p.helped }) : '', +p.ai_flag || +p.ai_override ? t('ts_p_ai', { a: p.ai_flag, b: p.ai_override }) : '',
       +p.msgs ? t('ts_p_msg', { a: p.msgs, b: p.msgs_read }) : '',
-      +p.made_up || +p.audit_ok || +p.audit_false || +p.miss_notes ? t('ts_p_audit', { m: +p.made_up || 0, a: +p.audit_ok || 0, b: +p.audit_false || 0, c: +p.miss_acked || 0, d: +p.miss_notes || 0 }) : ''].filter(Boolean);   // v149
+      +p.made_up || +p.audit_ok || +p.audit_false || +p.miss_notes ? t('ts_p_audit', { m: +p.made_up || 0, a: +p.audit_ok || 0, b: +p.audit_false || 0, c: +p.miss_acked || 0, d: +p.miss_notes || 0 }) : '',
+      +p.miss_pts || +p.miss_pending || +p.miss_excused ? t('ts_p_pts', { a: +p.miss_pts || 0, b: +p.miss_pending || 0, c: +p.miss_excused || 0 }) : ''].filter(Boolean);   // v149；v196：算进评价的、待判定、不算
     const ms = (p.misses || []).map(m => `<div class="meta small">${esc((m.pe ? t('ts_m_period', { a: dm(m.day), b: dm(m.pe) }) : dayLabel(m.day)) + ' · ' + (state.lang === 'de' ? m.name_de : m.name_zh) + (m.store ? ' · ' + m.store : '')
-      + ' · ' + (m.solo ? t('ts_m_solo') : t('ts_m_with', { m: (m.with || []).join(state.lang === 'de' ? ', ' : '、') })) + (m.msg ? ' · ' + t('ts_m_msg') : ''))}</div>`).join('');
+      + ' · ' + (m.solo ? t('ts_m_solo') : t('ts_m_with', { m: (m.with || []).join(state.lang === 'de' ? ', ' : '、') })) + (missWText(m) ? ' · ' + missWText(m) : '') + (m.msg ? ' · ' + t('ts_m_msg') : ''))} ${m.state ? missStTag(m) : ''}</div>`).join('');
     return `<div class="item"><div class="top"><div><strong>${esc(p.name)}</strong> <span class="small muted">${esc(t('grp_' + (p.role || 'service')))}</span></div>
       <span class="small ${bad ? 'negc' : miss ? 'warnc' : 'pos'} num">${pct(+p.done + +p.done_other, +p.turns)}%</span></div>
       ${lines.map((l, i) => `<div class="meta small${i === 1 && bad ? ' negc' : ''}">${esc(l)}</div>`).join('')}
@@ -11133,9 +11174,10 @@ function missCardsHTML(){
         ${state.viewAs ? '' : `<div class="task-b">${run ? `<button class="btn" data-act="miss-make" data-def="${m.def_id}" data-day="${m.day}">${esc(t('ta_make_up'))}</button>` : ''}
           <button class="btn ${run ? 'ghost' : ''}" data-act="miss-ack" data-id="${m.id}">${esc(t('ta_ack'))}</button></div>`}</div>`; }
     return `<div class="task bad"><div class="task-t">${esc(t('ta_miss_t', { d: dayLabel(m.day), n: what(m) }))}</div>
-      <div class="task-s">${esc(t('ta_miss_sub', { k: m.month_n || 1 }))}${m.made_up ? ' · ' + esc(t('ta_miss_made')) : ''}</div>
+      <div class="task-s">${esc(t('ta_miss_sub', { k: m.month_n || 1 }))}${m.made_up ? ' · ' + esc(t('ta_miss_made')) : ''}${m.can_appeal ? `<br><span class="warnc">${esc(t('miss_ap_until', { t: fmtDateTime(m.appeal_until) }))}</span>` : ''}</div>
       ${state.viewAs ? '' : `<div class="task-b">${run ? `<button class="btn" data-act="miss-make" data-def="${m.def_id}" data-day="${m.day}">${esc(t('ta_make_up'))}</button>` : ''}
-        <button class="btn ${run ? 'ghost' : ''}" data-act="miss-ack" data-id="${m.id}">${esc(t('ta_ack'))}</button></div>`}</div>`;
+        <button class="btn ${run ? 'ghost' : ''}" data-act="miss-ack" data-id="${m.id}">${esc(t('ta_ack'))}</button>
+        ${missApBtn(m, 'btn ghost')}</div><div data-missbox="${m.id}">${missApFormHTML(m)}</div>`}</div>`;   // v196：「不是我的问题」申诉
   }).join('');
 }
 function audCardsHTML(){
@@ -11229,7 +11271,7 @@ function taHomeHTML(){
   if (ms.length) h += `<div class="sheet" style="margin-bottom:12px"><div class="grp-t negc">${esc(t('ta_home_miss', { n: ms.length }))}</div>
     <div class="small muted" style="margin:2px 0 6px">${esc(t('ta_home_miss_hint'))}</div>
     ${ms.map(x => `<div class="meta" style="margin:8px 0"><strong>${esc(taNm(x))}</strong>${x.store ? storeTag(x.store) : ''}${x.made_up ? ` <span class="pos small">${esc(t('ta_home_made'))}</span>` : ''}
-      <div>${(x.people || []).map(p => `${esc(p.name)}${p.found ? ` <span class="small negc">${esc(t('ta_home_found'))}</span>` : ''} <span class="small ${p.acked_at ? 'pos' : 'muted'}">${esc(p.acked_at ? t('ta_home_acked') : t('ta_home_unacked'))}</span>${state.viewAs ? ''
+      <div>${(x.people || []).map(p => `${esc(p.name)}${p.found ? ` <span class="small negc">${esc(t('ta_home_found'))}</span>` : ''}${p.state === 'pending' || p.state === 'excuse' ? ' ' + missStTag(p) : ''} <span class="small ${p.acked_at ? 'pos' : 'muted'}">${esc(p.acked_at ? t('ta_home_acked') : t('ta_home_unacked'))}</span>${state.viewAs ? ''
         : ` <button class="link" data-act="miss-msg" data-def="${x.def_id}" data-day="${x.day}" data-id="${p.staff_id}" data-name="${esc(p.name)}" data-store="${esc(x.store || '')}" data-task="${esc(taNm(x))}">💬</button>`}`).join(' · ')}</div></div>`).join('')}</div>`;
   if (fs.length) h += `<div class="sheet" style="margin-bottom:12px"><div class="grp-t negc">${esc(t('ta_home_false'))}</div>
     ${fs.map(a => `<div class="meta" style="margin:8px 0">${esc(t('ta_home_false_row', { p: (a.staff || []).join(taSep()), n: taNm(a), s: a.store ? a.store + ' ' : '', d: dayLabel(a.day), b: a.done_by || '?' }))}
@@ -11256,17 +11298,126 @@ async function viewTaRec(){
   h += `<div class="sheet"><div class="grp-t ${miss ? (n('missed_solo') ? 'negc' : 'warnc') : 'pos'}">${esc(t('ta_rec_rate', { p: pc }))}</div>
     ${line(t('ta_rec_line', { a: turns, b: n('done'), c: n('done_other'), d: n('made_up') }))}
     ${miss ? line(t('ta_rec_miss', { a: miss, b: n('missed_solo'), c: n('missed_shared') }), n('missed_solo') > 0) : ''}
+    ${miss || n('miss_excused') ? line(t('ta_rec_pts', { a: n('miss_pts') }), n('miss_pts') > 0) + line(t('ta_rec_pts2', { a: n('miss_pending'), b: n('miss_open'), c: n('miss_excused') })) + (n('missed_shared') ? `<div class="meta small muted">${esc(t('ta_rec_pts_hint'))}</div>` : '') : ''}
     ${n('miss_notes') ? line(t('ta_rec_ack', { a: n('miss_notes'), b: n('miss_acked') })) : ''}
     ${n('ai_flag') || n('ai_override') ? line(t('ta_rec_ai', { a: n('ai_flag'), b: n('ai_override') })) : ''}
     ${n('audit_ok') || n('audit_false') ? line(t('ta_rec_audit', { a: n('audit_ok'), b: n('audit_false') }), n('audit_false') > 0) : ''}
     ${n('helped') ? line(t('ta_rec_help', { a: n('helped') })) : ''}</div>`;
   const ms = p.misses || [];
   if (ms.length) h += `<h3>${esc(t('ta_rec_misses'))}</h3><div class="list">${ms.map(m => `<div class="item"><div>${esc((m.pe ? t('ts_m_period', { a: dm(m.day), b: dm(m.pe) }) : dayLabel(m.day)) + ' · ' + taNm(m) + (m.store ? ' · ' + m.store : ''))}</div>
-    <div class="meta small">${esc(m.solo ? t('ts_m_solo') : t('ts_m_with', { m: (m.with || []).join(taSep()) }))}</div></div>`).join('')}</div>`;
+    <div class="meta small">${esc((m.solo ? t('ts_m_solo') : t('ts_m_with', { m: (m.with || []).join(taSep()) })) + (missWText(m) ? ' · ' + missWText(m) : ''))}</div>
+    <div class="meta small">${missStTag(m)}</div>
+    ${m.can_appeal && !state.viewAs ? `<div class="acts">${missApBtn(m, 'link')}</div><div data-missbox="${m.id}">${missApFormHTML(m)}</div>` : ''}</div>`).join('')}</div>`;   // v196：状态、分到的份数、申诉
   const au = R.audits || [];
   if (au.length) h += `<h3>${esc(t('ta_rec_audits'))}</h3><div class="list">${au.map(a => `<div class="item"><div>${esc(dayLabel(a.day) + ' · ' + taNm(a) + (a.store ? ' · ' + a.store : ''))}</div>
     <div class="meta small ${a.result === 'false' ? 'negc' : a.result === 'ok' ? 'pos' : ''}">${esc(t('ta_res_' + a.result) + (a.note ? ' · ' + a.note : ''))}</div></div>`).join('')}</div>`;
   $('#main').innerHTML = h;
+}
+// ============ 漏做申诉 + 判定（v196，数据库 v137 / 文件服务 tasks v36，老板 2026-11-19）============
+// 员工：普通漏做 48 小时内可以点「不是我的问题」申诉（原因 + 写一句 + 可以加一张照片），提交后 AI 给一个建议；这家店这个区域的负责人或老板判「算」或「不算」。
+// 判「不算」（或系统自动不算）的漏做哪里都不算；结果在员工「今天」显示一张卡（点「知道了」）。
+// 老板首页 / 负责人「今天」：待判定的；老板「管理 → 任务 → 申诉」：全部（没申诉的最近 7 天也能直接判，判过的能改判，记录都留着）。
+const MISS_REASONS = ['app', 'supply', 'done_other', 'left_ok', 'other'];
+const missApKey = id => 'miss_ap_' + id + '_' + ((state.me || {}).id || '');
+const missW = w => { const v = +w; if (!(v > 0) || v >= 1) return String(v || 0); return ({ 0.5: '½', 0.33: '⅓', 0.25: '¼', 0.2: '⅕', 0.17: '⅙', 0.67: '⅔' })[v] || String(v); };
+function missApS(id){ const A = state.missAp = state.missAp || {}; return A[id] || (A[id] = { open: false, reason: '', photo: null, preview: null, up: false, busy: false }); }
+function missFind(id){ const R = state.taRec && state.taRec.data && state.taRec.data.me; return (state.misses || []).find(m => m.id === id) || ((R && R.misses) || []).find(m => m.id === id) || null; }
+// 一条漏做现在的状态（算 / 还能申诉到… / 待判定 / 不算 / —）
+function missStText(m){ const s = m.state || 'none';
+  if (s === 'open') return m.appeal_until ? t('mst_open', { t: fmtDateTime(m.appeal_until) }) : t('mst_open0');
+  return t('mst_' + (['count', 'pending', 'excuse'].includes(s) ? s : 'none')); }
+const missStTag = m => `<span class="tag ${m.state === 'pending' || m.state === 'open' ? 'pend' : m.state === 'excuse' ? 'off' : ''}" style="margin-left:0">${esc(missStText(m))}</span>`;
+const missWText = m => !m.solo && +m.w > 0 && +m.w < 1 ? t('mst_w', { w: missW(m.w) }) : '';
+const missApBtn = (m, cls) => m.can_appeal && !state.viewAs ? `<button class="${cls}" data-act="miss-appeal-open" data-id="${m.id}">${esc(t(missApS(m.id).open ? 'miss_ap_close' : 'miss_ap_btn'))}</button>` : '';
+// 申诉表单（「今天」的红卡、我的任务记录里都用这一个）：原因、写一句（每个字都存在这台设备上）、一张照片
+function missApFormHTML(m){
+  const A = missApS(m.id); if (!A.open || !m.can_appeal || state.viewAs) return '';
+  const note = LS.get(missApKey(m.id), '') || '';
+  return `<div class="sheet" style="margin-top:10px;text-align:left"><div class="grp-t">${esc(t('miss_ap_title'))}</div>
+    <div class="small muted" style="margin:2px 0 8px">${esc(t('miss_ap_hint'))}</div>
+    <div class="chips" style="margin-bottom:8px">${MISS_REASONS.map(r => `<button type="button" class="chip ${A.reason === r ? 'on' : ''}" data-act="miss-ap-reason" data-id="${m.id}" data-r="${r}">${esc(t('miss_r_' + r))}</button>`).join('')}</div>
+    <textarea class="input tkm-ta" id="miss-ap-${m.id}" rows="3" maxlength="300" placeholder="${esc(t('miss_ap_note_ph'))}">${esc(note)}</textarea>
+    ${A.preview ? `<div class="sop-ph" style="margin-top:8px"><div><img src="${A.preview}" alt=""><button type="button" class="link danger" data-act="miss-ap-photo-rm" data-id="${m.id}">${esc(t('miss_ap_photo_rm'))}</button></div></div>`
+      : A.up ? `<div class="loading">${esc(t('miss_ap_uploading'))}</div>`
+      : `<label class="btn ghost sm" style="margin:8px 0 0;width:auto;display:inline-flex;align-items:center;justify-content:center;padding:0 14px">${esc(t('miss_ap_photo'))}<input type="file" accept="image/*" data-missphoto="${m.id}" hidden></label>`}
+    <button class="btn" style="margin-top:10px" data-act="miss-ap-send" data-id="${m.id}" ${A.busy || A.up ? 'disabled' : ''}>${esc(t('miss_ap_send'))}</button></div>`;
+}
+function missApRedraw(id){
+  const m = missFind(id), A = missApS(id);
+  document.querySelectorAll('[data-missbox="' + id + '"]').forEach(e => { e.innerHTML = m ? missApFormHTML(m) : ''; });
+  document.querySelectorAll('[data-act="miss-appeal-open"][data-id="' + id + '"]').forEach(b => { b.textContent = t(A.open ? 'miss_ap_close' : 'miss_ap_btn'); });
+}
+// 申诉的照片：压缩 → 文件服务给的上传链接（task_files r/…，同「交回结果」）
+async function missApPhoto(input){
+  const id = input.dataset.missphoto, f = input.files && input.files[0]; input.value = ''; if (!id || !f) return;
+  const A = missApS(id); A.up = true; missApRedraw(id);
+  try {
+    const img = await compressImage(f, 1600, 0.8), blob = await (await fetch(img)).blob();
+    const r = await callTasks({ action: 'task_upload_urls', kind: 'res', files: [{ type: 'image/jpeg', size: blob.size }] });
+    const u = (r.files || [])[0]; if (!u) throw new Error('TASK_UPLOAD_FAILED');
+    const { error } = await sb.storage.from('task_files').uploadToSignedUrl(u.path, u.token, blob, { contentType: 'image/jpeg' });
+    if (error) throw new Error('TASK_UPLOAD_FAILED');
+    A.photo = u.path; A.preview = img; TF_URLS[u.path] = { url: img, at: Date.now() };
+  } catch(e){ toast(errText(e), true); }
+  A.up = false; missApRedraw(id);
+}
+// 员工「今天」：申诉结果（判了以后显示一次，点「知道了」）
+function missResHTML(){
+  const L = state.missRes || []; if (!L.length) return '';
+  return L.map(x => { const ok = x.verdict === 'excuse';
+    return `<div class="task ${ok ? '' : 'bad'}"><div class="task-t">${esc(t('mres_t', { d: dayLabel(x.day), n: taNm(x) + (x.store ? ' · ' + x.store : '') }))}<span class="${ok ? 'pos' : 'negc'}">${esc(t(ok ? 'mres_excuse' : 'mres_count'))}</span></div>
+      <div class="task-s">${esc(t(ok ? 'mres_excuse_hint' : 'mres_count_hint'))}${x.cause ? '<br>' + esc(t('mr_cause_' + x.cause)) : ''}${x.note ? '<br>' + esc(x.note) : ''}<br><span class="muted">${esc(t('mres_by', { b: x.by || '?' }))}</span></div>
+      ${state.viewAs ? '' : `<div class="task-b"><button class="btn" data-act="miss-res-seen" data-id="${x.id}">${esc(t('ta_ack'))}</button></div>`}</div>`; }).join('');
+}
+// 判定（老板 / 负责人）：一条申诉
+const mrV = (v, c) => t(v === 'excuse' ? 'mr_v_excuse' : 'mr_v_count') + (v === 'excuse' && c ? ' · ' + t('mr_cause_' + c) : '');
+function mrItemHTML(x, full){
+  const A = x.appeal, ai = A && A.ai, V = x.verdicts || [], de = state.lang === 'de', busy = (state.mrAiBusy || {})[x.id], dBusy = (state.mrBusy || {})[x.id];
+  const lines = [x.solo ? t('mr_solo') : t('mr_with', { m: (x.with || []).join(taSep()) }), x.made_up ? t('mr_made') : '', x.auto ? t('mr_auto_' + x.auto) : '',
+    !A && x.state === 'open' && x.appeal_until ? t('mr_open_until', { t: fmtDateTime(x.appeal_until) }) : '', !A && x.state !== 'open' && !x.auto ? t('mr_no_appeal') : ''].filter(Boolean);
+  let h = `<div class="item"><div class="top"><div><strong>${esc(x.name || '?')}</strong> · ${esc(taNm(x))}${x.store ? ' ' + storeTag(x.store) : ''}</div><div class="meta small muted">${esc(dayLabel(x.day))}</div></div>`
+    + lines.map(l => `<div class="meta small">${esc(l)}</div>`).join('');
+  if (A) h += `<div style="margin-top:6px">${esc(t('mr_appeal', { r: t('miss_r_' + A.reason), x: A.note || '' }))}</div><div class="meta small muted">${esc(t('mr_appeal_at', { t: fmtDateTime(A.created_at) }))}</div>${A.photo_path ? tfThumbs([A.photo_path]) : ''}`
+    + (ai ? `<div class="meta small" style="margin-top:4px">✨ ${esc(t('mr_ai', { v: mrV(ai.suggest, ai.cause), w: (de ? ai.why_de || ai.why_zh : ai.why_zh || ai.why_de) || '' }))}</div>${!de ? (ai.evidence_zh || []).map(e => `<div class="meta small muted">· ${esc(e)}</div>`).join('') : ''}`
+      : x.state !== 'pending' ? ''   // 已经判了 / 系统自动不算：不用再等 AI，也不再叫（省钱）
+      : `<div class="meta small muted" style="margin-top:4px">✨ ${esc(t('mr_ai_wait'))}${state.viewAs ? '' : ` <button class="link" data-act="mr-ai" data-id="${x.id}" ${busy ? 'disabled' : ''}>${esc(t(busy ? 'mr_ai_busy' : 'mr_ai_go'))}</button>`}</div>`);
+  if (V.length) h += `<div style="margin-top:6px">${(full ? V : V.slice(0, 1)).map((v, i) => `<div class="meta small ${i ? 'muted' : v.verdict === 'excuse' ? 'pos' : 'negc'}">${esc(t('mr_hist', { b: v.by || '?', a: v.by_admin ? t('mr_by_admin') : '', v: mrV(v.verdict, v.cause), t: fmtDateTime(v.at) }) + (v.note ? ' · ' + v.note : ''))}</div>`).join('')}</div>`;
+  if (x.can_decide && !state.viewAs){
+    const ctl = `<textarea class="input tkm-ta" id="mr-note-${x.id}" rows="2" maxlength="300" style="margin-top:8px" placeholder="${esc(t('mr_note_ph'))}">${esc((state.mrNote || {})[x.id] || '')}</textarea>
+      <div class="row" style="flex-wrap:wrap;gap:6px;margin-top:8px">${[['count', ''], ['excuse', 'staff_ok'], ['excuse', 'system'], ['excuse', 'other']].map(([v, c]) => `<button class="btn ghost${v === 'count' ? ' negc' : ''}" style="flex:1 1 45%;height:auto;padding:8px 6px;font-size:15px;overflow-wrap:anywhere" data-act="mr-decide" data-id="${x.id}" data-v="${v}" data-c="${c}" ${dBusy ? 'disabled' : ''}>${esc(t(c ? 'mr_d_' + c : 'mr_d_count'))}</button>`).join('')}</div>`;
+    h += V.length ? `<details style="margin-top:6px"><summary class="small" style="cursor:pointer">${esc(t('mr_redo'))}</summary>${ctl}</details>` : ctl;
+  }
+  return h + '</div>';
+}
+// 老板首页 / 负责人「今天」：待判定的（能判的才放这里；没有就不显示）
+function mrPending(){ const R = state.missRev; return ((R && R.items) || []).filter(x => x.state === 'pending' && x.can_decide && !(x.verdicts || []).length); }
+function mrHomeHTML(){
+  const L = mrPending(); if (!L.length) return '';
+  if (L.some(x => x.appeal && x.appeal.photo_path)) setTimeout(tfLoadFiles);
+  return `<div id="mr-home" class="sheet" style="margin-bottom:12px"><div class="grp-t negc">${esc(t('mr_home_t', { n: L.length }))}</div>
+    <div class="small muted" style="margin:2px 0 6px">${esc(t('mr_home_hint'))}</div><div class="list">${L.map(x => mrItemHTML(x, false)).join('')}</div></div>`;
+}
+// 老板「管理 → 任务 → 申诉」：待判定、没申诉的（老板可以直接判）、判过的（全部记录，可以改判）
+function mrTabHTML(){
+  const R = state.missRev;
+  if (state.mrErr && !R) return `<div class="list"><div class="empty">${esc(state.mrErr)}</div></div>`;
+  if (!R) return `<div class="loading">${esc(t('loading'))}</div>`;
+  // 按数据库给的分组：1 = 待判定，2 = 没申诉、还没判（老板可以直接判），3 = 判过的 / 申诉后系统判了「不算」的
+  const L = R.items || [], grp = x => +x.group || ((x.verdicts || []).length || x.appeal ? (x.state === 'pending' ? 1 : 3) : 2),
+    pend = L.filter(x => grp(x) === 1), rest = L.filter(x => grp(x) === 2), done = L.filter(x => grp(x) === 3);
+  if (L.some(x => x.appeal && x.appeal.photo_path)) setTimeout(tfLoadFiles);
+  const sec = (k, xs, full) => xs.length ? `<h3>${esc(t(k, { n: xs.length }))}</h3><div class="list">${xs.map(x => mrItemHTML(x, full)).join('')}</div>` : '';
+  return `<div class="small muted" style="margin-bottom:10px">${esc(t('mr_tab_hint'))}</div>`
+    + (L.length ? sec('mr_sec_pending', pend) + sec('mr_sec_open', rest) + sec('mr_sec_done', done, true) : `<div class="list"><div class="empty">${esc(t('mr_none'))}</div></div>`);
+}
+async function mrLoad(redraw){
+  try { const r = await rpc('miss_reviews', { ...tok(), p_days: 14 }); state.missRev = r || { items: [] }; state.mrErr = null; }
+  catch(e){ state.mrErr = errText(e); }
+  if (redraw) mrRedraw();
+}
+function mrRedraw(){
+  const h = $('#mr-home'); if (h) h.outerHTML = mrHomeHTML();
+  if (state.tab === 'admin' && state.adminSub === 'tasks' && state.toView === 'appeal') keepScroll(toRedraw);
 }
 // ============ 问几个人（v147，数据库 v108，老板 2026-11-06）：同一个问题发给几个人，各自回答（老板的问题 = staff_messages.needs_answer）============
 const QA_KITCHEN = ['hot', 'cold', 'skewer', 'clean'];
@@ -12330,7 +12481,9 @@ document.addEventListener('click', async ev => {
       break;
     }
     // v95：某一天的任务（老板「管理 → 任务」、负责人「交给…」）
-    case 'to-view': state.toView = el.dataset.k; if (el.dataset.k === 'stats') tsLoad(); else keepScroll(toRedraw); break;   // v123：统计每次切过来重新算
+    case 'to-view': state.toView = el.dataset.k; if (el.dataset.k === 'stats') tsLoad(); else keepScroll(toRedraw);
+      if (el.dataset.k === 'appeal') mrLoad(true);   // v196：每次切过来重新要
+      break;   // v123：统计每次切过来重新算
     case 'ts-range': (state.ts = state.ts || {}).k = el.dataset.k; tsLoad(); break;
     case 'ts-sop': {   // v150：「✨ 查 SOP」（文件服务 tasks v27）
       const T = state.ts, D = T && T.data, id = el.dataset.id; if (!D || !id || (T.sopBusy || {})[id]) break;
@@ -12374,6 +12527,50 @@ document.addEventListener('click', async ev => {
       try { await rpc('task_miss_ack', { ...tok(), p_id: el.dataset.id }); state.misses = (state.misses || []).filter(m => m.id !== el.dataset.id); keepScroll(render); }
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
+    }
+    case 'miss-appeal-open': { const A = missApS(el.dataset.id); A.open = !A.open; missApRedraw(el.dataset.id); break; }   // v196：漏做申诉
+    case 'miss-ap-reason': { const A = missApS(el.dataset.id); A.reason = el.dataset.r; missApRedraw(el.dataset.id); break; }
+    case 'miss-ap-photo-rm': { const A = missApS(el.dataset.id); A.photo = null; A.preview = null; missApRedraw(el.dataset.id); break; }
+    case 'miss-ap-send': {
+      const id = el.dataset.id, A = missApS(id), box = document.getElementById('miss-ap-' + id), note = String(box ? box.value : LS.get(missApKey(id), '') || '').trim();
+      if (!A.reason){ toast(t('miss_ap_need_reason'), true); break; }
+      if (note.length < 2 || note.length > 300){ toast(errText(new Error('MISS_NOTE')), true); break; }
+      if (A.up || A.busy) break;
+      A.busy = true; el.disabled = true;
+      try { await rpc('task_miss_appeal', { ...tok(), p_miss: id, p_reason: A.reason, p_note: note, p_photo: A.photo || null }); }
+      catch(err){ A.busy = false; el.disabled = false; toast(errText(err), true); break; }
+      callTasks({ action: 'miss_ai', miss_id: id }).catch(() => {});   // AI 建议：在后台看，出错不管（老板那边还能点「让 AI 看」）
+      const reason = A.reason; LS.del(missApKey(id)); delete state.missAp[id];
+      state.misses = (state.misses || []).filter(m => m.id !== id);
+      const R = state.taRec && state.taRec.data && state.taRec.data.me, rm = ((R && R.misses) || []).find(m => m.id === id);
+      if (rm){ const was = rm.state; Object.assign(rm, { state: 'pending', can_appeal: false, reason });
+        if (was === 'open'){ R.miss_open = Math.max(0, (+R.miss_open || 0) - 1); R.miss_pending = (+R.miss_pending || 0) + 1; R.miss_pts = Math.max(0, Math.round(((+R.miss_pts || 0) - (+rm.w || 1)) * 100) / 100); } }   // v196：上面的数字跟着变
+      toast(t('miss_ap_sent')); keepScroll(render); break;
+    }
+    case 'miss-res-seen': {   // v196：申诉结果「知道了」
+      el.disabled = true;
+      try { await rpc('miss_result_seen', { ...tok(), p_id: el.dataset.id }); state.missRes = (state.missRes || []).filter(x => x.id !== el.dataset.id); keepScroll(render); }
+      catch(err){ toast(errText(err), true); el.disabled = false; }
+      break;
+    }
+    case 'mr-decide': {   // v196：判「算」/「不算」
+      const id = el.dataset.id, v = el.dataset.v, c = el.dataset.c || null, nb = document.getElementById('mr-note-' + id), note = String((nb ? nb.value : (state.mrNote || {})[id]) || '').trim();
+      if (note && note.length < 2){ toast(errText(new Error('MISS_NOTE')), true); break; }
+      const MB = state.mrBusy = state.mrBusy || {}; if (MB[id]) break;   // 一条正在判：别的按钮先不能点（不会存两个不一样的判定）
+      MB[id] = true; document.querySelectorAll('[data-act="mr-decide"]').forEach(b => { if (b.dataset.id === id) b.disabled = true; });
+      try { const r = await rpc('miss_decide', { ...tok(), p_miss: id, p_verdict: v, p_cause: v === 'excuse' ? c : null, p_note: note || null });
+        const R = state.missRev; if (R && r && r.id){ R.items = (R.items || []).map(x => x.id === id ? r : x); R.pending_n = R.items.filter(x => x.state === 'pending').length; }
+        if (state.mrNote) delete state.mrNote[id];
+        delete MB[id]; toast(t('mr_decided')); if (!(r && r.id)) await mrLoad(); mrRedraw(); }
+      catch(err){ delete MB[id]; toast(errText(err), true); document.querySelectorAll('[data-act="mr-decide"]').forEach(b => { if (b.dataset.id === id) b.disabled = false; }); }
+      break;
+    }
+    case 'mr-ai': {   // v196：AI 还没给建议时，老板 / 负责人点「让 AI 看」
+      const id = el.dataset.id, B = state.mrAiBusy = state.mrAiBusy || {}; if (B[id]) break;
+      B[id] = true; el.disabled = true; el.textContent = t('mr_ai_busy');
+      try { const r = await callTasks({ action: 'miss_ai', miss_id: id }), x = ((state.missRev || {}).items || []).find(i => i.id === id); if (x && x.appeal && r && r.ai) x.appeal.ai = r.ai; }
+      catch(err){ toast(errText(err), true); }
+      delete B[id]; mrRedraw(); break;
     }
     case 'miss-make': state.taskOpen = { def: el.dataset.def, day: el.dataset.day }; render(); window.scrollTo(0, 0); break;   // v149：补做
     case 'miss-msg': {   // v149：老板首页「昨天漏做」里给某人留言（同核对页的 💬）
@@ -13445,6 +13642,7 @@ document.addEventListener('click', async ev => {
         state.receipts = []; state.rcWeek = null; state.menu = false; state.staffEdit = null;
         state.week = mondayOf(today()); state.planWeek = planWeekDefault(); state.bon = blankBon(); state.form = blankForm();
         state.planSub = 'edit'; state.planArea = null; state.done = null; state.entryCtx = null; state.recon = null; state.lockOpen = null; state.expNew = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null; state.tfEdit = null; state.named = null; state.tfCat = null; state.cdPage = null; state.cdRec = null; state.cdMine = null; state.cdDraft = null;   // v70；v118：点名任务；v119：和员工本人登录时一样
+        state.missRev = null; state.missRes = null; state.missAp = null; state.mrNote = null;   // v196：申诉的数据换成这个人的
         await loadCommon(); state.tab = navTabs()[0]; render(); window.scrollTo(0, 0);
       } catch(e){ toast(errText(e), true); }
       break;
@@ -14440,6 +14638,7 @@ document.addEventListener('change', async ev => {
   if (ev.target.dataset && ev.target.dataset.invf === 'damp'){ const F = invS().form; if (F){ F.damp = ev.target.checked; F.dampTouched = true; } return; }
   if (ev.target.dataset && ev.target.dataset.lockcp){ lockUpload(ev.target); return; }
   if (ev.target.dataset && ev.target.dataset.taskitem){ taskUpload(ev.target); return; }   // v71
+  if (ev.target.dataset && ev.target.dataset.missphoto){ missApPhoto(ev.target); return; }   // v196：漏做申诉的照片
   if (ev.target.dataset && ev.target.dataset.bfphoto){ bfPhoto(ev.target); return; }   // v171：老板发现没做的照片
   if (ev.target.dataset && ev.target.dataset.audphoto){ audPhoto(ev.target); return; }   // v149：抽查的照片
   if (ev.target.dataset && ev.target.dataset.tfatt && ev.target.files && ev.target.files.length){ const fs = [...ev.target.files]; ev.target.value = ''; tfAttChosen(fs); return; }   // v128：附照片
@@ -14557,6 +14756,8 @@ document.addEventListener('input', ev => {
   const id = ev.target.id;
   if (id === 'cd-note' || id === 'cd-day'){ const F = state.cdRec && state.cdRec.form; if (F){ F[id === 'cd-note' ? 'note' : 'day'] = ev.target.value; cdSaveDraft(); } return; }   // v195：行为记录每个字都暂存
   if (id && id.startsWith('cd-r-')){ (state.cdDraft = state.cdDraft || {})[id.slice(5)] = ev.target.value; cdSaveReplies(); return; }
+  if (id && id.startsWith('miss-ap-')){ LS.set(missApKey(id.slice(8)), ev.target.value); return; }   // v196：申诉写的字每个都存在这台设备上
+  if (id && id.startsWith('mr-note-')){ (state.mrNote = state.mrNote || {})[id.slice(8)] = ev.target.value; return; }
   if (id && /^cd-r(zh|de)-/.test(id) && state.cdRec){ (state.cdRec.rdraft = state.cdRec.rdraft || {})[id] = ev.target.value; return; }
   if (id === 'inv-q'){ invS().q = ev.target.value; invMidSync(); invQueue(); }   // v91；v182
   if (id === 'ct-q'){ invS().ctQ = ev.target.value; ctRefresh(); return; }   // v179：盘点页找饮料
@@ -14617,6 +14818,7 @@ async function exitView(){
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
   ['#pinDlg', '#shiftDlg', '#photoDlg', '#fbDlg'].forEach(q => { const dlg = $(q); if (dlg && dlg.open) dlg.close(); });
   state.planWeek = planWeekDefault(); state.planSub = 'edit'; state.planArea = null; state.hintAcks = undefined; state.cdPage = null; state.cdRec = null; state.cdMine = null; state.cdDraft = null; state.done = null; state.entryCtx = null; state.expNew = null; state.taskOpen = null; state.ocOpen = false; state.onbOpen = null; state.sop = null; state.planTimes = null; state.libView = null; state.tfEdit = null; state.named = null; state.tfCat = null; state.cdPage = null; state.cdRec = null; state.cdMine = null; state.cdDraft = null;   // v70；v118：点名任务；v119
+  state.missRev = null; state.missRes = null; state.missAp = null; state.mrNote = null;   // v196：回到老板自己的申诉数据
   state.inv = null; await loadCommon(); state.tab = 'admin'; state.adminSub = 'staff'; state.week = mondayOf(today()); render(); window.scrollTo(0, 0);
 }
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
