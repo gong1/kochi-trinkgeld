@@ -158,6 +158,8 @@ body.en #main::after{content:"Tasks, notices and SOPs are translated by AI. Germ
 .xctl{display:flex;align-items:center;gap:10px;margin:2px 0 6px}
 .xctl input[type=range]{flex:1;min-width:0;accent-color:var(--celadon-deep);height:28px}
 .xb{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);font-size:20px;line-height:1;color:var(--ink);cursor:pointer}
+.xb.x5{width:auto;padding:0 10px;border-radius:18px;font-size:15px;font-weight:600}
+.xa-tap{cursor:pointer;border-bottom:1.5px dashed var(--line)}
 .today-shift .ts-row{padding:6px 0;border-top:1px solid var(--line)}
 .today-shift .ts-row:first-of-type{border-top:0}
 .task{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--copper);border-radius:var(--r-m);padding:12px 14px;margin-bottom:10px}
@@ -603,7 +605,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v199';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v200';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -1107,7 +1109,7 @@ zh: {
   admin_tasks:'任务', tl_title:'负责人', tl_hint:'每家店前场、后厨各设一个负责人：某一天的任务先归他管，他可以交给这个区域的某个人；没交的话，到那天按「默认交给」当天排的岗位（例如清洁）。负责人在自己的「今天」里看到这些任务。', tl_lead:'负责人', tl_role:'默认交给（当天排的岗位）', tl_none:'— 还没设 —', tl_by:'{n} · {t}', tl_saved:'负责人已保存', to_new:'＋ 新任务', to_title_new:'新任务（某一天做）', to_title_edit:'改任务', to_day:'哪天', to_when:'什么时候做', to_text:'做什么（写一句话，中文或德文都行）', to_text_ph:'例如：把油桶从地下室拿到门口，明天早上 ReFood 来收油', to_ai:'✨ AI 写成中德文', to_ai_busy:'AI 正在写…', to_ai_hint:'AI 写好任务名和说明，你可以改。不用 AI 也可以直接填下面。', to_name_zh:'任务名（中文）', to_name_de:'任务名（德文）', to_hint_zh:'说明（中文，可不填）', to_hint_de:'说明（德文，可不填）', to_how:'怎么算做完', to_check:'打勾', to_photo:'拍照', to_save:'保存任务', to_saved:'任务已保存', to_list:'某一天的任务', to_list_hint:'最近 7 天和以后的。谁做：交给的人那天上班就是他；不然按默认交给当天排的岗位；也没排就是那天这个区域上班的人，谁做都算。负责人和老板随时也能做。', to_none:'还没有某一天的任务。点「＋ 新任务」加一个。', to_lead:'负责：{n}', to_lead_none:'这个区域还没设负责人（在下面设）', to_who_assignee:'交给 {n}', to_who_assignee_off:'交给 {n}，但他那天没排班 → {p}', to_who_default:'按默认：当天的{r}（{p}）', to_who_default0:'按默认：当天的{r}', to_who_area:'当天没排{r} → 那天上班的都算（{p}）', to_nobody:'那天这个区域没人上班', to_unpub:'排班还没发布，发布后才知道是谁', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ 没做', to_assign:'交给…', to_edit:'改', to_cancel:'取消任务', to_cancel_q:'取消这个任务？（{n}，{d}）', to_cancelled:'任务已取消', tk_once:'{w}：{n} · {s}', tk_once_closing:'收店时', tk_once_arrival:'到店后', tk_once_now_arrival:'到店后先做', tk_close_photo_once:'这个任务要拍照', tk_by_lead:'{n} 交给你的', td_upcoming:'接下来（{n}）', ld_title:'我负责的任务（{n}）', ld_hint:'你是这个区域的任务负责人。可以把任务交给某个人（他会在自己的「今天」里看到）；不交的话，到那天按默认交给当天排的岗位。你自己也随时可以做。', ld_self:'我自己做', ld_assign_title:'交给谁', ld_default:'按默认：当天排的{r}', ld_on:'那天上班', ld_off:'那天没排班', ld_assign_hint:'交给的人那天没排班的话，到时候还是按默认交给当天的{r}。', ld_assigned:'已交给 {n}', ld_reset:'已改回默认', tk_adm_nobody_once:'{n}：那天没人上班',
   tk_close_go:'开始', tk_close_cont:'继续', tk_close_done:'{n} · {s} 做完了', tk_gone:'这个任务已经没有了。点「今天」回去。',
   tk_item_by:'{t} · {n}', tk_item_checked:'打勾', tk_item_override:'说 AI 看错了', tk_retake:'📷 重拍', tk_photo:'📷 拍照', tk_check:'✓ 我确认做了',
-  tk_override:'提交给老板确认', tk_sent_boss:'已提交，老板会看照片确认。', tk_rev_pending:'已提交，等老板确认', tk_rev_ok:'老板确认没问题', tk_rev_bad:'老板确认有问题', arv_title:'AI 有疑问的照片（{n}）', arv_hint:'员工提交给你确认的任务照片。点「没问题」就不算员工的问题；点「确实有问题」和以前点「AI 看错了」一样算（这个任务重新每次拍照）。', arv_ok:'✓ 没问题', arv_bad:'✗ 确实有问题', arv_big:'看大图', arv_saved_ok:'已确认：没问题', arv_saved_bad:'已记下：确实有问题', tk_run_done:'做完了（{t} · {n}）',
+  tk_override:'提交给老板确认', tk_ovr_other:'这张是 {n} 拍的，只有 {n} 能提交给老板确认。请等 {n}，或者你重拍一张。', tk_ovr_gone:'没提交成：这张照片可能已经提交给老板了，或者不是你拍的（只有拍照的人能提交）。页面已刷新，请看一下现在的状态。', tk_sent_boss:'已提交，老板会看照片确认。', tk_rev_pending:'已提交，等老板确认', tk_rev_ok:'老板确认没问题', tk_rev_bad:'老板确认有问题', arv_title:'AI 有疑问的照片（{n}）', arv_hint:'员工提交给你确认的任务照片。点「没问题」就不算员工的问题；点「确实有问题」和以前点「AI 看错了」一样算（这个任务重新每次拍照）。', arv_ok:'✓ 没问题', arv_bad:'✗ 确实有问题', arv_big:'看大图', arv_saved_ok:'已确认：没问题', arv_saved_bad:'已记下：确实有问题', tk_run_done:'做完了（{t} · {n}）',
   tk_uploading_ai:'照片上传中，AI 在看…', tk_ai_problem:'AI 看出问题了，请看提示', tk_all_done:'收店任务做完了 ✓ 谢谢！', tk_before_leave:'走之前还有：{x}',
   tk_adm_title:'任务', tk_adm_done:'{n}（{b} · {t}）', tk_adm_nobody:'{n}：没人负责（没排{r}，或者排了 Runner 但没定谁做{r}）', tk_adm_missed:'{n} 没做（{p}）', tk_adm_open:'{n}：还没做（{p}）',
   tk_adm_override:'员工说 AI 看错了', tk_adm_ai_bad:'AI 看出问题', rk_tasks:'任务', no_role_task:'没排{r}（有收店任务）',
@@ -1273,7 +1275,7 @@ zh: {
   ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_unbind_full:'解除绑定', ls_none:'还没有绑定。此人第一次上传 Bon 时会自动绑定，需要你确认。', ls_none_store:'还没绑定（在这家店第一次上传 Bon 时自动绑定）', ls_unbind_q:'解除 {n} 的 Lightspeed 绑定？此人下次上传 Bon 时会重新绑定，需要你确认。', ls_unbound:'已解除绑定', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
   shortage_note:'本周你承担的差额', read_again:'换照片后请重新识别',
   view_as:'查看', viewing_as:'正在以 {n} 的视角查看（只读）', exit_view:'退出查看',
-  role_server:'服务员', ex_title:'分配（可以多给同事）', ex_hint:'觉得 Runner / 吧台今天特别辛苦，可以把他那一行往右拉：每格多 1 €，从你自己那份扣。不能往左拉，厨房不能改。', ex_self:'你自己', ex_none:'你自己这份不够，不能多给。', ex_locked:'交 Bon 已超过 10 分钟，多给的金额不能再改。', ex_note:'多给：{list}（已含在上面的金额里）', ex_wk_title:'多给的小费（{n} 笔 · 合计 {x}）', ex_wk_hint:'服务员交 Bon 时自愿多给 Runner / 吧台的小费，从自己那份扣，已经算进分配里。留意有没有人经常被要求多给。', ex_wk_row:'{g} → {r}（{role}）：{b} + 多给 {x}', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
+  role_server:'服务员', ex_title:'分配（可以多给同事）', ex_hint:'觉得 Runner / 吧台今天特别辛苦，可以多给：点 ＋（1 €）或 +5（5 €），也可以点他的金额直接写多给几欧。从你自己那份扣，最多到你自己那份。厨房不能改。', ex_max:'给这一位最多只能多给 {x}（不能超过你自己那份）。', ex_type_q:'多给 {n} 几欧？（只写整欧，0 = 不多给；最多 {x}）', ex_type_bad:'请只写整欧的数字，例如 5 或 10。', ex_self:'你自己', ex_none:'你自己这份不够，不能多给。', ex_locked:'交 Bon 已超过 10 分钟，多给的金额不能再改。', ex_note:'多给：{list}（已含在上面的金额里）', ex_wk_title:'多给的小费（{n} 笔 · 合计 {x}）', ex_wk_hint:'服务员交 Bon 时自愿多给 Runner / 吧台的小费，从自己那份扣，已经算进分配里。留意有没有人经常被要求多给。', ex_wk_row:'{g} → {r}（{role}）：{b} + 多给 {x}', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
   week_of:'第 {w} 周', preview:'分配预览', from:'来自',
   sched_line:'按排班（{s}）：Runner {r} · 吧台 {b}', sched_auto:'已按排班自动选好，和实际不一样请直接点名字增减。', sched_empty:'排班里这个班没有排{r}，请自己选；确实没有就点「{none}」。', and_word:'和',
   miss_banner:'你有 {n} 个班还没交 Bon：{list}。请尽快拍照交上；如果那天没有上班，请告诉排班员把班删掉。', miss_go:'去交 Bon',
@@ -1856,7 +1858,7 @@ de: {
   admin_tasks:'Aufgaben', tl_title:'Verantwortliche', tl_hint:'Pro Filiale je eine verantwortliche Person für Service und Küche: Aufgaben für einen bestimmten Tag gehen zuerst an sie; sie kann sie jemandem aus ihrem Bereich zuteilen. Sonst macht es am Tag die eingeplante Standard-Position (z. B. Reinigung). Die Verantwortlichen sehen diese Aufgaben unter „Heute“.', tl_lead:'Verantwortlich', tl_role:'Standard (eingeplante Position am Tag)', tl_none:'— noch niemand —', tl_by:'{n} · {t}', tl_saved:'Verantwortliche gespeichert', to_new:'＋ Neue Aufgabe', to_title_new:'Neue Aufgabe (an einem Tag)', to_title_edit:'Aufgabe ändern', to_day:'Tag', to_when:'Wann', to_text:'Was ist zu tun (ein Satz, Deutsch oder Chinesisch)', to_text_ph:'z. B. Ölfass aus dem Keller vor die Tür stellen, morgen früh holt ReFood das Altfett ab', to_ai:'✨ Mit KI zweisprachig schreiben', to_ai_busy:'KI schreibt …', to_ai_hint:'Die KI schreibt Name und Hinweis, du kannst alles ändern. Ohne KI einfach unten ausfüllen.', to_name_zh:'Name (Chinesisch)', to_name_de:'Name (Deutsch)', to_hint_zh:'Hinweis (Chinesisch, optional)', to_hint_de:'Hinweis (Deutsch, optional)', to_how:'Wie erledigt', to_check:'Abhaken', to_photo:'Foto', to_save:'Aufgabe speichern', to_saved:'Aufgabe gespeichert', to_list:'Aufgaben an einem Tag', to_list_hint:'Die letzten 7 Tage und alles danach. Wer: die zugeteilte Person, wenn sie an dem Tag arbeitet; sonst die eingeplante Standard-Position; sonst alle aus dem Bereich, die an dem Tag arbeiten. Verantwortliche und Chef können jederzeit selbst erledigen.', to_none:'Noch keine Aufgaben an einem Tag. Mit „＋ Neue Aufgabe“ anlegen.', to_lead:'Verantwortlich: {n}', to_lead_none:'Für diesen Bereich ist noch niemand verantwortlich (unten festlegen)', to_who_assignee:'An {n}', to_who_assignee_off:'An {n}, aber an dem Tag nicht eingeplant → {p}', to_who_default:'Standard: {r} am Tag ({p})', to_who_default0:'Standard: {r} am Tag', to_who_area:'kein(e) {r} eingeplant → alle, die an dem Tag arbeiten ({p})', to_nobody:'an dem Tag arbeitet niemand aus dem Bereich', to_unpub:'Dienstplan noch nicht veröffentlicht – erst danach steht fest, wer', to_st_done:'✓ {n} · {t}', to_st_missed:'✗ nicht erledigt', to_assign:'Zuteilen …', to_edit:'Ändern', to_cancel:'Aufgabe absagen', to_cancel_q:'Diese Aufgabe absagen? ({n}, {d})', to_cancelled:'Aufgabe abgesagt', tk_once:'{w}: {n} · {s}', tk_once_closing:'Bei Feierabend', tk_once_arrival:'Bei Dienstbeginn', tk_once_now_arrival:'Gleich bei Dienstbeginn erledigen', tk_close_photo_once:'Mit Foto', tk_by_lead:'von {n} zugeteilt', td_upcoming:'Demnächst ({n})', ld_title:'Meine Bereichsaufgaben ({n})', ld_hint:'Du bist für die Aufgaben in diesem Bereich verantwortlich. Du kannst eine Aufgabe jemandem zuteilen (die Person sieht sie unter „Heute“); sonst macht es am Tag die eingeplante Standard-Position. Du kannst sie auch jederzeit selbst erledigen.', ld_self:'Selbst erledigen', ld_assign_title:'Wem zuteilen', ld_default:'Standard: {r} am Tag', ld_on:'arbeitet an dem Tag', ld_off:'an dem Tag nicht eingeplant', ld_assign_hint:'Ist die Person an dem Tag nicht eingeplant, macht es am Tag trotzdem die Standard-Position ({r}).', ld_assigned:'An {n} zugeteilt', ld_reset:'Zurück auf Standard', tk_adm_nobody_once:'{n}: an dem Tag arbeitet niemand',
   tk_close_go:'Starten', tk_close_cont:'Weiter', tk_close_done:'{n} · {s} erledigt', tk_gone:'Diese Aufgabe gibt es nicht mehr. Zurück zu „Heute“.',
   tk_item_by:'{t} · {n}', tk_item_checked:'abgehakt', tk_item_override:'„KI irrt sich“', tk_retake:'📷 Neu fotografieren', tk_photo:'📷 Foto', tk_check:'✓ Bestätigt: erledigt',
-  tk_override:'An den Chef zur Prüfung', tk_sent_boss:'Gesendet. Der Chef prüft das Foto.', tk_rev_pending:'gesendet, Chef prüft', tk_rev_ok:'vom Chef bestätigt: kein Problem', tk_rev_bad:'vom Chef bestätigt: Problem', arv_title:'Fotos, bei denen die KI zweifelt ({n})', arv_hint:'Aufgabenfotos, die dir zur Prüfung geschickt wurden. „Kein Problem“ zählt nicht gegen die Person. „Wirklich ein Problem“ zählt wie früher „KI irrt sich“ (die Aufgabe muss wieder jedes Mal fotografiert werden).', arv_ok:'✓ Kein Problem', arv_bad:'✗ Wirklich ein Problem', arv_big:'Groß ansehen', arv_saved_ok:'Bestätigt: kein Problem', arv_saved_bad:'Notiert: wirklich ein Problem', tk_run_done:'Erledigt ({t} · {n})',
+  tk_override:'An den Chef zur Prüfung', tk_ovr_other:'Dieses Foto hat {n} gemacht – nur {n} kann es an den Chef schicken. Bitte auf {n} warten oder selbst ein neues Foto machen.', tk_ovr_gone:'Nicht gesendet: Das Foto wurde vielleicht schon an den Chef geschickt, oder es ist nicht deins (nur wer das Foto gemacht hat, kann es schicken). Die Seite ist aktualisiert – bitte den aktuellen Stand ansehen.', tk_sent_boss:'Gesendet. Der Chef prüft das Foto.', tk_rev_pending:'gesendet, Chef prüft', tk_rev_ok:'vom Chef bestätigt: kein Problem', tk_rev_bad:'vom Chef bestätigt: Problem', arv_title:'Fotos, bei denen die KI zweifelt ({n})', arv_hint:'Aufgabenfotos, die dir zur Prüfung geschickt wurden. „Kein Problem“ zählt nicht gegen die Person. „Wirklich ein Problem“ zählt wie früher „KI irrt sich“ (die Aufgabe muss wieder jedes Mal fotografiert werden).', arv_ok:'✓ Kein Problem', arv_bad:'✗ Wirklich ein Problem', arv_big:'Groß ansehen', arv_saved_ok:'Bestätigt: kein Problem', arv_saved_bad:'Notiert: wirklich ein Problem', tk_run_done:'Erledigt ({t} · {n})',
   tk_uploading_ai:'Foto wird hochgeladen, die KI schaut…', tk_ai_problem:'Die KI sieht ein Problem – bitte Hinweis lesen', tk_all_done:'Feierabend-Aufgabe erledigt ✓ Danke!', tk_before_leave:'Vor dem Gehen noch: {x}',
   tk_adm_title:'Aufgaben', tk_adm_done:'{n} ({b} · {t})', tk_adm_nobody:'{n}: niemand zuständig (kein(e) {r} eingeplant oder nicht festgelegt, wer {r} übernimmt)', tk_adm_missed:'{n} nicht erledigt ({p})', tk_adm_open:'{n}: noch offen ({p})',
   tk_adm_override:'Mitarbeiter: KI irrt sich', tk_adm_ai_bad:'KI sieht Problem', rk_tasks:'Aufgaben', no_role_task:'Kein(e) {r} (Feierabend-Aufgabe)',
@@ -2022,7 +2024,7 @@ de: {
   ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_unbind_full:'Verknüpfung lösen', ls_none:'Noch nicht verknüpft. Wird beim ersten Bon-Upload automatisch verknüpft und muss bestätigt werden.', ls_none_store:'Noch nicht verknüpft (beim ersten Bon-Upload in diesem Restaurant)', ls_unbind_q:'Lightspeed-Verknüpfung von {n} lösen? Beim nächsten Bon-Upload wird neu verknüpft und muss bestätigt werden.', ls_unbound:'Verknüpfung gelöst', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
   shortage_note:'Von dir getragene Fehlbeträge diese Woche', read_again:'Neue Fotos bitte erneut auslesen',
   view_as:'Ansehen', viewing_as:'Ansicht als {n} (nur lesen)', exit_view:'Ansicht beenden',
-  role_server:'Service', ex_title:'Verteilung (du kannst mehr geben)', ex_hint:'War Runner / Bar heute besonders fleißig? Zeile nach rechts ziehen: pro Schritt 1 € mehr, wird von deinem Anteil abgezogen. Nach links geht nicht, Küche nicht änderbar.', ex_self:'Du selbst', ex_none:'Dein Anteil reicht nicht, um mehr zu geben.', ex_locked:'Mehr als 10 Minuten seit dem Einreichen – der Zusatzbetrag ist nicht mehr änderbar.', ex_note:'Mehr gegeben: {list} (in den Beträgen oben enthalten)', ex_wk_title:'Freiwillig mehr gegeben ({n} · gesamt {x})', ex_wk_hint:'Service hat Runner / Bar beim Einreichen freiwillig mehr gegeben, vom eigenen Anteil abgezogen und schon in der Verteilung enthalten. Achte darauf, ob jemand oft dazu gedrängt wird.', ex_wk_row:'{g} → {r} ({role}): {b} + {x} mehr', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
+  role_server:'Service', ex_title:'Verteilung (du kannst mehr geben)', ex_hint:'War Runner / Bar heute besonders fleißig? Du kannst mehr geben: ＋ (1 €) oder +5 (5 €) tippen, oder auf den Betrag tippen und direkt eingeben, wie viel Euro mehr. Wird von deinem Anteil abgezogen, höchstens bis zu deinem Anteil. Küche nicht änderbar.', ex_max:'Dieser Person kannst du höchstens {x} mehr geben (nicht mehr als dein eigener Anteil).', ex_type_q:'Wie viel Euro mehr für {n}? (nur ganze Euro, 0 = nichts extra; höchstens {x})', ex_type_bad:'Bitte nur ganze Euro als Zahl eingeben, z. B. 5 oder 10.', ex_self:'Du selbst', ex_none:'Dein Anteil reicht nicht, um mehr zu geben.', ex_locked:'Mehr als 10 Minuten seit dem Einreichen – der Zusatzbetrag ist nicht mehr änderbar.', ex_note:'Mehr gegeben: {list} (in den Beträgen oben enthalten)', ex_wk_title:'Freiwillig mehr gegeben ({n} · gesamt {x})', ex_wk_hint:'Service hat Runner / Bar beim Einreichen freiwillig mehr gegeben, vom eigenen Anteil abgezogen und schon in der Verteilung enthalten. Achte darauf, ob jemand oft dazu gedrängt wird.', ex_wk_row:'{g} → {r} ({role}): {b} + {x} mehr', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
   week_of:'KW {w}', preview:'Aufteilung', from:'von',
   sched_line:'Laut Dienstplan ({s}): Runner {r} · Bar {b}', sched_auto:'Automatisch nach Dienstplan ausgewählt. Wenn es anders war, einfach Namen an- oder abwählen.', sched_empty:'Für diese Schicht ist im Dienstplan niemand als {r} eingeplant – bitte selbst wählen; wenn wirklich niemand da war, „{none}“ tippen.', and_word:' und ',
   miss_banner:'Dein Bon fehlt noch ({n}): {list}. Bitte so bald wie möglich einreichen. Falls du an dem Tag nicht gearbeitet hast, sag bitte der Dienstplanung Bescheid, damit die Schicht gelöscht wird.', miss_go:'Bon eintragen',
@@ -2130,7 +2132,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=31'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=33'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -4622,7 +4624,9 @@ function renderTaskRun(){
     const l = it.last, flagged = l && l.ai && l.ai.ok === false && !l.override, photo = photoRun && !it.check_only;   // v77：只打勾的项（如 Rest 垃圾桶）不拍照
     const st = it.done ? `<div class="meta num"><span class="pos">✓</span> ${esc(t('tk_item_by', { t: fmtDateTime(l.done_at), n: l.by || '' }))}${l.evidence === 'check' && !c.need_result ? ' · ' + esc(t('tk_item_checked')) : ''}${l.override ? ' · ' + esc(tkRevTag(l)) : ''}</div>` : '';
     const msgs = flagged ? (l.ai.msgs || []).map(m => `<div>⚠ ${esc(state.lang === 'de' ? enT(m.de) : m.zh)}</div>`).join('') : '';
-    const acts = flagged ? cam(it, t('tk_retake')) + `<button class="btn ghost" style="flex:1 1 45%" data-act="task-override" data-id="${l.row_id}">${esc(t('tk_override'))}</button>`
+    const other = flagged && l.by_id && l.by_id !== state.me.id;   // v200（AI 建议 2026-11-14）：同事拍的照片只有他自己能提交给老板（数据库只认拍照的人），别人只能等他或重拍
+    const acts = flagged ? cam(it, t('tk_retake')) + (other ? `<div class="meta" style="flex:1 1 45%">${esc(t('tk_ovr_other', { n: l.by || '?' }))}</div>`
+        : `<button class="btn ghost" style="flex:1 1 45%" data-act="task-override" data-id="${l.row_id}">${esc(t('tk_override'))}</button>`)
       : c.need_result ? ''   // v128：交回结果在下面
       : it.done ? (l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') + (photo ? cam(it, t('tk_retake'), 'ghost sm') : '')
       : photo ? cam(it, t('tk_photo')) : `<button class="btn" data-act="task-check" data-item="${it.id}">${esc(t('tk_check'))}</button>`;
@@ -8463,10 +8467,11 @@ function extrasHTML(x, runners, bars, short){
   state.xcalc = { cap, self: x.s, helpers };
   const free = Math.floor((cap - sum) / 100) * 100;
   const rows = helpers.map(h => `<div class="xrow"><div class="li"><span>${esc(staffName(h.id))} <span class="muted small">${esc(t(h.role))}</span></span>
-      <span class="num" id="xa-${h.id}">${eur(h.base + (ex[h.id] || 0))}${ex[h.id] ? ` <small class="pos">+${eur(ex[h.id])}</small>` : ''}</span></div>
+      <span class="num${edit && cap >= 100 ? ' xa-tap' : ''}" id="xa-${h.id}"${edit && cap >= 100 ? ` data-act="ex-type" data-xid="${h.id}"` : ''}>${eur(h.base + (ex[h.id] || 0))}${ex[h.id] ? ` <small class="pos">+${eur(ex[h.id])}</small>` : ''}</span></div>
       ${edit && cap >= 100 ? `<div class="xctl"><button type="button" class="xb" data-act="ex-step" data-xid="${h.id}" data-d="-100" aria-label="−1 €">−</button>
         <input type="range" class="xr" data-xid="${h.id}" min="0" max="${(ex[h.id] || 0) + free}" step="100" value="${ex[h.id] || 0}" aria-label="${esc(staffName(h.id))}">
-        <button type="button" class="xb" data-act="ex-step" data-xid="${h.id}" data-d="100" aria-label="+1 €">＋</button></div>` : ''}</div>`).join('');
+        <button type="button" class="xb" data-act="ex-step" data-xid="${h.id}" data-d="100" aria-label="+1 €">＋</button>
+        <button type="button" class="xb x5" data-act="ex-step" data-xid="${h.id}" data-d="500" aria-label="+5 €">+5</button></div>` : ''}</div>`).join('');   // v200（AI 建议 2026-11-11）：+5 €，点金额可以直接输入
   return `<div style="margin-top:12px"><div class="muted small" style="margin-bottom:4px">${esc(t('ex_title'))}</div><div class="sum num">
       <div class="li"><span>${esc(t('kitchen'))}</span><span>${eur(x.k)}</span></div>${rows}
       <div class="li big"><span>${esc(bonPxActive() ? staffName(state.bon.pxPick) : t('ex_self'))}</span><span id="xa-self">${eur(x.s - sum)}</span></div></div>
@@ -9028,7 +9033,11 @@ async function readBon(){
     bonAutoPick();
   } else b.readErr = err;
   b.busy = false; refreshBonParts();
-  if (bonCoverStop(b)) bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok || bonBoss() });   // v126：识别服务 bon v18 说没拍全
+  const openSkip = bonState() === 'open' && (((b.read || {}).checks || {}).problems || []).includes('REPORT_OPEN') || bonState() === 'open' && ((b.read.checks || {}).cover || {}).header !== false;
+  if (bonCoverStop(b) && !openSkip) bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok || bonBoss() || bonState() === 'review' });   // v126：识别服务 bon v18 说没拍全
+  // v200（AI 建议 2026-11-14，老板 2026-11-19）：报告还开着（没有编号）时不弹「没拍全」：上面红字先说真正的原因（先 Entstempeln 再打印），免得员工一直重拍第二张；
+  //   只是没读到编号、AI 又说第一张顶部没拍到时照旧弹（有「重拍第一张」，编号就在顶部）；
+  //   已经重拍过 2 次（review）时弹窗也给「我确认拍全了」，不然这张 Bon 永远交不了
 }
 async function submitBon(){
   const b = state.bon, f = state.form, st = bonState(), boss = bonBoss(), fix = bonNeedFix(), d = bonEff();   // v153：老板可以手动确认继续
@@ -9042,7 +9051,8 @@ async function submitBon(){
     if (!x.date) return toast(t('bs_need_date'), true);
     if (String(x.schluss).trim() === '' || isNaN(parseSigned(x.schluss)) || String(x.card).trim() === '' || isNaN(parseEur(x.card))) return toast(t('bs_need_num'), true); }
   if (!boss && bonCoverStop(b)) bonFailNote('submit', 'COVER', rid);
-  if (!boss && bonCoverStop(b)) return bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok });   // v126：没拍全：重拍或确认拍全了
+  if (!boss && bonCoverStop(b)) return bonGuide({ cover: b.read.checks.cover, staff: true, canConfirm: !!b.read.checks.ok || st === 'review' });   // v126：没拍全：重拍或确认拍全了
+  // v200：重拍 2 次以后（review）可以「我确认拍全了，继续」，老板事后看照片（以前这里只能重拍，交不了）
   if (bonDateNeed()){ const q = $('#bon-date-q'); if (q) q.scrollIntoView({ block: 'center', behavior: 'smooth' }); return toast(t('bon_date_need'), true); }   // v112
   const card = d.card_cents || 0, schluss = d.schluss_cents || 0, w = parseEur(b.wallet);
   if (String(b.wallet).trim() === '') return toast(t('enter_wallet'), true);
@@ -12254,9 +12264,21 @@ document.addEventListener('click', async ev => {
       try { await rpc('admin_pin_request_dismiss', { ...tok(), p_id: el.dataset.id }); keepScroll(render); } catch(e){ toast(errText(e), true); }
       break;
     }
-    case 'ex-step': {   // v30：多给 ±1 €
+    case 'ex-step': {   // v30：多给 ±1 €；v200：也有 +5 €
       const r = document.querySelector(`.xr[data-xid="${el.dataset.xid}"]`); if (!r) break;
-      r.value = Math.max(0, Math.min(+r.max, +r.value + +el.dataset.d)); extrasSlide(r); break;
+      const want = +r.value + +el.dataset.d;
+      if (want > +r.max) toast(t('ex_max', { x: eur(+r.max) }));   // v200：到上限了说一声（以前点了没反应）
+      r.value = Math.max(0, Math.min(+r.max, want)); extrasSlide(r); break;
+    }
+    case 'ex-type': {   // v200（AI 建议 2026-11-11：员工一欧一欧点，一分钟点 19 次）：点金额直接写多给几欧（整欧，上限照旧）
+      const r = document.querySelector(`.xr[data-xid="${el.dataset.xid}"]`); if (!r) break;
+      const ans = prompt(t('ex_type_q', { n: staffName(el.dataset.xid), x: eur(+r.max) }), String(Math.round(+r.value / 100)));
+      if (ans === null) break;
+      const v = String(ans).trim().replace(/\s*€$/, '').replace(',', '.') || '0';   // 清空 = 不多给
+      if (!/^\d+([.]0+)?$/.test(v)) { toast(t('ex_type_bad'), true); break; }
+      const want = Math.round(+v) * 100;
+      if (want > +r.max) toast(t('ex_max', { x: eur(+r.max) }));
+      r.value = Math.max(0, Math.min(+r.max, want)); extrasSlide(r); break;
     }
     case 'staff-toggle-active': {
       const cbx = $('#s-active'), orig = el.dataset.orig === '1', turnOff = cbx.checked;
@@ -12686,7 +12708,9 @@ document.addEventListener('click', async ev => {
       el.disabled = true;   // v158（老板 2026-11-09）：提交给老板确认：这一项算做完，确认之前不受罚（不再问「确定吗」）
       try { const st = await rpc('task_item_override', { ...tok(), p_row: el.dataset.id }); await loadTasks();
         if (st && st.completed_at){ tkLeave(); toast(t('tk_sent_boss')); annAfterWork(); render(); window.scrollTo(0, 0); } else { toast(t('tk_sent_boss')); keepScroll(render); } }
-      catch(e){ toast(errText(e), true); el.disabled = false; }
+      catch(e){
+        if (String(e && e.message) === 'NOT_FOUND'){ toast(t('tk_ovr_gone'), true); await soft(loadTasks(), null); keepScroll(render); break; }   // v200：多半是已经提交过了，或者这张不是自己拍的：说清楚，并刷新这一页
+        toast(errText(e), true); el.disabled = false; }
       break;
     }
     // v81：等员工做事时发消息
