@@ -603,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v196';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v198';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -2921,8 +2921,16 @@ const rpcQ = { n: 0, wait: [], live: new Map(), w: 0 };
 function rpcSlot(){ if (rpcQ.n < RPC_MAX){ rpcQ.n++; return Promise.resolve(); } return new Promise(r => rpcQ.wait.push(r)); }
 function rpcFree(){ const nx = rpcQ.wait.shift(); if (nx) nx(); else rpcQ.n--; }
 const rpcCopy = x => x === null || typeof x !== 'object' ? x : (typeof structuredClone === 'function' ? structuredClone(x) : JSON.parse(JSON.stringify(x)));
+// v198（老板 2026-11-19「两个都做」）：只读的请求遇到数据库超时（偶尔整个卡几秒），等 1.5 秒自动再要一次，员工看不到报错；做事的请求不重试（免得重复提交）
+const rpcIsTimeout = er => /statement timeout|upstream request timeout|57014/i.test(String((er && er.message) || ''));
+function rpcRead(fn, args){
+  return rpcSend(fn, args).catch(er => {
+    if (!rpcIsTimeout(er)) throw er;
+    return new Promise(r => setTimeout(r, 1500)).then(() => rpcSend(fn, args));
+  });
+}
 function rpc(fn, args){
-  if (RPC_LOOK.has(fn)) return rpcSend(fn, args);
+  if (RPC_LOOK.has(fn)) return rpcRead(fn, args);
   if (!RPC_RO.has(fn)){   // 做事：开始、结束都算一次「数据变了」
     rpcQ.w++;
     const p = rpcSend(fn, args), bump = () => { rpcQ.w++; };
@@ -2937,7 +2945,7 @@ function rpc(fn, args){
     const b = new Promise(r => setTimeout(r, Math.max(0, e.at + RPC_HOLD_MS - Date.now()))).then(() => over ? a : rpc(fn, args));
     return Promise.race([a, b]);
   }
-  const p = rpcSend(fn, args), at = Date.now();
+  const p = rpcRead(fn, args), at = Date.now();
   rpcQ.live.set(k, { p, at });
   const done = () => { const x = rpcQ.live.get(k); if (x && x.p === p) rpcQ.live.delete(k); };
   p.then(done, done);
