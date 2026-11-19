@@ -603,7 +603,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v198';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v199';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -4209,7 +4209,7 @@ async function reconHome(day){
   } catch(e){
     if (e.message === 'AUTH_REQUIRED') throw e;
     const S = await reconStrip(), d = day || S.def, o = S.m[d] || await rpc('recon_overview', { ...tok(), p_day: d });
-    return { S, o, tasks: await soft(rpc('admin_tasks_day', { ...tok(), p_day: o.day }), []), msgs: null };
+    return { S, o, tasks: state.me && state.me.is_admin ? await soft(rpc('admin_tasks_day', { ...tok(), p_day: o.day }), []) : [], msgs: null };   // v199：任务列表只给老板（小费管理员要它会报「没有权限」）
   }
 }
 async function reconStrip(){
@@ -4371,7 +4371,7 @@ async function viewReconDay(){
   let r, ov = null, env = null, tks = [];
   try {   // v71：一起要；加上这一天的收店任务
     [r, ov, env, tks] = await Promise.all([rpc('recon_day', { ...tok(), p_store: R.store, p_day: R.day }), rpc('week_overview', { ...tok(), p_week_start: mondayOf(R.day) }),
-      soft(rpc('week_envelopes', { ...tok(), p_week_start: mondayOf(R.day) }), null), soft(rpc('admin_tasks_day', { ...tok(), p_day: R.day }), [])]);
+      soft(rpc('week_envelopes', { ...tok(), p_week_start: mondayOf(R.day) }), null), state.me && state.me.is_admin ? soft(rpc('admin_tasks_day', { ...tok(), p_day: R.day }), []) : []]);   // v199：收店任务只给老板看，小费管理员不再要（以前每次都报「没有权限」）
   } catch(e){ $('#main').innerHTML = `<button class="link" data-act="recon-back">${esc(t('rk_back'))}</button><div class="empty">${esc(errText(e))}</div>`; return; }
   const entries = (ov.entries || []).filter(e => e.date === R.day && e.store === R.store);
   await Promise.all([loadXfer(entries.filter(e => e.is_bon).map(e => e.entry_id)), loadCntMethods(entries.filter(e => e.is_bon && e.counted_cents != null).map(e => e.entry_id)),
