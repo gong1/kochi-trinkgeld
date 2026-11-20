@@ -308,7 +308,7 @@ details.fold .list{margin-bottom:8px}
 .login .names{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
 .login h2.grp{font-size:15px;font-weight:600;opacity:.6;margin:18px 0 8px}
 .login h2.grp:first-of-type{margin-top:4px}
-.idlebar{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--copper);color:#fff;border-radius:var(--r-m);padding:12px 16px;font-weight:600;text-align:center;box-shadow:0 4px 14px rgba(31,42,39,.25)}
+.idlebar{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:65;background:var(--copper);color:#fff;border-radius:var(--r-m);padding:12px 16px;font-weight:600;text-align:center;box-shadow:0 4px 14px rgba(31,42,39,.25)}
 .done{text-align:center;padding-top:12px}
 .done .done-mark{width:64px;height:64px;margin:0 auto 6px;border-radius:50%;background:var(--celadon-deep);color:#fff;font-size:34px;line-height:64px}
 .done p{margin:6px 0 16px}
@@ -350,6 +350,46 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .sop-ph{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.sop-ph div{display:flex;flex-direction:column;align-items:center;gap:2px}
 .sop-ph img{width:96px;height:96px;object-fit:cover;border-radius:8px;background:var(--celadon-soft);cursor:pointer}
 .sop-topic{margin-bottom:12px}.sop-box{margin-top:8px;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r-s)}
+/* v202：SOP 一步一张卡片（照片放在它那一步下面）+「跟着做」一屏一步 */
+.sopv-first{border-left:4px solid var(--neg);background:#F6E3DD;border-radius:10px;padding:8px 12px;margin:4px 0 12px}
+.sopv-first>strong{color:var(--neg)}
+.sopv-first ul,.sopv-mis ul{margin:4px 0 0 18px;padding:0}
+.sopv-first li,.sopv-mis li{margin:3px 0}
+.sopv-go{margin:2px 0 10px}
+.sopv-step{display:grid;grid-template-columns:32px minmax(0,1fr);gap:4px 10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px}
+.sopv-n{width:32px;height:32px;border-radius:50%;background:var(--celadon-deep);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.sopv-t{font-weight:600;align-self:center;overflow-wrap:anywhere}
+.sopv-step>.sopv-img,.sopv-step>.sopv-note{grid-column:1/-1}
+.sopv-img{display:block;width:100%;max-width:520px;min-height:60px;border-radius:10px;margin:6px 0 2px;background:var(--celadon-soft);cursor:zoom-in}
+.sopv-img.sm{display:inline-block;width:calc(50% - 6px);max-width:220px;margin-right:6px;vertical-align:top}
+.sopv-note{border-radius:8px;padding:6px 10px;font-size:15px;margin-top:4px;overflow-wrap:anywhere}
+.sopv-note.warn{background:#F6E3DD;color:var(--neg);font-weight:600}
+.sopv-note.key{background:var(--copper-soft);color:#7a4413}
+.sopv-mis{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin-top:2px}
+.sopv-more{margin-top:10px}
+.sopv-pick{display:flex;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}
+.sopv-pick:first-of-type{border-top:0}
+.sopv-pick img{width:56px;height:56px;object-fit:cover;border-radius:8px;flex:none;background:var(--celadon-soft);cursor:zoom-in}
+.sopv-pick select{flex:1;min-width:0}
+#sopFollow{position:fixed;inset:0;z-index:60;background:#111;color:#fff;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+#sopFollow .sf-top{display:flex;align-items:center;gap:10px;padding:10px 14px}
+#sopFollow .sf-ttl{color:#aaa;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+#sopFollow .sf-x{margin-left:auto;background:none;border:0;color:#fff;font-size:30px;line-height:1;cursor:pointer;padding:2px 8px}
+#sopFollow .sf-prog{height:6px;background:#333;border-radius:3px;margin:0 14px}
+#sopFollow .sf-prog i{display:block;height:100%;background:#7fd0b4;border-radius:3px}
+#sopFollow .sf-body{flex:1;overflow:auto;padding:10px 14px;display:flex;flex-direction:column;gap:8px;min-height:0}
+#sopFollow .sf-img{width:100%;max-height:52vh;object-fit:contain;border-radius:10px;background:#222;min-height:80px;cursor:zoom-in}
+#sopFollow .sf-t{font-size:21px;font-weight:700;line-height:1.35;overflow-wrap:anywhere}
+#sopFollow .sf-tip{font-size:17px;line-height:1.4;overflow-wrap:anywhere}
+#sopFollow .sf-note{border-radius:8px;padding:8px 10px;font-size:16px;font-weight:600;overflow-wrap:anywhere}
+#sopFollow .sf-note.warn{background:#5c1f12;color:#ffd9cf}
+#sopFollow .sf-note.key{background:#4a3418;color:#ffe2bf}
+#sopFollow .sf-btns{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;padding:12px 14px}
+#sopFollow .sf-btns button{padding:15px 8px;border-radius:12px;border:0;font:700 18px var(--font);cursor:pointer}
+#sopFollow .sf-prev{background:#333;color:#fff}
+#sopFollow .sf-next{background:#7fd0b4;color:#10251f}
+#sopFollow label.sf-chk{display:flex;gap:10px;align-items:flex-start;background:#222;border-radius:10px;padding:10px 12px;font-size:16px}
+#sopFollow label.sf-chk input{width:22px;height:22px;flex:none;margin-top:2px}
 .warnbox > .btn, .infobox > .btn{max-width:48%;height:auto !important;min-height:40px;line-height:1.2;padding-top:6px !important;padding-bottom:6px !important}
 .warnc{color:var(--copper)}
 .errbox{background:#F8E1DA;color:var(--neg);border-radius:var(--r-s);padding:10px 12px;margin:10px 0;font-size:15px}
@@ -365,7 +405,7 @@ label.photo img{display:block;max-width:100%;max-height:220px;object-fit:contain
 .login .err{color:#F2B39B;min-height:24px;margin-top:10px}
 
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);transform:translateX(-50%);
-  background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-weight:600;z-index:50;max-width:90vw;text-align:center;
+  background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-weight:600;z-index:70;max-width:90vw;text-align:center;
   box-shadow:0 6px 20px rgba(0,0,0,.2)}
 .toast.err{background:var(--neg);text-align:left;line-height:1.45;border-radius:14px;width:min(460px,90vw)}
 dialog{border:0;border-radius:var(--r-m);padding:20px;width:min(360px,92vw)}
@@ -605,7 +645,7 @@ const SUPABASE_URL = 'https://hxegfkyviumkdbxcuokw.supabase.co';
 const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUlLCOXsrWxEoDBr8A736XH_MhffClWk';
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
-const WEB_VER = 'v201';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v202';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -637,7 +677,8 @@ zh: {
   sop_new_h:'写一条 SOP', sop_edit_h:'补充 / 修改：{n}', sop_raw_hint:'按键盘上的 🎤，像教新同事一样说一遍：先做什么、再做什么、要注意什么、新人常犯什么错。中文、德文都行，说得乱也没关系，AI 会整理。',
   sop_raw_l:'说一段（或者打字）', sop_raw_l_edit:'说一下要补充或改什么', sop_raw_ph:'例如：开吧台先开灯，再开咖啡机，预热十分钟……', sop_photos:'照片（可不加，最多 6 张）', sop_ph_add:'📷 加照片', sop_ph_busy:'正在上传……', sop_ph_rm:'去掉',
   sop_ai:'✨ AI 整理', sop_ai_busy:'AI 正在整理……', sop_ai_again:'✨ 按补充的再整理', sop_direct:'不用 AI，直接改文字', sop_same:'这好像是已有的「{n}」。要补充到那一条吗？', sop_same_yes:'补充到那一条', sop_same_no:'不是，新的一条',
-  sop_draft:'AI 整理好的（可以直接改）', sop_f_title:'标题', sop_f_lines:'下面每行一条。', sop_f_steps:'步骤', sop_ai_q:'AI 还想知道', sop_extra:'补充一句（回答上面的问题，可以按 🎤 说）', sop_extra_ph:'例如：冰块装满杯，预热 10 分钟',
+  sop_draft:'AI 整理好的（可以直接改）', sop_f_title:'标题', sop_f_lines:'下面每行一条。某一步要特别小心的，在它下面另起一行用「⚠ 」开头，小窍门用「💡 」开头；「（照片 3）」= 第 3 张照片放在这一步（几张就写几个：（照片 2）（照片 3））。', sop_f_steps:'步骤', sop_ai_q:'AI 还想知道', sop_extra:'补充一句（回答上面的问题，可以按 🎤 说）', sop_extra_ph:'例如：冰块装满杯，预热 10 分钟',
+  sop_first:'开始前先看', sop_follow:'跟着做（一步一步）', sopf_step:'第 {i} / {n} 步', sopf_prev:'上一步', sopf_next:'下一步 →', sopf_done:'做完了 ✓', sopf_start:'开始 →', sopf_done_h:'做完了', sopf_check:'最后看一遍常见错误，没犯的打个勾（只是自己检查，不会保存）：', sop_more_ph:'更多照片', sop_photos_l:'照片', sop_ph_place:'照片放在哪一步', sop_ph_n:'照片 {n}', sop_ph_none:'不放在步骤里（放最下面）', sop_ph_tips:'放在「开始前先看」', sop_ph_mis:'放在「常见错误」', sop_ph_cut:'两条加起来超过 6 张照片，后面 {n} 张没加进去。要的话先去掉几张旧的，再加。', sop_ph_step:'第 {n} 步：{t}', sop_preview:'预览：员工看到的样子', sop_photos_hint:'说的时候讲「照片 1 是……」，AI 会把照片放进对应的那一步；整理好以后也能自己选。',   // v202
   sop_note:'给老板的一句话（可不写）', sop_submit:'提交给老板确认', sop_submit_hint:'老板确认以后员工才看得到。', sop_sent:'已提交，等老板确认', sop_need_draft:'请先点「✨ AI 整理」（或者「直接改文字」）。', sop_need_topic:'请选一个主题，或者写上新主题的名字。',
   sop_todo:'SOP：{n} 条等你确认', sop_todo_go:'去看',
   act_sop_submit:'提交 SOP', act_sop_decide:'确认 / 退回 SOP', act_sop_author:'设 SOP 编写人', act_sop_archive:'撤下 SOP', act_sop_topic:'改 SOP 主题',
@@ -1393,7 +1434,8 @@ de: {
   sop_new_h:'SOP schreiben', sop_edit_h:'Ergänzen / ändern: {n}', sop_raw_hint:'Mit dem 🎤 auf der Tastatur einfach erzählen, wie du es einer neuen Person zeigst: was zuerst, was dann, worauf achten, welche Fehler Neue oft machen. Deutsch oder Chinesisch, gern durcheinander – die KI ordnet es.',
   sop_raw_l:'Erzählen (oder tippen)', sop_raw_l_edit:'Erzähl, was ergänzt oder geändert werden soll', sop_raw_ph:'z. B.: Zum Öffnen zuerst Licht an, dann Kaffeemaschine einschalten, 10 Minuten aufheizen …', sop_photos:'Fotos (optional, höchstens 6)', sop_ph_add:'📷 Foto hinzufügen', sop_ph_busy:'Wird hochgeladen …', sop_ph_rm:'Entfernen',
   sop_ai:'✨ KI ordnen', sop_ai_busy:'KI ordnet …', sop_ai_again:'✨ Mit Ergänzung neu ordnen', sop_direct:'Ohne KI direkt bearbeiten', sop_same:'Das klingt nach der vorhandenen SOP „{n}“. Dort ergänzen?', sop_same_yes:'Dort ergänzen', sop_same_no:'Nein, neue SOP',
-  sop_draft:'Von der KI geordnet (direkt bearbeitbar)', sop_f_title:'Titel', sop_f_lines:'Unten eine Zeile pro Punkt.', sop_f_steps:'Schritte', sop_ai_q:'Die KI möchte noch wissen', sop_extra:'Ergänzung (Antwort auf die Fragen, gern mit 🎤)', sop_extra_ph:'z. B.: Glas voll mit Eis, 10 Minuten aufheizen',
+  sop_draft:'Von der KI geordnet (direkt bearbeitbar)', sop_f_title:'Titel', sop_f_lines:'Unten eine Zeile pro Punkt. Worauf man bei einem Schritt besonders achten muss: darunter eine eigene Zeile mit „⚠ “, ein Tipp mit „💡 “; „(Foto 3)“ = Foto 3 gehört zu diesem Schritt (mehrere: (Foto 2) (Foto 3)).', sop_f_steps:'Schritte', sop_ai_q:'Die KI möchte noch wissen', sop_extra:'Ergänzung (Antwort auf die Fragen, gern mit 🎤)', sop_extra_ph:'z. B.: Glas voll mit Eis, 10 Minuten aufheizen',
+  sop_first:'Vorher lesen', sop_follow:'Schritt für Schritt mitmachen', sopf_step:'Schritt {i} / {n}', sopf_prev:'Zurück', sopf_next:'Weiter →', sopf_done:'Fertig ✓', sopf_start:'Los geht’s →', sopf_done_h:'Fertig', sopf_check:'Zum Schluss die häufigen Fehler durchgehen – abhaken, was nicht passiert ist (nur zur eigenen Kontrolle, wird nicht gespeichert):', sop_more_ph:'Weitere Fotos', sop_photos_l:'Fotos', sop_ph_place:'Welches Foto zu welchem Schritt', sop_ph_n:'Foto {n}', sop_ph_none:'keinem Schritt (ganz unten)', sop_ph_tips:'bei „Vorher lesen“', sop_ph_mis:'bei „Häufige Fehler“', sop_ph_cut:'Zusammen mehr als 6 Fotos – die letzten {n} wurden nicht übernommen. Bei Bedarf erst alte Fotos entfernen, dann neue hinzufügen.', sop_ph_step:'Schritt {n}: {t}', sop_preview:'Vorschau: so sieht es das Team', sop_photos_hint:'Beim Erzählen „Foto 1 zeigt …“ sagen – die KI ordnet die Fotos den Schritten zu; danach kann man es auch selbst ändern.',   // v202
   sop_note:'Ein Satz an den Chef (optional)', sop_submit:'Zur Bestätigung an den Chef', sop_submit_hint:'Das Team sieht es erst nach der Bestätigung.', sop_sent:'Eingereicht, wartet auf den Chef', sop_need_draft:'Bitte zuerst „✨ KI ordnen“ (oder „direkt bearbeiten“) tippen.', sop_need_topic:'Bitte ein Thema wählen oder den Namen des neuen Themas eintragen.',
   sop_todo:'SOP: {n} warten auf deine Bestätigung', sop_todo_go:'Ansehen',
   act_sop_submit:'SOP eingereicht', act_sop_decide:'SOP bestätigt / zurückgegeben', act_sop_author:'SOP-Schreiber geändert', act_sop_archive:'SOP zurückgezogen', act_sop_topic:'SOP-Thema geändert',
@@ -2146,7 +2188,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=34'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=35'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -3087,7 +3129,7 @@ function setMenu(on){
 }
 // v68：启动 / 登录后等数据时显示，不再白屏
 function splash(){ $('#app').innerHTML = `<div class="splash" role="status"><b>${esc(t('app'))}</b><span class="muted">${esc(t('loading'))}</span></div>`; }
-function logoutLocal(){ clearTimeout(state.vcT); state.viewCache = null; LS.del('vcache'); SS.del('vcache');   // v102：退出登录清掉存着的页面
+function logoutLocal(){ if (state.sopF) sopFollowClose(); clearTimeout(state.vcT); state.viewCache = null; LS.del('vcache'); SS.del('vcache');   // v102：退出登录清掉存着的页面
   state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false;
   state.missRev = null; state.missRes = null; state.missAp = null; state.mrNote = null; }   // v196：申诉的数据跟人走，换人登录时不能留着（共用设备）
 // ============ 手机推送（v27）============
@@ -3523,14 +3565,142 @@ async function sopLoadPhotos(){
   if (need.length) try { const r = await callTasks({ action: 'sop_urls', paths: need.slice(0, 60) }); Object.entries(r.urls || {}).forEach(([p, u]) => { if (u) SOP_URLS[p] = { url: u, at: now }; }); } catch(e){}
   document.querySelectorAll('img[data-sop]').forEach(e => { const u = SOP_URLS[e.dataset.sop]; if (u && e.getAttribute('src') !== u.url) e.src = u.url; });
 }
-function sopPhotosHTML(paths, rm){ return (paths || []).length ? `<div class="sop-ph">${paths.map(p => `<div><img data-sop="${esc(p)}" data-act="sop-photo-big" alt="">${rm ? `<button class="link danger" data-act="sop-ph-rm" data-p="${esc(p)}">${esc(t('sop_ph_rm'))}</button>` : ''}</div>`).join('')}</div>` : ''; }
-// 一条 SOP 的内容（步骤编号、标准和注意、常见错误）
+function sopPhotosHTML(paths, rm){ return (paths || []).length ? `<div class="sop-ph">${paths.map((p, j) => `<div><img data-sop="${esc(p)}" data-act="sop-photo-big" alt="">${rm ? `<span class="small muted">${esc(t('sop_ph_n', { n: j + 1 }))}</span>` : ''}${rm ? `<button class="link danger" data-act="sop-ph-rm" data-p="${esc(p)}">${esc(t('sop_ph_rm'))}</button>` : ''}</div>`).join('')}</div>` : ''; }
+// v202：一条 SOP = 一步一张卡片（老板 2026-11-20「按方案做」）。不改数据库，约定写在文字里：
+//   步骤行里写「（照片 3）」/「(Foto 3)」→ 第 3 张照片整张放在这一步下面（显示时去掉这几个字；每张照片只在第一次提到的地方出现）；
+//   「⚠ …」「💡 …」开头的行（也认「注意：」「Achtung:」「要点：」「Tipp:」）跟在上一步的卡片里，不算一步；第一步前面的放进「开始前先看」；
+//   标准和注意 = 「⚠ 开始前先看」放在最上面；常见错误在最下面；没被提到的照片放在最下面。没写照片号的旧 SOP：步骤卡片 + 照片在最下面。
+const SOP_REF_W = '(?:照片|图片|Fotos?|Photos?|Bild(?:er)?)';
+const SOP_REF_GRP = new RegExp(`\\s*[（(]\\s*${SOP_REF_W}\\s*\\d{1,2}(?!\\d)(?:\\s*(?:[、,，;；&+\\/]|和|und|and)\\s*(?:${SOP_REF_W}\\s*)?\\d{1,2}(?!\\d))*\\s*[）)]`, 'gi');
+function sopRefs(x, n){ const out = [];   // 只认括号里的照片号（句子里随口说的「看照片 2」不算位置）
+  for (const g of String(x || '').matchAll(SOP_REF_GRP)) for (const m of g[0].matchAll(/\d{1,2}/g)){ const i = +m[0] - 1; if (i >= 0 && i < n && !out.includes(i)) out.push(i); }
+  return out; }
+function sopNoteKind(x){ const v = String(x || '').trim();
+  if (/^(?:⚠|❗|注意\s*[:：]|小心\s*[:：]|Achtung\s*:|Wichtig\s*:|Vorsicht\s*:|Warning\s*:|Caution\s*:)/i.test(v)) return 'warn';
+  if (/^(?:💡|要点\s*[:：]|关键\s*[:：]|窍门\s*[:：]|Tipp\s*:|Hinweis\s*:|Tip\s*:|Key point\s*:)/i.test(v)) return 'key';
+  return ''; }
+function sopClean(x){ return String(x || '').replace(SOP_REF_GRP, '').replace(/^\s*(?:⚠️?|❗|💡)\s*/u, '').trim(); }
+function sopParse(c, nPhotos){   // 现在的语言（德文 / 英文层看德文，没有就看中文）
+  const de = state.lang === 'de';
+  const pick = k => { const zh = (c && c[k + '_zh']) || [], dd = (c && c[k + '_de']) || []; return de ? (dd.length ? dd : zh) : (zh.length ? zh : dd); };
+  const ln = x => ({ refs: sopRefs(x, nPhotos), text: enT(sopClean(x)) });
+  const steps = [], pre = [];
+  pick('steps').forEach(x => { const k = sopNoteKind(x), o = ln(x);
+    if (k){ o.kind = k; (steps.length ? steps[steps.length - 1].notes : pre).push(o); } else { o.notes = []; steps.push(o); } });
+  return { pre, steps, tips: pick('tips').map(ln), mis: pick('mistakes').map(ln) };
+}
+const SOP_FOLLOW = {}; let sopFollowN = 0;   // 「跟着做」按钮 → 这一版的内容和照片
+function sopImg(P, i, cls){ return `<img class="${cls || 'sopv-img'}" data-sop="${esc(P[i])}" data-act="sop-photo-big" alt="">`; }
+// 一条 SOP 的内容
 function sopBodyHTML(c, photos){
-  const ul = (xs, cls) => (xs || []).length ? `<ul class="${cls || ''}">${xs.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
-  const steps = sopT(c, 'steps') || [], tips = sopT(c, 'tips') || [], mis = sopT(c, 'mistakes') || [];
-  return `<ol class="sop-steps">${steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol>`
-    + (tips.length ? `<div class="sop-sec"><strong>✅ ${esc(t('sop_tips'))}</strong>${ul(tips)}</div>` : '')
-    + (mis.length ? `<div class="sop-sec"><strong>⚠ ${esc(t('sop_mistakes'))}</strong>${ul(mis)}</div>` : '') + sopPhotosHTML(photos);
+  const P = photos || [], X = sopParse(c, P.length), used = new Set();
+  const imgs = refs => refs.filter(i => !used.has(i)).map(i => { used.add(i); return sopImg(P, i); }).join('');
+  const note = x => `<div class="sopv-note ${x.kind}">${x.kind === 'warn' ? '⚠' : '💡'} ${esc(x.text)}</div>${imgs(x.refs)}`;
+  const first = X.pre.concat(X.tips);
+  const firstHTML = first.length ? `<div class="sopv-first"><strong>⚠ ${esc(t('sop_first'))}</strong><ul>${first.map(x => `<li>${x.kind === 'key' ? '💡 ' : ''}${esc(x.text)}${imgs(x.refs)}</li>`).join('')}</ul></div>` : '';
+  const stepsHTML = X.steps.map((x, i) => `<div class="sopv-step"><div class="sopv-n">${i + 1}</div><div class="sopv-t">${esc(x.text)}</div>${imgs(x.refs)}${x.notes.map(note).join('')}</div>`).join('');
+  const misHTML = X.mis.length ? `<div class="sopv-mis"><strong>⚠ ${esc(t('sop_mistakes'))}</strong><ul>${X.mis.map(x => `<li>${esc(x.text)}${imgs(x.refs)}</li>`).join('')}</ul></div>` : '';
+  const rest = P.map((_, i) => i).filter(i => !used.has(i));
+  const restHTML = rest.length ? `<div class="sopv-more"><div class="small muted">${esc(t(used.size ? 'sop_more_ph' : 'sop_photos_l'))}</div>${rest.map(i => sopImg(P, i, 'sopv-img sm')).join('')}</div>` : '';
+  let go = '';
+  if (X.steps.length > 1){ const k = ++sopFollowN; SOP_FOLLOW[k] = { c, photos: P }; delete SOP_FOLLOW[k - 300];
+    go = `<button class="btn ghost sopv-go" data-act="sop-follow" data-k="${k}">▶ ${esc(t('sop_follow'))}</button>`; }
+  return `<div class="sopv">${go}${firstHTML}${stepsHTML}${misHTML}${restHTML}</div>`;
+}
+// v202：「跟着做」一屏一步：⚠ 开始前先看 →（照片、⚠ / 💡）每一步 → 做完了（常见错误打勾，只在这台手机上，不存）；开着的时候屏幕不自动熄灭
+let sopWake = null;
+async function sopWakeOn(){ try { if (navigator.wakeLock && !sopWake && state.token){ sopWake = await navigator.wakeLock.request('screen'); sopWake.addEventListener('release', () => { sopWake = null; }); if (!state.sopF) sopWakeOff(); } } catch(e){ sopWake = null; } }
+function sopWakeOff(){ try { if (sopWake) sopWake.release(); } catch(e){} sopWake = null; }
+function sopFollowOpen(k){
+  const F = SOP_FOLLOW[k]; if (!F) return; const X = sopParse(F.c, F.photos.length); if (!X.steps.length) return;
+  state.sopF = { F, X, i: X.pre.length + X.tips.length ? -1 : 0, title: sopTitle(F.c) };
+  let el = $('#sopFollow'); if (!el){ el = document.createElement('div'); el.id = 'sopFollow'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); document.body.appendChild(el); }
+  document.body.style.overflow = 'hidden'; sopFollowRender(); sopWakeOn();
+}
+function sopFollowClose(){ const el = $('#sopFollow'); if (el) el.remove(); state.sopF = null; document.body.style.overflow = ''; sopWakeOff(); }
+function sopFollowGo(d){ const S = state.sopF; if (!S) return; const lo = S.X.pre.length + S.X.tips.length ? -1 : 0;
+  const i = Math.max(lo, Math.min(S.X.steps.length, S.i + d)); if (i === S.i) return; S.i = i; sopFollowRender(); }
+function sopFollowRender(){
+  const S = state.sopF, el = $('#sopFollow'); if (!S || !el) return; const P = S.F.photos, X = sopParse(S.F.c, P.length), n = X.steps.length, i = S.i, title = sopTitle(S.F.c);
+  const img = refs => refs.map(r => `<img class="sf-img" data-sop="${esc(P[r])}" data-act="sop-photo-big" alt="">`).join('');
+  const note = x => `<div class="sf-note ${x.kind}">${x.kind === 'warn' ? '⚠' : '💡'} ${esc(x.text)}</div>${img(x.refs)}`;
+  const hasFirst = X.pre.length + X.tips.length > 0;
+  let lbl, pct, body, btns;
+  if (i < 0){ lbl = '⚠ ' + t('sop_first'); pct = 0;
+    body = X.pre.concat(X.tips).map(x => x.kind ? note(x) : `<div class="sf-tip">• ${esc(x.text)}</div>${img(x.refs)}`).join('');
+    btns = `<span></span><button class="sf-next" data-act="sop-f-next">${esc(t('sopf_start'))}</button>`; }
+  else if (i >= n){ lbl = t('sopf_done_h'); pct = 100;
+    const used = new Set(); X.pre.concat(X.tips).forEach(x => x.refs.forEach(r => used.add(r))); X.steps.forEach(x => { x.refs.forEach(r => used.add(r)); x.notes.forEach(o => o.refs.forEach(r => used.add(r))); });
+    const mimg = refs => img(refs.filter(r => !used.has(r) && (used.add(r), true)));
+    const rest = P.map((_, r) => r).filter(r => !used.has(r) && !X.mis.some(x => x.refs.includes(r)));
+    body = `<div style="font-size:52px;text-align:center;line-height:1.2">✅</div><div class="sf-t" style="text-align:center">${esc(t('sopf_done_h'))}</div>`
+      + (X.mis.length ? `<div class="small" style="color:#bbb">${esc(t('sopf_check'))}</div>${X.mis.map(x => `<label class="sf-chk"><input type="checkbox"><span>${esc(x.text)}</span></label>${mimg(x.refs)}`).join('')}` : '')
+      + (rest.length ? `<div class="small" style="color:#bbb;margin-top:6px">${esc(t(used.size ? 'sop_more_ph' : 'sop_photos_l'))}</div>${img(rest)}` : '');
+    btns = `<button class="sf-prev" data-act="sop-f-prev">← ${esc(t('sopf_prev'))}</button><button class="sf-next" data-act="sop-f-close">${esc(t('close'))}</button>`; }
+  else { const x = X.steps[i]; lbl = t('sopf_step', { i: i + 1, n }); pct = Math.round((i + 1) / n * 100);
+    body = `${img(x.refs)}<div class="sf-t">${esc(x.text)}</div>${x.notes.map(note).join('')}`;
+    btns = `<button class="sf-prev" data-act="sop-f-prev" ${i > 0 || hasFirst ? '' : 'style="visibility:hidden"'}>← ${esc(t('sopf_prev'))}</button><button class="sf-next" data-act="sop-f-next">${esc(t(i === n - 1 ? 'sopf_done' : 'sopf_next'))}</button>`; }
+  el.innerHTML = `<div class="sf-top"><b style="white-space:nowrap">${esc(lbl)}</b><span class="sf-ttl">${esc(title)}</span><button class="sf-x" data-act="sop-f-close" aria-label="${esc(t('close'))}">×</button></div>
+    <div class="sf-prog"><i style="width:${pct}%"></i></div><div class="sf-body">${body}</div><div class="sf-btns">${btns}</div>`;
+  sopLoadPhotos();
+}
+document.addEventListener('keydown', ev => { if (!state.sopF || ($('#photoDlg') && $('#photoDlg').open)) return;
+  if (ev.key === 'Escape') sopFollowClose(); else if (ev.key === 'ArrowRight') sopFollowGo(1); else if (ev.key === 'ArrowLeft') sopFollowGo(-1); });
+let sopTouch = null;
+document.addEventListener('touchstart', ev => { sopTouch = state.sopF && ev.target.closest && ev.target.closest('#sopFollow') && ev.touches.length === 1 ? { x: ev.touches[0].clientX, y: ev.touches[0].clientY } : null; }, { passive: true });
+document.addEventListener('touchend', ev => { if (!sopTouch || !state.sopF) return; const t0 = sopTouch, c = ev.changedTouches[0]; sopTouch = null; if (!c) return;
+  const dx = c.clientX - t0.x, dy = c.clientY - t0.y; if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) sopFollowGo(dx < 0 ? 1 : -1); }, { passive: true });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && state.sopF) sopWakeOn(); });
+// v202：写 SOP：给每张照片选「放在第几步」（改的是步骤文字里的「（照片 N）」/「(Foto N)」，中德文一起）+ 预览
+function sopStepIdx(a){ return (a || []).map((x, i) => sopNoteKind(x) ? -1 : i).filter(i => i >= 0); }
+function sopRefDel(x, j){   // 去掉这一行括号里第 j+1 张照片的号（句子里的文字不动）
+  const n = j + 1;
+  return String(x).replace(SOP_REF_GRP, g => { const nums = [...g.matchAll(/\d{1,2}/g)].map(m => +m[0]); if (!nums.includes(n)) return g;
+    const keep = nums.filter(k => k !== n); if (!keep.length) return '';
+    return /照片|图片/.test(g) ? keep.map(k => `（照片 ${k}）`).join('') : ' ' + keep.map(k => `(Foto ${k})`).join(' '); }).trim();
+}
+function sopRefShift(x, j){ return String(x).replace(SOP_REF_GRP, g => g.replace(/\d{1,2}/g, d => +d > j + 1 ? String(+d - 1) : d)); }   // 第 j+1 张照片去掉了：后面的号都减 1
+function sopDropPhoto(D, j){ sopPlacePhoto(D, j, -1); ['steps', 'tips', 'mistakes'].forEach(f => ['zh', 'de'].forEach(L => { if (Array.isArray(D[f + '_' + L])) D[f + '_' + L] = D[f + '_' + L].map(x => sopRefShift(x, j)); })); }
+function sopPlacePhoto(D, j, k){   // k：-1 不放、-2「开始前先看」、-3「常见错误」、0… 第几步（不算 ⚠ / 💡 行）
+  ['zh', 'de'].forEach(L => {
+    ['steps', 'tips', 'mistakes'].forEach(f => { const a = D[f + '_' + L]; if (Array.isArray(a)) D[f + '_' + L] = a.map(x => sopRefDel(x, j)).filter(Boolean); });
+    const add = x => String(x).trim() + (L === 'de' ? ` (Foto ${j + 1})` : `（照片 ${j + 1}）`), st = D['steps_' + L] || [];
+    if (k === -2){ const a = D['tips_' + L]; if (Array.isArray(a) && a.length){ a[0] = add(a[0]); return; }
+      const f = st.findIndex(x => sopNoteKind(x)), s0 = sopStepIdx(st)[0]; if (f >= 0 && (s0 === undefined || f < s0)) st[f] = add(st[f]); return; }
+    if (k === -3){ const a = D['mistakes_' + L]; if (Array.isArray(a) && a.length) a[0] = add(a[0]); return; }
+    if (k < 0) return;
+    const idx = sopStepIdx(st)[k]; if (idx !== undefined) st[idx] = add(st[idx]);
+  });
+}
+function sopLivePick(E){   // 每张照片一个「放在哪里」；和员工看到的一样，按第一次提到的地方算
+  const D = E.draft, P = E.photos || []; if (!D || !P.length) return '';
+  const X = sopParse(D, P.length); if (!X.steps.length) return '';
+  const where = j => { if (X.pre.concat(X.tips).some(x => x.refs.includes(j))) return -2;
+    const k = X.steps.findIndex(x => x.refs.includes(j) || x.notes.some(o => o.refs.includes(j))); if (k >= 0) return k;
+    return X.mis.some(x => x.refs.includes(j)) ? -3 : -1; };
+  const short = v => v.length > 22 ? v.slice(0, 21) + '…' : v;
+  return `<div class="field" style="margin-top:12px"><label>${esc(t('sop_ph_place'))}</label>${P.map((p, j) => { const w = where(j), N = t('sop_ph_n', { n: j + 1 }) + ' · ';
+    return `<div class="sopv-pick"><img data-sop="${esc(p)}" data-act="sop-photo-big" alt=""><select class="input" data-sopph="${j}" aria-label="${esc(t('sop_ph_n', { n: j + 1 }))}">
+      <option value="-1" ${w === -1 ? 'selected' : ''}>${esc(N + t('sop_ph_none'))}</option>${X.pre.length + X.tips.length ? `<option value="-2" ${w === -2 ? 'selected' : ''}>${esc(N + t('sop_ph_tips'))}</option>` : ''}
+      ${X.steps.map((x, k) => `<option value="${k}" ${w === k ? 'selected' : ''}>${esc(N + t('sop_ph_step', { n: k + 1, t: short(x.text) }))}</option>`).join('')}${X.mis.length ? `<option value="-3" ${w === -3 ? 'selected' : ''}>${esc(N + t('sop_ph_mis'))}</option>` : ''}</select></div>`; }).join('')}</div>`;
+}
+let sopLiveKey = '', sopLiveT = null;
+function sopLiveKeyOf(E){ const D = E.draft || {}; return JSON.stringify([state.lang, !!state.en, E.photos || [], ['title', 'steps', 'tips', 'mistakes'].map(f => [D[f + '_zh'], D[f + '_de']])]); }
+function sopLiveHTML(E){
+  if (!E.draft) return '';
+  sopLiveKey = sopLiveKeyOf(E);
+  return `<div id="sop-e-pick">${sopLivePick(E)}</div><details class="fold" open style="margin-top:10px"><summary>👁 ${esc(t('sop_preview'))}</summary><div class="inner" id="sop-e-prev">${sopBodyHTML(E.draft, E.photos || [])}</div></details>`;
+}
+function sopLiveRefresh(){   // 改了文字：只换预览；选择框原地更新（正在用的那个不动），点击不会被吞掉
+  const E = sopS().edit; if (!E || !E.draft || !$('#sop-e-live')) return;
+  const key = sopLiveKeyOf(E); if (key === sopLiveKey) return; sopLiveKey = key;
+  const prev = $('#sop-e-prev'); if (prev) prev.innerHTML = sopBodyHTML(E.draft, E.photos || []);
+  const pick = $('#sop-e-pick');
+  if (pick){ const tmp = document.createElement('div'); tmp.innerHTML = sopLivePick(E);
+    const old = pick.querySelectorAll('select[data-sopph]'), nw = tmp.querySelectorAll('select[data-sopph]');
+    if (old.length !== nw.length) pick.innerHTML = tmp.innerHTML;
+    else old.forEach((x, k) => { if (x === document.activeElement) return; x.innerHTML = nw[k].innerHTML; x.value = nw[k].value; }); }
+  sopLoadPhotos();
 }
 async function viewSop(){
   const S = sopS(), host = sopHost(); if (!host) return;
@@ -3572,6 +3742,7 @@ function renderSopList(){
       <input class="input" id="sop-q" placeholder="${esc(t('sop_search'))}" value="${esc(S.q || '')}" style="margin-bottom:10px">`
     + (roles.length ? roles.map(r => `<h3>${esc(sopRoleName(r))}</h3>` + tops.filter(tp => (tp.role || null) === r).map(topicHTML).join('')).join('')
       : `<div class="list"><div class="empty">${esc(q ? t('sop_none_q') : t(canW ? 'sop_none_w' : 'sop_none'))}</div></div>`);
+  sopLoadPhotos();   // v202：老板「等你确认」卡片里的照片以前没要链接，一直是灰的
 }
 function sopTopicForm(tp){
   return `<div class="sheet" style="margin:6px 0"><div class="row"><div class="field"><label for="sop-tz">${esc(t('sop_topic_zh'))}</label><input class="input" id="sop-tz" value="${esc(tp.name_zh || '')}"></div>
@@ -3669,6 +3840,7 @@ function renderSopEdit(){
       <div class="field"><label>✅ ${esc(t('sop_tips'))} 中文</label>${ta('tips_zh', 2)}</div><div class="field"><label>✅ ${esc(t('sop_tips'))} Deutsch</label>${ta('tips_de', 2)}</div>
       <div class="field"><label>⚠ ${esc(t('sop_mistakes'))} 中文</label>${ta('mistakes_zh', 2)}</div><div class="field"><label>⚠ ${esc(t('sop_mistakes'))} Deutsch</label>${ta('mistakes_de', 2)}</div>
       ${topicHTML}</div>
+    <div id="sop-e-live">${sopLiveHTML(E)}</div>
     ${(ai.questions_zh || []).length ? `<div class="infobox" style="margin-top:10px"><strong>🤔 ${esc(t('sop_ai_q'))}</strong><ul style="margin:2px 0 0 18px;padding:0">${(state.lang === 'de' && (ai.questions_de || []).length ? ai.questions_de : ai.questions_zh).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
     <div class="field" style="margin-top:8px"><label for="sop-extra">${esc(t('sop_extra'))}</label><textarea class="input" id="sop-extra" data-sopk="extra" rows="2" placeholder="${esc(t('sop_extra_ph'))}">${esc(E.extra || '')}</textarea></div>
     <button class="btn ghost" data-act="sop-ai" data-again="1" ${E.busy ? 'disabled' : ''}>${esc(t(E.busy ? 'sop_ai_busy' : 'sop_ai_again'))}</button>
@@ -3678,7 +3850,7 @@ function renderSopEdit(){
     <h2 style="margin-top:0">${esc(E.item_id ? t('sop_edit_h', { n: E.baseTitle || '' }) : t('sop_new_h'))}</h2>${areaPick}
     <div class="infobox">${esc(t('sop_raw_hint'))}</div>
     <div class="field"><label for="sop-raw">${esc(t(E.item_id ? 'sop_raw_l_edit' : 'sop_raw_l'))}</label><textarea class="input" id="sop-raw" data-sopk="raw" rows="6" maxlength="8000" placeholder="${esc(t('sop_raw_ph'))}">${esc(E.raw || '')}</textarea></div>
-    <div class="field"><label>${esc(t('sop_photos'))}</label>${sopPhotosHTML(E.photos, true)}
+    <div class="field"><label>${esc(t('sop_photos'))}</label><div class="small muted" style="margin:-2px 0 6px">${esc(t('sop_photos_hint'))}</div>${sopPhotosHTML(E.photos, true)}
       ${(E.photos || []).length < 6 ? `<label class="btn ghost" style="width:auto;display:inline-flex">${esc(t(E.upBusy ? 'sop_ph_busy' : 'sop_ph_add'))}<input type="file" accept="image/*" data-sopphoto="1" hidden></label>` : ''}</div>
     ${D ? '' : `<button class="btn" data-act="sop-ai" ${E.busy ? 'disabled' : ''}>${esc(t(E.busy ? 'sop_ai_busy' : 'sop_ai'))}</button>${E.base ? `<button class="link" data-act="sop-e-direct" style="margin-top:10px">${esc(t('sop_direct'))}</button>` : ''}`}
     ${sameHTML}${draftHTML}`;
@@ -3690,7 +3862,8 @@ async function sopRunAi(again){
   E.busy = true; renderSopEdit();
   try {
     const base = again && E.draft ? E.draft : E.base || null;
-    const r = await callTasks({ action: 'sop_ai', area: E.area, raw: E.raw, extra: again ? E.extra : '', base, is_draft: !!(again && E.draft) });
+    const r = await callTasks({ action: 'sop_ai', area: E.area, raw: E.raw, extra: again ? E.extra : '', base, is_draft: !!(again && E.draft), photos: (E.photos || []).length, photos_before: Math.min(E.photoOff || 0, (E.photos || []).length) });   // v202 / tasks v37：AI 知道有几张照片；补充到已有的一条时前面几张是原来的
+    E.photoOff = 0;   // v202：说话里的照片号只在第一次整理时要换算
     E.draft = { title_zh: r.title_zh, title_de: r.title_de, steps_zh: r.steps_zh, steps_de: r.steps_de, tips_zh: r.tips_zh, tips_de: r.tips_de, mistakes_zh: r.mistakes_zh, mistakes_de: r.mistakes_de };
     // 「这次改了」只对改已有的一条有用；按补充再整理时接着加在后面
     E.ai = { questions_zh: r.questions_zh, questions_de: r.questions_de, model: r.model,
@@ -4017,6 +4190,7 @@ function onbDetailHTML(){
 // v111：SOP 搜索（只重画列表）；改主题下拉
 document.addEventListener('input', ev => {
   if (ev.target.id === 'tf-q'){ const q = ev.target.value.trim().toLowerCase(); document.querySelectorAll('#tf-chips .chip').forEach(b => { b.hidden = !!q && !b.classList.contains('on') && !b.dataset.n.includes(q); }); return; }   // v118
+  if (ev.target.dataset && /^(title|steps|tips|mistakes)_/.test(ev.target.dataset.sopk || '') && state.sop && state.sop.edit){ clearTimeout(sopLiveT); sopLiveT = setTimeout(() => { sopKeep(); sopLiveRefresh(); }, 400); return; }   // v202：打字时预览跟着变
   if (ev.target.id === 'sop-q' && state.sop){ const pos = ev.target.selectionStart; state.sop.q = ev.target.value; renderSopList(); const n = $('#sop-q'); if (n){ n.focus(); try { n.setSelectionRange(pos, pos); } catch(e){} } return; }
   if (ev.target.id === 'sop-topic' && state.sop && state.sop.edit){ sopKeep(); state.sop.edit.topicTouched = true; renderSopEdit(); }
 });
@@ -13069,13 +13243,21 @@ document.addEventListener('click', async ev => {
     case 'sop-same-no': { const E = sopS().edit; if (E){ sopKeep(); E.same = null; renderSopEdit(); } break; }
     case 'sop-same-yes': {   // 补充到已有的那一条：拿那一条现在的内容，和说的话一起再整理一次
       const E = sopS().edit; if (!E || !E.same) break; sopKeep();
-      try { const x = await rpc('sop_item', { ...tok(), p_item: E.same.id }), src = x.pending || x.cur;
+      try { const x = await rpc('sop_item', { ...tok(), p_item: E.same.id }), src = x.pending || x.cur, mine = (E.photos || []).length;
         Object.assign(E, { item_id: x.id, base: src ? src.content : null, baseTitle: E.same.title, baseTopic: src && src.topic_id || '', topic: src && src.topic_id || '', topicTouched: false,
-          photos: (src && src.photos || []).concat(E.photos || []).slice(0, 6), draft: null, same: null }); }
+          photos: (src && src.photos || []).concat(E.photos || []).slice(0, 6), photoOff: (src && src.photos || []).length, draft: null, same: null });
+        const cut = (src && src.photos || []).length + mine - 6; if (cut > 0) toast(t('sop_ph_cut', { n: cut }), true); }   // v202
       catch(e){ return toast(errText(e), true); }
       sopRunAi(false); break;
     }
-    case 'sop-ph-rm': { const E = sopS().edit; if (!E) break; sopKeep(); E.photos = (E.photos || []).filter(p => p !== el.dataset.p); renderSopEdit(); break; }
+    case 'sop-ph-rm': { const E = sopS().edit; if (!E) break; sopKeep(); const j = (E.photos || []).indexOf(el.dataset.p); E.photos = (E.photos || []).filter(p => p !== el.dataset.p);
+      if (j >= 0){ if (E.draft) sopDropPhoto(E.draft, j); else if (E.base){ E.base = JSON.parse(JSON.stringify(E.base)); sopDropPhoto(E.base, j); } }   // v202：后面照片的号跟着往前挪（还没整理时改现在那一版的复制，不动页面上的原件）
+      if (j >= 0 && E.photoOff && j < E.photoOff) E.photoOff--;
+      renderSopEdit(); break; }
+    case 'sop-follow': sopFollowOpen(+el.dataset.k); break;   // v202
+    case 'sop-f-next': sopFollowGo(1); break;
+    case 'sop-f-prev': sopFollowGo(-1); break;
+    case 'sop-f-close': sopFollowClose(); break;
     case 'sop-submit': {
       const S = sopS(), E = S.edit; if (!E) break; sopKeep();
       if (!E.draft) return toast(t('sop_need_draft'), true);
@@ -13720,6 +13902,7 @@ document.addEventListener('click', async ev => {
     }
     case 'report-run': runReport(); break;
     case 'view-as': {
+      if (state.sopF) sopFollowClose();   // v202
       try {
         const r = await rpc('admin_view_start', { ...tok(), p_staff_id: el.dataset.id });
         state.viewAs = { id: el.dataset.id, name: r.name, token: r.token, adminToken: state.token, adminMe: state.me };
@@ -14690,6 +14873,9 @@ document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target
     const all = [...document.querySelectorAll('[data-ct]')].filter(e => e.offsetParent && !e.disabled), i = all.indexOf(ev.target); ev.target.blur(); if (all[i + 1]) all[i + 1].focus(); return; }
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.dataset && ev.target.dataset.sopph !== undefined && state.sop && state.sop.edit && state.sop.edit.draft){   // v202：照片放第几步
+    const E = state.sop.edit, y = window.scrollY; sopKeep(); sopPlacePhoto(E.draft, +ev.target.dataset.sopph, +ev.target.value); renderSopEdit(); window.scrollTo(0, y); return; }
+  if (ev.target.dataset && /^(title|steps|tips|mistakes)_/.test(ev.target.dataset.sopk || '') && state.sop && state.sop.edit){ clearTimeout(sopLiveT); sopKeep(); sopLiveRefresh(); return; }   // v202：改了文字 → 预览跟着变（内容没变不重画）
   if (ev.target.dataset && ev.target.dataset.ordq){ ordSaveQty(ev.target); return; }   // v169：订货单的数量、目标库存、供应商商品配饮料
   if (ev.target.dataset && ev.target.dataset.otg){ ordSaveTarget(ev.target); return; }
   if (ev.target.id === 'stk-rc-supplier' || ev.target.id === 'stk-rc-date'){ const R = invS().rc; if (R && state.tab === 'inv' && invS().view === 'rc'){ stkRcKeep(); stkRcDupCheck(R); } return; }   // v188：改了供应商 / 日期，重新查重复
@@ -14905,6 +15091,7 @@ document.addEventListener('submit', async ev => {
 // 结束「以员工视角查看」：作废只读会话，回到管理员自己的账号
 async function exitView(){
   const v = state.viewAs; if (!v) return;
+  if (state.sopF) sopFollowClose();   // v202
   state.viewAs = null; state.token = v.adminToken; state.me = v.adminMe;
   try { await rpc('admin_view_end', { p_token: v.adminToken, p_view_token: v.token }); } catch(e){}
   state.receipts = []; state.rcWeek = null; state.menu = false; state.bon = blankBon(); state.form = blankForm();
