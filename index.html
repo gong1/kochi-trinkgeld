@@ -646,7 +646,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v203';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v204';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -1088,6 +1088,8 @@ zh: {
   gap_title:'SOP 里可能缺的（{n}）', gap_hint:'带教人评价新同事时写的，AI 从新同事「还不清楚 / 没人教」的回答里找到的，和 AI 从老出问题的任务里找到的（不写是谁说的）。写进 SOP 或处理好了就点掉。',
   gap_ai:'✨ AI 发现', gap_about:'关于「{n}」', gap_add:'补充这一条', gap_wrong:'不是缺的', gap_wrong_ok:'好的，不再显示', gap_scan:'✨ 用最近 30 天的回答查一遍', gap_scan_busy:'AI 正在查…',
   gap_scan_hint:'AI 拿新同事说「还不清楚 / 没人教」的和现有的 SOP 比，约 2–5 欧分。以后每次交自评会自动查。', gap_scan_done:'AI 看了 {a} 个新同事的回答，新找到 {b} 条。', gap_write:'写一条', gap_done:'处理好了', gap_done_ok:'好的，已处理',
+  ts_rlw:'上周', ma_t:'屡次漏做（{n}）', ma_hint:'最近 14 天算进评价的漏做（申诉期过了、没判「不算」的；一起负责的按人数分）满 3 次。可以记一条行为记录，内容已经写好。', ma_line:'最近 {d} 天漏做 {n} 次', ma_w:'一起负责，算 {w} 次', ma_cd:'📝 记一条行为记录', ma_ok:'知道了', cd_from_alert:'来自「屡次漏做」：人、店、规矩和内容都填好了，看一眼可以改，再点「记下来」。记下以后这条提醒就处理掉了。员工会在 App 里看到这条记录。',
+  wr_t:'上周漏做排行 · {a}–{b}', wr_hide:'收起', wr_sum:'上周任务做完 {a} / {b} 次', wr_pts:'{n} 次', wr_open:'（其中 {n} 次还能申诉）', wr_pend:'另有 {n} 次在等判定', wr_none:'上周没有漏做 ✓', wr_tasks:'最常没做的任务：', wr_times:'{n} 次', wr_ai_wait:'AI 点评还在写，过一会儿再看。', wr_go:'看上周的统计和 AI 点评',
   tb_stats:'统计', ts_r4w:'近 4 周', ts_rmonth:'本月', ts_rlast:'上月', ts_period:'{a} – {b}（今天还没过完，不算）',
   ts_hint:'只统计，不打分。漏做分开写：只有他负责的（自己）和几个人一起负责的（一起）。店没开、没人负责的不算到个人。只有你能看到。',
   ts_ai:'✨ AI 点评', ts_ai_again:'✨ 重新点评', ts_ai_busy:'AI 正在看…', ts_ai_hint:'每个人一句、每个任务一句，约 2–5 欧分。AI 只写点评，数字以表为准。', ts_ai_at:'AI 点评 · {t}',
@@ -1845,6 +1847,8 @@ de: {
   gap_title:'Möglicherweise fehlt in den SOPs ({n})', gap_hint:'Von Einarbeiter*innen geschrieben, von der KI aus „unklar / nicht gezeigt“-Antworten neuer Kolleg*innen oder aus Aufgaben mit vielen Problemen gefunden (ohne Namen). Nach dem Einarbeiten in eine SOP abhaken.',
   gap_ai:'✨ KI-Fund', gap_about:'zu „{n}“', gap_add:'Diese SOP ergänzen', gap_wrong:'Fehlt nicht', gap_wrong_ok:'Ok, wird nicht mehr angezeigt', gap_scan:'✨ Antworten der letzten 30 Tage prüfen', gap_scan_busy:'KI prüft …',
   gap_scan_hint:'Die KI vergleicht, was neue Kolleg*innen „unklar / nicht gezeigt“ nennen, mit den SOPs. Ca. 2–5 Cent. Danach automatisch bei jeder Selbsteinschätzung.', gap_scan_done:'KI hat Antworten von {a} neuen Kolleg*innen gelesen, {b} neue Funde.', gap_write:'SOP schreiben', gap_done:'Erledigt', gap_done_ok:'Ok, erledigt.',
+  ts_rlw:'Letzte Woche', ma_t:'Wiederholt nicht erledigt ({n})', ma_hint:'In den letzten 14 Tagen 3× nicht erledigt (zählt für die Bewertung: Einspruchsfrist vorbei, nicht als „zählt nicht“ entschieden; gemeinsame Aufgaben anteilig). Eine Verhaltensnotiz ist schon vorbereitet.', ma_line:'in den letzten {d} Tagen {n}× nicht erledigt', ma_w:'gemeinsam, zählt {w}×', ma_cd:'📝 Verhaltensnotiz schreiben', ma_ok:'Verstanden', cd_from_alert:'Aus „Wiederholt nicht erledigt“: Person, Filiale, Regel und Text sind ausgefüllt. Bitte kurz prüfen, ggf. ändern und dann „Speichern“ tippen. Danach ist der Hinweis erledigt. Die Person sieht die Notiz in der App.',
+  wr_t:'Letzte Woche nicht erledigt · {a}–{b}', wr_hide:'Ausblenden', wr_sum:'Letzte Woche {a} von {b} Aufgaben erledigt', wr_pts:'{n}×', wr_open:'(davon {n}× noch Einspruch möglich)', wr_pend:'{n}× wartet auf Entscheidung', wr_none:'Letzte Woche wurde alles erledigt ✓', wr_tasks:'Am häufigsten nicht erledigt:', wr_times:'{n}×', wr_ai_wait:'Der KI-Kommentar wird noch geschrieben – bitte später nachsehen.', wr_go:'Statistik und KI-Kommentar der letzten Woche',
   tb_stats:'Statistik', ts_r4w:'Letzte 4 Wochen', ts_rmonth:'Dieser Monat', ts_rlast:'Letzter Monat', ts_period:'{a} – {b} (heute zählt noch nicht)',
   ts_hint:'Nur Zahlen, keine Bewertung. Nicht Erledigtes getrennt: allein zuständig und gemeinsam mit anderen zuständig. Tage ohne Öffnung / ohne Zuständige zählen nicht für Personen. Nur du siehst das.',
   ts_ai:'✨ KI-Kommentar', ts_ai_again:'✨ Neu kommentieren', ts_ai_busy:'KI liest …', ts_ai_hint:'Ein Satz pro Person und Aufgabe, ca. 2–5 Cent. Die KI kommentiert nur, maßgeblich sind die Zahlen.', ts_ai_at:'KI-Kommentar · {t}',
@@ -2189,7 +2193,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=36'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=37'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2539,6 +2543,7 @@ const ERR_ZH = {
   MISS_PHOTO: '照片没有传好。请去掉照片重新加一张，或者不加照片直接提交。',
   MISS_FORBIDDEN: '你不能判定这条漏做（只有老板和这家店这个区域的负责人能判）。请刷新页面。',
   MISS_ADMIN_DECIDED: '老板已经判过了，负责人不能再改。有不同意见请直接找老板。',
+  MISS_ALERT_CONDUCT: '这条行为记录不是记给这个人的，提醒没有处理。请刷新页面再试。',
   MISS_NOT_PENDING: '这条漏做没有在等判定（员工没申诉，或者系统已经判了「不算」）。负责人只能判员工申诉了的；别的请找老板。请刷新页面。',
   MISS_INVOLVED: '这个任务那天你自己也漏做了，这条只能由老板判定。',
   MISS_VERDICT: '只能选「算」或「不算」。请刷新页面再试。',
@@ -2840,6 +2845,7 @@ const ERR_DE = {
   MISS_PHOTO: 'Das Foto wurde nicht richtig hochgeladen. Bitte entfernen und neu hinzufügen oder ohne Foto senden.',
   MISS_FORBIDDEN: 'Darüber kannst du nicht entscheiden (nur der Chef und die Leitung dieser Filiale und dieses Bereichs). Bitte Seite neu laden.',
   MISS_ADMIN_DECIDED: 'Der Chef hat schon entschieden; die Leitung kann das nicht mehr ändern. Bei anderer Meinung bitte direkt mit dem Chef sprechen.',
+  MISS_ALERT_CONDUCT: 'Diese Verhaltensnotiz gehört nicht zu dieser Person, der Hinweis wurde nicht erledigt. Bitte Seite neu laden und nochmal versuchen.',
   MISS_NOT_PENDING: 'Hier wartet kein Einspruch auf eine Entscheidung (kein Einspruch, oder das System hat schon „zählt nicht“ entschieden). Die Leitung entscheidet nur über Einsprüche; sonst bitte den Chef fragen. Bitte Seite neu laden.',
   MISS_INVOLVED: 'Du hast diese Aufgabe an dem Tag selbst nicht erledigt – darüber entscheidet nur der Chef.',
   MISS_VERDICT: 'Nur „zählt“ oder „zählt nicht“ möglich. Bitte Seite neu laden und nochmal versuchen.',
@@ -2969,7 +2975,7 @@ function errText(e){
 const RPC_MAX = 5, RPC_HOLD_MS = 15000;
 const RPC_RO = new Set(('admin_announce_detail admin_announce_list admin_asks admin_audit admin_bon_attempts admin_bon_date_helpers admin_deleted_list admin_expense_overview admin_expense_person admin_expense_staff '
   + 'admin_feedback_ai admin_feedback_list admin_feedback_screenshot admin_keepers admin_library_detail admin_library_list admin_list_staff admin_lock_checkpoints admin_messages_about admin_onb_detail admin_onb_list '
-  + 'admin_pin_requests admin_report admin_review_list admin_sched_profiles admin_sop_authors admin_sop_pending admin_suggestions admin_task_ai_list admin_task_flows admin_task_leads admin_task_stats admin_tasks_day '
+  + 'admin_miss_alerts admin_pin_requests admin_report admin_review_list admin_sched_profiles admin_sop_authors admin_sop_pending admin_suggestions admin_task_ai_list admin_task_flows admin_task_leads admin_task_stats admin_tasks_day admin_week_report '
   + 'admin_tasks_once admin_conduct_counts conduct_list conduct_my conduct_people conduct_rules_list announce_image area_status area_today area_week_tips bon_extras count_methods day_helpers entry_extras_list envelopes_pending_list expense_mine expense_photo helper_stats inv_area inv_count '
   + 'inv_drinks inv_home inv_inbox_list inv_inbox_mine inv_item inv_labels inv_misses inv_order_home inv_order_targets inv_pick inv_place inv_qr_find inv_quick_place inv_receipt inv_receipt_dups inv_recipe_hints '
   + 'inv_stock_home inv_stock_levels inv_supplier_items_list inv_target_hints inv_todo inv_week_list kitchen_hours ksched_pending library_item list_disputes list_login_staff list_rates list_requests '
@@ -3132,7 +3138,8 @@ function setMenu(on){
 function splash(){ $('#app').innerHTML = `<div class="splash" role="status"><b>${esc(t('app'))}</b><span class="muted">${esc(t('loading'))}</span></div>`; }
 function logoutLocal(){ if (state.sopF) sopFollowClose(); clearTimeout(state.vcT); state.viewCache = null; LS.del('vcache'); SS.del('vcache');   // v102：退出登录清掉存着的页面
   state.viewAs = null; state.token = null; state.me = null; SS.del('token'); SS.del('me'); LS.del('token'); LS.del('me'); LS.del('personal'); state.personal = false; state.loginPick = null; state.menu = false;
-  state.missRev = null; state.missRes = null; state.missAp = null; state.mrNote = null; }   // v196：申诉的数据跟人走，换人登录时不能留着（共用设备）
+  state.missRev = null; state.missRes = null; state.missAp = null; state.mrNote = null;   // v196：申诉的数据跟人走，换人登录时不能留着（共用设备）
+  state.missAlerts = null; state.weekRep = null; state.cdRec = null; }   // v204：屡次漏做、上周排行、行为记录表单也跟人走
 // ============ 手机推送（v27）============
 const pushSupported = () => 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
 const isIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent);
@@ -4534,7 +4541,9 @@ async function viewReconHome(){
       soft(rpc('recon_imports', { ...tok(), p_from: addDays(bizToday(), -8) }), null).then(x => { state.repImp = x; }),
       soft(rpc('admin_task_flows', tok()), null).then(x => { state.homeFlows = x; }),
       soft(rpc('admin_misses', { ...tok(), p_day: null }), null).then(x => { state.taMiss = x; }),
-      soft(rpc('miss_reviews', { ...tok(), p_days: 14 }), null).then(x => { if (x) state.missRev = x; })]);   // v196：待判定的漏做申诉
+      soft(rpc('miss_reviews', { ...tok(), p_days: 14 }), null).then(x => { if (x) state.missRev = x; }),   // v196：待判定的漏做申诉
+      soft(rpc('admin_week_report', tok()), null).then(x => { state.weekRep = x; }),   // v204：上周漏做排行（数据库 v141）
+      soft(rpc('admin_miss_alerts', tok()), null).then(x => { if (x) state.missAlerts = x; })]);   // v204：屡次漏做
     // 上面几行：v149：昨天漏做、抽查不属实   // v144：收废油的检查晚了要标红   // v135：邮件自动导入的情况   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
     S = H.S; o = H.o; state.reconTasks = H.tasks;
   }
@@ -4545,7 +4554,7 @@ async function viewReconHome(){
   state.reconDay = o.day;
   const stores = o.stores.slice().sort((a, b) => rcProblem(b) - rcProblem(a));
   const mine = viewTasks().filter(x => x.status !== 'done' && x.kind !== 'closing'), myCl = viewTasks().filter(x => x.kind === 'closing');   // v118：老板自己的点名任务放进上面的「今天的任务」清单
-  $('#main').innerHTML = oilLateHTML() + audCardsHTML() + missCardsHTML() + mrHomeHTML() + taHomeHTML() + hrepCardHTML() + aiRevHTML() + tdlHTML(myCl.filter(x => x.scope !== 'upcoming'), myCl.filter(x => x.scope === 'upcoming')) + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
+  $('#main').innerHTML = oilLateHTML() + audCardsHTML() + missCardsHTML() + maHomeHTML() + mrHomeHTML() + wrHomeHTML() + taHomeHTML() + hrepCardHTML() + aiRevHTML() + tdlHTML(myCl.filter(x => x.scope !== 'upcoming'), myCl.filter(x => x.scope === 'upcoming')) + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
       <div class="wl">${esc(t('rk_home'))}<small>${(() => { const n = Math.round((parseD(o.today) - parseD(o.day)) / 864e5); return n >= 0 && n <= 2 ? esc(t('rk_rel' + n)) + ' · ' : ''; })()}${esc(dayLabel(o.day))}</small></div>
       <button data-act="recon-home-day" data-d="1" aria-label="${esc(t('rk_next'))}" ${o.day >= o.today ? 'disabled' : ''}>›</button></div>
     ${o.day !== o.today ? `<div style="text-align:center;margin:-6px 0 12px"><button class="link" data-act="recon-home-today">${esc(t('rk_go_today'))}</button></div>` : ''}`
@@ -5083,6 +5092,7 @@ function toAdminRender(){
 function tsRange(k){ const bd = bizToday(), m0 = bd.slice(0, 8) + '01';
   if (k === 'month') return [m0, bd];
   if (k === 'last'){ const d = parseD(m0); d.setDate(0); const e = ymd(d); return [e.slice(0, 8) + '01', e]; }
+  if (k === 'lw'){ const m = mondayOf(bd); return [addDays(m, -7), addDays(m, -1)]; }   // v204：上周（周一到周日）
   return [addDays(bd, -28), bd]; }
 async function tsLoad(){ const T = state.ts = state.ts || { k: '4w' }, [a, b] = tsRange(T.k), key = T.k;
   T.data = null; keepScroll(toRedraw);
@@ -5091,7 +5101,7 @@ async function tsLoad(){ const T = state.ts = state.ts || { k: '4w' }, [a, b] = 
   if (state.toView === 'stats') keepScroll(toRedraw); }
 function tsHTML(){
   const T = state.ts || { k: '4w' }, D = T.data, ai = D && D.ai && D.ai.out, L = x => state.lang === 'de' ? x.de || x.zh : x.zh || x.de;
-  const seg = `<div class="seg sm" style="margin-bottom:8px">${[['4w', 'ts_r4w'], ['month', 'ts_rmonth'], ['last', 'ts_rlast']].map(([k, l]) => `<button data-act="ts-range" data-k="${k}" class="${T.k === k ? 'on' : ''}">${esc(t(l))}</button>`).join('')}</div>`;
+  const seg = `<div class="seg sm" style="margin-bottom:8px">${[['lw', 'ts_rlw'], ['4w', 'ts_r4w'], ['month', 'ts_rmonth'], ['last', 'ts_rlast']].map(([k, l]) => `<button data-act="ts-range" data-k="${k}" class="${T.k === k ? 'on' : ''}">${esc(t(l))}</button>`).join('')}</div>`;
   if (T.err) return seg + `<div class="list"><div class="empty">${esc(T.err)}</div></div>`;
   if (!D) return seg + `<div class="loading">${esc(t('loading'))}</div>`;
   const pct = (a, b) => b ? Math.round(100 * a / b) : 0, wd = i => state.lang === 'de' ? WDAYS.de[i] : '周' + WDAYS.zh[i];
@@ -10414,6 +10424,7 @@ async function viewAdmin(){
     } else if (state.adminSub === 'tasks'){   // v95：某一天的任务 + 负责人
       el().innerHTML = await toAdminLoad();
       if (state.oilFocus){ const c = document.getElementById('oil-card-' + state.oilFocus); state.oilFocus = null; if (c) c.scrollIntoView({ block: 'start' }); }   // v144
+      if (state.tsAuto){ state.tsAuto = false; if (state.toView === 'stats') tsLoad(); }   // v204：从「上周漏做排行」卡片点进来
     } else if (state.adminSub === 'sop'){   // v111：SOP
       await viewSop();
     } else if (state.adminSub === 'conduct'){   // v194：行为记录
@@ -11335,7 +11346,7 @@ async function viewCdPage(){
 async function cdRecLoad(){
   let C = state.cdRec;
   if (!C || !C.loaded){
-    C = state.cdRec = { filter: (C && C.filter) || '', form: (C && C.form) || null, rulesOpen: !!(C && C.rulesOpen) };
+    C = state.cdRec = { filter: (C && C.filter) || '', form: (C && C.form) || null, rulesOpen: !!(C && C.rulesOpen), fromAlert: (C && C.fromAlert) || null };   // v204：fromAlert
     try {
       const [pp, rr, ll] = await Promise.all([rpc('conduct_people', tok()), rpc('conduct_rules_list', tok()),
         rpc('conduct_list', { ...tok(), p_staff: null, p_from: addDays(today(), -30), p_to: today() })]);
@@ -11347,7 +11358,7 @@ async function cdRecLoad(){
 // v195（老板 2026-11-18：「刚刚打了半天，结果没了」）：以前只在点按钮时暂存，切到别的页面或页面重画就丢了。
 //   现在每打一个字就存进 state 和这台设备（localStorage，按人分开）；「记下来」成功后才清掉。员工写的说明、规矩清单的输入框也一样。
 const cdKey = k => 'cd_' + k + '_' + ((state.me || {}).id || '');
-function cdSaveDraft(){ const C = state.cdRec; if (C && C.form) LS.set(cdKey('form'), C.form); }
+function cdSaveDraft(){ const C = state.cdRec; if (C && C.form && !C.fromAlert) LS.set(cdKey('form'), C.form); }   // v204：从屡次漏做预填的不存（不能盖掉老板没记完的草稿）
 function cdSaveReplies(){ LS.set(cdKey('reply'), state.cdDraft || {}); }
 function cdGrab(){   // 重画以前把输入框里的内容记下来
   const F = state.cdRec && state.cdRec.form; if (!F) return;   // 规矩清单的输入框在下面一起记
@@ -11364,13 +11375,14 @@ function cdRecHTML(){
     C.restored = !!ok;
   }
   const F = C.form;
+  if (F.ruleCode){ const r = rules.find(x => x.code === F.ruleCode); if (r) F.rule = r.id; delete F.ruleCode; }   // v204：从屡次漏做来的，规矩先选「其他」
   const who = ppl.find(x => x.id === F.staff), stores = who ? who.stores : [];
   if (who && stores.length === 1) F.store = stores[0];
   if (F.store && !stores.includes(F.store)) F.store = '';
   let h = '';
   if (state.viewAs) h += `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_view_only'))}</div>`;
   else if (!ppl.length) h += `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_nobody'))}</div>`;
-  else h += `<div class="sheet"><h3 style="margin-top:0">${esc(t('cd_new'))}</h3><div class="small muted" style="margin-bottom:10px">${esc(t('cd_new_hint'))}</div>${C.restored ? `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_draft_kept'))}</div>` : ''}
+  else h += `<div class="sheet"><h3 style="margin-top:0">${esc(t('cd_new'))}</h3><div class="small muted" style="margin-bottom:10px">${esc(t('cd_new_hint'))}</div>${C.restored ? `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_draft_kept'))}</div>` : ''}${C.fromAlert ? `<div class="infobox" style="margin-bottom:10px">${esc(t('cd_from_alert'))}</div>` : ''}
     <div class="field"><label for="cd-staff">${esc(t('cd_who'))}</label><select class="input" id="cd-staff"><option value="">${esc(t('cd_pick'))}</option>${ppl.map(p => `<option value="${p.id}"${p.id === F.staff ? ' selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>
     ${who ? `<div class="field"><label>${esc(t('cd_store'))}</label><div class="seg sm">${stores.map(x => `<button type="button" data-act="cd-store" data-s="${x}" class="${F.store === x ? 'on' : ''}">${esc(x)}</button>`).join('')}</div></div>` : ''}
     <div class="field"><label for="cd-day">${esc(t('cd_day'))}</label><input class="input" type="date" id="cd-day" min="${addDays(today(), -7)}" max="${today()}" value="${esc(F.day || today())}"></div>
@@ -11634,6 +11646,43 @@ function mrItemHTML(x, full){
     h += V.length ? `<details style="margin-top:6px"><summary class="small" style="cursor:pointer">${esc(t('mr_redo'))}</summary>${ctl}</details>` : ctl;
   }
   return h + '</div>';
+}
+// ============ v204：漏做监督（数据库 v141 / 文件服务 tasks v38，老板 2026-11-20「ab 先上吧」）============
+// 次数：算进评价的漏做（一起负责的按人数分），一位小数
+const maNum = x => String(Math.round(+x * 10) / 10).replace('.', state.lang === 'de' ? ',' : '.');
+const maTask = m => state.lang === 'de' ? m.name_de || m.name_zh : m.name_zh || m.name_de;
+// B：屡次漏做（14 天内满 3 次）：记一条行为记录（人、店、内容都填好）或「知道了」
+function maHomeHTML(){
+  const L = state.missAlerts || []; if (!L.length) return '';
+  return `<div id="ma-home" class="sheet" style="margin-bottom:12px"><div class="grp-t negc">${esc(t('ma_t', { n: L.length }))}</div>
+    <div class="small muted" style="margin:2px 0 6px">${esc(t('ma_hint'))}</div>
+    ${L.map(a => `<div class="meta" style="margin:10px 0"><strong>${esc(a.name)}</strong> <span class="negc">${esc(t('ma_line', { d: a.days, n: maNum(a.pts) }))}</span>
+      ${(a.misses || []).slice().reverse().map(m => `<div class="small">${esc(dm(m.day) + ' · ' + maTask(m) + (m.store ? ' · ' + m.store : '') + (+m.w < 1 ? ' · ' + t('ma_w', { w: maNum(m.w) }) : ''))}</div>`).join('')}
+      ${state.viewAs ? '' : `<div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">${a.can_conduct ? `<button class="btn" style="width:auto" data-act="ma-cd" data-id="${a.id}">${esc(t('ma_cd'))}</button>` : ''}<button class="btn ghost" style="width:auto" data-act="ma-ok" data-id="${a.id}">${esc(t('ma_ok'))}</button></div>`}</div>`).join('')}</div>`;
+}
+function maRedraw(){ const h = $('#ma-home'); if (h) h.outerHTML = maHomeHTML() || '<div id="ma-home"></div>'; }
+// 行为记录预填的内容：中德文各一行（员工也会看到），最多 500 字
+function maNote(a){
+  const L = (a.misses || []).slice().sort((x, y) => x.day < y.day ? 1 : -1), r1 = x => String(Math.round(+x * 10) / 10), w = (m, de) => +m.w < 1 ? ' ×' + (de ? r1(m.w).replace('.', ',') : r1(m.w)) : '';
+  const p2 = n => String(n).padStart(2, '0'), de = d => { const x = parseD(d); return p2(x.getDate()) + '.' + p2(x.getMonth() + 1) + '.'; }, zh = d => { const x = parseD(d); return (x.getMonth() + 1) + '月' + x.getDate() + '日'; };
+  const z = `最近 ${a.days} 天漏做 ${String(Math.round(+a.pts * 10) / 10)} 次（申诉期已过、算进评价的；一起负责的按人数分）：` + L.map(m => zh(m.day) + ' ' + (m.name_zh || m.name_de) + w(m, false)).join('；') + '。';
+  const g = `In den letzten ${a.days} Tagen ${String(Math.round(+a.pts * 10) / 10).replace('.', ',')}× nicht erledigt (zählt für die Bewertung; gemeinsam = anteilig): ` + L.map(m => de(m.day) + ' ' + (m.name_de || m.name_zh) + w(m, true)).join('; ') + '.';
+  const cut = (x, n) => x.length > n ? x.slice(0, n - 1) + '…' : x;
+  return cut(z, 230) + '\n' + cut(g, 260);
+}
+// A：周一到周三「上周漏做排行」（数据库每周一存好数字；AI 点评由文件服务写）
+function wrHomeHTML(){
+  const R = state.weekRep; if (!R || !R.show || LS.get('wr_hide_' + R.week, false)) return '';
+  const D = R.data || {}, P = (D.people || []).filter(p => +p.pts > 0 || +p.pending > 0), T = (D.tasks || []).filter(x => +x.missed > 0).slice(0, 3), ai = R.ai;
+  const row = (p, i) => `<div class="meta">${i + 1}. <strong>${esc(p.name)}</strong> <span class="${+p.pts >= 3 ? 'negc' : 'warnc'}">${esc(t('wr_pts', { n: maNum(p.pts) }))}</span>`
+    + (+p.open ? ` <span class="small muted">${esc(t('wr_open', { n: p.open }))}</span>` : '') + (+p.pending ? ` <span class="small muted">${esc(t('wr_pend', { n: p.pending }))}</span>` : '') + `</div>`;
+  return `<div id="wr-home" class="sheet" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="grp-t">${esc(t('wr_t', { a: dm(R.from), b: dm(R.to) }))}</div>
+      <button class="link small" data-act="wr-hide" data-w="${R.week}">${esc(t('wr_hide'))}</button></div>
+    <div class="small muted" style="margin:2px 0 6px">${esc(t('wr_sum', { a: D.done || 0, b: D.turns || 0 }))}</div>
+    ${P.length ? P.slice(0, 8).map(row).join('') : `<div class="pos">${esc(t('wr_none'))}</div>`}
+    ${T.length ? `<div class="small muted" style="margin-top:8px">${esc(t('wr_tasks'))}</div>${T.map(x => `<div class="small">· ${esc(maTask(x) + (x.store ? ' · ' + x.store : '') + ' ' + t('wr_times', { n: x.missed }))}</div>`).join('')}` : ''}
+    ${ai ? `<div class="small" style="margin-top:8px">✨ ${esc(state.lang === 'de' ? ai.overall_de || ai.overall_zh : ai.overall_zh || ai.overall_de)}</div>` : `<div class="small muted" style="margin-top:8px">${esc(t('wr_ai_wait'))}</div>`}
+    <button class="btn ghost" data-act="wr-stats" style="margin-top:10px">${esc(t('wr_go'))}</button></div>`;
 }
 // 老板首页 / 负责人「今天」：待判定的（能判的才放这里；没有就不显示）
 function mrPending(){ const R = state.missRev; return ((R && R.items) || []).filter(x => x.state === 'pending' && x.can_decide && !(x.verdicts || []).length); }
@@ -12887,7 +12936,21 @@ document.addEventListener('click', async ev => {
     case 'cd-mine': state.tab = 'more'; state.cdPage = 'mine'; state.cdMine = null; state.taRec = null; state.libView = null; state.sop = null; state.taskPage = false; state.docPage = false; render(); window.scrollTo(0, 0); break;   // v194
     case 'cd-rec': state.tab = 'more'; state.cdPage = 'rec'; state.cdRec = null; state.taRec = null; state.libView = null; state.sop = null; state.taskPage = false; state.docPage = false; render(); window.scrollTo(0, 0); break;   // v194
     case 'cd-close': state.cdPage = null; render(); window.scrollTo(0, 0); break;
-    case 'cd-staff': state.cdRec = { filter: el.dataset.id }; state.adminSub = 'conduct'; render(); window.scrollTo(0, 0); break;   // v194：员工列表点「📝 行为记录」
+    case 'cd-staff': state.cdRec = { filter: el.dataset.id }; state.adminSub = 'conduct'; render(); window.scrollTo(0, 0); break;
+    case 'ma-cd': {   // v204：屡次漏做 → 行为记录（人、店、规矩「其他」、内容都填好，老板看一眼再保存）
+      const A = (state.missAlerts || []).find(x => x.id === el.dataset.id); if (!A) break;
+      state.cdRec = { filter: A.staff_id, form: { staff: A.staff_id, store: A.store || '', day: today(), rule: '', ruleCode: 'other', note: maNote(A) }, fromAlert: A.id };
+      state.tab = 'admin'; state.adminSub = 'conduct'; render(); window.scrollTo(0, 0); break;
+    }
+    case 'ma-ok': {   // v204：知道了（不记行为记录）
+      if (state.viewAs) break;
+      el.disabled = true;
+      try { await rpc('admin_miss_alert_done', { ...tok(), p_id: el.dataset.id, p_conduct: null }); state.missAlerts = (state.missAlerts || []).filter(x => x.id !== el.dataset.id); maRedraw(); }
+      catch(e){ toast(errText(e), true); el.disabled = false; }
+      break;
+    }
+    case 'wr-hide': LS.set('wr_hide_' + el.dataset.w, true); { const h = $('#wr-home'); if (h) h.remove(); } break;   // v204：这台设备上收起这一周的卡片
+    case 'wr-stats': state.tab = 'admin'; state.adminSub = 'tasks'; state.toView = 'stats'; state.ts = { k: 'lw' }; state.tsAuto = true; render(); window.scrollTo(0, 0); break;   // v204   // v194：员工列表点「📝 行为记录」
     case 'cd-store': cdGrab(); state.cdRec.form.store = el.dataset.s; cdSaveDraft(); cdRedraw(); break;
     case 'cd-rule': cdGrab(); state.cdRec.form.rule = el.dataset.id; cdSaveDraft(); cdRedraw(); break;
     case 'cd-save': {
@@ -12896,7 +12959,12 @@ document.addEventListener('click', async ev => {
       el.disabled = true;
       try {
         const n = await rpc('conduct_note_add', { ...tok(), p_staff: F.staff, p_store: F.store, p_day: F.day || today(), p_rule: F.rule, p_note: F.note.trim() });
-        C.list = [n].concat(C.list || []); C.form = null; C.restored = false; LS.del(cdKey('form')); toast(t('cd_saved', { n: n.staff_name || '' })); cdRedraw();
+        const aid = C.fromAlert; C.fromAlert = null;   // v204
+        C.list = [n].concat(C.list || []); C.form = null; C.restored = false; if (!aid) LS.del(cdKey('form')); toast(t('cd_saved', { n: n.staff_name || '' }));   // v204：预填的那一次不删老板别的草稿
+        if (aid && n && n.id && n.staff_id === ((state.missAlerts || []).find(x => x.id === aid) || {}).staff_id){   // v204：记给同一个人 → 屡次漏做的提醒跟着处理掉
+          soft(rpc('admin_miss_alert_done', { ...tok(), p_id: aid, p_conduct: n.id }), null).then(x => { if (x) state.missAlerts = (state.missAlerts || []).filter(a => a.id !== aid); });
+        }
+        cdRedraw();
       } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
