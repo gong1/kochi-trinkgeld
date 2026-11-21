@@ -198,6 +198,78 @@ body.en #main::after{content:"Tasks, notices and SOPs are translated by AI. Germ
 .tsr-m{flex:1;min-width:0} .tsr-n{font-weight:600} .tsr-s{font-size:14px;color:var(--muted)} .tsr-s.negc{color:var(--neg)}
 .tsr-a{display:flex;gap:14px;margin-top:2px}
 .tsr-box{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:4px 14px}
+/* v205：统一的任务行（圆点 + 名字 + 一行状态 + 📷 + ›）；点一行从底部弹出操作 */
+.tkr{display:flex;align-items:center;gap:6px;border-top:1px solid var(--line);min-height:52px}
+.tkr:first-child,.tb-h + .tkr,.tdl-bar + .tkr,.tdl-g + .tkr{border-top:0}
+.tkr .tsr-d{margin-top:0}
+.tkr-m{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;border:0;background:none;padding:8px 0;text-align:left;color:inherit;font:inherit}
+.tkr-n{font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tkr-s{font-size:14px;color:var(--muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tkr-s .negc,.tkr-s.negc{color:var(--neg)} .tkr-s .warnc,.tkr-s.warnc{color:var(--copper)}
+.tkr-p{flex:none;width:44px;height:44px;border:0;background:none;font-size:18px;border-radius:8px}
+.tkr-c{flex:none;width:28px;height:44px;border:0;background:none;color:var(--muted);font-size:20px;padding:0}
+dialog.tks{margin:auto auto 0;width:100%;max-width:560px;border-radius:16px 16px 0 0;padding:18px 16px calc(16px + env(safe-area-inset-bottom,0px));max-height:88vh;overflow:auto}
+.tks-t{font-size:18px;font-weight:700;margin-bottom:4px;overflow-wrap:anywhere}
+.tks-d{font-size:14px;color:var(--muted);margin-bottom:12px}
+.tks-img{display:block;max-width:100%;max-height:160px;border-radius:8px;margin:0 0 12px;background:var(--line)}
+.tks-b{height:48px;margin-bottom:8px;text-align:left;padding:0 16px;font-size:16px;font-weight:600}
+.tks-b.danger{color:var(--neg);border-color:var(--neg)}
+.tks-sep{border-top:1px solid var(--line);margin:8px 0 12px}
+/* v205：管理 → 任务：日期条、条件行、「更多」入口、浮动「＋」 */
+.tdn{display:flex;align-items:center;gap:4px;margin:0 0 8px}
+.tdn button{flex:none;width:44px;height:44px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--card);font-size:20px;color:var(--ink)}
+.tdn .tdn-l{flex:1;text-align:center;font-weight:700}
+.tdn label{flex:none;width:44px;height:44px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;position:relative;overflow:hidden}
+.tdn label input{position:absolute;inset:0;opacity:0;width:100%;height:100%}
+.crow{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;padding:8px 12px;margin:0 0 8px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--card);text-align:left;color:inherit;font-weight:600}
+.crow > span:first-child{flex:1;min-width:0}
+.crow.bad{border-color:var(--neg);color:var(--neg);background:#FBF0EC} .crow.warn{border-color:var(--copper);color:var(--copper);background:var(--copper-soft)}
+.mrow{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:10px 14px;border:0;border-top:1px solid var(--line);background:none;text-align:left;color:inherit;font-size:17px;font-weight:600}
+.mrow:first-child{border-top:0} .mrow > span:nth-child(2){flex:1;min-width:0}
+.fab{position:fixed;right:16px;bottom:calc(env(safe-area-inset-bottom,0px) + 80px);z-index:11;width:56px;height:56px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:30px;line-height:1;box-shadow:0 4px 14px rgba(31,42,39,.3)}
+.seg .cnt{display:inline-block;min-width:18px;height:18px;line-height:18px;border-radius:9px;background:var(--neg);color:#fff;font-size:12px;margin-left:4px;padding:0 5px}
+/* v205：首页「任务提醒（N）」、员工「要处理（N）」 */
+.trc{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--copper);border-radius:var(--r-m);padding:10px 14px 4px;margin-bottom:12px}
+.trc.bad{border-left-color:var(--neg)}
+.trc-h{font-weight:700;font-size:17px;margin-bottom:2px}
+.trc-l{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;border:0;border-top:1px solid var(--line);background:none;padding:8px 0;text-align:left;color:inherit;font-size:15px;font-weight:600}
+.trc-l > span:first-child{flex:1;min-width:0} .trc-l.bad{color:var(--neg)}
+.trc-b{padding:2px 0 10px}
+.trc-b > .sheet{margin-bottom:0}
+.trc .task{border:0;border-top:1px solid var(--line);border-radius:0;background:none;padding:10px 0;margin:0}
+.trc .trc-h + .task{border-top:0}
+.tk-tag{display:inline-flex;align-items:center;gap:4px;min-height:36px;border:1px solid var(--line);border-radius:18px;background:var(--card);padding:2px 12px;margin:0 0 10px;font-size:14px;font-weight:600;color:var(--ink)}
+.tk-tag-x{font-size:14px;margin:-4px 0 10px}
+/* v205：新任务表（三问 + 更多设置）：从底部弹起、占满全屏；顶栏、底栏固定，中间滚 */
+.tfo{position:fixed;inset:0;z-index:40;background:var(--paper);display:flex;flex-direction:column}
+.tfo-h{flex:none;display:flex;align-items:center;gap:10px;padding:8px 16px;padding-top:calc(env(safe-area-inset-top,0px) + 8px);background:var(--card);border-bottom:1px solid var(--line)}
+.tfo-h b{font-size:18px} .tfo-h small{color:var(--muted);font-size:13px;margin-left:6px}
+.tfo-h .xb{margin-left:auto;width:44px;height:44px}
+.tfo-b{flex:1;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.tfo-in{max-width:560px;margin:0 auto;padding:14px 16px 24px}
+.tfo-f{flex:none;background:var(--card);box-shadow:0 -2px 10px rgba(31,42,39,.12);padding:10px 16px calc(env(safe-area-inset-bottom,0px) + 10px)}
+.tfo-f .tfs{max-width:560px;margin:0 auto 8px;font-weight:700;font-size:15px;line-height:1.35}
+.tfo-f .tfs.none{color:var(--muted);font-weight:600}
+.tfo-f .row{max-width:560px;margin:0 auto} .tfo-f .btn,.tfcc .btn{height:48px}
+.tfai{background:var(--celadon-soft);border-radius:var(--r-m);padding:12px;margin-bottom:12px}
+.tfai-r{display:flex;gap:8px} .tfai-r .input{flex:1;min-width:0} .tfai-r .btn{width:auto;flex:none;padding:0 14px;height:50px}
+.tfor{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:4px 0 12px} .tfor::before,.tfor::after{content:'';flex:1;border-top:1px solid var(--line)}
+.tfq{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r-m);padding:12px 12px 4px;margin-bottom:12px;scroll-margin:12px}
+.tfq.err,details.fold.tferr{border-color:var(--neg);border-style:solid} .tfq.miss{border:1.5px dashed var(--copper)}
+.tfq-h{font-weight:700;margin-bottom:8px} .tfq-h small{font-weight:400;color:var(--muted);font-size:13px;margin-left:6px}
+.tfq-e{color:var(--neg);font-size:14px;font-weight:600;margin:0 0 8px} .tfq-m{color:var(--copper);font-size:13px;font-weight:600;margin-left:6px}
+.tfg{font-size:12px;color:var(--muted);margin:2px 0 4px}
+.tfq .chip{min-height:44px}
+.tfsub{border-left:3px solid var(--celadon-soft);padding:2px 0 2px 10px;margin:0 0 10px}
+.tfsub.err{border:1.5px solid var(--neg);border-radius:var(--r-s);padding:8px 10px}
+.tfw .chip{flex:1 1 calc(25% - 8px);text-align:center;padding:8px 4px;min-width:0;font-size:15px;line-height:1.2}
+.chip:disabled{opacity:.4}
+.tfstep{display:flex;align-items:center;gap:12px;margin-bottom:10px} .tfstep button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:22px;line-height:1} .tfstep button:disabled{opacity:.4} .tfstep b{min-width:72px;text-align:center}
+.tflock{display:flex;align-items:center;gap:6px 12px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin:0 0 10px} .tflock .link{min-height:44px}
+.tfcc{border:2px solid var(--celadon);border-radius:var(--r-m);background:var(--card);padding:14px;margin-bottom:12px}
+.tfcc-t{color:var(--muted);font-size:14px} .tfcc-s{font-size:19px;font-weight:700;margin:4px 0 6px;line-height:1.35}
+.btn.warnb{background:var(--copper);border-color:var(--copper);color:#fff}
+.tfnote{font-size:13px;color:var(--copper);margin:-2px 0 10px}
 /* v114：老板「今天」最上面：拍全天报告 + 两家店一起点信封 */
 .hrep-card{margin:0 0 14px}
 .hrep-card > .row .btn{font-size:16px}
@@ -635,6 +707,7 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 <input type="file" id="rc-shoot" accept="image/*" capture="environment" data-invphoto="receipt-new" hidden>
 <dialog id="pinDlg"></dialog>
 <dialog id="photoDlg"></dialog>
+<dialog id="tkDlg" class="tks"></dialog>
 <dialog id="shiftDlg"></dialog>
 <dialog id="fbDlg"></dialog>
 
@@ -646,7 +719,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v204';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v205';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -999,7 +1072,7 @@ zh: {
   drk_m_bad_n:'⚠ 有问题的 {n} 行排在每段最前面，点黄色的字当场补上。', drk_m_fix_h:'补上缺的资料', drk_m_fix_content:'{n}：每瓶多少 ml', drk_m_fix_cost:'{n}：进价（每瓶，不含税，€）', drk_m_fix_need:'请至少填一项。',
   drk_rc_q_unit:'整瓶', drk_rc_q_glass:'一杯 170 ml', drk_rc_q_shot:'shot 60 ml', drk_rc_cq:'每瓶多少 ml', drk_rc_cq_save:'保存每瓶多少', drk_rc_cq_bad:'每瓶多少要填数字，例如 750。', drk_rc_price_bad:'卖价要填数字，例如 6,90。',
   drk_rc_till:'空着 = 按收银机实际卖的价（现在 {p}）', drk_rc_note:'收银商品：{a}', dp_like_art:'名字像这个收银商品的',
-  oil_other_open:'{s} 也有一轮收废油在进行（{x}）›', oil_other_late:'⚠ {s} 的收废油检查晚了 {n} 天 ›',
+  oil_other_open:'{s} 也有一轮收废油在进行（{x}）›', oil_other_late:'⚠ {s} 的收废油检查逾期 {n} 天 ›',
   dt_week:'每周小结', drk_wk_h:'📝 每周饮料小结', drk_wk_line:'📝 饮料周小结 · {s}（{a}–{b}）', drk_wk_range:'{a}–{b}', drk_wk_auto:'周一中午自动写的', drk_wk_by:'{n} 点「现在生成」',
   drk_wk_gen:'✨ 现在生成一次（上周）', drk_wk_busy:'AI 正在写……（大约半分钟）', drk_wk_done:'上周的小结写好了', drk_wk_fail:'AI 这次没写成。请过一会儿再点一次；还不行请截图发给 Claude。',
   drk_wk_none:'{s} 还没有小结。每周一中午自动写上一周的；也可以点上面「现在生成一次」。', drk_wk_off:'{s} 还没开始管饮料库存（还没盘点、收货或订货），所以不会自动写小结；点「现在生成一次」只能写销量。',
@@ -1105,6 +1178,8 @@ zh: {
   tf_need_timing:'请选什么时候（到店后 / 收店时）。', tf_need_photo:'请选怎么算完成（拍照 / 打勾）。', tf_say_empty:'先说一句话（或者打字）。',
   tf_sop:'按哪条 SOP 做（选填）', tf_sop_none:'不连 SOP', tf_sop_ai:'AI 按 SOP 的标准看照片（每张约 1 欧分）', tf_sop_gone_opt:'（已撤下）',
   tf_sop_hint:'员工做任务时能看这条 SOP；SOP 改了新版、你确认后，任务里自动是新版。',
+  tks_photo:'看照片', tks_res:'📎 看结果', tks_more:'操作', tks_view:'查看模式下只能看。', tks_none:'现在没有可以做的操作。', to_yesterday:'昨天', to_c_oil:'🛢 {s} 收废油：{x}', to_c_oil_late:'🛢 {s} 收废油：检查逾期 {n} 天', to_c_leads:'还有 {n} 个区域没设负责人', to_m_stats:'统计', to_m_appeal:'申诉', to_m_appeal_n:'申诉（{n} 个等你判定）', to_m_oil:'收废油', to_m_oil_on:'收废油（{s} 进行中）', to_m_leads:'负责人（已设 {a}/{b}）', to_pick_day:'跳到某一天', to_back_today:'回到今天', to_later_n:'以后还有 {n} 个一次性任务', to_past_n:'前几天的一次性任务（{n}）', to_later_t:'{d} 以后的一次性任务', to_past_t:'前几天的一次性任务', sg_fold_n:'✨ AI 从 SOP 建议了 {n} 个任务', sg_fold0:'✨ 让 AI 从 SOP 建议任务', tp_mine:'我安排的（{n}）', tp_rep:'重复的（{n}）', my_area_t:'我区域今天', my_area_tp:'📝 我安排的 / 重复的', my_area_none:'今天你负责的区域没有要安排的任务。', td_todo_t:'要处理（{n}）', td_todo_more:'还有 {n} 条', tr_title:'任务提醒（{n}）', tr_mr:'⚖️ 申诉等你判定（{n}）', tr_miss:'❗ 我的漏做（{n}）', tr_aud:'🔍 要你抽查（{n}）', tr_ma:'⚠ 屡次漏做（{n} 人）', tr_ta_miss:'✗ 昨天漏做（{n}）', tr_ta_false:'抽查不属实（{n}）', tr_ta_open:'🔍 还在等抽查（{n}）', tr_arv:'🤖 AI 有疑问的照片（{n}）', tr_wr:'📊 上周漏做排行', tdl_late:'逾期 {n} 天', tkt_learning:'📷 今天要拍 · 前 {b} 次', tkt_again:'📷 今天要拍 · 重拍 {b} 次', tkt_random:'📷 今天抽到要拍', tkt_important:'📷 每次都拍', tkt_onboarding:'📷 要拍 · 带教期间', tkt_false_14:'📷 要拍 · 到 {u}', tkt_boss_find:'📷 要拍 · 已拍 {a}/{b} 次', tkt_period:'📷 要拍照', tkt_check:'✓ 今天只要打勾', tkt_result:'📎 交回结果', to_once_rest:'这天的其他一次性任务',   // v205：任务界面第 3、5、6 步
+  tfq_what:'做什么', tfq_who:'谁做', tfq_when:'什么时候', tfq_how:'怎么算完成', tf_what_ph:'例如：把咖啡机拆洗干净', tf_m_what:'做什么', tf_g_role:'按岗位', tf_g_area:'谁在班就谁做', tf_g_person:'指定的人', tf_find:'🔍 找人', tf_kitchen_note:'后厨的人只能按岗位安排', tf_one:'一个人做就行', tf_each_one:'每个服务员各做一份', tf_each_short:'那天上班的每个服务员下班前都做一次，各算各的；交 Bon 时会提醒。', tf_store_q:'哪家店', tf_store_only:'哪家店：{s}', tf_w_pick:'选一天', tf_w_due:'某天前做完', tf_w_longer:'更长…', tf_due_only:'「某天前做完」只能给指定的人。', tf_due_conv:'「某天前做完」只能给指定的人，已改成那一天做。', tf_due_sun0:'本周日', tf_due_sun1:'下周日', tf_due_pick:'📅 选日期', tf_due_hint:'每天都显示，直到做完。截止日没做完记一次没做，之后显示「逾期 N 天」。', tf_due_none:'还没选截止日', tf_need_due:'请选截止日（最远今天起 30 天）。', tf_lock_once:'🔒 一次性任务，不能改成重复', tf_lock_rep:'🔒 重复的任务，不能改成一次性', tf_lock_each:'🔒 每个服务员各做一份 = 每天、下班前（收店时）做', tf_copy:'复制成新任务', tf_copied:'已复制成一个新任务，原来的不变。改好后点「保存」。', tf_hh_learn:'新人前几次每次拍，熟了以后随机抽查。', tf_hh_always:'每次做完都要拍照。', tf_hh_check:'打勾就算做完，不用拍照。', tf_hh_photo:'做完拍一张照片才算完成。', tf_hh_result:'要交回照片、截图或 PDF 才算做完，交了会推送给你。', tf_ph_note_result:'「交回结果」只给一次性的任务，已改成拍照。', tf_ph_note_always:'「每次都拍」只给每天的任务，已改成拍照。', tf_more_t:'更多设置', tf_more_sub:'SOP、参考照片、链接、中德文…', tf_mc_sop:'SOP：{n}', tf_mc_ph:'{n} 张照片', tf_mc_link:'有链接', tf_mc_mk:'没做完就过掉', tf_mc_tag:'店标签 {s}', tf_mc_names:'中德文改过', tf_names:'中德文（保存时 AI 自动写，也可以自己改）', tf_ai_again:'✨ 重新让 AI 写中德文', tf_sum_none:'还没选谁做', tf_s_each:'每个服务员', tf_s_due:'{d} 前做完', tf_s_mk_yes:'没做完要补', tf_s_mk_no:'没做完就过掉', tf_s_both:'午班 + 晚班', tf_s_learn:'拍照（熟了抽查）', tf_save_n:'保存（建 {n} 个）', tf_or:'或者自己填', tf_ai_btn:'✨ 填表', tf_ai_hint:'说清谁做、做什么、什么时候 · 按键盘 🎤 也行 · 约 1 分钱', tf_say_ph2:'例如：Duc 下周四之前把吧台饮料都录进库存', tf_cc_t:'我理解的是：', tf_cc_ok:'对，保存', tf_cc_edit:'我改一下', tf_cc_fix:'补上：{k} ›', tf_cc_due:'从{a}起每天都在 {n} 的清单里；截止日没做完记一次没做，之后显示「逾期 N 天」，做完才消失。', tf_say_edit:'✎ 改这句话', tf_ai_miss:'AI 没听到', tf_saved_due:'已交给 {n}：{d} 前做完', tf_saved_due_self:'已加到你的清单：{d} 前做完', dl_open:'截止 {d}，还剩 {n} 天', dl_tomorrow:'明天截止', dl_from:'{d} 起', dl_desc:'{a} 起 · {b} 截止', dl_done_late:'晚了 {n} 天',   // v205：新任务表（三问）、某天前做完、AI 确认卡
   nm_new_view:'＋ 新任务（查看模式下不能用）',   // v129
   tp_more:'📝 任务', tp_title:'任务', tp_none:'还没有安排的一次性任务。',   // v130
   // v128：任务附照片、附链接、交回结果（数据库 v93 / 文件服务 tasks v22 / 推送 push v13）
@@ -1137,7 +1212,7 @@ zh: {
   tf_mk_yes_hint:'差的次数一直挂着（标「逾期」），补完了下一期才开始。适合一定要做的，例如冰柜 Wartung。',
   tf_mk_no_hint:'这一期结束就过掉，记下少做了几次，下一期重新算。适合过了就没法补的，例如日常清洁。快来不及时标红提醒。',
   tf_per_left:'还差 {n} 次 · 截止 {d}', tf_per_tight:'还差 {n} 次，只剩 {d} 天', tf_per_last_n:'今天最后一天，还差 {n} 次', tf_per_late_n:'逾期 {d} 天 · 还差 {n} 次', tc_miss:'少做 {n} 次',
-  tf_per_late:'逾期 {n} 天', tf_per_last:'今天是最后一天', tf_per_due:'截止 {d}', tf_per_missed:'到期没做 · {p}', tf_per_done_late:'晚了 {n} 天',
+  tf_per_late:'逾期 {n} 天', tf_per_last:'今天最后一天', tf_per_due:'截止 {d}', tf_per_missed:'到期没做 · {p}', tf_per_done_late:'晚了 {n} 天',
   tf_saved_rep:'已保存：{n} · {r}', tdl_g_period:'这几天内做完', tb_wait:'这天没人上班', tk_per:'{r}：{n} · {s}',
   tk_adm_wait:'{n}：还没做，这天没人上班（{d}）', tk_adm_per_missed:'{n}：到期没做（{p}）', tk_close_photo_period:'这个任务要拍照',
   tc_rate_week:'近 {b} 周按时做完 {a} 周', tc_rate_month:'近 {b} 个月按时做完 {a} 个月', tc_rate_quarter:'近 {b} 个季度按时做完 {a} 个', tc_rate_year:'近 {b} 年按时做完 {a} 年',
@@ -1145,14 +1220,14 @@ zh: {
   tf_slot:'哪个班', tf_slot_last:'最后一个班', tf_slot_lunch:'午班', tf_slot_dinner:'晚班', tf_slot_hint_last:'这家店这天最后一个班（有晚班就是晚班）的人做。', tf_slot_hint_lunch:'午班的人做：午班开始后出现，午班下班前 1 小时提醒。那天没有午班就不用做。', tf_slot_hint_dinner:'晚班的人做。那天没有晚班就不用做。', tf_slot_hint_both:'午班、晚班各建一条：午班的人做一次，晚班的人再做一次。哪天没有午班，午班那条就不用做。', tf_slot_multi:'（午班、晚班可以一起选）', cd_draft_kept:'上次没记完的内容还在，接着写就行。',
   tk_slot_lunch_closing:'午班下班时', tk_slot_lunch_arrival:'午班到店后', tk_slot_dinner_closing:'晚班下班时', tk_slot_dinner_arrival:'晚班到店后', task_svcrun:'服务员和 Runner 一起负责{r}任务',
   tf_title_new:'新任务', tf_title_edit:'改任务', tf_what:'做什么', tf_who:'谁做', tf_w_person:'某个人', tf_w_role:'按岗位', tf_w_area:'区域里谁在班', tf_area_front:'前场谁在班', tf_area_kitchen:'后厨谁在班', tf_repeat:'多久一次', tf_once:'一次', tf_daily:'每天', tf_when:'什么时候', tf_store:'哪家店', tf_how:'怎么算完成', tf_ph_check:'打勾', tf_ph_photo:'拍照', tf_ph_learn:'拍照（新人先拍，熟了抽查）', tf_ph_always:'每次都拍', tf_more:'中德文（可改）', tf_tag:'店（只当标签，不影响谁做）', tf_need_role:'请选哪个岗位。', tf_need_store:'请选哪家店。', tf_saved:'任务已保存', tf_saved_n:'已建 {n} 个任务（每家店一个）', tf_person_hint:'指定的人那天任何时候都能做，不看排班；过了那天没做算「没做」，第二天还能补做。', tf_person_daily:'只在他有班的日子出现（哪家店都算），那天任何时候都能做；没班那天不算。没做第二天还能补做。', tf_role_hint:'那天这家店排了这个岗位的人做，一人做了就算完；没排这个岗位，就由这个区域上班的人做。', tf_area_hint:'那天这家店这个区域上班的人，谁做都算。', tf_role_hint_daily:'每天由那天这家店排了这个岗位的人做，一人做了就算完（Runner 没排就由服务员做）；那天没排这个岗位就没人负责，看板上标红。', tf_daily_hint:'从今天开始每天都有；没做第二天还能补做。', tf_store_hint:'两家都选 = 每家店各建一个。', tf_store_one:'改的时候只能选一家。', tf_cancel_q:'取消「{n}」（{d}）？', tf_cancelled:'已取消', tb_list:'清单', tc_title:'重复的任务', tc_hint:'每天、每周、每月、每季度、每年的任务，按店和区域；指定某个人的在最下面。可以改、停用（以前的记录都留着）。一次性的任务在「以后 / 前几天」里。', tc_none:'还没有重复的任务。', tc_rate:'近 14 天做完 {a} / {b} 天', tc_rate0:'近 14 天还没轮到', tc_items:'{n} 项', tc_off_grp:'已停用（{n}）', tc_disable:'停用', tc_enable:'重新启用', tc_disable_q:'停用「{n}」？停用后员工不再看到，以前的记录都留着，以后可以重新启用。', tc_disabled:'已停用', tc_enabled:'已重新启用', tc_mine:'我区域重复的任务（{n}）', tc_ai:'AI 看照片',   // v119：任务模块统一第一步
-  tk_once_anytime:'全天', tdl_g_named:'今天要做', nm_me:'我自己', nm_search:'搜索名字', nm_day:'哪天', nm_today:'今天', nm_tomorrow:'明天', nm_pick:'选日期', nm_text_ph:'例如：把凳子从 Bismarck 搬到 Flingern', nm_store_none:'不挂店', nm_zh:'中文名', nm_de:'德文名', nm_ai:'AI 写中德文', nm_ai_busy:'AI 正在写…', nm_ai_hint:'不填的话，保存时 AI 自动把上面那句话写成中德文；AI 出错就直接用原句。', nm_save:'保存', nm_saving:'正在保存…', nm_saved_self:'记下了：{d} 你自己做', nm_saved:'已交代给 {n}（{d}）', nm_need_who:'请选谁做。', nm_need_day:'请选哪天。', nm_block:'点名任务', nm_person:'{a} 件 · 做完 {b}', nm_by:'{n} 交代', nm_open:'还没做', nm_missed:'没做', nm_up:'还没到那天', nm_mine_title:'我安排的任务（{n}）', nm_mine_hint:'你安排的一次性任务（给某个人、某个岗位或区域）。做的人在自己的「今天」里看到；做完你在这里看到 ✓ 和照片。', nm_sub_by:'{n} 交代的', nm_done_line:'{n} 做完了', nm_when_hint:'那天任何时候都能做；过了那天还没做算「没做」，第二天还能补做。',   // v118：点名任务
+  tk_once_anytime:'全天', tdl_g_named:'今天要做', nm_me:'我自己', nm_search:'搜索名字', nm_day:'哪天', nm_today:'今天', nm_tomorrow:'明天', nm_pick:'选日期', nm_text_ph:'例如：把凳子从 Bismarck 搬到 Flingern', nm_store_none:'不挂店', nm_zh:'中文名', nm_de:'德文名', nm_ai:'AI 写中德文', nm_ai_busy:'AI 正在写…', nm_ai_hint:'不填的话，保存时 AI 自动把上面那句话写成中德文；AI 出错就直接用原句。', nm_save:'保存', nm_saving:'正在保存…', nm_saved_self:'记下了：{d} 你自己做', nm_saved:'已交代给 {n}（{d}）', nm_need_who:'请选谁做。', nm_need_day:'请选哪天。', nm_block:'指定的人', nm_person:'{a} 件 · 做完 {b}', nm_by:'{n} 交代', nm_open:'还没做', nm_missed:'没做', nm_up:'还没到那天', nm_mine_title:'我安排的任务（{n}）', nm_mine_hint:'你安排的一次性任务（给某个人、某个岗位或区域）。做的人在自己的「今天」里看到；做完你在这里看到 ✓ 和照片。', nm_sub_by:'{n} 交代的', nm_done_line:'{n} 做完了', nm_when_hint:'那天任何时候都能做；过了那天还没做算「没做」，第二天还能补做。',   // v118：点名任务
   tdl_title:'今天的任务', tdl_count:'做完 {a} / {b}', tdl_all:'都做完了 ✓', tdl_none:'今天没有任务', tdl_g_over:'要补做', tdl_g_arrival:'到店后', tdl_g_closing:'收店时 · 下班前做', tdl_g_closing_now:'收店时 · 快下班了，现在做', tdl_part:'做了 {a}/{b}', tdl_up:'接下来', tdl_photo:'要拍照', tdl_today:'今天', tdl_tomorrow:'明天', td_other:'其他要做的（{n}）', td_other0:'其他', tsr_open:'还没做 · {p}', tsr_open0:'还没做', tsr_missed:'没做 · {p}', tsr_nobody:'没人负责：没排{r}',   // v103
   tk_close:'收店：{n} · {s}', tk_close_later:'下班前做', tk_close_now:'快下班了，现在做', tk_close_over:'昨天没做完，今天补做',
   tk_close_photo_learning:'要拍照（前 {b} 次每次都拍，已做 {a} 次）', tk_close_photo_again:'要拍照（漏做过或照片确认有问题，重新拍 {b} 次，已做 {a} 次）',
   tk_close_photo_random:'今天抽到要拍照', tk_close_photo_important:'要拍照（重要任务每次都拍）', tk_close_check:'今天只要打勾',
   oil_sec:'收废油', oil_hint:'ReFood 来邮件问能不能收时，点「开始检查」：厨房拍油桶照片、AI 看油面、回答够不够，你会收到推送。够了就报给 ReFood，拿到日期后在这里填，系统自动安排前一天收店时拿出去、当天到店后拿回来。', oil_title:'收废油 · {s}', oil_start:'开始检查', oil_start_day:'检查哪天做（到店后）', oil_today:'今天', oil_tomorrow:'明天', oil_started:'检查任务已发出', oil_cancelled:'已取消', oil_ai:'AI：{l}{x}', oil_ai_level:'大约 {l}，', oil_ai_above:'超过 1/3', oil_ai_below:'没到 1/3', oil_mismatch:'⚠ 员工的回答和 AI 看的不一样，请看照片。', oil_pickup:'收油：{d}', oil_date_lbl:'收油日期（ReFood 给的）', oil_date_change:'改收油日期', oil_date_save:'保存日期', oil_date_saved:'日期已保存：已安排拿出去和拿回来', oil_not_full:'这次不收', oil_cancel:'取消这一轮', oil_not_full_q:'这次不收，结束这一轮？', oil_cancel_q:'取消这一轮？还没做的任务也会一起取消。', oil_closed_ok:'这一轮结束了', oil_h_done:'✓ {d} 收完', oil_h_not_full:'{d} 检查：还不够，这次不收', oil_h_cancel:'{d} 取消了', oil_tag:'收废油',
   // v144（数据库 v105）：收废油的检查过了检查日没做，不再过期
-  oil_late:'⚠ 检查晚了 {n} 天（{d} 就该做），还没人做。今天上班的后厨可以补做；不要了就点「这次不收」或「取消这一轮」。',
+  oil_late:'⚠ 检查逾期 {n} 天（{d} 就该做），还没人做。今天上班的后厨可以补做；不要了就点「这次不收」或「取消这一轮」。',
   oil_late_home:'⚠ 收废油 · {s}：检查晚了 {n} 天（{d} 就该做），还没人做', oil_go:'去看', tk_late_n:'{d} 就该做，晚了 {n} 天，今天请补做', tk_ask_first:'先拍照，再回答：{q}', tk_answered:'已回答：{a}', tk_ask_pending:'拍好了，还要回答一个问题', tk_answer_done:'谢谢！已经告诉老板了', 
   plan_hours:'工时', hr_info:'这一页只有后厨主管自己看得到。只按排班算：每一段的上下班时间加起来，不扣休息，不是打卡记录。一天超过 10 小时、一周超过 48 小时会标出来（德国工时法的上限），只是提醒。', hr_lastweek:'上周', hr_thisweek:'本周', hr_lastmonth:'上个月', hr_thismonth:'本月', hr_custom:'自选', hr_from:'从', hr_to:'到', hr_go:'查看', hr_all:'两家店', hr_sum:'{a} – {b} · 合计 {h} 小时 · {n} 人', hr_h:'{h} 小时', hr_row:'{d} 个班 · 平均每班 {a} 小时', hr_unpub:'其中 {h} 小时还没发布', hr_old:'其中 {h} 小时是 10月13日以前的整天班（那时没有分午班 / 晚班，可能偏多）', hr_warn_day:'⚠ {n} 天超过 10 小时', hr_warn_week:'⚠ 第 {w} 周 {h} 小时（超过 48）', hr_none:'这段时间没有厨房排班。', hr_unpub_tag:'未发布', hr_old_tag:'整天班', hr_more:'点名字看每天的明细', 
   admin_ai:'AI 建议', ais_title:'AI 建议', ais_hint:'Claude 每天 10 点看 App 的使用记录（谁在哪一步报错、反复点同一个按钮、哪里慢、做到一半放弃），每周深看一次，把发现写成建议放在这里：依据是什么、建议怎么改、多大改动。点「采纳」Claude 就去做，上线后在这里写「效果」；「不做」也记下来，以后不再提同一条。可以写一句话给 Claude。', ais_open_h:'等你决定 {n} 条', ais_acc_h:'已采纳、等 Claude 做 {n} 条', ais_done_h:'已上线 {n} 条', ais_decl_h:'不做 {n} 条', ais_none:'还没有建议。Claude 每天 10 点体检后会把发现放在这里。', ais_basis:'依据', ais_prop:'建议', ais_note:'你的话', ais_effect:'效果', ais_note_ph:'一句话给 Claude（可不填）', ais_accept:'采纳', ais_decline:'不做', ais_reopen:'重新考虑', ais_saved:'已记下，Claude 下次体检时会看到', ais_st_accepted:'已采纳 · 等 Claude 做', ais_st_done:'已上线 {v}', ais_st_verified:'已验证效果', ais_st_declined:'不做', ais_kind_bug:'出错', ais_kind_ux:'不顺手', ais_kind_rule:'规则', ais_kind_automation:'可自动化', ais_kind_other:'其他', act_ai_suggest_decide:'AI 建议：老板决定', act_ai_suggest_import:'AI 建议：写入', act_ui_log_purge:'操作记录：清理一年前的', act_ui_log_fail:'操作记录：存不进去',   // v163
@@ -1864,6 +1939,8 @@ de: {
   tf_need_timing:'Bitte wählen: bei Dienstbeginn oder bei Feierabend.', tf_need_photo:'Bitte wählen: Foto oder Abhaken.', tf_say_empty:'Bitte zuerst einen Satz sprechen oder tippen.',
   tf_sop:'Nach welcher SOP (optional)', tf_sop_none:'Keine SOP', tf_sop_ai:'KI prüft das Foto nach den SOP-Standards (ca. 1 Cent pro Foto)', tf_sop_gone_opt:' (zurückgezogen)',
   tf_sop_hint:'Beim Erledigen sieht man diese SOP; neue, von dir bestätigte Versionen erscheinen automatisch.',
+  tks_photo:'Foto ansehen', tks_res:'📎 Ergebnis ansehen', tks_more:'Aktionen', tks_view:'Im Ansichtsmodus nur ansehen.', tks_none:'Gerade keine Aktion möglich.', to_yesterday:'Gestern', to_c_oil:'🛢 Altfett {s}: {x}', to_c_oil_late:'🛢 Altfett {s}: Prüfung {n} Tage überfällig', to_c_leads:'{n} Bereich(e) ohne Verantwortliche', to_m_stats:'Statistik', to_m_appeal:'Einsprüche', to_m_appeal_n:'Einsprüche ({n} warten auf dich)', to_m_oil:'Altfett', to_m_oil_on:'Altfett ({s} läuft)', to_m_leads:'Verantwortliche ({a}/{b} festgelegt)', to_pick_day:'Zu einem Tag springen', to_back_today:'Zurück zu heute', to_later_n:'Später noch {n} einmalige Aufgabe(n)', to_past_n:'Einmalige Aufgaben der letzten Tage ({n})', to_later_t:'Einmalige Aufgaben nach {d}', to_past_t:'Einmalige Aufgaben der letzten Tage', sg_fold_n:'✨ KI schlägt {n} Aufgabe(n) aus SOPs vor', sg_fold0:'✨ KI Aufgaben aus SOPs vorschlagen lassen', tp_mine:'Von mir geplant ({n})', tp_rep:'Wiederkehrend ({n})', my_area_t:'Mein Bereich heute', my_area_tp:'📝 Geplant / Wiederkehrend', my_area_none:'Heute keine Aufgaben in deinem Bereich zu planen.', td_todo_t:'Zu erledigen ({n})', td_todo_more:'Noch {n} weitere', tr_title:'Aufgaben-Hinweise ({n})', tr_mr:'⚖️ Einsprüche warten auf dich ({n})', tr_miss:'❗ Von mir nicht erledigt ({n})', tr_aud:'🔍 Stichproben für dich ({n})', tr_ma:'⚠ Wiederholt nicht erledigt ({n} Pers.)', tr_ta_miss:'✗ Gestern nicht erledigt ({n})', tr_ta_false:'Stichprobe: falsch bestätigt ({n})', tr_ta_open:'🔍 Offene Stichproben ({n})', tr_arv:'🤖 Fotos mit KI-Zweifel ({n})', tr_wr:'📊 Rangliste letzte Woche', tdl_late:'{n} Tage überfällig', tkt_learning:'📷 Heute Foto · erste {b}×', tkt_again:'📷 Heute Foto · wieder {b}×', tkt_random:'📷 Heute Foto (Stichprobe)', tkt_important:'📷 Immer Foto', tkt_onboarding:'📷 Foto · Einarbeitung', tkt_false_14:'📷 Foto · bis {u}', tkt_boss_find:'📷 Foto · {a}/{b} erledigt', tkt_period:'📷 Mit Foto', tkt_check:'✓ Heute nur abhaken', tkt_result:'📎 Ergebnis abgeben', to_once_rest:'Weitere einmalige Aufgaben an diesem Tag',   // v205
+  tfq_what:'Was', tfq_who:'Wer', tfq_when:'Wann', tfq_how:'Nachweis', tf_what_ph:'z. B. Kaffeemaschine zerlegen und reinigen', tf_m_what:'Was', tf_g_role:'Nach Position', tf_g_area:'Wer gerade Dienst hat', tf_g_person:'Bestimmte Person', tf_find:'🔍 Person suchen', tf_kitchen_note:'Küchenpersonal nur über die Position einplanen', tf_one:'Eine Person reicht', tf_each_one:'Jede Servicekraft einzeln', tf_each_short:'Jede Servicekraft im Dienst macht es einmal vor Feierabend, jede zählt für sich; Erinnerung bei der Bon-Abgabe.', tf_store_q:'Filiale', tf_store_only:'Filiale: {s}', tf_w_pick:'Tag wählen', tf_w_due:'Bis zu einem Tag', tf_w_longer:'Länger …', tf_due_only:'„Bis zu einem Tag“ gibt es nur für eine bestimmte Person.', tf_due_conv:'„Bis zu einem Tag“ gibt es nur für eine bestimmte Person – jetzt an diesem Tag.', tf_due_sun0:'Diesen Sonntag', tf_due_sun1:'Nächsten Sonntag', tf_due_pick:'📅 Datum wählen', tf_due_hint:'Jeden Tag sichtbar, bis es erledigt ist. Bis zur Frist nicht erledigt = einmal „nicht erledigt“, danach „N Tage überfällig“.', tf_due_none:'Noch keine Frist gewählt', tf_need_due:'Bitte eine Frist wählen (höchstens 30 Tage ab heute).', tf_lock_once:'🔒 Einmalige Aufgabe – kann nicht wiederkehrend werden', tf_lock_rep:'🔒 Wiederkehrende Aufgabe – kann nicht einmalig werden', tf_lock_each:'🔒 Jede Servicekraft einzeln = täglich vor Feierabend', tf_copy:'Als neue Aufgabe kopieren', tf_copied:'Als neue Aufgabe kopiert, die alte bleibt. Anpassen und „Speichern“ tippen.', tf_hh_learn:'Neue machen die ersten Male ein Foto, später nur Stichproben.', tf_hh_always:'Jedes Mal ein Foto.', tf_hh_check:'Abhaken reicht, kein Foto nötig.', tf_hh_photo:'Erledigt erst mit einem Foto.', tf_hh_result:'Erledigt erst mit Foto, Screenshot oder PDF; du bekommst eine Benachrichtigung.', tf_ph_note_result:'„Ergebnis abgeben“ gibt es nur bei einmaligen Aufgaben – jetzt Foto.', tf_ph_note_always:'„Jedes Mal Foto“ gibt es nur bei täglichen Aufgaben – jetzt Foto.', tf_more_t:'Mehr', tf_more_sub:'SOP, Fotos, Link, Namen …', tf_mc_sop:'SOP: {n}', tf_mc_ph:'{n} Foto(s)', tf_mc_link:'Link', tf_mc_mk:'verfällt', tf_mc_tag:'Filial-Etikett {s}', tf_mc_names:'Namen geändert', tf_names:'Chinesisch / Deutsch (schreibt die KI beim Speichern, du kannst es ändern)', tf_ai_again:'✨ KI neu schreiben lassen', tf_sum_none:'Noch nicht gewählt, wer', tf_s_each:'jede Servicekraft', tf_s_due:'bis {d}', tf_s_mk_yes:'nicht geschafft = nachholen', tf_s_mk_no:'nicht geschafft = verfällt', tf_s_both:'Mittag + Abend', tf_s_learn:'Foto (später Stichprobe)', tf_save_n:'Speichern ({n} anlegen)', tf_or:'oder selbst ausfüllen', tf_ai_btn:'✨ Ausfüllen', tf_ai_hint:'Sag wer, was, wann · 🎤 auf der Tastatur geht auch · ca. 1 Cent', tf_say_ph2:'z. B. Duc trägt bis nächsten Donnerstag alle Bar-Getränke ins Lager ein', tf_cc_t:'Verstanden habe ich:', tf_cc_ok:'Ja, speichern', tf_cc_edit:'Ich ändere es', tf_cc_fix:'Ergänzen: {k} ›', tf_cc_due:'Ab {a} jeden Tag in der Liste von {n}; bis zur Frist nicht erledigt = einmal „nicht erledigt“, danach „N Tage überfällig“, bis es erledigt ist.', tf_say_edit:'✎ Satz ändern', tf_ai_miss:'KI hat es nicht gehört', tf_saved_due:'An {n} vergeben: bis {d}', tf_saved_due_self:'In deiner Liste: bis {d}', dl_open:'Frist {d}, noch {n} Tage', dl_tomorrow:'Frist morgen', dl_from:'ab {d}', dl_desc:'ab {a} · Frist {b}', dl_done_late:'{n} Tage zu spät',   // v205
   nm_new_view:'+ Neue Aufgabe (im Ansichtsmodus nicht verfügbar)',   // v129
   tp_more:'📝 Aufgaben', tp_title:'Aufgaben', tp_none:'Noch keine einmaligen Aufgaben geplant.',   // v130
   // v128
@@ -2193,7 +2270,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=37'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=38'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2559,6 +2636,10 @@ const ERR_ZH = {
   OIL_CLOSED: '这一轮已经结束了，请刷新页面。',
   TASK_INPUT: '区域或时间选得不对：区域只能是前场或后厨，时间只能是「收店时」或「到店后」。请重新选一下。',
   TASK_NAME_EMPTY: '请写这个任务要做什么（中文或德文都行）。',
+  TASK_DUE_PERSON: '截止日只能用在「指定的人」的一次性任务上。请指定一个人，或者改选「今天 / 明天 / 选一天」。',   // v205（数据库 v142）
+  TASK_DUE_BEFORE: '截止日不能早于开始那天。请重新选截止日。',   // v205（数据库 v142）
+  TASK_DUE_FAR: '截止日最远只能选今天起 30 天以内。请选近一点的日子，或者分成几个任务。',   // v205（数据库 v142）
+  TASK_DUE_BAD: '截止日的日期不对。请重新选一个日期。',   // v205（数据库 v142）
   TASK_DAY_PAST: '日期已经过了：只能选今天或以后。过了日期的任务不能再改、取消或交给别人；需要的话加一个新任务。',
   TASK_DAY_FAR: '日期太远了：最多选一年以内的日子。',
   TASK_NEED_RESULT: '这个任务要交回结果（照片、截图或 PDF），不能直接打勾。请打开任务，加文件后点「交回结果」。',   // v128
@@ -2861,6 +2942,10 @@ const ERR_DE = {
   OIL_CLOSED: 'Diese Runde ist schon beendet – bitte die Seite neu laden.',
   TASK_INPUT: 'Bereich oder Zeitpunkt ungültig: Bereich nur Service oder Küche, Zeitpunkt nur „Bei Feierabend“ oder „Bei Dienstbeginn“. Bitte neu wählen.',
   TASK_NAME_EMPTY: 'Bitte eintragen, was zu tun ist (Deutsch oder Chinesisch).',
+  TASK_DUE_PERSON: 'Eine Frist gibt es nur bei einmaligen Aufgaben für eine bestimmte Person. Bitte eine Person wählen oder „Heute / Morgen / Tag wählen“ nehmen.',   // v205
+  TASK_DUE_BEFORE: 'Die Frist darf nicht vor dem Starttag liegen. Bitte die Frist neu wählen.',   // v205
+  TASK_DUE_FAR: 'Die Frist darf höchstens 30 Tage ab heute liegen. Bitte ein früheres Datum wählen oder die Aufgabe aufteilen.',   // v205
+  TASK_DUE_BAD: 'Das Fristdatum ist ungültig. Bitte ein Datum neu wählen.',   // v205
   TASK_DAY_PAST: 'Das Datum ist vorbei: nur heute oder später. Vergangene Aufgaben können nicht mehr geändert, abgesagt oder zugeteilt werden; bei Bedarf eine neue anlegen.',
   TASK_DAY_FAR: 'Das Datum ist zu weit weg: höchstens ein Jahr im Voraus.',
   TASK_NEED_RESULT: 'Für diese Aufgabe muss ein Ergebnis abgegeben werden (Foto, Screenshot oder PDF) – nur abhaken geht nicht. Bitte die Aufgabe öffnen, Datei hinzufügen und „Ergebnis abgeben“ tippen.',   // v128
@@ -3355,8 +3440,8 @@ function taskCardHTML(k){
   if (k.kind === 'closing'){   // v71：收店任务；v95：某一天的任务（收店时 / 到店后）
     const nd = d.need || {}, n = d.items.length, got = d.items.filter(i => i.done).length;
     const title = (d.each_leave ? t('ek_card', { n: toName(d), s: d.store }) : isPer(d) && !d.named ? t('tk_per', { r: perLabel(d), n: toName(d), s: d.store }) : d.named ? toWhen(d) + (state.lang === 'de' ? ': ' : '：') + toName(d) + (d.store ? ' · ' + d.store : '') : d.once ? t('tk_once', { w: toWhen(d), n: toName(d), s: d.store }) : t('tk_close', { n: state.lang === 'de' ? enT(d.name_de) : d.name_zh, s: d.store })) + (d.day !== (state.tasks || {}).day ? ' · ' + dayLabel(d.day) : '');
-    const sub = (k.status === 'overdue' && d.late_days ? t('tk_late_n', { n: d.late_days, d: dayLabel(d.day) })   // v144：收废油的检查晚了几天（数据库 v105）
-      : t(k.status === 'overdue' ? 'tk_close_over' : d.once && d.timing === 'arrival' ? 'tk_once_now_arrival' : k.status === 'now' ? 'tk_close_now' : 'tk_close_later')) + ' · ' + tkHow(nd) + toByLead(d)
+    const sub = (k.status === 'overdue' ? t('tdl_late', { n: tkLateN(d) })   // v144：收废油的检查晚了几天（数据库 v105）；v205：统一写「逾期 N 天」
+      : t(d.once && d.timing === 'arrival' ? 'tk_once_now_arrival' : k.status === 'now' ? 'tk_close_now' : 'tk_close_later')) + ' · ' + tkHow(nd) + toByLead(d)
       + (d.ask && got === n && !d.answer ? ' · ' + t('tk_ask_pending') : '');   // v101
     return card(cls, esc(title) + (got ? ` <span class="muted small num">${got}/${n}</span>` : ''), sub,
       `<button class="btn ${k.status === 'later' ? 'ghost' : ''}" data-act="task-open" data-def="${d.def_id}" data-day="${d.day}">${esc(t(got ? 'tk_close_cont' : 'tk_close_go'))}</button>`);
@@ -3506,13 +3591,12 @@ function renderToday(){
   const tm = tmTodoCards(), msgs = open.filter(x => x.kind === 'message'), rest = open.filter(x => x.kind !== 'message' && !isCl(x));
   const nOther = rest.filter(x => x.status !== 'later').length + tm.length, hasList = !!(cl.length || upCl.length);
   const doneO = done.filter(x => !isCl(x));
-  $('#main').innerHTML = cdCardsHTML() + missCardsHTML() + missResHTML() + audCardsHTML() + invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + areaTodayHTML(state.areaToday) + (!state.me.is_admin && (taskRight(state.me) || isSup()) ? mrHomeHTML() : '') + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts + tfTopHTML()
+  // v205：漏做 / 老板发现没做 / 不属实 / 申诉结果合成一张「要处理（N）」卡；负责人 / 主管的任务合成一块「我区域今天」（myAreaHTML，里面有「＋ 新任务」）
+  $('#main').innerHTML = cdCardsHTML() + fixCardHTML() + audCardsHTML() + invFindHTML() + (state.me.is_admin ? weekTodoHTML() : '') + myAreaHTML() + (!state.me.is_admin && (taskRight(state.me) || isSup()) ? mrHomeHTML() : '') + (isSup() || invIsKeeper() ? invTodoCardHTML(state.invTodo) : '') + expTodayHTML() + shifts
     + msgs.map(taskCardHTML).join('') + tdlHTML(cl, upCl) + ocMineHTML()
     + (rest.length || tm.length ? `<h3>${esc(nOther ? t(hasList ? 'td_other' : 'td_mine', { n: nOther }) : t(hasList ? 'td_other0' : 'td_mine_ok'))}</h3>` + tm.join('') + rest.map(taskCardHTML).join('')
       : hasList || msgs.length ? '' : `<h3>${esc(t('td_mine_ok'))}</h3><div class="list"><div class="empty">${esc(t('td_alldone'))}</div></div>`)
     + (doneO.length ? `<details class="fold" style="margin-top:14px"><summary>${esc(t('td_done_grp', { n: doneO.length }))}</summary><div class="inner"><div class="list">${doneO.map(taskDoneLine).join('')}</div></div></details>` : '')
-    + ledHTML()   // v95：我负责的任务（v103：「接下来」放进了上面的清单）
-    + nmMineHTML()   // v118：负责人交代的事
     + (store.length ? `<h3>${esc(t('td_store'))}</h3>` + store.filter(x => x.status !== 'done').sort((a, b) => order[a.status] - order[b.status]).map(taskCardHTML).join('')
         + (store.some(x => x.status === 'done') ? `<div class="list">${store.filter(x => x.status === 'done').map(taskDoneLine).join('')}</div>` : '') : '');
 }
@@ -3537,7 +3621,7 @@ function areaTodayHTML(A){
       ${tk.length ? tsrAreaHTML(tk) : `<div class="small muted" style="margin-top:6px">${esc(t(past ? 'at_no_tasks_d' : c.area === 'kitchen' ? 'at_no_ktasks' : 'at_no_tasks'))}</div>`}</div>`;
   };
   const go = (d, txt) => `<button class="link" type="button" style="flex:none;white-space:nowrap" data-act="area-day" data-d="${d}">${esc(txt)}</button>`;
-  return `<div id="area-today"><h3 style="margin-top:4px">${esc(t(past ? 'at_title_day' : 'at_title'))}</h3>
+  return `<div id="area-today"><h3 style="margin-top:4px">${esc(t(past ? 'at_title_day' : 'my_area_t'))}</h3>
     <div class="row" style="align-items:center;margin:0 0 8px">${go(-1, '‹ ' + t('at_prev'))}<strong style="flex:1;text-align:center">${esc(dayLabel(A.day))}</strong>${past ? go(1, t('at_next') + ' ›') : ''}</div>`
     + A.cards.map(card).join('') + '</div>';
 }
@@ -4197,7 +4281,7 @@ function onbDetailHTML(){
 // AI 看这一天（交完自动看过的不用再点）；老板点了等结果再刷新
 // v111：SOP 搜索（只重画列表）；改主题下拉
 document.addEventListener('input', ev => {
-  if (ev.target.id === 'tf-q'){ const q = ev.target.value.trim().toLowerCase(); document.querySelectorAll('#tf-chips .chip').forEach(b => { b.hidden = !!q && !b.classList.contains('on') && !b.dataset.n.includes(q); }); return; }   // v118
+  if (ev.target.id === 'tf-q'){ tfFindFilter(); return; }   // v118；v205：重画以后也照样筛
   if (ev.target.dataset && /^(title|steps|tips|mistakes)_/.test(ev.target.dataset.sopk || '') && state.sop && state.sop.edit){ clearTimeout(sopLiveT); sopLiveT = setTimeout(() => { sopKeep(); sopLiveRefresh(); }, 400); return; }   // v202：打字时预览跟着变
   if (ev.target.id === 'sop-q' && state.sop){ const pos = ev.target.selectionStart; state.sop.q = ev.target.value; renderSopList(); const n = $('#sop-q'); if (n){ n.focus(); try { n.setSelectionRange(pos, pos); } catch(e){} } return; }
   if (ev.target.id === 'sop-topic' && state.sop && state.sop.edit){ sopKeep(); state.sop.edit.topicTouched = true; renderSopEdit(); }
@@ -4554,7 +4638,7 @@ async function viewReconHome(){
   state.reconDay = o.day;
   const stores = o.stores.slice().sort((a, b) => rcProblem(b) - rcProblem(a));
   const mine = viewTasks().filter(x => x.status !== 'done' && x.kind !== 'closing'), myCl = viewTasks().filter(x => x.kind === 'closing');   // v118：老板自己的点名任务放进上面的「今天的任务」清单
-  $('#main').innerHTML = oilLateHTML() + audCardsHTML() + missCardsHTML() + maHomeHTML() + mrHomeHTML() + wrHomeHTML() + taHomeHTML() + hrepCardHTML() + aiRevHTML() + tdlHTML(myCl.filter(x => x.scope !== 'upcoming'), myCl.filter(x => x.scope === 'upcoming')) + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
+  $('#main').innerHTML = trCardHTML() + hrepCardHTML() + tdlHTML(myCl.filter(x => x.scope !== 'upcoming'), myCl.filter(x => x.scope === 'upcoming')) + `<div class="weeknav"><button data-act="recon-home-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button>
       <div class="wl">${esc(t('rk_home'))}<small>${(() => { const n = Math.round((parseD(o.today) - parseD(o.day)) / 864e5); return n >= 0 && n <= 2 ? esc(t('rk_rel' + n)) + ' · ' : ''; })()}${esc(dayLabel(o.day))}</small></div>
       <button data-act="recon-home-day" data-d="1" aria-label="${esc(t('rk_next'))}" ${o.day >= o.today ? 'disabled' : ''}>›</button></div>
     ${o.day !== o.today ? `<div style="text-align:center;margin:-6px 0 12px"><button class="link" data-act="recon-home-today">${esc(t('rk_go_today'))}</button></div>` : ''}`
@@ -4715,6 +4799,10 @@ function renderLock(){
 }
 // ============ 收店任务（v71）============
 // 今天要不要拍照、为什么
+// v205：短标签「📷 今天要拍 · 前 7 次」（点开看 tkHow 的完整原因）
+const TKT_R = ['learning', 'again', 'random', 'important', 'onboarding', 'false_14', 'boss_find', 'period'];
+function tkHowShort(nd){ if (!nd || nd.mode !== 'photo') return t('tkt_check');
+  const r = nd.reason || 'learning'; return t('tkt_' + (TKT_R.includes(r) ? r : 'period'), { a: nd.done || 0, b: nd.need || 0, u: nd.until ? dm(nd.until) : '' }); }
 function tkHow(nd){ return nd && nd.mode === 'photo' ? t('tk_close_photo_' + (nd.reason || 'learning'), { a: nd.done || 0, b: nd.need || 0, u: nd.until ? dayLabel(nd.until) : '' }) : t('tk_close_check'); }   // v149：false_14 到哪天
 // ============ v128：任务附照片、附链接、交回结果（数据库 v93 / 文件服务 tasks v22 / 推送 push v13，老板 2026-11-01）============
 // 文件在私有存储桶 task_files：a/… = 建任务时附的照片，r/… = 员工交回的结果；查看用 1 小时的链接（50 分钟内重用）
@@ -4836,7 +4924,10 @@ function renderTaskRun(){
   }).join('');
   $('#main').innerHTML = `<button class="link" data-act="task-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>
     <h2 style="margin-top:0">${esc((c.once ? toWhen(c) + (state.lang === 'de' ? ': ' : '：') : isPer(c) ? perLabel(c) + (state.lang === 'de' ? ': ' : '：') : '') + nm(c))} ${storeTag(c.store)}</h2>
-    <div class="infobox">${esc(c.need_result ? t('tk_how_result') : tkHow(c.need))}${!photoRun && !c.need_result ? '<br><span class="small">' + esc(t('ta_check_note')) + '</span>' : ''}${c.day !== (state.tasks || {}).day ? ' · ' + esc(dayLabel(c.day)) : ''}${perDue(c) ? ' · ' + esc(perDue(c).txt) : ''}</div>
+    ${(() => { const pd = perDue(c), ex = [c.day !== (state.tasks || {}).day && !c.deadline ? dayLabel(c.day) : '', pd ? pd.txt : ''].filter(Boolean).join(' · ');   // v205：拍照说明缩成一个小标签，点了才看完整原因
+      return `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px"><button type="button" class="tk-tag" data-act="tk-how" aria-expanded="${!!state.tkHowOpen}">${esc(c.need_result ? t('tkt_result') : tkHowShort(c.need))} <span class="muted" aria-hidden="true">${state.tkHowOpen ? '▴' : 'ⓘ'}</span></button>`
+        + (ex ? `<span class="small ${pd && pd.cls === 'bad' ? 'negc' : pd && pd.cls === 'warn' ? 'warnc' : 'muted'}" style="margin-bottom:10px">${esc(ex)}</span>` : '') + '</div>'
+        + (state.tkHowOpen ? `<div class="infobox tk-tag-x">${esc(c.need_result ? t('tk_how_result') : tkHow(c.need))}${!photoRun && !c.need_result ? '<br><span class="small">' + esc(t('ta_check_note')) + '</span>' : ''}</div>` : ''); })()}
     ${c.sop && !c.sop.gone ? (() => { const S = state.tkSop && state.tkSop.id === c.sop.item_id ? state.tkSop : null, cur = S && S.x && S.x.cur;   // v121：按哪条 SOP 做
       return `<button class="btn ghost" data-act="tk-sop" data-id="${c.sop.item_id}" style="margin:0 0 10px">${esc(S ? t('tk_sop_hide') : t('tk_sop_btn'))}</button>`
         + (cur ? `<div class="sheet" style="margin-bottom:10px"><strong>${esc(sopTitle(cur.content))}</strong>${sopBodyHTML(cur.content, cur.photos)}</div>` : S ? `<div class="loading">${esc(t('loading'))}</div>` : ''); })() : ''}
@@ -4886,7 +4977,14 @@ function perLabel(x){
   if (x.repeat === 'week') return t('tf_per_week', { d: WDAYS[state.lang === 'de' ? 'de' : 'zh'][d - 1] });
   return isPer(x) ? t('tf_per_' + x.repeat, { d, m }) : t('tf_daily');
 }
-function perDue(x, day){ const p = x.period; if (!p || !p.open) return null;
+// v205（数据库 v142）：某天前做完（截止日）：截止 周四 · 还剩 N 天（灰）/ 今天最后一天（橙）/ 逾期 N 天（红）；做完了 = null
+function dlDue(x){ const d = x.deadline; if (!d || d.state === 'done') return null;
+  if (d.state === 'late') return { txt: t('tdl_late', { n: +d.late || 1 }), cls: 'bad' };
+  if (d.state === 'last') return { txt: t('tf_per_last'), cls: 'warn' };
+  if (d.state === 'not_yet') return { txt: t('dl_from', { d: dayLabel(d.from) }), cls: '' };
+  return { txt: +d.days_left === 1 ? t('dl_tomorrow') : t('dl_open', { d: dayLabel(d.due), n: +d.days_left }), cls: '' }; }
+function perDue(x, day){ if (x.deadline) return dlDue(x);
+  const p = x.period; if (!p || !p.open) return null;
   // v132（数据库 v96）：几次、不补的任务：还差几次；不补的快来不及标红
   const many = +p.times > 1, left = +p.left || 0, dl = +p.days_left || 0;
   if (+p.late > 0) return { txt: many ? t('tf_per_late_n', { d: p.late, n: left }) : t('tf_per_late', { n: p.late }), cls: 'bad' };
@@ -4911,14 +5009,16 @@ function toWhoText(x){
 // v103（老板 2026-10-22：任务界面不够直观）：员工「今天的任务」= 打勾清单。要补做的在最上面，再按「到店后」「收店时」分组；
 // 每件一行（方框 + 名字 + 要拍照的 📷），点一下进去做，做完打勾变灰；最上面「做完 a / b」和进度条；接下来几天的放在最下面（只看，不能点）
 const fmtTime = iso => iso ? new Date(iso).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }) : '';
+// v205：所有「晚了」只用一种说法：逾期 N 天（红）/ 今天最后一天（橙）/ 截止 周四（灰）。要补做的：数据库给的 late_days，没有就按那天到今天算（至少 1 天）
+const tkLateN = d => +d.late_days || Math.max(1, Math.round((parseD(bizToday()) - parseD(d.day)) / 864e5));
 const dayWord = dy => dy === bizToday() ? t('tdl_today') + ' · ' + dayLabel(dy) : dy === addDays(bizToday(), 1) ? t('tdl_tomorrow') + ' · ' + dayLabel(dy) : dayLabel(dy);
 function tdlHTML(cl, up){
   if (!cl.length && !up.length) return '';
   const stores = new Set([...cl, ...up].map(k => k.data.store).filter(Boolean)), st = d => stores.size > 1 ? ' ' + storeTag(d.store) : '';   // v119：没挂店的点名任务不算
   const row = k => {
-    const d = k.data, done = k.status === 'done', pd = isPer(d) && !done ? perDue(d) : null, bad = k.status === 'overdue' || !!(pd && pd.cls === 'bad'), its = d.items || [], n = its.length, got = its.filter(i => i.done).length;   // v120：周期任务写截止 / 逾期
+    const d = k.data, done = k.status === 'done', pd = (isPer(d) || d.deadline) && !done ? perDue(d) : null, bad = k.status === 'overdue' || !!(pd && pd.cls === 'bad'), its = d.items || [], n = its.length, got = its.filter(i => i.done).length;   // v120：周期任务写截止 / 逾期
     const sub = done ? [fmtTime(d.completed_at), d.completed_by && d.completed_by !== state.me.name ? d.completed_by : '', d.answer ? askAns(d) : ''].filter(Boolean).join(' · ')
-      : [k.status === 'overdue' ? (d.late_days ? t('tk_late_n', { n: d.late_days, d: dayLabel(d.day) }) : t('tk_close_over')) : pd ? pd.txt : d.day !== (state.tasks || {}).day ? dayLabel(d.day) : '', got && got < n ? t('tdl_part', { a: got, b: n }) : '',
+      : [k.status === 'overdue' ? t('tdl_late', { n: tkLateN(d) }) : pd ? pd.txt : d.day !== (state.tasks || {}).day ? dayLabel(d.day) : '', got && got < n ? t('tdl_part', { a: got, b: n }) : '',
          d.ask && n && got === n && !d.answer ? t('tk_ask_pending') : '', toByLead(d).replace(/^ · /, ''), nmByTxt(d), d.each_leave ? t('ek_tag') : ''].filter(Boolean).join(' · ');   // v152
     const inner = `<span class="tdl-cb">${done ? '✓' : ''}</span><span class="tdl-m"><span class="tdl-n">${esc(toName(d))}${st(d)}</span>${sub ? `<span class="tdl-s${bad ? ' bad' : pd && pd.cls === 'warn' ? ' warnc' : ''}">${esc(sub)}</span>` : ''}</span>`
       + (done && !d.need_result ? '' : (d.need_result ? (done ? '' : `<span class="tdl-i" title="${esc(t('tdl_result'))}">📎</span>`) : (d.need || {}).mode === 'photo' ? `<span class="tdl-i" title="${esc(t('tdl_photo'))}">📷</span>` : '') + '<span class="tdl-i" aria-hidden="true">›</span>');
@@ -4927,7 +5027,7 @@ function tdlHTML(cl, up){
   const ord = list => list.filter(k => k.status !== 'done').concat(list.filter(k => k.status === 'done'));
   const grp = (cls, label, list) => list.length ? `<div class="tdl-g ${cls}">${esc(label)}</div>` + ord(list).map(row).join('') : '';
   const over = cl.filter(k => k.status === 'overdue'), rest = cl.filter(k => k.status !== 'overdue');
-  const per = rest.filter(k => isPer(k.data)), r2 = rest.filter(k => !isPer(k.data));   // v120：周期任务单独一组「这几天内做完」
+  const per = rest.filter(k => isPer(k.data) || k.data.deadline), r2 = rest.filter(k => !isPer(k.data) && !k.data.deadline);   // v120：周期任务单独一组「这几天内做完」；v205：截止任务也在这一组
   const nmd = r2.filter(k => k.data.named), arr = r2.filter(k => !k.data.named && k.data.timing === 'arrival'), clo = r2.filter(k => !k.data.named && k.data.timing !== 'arrival'), cloNow = clo.some(k => k.status === 'now');   // v118：点名任务单独一组「今天要做」
   const nd = cl.filter(k => k.status === 'done').length;
   const head = `<div class="tdl-h"><b>${esc(t('tdl_title'))}</b><span class="small ${cl.length && nd === cl.length ? 'pos' : 'muted'}">${esc(!cl.length ? t('tdl_none') : nd === cl.length ? t('tdl_all') : t('tdl_count', { a: nd, b: cl.length }))}</span></div>`
@@ -4939,6 +5039,54 @@ function tdlHTML(cl, up){
 // v103：任务状态行（主管「我管的区域」、负责人「我负责的任务」共用）：颜色点（绿 做完 · 黄 还没做 · 红 没人做 / 漏做 · 灰 还没到那天）+ 名字 + 谁、什么状态 + 操作。sub 是已经转义的 HTML
 function tsrRow(name, dot, sub, subCls, acts){
   return `<div class="tsr"><span class="tsr-d ${dot}"></span><div class="tsr-m"><div class="tsr-n">${name}</div>${sub ? `<div class="tsr-s ${subCls || ''}">${sub}</div>` : ''}${acts ? `<div class="tsr-a">${acts}</div>` : ''}</div></div>`;
+}
+// v205（老板 2026-11-21「按建议」：任务界面第 3、5 步）：统一的任务行（老板看板 / 清单、负责人 / 主管都用这一个）。
+// 圆点 + 名字（一行，最多一个 📷 / 📎）+ 一行状态（最多 2 件事）+ 有照片时 📷 小按钮 + ›；点一行从底部弹出大按钮（tkSheetOpen）。
+// 按钮就是原来那几个动作（看照片 / 看结果 / 交给… / 我自己做 / 改 / 发现没做 / 取消 / 停用），不改数据库调用；取消、停用放最下面，点了照旧要再确认一次。
+// o = { k 唯一键, name 名字（纯文字）, icon, dot, sub 状态（纯文字，「 · 」分开）, cls 状态颜色, flags [{ t, c }] 一定要显示的提醒（AI 有问题…）,
+//       acts 原来的操作按钮（HTML）, desc 完整描述里另外写的几件事（纯文字）, photo 最近一张照片的 row_id }
+const TK_SHEET = {};
+// v205：做完的一行：「✓ 谁 几点」算一件事，后面是 晚了几天 / 回答（行里最多 2 件事，以前「谁」「几点」各算一件，晚了就被挤掉）
+const tkDoneFacts = (by, tm, ...more) => ['✓ ' + [by, tm].filter(Boolean).join(' '), ...more];
+// 每人一份：几个人做完了、还差谁、谁做完了（按这个顺序，行里显示前两件）
+function eachFacts(x){
+  const ppl = x.people || [], done = (x.each_done || []).filter(p => ppl.some(q => q.id === p.id)), ids = new Set(done.map(p => p.id)), left = ppl.filter(p => !ids.has(p.id));
+  return [t('ek_line', { a: done.length, b: x.each_total ?? ppl.length }), left.length ? t('ek_left', { n: left.map(p => p.name).join('、') }) : '', done.length ? '✓ ' + done.map(p => p.name + ' ' + fmtTime(p.at)).join('、') : ''];
+}
+function tkRow(o){
+  const facts = (o.facts || String(o.sub || '').split(' · ')).map(x => String(x || '').trim()).filter(Boolean), flags = (o.flags || []).filter(Boolean);   // o.facts：按重要的排（逾期 / 截止在前），行里只显示前 2 件
+  const show = facts.slice(0, flags.length ? 1 : 2).map(x => `<span class="${o.cls || ''}">${esc(x)}</span>`).concat(flags.map(f => `<span class="${f.c || ''}">${esc(f.t)}</span>`)).slice(0, 2);
+  TK_SHEET[o.k] = { name: o.name, desc: (o.desc || []).filter(Boolean).concat(facts, flags.map(f => f.t)), acts: o.acts || '', photo: o.photo || '' };
+  const k = esc(o.k);
+  return `<div class="tkr"><span class="tsr-d ${o.dot || ''}"></span><button type="button" class="tkr-m" data-act="tk-sheet" data-k="${k}"><span class="tkr-n">${esc(o.name)}${o.icon ? ' ' + o.icon : ''}</span>${show.length ? `<span class="tkr-s">${show.join(' · ')}</span>` : ''}</button>`
+    + (o.photo ? `<button type="button" class="tkr-p" data-act="task-photo" data-id="${esc(o.photo)}" aria-label="${esc(t('tks_photo'))}">📷</button>` : '')
+    + `<button type="button" class="tkr-c" data-act="tk-sheet" data-k="${k}" aria-label="${esc(t('tks_more'))}">›</button></div>`;
+}
+const TKS_RANK = { 'task-photo': 0, 'tk-res-view': 1, 'asg-open': 2, 'task-open': 3, 'tf-edit': 4, 'tc-on': 4, 'bf-open': 5 };
+const TKS_ICON = { 'task-photo': '📷 ', 'asg-open': '👤 ', 'task-open': '✋ ', 'tf-edit': '✏️ ', 'tc-on': '▶️ ' };
+function tkSheetOpen(k){
+  const S = TK_SHEET[k], dlg = $('#tkDlg'); if (!S || !dlg) return;
+  const box = document.createElement('div'); box.innerHTML = S.acts;
+  const view = !!state.viewAs, top = [], bottom = [];   // 查看模式：只能看照片、看结果
+  [...box.querySelectorAll('[data-act]')].forEach(b => { const a = b.dataset.act;
+    if (view && !['task-photo', 'tk-res-view'].includes(a)) return;
+    const off = a === 'tf-cancel' || (a === 'tc-on' && b.dataset.on === '0'), red = off || b.classList.contains('danger');
+    const txt = b.textContent.trim(), ic = a === 'tc-on' && off ? '' : TKS_ICON[a] || '';
+    b.className = 'btn ghost tks-b' + (red ? ' danger' : ''); b.type = 'button'; b.removeAttribute('style');
+    if (a === 'task-photo') b.textContent = '📷 ' + t('tks_photo');
+    else if (a === 'tk-res-view') b.textContent = t('tks_res') + (txt.match(/ ×\d+$/) || [''])[0];
+    else if (ic && !/^\p{Extended_Pictographic}/u.test(txt)) b.textContent = ic + txt;
+    (off ? bottom : top).push(b); });
+  top.sort((p, q) => (TKS_RANK[p.dataset.act] ?? 9) - (TKS_RANK[q.dataset.act] ?? 9));
+  const u = S.photo && ARV_URL[S.photo] && Date.now() - ARV_URL[S.photo].at < 48e4 ? ARV_URL[S.photo].url : '';
+  dlg.innerHTML = `<div class="tks-t">${esc(S.name)}</div>${S.desc.length ? `<div class="tks-d">${esc(S.desc.join(' · '))}</div>` : ''}`
+    + (S.photo ? `<img class="tks-img" data-act="task-photo" data-id="${esc(S.photo)}" alt="" ${u ? `src="${esc(u)}"` : 'hidden'}>` : '')
+    + top.map(b => b.outerHTML).join('') + (bottom.length ? '<div class="tks-sep"></div>' + bottom.map(b => b.outerHTML).join('') : '')
+    + (top.length || bottom.length ? '' : `<div class="small muted" style="margin-bottom:10px">${esc(t(view ? 'tks_view' : 'tks_none'))}</div>`)
+    + `<button type="button" class="btn ghost" data-act="tks-close" style="margin-top:4px">${esc(t('close'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+  if (S.photo && !u) callTasks({ action: 'task_photo_view', row_id: S.photo }).then(r => { ARV_URL[S.photo] = { url: r.url, at: Date.now() };   // 最近一张照片的小图
+    const img = dlg.open && dlg.querySelector('img.tks-img'); if (img && img.dataset.id === S.photo){ img.src = r.url; img.hidden = false; } }).catch(() => {});
 }
 // 我负责、还没做的某一天的任务：「交给…」「我自己做」（state.led 里有这一条才有）
 // v158（数据库 v117）：AI 不通过的照片：等老板确认 / 老板说没问题的不算问题
@@ -4954,19 +5102,21 @@ function tsrLeadActs(def, day){
 // 主管「我管的区域」卡片里今天的任务（area_today）：以前每项一行（「检查废油桶：–」），现在一个任务一行
 function tsrAreaHTML(list){
   return `<div style="margin-top:8px">${list.map(x => {
-    const nm = esc((x.once ? toWhen(x) + ' · ' : '') + toName(x)) + (x.once && x.important ? ' 📷' : '') + (isPer(x) ? ` <span class="tag">${esc(perLabel(x))}</span>` : ''), ppl = (x.people || []).map(p => p.name).join('、');
+    const ppl = (x.people || []).map(p => p.name).join('、');
     const photo = (x.items || []).map(i => i.last).find(l => l && l.evidence === 'photo'), aiBad = (x.items || []).some(i => tkAiBad(i.last)), aiPend = (x.items || []).some(i => i.last && i.last.review === 'pending');
     const pd = perDue(x);   // v120：周期任务
-    const [dot, sub] = x.each_leave && !['nobody', 'closed'].includes(x.status) ? [x.status === 'done' ? 'ok' : x.status === 'missed' ? 'bad' : 'todo', eachLine(x)]   // v152
+    const [dot, sub] = x.each_leave && !['nobody', 'closed'].includes(x.status) ? [x.status === 'done' ? 'ok' : x.status === 'missed' ? 'bad' : 'todo', eachFacts(x)]   // v152；v205：按重要的排
       : x.status === 'wait' ? ['', t('tb_wait') + (pd ? ' · ' + pd.txt : '')]
       : x.status === 'missed' && isPer(x) ? ['bad', t('tf_per_missed', { p: ppl || '–' })]
-      : x.status !== 'done' && pd ? [pd.cls === 'bad' ? 'bad' : 'todo', (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + ' · ' + pd.txt]
-      : x.status === 'done' ? ['ok', '✓ ' + [x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : ''].filter(Boolean).join(' · ')]
+      : x.status !== 'done' && pd ? [pd.cls === 'bad' ? 'bad' : 'todo', [pd.txt, ppl || t('tsr_open0')]]   // v205：逾期 / 截止 / 今天最后一天写在前面（以前排在「还没做 · 谁」后面被挤掉）
+      : x.status === 'done' ? ['ok', tkDoneFacts(x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : '')]
       : x.status === 'nobody' ? ['bad', x.once ? t('to_nobody') : t('tsr_nobody', { r: t('grp_' + x.role) })]
       : x.status === 'missed' ? ['bad', t('tsr_missed', { p: ppl || '–' })]
       : ['todo', (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + (x.ask && !x.answer && (x.items || []).length && x.items.every(i => i.last) ? ' · ' + t('tk_ask_pending') : '')];   // 拍好了还没回答
     const acts = (photo ? `<button class="link" data-act="task-photo" data-id="${photo.row_id}">${esc(t('lk_view'))}</button>` : '') + tkResBtn(x) + (x.status === 'done' ? '' : tsrLeadActs(x.def_id, x.day));
-    return tsrRow(nm, dot, esc(sub) + (aiBad ? ` <span class="negc">· ${esc(t('tk_adm_ai_bad'))}</span>` : '') + (aiPend ? ` <span class="warnc">· ${esc(t('tk_rev_pending'))}</span>` : ''), dot === 'bad' ? 'negc' : '', acts);
+    return tkRow({ k: 'at|' + x.def_id + '|' + x.day, name: toName(x), icon: x.once && x.need_result ? '📎' : x.once && x.important ? '📷' : '', dot, ...(Array.isArray(sub) ? { facts: sub } : { sub }), cls: dot === 'bad' ? 'negc' : pd && pd.cls === 'warn' ? 'warnc' : '',   // v205：统一的任务行
+      flags: [aiBad && { t: t('tk_adm_ai_bad'), c: 'negc' }, aiPend && { t: t('tk_rev_pending'), c: 'warnc' }], acts,
+      desc: [x.once ? toWhen(x) : '', isPer(x) ? perLabel(x) : '', x.store], photo: photo ? photo.row_id : '' });
   }).join('')}</div>`;
 }
 // 负责人「今天」：我负责的任务
@@ -4979,9 +5129,11 @@ function ledHTML(){
   const row = x => {
     const done = x.status === 'done', bad = ['missed', 'overdue'].includes(x.status), nob = !done && !bad && toNobody(x);
     const dot = done ? 'ok' : bad || nob ? 'bad' : x.status === 'today' ? 'todo' : '';
-    const sub = done ? '✓ ' + [x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : ''].filter(Boolean).join(' · ') : bad ? t('to_st_missed') : toWhoText(x);
-    return tsrRow(esc(toWhen(x) + ' · ' + toName(x)) + (x.need_result ? ' 📎' : x.important ? ' 📷' : '') + (stores.size > 1 ? ' ' + storeTag(x.store) : ''), dot,
-      `<span class="${nob ? 'warnc' : ''}">${esc(sub)}</span>`, bad ? 'negc' : '', done || bad ? '' : tsrLeadActs(x.def_id, x.day));
+    const facts = done ? tkDoneFacts(x.completed_by, fmtTime(x.completed_at), x.answer ? askAns(x) : '') : bad ? [t('to_st_missed')] : toWhoText(x).split(' · ');
+    const l = ((x.items || [])[0] || {}).last, ph = l && l.evidence === 'photo' ? l.row_id : '';   // v205：统一的任务行
+    return tkRow({ k: 'ld|' + x.def_id + '|' + x.day, name: toName(x), icon: x.need_result ? '📎' : x.important ? '📷' : '', dot, facts: facts.concat(stores.size > 1 ? [x.store] : []), cls: bad ? 'negc' : nob ? 'warnc' : '',
+      acts: (ph ? `<button class="link" data-act="task-photo" data-id="${ph}">${esc(t('lk_view'))}</button>` : '') + tkResBtn(x) + (done || bad ? '' : tsrLeadActs(x.def_id, x.day)),
+      desc: [toWhen(x), x.store], photo: ph });
   };
   return h3i(esc(t('ld_title', { n: list.filter(x => x.status !== 'done').length })), t('ld_hint'))
     + days.map(dy => `<div class="tdl-g">${esc(dayWord(dy))}</div><div class="tsr-box">${list.filter(x => x.day === dy).map(row).join('')}</div>`).join('');
@@ -5001,14 +5153,15 @@ function asgRender(){
 }
 // 老板「管理 → 任务」
 async function toAdminLoad(){
-  const bd = bizToday(), bd1 = addDays(bd, 1);
-  const [L, list, staff, fl, d0, d1, nm, cat] = await Promise.all([rpc('admin_task_leads', tok()), rpc('admin_tasks_once', tok()), rpc('admin_list_staff', tok()),
+  const bd = bizToday(), bd1 = addDays(bd, 1), ds = state.toDay && ![bd, bd1].includes(state.toDay) ? state.toDay : null;   // v205：翻到的那一天也一起要
+  const [L, list, staff, fl, d0, d1, nm, cat, , dx] = await Promise.all([rpc('admin_task_leads', tok()), rpc('admin_tasks_once', tok()), rpc('admin_list_staff', tok()),
     soft(rpc('admin_task_flows', tok()), []),   // v101：收废油
     soft(rpc('admin_tasks_day', { ...tok(), p_day: bd }), []), soft(rpc('admin_tasks_day', { ...tok(), p_day: bd1 }), []),   // v105：看板（今天、明天，每天的任务和某一天的任务）
     soft(rpc('task_named_list', tok()), null), soft(rpc('task_catalog', tok()), null),   // v118：点名任务；v119：任务清单
-    mrLoad()]);   // v196：申诉（标签上的数字）
+    mrLoad(), ds ? soft(rpc('admin_tasks_day', { ...tok(), p_day: ds }), []) : null]);   // v196：申诉（标签上的数字）
   state.named = nm; state.tfCat = cat;
   state.toLeads = L || []; state.toList = list || []; state.toStaff = staff || []; state.toFlows = fl || []; state.toDays = { [bd]: d0 || [], [bd1]: d1 || [] };
+  if (ds) state.toDays[ds] = dx || [];
   return toAdminRender();
 }
 // v105（老板 2026-10-22 同意：任务界面第二步）：老板「管理 → 任务」= 看板。最上面切换 今天 / 明天 / 以后 / 前几天；
@@ -5018,16 +5171,14 @@ const toArea = x => x.area || (isKRole(x.role) ? 'kitchen' : 'front');
 // 看板里的一行：x 来自 admin_tasks_day（今天、明天）；某一天的任务另外在 admin_tasks_once 里找到同一条（o），用来写谁做、交给…、改、取消
 function toBoardRow(x){
   const o = x.once ? (state.toList || []).find(v => v.def_id === x.def_id) : null;
-  const nm = esc(toWhen(x) + ' · ' + toName(x)) + (x.once && x.important ? ' 📷' : '') + (x.flow_id ? ` <span class="tag">${esc(t('oil_tag'))}</span>` : '')
-    + (isPer(x) ? ` <span class="tag">${esc(perLabel(x))}</span>` : '');   // v120
   const ppl = (x.people || []).map(p => p.name).join('、'), its = x.items || [], pd = perDue(x);
   const photo = its.map(i => i.last).find(l => l && l.evidence === 'photo'), aiBad = its.some(i => tkAiBad(i.last)), aiPend = its.some(i => i.last && i.last.review === 'pending');
   let dot = 'todo', sub, cls = '';
-  if (x.each_leave && !['nobody', 'closed'].includes(x.status)){ dot = x.status === 'done' ? 'ok' : x.status === 'missed' ? 'bad' : 'todo'; cls = x.status === 'missed' ? 'negc' : ''; sub = eachLine(x); }   // v152
-  else if (x.status === 'done'){ dot = 'ok'; sub = '✓ ' + [x.completed_by, fmtTime(x.completed_at), askAns(x), pd && +x.period.late ? t('tf_per_done_late', { n: x.period.late }) : ''].filter(Boolean).join(' · '); }
+  if (x.each_leave && !['nobody', 'closed'].includes(x.status)){ dot = x.status === 'done' ? 'ok' : x.status === 'missed' ? 'bad' : 'todo'; cls = x.status === 'missed' ? 'negc' : ''; sub = eachFacts(x); }   // v152；v205：按重要的排
+  else if (x.status === 'done'){ dot = 'ok'; sub = tkDoneFacts(x.completed_by, fmtTime(x.completed_at), pd && +x.period.late ? t('tf_per_done_late', { n: x.period.late }) : '', askAns(x)); }   // v205：晚了几天排在回答前面
   else if (x.status === 'wait'){ dot = ''; sub = t('tb_wait') + (pd ? ' · ' + pd.txt : ''); }   // v120：周期任务今天没人上班，不标红
   else if (x.status === 'missed' && isPer(x)){ dot = 'bad'; cls = 'negc'; sub = t('tf_per_missed', { p: ppl || '–' }); }
-  else if (pd){ dot = pd.cls === 'bad' ? 'bad' : 'todo'; cls = pd.cls === 'bad' ? 'negc' : pd.cls === 'warn' ? 'warnc' : ''; sub = (ppl ? t('tsr_open', { p: ppl }) : t('tsr_open0')) + ' · ' + pd.txt; }
+  else if (pd){ dot = pd.cls === 'bad' ? 'bad' : 'todo'; cls = pd.cls === 'bad' ? 'negc' : pd.cls === 'warn' ? 'warnc' : ''; sub = [pd.txt, ppl || t('tsr_open0')]; }   // v205：逾期 / 截止 / 今天最后一天写在前面
   else if (x.status === 'missed'){ dot = 'bad'; cls = 'negc'; sub = t('tsr_missed', { p: ppl || '–' }); }
   else if (x.status === 'nobody' && !o){ dot = 'bad'; cls = 'negc'; sub = t('tsr_nobody', { r: t('grp_' + x.role) }); }
   else { if (o && toNobody(o)) { dot = 'bad'; cls = 'warnc'; }
@@ -5036,12 +5187,14 @@ function toBoardRow(x){
     + (o && !['done', 'missed'].includes(x.status) ? `<button class="link" data-act="asg-open" data-def="${x.def_id}" data-mode="admin">${esc(t('to_assign'))}</button>`
       + (x.flow_id ? '' : `<button class="link" data-act="tf-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="tf-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>`) : '')   // 收废油的任务在收废油卡片里改
     + (x.status !== 'done' && !isPer(x) && x.day <= bizToday() && x.day >= addDays(bizToday(), -2) ? bfBtn(x, x.day) : '');   // v171：老板发现没做（只能记今天 / 昨天 / 前天）
-  return tsrRow(nm, dot, esc(sub) + (aiBad ? ` <span class="negc">· ${esc(t('tk_adm_ai_bad'))}</span>` : '') + (aiPend ? ` <span class="warnc">· ${esc(t('tk_rev_pending'))}</span>` : ''), cls, acts);
+  return tkRow({ k: 'tb|' + x.def_id + '|' + x.day, name: toName(x), icon: x.once && x.need_result ? '📎' : x.once && x.important ? '📷' : '', dot, ...(Array.isArray(sub) ? { facts: sub } : { sub }), cls,   // v205：统一的任务行
+    flags: [aiBad && { t: t('tk_adm_ai_bad'), c: 'negc' }, aiPend && { t: t('tk_rev_pending'), c: 'warnc' }], acts,
+    desc: [toWhen(x), x.flow_id ? t('oil_tag') : '', isPer(x) ? perLabel(x) : '', x.store + ' ' + t('area_' + toArea(x))], photo: photo ? photo.row_id : '' });
 }
 function toBoardHTML(day){
   const all = ((state.toDays || {})[day] || []).filter(x => x.status !== 'closed'), rank = x => x.status === 'done' ? 3 : x.status === 'wait' ? 2 : ['missed', 'nobody'].includes(x.status) ? 0 : 1;
   const blocks = STORES.flatMap(st => ['kitchen', 'front'].map(a => ({ st, a, list: all.filter(x => x.store === st && toArea(x) === a).sort((p, q) => rank(p) - rank(q)) }))).filter(b => b.list.length);
-  if (!blocks.length) return ((state.named || {}).tasks || []).some(x => x.day === day) ? '' : `<div class="list"><div class="empty">${esc(t('tb_none'))}</div></div>`;   // v118
+  if (!blocks.length) return ((state.named || {}).tasks || []).some(x => nmOnDay(x, day)) || (state.toList || []).some(x => x.day === day) ? '' : `<div class="list"><div class="empty">${esc(t('tb_none'))}</div></div>`;   // v118
   return blocks.map(b => {
     const l = (state.toLeads || []).find(x => x.store === b.st && x.area === b.a) || {}, n = b.list.length, nd = b.list.filter(x => x.status === 'done').length;
     return `<div class="tb"><div class="tb-h"><div>${storeTag(b.st)} <strong>${esc(t('area_' + b.a))}</strong></div><span class="small ${nd === n ? 'pos' : 'muted'}">${esc(t('tdl_count', { a: nd, b: n }))}</span></div>
@@ -5052,40 +5205,93 @@ function toBoardHTML(day){
 // 以后 / 前几天：某一天的任务（admin_tasks_once）按天列
 function toListRow(x){
   const done = x.status === 'done', bad = ['missed', 'overdue'].includes(x.status), nob = !done && !bad && toNobody(x);
-  const sub = done ? '✓ ' + [x.completed_by, fmtDateTime(x.completed_at), askAns(x)].filter(Boolean).join(' · ') : bad ? t('to_st_missed') : toWhoText(x);
+  const facts = done ? tkDoneFacts(x.completed_by, fmtDateTime(x.completed_at), askAns(x)) : bad ? [t('to_st_missed')] : toWhoText(x).split(' · ');   // v205：店放进完整描述（「排班还没发布」不会被挤掉）
   const l = ((x.items || [])[0] || {}).last;
   const acts = (l && l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') + tkResBtn(x)
     + (done || bad ? '' : `<button class="link" data-act="asg-open" data-def="${x.def_id}" data-mode="admin">${esc(t('to_assign'))}</button>`
       + (x.flow_id ? '' : `<button class="link" data-act="tf-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="tf-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>`));
-  return tsrRow(esc(toWhen(x) + ' · ' + toName(x)) + (x.need_result ? ' 📎' : x.important ? ' 📷' : '') + ' ' + storeTag(x.store) + ` <span class="tag">${esc(t('area_' + x.area))}</span>`,
-    done ? 'ok' : bad || nob ? 'bad' : '', `<span class="${nob ? 'warnc' : ''}">${esc(sub)}</span>`, bad ? 'negc' : '', acts);
+  return tkRow({ k: 'tl|' + x.def_id + '|' + x.day, name: toName(x), icon: x.need_result ? '📎' : x.important ? '📷' : '', dot: done ? 'ok' : bad || nob ? 'bad' : '',   // v205
+    facts: facts.concat([x.store]), cls: bad ? 'negc' : nob ? 'warnc' : '', acts, desc: [toWhen(x), x.store + ' ' + t('area_' + x.area)], photo: l && l.evidence === 'photo' ? l.row_id : '' });
 }
-function toAdminRender(){
-  const bd = bizToday(), bd1 = addDays(bd, 1), v = state.toView || 'today', L = state.toList || [];
-  const NL = (state.named || {}).tasks || [], later = L.concat(NL).filter(x => x.day > bd1), past = L.concat(NL).filter(x => x.day < bd);   // v118：点名任务也在「以后 / 前几天」里
-  const byDay = (list, desc) => { const g = {}; list.forEach(x => (g[x.day] = g[x.day] || []).push(x)); const ks = Object.keys(g).sort(); if (desc) ks.reverse();
-    return ks.map(d => `<div class="tdl-g">${esc(dayLabel(d))}</div><div class="tsr-box">${g[d].map(x => x.named ? nmRow(x, true) : toListRow(x)).join('')}</div>`).join(''); };
-  const seg = `<div class="seg sm" style="margin-bottom:8px">${[['today', t('tb_today')], ['tomorrow', t('tb_tomorrow')], ['later', t('tb_later', { n: later.length })], ['past', t('tb_past', { n: past.length })], ['list', t('tb_list')], ['stats', t('tb_stats')], ['appeal', mrPending().length ? t('tb_appeal', { n: mrPending().length }) : t('tb_appeal0')]]
-    .map(([k, lbl]) => `<button data-act="to-view" data-k="${k}" class="${v === k ? 'on' : ''}">${esc(lbl)}</button>`).join('')}</div>`;
-  const board = v === 'today' ? nmBlockHTML(bd) + toBoardHTML(bd) : v === 'tomorrow' ? nmBlockHTML(bd1) + toBoardHTML(bd1)   // v118：点名任务在最上面
-    : v === 'list' ? tcListHTML()   // v119：任务清单（每天的任务）
-    : v === 'stats' ? tsHTML()   // v123：统计
-    : v === 'appeal' ? mrTabHTML()   // v196：漏做申诉
-    : v === 'later' ? (byDay(later) || `<div class="list"><div class="empty">${esc(t('tb_later_none'))}</div></div>`)
-    : (byDay(past, true) || `<div class="list"><div class="empty">${esc(t('tb_past_none'))}</div></div>`);
-  const nLead = (state.toLeads || []).filter(x => x.staff_id).length;
-  const leads = `<details class="fold" style="margin-top:14px"${state.toLeadsOpen ? ' open' : ''}><summary>${esc(t('tl_sum', { a: nLead, b: STORES.length * 2 }))}</summary><div class="inner">
-    <div class="small muted" style="margin-bottom:8px">${esc(t('tl_hint'))}</div><div class="list">${STORES.flatMap(st => ['kitchen', 'front'].map(a => {
+// v205（老板 2026-11-21「按建议」：任务界面第 3 步）：7 个标签变 3 个：今天（‹ 日期 › 左右翻天，代替以前的 今天 / 明天 / 以后 / 前几天）、清单、更多（统计 / 申诉 / 收废油 / 负责人）。
+// 收废油只在进行中或迟到时在「今天」最上面一行；没设负责人的区域一行橙色；右下角浮动「＋」= 原来的「＋ 新任务」（tf-new）。查看模式只能看
+const TO_MORE = ['more', 'stats', 'appeal', 'oil', 'leads'];
+const toOilOpen = f => ['check', 'answered', 'dated'].includes(f.status);
+function toDayLbl(d){ const bd = bizToday(), w = d === bd ? t('tdl_today') : d === addDays(bd, 1) ? t('tdl_tomorrow') : d === addDays(bd, -1) ? t('to_yesterday') : '';
+  return (w ? w + ' · ' : '') + dayLabel(d); }
+async function toDayGo(d){
+  if (!d || !/^\d{4}-\d{2}-\d{2}$/.test(d)) return;
+  state.toDay = d === bizToday() ? null : d; state.toView = 'today';
+  if (!(state.toDays || {})[d]){ keepScroll(toRedraw);
+    try { const r = await rpc('admin_tasks_day', { ...tok(), p_day: d }); (state.toDays = state.toDays || {})[d] = r || []; }
+    catch(e){ toast(errText(e), true); (state.toDays = state.toDays || {})[d] = []; } }
+  if ((state.toDay || bizToday()) === d) keepScroll(toRedraw);
+}
+// 「今天」最上面的条件行：收废油正在进行 / 迟到（每家店一行）、没设负责人
+function toCondHTML(){
+  const F = state.toFlows || [], arrow = '<span aria-hidden="true">›</span>';
+  const oil = STORES.map(st => { const o = F.find(f => f.store === st && toOilOpen(f)); if (!o) return '';
+    const late = o.check_late_days > 0 && o.check, step = o.status === 'check' ? 1 : o.status === 'answered' ? 2 : !(o.out && o.out.completed_at) ? 3 : 4;
+    return `<button type="button" class="crow${late ? ' bad' : ''}" data-act="oil-go" data-store="${st}"><span>${esc(late ? t('to_c_oil_late', { s: st, n: o.check_late_days }) : t('to_c_oil', { s: st, x: t('oil_s' + step) }))}</span>${arrow}</button>`; }).join('');
+  const nl = STORES.length * 2 - (state.toLeads || []).filter(x => x.staff_id).length;
+  return oil + (nl > 0 ? `<button type="button" class="crow warn" data-act="to-view" data-k="leads"><span>${esc(t('to_c_leads', { n: nl }))}</span>${arrow}</button>` : '');
+}
+// 「更多」：4 行大入口
+function toMoreHTML(){
+  const F = state.toFlows || [], np = mrPending().length, nLead = (state.toLeads || []).filter(x => x.staff_id).length, oilOn = STORES.filter(st => F.some(f => f.store === st && toOilOpen(f)));
+  const row = (k, ic, txt, cls) => `<button type="button" class="mrow" data-act="to-view" data-k="${k}"><span aria-hidden="true">${ic}</span><span class="${cls || ''}">${esc(txt)}</span><span class="muted" aria-hidden="true">›</span></button>`;
+  return `<div class="tsr-box" style="padding:0 4px">${row('stats', '📊', t('to_m_stats'))}${row('appeal', '⚖️', np ? t('to_m_appeal_n', { n: np }) : t('to_m_appeal'), np ? 'negc' : '')}`
+    + `${row('oil', '🛢', oilOn.length ? t('to_m_oil_on', { s: oilOn.join(', ') }) : t('to_m_oil'))}${row('leads', '👤', t('to_m_leads', { a: nLead, b: STORES.length * 2 }))}</div>`;
+}
+// 负责人设置（以前是页面最下面一直挂着的折叠，现在在「更多 → 负责人」）
+function toLeadsHTML(){
+  return `<div class="small muted" style="margin-bottom:8px">${esc(t('tl_hint'))}</div><div class="list">${STORES.flatMap(st => ['kitchen', 'front'].map(a => {
       const l = (state.toLeads || []).find(x => x.store === st && x.area === a) || {}, k = st + '-' + a, pick = toAreaStaff(state.toStaff, a);
       if (l.staff_id && !pick.some(p => p.id === l.staff_id)) pick.unshift({ id: l.staff_id, name: l.name || '?' });
       return `<div class="item"><div class="top"><div>${storeTag(st)} <strong>${esc(t('area_' + a))}</strong></div>${l.updated_by ? `<div class="meta small muted">${esc(t('tl_by', { n: l.updated_by, t: fmtDateTime(l.updated_at) }))}</div>` : ''}</div>
         <div class="row" style="gap:8px;margin-top:8px;flex-wrap:wrap">
-          <div class="field" style="flex:1 1 140px;margin:0"><label for="tl-p-${k}" class="small muted">${esc(t('tl_lead'))}</label><select class="input" id="tl-p-${k}"><option value="">${esc(t('tl_none'))}</option>${pick.map(p => `<option value="${p.id}" ${p.id === l.staff_id ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>
-          <div class="field" style="flex:1 1 140px;margin:0"><label for="tl-r-${k}" class="small muted">${esc(t('tl_role'))}</label><select class="input" id="tl-r-${k}">${(a === 'kitchen' ? KROLES : FROLES).map(r => `<option value="${r}" ${r === l.default_role ? 'selected' : ''}>${esc(t('grp_' + r))}</option>`).join('')}</select></div></div>
-        <div class="acts"><button class="link" data-act="tl-save" data-store="${st}" data-area="${a}">${esc(t('save'))}</button></div></div>`;
-    })).join('')}</div></div></details>`;
-  const top = state.tfEdit ? tfFormHTML() : `<button class="btn" data-act="tf-new" style="margin:0 0 12px">${esc(t('to_new'))}</button>`;   // v119：只有一个「＋ 新任务」
-  return top + seg + board + oilHTML() + leads;
+          <div class="field" style="flex:1 1 140px;margin:0"><label for="tl-p-${k}" class="small muted">${esc(t('tl_lead'))}</label><select class="input" id="tl-p-${k}" ${state.viewAs ? 'disabled' : ''}><option value="">${esc(t('tl_none'))}</option>${pick.map(p => `<option value="${p.id}" ${p.id === l.staff_id ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select></div>
+          <div class="field" style="flex:1 1 140px;margin:0"><label for="tl-r-${k}" class="small muted">${esc(t('tl_role'))}</label><select class="input" id="tl-r-${k}" ${state.viewAs ? 'disabled' : ''}>${(a === 'kitchen' ? KROLES : FROLES).map(r => `<option value="${r}" ${r === l.default_role ? 'selected' : ''}>${esc(t('grp_' + r))}</option>`).join('')}</select></div></div>
+        ${state.viewAs ? '' : `<div class="acts"><button class="link" data-act="tl-save" data-store="${st}" data-area="${a}">${esc(t('save'))}</button></div>`}</div>`;
+    })).join('')}</div>`;
+}
+// 这一天的一次性任务、看板上没有的（排班还没发布 / 那天不营业）：照样列出来，能交给、改、取消
+function toOnceRest(day, D){
+  const on = new Set((D || []).filter(x => x.status !== 'closed').map(x => x.def_id)), R = (state.toList || []).filter(x => x.day === day && !on.has(x.def_id));
+  return R.length ? `<div class="tb"><div class="tb-h"><strong>${esc(t('to_once_rest'))}</strong><span class="small muted">${R.length}</span></div>${R.map(toListRow).join('')}</div>` : '';
+}
+function toAdminRender(){
+  const bd = bizToday(), L = state.toList || [];
+  let v = state.toView || 'today';
+  if (v === 'tomorrow'){ state.toDay = addDays(bd, 1); v = state.toView = 'today'; }   // 以前的「明天」标签
+  const day = state.toDay || bd, np = mrPending().length;
+  const NL = (state.named || {}).tasks || [], later = L.concat(NL).filter(x => x.deadline ? (nmDoneDay(x) ? nmDoneDay(x) > day : x.status !== 'done' && x.deadline.from > day) : x.day > day), past = L.concat(NL).filter(x => x.day < bd && !(x.deadline && x.status !== 'done'));   // v205：截止任务在开始到截止日（逾期 = 今天）的看板上   // v118：点名任务也在「以后 / 前几天」里
+  const byDay = (list, desc) => { const g = {}; list.forEach(x => (g[x.day] = g[x.day] || []).push(x)); const ks = Object.keys(g).sort(); if (desc) ks.reverse();
+    return ks.map(d => `<div class="tdl-g">${esc(dayLabel(d))}</div><div class="tsr-box">${g[d].map(x => x.named ? nmRow(x, true) : toListRow(x)).join('')}</div>`).join(''); };
+  const on = k => k === 'more' ? TO_MORE.includes(v) : k === 'today' ? ['today', 'later', 'past'].includes(v) : v === k;
+  const seg = `<div class="seg" style="margin-bottom:10px">${[['today', t('tb_today')], ['list', t('tb_list')], ['more', t('more_title')]]
+    .map(([k, lbl]) => `<button data-act="to-view" data-k="${k}" class="${on(k) ? 'on' : ''}">${esc(lbl)}${k === 'more' && np ? `<span class="cnt">${np}</span>` : ''}</button>`).join('')}</div>`;
+  const back = (k, lbl) => `<button class="link" data-act="to-view" data-k="${k}" style="margin:0 0 10px">‹ ${esc(lbl)}</button>`;
+  let body;
+  if (v === 'list') body = tcListHTML();   // v119：任务清单（重复的任务）
+  else if (v === 'more') body = toMoreHTML();
+  else if (v === 'stats') body = back('more', t('more_title')) + tsHTML();   // v123：统计
+  else if (v === 'appeal') body = back('more', t('more_title')) + mrTabHTML();   // v196：漏做申诉
+  else if (v === 'oil') body = back('more', t('more_title')) + oilHTML();   // v101：收废油
+  else if (v === 'leads') body = back('more', t('more_title')) + `<h3 style="margin-top:0">${esc(t('tl_sum', { a: (state.toLeads || []).filter(x => x.staff_id).length, b: STORES.length * 2 }))}</h3>` + toLeadsHTML();
+  else if (v === 'later') body = back('today', toDayLbl(day)) + `<h3 style="margin-top:0">${esc(t('to_later_t', { d: dayLabel(day) }))}</h3>` + (byDay(later) || `<div class="list"><div class="empty">${esc(t('tb_later_none'))}</div></div>`);
+  else if (v === 'past') body = back('today', toDayLbl(day)) + `<h3 style="margin-top:0">${esc(t('to_past_t'))}</h3>` + (byDay(past, true) || `<div class="list"><div class="empty">${esc(t('tb_past_none'))}</div></div>`);
+  else { const D = (state.toDays || {})[day];
+    body = `<div class="tdn"><button type="button" data-act="to-day" data-d="-1" aria-label="${esc(t('rk_prev'))}">‹</button><span class="tdn-l">${esc(toDayLbl(day))}</span>`
+      + `<button type="button" data-act="to-day" data-d="1" aria-label="${esc(t('rk_next'))}">›</button><label title="${esc(t('to_pick_day'))}">📅<input type="date" id="to-day-pick" value="${day}" aria-label="${esc(t('to_pick_day'))}"></label></div>`
+      + (day !== bd ? `<div style="text-align:center;margin:-2px 0 10px"><button class="link" data-act="to-day" data-d="0">${esc(t('to_back_today'))}</button></div>` : '')
+      + toCondHTML() + (D ? nmBlockHTML(day) + toBoardHTML(day) + toOnceRest(day, D) : `<div class="loading">${esc(t('loading'))}</div>`)   // v118：点名任务在最上面
+      + `<div style="margin:10px 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:6px">`
+      + (later.length ? `<button class="link" data-act="to-view" data-k="later">${esc(t('to_later_n', { n: later.length }))} ›</button>` : '')
+      + (past.length ? `<button class="link" data-act="to-view" data-k="past">${esc(t('to_past_n', { n: past.length }))} ›</button>` : '') + '</div>'; }
+  const fab = state.tfEdit ? '' : state.viewAs ? `<div class="small muted" style="margin:12px 0">${esc(t('nm_new_view'))}</div>`
+    : `<div style="height:64px" aria-hidden="true"></div><button type="button" class="fab" data-act="tf-new" aria-label="${esc(t('to_new'))}" title="${esc(t('to_new'))}">＋</button>`;
+  return (state.tfEdit ? tfFormHTML() : '') + seg + body + fab;   // 表单照旧在最上面打开
 }
 // ============ v123：任务统计（数据库 v88 / 文件服务 tasks v19，老板 2026-10-31：1A 2B 3B）============
 // 只有老板看。只统计、不打分；漏做分开写「自己负责」和「一起负责」；AI 点评（每人一句、每个任务一句）点了才生成，存在数据库
@@ -5158,15 +5364,39 @@ async function nmLoad(){ state.named = await soft(rpc('task_named_list', tok()),
 // 老板和任务负责人（只限自己负责的店 + 区域）都用这一个表单；「任务清单」里改、停用每天的任务
 async function tfLoad(){ state.tfCat = await soft(rpc('task_catalog', tok()), state.tfCat || null); }
 function tfRedraw(){ if (state.tab === 'admin') keepScroll(toRedraw); else keepScroll(tfView); }
+// v205：选了日期 / 截止日以后只换这几块：截止日快捷按钮、日期旁边的字、确认卡、底部（总结句 + 保存）。正在用的日期框不换掉
+function tfSoftRedraw(){ const f = document.getElementById('tf-form'); tfSync();
+  if (!f || f.querySelector('.tferr, .tfq-e')){ tfRedraw(); return; }   // 有标红的问题：整张重画（红框跟着清掉）
+  const tp = document.createElement('div'); tp.innerHTML = tfFormHTML();
+  const sels = ['#tf-duechips', '#tf-duelbl', '.tfcc', '.tfo-f'];
+  if (sels.some(s => !f.querySelector(s) !== !tp.querySelector(s))){ tfRedraw(); return; }   // 结构变了：整张重画
+  sels.forEach(s => { const a = f.querySelector(s), n = tp.querySelector(s); if (a && n) a.replaceWith(n); }); }
 // 我能建哪些店 + 区域的任务（老板：全部）
 const tfManage = () => ((state.tfCat || {}).manage || []);
 const tfAreas = () => [...new Set(tfManage().map(m => m.area))];
 const tfStoresFor = a => STORES.filter(st => tfManage().some(m => m.area === a && m.store === st));
 const tfArea = e => e.who === 'each' ? 'front' : e.who === 'role' ? (e.role ? (isKRole(e.role) ? 'kitchen' : 'front') : '') : e.area;   // v152：每个服务员下班前 = 前场
+// v205（老板 2026-11-21「按建议」：任务界面第 1、2、4 步）：新任务表 = 三问（做什么 / 谁做 / 什么时候）+ 一行「怎么算完成」+「更多设置」折叠。
+// 底部一句总结（网页自己拼，不调 AI）；没填的项红框 + 红字 + 滚过去；记住上次选的店和岗位（每个人自己的，只在这台手机）。
+// 保存的参数和以前一样（task_save 18 个参数）；只多一个 p_extra.due（某天前做完，数据库 v142）。表单从底部弹起、占满全屏（#tf-form.tfo）
+const TF_MEMK = () => 'kochi_tf_last_' + ((state.me || {}).id || '');
+function tfMem(){ try { return JSON.parse(localStorage.getItem(TF_MEMK()) || '{}') || {}; } catch(err){ return {}; } }
+function tfMemSave(e){
+  try { const m = tfMem();
+    if (e.who === 'person'){ m.kind = 'person'; m.recent = [e.staff, ...(m.recent || []).filter(x => x !== e.staff)].slice(0, 12); }
+    else { m.kind = e.who === 'area' ? 'area' : 'role'; m.role = e.who === 'each' ? 'service' : e.who === 'role' ? e.role : ''; m.area = e.who === 'area' ? e.area : ''; m.stores = (e.stores || []).slice(); }
+    localStorage.setItem(TF_MEMK(), JSON.stringify(m)); } catch(err){}
+}
+// 什么时候：今天 / 明天 / 选一天 / 某天前做完 / 每天 / 每周 / 每月 / 更长（每季度、每年）
+const tfWhen = e => e.repeat === 'once' ? (e.due || e.dayMode === 'due' ? 'due' : e.dayMode || '') : ['quarter', 'year'].includes(e.repeat) ? 'longer' : e.repeat || '';
+const tfTimesMax = r => r === 'week' ? 7 : r === 'month' ? 28 : r === 'quarter' ? 60 : 100;   // 和数据库 TASK_TIMES_BAD 一样
+const tfSun = n => { const bd = bizToday(); return addDays(bd, (6 - wdIdx(bd)) + 7 * n); };   // 本周日（今天是周日 = 今天）/ 下周日
+const tfDueMin = e => e.wasDue && e.dueFrom && e.dueFrom > bizToday() ? e.dueFrom : bizToday();
 function tfSync(){ const e = state.tfEdit; if (!e) return;
-  [['text', 'tf-text'], ['zh', 'tf-zh'], ['de', 'tf-de'], ['day', 'tf-date'], ['rd', 'tf-rd'], ['rm', 'tf-rm'], ['sop', 'tf-sop'], ['say', 'tf-say'], ['link', 'tf-link']].forEach(([k, id]) => { const el = document.getElementById(id); if (el && (k !== 'day' || e.dayMode === 'pick')) e[k] = el.value; });   // v120：周期从哪天开始；v121：SOP
+  [['text', 'tf-text'], ['zh', 'tf-zh'], ['de', 'tf-de'], ['day', 'tf-date'], ['due', 'tf-due'], ['rd', 'tf-rd'], ['rm', 'tf-rm'], ['sop', 'tf-sop'], ['say', 'tf-say'], ['link', 'tf-link'], ['q', 'tf-q']].forEach(([k, id]) => { const el = document.getElementById(id);
+    if (el && (k !== 'day' || (e.dayMode === 'pick' && tfWhen(e) !== 'due'))) e[k] = el.value; });   // v120：周期从哪天开始；v121：SOP；v205：截止日、找人
   const sa = document.getElementById('tf-sopai'); if (sa) e.sopAi = sa.checked;
-  e.more = !!(document.querySelector('#tf-form details') || {}).open; }
+  e.more = !!(document.getElementById('tf-more') || {}).open; e.err = {}; e.hl = ''; }
 // 从看板 / 清单 / 列表里的一条，变成表单
 function tfFrom(x){
   const bd = bizToday(), who = x.each_leave ? 'each' : x.who_kind || (x.named ? 'person' : 'role');   // v152
@@ -5174,10 +5404,12 @@ function tfFrom(x){
   let photo = x.photo || (x.check_only ? 'check' : repeat === 'once' ? (x.important ? 'photo' : 'check') : (x.important ? 'always' : 'photo'));
   if (photo === 'always' && repeat !== 'daily') photo = 'photo';
   if (x.need_result) photo = 'result';   // v128：交回结果
+  const dl = x.deadline || null;   // v205（数据库 v142）：某天前做完：day = 截止日，deadline.from = 开始那天
   return { id: x.def_id, photos: ((x.att || {}).photos || []).slice(), link: (x.att || {}).link || '', who, staff: (x.assignee || {}).id || '', role: who === 'role' ? x.role : '', area: x.area || toArea(x), repeat, lockRepeat: true,
-    day: x.day || '', dayMode: !x.day || x.day === addDays(bd, 1) ? 'tomorrow' : x.day === bd ? 'today' : 'pick',
+    day: dl ? dl.from : x.day || '', dayMode: dl ? 'due' : !x.day || x.day === addDays(bd, 1) ? 'tomorrow' : x.day === bd ? 'today' : 'pick',
+    due: dl ? dl.due : '', dueFrom: dl ? dl.from : '', wasDue: !!dl,
     timing: x.timing === 'arrival' ? 'arrival' : 'closing', slot: ['lunch', 'dinner'].includes(x.slot) ? x.slot : 'last', stores: who === 'person' ? [] : (x.store ? [x.store] : []), tag: who === 'person' ? (x.store || '') : '',
-    photo, text: toName(x), text0: toName(x), zh: x.name_zh, de: x.name_de, zh0: x.name_zh, de0: x.name_de, multi: (x.items || 1) > 1, rd: +x.repeat_day || 1, rm: +x.repeat_month || 1, times: +x.times || 1, makeup: x.makeup !== false,   // v132
+    photo, text: toName(x), text0: toName(x), zh: x.name_zh, de: x.name_de, zh0: x.name_zh, de0: x.name_de, multi: (Array.isArray(x.items) ? x.items.length : +x.items || 1) > 1, rd: +x.repeat_day || 1, rm: +x.repeat_month || 1, times: +x.times || 1, makeup: x.makeup !== false,   // v132
     sop: (x.sop || {}).item_id || '', sopTitle: x.sop ? sopTitle(x.sop) : '', sopAi: x.sop ? !!x.sop_ai : true };   // v121：连的 SOP
 }
 // v121：任务连 SOP（数据库 v87）。表单里的 SOP 列表用 sop_tree（所有人都能读）
@@ -5190,21 +5422,28 @@ function tfSopOpts(e){
     + groups.map(a => `<optgroup label="${esc(t('area_' + a))}">${(T.topics || []).filter(tp => tp.area === a).flatMap(tp => (tp.items || []).map(i => opt(i.id, sopTopicName(tp) + ' · ' + sopTitle(i)))).join('')}</optgroup>`).join('');
 }
 // v122：说一句话建任务（文件服务 tasks v18 task_parse）：AI 的结果填进表单；没说的留空、标橙（老板 2026-10-31：1A 2A 3A）
+// v205（文件服务 tasks v39）：多认 due（某天前做完）、times（每周两次）、makeup（做不完就算了）、result（交回结果）、each（每个服务员各做一份）
 function tfApplyParse(e, r){
   const bd = bizToday(), who = r.who || 'person';
   e.who = who; e.staff = who === 'person' ? r.staff_id || '' : ''; e.role = who === 'role' ? r.role || '' : '';
   e.area = who === 'area' ? r.area || '' : r.role ? (isKRole(r.role) ? 'kitchen' : 'front') : e.area;
   e.repeat = r.repeat || 'once'; e.day = e.repeat === 'once' ? r.day || '' : '';
   e.dayMode = !e.day ? '' : e.day === bd ? 'today' : e.day === addDays(bd, 1) ? 'tomorrow' : 'pick';
-  e.rd = r.repeat_day || 1; e.rm = r.repeat_month || 1; e.timing = r.timing || '';
+  e.due = who === 'person' && e.repeat === 'once' && r.due ? r.due : '';   // v205：截止日（day = 开始，没说 = 今天）
+  if (e.due){ e.dayMode = 'due'; if (!e.day || e.day < bd || e.day >= e.due) e.day = bd; }   // 开始要早于截止日（AI 把截止日也填进 day 时 = 今天）
+  if (r.each && who === 'role' && r.role === 'service'){ e.who = 'each'; e.repeat = 'daily'; e.timing = 'closing'; e.day = ''; }   // v205：每个服务员各做一份
+  e.rd = r.repeat_day || 1; e.rm = r.repeat_month || 1; if (e.who !== 'each') e.timing = r.timing || '';
+  e.times = isPer(e) ? Math.min(Math.max(+r.times || 1, 1), tfTimesMax(e.repeat)) : 1; e.makeup = isPer(e) ? r.makeup !== false : true;   // v205
   e.slot = ['lunch', 'dinner'].includes(r.slot) ? r.slot : 'last';   // v193（tasks v35）：说了中午 / 晚上
   const ok = who === 'person' ? STORES : tfStoresFor(tfArea(e)), said = r.stores || [];
   e.stores = who === 'person' ? [] : said.filter(x => ok.includes(x)); e.tag = who === 'person' ? said[0] || '' : '';
+  if (who !== 'person' && !said.length && ok.length === 1) e.stores = ok.slice();   // v205：只有一家店能选 = 自动选好
   e.outside = who !== 'person' && (said.some(x => !ok.includes(x)) || (!!tfArea(e) && !tfAreas().includes(tfArea(e))));
   e.photo = r.photo === 'always' && e.repeat !== 'daily' ? 'photo' : r.photo || '';
+  if (r.result && e.repeat === 'once') e.photo = 'result';   // v205：交回结果（只给一次性的）
   if (r.sop_item_id){ e.sop = r.sop_item_id; e.sopAi = true; }
   e.zh = r.name_zh || r.name_de; e.de = r.name_de || r.name_zh; e.zh0 = e.zh; e.de0 = e.de; e.text = state.lang === 'de' ? e.de : e.zh; e.text0 = e.text;
-  e.miss = r.missing || []; e.moreN = r.more || 1; e.parsed = true;
+  e.miss = (r.missing || []).filter(k => !(k === 'photo' && e.photo === 'result')); e.moreN = r.more || 1; e.parsed = true; e.sayOpen = false; e.cardOff = false; e.phNote = ''; e.whenNote = '';
 }
 function tfShow(){ if (state.me.is_admin){ state.tab = 'admin'; state.adminSub = 'tasks'; } else state.tab = 'today'; render(); window.scrollTo(0, 0); }
 // AI 建议的一条 → 表单（名字、谁、多久一次、什么时候、拍照都按建议填好，店自己选）
@@ -5226,78 +5465,197 @@ function sgHTML(){ const L = (state.tfCat || {}).suggest || [];
   if (!nmCan() && !L.length) return '';
   return `<div class="tb"><div class="tb-h"><strong>${esc(t('sg_title', { n: L.length }))}</strong></div><div class="small muted" style="margin-bottom:8px">${esc(t('sg_hint'))}</div>
     ${nmCan() ? `<button class="btn ghost" data-act="sg-run" style="margin-bottom:6px" ${state.sgBusy ? 'disabled' : ''}>${esc(t(state.sgBusy ? 'sg_busy' : 'sg_run'))}</button>` : ''}${L.map(sgRow).join('')}</div>`; }
+// v205：清单最上面收起成一行「✨ AI 从 SOP 建议了 N 个任务 ›」，点开是原来的建议块
+function sgFoldHTML(){ const L = (state.tfCat || {}).suggest || [], h = sgHTML(); if (!h) return '';
+  return `<details class="fold" id="sg-fold" style="margin:0 0 10px"${state.sgOpen || state.sgBusy ? ' open' : ''}><summary>${esc(L.length ? t('sg_fold_n', { n: L.length }) : t('sg_fold0'))}</summary><div class="inner">${h}</div></details>`; }
 function tfFind(id){ return [...((state.tfCat || {}).daily || []), ...(state.toList || []), ...((state.named || {}).tasks || []), ...((state.led || {}).tasks || [])].find(v => v.def_id === id); }
 // v193（数据库 v135）：「哪个班」只给前场按岗位 / 区域的任务
 const tfSlotOk = e => ['role', 'area'].includes(e.who) && tfArea(e) === 'front';
 // v195（老板 2026-11-18：「午班晚班一起选不行吗」）：新建时午班、晚班可以一起选（e.slot = 'both'），保存时各建一条
 const tfSlotOn = (e, v) => v === 'last' ? !['lunch', 'dinner', 'both'].includes(e.slot) : e.slot === v || e.slot === 'both';
+// v205：表单里每个问题的小标题：中文界面后面跟一个小一号的德文
+const tfQH = (k, extra) => `<div class="tfq-h">${esc(t(k))}${state.lang === 'zh' && I18N.de[k] ? `<small>${esc(I18N.de[k])}</small>` : ''}${extra || ''}</div>`;
+// 要建几个任务：每家店一个 × 午班、晚班各一个
+const tfCount = e => e.id || e.who === 'person' ? 1 : Math.max(1, (e.stores || []).length) * (tfSlotOk(e) && e.slot === 'both' ? 2 : 1);
+// 截止日 / 选一天 / 每周…的文字
+function tfWhenTxt(e){ const w = tfWhen(e);
+  if (w === 'due') return e.due ? t('tf_s_due', { d: dayLabel(e.due) }) : '';
+  if (w === 'today' || w === 'tomorrow' || w === 'pick') return e.day ? (e.day === bizToday() ? t('nm_today') : e.day === addDays(bizToday(), 1) ? t('nm_tomorrow') : dayLabel(e.day)) : '';
+  if (e.repeat === 'daily') return t('tf_daily');
+  return isPer(e) ? perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm, times: e.times }) : ''; }
+// 底部一句话总结（网页自己拼）：「Bismarck · 吧台 · 每周 2 次 · 收店时 · 拍照，没做完要补」
+function tfSum(e){
+  const staff = (state.tfCat || {}).staff || [], p = staff.find(x => x.id === e.staff);
+  const who = e.who === 'person' ? (p ? (p.me ? t('nm_me') : p.name) : '') : e.who === 'each' ? t('tf_s_each') : e.who === 'role' ? (e.role ? t('grp_' + e.role) : '') : e.who === 'area' && e.area ? t('tf_area_' + e.area) : '';
+  if (!who) return '';
+  const st = e.who === 'person' ? '' : (e.stores || []).join(' + ');
+  const slot = tfSlotOk(e) ? (e.slot === 'both' ? t('tf_s_both') : ['lunch', 'dinner'].includes(e.slot) ? t('tf_slot_' + e.slot) : '') : '';
+  const tm = e.who === 'person' ? '' : e.timing ? t('tk_once_' + (e.timing === 'arrival' ? 'arrival' : 'closing')) : '';
+  const ph = !e.photo ? '' : e.photo === 'result' ? t('tf_ph_result') : e.photo === 'check' ? '✓ ' + t('tf_ph_check') : e.photo === 'always' ? '📷 ' + t('tf_ph_always') : '📷 ' + t(e.repeat === 'daily' ? 'tf_s_learn' : 'tf_ph_photo');
+  const mk = isPer(e) ? t(e.makeup !== false ? 'tf_s_mk_yes' : 'tf_s_mk_no') : '';
+  return [st, who, tfWhenTxt(e), slot, tm, [ph, mk].filter(Boolean).join(state.lang === 'zh' ? '，' : ', ')].filter(Boolean).join(' · ');
+}
+// 保存前检查：第一个没填好的问题 { k 问题, m 说明 }（按表单从上到下的顺序）
+function tfCheck(e){
+  const txt = (e.text || '').trim(), w = tfWhen(e), bd = bizToday();
+  if (!txt && !(e.zh || '').trim() && !(e.de || '').trim()) return { k: 'what', m: t('err_TASK_NAME_EMPTY') };
+  if (!e.who || (e.who === 'person' && !e.staff) || (e.who === 'area' && !e.area)) return { k: 'who', m: t('nm_need_who') };
+  if (e.who === 'role' && !e.role) return { k: 'who', m: t('tf_need_role') };
+  if (e.who !== 'person' && !(e.stores || []).length) return { k: 'store', m: t('tf_need_store') };
+  if (e.repeat === 'once' && w === 'due'){
+    if (e.who !== 'person') return { k: 'when', m: t('err_TASK_DUE_PERSON') };
+    if (!e.due) return { k: 'when', m: t('tf_need_due') };
+    if (e.due < (e.day || bd)) return { k: 'when', m: t('err_TASK_DUE_BEFORE') };
+    if (e.due > addDays(bd, 30)) return { k: 'when', m: t('err_TASK_DUE_FAR') };
+  }
+  if (!w || (e.repeat === 'once' && !e.day)) return { k: 'when', m: t('nm_need_day') };
+  if (e.who !== 'person' && !e.timing) return { k: 'when', m: t('tf_need_timing') };   // v122：AI 填表时没说的
+  if (!e.photo) return { k: 'how', m: t('tf_need_photo') };
+  if (tfLinkFix(e.link) === false){ e.more = true; return { k: 'more', m: errText(new Error('TASK_LINK_BAD')) }; }
+  return null;
+}
+// 数据库的报错 → 表单里哪个问题标红
+const TF_ERR_Q = { TASK_NAME_EMPTY: 'what', FORBIDDEN: 'who', TASK_NOT_LEAD_AREA: 'who', NOT_FOUND: 'who', INVALID_STORE: 'store', TASK_DAY_PAST: 'when', TASK_DAY_FAR: 'when', TASK_TIMES_BAD: 'when',
+  TASK_DUE_PERSON: 'when', TASK_DUE_BEFORE: 'when', TASK_DUE_FAR: 'when', TASK_DUE_BAD: 'when', TASK_RESULT_ONCE: 'how', TASK_LINK_BAD: 'more', TASK_FILE_BAD: 'more', TASK_SOP_GONE: 'more', TASK_SLOT_BAD: 'more' };
+// 打开表单 / 重画以后：回到原来滚到的地方；要去某个问题就滚过去
+// 找人：按搜索框里的字筛名字（打字时、表单重画以后都筛；选中的一直显示）
+function tfFindFilter(){ const i = document.getElementById('tf-q'); if (!i) return; const q = i.value.trim().toLowerCase();
+  document.querySelectorAll('#tf-chips .chip').forEach(c => { c.hidden = !!q && !c.classList.contains('on') && !(c.dataset.n || '').includes(q); }); }
+function tfAfterDraw(){ const e = state.tfEdit, b = document.getElementById('tf-body'); if (!e || !b) return;
+  tfFindFilter();
+  if (e.goto){ const q = b.querySelector(`[data-tfq="${e.goto}"]`); e.goto = ''; if (q){ q.scrollIntoView({ block: 'center' }); e.sy = b.scrollTop; return; } }
+  if (e.sy) b.scrollTop = e.sy; }
 function tfFormHTML(){
   const e = state.tfEdit; if (!e) return '';
-  const staff = (state.tfCat || {}).staff || (state.named || {}).staff || [], bd = bizToday(), area = tfArea(e), areas = tfAreas();
-  const seg = (k, opts, dis) => `<div class="seg sm" style="margin-bottom:12px">${opts.map(([v, lbl]) => `<button type="button" data-act="tf-set" data-k="${k}" data-v="${v}" class="${String(e[k]) === String(v) ? 'on' : ''}"${dis ? ' disabled' : ''}>${esc(lbl)}</button>`).join('')}</div>`;
-  const lbl = txt => `<div class="small muted" style="margin-bottom:6px">${esc(txt)}</div>`, hint = txt => `<div class="small muted" style="margin:-6px 0 12px">${esc(txt)}</div>`;
-  // v122：AI 填表时这一项没说、现在还空着 → 标橙「还没说」
-  const empty = { who: () => e.who === 'each' ? false : e.who === 'person' ? !e.staff : e.who === 'role' ? !e.role : !e.area, day: () => e.repeat === 'once' && !e.day, timing: () => !e.timing, stores: () => !e.stores.length, photo: () => !e.photo };
-  const lblM = (k, txt) => (e.miss || []).includes(k) && empty[k]() ? `<div class="small warnc" style="margin-bottom:6px">${esc(txt)} · ${esc(t('tf_missing'))}</div>` : lbl(txt);
-  const chip = (act, k, v, on, txt, extra) => `<button type="button" class="chip${on ? ' on' : ''}" data-act="${act}" data-${k}="${v}"${extra || ''}>${esc(txt)}</button>`;
+  const staff = (state.tfCat || {}).staff || (state.named || {}).staff || [], bd = bizToday(), area = tfArea(e), areas = ['front', 'kitchen'].filter(a => tfAreas().includes(a)), w = tfWhen(e), daily = e.repeat === 'daily', per = isPer(e), once = e.repeat === 'once';
+  const seg = (k, opts, dis) => `<div class="seg sm" style="margin-bottom:10px">${opts.map(([v, lbl]) => `<button type="button" data-act="tf-set" data-k="${k}" data-v="${v}" class="${String(e[k]) === String(v) ? 'on' : ''}"${dis ? ' disabled' : ''}>${esc(lbl)}</button>`).join('')}</div>`;
+  const lbl = txt => `<div class="small muted" style="margin-bottom:6px">${esc(txt)}</div>`, hint = txt => `<div class="small muted" style="margin:-4px 0 10px">${esc(txt)}</div>`;
+  const chip = (act, attrs, on, txt, dis) => `<button type="button" class="chip${on ? ' on' : ''}" data-act="${act}" ${attrs}${dis ? ' disabled' : ''}>${esc(txt)}</button>`;
+  // v122：AI 填表时这一项没说、现在还空着 → 橙色虚线框「AI 没听到」
+  const empty = { who: () => !e.who || (e.who === 'person' ? !e.staff : e.who === 'role' ? !e.role : e.who === 'area' ? !e.area : false), day: () => !w || (once && (w === 'due' ? !e.due : !e.day)),
+    timing: () => e.who !== 'person' && !e.timing, stores: () => e.who !== 'person' && !(e.stores || []).length, photo: () => !e.photo };
+  const QM = { who: ['who'], store: ['stores'], when: ['day', 'timing'], how: ['photo'] };
+  const miss = q => (QM[q] || []).some(k => (e.miss || []).includes(k) && empty[k] && empty[k]());
+  const err = (e.err || {});
+  const Q = (q, title, body, extra) => `<div class="tfq${err[q] ? ' err' : miss(q) || e.hl === q ? ' miss' : ''}" data-tfq="${q}">${tfQH(title, (miss(q) && !err[q] ? `<span class="tfq-m">${esc(t('tf_ai_miss'))}</span>` : '') + (extra || ''))}${err[q] ? `<div class="tfq-e">${esc(err[q])}</div>` : ''}${body}</div>`;
+  // ---- 谁做：按岗位 / 谁在班就谁做 / 指定的人，一次点完 ----
+  const storesOk = area ? tfStoresFor(area) : [];
+  const storeHTML = () => {
+    if (e.who === 'person' || !area) return '';
+    const inner = storesOk.length === 1 && (e.stores || []).join() === storesOk.join() && !e.id ? `<div class="small" style="margin-bottom:10px"><b>${esc(t('tf_store_only', { s: storesOk[0] }))}</b></div>`
+      : lbl(t('tf_store_q')) + `<div class="chips">${storesOk.map(st => chip('tf-store', `data-st="${st}"`, (e.stores || []).includes(st), st)).join('')}</div>` + hint(t(e.id ? 'tf_store_one' : 'tf_store_hint'));
+    return `<div class="tfsub${err.store ? ' err' : ''}" data-tfq="store">${err.store ? `<div class="tfq-e">${esc(err.store)}</div>` : miss('store') || e.hl === 'store' ? `<div class="tfq-m" style="margin:0 0 6px">${esc(t('tf_m_stores'))}${miss('store') ? ' · ' + esc(t('tf_ai_miss')) : ''}</div>` : ''}${inner}</div>`;
+  };
   let who = '';
-  if (e.who === 'person') who = (staff.length > 12 ? `<input class="input" id="tf-q" placeholder="${esc(t('nm_search'))}" autocomplete="off" style="margin-bottom:8px">` : '')
-    + `<div class="chips" id="tf-chips" style="margin-bottom:12px">${staff.map(p => chip('tf-staff', 'id', p.id, p.id === e.staff, p.me ? t('nm_me') : p.name, ` data-n="${esc(p.name.toLowerCase())}"`)).join('')}</div>`;
-  else if (e.who === 'role') who = areas.map(a => `<div class="small muted" style="margin:0 0 4px">${esc(t('area_' + a))}</div><div class="chips" style="margin-bottom:10px">${(a === 'kitchen' ? KROLES : FROLES).map(r => chip('tf-role', 'r', r, e.role === r, t('grp_' + r))).join('')}</div>`).join('') + hint(t(e.repeat === 'daily' ? 'tf_role_hint_daily' : e.repeat === 'once' ? 'tf_role_hint' : 'tf_role_hint_per'));
-  else if (e.who === 'each') who = hint(t('tf_each_hint'));   // v152
-  else who = seg('area', areas.map(a => [a, t('tf_area_' + a)])) + hint(t('tf_area_hint'));
-  const stores = area ? tfStoresFor(area) : [];
-  const where = e.who === 'person' ? '' : lblM('stores', t('tf_store')) + `<div class="chips" style="margin-bottom:6px">${stores.map(st => chip('tf-store', 'st', st, e.stores.includes(st), st)).join('')}</div>`
-    + hint(t(e.id ? 'tf_store_one' : 'tf_store_hint'));
-  const daily = e.repeat === 'daily', per = isPer(e), opt = (k, v, txt) => `<option value="${v}"${String(e[k]) === String(v) ? ' selected' : ''}>${esc(txt)}</option>`;
-  // v120：多久一次（改的时候：一次的不能变重复，重复的不能变一次）；周期任务从哪天开始出现
-  const reps = e.lockRepeat ? (e.repeat === 'once' ? ['once'] : ['daily', 'week', 'month', 'quarter', 'year']) : ['once', 'daily', 'week', 'month', 'quarter', 'year'];
-  const repHTML = `<div class="chips" style="margin-bottom:12px">${reps.map(v => `<button type="button" class="chip${e.repeat === v ? ' on' : ''}" data-act="tf-set" data-k="repeat" data-v="${v}"${e.lockRepeat && e.repeat === 'once' ? ' disabled' : ''}>${esc(t('tf_' + v))}</button>`).join('')}</div>`;
-  // v132：这一期做几次（2 次以上不用选哪天开始）+ 没做完要补还是过掉
-  if (e.makeup === undefined) e.makeup = true;   // 新建的、AI 填的：默认 1 次、要补
-  const times = +e.times || 1, mkOn = e.makeup !== false, maxT = e.repeat === 'week' ? 7 : 10;
-  const timesHTML = !per ? '' : lbl(t('tf_times')) + `<div class="chips" style="margin-bottom:12px">${[...Array(maxT)].map((_, i) => `<button type="button" class="chip${times === i + 1 ? ' on' : ''}" data-act="tf-set" data-k="times" data-v="${i + 1}">${esc(t('tf_times_n', { n: i + 1 }))}</button>`).join('')}</div>`
-    + (times > 1 ? hint(t('tf_times_hint', { n: times })) : '');
-  const mkHTML = !per ? '' : lbl(t('tf_makeup')) + seg('makeup', [['true', t('tf_mk_yes')], ['false', t('tf_mk_no')]]) + hint(t(mkOn ? 'tf_mk_yes_hint' : 'tf_mk_no_hint'));
-  const perHTML = !per ? '' : times > 1 ? timesHTML + mkHTML : timesHTML + lbl(t('tf_start')) + (e.repeat === 'week'
-      ? `<div class="chips" style="margin-bottom:12px">${[1, 2, 3, 4, 5, 6, 7].map(d => `<button type="button" class="chip${+e.rd === d ? ' on' : ''}" data-act="tf-set" data-k="rd" data-v="${d}">${esc(WDAYS[state.lang === 'de' ? 'de' : 'zh'][d - 1])}</button>`).join('')}</div>`
-      : (e.repeat === 'quarter' ? seg('rm', [1, 2, 3].map(m => [m, t('tf_qm', { m })])) : '')
-        + `<div class="row" style="gap:8px;margin-bottom:12px">${e.repeat === 'year' ? `<select class="input" id="tf-rm" aria-label="${esc(t('tf_start'))}" style="flex:1">${[...Array(12)].map((_, i) => opt('rm', i + 1, t('tf_month_n', { m: i + 1 }))).join('')}</select>` : ''}
-          <select class="input" id="tf-rd" aria-label="${esc(t('tf_start'))}" style="flex:1">${[...Array(28)].map((_, i) => opt('rd', i + 1, t('tf_day_n', { d: i + 1 }))).join('')}</select></div>`)
-    + (mkOn ? hint(t(e.who === 'person' ? 'tf_per_hint_person' : 'tf_per_hint_role', { s: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm }), e: t('tf_end_' + e.repeat) }) + (e.id ? '' : ' ' + t('tf_per_new'))) : e.id ? '' : hint(t('tf_per_new')))
-    + mkHTML;
-  const missTxt = (e.miss || []).filter(k => empty[k] && empty[k]()).map(k => t('tf_m_' + k)).join('、');
-  const say = e.id ? '' : `<div class="field" style="margin-bottom:6px"><label for="tf-say">${esc(t('tf_say'))}</label><textarea class="input" id="tf-say" rows="2" maxlength="1000" placeholder="${esc(t('tf_say_ph'))}">${esc(e.say || '')}</textarea></div>
-    <button class="btn ghost" type="button" data-act="tf-parse" ${e.parsing ? 'disabled' : ''}>${esc(t(e.parsing ? 'tf_parsing' : 'tf_parse'))}</button>
-    <div class="small muted" style="margin:6px 0 12px">${esc(t('tf_parse_hint'))}</div>
-    ${e.parsed ? `<div class="${missTxt || e.outside || e.moreN > 1 ? 'warnbox' : 'infobox'}" style="margin:0 0 12px">${esc(t('tf_parsed'))}${missTxt ? '<br>' + esc(t('tf_parsed_miss', { m: missTxt })) : ''}${e.moreN > 1 ? '<br>' + esc(t('tf_parsed_more', { n: e.moreN })) : ''}${e.outside ? '<br>' + esc(t('tf_parsed_out')) : ''}</div>` : ''}`;
-  return `<div class="sheet" id="tf-form"><h3 style="margin-top:0">${esc(t(e.id ? 'tf_title_edit' : 'tf_title_new'))}</h3>${say}
-    <div class="field"><label for="tf-text">${esc(t('tf_what'))}</label><input class="input" id="tf-text" maxlength="200" autocomplete="off" placeholder="${esc(t('nm_text_ph'))}" value="${esc(e.text || '')}"></div>
-    ${lblM('who', t('tf_who'))}${seg('who', [['person', t('tf_w_person')], ['role', t('tf_w_role')], ['area', t('tf_w_area')], ['each', t('tf_w_each')]]
-      .filter(([k]) => k === 'person' || (k === 'each' ? areas.includes('front') && !(e.lockRepeat && e.repeat === 'once') : areas.length)))}${who}
-    ${e.who === 'each' ? '' : lbl(t('tf_repeat')) + repHTML}
-    ${e.who === 'each' ? '' : daily ? hint(t(e.who === 'person' ? 'tf_person_daily' : 'tf_daily_hint')) : per ? perHTML : lblM('day', t('nm_day')) + seg('dayMode', [['today', t('nm_today')], ['tomorrow', t('nm_tomorrow')], ['pick', t('nm_pick')]])
-      + (e.dayMode === 'pick' ? `<div class="field"><input class="input" type="date" id="tf-date" min="${bd}" value="${esc(e.day || '')}" aria-label="${esc(t('nm_pick'))}"></div>` : '')}
-    ${e.who === 'person' ? (e.repeat === 'once' ? hint(t('tf_person_hint')) : '') : e.who === 'each' ? '' : lblM('timing', t('tf_when')) + seg('timing', [['arrival', t('tk_once_arrival')], ['closing', t('tk_once_closing')]])}
-    ${!tfSlotOk(e) ? '' : e.id ? lbl(t('tf_slot')) + seg('slot', [['last', t('tf_slot_last')], ['lunch', t('tf_slot_lunch')], ['dinner', t('tf_slot_dinner')]]) + hint(t('tf_slot_hint_' + (e.slot === 'both' ? 'lunch' : e.slot || 'last')))
-      : lbl(t('tf_slot') + ' ' + t('tf_slot_multi')) + `<div class="seg sm" style="margin-bottom:12px">${[['last', t('tf_slot_last')], ['lunch', t('tf_slot_lunch')], ['dinner', t('tf_slot_dinner')]].map(([v, l]) => `<button type="button" data-act="tf-slot" data-v="${v}" class="${tfSlotOn(e, v) ? 'on' : ''}">${esc(l)}</button>`).join('')}</div>`
-        + hint(t('tf_slot_hint_' + (e.slot || 'last')))}
-    ${where}
-    ${lblM('photo', t('tf_how'))}${(opts => `<div class="chips" style="margin-bottom:12px">${opts.map(([v, l]) => `<button type="button" class="chip${e.photo === v ? ' on' : ''}" data-act="tf-set" data-k="photo" data-v="${v}">${esc(l)}</button>`).join('')}</div>`)(   // v121：德文窄屏放不下一排，改成可以换行
-      daily ? [['photo', t('tf_ph_learn')], ['always', t('tf_ph_always')], ['check', t('tf_ph_check')]] : [['photo', '📷 ' + t('tf_ph_photo')], ['check', '✓ ' + t('tf_ph_check')], ...(e.repeat === 'once' ? [['result', t('tf_ph_result')]] : [])])}
-    ${e.photo === 'result' ? hint(t('tf_ph_result_hint')) : ''}
-    ${lbl(t('tf_sop'))}<select class="input" id="tf-sop" aria-label="${esc(t('tf_sop'))}" style="margin-bottom:6px">${tfSopOpts(e)}</select>
-    ${e.sop && !['check', 'result'].includes(e.photo) ? `<label style="display:flex;gap:8px;align-items:center;margin:2px 0 8px"><input type="checkbox" id="tf-sopai" ${e.sopAi ? 'checked' : ''}><span class="small">${esc(t('tf_sop_ai'))}</span></label>` : ''}
-    ${e.sop ? hint(t('tf_sop_hint')).replace('margin:-6px 0 12px', 'margin:0 0 12px') : '<div style="margin-bottom:12px"></div>'}
-    ${tfAttHTML(e)}
-    <details class="fold" style="margin-bottom:12px"${e.more ? ' open' : ''}><summary>${esc(t('tf_more'))}</summary><div class="inner">
+  if (areas.length){
+    who += `<div class="tfg">${esc(t('tf_g_role'))}</div>` + areas.map(a => `<div class="chips" style="margin-bottom:6px">${(a === 'kitchen' ? KROLES : FROLES).map(r => chip('tf-who', `data-w="role" data-v="${r}"`, (e.who === 'role' && e.role === r) || (r === 'service' && e.who === 'each'), t('grp_' + r))).join('')}</div>`).join('');
+    if ((e.who === 'role' && e.role === 'service') || e.who === 'each'){   // v152：每个服务员下班前（以前是「谁做」里单独一项）
+      const canEach = !(e.lockRepeat && once);
+      who += canEach ? `<div class="tfsub"><div class="seg sm" style="margin-bottom:8px">${[['0', t('tf_one')], ['1', t('tf_each_one')]].map(([v, l]) => `<button type="button" data-act="tf-each" data-v="${v}" class="${(e.who === 'each') === (v === '1') ? 'on' : ''}">${esc(l)}</button>`).join('')}</div>`
+        + (e.who === 'each' ? hint(t('tf_each_short')).replace('margin:-4px 0 10px', 'margin:0 0 6px') : '') + '</div>' : '';
+    }
+    if (e.who === 'role' || e.who === 'each') who += storeHTML();
+    who += `<div class="tfg" style="margin-top:6px">${esc(t('tf_g_area'))}</div><div class="chips" style="margin-bottom:6px">${areas.map(a => chip('tf-who', `data-w="area" data-v="${a}"`, e.who === 'area' && e.area === a, t('tf_area_' + a))).join('')}</div>`;
+    if (e.who === 'area') who += storeHTML();
+  }
+  const mem = tfMem(), byId = id => staff.find(p => p.id === id), me = staff.find(p => p.me);
+  const recent = [...(mem.recent || []), ...((state.named || {}).tasks || []).slice().sort((p, q) => String(q.day).localeCompare(String(p.day))).map(x => (x.assignee || {}).id)]
+    .filter((id, i, L) => id && L.indexOf(id) === i && byId(id) && !byId(id).me).slice(0, 6).map(byId);
+  const sel = e.who === 'person' && e.staff && byId(e.staff), shown = [me, ...recent, sel && !sel.me && !recent.includes(sel) ? sel : null].filter(Boolean);
+  const pchip = p => chip('tf-who', `data-w="person" data-v="${p.id}" data-n="${esc(p.name.toLowerCase())}"`, e.who === 'person' && e.staff === p.id, p.me ? t('nm_me') : p.name);
+  who += `<div class="tfg" style="margin-top:6px">${esc(t('tf_g_person'))}</div><div class="chips" style="margin-bottom:6px">${(e.find ? (me ? [me] : []) : shown).map(pchip).join('')}`
+    + (staff.length > shown.length || e.find ? chip('tf-find', '', !!e.find, t('tf_find')) : '') + '</div>'
+    + (e.find ? `<input class="input" id="tf-q" placeholder="${esc(t('nm_search'))}" autocomplete="off" style="margin-bottom:8px" value="${esc(e.q || '')}"><div class="chips" id="tf-chips" style="margin-bottom:8px">${staff.filter(p => !p.me).map(pchip).join('')}</div>` : '')
+    + `<div class="small muted" style="margin-bottom:8px">${esc(t('tf_kitchen_note'))}</div>`;
+  // ---- 什么时候 ----
+  const wchip = (v, txt, dis) => chip('tf-when', `data-v="${v}"`, w === v, txt, dis);
+  const row1 = [['today', t('nm_today')], ['tomorrow', t('nm_tomorrow')], ['pick', t('tf_w_pick')], ['due', t('tf_w_due')]], row2 = [['daily', t('tf_daily')], ['week', t('tf_week')], ['month', t('tf_month')], ['longer', t('tf_w_longer')]];
+  const dueOff = !!e.who && e.who !== 'person';
+  let when = '';
+  if (e.who === 'each') when = `<div class="tflock">${esc(t('tf_lock_each'))}</div>`;
+  else {
+    const showOnce = !e.lockRepeat || once, showRep = !e.lockRepeat || !once;
+    when = (showOnce ? `<div class="chips tfw" style="margin-bottom:8px">${row1.map(([v, l]) => wchip(v, l, v === 'due' && dueOff)).join('')}</div>` : '')
+      + (showRep ? `<div class="chips tfw" style="margin-bottom:8px">${row2.map(([v, l]) => wchip(v, l)).join('')}</div>` : '')
+      + (showOnce && dueOff ? `<div class="small muted" style="margin:-2px 0 8px">${esc(t('tf_due_only'))}</div>` : '')
+      + (e.whenNote ? `<div class="tfnote">${esc(e.whenNote)}</div>` : '')
+      + (e.lockRepeat ? `<div class="tflock">${esc(t(once ? 'tf_lock_once' : 'tf_lock_rep'))}${e.multi ? '' : `<button type="button" class="link" data-act="tf-copy">${esc(t('tf_copy'))}</button>`}</div>` : '');   // v205：几项的清单不能复制（只会复制成一项）
+  }
+  let sub = '';
+  if (w === 'pick') sub = `<input class="input" type="date" id="tf-date" min="${bd}" max="${addDays(bd, 366)}" value="${esc(e.day || '')}" aria-label="${esc(t('tf_w_pick'))}" style="margin-bottom:10px">`;
+  else if (w === 'due') sub = `<div class="chips" id="tf-duechips" style="margin-bottom:8px">${[['0', t('tf_due_sun0')], ['1', t('tf_due_sun1')]].map(([v, l]) => chip('tf-due', `data-v="${v}"`, e.due === tfSun(+v), l)).join('')}${chip('tf-due', 'data-v="pick"', !!e.due && ![tfSun(0), tfSun(1)].includes(e.due), t('tf_due_pick'))}</div>`
+      + `<div class="row" style="gap:10px;align-items:center;margin-bottom:8px"><input class="input" type="date" id="tf-due" min="${tfDueMin(e)}" max="${addDays(bd, 30)}" value="${esc(e.due || '')}" aria-label="${esc(t('tf_w_due'))}" style="flex:1"><b id="tf-duelbl" style="flex:1">${esc(e.due ? dayLabel(e.due) : t('tf_due_none'))}</b></div>`
+      + hint(t('tf_due_hint')).replace('margin:-4px 0 10px', 'margin:0 0 10px');
+  else if (daily) sub = e.who === 'each' ? '' : hint(t(e.who === 'person' ? 'tf_person_daily' : 'tf_daily_hint')).replace('margin:-4px 0 10px', 'margin:0 0 10px');
+  else if (per){
+    const times = +e.times || 1, mx = tfTimesMax(e.repeat), opt = (k, v, txt) => `<option value="${v}"${String(e[k]) === String(v) ? ' selected' : ''}>${esc(txt)}</option>`;
+    sub = (w === 'longer' ? `<div class="chips" style="margin-bottom:8px">${['quarter', 'year'].map(v => chip('tf-when', `data-v="${v}"`, e.repeat === v, t('tf_' + v))).join('')}</div>` : '')
+      + lbl(t('tf_times')) + `<div class="tfstep"><button type="button" data-act="tf-times" data-d="-1" aria-label="−"${times <= 1 ? ' disabled' : ''}>−</button><b>${esc(t('tf_times_n', { n: times }))}</b><button type="button" data-act="tf-times" data-d="1" aria-label="+"${times >= mx ? ' disabled' : ''}>+</button></div>`
+      + (times > 1 ? hint(t('tf_times_hint', { n: times })) : lbl(t('tf_start')) + (e.repeat === 'week'
+        ? `<div class="chips" style="margin-bottom:10px">${[1, 2, 3, 4, 5, 6, 7].map(d => chip('tf-set', `data-k="rd" data-v="${d}"`, +e.rd === d, WDAYS[state.lang === 'de' ? 'de' : 'zh'][d - 1])).join('')}</div>`
+        : (e.repeat === 'quarter' ? seg('rm', [1, 2, 3].map(m => [m, t('tf_qm', { m })])) : '')
+          + `<div class="row" style="gap:8px;margin-bottom:10px">${e.repeat === 'year' ? `<select class="input" id="tf-rm" aria-label="${esc(t('tf_start'))}" style="flex:1">${[...Array(12)].map((_, i) => opt('rm', i + 1, t('tf_month_n', { m: i + 1 }))).join('')}</select>` : ''}
+            <select class="input" id="tf-rd" aria-label="${esc(t('tf_start'))}" style="flex:1">${[...Array(28)].map((_, i) => opt('rd', i + 1, t('tf_day_n', { d: i + 1 }))).join('')}</select></div>`));
+  }
+  const timing = e.who === 'role' || e.who === 'area' ? `<div class="tfsub">${lbl(t('tf_when'))}${seg('timing', [['arrival', t('tk_once_arrival')], ['closing', t('tk_once_closing')]])}</div>` : '';
+  // ---- 怎么算完成（一行）----
+  const phs = daily ? [['photo', '📷 ' + t('tf_s_learn')], ['always', '📷 ' + t('tf_ph_always')], ['check', '✓ ' + t('tf_ph_check')]]
+    : [['photo', '📷 ' + t('tf_ph_photo')], ['check', '✓ ' + t('tf_ph_check')], ...(once ? [['result', t('tf_ph_result')]] : [])];
+  const phHint = { photo: daily ? 'tf_hh_learn' : 'tf_hh_photo', always: 'tf_hh_always', check: 'tf_hh_check', result: 'tf_hh_result' }[e.photo];
+  const how = `<div class="chips" style="margin-bottom:8px">${phs.map(([v, l]) => chip('tf-set', `data-k="photo" data-v="${v}"`, e.photo === v, l)).join('')}</div>`
+    + (e.phNote ? `<div class="tfnote">${esc(e.phNote)}</div>` : '') + (phHint ? hint(t(phHint)).replace('margin:-4px 0 10px', 'margin:0 0 8px') : '');
+  // ---- 更多设置：SOP、参考照片、链接、哪个班、要补 / 过掉、店标签、中德文。改过的写在标题上 ----
+  const sopIt = e.sop ? (((state.tfSops || {}).topics || []).flatMap(tp => tp.items || []).find(i => i.id === e.sop)) : null;
+  const changed = [e.sop ? t('tf_mc_sop', { n: sopIt ? sopTitle(sopIt) : e.sopTitle || '?' }) : '', (e.photos || []).length ? t('tf_mc_ph', { n: e.photos.length }) : '', (e.link || '').trim() ? t('tf_mc_link') : '',
+    tfSlotOk(e) && e.slot !== 'last' ? (e.slot === 'both' ? t('tf_s_both') : t('tf_slot_' + e.slot)) : '', per && e.makeup === false ? t('tf_mc_mk') : '', e.who === 'person' && e.tag ? t('tf_mc_tag', { s: e.tag }) : '',
+    (e.zh || '') !== (e.zh0 || '') || (e.de || '') !== (e.de0 || '') ? t('tf_mc_names') : ''].filter(Boolean);
+  const slotHTML = !tfSlotOk(e) ? '' : e.id ? lbl(t('tf_slot')) + seg('slot', [['last', t('tf_slot_last')], ['lunch', t('tf_slot_lunch')], ['dinner', t('tf_slot_dinner')]]) + hint(t('tf_slot_hint_' + (e.slot === 'both' ? 'lunch' : e.slot || 'last')))
+    : lbl(t('tf_slot') + ' ' + t('tf_slot_multi')) + `<div class="seg sm" style="margin-bottom:10px">${[['last', t('tf_slot_last')], ['lunch', t('tf_slot_lunch')], ['dinner', t('tf_slot_dinner')]].map(([v, l]) => `<button type="button" data-act="tf-slot" data-v="${v}" class="${tfSlotOn(e, v) ? 'on' : ''}">${esc(l)}</button>`).join('')}</div>`
+      + hint(t('tf_slot_hint_' + (e.slot || 'last')));
+  const mkHTML = !per ? '' : lbl(t('tf_makeup')) + seg('makeup', [['true', t('tf_mk_yes')], ['false', t('tf_mk_no')]]) + hint(t(e.makeup !== false ? 'tf_mk_yes_hint' : 'tf_mk_no_hint'))
+    + (e.makeup !== false ? hint(t(e.who === 'person' ? 'tf_per_hint_person' : 'tf_per_hint_role', { s: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm }), e: t('tf_end_' + e.repeat) })) : '');
+  const more = `<details class="fold${err.more ? ' tferr' : ''}" id="tf-more" data-tfq="more" style="margin-bottom:12px"${e.more ? ' open' : ''}><summary><span>${esc(t('tf_more_t'))}${changed.length ? ' · ' + esc(changed.join(' · ')) : ''}</span>${changed.length ? '' : `<span class="muted">${esc(t('tf_more_sub'))}</span>`}</summary><div class="inner">
+      ${err.more ? `<div class="tfq-e">${esc(err.more)}</div>` : ''}
+      ${lbl(t('tf_sop'))}<select class="input" id="tf-sop" aria-label="${esc(t('tf_sop'))}" style="margin-bottom:6px">${tfSopOpts(e)}</select>
+      ${e.sop && !['check', 'result'].includes(e.photo) ? `<label style="display:flex;gap:8px;align-items:center;margin:2px 0 8px;min-height:44px"><input type="checkbox" id="tf-sopai" ${e.sopAi ? 'checked' : ''}><span class="small">${esc(t('tf_sop_ai'))}</span></label>` : ''}
+      ${e.sop ? hint(t('tf_sop_hint')).replace('margin:-4px 0 10px', 'margin:0 0 12px') : '<div style="margin-bottom:12px"></div>'}
+      ${tfAttHTML(e)}${slotHTML}${mkHTML}
       ${e.who === 'person' ? lbl(t('tf_tag')) + seg('tag', [['', t('nm_store_none')], ...STORES.map(x => [x, x])]) : ''}
-      <button class="btn ghost" type="button" data-act="tf-ai" ${e.ai ? 'disabled' : ''}>${esc(e.ai ? t('nm_ai_busy') : t('nm_ai'))}</button>
-      <div class="small muted" style="margin:6px 0 10px">${esc(t('nm_ai_hint'))}</div>
-      <div class="field"><label for="tf-zh">${esc(t('nm_zh'))}</label><input class="input" id="tf-zh" maxlength="120" value="${esc(e.zh || '')}"></div>
+      ${lbl(t('tf_names'))}<div class="field"><label for="tf-zh">${esc(t('nm_zh'))}</label><input class="input" id="tf-zh" maxlength="120" value="${esc(e.zh || '')}"></div>
       <div class="field"><label for="tf-de">${esc(t('nm_de'))}</label><input class="input" id="tf-de" maxlength="200" value="${esc(e.de || '')}"></div>
-    </div></details>
-    <div class="row"><button class="btn ghost" type="button" data-act="tf-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="tf-save" ${e.busy ? 'disabled' : ''}>${esc(e.busy ? t('nm_saving') : t('nm_save'))}</button></div></div>`;
+      <button class="btn ghost" type="button" data-act="tf-ai" ${e.ai ? 'disabled' : ''}>${esc(e.ai ? t('nm_ai_busy') : t('tf_ai_again'))}</button>
+    </div></details>`;
+  // ---- AI：说一句话（只在新建时）+ 确认卡「我理解的是：…」----
+  const sum = tfSum(e), prob = tfCheck(e), n = tfCount(e);
+  const MQ = { what: 'tf_m_what', who: 'tf_m_who', store: 'tf_m_stores', when: 'tf_m_day', how: 'tf_m_photo', more: 'tf_more_t' };
+  let ai = '';
+  if (!e.id){
+    ai = e.parsed && !e.sayOpen ? `<div class="small muted" style="margin:0 0 10px">“${esc((e.say || '').length > 40 ? e.say.slice(0, 40) + '…' : e.say || '')}” <button type="button" class="link" data-act="tf-say-edit">${esc(t('tf_say_edit'))}</button></div>`
+      : `<div class="tfai"><div class="tfai-r"><input class="input" id="tf-say" maxlength="1000" autocomplete="off" enterkeyhint="go" placeholder="${esc(t('tf_say_ph2'))}" value="${esc(e.say || '')}" aria-label="${esc(t('tf_say'))}">`
+        + `<button class="btn" type="button" data-act="tf-parse" ${e.parsing ? 'disabled' : ''}>${esc(t(e.parsing ? 'tf_parsing' : 'tf_ai_btn'))}</button></div><div class="small muted" style="margin-top:6px">${esc(t('tf_ai_hint'))}</div></div>`;
+    if (e.parsed && !e.cardOff){
+      const p = ((state.tfCat || {}).staff || []).find(x => x.id === e.staff);
+      const note = [tfWhen(e) === 'due' && e.due && p ? t('tf_cc_due', { a: e.day === bd ? t('nm_today') : dayLabel(e.day), n: p.me ? t('nm_me') : p.name }) : '', e.moreN > 1 ? t('tf_parsed_more', { n: e.moreN }) : '', e.outside ? t('tf_parsed_out') : ''].filter(Boolean);
+      ai += `<div class="tfcc"><div class="tfcc-t">${esc(t('tf_cc_t'))}</div><div class="tfcc-s">${esc([(e.text || '').trim(), sum].filter(Boolean).join(' · ') || t('tf_sum_none'))}</div>`
+        + note.map(x => `<div class="small muted" style="margin-bottom:6px">${esc(x)}</div>`).join('')
+        + `<div class="row" style="margin-top:8px">` + (prob ? `<button class="btn warnb" type="button" data-act="tf-goto" data-k="${prob.k}">${esc(t('tf_cc_fix', { k: t(MQ[prob.k]) }))}</button>`
+          : `<button class="btn ghost" type="button" data-act="tf-card-off">${esc(t('tf_cc_edit'))}</button><button class="btn" type="button" data-act="tf-save" ${e.busy ? 'disabled' : ''}>${esc(e.busy ? t('nm_saving') : n > 1 ? t('tf_save_n', { n }) : t('tf_cc_ok'))}</button>`) + '</div></div>';
+    }
+    ai += `<div class="tfor">${esc(t('tf_or'))}</div>`;
+  }
+  Promise.resolve().then(tfAfterDraw);   // innerHTML 换好以后：回到原来滚到的地方 / 滚到要补的问题
+  return `<div class="tfo" id="tf-form" role="dialog" aria-modal="true" aria-label="${esc(t(e.id ? 'tf_title_edit' : 'tf_title_new'))}">
+    <div class="tfo-h"><div><b>${esc(t(e.id ? 'tf_title_edit' : 'tf_title_new'))}</b>${state.lang === 'zh' ? `<small>${esc(I18N.de[e.id ? 'tf_title_edit' : 'tf_title_new'])}</small>` : ''}</div><button type="button" class="xb" data-act="tf-close" aria-label="${esc(t('close'))}">✕</button></div>
+    <div class="tfo-b" id="tf-body"><div class="tfo-in">${ai}
+      ${Q('what', 'tfq_what', `<input class="input" id="tf-text" maxlength="200" autocomplete="off" placeholder="${esc(t('tf_what_ph'))}" value="${esc(e.text || '')}" aria-label="${esc(t('tfq_what'))}" style="margin-bottom:10px">`)}
+      ${Q('who', 'tfq_who', who)}
+      ${Q('when', 'tfq_when', when + sub + timing)}
+      ${Q('how', 'tfq_how', how)}
+      ${more}
+    </div></div>
+    <div class="tfo-f"><div class="tfs${sum ? '' : ' none'}" id="tf-sum">${esc(sum || t('tf_sum_none'))}</div>
+      <div class="row"><button class="btn ghost" type="button" data-act="tf-close">${esc(t('cancel'))}</button><button class="btn" type="button" data-act="tf-save" ${e.busy ? 'disabled' : ''}>${esc(e.busy ? t('nm_saving') : n > 1 ? t('tf_save_n', { n }) : t('nm_save'))}</button></div></div>
+  </div>`;
 }
 // 任务清单：每天的任务按 店 × 区域；停用的折叠在最下面。mine = 负责人「今天」里（不分块标题外的说明）
 function tcRow(x){
@@ -5306,19 +5664,22 @@ function tcRow(x){
   const ph = per ? (x.photo === 'check' ? 'check' : 'photo') : x.photo === 'photo' ? 'learn' : x.photo;
   const now = !per || !x.active ? '' : x.done_today ? t('tc_done_today') : pd ? pd.txt : x.period && x.period.next ? t('tc_next', { d: dayLabel(x.period.next) }) : '';
   const sop = !x.sop ? '' : x.sop.gone ? t('tc_sop_gone', { n: sopTitle(x.sop) }) : t('tc_sop', { n: sopTitle(x.sop) }) + (x.sop_ai && x.photo !== 'check' ? ' · ' + t('tc_sop_ai') : '');   // v121
-  const sub = [who, perLabel(x), person ? (per ? '' : t('tc_on_shift')) : toWhen(x), t('tf_ph_' + ph), x.items > 1 ? t('tc_items', { n: x.items }) : '', sop,
-    per ? (r.total ? t('tc_rate_' + x.repeat, { a: r.done, b: r.total }) + (+r.times > 1 && r.miss ? ' · ' + t('tc_miss', { n: r.miss }) : '') : t('tc_rate0_per')) : r.total ? t('tc_rate', { a: r.done, b: r.total }) : t('tc_rate0'), now].filter(Boolean).join(' · ');   // v132：少做几次
+  const rate = per ? (r.total ? t('tc_rate_' + x.repeat, { a: r.done, b: r.total }) + (+r.times > 1 && r.miss ? ' · ' + t('tc_miss', { n: r.miss }) : '') : t('tc_rate0_per')) : r.total ? t('tc_rate', { a: r.done, b: r.total }) : t('tc_rate0');   // v132：少做几次
+  // v205：行里只写 谁 + 现在的状态（没有就写完成率）；多久一次、什么时候、拍照、几项、SOP、完成率都在点开的完整描述里
+  const sub = [who, now || rate].filter(Boolean).join(' · ');
   const acts = (x.can_edit && nmCan() ? (x.active ? `<button class="link" data-act="tf-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="tc-on" data-def="${x.def_id}" data-on="0">${esc(t('tc_disable'))}</button>`
     : `<button class="link" data-act="tc-on" data-def="${x.def_id}" data-on="1">${esc(t('tc_enable'))}</button>`) : '') + (x.active && !per ? bfBtn(x) : '');   // v171：老板发现没做
   const bad = x.active && r.total && r.done < r.total;
-  return tsrRow(esc(toName(x)) + (x.store && person ? ' ' + storeTag(x.store) : ''), !x.active ? '' : pd && pd.cls === 'bad' ? 'bad' : bad || (x.sop && x.sop.gone) ? 'todo' : r.total ? 'ok' : '', esc(sub), pd && pd.cls === 'bad' ? 'negc' : '', acts);
+  return tkRow({ k: 'tc|' + x.def_id, name: toName(x), dot: !x.active ? '' : pd && pd.cls === 'bad' ? 'bad' : bad || (x.sop && x.sop.gone) ? 'todo' : r.total ? 'ok' : '', sub,
+    cls: pd && pd.cls === 'bad' ? 'negc' : pd && pd.cls === 'warn' ? 'warnc' : '', flags: [x.sop && x.sop.gone && { t: t('tc_sop_gone', { n: sopTitle(x.sop) }), c: 'warnc' }], acts,
+    desc: [perLabel(x), person ? (per ? '' : t('tc_on_shift')) : toWhen(x), t('tf_ph_' + ph), x.items > 1 ? t('tc_items', { n: x.items }) : '', x.sop && !x.sop.gone ? sop : '', now ? rate : '', x.store && person ? x.store : ''] });
 }
 function tcListHTML(mine){
   const D = (state.tfCat || {}).daily || [], on = D.filter(x => x.active), off = D.filter(x => !x.active);
-  if (!D.length) return sgHTML() + `<div class="list"><div class="empty">${esc(t('tc_none'))}</div></div>`;   // v121：AI 建议在最上面
+  if (!D.length) return sgFoldHTML() + `<div class="list"><div class="empty">${esc(t('tc_none'))}</div></div>`;   // v121：AI 建议在最上面
   const blocks = STORES.flatMap(st => ['kitchen', 'front'].map(a => ({ st, a, list: on.filter(x => x.who_kind !== 'person' && x.store === st && x.area === a) }))).filter(b => b.list.length);
   const ppl = on.filter(x => x.who_kind === 'person');   // v120：指定某个人的每天 / 周期任务
-  return (mine ? '' : h3i(esc(t('tc_title')), t('tc_hint'))) + sgHTML()
+  return (mine ? '' : h3i(esc(t('tc_title')), t('tc_hint'))) + sgFoldHTML()
     + blocks.map(b => `<div class="tb"><div class="tb-h"><div>${storeTag(b.st)} <strong>${esc(t('area_' + b.a))}</strong></div><span class="small muted">${b.list.length}</span></div>${b.list.map(tcRow).join('')}</div>`).join('')
     + (ppl.length ? `<div class="tb"><div class="tb-h"><strong>${esc(t('tc_people'))}</strong><span class="small muted">${ppl.length}</span></div>${ppl.map(tcRow).join('')}</div>` : '')
     + (off.length ? `<details class="fold" style="margin-top:10px"><summary>${esc(t('tc_off_grp', { n: off.length }))}</summary><div class="inner"><div class="tsr-box">${off.map(x => tcRow(x)).join('')}</div></div></details>` : '');
@@ -5326,24 +5687,31 @@ function tcListHTML(mine){
 // 一行：颜色点（绿 做完 · 黄 今天还没做 · 红 没做 · 灰 还没到那天）+ 事情 + 状态 + 看照片 / 改 / 取消
 function nmRow(x, showWho){
   const done = x.status === 'done', bad = x.status === 'missed', l = ((x.items || [])[0] || {}).last;
-  const pd = done ? null : perDue(x);
-  const nm = (showWho ? `<strong>${esc((x.assignee || {}).name || '?')}</strong> · ` : '') + esc(toName(x)) + (x.need_result ? ' 📎' : x.important ? ' 📷' : '') + (x.store ? ' ' + storeTag(x.store) : '')
-    + (x.once === false ? ` <span class="tag">${esc(perLabel(x))}</span>` : '');   // v120：指定某个人的每天 / 周期任务
-  const sub = (done ? '✓ ' + [x.completed_by, fmtDateTime(x.completed_at)].filter(Boolean).join(' · ') : t(bad ? 'nm_missed' : x.status === 'upcoming' ? 'nm_up' : 'nm_open') + (pd ? ' · ' + pd.txt : ''))
-    + (x.by && x.by.id !== state.me.id ? ' · ' + t('nm_by', { n: x.by.name }) : '');
-  const acts = (l && l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') + tkResBtn(x)
-    + (x.can_edit && nmCan() ? `<button class="link" data-act="tf-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button><button class="link danger" data-act="tf-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>` : '');
-  return tsrRow(nm, done ? 'ok' : bad ? 'bad' : x.status === 'today' ? 'todo' : '', esc(sub), bad ? 'negc' : '', acts);
+  const pd = done ? null : perDue(x), ph = l && l.evidence === 'photo' ? l.row_id : '';
+  // v205：统一的任务行：谁 + 状态（有截止 / 逾期就写截止 / 逾期）；店、多久一次、谁安排的放进点开的完整描述
+  const st = done ? '✓ ' + [x.completed_by, fmtDateTime(x.completed_at)].filter(Boolean).join(' ') + (x.deadline && x.deadline.done_late ? ' · ' + t('dl_done_late', { n: x.deadline.done_late_days }) : '') : bad && !x.deadline ? t('nm_missed') : pd ? pd.txt : t(x.status === 'upcoming' ? 'nm_up' : 'nm_open');   // v205：截止任务写截止 / 逾期
+  const acts = (ph ? `<button class="link" data-act="task-photo" data-id="${ph}">${esc(t('lk_view'))}</button>` : '') + tkResBtn(x)
+    + (x.can_edit && nmCan() ? `<button class="link" data-act="tf-edit" data-def="${x.def_id}">${esc(t('to_edit'))}</button>` : '')
+    + ((x.can_edit || x.can_cancel) && nmCan() ? `<button class="link danger" data-act="tf-cancel" data-def="${x.def_id}">${esc(t('to_cancel'))}</button>` : '');   // v205（数据库 v142）：过了截止日没做的截止任务也能取消（can_cancel）
+  return tkRow({ k: 'nm|' + x.def_id + '|' + x.day, name: toName(x), icon: x.need_result ? '📎' : x.important ? '📷' : '', dot: done ? 'ok' : bad || (pd && pd.cls === 'bad') ? 'bad' : x.status === 'today' ? 'todo' : '',
+    facts: done ? st.split(' · ') : [showWho ? (x.assignee || {}).name || '?' : '', st], cls: bad || (pd && pd.cls === 'bad') ? 'negc' : pd && pd.cls === 'warn' ? 'warnc' : '', acts,
+    desc: [x.deadline ? t('dl_desc', { a: dayLabel(x.deadline.from), b: dayLabel(x.deadline.due) }) : dayLabel(x.day), x.store, x.once === false ? perLabel(x) : '', x.by && x.by.id !== state.me.id ? t('nm_by', { n: x.by.name }) : ''], photo: ph });
 }
 // 老板看板（今天 / 明天）最上面：按人分组「小王 · 2 件 · 做完 1」
+// v205：点名任务在看板的哪一天：普通的 = 那一天；截止任务 = 开始到截止日每天（逾期的一直在今天），做完了 = 做完的那一天（提前做完的不算进「以后」）
+const bizOfTs = iso => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(new Date(Date.parse(iso) - 5 * 3600e3));
+const nmDoneDay = x => x.deadline && x.status === 'done' && (x.deadline.done_at || x.completed_at) ? bizOfTs(x.deadline.done_at || x.completed_at) : null;
+function nmOnDay(x, day){
+  if (!x.deadline) return x.day === day;
+  const dd = nmDoneDay(x); if (dd) return dd === day;
+  return x.status !== 'done' && x.deadline.from <= day && (day <= x.day || day === bizToday());
+}
 function nmBlockHTML(day){
-  const L = ((state.named || {}).tasks || []).filter(x => x.day === day); if (!L.length) return '';
-  const g = new Map(); L.forEach(x => { const k = (x.assignee || {}).id || '?'; if (!g.has(k)) g.set(k, []); g.get(k).push(x); });
-  const rank = x => x.status === 'done' ? 2 : x.status === 'missed' ? 0 : 1;
-  return `<div class="tb"><div class="tb-h"><strong>${esc(t('nm_block'))}</strong><span class="small muted">${esc(t('tdl_count', { a: L.filter(x => x.status === 'done').length, b: L.length }))}</span></div>`
-    + [...g.values()].map(list => { const nd = list.filter(x => x.status === 'done').length;
-      return `<div class="tdl-g">${esc((list[0].assignee || {}).name || '?')} <span class="muted" style="font-weight:400">· ${esc(t('nm_person', { a: list.length, b: nd }))}</span></div>`
-        + list.slice().sort((p, q) => rank(p) - rank(q)).map(x => nmRow(x, false)).join(''); }).join('') + '</div>';
+  const L = ((state.named || {}).tasks || []).filter(x => nmOnDay(x, day)); if (!L.length) return '';   // v205：截止任务从开始到截止日每天都在；逾期的一直在今天；做完的在做完那天
+  const rank = x => x.status === 'done' ? 2 : x.status === 'missed' ? 0 : 1, nd = L.filter(x => x.status === 'done').length;   // v205：每个任务一行（谁在状态行里）
+  return `<div class="tb"><div class="tb-h"><strong>${esc(t('nm_block'))}</strong><span class="small ${nd === L.length ? 'pos' : 'muted'}">${esc(t('tdl_count', { a: nd, b: L.length }))}</span></div>`
+    + `<div class="tdl-bar"><i style="width:${Math.round(100 * nd / L.length)}%"></i></div>`
+    + L.slice().sort((p, q) => rank(p) - rank(q) || String((p.assignee || {}).name || '').localeCompare(String((q.assignee || {}).name || ''))).map(x => nmRow(x, true)).join('') + '</div>';
 }
 // 负责人「今天」：我交代的事（昨天起），「＋ 交代一件事」
 // v129：负责人 / 主管的「＋ 新任务」放在「今天」上面（以前在最下面，不好找）；查看模式只显示一行灰字
@@ -5352,24 +5720,34 @@ function tfTopHTML(){
   return nmCan() ? `<button class="btn ghost" data-act="tf-new" style="margin:0 0 12px">${esc(t('to_new'))}</button>`
     : `<div class="small muted" style="margin:0 0 12px">${esc(t('nm_new_view'))}</div>`;
 }
-// v130：「更多 → 📝 任务」：负责人和主管的任务页（「＋ 新任务」、我安排的、我区域重复的）
+// v130：「更多 → 📝 任务」：负责人和主管的任务页。v205（任务界面第 5 步）：两个小标签「我安排的」/「重复的」，同样的任务行和底部操作
 function viewTaskPage(){
   const back = (act, label) => `<button class="link" data-act="${act}" style="margin:2px 0 10px">← ${esc(label)}</button>`;
   if (state.tfEdit){ $('#main').innerHTML = back('tf-close', t('back')) + tfFormHTML(); return; }
-  $('#main').innerHTML = back('tp-close', t('more_title')) + `<h2 style="margin-top:4px">${esc(t('tp_title'))}</h2>` + tfTopHTML() + nmMineHTML(true);
+  const v = state.tpTab === 'rep' ? 'rep' : 'mine', bd = bizToday(), D = (state.tfCat || {}).daily || [];
+  const N = ((state.named || {}).tasks || []).filter(x => x.day >= addDays(bd, -1) || (x.deadline && x.status !== 'done'));   // v205：逾期的截止任务一直列着
+  const seg = `<div class="seg sm" style="margin-bottom:10px">${[['mine', t('tp_mine', { n: N.filter(x => x.status !== 'done').length })], ['rep', t('tp_rep', { n: D.filter(x => x.active).length })]]
+    .map(([k, l]) => `<button data-act="tp-tab" data-k="${k}" class="${v === k ? 'on' : ''}">${esc(l)}</button>`).join('')}</div>`;
+  $('#main').innerHTML = back('tp-close', t('more_title')) + `<h2 style="margin-top:4px">${esc(t('tp_title'))}</h2>` + tfTopHTML() + seg + (v === 'rep' ? tcListHTML(true) : tpMineHTML(N));
 }
 // 任务表单画在哪：管理页 / 「更多 → 任务」页 / 「今天」
 const tfView = () => state.tab === 'more' && state.taskPage ? viewTaskPage() : renderToday();
-function nmMineHTML(page){   // v130：page = 「更多 → 📝 任务」页（重复的任务直接展开）
-  if (!nmLeadOnly()) return '';   // 查看模式也列出来（只看，没有按钮）
-  const bd = bizToday(), L = ((state.named || {}).tasks || []).filter(x => x.day >= addDays(bd, -1)), days = [...new Set(L.map(x => x.day))].sort();
-  return h3i(esc(t('nm_mine_title', { n: L.filter(x => x.status !== 'done').length })), t('nm_mine_hint'))
-    + days.map(dy => `<div class="tdl-g">${esc(dayWord(dy))}</div><div class="tsr-box">${L.filter(x => x.day === dy).map(x => nmRow(x, true)).join('')}</div>`).join('')
-    + (page && !days.length ? `<div class="list"><div class="empty">${esc(t('tp_none'))}</div></div>` : '')
-    + (() => { const D = (state.tfCat || {}).daily || [];
-        if (page) return `<h3>${esc(t('tc_mine', { n: D.filter(x => x.active).length }))}</h3>` + tcListHTML(true);
-        if (!D.length) return '';   // v119：我区域每天的任务（折叠）
-        return `<details class="fold" style="margin-top:10px"><summary>${esc(t('tc_mine', { n: D.filter(x => x.active).length }))}</summary><div class="inner">${tcListHTML(true)}</div></details>`; })();
+// 我安排的一次性任务（昨天起），按天分组（查看模式也列出来，只能看）
+function tpMineHTML(N){
+  const days = [...new Set(N.map(x => x.day))].sort();
+  return days.length ? `<div class="small muted" style="margin-bottom:6px">${esc(t('nm_mine_hint'))}</div>` + days.map(dy => `<div class="tdl-g">${esc(dayWord(dy))}</div><div class="tsr-box">${N.filter(x => x.day === dy).map(x => nmRow(x, true)).join('')}</div>`).join('')
+    : `<div class="list"><div class="empty">${esc(t('tp_none'))}</div></div>`;
+}
+// v205（任务界面第 5 步）：负责人 / 区域主管「今天」页只有一块「我区域今天 ‹ ›」：主管的区域卡片（可以往前翻）+ 我负责的其他天的任务 + ＋ 新任务 + 去「更多 → 📝 任务」。
+// 以前分在 4 个地方（我管的区域、我负责的、我安排的、我区域重复的）
+function myAreaHTML(){
+  const lead = nmLeadOnly(), A = state.areaToday, sup = isSup() && A && (A.cards || []).length;
+  if (!lead && !sup) return '';
+  const led = ledHTML();
+  const foot = lead ? `<div class="row" style="gap:8px;margin:10px 0 4px;flex-wrap:wrap">${nmCan() ? `<button class="btn ghost" style="flex:1 1 40%;height:48px" data-act="tf-new">${esc(t('to_new'))}</button>` : ''}`
+      + `<button class="btn ghost" style="flex:1 1 40%;height:48px" data-act="tp-go">${esc(t('my_area_tp'))}</button></div>${nmCan() ? '' : `<div class="small muted">${esc(t('nm_new_view'))}</div>`}` : '';
+  return `<div id="my-area" style="margin-bottom:12px">` + (sup ? areaTodayHTML(A) : `<h3 style="margin-top:4px">${esc(t('my_area_t'))}</h3>`)
+    + led + (!sup && !led ? `<div class="list"><div class="empty">${esc(t('my_area_none'))}</div></div>` : '') + foot + '</div>';
 }
 
 // v96：速度记录页：最近 30 次打开页面、每种请求的平均 / 最慢时间（慢的在前）
@@ -5443,11 +5821,6 @@ function oilTaskLine(x){
   return `<div class="item">${h}</div>`;
 }
 // v144（数据库 v105）：收废油的检查过了检查日还没做 → 老板首页最上面标红，点「去看」到「管理 → 任务」的收废油卡片
-function oilLateHTML(){
-  return (state.homeFlows || []).filter(f => f.status === 'check' && f.check_late_days > 0 && f.check).map(f =>
-    `<div class="infobox negc" style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="flex:1">${esc(t('oil_late_home', { s: f.store, n: f.check_late_days, d: dayLabel(f.check.day) }))}</span>
-      <button class="btn" style="flex:none;width:auto;padding:0 14px" data-act="oil-go" data-store="${f.store}">${esc(t('oil_go'))}</button></div>`).join('');
-}
 // 老板「管理 → 任务」最上面：每家店一张收废油卡片（进行中的一轮 + 最近几轮）
 function oilHTML(){
   const F = state.toFlows || [], cur = curStore(), isOpen = f => ['check', 'answered', 'dated'].includes(f.status);
@@ -11414,8 +11787,8 @@ function cdRedraw(){   // 记录页重画（老板在管理页，主管在「更
 const taNm = x => (state.lang === 'de' ? enT(x.name_de || x.name_zh) : x.name_zh || x.name_de) || '';
 const taSep = () => state.lang === 'de' ? ', ' : '、';
 const tkFindRun = (def, day) => (state.closing || []).find(x => x.def_id === def && x.day === day && x.status !== 'upcoming');
-function missCardsHTML(){
-  const L = state.misses || []; if (!L.length) return '';
+function missCardsHTML(L0){   // v205：L0 = 只画这几条（「要处理」卡先显示前 3 条）
+  const L = L0 || state.misses || []; if (!L.length) return '';
   if (L.some(m => (m.audit && m.audit.photo_path) || (m.find && m.find.photo_path))) setTimeout(tfLoadFiles);
   const what = m => taNm(m) + (m.store ? ' · ' + m.store : '');
   return L.map(m => {
@@ -11620,12 +11993,41 @@ async function missApPhoto(input){
   A.up = false; missApRedraw(id);
 }
 // 员工「今天」：申诉结果（判了以后显示一次，点「知道了」）
-function missResHTML(){
-  const L = state.missRes || []; if (!L.length) return '';
+function missResHTML(L0){
+  const L = L0 || state.missRes || []; if (!L.length) return '';
   return L.map(x => { const ok = x.verdict === 'excuse';
     return `<div class="task ${ok ? '' : 'bad'}"><div class="task-t">${esc(t('mres_t', { d: dayLabel(x.day), n: taNm(x) + (x.store ? ' · ' + x.store : '') }))}<span class="${ok ? 'pos' : 'negc'}">${esc(t(ok ? 'mres_excuse' : 'mres_count'))}</span></div>
       <div class="task-s">${esc(t(ok ? 'mres_excuse_hint' : 'mres_count_hint'))}${x.cause ? '<br>' + esc(t('mr_cause_' + x.cause)) : ''}${x.note ? '<br>' + esc(x.note) : ''}<br><span class="muted">${esc(t('mres_by', { b: x.by || '?' }))}</span></div>
       ${state.viewAs ? '' : `<div class="task-b"><button class="btn" data-act="miss-res-seen" data-id="${x.id}">${esc(t('ta_ack'))}</button></div>`}</div>`; }).join('');
+}
+// v205（任务界面第 6 步）：员工「今天」最上面的红卡（漏做、老板发现没做、抽查不属实、申诉结果）合成一张「要处理（N）」卡；每条里面还是原来的按钮（现在补做 / 知道了 / 不是我的问题）
+function fixCardHTML(){
+  const M = state.misses || [], R = state.missRes || [], n = M.length + R.length; if (!n) return '';
+  // 多于 3 条：先显示 3 条（漏做在前：要补做、能申诉；然后是申诉结果），其余收进「还有 N 条」
+  const all = M.map(x => ({ m: x })).concat(R.map(x => ({ r: x }))), head = all.slice(0, 3), tail = all.slice(3);
+  const draw = list => missCardsHTML(list.filter(x => x.m).map(x => x.m)) + missResHTML(list.filter(x => x.r).map(x => x.r));
+  return `<div class="trc bad"><div class="trc-h negc">${esc(t('td_todo_t', { n }))}</div>${draw(head)}`
+    + (tail.length ? `<details class="fold" id="todo-more" style="margin:6px 0 8px"${state.todoMore ? ' open' : ''}><summary>${esc(t('td_todo_more', { n: tail.length }))}</summary><div class="inner">${draw(tail)}</div></details>` : '') + '</div>';
+}
+// v205：老板首页：原来最多 9 块任务提醒合成一张「任务提醒（N）」卡，每种一行；点一行在原地展开原来的内容（判申诉、记行为记录、AI 照片、💬 留言…都照旧），收废油直接进收废油页
+function trCardHTML(){
+  const L = [], O = state.trOpen || {}, add = (k, txt, html, bad) => { if (html) L.push({ k, txt, html, bad }); };
+  (state.homeFlows || []).filter(f => f.status === 'check' && f.check_late_days > 0 && f.check).forEach(f => L.push({ k: 'oil', txt: t('to_c_oil_late', { s: f.store, n: f.check_late_days }), bad: true, store: f.store }));
+  add('mr', t('tr_mr', { n: mrPending().length }), mrHomeHTML(), true);
+  add('miss', t('tr_miss', { n: (state.misses || []).length }), missCardsHTML(), true);
+  add('aud', t('tr_aud', { n: (state.audits || []).length }), audCardsHTML());
+  add('ma', t('tr_ma', { n: (state.missAlerts || []).length }), maHomeHTML(), true);
+  const M = state.taMiss || {}, ms = (M.misses || []).length, fs = (M.false || []).length;
+  add('ta', [ms ? t('tr_ta_miss', { n: ms }) : '', fs ? t('tr_ta_false', { n: fs }) : '', !ms && !fs && +M.audits_open ? t('tr_ta_open', { n: M.audits_open }) : ''].filter(Boolean).join(' · '), taHomeHTML(), ms + fs > 0);
+  const ar = (state.aiRev || []).length; add('arv', t('tr_arv', { n: ar }), ar ? aiRevHTML() : '');
+  add('wr', t('tr_wr'), wrHomeHTML());
+  const keep = ar ? '' : aiRevHTML();   // 空的 #ai-rev 也留在页面上（判完以后原地重画用）
+  if (!L.length) return keep;
+  const arrow = '<span aria-hidden="true">›</span>';
+  return `<div class="trc${L.some(x => x.bad) ? ' bad' : ''}" id="tr-card"><div class="trc-h">${esc(t('tr_title', { n: L.length }))}</div>` + L.map(x => x.store
+      ? `<button type="button" class="trc-l bad" data-act="oil-go" data-store="${x.store}"><span>${esc(x.txt)}</span>${arrow}</button>`
+      : `<button type="button" class="trc-l${x.bad ? ' bad' : ''}" data-act="tr-tog" data-k="${x.k}" aria-expanded="${!!O[x.k]}"><span>${esc(x.txt)}</span><span aria-hidden="true" data-trc="${x.k}">${O[x.k] ? '▾' : '›'}</span></button>`
+        + `<div class="trc-b" data-trb="${x.k}"${O[x.k] ? '' : ' hidden'}>${x.html}</div>`).join('') + '</div>' + keep;
 }
 // 判定（老板 / 负责人）：一条申诉
 const mrV = (v, c) => t(v === 'excuse' ? 'mr_v_excuse' : 'mr_v_count') + (v === 'excuse' && c ? ' · ' + t('mr_cause_' + c) : '');
@@ -11660,7 +12062,17 @@ function maHomeHTML(){
       ${(a.misses || []).slice().reverse().map(m => `<div class="small">${esc(dm(m.day) + ' · ' + maTask(m) + (m.store ? ' · ' + m.store : '') + (+m.w < 1 ? ' · ' + t('ma_w', { w: maNum(m.w) }) : ''))}</div>`).join('')}
       ${state.viewAs ? '' : `<div style="margin-top:6px;display:flex;gap:8px;flex-wrap:wrap">${a.can_conduct ? `<button class="btn" style="width:auto" data-act="ma-cd" data-id="${a.id}">${esc(t('ma_cd'))}</button>` : ''}<button class="btn ghost" style="width:auto" data-act="ma-ok" data-id="${a.id}">${esc(t('ma_ok'))}</button></div>`}</div>`).join('')}</div>`;
 }
-function maRedraw(){ const h = $('#ma-home'); if (h) h.outerHTML = maHomeHTML() || '<div id="ma-home"></div>'; }
+function maRedraw(){ const h = $('#ma-home'); if (h) h.outerHTML = maHomeHTML() || '<div id="ma-home"></div>';
+  trRedraw(); }
+// v205：首页「任务提醒（N）」：原地判完一条（申诉、AI 照片、屡次漏做）以后，行数和数字跟着变（展开的照旧展开）
+//      只改标题、每行的字和颜色，拿掉已经空了的行；别的块不重画（里面没写完的字不会丢）
+function trRedraw(){ const c = $('#tr-card'); if (!c) return;
+  const tp = document.createElement('div'); tp.innerHTML = trCardHTML(); const n = tp.querySelector('#tr-card');
+  if (!n){ if (c.querySelector('#ai-rev') || !document.getElementById('ai-rev')) c.outerHTML = tp.innerHTML; else c.remove(); return; }   // 都处理完了：整张卡拿掉（#ai-rev 只留一个）
+  c.className = n.className; const h = c.querySelector('.trc-h'), nh = n.querySelector('.trc-h'); if (h && nh) h.textContent = nh.textContent;
+  c.querySelectorAll('.trc-l[data-k]').forEach(l => { const k = l.dataset.k, nl = n.querySelector(`.trc-l[data-k="${k}"]`);
+    if (!nl){ const bd = c.querySelector(`[data-trb="${k}"]`); if (bd) bd.remove(); l.remove(); return; }
+    const s = l.querySelector('span'), ns = nl.querySelector('span'); if (s && ns) s.textContent = ns.textContent; l.className = nl.className; }); }
 // 行为记录预填的内容：中德文各一行（员工也会看到），最多 500 字
 function maNote(a){
   const L = (a.misses || []).slice().sort((x, y) => x.day < y.day ? 1 : -1), r1 = x => String(Math.round(+x * 10) / 10), w = (m, de) => +m.w < 1 ? ' ×' + (de ? r1(m.w).replace('.', ',') : r1(m.w)) : '';
@@ -11712,6 +12124,7 @@ async function mrLoad(redraw){
 }
 function mrRedraw(){
   const h = $('#mr-home'); if (h) h.outerHTML = mrHomeHTML();
+  trRedraw();   // v205
   if (state.tab === 'admin' && state.adminSub === 'tasks' && state.toView === 'appeal') keepScroll(toRedraw);
 }
 // ============ 问几个人（v147，数据库 v108，老板 2026-11-06）：同一个问题发给几个人，各自回答（老板的问题 = staff_messages.needs_answer）============
@@ -11815,6 +12228,7 @@ function annGuardCheck(){
   b.textContent = left > 0 ? t('an_wait', { s: left }) : !g.scrolled ? t('an_scroll') : t('an_ack');
 }
 window.addEventListener('scroll', annGuardCheck, { passive: true });
+document.addEventListener('scroll', ev => { if (ev.target && ev.target.id === 'tf-body' && state.tfEdit) state.tfEdit.sy = ev.target.scrollTop; }, { capture: true, passive: true });   // v205：新任务表重画后回到原来滚到的地方
 setInterval(annGuardCheck, 500);
 // v192（体检 2026-11-17：数据库内存紧）：待确认的公告不再带图片（my_announcements 只给 has_image），显示这条时才单独要图片（announce_image），要过的记在这台手机上
 function annImgHTML(a){
@@ -12494,8 +12908,10 @@ function openPinDialog(){
 
 // ============ 事件 ============
 document.addEventListener('click', async ev => {
+  if (ev.target.id === 'tkDlg'){ ev.target.close(); return; }   // v205：点底部操作菜单外面 = 关掉
   const el = ev.target.closest('[data-act]'); if (!el) { if (state.menu && !ev.target.closest('.menu')) setMenu(false); return; }   // v74：不重画整页
   const act = el.dataset.act, f = state.form;
+  if (act !== 'tk-sheet' && el.closest('#tkDlg')){ const d = $('#tkDlg'); if (d && d.open) d.close(); }   // v205：底部菜单里的按钮 = 原来的动作，先关菜单
   UL.a(act, el);   // v163：操作记录（只记按钮的名字，不记输入的内容）
   switch (act){
     case 'lang-menu': langMenu(); break;   // v162
@@ -12596,7 +13012,7 @@ document.addEventListener('click', async ev => {
     }
     case 'lock-open': state.lockOpen = el.dataset.store; renderToday(); window.scrollTo(0, 0); break;
     // v71：收店任务
-    case 'task-open': state.tkSop = null; state.taskOpen = { def: el.dataset.def, day: el.dataset.day, back: state.tab === 'entry' && !state.done ? 'entry' : null }; state.done = null; state.recon = null; state.tab = 'today'; render(); window.scrollTo(0, 0); break;   // v152：从交 Bon 页来的，做完 / 返回回到交 Bon
+    case 'task-open': state.tkSop = null; state.tkHowOpen = false; state.taskOpen = { def: el.dataset.def, day: el.dataset.day, back: state.tab === 'entry' && !state.done ? 'entry' : null }; state.done = null; state.recon = null; state.tab = 'today'; render(); window.scrollTo(0, 0); break;   // v152：从交 Bon 页来的，做完 / 返回回到交 Bon
     case 'task-close': tkLeave(); render(); window.scrollTo(0, 0); break;
     // v101：回答带问题的任务（检查废油桶）；回答后推送给老板（push v11）
     case 'task-answer': {
@@ -12633,20 +13049,41 @@ document.addEventListener('click', async ev => {
     case 'tf-new': {
       if (!nmCan()) break;
       if (!state.tfCat) await tfLoad();
-      const a = tfAreas()[0] || 'front';
-      state.tfEdit = { who: 'person', staff: '', role: '', area: a, repeat: 'once', dayMode: 'tomorrow', day: addDays(bizToday(), 1), timing: 'closing', slot: 'last',   // v193
-        stores: tfStoresFor(a).length === 1 ? tfStoresFor(a) : [], tag: '', photo: 'photo', text: '', zh: '', de: '', rd: 1, rm: 1, sop: '', sopAi: true };
+      // v205：「谁做」默认一个都不选；上次按岗位 / 谁在班建的，直接用上次的岗位和店（每个人自己的，只记在这台手机）
+      const m = tfMem(), mA = m.kind === 'area' ? m.area : m.kind === 'role' && m.role ? (isKRole(m.role) ? 'kitchen' : 'front') : '', useM = !!mA && tfAreas().includes(mA);
+      state.tfEdit = { who: useM ? m.kind : '', staff: '', role: useM && m.kind === 'role' ? m.role : '', area: useM ? mA : '', repeat: 'once', dayMode: 'tomorrow', day: addDays(bizToday(), 1), timing: 'closing', slot: 'last',   // v193
+        stores: [], tag: '', photo: 'photo', text: '', zh: '', de: '', rd: 1, rm: 1, sop: '', sopAi: true, times: 1, makeup: true, due: '' };
+      { const e = state.tfEdit, ok = tfStoresFor(tfArea(e)); e.stores = useM ? (m.stores || []).filter(st => ok.includes(st)) : []; if (e.who && !e.stores.length && ok.length === 1) e.stores = ok.slice(); }
       await tfSopsLoad();   // v121
-      if (state.tab === 'admin') toRedraw(); else tfView(); window.scrollTo(0, 0); break;
+      if (state.tab === 'admin') toRedraw(); else tfView(); break;
     }
     case 'tf-edit': {
       const x = tfFind(el.dataset.def); if (!x) break;
       if (!state.tfCat) await tfLoad();
       await tfSopsLoad();   // v121
-      state.tfEdit = tfFrom(x); if (state.tab === 'admin') toRedraw(); else tfView(); window.scrollTo(0, 0); break;
+      state.tfEdit = tfFrom(x); if (state.tab === 'admin') toRedraw(); else tfView(); break;
     }
     case 'tf-close': state.tfEdit = null; if (state.tab === 'admin') keepScroll(toRedraw); else render(); break;
-    case 'tf-staff': { const e = state.tfEdit; if (!e) break; tfSync(); e.staff = el.dataset.id; tfRedraw(); break; }
+    // v205：谁做：岗位 / 谁在班 / 某个人，一次点完（再点一下已选的 = 不选）
+    case 'tf-who': case 'tf-staff': {
+      const e = state.tfEdit; if (!e) break; tfSync();
+      const w = act === 'tf-staff' ? 'person' : el.dataset.w, v = act === 'tf-staff' ? el.dataset.id : el.dataset.v;
+      const on = w === 'person' ? e.who === 'person' && e.staff === v : w === 'area' ? e.who === 'area' && e.area === v : (e.who === 'role' && e.role === v) || (v === 'service' && e.who === 'each');
+      if (on){ e.who = ''; e.staff = ''; e.role = ''; }
+      else { const wasEach = e.who === 'each'; e.who = w; e.staff = w === 'person' ? v : ''; e.role = w === 'role' ? v : ''; if (w === 'area') e.area = v; else if (w === 'role') e.area = isKRole(v) ? 'kitchen' : 'front';
+        if (wasEach && e.repeat === 'daily' && w !== 'role') e.timing = e.timing || 'closing'; }
+      if (e.who !== 'person' && e.who && (e.due || e.dayMode === 'due')){ const d = e.due; e.due = ''; e.dayMode = d ? 'pick' : 'tomorrow'; e.day = d || addDays(bizToday(), 1); e.whenNote = t('tf_due_conv'); }   // 某天前做完只给指定的人
+      if (e.who !== 'person'){ const ok = tfStoresFor(tfArea(e)); e.stores = (e.stores || []).filter(st => ok.includes(st)); if (!e.stores.length && ok.length === 1) e.stores = ok.slice(); }
+      if (w === 'person' && !on){ e.find = false; e.q = ''; }
+      tfRedraw(); break;
+    }
+    case 'tf-each': {   // v152：选了「服务」：一个人做就行 / 每个服务员各做一份（= 每天、收店时）
+      const e = state.tfEdit; if (!e) break; tfSync();
+      if (el.dataset.v === '1'){ e.who = 'each'; e.role = 'service'; e.area = 'front'; e.repeat = 'daily'; e.timing = 'closing'; e.due = ''; if (e.photo === 'result'){ e.photo = 'photo'; e.phNote = t('tf_ph_note_result'); } }
+      else { e.who = 'role'; e.role = 'service'; }
+      tfRedraw(); break;
+    }
+    case 'tf-find': { const e = state.tfEdit; if (!e) break; tfSync(); e.find = !e.find; tfRedraw(); if (e.find) setTimeout(() => { const q = document.getElementById('tf-q'); if (q) q.focus(); }, 0); break; }
     case 'tf-role': { const e = state.tfEdit; if (!e) break; tfSync(); e.role = el.dataset.r; const ok = tfStoresFor(tfArea(e)); e.stores = e.stores.filter(st => ok.includes(st)); if (!e.stores.length && ok.length === 1) e.stores = ok.slice(); tfRedraw(); break; }
     case 'tf-store': { const e = state.tfEdit; if (!e) break; tfSync(); const st = el.dataset.st;
       e.stores = e.id ? [st] : e.stores.includes(st) ? e.stores.filter(x => x !== st) : e.stores.concat(st); tfRedraw(); break; }
@@ -12656,32 +13093,68 @@ document.addEventListener('click', async ev => {
       const nl = v === 'lunch' ? !L : v === 'last' ? false : L, nd = v === 'dinner' ? !D : v === 'last' ? false : D;
       e.slot = nl && nd ? 'both' : nl ? 'lunch' : nd ? 'dinner' : 'last'; tfRedraw(); break;
     }
+    // v205：什么时候：今天 / 明天 / 选一天 / 某天前做完 / 每天 / 每周 / 每月 / 更长（每季度、每年）
+    case 'tf-when': {
+      const e = state.tfEdit; if (!e) break; tfSync();
+      const v = el.dataset.v, bd = bizToday(); e.whenNote = ''; e.phNote = '';
+      if (['today', 'tomorrow', 'pick', 'due'].includes(v)){
+        if (e.lockRepeat && e.repeat !== 'once') break;
+        e.repeat = 'once';
+        if (v === 'due'){ if (e.who && e.who !== 'person') break; e.dayMode = 'due'; e.day = e.wasDue && e.dueFrom ? e.dueFrom : bd; }
+        else { e.due = ''; e.dayMode = v; e.day = v === 'today' ? bd : v === 'tomorrow' ? addDays(bd, 1) : (!e.day || e.day < bd ? addDays(bd, 2) : e.day); }
+      } else {
+        if (e.lockRepeat && e.repeat === 'once') break;
+        e.due = ''; e.repeat = v === 'longer' ? (['quarter', 'year'].includes(e.repeat) ? e.repeat : 'quarter') : v;
+      }
+      if (e.repeat !== 'daily' && e.photo === 'always'){ e.photo = 'photo'; e.phNote = t('tf_ph_note_always'); }   // v120：一次 / 周期只有 拍照 / 打勾
+      if (e.repeat !== 'once' && e.photo === 'result'){ e.photo = 'photo'; e.phNote = t('tf_ph_note_result'); }   // v128：交回结果只给一次性的任务
+      if (e.repeat === 'week' && +e.rd > 7) e.rd = 1;
+      if (+e.times > tfTimesMax(e.repeat)) e.times = tfTimesMax(e.repeat);
+      if (!isPer(e)) e.times = 1;
+      tfRedraw(); break;
+    }
+    case 'tf-due': {   // v205：截止日快捷：本周日 / 下周日 / 📅 选日期
+      const e = state.tfEdit; if (!e) break;
+      if (el.dataset.v === 'pick'){ const i = document.getElementById('tf-due'); if (i){ try { i.showPicker(); } catch(err){ i.focus(); } } break; }
+      tfSync(); e.due = tfSun(+el.dataset.v); tfRedraw(); break;
+    }
+    case 'tf-times': { const e = state.tfEdit; if (!e) break; tfSync(); e.times = Math.min(Math.max((+e.times || 1) + (+el.dataset.d), 1), tfTimesMax(e.repeat)); tfRedraw(); break; }   // v132；v205：− 1 +
     case 'tf-set': {
       const e = state.tfEdit; if (!e) break; tfSync();
       const k = el.dataset.k, v = el.dataset.v;
       if (k === 'dayMode'){ e.dayMode = v; if (v === 'today') e.day = bizToday(); else if (v === 'tomorrow') e.day = addDays(bizToday(), 1); else if (!e.day || e.day < bizToday()) e.day = addDays(bizToday(), 2); }
       else e[k] = k === 'makeup' ? v === 'true' : k === 'times' ? +v : v;   // v132
-      if (k === 'repeat' && e.repeat !== 'daily' && e.photo === 'always') e.photo = 'photo';   // v120：一次 / 周期只有 拍照 / 打勾
-      if (k === 'repeat' && e.repeat !== 'once' && e.photo === 'result') e.photo = 'photo';   // v128：交回结果只给一次性的任务
-      if (k === 'repeat' && e.repeat === 'week' && +e.rd > 7) e.rd = 1;
-      if (k === 'repeat' && +e.times > (e.repeat === 'week' ? 7 : 10)) e.times = e.repeat === 'week' ? 7 : 10;   // v132
-      if (e.repeat === 'once' && !e.day){ e.day = addDays(bizToday(), 1); e.dayMode = 'tomorrow'; }
-      if (k === 'who' && v === 'each'){ e.repeat = 'daily'; e.timing = 'closing'; e.role = 'service'; if (e.photo === 'result') e.photo = 'photo'; }   // v152：每个服务员下班前 = 每天、收店时
-      if (k === 'who' || k === 'area'){ const ok = tfStoresFor(tfArea(e)); e.stores = e.stores.filter(st => ok.includes(st)); if (!e.stores.length && ok.length === 1) e.stores = ok.slice(); }
+      if (k === 'photo') e.phNote = '';
       tfRedraw(); break;
     }
-    case 'tf-parse': {   // v122：说一句话 → AI 填整张表（不保存）
+    case 'tf-goto': {   // v205：确认卡「补上：… ›」→ 滚到那个问题（AI 没听到的、还没填的）
+      const e = state.tfEdit; if (!e) break; tfSync(); const k = el.dataset.k; e.cardOff = false;
+      e.hl = k;   // 橙色框标出来（AI 没听到 / 还没填）
+      if (k === 'more') e.more = true;
+      e.goto = k; tfRedraw(); break;
+    }
+    case 'tf-card-off': { const e = state.tfEdit; if (!e) break; tfSync(); e.cardOff = true; e.goto = 'what'; tfRedraw(); break; }
+    case 'tf-say-edit': { const e = state.tfEdit; if (!e) break; tfSync(); e.sayOpen = true; e.sy = 0; tfRedraw(); setTimeout(() => { const i = document.getElementById('tf-say'); if (i) i.focus(); }, 0); break; }
+    case 'tf-copy': {   // v205：改的时候不能换的（一次 ↔ 重复）：复制成一个新任务（原来的不变）
+      const e = state.tfEdit; if (!e || !e.id || e.multi) break; tfSync(); const bd = bizToday();
+      const c = { ...e, id: undefined, lockRepeat: false, wasDue: false, dueFrom: '', copyOf: e.id, err: {}, parsed: false, busy: false, sy: 0, photos: (e.photos || []).slice(), stores: (e.stores || []).slice() };
+      if (c.repeat === 'once' && (!c.day || c.day < bd)){ c.day = addDays(bd, 1); c.dayMode = 'tomorrow'; }
+      if (c.due && c.due < bd){ c.due = ''; c.dayMode = 'tomorrow'; c.day = addDays(bd, 1); }
+      if (c.due) c.day = bd;
+      state.tfEdit = c; toast(t('tf_copied')); tfRedraw(); break;
+    }
+    case 'tf-parse': {   // v122：说一句话 → AI 填整张表（不保存）；v205：然后给一张确认卡「我理解的是：…」
       const e = state.tfEdit; if (!e || e.parsing) break; tfSync();
-      const txt = (e.say || '').trim(); if (!txt) return toast(t('tf_say_empty'), true);
+      const txt = (e.say || '').trim(); if (!txt){ toast(t('tf_say_empty'), true); const i = document.getElementById('tf-say'); if (i) i.focus(); break; }
       e.parsing = true; tfRedraw();
-      try { await tfSopsLoad(); const r = await callTasks({ action: 'task_parse', text: txt }); if (state.tfEdit === e) tfApplyParse(e, r); }
+      try { await tfSopsLoad(); const r = await callTasks({ action: 'task_parse', text: txt }); if (state.tfEdit === e){ tfApplyParse(e, r); e.sy = 0; } }
       catch(err){ toast(errText(err), true); }
       e.parsing = false; if (state.tfEdit === e) tfRedraw();
       break;
     }
     case 'tf-ai': {
       const e = state.tfEdit; if (!e || e.ai) break; tfSync(); e.more = true;
-      const txt = (e.text || '').trim(); if (!txt) return toast(t('err_TASK_NAME_EMPTY'), true);
+      const txt = (e.text || '').trim(); if (!txt){ e.err = { what: t('err_TASK_NAME_EMPTY') }; e.goto = 'what'; tfRedraw(); toast(t('err_TASK_NAME_EMPTY'), true); break; }
       e.ai = true; tfRedraw();
       try { const r = await callTasks({ action: 'task_text', text: txt }); e.zh = r.name_zh || e.zh; e.de = r.name_de || e.de; e.zh0 = e.zh; e.de0 = e.de; e.text0 = txt; }
       catch(err){ toast(errText(err), true); }
@@ -12692,17 +13165,11 @@ document.addEventListener('click', async ev => {
       const e = state.tfEdit; if (!e || e.busy) break; tfSync();
       const txt = (e.text || '').trim(); let zh = (e.zh || '').trim(), de = (e.de || '').trim();
       // 改了上面那句话、中德文名没自己改过 → 重新写中德文（以前用脚本建的多项任务不重写）
-      if (e.id && txt && txt !== e.text0 && zh === (e.zh0 || '') && de === (e.de0 || '')){ zh = ''; de = ''; }
-      if (e.who === 'person' && !e.staff) return toast(t('nm_need_who'), true);
-      if (e.who === 'role' && !e.role) return toast(t('tf_need_role'), true);
-      if (e.who !== 'person' && !e.stores.length) return toast(t('tf_need_store'), true);
-      if (e.repeat === 'once' && !e.day) return toast(t('nm_need_day'), true);
-      if (e.who !== 'person' && !e.timing) return toast(t('tf_need_timing'), true);   // v122：AI 填表时没说的
-      if (!e.photo) return toast(t('tf_need_photo'), true);
-      if (!txt && !zh && !de) return toast(t('err_TASK_NAME_EMPTY'), true);
+      if (txt && txt !== (e.text0 || '') && zh === (e.zh0 || '') && de === (e.de0 || '')){ zh = ''; de = ''; }   // v205：新建（复制、AI 填的、SOP 带来的）也一样，不再只限改的时候
+      const pr = tfCheck(e);   // v205：没填好的问题标红、滚过去（以前只弹一个提示）
+      if (pr){ e.err = { [pr.k]: pr.m }; e.goto = pr.k; e.cardOff = true; tfRedraw(); toast(pr.m, true); break; }
+      if (e.upBusy){ toast(t('tf_att_busy'), true); break; }
       const link = tfLinkFix(e.link);   // v128：附链接（只收 http / https，不带用户名密码）
-      if (link === false) return toast(errText(new Error('TASK_LINK_BAD')), true);
-      if (e.upBusy) return toast(t('tf_att_busy'), true);
       e.busy = true; tfRedraw();
       if (!zh && !de){   // AI 把一句话写成中德文；出错就用原句，不挡保存
         try { const r = await callTasks({ action: 'task_text', text: txt }); zh = (r.name_zh || '').trim(); de = (r.name_de || '').trim(); } catch(err){}
@@ -12710,30 +13177,37 @@ document.addEventListener('click', async ev => {
       }
       try {
         const person = e.who === 'person', per = isPer(e), once = e.repeat === 'once', each = e.who === 'each';   // v152
+        const due = person && once && tfWhen(e) === 'due' ? e.due : '';   // v205（数据库 v142）：某天前做完
         const slots = tfSlotOk(e) && !e.id && e.slot === 'both' ? ['lunch', 'dinner'] : [tfSlotOk(e) && ['lunch', 'dinner'].includes(e.slot) ? e.slot : ''];   // v195
         let r = null; const ids = [];
         for (const sl of slots){
+        const ex = { photos: e.photos || [], link: link || null, result: e.photo === 'result' && once,   // v128：附照片、链接、交回结果
+                     times: per ? (+e.times || 1) : 1, makeup: per ? e.makeup !== false : true, each,   // v152：每个服务员下班前   // v132：几次、没做完要不要补
+                     slot: sl };   // v193：哪个班（空 = 最后一个班）；v195：午班 + 晚班 = 存两次
+        if (due || e.wasDue) ex.due = due || null;   // v205：只有截止任务带 due（改回普通的 = null）；别的任务参数和以前一字不差
         r = await rpc('task_save', { ...tok(), p_id: e.id || null, p_who: each ? 'role' : e.who, p_staff_id: person ? e.staff : null, p_role: each ? 'service' : e.who === 'role' ? e.role : null,
           p_area: e.who === 'area' ? e.area : null, p_repeat: each ? 'daily' : e.repeat, p_day: once ? e.day : null,
           p_rep_month: per && ['quarter', 'year'].includes(e.repeat) ? +e.rm : null, p_rep_day: per ? +e.rd : null, p_timing: person ? null : each ? 'closing' : e.timing,   // v120：周期从哪天开始
           p_stores: person ? (e.tag ? [e.tag] : []) : e.stores, p_name_zh: zh, p_name_de: de,
           p_photo: e.photo === 'result' ? 'check' : per && e.photo === 'always' ? 'photo' : e.photo,
           p_sop_item: e.sop || null, p_sop_ai: !!(e.sop && !['check', 'result'].includes(e.photo) && e.sopAi),   // v121：连 SOP、AI 按 SOP 看照片
-          p_extra: { photos: e.photos || [], link: link || null, result: e.photo === 'result' && once,   // v128：附照片、链接、交回结果
-                     times: per ? (+e.times || 1) : 1, makeup: per ? e.makeup !== false : true, each,   // v152：每个服务员下班前   // v132：几次、没做完要不要补
-                     slot: sl } });   // v193：哪个班（空 = 最后一个班）；v195：午班 + 晚班 = 存两次
+          p_extra: ex });
         ids.push(...((r && r.ids) || (r && r.id ? [r.id] : [])));
         }
         if (slots.length > 1 && r) r.ids = ids;
         if (e.sop) state.sopSug = (state.sopSug || []).filter(x => x.sop_item_id !== e.sop);
-        if (r && person && once && !r.self) callPush('task_assign', { def_id: r.id });   // 推给被指定的人（push v12 只推一次性的；换了人才会再推）
+        if (r && person && once && !r.self) callPush('task_assign', { def_id: r.id });   // 推给被指定的人（push v12 只推一次性的；换了人才会再推）；截止任务也一样（建好时推一次）
         if (r && once && !person) callPush('task_due');   // v146（数据库 v107 / push v14）：按岗位 / 区域的一次性任务马上推给那天要做的人（排班已发布时）
+        if (!e.id) tfMemSave(e);   // v205：记住这次的店和岗位 / 最近指定的人
         state.tfEdit = null;
-        toast(person && once ? (r.self ? t('nm_saved_self', { d: dayLabel(e.day) }) : t('nm_saved', { n: r.to || '', d: dayLabel(e.day) }))
+        toast(person && once && due ? (r.self ? t('tf_saved_due_self', { d: dayLabel(due) }) : t('tf_saved_due', { n: r.to || '', d: dayLabel(due) }))
+          : person && once ? (r.self ? t('nm_saved_self', { d: dayLabel(e.day) }) : t('nm_saved', { n: r.to || '', d: dayLabel(e.day) }))
           : person ? t('tf_saved_rep', { n: r.self ? t('nm_me') : r.to || '', r: perLabel({ repeat: e.repeat, repeat_day: e.rd, repeat_month: e.rm, times: e.times }) })
           : (r.ids || []).length > 1 ? t('tf_saved_n', { n: r.ids.length }) : t('tf_saved'));
         await Promise.all([nmLoad(), tfLoad(), loadTasks()]); render(); window.scrollTo(0, 0);
-      } catch(err){ e.busy = false; toast(errText(err), true); if (state.tfEdit === e) tfRedraw(); }
+      } catch(err){ e.busy = false; const code = String(err && err.message || ''), q = TF_ERR_Q[code];
+        if (q && state.tfEdit === e){ e.err = { [q]: errText(err) }; e.goto = q; e.cardOff = true; if (q === 'more') e.more = true; }
+        toast(errText(err), true); if (state.tfEdit === e) tfRedraw(); }
       break;
     }
     case 'tf-cancel': {
@@ -12787,6 +13261,18 @@ document.addEventListener('click', async ev => {
       catch(err){ toast(errText(err), true); el.disabled = false; }
       break;
     }
+    // v205：任务行 → 底部操作菜单；管理 → 任务 翻天；首页「任务提醒」一行展开 / 收起；「更多 → 📝 任务」的两个小标签；任务里的拍照小标签
+    case 'tk-sheet': tkSheetOpen(el.dataset.k); break;
+    case 'tks-close': { const d = $('#tkDlg'); if (d && d.open) d.close(); break; }
+    case 'to-day': { const n = +el.dataset.d; toDayGo(n ? addDays(state.toDay || bizToday(), n) : bizToday()); break; }
+    case 'tr-tog': { const k = el.dataset.k, O = state.trOpen = state.trOpen || {}; O[k] = !O[k];
+      const b = document.querySelector(`[data-trb="${k}"]`), c = document.querySelector(`[data-trc="${k}"]`);
+      if (b) b.hidden = !O[k]; if (c) c.textContent = O[k] ? '▾' : '›'; el.setAttribute('aria-expanded', String(!!O[k]));
+      if (O[k] && k === 'arv') setTimeout(aiRevImgs, 0); break; }
+    case 'tp-tab': state.tpTab = el.dataset.k; keepScroll(viewTaskPage); break;
+    case 'tp-go': state.tab = 'more'; state.taskPage = true; state.tfEdit = null; state.sop = null; state.taRec = null; state.libView = null; state.docPage = false; state.cdPage = null;
+      if (!state.tfCat) await tfLoad(); render(); window.scrollTo(0, 0); break;
+    case 'tk-how': state.tkHowOpen = !state.tkHowOpen; keepScroll(renderTaskRun); break;
     // v95：某一天的任务（老板「管理 → 任务」、负责人「交给…」）
     case 'to-view': state.toView = el.dataset.k; if (el.dataset.k === 'stats') tsLoad(); else keepScroll(toRedraw);
       if (el.dataset.k === 'appeal') mrLoad(true);   // v196：每次切过来重新要
@@ -12949,7 +13435,7 @@ document.addEventListener('click', async ev => {
       catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     }
-    case 'wr-hide': LS.set('wr_hide_' + el.dataset.w, true); { const h = $('#wr-home'); if (h) h.remove(); } break;   // v204：这台设备上收起这一周的卡片
+    case 'wr-hide': LS.set('wr_hide_' + el.dataset.w, true); { const h = $('#wr-home'); if (h) h.remove(); document.querySelectorAll('[data-k="wr"][data-act="tr-tog"],[data-trb="wr"]').forEach(e => e.remove()); } break;   // v205   // v204：这台设备上收起这一周的卡片
     case 'wr-stats': state.tab = 'admin'; state.adminSub = 'tasks'; state.toView = 'stats'; state.ts = { k: 'lw' }; state.tsAuto = true; render(); window.scrollTo(0, 0); break;   // v204   // v194：员工列表点「📝 行为记录」
     case 'cd-store': cdGrab(); state.cdRec.form.store = el.dataset.s; cdSaveDraft(); cdRedraw(); break;
     case 'cd-rule': cdGrab(); state.cdRec.form.rule = el.dataset.id; cdSaveDraft(); cdRedraw(); break;
@@ -13895,7 +14381,7 @@ document.addEventListener('click', async ev => {
       try { await rpc('lock_week', { ...tok(), p_week_start: state.week }); render(); } catch(e){ toast(errText(e), true); el.disabled = false; }
       break;
     case 'oil-go': if (storeOk(el.dataset.store) && el.dataset.store !== curStore()){ state.storeSel = { s: el.dataset.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', el.dataset.store); }   // v186：收废油按门店标签显示，先切到那家店
-      state.tab = 'admin'; state.adminSub = 'tasks'; state.oilFocus = el.dataset.store; render(); window.scrollTo(0, 0); break;   // v144：打开后滚到这家店的收废油卡片
+      state.tab = 'admin'; state.adminSub = 'tasks'; state.toView = 'oil'; state.oilFocus = el.dataset.store; render(); window.scrollTo(0, 0); break;   // v144：打开后滚到这家店的收废油卡片
     case 'admin-sub': if (el.dataset.sub === 'conduct' && state.cdRec) state.cdRec.loaded = false;   // v194：每次点进行为记录都重新取
       state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; state.onbPlan = null; state.onbForm = null; state.onbNew = false; if (el.dataset.sub === 'sop') state.sop = { view: 'list', q: '' }; render(); break;
     case 'admin-more': state.done = null; state.rcWeek = null; state.tab = 'admin'; state.adminSub = el.dataset.sub; state.staffEdit = null; state.menu = false; render(); break;
@@ -13993,7 +14479,8 @@ document.addEventListener('click', async ev => {
     case 'arv-ok': case 'arv-bad': {   // v158：老板确认一张（只换这一块，不重新读整页）
       el.disabled = true;
       try { state.aiRev = await rpc('admin_task_ai_decide', { ...tok(), p_row: el.dataset.id, p_ok: act === 'arv-ok' }) || [];
-        const box = $('#ai-rev'); if (box) box.outerHTML = aiRevHTML(); toast(t(act === 'arv-ok' ? 'arv_saved_ok' : 'arv_saved_bad')); }
+        const box = $('#ai-rev'); if (box) box.outerHTML = aiRevHTML();
+        trRedraw(); toast(t(act === 'arv-ok' ? 'arv_saved_ok' : 'arv_saved_bad')); }   // v205：首页「任务提醒」跟着变
       catch(e){ toast(errText(e), true); await loadAiRev(); const box = $('#ai-rev'); if (box) box.outerHTML = aiRevHTML(); }
       break;
     }
@@ -14938,10 +15425,12 @@ document.addEventListener('click', async ev => {
   }
 });
 document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target.id === 'b-wallet') ev.target.blur();
+  if (ev.key === 'Enter' && ev.target.id === 'tf-say' && !ev.isComposing){ ev.preventDefault(); const b = document.querySelector('[data-act="tf-parse"]'); if (b && !b.disabled) b.click(); return; }   // v205：说一句话，回车 = ✨ 填表
   if (ev.key === 'Enter' && ev.target.dataset && ev.target.dataset.ct){ ev.preventDefault();   // v179：盘点时回车 = 到下一格
     const all = [...document.querySelectorAll('[data-ct]')].filter(e => e.offsetParent && !e.disabled), i = all.indexOf(ev.target); ev.target.blur(); if (all[i + 1]) all[i + 1].focus(); return; }
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
+  if (ev.target.id === 'to-day-pick'){ if (ev.target.value) toDayGo(ev.target.value); return; }   // v205：管理 → 任务 跳到某一天
   if (ev.target.dataset && ev.target.dataset.sopph !== undefined && state.sop && state.sop.edit && state.sop.edit.draft){   // v202：照片放第几步
     const E = state.sop.edit, y = window.scrollY; sopKeep(); sopPlacePhoto(E.draft, +ev.target.dataset.sopph, +ev.target.value); renderSopEdit(); window.scrollTo(0, y); return; }
   if (ev.target.dataset && /^(title|steps|tips|mistakes)_/.test(ev.target.dataset.sopk || '') && state.sop && state.sop.edit){ clearTimeout(sopLiveT); sopKeep(); sopLiveRefresh(); return; }   // v202：改了文字 → 预览跟着变（内容没变不重画）
@@ -14961,10 +15450,12 @@ document.addEventListener('change', async ev => {
     const b = document.getElementById('drk-selbar'); if (b) b.outerHTML = drkSelBarHTML(); return; }
   if (ev.target.dataset && ev.target.dataset.rcpchg){ rcpKeep(); keepScroll(() => renderInvRecipe()); return; }   // v166：配方里换了饮料，单位跟着变
   if (ev.target.classList && ev.target.classList.contains('lib-lang') && state.libForm && state.libForm.replaces){ libKeep(); keepScroll(render); return; }   // v134：语言改了，换掉哪份跟着变
+  if (ev.target.id === 'tf-date' || ev.target.id === 'tf-due'){ tfSoftRedraw(); return; }   // v205：选了日期 / 截止日：只换跟日期有关的几块，日期框不动（iPhone 的日期选择器不会被关掉）
   if (ev.target.id === 'tf-rd' || ev.target.id === 'tf-rm'){ tfSync(); tfRedraw(); return; }   // v120：周期从哪天开始，说明跟着变
   if (ev.target.id === 'tf-sop'){ const e = state.tfEdit; if (!e) return; const was = e.sop; tfSync();   // v121：选了 SOP：名字空着就用 SOP 的标题，AI 看照片默认开（1A）
     if (e.sop && e.sop !== was){ e.sopAi = true; const it = ((state.tfSops || {}).topics || []).flatMap(tp => tp.items || []).find(i => i.id === e.sop);
-      if (it && !(e.text || '').trim() && !e.id){ e.text = sopTitle(it); e.zh = it.title_zh || it.title_de; e.de = it.title_de || it.title_zh; } }
+      if (it && !(e.text || '').trim() && !e.id){ e.text = sopTitle(it); e.zh = it.title_zh || it.title_de; e.de = it.title_de || it.title_zh;
+        e.text0 = e.text; e.zh0 = e.zh; e.de0 = e.de; } }   // v205：之后改了「做什么」，保存时重新写中德文
     tfRedraw(); return; }
   if (ev.target.id === 'e-date'){ bonEditDate(ev.target.value); return; }   // v112：老板改 Bon 日期
   if (ev.target.dataset && ev.target.dataset.sopphoto && ev.target.files && ev.target.files[0]){ const f = ev.target.files[0]; ev.target.value = ''; sopPhotoChosen(f); return; }   // v111：SOP 照片
@@ -15094,6 +15585,8 @@ document.addEventListener('change', async ev => {
 });
 // v133：「发放 / 签收还没完成」里打开的周，重画后照样打开（例如选了谁发的钱）
 document.addEventListener('toggle', ev => { if (ev.target.id === 'cd-rules' && state.cdRec) state.cdRec.rulesOpen = ev.target.open;   // v194
+  if (ev.target.id === 'sg-fold') state.sgOpen = ev.target.open;   // v205
+  if (ev.target.id === 'todo-more') state.todoMore = ev.target.open;
   const w = ev.target.dataset && ev.target.dataset.rcw; if (w) (state.rcOpen = state.rcOpen || {})[w] = ev.target.open;
   const ah = ev.target.dataset && ev.target.dataset.aih; if (ah){ const S = invS(); (S.aihOpen = S.aihOpen || {})[ah] = ev.target.open; }   // v180
   const orr = ev.target.dataset && ev.target.dataset.ordrest; if (orr) invS().ordRest = ev.target.open ? orr : null;
