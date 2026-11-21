@@ -724,7 +724,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v209';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v210';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -1448,7 +1448,7 @@ zh: {
   tag_counted_confirm:'已点收 · 一致确认', tag_counted_manual:'已点收 · 手填',
   nets_fold:'预计净额（{n} 人）', entries_day:'{n} 条', rc_open_week:'KW {w} · 还有 {n} 人未完成',
   ad_counted:'点收', ad_expected:'应为', ad_amount_cents:'金额', ad_reason:'原因', ad_comment:'内容', ad_week:'周', ad_payout_euros:'实发',
-  ad_done:'已发放', ad_yes:'是', ad_no:'否', ad_before:'修改前', ad_after:'修改后', ad_resolution:'处理结果', ad_role:'岗位', ad_method:'方式',
+  ad_done:'已发放', ad_yes:'是', ad_no:'否', ad_before:'修改前', ad_after:'修改后', ad_old:'原来', ad_new:'改成', ad_resolution:'处理结果', ad_role:'岗位', ad_method:'方式',
   ad_wallet_cents:'钱包', ad_card_cents:'刷卡小费', ad_cash_cents:'现金小费', ad_schluss_cents:'交店里', ad_shortage_cents:'差额', ad_bearer:'承担方',
   ad_name:'姓名', ad_valid_from:'生效日期', ad_kitchen:'厨房 %', ad_runner:'Runner %', ad_bar:'吧台 %', ad_date:'日期', ad_store:'门店', ad_slot:'班次', ad_where:'位置', ad_month:'月份', ad_open_count:'未完成', ad_server:'服务员', ad_runners:'Runner', ad_bars:'吧台', ad_from:'谁付', ad_to:'付给谁',
   rc_banner:'KW {w} 小费 {x}，请签收', rc_banner_pay:'KW {w} 你交给小费管理员 {x}，请签字确认', rc_banner_resign:'（结算有变动，需要重新签收）', rc_go:'去签收',
@@ -2209,7 +2209,7 @@ de: {
   tag_counted_confirm:'Gezählt · bestätigt', tag_counted_manual:'Gezählt · eingegeben',
   nets_fold:'Voraussichtlicher Saldo ({n})', entries_day:'{n} Einträge', rc_open_week:'KW {w} · noch {n} offen',
   ad_counted:'Gezählt', ad_expected:'Soll', ad_amount_cents:'Betrag', ad_reason:'Grund', ad_comment:'Text', ad_week:'Woche', ad_payout_euros:'Auszahlung',
-  ad_done:'Ausgezahlt', ad_yes:'ja', ad_no:'nein', ad_before:'Vorher', ad_after:'Nachher', ad_resolution:'Klärung', ad_role:'Rolle', ad_method:'Art',
+  ad_done:'Ausgezahlt', ad_yes:'ja', ad_no:'nein', ad_before:'Vorher', ad_after:'Nachher', ad_old:'vorher', ad_new:'neu', ad_resolution:'Klärung', ad_role:'Rolle', ad_method:'Art',
   ad_wallet_cents:'Portemonnaie', ad_card_cents:'Kartentrinkgeld', ad_cash_cents:'Bartrinkgeld', ad_schluss_cents:'An den Laden', ad_shortage_cents:'Fehlbetrag', ad_bearer:'Träger',
   ad_name:'Name', ad_valid_from:'Gültig ab', ad_kitchen:'Küche %', ad_runner:'Runner %', ad_bar:'Bar %', ad_date:'Datum', ad_store:'Filiale', ad_slot:'Schicht', ad_where:'Ort', ad_month:'Monat', ad_open_count:'Offen', ad_server:'Service', ad_runners:'Runner', ad_bars:'Bar', ad_from:'Von', ad_to:'An',
   rc_banner:'Trinkgeld KW {w}: {x} – bitte quittieren', rc_banner_pay:'KW {w}: {x} an den Tip-Manager abgegeben – bitte bestätigen', rc_banner_resign:' (Abrechnung geändert – bitte neu quittieren)', rc_go:'Quittieren',
@@ -2278,7 +2278,7 @@ Object.assign(I18N.zh, {
   adj_sum_none: '选好从谁、给谁，写上金额和原因。',
   adj_sum: '从 {a} 转 {x} 给 {b}（{r}）',
   adj_list_btn: '看这周已经加过的调整 ›',
-  adj_list_none: '最近的操作记录（最多 1000 条）里没找到这周的调整；更早加的可能不显示。',
+  adj_list_none: '这周还没有调整。',   // v210：改读 week_adjustments（全部）
   adj_list_fail: '没取到这周的调整。',
   dist_fail: '没取到这周的发放表（网络或服务器慢），先别勾发放。'
 });
@@ -2306,7 +2306,7 @@ Object.assign(I18N.de, {
   adj_sum_none: 'Von wem, an wen, Betrag und Grund eintragen.',
   adj_sum: '{x} von {a} an {b} ({r})',
   adj_list_btn: 'Korrekturen dieser Woche ansehen ›',
-  adj_list_none: 'In den letzten Protokolleinträgen (max. 1000) keine Korrektur für diese Woche gefunden; ältere werden evtl. nicht angezeigt.',
+  adj_list_none: 'Für diese Woche gibt es noch keine Korrekturen.',   // v210
   adj_list_fail: 'Korrekturen dieser Woche nicht geladen.',
   dist_fail: 'Auszahlungsliste dieser Woche nicht geladen (Netz oder Server langsam) – bitte noch nichts abhaken.'
 });
@@ -2343,7 +2343,6 @@ Object.assign(I18N.zh, {
   aih_r_both: "两家店共用这个配方，会一起改。",
   drk_undo_fail: "{n} 个没撤销成功，请到「不管库存」里点「改回来」。",
   ord_cancel_open_q: "不要这张订货建议？（还没下单，可以随时再出一张）",
-  ord_boost_all: "这家店这天送货的所有供应商",
   lv_ai_failed: "AI 小结没写成，点「🤖 AI 写小结」再试一次。",
   an_before_join: "入职前发布 · 不用确认",
   an_load_fail: "公告没加载出来（网络慢）。",
@@ -2370,7 +2369,6 @@ Object.assign(I18N.de, {
   aih_r_both: "Gilt für beide Filialen – das Rezept wird in beiden geändert.",
   drk_undo_fail: "{n} nicht rückgängig gemacht – bitte unter „Ignoriert“ zurückholen.",
   ord_cancel_open_q: "Diesen Bestellvorschlag verwerfen? (Noch nicht bestellt – du kannst jederzeit einen neuen erstellen.)",
-  ord_boost_all: "alle Lieferanten dieser Filiale an diesem Tag",
   lv_ai_failed: "KI-Zusammenfassung fehlgeschlagen – bitte „🤖 KI-Zusammenfassung“ erneut tippen.",
   an_before_join: "Vor deinem Start · keine Bestätigung nötig",
   an_load_fail: "Mitteilungen konnten nicht geladen werden (Netz langsam).",
@@ -2448,6 +2446,28 @@ Object.assign(I18N.de, { act_feedback_ask:"Feedback: Rückfrage", act_feedback_r
 Object.assign(I18N.zh, {"kc_h": "🍢 后厨的串", "kc_t_count": "数剩余", "kc_t_made": "今天要串", "kc_t_plan": "备串计划", "kc_title": "🍢 后厨的串", "kc_tab_count": "今晚剩余", "kc_tab_made": "今天要串", "kc_tab_plan": "备串计划", "kc_tab_items": "清单", "kc_g_meat": "肉", "kc_g_sea": "海鲜", "kc_g_veg": "蔬菜", "kc_g_other": "其他", "kc_qty": "根数", "kc_zero": "没有", "kc_mm_hint": "有的串今天没有计划、也没记串了多少：剩的不是 0 的，要在那一行填「今天串了几根」，不然算不出哪些是昨天的、要扔。", "kc_mm_lbl": "今天串了", "kc_ph_left": "剩", "kc_mm_need": "填「今天串了几根」", "kc_plan_clear0": "要去掉这一种的计划，请填 0（空着 = 不改）。", "kc_task_fail": "任务没自动打勾：{e}", "kc_task_past": "{d} 晚上没数完：已经补不了（只能数今天的），算漏做；觉得不该算可以申诉。", "kc_task_past_m": "{d} 没记串了多少：已经补不了，算漏做；觉得不该算可以申诉。", "kc_made_plan": "今天按计划串了 {n} 根", "kc_made_rec": "今天串了 {n} 根", "kc_old": "其中 {n} 根是昨天串的：今晚扔掉", "kc_over": "比可能剩的多 {n} 根：数错了，还是今天串的没记？", "kc_count_for": "{d} 晚上 · 每种都填剩几根，没有填 0。数完不再串。", "kc_too_early": "晚上 {t} 以后才能数（厨房最后点单以后）。", "kc_boss_any": "员工晚上 {t} 以后才能数；老板和后厨主管什么时候都能改。", "kc_done_at": "✓ 数完了 {t} · {n}", "kc_done_sum": "剩 {a} 根，扔 {w} 根", "kc_stale": "数完以后又改了：请再点一次「数完了」。", "kc_filled": "已填 {a} / {b}", "kc_saving": "还有 {n} 个在保存…", "kc_finish": "✓ 数完了", "kc_finish_again": "✓ 再确认一次数完了", "kc_fill_all_hint": "还有 {n} 种没填（没有就填 0）", "kc_throw_h": "今晚扔掉（昨天串的）：", "kc_throw_none": "没有要扔的。", "kc_over_list": "比可能剩的多：{l}（数错了，还是今天串的没记？）", "kc_made_for": "{d} · 照单串好以后记下来", "kc_no_plan": "还没有计划，问老板。串好以后也可以先记下今天串了多少。", "kc_guests_n": "预定 {n} 人", "kc_plan_by": "计划 {t} · {n}", "kc_base_none_made": "昨晚没数完：剩的没算进去，要串 = 要备好的全部。", "kc_made_done": "✓ 记好了 {t} · {n}", "kc_make_line": "要备好 {t} · 剩 {b} → 要串 {n}", "kc_make_none": "这一种没有计划（今天不串）", "kc_make_n": "串 {n}", "kc_made_was": "记的是 {n}（{w}）", "kc_made_save": "✓ 按这些数做完", "kc_made_save2": "保存改动", "kc_made_save_free": "记下今天串了多少", "kc_made_hint": "框里先填的是「要串」的数；实际串的不一样就改。每种都要有数（没串填 0）。", "kc_base_ok": "基础：前一晚数的（{t} · {n}），昨天的扔了 {w} 根。下面的「剩」能用到这一天。", "kc_base_none": "昨晚还没数完：剩的不知道，要串 = 要备好的全部。", "kc_base_none_future": "前一晚还没数：那天晚上数完以后，「剩」和「要串」会自动算好。", "kc_guests": "预定人数", "kc_note": "备注", "kc_note_ph": "例如：圣诞聚会 30 人", "kc_copy_lw": "照上周同一天（只填空着的）", "kc_plan_hint": "每种填「这一天要备好几根」，App 减掉剩的算出要串几根。框里灰色的数是上周同一天。", "kc_plan_save": "保存计划", "kc_left_b": "剩 {n}", "kc_lw": "上周 {n}", "kc_i_zh": "中文名", "kc_i_de": "德文名", "kc_i_grp": "分组", "kc_i_sort": "顺序", "kc_i_off": "停用了", "kc_i_edit": "改", "kc_i_hide": "停用", "kc_i_show": "再用", "kc_items_hint": "要数的串（顺序和冰箱里一样）。换菜单时在这里加、改、停用；停用的不用数，以前的记录都留着。", "kc_i_new": "＋ 加一种串", "kc_i_hide_q": "停用「{n}」？以后晚上不用数它，以前的记录都留着。", "kc_not_saved": "有的数没保存上（网络？）。请稍等再点一次。", "kc_finished": "数完了。今晚要扔 {w} 根。", "kc_fill_all": "每种都要填一个数（没有就填 0）。", "kc_made_ok": "记好了。", "kc_made_ok_task": "记好了，任务也打勾了。", "kc_plan_empty": "还没填任何数。", "kc_plan_saved": "{d} 的计划保存了。", "kc_copy_none": "上周同一天没有计划，或者都已经填了。", "kc_copied": "填了 {n} 种（上周同一天的数），检查一下再保存。", "kc_task_go_count": "🍢 去数串 →", "kc_task_go_made": "🔪 打开「今天要串」→", "kc_task_done_check": "已经在「串」页数完了，但没自动打勾？点这里打勾", "kc_task_done_check_m": "已经记好串了多少，但没自动打勾？点这里打勾", "kc_task_done_photo": "已经做完了：拍照打勾", "act_kitchen_count": "后厨：数完剩余的串", "act_kitchen_plan": "后厨：备串计划", "act_kitchen_made": "后厨：记串了多少", "act_kitchen_item": "后厨：串的清单"});
 Object.assign(I18N.de, {"kc_h": "🍢 Küche: Spieße", "kc_t_count": "Rest zählen", "kc_t_made": "Heute aufspießen", "kc_t_plan": "Spieß-Plan", "kc_title": "🍢 Spieße (Küche)", "kc_tab_count": "Rest heute", "kc_tab_made": "Heute aufspießen", "kc_tab_plan": "Plan", "kc_tab_items": "Liste", "kc_g_meat": "Fleisch", "kc_g_sea": "Fisch & Meeresfrüchte", "kc_g_veg": "Gemüse", "kc_g_other": "Sonstiges", "kc_qty": "Anzahl Spieße", "kc_zero": "keine", "kc_mm_hint": "Für manche Sorten gibt es heute weder Plan noch Eintrag: wenn Rest > 0, in der Zeile „heute aufgespießt“ eintragen, sonst ist unklar, was von gestern ist und weg muss.", "kc_mm_lbl": "Heute aufgespießt", "kc_ph_left": "Rest", "kc_mm_need": "„Heute aufgespießt“ eintragen", "kc_plan_clear0": "Um den Plan für diese Sorte zu entfernen, 0 eintragen (leer = keine Änderung).", "kc_task_fail": "Aufgabe nicht automatisch abgehakt: {e}", "kc_task_past": "Am Abend {d} nicht fertig gezählt: kann nicht nachgeholt werden (nur heute zählbar), zählt als nicht erledigt; Einspruch möglich.", "kc_task_past_m": "Am {d} nichts eingetragen: kann nicht nachgeholt werden, zählt als nicht erledigt; Einspruch möglich.", "kc_made_plan": "Heute laut Plan {n} aufgespießt", "kc_made_rec": "Heute {n} aufgespießt", "kc_old": "davon {n} von gestern: heute wegwerfen", "kc_over": "{n} mehr als möglich: verzählt oder Aufgespießtes nicht eingetragen?", "kc_count_for": "Abend {d} · für jede Sorte den Rest eintragen, keine = 0. Danach nichts mehr aufspießen.", "kc_too_early": "Zählen erst ab {t} Uhr (nach der letzten Küchenbestellung).", "kc_boss_any": "Mitarbeiter zählen ab {t} Uhr; Chef und Küchenleitung können jederzeit ändern.", "kc_done_at": "✓ Fertig gezählt {t} · {n}", "kc_done_sum": "{a} übrig, {w} wegwerfen", "kc_stale": "Nach dem Zählen geändert: bitte noch einmal „Fertig gezählt“ tippen.", "kc_filled": "{a} / {b} eingetragen", "kc_saving": "Speichere noch {n} …", "kc_finish": "✓ Fertig gezählt", "kc_finish_again": "✓ Nochmals fertig gezählt", "kc_fill_all_hint": "Noch {n} Sorten offen (keine = 0)", "kc_throw_h": "Heute wegwerfen (von gestern):", "kc_throw_none": "Nichts wegzuwerfen.", "kc_over_list": "Mehr als möglich: {l} (verzählt oder nicht eingetragen?)", "kc_made_for": "{d} · nach dem Aufspießen eintragen", "kc_no_plan": "Noch kein Plan – bitte den Chef fragen. Was du schon aufgespießt hast, kannst du trotzdem eintragen.", "kc_guests_n": "{n} Gäste reserviert", "kc_plan_by": "Plan {t} · {n}", "kc_base_none_made": "Gestern nicht fertig gezählt: Rest nicht abgezogen, aufspießen = ganze Zielmenge.", "kc_made_done": "✓ Eingetragen {t} · {n}", "kc_make_line": "Ziel {t} · Rest {b} → aufspießen {n}", "kc_make_none": "Kein Plan für diese Sorte (heute nicht aufspießen)", "kc_make_n": "{n} aufspießen", "kc_made_was": "eingetragen {n} ({w})", "kc_made_save": "✓ Fertig mit diesen Mengen", "kc_made_save2": "Änderungen speichern", "kc_made_save_free": "Heute Aufgespießtes eintragen", "kc_made_hint": "Vorausgefüllt ist die Plan-Menge; wenn du anders aufgespießt hast, ändere sie. Jede Sorte braucht eine Zahl (keine = 0).", "kc_base_ok": "Grundlage: Zählung am Vorabend ({t} · {n}), {w} von gestern weggeworfen. „Rest“ unten ist bis zu diesem Tag verwendbar.", "kc_base_none": "Gestern Abend nicht fertig gezählt: Rest unbekannt, aufspießen = ganze Zielmenge.", "kc_base_none_future": "Der Vorabend ist noch nicht gezählt: danach werden „Rest“ und „aufspießen“ automatisch berechnet.", "kc_guests": "Reservierte Gäste", "kc_note": "Notiz", "kc_note_ph": "z. B. Weihnachtsfeier 30 Pers.", "kc_copy_lw": "Wie letzte Woche (nur leere Felder)", "kc_plan_hint": "Pro Sorte eintragen, wie viele an diesem Tag bereit sein sollen; die App zieht den Rest ab. Grau im Feld = gleicher Tag letzte Woche.", "kc_plan_save": "Plan speichern", "kc_left_b": "Rest {n}", "kc_lw": "letzte Woche {n}", "kc_i_zh": "Chinesischer Name", "kc_i_de": "Deutscher Name", "kc_i_grp": "Gruppe", "kc_i_sort": "Reihenfolge", "kc_i_off": "deaktiviert", "kc_i_edit": "Ändern", "kc_i_hide": "Deaktivieren", "kc_i_show": "Wieder aktiv", "kc_items_hint": "Die Spieße zum Zählen (Reihenfolge wie im Kühlschrank). Bei neuer Karte hier ergänzen, ändern oder deaktivieren; deaktivierte werden nicht gezählt, alte Daten bleiben.", "kc_i_new": "＋ Neue Sorte", "kc_i_hide_q": "„{n}“ deaktivieren? Abends nicht mehr zählen; alte Daten bleiben.", "kc_not_saved": "Nicht alle Zahlen gespeichert (Netz?). Bitte kurz warten und nochmal tippen.", "kc_finished": "Fertig gezählt. Heute {w} wegwerfen.", "kc_fill_all": "Bitte für jede Sorte eine Zahl eintragen (keine = 0).", "kc_made_ok": "Eingetragen.", "kc_made_ok_task": "Eingetragen, Aufgabe abgehakt.", "kc_plan_empty": "Noch keine Zahl eingetragen.", "kc_plan_saved": "Plan für {d} gespeichert.", "kc_copy_none": "Letzte Woche gab es keinen Plan, oder alles ist schon ausgefüllt.", "kc_copied": "{n} Sorten von letzter Woche übernommen – bitte prüfen und speichern.", "kc_task_go_count": "🍢 Spieße zählen →", "kc_task_go_made": "🔪 „Heute aufspießen“ öffnen →", "kc_task_done_check": "Schon auf der Spieße-Seite gezählt, aber nicht abgehakt? Hier abhaken", "kc_task_done_check_m": "Aufgespießtes schon eingetragen, aber nicht abgehakt? Hier abhaken", "kc_task_done_photo": "Schon erledigt: Foto zum Abhaken", "act_kitchen_count": "Küche: Spieße gezählt", "act_kitchen_plan": "Küche: Spieß-Plan", "act_kitchen_made": "Küche: Aufgespießtes eingetragen", "act_kitchen_item": "Küche: Spieß-Liste"});
 
+// v210（四件后续：比例「改」、调整、只改这一家店的配方、门店一级的「忙的时候多订」）新文字
+Object.assign(I18N.zh, {
+  rate_edit_btn: '改', rate_future_tag: '还没生效', rate_edit_h: '改 {d} 生效的比例', rate_edit_cancel: '不改了', rate_edit_day_fixed: '改的时候生效日不能换。要换日子：先点「不改了」，再设一个新的（原来这天的比例还会留着）', ord_boost_go_page: '去订货页「忙的时候多订」里改 ›',
+  rate_edit_q: '生效日 {d} 的比例会从 {a} 改成 {b}（厨房 / Runner / 吧台 %）。确定吗？',
+  rate_updated: '改好了：{d} 起按新的比例算', rate_nochange: '比例和原来一样，没有改。', rate_changed_at: '{t} 改过', act_rate_change: '改还没生效的比例',
+  adj_big_q: '确定要从 {a} 转 {x} 给 {b} 吗？金额超过 200 €，请再核对一次。', adj_list_sum: '这周 {n} 笔调整，一共 {x}',
+  aih_r_one: '只改这一家店（{s}）',
+  aih_r_one_q: '{s} 会有自己的配方：{n} {u}。另一家店还用原来的 {o} {u}。以后改两家店共用的配方，{s} 不会跟着变（要回到共用的：打开 {s} 的这个配方，点「去掉这个配方」）。确定吗？',
+  aih_r_one_done: '{a}：{s} 现在用自己的配方',
+  ord_boost_store: '这家店 · 每个送货日（所有供应商）', ord_boost_sups: '这天送货：{l}', ord_boost_ro: '📈 {d} 这批多订 ×{f}', ord_boost_go: '在上面「忙的时候多订」里改 ›'
+});
+Object.assign(I18N.de, {
+  rate_edit_btn: 'Ändern', rate_future_tag: 'noch nicht gültig', rate_edit_h: 'Anteile ab {d} ändern', rate_edit_cancel: 'Nicht ändern', rate_edit_day_fixed: 'Beim Ändern bleibt das Datum gleich. Anderes Datum: erst „Nicht ändern“ tippen, dann neue Anteile anlegen (die Anteile an diesem Tag bleiben bestehen)', ord_boost_go_page: 'Auf der Bestellseite unter „Mehr bestellen“ ändern ›',
+  rate_edit_q: 'Die Anteile ab {d} werden von {a} auf {b} geändert (Küche / Runner / Bar %). Sicher?',
+  rate_updated: 'Geändert: ab {d} gelten die neuen Anteile', rate_nochange: 'Die Anteile sind gleich geblieben – nichts geändert.', rate_changed_at: 'geändert {t}', act_rate_change: 'Künftige Anteile geändert',
+  adj_big_q: 'Wirklich {x} von {a} an {b} übertragen? Der Betrag ist über 200 € – bitte noch einmal prüfen.', adj_list_sum: '{n} Korrekturen diese Woche, zusammen {x}',
+  aih_r_one: 'Nur diese Filiale ({s})',
+  aih_r_one_q: '{s} bekommt ein eigenes Rezept: {n} {u}. Die andere Filiale bleibt bei {o} {u}. Spätere Änderungen am gemeinsamen Rezept gelten dann nicht für {s} (zurück zum gemeinsamen: dieses Rezept von {s} öffnen und „Rezept entfernen“ tippen). Sicher?',
+  aih_r_one_done: '{a}: {s} hat jetzt ein eigenes Rezept',
+  ord_boost_store: 'diese Filiale · jeder Liefertag (alle Lieferanten)', ord_boost_sups: 'Liefert an diesem Tag: {l}', ord_boost_ro: '📈 Lieferung {d}: ×{f}', ord_boost_go: 'Oben unter „Mehr bestellen“ ändern ›'
+});
+
 // ============ 工具 ============
 const LS = {
   get(k, d){ try{ const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
@@ -2470,7 +2490,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=42'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=43'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2631,6 +2651,11 @@ function toast(msg, isErr){
 const ERR_ZH = {
   ADJ_SAME: '「从谁」和「给谁」不能是同一个人。',   // v206
   ADJ_PICK: '请选好「从谁」和「给谁」。',   // v206
+  ADJ_WEEK: '没选是哪一周。请回到周结页，选好那一周再记。',   // v210
+  ADJ_STAFF: '选的人不在员工名单里（可能刚被删掉）。请刷新页面，重新选「从谁」和「给谁」。',   // v210
+  ADJ_AMOUNT: '金额要大于 0，例如 12,50。',   // v210
+  RATE_SUM_OVER: '三个比例加起来不能超过 100%。请改小一点再保存。',   // v210
+  RATE_LOCKED: '这一天的比例已经生效（或已经用来算过小费），不能再改。要换比例，请选明天或以后的日期，设一个新的。',   // v210
   BON_DATE_CHOICE: '只能改成今天或昨天。都不对请点「都不对，重拍」把顶部的日期拍清楚；重拍还不行，请把 Bon 交给老板录入。',
   BON_NEWDATE_BAD: '新日期不对：不能是今天以后的日子。请重新选日期。',
   BON_DATE_REASON: '请写一句为什么改日期（会记进日志）。',
@@ -2950,6 +2975,11 @@ const ERR_ZH = {
 const ERR_DE = {
   ADJ_SAME: '„Von“ und „An“ dürfen nicht dieselbe Person sein.',   // v206
   ADJ_PICK: 'Bitte „Von“ und „An“ auswählen.',   // v206
+  ADJ_WEEK: 'Keine Woche gewählt. Bitte im Wochenabschluss die Woche wählen und dann eintragen.',   // v210
+  ADJ_STAFF: 'Diese Person steht nicht in der Mitarbeiterliste (evtl. gerade entfernt). Bitte die Seite neu laden und „Von“ / „An“ neu wählen.',   // v210
+  ADJ_AMOUNT: 'Der Betrag muss größer als 0 sein, z. B. 12,50.',   // v210
+  RATE_SUM_OVER: 'Die drei Anteile dürfen zusammen höchstens 100 % sein. Bitte verringern und erneut speichern.',   // v210
+  RATE_LOCKED: 'Diese Anteile gelten schon (oder wurden schon für Trinkgeld verwendet) und können nicht mehr geändert werden. Für neue Anteile bitte morgen oder später als Startdatum wählen.',   // v210
   BON_DATE_CHOICE: 'Nur heute oder gestern möglich. Stimmt beides nicht, „Beides falsch – neu fotografieren“ tippen und das Datum oben scharf fotografieren; klappt es dann nicht, den Bon dem Chef zum Eintragen geben.',
   BON_NEWDATE_BAD: 'Neues Datum ungültig: Es darf nicht in der Zukunft liegen. Bitte ein anderes Datum wählen.',
   BON_DATE_REASON: 'Bitte kurz schreiben, warum das Datum geändert wird (kommt ins Protokoll).',
@@ -3295,7 +3325,7 @@ const RPC_RO = new Set(('admin_badge_counts admin_announce_detail admin_announce
   + 'inv_stock_home inv_stock_levels inv_supplier_items_list inv_target_hints inv_todo inv_week_list kitchen_hours ksched_pending library_item list_disputes list_login_staff list_rates list_requests '
   + 'list_staff lock_rounds_open miss_reviews month_archive_state my_announcements my_audits my_bon_status my_hint_acks my_led_tasks my_library my_miss_results my_notices my_receipts my_store_tasks my_task_misses my_task_record my_tasks '
   + 'my_tip_totals my_week onb_check_mine onb_checklist onb_mine onb_sched_info push_status receipt_image receipts_open recon_day recon_home recon_imports recon_overview recon_report_file sched_bon_helpers '
-  + 'sched_notices sched_pending_changes sched_tip_check sched_week settle_payers settlement sop_gaps sop_item sop_tree task_catalog task_named_list task_roles week_envelopes week_extras week_overview week_receipts').split(' '));
+  + 'sched_notices sched_pending_changes sched_tip_check sched_week settle_payers settlement sop_gaps sop_item sop_tree task_catalog task_named_list task_roles week_adjustments week_envelopes week_extras week_overview week_receipts').split(' '));
 // 不是 stable、但对这台手机来说只是「看」的请求（顺带记一下最后在线、补记漏做、记搜不到的词）：不合并，也不算「做事」
 const RPC_LOOK = new Set('me my_docs admin_docs admin_misses admin_task_find_ctx inv_search'.split(' '));
 const rpcQ = { n: 0, wait: [], live: new Map(), w: 0 };
@@ -8160,7 +8190,7 @@ function aihRecipeHTML(){
       <div class="meta">${esc(t('aih_r_line', { o: drkNum(h.old), n: drkNum(h.new), u: h.unit }))}</div>
       <div class="small muted">${esc(t(+h.diff < 0 ? 'aih_r_why_less' : 'aih_r_why_more', { a: dayLabel(h.base_day), b: dayLabel(h.day), g: drkNum(h.item_glasses), d: drkNum(Math.abs(+h.diff)), name: invName(h) }))}</div>
       ${h.rstore ? '' : `<div class="small" style="color:var(--copper);margin-top:4px">${esc(t('aih_r_both'))}</div>`}
-      ${state.viewAs ? '' : `<div class="acts"><button class="link" data-act="aih-r-ok" data-i="${i}">${esc(t('aih_r_ok', { n: drkNum(h.new), u: h.unit }))}</button><button class="link" data-act="aih-no" data-key="${esc(h.key)}">${esc(t('aih_no'))}</button></div>`}</div>`).join('')}</div>`;
+      ${state.viewAs ? '' : `<div class="acts" style="flex-wrap:wrap;row-gap:6px"><button class="link" data-act="aih-r-ok" data-i="${i}">${esc(t('aih_r_ok', { n: drkNum(h.new), u: h.unit }))}</button>${h.rstore ? '' : `<button class="link" data-act="aih-r-one" data-i="${i}">${esc(t('aih_r_one', { s: h.store }))}</button>`}<button class="link" data-act="aih-no" data-key="${esc(h.key)}">${esc(t('aih_no'))}</button></div>`}</div>`).join('')}</div>`;
 }
 function aihTargetHTML(store){
   const T = invS().tHints; if (!T) return '';
@@ -8213,7 +8243,7 @@ function renderInvOrders(){
       ${W && sp.delivery_dow ? `<button class="btn${sp.open || sp.order_today ? '' : ' ghost'}" data-act="ord-start" data-store="${st.store}" data-sup="${sp.id}" style="margin-top:6px;height:auto;min-height:52px;padding:8px 10px;line-height:1.25">${esc(sp.open ? (exp ? t('ord_resume_x', { d: dayLabel(sp.open.delivery_day) }) : old ? t('ord_resume_d', { d: dayLabel(od), n: nOpen }) : t('ord_resume', { n: nOpen })) : t('ord_start'))}</button>` : ''}
       <button class="btn ghost" data-act="ord-targets" data-store="${st.store}" data-sup="${sp.id}" style="margin-top:6px;height:46px;font-size:15px">${esc(t('ord_targets_btn'))}${+sp.no_target ? ` <span class="tag pend">${sp.no_target}</span>` : ''}</button>
       ${+sp.no_target ? `<div class="small" style="color:var(--copper);margin-top:4px">${esc(t('ord_no_target', { n: sp.no_target }))}</div>` : ''}
-      ${ordBoostHTML(st.store, sp, W)}
+      ${ordBoostROHTML(st.store, sp, W)}
       ${D.admin && W ? `<details class="fold" style="margin-top:8px"><summary>${esc(t('ord_days_edit'))}</summary><div class="inner"><div class="row" style="gap:8px;flex-wrap:wrap;align-items:center">
         <label class="small" for="ord-do-${st.store}-${sp.id}">${esc(t('ord_day_order'))}</label>${dowSel(`ord-do-${st.store}-${sp.id}`, sp.order_dow, true)}
         <label class="small" for="ord-dd-${st.store}-${sp.id}">${esc(t('ord_day_delivery'))}</label>${dowSel(`ord-dd-${st.store}-${sp.id}`, sp.delivery_dow || 5, false)}
@@ -8222,11 +8252,12 @@ function renderInvOrders(){
       ${(sp.orders || []).length ? `<div class="small muted" style="margin:10px 0 4px">${esc(t('ord_recent'))}</div><div class="list">${sp.orders.map(ordOrderRow).join('')}</div>` : ''}</div>`; };
   const un = D.unlinked || [];
   $('#main').innerHTML = `${head}
-    ${(st.suppliers || []).map(sup).join('')}${aihTargetHTML(st.store)}
+    ${ordBoostStoreHTML(st, W)}${(st.suppliers || []).map(sup).join('')}${aihTargetHTML(st.store)}
     <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('ord_hint'))}</div></details>
     ${un.length ? `<details class="fold"><summary>${esc(t('ord_unlinked_h', { n: un.length }))}</summary><div class="inner"><div class="small muted" style="margin-bottom:8px">${esc(t('ord_unlinked_hint'))}</div>
       ${un.map(x => `<div style="margin-bottom:10px"><div>${esc(x.name)} <span class="small muted">· ${esc(t('ord_art', { a: x.art_no }))} · ${esc(ordUnit(x))}</span></div>
         <select class="input" data-ordlink="${x.id}" aria-label="${esc(t('ord_link_pick'))}" style="margin-top:4px"><option value="">${esc(t('ord_link_pick'))}</option>${(D.drinks || []).map(d => `<option value="${d.id}">${esc(invName(d))}</option>`).join('')}</select></div>`).join('')}</div></details>` : ''}`;
+  if (S.ordBoostJump && $('#ord-boost')){ S.ordBoostJump = false; const d = $('#ord-boost'); d.open = true; d.scrollIntoView({ block: 'start' }); }   // v210：从供应商卡片 / 订货单点「在上面…改」过来
 }
 // v188：老板看一个供应商的全部商品配了哪件饮料，配错的「改」、不用订的「去掉」（只影响以后的订货建议）
 async function viewInvOrdSi(){
@@ -8295,22 +8326,36 @@ function ordCalcText(l){
 function ordBoostBanner(o, ed){
   const cur = o.boost ? +o.boost.factor : 1, used = +((o.lines || []).find(l => l.boost != null) || {}).boost || 1, out = [];
   if (o.status !== 'open'){ return used !== 1 ? `<div class="small" style="color:var(--celadon-deep);font-weight:600;margin-bottom:6px">${esc(t('ord_boost_used', { f: drkNum(used) }))}${o.boost && o.boost.note && Math.abs(cur - used) < 0.001 ? ' · ' + esc(o.boost.note) : ''}</div>` : ''; }   // 确认过的：写当时按几倍算的
-  if (o.boost) out.push(`<div class="small" style="color:var(--celadon-deep);font-weight:600;margin-bottom:6px">${esc(t('ord_boost_on', { f: drkNum(cur) }))}${o.boost.note ? ' · ' + esc(o.boost.note) : ''}</div>`);
+  if (o.boost) out.push(`<div class="small" style="color:var(--celadon-deep);font-weight:600;margin-bottom:6px">${esc(t('ord_boost_on', { f: drkNum(cur) }))}${o.boost.note ? ' · ' + esc(o.boost.note) : ''}${ed ? ` <button class="link" data-act="ord-boost-go" data-store="${esc(o.store)}" style="font-weight:400">${esc(t('ord_boost_go_page'))}</button>` : ''}</div>`);
   if (o.status === 'open' && Math.abs(cur - used) > 0.001) out.push(`<div class="infobox" style="background:#FFF1C9;color:#6B5200">${esc(t('ord_boost_changed', { f: drkNum(cur), g: drkNum(used) }))}${ed ? `<div class="rc-quick"><button data-act="ord-recalc">${esc(t('ord_recalc'))}</button></div>` : ''}</div>`);
   const sd = o.status === 'open' ? (o.same_day || []) : []; if (sd.length) out.push(`<div class="infobox">${esc(t('ord_same_day', { l: sd.map(x => t('ord_same_day_one', { n: x.confirmed_name || '', t: fmtDateTime(x.confirmed_at), k: x.n })).join(state.lang === 'zh' ? '；' : '; ') }))}</div>`);
   return out.join('');
 }
-// v197：供应商卡片上「忙的时候多订」：接下来 8 个送货日，每个选倍数 + 原因
+// v197：「忙的时候多订」：接下来的送货日，每个选倍数 + 原因
+// v210（drinks-9）：数据库本来就按「店 + 送货日」存（不分供应商）：在订货页门店一级设一次，供应商卡片里只显示
 const ORD_BF = [0.5, 0.8, 1, 1.2, 1.4, 1.5, 1.8, 2, 2.5, 3];
-function ordBoostHTML(store, sp, W){
-  const B = sp.boosts || [], on = B.filter(x => x.boost); if (!B.length || (!W && !on.length)) return '';
-  const row = x => { const f = x.boost ? +x.boost.factor : 1, note = (x.boost && x.boost.note) || '', id = `${store}-${sp.id}-${x.day}`;
+function ordBoostDays(st){
+  const M = new Map();
+  (st.suppliers || []).forEach(sp => (sp.boosts || []).forEach(x => { const d = M.get(x.day) || { day: x.day, boost: null, names: [] };
+    if (!d.boost && x.boost) d.boost = x.boost; if (!d.names.includes(sp.name)) d.names.push(sp.name); M.set(x.day, d); }));
+  return [...M.values()].sort((a, b) => a.day < b.day ? -1 : a.day > b.day ? 1 : 0);
+}
+function ordBoostStoreHTML(st, W){
+  const B = ordBoostDays(st), on = B.filter(x => x.boost), store = st.store; if (!B.length || (!W && !on.length)) return '';
+  const sep = state.lang === 'zh' ? '、' : ', ';
+  const row = x => { const f = x.boost ? +x.boost.factor : 1, note = (x.boost && x.boost.note) || '', id = `${store}-${x.day}`;
     if (!W) return x.boost ? `<div class="small" style="margin:4px 0">${esc(dayLabel(x.day))} · ×${esc(drkNum(f))}${note ? ' · ' + esc(note) : ''}</div>` : '';
     const opts = [...new Set([...ORD_BF, f])].sort((a, b) => a - b);
-    return `<div style="margin:8px 0;padding-bottom:8px;border-bottom:1px solid var(--line)"><div class="row" style="gap:8px;align-items:center;justify-content:space-between"><strong class="small">${esc(dayLabel(x.day))}</strong>
+    return `<div style="margin:8px 0;padding-bottom:8px;border-bottom:1px solid var(--line)"><div class="row" style="gap:8px;align-items:center;justify-content:space-between"><div style="min-width:0"><strong class="small">${esc(dayLabel(x.day))}</strong>
+      <div class="small muted">${esc(t('ord_boost_sups', { l: x.names.join(sep) }))}</div></div>
       <select class="input" id="ord-bf-${id}" aria-label="${esc(t('ord_boost_f', { d: dayLabel(x.day) }))}" style="flex:0 0 auto;width:auto">${opts.map(v => `<option value="${v}"${v === f ? ' selected' : ''}>×${esc(drkNum(v))}</option>`).join('')}</select></div>
-      <div class="row" style="gap:8px;margin-top:6px"><input class="input" id="ord-bn-${id}" maxlength="200" value="${esc(note)}" placeholder="${esc(t('ord_boost_ph'))}" aria-label="${esc(t('ord_boost_ph'))}" style="flex:1;min-width:0"><button class="btn ghost" data-act="ord-boost-save" data-store="${esc(store)}" data-sup="${esc(sp.id)}" data-day="${esc(x.day)}" style="flex:0 0 auto;width:auto;height:44px;padding:0 14px">${esc(t('ord_boost_save'))}</button></div></div>`; };
-  return `<details class="fold"${invS().ordBoostOpen === store ? ' open' : ''} style="margin-top:8px"><summary>${esc(t('ord_boost_h'))} <span class="small muted">· ${esc(t('ord_boost_all'))}</span>${on.length ? ` <span class="tag pend">${on.length}</span>` : ''}</summary><div class="inner"><div class="small muted" style="margin-bottom:4px">${esc(t('ord_boost_hint'))}</div>${B.map(row).join('')}</div></details>`;
+      <div class="row" style="gap:8px;margin-top:6px"><input class="input" id="ord-bn-${id}" maxlength="200" value="${esc(note)}" placeholder="${esc(t('ord_boost_ph'))}" aria-label="${esc(t('ord_boost_ph'))}" style="flex:1;min-width:0"><button class="btn ghost" data-act="ord-boost-save" data-store="${esc(store)}" data-day="${esc(x.day)}" style="flex:0 0 auto;width:auto;height:44px;padding:0 14px">${esc(t('ord_boost_save'))}</button></div></div>`; };
+  return `<details class="fold" id="ord-boost" style="margin-bottom:10px;scroll-margin-top:90px"${invS().ordBoostOpen === store ? ' open' : ''}><summary><span style="min-width:0">${esc(t('ord_boost_h'))}<span class="small muted" style="display:block;font-weight:400">${esc(t('ord_boost_store'))}</span></span>${on.length ? ` <span class="tag pend">${on.length}</span>` : ''}</summary><div class="inner">${W ? `<div class="small muted" style="margin-bottom:4px">${esc(t('ord_boost_hint'))}</div>` : ''}${B.map(row).join('')}</div></details>`;
+}
+function ordBoostROHTML(store, sp, W){   // v210：供应商卡片里只显示这个供应商送货日里设了倍数的，改去门店一级
+  const on = (sp.boosts || []).filter(x => x.boost); if (!on.length) return '';
+  return `<div style="margin-top:8px">${on.map(x => `<div class="small" style="color:var(--celadon-deep);font-weight:600;margin:2px 0">${esc(t('ord_boost_ro', { d: dayLabel(x.day), f: drkNum(+x.boost.factor) }))}${x.boost.note ? ` <span class="muted" style="font-weight:400">· ${esc(x.boost.note)}</span>` : ''}</div>`).join('')}
+    ${W ? `<button class="link" data-act="ord-boost-go" data-store="${esc(store)}">${esc(t('ord_boost_go'))}</button>` : ''}</div>`;
 }
 function ordSugHTML(l, ed){ return ed && +l.qty !== +l.suggest ? `<button class="link" data-act="ord-sug" data-si="${l.si}">${esc(t('ord_use_sug', { n: drkNum(l.suggest) }))}</button>` : `<span class="small muted">${esc(t('ord_sug', { n: drkNum(l.suggest) }))}</span>`; }
 function ordTicks(o){ const a = LS.get('ordTick:' + o.id, []); return new Set(Array.isArray(a) ? a : []); }   // v180：照着清单往供应商那边输，输好一行点一下（记在这台设备上）
@@ -8505,7 +8550,7 @@ function renderInvRecipe(){
     <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn" data-act="drk-rc-save">${esc(t('drk_rc_save'))}</button>${R.id ? `<button class="btn ghost danger" data-act="drk-rc-end">${esc(t('drk_rc_end'))}</button>` : ''}</div>`;
 }
 // v206（网页 3/4，drinks-13）：查看模式下饮料页、订货页上会写数据的按钮都拿掉（数据库会挡，但不该让人点了才知道）
-const DRK_W = ['aih-r-ok', 'aih-t-ok', 'aih-no', 'drk-grp-ign', 'drk-guess', 'drk-i-cost-use', 'drk-i-edit', 'drk-i-save', 'drk-ignore', 'drk-link', 'drk-m-fix', 'drk-m-fix-save', 'drk-off', 'drk-rc-add', 'drk-rc-cq',
+const DRK_W = ['aih-r-ok', 'aih-r-one', 'aih-t-ok', 'aih-no', 'drk-grp-ign', 'drk-guess', 'drk-i-cost-use', 'drk-i-edit', 'drk-i-save', 'drk-ignore', 'drk-link', 'drk-m-fix', 'drk-m-fix-save', 'drk-off', 'drk-rc-add', 'drk-rc-cq',
   'drk-rc-del', 'drk-rc-end', 'drk-rc-new', 'drk-rc-open', 'drk-rc-menu', 'drk-rc-save', 'drk-sel-ign', 'drk-sugg-all', 'drk-sugg-edit', 'drk-sugg-link', 'drk-sugg-new', 'drk-sugg-rej', 'drk-sugg-save', 'drk-unignore', 'drk-unlink',
   'ord-boost-save', 'ord-cancel', 'ord-confirm', 'ord-days-save', 'ord-recalc', 'ord-si-off', 'ord-si-pick', 'ord-start', 'ord-sug', 'ord-step', 'ord-t-fill', 'ord-t-use', 'lv-ai', 'ct-start'];
 function drkViewStrip(){
@@ -10876,22 +10921,25 @@ async function adjAdd(el){
   if (isNaN(a.amt) || a.amt <= 0) return fieldErr(F('a-amt'), t('bad_amount'));
   if (!a.reason) return fieldErr(F('a-reason'), t('adj_need_reason'));
   if (el.disabled) return;
+  if (a.amt > 20000){ const nm = id => (document.querySelector(`#a-from option[value="${id}"]`) || {}).textContent || '?';   // v210：超过 200 € 再问一次（正好 200 € 不问）
+    if (!confirm(t('adj_big_q', { a: nm(a.from), x: eur(a.amt), b: nm(a.to) }))) return; }
+  if (el.disabled) return;
   el.disabled = true;
   try { await rpc('add_adjustment', { ...tok(), p_week_start: state.week, p_from: a.from, p_to: a.to, p_amount_cents: a.amt, p_reason: a.reason });
-    toast(t('adj_added')); state.adjList = null; keepScroll(render); }
-  catch(e){ el.disabled = false; fieldErr(box, errText(e)); }
+    toast(t('adj_added')); state.adjList = null; await keepScroll(render); if (state.adjListOpen) adjListLoad(); }
+  catch(e){ el.disabled = false; const m = String(e && e.message || '');   // v210：服务器的检查也写在对应那一栏下面
+    fieldErr(m === 'ADJ_AMOUNT' ? F('a-amt') : /^ADJ_(PICK|SAME|STAFF)$/.test(m) ? F('a-to') : m === 'REASON_REQUIRED' ? F('a-reason') : box, errText(e)); }
 }
-// v206：这周已经加过的调整（数据库没有单独的读取函数：从最近的操作记录里找这一周的「加调整」；点开才读）
+// v210：这周加过的全部调整（数据库 v146 的 week_adjustments：从谁、给谁、金额、原因、谁加的、什么时候；点开才读）
 async function adjListLoad(){
-  const box = $('#adj-list'); if (!box) return; const wk = state.week;
+  const box = $('#adj-list'); if (!box) return; const wk = state.week; state.adjListOpen = true;
   box.innerHTML = `<div class="small muted">${esc(t('loading'))}</div>`;
-  const log = await soft(rpc('admin_audit', { ...tok(), p_limit: 1000 }), null);
+  const L = await soft(rpc('week_adjustments', { ...tok(), p_week_start: wk }), null);
   if (state.week !== wk || !$('#adj-list')) return;
-  if (!log){ box.innerHTML = retryHTML(t('adj_list_fail'), true).replace('data-act="re-render"', 'data-act="adj-list"'); return; }
-  const L = log.filter(x => x.action === 'adjustment_add' && x.detail && x.detail.week === wk);
-  const nm = id => id === null ? '?' : (state.staff.find(x => x.id === id) || (state.loginStaff || []).find(x => x.id === id) || {}).name || '?';
-  box.innerHTML = L.length ? `<div class="list">${L.map(x => `<div class="item"><div class="top"><div>${esc(nm(x.detail.from))} → ${esc(nm(x.detail.to))}</div><div class="amt num">${eur(+x.detail.amount_cents)}</div></div>
-      <div class="meta">${esc(x.detail.reason || '')} · ${esc(x.actor || '')} · ${esc(fmtDateTime(x.at))}</div></div>`).join('')}</div>` : `<div class="small muted">${esc(t('adj_list_none'))}</div>`;
+  if (!Array.isArray(L)){ box.innerHTML = retryHTML(t('adj_list_fail'), true).replace('data-act="re-render"', 'data-act="adj-list"'); return; }
+  const sum = L.reduce((a, x) => a + (+x.amount_cents || 0), 0);
+  box.innerHTML = L.length ? `<div class="small muted" style="margin:8px 0 4px">${esc(t('adj_list_sum', { n: L.length, x: eur(sum) }))}</div><div class="list">${L.map(x => `<div class="item"><div class="top"><div>${esc(x.from_name || '?')} → ${esc(x.to_name || '?')}</div><div class="amt num">${eur(+x.amount_cents)}</div></div>
+      <div class="meta">${esc(x.reason || '')}${x.created_by ? ' · ' + esc(x.created_by) : ''} · ${esc(fmtDateTime(x.created_at))}</div></div>`).join('')}</div>` : `<div class="small muted" style="margin-top:8px">${esc(t('adj_list_none'))}</div>`;
 }
 // v206：取数据失败时的一行：原因 + 「重试」（重画这一页）；small = 页面里的一小块（不是整页）
 function retryHTML(msg, small){
@@ -11643,19 +11691,24 @@ async function viewAdmin(){
     } else if (state.adminSub === 'rates'){
       const rates = await rpc('list_rates', tok()); state.rates = rates;
       const bd = berlinDay(), cur = rateFor(bd);   // v206（admin-8）：按柏林的日期（数据库 _today() 一样），不按手机的时区
+      const ed = state.rateEdit != null ? rates.find(r => r.id === state.rateEdit && r.editable === true) : null;   // v210：「改」还没生效的比例：表单预填这一行
+      if (!ed) state.rateEdit = null;
+      const pf = ed || cur, ef = ed ? ed.valid_from : bd;
       el().innerHTML = `<div class="sheet"><div class="muted small">${esc(t('current_rate'))}</div>
           <div style="font-size:22px;font-weight:700" class="num">${cur ? `${esc(t('kitchen'))} ${cur.kitchen_pct}% · ${esc(t('runner'))} ${cur.runner_pct}% · ${esc(t('bar'))} ${cur.bar_pct}%` : '–'}</div></div>
-        <h3>${esc(t('new_rate'))}</h3><div class="sheet">
+        <h3 id="rate-h">${esc(ed ? t('rate_edit_h', { d: fullDate(ed.valid_from) }) : t('new_rate'))}</h3><div class="sheet">
           <div id="r-pcts"><div class="row">
-            <div class="field"><label for="r-k">${esc(t('kitchen'))} %</label><input class="input num" id="r-k" inputmode="decimal" value="${cur?cur.kitchen_pct:''}"></div>
-            <div class="field"><label for="r-r">${esc(t('runner'))} %</label><input class="input num" id="r-r" inputmode="decimal" value="${cur?cur.runner_pct:''}"></div>
-            <div class="field"><label for="r-b">${esc(t('bar'))} %</label><input class="input num" id="r-b" inputmode="decimal" value="${cur?cur.bar_pct:''}"></div>
+            <div class="field"><label for="r-k">${esc(t('kitchen'))} %</label><input class="input num" id="r-k" inputmode="decimal" value="${pf?pf.kitchen_pct:''}"></div>
+            <div class="field"><label for="r-r">${esc(t('runner'))} %</label><input class="input num" id="r-r" inputmode="decimal" value="${pf?pf.runner_pct:''}"></div>
+            <div class="field"><label for="r-b">${esc(t('bar'))} %</label><input class="input num" id="r-b" inputmode="decimal" value="${pf?pf.bar_pct:''}"></div>
           </div></div>
-          <div class="small muted num" id="r-sum" style="margin:4px 0 10px">${cur ? esc(t('rate_sum_line', { s: +cur.kitchen_pct + +cur.runner_pct + +cur.bar_pct })) : ''}</div>
-          <div class="field" id="r-from-f"><label for="r-from">${esc(t('valid_from'))}</label><input class="input" type="date" id="r-from" min="${bd}" value="${bd}"></div>
-          <button class="btn" data-act="rate-save">${esc(t('save'))}</button></div>
-        <div class="list">${rates.map(r => `<div class="item"><div class="top"><div>${esc(t('valid_from'))} ${esc(fullDate(r.valid_from))}</div></div>
-          <div class="meta num">${esc(t('kitchen'))} ${r.kitchen_pct}% · ${esc(t('runner'))} ${r.runner_pct}% · ${esc(t('bar'))} ${r.bar_pct}%</div></div>`).join('')}</div>`;
+          <div class="small muted num" id="r-sum" style="margin:4px 0 10px">${pf ? esc(t('rate_sum_line', { s: Math.round((+pf.kitchen_pct + +pf.runner_pct + +pf.bar_pct) * 100) / 100 })) : ''}</div>
+          <div class="field" id="r-from-f"><label for="r-from">${esc(t('valid_from'))}</label><input class="input" type="date" id="r-from" min="${bd}" value="${ef}"${ed ? ' readonly' : ''}>${ed ? `<div class="small muted" style="margin-top:4px">${esc(t('rate_edit_day_fixed'))}</div>` : ''}</div>
+          <button class="btn" data-act="rate-save">${esc(t('save'))}</button>
+          ${ed ? `<button class="link" type="button" data-act="rate-edit-cancel" style="margin-top:10px">${esc(t('rate_edit_cancel'))}</button>` : ''}</div>
+        <div class="list">${rates.map(r => `<div class="item"><div class="top"><div>${esc(t('valid_from'))} ${esc(fullDate(r.valid_from))}${r.editable === true ? ` <span class="tag pend">${esc(t('rate_future_tag'))}</span>` : ''}</div>
+          ${r.editable === true && !state.viewAs ? `<button class="link" type="button" data-act="rate-edit" data-id="${r.id}">${esc(t('rate_edit_btn'))}</button>` : ''}</div>
+          <div class="meta num">${esc(t('kitchen'))} ${r.kitchen_pct}% · ${esc(t('runner'))} ${r.runner_pct}% · ${esc(t('bar'))} ${r.bar_pct}%${r.changed_at ? ` · ${esc(t('rate_changed_at', { t: fmtDateTime(r.changed_at) }))}` : ''}</div></div>`).join('')}</div>`;
     } else if (state.adminSub === 'feedback'){
       const [fl, ai] = await Promise.all([rpc('admin_feedback_list', tok()), soft(rpc('admin_feedback_ai', tok()), {})]);   // v88：AI 的分类
       const list = fl || []; state.fbAi = ai || {};
@@ -15315,7 +15368,7 @@ document.addEventListener('click', async ev => {
     case 'oil-go': if (storeOk(el.dataset.store) && el.dataset.store !== curStore()){ state.storeSel = { s: el.dataset.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', el.dataset.store); }   // v186：收废油按门店标签显示，先切到那家店
       state.tab = 'admin'; state.adminSub = 'tasks'; state.toView = 'oil'; state.oilFocus = el.dataset.store; render(); window.scrollTo(0, 0); break;   // v144：打开后滚到这家店的收废油卡片
     case 'admin-sub': if (el.dataset.sub === 'conduct' && state.cdRec) state.cdRec.loaded = false;   // v194：每次点进行为记录都重新取
-      state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; state.onbPlan = null; state.onbForm = null; state.onbNew = false; if (el.dataset.sub === 'sop') state.sop = { view: 'list', q: '' }; render(); break;
+      state.adminSub = el.dataset.sub; state.staffEdit = null; state.lockEdit = null; state.rateEdit = null; state.onbPlan = null; state.onbForm = null; state.onbNew = false; if (el.dataset.sub === 'sop') state.sop = { view: 'list', q: '' }; render(); break;
     case 'admin-more': state.done = null; state.rcWeek = null; state.tab = 'admin'; state.adminSub = el.dataset.sub; state.staffEdit = null; state.menu = false; render(); break;
     case 'aisug-decide': {   // v163：AI 建议：采纳 / 不做 / 重新考虑（可带一句话）
       const id = el.dataset.id, inp = document.getElementById('ais-note-' + id);
@@ -15407,11 +15460,25 @@ document.addEventListener('click', async ev => {
       const sum = Math.round((k + r + b) * 100) / 100;
       if (sum > 100) return fieldErr(box, t('err_RATE_SUM', { s: sum }));
       if (!from || from < berlinDay()) return fieldErr($('#r-from-f'), t('err_RATE_DAY'));
+      const edr = state.rateEdit != null ? (state.rates || []).find(x => x.id === state.rateEdit) : null;   // v210（复查）：「改」的时候不能换生效日（换了会多出一个比例）
+      if (edr && from !== edr.valid_from) return fieldErr($('#r-from-f'), t('rate_edit_day_fixed'));
+      const ex = (state.rates || []).find(x => x.valid_from === from);   // v210：这一天已经有比例：还没生效、没用过 → 改；否则说清楚不能改
+      if (ex && (ex.editable !== true || ex.valid_from <= berlinDay())) return fieldErr($('#r-from-f'), t(ex.editable === undefined ? 'err_RATE_SAME_DAY' : 'err_RATE_LOCKED'));
+      if (ex && +ex.kitchen_pct === k && +ex.runner_pct === r && +ex.bar_pct === b){ toast(t('rate_nochange')); break; }
+      if (ex && !confirm(t('rate_edit_q', { d: fullDate(from), a: `${+ex.kitchen_pct}/${+ex.runner_pct}/${+ex.bar_pct}`, b: `${k}/${r}/${b}` }))) break;
+      if (el.disabled) break;
       el.disabled = true;
-      try { await rpc('admin_set_rate', { ...tok(), p_kitchen: k, p_runner: r, p_bar: b, p_valid_from: from }); toast(t('rate_saved')); await loadCommon(); render(); }
-      catch(e){ el.disabled = false; fieldErr(String(e && e.message || '').includes('rates_valid_from_key') ? $('#r-from-f') : box, errText(e)); }
+      try { await rpc('admin_set_rate', { ...tok(), p_kitchen: k, p_runner: r, p_bar: b, p_valid_from: from }); toast(ex ? t('rate_updated', { d: fullDate(from) }) : t('rate_saved')); state.rateEdit = null; await loadCommon(); render(); }
+      catch(e){ el.disabled = false; fieldErr(/rates_valid_from_key|RATE_LOCKED|NO_RETROACTIVE_RATE|RATE_DAY/.test(String(e && e.message || '')) ? $('#r-from-f') : box, errText(e)); }
       break;
     }
+    case 'rate-edit': {   // v210：比例列表上「改」（只有还没生效、没用过的有这个按钮）：表单预填这一行
+      const r = (state.rates || []).find(x => String(x.id) === el.dataset.id); if (!r || r.editable !== true) break;
+      state.rateEdit = r.id; await render(); const p = $('#rate-h'); if (p) p.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      const k = $('#r-k'); if (k) setTimeout(() => { try { k.focus({ preventScroll: true }); } catch(e){} }, 300);
+      break;
+    }
+    case 'rate-edit-cancel': state.rateEdit = null; render(); break;
     case 'report-run': runReport(document.querySelector('.sheet [data-act="report-run"]')); break;
     case 'view-as': {
       if (state.sopF) sopFollowClose();   // v202
@@ -16047,7 +16114,13 @@ document.addEventListener('click', async ev => {
       await invLock(el, async () => {   // v206：连点两下不再存两版配方
         try { await rpc('inv_recipe_save', { ...tok(), p_article: h.article, p_store: h.rstore || null, p_lines: [{ item_id: h.item, qty: h.new, unit: h.unit }], p_price_cents: h.price_cents, p_on_menu: h.on_menu !== false }); }
         catch(e){ toast(drkErr(e), true); return; }
-        S.rHints = (S.rHints || []).filter(x => x !== h); await keepScroll(() => drkReload(t('aih_r_done', { a: h.article }))); }); break; }
+        S.rHints = (S.rHints || []).filter(x => x !== h && !(!h.rstore && x.recipe === h.recipe)); await keepScroll(() => drkReload(t('aih_r_done', { a: h.article }))); }); break; }   // v210：共用配方改了，另一家店基于旧值的建议也拿掉
+    case 'aih-r-one': { const S = invS(), h = (S.rHints || [])[+el.dataset.i]; if (!h || h.rstore || el.disabled || state.invBusy) break;   // v210：共用配方只改这一家店：给这家店建一条自己的配方，共用的（另一家店）不动
+      if (!confirm(t('aih_r_one_q', { s: h.store, n: drkNum(h.new), o: drkNum(h.old), u: h.unit }))) break;
+      await invLock(el, async () => {
+        try { await rpc('inv_recipe_save', { ...tok(), p_article: h.article, p_store: h.store, p_lines: [{ item_id: h.item, qty: h.new, unit: h.unit }], p_price_cents: h.price_cents, p_on_menu: h.on_menu !== false }); }
+        catch(e){ toast(drkErr(e), true); return; }
+        S.rHints = (S.rHints || []).filter(x => x !== h); await keepScroll(() => drkReload(t('aih_r_one_done', { a: h.article, s: h.store }))); }); break; }
     case 'aih-t-ok': { const S = invS(), h = ((S.tHints || {}).hints || []).find(x => x.key === el.dataset.key); if (!h || el.disabled) break; el.disabled = true;   // 按 key 找（序号在别的建议消失后会错位）
       try { await rpc('inv_target_save', { ...tok(), p_store: h.store, p_item: h.item, p_qty: h.sug }); } catch(e){ el.disabled = false; toast(errText(e), true); break; }
       S.tHints.hints = (S.tHints.hints || []).filter(x => x.key !== h.key);   // v180：点过的这条马上消失，不等整页重读
@@ -16109,7 +16182,11 @@ document.addEventListener('click', async ev => {
       if (!confirm(t('ord_cancel_open_q'))) break;
       S.ordBusy = true; try { await go(null); } catch(e){ toast(errText(e), true); } S.ordBusy = false; break; }
     case 'ord-copy': { const o = invS().ordCur; if (!o) break; const m = ordListText(o); try { await navigator.clipboard.writeText(m); toast(t('ord_copied')); } catch(e){ prompt(t('ord_copy'), m); } break; }
-    case 'ord-boost-save': { const S = invS(), id = `${el.dataset.store}-${el.dataset.sup}-${el.dataset.day}`, f = document.getElementById('ord-bf-' + id), n = document.getElementById('ord-bn-' + id); if (!f || !n || el.disabled) break;   // v197：这批多订
+    case 'ord-boost-go': { const S = invS(); S.ordBoostOpen = el.dataset.store;   // v210：去订货页门店一级的「忙的时候多订」
+      if (S.view !== 'orders' || S.ordCur){ S.ordCur = null; S.otg = null; S.ordBoostJump = true; S.view = 'orders'; S.id = null; state.tab = 'inv'; window.scrollTo(0, 0); render(); }   // 先回顶上再画（画完会滚到「忙的时候多订」）
+      else { const d = $('#ord-boost'); if (d){ d.open = true; d.scrollIntoView({ block: 'start', behavior: 'smooth' }); } }
+      break; }
+    case 'ord-boost-save': { const S = invS(), id = `${el.dataset.store}-${el.dataset.day}`, f = document.getElementById('ord-bf-' + id), n = document.getElementById('ord-bn-' + id); if (!f || !n || el.disabled) break;   // v197：这批多订
       el.disabled = true;
       try { await rpc('inv_order_boost_save', { ...tok(), p_store: el.dataset.store, p_day: el.dataset.day, p_factor: +f.value, p_note: n.value }); } catch(e){ el.disabled = false; toast(errText(e), true); break; }
       toast(t('ord_boost_saved')); S.ordBoostOpen = el.dataset.store; S.ord = null; await keepScroll(() => viewInvOrders()); break; }
