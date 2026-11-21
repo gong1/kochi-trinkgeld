@@ -719,7 +719,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v205';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v207';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -854,7 +854,7 @@ zh: {
   inv_owner_front:'前场', inv_owner_kitchen:'后厨', inv_owner_shared:'共用', inv_tag_damp:'潮湿', inv_tag_nofood:'不放食品', inv_tag_chem:'放化学品',
   inv_tag_gas:'瓦斯罐专用', inv_tag_temp:'临时区', inv_tag_off:'已停用', inv_main:'主', inv_main_long:'主位置', inv_not_main:'不是主位置', inv_no_loc:'还没有位置',
   inv_none:'没找到「{q}」。换个叫法试试（中文、德文、别名都行），或者问主管。', inv_none_sup:'是新东西的话，点上面「＋ 新物品」录进去。',
-  inv_places_h:'位置', inv_searching:'正在找……', inv_back:'← 物品', inv_back_more:'← 更多', inv_add_unit:'＋ 加货架 / 柜子', inv_edit:'编辑',
+  inv_places_h:'位置', inv_searching:'正在找……', inv_back:'← 物品', inv_back_more:'← 更多', inv_add_unit:'＋ 加货架 / 柜子 / 冰箱', inv_edit:'编辑',
   inv_unit_off:'已停用（{n}）', inv_items_n:'{n} 件', inv_empty_place:'空着', inv_area_empty:'这里还没有位置。',
   inv_photo_none:'还没照片', inv_photo_take:'📷 拍照片', inv_photo_retake:'📷 重拍', inv_photo_by:'照片：{n} · {t}', inv_photo_saved:'照片已保存', inv_uploading:'正在上传照片……',
   inv_here:'这里应该放（{n}）', inv_here_none:'这里还没登记东西。', inv_temp_hint:'临时区：东西只是暂时放这里，不能当固定位置。',
@@ -880,17 +880,17 @@ zh: {
   inv_c_GAS_PLACE:'瓦斯罐只能放在「瓦斯罐专用」的位置（Flingern：办公室门口储物柜 B1–B3），{p} 不是。', inv_c_GAS_ONLY:'{p} 是瓦斯罐专用的位置，不能放别的东西。',
   inv_c_change:'换一个位置', inv_c_only_boss:'只有老板可以确认后强制保存。', inv_c_force_lbl:'老板：确实要放这里，写一句原因（记进日志）',
   inv_c_force:'我确认，仍然保存', inv_c_note_need:'请写一句原因。', inv_placed:'已放到 {c}',
-  inv_u_new_h:'加货架 / 柜子 · {a}', inv_u_edit_h:'编辑位置 {c}', inv_u_edit_btn:'编辑这个位置', inv_u_type:'类型',
-  inv_type_R:'货架', inv_type_S:'柜子', inv_type_SL:'抽屉', inv_type_K:'冷藏柜', inv_type_T:'冷冻柜', inv_type_F:'地面区',
+  inv_u_new_h:'加货架 / 柜子 / 冰箱 · {a}', inv_u_edit_h:'编辑位置 {c}', inv_u_edit_btn:'编辑这个位置', inv_u_type:'类型',
+  inv_type_R:'货架', inv_type_S:'柜子', inv_type_SL:'抽屉', inv_type_K:'冰箱（冷藏）', inv_type_T:'冰柜（冷冻）', inv_type_F:'地面区',
   inv_u_no:'号码（空着 = 接着最大的号；停用过的号码不能再用）', inv_u_preview:'编号：{c}', inv_u_name_zh:'名称（中文，例如「窗边铁货架」）', inv_u_name_de:'名称（德文）',
   inv_u_use_zh:'用途（中文，可不填，例如「食品」）', inv_u_use_de:'用途（德文，可不填）', inv_u_layout:'分层', inv_u_lay_none:'不分层',
-  inv_u_lay_levels:'分层 A、B、C', inv_u_lay_grid:'格子 A1、A2', inv_u_levels:'几层（从上往下 A、B、C……）', inv_u_rows:'几行（A、B……）', inv_u_cols:'几列（1、2……）',
+  inv_u_lay_levels:'分层 / 抽屉 A、B、C', inv_u_lay_grid:'格子 A1、A2（几行几列，例如两排抽屉）', inv_u_levels:'几层 / 几个抽屉（从上往下 A、B、C……）', inv_u_rows:'几行（A、B……）', inv_u_cols:'几列（1、2……）',
   inv_u_gas:'瓦斯罐专用（只有老板能改）', inv_u_temp:'临时区：不能当物品的固定位置（只有老板能改）',
   inv_u_add_slots:'加层 / 加一行格子', inv_u_add_hint:'接着往后加：已有 A–D 就加 E……；格子柜加一整行。', inv_u_add_hint0:'现在不分层。加几层（从上往下 A、B……）；要格子就同时填列数。',
   inv_u_add_n:'加几层（几行）', inv_u_cols_opt:'列数（格子才填）', inv_u_added:'加好了 {n} 个',
   inv_u_off:'停用这个位置', inv_u_off_q:'停用 {c}？编号作废，以后不会再用；层 / 格一起停用。只有老板能重新启用。', inv_u_on:'重新启用',
   inv_set_h:'物品设置', inv_set_areas:'房间', inv_set_cats:'分类', inv_set_new_area:'＋ 新房间', inv_set_new_cat:'＋ 新分类',
-  inv_a_code:'代码（3 个字符，例如 TKR）', inv_a_owner:'归属（哪边的区域主管维护）', inv_a_damp:'潮湿（地下室）', inv_a_food:'能放食品', inv_a_chem:'能放化学品（只有清洁间）',
+  inv_a_code:'代码（3 个字符，例如 TKR）', inv_a_presets:'常用房间（点一下填好）', inv_a_new_ok:'房间建好了：现在可以加货架、柜子、冰箱', inv_u_name_auto:'名称不填，就叫「{zh} / {de}」', inv_a_owner:'归属（哪边的区域主管维护）', inv_a_damp:'潮湿（地下室）', inv_a_food:'能放食品', inv_a_chem:'能放化学品（只有清洁间）',
   inv_a_active:'启用', inv_a_sort:'排序（小的在前）', inv_a_hint:'改了规矩以后，已经放着的东西不符合的会标 ⚠（不会自动挪走）。',
   inv_k_nature:'性质（决定放置规则）', inv_nat_food:'食品', inv_nat_chemical:'化学品', inv_nat_gas:'瓦斯罐', inv_nat_other:'其他',
   inv_k_damp:'新物品默认怕潮', inv_k_area:'默认房间代码（例如 LAG，可空）', inv_k_area_short:'默认 {c}',
@@ -1615,7 +1615,7 @@ de: {
   inv_owner_front:'Service', inv_owner_kitchen:'Küche', inv_owner_shared:'gemeinsam', inv_tag_damp:'feucht', inv_tag_nofood:'keine Lebensmittel', inv_tag_chem:'Chemikalien',
   inv_tag_gas:'nur Gaskartuschen', inv_tag_temp:'Zwischenablage', inv_tag_off:'deaktiviert', inv_main:'Haupt', inv_main_long:'Hauptplatz', inv_not_main:'nicht Hauptplatz', inv_no_loc:'Noch kein Platz',
   inv_none:'„{q}“ nicht gefunden. Anders schreiben (Deutsch, Chinesisch, anderer Name) oder die Bereichsleitung fragen.', inv_none_sup:'Neuer Artikel? Oben „＋ Neuer Artikel“ tippen.',
-  inv_places_h:'Plätze', inv_searching:'Suche …', inv_back:'← Artikel', inv_back_more:'← Mehr', inv_add_unit:'＋ Regal / Schrank hinzufügen', inv_edit:'Bearbeiten',
+  inv_places_h:'Plätze', inv_searching:'Suche …', inv_back:'← Artikel', inv_back_more:'← Mehr', inv_add_unit:'＋ Regal / Schrank / Kühlschrank hinzufügen', inv_edit:'Bearbeiten',
   inv_unit_off:'Deaktiviert ({n})', inv_items_n:'{n} Artikel', inv_empty_place:'leer', inv_area_empty:'Hier gibt es noch keine Plätze.',
   inv_photo_none:'kein Foto', inv_photo_take:'📷 Foto machen', inv_photo_retake:'📷 Neues Foto', inv_photo_by:'Foto: {n} · {t}', inv_photo_saved:'Foto gespeichert', inv_uploading:'Foto wird hochgeladen …',
   inv_here:'Gehört hierher ({n})', inv_here_none:'Hier ist noch nichts eingetragen.', inv_temp_hint:'Zwischenablage: Sachen liegen hier nur kurz, kein fester Platz.',
@@ -1641,17 +1641,17 @@ de: {
   inv_c_GAS_PLACE:'Gaskartuschen nur an Plätze „nur Gaskartuschen“ (Flingern: Fächerschrank an der Bürotür B1–B3); {p} ist keiner.', inv_c_GAS_ONLY:'{p} ist nur für Gaskartuschen – nichts anderes hinlegen.',
   inv_c_change:'Anderen Platz wählen', inv_c_only_boss:'Nur der Chef kann das bestätigen und trotzdem speichern.', inv_c_force_lbl:'Chef: Wenn es wirklich hierher soll, kurz den Grund schreiben (kommt ins Protokoll)',
   inv_c_force:'Bestätigen und trotzdem speichern', inv_c_note_need:'Bitte einen Grund schreiben.', inv_placed:'Platz {c} eingetragen',
-  inv_u_new_h:'Regal / Schrank hinzufügen · {a}', inv_u_edit_h:'Platz {c} bearbeiten', inv_u_edit_btn:'Diesen Platz bearbeiten', inv_u_type:'Art',
+  inv_u_new_h:'Regal / Schrank / Kühlschrank hinzufügen · {a}', inv_u_edit_h:'Platz {c} bearbeiten', inv_u_edit_btn:'Diesen Platz bearbeiten', inv_u_type:'Art',
   inv_type_R:'Regal', inv_type_S:'Schrank', inv_type_SL:'Schublade', inv_type_K:'Kühlschrank', inv_type_T:'Tiefkühler', inv_type_F:'Bodenfläche',
   inv_u_no:'Nummer (leer = nächste freie; deaktivierte Nummern werden nicht wieder vergeben)', inv_u_preview:'Platznummer: {c}', inv_u_name_zh:'Name Chinesisch (z. B. „窗边铁货架“)', inv_u_name_de:'Name Deutsch (z. B. „Metallregal am Fenster“)',
   inv_u_use_zh:'Zweck Chinesisch (optional)', inv_u_use_de:'Zweck Deutsch (optional, z. B. „Lebensmittel“)', inv_u_layout:'Ebenen', inv_u_lay_none:'ohne Ebenen',
-  inv_u_lay_levels:'Ebenen A, B, C', inv_u_lay_grid:'Fächer A1, A2', inv_u_levels:'Wie viele Ebenen (von oben A, B, C …)', inv_u_rows:'Reihen (A, B …)', inv_u_cols:'Spalten (1, 2 …)',
+  inv_u_lay_levels:'Ebenen / Schubladen A, B, C', inv_u_lay_grid:'Fächer A1, A2 (Reihen × Spalten, z. B. zwei Reihen Schubladen)', inv_u_levels:'Wie viele Ebenen / Schubladen (von oben A, B, C …)', inv_u_rows:'Reihen (A, B …)', inv_u_cols:'Spalten (1, 2 …)',
   inv_u_gas:'Nur Gaskartuschen (nur der Chef kann das ändern)', inv_u_temp:'Zwischenablage: kein fester Platz für Artikel (nur der Chef kann das ändern)',
   inv_u_add_slots:'Ebenen / Fachreihe hinzufügen', inv_u_add_hint:'Es geht hinten weiter: bei A–D kommt E …; bei Fächern eine ganze Reihe.', inv_u_add_hint0:'Noch ohne Ebenen. Wie viele Ebenen (von oben A, B …); für Fächer zusätzlich die Spalten.',
   inv_u_add_n:'Wie viele Ebenen (Reihen)', inv_u_cols_opt:'Spalten (nur für Fächer)', inv_u_added:'{n} hinzugefügt',
   inv_u_off:'Platz deaktivieren', inv_u_off_q:'{c} deaktivieren? Die Nummer wird nicht wieder vergeben; Ebenen / Fächer werden mit deaktiviert. Nur der Chef kann wieder aktivieren.', inv_u_on:'Wieder aktivieren',
   inv_set_h:'Artikel-Einstellungen', inv_set_areas:'Räume', inv_set_cats:'Kategorien', inv_set_new_area:'＋ Neuer Raum', inv_set_new_cat:'＋ Neue Kategorie',
-  inv_a_code:'Kürzel (3 Zeichen, z. B. TKR)', inv_a_owner:'Zuständig (welche Bereichsleitung)', inv_a_damp:'Feucht (Keller)', inv_a_food:'Lebensmittel erlaubt', inv_a_chem:'Chemikalien erlaubt (nur Putzraum)',
+  inv_a_code:'Kürzel (3 Zeichen, z. B. TKR)', inv_a_presets:'Häufige Räume (antippen zum Ausfüllen)', inv_a_new_ok:'Raum angelegt: Jetzt Regale, Schränke, Kühlschränke hinzufügen', inv_u_name_auto:'Ohne Namen heißt er „{de} / {zh}“', inv_a_owner:'Zuständig (welche Bereichsleitung)', inv_a_damp:'Feucht (Keller)', inv_a_food:'Lebensmittel erlaubt', inv_a_chem:'Chemikalien erlaubt (nur Putzraum)',
   inv_a_active:'Aktiv', inv_a_sort:'Reihenfolge (kleiner = weiter oben)', inv_a_hint:'Nach einer Änderung werden vorhandene Artikel, die nicht mehr passen, mit ⚠ markiert (nicht automatisch umgeräumt).',
   inv_k_nature:'Art (bestimmt die Regeln)', inv_nat_food:'Lebensmittel', inv_nat_chemical:'Chemikalie', inv_nat_gas:'Gaskartusche', inv_nat_other:'Sonstiges',
   inv_k_damp:'Neue Artikel standardmäßig feuchtigkeitsempfindlich', inv_k_area:'Standard-Raum (Kürzel, z. B. LAG; optional)', inv_k_area_short:'Standard {c}',
@@ -2270,7 +2270,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=38'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=40'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -6117,6 +6117,12 @@ function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return
 // 第一步：储区、储位、物品、放置规则、搜索、照片、AI 拍照填名字。二维码（第 2 步）、待归位（第 3 步）、3 个月确认和「搜不到的词」（第 4 步）以后做。
 // 页面：首页（搜索 + 按储区浏览）→ 储区 → 储位 → 物品；录入（拍照 → AI 填名字 → 选储位）；储位编辑；物品设置（老板）。
 const INV_TYPES = ['R', 'S', 'SL', 'K', 'T', 'F'];
+// v207：类型带图标；名字不填就自动叫「冰箱 3 / Kühlschrank 3」（数据库里存中德文两个名字，不看界面语言）
+const INV_TYPE_ICON = { R: '🗄️', S: '🚪', SL: '🗃️', K: '🧊', T: '❄️', F: '⬜' };
+const INV_TYPE_NAME = { zh: { R: '货架', S: '柜子', SL: '抽屉', K: '冰箱', T: '冰柜', F: '地面区' }, de: { R: 'Regal', S: 'Schrank', SL: 'Schublade', K: 'Kühlschrank', T: 'Tiefkühler', F: 'Bodenfläche' } };
+// v207：常用房间（编号 v63 就定好的），新建房间时点一下填好
+const INV_ROOM_PRESETS = [{ code: 'BAR', zh: '吧台', de: 'Theke', owner: 'front' }, { code: 'KUE', zh: '厨房', de: 'Küche', owner: 'kitchen' },
+  { code: 'KUR', zh: '冷库', de: 'Kühlraum', owner: 'kitchen' }, { code: 'TKR', zh: '冷冻间', de: 'Tiefkühlraum', owner: 'kitchen' }];
 const INV_URLS = {};   // 照片路径 → { url, at }（文件服务给的 1 小时链接，50 分钟内重用）
 function invS(){ return state.inv || (state.inv = { view: 'home', q: '' }); }
 function invGo(view, id, extra){ const S = invS(); S.view = view; S.id = id || null; Object.assign(S, extra || {}); state.tab = 'inv'; render(); window.scrollTo(0, 0); }
@@ -6298,7 +6304,7 @@ function renderInvHome(){
     <div id="inv-mid"${S.q.trim() ? ' hidden' : ''}>
     ${invTodoLines(state.invTodo).length ? `<div class="list">${invTodoLines(state.invTodo).join('')}</div>` : ''}
     ${drkTilesHTML(false)}
-    <div class="btn2">${H.sup ? `<button class="btn ghost" data-act="inv-new">${esc(t('inv_new'))}</button>` : ''}${!H.admin && (H.area_new || []).length && !state.viewAs ? `<button class="btn ghost" data-act="kp-area-new">${esc(t('kp_new_area'))}</button>` : ''}<button class="btn ghost" data-act="inv-ib-new">${esc(t('inv_ib_btn'))}</button></div>
+    <div class="btn2">${H.sup ? `<button class="btn ghost" data-act="inv-new">${esc(t('inv_new'))}</button>` : ''}${(H.area_new || []).length && !state.viewAs ? `<button class="btn ghost" data-act="kp-area-new">${esc(t('kp_new_area'))}</button>` : ''}<button class="btn ghost" data-act="inv-ib-new">${esc(t('inv_ib_btn'))}</button></div>
     ${(S.ibMine || []).length ? `<button class="link" data-act="inv-ib-mine" style="margin:0 0 6px">${esc(t('inv_ib_mine', { n: S.ibMine.length }))}</button>` : ''}
     </div>
     <div id="inv-res">${S.q.trim() ? invResultsHTML() : invBrowseHTML(H)}</div>
@@ -6872,24 +6878,32 @@ async function invUnitOpen(placeId){
   S.view = 'unit'; render(); window.scrollTo(0, 0);
 }
 function invUnitKeep(){ const U = invS().uform; if (!U) return; document.querySelectorAll('[data-invu]').forEach(e => { U[e.dataset.invu] = e.type === 'checkbox' ? e.checked : e.value; }); }
-function invUnitPreview(U){
+function invUnitNo(U){   // v207：新储存单元会拿到的号码（空着 = 接着这个类型最大的号）；号码不对返回 0
   const no = parseInt(U.unit_no, 10), A = U.area;
-  if (U.unit_no && !(no >= 1 && no <= 99)) return '';
-  const nx = no || (Math.max(0, ...((A.units || []).filter(u => u.unit_type === U.unit_type).map(u => u.unit_no || 0))) + 1);
+  if (U.unit_no && !(no >= 1 && no <= 99)) return 0;
+  return no || (Math.max(0, ...((A.units || []).filter(u => u.unit_type === U.unit_type).map(u => u.unit_no || 0))) + 1);
+}
+function invUnitPreview(U){
+  const nx = invUnitNo(U), A = U.area;
+  if (!nx) return '';
   return `${A.store === 'Bismarck' ? 'B' : 'F'}-${A.code}-${U.unit_type}${String(nx).padStart(2, '0')}`;
 }
+function invUnitAuto(U){ const nx = invUnitNo(U); return nx ? { zh: INV_TYPE_NAME.zh[U.unit_type] + ' ' + nx, de: INV_TYPE_NAME.de[U.unit_type] + ' ' + nx } : null; }
 function renderInvUnit(){
   const S = invS(), U = S.uform, A = U.area, admin = !!state.me.is_admin;
   const fld = (k, label, attrs) => `<div class="field"><label for="invu-${k}">${esc(label)}</label><input class="input" id="invu-${k}" data-invu="${k}" value="${esc(U[k] || '')}" ${attrs || ''}></div>`;
   const chk = (k, label) => `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invu="${k}"${U[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`;
   const names = fld('name_zh', t('inv_u_name_zh')) + fld('name_de', t('inv_u_name_de')) + fld('use_zh', t('inv_u_use_zh')) + fld('use_de', t('inv_u_use_de'));
   if (!U.id){
+    const au = invUnitAuto(U);   // v207：名字不填就用它
+    const namesNew = fld('name_zh', t('inv_u_name_zh'), au ? `placeholder="${esc(au.zh)}"` : '') + fld('name_de', t('inv_u_name_de'), au ? `placeholder="${esc(au.de)}"` : '')
+      + `<div class="small muted" id="inv-u-auto" style="margin:-6px 0 12px">${au ? esc(t('inv_u_name_auto', au)) : ''}</div>` + fld('use_zh', t('inv_u_use_zh')) + fld('use_de', t('inv_u_use_de'));
     $('#main').innerHTML = `<button class="link" data-act="inv-unit-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button>
       <h2 style="margin-top:4px">${esc(t('inv_u_new_h', { a: invName(A) }))}</h2>
-      <div class="field"><label>${esc(t('inv_u_type'))}</label><div class="chips">${INV_TYPES.map(k => `<button class="chip${U.unit_type === k ? ' on' : ''}" data-act="inv-u-type" data-k="${k}">${k} · ${esc(t('inv_type_' + k))}</button>`).join('')}</div></div>
+      <div class="field"><label>${esc(t('inv_u_type'))}</label><div class="chips">${INV_TYPES.map(k => `<button class="chip${U.unit_type === k ? ' on' : ''}" data-act="inv-u-type" data-k="${k}">${INV_TYPE_ICON[k]} ${esc(t('inv_type_' + k))} <span class="muted">${k}</span></button>`).join('')}</div></div>
       ${fld('unit_no', t('inv_u_no'), 'inputmode="numeric"')}
       <div class="inv-chosen" id="inv-u-prev">${esc(t('inv_u_preview', { c: invUnitPreview(U) }))}</div>
-      ${names}
+      ${namesNew}
       <div class="field"><label>${esc(t('inv_u_layout'))}</label><div class="seg sm">${['none', 'levels', 'grid'].map(k => `<button data-act="inv-u-lay" data-k="${k}" class="${U.layout === k ? 'on' : ''}">${esc(t('inv_u_lay_' + k))}</button>`).join('')}</div></div>
       ${U.layout === 'levels' ? fld('levels', t('inv_u_levels'), 'inputmode="numeric"') : ''}
       ${U.layout === 'grid' ? `<div class="row" style="gap:10px">${fld('rows', t('inv_u_rows'), 'inputmode="numeric"')}${fld('cols', t('inv_u_cols'), 'inputmode="numeric"')}</div>` : ''}
@@ -6913,7 +6927,8 @@ async function invUnitSave(){
   const S = invS(), U = S.uform; invUnitKeep(); invTrKeep();
   try {
     if (!U.id){
-      const d = { area_id: U.area.id, unit_type: U.unit_type, unit_no: U.unit_no.trim(), name_zh: U.name_zh, name_de: U.name_de, use_zh: U.use_zh, use_de: U.use_de,
+      const au = !String(U.name_zh || '').trim() && !String(U.name_de || '').trim() ? invUnitAuto(U) : null;   // v207
+      const d = { area_id: U.area.id, unit_type: U.unit_type, unit_no: U.unit_no.trim(), name_zh: au ? au.zh : U.name_zh, name_de: au ? au.de : U.name_de, use_zh: U.use_zh, use_de: U.use_de,
         levels: U.layout === 'levels' ? U.levels : '', rows: U.layout === 'grid' ? U.rows : '', cols: U.layout === 'grid' ? U.cols : '' };
       const id = await rpc('inv_place_save', { ...tok(), p_id: null, p_data: d });
       S.pick = null;   // v177：新货架要出现在「放在哪里」的清单里（以前要重开 App）
@@ -6953,11 +6968,18 @@ async function viewInvSettings(){
 function invSetKeep(){ const G = invS().sform; if (!G) return; document.querySelectorAll('[data-invs]').forEach(e => { G[e.dataset.invs] = e.type === 'checkbox' ? e.checked : e.value; }); }
 function invSetFld(G, k, label, attrs){ return `<div class="field"><label for="invs-${k}">${esc(label)}</label><input class="input" id="invs-${k}" data-invs="${k}" value="${esc(G[k] == null ? '' : G[k])}" ${attrs || ''}></div>`; }
 function invSetChk(G, k, label){ return `<label class="small" style="display:flex;gap:10px;align-items:center;margin:0 0 12px"><input type="checkbox" data-invs="${k}"${G[k] ? ' checked' : ''} style="width:22px;height:22px">${esc(label)}</label>`; }
+// v207：常用房间，点一下填好编号、名字、归属（这家店已经有的编号不列；归属你管不了的不列）
+function invPresetHTML(G, boss){
+  const have = new Set(((invS().home || {}).areas || []).filter(a => a.store === G.store).map(a => a.code));
+  const P = INV_ROOM_PRESETS.filter(p => !have.has(p.code) && (boss || invKeepArea(G.store, p.owner)));
+  if (!P.length) return '';
+  return `<div class="field"><label>${esc(t('inv_a_presets'))}</label><div class="chips">${P.map(p => `<button class="chip${G.code === p.code ? ' on' : ''}" data-act="inv-s-preset" data-code="${p.code}">${esc(state.lang === 'zh' ? p.zh : p.de)} <span class="muted">${p.code}</span></button>`).join('')}</div></div>`;
+}
 function renderInvAreaForm(){
   invTrKeep();   // v100：重画前记下特点框里的字
   const G = invS().sform, boss = state.me.is_admin;   // v143：库管也能建 / 改自己的房间
   $('#main').innerHTML = `<button class="link" data-act="inv-aform-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(G.id ? invName(G) + ' · ' + G.code : t('inv_set_new_area'))}</h2>
-    ${G.id ? '' : `<div class="seg sm" style="margin-bottom:12px">${(boss ? STORES : STORES.filter(s => ((invS().home || {}).area_new || []).includes(s))).map(s => `<button data-act="inv-s-store" data-store="${s}" class="${G.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>${invSetFld(G, 'code', t('inv_a_code'), 'autocapitalize="characters" maxlength="3"')}`}
+    ${G.id ? '' : `<div class="seg sm" style="margin-bottom:12px">${(boss ? STORES : STORES.filter(s => ((invS().home || {}).area_new || []).includes(s))).map(s => `<button data-act="inv-s-store" data-store="${s}" class="${G.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>${invPresetHTML(G, boss)}${invSetFld(G, 'code', t('inv_a_code'), 'autocapitalize="characters" maxlength="3"')}`}
     ${invSetFld(G, 'name_zh', t('inv_f_zh'))}${invSetFld(G, 'name_de', t('inv_f_de'))}
     <div class="field"><label>${esc(t('inv_a_owner'))}</label><div class="seg sm">${['front', 'kitchen', 'shared'].filter(k => boss || invKeepArea(G.store, k)).map(k => `<button data-act="inv-s-owner" data-k="${k}" class="${G.owner === k ? 'on' : ''}">${esc(t('inv_owner_' + k))}</button>`).join('')}</div></div>
     ${boss || !G.id ? invSetChk(G, 'damp', t('inv_a_damp')) + invSetChk(G, 'food_ok', t('inv_a_food')) + invSetChk(G, 'chem_ok', t('inv_a_chem')) : `<div class="small muted" style="margin-bottom:8px">${invAreaTags(G)}<br>${esc(t('kp_area_rules_lock'))}</div>`}
@@ -7172,7 +7194,8 @@ async function invTodoLoad(){ const m = state.me || {}; if (!(m.is_admin || isSu
 // v143：库管（数据库 v104）。网页记住「我是库管」，「今天」页和底部「物品」才去要物品待办；物品页 / 待办会更新它
 function invIsKeeper(){ try { return !state.viewAs && LS.get('invKeeper:' + ((state.me || {}).id || '')) === true; } catch(e){ return false; } }
 function invKeeperMark(on){ if (state.viewAs || !state.me) return; try { LS.set('invKeeper:' + state.me.id, !!on); } catch(e){} }
-function invKeepArea(store, owner){ const K = (invS().home || {}).keeper || state.invKeep || []; return owner === 'front' || owner === 'kitchen' ? K.some(k => k.side === owner && k.store === store) : K.some(k => k.store === store); }
+// v207：能管这个房间 = 库管或区域主管（同数据库 _inv_room_ok）
+function invKeepArea(store, owner){ const K = [...((invS().home || {}).keeper || state.invKeep || []), ...((state.me && state.me.areas) || []).map(a => ({ side: a.area, store: a.store }))]; return owner === 'front' || owner === 'kitchen' ? K.some(k => k.side === owner && k.store === store) : K.some(k => k.store === store); }
 function invTodoLines(T){
   if (!T || !T.sup) return [];
   const out = [];
@@ -15044,7 +15067,7 @@ document.addEventListener('click', async ev => {
     case 'qp-more': { const Q = qpS(); Q.more = !Q.more; keepScroll(renderInvQplace); break; }
     case 'qp-put': qpPut(el.dataset.id); break;
     case 'qp-take': qpTake(el.dataset.id, el.dataset.link); break;
-    case 'kp-area-new': { const S = invS(), H = S.home || {}, st = (H.area_new || []).includes(curStore()) ? curStore() : (H.area_new || [])[0] || STORES[0], K = (H.keeper || []).filter(k => k.store === st);   // v182：先用选中的门店
+    case 'kp-area-new': { const S = invS(), H = S.home || {}, st = (H.area_new || []).includes(curStore()) ? curStore() : (H.area_new || [])[0] || STORES[0], K = H.admin ? [] : [...new Set([...(H.keeper || []).filter(k => k.store === st).map(k => k.side), ...((state.me && state.me.areas) || []).filter(a => a.store === st).map(a => a.area)])].map(side => ({ side }));   // v207：区域主管也算；老板默认共用   // v182：先用选中的门店
       S.sform = { id: null, store: st, code: '', name_zh: '', name_de: '', owner: K.length === 1 ? K[0].side : 'shared', damp: false, food_ok: true, chem_ok: false, sort: '50', active: true, tr: invTrNew(null), back: { view: 'home' } };
       S.view = 'aform'; render(); window.scrollTo(0, 0); break; }
     case 'sh-close': { const S = invS(); S.shelf = null; keepScroll(renderInvPlace); break; }
@@ -15403,6 +15426,8 @@ document.addEventListener('click', async ev => {
     }
     case 'inv-s-store': invSetKeep(); invS().sform.store = el.dataset.store; renderInvAreaForm(); break;
     case 'inv-s-owner': invSetKeep(); invS().sform.owner = el.dataset.k; renderInvAreaForm(); break;
+    case 'inv-s-preset': { invSetKeep(); const G = invS().sform, p = INV_ROOM_PRESETS.find(x => x.code === el.dataset.code); if (!G || !p) break;   // v207
+      Object.assign(G, { code: p.code, name_zh: p.zh, name_de: p.de, owner: p.owner, damp: false, food_ok: true, chem_ok: false }); renderInvAreaForm(); break; }
     case 'inv-s-nature': invSetKeep(); invS().sform.nature = el.dataset.k; renderInvCatForm(); break;
     case 'inv-aform-save': case 'inv-cform-save': {
       invSetKeep(); const S = invS(), G = S.sform, isA = act === 'inv-aform-save'; if (!G) break;
@@ -15413,7 +15438,9 @@ document.addEventListener('click', async ev => {
         try { const id = await rpc(isA ? 'inv_area_save' : 'inv_category_save', { ...tok(), p_id: G.id || null, p_data: d }); if (isA) await invTrSave('area', id);   // v100：特点
           S.pick = null;
           if (isA && !G.id && storeOk(G.store) && G.store !== curStore()){ state.storeSel = { s: G.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', G.store); }
-          const back = G.back; S.sform = null; S.home = null; S.area = null; toast(t('inv_saved')); if (isA && back) invGo(back.view, back.id); else invGo('settings'); }
+          const back = G.back; S.sform = null; S.home = null; S.area = null;
+          if (isA && !G.id){ toast(t('inv_a_new_ok')); S.nav = []; invGo('area', id); }   // v207：建好直接进房间
+          else { toast(t('inv_saved')); if (isA && back) invGo(back.view, back.id); else invGo('settings'); } }
         catch(e){ toast(errText(e), true); }
       });
       break;
@@ -15614,7 +15641,9 @@ document.addEventListener('input', ev => {
       if (s) s.textContent = q != null ? t('stk_l_bottles', { n: drkNum(q) }) : '?'; if (m) m.innerHTML = stkRcSumHTML(R, true); } }
   if (ev.target.dataset && ev.target.dataset.trl === 'qty_note'){ const T = invS().tr, i = +ev.target.dataset.i, l = T && T.lines[i];
     if (l){ l.qty_note = ev.target.value; const b = stkTrBottles(l), s = document.getElementById('stk-tq-' + i); if (s) s.textContent = b != null ? '= ' + t('stk_l_bottles', { n: drkNum(b) }) : ''; } }
-  if (id === 'invu-unit_no'){ invUnitKeep(); const b = $('#inv-u-prev'), U = invS().uform; if (b && U) b.textContent = t('inv_u_preview', { c: invUnitPreview(U) }); }
+  if (id === 'invu-unit_no'){ invUnitKeep(); const b = $('#inv-u-prev'), U = invS().uform; if (b && U) b.textContent = t('inv_u_preview', { c: invUnitPreview(U) });
+    const au = U && invUnitAuto(U), z = $('#invu-name_zh'), g = $('#invu-name_de'), h = $('#inv-u-auto');   // v207：自动的名字跟着号码
+    if (z) z.placeholder = au ? au.zh : ''; if (g) g.placeholder = au ? au.de : ''; if (h) h.textContent = au ? t('inv_u_name_auto', au) : ''; }
   if (id && id.startsWith('rp-')) rcPartsSum();
   if (ev.target.classList && ev.target.classList.contains('xr')) extrasSlide(ev.target);
   if (id === 'f-reason') state.form.reason = ev.target.value;
