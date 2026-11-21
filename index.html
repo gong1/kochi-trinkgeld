@@ -703,6 +703,7 @@ div.inv-noph.big{width:100%;height:120px;font-size:34px;border-radius:var(--r-m)
 .inv-grid{display:grid;gap:6px}
 .inv-cell{height:44px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;font-weight:700}
 .inv-find{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;flex:1;min-width:0;height:48px;text-align:left;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-s);background:#fff;color:var(--muted);font-size:16px}
+.kc-row{display:flex;align-items:center;gap:10px}.kc-l{flex:1 1 auto;min-width:0}.kc-in{flex:0 0 auto;display:flex;gap:6px;align-items:center}.kc-n{width:72px;text-align:center;font-size:18px}.kc-mm{margin-top:6px;font-size:13px;color:var(--muted)}.kc-mm .kc-n{width:56px;height:34px;min-height:0;padding:4px;font-size:15px;margin-left:6px;border-style:dashed}.kc-z{min-width:0;padding:6px 10px;font-size:13px;font-weight:600;color:var(--muted);border-style:dashed}
 </style>
 </head>
 <body>
@@ -723,7 +724,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v208';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v209';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -2443,6 +2444,9 @@ Object.assign(I18N.de, {
 });
 Object.assign(I18N.zh, { act_feedback_ask:"反馈：追问员工", act_feedback_reply:"反馈：员工回复", act_oil_date:"收废油：定日子", act_oil_date_change:"收废油：改日子", act_recon_report_add:"录入报告", act_recon_report_fix:"修正报告", act_task_add:"新任务", act_task_edit:"改任务", act_task_disable:"停用任务", act_task_enable:"启用任务", act_task_named_add:"交代一件事", act_task_named_edit:"改交代的事", act_task_once_add:"新一次性任务", act_task_once_edit:"改一次性任务", act_announce:"发布公告", act_area_set:"设区域主管", act_ask_send:"问几个人", act_audit_done:"抽查做完", act_audit_start:"派抽查", act_bon_cover_confirm:"确认一张 Bon 管两个班", act_bon_entry_proxy:"替员工交 Bon", act_bon_report_id:"改 Bon 报告编号", act_doc_decide:"证件审核", act_doc_exempt:"证件免交", act_doc_mark:"替员工登记证件", act_doc_reset:"证件重来", act_doc_start:"开始收证件", act_doc_submit:"交证件", act_expense_add:"记垫付", act_expense_cancel:"撤回垫付", act_expense_pay:"垫付付款", act_expense_void:"作废垫付", act_feedback_answer:"回复反馈", act_inv_area_save:"物品：存储区", act_inv_category_save:"物品：类别", act_inv_count_cancel:"饮料：放弃盘点", act_inv_count_finish:"饮料：盘点完成", act_inv_count_start:"饮料：开始盘点", act_inv_drink_off:"饮料：不管库存", act_inv_drink_save:"饮料：存饮料", act_inv_drink_suggest:"饮料：AI 配对建议", act_inv_inbox_add:"物品：待归位登记", act_inv_inbox_handle:"物品：处理待归位", act_inv_item_active:"物品：停用 / 启用", act_inv_item_alias:"物品：加别名", act_inv_item_merge:"物品：合并", act_inv_item_save:"物品：存物品", act_inv_keeper_set:"设库管", act_inv_loss_cancel:"饮料：撤销报损", act_inv_loss_save:"饮料：报损", act_inv_miss_ignore:"物品：忽略搜不到的词", act_inv_order_boost_save:"订货：忙的时候多订", act_inv_order_cancel:"订货：撤销订货单", act_inv_order_confirm:"订货：确认订货单", act_inv_order_start:"订货：出订货建议", act_inv_place_active:"物品：储位停用 / 启用", act_inv_place_item:"物品：放进储位", act_inv_place_new:"物品：新储位", act_inv_place_save:"物品：存储位", act_inv_place_slots:"物品：储位格子", act_inv_pos_link:"饮料：连收银商品", act_inv_receipt_cancel:"饮料：撤销收货", act_inv_receipt_confirm:"饮料：确认收货", act_inv_receipt_dup_ok:"饮料：确认不是重复的送货单", act_inv_receipt_save:"饮料：存送货单", act_inv_recipe_end:"饮料：停用配方", act_inv_recipe_save:"饮料：存配方", act_inv_set_main:"物品：设主位置", act_inv_supplier_item_link:"订货：连供应商商品", act_inv_supplier_store_save:"订货：供应商设置", act_inv_targets_fill:"订货：AI 填目标库存", act_inv_traits_save:"饮料：存特点", act_inv_transfer_cancel:"饮料：撤销调拨", act_inv_transfer_save:"饮料：调拨", act_inv_unplace:"物品：从储位取下", act_inv_week_save:"饮料：每周设置", act_ksched_publish:"发布厨房排班", act_kshift_times_set:"改厨房班次时间", act_library_archive:"资料存档", act_library_create:"发布资料", act_lock_checkpoint_save:"锁门检查点", act_lock_photo:"锁门拍照", act_message_send:"发留言", act_miss_alert_done:"屡次漏做已处理", act_oil_close:"收废油结束", act_oil_start:"收废油开始", act_onb_check:"带教清单打勾", act_onb_exam:"带教考核", act_pin_expired:"初始 PIN 过期", act_pin_request:"忘记 PIN 申请", act_pin_request_dismiss:"忽略 PIN 申请", act_recon_complete:"核对完成", act_recon_note:"核对说明", act_recon_report_void:"作废报告", act_role_concentration_ok:"确认权力集中", act_shift_days_set:"改班次日子", act_shift_times_set:"改班次时间", act_sop_ai_gap_done:"SOP：AI 缺口已处理", act_sop_gap_done:"SOP：缺口已写好", act_sop_key:"SOP：设成关键", act_staff_expense:"改垫付权限", act_staff_kitchen_scheduler:"改厨房排班员权限", act_task_answer:"任务回答", act_task_assign:"任务交给…", act_task_attach:"任务附件", act_task_find:"发现没做", act_task_lead_set:"设任务负责人", act_task_miss_ack:"漏做：知道了", act_task_miss_appeal:"漏做申诉", act_task_miss_decide:"判定申诉", act_task_named_cancel:"取消交代的事", act_task_once_cancel:"取消一次性任务", act_task_result:"交回结果", act_task_sop_check:"任务按 SOP 检查", act_task_stats_ai:"任务统计 AI 点评", act_task_suggest:"AI 建议任务", act_task_suggest_dismiss:"不要 AI 建议的任务", act_tip_extra:"多给小费" });
 Object.assign(I18N.de, { act_feedback_ask:"Feedback: Rückfrage", act_feedback_reply:"Feedback: Antwort", act_oil_date:"Altfett: Termin festgelegt", act_oil_date_change:"Altfett: Termin geändert", act_recon_report_add:"Bericht erfasst", act_recon_report_fix:"Bericht korrigiert", act_task_add:"Aufgabe angelegt", act_task_edit:"Aufgabe geändert", act_task_disable:"Aufgabe deaktiviert", act_task_enable:"Aufgabe aktiviert", act_task_named_add:"Persönliche Aufgabe angelegt", act_task_named_edit:"Persönliche Aufgabe geändert", act_task_once_add:"Einmalige Aufgabe angelegt", act_task_once_edit:"Einmalige Aufgabe geändert", act_announce:"Mitteilung veröffentlicht", act_area_set:"Bereichsleitung festgelegt", act_ask_send:"Frage an Mitarbeiter gesendet", act_audit_done:"Stichprobe erledigt", act_audit_start:"Stichprobe vergeben", act_bon_cover_confirm:"Ein Bon für zwei Schichten bestätigt", act_bon_entry_proxy:"Bon für Mitarbeiter eingereicht", act_bon_report_id:"Bon-Berichtsnummer geändert", act_doc_decide:"Nachweis geprüft", act_doc_exempt:"Nachweis erlassen", act_doc_mark:"Nachweis für Mitarbeiter eingetragen", act_doc_reset:"Nachweis zurückgesetzt", act_doc_start:"Nachweis-Abfrage gestartet", act_doc_submit:"Nachweis eingereicht", act_expense_add:"Auslage erfasst", act_expense_cancel:"Auslage zurückgezogen", act_expense_pay:"Auslage ausgezahlt", act_expense_void:"Auslage gestrichen", act_feedback_answer:"Feedback beantwortet", act_inv_area_save:"Lager: Bereich gespeichert", act_inv_category_save:"Lager: Kategorie gespeichert", act_inv_count_cancel:"Getränke: Inventur abgebrochen", act_inv_count_finish:"Getränke: Inventur abgeschlossen", act_inv_count_start:"Getränke: Inventur gestartet", act_inv_drink_off:"Getränke: Bestand nicht verfolgen", act_inv_drink_save:"Getränke: Getränk gespeichert", act_inv_drink_suggest:"Getränke: KI-Zuordnung", act_inv_inbox_add:"Lager: Eingang erfasst", act_inv_inbox_handle:"Lager: Eingang bearbeitet", act_inv_item_active:"Lager: Artikel aktiv / inaktiv", act_inv_item_alias:"Lager: Suchwort ergänzt", act_inv_item_merge:"Lager: Artikel zusammengeführt", act_inv_item_save:"Lager: Artikel gespeichert", act_inv_keeper_set:"Lagerverantwortliche festgelegt", act_inv_loss_cancel:"Getränke: Verlust storniert", act_inv_loss_save:"Getränke: Verlust erfasst", act_inv_miss_ignore:"Lager: Suchwort ignoriert", act_inv_order_boost_save:"Bestellung: Mehrbedarf gespeichert", act_inv_order_cancel:"Bestellung: storniert", act_inv_order_confirm:"Bestellung: bestätigt", act_inv_order_start:"Bestellung: Vorschlag erstellt", act_inv_place_active:"Lager: Platz aktiv / inaktiv", act_inv_place_item:"Lager: Artikel eingeräumt", act_inv_place_new:"Lager: neuer Platz", act_inv_place_save:"Lager: Platz gespeichert", act_inv_place_slots:"Lager: Fächer gespeichert", act_inv_pos_link:"Getränke: Kassenartikel verknüpft", act_inv_receipt_cancel:"Getränke: Wareneingang storniert", act_inv_receipt_confirm:"Getränke: Wareneingang bestätigt", act_inv_receipt_dup_ok:"Getränke: kein doppelter Lieferschein", act_inv_receipt_save:"Getränke: Lieferschein gespeichert", act_inv_recipe_end:"Getränke: Rezept beendet", act_inv_recipe_save:"Getränke: Rezept gespeichert", act_inv_set_main:"Lager: Hauptplatz gesetzt", act_inv_supplier_item_link:"Bestellung: Lieferantenartikel verknüpft", act_inv_supplier_store_save:"Bestellung: Lieferant gespeichert", act_inv_targets_fill:"Bestellung: Zielbestand per KI", act_inv_traits_save:"Getränke: Eigenschaften gespeichert", act_inv_transfer_cancel:"Getränke: Umlagerung storniert", act_inv_transfer_save:"Getränke: Umlagerung erfasst", act_inv_unplace:"Lager: aus Platz entfernt", act_inv_week_save:"Getränke: Wochenplan gespeichert", act_ksched_publish:"Küchenplan veröffentlicht", act_kshift_times_set:"Küchen-Schichtzeiten geändert", act_library_archive:"Unterlage archiviert", act_library_create:"Unterlage veröffentlicht", act_lock_checkpoint_save:"Schließ-Prüfpunkt gespeichert", act_lock_photo:"Abschluss-Foto", act_message_send:"Nachricht gesendet", act_miss_alert_done:"Wiederholt nicht erledigt: bearbeitet", act_oil_close:"Altfett abgeschlossen", act_oil_start:"Altfett gestartet", act_onb_check:"Einarbeitungs-Liste abgehakt", act_onb_exam:"Einarbeitung: Prüfung", act_pin_expired:"Start-PIN abgelaufen", act_pin_request:"PIN vergessen gemeldet", act_pin_request_dismiss:"PIN-Anfrage geschlossen", act_recon_complete:"Abgleich abgeschlossen", act_recon_note:"Abgleich-Notiz", act_recon_report_void:"Bericht storniert", act_role_concentration_ok:"Rollenbündelung bestätigt", act_shift_days_set:"Schichttage geändert", act_shift_times_set:"Schichtzeiten geändert", act_sop_ai_gap_done:"SOP: KI-Lücke erledigt", act_sop_gap_done:"SOP: Lücke erledigt", act_sop_key:"SOP: als wichtig markiert", act_staff_expense:"Auslagen-Recht geändert", act_staff_kitchen_scheduler:"Küchenplan-Recht geändert", act_task_answer:"Aufgabe beantwortet", act_task_assign:"Aufgabe zugewiesen", act_task_attach:"Aufgabe: Anhang", act_task_find:"Nicht erledigt festgestellt", act_task_lead_set:"Aufgaben-Verantwortliche festgelegt", act_task_miss_ack:"Nicht erledigt: zur Kenntnis", act_task_miss_appeal:"Einspruch: nicht erledigt", act_task_miss_decide:"Einspruch entschieden", act_task_named_cancel:"Persönliche Aufgabe storniert", act_task_once_cancel:"Einmalige Aufgabe storniert", act_task_result:"Ergebnis abgegeben", act_task_sop_check:"Aufgabe nach SOP geprüft", act_task_stats_ai:"Aufgaben-Statistik: KI-Kommentar", act_task_suggest:"KI-Aufgabenvorschlag", act_task_suggest_dismiss:"KI-Vorschlag verworfen", act_tip_extra:"Extra-Trinkgeld" });
+// v209：后厨的串
+Object.assign(I18N.zh, {"kc_h": "🍢 后厨的串", "kc_t_count": "数剩余", "kc_t_made": "今天要串", "kc_t_plan": "备串计划", "kc_title": "🍢 后厨的串", "kc_tab_count": "今晚剩余", "kc_tab_made": "今天要串", "kc_tab_plan": "备串计划", "kc_tab_items": "清单", "kc_g_meat": "肉", "kc_g_sea": "海鲜", "kc_g_veg": "蔬菜", "kc_g_other": "其他", "kc_qty": "根数", "kc_zero": "没有", "kc_mm_hint": "有的串今天没有计划、也没记串了多少：剩的不是 0 的，要在那一行填「今天串了几根」，不然算不出哪些是昨天的、要扔。", "kc_mm_lbl": "今天串了", "kc_ph_left": "剩", "kc_mm_need": "填「今天串了几根」", "kc_plan_clear0": "要去掉这一种的计划，请填 0（空着 = 不改）。", "kc_task_fail": "任务没自动打勾：{e}", "kc_task_past": "{d} 晚上没数完：已经补不了（只能数今天的），算漏做；觉得不该算可以申诉。", "kc_task_past_m": "{d} 没记串了多少：已经补不了，算漏做；觉得不该算可以申诉。", "kc_made_plan": "今天按计划串了 {n} 根", "kc_made_rec": "今天串了 {n} 根", "kc_old": "其中 {n} 根是昨天串的：今晚扔掉", "kc_over": "比可能剩的多 {n} 根：数错了，还是今天串的没记？", "kc_count_for": "{d} 晚上 · 每种都填剩几根，没有填 0。数完不再串。", "kc_too_early": "晚上 {t} 以后才能数（厨房最后点单以后）。", "kc_boss_any": "员工晚上 {t} 以后才能数；老板和后厨主管什么时候都能改。", "kc_done_at": "✓ 数完了 {t} · {n}", "kc_done_sum": "剩 {a} 根，扔 {w} 根", "kc_stale": "数完以后又改了：请再点一次「数完了」。", "kc_filled": "已填 {a} / {b}", "kc_saving": "还有 {n} 个在保存…", "kc_finish": "✓ 数完了", "kc_finish_again": "✓ 再确认一次数完了", "kc_fill_all_hint": "还有 {n} 种没填（没有就填 0）", "kc_throw_h": "今晚扔掉（昨天串的）：", "kc_throw_none": "没有要扔的。", "kc_over_list": "比可能剩的多：{l}（数错了，还是今天串的没记？）", "kc_made_for": "{d} · 照单串好以后记下来", "kc_no_plan": "还没有计划，问老板。串好以后也可以先记下今天串了多少。", "kc_guests_n": "预定 {n} 人", "kc_plan_by": "计划 {t} · {n}", "kc_base_none_made": "昨晚没数完：剩的没算进去，要串 = 要备好的全部。", "kc_made_done": "✓ 记好了 {t} · {n}", "kc_make_line": "要备好 {t} · 剩 {b} → 要串 {n}", "kc_make_none": "这一种没有计划（今天不串）", "kc_make_n": "串 {n}", "kc_made_was": "记的是 {n}（{w}）", "kc_made_save": "✓ 按这些数做完", "kc_made_save2": "保存改动", "kc_made_save_free": "记下今天串了多少", "kc_made_hint": "框里先填的是「要串」的数；实际串的不一样就改。每种都要有数（没串填 0）。", "kc_base_ok": "基础：前一晚数的（{t} · {n}），昨天的扔了 {w} 根。下面的「剩」能用到这一天。", "kc_base_none": "昨晚还没数完：剩的不知道，要串 = 要备好的全部。", "kc_base_none_future": "前一晚还没数：那天晚上数完以后，「剩」和「要串」会自动算好。", "kc_guests": "预定人数", "kc_note": "备注", "kc_note_ph": "例如：圣诞聚会 30 人", "kc_copy_lw": "照上周同一天（只填空着的）", "kc_plan_hint": "每种填「这一天要备好几根」，App 减掉剩的算出要串几根。框里灰色的数是上周同一天。", "kc_plan_save": "保存计划", "kc_left_b": "剩 {n}", "kc_lw": "上周 {n}", "kc_i_zh": "中文名", "kc_i_de": "德文名", "kc_i_grp": "分组", "kc_i_sort": "顺序", "kc_i_off": "停用了", "kc_i_edit": "改", "kc_i_hide": "停用", "kc_i_show": "再用", "kc_items_hint": "要数的串（顺序和冰箱里一样）。换菜单时在这里加、改、停用；停用的不用数，以前的记录都留着。", "kc_i_new": "＋ 加一种串", "kc_i_hide_q": "停用「{n}」？以后晚上不用数它，以前的记录都留着。", "kc_not_saved": "有的数没保存上（网络？）。请稍等再点一次。", "kc_finished": "数完了。今晚要扔 {w} 根。", "kc_fill_all": "每种都要填一个数（没有就填 0）。", "kc_made_ok": "记好了。", "kc_made_ok_task": "记好了，任务也打勾了。", "kc_plan_empty": "还没填任何数。", "kc_plan_saved": "{d} 的计划保存了。", "kc_copy_none": "上周同一天没有计划，或者都已经填了。", "kc_copied": "填了 {n} 种（上周同一天的数），检查一下再保存。", "kc_task_go_count": "🍢 去数串 →", "kc_task_go_made": "🔪 打开「今天要串」→", "kc_task_done_check": "已经在「串」页数完了，但没自动打勾？点这里打勾", "kc_task_done_check_m": "已经记好串了多少，但没自动打勾？点这里打勾", "kc_task_done_photo": "已经做完了：拍照打勾", "act_kitchen_count": "后厨：数完剩余的串", "act_kitchen_plan": "后厨：备串计划", "act_kitchen_made": "后厨：记串了多少", "act_kitchen_item": "后厨：串的清单"});
+Object.assign(I18N.de, {"kc_h": "🍢 Küche: Spieße", "kc_t_count": "Rest zählen", "kc_t_made": "Heute aufspießen", "kc_t_plan": "Spieß-Plan", "kc_title": "🍢 Spieße (Küche)", "kc_tab_count": "Rest heute", "kc_tab_made": "Heute aufspießen", "kc_tab_plan": "Plan", "kc_tab_items": "Liste", "kc_g_meat": "Fleisch", "kc_g_sea": "Fisch & Meeresfrüchte", "kc_g_veg": "Gemüse", "kc_g_other": "Sonstiges", "kc_qty": "Anzahl Spieße", "kc_zero": "keine", "kc_mm_hint": "Für manche Sorten gibt es heute weder Plan noch Eintrag: wenn Rest > 0, in der Zeile „heute aufgespießt“ eintragen, sonst ist unklar, was von gestern ist und weg muss.", "kc_mm_lbl": "Heute aufgespießt", "kc_ph_left": "Rest", "kc_mm_need": "„Heute aufgespießt“ eintragen", "kc_plan_clear0": "Um den Plan für diese Sorte zu entfernen, 0 eintragen (leer = keine Änderung).", "kc_task_fail": "Aufgabe nicht automatisch abgehakt: {e}", "kc_task_past": "Am Abend {d} nicht fertig gezählt: kann nicht nachgeholt werden (nur heute zählbar), zählt als nicht erledigt; Einspruch möglich.", "kc_task_past_m": "Am {d} nichts eingetragen: kann nicht nachgeholt werden, zählt als nicht erledigt; Einspruch möglich.", "kc_made_plan": "Heute laut Plan {n} aufgespießt", "kc_made_rec": "Heute {n} aufgespießt", "kc_old": "davon {n} von gestern: heute wegwerfen", "kc_over": "{n} mehr als möglich: verzählt oder Aufgespießtes nicht eingetragen?", "kc_count_for": "Abend {d} · für jede Sorte den Rest eintragen, keine = 0. Danach nichts mehr aufspießen.", "kc_too_early": "Zählen erst ab {t} Uhr (nach der letzten Küchenbestellung).", "kc_boss_any": "Mitarbeiter zählen ab {t} Uhr; Chef und Küchenleitung können jederzeit ändern.", "kc_done_at": "✓ Fertig gezählt {t} · {n}", "kc_done_sum": "{a} übrig, {w} wegwerfen", "kc_stale": "Nach dem Zählen geändert: bitte noch einmal „Fertig gezählt“ tippen.", "kc_filled": "{a} / {b} eingetragen", "kc_saving": "Speichere noch {n} …", "kc_finish": "✓ Fertig gezählt", "kc_finish_again": "✓ Nochmals fertig gezählt", "kc_fill_all_hint": "Noch {n} Sorten offen (keine = 0)", "kc_throw_h": "Heute wegwerfen (von gestern):", "kc_throw_none": "Nichts wegzuwerfen.", "kc_over_list": "Mehr als möglich: {l} (verzählt oder nicht eingetragen?)", "kc_made_for": "{d} · nach dem Aufspießen eintragen", "kc_no_plan": "Noch kein Plan – bitte den Chef fragen. Was du schon aufgespießt hast, kannst du trotzdem eintragen.", "kc_guests_n": "{n} Gäste reserviert", "kc_plan_by": "Plan {t} · {n}", "kc_base_none_made": "Gestern nicht fertig gezählt: Rest nicht abgezogen, aufspießen = ganze Zielmenge.", "kc_made_done": "✓ Eingetragen {t} · {n}", "kc_make_line": "Ziel {t} · Rest {b} → aufspießen {n}", "kc_make_none": "Kein Plan für diese Sorte (heute nicht aufspießen)", "kc_make_n": "{n} aufspießen", "kc_made_was": "eingetragen {n} ({w})", "kc_made_save": "✓ Fertig mit diesen Mengen", "kc_made_save2": "Änderungen speichern", "kc_made_save_free": "Heute Aufgespießtes eintragen", "kc_made_hint": "Vorausgefüllt ist die Plan-Menge; wenn du anders aufgespießt hast, ändere sie. Jede Sorte braucht eine Zahl (keine = 0).", "kc_base_ok": "Grundlage: Zählung am Vorabend ({t} · {n}), {w} von gestern weggeworfen. „Rest“ unten ist bis zu diesem Tag verwendbar.", "kc_base_none": "Gestern Abend nicht fertig gezählt: Rest unbekannt, aufspießen = ganze Zielmenge.", "kc_base_none_future": "Der Vorabend ist noch nicht gezählt: danach werden „Rest“ und „aufspießen“ automatisch berechnet.", "kc_guests": "Reservierte Gäste", "kc_note": "Notiz", "kc_note_ph": "z. B. Weihnachtsfeier 30 Pers.", "kc_copy_lw": "Wie letzte Woche (nur leere Felder)", "kc_plan_hint": "Pro Sorte eintragen, wie viele an diesem Tag bereit sein sollen; die App zieht den Rest ab. Grau im Feld = gleicher Tag letzte Woche.", "kc_plan_save": "Plan speichern", "kc_left_b": "Rest {n}", "kc_lw": "letzte Woche {n}", "kc_i_zh": "Chinesischer Name", "kc_i_de": "Deutscher Name", "kc_i_grp": "Gruppe", "kc_i_sort": "Reihenfolge", "kc_i_off": "deaktiviert", "kc_i_edit": "Ändern", "kc_i_hide": "Deaktivieren", "kc_i_show": "Wieder aktiv", "kc_items_hint": "Die Spieße zum Zählen (Reihenfolge wie im Kühlschrank). Bei neuer Karte hier ergänzen, ändern oder deaktivieren; deaktivierte werden nicht gezählt, alte Daten bleiben.", "kc_i_new": "＋ Neue Sorte", "kc_i_hide_q": "„{n}“ deaktivieren? Abends nicht mehr zählen; alte Daten bleiben.", "kc_not_saved": "Nicht alle Zahlen gespeichert (Netz?). Bitte kurz warten und nochmal tippen.", "kc_finished": "Fertig gezählt. Heute {w} wegwerfen.", "kc_fill_all": "Bitte für jede Sorte eine Zahl eintragen (keine = 0).", "kc_made_ok": "Eingetragen.", "kc_made_ok_task": "Eingetragen, Aufgabe abgehakt.", "kc_plan_empty": "Noch keine Zahl eingetragen.", "kc_plan_saved": "Plan für {d} gespeichert.", "kc_copy_none": "Letzte Woche gab es keinen Plan, oder alles ist schon ausgefüllt.", "kc_copied": "{n} Sorten von letzter Woche übernommen – bitte prüfen und speichern.", "kc_task_go_count": "🍢 Spieße zählen →", "kc_task_go_made": "🔪 „Heute aufspießen“ öffnen →", "kc_task_done_check": "Schon auf der Spieße-Seite gezählt, aber nicht abgehakt? Hier abhaken", "kc_task_done_check_m": "Aufgespießtes schon eingetragen, aber nicht abgehakt? Hier abhaken", "kc_task_done_photo": "Schon erledigt: Foto zum Abhaken", "act_kitchen_count": "Küche: Spieße gezählt", "act_kitchen_plan": "Küche: Spieß-Plan", "act_kitchen_made": "Küche: Aufgespießtes eingetragen", "act_kitchen_item": "Küche: Spieß-Liste"});
 
 // ============ 工具 ============
 const LS = {
@@ -2466,7 +2470,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=41'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=42'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2686,6 +2690,17 @@ const ERR_ZH = {
   INV_ORDER_QTY: '数量要填 0 或更大的整数（几个订货单位）。请改一下。',   // v169
   INV_ORDER_EMPTY: '订货单里一行数量都没有，不能确认。请先填要订的数量，或者撤销这张订货单。',   // v169
   INV_BOOST_BAD: '「这批多订」没保存：倍数要在 0,5 到 3 之间，送货日要在今天到 4 个月以内。请改一下再保存。',   // v197
+  KITCHEN_NOT_ALLOWED: "只有厨房的人、老板和后厨主管能看和改「串」。如果你在厨房上班，请老板在员工里把你的主岗位设成厨房的岗位。",   // v209
+  KITCHEN_INPUT: "没保存：填的内容不对（数字或名字）。请检查一下再试。",   // v209
+  KITCHEN_DAY_BAD: "只能看最近 30 天，计划只能定今天到 7 天以后。",   // v209
+  KITCHEN_TOO_EARLY: "还没到晚上 8 点：厨房最后点单以后才数（数完不再串）。",   // v209
+  KITCHEN_QTY_BAD: "根数要是 0 到 2000 的整数。请改一下再保存。",   // v209
+  KITCHEN_COUNT_MISSING: "还有串没填：每种都要填（没有就填 0），才能点「数完了」。",   // v209
+  KITCHEN_MADE_MISSING: "还不能数完：这些串剩的不是 0，又不知道今天串了几根，算不出哪些是昨天的、要扔。请在那一行填「今天串了几根」（没串填 0）：",   // v209
+  KITCHEN_NAME_MISSING: "没保存：中文名和德文名至少填一个。",   // v209
+  KITCHEN_NAME_TAKEN: "没保存：清单里已经有这个名字了。换个名字，或者把停用的那个再用。",   // v209
+  KITCHEN_COUNT_FIRST: "这个任务不能直接打勾：先在「物品 → 🍢 数剩余」里每种填好、点「数完了」，任务会自己打勾。",   // v209
+  KITCHEN_MADE_FIRST: "这个任务不能直接打勾：先在「物品 → 🔪 今天要串」里记下串了多少，任务会自己打勾。",   // v209
   INV_TARGET_BAD: '目标库存要填 0 或更大的数。请改一下。',   // v169
   INV_FACTOR: '「卖 1 个 = 几个」要填大于 0 的数（瓶装饮料一般是 1）。请改一下再保存。',
   INV_PHOTO_BAD: '照片没有传上去（网络断了或照片有问题）。请重拍一次。',
@@ -2994,6 +3009,17 @@ const ERR_DE = {
   INV_ORDER_QTY: 'Die Menge muss eine ganze Zahl ab 0 sein (Bestelleinheiten). Bitte korrigieren.',   // v169
   INV_ORDER_EMPTY: 'In der Bestellung steht noch keine Menge, deshalb kann sie nicht bestätigt werden. Bitte Mengen eintragen oder die Bestellung stornieren.',   // v169
   INV_BOOST_BAD: '„Mehr bestellen“ nicht gespeichert: Der Faktor muss zwischen 0,5 und 3 liegen und der Liefertag zwischen heute und 4 Monaten. Bitte korrigieren und erneut speichern.',   // v197
+  KITCHEN_NOT_ALLOWED: "Nur Küchenpersonal, Chef und Küchenleitung können „Spieße“ sehen und ändern. Wenn du in der Küche arbeitest: Der Chef soll deine Hauptrolle auf eine Küchenrolle setzen.",   // v209
+  KITCHEN_INPUT: "Nicht gespeichert: Eingabe ungültig (Zahl oder Name). Bitte prüfen und nochmal versuchen.",   // v209
+  KITCHEN_DAY_BAD: "Nur die letzten 30 Tage ansehen; Pläne nur von heute bis in 7 Tagen.",   // v209
+  KITCHEN_TOO_EARLY: "Noch vor 20 Uhr: erst nach der letzten Küchenbestellung zählen (danach nichts mehr aufspießen).",   // v209
+  KITCHEN_QTY_BAD: "Die Anzahl muss eine ganze Zahl von 0 bis 2000 sein. Bitte korrigieren und speichern.",   // v209
+  KITCHEN_COUNT_MISSING: "Noch nicht alle Sorten eingetragen: jede braucht eine Zahl (keine = 0), dann „Fertig gezählt“.",   // v209
+  KITCHEN_MADE_MISSING: "Noch nicht fertig: Bei diesen Sorten ist ein Rest da, aber unklar, wie viele heute aufgespießt wurden – also auch, was von gestern ist und weg muss. Bitte in der Zeile „Heute aufgespießt“ eintragen (keine = 0):",   // v209
+  KITCHEN_NAME_MISSING: "Nicht gespeichert: mindestens einen Namen (Chinesisch oder Deutsch) eintragen.",   // v209
+  KITCHEN_NAME_TAKEN: "Nicht gespeichert: Diesen Namen gibt es schon. Anderen Namen wählen oder die deaktivierte Sorte wieder aktivieren.",   // v209
+  KITCHEN_COUNT_FIRST: "Nicht direkt abhakbar: zuerst unter „Artikel → 🍢 Rest zählen“ alles eintragen und „Fertig gezählt“ tippen – dann wird automatisch abgehakt.",   // v209
+  KITCHEN_MADE_FIRST: "Nicht direkt abhakbar: zuerst unter „Artikel → 🔪 Heute aufspießen“ eintragen, was aufgespießt wurde – dann wird automatisch abgehakt.",   // v209
   INV_TARGET_BAD: 'Der Sollbestand muss eine Zahl ab 0 sein. Bitte korrigieren.',   // v169
   INV_FACTOR: '„1 verkauft = wie viele“ muss größer als 0 sein (bei Flaschen meist 1). Bitte korrigieren und erneut speichern.',
   INV_PHOTO_BAD: 'Das Foto wurde nicht hochgeladen (keine Verbindung oder Fotoproblem). Bitte noch einmal fotografieren.',
@@ -5183,6 +5209,7 @@ function renderTaskRun(){
         : `<button class="btn ghost" style="flex:1 1 45%" data-act="task-override" data-id="${l.row_id}">${esc(t('tk_override'))}</button>`)
       : c.need_result ? ''   // v128：交回结果在下面
       : it.done ? (l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') + (photo ? cam(it, t('tk_retake'), 'ghost sm') : '')
+      : kcTaskTab(c) ? kcTaskActs(c, it, photo, cam)   // v209：后厨的串：先去「串」页
       : photo ? cam(it, t('tk_photo')) : `<button class="btn" data-act="task-check" data-item="${it.id}">${esc(t('tk_check'))}</button>`;
     return `<div class="item"><div><span class="lk-n num">${i + 1}</span> <strong>${esc(nm(it))}</strong>${it.ai && photo ? ' <span class="tag m">AI</span>' : ''}</div>
       ${hint(it) ? `<div class="meta">${esc(hint(it))}</div>` : ''}${st}${l && l.ai && aiSaw(l.ai.seen) ? `<div class="meta">${esc(aiSaw(l.ai.seen))}</div>` : ''}${msgs ? `<div class="warnbox" style="margin:8px 0 0">${msgs}</div>` : ''}
@@ -6559,6 +6586,7 @@ async function viewInv(){
   if (S.view === 'otargets') return viewInvOtargets();
   if (S.view === 'ordsi') return viewInvOrdSi();   // v188
   if (S.view === 'count') return viewInvCount();
+  if (S.view === 'kitchen') return viewKc();   // v209：后厨的串
   if (S.view === 'unplaced') return renderInvUnplaced();
   if (S.view === 'qplace') return viewInvQplace();   // v175：快速放位置
   if (S.view === 'settings' || S.view === 'aform' || S.view === 'cform') return viewInvSettings();
@@ -6582,6 +6610,287 @@ async function viewInvHome(){
 }
 // v206（inv-3）：查看模式只能看：会写数据的按钮都不显示（以前点了才报只读，有的还先拍了照、上传了）
 const invW = () => !state.viewAs;
+// ============ v209（数据库 v145 / 推送服务 push v18，老板 2026-11-20 / 21）：后厨的串（Flingern 先做） ============
+// 晚上数剩余（每种填一个数，全填了才能「数完了」；App 算出昨天的要扔几根）→ 老板 / 后厨主管定某一天每种要备好几根（要串 = 要备好 − 前一晚能留的）
+// → 第二天出串的人照单串、记下实际串了多少。两个每天的任务（数剩余的串 / 按备串单串串）由数据库自动打勾。
+const KC_STORES = ['Flingern'];
+const KC_GRPS = ['meat', 'sea', 'veg', 'other'];
+const kcNm = x => x ? (state.lang === 'de' ? enT(x.name_de) : x.name_zh) : '?';
+const kcBoss = st => { const m = state.me || {}; return !!(m.is_admin || (m.areas || []).some(x => x.area === 'kitchen' && (!st || x.store === st))); };
+const kcWho = () => { const m = state.me || {}; return !!(kcBoss() || isKRole(m.main_role)); };   // 查看模式：state.me 就是被看的人
+const kcHour = () => +new Intl.DateTimeFormat('en-GB', { hour: '2-digit', hour12: false, timeZone: 'Europe/Berlin' }).format(new Date()) % 24;
+function kcS(){ const S = invS(); return S.kc || (S.kc = { store: KC_STORES[0], tab: null, day: null, D: {}, cv: {}, mv: {}, mmv: {}, pv: {}, cpend: {}, edit: null, busy: false, vDay: null }); }
+// 没保存的数只属于打的那一天（个人手机 App 可能开着过夜）：换了营业日就丢掉，免得昨天打的数今天又被存进去
+function kcDayCheck(){ const K = kcS(), bd = bizToday(); if (K.vDay !== bd){ Object.values(KC_T).forEach(clearTimeout); K.cv = {}; K.mv = {}; K.mmv = {}; K.cpend = {}; K.vDay = bd; } }
+const kcKey = (st, d) => st + '|' + d;
+const kcNum = v => { const s = String(v ?? '').trim(); return /^\d{1,4}$/.test(s) ? +s : null; };
+// 今天要串 / 计划：下午 3 点以前默认今天，以后默认明天
+const kcPlanDefault = () => kcHour() >= 15 || kcHour() < 5 ? addDays(bizToday(), 1) : bizToday();
+function kcGo(store, tab){
+  const K = kcS(); K.store = KC_STORES.includes(store) ? store : KC_STORES[0];
+  K.tab = tab || (kcHour() >= 15 || kcHour() < 5 ? 'count' : 'made');
+  K.day = K.tab === 'plan' ? kcPlanDefault() : bizToday(); K.edit = null;
+  invGo('kitchen');
+}
+function kcTilesHTML(){
+  const st = curStore(); if (!KC_STORES.includes(st) || !kcWho()) return '';
+  const tile = (tab, ico, label) => `<button class="tile" data-act="kc-go" data-store="${st}" data-tab="${tab}"><i>${ico}</i>${esc(label)}</button>`;
+  return `<div class="tiles-h">${esc(t('kc_h'))} · ${esc(st)}</div><div class="tiles">${tile('count', '🍢', t('kc_t_count'))}${tile('made', '🔪', t('kc_t_made'))}${kcBoss(st) ? tile('plan', '📝', t('kc_t_plan')) : ''}</div>`;
+}
+async function viewKc(){
+  kcDayCheck();
+  const K = kcS(), day = K.tab === 'plan' ? (K.day || kcPlanDefault()) : bizToday(), key = kcKey(K.store, day);
+  if (K.D[key]) renderKc(); else $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`;
+  try { const D = await rpc('kitchen_day', { ...tok(), p_store: K.store, p_day: day }); K.D[key] = D; }
+  catch(e){ if (state.tab !== 'inv' || invS().view !== 'kitchen') return;
+    $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><div class="list"><div class="empty">${esc(errText(e))}<div style="margin-top:12px"><button class="btn ghost" data-act="kc-reload">${esc(t('inv_reload'))}</button></div></div></div>`; return; }
+  if (state.tab === 'inv' && invS().view === 'kitchen') keepScroll(renderKc);
+}
+function kcCur(){ const K = kcS(); return K.D[kcKey(K.store, K.tab === 'plan' ? (K.day || kcPlanDefault()) : bizToday())]; }
+function renderKc(){
+  const K = kcS(), D = kcCur(); if (!D) return;
+  const boss = D.can_plan, tabs = ['count', 'made'].concat(boss ? ['plan', 'items'] : []);
+  if (!tabs.includes(K.tab)) K.tab = 'count';
+  const seg = `<div class="seg sm" style="margin-bottom:12px">${tabs.map(x => `<button data-act="kc-tab" data-tab="${x}" class="${K.tab === x ? 'on' : ''}">${esc(t('kc_tab_' + x))}</button>`).join('')}</div>`;
+  const body = K.tab === 'made' ? kcMadeHTML(D) : K.tab === 'plan' ? kcPlanHTML(D) : K.tab === 'items' ? kcItemsHTML(D) : kcCountHTML(D);
+  $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button>
+    <h2 style="margin-top:4px">${esc(t('kc_title'))} ${storeTag(K.store)}</h2>${state.viewAs ? `<div class="small muted" style="margin:0 0 8px">${esc(t('tks_view'))}</div>` : ''}${seg}${body}`;
+  kcLive();
+}
+// 一行：名字 + 下面的说明 + 右边的输入框
+const kcGrpHTML = (items, fn) => KC_GRPS.map(g => { const L = items.filter(i => (i.grp || 'meat') === g); return L.length ? `<div class="tiles-h" style="margin-top:6px">${esc(t('kc_g_' + g))}</div><div class="list">${L.map(fn).join('')}</div>` : ''; }).join('');
+function kcInput(attr, id, val, dis, ph){
+  return `<input class="input num kc-n" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" ${attr}="${id}" value="${val ?? ''}"${ph != null ? ` placeholder="${esc(String(ph))}"` : ''}${dis ? ' disabled' : ''} aria-label="${esc(t('kc_qty'))}">`;
+}
+// 昨天的（今晚扔）、多出来的：和数据库 _kc_calc 一样算
+function kcCalc(r, left){
+  if (left == null) return { old: null, over: 0, carry: null };
+  if (left === 0) return { old: 0, over: 0, carry: 0 };
+  if (r.made == null) return { old: null, over: 0, carry: left };
+  const x = Math.max(0, left - r.made), old = r.prev == null ? x : Math.min(x, r.prev);
+  return { old, over: r.prev == null ? 0 : Math.max(0, left - r.made - r.prev), carry: left - old };
+}
+const kcMadeOf = (K, r, id) => r.made != null ? r.made : kcNum((K.mmv || {})[id]);
+function kcCountVal(K, D, id){ const r = (D.count.rows || []).find(x => x.item === id) || {}; return id in K.cv ? K.cv[id] : r.left; }
+function kcCountFacts(D, id, left){
+  const r0 = (D.count.rows || []).find(x => x.item === id) || {}, K = kcS(), mm = kcMadeOf(K, r0, id), r = { ...r0, made: mm }, c = kcCalc(r, left), f = [];
+  if (r0.made != null) f.push(t(r0.src === 'plan' ? 'kc_made_plan' : 'kc_made_rec', { n: r0.made }));
+  else if (left > 0 && mm == null) f.push(`<span class="negc">${esc(t('kc_mm_need'))}</span>`);
+  if (c.old > 0) f.push(`<span class="negc">${esc(t('kc_old', { n: c.old }))}</span>`);
+  if (c.over > 0) f.push(`<span class="warnc">${esc(t('kc_over', { n: c.over }))}</span>`);
+  return f.map(x => x.startsWith('<span') ? x : esc(x)).join(' · ');
+}
+function kcCountHTML(D){
+  const K = kcS(), C = D.count, items = D.items.filter(i => i.active), dn = C.done;
+  const can = D.can_work && !state.viewAs && (D.count_open || D.can_plan);
+  const vals = items.map(i => kcNum(kcCountVal(K, D, i.id))), filled = vals.filter(v => v != null).length;
+  const head = `<div class="small muted" style="margin-bottom:8px">${esc(t('kc_count_for', { d: dayLabel(D.day) }))}</div>`
+    + ((C.rows || []).some(r => r.made == null && (r.left == null || r.left > 0)) && can ? `<div class="small muted" style="margin-bottom:8px">${esc(t('kc_mm_hint'))}</div>` : '')
+    + (!D.count_open && !D.can_plan ? `<div class="infobox">${esc(t('kc_too_early', { t: D.count_from }))}</div>` : '')
+    + (!D.count_open && D.can_plan && !dn ? `<div class="small muted" style="margin-bottom:8px">${esc(t('kc_boss_any', { t: D.count_from }))}</div>` : '')
+    + (dn ? `<div class="infobox" style="border-color:${C.stale ? 'var(--copper)' : 'var(--celadon)'}">${esc(t('kc_done_at', { t: fmtDateTime(dn.at), n: dn.by || '' }))} · ${esc(t('kc_done_sum', { a: dn.left, w: dn.waste }))}`
+        + (C.stale ? `<br><b>${esc(t('kc_stale'))}</b>` : kcWasteList(D, dn.lines)) + '</div>' : '')
+    + `<div class="tdl-h" style="margin:6px 0"><b id="kc-filled">${esc(t('kc_filled', { a: filled, b: items.length }))}</b></div><div class="tdl-bar" style="margin-bottom:10px"><i id="kc-bar" style="width:${items.length ? Math.round(100 * filled / items.length) : 0}%"></i></div>`;
+  const row = i => { const v = kcCountVal(K, D, i.id), r = (C.rows || []).find(x => x.item === i.id) || {};
+    const show = (kcNum(v) || 0) > 0 || kcNum((K.mmv || {})[i.id]) != null;   // 剩的 > 0 才要填「今天串了几根」
+    const mm = r.made == null || i.id in (K.mmv || {}) ? `<div class="kc-mm" id="kc-mmw-${i.id}"${show ? '' : ' hidden'}><label>${esc(t('kc_mm_lbl'))} ${kcInput('data-kcmm', i.id, (K.mmv || {})[i.id] ?? r.made, !can)}</label></div>` : '';
+    return `<div class="item kc-row"><div class="kc-l"><strong>${esc(kcNm(i))}</strong><div class="meta" id="kc-f-${i.id}">${kcCountFacts(D, i.id, kcNum(v))}</div>${mm}</div>
+      <div class="kc-in">${can ? `<button class="btn ghost sm kc-z" data-act="kc-zero" data-id="${i.id}">${esc(t('kc_zero'))}</button>` : ''}${kcInput('data-kc', i.id, v, !can, t('kc_ph_left'))}</div></div>`; };
+  const pend = Object.keys(K.cpend || {}).length;
+  const foot = can ? `<div id="kc-pend" class="small ${pend ? 'warnc' : 'muted'}" style="margin:8px 0">${pend ? esc(t('kc_saving', { n: pend })) : ''}</div>
+      <button class="btn" data-act="kc-finish"${filled < items.length ? ' disabled' : ''}>${esc(t(dn && !C.stale ? 'kc_finish_again' : 'kc_finish'))}</button>
+      <div class="small muted" id="kc-fh" style="margin-top:6px">${filled < items.length ? esc(t('kc_fill_all_hint', { n: items.length - filled })) : ''}</div>` : '';
+  return head + kcGrpHTML(items, row) + foot;
+}
+function kcWasteList(D, lines){
+  const L = (lines || []).filter(l => +l.old > 0), over = (lines || []).filter(l => +l.over > 0), it = id => D.items.find(i => i.id === id);
+  return (L.length ? `<div style="margin-top:6px"><b>${esc(t('kc_throw_h'))}</b> ${esc(L.map(l => kcNm(it(l.item)) + ' ' + l.old).join('、'))}</div>` : `<div class="small" style="margin-top:4px">${esc(t('kc_throw_none'))}</div>`)
+    + (over.length ? `<div class="warnc small" style="margin-top:4px">${esc(t('kc_over_list', { l: over.map(l => kcNm(it(l.item)) + ' +' + l.over).join('、') }))}</div>` : '');
+}
+// 今天要串
+function kcMadeHTML(D){
+  const K = kcS(), P = D.plan, items = D.items.filter(i => i.active), pr = id => (P.rows || []).find(x => x.item === id) || {}, mr = id => (D.made.rows || []).find(x => x.item === id);
+  const noPlan = !+P.n_set, can = D.can_work && !state.viewAs, all = items.every(i => mr(i.id));
+  const head = `<div class="small muted" style="margin-bottom:8px">${esc(t('kc_made_for', { d: dayLabel(D.day) }))}</div>`
+    + (noPlan ? `<div class="warnbox">${esc(t('kc_no_plan'))}</div>` : `<div class="infobox">${[esc([P.guests != null ? t('kc_guests_n', { n: P.guests }) : '', P.note || '', P.last_at ? t('kc_plan_by', { t: fmtDateTime(P.last_at), n: ((P.rows || []).find(r => r.at === P.last_at) || {}).by || P.by || '' }) : ''].filter(Boolean).join(' · ')),
+        P.base_done ? '' : `<span class="warnc">${esc(t('kc_base_none_made'))}</span>`].filter(Boolean).join('<br>')}</div>`)
+    + (all ? `<div class="infobox" style="border-color:var(--celadon)">${esc(t('kc_made_done', { t: fmtDateTime(D.made.at), n: (D.made.rows.find(x => x.at === D.made.at) || {}).by || '' }))}</div>` : '');
+  const row = i => { const p = pr(i.id), m = mr(i.id), v = i.id in K.mv ? K.mv[i.id] : m ? m.qty : p.to_make != null ? p.to_make : noPlan ? '' : 0;   // 有计划、这一种没计划 = 今天不串（0）
+    const meta = p.target != null ? t('kc_make_line', { t: p.target, b: p.base ?? '–', n: p.to_make }) : noPlan ? '' : t('kc_make_none');
+    return `<div class="item kc-row"><div class="kc-l"><strong>${esc(kcNm(i))}</strong>${p.to_make != null ? ` <span class="tag ${p.to_make ? 'pend' : ''}">${esc(t('kc_make_n', { n: p.to_make }))}</span>` : ''}<div class="meta">${esc(meta)}${m ? ' · ' + esc(t('kc_made_was', { n: m.qty, w: m.by || '' })) : ''}</div></div>
+      <div class="kc-in">${kcInput('data-kcm', i.id, v, !can, noPlan ? '' : null)}</div></div>`; };
+  const foot = can ? `<button class="btn" data-act="kc-made-save" style="margin-top:10px">${esc(t(all ? 'kc_made_save2' : noPlan ? 'kc_made_save_free' : 'kc_made_save'))}</button><div class="small muted" style="margin-top:6px">${esc(t('kc_made_hint'))}</div>` : '';
+  return head + kcGrpHTML(items, row) + foot;
+}
+// 备串计划（老板、后厨主管）
+function kcPlanHTML(D){
+  const K = kcS(), P = D.plan, items = D.items.filter(i => i.active), pr = id => (P.rows || []).find(x => x.item === id) || {}, bd = bizToday();
+  const days = Array.from({ length: 8 }, (_, n) => addDays(bd, n));
+  const chips = `<div class="chips" style="margin-bottom:10px">${days.map(d => `<button class="chip${d === D.day ? ' on' : ''}" data-act="kc-day" data-day="${d}">${esc(dayWord(d))}</button>`).join('')}</div>`;
+  const can = D.can_plan && !state.viewAs, pv = K.pv[D.day] || {};
+  const base = P.base_done ? `<div class="infobox">${esc(t('kc_base_ok', { t: fmtDateTime(P.base_at), n: P.base_by || '', w: P.base_waste || 0 }))}</div>`
+    : `<div class="warnbox">${esc(t(D.day === bd ? 'kc_base_none' : 'kc_base_none_future'))}</div>`;
+  const val = id => id in pv ? pv[id] : pr(id).target;
+  const hasLw = (P.rows || []).some(r => r.last_week != null);
+  const row = i => { const p = pr(i.id), v = val(i.id), n = kcNum(v);
+    return `<div class="item kc-row"><div class="kc-l"><strong>${esc(kcNm(i))}</strong><div class="meta" id="kc-p-${i.id}">${esc(kcPlanFacts(p, n))}</div></div>
+      <div class="kc-in">${kcInput('data-kcp', i.id, v, !can, p.last_week != null ? p.last_week : null)}</div></div>`; };
+  return chips + base
+    + `<div class="row" style="gap:8px"><div class="field" style="flex:0 0 120px"><label for="kc-guests">${esc(t('kc_guests'))}</label><input class="input num" id="kc-guests" type="text" inputmode="numeric" maxlength="4" value="${esc(String('guests' in pv ? pv.guests : P.guests ?? ''))}"${can ? '' : ' disabled'}></div>
+       <div class="field"><label for="kc-note">${esc(t('kc_note'))}</label><input class="input" id="kc-note" maxlength="200" value="${esc('note' in pv ? pv.note : P.note || '')}" placeholder="${esc(t('kc_note_ph'))}"${can ? '' : ' disabled'}></div></div>`
+    + (can && hasLw ? `<button class="btn ghost sm" data-act="kc-plan-copy" style="margin:0 0 8px">${esc(t('kc_copy_lw'))}</button>` : '')
+    + `<div class="small muted" style="margin-bottom:6px">${esc(t('kc_plan_hint'))}</div>`
+    + kcGrpHTML(items, row)
+    + (can ? `<button class="btn" data-act="kc-plan-save" style="margin-top:10px">${esc(t('kc_plan_save'))}</button>` : '')
+    + (P.last_at ? `<div class="small muted" style="margin-top:6px">${esc(t('kc_plan_by', { t: fmtDateTime(P.last_at), n: ((P.rows || []).find(r => r.at === P.last_at) || {}).by || P.by || '' }))}</div>` : '');
+}
+const kcPlanFacts = (p, n) => [t('kc_left_b', { n: p.base ?? '–' }), n != null ? t('kc_make_n', { n: Math.max(0, n - (p.base || 0)) }) : '', p.last_week != null ? t('kc_lw', { n: p.last_week }) : ''].filter(Boolean).join(' · ');
+// 清单（老板、后厨主管）
+function kcItemsHTML(D){
+  const K = kcS(), E = K.edit, can = D.can_plan && !state.viewAs;
+  const form = x => `<div class="sheet" style="margin:8px 0">
+      <div class="field"><label for="kc-i-zh">${esc(t('kc_i_zh'))}</label><input class="input" id="kc-i-zh" maxlength="60" value="${esc(x.name_zh || '')}"></div>
+      <div class="field"><label for="kc-i-de">${esc(t('kc_i_de'))}</label><input class="input" id="kc-i-de" maxlength="60" value="${esc(x.name_de || '')}"></div>
+      <div class="row" style="gap:8px"><div class="field"><label for="kc-i-grp">${esc(t('kc_i_grp'))}</label><select class="input" id="kc-i-grp">${KC_GRPS.map(g => `<option value="${g}"${(x.grp || 'meat') === g ? ' selected' : ''}>${esc(t('kc_g_' + g))}</option>`).join('')}</select></div>
+      <div class="field" style="flex:0 0 110px"><label for="kc-i-sort">${esc(t('kc_i_sort'))}</label><input class="input num" id="kc-i-sort" type="text" inputmode="numeric" maxlength="4" value="${x.sort ?? ''}"></div></div>
+      <div class="row" style="gap:8px"><button class="btn" data-act="kc-item-save">${esc(t('save'))}</button><button class="btn ghost" data-act="kc-item-cancel">${esc(t('cancel'))}</button></div></div>`;
+  const rows = D.items.map(i => E && E.id === i.id ? form(i) : `<div class="item kc-row"><div class="kc-l"><strong${i.active ? '' : ' class="muted"'}>${esc(i.name_zh)} / ${esc(i.name_de)}</strong><div class="meta">${esc(t('kc_g_' + (i.grp || 'meat')))} · ${esc(t('kc_i_sort'))} ${i.sort}${i.active ? '' : ' · ' + esc(t('kc_i_off'))}</div></div>
+      ${can ? `<div class="kc-in"><button class="btn ghost sm" data-act="kc-item-edit" data-id="${i.id}">${esc(t('kc_i_edit'))}</button><button class="btn ghost sm" data-act="kc-item-toggle" data-id="${i.id}">${esc(t(i.active ? 'kc_i_hide' : 'kc_i_show'))}</button></div>` : ''}</div>`).join('');
+  return `<div class="small muted" style="margin-bottom:8px">${esc(t('kc_items_hint'))}</div>`
+    + (can ? (E && !E.id ? form(E) : `<button class="btn ghost" data-act="kc-item-new" style="margin-bottom:8px">${esc(t('kc_i_new'))}</button>`) : '')
+    + `<div class="list">${rows}</div>`;
+}
+// 打字时：只改这一行的说明和底下的按钮，不重画（光标不跳）；晚上数的 0.7 秒不打字就存
+const KC_T = {};
+function kcLive(){
+  const K = kcS(), D = kcCur(); if (!D) return;
+  if (K.tab === 'count'){ const items = D.items.filter(i => i.active), filled = items.filter(i => kcNum(kcCountVal(K, D, i.id)) != null).length, b = document.querySelector('[data-act="kc-finish"]');
+    if (b) b.disabled = filled < items.length || K.busy;
+    const a = document.getElementById('kc-filled'), bar = document.getElementById('kc-bar'), h = document.getElementById('kc-fh');
+    if (a) a.textContent = t('kc_filled', { a: filled, b: items.length }); if (bar) bar.style.width = (items.length ? Math.round(100 * filled / items.length) : 0) + '%';
+    if (h) h.textContent = filled < items.length ? t('kc_fill_all_hint', { n: items.length - filled }) : ''; }
+}
+document.addEventListener('input', ev => {
+  const x = ev.target, K = invS().kc; if (!K || !x.dataset) return;
+  if (x.dataset.kcmm){ const id = x.dataset.kcmm, D = kcCur(); if (!D) return; x.value = x.value.replace(/\D/g, '').slice(0, 4); K.mmv[id] = x.value;
+    const left = kcNum(kcCountVal(K, D, id)), f = document.getElementById('kc-f-' + id); if (f) f.innerHTML = kcCountFacts(D, id, left);
+    K.cpend['m' + id] = true; kcPendShow(); clearTimeout(KC_T['m' + id]); KC_T['m' + id] = setTimeout(() => kcMmSave(id), 900); return; }
+  if (x.dataset.kc){ const id = x.dataset.kc, D = kcCur(); if (!D) return; x.value = x.value.replace(/\D/g, '').slice(0, 4); K.cv[id] = x.value;
+    const f = document.getElementById('kc-f-' + id); if (f) f.innerHTML = kcCountFacts(D, id, kcNum(x.value));
+    const w = document.getElementById('kc-mmw-' + id); if (w) w.hidden = !((kcNum(x.value) || 0) > 0 || kcNum(K.mmv[id]) != null);
+    (K.cpend || (K.cpend = {}))[id] = true; kcPendShow(); clearTimeout(KC_T[id]); KC_T[id] = setTimeout(() => kcCountSave(id), 700); kcLive(); return; }
+  if (x.dataset.kcm){ x.value = x.value.replace(/\D/g, '').slice(0, 4); K.mv[x.dataset.kcm] = x.value; return; }
+  if (x.dataset.kcp){ const D = kcCur(); if (!D) return; x.value = x.value.replace(/\D/g, '').slice(0, 4); (K.pv[D.day] || (K.pv[D.day] = {}))[x.dataset.kcp] = x.value;
+    const p = (D.plan.rows || []).find(r => r.item === x.dataset.kcp) || {}, f = document.getElementById('kc-p-' + x.dataset.kcp); if (f) f.textContent = kcPlanFacts(p, kcNum(x.value)); return; }
+  if (x.id === 'kc-guests' || x.id === 'kc-note'){ const D = kcCur(); if (!D) return; if (x.id === 'kc-guests') x.value = x.value.replace(/\D/g, '').slice(0, 4);
+    (K.pv[D.day] || (K.pv[D.day] = {}))[x.id === 'kc-guests' ? 'guests' : 'note'] = x.value; }
+});
+function kcPendShow(){ const K = kcS(), n = Object.keys(K.cpend || {}).length, e = document.getElementById('kc-pend'); if (e){ e.textContent = n ? t('kc_saving', { n }) : ''; e.className = 'small ' + (n ? 'warnc' : 'muted'); } }
+// 每一种同时只存一次（一个接一个）；存完只有框里还是存的那个数才算存好，打字时改了的继续等着存
+const KC_INF = {};
+function kcChain(key, run){ const p = (KC_INF[key] || Promise.resolve()).catch(() => {}).then(run); KC_INF[key] = p; return p; }
+function kcCountSave(id){ clearTimeout(KC_T[id]);
+  return kcChain(id, async () => {
+    const K = kcS(), v = kcNum(K.cv[id]);
+    if (!(id in K.cv)){ delete K.cpend[id]; kcPendShow(); return; }
+    if (v == null){ delete K.cpend[id]; kcPendShow(); return; }   // 空着 = 还没数，不存
+    try { await rpc('kitchen_count_set', { ...tok(), p_store: K.store, p_item: id, p_qty: v });
+      const D = kcCur(); if (D){ const r = (D.count.rows || []).find(x => x.item === id); if (r) r.left = v; }
+      if (kcNum(K.cv[id]) === v){ delete K.cv[id]; delete K.cpend[id]; } }
+    catch(e){ toast(errText(e), true); }
+    finally { kcPendShow(); } }); }
+function kcMmSave(id){ clearTimeout(KC_T['m' + id]);
+  return kcChain('m' + id, async () => {
+    const K = kcS(), v = kcNum(K.mmv[id]);
+    if (v == null){ delete K.cpend['m' + id]; kcPendShow(); return; }
+    try { await rpc('kitchen_made_save', { ...tok(), p_store: K.store, p_lines: [{ item: id, qty: v }] });
+      const D = kcCur(); if (D){ const r = (D.count.rows || []).find(x => x.item === id); if (r){ r.made = v; r.src = 'made'; } }
+      if (kcNum(K.mmv[id]) === v) delete K.cpend['m' + id]; }
+    catch(e){ toast(errText(e), true); }
+    finally { kcPendShow(); } }); }
+async function kcFlush(){
+  const K = kcS(); Object.values(KC_T).forEach(clearTimeout);
+  for (let n = 0; n < 3; n++){
+    const ids = Object.keys(K.cpend || {});
+    await Promise.all(Object.values(KC_INF).concat(ids.map(k => k[0] === 'm' && k.length > 36 ? kcMmSave(k.slice(1)) : kcCountSave(k))).map(p => Promise.resolve(p).catch(() => {})));
+    if (!Object.keys(K.cpend || {}).length) return true;
+  }
+  return false;
+}
+// 自动打勾没成（很少见，例如老板发现过没做、这个任务要拍照）：说清原因
+function kcTaskToast(task){ if (!task || ['ticked', 'done', 'none'].includes(task)) return; setTimeout(() => toast(t('kc_task_fail', { e: errText({ message: task }) }), true), 2500); }
+async function kcFinish(btn){
+  const K = kcS(), D0 = kcCur(); if (K.busy || !D0) return;
+  // 剩的 > 0、又不知道今天串了几根的 → 先填（不然算不出哪些是昨天的、要扔）
+  const miss = D0.items.filter(i => i.active).filter(i => { const r = (D0.count.rows || []).find(x => x.item === i.id) || {}; return (kcNum(kcCountVal(K, D0, i.id)) || 0) > 0 && kcMadeOf(K, r, i.id) == null; });
+  if (miss.length){ toast(t('err_KITCHEN_MADE_MISSING') + ' ' + miss.map(kcNm).join('、'), true); const el = document.querySelector(`[data-kcmm="${miss[0].id}"]`); if (el) el.focus(); return; }
+  K.busy = true; btn.disabled = true; document.querySelectorAll('[data-kc],[data-kcmm]').forEach(x => x.disabled = true);
+  try {
+    if (!await kcFlush()){ toast(t('kc_not_saved'), true); return; }
+    const r = await rpc('kitchen_count_finish', { ...tok(), p_store: K.store }); K.D[kcKey(K.store, bizToday())] = r; K.mmv = {};
+    const dn = r.count.done || {}; toast(t('kc_finished', { w: dn.waste || 0 }));
+    kcTaskToast(r.task);
+    callPush('kitchen_due'); if (r.task === 'ticked') callPush('task_due'); soft(loadTasks(), null);
+  } catch(e){ toast(errText(e), true); }
+  finally { K.busy = false; if (state.tab === 'inv' && invS().view === 'kitchen'){ keepScroll(renderKc); window.scrollTo(0, 0); } }
+}
+async function kcMadeSave(btn){
+  const K = kcS(), D = kcCur(); if (!D || K.busy) return;
+  const items = D.items.filter(i => i.active), lines = [];
+  for (const i of items){ const el = document.querySelector(`[data-kcm="${i.id}"]`), v = kcNum(el ? el.value : null);
+    if (v == null){ toast(t('kc_fill_all'), true); if (el) el.focus(); return; } lines.push({ item: i.id, qty: v }); }
+  K.busy = true; btn.disabled = true;
+  try { const r = await rpc('kitchen_made_save', { ...tok(), p_store: K.store, p_lines: lines }); K.D[kcKey(K.store, bizToday())] = r; K.mv = {};
+    toast(t(r.task === 'ticked' ? 'kc_made_ok_task' : 'kc_made_ok')); if (r.task === 'ticked') callPush('task_due');
+    kcTaskToast(r.task); soft(loadTasks(), null); }
+  catch(e){ toast(errText(e), true); }
+  finally { K.busy = false; if (state.tab === 'inv' && invS().view === 'kitchen') keepScroll(renderKc); }
+}
+async function kcPlanSave(btn){
+  const K = kcS(), D = kcCur(); if (!D || K.busy) return;
+  const g = $('#kc-guests'), n = $('#kc-note'), gv = g && g.value.trim() !== '' ? kcNum(g.value) : null;
+  if (g && g.value.trim() !== '' && gv == null){ toast(t('err_KITCHEN_QTY_BAD'), true); return; }
+  const lines = D.items.filter(i => i.active).map(i => { const el = document.querySelector(`[data-kcp="${i.id}"]`), s = el ? el.value.trim() : ''; return { item: i.id, target: s === '' ? null : kcNum(s), el }; });
+  // 清空了以前填过的：不能用「空」去掉（服务器空 = 不改），要填 0
+  const cleared = lines.find(l => l.target == null && ((D.plan.rows || []).find(r => r.item === l.item) || {}).target != null);
+  if (cleared){ toast(t('kc_plan_clear0'), true); if (cleared.el) cleared.el.focus(); return; }
+  if (!lines.some(l => l.target != null) && !(D.plan.rows || []).some(r => r.target != null) && gv == null && !(n && n.value.trim()) && D.plan.guests == null && !D.plan.note){ toast(t('kc_plan_empty'), true); return; }
+  K.busy = true; btn.disabled = true;
+  try { const r = await rpc('kitchen_plan_save', { ...tok(), p_store: K.store, p_day: D.day, p_guests: gv, p_note: n ? n.value : null, p_lines: lines.map(l => ({ item: l.item, target: l.target })) });
+    K.D[kcKey(K.store, D.day)] = r; delete K.pv[D.day]; toast(t('kc_plan_saved', { d: dayWord(D.day) })); }
+  catch(e){ toast(errText(e), true); }
+  finally { K.busy = false; if (state.tab === 'inv' && invS().view === 'kitchen') keepScroll(renderKc); }
+}
+function kcPlanCopy(){
+  const K = kcS(), D = kcCur(); if (!D) return; const pv = K.pv[D.day] || (K.pv[D.day] = {}); let n = 0;
+  (D.plan.rows || []).forEach(r => { const el = document.querySelector(`[data-kcp="${r.item}"]`); if (r.last_week != null && el && el.value.trim() === ''){ pv[r.item] = String(r.last_week); n++; } });
+  if (!n){ toast(t('kc_copy_none')); return; } toast(t('kc_copied', { n })); keepScroll(renderKc);
+}
+async function kcItemSave(btn){
+  const K = kcS(), E = K.edit; if (!E) return;
+  const zh = $('#kc-i-zh').value, de = $('#kc-i-de').value, grp = $('#kc-i-grp').value, so = $('#kc-i-sort').value.trim();
+  if (so !== '' && kcNum(so) == null){ toast(t('err_KITCHEN_INPUT'), true); return; }
+  btn.disabled = true;
+  try { const r = await rpc('kitchen_item_save', { ...tok(), p_store: K.store, p_id: E.id || null, p_name_zh: zh, p_name_de: de, p_grp: grp, p_sort: so === '' ? null : kcNum(so), p_active: null });
+    K.D = {}; K.D[kcKey(K.store, bizToday())] = r; K.edit = null; toast(t('saved')); viewKc(); }
+  catch(e){ toast(errText(e), true); btn.disabled = false; }
+}
+async function kcItemToggle(id){
+  const K = kcS(), D = kcCur(), i = D && D.items.find(x => x.id === id); if (!i) return;
+  if (i.active && !confirm(t('kc_i_hide_q', { n: kcNm(i) }))) return;
+  try { const r = await rpc('kitchen_item_save', { ...tok(), p_store: K.store, p_id: i.id, p_name_zh: i.name_zh, p_name_de: i.name_de, p_grp: i.grp, p_sort: i.sort, p_active: !i.active });
+    K.D = {}; K.D[kcKey(K.store, bizToday())] = r; toast(t('saved')); viewKc(); }
+  catch(e){ toast(errText(e), true); }
+}
+// 任务页：两个串任务 → 先去「串」页（数据库会自动打勾）；万一没自动打勾（数的人今天没排出串），出串的人再在这里打勾
+const kcTaskTab = c => /^kitchen_count_/.test(c.code || '') ? 'count' : /^kitchen_prep_/.test(c.code || '') ? 'made' : null;
+function kcTaskActs(c, it, photo, cam){
+  const tab = kcTaskTab(c);
+  if (c.day && c.day < bizToday()) return `<div class="small muted" style="white-space:normal">${esc(t(tab === 'count' ? 'kc_task_past' : 'kc_task_past_m', { d: dayLabel(c.day) }))}</div>`;   // 昨天的已经补不了（只能记今天的）
+  return `<button class="btn" data-act="kc-go" data-store="${esc(c.store || KC_STORES[0])}" data-tab="${tab}" style="flex:1 1 100%">${esc(t(tab === 'count' ? 'kc_task_go_count' : 'kc_task_go_made'))}</button>`
+    + (photo ? cam(it, t('kc_task_done_photo'), 'ghost sm') : `<button class="link" data-act="task-check" data-item="${it.id}" style="white-space:normal;text-align:left">${esc(t(tab === 'count' ? 'kc_task_done_check' : 'kc_task_done_check_m'))}</button>`);
+}
+
 function renderInvHome(){
   const S = invS(), H = S.home;
   // v206（inv-4）：没读到物品首页：说清原因 + 重新加载（以前只有一句「出错了」，只能切走再回来）
@@ -6592,6 +6901,7 @@ function renderInvHome(){
     <div id="inv-mid"${S.q.trim() ? ' hidden' : ''}>
     ${invTodoLines(state.invTodo).length ? `<div class="list">${invTodoLines(state.invTodo).join('')}</div>` : ''}
     ${drkTilesHTML(false)}
+    ${kcTilesHTML()}
     ${invW() ? `<div class="btn2">${H.sup ? `<button class="btn ghost" data-act="inv-new">${esc(t('inv_new'))}</button>` : ''}${(H.area_new || []).length ? `<button class="btn ghost" data-act="kp-area-new">${esc(t('kp_new_area'))}</button>` : ''}<button class="btn ghost" data-act="inv-ib-new">${esc(t('inv_ib_btn'))}</button></div>` : `<div class="small muted" style="margin:0 0 8px">${esc(t('inv_view_only'))}</div>`}
     ${(S.ibMine || []).length ? `<button class="link" data-act="inv-ib-mine" style="margin:0 0 6px">${esc(t('inv_ib_mine', { n: S.ibMine.length }))}</button>` : ''}
     </div>
@@ -13468,7 +13778,7 @@ const VIEW_BLOCK = new Set(['notice-ok', 'msg-read', 'msg-ans', 'hint-ack', 'pin
   'inv-place-check', 'inv-put-new', 'inv-put-old', 'inv-merge', 'inv-edit-item', 'inv-add-loc', 'inv-save', 'inv-main', 'inv-unplace', 'inv-active', 'inv-unit-new', 'inv-unit-edit', 'inv-unit-save',
   'inv-unit-slots', 'inv-unit-off', 'inv-unit-on', 'inv-area-edit', 'inv-aform-save', 'inv-cform-save', 'kp-area-new', 'inv-aip', 'inv-tr-ai'].forEach(a => VIEW_BLOCK.add(a));
 DRK_W.forEach(a => VIEW_BLOCK.add(a));   // v206（网页 3/4）：饮料 / 订货
-['task-check', 'task-override', 'task-answer', 'tk-res-send', 'tk-res-rm', 'tk-res-again', 'tf-save', 'staff-move', 'staff-save', 'rate-save', 'req-approve', 'req-reject', 'review-save', 'pinreq-reset', 'pinreq-dismiss', 'ls-confirm', 'ls-unbind', 'fb-status'].forEach(a => VIEW_BLOCK.add(a));   // v206（网页 4/4）：任务、管理的写入
+['kc-zero', 'kc-finish', 'kc-made-save', 'kc-plan-save', 'kc-plan-copy', 'kc-item-new', 'kc-item-edit', 'kc-item-save', 'kc-item-toggle', 'task-check', 'task-override', 'task-answer', 'tk-res-send', 'tk-res-rm', 'tk-res-again', 'tf-save', 'staff-move', 'staff-save', 'rate-save', 'req-approve', 'req-reject', 'review-save', 'pinreq-reset', 'pinreq-dismiss', 'ls-confirm', 'ls-unbind', 'fb-status'].forEach(a => VIEW_BLOCK.add(a));   // v206（网页 4/4）：任务、管理的写入
 ['ex-confirm', 'ex-cancel', 'ex-save', 'doc-send', 'doc-again', 'onb-send', 'lib-confirm', 'sop-new', 'sop-edit', 'sop-fix', 'sop-gap-write', 'sop-gap-done', 'sop-gap-wrong', 'an-ack'].forEach(a => VIEW_BLOCK.add(a));   // v206（网页 3/4）：垫付、证件、带教、资料、SOP
 // ============ 事件 ============
 document.addEventListener('click', async ev => {
@@ -15945,6 +16255,20 @@ document.addEventListener('click', async ev => {
     case 'inv-find': { const S = invS(); S.view = 'home'; S.focus = true; state.tab = 'inv'; render(); window.scrollTo(0, 0); break; }
     case 'more-inv': Object.assign(invS(), { q: '', res: null }); invS().nav = []; invGo('home'); break;
     case 'inv-home': invS().nav = []; invGo('home'); break;
+    case 'kc-go': kcGo(el.dataset.store, el.dataset.tab); break;   // v209：后厨的串
+    case 'kc-tab': { const K = kcS(); K.tab = el.dataset.tab; K.edit = null; K.day = K.tab === 'plan' ? kcPlanDefault() : bizToday(); viewKc(); window.scrollTo(0, 0); break; }
+    case 'kc-day': { kcS().day = el.dataset.day; viewKc(); break; }
+    case 'kc-reload': viewKc(); break;
+    case 'kc-zero': { const x = document.querySelector(`[data-kc="${el.dataset.id}"]`); if (x){ x.value = '0'; x.dispatchEvent(new Event('input', { bubbles: true })); kcCountSave(el.dataset.id); } break; }
+    case 'kc-finish': kcFinish(el); break;
+    case 'kc-made-save': kcMadeSave(el); break;
+    case 'kc-plan-save': kcPlanSave(el); break;
+    case 'kc-plan-copy': kcPlanCopy(); break;
+    case 'kc-item-new': kcS().edit = { id: null, grp: 'meat' }; keepScroll(renderKc); break;
+    case 'kc-item-edit': { const D = kcCur(); kcS().edit = D && D.items.find(x => x.id === el.dataset.id) || null; keepScroll(renderKc); break; }
+    case 'kc-item-cancel': kcS().edit = null; keepScroll(renderKc); break;
+    case 'kc-item-save': kcItemSave(el); break;
+    case 'kc-item-toggle': kcItemToggle(el.dataset.id); break;
     case 'inv-back-more': state.tab = 'more'; render(); window.scrollTo(0, 0); break;
     case 'inv-area': invS().nav = []; invGo('area', el.dataset.id); break;
     case 'inv-place': invNavStep(el); invGo('place', el.dataset.id); break;   // v182：记住从哪来，返回回那里
