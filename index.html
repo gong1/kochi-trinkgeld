@@ -216,6 +216,7 @@ dialog.tks{margin:auto auto 0;width:100%;max-width:560px;border-radius:16px 16px
 .tks-b.danger{color:var(--neg);border-color:var(--neg)}
 .tks-sep{border-top:1px solid var(--line);margin:8px 0 12px}
 .ferr-on{outline:2px solid var(--neg);outline-offset:3px;border-radius:10px}   /* v206：就地报错的红框 */
+.lf-row{display:flex;gap:12px;align-items:flex-start;cursor:pointer}.lf-ph{width:64px;height:64px;flex:0 0 64px;object-fit:cover;border-radius:8px;background:var(--line)}.lf-tx{flex:1;min-width:0;overflow-wrap:anywhere}.lf-prev{display:block;max-width:100%;max-height:220px;border-radius:8px;margin:6px 0}   /* v215：失物招领 */
 #adj-sum{font-weight:600;font-size:15px;line-height:1.35}
 /* v205：管理 → 任务：日期条、条件行、「更多」入口、浮动「＋」 */
 .tdn{display:flex;align-items:center;gap:4px;margin:0 0 8px}
@@ -724,7 +725,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v214';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v215';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -2470,6 +2471,10 @@ Object.assign(I18N.de, {
   ord_boost_store: 'diese Filiale · jeder Liefertag (alle Lieferanten)', ord_boost_sups: 'Liefert an diesem Tag: {l}', ord_boost_ro: '📈 Lieferung {d}: ×{f}', ord_boost_go: 'Oben unter „Mehr bestellen“ ändern ›'
 });
 
+// v215（失物招领、房间代码就地检查）新文字
+Object.assign(I18N.zh, {"lf_more": "🧳 捡到东西（失物）", "admin_lost": "失物", "act_mod_lost": "失物", "act_lost_create": "失物：登记", "act_lost_update": "失物：修改", "act_lost_return": "失物：已领走", "act_lost_dispose": "失物：处理掉", "act_lost_undo": "失物：撤销", "act_lost_place_set": "失物：存放位置", "lf_title": "失物招领", "lf_new": "登记捡到的东西", "lf_again": "再登记一件", "lf_store_n": "{s}（{n}）", "lf_st_kept": "还在", "lf_st_returned": "已领走", "lf_st_disposed": "已处理", "lf_tab_kept": "还在的失物", "lf_tab_old": "超过 30 天", "lf_tab_done": "已领走 / 已处理", "lf_q_ph": "搜：颜色、牌子、桌号、备注……", "lf_empty": "这家店现在没有失物。", "lf_empty_q": "没找到「{q}」。换个说法试试（例如只写颜色或种类）。", "lf_load_fail": "失物列表没打开。", "lf_place_is": "放在：{p}", "lf_place_none": "老板还没定失物放在哪里。", "lf_place_edit": "改存放位置", "lf_place_zh": "存放位置（中文）", "lf_place_de": "存放位置（德文）", "lf_place_saved": "存放位置已保存", "lf_photo": "拍照 / 选照片（必填）", "lf_photo_again": "重拍", "lf_uploading": "正在上传照片……", "lf_wait_up": "照片还在上传，请等几秒再保存。", "lf_ai_busy": "✨ AI 正在看照片，帮你写是什么东西……", "lf_ai_done": "✨ AI 填好了，请看一眼，不对就改。", "lf_ai_fail": "AI 没认出来，请自己写是什么东西。", "lf_desc_zh": "是什么东西（中文）", "lf_desc_de": "是什么东西（德文）", "lf_desc_hint": "写一种语言就行：颜色、牌子、种类，例如「黑色 Samsung 手机」。", "lf_table_lbl": "桌号（知道的话）", "lf_table": "桌 {t}", "lf_resv": "📷 预订信息的照片（可选）", "lf_resv_hint": "有预订的话，拍一下预订页面（名字、电话、时间），客人来问时好对上。", "lf_resv_view": "预订信息的照片", "lf_note": "备注（可选：在哪里捡到的；客人名字、电话不要写这里）", "lf_ai_check": "✨ AI 填好了，但它不太确定，请仔细看一眼再保存。", "lf_auto": "时间、门店和你的名字自动记下。", "lf_save": "保存", "lf_cancel_q": "照片已经拍了，还没保存。确定不登记了？", "lf_saved": "已登记 ✓", "lf_put_to": "请马上放到：{p}", "lf_put_none": "老板还没定放哪里：请交给当班负责人保管。", "lf_back": "← 失物列表", "lf_by": "{n} 登记", "lf_age": "{d} 天", "lf_ret": "已领走", "lf_ret_to_lbl": "谁领走的（名字或电话）", "lf_ret_note": "备注（可选）", "lf_ret_hint": "先请客人说出东西的样子（颜色、牌子、里面有什么），对上了再给。", "lf_ret_ok": "已记下：已领走", "lf_ret_line": "已领走 · {t} · 经手：{n}", "lf_ret_to": "领走的人：{x}", "lf_edit": "修改", "lf_edit_ok": "已保存", "lf_disp": "处理掉（老板）", "lf_disp_donated": "捐掉", "lf_disp_fundbuero": "交给失物招领处（Fundbüro）", "lf_disp_thrown": "扔掉", "lf_disp_other": "其他", "lf_disp_reason": "原因", "lf_disp_q": "确定把这件东西标成「已处理」？以后还能撤销。", "lf_disp_ok": "已记下：已处理", "lf_disp_line": "已处理（{h}）· {t} · {n}", "lf_undo": "撤销（放回「还在」）", "lf_undo_q": "为什么撤销？（例如「点错了，东西还在」）", "lf_undo_ok": "已放回「还在的失物」", "tr_lf": "失物 {n} 件超过 30 天还没人领", "inv_a_code_bad": "代码要 3 个字母或数字，第一个是字母，例如 TKR。", "inv_a_code_taken": "{s} 已经有代码 {c} 的房间了（停用的也算）。请换一个代码。", "inv_a_bad_other": "门店或归属没选对。请点上面的门店和「归属」再保存；还不行请截图发给老板。"});
+Object.assign(I18N.de, {"lf_more": "🧳 Fundsachen", "admin_lost": "Fundsachen", "act_mod_lost": "Fundsachen", "act_lost_create": "Fundsache eingetragen", "act_lost_update": "Fundsache geändert", "act_lost_return": "Fundsache abgeholt", "act_lost_dispose": "Fundsache entsorgt", "act_lost_undo": "Fundsache rückgängig", "act_lost_place_set": "Fundsachen: Ort", "lf_title": "Fundsachen", "lf_new": "Fundsache eintragen", "lf_again": "Noch eine eintragen", "lf_store_n": "{s} ({n})", "lf_st_kept": "noch da", "lf_st_returned": "abgeholt", "lf_st_disposed": "entsorgt", "lf_tab_kept": "Noch da", "lf_tab_old": "Über 30 Tage", "lf_tab_done": "Abgeholt / entsorgt", "lf_q_ph": "Suchen: Farbe, Marke, Tisch, Notiz …", "lf_empty": "In dieser Filiale ist gerade nichts abgegeben.", "lf_empty_q": "Nichts zu „{q}“ gefunden. Anders suchen (z. B. nur Farbe oder Art).", "lf_load_fail": "Fundsachen konnten nicht geladen werden.", "lf_place_is": "Aufbewahrt: {p}", "lf_place_none": "Der Chef hat noch keinen Aufbewahrungsort festgelegt.", "lf_place_edit": "Ort ändern", "lf_place_zh": "Ort (Chinesisch)", "lf_place_de": "Ort (Deutsch)", "lf_place_saved": "Ort gespeichert", "lf_photo": "Foto aufnehmen / wählen (Pflicht)", "lf_photo_again": "Neues Foto", "lf_uploading": "Foto wird hochgeladen …", "lf_wait_up": "Foto wird noch hochgeladen – bitte kurz warten.", "lf_ai_busy": "✨ KI schaut aufs Foto und beschreibt den Gegenstand …", "lf_ai_done": "✨ Von der KI ausgefüllt – bitte prüfen und ggf. ändern.", "lf_ai_fail": "Die KI hat es nicht erkannt – bitte selbst beschreiben.", "lf_desc_zh": "Was ist es? (Chinesisch)", "lf_desc_de": "Was ist es? (Deutsch)", "lf_desc_hint": "Eine Sprache reicht: Farbe, Marke, Art, z. B. „schwarzes Samsung-Handy“.", "lf_table_lbl": "Tisch (falls bekannt)", "lf_table": "Tisch {t}", "lf_resv": "📷 Foto der Reservierung (optional)", "lf_resv_hint": "Bei Reservierung: Reservierungsbildschirm fotografieren (Name, Telefon, Uhrzeit) – so lässt sich der Gast später zuordnen.", "lf_resv_view": "Foto der Reservierung", "lf_note": "Notiz (optional: wo gefunden; keine Gastnamen oder Telefonnummern hier)", "lf_ai_check": "✨ Von der KI ausgefüllt, aber sie ist unsicher – bitte genau prüfen.", "lf_auto": "Uhrzeit, Filiale und dein Name werden automatisch gespeichert.", "lf_save": "Speichern", "lf_cancel_q": "Foto ist schon gemacht, aber noch nicht gespeichert. Wirklich abbrechen?", "lf_saved": "Eingetragen ✓", "lf_put_to": "Bitte sofort hierhin legen: {p}", "lf_put_none": "Noch kein Ort festgelegt: bitte der Schichtleitung geben.", "lf_back": "← Fundsachen", "lf_by": "eingetragen von {n}", "lf_age": "{d} Tage", "lf_ret": "Abgeholt", "lf_ret_to_lbl": "Wer hat es abgeholt? (Name oder Telefon)", "lf_ret_note": "Notiz (optional)", "lf_ret_hint": "Erst beschreiben lassen (Farbe, Marke, Inhalt) – nur bei Übereinstimmung herausgeben.", "lf_ret_ok": "Gespeichert: abgeholt", "lf_ret_line": "Abgeholt · {t} · durch {n}", "lf_ret_to": "Abgeholt von: {x}", "lf_edit": "Bearbeiten", "lf_edit_ok": "Gespeichert", "lf_disp": "Entsorgen (Chef)", "lf_disp_donated": "Gespendet", "lf_disp_fundbuero": "Ans Fundbüro gegeben", "lf_disp_thrown": "Weggeworfen", "lf_disp_other": "Sonstiges", "lf_disp_reason": "Grund", "lf_disp_q": "Diesen Gegenstand als „entsorgt“ markieren? Lässt sich rückgängig machen.", "lf_disp_ok": "Gespeichert: entsorgt", "lf_disp_line": "Entsorgt ({h}) · {t} · {n}", "lf_undo": "Rückgängig (wieder „noch da“)", "lf_undo_q": "Warum rückgängig? (z. B. „falsch getippt, liegt noch da“)", "lf_undo_ok": "Wieder als „noch da“ markiert", "tr_lf": "{n} Fundsachen seit über 30 Tagen nicht abgeholt", "inv_a_code_bad": "Das Kürzel muss genau 3 Buchstaben oder Ziffern haben, das erste ein Buchstabe, z. B. TKR.", "inv_a_code_taken": "In {s} gibt es schon einen Raum mit dem Kürzel {c} (auch deaktivierte zählen). Bitte ein anderes Kürzel wählen.", "inv_a_bad_other": "Filiale oder Zuständigkeit ungültig. Bitte oben Filiale und „Zuständig“ antippen und erneut speichern; sonst Screenshot an den Chef."});
+
 // ============ 工具 ============
 const LS = {
   get(k, d){ try{ const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
@@ -2492,7 +2497,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=47'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=48'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2973,6 +2978,20 @@ const ERR_ZH = {
   INVALID_TIME: '时间不对：结束时间要晚于开始时间。',
   HOURS_RANGE: '时间段不对：开始要早于结束，最长一年。请重新选日期。',
   INVALID_KTIME: '时间不对：开始要在 05:00 以后，结束要晚于开始。过了半夜下班的照填，最晚到 05:00（例如 22:00–01:00）。请检查每个人的时间，有没有空着的。',
+  LOST_BAD: "填写的内容不对（门店、照片或选项）。请返回重新打开「捡到东西」再填；还不行请截图发给老板。",
+  LOST_PHOTO_MISSING: "还没有东西的照片。请先点「📷 拍照 / 选照片」拍一张，等上传好再保存。",
+  LOST_PHOTO_USED: "这张照片已经登记过了（可能点了两次保存）。请在「还在的失物」里看一下，不用再登记。",
+  LOST_DESC_EMPTY: "还没写是什么东西。请写一句（颜色、牌子、种类，例如「黑色 Samsung 手机」），或等 AI 填好再保存。",
+  LOST_NOT_KEPT: "这件东西已经被领走或处理掉了（可能别人刚刚点了）。页面已刷新，请看最新状态。",
+  LOST_NOT_DONE: "这件东西还在店里，没什么可撤销的。",
+  LOST_TO_EMPTY: "请写是谁领走的（名字或电话，至少 2 个字），以后有人问才查得到。",
+  LOST_REASON_EMPTY: "请写一句原因（例如「放了 3 个月没人来领，捐给红十字会」）。",
+  LOST_PLACE_EMPTY: "请写放在哪里（中文或德文写一种就行），例如「吧台下面左边的抽屉」。",
+  LOST_NO_DELETE: "失物记录不能删除。不要的请标「已领走」或（老板）「处理掉」。",
+  LOST_UPLOAD_FAILED: "照片没传上去（网络或服务器问题）。请检查网络后再点一次「📷」；还不行请截图发给老板。",
+  LOST_PHOTO_BAD: "照片打不开或太大（最大 5 MB）。请重新拍一张。",
+  LOST_AI_FAILED: "AI 没认出来，请自己写是什么东西。",
+  LOST_NOT_READY: "失物招领还没开通（服务器还没升级好）。请先用纸条记下，交给当班负责人，并告诉老板。",
 };
 const ERR_DE = {
   ADJ_SAME: '„Von“ und „An“ dürfen nicht dieselbe Person sein.',   // v206
@@ -3297,6 +3316,20 @@ const ERR_DE = {
   INVALID_TIME: 'Ungültige Zeit: Das Ende muss nach dem Beginn liegen.',
   HOURS_RANGE: 'Ungültiger Zeitraum: Beginn vor Ende, höchstens ein Jahr. Bitte die Daten neu wählen.',
   INVALID_KTIME: 'Ungültige Zeit: Beginn ab 05:00, Ende nach dem Beginn. Schichten über Mitternacht einfach so eintragen, Ende spätestens 05:00 (z. B. 22:00–01:00). Bitte alle Zeiten prüfen – ist ein Feld leer?',
+  LOST_BAD: "Eingabe ungültig (Filiale, Foto oder Auswahl). Bitte „Fundsachen“ neu öffnen und nochmal ausfüllen; sonst Screenshot an den Chef.",
+  LOST_PHOTO_MISSING: "Noch kein Foto vom Gegenstand. Bitte zuerst „📷 Foto“ tippen und warten, bis es hochgeladen ist.",
+  LOST_PHOTO_USED: "Dieses Foto ist schon eingetragen (vielleicht doppelt gespeichert). Bitte in der Liste nachsehen – nicht nochmal eintragen.",
+  LOST_DESC_EMPTY: "Es fehlt, was es ist. Bitte kurz beschreiben (Farbe, Marke, Art, z. B. „schwarzes Samsung-Handy“) oder warten, bis die KI es ausfüllt.",
+  LOST_NOT_KEPT: "Dieser Gegenstand ist schon abgeholt oder entsorgt (vielleicht gerade von jemand anderem). Die Liste wurde neu geladen.",
+  LOST_NOT_DONE: "Der Gegenstand ist noch da – es gibt nichts rückgängig zu machen.",
+  LOST_TO_EMPTY: "Bitte eintragen, wer es abgeholt hat (Name oder Telefon, mind. 2 Zeichen), damit es später nachvollziehbar ist.",
+  LOST_REASON_EMPTY: "Bitte kurz den Grund angeben (z. B. „3 Monate nicht abgeholt, ans DRK gespendet“).",
+  LOST_PLACE_EMPTY: "Bitte den Ort eintragen (Chinesisch oder Deutsch reicht), z. B. „Schublade links unter der Theke“.",
+  LOST_NO_DELETE: "Fundsachen können nicht gelöscht werden. Bitte „Abgeholt“ oder (Chef) „Entsorgt“ markieren.",
+  LOST_UPLOAD_FAILED: "Foto konnte nicht hochgeladen werden (Netz oder Server). Bitte Netz prüfen und nochmal „📷“ tippen; sonst Screenshot an den Chef.",
+  LOST_PHOTO_BAD: "Foto nicht lesbar oder zu groß (max. 5 MB). Bitte neu fotografieren.",
+  LOST_AI_FAILED: "Die KI hat es nicht erkannt – bitte selbst beschreiben.",
+  LOST_NOT_READY: "Fundsachen sind noch nicht freigeschaltet (Server noch nicht aktualisiert). Bitte vorerst auf Papier notieren, der Schichtleitung geben und dem Chef Bescheid sagen.",
 };
 Object.keys(ERR_ZH).forEach(k => { I18N.zh['err_' + k] = ERR_ZH[k]; I18N.de['err_' + k] = ERR_DE[k]; });
 
@@ -3328,6 +3361,7 @@ const RPC_RO = new Set(('admin_badge_counts admin_announce_detail admin_announce
   + 'list_staff lock_rounds_open miss_reviews month_archive_state my_announcements my_audits my_bon_status my_hint_acks my_led_tasks my_library my_miss_results my_notices my_receipts my_store_tasks my_task_misses my_task_record my_tasks '
   + 'my_tip_totals my_week onb_check_mine onb_checklist onb_mine onb_sched_info push_status receipt_image receipts_open recon_day recon_home recon_imports recon_overview recon_report_file sched_bon_helpers '
   + 'sched_notices sched_pending_changes sched_tip_check sched_week settle_payers settlement sop_gaps sop_item sop_tree task_catalog task_named_list task_roles week_adjustments week_envelopes week_extras week_overview week_receipts').split(' '));
+['lost_list', 'admin_lost_old'].forEach(f => RPC_RO.add(f));   // v215：失物招领（数据库 v149，stable）
 // 不是 stable、但对这台手机来说只是「看」的请求（顺带记一下最后在线、补记漏做、记搜不到的词）：不合并，也不算「做事」
 const RPC_LOOK = new Set('me my_docs admin_docs admin_misses admin_task_find_ctx inv_search'.split(' '));
 const rpcQ = { n: 0, wait: [], live: new Map(), w: 0 };
@@ -3500,6 +3534,7 @@ function resetPersonState(){
   MINE.key = null;
   try { [ARV_URL, INV_URLS].forEach(o => Object.keys(o).forEach(k => delete o[k])); } catch(e){}   // v206（网页 2/4）：上一个人的任务照片 / 物品照片链接不留给下一个人
   try { [DOC_URLS, SOP_URLS, SOP_FOLLOW].forEach(o => Object.keys(o).forEach(k => delete o[k])); } catch(e){}   // v206（网页 3/4）：证件照片链接（个人信息）、SOP 照片链接也不留
+  try { Object.keys(LF_URLS).forEach(k => delete LF_URLS[k]); } catch(e){}   // v215：失物照片链接（预订照片里有客人信息）也不留
 }
 // ============ 手机推送（v27）============
 const pushSupported = () => 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
@@ -4946,6 +4981,7 @@ async function viewReconHome(){
       soft(rpc('admin_misses', { ...tok(), p_day: null }), null).then(x => { state.taMiss = x; }),
       soft(rpc('miss_reviews', { ...tok(), p_days: 14 }), null).then(x => { if (x) state.missRev = x; }),   // v196：待判定的漏做申诉
       soft(rpc('admin_week_report', tok()), null).then(x => { state.weekRep = x; }),   // v204：上周漏做排行（数据库 v141）
+      soft(rpc('admin_lost_old', tok()), null).then(x => { state.lostOld = x; }),   // v215：失物超过 30 天
       soft(rpc('admin_miss_alerts', tok()), null).then(x => { if (x) state.missAlerts = x; })]);   // v204：屡次漏做
     // 上面几行：v149：昨天漏做、抽查不属实   // v144：收废油的检查晚了要标红   // v135：邮件自动导入的情况   // v114：两家店还没点的信封（「点信封（N）」）   // v83：两边主管   // v68：一起要；v71：收店任务；v89：待处理的疑问
     S = H.S; o = H.o; state.reconTasks = H.tasks;
@@ -6570,7 +6606,7 @@ async function docDlgDo(fn){
 
 // v206：从别处进「更多」的一个子页：先把别的子页关掉（以前公告、垫付不是页面状态，一重画就跳回「更多」）
 function morePage(k){
-  state.tab = 'more'; state.libView = null; state.docPage = false; state.taskPage = false; state.taRec = null; state.cdPage = null; state.annPage = false; state.expPage = false;
+  state.tab = 'more'; state.libView = null; state.docPage = false; state.taskPage = false; state.taRec = null; state.cdPage = null; state.annPage = false; state.expPage = false; state.lfPage = false;
   if (!state.me.is_admin) state.sop = null; if (k) state[k] = true;
 }
 function viewMore(){
@@ -6582,14 +6618,240 @@ function viewMore(){
   if (state.taskPage) return viewTaskPage();   // v130：任务
   if (state.taRec) return viewTaRec();   // v149：我的任务记录
   if (state.cdPage) return viewCdPage();   // v194：行为记录
+  if (state.lfPage) return viewLost();   // v215：失物招领（放最后：别的子页优先）
   const b = (act, label, extra) => `<button class="btn ghost more-b" data-act="${act}" ${extra || ''}>${esc(label)}</button>`;
   $('#main').innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0 12px"><h2 style="margin:0">${esc(t('more_title'))}</h2>${langBtn('btn ghost sm')}</div><div class="more">
     ${tabs().includes('inv') && !navTabs().includes('inv') ? b('more-inv', t('inv_more')) : ''}${tabs().includes('entry') ? b('more-bon', t('more_bon')) : ''}
+    ${state.me.is_admin ? '' : b('more-lf', t('lf_more'))}
     ${state.viewAs ? '' : state.pushOn ? b('push-test', t('push_test')) + b('push-off', t('push_off')) : b('push-on', t('push_on'))}
     ${!state.me.is_admin && taskRight(state.me) ? b('more-task', t('tp_more')) : ''}${!state.me.is_admin && state.myDocs && state.myDocs.started ? b('more-docs', t('doc_more')) : ''}${state.me.is_admin ? '' : b('ta-rec', t('ta_rec_more'))}${state.me.is_admin ? '' : b('cd-mine', t('cd_more'))}${!state.me.is_admin && cdCanRecord() ? b('cd-rec', t('cd_page_more')) : ''}${state.me.is_admin ? '' : b('more-ann', t('an_more')) + b('more-lib', t('lib_more')) + b('more-sop', t('sop_more'))}${state.exp && (state.exp.allowed || (state.exp.items || []).length) ? b('more-exp', t('ex_more')) : ''}${state.viewAs ? b('view-exit', t('exit_view')) : b('pin-open', t('change_pin')) + b('logout', t('logout'))}</div>`;   // v206：查看模式下不能改 PIN、不能退出老板自己的登录，只有「退出查看」
 }
 function staffName(id){ const s = state.staff.find(x => x.id === id); return s ? s.name : '?'; }
 function staffIdByName(n){ const s = state.staff.find(x => x.name === n); return s ? s.id : null; }
+
+// ============ v215（老板 2026-11-22「3个都做」，数据库 v149 / 文件服务 tasks v41）：失物招领 ============
+// 员工捡到客人的东西：拍照（AI 先写是什么）→ 桌号、预订页面的照片、备注 → 保存（时间、门店、谁登记的自动记下）→ 放到老板定的地方。
+// 「还在的失物」按门店，能搜；客人来领：标「已领走」写谁领的（名字 / 电话只存在这一格，不进操作记录，也不放进 data-* 属性）。老板：处理掉、撤销、定存放位置。
+const LF_URLS = {};   // 照片路径 → { url, at }（文件服务给的 1 小时链接，50 分钟内重用）
+let lfTimer = null, lfSeq = 0;
+function lfS(){ return state.lf || (state.lf = { store: curStore(), status: 'kept', q: '', data: null, err: null, form: null, saved: null, placeEdit: false, dlg: null }); }
+function lfOpen(){ const S = lfS(); Object.assign(S, { store: curStore(), status: 'kept', q: '', data: null, err: null, form: null, saved: null, placeEdit: false, dlg: null }); }
+function lfTarget(){ return state.tab === 'admin' && state.me && state.me.is_admin && state.adminSub === 'lost' ? $('#asub') : state.tab === 'more' && state.lfPage ? $('#main') : null; }
+function lfDesc(x){ const de = state.lang === 'de'; return (de ? (x.desc_de || x.desc_zh) : (x.desc_zh || x.desc_de)) || ''; }
+function lfDescOther(x){ const o = state.lang === 'de' ? x.desc_zh : x.desc_de; return o && o !== lfDesc(x) ? o : ''; }
+function lfPlaceName(p){ return p ? ((state.lang === 'de' ? (p.de || p.zh) : (p.zh || p.de)) || '') : ''; }
+async function viewLost(){
+  const S = lfS(); lfDraw();
+  if (!S.form && !S.saved) await lfLoad();
+}
+// 重画前记下正在写的字（登记表、弹窗里的框）
+function lfKeep(){
+  const S = lfS(), F = S.form, D = S.dlg, v = id => { const e = document.getElementById(id); return e ? e.value : undefined; };
+  if (F){ [['lf-desc-zh', 'desc_zh'], ['lf-desc-de', 'desc_de'], ['lf-table', 'table_no'], ['lf-note', 'note']].forEach(([id, k]) => { const x = v(id); if (x !== undefined) F[k] = x; }); }
+  if (S.placeEdit){ const z = v('lf-place-zh'), d = v('lf-place-de'); if (z !== undefined) S.placeZh = z; if (d !== undefined) S.placeDe = d; }
+  if (D){ [['lf-ret-to', 'to'], ['lf-ret-note', 'rnote'], ['lf-disp-reason', 'reason'], ['lfe-zh', 'desc_zh'], ['lfe-de', 'desc_de'], ['lfe-table', 'table_no'], ['lfe-note', 'note']].forEach(([id, k]) => { const x = v(id); if (x !== undefined) D[k] = x; }); }
+}
+// 重画这一页（焦点、光标、滚动位置不变）
+function lfDraw(noKeep){
+  const box = lfTarget(); if (!box) return;
+  if (!noKeep) lfKeep();   // noKeep：刚把新内容写进 state（例如 AI 填的字），不要再被框里旧的字盖掉
+  const a = document.activeElement, aid = a && a.id, ss = a && a.selectionStart, y = window.scrollY;
+  box.innerHTML = (state.tab === 'more' && !lfS().form && !lfS().saved ? `<button class="link" data-act="tab" data-tab="more" style="margin:2px 0 8px">← ${esc(t('more_title'))}</button>` : '') + lfHTML();
+  if (aid && !(document.activeElement && document.activeElement.id === aid)){ const e = document.getElementById(aid); if (e && box.contains(e)){ try { e.focus({ preventScroll: true }); if (ss != null && e.setSelectionRange) e.setSelectionRange(ss, ss); } catch(er){} } }
+  window.scrollTo(0, y);
+  lfLoadPhotos();
+}
+async function lfLoad(){
+  const S = lfS(), my = ++lfSeq, who = state.token;
+  try {
+    const r = await rpc('lost_list', { ...tok(), p_store: S.store, p_status: S.status, p_q: String(S.q || '').trim() || null });
+    if (my !== lfSeq || state.token !== who) return;
+    S.data = r; S.err = null;
+  } catch(e){ if (my !== lfSeq || state.token !== who) return; S.err = e; }
+  if (S.form || S.saved) return;
+  const L = $('#lf-list');
+  if (L && document.activeElement && document.activeElement.id === 'lf-q'){ L.innerHTML = lfListHTML(); lfLoadPhotos(); }   // 正在搜：只换下面的结果，输入框不动
+  else lfDraw();
+}
+function lfHTML(){
+  const S = lfS();
+  if (S.saved) return lfSavedHTML();
+  if (S.form) return lfFormHTML();
+  const D = S.data, C = (D && D.counts) || {}, cs = C[S.store] || {}, place = D && D.places ? D.places[S.store] : null, boss = state.me.is_admin && !state.viewAs;
+  const stBtn = k => `<button data-act="lf-status" data-k="${k}" class="${S.status === k ? 'on' : ''}">${esc(t('lf_tab_' + k))}</button>`;
+  const placeBox = !D ? '' : S.placeEdit && boss
+    ? `<div class="sheet" id="lf-place-box" style="margin:0 0 12px"><div class="field"><label for="lf-place-zh">${esc(t('lf_place_zh'))}</label><input class="input" id="lf-place-zh" maxlength="100" value="${esc(S.placeZh || '')}"></div>
+        <div class="field"><label for="lf-place-de">${esc(t('lf_place_de'))}</label><input class="input" id="lf-place-de" maxlength="150" value="${esc(S.placeDe || '')}"></div>
+        <div class="row"><button class="btn ghost" data-act="lf-place-edit" data-k="off">${esc(t('cancel'))}</button><button class="btn" data-act="lf-place-save">${esc(t('save'))}</button></div></div>`
+    : `<div class="small${place ? '' : ' muted'}" style="margin:0 0 12px">📍 ${esc(place ? t('lf_place_is', { p: lfPlaceName(place) }) : t('lf_place_none'))}${boss ? ` <button class="link" data-act="lf-place-edit">${esc(t('lf_place_edit'))}</button>` : ''}</div>`;
+  return `<h2 style="margin-top:4px">${esc(t('lf_title'))}</h2>
+    <div class="seg sm" style="margin-bottom:10px">${STORES.map(s => `<button data-act="lf-store" data-store="${s}" class="${S.store === s ? 'on' : ''}">${esc(C[s] ? t('lf_store_n', { s, n: +C[s].kept || 0 }) : s)}</button>`).join('')}</div>
+    ${placeBox}
+    ${state.viewAs ? '' : `<button class="btn" data-act="lf-new" style="margin:0 0 12px">＋ ${esc(t('lf_new'))}</button>`}
+    <div class="seg sm" style="margin-bottom:10px">${stBtn('kept')}${+cs.old > 0 || S.status === 'old' ? stBtn('old') : ''}${stBtn('done')}</div>
+    <input class="input" id="lf-q" type="search" enterkeyhint="search" maxlength="60" placeholder="${esc(t('lf_q_ph'))}" value="${esc(S.q || '')}" style="margin-bottom:10px">
+    <div id="lf-list">${lfListHTML()}</div>`;
+}
+function lfListHTML(){
+  const S = lfS(), D = S.data;
+  if (S.err && !D) return `<div class="list">${retryHTML(t('lf_load_fail') + ' ' + errText(S.err))}</div>`;
+  if (!D) return `<div class="loading">${esc(t('loading'))}</div>`;
+  const items = D.items || [];
+  const warn = S.err ? retryHTML(t('lf_load_fail') + ' ' + errText(S.err), true) : '';
+  if (!items.length) return warn + `<div class="list"><div class="empty">${esc(String(S.q || '').trim() ? t('lf_empty_q', { q: String(S.q).trim() }) : t('lf_empty'))}</div></div>`;
+  return warn + `<div class="list">${items.map(x => `<div class="item lf-row" data-act="lf-item" data-id="${esc(x.id)}" role="button" tabindex="0">
+      <img class="lf-ph" data-lph="${esc(x.photo_t || x.photo)}" data-full="${esc(x.photo)}" data-act="lf-photo-big" alt="">
+      <div class="lf-tx"><strong>${esc(lfDesc(x))}</strong>${lfDescOther(x) ? `<div class="small muted">${esc(lfDescOther(x))}</div>` : ''}
+        <div class="meta">${storeTag(x.store)}${x.table_no ? ' · ' + esc(t('lf_table', { t: x.table_no })) : ''}</div>
+        <div class="meta num">${esc(fmtDateTime(x.found_at))} · ${esc(t('lf_by', { n: x.found_by_name || '?' }))}</div>
+        <div>${x.status === 'kept' ? `<span class="tag ${x.age_days > 30 ? 'bad' : 'off'}" style="margin-left:0">${esc(t('lf_age', { d: x.age_days || 0 }))}</span>` : ''}<span class="tag ${x.status === 'kept' ? 'pend' : x.status === 'returned' ? 'ok' : 'off'}"${x.status === 'kept' ? '' : ' style="margin-left:0"'}>${esc(t('lf_st_' + x.status))}</span>${x.resv ? ' <span class="small muted">📅</span>' : ''}</div></div></div>`).join('')}</div>`;
+}
+function lfPhotoBtn(kind, label, has, busy){
+  return `<label class="btn ghost" style="${busy ? 'opacity:.4;pointer-events:none;' : ''}display:flex;align-items:center;justify-content:center;gap:6px;margin:6px 0">📷 ${esc(has ? t('lf_photo_again') : label)}<input type="file" accept="image/*" data-lfphoto="${kind}" hidden ${busy ? 'disabled' : ''}></label>`;
+}
+function lfFormHTML(){
+  const F = lfS().form, aiLine = F.up.item ? t('lf_uploading') : F.aiState === 'busy' ? t('lf_ai_busy') : F.aiState === 'done' ? t('lf_ai_done') : F.aiState === 'check' ? t('lf_ai_check') : F.aiState === 'fail' ? t('lf_ai_fail') : '';
+  return `<button class="link" data-act="lf-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(t('lf_new'))}</h2>
+    <div class="seg sm" style="margin-bottom:12px">${STORES.map(s => `<button data-act="lf-store" data-store="${s}" class="${F.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div>
+    <div class="field" id="lf-f-photo">${F.prev ? `<img src="${esc(F.prev)}" alt="" class="lf-prev">` : ''}${lfPhotoBtn('item', t('lf_photo'), !!F.prev, F.up.item)}
+      ${aiLine ? `<div class="small ${F.aiState === 'fail' && !F.up.item ? 'muted' : ''}" id="lf-ai-st" style="margin-top:4px">${esc(aiLine)}</div>` : ''}</div>
+    <div id="lf-f-desc"><div class="field"><label for="lf-desc-zh">${esc(t('lf_desc_zh'))}</label><input class="input" id="lf-desc-zh" maxlength="200" value="${esc(F.desc_zh || '')}"></div>
+      <div class="field"><label for="lf-desc-de">${esc(t('lf_desc_de'))}</label><input class="input" id="lf-desc-de" maxlength="300" value="${esc(F.desc_de || '')}"></div>
+      <div class="small muted" style="margin:-4px 0 10px">${esc(t('lf_desc_hint'))}</div></div>
+    <div class="field"><label for="lf-table">${esc(t('lf_table_lbl'))}</label><input class="input" id="lf-table" maxlength="20" value="${esc(F.table_no || '')}"></div>
+    <div class="field" id="lf-f-resv"><label>${esc(t('lf_resv'))}</label><div class="small muted">${esc(t('lf_resv_hint'))}</div>${F.resvPrev ? `<img src="${esc(F.resvPrev)}" alt="" class="lf-prev">` : ''}${lfPhotoBtn('resv', t('lf_resv').replace(/^📷\s*/, ''), !!F.resvPrev, F.up.resv)}${F.up.resv ? `<div class="small">${esc(t('lf_uploading'))}</div>` : ''}</div>
+    <div class="field"><label for="lf-note">${esc(t('lf_note'))}</label><textarea class="input" id="lf-note" rows="2" maxlength="500">${esc(F.note || '')}</textarea></div>
+    <div class="small muted" style="margin:0 0 10px">${esc(t('lf_auto'))}</div>
+    <button class="btn" data-act="lf-save" ${F.busy ? 'disabled' : ''}>${esc(F.busy ? t('staff_saving') : t('lf_save'))}</button>`;
+}
+function lfSavedHTML(){
+  const R = lfS().saved, p = lfPlaceName({ zh: R.place_zh, de: R.place_de }), x = R.item || {};
+  return `<div class="hero" style="text-align:center"><div class="big" style="font-size:32px">${esc(t('lf_saved'))}</div><div class="muted">${esc(lfDesc(x))}${x.store ? ' · ' + esc(x.store) : ''}</div></div>
+    <div class="infobox" style="font-size:18px;font-weight:600;margin:12px 0">📍 ${esc(p ? t('lf_put_to', { p }) : t('lf_put_none'))}</div>
+    <button class="btn" data-act="lf-new" style="margin-bottom:8px">＋ ${esc(t('lf_again'))}</button><button class="btn ghost" data-act="lf-back">${esc(t('lf_back'))}</button>`;
+}
+// 照片：拍好 → 压缩（大图 + 小图）→ 传进存储桶 lost_found → 东西的照片再给 AI 看一眼
+async function lfUpload(prep){
+  const r = await callTasks({ action: 'lost_upload_urls', count: 1 }), p = (r.photos || [])[0];
+  if (!p) throw new Error('LOST_UPLOAD_FAILED');
+  for (const [x, blob] of [[p.photo, prep.big], [p.thumb, prep.small]]){
+    const { error } = await sb.storage.from('lost_found').uploadToSignedUrl(x.path, x.token, blob, { contentType: 'image/jpeg' });
+    if (error) throw new Error('LOST_UPLOAD_FAILED');
+  }
+  return { photo: p.photo.path, photo_t: p.thumb.path };
+}
+async function lfPhotoChosen(kind, file){
+  const S = lfS();
+  if (kind === 'eresv'){ const D = S.dlg; if (!D || D.up) return;   // 弹窗里补预订照片
+    lfKeep(); D.up = true; lfItemDraw();
+    let prep = null, msg = '';   // 提示放在重画弹窗之后，不然会被重画冲掉
+    try { prep = await invPrep(file); } catch(e){ msg = t('err_LOST_PHOTO_BAD'); }
+    if (prep){ try { const up = await lfUpload(prep); if (S.dlg !== D) return; Object.assign(D, { resv: up.photo, resv_t: up.photo_t, resvPrev: prep.preview }); }
+      catch(e){ msg = errText(e); } }
+    if (S.dlg === D){ D.up = false; lfItemDraw(); }
+    if (msg) toast(msg, true);
+    return; }
+  const F = S.form; if (!F || F.up[kind]) return;
+  let prep; try { prep = await invPrep(file); } catch(e){ toast(t('err_LOST_PHOTO_BAD'), true); return; }
+  if (S.form !== F) return;
+  const old = kind === 'item' ? { prev: F.prev, photo: F.photo, photo_t: F.photo_t, aiState: F.aiState } : { resvPrev: F.resvPrev, resv: F.resv, resv_t: F.resv_t };   // 重拍失败时放回原来那张
+  F.up[kind] = true; if (kind === 'item'){ F.prev = prep.preview; F.photo = null; F.photo_t = null; F.aiState = null; } else { F.resvPrev = prep.preview; F.resv = null; F.resv_t = null; }
+  lfDraw();
+  let up;
+  try { up = await lfUpload(prep); }
+  catch(e){ if (S.form !== F) return; F.up[kind] = false; Object.assign(F, old); lfDraw(); toast(errText(e), true); return; }
+  if (S.form !== F) return;
+  F.up[kind] = false;
+  if (kind === 'resv'){ F.resv = up.photo; F.resv_t = up.photo_t; lfDraw(); return; }
+  F.photo = up.photo; F.photo_t = up.photo_t; F.aiState = 'busy'; lfDraw();
+  try {
+    const r = await callTasks({ action: 'lost_ai_read', path: up.photo });
+    if (S.form !== F || F.photo !== up.photo) return;
+    lfKeep(); let used = false;
+    if (!String(F.desc_zh || '').trim() && r.desc_zh){ F.desc_zh = r.desc_zh; used = true; }   // 员工已经写了的不覆盖
+    if (!String(F.desc_de || '').trim() && r.desc_de){ F.desc_de = r.desc_de; used = true; }
+    if (used) F.ai = true;
+    F.aiState = used ? (r.sure === false ? 'check' : 'done') : null;   // 员工自己写了的：不显示「AI 填好了」
+    lfDraw(true); return;
+  } catch(e){ if (S.form !== F || F.photo !== up.photo) return; F.aiState = 'fail'; }
+  lfDraw();
+}
+// 页面上所有还没有链接的照片，一次向文件服务要（每次最多 60 张）
+async function lfLoadPhotos(){
+  const els = [...document.querySelectorAll('img[data-lph]')], now = Date.now();
+  const fresh = p => LF_URLS[p] && now - LF_URLS[p].at < 50 * 60e3;
+  const need = [...new Set(els.map(e => e.dataset.lph).filter(p => p && !fresh(p)))];
+  for (let i = 0; i < need.length; i += 60){
+    try { const r = await callTasks({ action: 'lost_urls', paths: need.slice(i, i + 60) }); Object.entries(r.urls || {}).forEach(([p, u]) => { if (u) LF_URLS[p] = { url: u, at: now }; }); }
+    catch(e){ break; }
+  }
+  document.querySelectorAll('img[data-lph]').forEach(e => { const u = LF_URLS[e.dataset.lph]; if (u && e.getAttribute('src') !== u.url) e.src = u.url; });
+}
+async function lfPhotoBig(path){
+  if (!path) return;
+  const S = lfS(), dlg0 = S.dlg, seq = (S.bigSeq = (S.bigSeq || 0) + 1);   // 等链接的时候用户又点了别的：不要盖掉
+  if (!LF_URLS[path] || Date.now() - LF_URLS[path].at > 50 * 60e3){
+    try { const r = await callTasks({ action: 'lost_urls', paths: [path] }); if (r.urls && r.urls[path]) LF_URLS[path] = { url: r.urls[path], at: Date.now() }; } catch(e){ toast(errText(e), true); return; }
+  }
+  const u = LF_URLS[path]; if (!u || S.bigSeq !== seq || S.dlg !== dlg0) return;
+  S.dlg = null;
+  const dlg = $('#photoDlg'); dlg.innerHTML = `<img src="${esc(u.url)}" alt="" style="width:100%;border-radius:8px;margin-bottom:12px"><button class="btn" data-act="photo-close">${esc(t('close'))}</button>`; if (!dlg.open) dlg.showModal();
+}
+// 一件东西的弹窗：大照片、预订照片、经过；按钮按数据库给的权限（查看模式下都不显示）
+function lfItemDraw(){
+  const S = lfS(), D = S.dlg, dlg = $('#photoDlg'); if (!D || !D.item) return;
+  lfKeep();
+  const x = D.item, boss = state.me.is_admin, ro = !!state.viewAs, busy = D.busy || D.up;
+  const a = document.activeElement, aid = a && a.id, ss = a && a.selectionStart;
+  const btn = (act, label, cls, extra) => `<button class="btn ${cls || ''}" data-act="${act}" ${extra || ''} ${busy ? 'disabled' : ''} style="margin-top:8px">${esc(label)}</button>`;
+  let body = `<img data-lph="${esc(x.photo)}" alt="" style="min-height:120px;background:var(--line)"><h3 style="margin:4px 0">${esc(lfDesc(x))}</h3>${lfDescOther(x) ? `<div class="small muted">${esc(lfDescOther(x))}</div>` : ''}
+    <div class="small" style="margin-top:6px">${storeTag(x.store)}${x.table_no ? ' · ' + esc(t('lf_table', { t: x.table_no })) : ''} · <span class="tag ${x.status === 'kept' ? 'pend' : x.status === 'returned' ? 'ok' : 'off'}">${esc(t('lf_st_' + x.status))}</span></div>
+    <div class="small muted num">${esc(fmtDateTime(x.found_at))} · ${esc(t('lf_by', { n: x.found_by_name || '?' }))}${x.status === 'kept' ? ' · ' + esc(t('lf_age', { d: x.age_days || 0 })) : ''}</div>
+    ${x.note ? `<div class="small" style="margin-top:6px;white-space:pre-wrap">${esc(x.note)}</div>` : ''}`;
+  if (x.status === 'returned') body += `<div class="small" style="margin-top:6px">${esc(t('lf_ret_line', { t: fmtDateTime(x.done_at), n: x.done_by_name || '?' }))}</div>${x.returned_to ? `<div class="small">${esc(t('lf_ret_to', { x: x.returned_to }))}</div>` : ''}${x.done_note ? `<div class="small muted">${esc(x.done_note)}</div>` : ''}`;
+  if (x.status === 'disposed') body += `<div class="small" style="margin-top:6px">${esc(t('lf_disp_line', { h: t('lf_disp_' + (x.dispose_how || 'other')), t: fmtDateTime(x.done_at), n: x.done_by_name || '?' }))}</div>${x.done_note ? `<div class="small muted">${esc(x.done_note)}</div>` : ''}`;
+  if (x.resv) body += `<div class="small muted" style="margin-top:10px">${esc(t('lf_resv_view'))}</div><img data-lph="${esc(x.resv)}" alt="" style="min-height:80px;background:var(--line)">`;
+  let acts = '';
+  if (ro){ acts = ''; }
+  else if (D.mode === 'ret') acts = `<div class="infobox small" style="text-align:left;margin:10px 0 0">${esc(t('lf_ret_hint'))}</div>
+      <div class="field" id="lf-ret-f" style="margin-top:8px"><label for="lf-ret-to">${esc(t('lf_ret_to_lbl'))}</label><input class="input" id="lf-ret-to" maxlength="200" autocomplete="off" value="${esc(D.to || '')}"></div>
+      <div class="field"><label for="lf-ret-note">${esc(t('lf_ret_note'))}</label><input class="input" id="lf-ret-note" maxlength="300" value="${esc(D.rnote || '')}"></div>
+      ${btn('lf-ret-save', t('lf_ret'))}${btn('lf-ret', t('cancel'), 'ghost', 'data-k="off"')}`;
+  else if (D.mode === 'edit') acts = `<div id="lf-e-desc" style="margin-top:10px"><div class="field"><label for="lfe-zh">${esc(t('lf_desc_zh'))}</label><input class="input" id="lfe-zh" maxlength="200" value="${esc(D.desc_zh || '')}"></div>
+      <div class="field"><label for="lfe-de">${esc(t('lf_desc_de'))}</label><input class="input" id="lfe-de" maxlength="300" value="${esc(D.desc_de || '')}"></div></div>
+      <div class="field"><label for="lfe-table">${esc(t('lf_table_lbl'))}</label><input class="input" id="lfe-table" maxlength="20" value="${esc(D.table_no || '')}"></div>
+      <div class="field"><label for="lfe-note">${esc(t('lf_note'))}</label><textarea class="input" id="lfe-note" rows="2" maxlength="500">${esc(D.note || '')}</textarea></div>
+      ${x.resv ? '' : `<div class="small muted">${esc(t('lf_resv_hint'))}</div>${D.resvPrev ? `<img src="${esc(D.resvPrev)}" alt="" class="lf-prev">` : ''}${lfPhotoBtn('eresv', t('lf_resv').replace(/^📷\s*/, ''), !!D.resvPrev, D.up)}${D.up ? `<div class="small">${esc(t('lf_uploading'))}</div>` : ''}`}
+      ${btn('lf-edit-save', t('save'))}${btn('lf-edit', t('cancel'), 'ghost', 'data-k="off"')}`;
+  else if (D.mode === 'disp') acts = `<div class="chips" style="gap:6px;margin-top:10px">${['donated', 'fundbuero', 'thrown', 'other'].map(k => `<button class="dchip${D.how === k ? ' ok' : ''}" data-act="lf-disp-k" data-k="${k}">${esc(t('lf_disp_' + k))}</button>`).join('')}</div>
+      <div class="field" id="lf-disp-f" style="margin-top:8px"><label for="lf-disp-reason">${esc(t('lf_disp_reason'))}</label><textarea class="input" id="lf-disp-reason" rows="2" maxlength="300">${esc(D.reason || '')}</textarea></div>
+      ${btn('lf-disp-save', t('lf_disp'))}${btn('lf-disp', t('cancel'), 'ghost', 'data-k="off"')}`;
+  else acts = (x.can_return ? btn('lf-ret', t('lf_ret')) : '') + (x.can_edit ? btn('lf-edit', t('lf_edit'), 'ghost') : '') + (x.can_dispose && boss ? btn('lf-disp', t('lf_disp'), 'ghost') : '') + (x.can_undo && boss ? btn('lf-undo', t('lf_undo'), 'ghost') : '');
+  dlg.innerHTML = body + acts + `<button class="btn ghost" data-act="lf-dlg-close" style="margin-top:8px">${esc(t('close'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+  if (aid){ const e = document.getElementById(aid); if (e && dlg.contains(e)){ try { e.focus({ preventScroll: true }); if (ss != null && e.setSelectionRange) e.setSelectionRange(ss, ss); } catch(er){} } }
+  lfLoadPhotos();
+}
+// 弹窗里做完一件事：换成数据库给的新数据；不在这一栏了（领走 / 处理掉 / 撤销）就重新读列表
+function lfAfter(item, msg){
+  const S = lfS(); toast(msg);
+  if (S.dlg && item){ S.dlg = { item }; }
+  if (S.data && item) S.data.items = (S.data.items || []).map(y => y.id === item.id ? item : y);
+  lfItemDraw(); lfLoad();
+}
+function lfDlgErr(e){
+  const S = lfS(), m = String(e && e.message || '');
+  if (m === 'LOST_NOT_KEPT' || m === 'LOST_NOT_DONE' || m === 'NOT_FOUND'){ toast(errText(e), true); S.dlg = null; const d = $('#photoDlg'); if (d.open) d.close(); lfLoad(); return; }
+  const fld = { LOST_TO_EMPTY: '#lf-ret-f', LOST_REASON_EMPTY: '#lf-disp-f', LOST_DESC_EMPTY: '#lf-e-desc' }[m];
+  if (S.dlg){ S.dlg.busy = false; lfItemDraw(); }
+  if (fld && $(fld)) fieldErr($(fld), errText(e)); else toast(errText(e), true);
+}
+async function lfDlgDo(fn, msg){
+  const S = lfS(), D = S.dlg; if (!D || D.busy || D.up) return;
+  lfKeep(); fieldErrClear($('#photoDlg')); D.busy = true; lfItemDraw();
+  try { const r = await fn(D); if (S.dlg !== D) return; lfAfter(r, msg); }
+  catch(e){ if (S.dlg === D) lfDlgErr(e); else toast(errText(e), true); }
+}
 
 // ============ 物品（v91，数据库 v63 / 文件服务 tasks v8，老板 2026-10-17 决定）============
 // 第一步：储区、储位、物品、放置规则、搜索、照片、AI 拍照填名字。二维码（第 2 步）、待归位（第 3 步）、3 个月确认和「搜不到的词」（第 4 步）以后做。
@@ -6601,6 +6863,7 @@ const INV_TYPE_NAME = { zh: { R: '货架', S: '柜子', SL: '抽屉', K: '冰箱
 // v207：常用房间（编号 v63 就定好的），新建房间时点一下填好
 const INV_ROOM_PRESETS = [{ code: 'BAR', zh: '吧台', de: 'Theke', owner: 'front' }, { code: 'KUE', zh: '厨房', de: 'Küche', owner: 'kitchen' },
   { code: 'KUR', zh: '冷库', de: 'Kühlraum', owner: 'kitchen' }, { code: 'TKR', zh: '冷冻间', de: 'Tiefkühlraum', owner: 'kitchen' }];
+const INV_CODE_RE = /^[A-Z][A-Z0-9]{2}$/;   // v215：房间代码（和数据库 inv_area_save 一样）
 const INV_URLS = {};   // 照片路径 → { url, at }（文件服务给的 1 小时链接，50 分钟内重用）
 function invS(){ return state.inv || (state.inv = { view: 'home', q: '' }); }
 function invGo(view, id, extra){ const S = invS(); S.view = view; S.id = id || null; Object.assign(S, extra || {}); state.tab = 'inv'; render(); window.scrollTo(0, 0); }
@@ -11700,7 +11963,7 @@ function staffOptions(withKitchen){
 }
 
 // ============ 管理（超级管理员）============
-const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['bonfails', 'rates', 'report', 'deleted', 'audit', 'perf']);   // v96：速度记录   // v69：锁门检查点暂时隐藏
+const ADMIN_MORE = (LOCK_ON ? ['lock'] : []).concat(['bonfails', 'rates', 'report', 'deleted', 'audit', 'perf', 'lost']);   // v96：速度记录   // v69：锁门检查点暂时隐藏
 // v61：「管理」上的待办数字分到「审批」「反馈」两个按钮上（反馈 = 未处理的反馈，审批 = 其余：修改申请、待核对的 Bon、工号绑定、忘记 PIN）
 // v206（admin-1，数据库 v143）：标签上的数字一次算好（admin_badge_counts，以前每次重画都要 6 个请求，其中 admin_onb_list、admin_docs 很重）。
 //   60 秒内、这台手机没做过事（rpcQ.w 没变）就用上次的；做了任何事（批准、核对、处理反馈……）以后自动重新要。
@@ -11857,6 +12120,8 @@ async function viewAdmin(){
       const open = list.filter(x => x.status === 'open').sort((a, b) => fbAiRank(a) - fbAiRank(b)), done = list.filter(x => x.status !== 'open');
       el().innerHTML = fbAiSumHTML(open) + `<div class="list">${open.map(fbItem).join('') || `<div class="empty">${esc(t('fb_none'))}</div>`}</div>`
         + (done.length ? `<details class="fold"><summary>${esc(t('fb_done_grp', { n: done.length }))}</summary><div class="inner"><div class="list">${done.map(fbItem).join('')}</div></div></details>` : '');
+    } else if (state.adminSub === 'lost'){   // v215：失物招领
+      await viewLost();
     } else if (state.adminSub === 'report'){
       const bd = berlinDay(), first = bd.slice(0, 8) + '01';   // v206（admin-8）：柏林的日期
       el().innerHTML = `<div class="sheet"><div id="p-range"><div class="row">
@@ -11909,7 +12174,7 @@ function day10(v){ return /^\d{4}-\d{2}-\d{2}$/.test(String(v || '')); }
 // 日志操作名：有翻译用翻译，没有就显示原代码
 // v206（admin-9）：没有翻译的按开头写成「模块 · 代码」（以前只显示代码）
 const ACT_MOD = [['inv_', 'inv'], ['task_', 'task'], ['doc_', 'doc'], ['expense_', 'expense'], ['sop_', 'sop'], ['onb_', 'onb'], ['recon_', 'recon'], ['lock_', 'lock'], ['library_', 'library'], ['pin_', 'pin'],
-  ['ksched_', 'sched'], ['kshift_', 'sched'], ['shift_', 'sched'], ['sched_', 'sched'], ['oil_', 'oil'], ['miss_', 'miss']];
+  ['ksched_', 'sched'], ['kshift_', 'sched'], ['shift_', 'sched'], ['sched_', 'sched'], ['oil_', 'oil'], ['miss_', 'miss'], ['lost_', 'lost']];
 function actionLabel(a){ const x = t('act_' + a); if (x !== 'act_' + a) return x;
   const m = ACT_MOD.find(([p]) => String(a).startsWith(p)); return m ? t('act_mod_' + m[1]) + ' · ' + a : a; }
 function deletedCard(x){
@@ -13050,11 +13315,13 @@ function trCardHTML(){
   add('ta', [ms ? t('tr_ta_miss', { n: ms }) : '', fs ? t('tr_ta_false', { n: fs }) : '', !ms && !fs && +M.audits_open ? t('tr_ta_open', { n: M.audits_open }) : ''].filter(Boolean).join(' · '), taHomeHTML(), ms + fs > 0);
   const ar = (state.aiRev || []).length; add('arv', t('tr_arv', { n: ar }), ar ? aiRevHTML() : '');
   add('wr', t('tr_wr'), wrHomeHTML());
+  if (state.lostOld && +state.lostOld.n > 0) L.push({ k: 'lf', txt: t('tr_lf', { n: state.lostOld.n }), go: 'lf-old', bad: false });   // v215：失物超过 30 天 → 直接打开那张单子
   const keep = ar ? '' : aiRevHTML();   // 空的 #ai-rev 也留在页面上（判完以后原地重画用）
   if (!L.length) return keep;
   const arrow = '<span aria-hidden="true">›</span>';
   return `<div class="trc${L.some(x => x.bad) ? ' bad' : ''}" id="tr-card"><div class="trc-h">${esc(t('tr_title', { n: L.length }))}</div>` + L.map(x => x.store
       ? `<button type="button" class="trc-l bad" data-act="oil-go" data-store="${x.store}"><span>${esc(x.txt)}</span>${arrow}</button>`
+      : x.go ? `<button type="button" class="trc-l" data-act="${x.go}"><span>${esc(x.txt)}</span>${arrow}</button>`
       : `<button type="button" class="trc-l${x.bad ? ' bad' : ''}" data-act="tr-tog" data-k="${x.k}" aria-expanded="${!!O[x.k]}"><span>${esc(x.txt)}</span><span aria-hidden="true" data-trc="${x.k}">${O[x.k] ? '▾' : '›'}</span></button>`
         + `<div class="trc-b" data-trb="${x.k}"${O[x.k] ? '' : ' hidden'}>${x.html}</div>`).join('') + '</div>' + keep;
 }
@@ -13975,6 +14242,7 @@ const VIEW_BLOCK = new Set(['notice-ok', 'msg-read', 'msg-ans', 'hint-ack', 'pin
 DRK_W.forEach(a => VIEW_BLOCK.add(a));   // v206（网页 3/4）：饮料 / 订货
 ['kc-zero', 'kc-finish', 'kc-made-save', 'kc-plan-save', 'kc-plan-copy', 'kc-item-new', 'kc-item-edit', 'kc-item-save', 'kc-item-toggle', 'task-check', 'task-override', 'task-answer', 'tk-res-send', 'tk-res-rm', 'tk-res-again', 'tf-save', 'staff-move', 'staff-save', 'rate-save', 'req-approve', 'req-reject', 'review-save', 'pinreq-reset', 'pinreq-dismiss', 'ls-confirm', 'ls-unbind', 'fb-status'].forEach(a => VIEW_BLOCK.add(a));   // v206（网页 4/4）：任务、管理的写入
 ['ex-confirm', 'ex-cancel', 'ex-save', 'doc-send', 'doc-again', 'onb-send', 'lib-confirm', 'sop-new', 'sop-edit', 'sop-fix', 'sop-gap-write', 'sop-gap-done', 'sop-gap-wrong', 'an-ack'].forEach(a => VIEW_BLOCK.add(a));   // v206（网页 3/4）：垫付、证件、带教、资料、SOP
+['lf-new', 'lf-save', 'lf-ret', 'lf-ret-save', 'lf-edit', 'lf-edit-save', 'lf-disp', 'lf-disp-save', 'lf-undo', 'lf-place-edit', 'lf-place-save'].forEach(a => VIEW_BLOCK.add(a));   // v215：失物招领的写入
 // ============ 事件 ============
 document.addEventListener('click', async ev => {
   if (ev.target.id === 'tkDlg'){ ev.target.close(); return; }   // v205：点底部操作菜单外面 = 关掉
@@ -14076,7 +14344,7 @@ document.addEventListener('click', async ev => {
           const wk = weekToOpen(w); if (wk !== state.week){ state.week = wk; render(); } }, () => {}); }
       }
       if (el.dataset.tab === 'entry' && state.tab !== 'entry') state.entryCtx = { back: state.tab };   // v68：录入页「← 返回」回到这里
-      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; state.docPage = false; state.cdPage = null; state.annPage = false; state.expPage = false; state.taRec = null; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.areaDay = null; state.tipStats = false; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || curWeek(); state.fromTab = true; render(); break;
+      state.done = null; state.rcWeek = null; state.lockOpen = null; state.taskOpen = null; state.ocOpen = false; state.planTimes = null; state.libView = null; state.taskPage = false; state.docPage = false; state.cdPage = null; state.annPage = false; state.expPage = false; state.lfPage = false; state.taRec = null; if (!state.me.is_admin) state.sop = null; state.recon = null; state.envAll = null; state.areaDay = null; state.tipStats = false; state.repForm = null; state.tab = el.dataset.tab; if (state.tab === 'plan') state.banner = false; if (navTabs().includes(state.tab)) LS.set('tab', state.tab); state.menu = false; if (state.tab !== 'entry') state.week = state.week || curWeek(); state.fromTab = true; render(); break;
     case 'store': f.store = el.dataset.store; render(); break;
     case 'chip': {
       const key = el.dataset.role === 'runner' ? 'runners' : 'bars', arr = f[key] || [], id = el.dataset.id, i = arr.indexOf(id);
@@ -16657,6 +16925,9 @@ document.addEventListener('click', async ev => {
     case 'inv-s-nature': invSetKeep(); invS().sform.nature = el.dataset.k; renderInvCatForm(); break;
     case 'inv-aform-save': case 'inv-cform-save': {
       invSetKeep(); const S = invS(), G = S.sform, isA = act === 'inv-aform-save'; if (!G) break;
+      const newRoom = isA && !G.id;   // v215：新房间的代码先在页面上查（3 个字母或数字，第一个是字母）
+      if (newRoom){ G.code = String(G.code || '').trim().toUpperCase(); fieldErrClear($('#main'));
+        if (!INV_CODE_RE.test(G.code)){ const f = $('#invs-code'); fieldErr(f ? f.closest('.field') : null, t('inv_a_code_bad')); break; } }
       const d = isA ? { store: G.store, code: G.code, name_zh: G.name_zh, name_de: G.name_de, owner: G.owner, damp: !!G.damp, food_ok: !!G.food_ok, chem_ok: !!G.chem_ok, sort: G.sort, active: !!G.active }
         : { name_zh: G.name_zh, name_de: G.name_de, nature: G.nature, damp: !!G.damp, area_code: G.area_code, sort: G.sort, active: !!G.active };
       if (isA) invTrKeep();
@@ -16667,10 +16938,76 @@ document.addEventListener('click', async ev => {
           const back = G.back; S.sform = null; S.home = null; S.area = null;
           if (isA && !G.id){ toast(t('inv_a_new_ok')); S.nav = []; invGo('area', id); }   // v207：建好直接进房间
           else { toast(t('inv_saved')); if (isA && back) invGo(back.view, back.id); else invGo('settings'); } }
-        catch(e){ toast(errText(e), true); }
+        catch(e){ const f = newRoom && $('#invs-code'), fe = f && f.closest('.field');   // v215：代码的错误写在代码框下面
+          if (fe && e.message === 'INV_CODE_TAKEN') fieldErr(fe, t('inv_a_code_taken', { c: G.code, s: G.store }));
+          else if (fe && e.message === 'INV_BAD' && !INV_CODE_RE.test(G.code)) fieldErr(fe, t('inv_a_code_bad'));
+          else if (newRoom && e.message === 'INV_BAD') toast(t('inv_a_bad_other'), true);
+          else toast(errText(e), true); }
       });
       break;
     }
+    // v215：失物招领
+    case 'more-lf': morePage('lfPage'); lfOpen(); render(); window.scrollTo(0, 0); break;
+    case 'lf-old': { const S = lfS(); lfOpen(); S.status = 'old'; S.store = (state.lostOld && storeOk(state.lostOld.oldest_store)) || curStore();
+      state.done = null; state.rcWeek = null; state.staffEdit = null; state.menu = false; state.tab = 'admin'; state.adminSub = 'lost'; render(); window.scrollTo(0, 0); break; }
+    case 'lf-store': { const S = lfS(); if (!storeOk(el.dataset.store)) break; lfKeep();
+      if (S.form){ S.form.store = el.dataset.store; lfDraw(); break; }
+      S.store = el.dataset.store; S.placeEdit = false; if (S.status === 'old') S.status = 'kept'; S.data = null; lfDraw(); lfLoad(); break; }
+    case 'lf-status': { const S = lfS(); lfKeep(); S.status = el.dataset.k; S.data = null; lfDraw(); lfLoad(); break; }
+    case 'lf-new': { const S = lfS(); lfKeep(); S.saved = null; S.placeEdit = false;
+      S.form = { store: S.store || curStore(), photo: null, photo_t: null, prev: null, resv: null, resv_t: null, resvPrev: null, desc_zh: '', desc_de: '', table_no: '', note: '', ai: false, up: {}, aiState: null, busy: false };
+      lfDraw(); window.scrollTo(0, 0); break; }
+    case 'lf-cancel': { const S = lfS(), F = S.form; if (!F) break;
+      if ((F.photo || F.up.item) && !confirm(t('lf_cancel_q'))) break;
+      S.form = null; lfDraw(); lfLoad(); window.scrollTo(0, 0); break; }
+    case 'lf-back': { const S = lfS(); S.form = null; S.saved = null; S.status = 'kept'; S.q = ''; S.data = null; lfDraw(); lfLoad(); window.scrollTo(0, 0); break; }
+    case 'lf-save': { const S = lfS(), F = S.form; if (!F || F.busy) break;
+      lfKeep(); fieldErrClear(lfTarget());
+      if (F.up.item || F.up.resv){ toast(t('lf_wait_up'), true); break; }
+      if (!F.photo){ fieldErr('#lf-f-photo', t('err_LOST_PHOTO_MISSING')); break; }
+      if (!String(F.desc_zh || '').trim() && !String(F.desc_de || '').trim()){ fieldErr('#lf-f-desc', t('err_LOST_DESC_EMPTY')); break; }
+      F.busy = true; lfDraw();
+      try {
+        const r = await rpc('lost_create', { ...tok(), p: { store: F.store, photo: F.photo, photo_t: F.photo_t, resv: F.resv, resv_t: F.resv_t, desc_zh: F.desc_zh, desc_de: F.desc_de, table_no: F.table_no, note: F.note, ai: !!F.ai } });
+        if (S.form !== F) break;
+        S.form = null; S.saved = r; S.store = (r && r.item && r.item.store) || F.store; S.data = null; lfDraw(); window.scrollTo(0, 0);
+      } catch(e){ if (S.form !== F) break; F.busy = false; lfDraw(); const m = e.message;
+        if (m === 'LOST_PHOTO_MISSING') fieldErr('#lf-f-photo', errText(e));
+        else if (m === 'LOST_DESC_EMPTY') fieldErr('#lf-f-desc', errText(e));
+        else if (m === 'LOST_PHOTO_USED'){ toast(errText(e), true); S.form = null; S.data = null; lfDraw(); lfLoad(); }
+        else toast(errText(e), true); }
+      break; }
+    case 'lf-item': { const S = lfS(), x = ((S.data || {}).items || []).find(y => y.id === el.dataset.id); if (!x) break; S.dlg = { item: x }; lfItemDraw(); break; }
+    case 'lf-photo-big': lfPhotoBig(el.dataset.full); break;
+    case 'lf-dlg-close': lfS().dlg = null; $('#photoDlg').close(); break;
+    case 'lf-ret': case 'lf-edit': case 'lf-disp': { const D = lfS().dlg; if (!D) break; lfKeep();
+      if (el.dataset.k === 'off'){ D.mode = null; lfItemDraw(); break; }
+      D.mode = act.slice(3); const x = D.item;
+      if (D.mode === 'edit') Object.assign(D, { desc_zh: x.desc_zh || '', desc_de: x.desc_de || '', table_no: x.table_no || '', note: x.note || '', resv: null, resv_t: null, resvPrev: null });
+      if (D.mode === 'disp' && !D.how) D.how = 'donated';
+      lfItemDraw(); const fi = $(D.mode === 'ret' ? '#lf-ret-to' : D.mode === 'disp' ? '#lf-disp-reason' : '#lfe-zh'); if (fi) fi.scrollIntoView({ block: 'center' }); break; }
+    case 'lf-disp-k': { const D = lfS().dlg; if (!D) break; lfKeep(); D.how = el.dataset.k; lfItemDraw(); break; }
+    case 'lf-ret-save': lfKeep(); { const D = lfS().dlg; if (!D) break;
+      if (String(D.to || '').trim().length < 2){ fieldErrClear($('#photoDlg')); fieldErr('#lf-ret-f', t('err_LOST_TO_EMPTY')); break; } }
+      await lfDlgDo(D => rpc('lost_return', { ...tok(), p_id: D.item.id, p_to: D.to, p_note: D.rnote || null }), t('lf_ret_ok')); break;
+    case 'lf-edit-save': lfKeep(); { const D = lfS().dlg; if (!D) break;
+      if (!String(D.desc_zh || '').trim() && !String(D.desc_de || '').trim()){ fieldErrClear($('#photoDlg')); fieldErr('#lf-e-desc', t('err_LOST_DESC_EMPTY')); break; } }
+      await lfDlgDo(D => rpc('lost_update', { ...tok(), p_id: D.item.id, p: { desc_zh: D.desc_zh, desc_de: D.desc_de, table_no: D.table_no, note: D.note, ...(D.resv ? { resv: D.resv, resv_t: D.resv_t } : {}) } }), t('lf_edit_ok')); break;
+    case 'lf-disp-save': lfKeep(); { const D = lfS().dlg; if (!D) break;
+      if (!String(D.reason || '').trim()){ fieldErrClear($('#photoDlg')); fieldErr('#lf-disp-f', t('err_LOST_REASON_EMPTY')); break; }
+      if (!confirm(t('lf_disp_q'))) break; }
+      await lfDlgDo(D => rpc('lost_dispose', { ...tok(), p_id: D.item.id, p_how: D.how || 'other', p_reason: D.reason }), t('lf_disp_ok')); break;
+    case 'lf-undo': { const D = lfS().dlg; if (!D) break; const why = prompt(t('lf_undo_q')); if (why === null) break;
+      if (!why.trim()){ toast(t('err_LOST_REASON_EMPTY'), true); break; }
+      await lfDlgDo(D => rpc('lost_undo', { ...tok(), p_id: D.item.id, p_reason: why }), t('lf_undo_ok')); break; }
+    case 'lf-place-edit': { const S = lfS(); if (el.dataset.k === 'off'){ S.placeEdit = false; lfDraw(); break; }
+      const p = ((S.data || {}).places || {})[S.store] || {}; S.placeEdit = true; S.placeZh = p.zh || ''; S.placeDe = p.de || ''; lfDraw(); const i = $('#lf-place-zh'); if (i) i.focus(); break; }
+    case 'lf-place-save': { const S = lfS(); lfKeep(); fieldErrClear($('#lf-place-box'));
+      if (!String(S.placeZh || '').trim() && !String(S.placeDe || '').trim()){ fieldErr('#lf-place-box', t('err_LOST_PLACE_EMPTY')); break; }
+      el.disabled = true;
+      try { await rpc('lost_place_set', { ...tok(), p_store: S.store, p_zh: S.placeZh || null, p_de: S.placeDe || null }); S.placeEdit = false; toast(t('lf_place_saved')); lfLoad(); }
+      catch(e){ el.disabled = false; if (e.message === 'LOST_PLACE_EMPTY') fieldErr('#lf-place-box', errText(e)); else toast(errText(e), true); }
+      break; }
     case 'ls-confirm': case 'ls-unbind':   // v206（admin-11 / admin-14）：解绑先问；防连点；留在原地
       if (act === 'ls-unbind' && !confirm(t('ls_unbind_q', { n: el.dataset.name || el.dataset.store }))) break;
       el.disabled = true;
@@ -16683,6 +17020,7 @@ document.addEventListener('keydown', ev => { if (ev.key === 'Enter' && ev.target
   if (ev.key === 'Enter' && ev.target.id === 'tf-say' && !ev.isComposing){ ev.preventDefault(); const b = document.querySelector('[data-act="tf-parse"]'); if (b && !b.disabled) b.click(); return; }   // v205：说一句话，回车 = ✨ 填表
   if (ev.key === 'Enter' && ev.target.dataset && ev.target.dataset.ct){ ev.preventDefault();   // v179：盘点时回车 = 到下一格
     const all = [...document.querySelectorAll('[data-ct]')].filter(e => e.offsetParent && !e.disabled), i = all.indexOf(ev.target); ev.target.blur(); if (all[i + 1]) all[i + 1].focus(); return; }
+  if (ev.key === 'Enter' && ev.target.id === 'lf-q' && !ev.isComposing){ ev.preventDefault(); clearTimeout(lfTimer); lfS().q = ev.target.value; ev.target.blur(); lfLoad(); return; }   // v215：失物，回车 = 马上搜
   if (ev.key === 'Enter' && ev.target.id === 'inv-q'){ ev.preventDefault(); clearTimeout(invTimer); clearTimeout(invLogTimer); ev.target.blur(); invSearch().then(invLogMiss); } });   // v91：回车 = 搜，搜不到记下
 document.addEventListener('change', async ev => {
   if (ev.target.classList && ev.target.classList.contains('qa-who')){ const n = $('#qa-n'); if (n) n.textContent = t('qa_picked', { n: document.querySelectorAll('.qa-who:checked').length }); document.querySelectorAll('[data-act="qa-pick"].on').forEach(b => b.classList.remove('on')); }   // v206：「已选 N 人」
@@ -16715,6 +17053,7 @@ document.addEventListener('change', async ev => {
         e.text0 = e.text; e.zh0 = e.zh; e.de0 = e.de; } }   // v205：之后改了「做什么」，保存时重新写中德文
     tfRedraw(); return; }
   if (ev.target.id === 'e-date'){ bonEditDate(ev.target.value); return; }   // v112：老板改 Bon 日期
+  if (ev.target.dataset && ev.target.dataset.lfphoto && ev.target.files && ev.target.files[0]){ const f = ev.target.files[0], k = ev.target.dataset.lfphoto; ev.target.value = ''; lfPhotoChosen(k, f); return; }   // v215：失物的照片
   if (ev.target.dataset && ev.target.dataset.sopphoto && ev.target.files && ev.target.files[0]){ const f = ev.target.files[0]; ev.target.value = ''; sopPhotoChosen(f); return; }   // v111：SOP 照片
   if (ev.target.dataset && ev.target.dataset.invphoto && ev.target.files && ev.target.files[0]){   // v91：物品 / 储位照片
     const f = ev.target.files[0], k = ev.target.dataset.invphoto; ev.target.value = '';
@@ -16863,6 +17202,8 @@ document.addEventListener('input', ev => {
   if (id && id.startsWith('mr-note-')){ (state.mrNote = state.mrNote || {})[id.slice(8)] = ev.target.value; return; }
   if (id && /^cd-r(zh|de)-/.test(id) && state.cdRec){ (state.cdRec.rdraft = state.cdRec.rdraft || {})[id] = ev.target.value; return; }
   if (id === 'inv-q'){ invS().q = ev.target.value; invMidSync(); invQueue(); }   // v91；v182
+  if (id === 'lf-q'){ lfS().q = ev.target.value; clearTimeout(lfTimer); lfTimer = setTimeout(lfLoad, 350); return; }   // v215：失物，停手 0.35 秒再搜
+  if (id === 'invs-code' && invS().sform && !invS().sform.id){ const x = ev.target, p = x.selectionStart; x.value = x.value.toUpperCase().replace(/\s/g, ''); try { x.setSelectionRange(p, p); } catch(e){} fieldErrClear(x.closest('.field')); return; }   // v215：房间代码边打边变大写
   if (id === 'ct-q'){ invS().ctQ = ev.target.value; ctRefresh(); return; }   // v179：盘点页找饮料
   if (id === 'ord-si-q'){ const O = invS().osi, b = document.getElementById('ord-si-list'); if (O && O.items && b){ O.q = ev.target.value; b.innerHTML = ordSiListHTML(O); } return; }   // v188
   if (id === 'dp-q'){ const P = state.dp, b = document.getElementById('dp-list'); if (P && b){ P.q = ev.target.value; b.innerHTML = dpRowsHTML('dp-pick', P.q, P.hint, P.cur, P.list, P.like); b.scrollTop = 0; } return; }   // v181：选饮料的窗口
