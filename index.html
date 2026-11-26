@@ -753,13 +753,19 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v219';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v220';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
 // ============ 文案 ============
 const I18N = {
 zh: {
+  // v220：配方（库管、主管、老板）；菜也能配饮料
+  dt_rcp:'配方', rcp_title:'📖 配方', rcp_hint:'配方 = 卖 1 个这个收银商品，库存里扣哪些饮料、扣多少。菜也可以，例如啤酒锅用 2 瓶 Cass。改了配方，这家店从上一次盘点起的「应有」会跟着变，已经盘完的结果不变。一家店有自己的配方就用自己的，没有才用两家店共用的。',
+  rcp_k_hint:'卖价、成本、毛利和「在不在酒水单上」只有老板能看、能改。', rcp_q:'搜收银商品，菜也可以（例如 Biertopf）', rcp_q_none:'没找到「{q}」。只能搜这家店最近 4 个月卖过的商品，请照收银机上的名字搜一个词。', rcp_q_sold:'4 个月卖了 {n}',
+  rcp_has:'现在扣：{x}', rcp_has_none:'还没配', rcp_has_ign:'标了「不管库存」', rcp_dishes:'菜和别的（{n}）', rcp_dishes_none:'还没有。在上面搜菜的名字，就能给它配饮料（例如啤酒锅用 2 瓶 Cass）。', rcp_drinks:'饮料（{n}）',
+  rcp_unlinked:'还没配的饮料（{n}）', rcp_new_btn:'配配方', rcp_only:'只 {s}', rcp_link:'按瓶配的', rcp_sold0:'30 天没卖', rcp_by:'{n} {d} 存的', rcp_none:'这家店还没有配方。', rcp_drinks_none:'最近 30 天没有卖过配了配方的饮料。', rcp_idle:'30 天没卖的（{n}）', rcp_combo:'这是套餐那一行。套餐里的菜收银机上还会单独记一行（例如「… Grundgericht」），配方请配在菜那一行，这一行不要配，不然会扣两次。',
+  rcp_no_store:'{s} 的配方只有这家店的库管、主管和老板能改。请点上面换一家店。', rcp_shared_note:'现在两家店共用这一个配方。你存了以后只改 {s}，另一家店照旧。',
   // v112：Bon 上的日期读错时（老板 2026-10-28：Hang 28 号的 Bon 被读成 26 号）
   bon_date_q:'Bon 上的日期读出来是 {d}，对吗？', bon_date_q_hint:'请看一眼纸上 Bon 顶部的日期（Anfangsdatum）。热敏纸上 8 和 6、3 和 8 容易读错。',
   bon_date_yes:'对，是 {d}', bon_date_no:'不对，是{d}', bon_date_none:'都不对，重拍', bon_date_need:'请先确认 Bon 上的日期（上面黄色的框）。',
@@ -1526,6 +1532,12 @@ zh: {
   wd:['周一','周二','周三','周四','周五','周六','周日']
 },
 de: {
+  // v220
+  dt_rcp:'Rezepte', rcp_title:'📖 Rezepte', rcp_hint:'Ein Rezept legt fest, welche Getränke beim Verkauf eines Kassenartikels vom Bestand abgezogen werden und wie viel. Auch Gerichte gehen, z. B. Bier-Hotpot mit 2 Flaschen Cass. Eine Änderung wirkt auf den Soll-Bestand dieser Filiale seit der letzten Zählung; abgeschlossene Zählungen bleiben unverändert. Hat eine Filiale ein eigenes Rezept, gilt das eigene, sonst das gemeinsame.',
+  rcp_k_hint:'Verkaufspreis, Kosten, Marge und „Steht auf der Karte“ sieht und ändert nur der Chef.', rcp_q:'Kassenartikel suchen, auch Gerichte (z. B. Biertopf)', rcp_q_none:'„{q}“ nicht gefunden. Gesucht wird nur in Artikeln, die diese Filiale in den letzten 4 Monaten verkauft hat – bitte ein Wort aus dem Kassennamen eingeben.', rcp_q_sold:'4 Monate: {n}',
+  rcp_has:'Zieht ab: {x}', rcp_has_none:'Noch kein Rezept', rcp_has_ign:'Als „ohne Bestand“ markiert', rcp_dishes:'Gerichte und Sonstiges ({n})', rcp_dishes_none:'Noch keine. Oben den Namen des Gerichts suchen, dann ein Getränk zuordnen (z. B. Bier-Hotpot = 2 Flaschen Cass).', rcp_drinks:'Getränke ({n})',
+  rcp_unlinked:'Getränke ohne Rezept ({n})', rcp_new_btn:'Rezept anlegen', rcp_only:'nur {s}', rcp_link:'pro Flasche zugeordnet', rcp_sold0:'30 Tage nicht verkauft', rcp_by:'gespeichert von {n} am {d}', rcp_none:'Für diese Filiale gibt es noch keine Rezepte.', rcp_drinks_none:'In den letzten 30 Tagen wurde kein Getränk mit Rezept verkauft.', rcp_idle:'In 30 Tagen nicht verkauft ({n})', rcp_combo:'Das ist die Menü-Zeile. Die Gerichte im Menü bucht die Kasse zusätzlich als eigene Zeile (z. B. „… Grundgericht“). Das Rezept bitte bei dieser Gericht-Zeile anlegen, nicht hier – sonst wird doppelt abgezogen.',
+  rcp_no_store:'Rezepte für {s} ändern nur Lagerverantwortliche und Leitungen dieser Filiale sowie der Chef. Bitte oben die andere Filiale wählen.', rcp_shared_note:'Dieses Rezept gilt gerade für beide Filialen. Wenn du speicherst, ändert sich nur {s}; die andere Filiale bleibt wie bisher.',
   // v112：Bon-Datum falsch gelesen
   bon_date_q:'Datum auf dem Bon gelesen als {d} – stimmt das?', bon_date_q_hint:'Bitte kurz oben auf dem Bon nachsehen (Anfangsdatum). Auf Thermopapier werden 8 und 6, 3 und 8 leicht verwechselt.',
   bon_date_yes:'Ja, {d}', bon_date_no:'Nein, richtig ist {d}', bon_date_none:'Beides falsch – neu fotografieren', bon_date_need:'Bitte zuerst das Datum auf dem Bon bestätigen (gelber Kasten oben).',
@@ -2533,7 +2545,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=52'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=53'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2692,6 +2704,7 @@ function toast(msg, isErr){
 }
 // 报错提示：每条都写清原因和下一步怎么做
 const ERR_ZH = {
+  INV_CONTENT_SET: '这件饮料已经填了每瓶多少，只有老板能改。如果填错了，请告诉老板。',   // v220
   ADJ_SAME: '「从谁」和「给谁」不能是同一个人。',   // v206
   ADJ_PICK: '请选好「从谁」和「给谁」。',   // v206
   ADJ_WEEK: '没选是哪一周。请回到周结页，选好那一周再记。',   // v210
@@ -3030,6 +3043,7 @@ const ERR_ZH = {
   LOST_NOT_READY: "失物招领还没开通（服务器还没升级好）。请先用纸条记下，交给当班负责人，并告诉老板。",
 };
 const ERR_DE = {
+  INV_CONTENT_SET: 'Für dieses Getränk ist der Flascheninhalt schon eingetragen; ändern kann ihn nur der Chef. Falls er falsch ist, bitte dem Chef Bescheid geben.',   // v220
   ADJ_SAME: '„Von“ und „An“ dürfen nicht dieselbe Person sein.',   // v206
   ADJ_PICK: 'Bitte „Von“ und „An“ auswählen.',   // v206
   ADJ_WEEK: 'Keine Woche gewählt. Bitte im Wochenabschluss die Woche wählen und dann eintragen.',   // v210
@@ -3398,6 +3412,7 @@ const RPC_RO = new Set(('admin_badge_counts admin_announce_detail admin_announce
   + 'my_tip_totals my_week onb_check_mine onb_checklist onb_mine onb_sched_info push_status receipt_image receipts_open recon_day recon_home recon_imports recon_overview recon_report_file sched_bon_helpers '
   + 'sched_notices sched_pending_changes sched_tip_check sched_week settle_payers settlement sop_gaps sop_item sop_tree task_catalog task_named_list task_roles week_adjustments week_envelopes week_extras week_overview week_receipts').split(' '));
 ['lost_list', 'admin_lost_old'].forEach(f => RPC_RO.add(f));   // v215：失物招领（数据库 v149，stable）
+['inv_recipe_home', 'inv_recipe_find'].forEach(f => RPC_RO.add(f));   // v220：配方页（数据库 v153，stable）
 // 不是 stable、但对这台手机来说只是「看」的请求（顺带记一下最后在线、补记漏做、记搜不到的词）：不合并，也不算「做事」
 const RPC_LOOK = new Set('me my_docs admin_docs admin_misses admin_task_find_ctx inv_search'.split(' '));
 const rpcQ = { n: 0, wait: [], live: new Map(), w: 0 };
@@ -7207,7 +7222,8 @@ function storeTabsHTML(){
   const cur = curStore(), byGeo = !!storeOk(state.geoStore) && cur === state.geoStore;
   return `<div class="stabs"><div class="seg">${STORES.map(x => `<button data-act="store-pick" data-store="${x}" class="${x === cur ? 'on' : ''}">${esc(x)}</button>`).join('')}</div>${geoCan() ? `<button class="stabs-geo${byGeo ? ' on' : ''}${geoBusy ? ' busy' : ''}" data-act="store-geo" title="${esc(t('geo_btn'))}" aria-label="${esc(t('geo_btn'))}">📍</button>` : ''}</div>`;
 }
-function storeChanged(){ if (state.tab === 'inv' && invS().view === 'dweek' && invS().week){ keepScroll(renderInvWeek); }   // v187：每周饮料小结
+function storeChanged(){ if (state.tab === 'inv' && invS().view === 'recipes'){ invS().rres = null; viewInvRcp(); }   // v220：配方页换店
+  else if (state.tab === 'inv' && invS().view === 'dweek' && invS().week){ keepScroll(renderInvWeek); }   // v187：每周饮料小结
   else if (state.tab === 'admin' && state.adminSub === 'tasks' && $('#asub')){ tfSync(); keepScroll(toRedraw); }   // v186：收废油（先记下正在写的新任务，重画不会把它清掉）
   else if (state.tab === 'inv' && invS().view === 'otargets' && invS().otg){ const a = document.activeElement; if (a && a.dataset && a.dataset.otg) a.blur(); viewInvOtargets(); }   // v186：目标库存换店（正在打的格子先存进原来那家店）
   else if (state.tab === 'inv' && invS().view === 'dmenu' && invS().drinks){ invS().mFix = null; keepScroll(() => renderInvDmenu()); }   // v185：酒水单
@@ -7265,6 +7281,7 @@ async function viewInv(){
   if (S.view === 'dmenu') return renderInvDmenu();   // v166：酒水单和成本
   if (S.view === 'dweek') return viewInvWeek();   // v187：每周饮料小结
   if (S.view === 'recipe') return renderInvRecipe();
+  if (S.view === 'recipes') return viewInvRcp();   // v220：配方（库管、主管、老板）
   if (S.view === 'stock') return viewInvStock();   // v142：饮料收货 · 调拨
   if (S.view === 'rc') return renderInvRc();
   if (S.view === 'tr') return renderInvTr();
@@ -7609,7 +7626,7 @@ function drkTilesHTML(full){
   // v181：首页最多 4 个格子；没有「盘点 / 订货」的人（普通员工）空出来的位置放「报损」（员工喝的饮料每天都要记）
   if (!full){ if (W && a0.length < 3) a0.push(tile('ls-new', '🗑', t('dt_loss'))); a0.push(tile('inv-stock', '⋯', t('dt_more'), (T.rc_open || 0) + todo || '')); }
   const a = a0.join('');
-  const b = full ? [cs.length ? tile('lv-open', '📊', t('dt_levels')) : '', W ? tile('stk-tr-new', '🔁', t('dt_tr')) : '', W ? tile('ls-new', '🗑', t('dt_loss')) : '', cs.includes(st) ? tile('qp-open', '📍', t('qp_btn')) : ''].join('') : '';   // v175：放位置
+  const b = full ? [cs.length ? tile('lv-open', '📊', t('dt_levels')) : '', W ? tile('stk-tr-new', '🔁', t('dt_tr')) : '', W ? tile('ls-new', '🗑', t('dt_loss')) : '', cs.includes(st) ? tile('qp-open', '📍', t('qp_btn')) : '', rcpStores().length ? tile('rcp-home', '📖', t('dt_rcp')) : ''].join('') : '';   // v220：配方   // v175：放位置
   const c = full && admin ? tile('drk-menu', '🍷', t('dt_menu')) + tile('inv-drinks', '📈', t('dt_sales'), todo || '') + (state.viewAs ? '' : tile('drk-week', '📝', t('dt_week'), wkUnread().length || '')) : '';   // v187
   return `${full ? '' : `<div class="tiles-h">${esc(t('dt_h'))} · ${esc(st)}</div>`}${a ? `<div class="tiles">${a}</div>` : ''}${b ? `<div class="tiles-h">${esc(t('dt_other_h'))}</div><div class="tiles">${b}</div>` : ''}${c ? `<div class="tiles-h">${esc(t('dt_boss_h'))}</div><div class="tiles">${c}</div>` : ''}`;
 }
@@ -9166,13 +9183,13 @@ function rcpOpen(m, from){
   invGo('recipe');
 }
 // 还没配的商品：按名字猜（名字里有哪件饮料的词；Glas / 150 ml = 170 ml，shot / 50 ml = 60 ml，其余 1 个）
-function rcpNew(article, store, from){
-  const S = invS(), D = S.drinks || {}, a = String(article || '').toLowerCase(); S.backY = window.scrollY;
+function rcpNew(article, store, from, list, grp){   // v220：list = 配方页的饮料清单；grp = Warengruppe（菜不猜、默认不在酒水单上）
+  const S = invS(), D = S.drinks || {}, a = String(article || '').toLowerCase(), food = grp != null && !rcpDrinkGrp(grp); S.backY = window.scrollY;
   let best = null, bs = 0;
-  (D.drinks || []).forEach(x => { const w = String(x.name_de || '').toLowerCase().split(/[^a-z0-9äöüßàèéìòùâêîôûç’']+/).filter(v => v.length >= 3 && !/^\d/.test(v));
+  if (!food) (list || D.drinks || []).forEach(x => { const w = String(x.name_de || '').toLowerCase().split(/[^a-z0-9äöüßàèéìòùâêîôûç’']+/).filter(v => v.length >= 3 && !/^\d/.test(v));
     const sc = w.filter(v => a.includes(v)).length; if (sc > bs){ bs = sc; best = x; } });
   const glass = /glas|150\s*ml/i.test(article), shot = !glass && /shot|50\s*ml/i.test(article), byMl = !!best && best.content_unit === 'ml' && (glass || shot);
-  S.rcp = { article, store: store || '', id: null, price: '', on_menu: true, from: from || 'drinks', guess: !!best,
+  S.rcp = { article, store: store || '', id: null, rstore: null, price: '', on_menu: !food, from: from || 'drinks', k: from === 'recipes', guess: !!best, grp: grp || null,
             lines: [best ? { item_id: best.id, qty: byMl ? (shot ? '60' : '170') : '1', unit: byMl ? 'ml' : 'unit' } : { item_id: '', qty: '1', unit: 'unit' }] };
   invGo('recipe');
 }
@@ -9184,8 +9201,13 @@ function rcpKeep(){
 // v185：门店是三个按钮；饮料点一下开「选饮料」窗口（能搜索，名字像这个收银商品的排最前）；每行三个快捷按钮「整瓶 / 一杯 170 ml / shot 60 ml」；
 // 没填每瓶多少的饮料当场填（存进这件饮料，之后才能按 ml 扣）
 function renderInvRecipe(){
-  const S = invS(), R = S.rcp, D = S.drinks; if (!R || !D){ S.view = 'drinks'; return viewInvDrinks(); }
-  const drinks = D.drinks || [];
+  const S = invS(), R = S.rcp, D = S.drinks, H = S.rh;
+  if (R && R.k && !H){ S.view = 'recipes'; return viewInvRcp(); }   // v220：配方页来的
+  if (!R || (!R.k && !D)){ S.view = 'drinks'; return viewInvDrinks(); }
+  const drinks = (R.k ? H.drinks : D.drinks) || [], boss = R.k ? !!H.boss : true;
+  const sts = R.k ? (H.both ? [''] : []).concat(STORES.filter(x => (H.stores || []).includes(x))) : [''].concat(STORES);
+  if (!sts.includes(R.store)) R.store = sts.includes(H && H.store) ? H.store : sts[0];
+  const canEnd = !!R.id && (!R.k || (R.rstore ? (H.stores || []).includes(R.rstore) : !!H.both));
   const line = (l, i) => { const x = drinks.find(d => d.id === l.item_id);
     if (!x) l.item_id = '';   // 这件饮料已经不在清单上（不再盘点、停用、合并）：当作没选，保存时不会把看不见的饮料存回去（和以前的下拉框一样）
     const units = ['unit'].concat(x && x.content_unit ? [x.content_unit] : []); if (!units.includes(l.unit)) l.unit = 'unit';
@@ -9199,14 +9221,16 @@ function renderInvRecipe(){
         <div class="row" style="gap:8px;align-items:center;margin-top:4px"><input class="input" data-rcp="cq" data-i="${i}" value="${esc(l.cq || '')}" inputmode="decimal" placeholder="750" aria-label="${esc(t('drk_rc_cq'))}" style="flex:0 0 100px"><span style="flex:none">ml</span><button class="btn ghost" data-act="drk-rc-cq" data-i="${i}" style="height:48px;font-size:15px">${esc(t('drk_rc_cq_save'))}</button></div>` : ''}
       ${R.lines.length > 1 ? `<button class="link danger" data-act="drk-rc-del" data-i="${i}" style="margin-top:6px">${esc(t('drk_rc_del'))}</button>` : ''}</div>`; };
   $('#main').innerHTML = `<button class="link" data-act="drk-rc-cancel" style="margin:2px 0 6px">${esc(t('inv_cancel'))}</button><h2 style="margin-top:4px">${esc(t('drk_rc_h', { a: R.article }))}</h2>
-    <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('drk_rc_hint'))}<br>${esc(t('drk_rc_store_hint'))}</div></details>
+    <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('drk_rc_hint'))}<br>${esc(t('drk_rc_store_hint'))}${boss ? '' : '<br>' + esc(t('rcp_k_hint'))}</div></details>
+    ${rcpCombo(R.grp) ? `<div class="small" style="color:var(--copper);margin-bottom:8px">⚠ ${esc(t('rcp_combo'))}</div>` : ''}
+    ${R.id && !R.rstore && R.k && R.store ? `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('rcp_shared_note', { s: R.store }))}</div>` : ''}
     ${R.guess ? `<div class="small" style="color:var(--copper);margin-bottom:8px">${esc(t('drk_rc_guess'))}</div>` : ''}
-    <div class="field"><label>${esc(t('drk_rc_store'))}</label><div class="seg sm">${[''].concat(STORES).map(x => `<button data-act="drk-rc-store" data-store="${x}" class="${x === R.store ? 'on' : ''}">${esc(x || t('drk_rc_both'))}</button>`).join('')}</div></div>
+    <div class="field"><label>${esc(t('drk_rc_store'))}</label><div class="seg sm">${sts.map(x => `<button data-act="drk-rc-store" data-store="${x}" class="${x === R.store ? 'on' : ''}">${esc(x || t('drk_rc_both'))}</button>`).join('')}</div></div>
     <h3>${esc(t('drk_rc_lines'))}</h3>${R.lines.map(line).join('')}
     <button class="btn ghost" data-act="drk-rc-add" style="margin-bottom:12px">${esc(t('drk_rc_add'))}</button>
-    <div class="field"><label for="rcp-price">${esc(t('drk_rc_price'))}</label><input class="input" id="rcp-price" data-rcp="price" value="${esc(R.price)}" inputmode="decimal" placeholder="${R.till != null ? esc(eurInput(R.till) || '0') : '6,90'}">${R.till != null ? `<div class="small muted" style="margin-top:4px">${esc(t('drk_rc_till', { p: eur(R.till) }))}</div>` : ''}</div>
-    <label class="row" style="gap:8px;align-items:center;margin-bottom:12px"><input type="checkbox" data-rcp="on_menu"${R.on_menu ? ' checked' : ''}> ${esc(t('drk_rc_onmenu'))}</label>
-    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn" data-act="drk-rc-save">${esc(t('drk_rc_save'))}</button>${R.id ? `<button class="btn ghost danger" data-act="drk-rc-end">${esc(t('drk_rc_end'))}</button>` : ''}</div>`;
+    ${boss ? `<div class="field"><label for="rcp-price">${esc(t('drk_rc_price'))}</label><input class="input" id="rcp-price" data-rcp="price" value="${esc(R.price)}" inputmode="decimal" placeholder="${R.till != null ? esc(eurInput(R.till) || '0') : '6,90'}">${R.till != null ? `<div class="small muted" style="margin-top:4px">${esc(t('drk_rc_till', { p: eur(R.till) }))}</div>` : ''}</div>
+    <label class="row" style="gap:8px;align-items:center;margin-bottom:12px"><input type="checkbox" data-rcp="on_menu"${R.on_menu ? ' checked' : ''}> ${esc(t('drk_rc_onmenu'))}</label>` : ''}
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn" data-act="drk-rc-save">${esc(t('drk_rc_save'))}</button>${canEnd ? `<button class="btn ghost danger" data-act="drk-rc-end">${esc(t('drk_rc_end'))}</button>` : ''}</div>`;
 }
 // v206（网页 3/4，drinks-13）：查看模式下饮料页、订货页上会写数据的按钮都拿掉（数据库会挡，但不该让人点了才知道）
 const DRK_W = ['aih-r-ok', 'aih-r-one', 'aih-t-ok', 'aih-no', 'drk-grp-ign', 'drk-guess', 'drk-i-cost-use', 'drk-i-edit', 'drk-i-save', 'drk-ignore', 'drk-link', 'drk-m-fix', 'drk-m-fix-save', 'drk-off', 'drk-rc-add', 'drk-rc-cq',
@@ -9216,10 +9240,79 @@ function drkViewStrip(){
   if (!state.viewAs) return; const m = $('#main'); if (!m) return;
   m.querySelectorAll(DRK_W.map(a => `[data-act="${a}"]`).join(',') + ',[data-drksel],[data-ordlink],[data-otg]').forEach(n => { if (n.matches('input[data-otg]')) n.disabled = true; else n.remove(); });
 }
-['renderInvDrinks', 'renderInvDrink', 'renderInvDmenu', 'renderInvRecipe', 'renderInvOrders', 'renderInvOrdSi', 'renderInvOrder', 'renderInvOtargets'].forEach(k => {
+['renderInvDrinks', 'renderInvDrink', 'renderInvDmenu', 'renderInvRecipe', 'renderInvRcp', 'renderInvOrders', 'renderInvOrdSi', 'renderInvOrder', 'renderInvOtargets'].forEach(k => {
   const f = window[k]; if (typeof f !== 'function') return; window[k] = function(){ const r = f.apply(this, arguments); drkViewStrip(); return r; };
 });
 function rcpBack(){ const S = invS(), R = S.rcp || {}, to = R.from || 'drinks'; S.rcp = null; invGo(to, to === 'drink' ? R.backId : null); if (to !== 'drink') window.scrollTo(0, S.backY || 0); }   // v184：回到清单 / 酒水单上刚才的位置
+// ============ v220（数据库 v153，老板 2026-11-26「按建议做」）：「📖 配方」——库管、区域主管、老板写自己店的配方；菜也能配饮料（啤酒锅 = 2 瓶 Cass） ============
+// 谁能写哪家店（和数据库 _inv_rcp_ok 一样）：老板两家店；这家店的前场 / 后厨主管、前厅 / 后厨库管。两家店共用的配方：两家店都能写的人。
+// 不是老板：看不到进价、成本、毛利，不改卖价和「在不在酒水单上」（数据库沿用现在的）；只能补还空着的「每瓶多少」。
+function rcpStores(){ const m = state.me || {}; if (m.is_admin) return STORES.slice();
+  const K = [...(((invS().home || {}).keeper) || state.invKeep || []).map(x => x.store), ...(m.areas || []).map(a => a.store)];
+  return STORES.filter(x => K.includes(x)); }
+function rcpDrinkGrp(g){ return /getr(ä|a|ae)nk/i.test(String(g || '')); }
+function rcpCombo(g){ return /combo|container/i.test(String(g || '')); }   // 套餐那一行：里面的菜收银机上还会单独记一行，配在这里会扣两次
+function rcpDay(at){ try { return dm(new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(new Date(at))); } catch(e){ return ''; } }
+function rcpLinesText(L){ const D = (invS().rh || {}).drinks || []; return (L || []).map(l => `${drkQtyU(l.qty, l.unit, D.find(d => d.id === l.item))} ${invName(l)}`).join(' + '); }
+function rcpHead(){ return `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><div class="stabs-row"><h2>${esc(t('rcp_title'))}</h2>${storeTabsHTML()}</div>`; }
+async function viewInvRcp(){
+  const S = invS(), st = curStore();
+  if (S.rh && S.rh.store === st){ renderInvRcp(); if (Date.now() - (S.rhAt || 0) < 5000) return; }   // 刚存完、刚读过：不再读一遍（再读会重画，搜索框的键盘会收起来）
+  else { S.rh = null; S.rres = null; $('#main').innerHTML = `${rcpHead()}<div class="loading">${esc(t('loading'))}</div>`; }
+  let R; try { R = await rpc('inv_recipe_home', { ...tok(), p_store: st }); }
+  catch(e){ if (state.tab !== 'inv' || S.view !== 'recipes' || curStore() !== st) return;
+    if (S.rh && S.rh.store === st){ toast(errText(e), true); return; }   // 已经显示着这家店的：只提示
+    $('#main').innerHTML = `${rcpHead()}${/FORBIDDEN/.test(String(e && e.message)) ? `<div class="list"><div class="empty">${esc(t('rcp_no_store', { s: st }))}</div></div>` : retryHTML(errText(e))}`; return; }
+  if (state.tab !== 'inv' || S.view !== 'recipes' || curStore() !== st) return;
+  S.rh = R; S.rhAt = Date.now(); keepScroll(() => renderInvRcp());
+}
+function rcpResHTML(){
+  const S = invS(), q = String(S.rq || '').trim(), X = S.rres, W = invW(); if (!q) return '';
+  if (!X || X.q !== q) return `<div class="empty">${esc(t('inv_searching'))}</div>`;
+  if (!X.list.length) return `<div class="empty">${esc(t('rcp_q_none', { q }))}</div>`;
+  const st = x => x.has === 'recipe' || x.has === 'link' ? t('rcp_has', { x: rcpLinesText(x.lines) }) : x.has === 'ignore' ? t('rcp_has_ign') : t('rcp_has_none');
+  return `<div class="dp-list" style="max-height:none">${X.list.map((x, i) => `<${W ? `button class="qp-row" data-act="rcp-hit" data-i="${i}"` : 'div class="qp-row"'}><span class="qp-n"><strong>${esc(x.article)}</strong><small>${esc([x.grp, t('rcp_q_sold', { n: drkNum(x.n) }), st(x)].filter(Boolean).join(' · '))}</small>${rcpCombo(x.grp) ? `<small style="color:var(--copper)">⚠ ${esc(t('rcp_combo'))}</small>` : ''}</span>${W ? '<span class="muted">›</span>' : ''}</${W ? 'button' : 'div'}>`).join('')}</div>`;
+}
+let rcpTimer = null, rcpSeq = 0;
+async function rcpFind(){
+  const S = invS(), q = String(S.rq || '').trim(), st = (S.rh || {}).store, seq = ++rcpSeq, box = () => document.getElementById('rcp-res');
+  if (!q || !st){ S.rres = null; if (box()) box().innerHTML = ''; return; }
+  if (box() && !(S.rres && S.rres.q === q)) box().innerHTML = rcpResHTML();
+  let r; try { r = await rpc('inv_recipe_find', { ...tok(), p_store: st, p_q: q }); } catch(e){ if (seq === rcpSeq){ toast(errText(e), true); if (box()) box().innerHTML = ''; } return; }
+  if (seq !== rcpSeq || String(S.rq || '').trim() !== q || (S.rh || {}).store !== st) return;
+  S.rres = { q, st, list: r || [] }; if (state.tab === 'inv' && S.view === 'recipes' && box()) box().innerHTML = rcpResHTML();
+}
+function renderInvRcp(){
+  const S = invS(), H = S.rh; if (!H) return; const W = invW();
+  const all = (H.recipes || []).map((m, i) => ({ ...m, i })), sold = m => +m.sold30 > 0, food = m => !!m.grp && !rcpDrinkGrp(m.grp), un = H.unlinked || [];
+  const dish = all.filter(m => sold(m) && food(m)), drink = all.filter(m => sold(m) && !food(m)), idle = all.filter(m => !sold(m));   // 30 天没卖的收起来
+  const tag = m => m.recipe ? (m.rstore ? t('rcp_only', { s: m.rstore }) : t('drk_m_shared')) : t('rcp_link');
+  const row = m => `<div class="item"${W ? ` data-act="rcp-row" data-i="${m.i}" style="cursor:pointer"` : ''}><div class="top"><div style="min-width:0"><strong>${esc(m.article)}</strong>
+      <div class="small">${esc(rcpLinesText(m.lines))}</div>
+      <div class="meta" style="margin-top:3px">${esc([tag(m), +m.sold30 ? t('drk_m_sold', { n: drkNum(m.sold30) }) : t('rcp_sold0'), m.by && m.at ? t('rcp_by', { n: m.by, d: rcpDay(m.at) }) : ''].filter(Boolean).join(' · '))}</div></div>${W ? '<span class="muted" style="flex:none">›</span>' : ''}</div></div>`;
+  $('#main').innerHTML = `${rcpHead()}
+    <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('rcp_hint'))}${H.boss ? '' : '<br>' + esc(t('rcp_k_hint'))}</div></details>
+    <input type="search" class="input" id="rcp-q" value="${esc(S.rq || '')}" placeholder="${esc(t('rcp_q'))}" aria-label="${esc(t('rcp_q'))}" autocomplete="off" style="margin-bottom:8px">
+    <div id="rcp-res">${rcpResHTML()}</div>
+    ${un.length ? `<h3>${esc(t('rcp_unlinked', { n: un.length }))}</h3><div class="list">${un.map((u, i) => `<div class="item"><strong>${esc(u.article)}</strong><div class="meta">${esc([u.grp, t('drk_m_sold', { n: drkNum(u.n) })].filter(Boolean).join(' · '))}</div>
+      ${W ? `<div class="rc-quick"><button class="main" data-act="rcp-new" data-i="${i}">${esc(t('rcp_new_btn'))}</button></div>` : ''}</div>`).join('')}</div>` : ''}
+    <h3>${esc(t('rcp_dishes', { n: dish.length }))}</h3>${dish.length ? `<div class="list">${dish.map(row).join('')}</div>` : `<div class="small muted" style="margin-bottom:12px">${esc(t('rcp_dishes_none'))}</div>`}
+    <h3>${esc(t('rcp_drinks', { n: drink.length }))}</h3>${drink.length ? `<div class="list">${drink.map(row).join('')}</div>` : `<div class="list"><div class="empty">${esc(t(all.length ? 'rcp_drinks_none' : 'rcp_none'))}</div></div>`}
+    ${idle.length ? `<details class="fold" data-rcw="rcpIdle"${(state.rcOpen || {}).rcpIdle ? ' open' : ''}><summary>${esc(t('rcp_idle', { n: idle.length }))}</summary><div class="inner"><div class="list">${idle.map(row).join('')}</div></div></details>` : ''}`;
+  if (String(S.rq || '').trim() && !(S.rres && S.rres.st === H.store && S.rres.q === String(S.rq).trim())) rcpFind();
+}
+// 打开一行（现在扣什么）：自己店的配方 → 存给这家店；共用的 / 按瓶配的 → 能写两家店的人默认改共用的，只管一家店的人存给自己的店
+function rcpOpenK(m){
+  const S = invS(), H = S.rh || {}; S.backY = window.scrollY;
+  S.rcp = { article: m.article, store: m.recipe && m.rstore ? m.rstore : (H.both ? '' : H.store), id: m.recipe || null, rstore: m.rstore || null,
+            price: m.price_cents != null ? eurInput(m.price_cents) || '0' : '', on_menu: m.on_menu !== false, till: m.till_cents != null ? m.till_cents : null,
+            lines: (m.lines || []).map(l => ({ item_id: l.item, qty: drkNum4(l.qty), unit: l.unit })), from: 'recipes', k: true, guess: false, grp: m.grp || null };
+  if (!S.rcp.lines.length) S.rcp.lines.push({ item_id: '', qty: '1', unit: 'unit' });
+  invGo('recipe');
+}
+function rcpNewK(article, grp){ const H = invS().rh || {}; rcpNew(article, H.both ? '' : H.store, 'recipes', H.drinks || [], grp); }
+// 存好 / 去掉以后：配方页重新读这家店（读到了再回去，回去时停在原来的位置）
+async function rcpReloadK(){ const S = invS(), st = (S.rh || {}).store; if (!st) return; const h = await soft(rpc('inv_recipe_home', { ...tok(), p_store: st }), null); if (h && (S.rh || {}).store === st){ S.rh = h; S.rhAt = Date.now(); } S.rres = null; }
 // ---------- v142：饮料库存第二步（数据库 v101 / 文件服务 tasks v24，老板 2026-11-05）：收货（拍送货单 → AI 读 → 前场主管 / 老板确认入库）、两家店之间调拨 ----------
 function stkCanWrite(){ return !state.viewAs; }
 // v206（网页 3/4）：还在这一页吗（读失败 / 读完回来时人可能已经去别的页了，别把报错写到别的页上）
@@ -17071,18 +17164,23 @@ document.addEventListener('click', async ev => {
     case 'drk-rc-open': { const m = ((invS().drinks || {}).menu || []).find(x => x.store === el.dataset.store && x.article === el.dataset.article); if (m) rcpOpen(m, 'drink'); break; }
     case 'drk-rc-new': { const u = ((invS().drinks || {}).unlinked || [])[+el.dataset.i]; if (u) rcpNew(u.article, +u.f > 0 && +u.b > 0 ? '' : +u.b > 0 ? 'Bismarck' : +u.f > 0 ? 'Flingern' : '', 'drinks'); break; }
     case 'drk-rc-cancel': rcpBack(); break;
+    case 'rcp-home': { const S = invS(); S.rq = ''; S.rres = null; invGo('recipes'); break; }   // v220：配方页
+    case 'rcp-row': { const m = ((invS().rh || {}).recipes || [])[+el.dataset.i]; if (m) rcpOpenK(m); break; }
+    case 'rcp-new': { const u = ((invS().rh || {}).unlinked || [])[+el.dataset.i]; if (u) rcpNewK(u.article, u.grp); break; }
+    case 'rcp-hit': { const S = invS(), x = ((S.rres || {}).list || [])[+el.dataset.i]; if (!x) break; const m = ((S.rh || {}).recipes || []).find(r => r.norm === x.norm); if (m) rcpOpenK(m); else rcpNewK(x.article, x.grp); break; }
     case 'drk-rc-store': { rcpKeep(); const R = invS().rcp; if (R){ R.store = el.dataset.store || ''; keepScroll(() => renderInvRecipe()); } break; }   // v185
     case 'drk-rc-q': { rcpKeep(); const R = invS().rcp, l = R && R.lines[+el.dataset.i]; if (l){ l.qty = el.dataset.q; l.unit = el.dataset.u; keepScroll(() => renderInvRecipe()); } break; }   // 整瓶 / 一杯 170 ml / shot 60 ml
     case 'drk-rc-pick': { rcpKeep(); const S = invS(), R = S.rcp, l = R && R.lines[+el.dataset.i]; if (!l) break;
-      drkPickOpen({ list: (S.drinks || {}).drinks || [], hint: R.article, note: t('drk_rc_note', { a: R.article }), cur: l.item_id || null, on: v => {
+      const PL = (R.k ? (S.rh || {}).drinks : (S.drinks || {}).drinks) || [];   // v220：配方页用不带进价的那份清单
+      drkPickOpen({ list: PL, hint: R.article, note: t('drk_rc_note', { a: R.article }), cur: l.item_id || null, on: v => {
         const R2 = invS().rcp; if (R2 !== R || !R.lines.includes(l) || state.tab !== 'inv' || invS().view !== 'recipe') return; rcpKeep();
-        if (l.item_id !== v){ l.item_id = v; l.cq = ''; const d = ((invS().drinks || {}).drinks || []).find(x => x.id === v); if (!(d && d.content_unit && l.unit === d.content_unit)){ l.unit = 'unit'; l.qty = '1'; } }   // 换了饮料：先按整瓶，要按杯点下面的按钮
+        if (l.item_id !== v){ l.item_id = v; l.cq = ''; const d = PL.find(x => x.id === v); if (!(d && d.content_unit && l.unit === d.content_unit)){ l.unit = 'unit'; l.qty = '1'; } }   // 换了饮料：先按整瓶，要按杯点下面的按钮
         keepScroll(() => renderInvRecipe()); } }); break; }
     case 'drk-rc-cq': { rcpKeep(); const S = invS(), R = S.rcp, l = R && R.lines[+el.dataset.i]; if (!l || !l.item_id) break;   // 当场填这件饮料每瓶多少 ml（存进饮料，之后这一行才能按 ml 扣）
       const v = parseFloat(String(l.cq || '').replace(',', '.')); if (!(v > 0)){ toast(t('drk_rc_cq_bad'), true); break; }
       await invLock(el, async () => {
         try { await rpc('inv_drink_save', { ...tok(), p_item: l.item_id, p_data: { content_qty: String(l.cq).trim(), content_unit: 'ml' } }); } catch(e){ toast(errText(e), true); return; }
-        const d2 = await soft(rpc('inv_drinks', tok()), null); if (d2) S.drinks = d2; l.cq = '';
+        if (R.k) await rcpReloadK(); else { const d2 = await soft(rpc('inv_drinks', tok()), null); if (d2) S.drinks = d2; } l.cq = '';   // v220
         toast(t('drk_i_saved')); if (invS().rcp === R && state.tab === 'inv' && S.view === 'recipe'){ rcpKeep(); keepScroll(() => renderInvRecipe()); } });
       break; }
     case 'drk-m-fix': { const S = invS(), m = ((S.drinks || {}).menu || [])[+el.dataset.i]; if (!m) break; const k = m.store + '|' + m.article; S.mFix = S.mFix === k ? null : k; keepScroll(() => renderInvDmenu()); break; }   // v185：酒水单上当场补进价 / 每瓶多少
@@ -17104,12 +17202,12 @@ document.addEventListener('click', async ev => {
       await invLock(el, async () => {   // v184：连点不会存两版
         try { await rpc('inv_recipe_save', { ...tok(), p_article: R.article, p_store: R.store || null, p_lines: lines, p_price_cents: pc === '' ? null : pc, p_on_menu: !!R.on_menu }); }
         catch(e){ toast(drkErr(e), true); return; }
-        const a = R.article; try { S.drinks = await rpc('inv_drinks', tok()); S.drkAt = Date.now(); } catch(e){}
+        const a = R.article; if (R.k) await rcpReloadK(); else { try { S.drinks = await rpc('inv_drinks', tok()); S.drkAt = Date.now(); } catch(e){} }   // v220：配方页来的读配方页
         toast(t('drk_rc_saved', { a })); rcpBack(); refreshInvBadge(); });
       break; }
     case 'drk-rc-end': { const S = invS(), R = S.rcp; if (!R || !R.id || !confirm(t('drk_rc_end_q', { a: R.article }))) break;
       try { await rpc('inv_recipe_end', { ...tok(), p_id: R.id }); } catch(e){ toast(errText(e), true); break; }
-      const a = R.article; try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){}
+      const a = R.article; if (R.k) await rcpReloadK(); else { try { S.drinks = await rpc('inv_drinks', tok()); } catch(e){} }   // v220
       toast(t('drk_rc_ended', { a })); rcpBack(); break; }
     case 'drk-i-edit': { const S = invS(), x = ((S.drinks || {}).drinks || []).find(d => d.id === S.id); if (!x) break;
       S.dInfo = { id: x.id, content_qty: x.content_qty != null ? drkNum4(x.content_qty) : '', content_unit: x.content_unit || 'ml', cost: x.cost_cents != null ? (x.cost_cents / 100).toFixed(2).replace('.', ',') : '', supplier: x.supplier || '' };
@@ -17599,7 +17697,8 @@ document.addEventListener('input', ev => {
   if (id && id.startsWith('mr-note-')){ (state.mrNote = state.mrNote || {})[id.slice(8)] = ev.target.value; return; }
   if (id && /^cd-r(zh|de)-/.test(id) && state.cdRec){ (state.cdRec.rdraft = state.cdRec.rdraft || {})[id] = ev.target.value; return; }
   if (id === 'inv-q'){ invS().q = ev.target.value; invMidSync(); invQueue(); }   // v91；v182
-  if (id === 'lf-q'){ lfS().q = ev.target.value; clearTimeout(lfTimer); lfTimer = setTimeout(lfLoad, 350); return; }   // v215：失物，停手 0.35 秒再搜
+  if (id === 'lf-q'){ lfS().q = ev.target.value; clearTimeout(lfTimer); lfTimer = setTimeout(lfLoad, 350); return; }
+  if (id === 'rcp-q'){ invS().rq = ev.target.value; clearTimeout(rcpTimer); rcpTimer = setTimeout(rcpFind, 300); return; }   // v220：配方页搜收银商品   // v215：失物，停手 0.35 秒再搜
   if (id === 'invs-code' && invS().sform && !invS().sform.id){ const x = ev.target, p = x.selectionStart; x.value = x.value.toUpperCase().replace(/\s/g, ''); try { x.setSelectionRange(p, p); } catch(e){} fieldErrClear(x.closest('.field')); return; }   // v215：房间代码边打边变大写
   if (id === 'ct-q'){ invS().ctQ = ev.target.value; ctRefresh(); return; }   // v179：盘点页找饮料
   if (id === 'ord-si-q'){ const O = invS().osi, b = document.getElementById('ord-si-list'); if (O && O.items && b){ O.q = ev.target.value; b.innerHTML = ordSiListHTML(O); } return; }   // v188
