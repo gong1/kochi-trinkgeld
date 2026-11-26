@@ -753,7 +753,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v220';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v221';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -764,7 +764,7 @@ zh: {
   dt_rcp:'配方', rcp_title:'📖 配方', rcp_hint:'配方 = 卖 1 个这个收银商品，库存里扣哪些饮料、扣多少。菜也可以，例如啤酒锅用 2 瓶 Cass。改了配方，这家店从上一次盘点起的「应有」会跟着变，已经盘完的结果不变。一家店有自己的配方就用自己的，没有才用两家店共用的。',
   rcp_k_hint:'卖价、成本、毛利和「在不在酒水单上」只有老板能看、能改。', rcp_q:'搜收银商品，菜也可以（例如 Biertopf）', rcp_q_none:'没找到「{q}」。只能搜这家店最近 4 个月卖过的商品，请照收银机上的名字搜一个词。', rcp_q_sold:'4 个月卖了 {n}',
   rcp_has:'现在扣：{x}', rcp_has_none:'还没配', rcp_has_ign:'标了「不管库存」', rcp_dishes:'菜和别的（{n}）', rcp_dishes_none:'还没有。在上面搜菜的名字，就能给它配饮料（例如啤酒锅用 2 瓶 Cass）。', rcp_drinks:'饮料（{n}）',
-  rcp_unlinked:'还没配的饮料（{n}）', rcp_new_btn:'配配方', rcp_only:'只 {s}', rcp_link:'按瓶配的', rcp_sold0:'30 天没卖', rcp_by:'{n} {d} 存的', rcp_none:'这家店还没有配方。', rcp_drinks_none:'最近 30 天没有卖过配了配方的饮料。', rcp_idle:'30 天没卖的（{n}）', rcp_combo:'这是套餐那一行。套餐里的菜收银机上还会单独记一行（例如「… Grundgericht」），配方请配在菜那一行，这一行不要配，不然会扣两次。',
+  rcp_unlinked:'还没配的饮料（{n}）', rcp_new_btn:'配配方', rcp_only:'只 {s}', rcp_link:'按瓶配的', rcp_sold0:'30 天没卖', rcp_by:'{n} {d} 存的', rcp_none:'这家店还没有配方。', rcp_drinks_none:'最近 30 天没有卖过配了配方的饮料。', rcp_idle:'30 天没卖的（{n}）', rcp_combo:'这是套餐那一行：每卖一个套餐算一个。套餐和套餐里的菜只配一处，两处都配会扣两次（例如啤酒锅配在「G02 …」这一行）。',
   rcp_no_store:'{s} 的配方只有这家店的库管、主管和老板能改。请点上面换一家店。', rcp_shared_note:'现在两家店共用这一个配方。你存了以后只改 {s}，另一家店照旧。',
   // v112：Bon 上的日期读错时（老板 2026-10-28：Hang 28 号的 Bon 被读成 26 号）
   bon_date_q:'Bon 上的日期读出来是 {d}，对吗？', bon_date_q_hint:'请看一眼纸上 Bon 顶部的日期（Anfangsdatum）。热敏纸上 8 和 6、3 和 8 容易读错。',
@@ -1536,7 +1536,7 @@ de: {
   dt_rcp:'Rezepte', rcp_title:'📖 Rezepte', rcp_hint:'Ein Rezept legt fest, welche Getränke beim Verkauf eines Kassenartikels vom Bestand abgezogen werden und wie viel. Auch Gerichte gehen, z. B. Bier-Hotpot mit 2 Flaschen Cass. Eine Änderung wirkt auf den Soll-Bestand dieser Filiale seit der letzten Zählung; abgeschlossene Zählungen bleiben unverändert. Hat eine Filiale ein eigenes Rezept, gilt das eigene, sonst das gemeinsame.',
   rcp_k_hint:'Verkaufspreis, Kosten, Marge und „Steht auf der Karte“ sieht und ändert nur der Chef.', rcp_q:'Kassenartikel suchen, auch Gerichte (z. B. Biertopf)', rcp_q_none:'„{q}“ nicht gefunden. Gesucht wird nur in Artikeln, die diese Filiale in den letzten 4 Monaten verkauft hat – bitte ein Wort aus dem Kassennamen eingeben.', rcp_q_sold:'4 Monate: {n}',
   rcp_has:'Zieht ab: {x}', rcp_has_none:'Noch kein Rezept', rcp_has_ign:'Als „ohne Bestand“ markiert', rcp_dishes:'Gerichte und Sonstiges ({n})', rcp_dishes_none:'Noch keine. Oben den Namen des Gerichts suchen, dann ein Getränk zuordnen (z. B. Bier-Hotpot = 2 Flaschen Cass).', rcp_drinks:'Getränke ({n})',
-  rcp_unlinked:'Getränke ohne Rezept ({n})', rcp_new_btn:'Rezept anlegen', rcp_only:'nur {s}', rcp_link:'pro Flasche zugeordnet', rcp_sold0:'30 Tage nicht verkauft', rcp_by:'gespeichert von {n} am {d}', rcp_none:'Für diese Filiale gibt es noch keine Rezepte.', rcp_drinks_none:'In den letzten 30 Tagen wurde kein Getränk mit Rezept verkauft.', rcp_idle:'In 30 Tagen nicht verkauft ({n})', rcp_combo:'Das ist die Menü-Zeile. Die Gerichte im Menü bucht die Kasse zusätzlich als eigene Zeile (z. B. „… Grundgericht“). Das Rezept bitte bei dieser Gericht-Zeile anlegen, nicht hier – sonst wird doppelt abgezogen.',
+  rcp_unlinked:'Getränke ohne Rezept ({n})', rcp_new_btn:'Rezept anlegen', rcp_only:'nur {s}', rcp_link:'pro Flasche zugeordnet', rcp_sold0:'30 Tage nicht verkauft', rcp_by:'gespeichert von {n} am {d}', rcp_none:'Für diese Filiale gibt es noch keine Rezepte.', rcp_drinks_none:'In den letzten 30 Tagen wurde kein Getränk mit Rezept verkauft.', rcp_idle:'In 30 Tagen nicht verkauft ({n})', rcp_combo:'Das ist die Menü-Zeile: jedes verkaufte Menü zählt einmal. Rezept nur an einer Stelle anlegen – beim Menü oder beim Gericht darin –, sonst wird doppelt abgezogen (z. B. Bier-Hotpot bei „G02 …“).',
   rcp_no_store:'Rezepte für {s} ändern nur Lagerverantwortliche und Leitungen dieser Filiale sowie der Chef. Bitte oben die andere Filiale wählen.', rcp_shared_note:'Dieses Rezept gilt gerade für beide Filialen. Wenn du speicherst, ändert sich nur {s}; die andere Filiale bleibt wie bisher.',
   // v112：Bon-Datum falsch gelesen
   bon_date_q:'Datum auf dem Bon gelesen als {d} – stimmt das?', bon_date_q_hint:'Bitte kurz oben auf dem Bon nachsehen (Anfangsdatum). Auf Thermopapier werden 8 und 6, 3 und 8 leicht verwechselt.',
@@ -2545,7 +2545,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=53'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=54'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -9251,7 +9251,7 @@ function rcpStores(){ const m = state.me || {}; if (m.is_admin) return STORES.sl
   const K = [...(((invS().home || {}).keeper) || state.invKeep || []).map(x => x.store), ...(m.areas || []).map(a => a.store)];
   return STORES.filter(x => K.includes(x)); }
 function rcpDrinkGrp(g){ return /getr(ä|a|ae)nk/i.test(String(g || '')); }
-function rcpCombo(g){ return /combo|container/i.test(String(g || '')); }   // 套餐那一行：里面的菜收银机上还会单独记一行，配在这里会扣两次
+function rcpCombo(g){ return /combo|container/i.test(String(g || '')); }   // 套餐那一行：套餐和里面的菜只配一处（v221：每天的销售报告里有套餐这一行，啤酒锅配在 G02）
 function rcpDay(at){ try { return dm(new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(new Date(at))); } catch(e){ return ''; } }
 function rcpLinesText(L){ const D = (invS().rh || {}).drinks || []; return (L || []).map(l => `${drkQtyU(l.qty, l.unit, D.find(d => d.id === l.item))} ${invName(l)}`).join(' + '); }
 function rcpHead(){ return `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><div class="stabs-row"><h2>${esc(t('rcp_title'))}</h2>${storeTabsHTML()}</div>`; }
