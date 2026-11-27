@@ -753,7 +753,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v222';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v223';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -1446,7 +1446,7 @@ zh: {
   ls_pending:'待确认', ls_confirm:'确认', ls_unbind:'解除', ls_unbind_full:'解除绑定', ls_none:'还没有绑定。此人第一次上传 Bon 时会自动绑定，需要你确认。', ls_none_store:'还没绑定（在这家店第一次上传 Bon 时自动绑定）', ls_unbind_q:'解除 {n} 的 Lightspeed 绑定？此人下次上传 Bon 时会重新绑定，需要你确认。', ls_unbound:'已解除绑定', ls_bind_title:'Lightspeed 员工编号绑定', lbl_wallet:'钱包',
   shortage_note:'本周你承担的差额', read_again:'换照片后请重新识别',
   view_as:'查看', viewing_as:'正在以 {n} 的视角查看（只读）', exit_view:'退出查看',
-  role_server:'服务员', ex_title:'分配（可以多给同事）', ex_hint:'觉得 Runner / 吧台今天特别辛苦，可以多给：点 ＋（1 €）或 +5（5 €），也可以点他的金额直接写多给几欧。从你自己那份扣，最多到你自己那份。厨房不能改。', ex_max:'给这一位最多只能多给 {x}（不能超过你自己那份）。', ex_type_q:'多给 {n} 几欧？（只写整欧，0 = 不多给；最多 {x}）', ex_type_bad:'请只写整欧的数字，例如 5 或 10。', ex_self:'你自己', ex_none:'你自己这份不够，不能多给。', ex_locked:'交 Bon 已超过 10 分钟，多给的金额不能再改。', ex_note:'多给：{list}（已含在上面的金额里）', ex_wk_title:'多给的小费（{n} 笔 · 合计 {x}）', ex_wk_hint:'服务员交 Bon 时自愿多给 Runner / 吧台的小费，从自己那份扣，已经算进分配里。留意有没有人经常被要求多给。', ex_wk_row:'{g} → {r}（{role}）：{b} + 多给 {x}', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
+  role_server:'服务员', ex_title:'分配（可以多给同事）', ex_type_tip:'要多给很多？点他的金额（✏️），直接写多给几欧，不用一下一下点。', ex_hint:'觉得 Runner / 吧台今天特别辛苦，可以多给：点 ＋（1 €）或 +5（5 €），也可以点他的金额直接写多给几欧。从你自己那份扣，最多到你自己那份。厨房不能改。', ex_max:'给这一位最多只能多给 {x}（不能超过你自己那份）。', ex_type_q:'多给 {n} 几欧？（只写整欧，0 = 不多给；最多 {x}）', ex_type_bad:'请只写整欧的数字，例如 5 或 10。', ex_self:'你自己', ex_none:'你自己这份不够，不能多给。', ex_locked:'交 Bon 已超过 10 分钟，多给的金额不能再改。', ex_note:'多给：{list}（已含在上面的金额里）', ex_wk_title:'多给的小费（{n} 笔 · 合计 {x}）', ex_wk_hint:'服务员交 Bon 时自愿多给 Runner / 吧台的小费，从自己那份扣，已经算进分配里。留意有没有人经常被要求多给。', ex_wk_row:'{g} → {r}（{role}）：{b} + 多给 {x}', role_kitchen:'厨房', role_runner:'Runner', role_bar:'吧台', by_staff:'按人汇总', by_store:'按门店汇总',
   week_of:'第 {w} 周', preview:'分配预览', from:'来自',
   sched_line:'按排班（{s}）：Runner {r} · 吧台 {b}', sched_auto:'已按排班自动选好，和实际不一样请直接点名字增减。', sched_empty:'排班里这个班没有排{r}，请自己选；确实没有就点「{none}」。', and_word:'和',
   miss_banner:'你有 {n} 个班还没交 Bon：{list}。请尽快拍照交上；如果那天没有上班，请告诉排班员把班删掉。', miss_go:'去交 Bon',
@@ -2218,7 +2218,7 @@ de: {
   ls_pending:'unbestätigt', ls_confirm:'Bestätigen', ls_unbind:'Lösen', ls_unbind_full:'Verknüpfung lösen', ls_none:'Noch nicht verknüpft. Wird beim ersten Bon-Upload automatisch verknüpft und muss bestätigt werden.', ls_none_store:'Noch nicht verknüpft (beim ersten Bon-Upload in diesem Restaurant)', ls_unbind_q:'Lightspeed-Verknüpfung von {n} lösen? Beim nächsten Bon-Upload wird neu verknüpft und muss bestätigt werden.', ls_unbound:'Verknüpfung gelöst', ls_bind_title:'Lightspeed-Mitarbeiternummer', lbl_wallet:'Portemonnaie',
   shortage_note:'Von dir getragene Fehlbeträge diese Woche', read_again:'Neue Fotos bitte erneut auslesen',
   view_as:'Ansehen', viewing_as:'Ansicht als {n} (nur lesen)', exit_view:'Ansicht beenden',
-  role_server:'Service', ex_title:'Verteilung (du kannst mehr geben)', ex_hint:'War Runner / Bar heute besonders fleißig? Du kannst mehr geben: ＋ (1 €) oder +5 (5 €) tippen, oder auf den Betrag tippen und direkt eingeben, wie viel Euro mehr. Wird von deinem Anteil abgezogen, höchstens bis zu deinem Anteil. Küche nicht änderbar.', ex_max:'Dieser Person kannst du höchstens {x} mehr geben (nicht mehr als dein eigener Anteil).', ex_type_q:'Wie viel Euro mehr für {n}? (nur ganze Euro, 0 = nichts extra; höchstens {x})', ex_type_bad:'Bitte nur ganze Euro als Zahl eingeben, z. B. 5 oder 10.', ex_self:'Du selbst', ex_none:'Dein Anteil reicht nicht, um mehr zu geben.', ex_locked:'Mehr als 10 Minuten seit dem Einreichen – der Zusatzbetrag ist nicht mehr änderbar.', ex_note:'Mehr gegeben: {list} (in den Beträgen oben enthalten)', ex_wk_title:'Freiwillig mehr gegeben ({n} · gesamt {x})', ex_wk_hint:'Service hat Runner / Bar beim Einreichen freiwillig mehr gegeben, vom eigenen Anteil abgezogen und schon in der Verteilung enthalten. Achte darauf, ob jemand oft dazu gedrängt wird.', ex_wk_row:'{g} → {r} ({role}): {b} + {x} mehr', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
+  role_server:'Service', ex_title:'Verteilung (du kannst mehr geben)', ex_type_tip:'Viel mehr geben? Tippe auf den Betrag (✏️) und gib direkt die Euro ein – kein einzelnes Tippen nötig.', ex_hint:'War Runner / Bar heute besonders fleißig? Du kannst mehr geben: ＋ (1 €) oder +5 (5 €) tippen, oder auf den Betrag tippen und direkt eingeben, wie viel Euro mehr. Wird von deinem Anteil abgezogen, höchstens bis zu deinem Anteil. Küche nicht änderbar.', ex_max:'Dieser Person kannst du höchstens {x} mehr geben (nicht mehr als dein eigener Anteil).', ex_type_q:'Wie viel Euro mehr für {n}? (nur ganze Euro, 0 = nichts extra; höchstens {x})', ex_type_bad:'Bitte nur ganze Euro als Zahl eingeben, z. B. 5 oder 10.', ex_self:'Du selbst', ex_none:'Dein Anteil reicht nicht, um mehr zu geben.', ex_locked:'Mehr als 10 Minuten seit dem Einreichen – der Zusatzbetrag ist nicht mehr änderbar.', ex_note:'Mehr gegeben: {list} (in den Beträgen oben enthalten)', ex_wk_title:'Freiwillig mehr gegeben ({n} · gesamt {x})', ex_wk_hint:'Service hat Runner / Bar beim Einreichen freiwillig mehr gegeben, vom eigenen Anteil abgezogen und schon in der Verteilung enthalten. Achte darauf, ob jemand oft dazu gedrängt wird.', ex_wk_row:'{g} → {r} ({role}): {b} + {x} mehr', role_kitchen:'Küche', role_runner:'Runner', role_bar:'Bar', by_staff:'Nach Person', by_store:'Nach Filiale',
   week_of:'KW {w}', preview:'Aufteilung', from:'von',
   sched_line:'Laut Dienstplan ({s}): Runner {r} · Bar {b}', sched_auto:'Automatisch nach Dienstplan ausgewählt. Wenn es anders war, einfach Namen an- oder abwählen.', sched_empty:'Für diese Schicht ist im Dienstplan niemand als {r} eingeplant – bitte selbst wählen; wenn wirklich niemand da war, „{none}“ tippen.', and_word:' und ',
   miss_banner:'Dein Bon fehlt noch ({n}): {list}. Bitte so bald wie möglich einreichen. Falls du an dem Tag nicht gearbeitet hast, sag bitte der Dienstplanung Bescheid, damit die Schicht gelöscht wird.', miss_go:'Bon eintragen',
@@ -2545,7 +2545,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=55'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=56'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -10522,7 +10522,7 @@ function extrasHTML(x, runners, bars, short){
   state.xcalc = { cap, self: x.s, helpers };
   const free = Math.floor((cap - sum) / 100) * 100;
   const rows = helpers.map(h => `<div class="xrow"><div class="li"><span>${esc(staffName(h.id))} <span class="muted small">${esc(t(h.role))}</span></span>
-      <span class="num${edit && cap >= 100 ? ' xa-tap' : ''}" id="xa-${h.id}"${edit && cap >= 100 ? ` data-act="ex-type" data-xid="${h.id}"` : ''}>${eur(h.base + (ex[h.id] || 0))}${ex[h.id] ? ` <small class="pos">+${eur(ex[h.id])}</small>` : ''}</span></div>
+      <span class="num${edit && cap >= 100 ? ' xa-tap' : ''}" id="xa-${h.id}"${edit && cap >= 100 ? ` data-act="ex-type" data-xid="${h.id}"` : ''}>${eur(h.base + (ex[h.id] || 0))}${ex[h.id] ? ` <small class="pos">+${eur(ex[h.id])}</small>` : ''}${edit && cap >= 100 ? ' <small aria-hidden="true">✏️</small>' : ''}</span></div>
       ${edit && cap >= 100 ? `<div class="xctl"><button type="button" class="xb" data-act="ex-step" data-xid="${h.id}" data-d="-100" aria-label="−1 €">−</button>
         <input type="range" class="xr" data-xid="${h.id}" min="0" max="${(ex[h.id] || 0) + free}" step="100" value="${ex[h.id] || 0}" aria-label="${esc(staffName(h.id))}">
         <button type="button" class="xb" data-act="ex-step" data-xid="${h.id}" data-d="100" aria-label="+1 €">＋</button>
@@ -10538,7 +10538,7 @@ function extrasSlide(el){
   ex[el.dataset.xid] = +el.value;
   const sum = c.helpers.reduce((a, h) => a + (ex[h.id] || 0), 0), free = Math.floor((c.cap - sum) / 100) * 100;
   c.helpers.forEach(h => {
-    const a = $('#xa-' + h.id); if (a) a.innerHTML = eur(h.base + (ex[h.id] || 0)) + (ex[h.id] ? ` <small class="pos">+${eur(ex[h.id])}</small>` : '');
+    const a = $('#xa-' + h.id); if (a) a.innerHTML = eur(h.base + (ex[h.id] || 0)) + (ex[h.id] ? ` <small class="pos">+${eur(ex[h.id])}</small>` : '') + (a.dataset.act ? ' <small aria-hidden="true">✏️</small>' : '');   // v223：可以点的金额带 ✏️
     const r = document.querySelector(`.xr[data-xid="${h.id}"]`); if (r && r !== el) r.max = (ex[h.id] || 0) + free;
   });
   el.max = (ex[el.dataset.xid] || 0) + free;
@@ -14737,6 +14737,8 @@ document.addEventListener('click', async ev => {
       const r = document.querySelector(`.xr[data-xid="${el.dataset.xid}"]`); if (!r) break;
       const want = +r.value + +el.dataset.d;
       if (want > +r.max) toast(t('ex_max', { x: eur(+r.max) }));   // v200：到上限了说一声（以前点了没反应）
+      else { const k = state.xtap || (state.xtap = {}); k[el.dataset.xid] = (k[el.dataset.xid] || 0) + 1;
+        if (k[el.dataset.xid] === 3 && !k.tipShown){ k.tipShown = 1; toast(t('ex_type_tip')); } }   // v223：一个人连点 3 下，提示一次「点金额直接写」（体检：一欧一欧点 13–20 次）
       r.value = Math.max(0, Math.min(+r.max, want)); extrasSlide(r); break;
     }
     case 'ex-type': {   // v200（AI 建议 2026-11-11：员工一欧一欧点，一分钟点 19 次）：点金额直接写多给几欧（整欧，上限照旧）
