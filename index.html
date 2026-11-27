@@ -753,7 +753,7 @@ const VAPID_PUBLIC = 'BCx4byt_jRKcXPpXOufVaTxwPdCTtz0p7F_gI3gKw-DdVB0V2MP3FUnfUl
 const SUPABASE_KEY = 'sb_publishable_mpZXW-LZt_EdqGqbQfB82w_ySrUvCaC';
 const STORES = ['Flingern', 'Bismarck'];
 const EXP_DUE_CENTS = 10000;   // v203：垫付累计欠款满 100 € 提醒老板结算、员工报账（老板 2026-11-20；v67–v202 是 20 €）
-const WEB_VER = 'v223';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
+const WEB_VER = 'v224';   // v163：操作记录里写的网页版本（每次上线改成新的版本号）
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
 
@@ -2491,6 +2491,9 @@ Object.assign(I18N.de, {
   act_mod_inv: 'Lager / Getränke', act_mod_task: 'Aufgaben', act_mod_doc: 'Nachweise', act_mod_expense: 'Auslagen', act_mod_sop: 'SOP', act_mod_onb: 'Einarbeitung',
   act_mod_recon: 'Abgleich', act_mod_lock: 'Abschließen', act_mod_library: 'Unterlagen', act_mod_pin: 'PIN', act_mod_sched: 'Dienstplan', act_mod_oil: 'Altfett', act_mod_miss: 'Nicht erledigt'
 });
+// v224：收货进 App（数 → 对 → 放好）、送货、新供应商
+Object.assign(I18N.zh, { rcx_next:"下一步：数 →", rcx_back:"← 送货单", rcx_title:"收货 · {s}", rcx_s_photo:"拍单", rcx_s_count:"数", rcx_s_check:"对", rcx_s_put:"放好", rcx_count_hint:"一行一行数：数到几个就填几个（零散的瓶数填在「+ 瓶」里），一个都没到填 0。和单上一样就点「= 单上」。单上没有、却送来了的，点最下面「＋ 单上没有的东西」。", rcx_on_doc:"单上：{x}", rcx_not_on_doc:"单上没有（多送来的）", rcx_btl_paren:"（{n} 瓶）", rcx_btl:"瓶", rcx_same:"= 单上", rcx_count_aria:"数到几个", rcx_loose_aria:"另外几瓶", rcx_extra_tag:"单上没有", rcx_add:"＋ 单上没有的东西", rcx_counted:"已数 {n} / {m} 行", rcx_to_check:"下一步：对 →", rcx_less:"少 {x}", rcx_more:"多 {x}", rcx_diff_h:"{n} 行和送货单对不上", rcx_diff_next:"按数到的入库。收完以后 App 会告诉这家店的库管和老板，库管再找供应商（下面可以复制一段给供应商的话）。", rcx_all_ok:"{n} 行都和送货单一样 ✓", rcx_doc_cnt:"单上 {a} · 数到 {b}", rcx_extra_got:"单上没有 · 数到 {x}", rcx_order_h:"订货单（{d} 送货，{s}）：", rcx_ordered:"订了 {o} 瓶 · 到了 {g} 瓶", rcx_order_miss:"订了但没送来：{l}", rcx_claim_btn:"📋 复制给供应商的话（德文）", rcx_claim_copied:"复制好了，可以贴到邮件或 WhatsApp 里发给供应商", rcx_to_put:"下一步：放好 →", rcx_put_hint:"每样放到它的位置，放好一样点一下「放好了」。", rcx_no_place:"这件饮料在这家店还没有固定位置：放好以后写一句放在哪（库管之后给它定位置）。", rcx_no_place_other:"不进库存的东西：放好以后点一下就行。", rcx_put_ph:"放在哪（例：地下室货架 2）", rcx_place_btn:"✓ 放好了", rcx_placed:"已放好 ✓（点一下取消）", rcx_zero:"没送来，不用放：{l}", rcx_put_n:"放好了 {n} / {m} 样", rcx_finish:"✓ 收完", rcx_finishing:"正在保存…", rcx_booked:"✓ 收完了，已经入库（{n} 瓶）。", rcx_booked_t:"收完了，已经入库", rcx_wait_t:"收完了，等库管确认", rcx_wait:"{n} 收完了（{t}），等库管确认入库。已经告诉库管和老板。", rcx_wait_sup:"{n} 收完了（{t}），等你确认入库：看看下面对不上的，没问题就点「确认入库」（按数到的算）。", rcx_why_edited:"有的行「单上的数」改过或是自己加的（和 AI 从照片上读的不一样），请库管看一眼送货单照片。", dlv_done:"✓ 已经收好了（单子另外登记了）", dlv_done_t:"这批货已经收好了？", dlv_done_hint:"货已经数过、放好，送货单另外登记了（或者没有单子）。收货任务打勾，记在你名下。", dlv_done_ph:"一句话（选填，例：单子在 Anh 那张里）", dlv_done_go:"对，已经收好了", dlv_done_ok:"记下了：收好了", dlv_task_how_long:"这个任务不用打勾：点「📦 去收货」，拍送货单、一行行数、对一对、放好，点「收完」——收完以后自己打勾。货今天没来就点「今天没送来」。", rcx_why_unmapped:"有的行还没配饮料。", rcx_why_dup:"这张单好像已经登记过。", rcx_why_empty:"没有要进库存的东西。", rcx_fin_by:"{n} 收的（{t}）", rcx_confirm:"✓ 确认入库（按数到的）", rcx_reopen:"改数 / 放好", rcx_no_lines:"送货单上还没有行：先让 AI 读，或者自己加一行。", rcx_save_err:"有改动没存上{e}：网络好了会再存，收完前也会再存一次。", rcx_l_cnt:"数到 {x}", rcx_l_placed:"放好了", dlv_h:"📦 送货 · {s}", dlv_unknown:"不知道哪家", dlv_st_rc:"✓ {n} 收好了 · {t}", dlv_st_none:"没送来（{n} 说的）", dlv_st_here:"货到了：{n} · {t}", dlv_st_plan:"今天是送货日：货到了就收（数 → 对送货单 → 拍进 App → 放好）", dlv_st_late:"送货日过了还没收", dlv_tag_rc:"收好了", dlv_tag_none:"没送来", dlv_tag_here:"货到了", dlv_tag_open:"等收货", dlv_go:"📦 去收货", dlv_task_go:"📦 去收货 →", dlv_task_how:"📦 收完送货单自动打勾", dlv_skip:"今天没送来", dlv_skip_t:"{s} 今天没送来？", dlv_skip_hint:"收货任务会取消（不算漏做），App 告诉库管和老板。货后来又到了，点「📦 货到了」就行。", dlv_skip_ph:"一句话（选填，例：司机说改到下周）", dlv_skip_go:"对，今天没送来", dlv_skipped:"记下了：今天没送来", dlv_gone:"这次送货找不到了，请刷新一下。", dlv_here_btn:"📦 货到了？点这里告诉收货的人", dlv_here_h:"📦 货到了", dlv_here_hint:"这家店今天收货的人（吧台；没排吧台就是服务员和 Runner）会收到推送和一个收货任务：数 → 对送货单 → 拍进 App → 放好。", dlv_here_who:"哪家送的", dlv_here_other:"别的 / 不知道", dlv_here_name_ph:"名字（选填）", dlv_here_note:"货放在哪", dlv_here_note_ph:"例：办公室、门口", dlv_here_send:"告诉收货的人", dlv_here_pick:"请选哪家送的（不知道就点「别的 / 不知道」）。", dlv_here_sent:"已经告诉收货的人：{s} 的货到了", dlv_todo_here:"{s} · {p}（{d}）的货到了，还没收", dlv_todo_late:"{s} · {p}（{d}）送货日过了，还没收", sup_add_btn:"＋ 新供应商", sup_add_t:"新供应商的名字", sup_add_hint:"例：Ueno Gourmet。加好以后在它的卡片里「改订货日、送货日」设送货日：送货日那天 App 自动给水吧一个收货任务。", sup_add_go:"加上", sup_added:"加好了：{s}", ord_dd_none:"不固定", ord_no_items:"{p} 在 App 里还没有订货的商品：现在只用来收货和送货日提醒。", act_inv_receipt_finish:"饮料：收完送货单", act_inv_delivery_report:"饮料：货到了", act_inv_delivery_skip:"饮料：今天没送来", act_inv_supplier_add:"订货：新供应商" });
+Object.assign(I18N.de, { rcx_next:"Weiter: zählen →", rcx_back:"← Lieferschein", rcx_title:"Wareneingang · {s}", rcx_s_photo:"Foto", rcx_s_count:"Zählen", rcx_s_check:"Abgleichen", rcx_s_put:"Einräumen", rcx_count_hint:"Zeile für Zeile zählen: so viele eintragen, wie da sind (einzelne Flaschen bei „+ Fl.“), nichts gekommen = 0. Gleich wie auf dem Schein → „= Schein“. Was gekommen ist, aber nicht auf dem Schein steht: unten „＋ Nicht auf dem Schein“.", rcx_on_doc:"Schein: {x}", rcx_not_on_doc:"Nicht auf dem Schein (zusätzlich geliefert)", rcx_btl_paren:"({n} Fl.)", rcx_btl:"Fl.", rcx_same:"= Schein", rcx_count_aria:"Gezählt", rcx_loose_aria:"Einzelne Flaschen", rcx_extra_tag:"nicht auf dem Schein", rcx_add:"＋ Nicht auf dem Schein", rcx_counted:"{n} / {m} Zeilen gezählt", rcx_to_check:"Weiter: abgleichen →", rcx_less:"{x} zu wenig", rcx_more:"{x} zu viel", rcx_diff_h:"{n} Zeile(n) stimmen nicht mit dem Lieferschein", rcx_diff_next:"Eingebucht wird, was gezählt wurde. Nach „Fertig“ informiert die App die Lagerverantwortlichen und den Chef; die klären es mit dem Lieferanten (unten kannst du einen Text für den Lieferanten kopieren).", rcx_all_ok:"Alle {n} Zeilen wie auf dem Lieferschein ✓", rcx_doc_cnt:"Schein {a} · gezählt {b}", rcx_extra_got:"Nicht auf dem Schein · gezählt {x}", rcx_order_h:"Bestellung (Lieferung {d}, {s}):", rcx_ordered:"Bestellt {o} Fl. · gekommen {g} Fl.", rcx_order_miss:"Bestellt, aber nicht gekommen: {l}", rcx_claim_btn:"📋 Text für den Lieferanten kopieren (Deutsch)", rcx_claim_copied:"Kopiert – in E-Mail oder WhatsApp an den Lieferanten einfügen", rcx_to_put:"Weiter: einräumen →", rcx_put_hint:"Alles an seinen Platz räumen und bei jedem Artikel „Eingeräumt“ tippen.", rcx_no_place:"Dieses Getränk hat in diesem Restaurant noch keinen festen Platz: nach dem Einräumen kurz schreiben, wo es steht (die Lagerverantwortlichen legen den Platz später fest).", rcx_no_place_other:"Nicht im Bestand: nach dem Einräumen einfach antippen.", rcx_put_ph:"Wo? (z. B. Keller Regal 2)", rcx_place_btn:"✓ Eingeräumt", rcx_placed:"Eingeräumt ✓ (tippen = zurück)", rcx_zero:"Nicht gekommen, nichts einzuräumen: {l}", rcx_put_n:"{n} / {m} eingeräumt", rcx_finish:"✓ Fertig", rcx_finishing:"Wird gespeichert …", rcx_booked:"✓ Fertig und eingebucht ({n} Fl.).", rcx_booked_t:"Fertig, eingebucht", rcx_wait_t:"Fertig – wartet auf die Lagerverantwortlichen", rcx_wait:"{n} hat die Ware angenommen ({t}). Die Lagerverantwortlichen buchen sie ein – sie und der Chef sind informiert.", rcx_wait_sup:"{n} hat die Ware angenommen ({t}) – bitte einbuchen: Abweichungen unten prüfen, dann „Einbuchen“ (nach Zählung).", rcx_why_edited:"Bei manchen Zeilen wurde die Menge „laut Schein“ geändert oder selbst hinzugefügt (anders als von der KI vom Foto gelesen) – bitte das Foto des Lieferscheins prüfen.", dlv_done:"✓ Schon angenommen (Schein separat erfasst)", dlv_done_t:"Ware schon angenommen?", dlv_done_hint:"Die Ware ist gezählt und eingeräumt, der Lieferschein ist separat erfasst (oder es gibt keinen). Die Annahme-Aufgabe wird auf deinen Namen abgehakt.", dlv_done_ph:"Kurz (optional, z. B. Schein bei Anh)", dlv_done_go:"Ja, schon angenommen", dlv_done_ok:"Notiert: angenommen", dlv_task_how_long:"Diese Aufgabe nicht abhaken: „📦 Ware annehmen“ tippen, Lieferschein fotografieren, Zeile für Zeile zählen, abgleichen, einräumen, „Fertig“ – dann wird sie automatisch abgehakt. Nichts gekommen → „Heute nicht geliefert“.", rcx_why_unmapped:"Manche Zeilen haben noch kein Getränk.", rcx_why_dup:"Dieser Lieferschein scheint schon erfasst zu sein.", rcx_why_empty:"Nichts für den Bestand.", rcx_fin_by:"Angenommen von {n} ({t})", rcx_confirm:"✓ Einbuchen (nach Zählung)", rcx_reopen:"Zählen / Einräumen ändern", rcx_no_lines:"Noch keine Zeilen: zuerst die KI lesen lassen oder eine Zeile hinzufügen.", rcx_save_err:"Eine Änderung ist noch nicht gespeichert{e}: wird mit Netz erneut gespeichert, spätestens vor „Fertig“.", rcx_l_cnt:"gezählt {x}", rcx_l_placed:"eingeräumt", dlv_h:"📦 Lieferungen · {s}", dlv_unknown:"Lieferant unbekannt", dlv_st_rc:"✓ angenommen von {n} · {t}", dlv_st_none:"Nicht geliefert (laut {n})", dlv_st_here:"Ware ist da: {n} · {t}", dlv_st_plan:"Heute ist Liefertag: Ware annehmen, sobald sie da ist (zählen → Schein abgleichen → in die App → einräumen)", dlv_st_late:"Liefertag vorbei, noch nicht angenommen", dlv_tag_rc:"angenommen", dlv_tag_none:"nicht geliefert", dlv_tag_here:"Ware ist da", dlv_tag_open:"offen", dlv_go:"📦 Ware annehmen", dlv_task_go:"📦 Ware annehmen →", dlv_task_how:"📦 wird beim „Fertig“ automatisch abgehakt", dlv_skip:"Heute nicht geliefert", dlv_skip_t:"{s} heute nicht geliefert?", dlv_skip_hint:"Die Annahme-Aufgabe wird storniert (zählt nicht als nicht erledigt); die App informiert die Lagerverantwortlichen und den Chef. Kommt die Ware später doch, einfach „📦 Ware ist da“.", dlv_skip_ph:"Kurz warum (optional, z. B. Fahrer sagt nächste Woche)", dlv_skip_go:"Ja, heute nicht geliefert", dlv_skipped:"Notiert: heute nicht geliefert", dlv_gone:"Diese Lieferung ist nicht mehr da – bitte neu laden.", dlv_here_btn:"📦 Ware ist da? Hier Bescheid geben", dlv_here_h:"📦 Ware ist da", dlv_here_hint:"Wer heute in diesem Restaurant annimmt (Bar; ohne Bar: Service und Runner), bekommt eine Push-Nachricht und eine Aufgabe: zählen → Schein abgleichen → in die App → einräumen.", dlv_here_who:"Von wem?", dlv_here_other:"Andere / weiß nicht", dlv_here_name_ph:"Name (optional)", dlv_here_note:"Wo steht die Ware?", dlv_here_note_ph:"z. B. Büro, Eingang", dlv_here_send:"Bescheid geben", dlv_here_pick:"Bitte wählen, von wem (unbekannt → „Andere / weiß nicht“).", dlv_here_sent:"Bescheid gegeben: Ware von {s} ist da", dlv_todo_here:"{s} · {p} ({d}): Ware ist da, noch nicht angenommen", dlv_todo_late:"{s} · {p} ({d}): Liefertag vorbei, noch nicht angenommen", sup_add_btn:"＋ Neuer Lieferant", sup_add_t:"Name des neuen Lieferanten", sup_add_hint:"z. B. Ueno Gourmet. Danach in seiner Karte unter „Bestell- und Liefertag ändern“ den Liefertag setzen: an dem Tag bekommt die Bar automatisch eine Annahme-Aufgabe.", sup_add_go:"Hinzufügen", sup_added:"Hinzugefügt: {s}", ord_dd_none:"nicht fest", ord_no_items:"{p} hat in der App noch keine Bestellartikel – nur für Wareneingang und Liefertag-Erinnerung.", act_inv_receipt_finish:"Getränke: Wareneingang fertig", act_inv_delivery_report:"Getränke: Ware ist da", act_inv_delivery_skip:"Getränke: heute nicht geliefert", act_inv_supplier_add:"Bestellung: neuer Lieferant" });
 Object.assign(I18N.zh, { act_feedback_ask:"反馈：追问员工", act_feedback_reply:"反馈：员工回复", act_oil_date:"收废油：定日子", act_oil_date_change:"收废油：改日子", act_recon_report_add:"录入报告", act_recon_report_fix:"修正报告", act_task_add:"新任务", act_task_edit:"改任务", act_task_disable:"停用任务", act_task_enable:"启用任务", act_task_named_add:"交代一件事", act_task_named_edit:"改交代的事", act_task_once_add:"新一次性任务", act_task_once_edit:"改一次性任务", act_announce:"发布公告", act_area_set:"设区域主管", act_ask_send:"问几个人", act_audit_done:"抽查做完", act_audit_start:"派抽查", act_bon_cover_confirm:"确认一张 Bon 管两个班", act_bon_entry_proxy:"替员工交 Bon", act_bon_report_id:"改 Bon 报告编号", act_doc_decide:"证件审核", act_doc_exempt:"证件免交", act_doc_mark:"替员工登记证件", act_doc_reset:"证件重来", act_doc_start:"开始收证件", act_doc_submit:"交证件", act_expense_add:"记垫付", act_expense_cancel:"撤回垫付", act_expense_pay:"垫付付款", act_expense_void:"作废垫付", act_feedback_answer:"回复反馈", act_inv_area_save:"物品：存储区", act_inv_category_save:"物品：类别", act_inv_count_cancel:"饮料：放弃盘点", act_inv_count_finish:"饮料：盘点完成", act_inv_count_start:"饮料：开始盘点", act_inv_drink_off:"饮料：不管库存", act_inv_drink_save:"饮料：存饮料", act_inv_drink_suggest:"饮料：AI 配对建议", act_inv_inbox_add:"物品：待归位登记", act_inv_inbox_handle:"物品：处理待归位", act_inv_item_active:"物品：停用 / 启用", act_inv_item_alias:"物品：加别名", act_inv_item_merge:"物品：合并", act_inv_item_save:"物品：存物品", act_inv_keeper_set:"设库管", act_inv_loss_cancel:"饮料：撤销报损", act_inv_loss_save:"饮料：报损", act_inv_miss_ignore:"物品：忽略搜不到的词", act_inv_order_boost_save:"订货：忙的时候多订", act_inv_order_cancel:"订货：撤销订货单", act_inv_order_confirm:"订货：确认订货单", act_inv_order_start:"订货：出订货建议", act_inv_place_active:"物品：储位停用 / 启用", act_inv_place_item:"物品：放进储位", act_inv_place_new:"物品：新储位", act_inv_place_save:"物品：存储位", act_inv_place_slots:"物品：储位格子", act_inv_pos_link:"饮料：连收银商品", act_inv_receipt_cancel:"饮料：撤销收货", act_inv_receipt_confirm:"饮料：确认收货", act_inv_receipt_dup_ok:"饮料：确认不是重复的送货单", act_inv_receipt_save:"饮料：存送货单", act_inv_recipe_end:"饮料：停用配方", act_inv_recipe_save:"饮料：存配方", act_inv_set_main:"物品：设主位置", act_inv_supplier_item_link:"订货：连供应商商品", act_inv_supplier_store_save:"订货：供应商设置", act_inv_targets_fill:"订货：AI 填目标库存", act_inv_traits_save:"饮料：存特点", act_inv_transfer_cancel:"饮料：撤销调拨", act_inv_transfer_save:"饮料：调拨", act_inv_unplace:"物品：从储位取下", act_inv_week_save:"饮料：每周设置", act_ksched_publish:"发布厨房排班", act_kshift_times_set:"改厨房班次时间", act_library_archive:"资料存档", act_library_create:"发布资料", act_lock_checkpoint_save:"锁门检查点", act_lock_photo:"锁门拍照", act_message_send:"发留言", act_miss_alert_done:"屡次漏做已处理", act_oil_close:"收废油结束", act_oil_start:"收废油开始", act_onb_check:"带教清单打勾", act_onb_exam:"带教考核", act_pin_expired:"初始 PIN 过期", act_pin_request:"忘记 PIN 申请", act_pin_request_dismiss:"忽略 PIN 申请", act_recon_complete:"核对完成", act_recon_note:"核对说明", act_recon_report_void:"作废报告", act_role_concentration_ok:"确认权力集中", act_shift_days_set:"改班次日子", act_shift_times_set:"改班次时间", act_sop_ai_gap_done:"SOP：AI 缺口已处理", act_sop_gap_done:"SOP：缺口已写好", act_sop_key:"SOP：设成关键", act_staff_expense:"改垫付权限", act_staff_kitchen_scheduler:"改厨房排班员权限", act_task_answer:"任务回答", act_task_assign:"任务交给…", act_task_attach:"任务附件", act_task_find:"发现没做", act_task_lead_set:"设任务负责人", act_task_miss_ack:"漏做：知道了", act_task_miss_appeal:"漏做申诉", act_task_miss_decide:"判定申诉", act_task_named_cancel:"取消交代的事", act_task_once_cancel:"取消一次性任务", act_task_result:"交回结果", act_task_sop_check:"任务按 SOP 检查", act_task_stats_ai:"任务统计 AI 点评", act_task_suggest:"AI 建议任务", act_task_suggest_dismiss:"不要 AI 建议的任务", act_tip_extra:"多给小费" });
 Object.assign(I18N.de, { act_feedback_ask:"Feedback: Rückfrage", act_feedback_reply:"Feedback: Antwort", act_oil_date:"Altfett: Termin festgelegt", act_oil_date_change:"Altfett: Termin geändert", act_recon_report_add:"Bericht erfasst", act_recon_report_fix:"Bericht korrigiert", act_task_add:"Aufgabe angelegt", act_task_edit:"Aufgabe geändert", act_task_disable:"Aufgabe deaktiviert", act_task_enable:"Aufgabe aktiviert", act_task_named_add:"Persönliche Aufgabe angelegt", act_task_named_edit:"Persönliche Aufgabe geändert", act_task_once_add:"Einmalige Aufgabe angelegt", act_task_once_edit:"Einmalige Aufgabe geändert", act_announce:"Mitteilung veröffentlicht", act_area_set:"Bereichsleitung festgelegt", act_ask_send:"Frage an Mitarbeiter gesendet", act_audit_done:"Stichprobe erledigt", act_audit_start:"Stichprobe vergeben", act_bon_cover_confirm:"Ein Bon für zwei Schichten bestätigt", act_bon_entry_proxy:"Bon für Mitarbeiter eingereicht", act_bon_report_id:"Bon-Berichtsnummer geändert", act_doc_decide:"Nachweis geprüft", act_doc_exempt:"Nachweis erlassen", act_doc_mark:"Nachweis für Mitarbeiter eingetragen", act_doc_reset:"Nachweis zurückgesetzt", act_doc_start:"Nachweis-Abfrage gestartet", act_doc_submit:"Nachweis eingereicht", act_expense_add:"Auslage erfasst", act_expense_cancel:"Auslage zurückgezogen", act_expense_pay:"Auslage ausgezahlt", act_expense_void:"Auslage gestrichen", act_feedback_answer:"Feedback beantwortet", act_inv_area_save:"Lager: Bereich gespeichert", act_inv_category_save:"Lager: Kategorie gespeichert", act_inv_count_cancel:"Getränke: Inventur abgebrochen", act_inv_count_finish:"Getränke: Inventur abgeschlossen", act_inv_count_start:"Getränke: Inventur gestartet", act_inv_drink_off:"Getränke: Bestand nicht verfolgen", act_inv_drink_save:"Getränke: Getränk gespeichert", act_inv_drink_suggest:"Getränke: KI-Zuordnung", act_inv_inbox_add:"Lager: Eingang erfasst", act_inv_inbox_handle:"Lager: Eingang bearbeitet", act_inv_item_active:"Lager: Artikel aktiv / inaktiv", act_inv_item_alias:"Lager: Suchwort ergänzt", act_inv_item_merge:"Lager: Artikel zusammengeführt", act_inv_item_save:"Lager: Artikel gespeichert", act_inv_keeper_set:"Lagerverantwortliche festgelegt", act_inv_loss_cancel:"Getränke: Verlust storniert", act_inv_loss_save:"Getränke: Verlust erfasst", act_inv_miss_ignore:"Lager: Suchwort ignoriert", act_inv_order_boost_save:"Bestellung: Mehrbedarf gespeichert", act_inv_order_cancel:"Bestellung: storniert", act_inv_order_confirm:"Bestellung: bestätigt", act_inv_order_start:"Bestellung: Vorschlag erstellt", act_inv_place_active:"Lager: Platz aktiv / inaktiv", act_inv_place_item:"Lager: Artikel eingeräumt", act_inv_place_new:"Lager: neuer Platz", act_inv_place_save:"Lager: Platz gespeichert", act_inv_place_slots:"Lager: Fächer gespeichert", act_inv_pos_link:"Getränke: Kassenartikel verknüpft", act_inv_receipt_cancel:"Getränke: Wareneingang storniert", act_inv_receipt_confirm:"Getränke: Wareneingang bestätigt", act_inv_receipt_dup_ok:"Getränke: kein doppelter Lieferschein", act_inv_receipt_save:"Getränke: Lieferschein gespeichert", act_inv_recipe_end:"Getränke: Rezept beendet", act_inv_recipe_save:"Getränke: Rezept gespeichert", act_inv_set_main:"Lager: Hauptplatz gesetzt", act_inv_supplier_item_link:"Bestellung: Lieferantenartikel verknüpft", act_inv_supplier_store_save:"Bestellung: Lieferant gespeichert", act_inv_targets_fill:"Bestellung: Zielbestand per KI", act_inv_traits_save:"Getränke: Eigenschaften gespeichert", act_inv_transfer_cancel:"Getränke: Umlagerung storniert", act_inv_transfer_save:"Getränke: Umlagerung erfasst", act_inv_unplace:"Lager: aus Platz entfernt", act_inv_week_save:"Getränke: Wochenplan gespeichert", act_ksched_publish:"Küchenplan veröffentlicht", act_kshift_times_set:"Küchen-Schichtzeiten geändert", act_library_archive:"Unterlage archiviert", act_library_create:"Unterlage veröffentlicht", act_lock_checkpoint_save:"Schließ-Prüfpunkt gespeichert", act_lock_photo:"Abschluss-Foto", act_message_send:"Nachricht gesendet", act_miss_alert_done:"Wiederholt nicht erledigt: bearbeitet", act_oil_close:"Altfett abgeschlossen", act_oil_start:"Altfett gestartet", act_onb_check:"Einarbeitungs-Liste abgehakt", act_onb_exam:"Einarbeitung: Prüfung", act_pin_expired:"Start-PIN abgelaufen", act_pin_request:"PIN vergessen gemeldet", act_pin_request_dismiss:"PIN-Anfrage geschlossen", act_recon_complete:"Abgleich abgeschlossen", act_recon_note:"Abgleich-Notiz", act_recon_report_void:"Bericht storniert", act_role_concentration_ok:"Rollenbündelung bestätigt", act_shift_days_set:"Schichttage geändert", act_shift_times_set:"Schichtzeiten geändert", act_sop_ai_gap_done:"SOP: KI-Lücke erledigt", act_sop_gap_done:"SOP: Lücke erledigt", act_sop_key:"SOP: als wichtig markiert", act_staff_expense:"Auslagen-Recht geändert", act_staff_kitchen_scheduler:"Küchenplan-Recht geändert", act_task_answer:"Aufgabe beantwortet", act_task_assign:"Aufgabe zugewiesen", act_task_attach:"Aufgabe: Anhang", act_task_find:"Nicht erledigt festgestellt", act_task_lead_set:"Aufgaben-Verantwortliche festgelegt", act_task_miss_ack:"Nicht erledigt: zur Kenntnis", act_task_miss_appeal:"Einspruch: nicht erledigt", act_task_miss_decide:"Einspruch entschieden", act_task_named_cancel:"Persönliche Aufgabe storniert", act_task_once_cancel:"Einmalige Aufgabe storniert", act_task_result:"Ergebnis abgegeben", act_task_sop_check:"Aufgabe nach SOP geprüft", act_task_stats_ai:"Aufgaben-Statistik: KI-Kommentar", act_task_suggest:"KI-Aufgabenvorschlag", act_task_suggest_dismiss:"KI-Vorschlag verworfen", act_tip_extra:"Extra-Trinkgeld" });
 // v209：后厨的串
@@ -2545,7 +2548,7 @@ function t(k, vars){ const EN = state.en && window.KOCHI_EN; let s = EN && EN[k]
 
 let enLoading = null;
 function loadEn(){ if (window.KOCHI_EN) return Promise.resolve();
-  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=56'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
+  return enLoading || (enLoading = new Promise((ok, no) => { const x = document.createElement('script'); x.src = 'en.js?v=57'; x.onload = ok; x.onerror = () => { enLoading = null; no(new Error('Failed to fetch')); }; document.head.appendChild(x); })); }
 // v160（tasks v31）：写进系统的内容（任务、公告、SOP、留言）选英文时由 AI 翻译：先显示德语，翻好换成英文；结果存在这台手机上，数据库不存
 const EN_TX = (() => { try { return JSON.parse(localStorage.getItem('en_tx') || '{}') || {}; } catch(e){ return {}; } })();
 const enQ = new Set(); let enTimer = null, enBusy = false, enWaitUntil = 0;
@@ -2704,6 +2707,14 @@ function toast(msg, isErr){
 }
 // 报错提示：每条都写清原因和下一步怎么做
 const ERR_ZH = {
+  INV_RC_COUNT: "第 {n} 行还没数：数到几个就填几个（一个都没到填 0）。",   // v224
+  INV_RC_PUT: "第 {n} 行还没放好：放到位置以后点「放好了」。",   // v224
+  INV_DLV_FIRST: "收货任务不能直接打勾：点「📦 去收货」，数完、放好、点「收完」，任务会自己打勾。",   // v224
+  INV_DLV_DONE: "这家今天的货已经收过了。又来了一批就直接「📷 收货」拍新的送货单。",   // v224
+  INV_DLV_CLOSED: "这次送货已经收了，或者有人说过没送来。请刷新一下。",   // v224
+  INV_DLV_ARRIVED: "有人说货已经到了，只有库管、主管或老板能改成「没送来」。请先看看办公室 / 门口。",   // v224
+  INV_DLV_LIMIT: "24 小时里点「货到了」太多次了（最多 10 次）。有问题请找老板。",   // v224
+  INV_SUP_TAKEN: "已经有这个供应商了。",   // v224
   INV_CONTENT_SET: '这件饮料已经填了每瓶多少，只有老板能改。如果填错了，请告诉老板。',   // v220
   ADJ_SAME: '「从谁」和「给谁」不能是同一个人。',   // v206
   ADJ_PICK: '请选好「从谁」和「给谁」。',   // v206
@@ -3043,6 +3054,14 @@ const ERR_ZH = {
   LOST_NOT_READY: "失物招领还没开通（服务器还没升级好）。请先用纸条记下，交给当班负责人，并告诉老板。",
 };
 const ERR_DE = {
+  INV_RC_COUNT: "Zeile {n} ist noch nicht gezählt: Anzahl eintragen (nichts gekommen = 0).",   // v224
+  INV_RC_PUT: "Zeile {n} ist noch nicht eingeräumt: an den Platz räumen und „Eingeräumt“ tippen.",   // v224
+  INV_DLV_FIRST: "Die Annahme-Aufgabe lässt sich nicht direkt abhaken: „📦 Ware annehmen“ tippen, zählen, einräumen, „Fertig“ – dann wird sie automatisch abgehakt.",   // v224
+  INV_DLV_DONE: "Die Ware dieses Lieferanten ist heute schon angenommen. Kommt noch eine Lieferung, einfach „📷 Wareneingang“ mit dem neuen Lieferschein.",   // v224
+  INV_DLV_CLOSED: "Diese Lieferung ist schon angenommen oder als „nicht geliefert“ gemeldet. Bitte neu laden.",   // v224
+  INV_DLV_ARRIVED: "Jemand hat gemeldet, dass die Ware da ist – nur Lagerverantwortliche, Leitung oder Chef können „nicht geliefert“ melden. Bitte zuerst im Büro / am Eingang nachsehen.",   // v224
+  INV_DLV_LIMIT: "Zu oft „Ware ist da“ in 24 Stunden (höchstens 10). Bitte beim Chef melden.",   // v224
+  INV_SUP_TAKEN: "Diesen Lieferanten gibt es schon.",   // v224
   INV_CONTENT_SET: 'Für dieses Getränk ist der Flascheninhalt schon eingetragen; ändern kann ihn nur der Chef. Falls er falsch ist, bitte dem Chef Bescheid geben.',   // v220
   ADJ_SAME: '„Von“ und „An“ dürfen nicht dieselbe Person sein.',   // v206
   ADJ_PICK: 'Bitte „Von“ und „An“ auswählen.',   // v206
@@ -5328,6 +5347,7 @@ function renderTaskRun(){
         : `<button class="btn ghost" style="flex:1 1 45%" data-act="task-override" data-id="${l.row_id}">${esc(t('tk_override'))}</button>`)
       : c.need_result ? ''   // v128：交回结果在下面
       : it.done ? (l.evidence === 'photo' ? `<button class="link" data-act="task-photo" data-id="${l.row_id}">${esc(t('lk_view'))}</button>` : '') + (photo ? cam(it, t('tk_retake'), 'ghost sm') : '')
+      : dlvTaskId(c) ? dlvTaskActs(c)   // v224：收货任务：去收货（收完自动打勾）
       : kcTaskTab(c) ? kcTaskActs(c, it, photo, cam)   // v209：后厨的串：先去「串」页
       : photo ? cam(it, t('tk_photo')) : `<button class="btn" data-act="task-check" data-item="${it.id}">${esc(t('tk_check'))}</button>`;
     return `<div class="item"><div><span class="lk-n num">${i + 1}</span> <strong>${esc(nm(it))}</strong>${it.ai && photo ? ' <span class="tag m">AI</span>' : ''}</div>
@@ -5337,9 +5357,9 @@ function renderTaskRun(){
   $('#main').innerHTML = `<button class="link" data-act="task-close" style="margin:2px 0 10px">← ${esc(t('back'))}</button>${ro ? `<div class="small muted" style="margin:0 0 8px">${esc(t('tks_view'))}</div>` : ''}
     <h2 style="margin-top:0">${esc((c.once ? toWhen(c) + (state.lang === 'de' ? ': ' : '：') : isPer(c) ? perLabel(c) + (state.lang === 'de' ? ': ' : '：') : '') + nm(c))} ${storeTag(c.store)}</h2>
     ${(() => { const pd = perDue(c), ex = [c.day !== (state.tasks || {}).day && !c.deadline ? dayLabel(c.day) : '', pd ? pd.txt : ''].filter(Boolean).join(' · ');   // v205：拍照说明缩成一个小标签，点了才看完整原因
-      return `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px"><button type="button" class="tk-tag" data-act="tk-how" aria-expanded="${!!state.tkHowOpen}">${esc(c.need_result ? t('tkt_result') : tkHowShort(c.need))} <span class="muted" aria-hidden="true">${state.tkHowOpen ? '▴' : 'ⓘ'}</span></button>`
+      return `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px"><button type="button" class="tk-tag" data-act="tk-how" aria-expanded="${!!state.tkHowOpen}">${esc(c.need_result ? t('tkt_result') : dlvTaskId(c) ? t('dlv_task_how') : tkHowShort(c.need))} <span class="muted" aria-hidden="true">${state.tkHowOpen ? '▴' : 'ⓘ'}</span></button>`
         + (ex ? `<span class="small ${pd && pd.cls === 'bad' ? 'negc' : pd && pd.cls === 'warn' ? 'warnc' : 'muted'}" style="margin-bottom:10px">${esc(ex)}</span>` : '') + '</div>'
-        + (state.tkHowOpen ? `<div class="infobox tk-tag-x">${esc(c.need_result ? t('tk_how_result') : tkHow(c.need))}${!photoRun && !c.need_result ? '<br><span class="small">' + esc(t('ta_check_note')) + '</span>' : ''}</div>` : ''); })()}
+        + (state.tkHowOpen ? `<div class="infobox tk-tag-x">${esc(c.need_result ? t('tk_how_result') : dlvTaskId(c) ? t('dlv_task_how_long') : tkHow(c.need))}${!photoRun && !c.need_result ? '<br><span class="small">' + esc(t('ta_check_note')) + '</span>' : ''}</div>` : ''); })()}
     ${c.sop && !c.sop.gone ? (() => { const S = state.tkSop && state.tkSop.id === c.sop.item_id ? state.tkSop : null, cur = S && S.x && S.x.cur;   // v121：按哪条 SOP 做
       return `<button class="btn ghost" data-act="tk-sop" data-id="${c.sop.item_id}" style="margin:0 0 10px">${esc(S ? t('tk_sop_hide') : t('tk_sop_btn'))}</button>`
         + (cur ? `<div class="sheet" style="margin-bottom:10px"><strong>${esc(sopTitle(cur.content))}</strong>${sopBodyHTML(cur.content, cur.photos)}</div>` : S ? `<div class="loading">${esc(t('loading'))}</div>` : ''); })() : ''}
@@ -7284,6 +7304,7 @@ async function viewInv(){
   if (S.view === 'recipes') return viewInvRcp();   // v220：配方（库管、主管、老板）
   if (S.view === 'stock') return viewInvStock();   // v142：饮料收货 · 调拨
   if (S.view === 'rc') return renderInvRc();
+  if (S.view === 'rcx') return renderInvRcx();   // v224：数 → 对 → 放好
   if (S.view === 'tr') return renderInvTr();
   if (S.view === 'loss') return renderInvLoss();   // v143
   if (S.view === 'levels') return viewInvLevels();
@@ -7476,6 +7497,17 @@ function kcLive(){
     if (a) a.textContent = t('kc_filled', { a: filled, b: items.length }); if (bar) bar.style.width = (items.length ? Math.round(100 * filled / items.length) : 0) + '%';
     if (h) h.textContent = filled < items.length ? t('kc_fill_all_hint', { n: items.length - filled }) : ''; }
 }
+// v224：收货——数到几个（整箱 + 零的瓶数）、放在哪；打字时只改这一行的提示和下面的「已数」，不重画整页
+document.addEventListener('input', ev => {
+  const x = ev.target; if (!x.dataset || !x.dataset.rcx) return; const R = invS().rc, i = +x.dataset.i, l = R && R.lines[i]; if (!l) return;
+  if (x.dataset.rcx === 'put'){ l.put_note = x.value; rcxSaveSoon(); return; }
+  const wE = document.querySelector(`[data-rcx="w"][data-i="${i}"]`), bE = document.querySelector(`[data-rcx="b"][data-i="${i}"]`), pu = rcxPu(l);
+  const w = stkNum(wE && wE.value), b = stkNum(bE && bE.value);
+  if (w == null && !(pu && b != null)){ l.cnt = null; rcxSaveSoon(); } else rcxSet(i, Math.max(0, w || 0) + (pu && b ? Math.max(0, b) / pu : 0));
+  const d = document.getElementById('rcx-d-' + i); if (d) d.textContent = rcxDiffTxt(l);
+  const L = rcxLines(R), n = L.filter(y => rcxCnt(y.l) != null).length, sm = document.querySelector('.rc-bar .rc-sum'), nx = document.querySelector('.rc-bar [data-k="check"]');
+  if (sm) sm.textContent = t('rcx_counted', { n, m: L.length }); if (nx) nx.disabled = n !== L.length;
+});
 document.addEventListener('input', ev => {
   const x = ev.target, K = invS().kc; if (!K || !x.dataset) return;
   if (x.dataset.kcmm){ const id = x.dataset.kcmm, D = kcCur(); if (!D) return; x.value = x.value.replace(/\D/g, '').slice(0, 4); K.mmv[id] = x.value;
@@ -7611,6 +7643,7 @@ function renderInvHome(){
     <div id="inv-mid"${S.q.trim() ? ' hidden' : ''}>
     ${invTodoLines(state.invTodo).length ? `<div class="list">${invTodoLines(state.invTodo).join('')}</div>` : ''}
     ${drkTilesHTML(false)}
+    ${invW() && stkCanWrite() ? `<button class="link" data-act="dlv-here" style="margin:-2px 0 10px;white-space:normal;text-align:left">${esc(t('dlv_here_btn'))}</button>` : ''}
     ${kcTilesHTML()}
     ${invW() ? `<div class="btn2">${H.sup ? `<button class="btn ghost" data-act="inv-new">${esc(t('inv_new'))}</button>` : ''}${(H.area_new || []).length ? `<button class="btn ghost" data-act="kp-area-new">${esc(t('kp_new_area'))}</button>` : ''}<button class="btn ghost" data-act="inv-ib-new">${esc(t('inv_ib_btn'))}</button></div>` : `<div class="small muted" style="margin:0 0 8px">${esc(t('inv_view_only'))}</div>`}
     ${(S.ibMine || []).length ? `<button class="link" data-act="inv-ib-mine" style="margin:0 0 6px">${esc(t('inv_ib_mine', { n: S.ibMine.length }))}</button>` : ''}
@@ -8508,6 +8541,7 @@ function invTodoLines(T){
   if (!T || !T.sup) return [];
   const out = [];
   (T.unplaced || []).forEach(u => out.push(`<div class="item" data-act="kp-unplaced" data-store="${u.store}" style="cursor:pointer">🍹 ${esc(t('kp_unplaced', { s: u.store, n: u.n }))}</div>`));   // v143
+  (T.dlv_open || []).forEach(d => out.push(`<div class="item" data-act="dlv-todo" data-store="${esc(d.store)}" style="cursor:pointer"><strong>📦 ${esc(t(d.arrived_at ? 'dlv_todo_here' : 'dlv_todo_late', { s: d.store, p: dlvShort(d), d: dayLabel(d.day) }))}</strong></div>`));   // v224
   if (T.rc_open) out.push(`<div class="item" data-act="stk-open-todo" style="cursor:pointer"><strong>🧾 ${esc(t('stk_todo', { n: T.rc_open }))}</strong></div>`);   // v142；v178：只有 1 张就直接打开
   (T.order_due || []).forEach(d => out.push(`<div class="item" data-act="${stkCanWrite() ? 'ord-start' : 'ord-home'}" data-store="${esc(d.store)}" data-sup="${esc(d.supplier_id)}" style="cursor:pointer"><strong>🛒 ${esc(t('ord_due', { p: d.supplier, s: d.store, d: dayLabel(d.delivery_day) }))}</strong></div>`));   // v169
   if (T.inbox_open) out.push(`<div class="item" data-act="inv-ib-list" style="cursor:pointer"><strong>📦 ${esc(t('inv_ib_todo', { n: T.inbox_open }))}</strong>${T.inbox_late ? ` <span class="tag bad">${esc(t('inv_ib_late_n', { n: T.inbox_late }))}</span>` : ''}</div>`);
@@ -8522,7 +8556,7 @@ function invTodoCardHTML(T){   // 「今天」页：主管（老板的「今天�
   const L = invTodoLines(T); if (!L.length) return '';
   return `<h3>${esc(t('inv_todo_h'))}</h3><div class="list">${L.join('')}</div>`;
 }
-function invBadge(){ const T = state.invTodo, n = T ? (T.inbox_open || 0) + (T.rc_open || 0) + (T.order_due || []).length : 0; return n ? ` <span class="tag ${T.inbox_late ? 'bad' : 'pend'}">${n}</span>` : ''; }   // v142：加上等确认的送货单
+function invBadge(){ const T = state.invTodo, n = T ? (T.inbox_open || 0) + (T.rc_open || 0) + (T.order_due || []).length + (T.dlv_open || []).length : 0; return n ? ` <span class="tag ${T.inbox_late ? 'bad' : 'pend'}">${n}</span>` : ''; }   // v142：加上等确认的送货单
 
 // 待归位：员工登记
 function invIbNew(){ const S = invS(); S.ibf = { store: invMyStore() || STORES[0], note: '', photo: null }; invGo('ibnew'); }
@@ -8914,25 +8948,26 @@ function renderInvOrders(){
   const W = stkCanWrite(), cur = curStore(), st = (D.stores || []).find(x => x.store === cur);   // v180：门店标签，只显示选中的那家店
   const head = `<button class="link" data-act="inv-stock" style="margin:2px 0 6px">${esc(t('stk_back'))}</button><div class="stabs-row"><h2>${esc(t('ord_title'))}</h2>${storeTabsHTML()}</div>`;
   if (!st){ $('#main').innerHTML = `${head}<div class="empty">${esc(t('ord_no_store', { s: cur }))}</div>`; return; }
-  const dowSel = (id, v, none) => `<select class="input" id="${id}" style="width:auto">${none ? `<option value="">${esc(t('ord_day_none'))}</option>` : ''}${[1, 2, 3, 4, 5, 6, 7].map(n => `<option value="${n}"${+v === n ? ' selected' : ''}>${esc(ordDow(n))}</option>`).join('')}</select>`;
+  const dowSel = (id, v, none, nl) => `<select class="input" id="${id}" style="width:auto">${none ? `<option value="">${esc(nl || t('ord_day_none'))}</option>` : ''}${[1, 2, 3, 4, 5, 6, 7].map(n => `<option value="${n}"${+v === n ? ' selected' : ''}>${esc(ordDow(n))}</option>`).join('')}</select>`;
   const sup = sp => { const nOpen = sp.open ? (sp.open.lines || []).filter(l => +l.qty > 0).length : 0, od = ordDay(sp.open), old = sp.open && od && od < today(), exp = sp.open && sp.open.delivery_day <= today();
     return `<div class="sheet" style="margin-bottom:10px"><strong>${esc(sp.name)}</strong>
       <div class="small muted" style="margin:4px 0">${esc(t('ord_days', { o: ordDow(sp.order_dow), d: ordDow(sp.delivery_dow) }))}${sp.next_delivery ? ' · ' + esc(t('ord_next', { d: dayLabel(sp.next_delivery) })) : ''}</div>
       ${sp.order_today ? `<div class="small" style="color:var(--celadon-deep);font-weight:600;margin-bottom:4px">${esc(t('ord_today'))}</div>` : ''}
       ${!st.counted ? `<div class="small" style="color:var(--copper);margin-bottom:4px">${esc(t('ord_no_count'))}</div>` : ''}
-      ${W && sp.delivery_dow ? `<button class="btn${sp.open || sp.order_today ? '' : ' ghost'}" data-act="ord-start" data-store="${st.store}" data-sup="${sp.id}" style="margin-top:6px;height:auto;min-height:52px;padding:8px 10px;line-height:1.25">${esc(sp.open ? (exp ? t('ord_resume_x', { d: dayLabel(sp.open.delivery_day) }) : old ? t('ord_resume_d', { d: dayLabel(od), n: nOpen }) : t('ord_resume', { n: nOpen })) : t('ord_start'))}</button>` : ''}
-      <button class="btn ghost" data-act="ord-targets" data-store="${st.store}" data-sup="${sp.id}" style="margin-top:6px;height:46px;font-size:15px">${esc(t('ord_targets_btn'))}${+sp.no_target ? ` <span class="tag pend">${sp.no_target}</span>` : ''}</button>
-      ${+sp.no_target ? `<div class="small" style="color:var(--copper);margin-top:4px">${esc(t('ord_no_target', { n: sp.no_target }))}</div>` : ''}
+      ${!(+sp.items > 0) ? `<div class="small muted" style="margin:4px 0">${esc(t('ord_no_items', { p: sp.name }))}</div>` : ''}
+      ${W && sp.delivery_dow && +sp.items > 0 ? `<button class="btn${sp.open || sp.order_today ? '' : ' ghost'}" data-act="ord-start" data-store="${st.store}" data-sup="${sp.id}" style="margin-top:6px;height:auto;min-height:52px;padding:8px 10px;line-height:1.25">${esc(sp.open ? (exp ? t('ord_resume_x', { d: dayLabel(sp.open.delivery_day) }) : old ? t('ord_resume_d', { d: dayLabel(od), n: nOpen }) : t('ord_resume', { n: nOpen })) : t('ord_start'))}</button>` : ''}
+      ${+sp.items > 0 ? `<button class="btn ghost" data-act="ord-targets" data-store="${st.store}" data-sup="${sp.id}" style="margin-top:6px;height:46px;font-size:15px">${esc(t('ord_targets_btn'))}${+sp.no_target ? ` <span class="tag pend">${sp.no_target}</span>` : ''}</button>` : ''}
+      ${+sp.items > 0 && +sp.no_target ? `<div class="small" style="color:var(--copper);margin-top:4px">${esc(t('ord_no_target', { n: sp.no_target }))}</div>` : ''}
       ${ordBoostROHTML(st.store, sp, W)}
       ${D.admin && W ? `<details class="fold" style="margin-top:8px"><summary>${esc(t('ord_days_edit'))}</summary><div class="inner"><div class="row" style="gap:8px;flex-wrap:wrap;align-items:center">
         <label class="small" for="ord-do-${st.store}-${sp.id}">${esc(t('ord_day_order'))}</label>${dowSel(`ord-do-${st.store}-${sp.id}`, sp.order_dow, true)}
-        <label class="small" for="ord-dd-${st.store}-${sp.id}">${esc(t('ord_day_delivery'))}</label>${dowSel(`ord-dd-${st.store}-${sp.id}`, sp.delivery_dow || 5, false)}
+        <label class="small" for="ord-dd-${st.store}-${sp.id}">${esc(t('ord_day_delivery'))}</label>${dowSel(`ord-dd-${st.store}-${sp.id}`, sp.delivery_dow, true, t('ord_dd_none'))}
         <button class="btn ghost" data-act="ord-days-save" data-store="${st.store}" data-sup="${sp.id}">${esc(t('ord_days_save'))}</button></div></div></details>` : ''}
       ${D.admin ? `<button class="link" data-act="ord-si" data-sup="${sp.id}" data-name="${esc(sp.name)}" style="margin-top:8px;white-space:normal;text-align:left">${esc(t('ord_si_btn', { s: sp.name, n: +sp.items || 0 }))}</button>` : ''}
       ${(sp.orders || []).length ? `<div class="small muted" style="margin:10px 0 4px">${esc(t('ord_recent'))}</div><div class="list">${sp.orders.map(ordOrderRow).join('')}</div>` : ''}</div>`; };
   const un = D.unlinked || [];
   $('#main').innerHTML = `${head}
-    ${ordBoostStoreHTML(st, W)}${(st.suppliers || []).map(sup).join('')}${aihTargetHTML(st.store)}
+    ${ordBoostStoreHTML(st, W)}${(st.suppliers || []).map(sup).join('')}${D.admin && W ? `<button class="btn ghost" data-act="sup-add" style="margin:0 0 12px">${esc(t('sup_add_btn'))}</button>` : ''}${aihTargetHTML(st.store)}
     <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('ord_hint'))}</div></details>
     ${un.length ? `<details class="fold"><summary>${esc(t('ord_unlinked_h', { n: un.length }))}</summary><div class="inner"><div class="small muted" style="margin-bottom:8px">${esc(t('ord_unlinked_hint'))}</div>
       ${un.map(x => `<div style="margin-bottom:10px"><div>${esc(x.name)} <span class="small muted">· ${esc(t('ord_art', { a: x.art_no }))} · ${esc(ordUnit(x))}</span></div>
@@ -9239,7 +9274,7 @@ function renderInvRecipe(){
 // v206（网页 3/4，drinks-13）：查看模式下饮料页、订货页上会写数据的按钮都拿掉（数据库会挡，但不该让人点了才知道）
 const DRK_W = ['aih-r-ok', 'aih-r-one', 'aih-t-ok', 'aih-no', 'drk-grp-ign', 'drk-guess', 'drk-i-cost-use', 'drk-i-edit', 'drk-i-save', 'drk-ignore', 'drk-link', 'drk-m-fix', 'drk-m-fix-save', 'drk-off', 'drk-rc-add', 'drk-rc-cq',
   'drk-rc-del', 'drk-rc-end', 'drk-rc-new', 'drk-rc-open', 'drk-rc-menu', 'drk-rc-save', 'drk-sel-ign', 'drk-sugg-all', 'drk-sugg-edit', 'drk-sugg-link', 'drk-sugg-new', 'drk-sugg-rej', 'drk-sugg-save', 'drk-unignore', 'drk-unlink',
-  'ord-boost-save', 'ord-cancel', 'ord-confirm', 'ord-days-save', 'ord-recalc', 'ord-si-off', 'ord-si-pick', 'ord-start', 'ord-sug', 'ord-step', 'ord-t-fill', 'ord-t-use', 'lv-ai', 'ct-start'];
+  'ord-boost-save', 'ord-cancel', 'ord-confirm', 'ord-days-save', 'sup-add', 'ord-recalc', 'ord-si-off', 'ord-si-pick', 'ord-start', 'ord-sug', 'ord-step', 'ord-t-fill', 'ord-t-use', 'lv-ai', 'ct-start'];
 function drkViewStrip(){
   if (!state.viewAs) return; const m = $('#main'); if (!m) return;
   m.querySelectorAll(DRK_W.map(a => `[data-act="${a}"]`).join(',') + ',[data-drksel],[data-ordlink],[data-otg]').forEach(n => { if (n.matches('input[data-otg]')) n.disabled = true; else n.remove(); });
@@ -9328,7 +9363,7 @@ function stkDrink(id){ return id ? ((invS().stock || {}).drinks || []).find(d =>
 function stkNum(v){ const x = parseFloat(String(v == null ? '' : v).replace(',', '.')); return isFinite(x) ? x : null; }
 function stkLineQty(l){ const q = stkNum(l.qty_note), p = stkNum(l.per_unit); return q != null && p != null ? Math.round(q * p * 1000) / 1000 : null; }
 function stkLineBad(l){ return l.kind === 'item' && (!l.item_id || !stkNum(l.qty_note) || !(stkNum(l.per_unit) > 0)); }
-function stkErr(e){ const m = String(e && e.message || ''), x = m.match(/^INV_RC_(NO_ITEM|QTY):(\d+)$/); return x ? t('err_INV_RC_' + x[1], { n: x[2] }) : errText(e); }
+function stkErr(e){ const m = String(e && e.message || ''), x = m.match(/^INV_RC_(NO_ITEM|QTY|COUNT|PUT):(\d+)$/); return x ? t('err_INV_RC_' + x[1], { n: x[2] }) : errText(e); }
 async function viewInvStock(){
   const S = invS();
   if (!S.stock) $('#main').innerHTML = `<div class="loading">${esc(t('loading'))}</div>`; else renderInvStock();
@@ -9374,6 +9409,7 @@ function renderInvStock(){
   const hfBtn = (k, n) => `<button class="chip${hf === k ? ' on' : ''}" data-act="stk-hist" data-k="${k}">${esc(t('stk_hf_' + k))}${n ? ' ' + n : ''}</button>`;
   $('#main').innerHTML = `<button class="link" data-act="inv-home" style="margin:2px 0 6px">${esc(t('inv_back'))}</button><div class="stabs-row"><h2>${esc(t('stk_title'))}</h2>${storeTabsHTML()}</div>
     ${!(D.drinks || []).length ? `<div class="small" style="color:var(--copper);margin-bottom:10px">${esc(t('stk_no_drinks'))}</div>` : ''}
+    ${dlvBoxHTML()}
     ${open.length ? `<h3 style="margin-top:6px">${esc(t(open.some(r => r.can_confirm) ? 'stk_open_h_sup' : 'stk_open_h', { n: open.length }))}</h3><div class="list">${open.map(stkRcCard).join('')}</div>` : ''}
     ${drkTilesHTML(true)}
     <details class="fold" style="margin-bottom:10px"><summary>${esc(t('dt_how'))}</summary><div class="inner small muted">${esc(t('stk_hint'))}</div></details>
@@ -9416,7 +9452,7 @@ function stkRcJump(i){
   el.scrollIntoView({ block: 'center' }); el.classList.add('rc-flash'); setTimeout(() => el.classList.remove('rc-flash'), 1900);
 }
 function stkRcSumHTML(R, ed){
-  const items = R.lines.filter(l => l.kind === 'item'), tot = items.reduce((a, l) => a + (stkLineQty(l) || 0), 0), nBad = R.lines.filter(stkLineBad).length;
+  const items = R.lines.filter(l => l.kind === 'item'), tot = items.reduce((a, l) => a + ((l.cnt != null && l.cnt !== '' ? rcxBtl(l, +l.cnt) : stkLineQty(l)) || 0), 0), nBad = R.lines.filter(stkLineBad).length;   // v224：数过的按数到的算
   return `${esc(t('stk_rc_sum', { n: items.length, b: drkNum(tot) }))}${R.total_cents != null ? ' · ' + esc(t('stk_rc_total', { c: eur(R.total_cents) })) : ''}
     ${nBad ? (ed ? `<div><button data-act="stk-rc-jump">${esc(t('stk_rc_bad', { n: nBad }))} ›</button></div>` : `<div class="small" style="color:var(--copper)">${esc(t('stk_rc_bad', { n: nBad }))}</div>`) : ''}`;
 }
@@ -9453,7 +9489,8 @@ function renderInvRc(){
       <small>${esc(l.kind === 'item' ? t('stk_l_calc', { q: drkNum(stkNum(l.qty_note)), u: l.unit_note || '', p: drkNum(stkNum(l.per_unit)), n: drkNum(q) }) : (l.qty_note != null && l.qty_note !== '' ? drkNum(stkNum(l.qty_note)) + ' ' + (l.unit_note || '') : ''))}${price ? ' · ' + esc(price) : ''}</small></span><span class="muted">✎</span></button></div>`;
     if (!ed) return `<div class="item"><strong>${i + 1}. ${esc(l.kind === 'item' ? (invName(l) || l.text || '?') : (l.text || '?'))}</strong>${kindTag}
       ${l.kind === 'item' && l.text ? `<div class="small muted">${esc(t('stk_l_on_note', { x: l.text }))}</div>` : ''}
-      <div class="meta">${esc(l.kind === 'item' ? t('stk_l_calc', { q: drkNum(l.qty_note), u: l.unit_note || '', p: drkNum(l.per_unit), n: drkNum(l.qty) }) : (l.qty_note != null ? drkNum(l.qty_note) + ' ' + (l.unit_note || '') : ''))}${price ? ' · ' + esc(price) : ''}</div></div>`;
+      <div class="meta">${esc(l.kind === 'item' ? t('stk_l_calc', { q: drkNum(l.qty_note), u: l.unit_note || '', p: drkNum(l.per_unit), n: drkNum(l.qty) }) : (l.qty_note != null ? drkNum(l.qty_note) + ' ' + (l.unit_note || '') : ''))}${price ? ' · ' + esc(price) : ''}</div>
+      ${l.cnt != null && l.kind !== 'pfand' ? `<div class="meta">${esc([t('rcx_l_cnt', { x: rcxQtyTxt(l, +l.cnt) }), rcxDiffTxt(l), l.placed ? t('rcx_l_placed') + (l.put_note ? (state.lang === 'de' ? ': ' : '：') + l.put_note : '') : ''].filter(Boolean).join(' · '))}</div>` : ''}</div>`;   // v224
     return `<div class="item" id="stk-l-${i}" style="${bad || l.sure === false ? 'border-left:4px solid var(--copper)' : ''}">
       <div class="top"><div class="small muted"><strong class="num">${i + 1}.</strong> ${esc(l.text ? t('stk_l_on_note', { x: l.text }) : t('stk_l_manual'))}${l.learned ? ` <span class="tag m">${esc(t('stk_l_learned'))}</span>` : ''}</div><button class="link danger rc-x" data-act="stk-rc-delline" data-i="${i}">✕</button></div>
       ${sel(l, i)}
@@ -9471,8 +9508,8 @@ function renderInvRc(){
   // v178：合计和保存 / 确认入库固定在屏幕下面，不用滑到底
   const nav = document.querySelector('nav'), navH = nav ? nav.offsetHeight : 0;
   const acts = !stkCanWrite() ? `<div class="sheet" id="stk-rc-sum" style="margin:10px 0">${stkRcSumHTML(R, false)}</div>` : `<div class="rc-bar" style="bottom:${navH}px"><div class="rc-sum" id="stk-rc-sum">${stkRcSumHTML(R, ed)}</div>
-      ${ed ? `<div class="row">${sup ? `<button class="btn" data-act="stk-rc-confirm"${busy ? ' disabled' : ''}>${esc(t('stk_rc_confirm'))}</button><button class="btn ghost" data-act="stk-rc-save"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_short'))}</button>`
-      : `<button class="btn" data-act="stk-rc-save"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_staff'))}</button>`}</div>` : ''}</div>
+      ${ed ? `<div class="row">${R.finished_at && R.status === 'open' ? (sup ? `<button class="btn" data-act="stk-rc-confirm"${busy ? ' disabled' : ''}>${esc(t('rcx_confirm'))}</button>` : '') + `<button class="btn ghost" data-act="rcx-open"${busy ? ' disabled' : ''}>${esc(t('rcx_reopen'))}</button>`
+      : `<button class="btn" data-act="stk-rc-next"${busy ? ' disabled' : ''}>${esc(t('rcx_next'))}</button><button class="btn ghost" data-act="stk-rc-save"${busy ? ' disabled' : ''}>${esc(t('stk_rc_save_short'))}</button>`}</div>` : ''}</div>
     ${R.can_cancel && !R.isNew ? `<button class="btn ghost danger" data-act="stk-rc-cancel" style="margin-top:14px">${esc(t(R.status === 'done' ? 'stk_rc_undo' : 'stk_rc_cancel'))}</button>` : ''}`;
   const back = `<button class="link" data-act="stk-rc-back" style="margin:2px 0 6px">${esc(t(ed && R.isNew ? 'inv_cancel' : 'stk_back'))}</button>`;
   if (ed && R.isNew && !R.photos.length && !R.lines.length){   // v178：还没拍照：只有拍照这一步，不摆一张空表
@@ -9481,6 +9518,7 @@ function renderInvRc(){
   }
   $('#main').innerHTML = `${back}
     <h2 style="margin-top:4px">${esc(R.isNew ? t('stk_rc_new_h') : stkRcTitle(R))} ${R.isNew ? '' : stkRcStatus(R)}</h2>${who}
+    ${rcxResultHTML(R)}${rcxDiffBoxHTML(R)}
     ${photos}${head}
     <h3>${esc(t('stk_lines_h', { n: R.lines.length }))}</h3>
     <div class="list">${R.lines.map(line).join('') || `<div class="empty">${esc(t(R.photos.length ? 'stk_lines_none' : 'stk_lines_first'))}</div>`}</div>
@@ -9545,7 +9583,8 @@ function stkRcPayload(R){
   return { store: R.store, supplier: R.supplier || '', doc_no: R.doc_no || '', doc_date: R.doc_date || '',
     photos: R.photos.filter(p => p.photo).map(p => ({ photo: p.photo, thumb: p.thumb })),
     lines: R.lines.map(l => ({ text: l.text || null, kind: l.kind, item_id: l.kind === 'item' ? l.item_id || null : null, qty_note: l.qty_note, unit_note: l.unit_note, per_unit: l.per_unit,
-      price_cents: l.price_cents, total_cents: l.total_cents, sure: l.sure, learned: l.learned })),
+      price_cents: l.price_cents, total_cents: l.total_cents, sure: l.sure, learned: l.learned,
+      cnt: l.cnt == null || l.cnt === '' ? null : l.cnt, extra: l.extra || null, placed: l.placed || null, put_note: l.put_note || null })),   // v224
     total_cents: R.total_cents, ai: R.ai || null, note: R.note || '' };
 }
 async function stkRcSave(btn, confirmToo){
@@ -9574,6 +9613,246 @@ function stkRcDone(R, r, confirmToo){
   toast(t(confirmToo ? 'stk_rc_done' : (R.created_by && R.created_by !== (state.me || {}).id ? 'stk_rc_saved' : 'stk_rc_saved_new'), { n: drkNum(r.bottles) }));
   invGo('stock'); invTodoLoad().then(refreshInvBadge);
 }
+// ---------- v224：收货进 App（数据库 v155 / push v20，老板 2026-11-27）：拍单 → 数 → 对 → 放好 → 收完；送货日的收货任务、「📦 货到了」「今天没送来」 ----------
+// 数的时候给看单上的数（老板定）；数到的按单上这一行的单位存（cnt，3 箱零 6 瓶 = 3,25），入库按数到的算。
+// 收完：全部对上、每行配好了饮料、不像重复 → 直接入库（谁收的都行）；不然等这家店的库管 / 前场主管 / 老板确认，推送给库管和老板。
+function rcxLines(R){ return ((R && R.lines) || []).map((l, i) => ({ l, i })).filter(x => x.l.kind === 'item' || x.l.kind === 'other'); }
+function rcxPu(l){ const p = stkNum(l.per_unit); return l.kind === 'item' && p > 1 ? p : null; }   // 一个单位几瓶（> 1 才分「箱 + 瓶」）
+function rcxDoc(l){ return l.extra ? 0 : (stkNum(l.qty_note) || 0); }
+function rcxCnt(l){ return stkNum(l.cnt); }   // null = 还没数
+function rcxUnit(l){ return l.unit_note || (l.kind === 'item' && rcxPu(l) ? t('stk_pack') : t('stk_l_units')); }
+function rcxName(l){ return l.kind === 'item' ? (invName(stkDrink(l.item_id) || l) || l.text || '?') : (l.text || '?'); }
+// 数量写成「3 Karton + 6 瓶」（有「1 个几瓶」时）或「3 Karton」
+function rcxQtyTxt(l, n){
+  if (n == null) return '?'; const pu = rcxPu(l), sg = n < 0 ? '−' : '', a = Math.abs(n);
+  if (!pu) return sg + drkNum(a) + ' ' + rcxUnit(l);
+  const whole = Math.floor(a + 1e-9), loose = Math.round((a - whole) * pu * 1000) / 1000;
+  if (!whole && !loose) return '0 ' + rcxUnit(l);
+  return sg + [whole ? drkNum(whole) + ' ' + rcxUnit(l) : '', loose ? t('stk_l_bottles', { n: drkNum(loose) }) : ''].filter(Boolean).join(' + ');
+}
+function rcxBtl(l, n){ const p = stkNum(l.per_unit); return l.kind === 'item' && p && n != null ? Math.round(n * p * 1000) / 1000 : null; }
+// 一行对不上的话：「少 1 Karton（24 瓶）」/「多 …」
+function rcxDiffTxt(l){ const c = rcxCnt(l); if (c == null) return ''; const d = Math.round((c - rcxDoc(l)) * 1000) / 1000; if (!d) return '';
+  const b = rcxPu(l) ? rcxBtl(l, Math.abs(d)) : null;
+  return t(d < 0 ? 'rcx_less' : 'rcx_more', { x: rcxQtyTxt(l, Math.abs(d)) }) + (b != null ? (state.lang === 'de' ? ' ' : '') + t('rcx_btl_paren', { n: drkNum(b) }) : ''); }
+// 给供应商的消息（德文，复制了自己发；App 不发）：送货单上的名字、送到多少、单上多少
+function rcxClaimText(R){
+  const D = (R.diff && R.diff.length ? R.diff.map(x => ({ l: R.lines[x.k - 1] || x, doc: +x.doc, cnt: +x.cnt })) : rcxLines(R).map(x => ({ l: x.l, doc: rcxDoc(x.l), cnt: rcxCnt(x.l) })).filter(x => x.cnt != null && Math.round((x.cnt - x.doc) * 1000)));
+  if (!D.length) return '';
+  const nm = l => l.text || (stkDrink(l.item_id) || {}).name_de || l.name_de || '?';
+  const q = (l, n) => String(Math.round(n * 1000) / 1000).replace('.', ',') + ' ' + (l.unit_note || '');
+  const head = ['Kochi ' + (R.store || ''), R.doc_no ? 'Lieferschein ' + R.doc_no : '', R.doc_date ? 'vom ' + R.doc_date.split('-').reverse().join('.') : ''].filter(Boolean).join(' · ');
+  return `${head}\nBei der Lieferung gab es Abweichungen:\n` + D.map(x => x.doc ? `- ${nm(x.l)}: geliefert ${q(x.l, x.cnt)} statt ${q(x.l, x.doc)}` : `- ${nm(x.l)}: ${q(x.l, x.cnt)} geliefert, steht nicht auf dem Lieferschein`).join('\n')
+    + `\nBitte um Gutschrift bzw. Nachlieferung. Vielen Dank!`;
+}
+function rcxDiffBoxHTML(R){
+  const D = R.diff || []; if (!D.length) return '';
+  const rows = D.map(x => { const l = R.lines[x.k - 1] || x; return `<div>${x.k}. ${esc(rcxName(l))}: ${esc(x.extra ? t('rcx_extra_got', { x: rcxQtyTxt(l, +x.cnt) }) : t('rcx_doc_cnt', { a: rcxQtyTxt(l, +x.doc), b: rcxQtyTxt(l, +x.cnt) }))}</div>`; }).join('');
+  return `<div class="warnbox" style="margin:0 0 10px">${esc(t('rcx_diff_h', { n: D.length }))}<div class="small" style="margin:6px 0">${rows}</div>
+    <button class="link" data-act="rcx-claim" style="white-space:normal;text-align:left">${esc(t('rcx_claim_btn'))}</button></div>`;
+}
+// 收完以后 / 等确认：最上面一块
+function rcxResultHTML(R){
+  const rs = R.reasons || [+R.dups > 0 ? 'dup' : '', (R.lines || []).some(l => l.kind === 'item' && +l.cnt > 0 && !l.item_id) ? 'unmapped' : ''].filter(Boolean);
+  const why = rs.filter(x => x !== 'diff' && x !== 'empty').map(x => t('rcx_why_' + x)).join(' ');
+  if (R.result === 'booked') return `<div class="infobox" style="background:#E3F1EA;color:#1D5B43;margin:0 0 10px">${esc(t('rcx_booked', { n: drkNum(R.bottles) }))}</div>`;
+  if (R.status === 'open' && R.finished_at) return `<div class="infobox" style="background:#FFF1C9;color:#6B5200;margin:0 0 10px">${esc(t(R.can_confirm ? 'rcx_wait_sup' : 'rcx_wait', { n: R.finished_name || '', t: fmtDateTime(R.finished_at) }))}${why ? '<br>' + esc(why) : ''}</div>`;
+  if (R.status === 'done' && R.finished_at) return `<div class="small muted" style="margin:-4px 0 8px">${esc(t('rcx_fin_by', { n: R.finished_name || '', t: fmtDateTime(R.finished_at) }))}</div>`;
+  return '';
+}
+// 第 1 步（送货单页）→「下一步：数」：先存（新单要建、改过的要存），再进数的那一页
+async function rcxStart(btn){
+  const S = invS(), R = S.rc; if (!R) return; stkRcKeep();
+  if (!R.photos.some(p => p.photo)) return toast(t('err_INV_RC_PHOTO'), true);
+  if (R.photos.some(p => p.busy) || R.aiBusy) return toast(t('stk_wait'), true);
+  if (!rcxLines(R).length) return toast(t('rcx_no_lines'), true);
+  if (R.saving) return; R.saving = true; if (btn) btn.disabled = true;
+  try { const r = await rpc('inv_receipt_save', { ...tok(), p_id: R.id || null, p_data: stkRcPayload(R) }); const dlv = R.dlv;
+    S.rc = stkRcFrom(r); S.rc.dlv = dlv; S.rcxStep = 'count'; invGo('rcx');
+    if (dlv) soft(rpc('inv_delivery_draft', { ...tok(), p_id: dlv, p_receipt: r.id }), null); }
+  catch(e){ R.saving = false; if (btn) btn.disabled = false; toast(stkErr(e), true); }
+}
+function rcxOpen(step){ const S = invS(); if (!S.rc) return; S.rcxStep = step || 'count'; invGo('rcx'); }
+// 改了就存（0,8 秒不再改就存；收完前先等它）
+const RCX = { t: null, p: Promise.resolve(), pend: new Set() };   // 每张有改动的单都排队存（换了单、离开页面，打的数也存得上）
+function rcxSaveSoon(R0){ const R = R0 || invS().rc; if (!R || !R.id) return; R.rcxDirty = true; RCX.pend.add(R);
+  if (R.finished_at && R.status === 'open'){ R.finished_at = null; R.diff = null; R.result = null; R.reasons = null; }   // 收完以后又改了：要重新收完（数据库也会清掉）
+  clearTimeout(RCX.t); RCX.t = setTimeout(() => rcxFlush().catch(() => {}), 800); }
+function rcxFlush(){
+  clearTimeout(RCX.t);
+  const run = async () => {
+    for (const R of [...RCX.pend]){
+      if (!R.rcxDirty){ RCX.pend.delete(R); continue; }
+      R.rcxDirty = false; const cur = () => invS().rc === R;
+      try { const r = await rpc('inv_receipt_save', { ...tok(), p_id: R.id, p_data: { lines: stkRcPayload(R).lines } });
+        if (!R.rcxDirty) (r.lines || []).forEach((x, i) => { const l = R.lines[i]; if (l){ l.places = x.places; l.qty = x.qty; if (x.name_zh || x.name_de){ l.name_zh = x.name_zh; l.name_de = x.name_de; } } });
+        if (!R.rcxDirty) RCX.pend.delete(R); R.rcxErr = false; const e = cur() && $('#rcx-err'); if (e) e.hidden = true; }
+      catch(e){ R.rcxDirty = true; R.rcxErr = true; const x = cur() && $('#rcx-err'); if (x){ x.hidden = false; x.textContent = t('rcx_save_err', { e: '（' + stkErr(e) + '）' }); } throw e; }
+    }
+  };
+  RCX.p = RCX.p.catch(() => {}).then(run);
+  return RCX.p;
+}
+function rcxSet(i, v){ const R = invS().rc, l = R && R.lines[i]; if (!l) return; l.cnt = v == null ? null : Math.max(0, Math.round(v * 1e6) / 1e6); rcxSaveSoon(R); }   // 6 位小数：3 箱零 5 瓶 × 24 = 77 瓶
+function rcxStepHTML(cur){
+  const R = invS().rc, L = rcxLines(R), nC = L.filter(x => rcxCnt(x.l) != null).length, put = L.filter(x => (rcxCnt(x.l) || 0) > 0);
+  const st = [['photo', '1 ' + t('rcx_s_photo'), true], ['count', '2 ' + t('rcx_s_count'), true], ['check', '3 ' + t('rcx_s_check'), nC === L.length], ['put', '4 ' + t('rcx_s_put'), nC === L.length]];
+  return `<div class="chips sm" style="margin:6px 0 10px">${st.map(([k, lb, ok]) => `<button class="chip${k === cur ? ' on' : ''}" data-act="rcx-go" data-k="${k}"${ok ? '' : ' disabled'}>${esc(lb)}${k === 'count' && nC === L.length ? ' ✓' : k === 'put' && put.length && put.every(x => x.l.placed) ? ' ✓' : ''}</button>`).join('')}</div>`;
+}
+function renderInvRcx(){
+  const S = invS(), R = S.rc; if (!R || !R.id){ S.view = 'stock'; return viewInvStock(); }
+  const step = S.rcxStep || 'count', L = rcxLines(R), nav = document.querySelector('nav'), navH = nav ? nav.offsetHeight : 0;
+  const nC = L.filter(x => rcxCnt(x.l) != null).length;
+  const head = `<button class="link" data-act="rcx-back" style="margin:2px 0 6px">${esc(t('rcx_back'))}</button>
+    <h2 style="margin-top:4px">${esc(t('rcx_title', { s: R.supplier || t('stk_rc_noname') }))} ${storeTag(R.store)}</h2>${rcxStepHTML(step)}
+    <div class="small" id="rcx-err" style="color:var(--copper);margin-bottom:6px"${R.rcxErr ? '' : ' hidden'}>${esc(t('rcx_save_err', { e: '' }))}</div>`;
+  const nm = x => `<strong>${x.i + 1}. ${esc(rcxName(x.l))}</strong>${x.l.kind === 'other' ? ` <span class="tag off">${esc(t('stk_l_other'))}</span>` : ''}${x.l.extra ? ` <span class="tag pend">${esc(t('rcx_extra_tag'))}</span>` : ''}${x.l.kind === 'item' && x.l.text && x.l.text !== rcxName(x.l) ? `<div class="small muted">${esc(t('stk_l_on_note', { x: x.l.text }))}</div>` : ''}`;
+  let body = '', bar = '';
+  if (step === 'count'){
+    body = `<div class="small muted" style="margin-bottom:8px">${esc(t('rcx_count_hint'))}</div><div class="list">${L.map(x => { const l = x.l, c = rcxCnt(l), pu = rcxPu(l), doc = rcxDoc(l);
+      const whole = c == null ? '' : pu ? Math.floor(c + 1e-9) : Math.round(c * 1000) / 1000, loose = c == null || !pu ? '' : Math.round((c - Math.floor(c + 1e-9)) * pu * 1000) / 1000, dt = rcxDiffTxt(l);
+      return `<div class="item" id="rcx-l-${x.i}" style="${c == null ? '' : dt ? 'border-left:4px solid var(--copper)' : 'border-left:4px solid var(--celadon-deep)'}">
+        <div class="top"><div>${nm(x)}</div>${l.extra ? `<button class="link danger rc-x" data-act="rcx-del" data-i="${x.i}">✕</button>` : c != null && !dt ? '<span class="pos">✓</span>' : ''}</div>
+        <div class="small">${esc(l.extra ? t('rcx_not_on_doc') : t('rcx_on_doc', { x: rcxQtyTxt(l, doc) }) + (pu ? (state.lang === 'de' ? ' ' : '') + t('rcx_btl_paren', { n: drkNum(rcxBtl(l, doc)) }) : ''))}</div>
+        <div style="display:flex;gap:6px;align-items:center;margin-top:6px">
+          <button class="btn ghost sm" data-act="rcx-step" data-i="${x.i}" data-d="-1" style="width:44px;flex:0 0 44px;padding:0;margin:0">−</button>
+          <input class="input" style="width:64px;flex:0 0 64px;text-align:center" inputmode="decimal" data-rcx="w" data-i="${x.i}" value="${esc(String(whole).replace('.', ','))}" aria-label="${esc(t('rcx_count_aria'))}" placeholder="?">
+          <button class="btn ghost sm" data-act="rcx-step" data-i="${x.i}" data-d="1" style="width:44px;flex:0 0 44px;padding:0;margin:0">＋</button>
+          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(rcxUnit(l))}</span></div>
+        ${pu || !l.extra ? `<div style="display:flex;gap:6px;align-items:center;margin-top:6px">
+          ${pu ? `<span>+</span><input class="input" style="width:56px;flex:0 0 56px;text-align:center" inputmode="numeric" data-rcx="b" data-i="${x.i}" value="${esc(loose ? String(loose).replace('.', ',') : '')}" placeholder="0" aria-label="${esc(t('rcx_loose_aria'))}"><span style="white-space:nowrap">${esc(t('rcx_btl'))}</span>` : ''}
+          ${l.extra ? '' : `<button class="btn${c == null ? '' : ' ghost'} sm" data-act="rcx-same" data-i="${x.i}" style="margin:0 0 0 auto;width:auto;padding:0 14px;white-space:nowrap">${esc(t('rcx_same'))}</button>`}</div>` : ''}
+        <div class="small" id="rcx-d-${x.i}" style="color:var(--copper);margin-top:4px">${esc(dt)}</div></div>`; }).join('')}</div>
+      <button class="link" data-act="rcx-add" style="margin:6px 0 8px">${esc(t('rcx_add'))}</button>`;
+    bar = `<div class="rc-sum">${esc(t('rcx_counted', { n: nC, m: L.length }))}</div><div class="row"><button class="btn" data-act="rcx-go" data-k="check"${nC === L.length ? '' : ' disabled'}>${esc(t('rcx_to_check'))}</button></div>`;
+  } else if (step === 'check'){
+    const D = L.filter(x => rcxDiffTxt(x.l)), O = R.order && R.order.items ? R.order.items : null;
+    const oRow = x => { if (!O || x.l.kind !== 'item' || !x.l.item_id || O[x.l.item_id] == null) return ''; const ob = +O[x.l.item_id], gb = rcxBtl(x.l, rcxCnt(x.l) || 0) || 0;
+      return `<div class="small${Math.round(ob) === Math.round(gb) ? ' muted' : ''}" style="${Math.round(ob) === Math.round(gb) ? '' : 'color:var(--copper)'}">${esc(t('rcx_ordered', { o: drkNum(ob), g: drkNum(gb) }))}</div>`; };
+    const miss = O ? Object.keys(O).filter(id => !L.some(x => x.l.item_id === id && (rcxCnt(x.l) || 0) > 0) && +O[id] > 0) : [];
+    body = `${D.length ? `<div class="warnbox" style="margin:0 0 10px">${esc(t('rcx_diff_h', { n: D.length }))}<div class="small" style="margin-top:4px">${esc(t('rcx_diff_next'))}</div></div>`
+      : `<div class="infobox" style="background:#E3F1EA;color:#1D5B43;margin:0 0 10px">${esc(t('rcx_all_ok', { n: L.length }))}</div>`}
+      ${O ? `<div class="small muted" style="margin-bottom:6px">${esc(t('rcx_order_h', { d: dayLabel(R.order.delivery_day), s: R.order.supplier || '' }))}</div>` : ''}
+      <div class="list">${L.map(x => { const dt = rcxDiffTxt(x.l); return `<div class="item"${dt ? ' style="border-left:4px solid var(--copper)"' : ''}>${nm(x)}
+        <div class="small">${esc(x.l.extra ? t('rcx_extra_got', { x: rcxQtyTxt(x.l, rcxCnt(x.l)) }) : t('rcx_doc_cnt', { a: rcxQtyTxt(x.l, rcxDoc(x.l)), b: rcxQtyTxt(x.l, rcxCnt(x.l)) }))}</div>
+        ${dt ? `<div class="small" style="color:var(--copper);font-weight:600">${esc(dt)}</div>` : ''}${oRow(x)}</div>`; }).join('')}</div>
+      ${miss.length ? `<div class="warnbox" style="margin:10px 0">${esc(t('rcx_order_miss', { l: miss.map(id => invName(stkDrink(id) || {}) || '?').join('、') }))}</div>` : ''}
+      ${D.length ? `<button class="link" data-act="rcx-claim" style="margin:8px 0;white-space:normal;text-align:left">${esc(t('rcx_claim_btn'))}</button>` : ''}`;
+    bar = `<div class="row"><button class="btn" data-act="rcx-go" data-k="put">${esc(t('rcx_to_put'))}</button></div>`;
+  } else {
+    const P = L.filter(x => (rcxCnt(x.l) || 0) > 0), Z = L.filter(x => rcxCnt(x.l) === 0), nP = P.filter(x => x.l.placed).length;
+    body = `<div class="small muted" style="margin-bottom:8px">${esc(t('rcx_put_hint'))}</div><div class="list">${P.map(x => { const l = x.l, pl = l.places || [];
+      return `<div class="item" style="${l.placed ? 'border-left:4px solid var(--celadon-deep)' : ''}">${nm(x)}<div class="small">${esc(rcxQtyTxt(l, rcxCnt(l)))}</div>
+        ${pl.length ? `<div class="small" style="margin-top:4px">📍 ${pl.map(p => `<strong>${esc(p.code)}</strong>`).join(' · ')}</div>`
+          : `<div class="small" style="color:var(--copper);margin-top:4px">${esc(t(l.kind === 'item' ? 'rcx_no_place' : 'rcx_no_place_other'))}</div>
+             <input class="input" data-rcx="put" data-i="${x.i}" value="${esc(l.put_note || '')}" placeholder="${esc(t('rcx_put_ph'))}" maxlength="80" style="margin-top:6px">`}
+        <button class="btn${l.placed ? ' ghost' : ''} sm" data-act="rcx-put" data-i="${x.i}" style="margin-top:8px">${esc(t(l.placed ? 'rcx_placed' : 'rcx_place_btn'))}</button></div>`; }).join('')}</div>
+      ${Z.length ? `<div class="small muted" style="margin:8px 0">${esc(t('rcx_zero', { l: Z.map(x => rcxName(x.l)).join('、') }))}</div>` : ''}`;
+    bar = `<div class="rc-sum">${esc(t('rcx_put_n', { n: nP, m: P.length }))}</div><div class="row"><button class="btn" data-act="rcx-finish"${nP === P.length && !R.finishing ? '' : ' disabled'}>${esc(t('rcx_finish'))}</button></div>`;
+  }
+  $('#main').innerHTML = `${head}${body}<div class="rc-bar" style="bottom:${navH}px">${bar}</div>`;
+}
+async function rcxFinish(btn){
+  const S = invS(), R = S.rc; if (!R || R.finishing) return;
+  const c = rcxLines(R).find(x => rcxCnt(x.l) == null); if (c){ S.rcxStep = 'count'; renderInvRcx(); return toast(t('err_INV_RC_COUNT', { n: c.i + 1 }), true); }
+  const p = rcxLines(R).find(x => (rcxCnt(x.l) || 0) > 0 && !x.l.placed); if (p) return toast(t('err_INV_RC_PUT', { n: p.i + 1 }), true);
+  R.finishing = true; if (btn){ btn.disabled = true; btn.textContent = t('rcx_finishing'); }
+  try { await rcxFlush();
+    const r = await rpc('inv_receipt_finish', { ...tok(), p_id: R.id, p_delivery: R.dlv || null });
+    S.rc = stkRcFrom(r); S.rc.result = r.result; S.rc.reasons = r.reasons || []; S.stock = null; LS.set('invStore', R.store);
+    callPush('inv_due'); invTodoLoad().then(refreshInvBadge); soft(loadTasks(), null);
+    S.stock = await soft(rpc('inv_stock_home', tok()), null);
+    invGo('rc'); toast(t(r.result === 'booked' ? 'rcx_booked_t' : 'rcx_wait_t')); }
+  catch(e){ R.finishing = false; if (S.view === 'rcx') keepScroll(renderInvRcx); toast(stkErr(e), true); }
+}
+// 单上没有、却送来了的：选饮料加一行（数 1 个单位开始）
+function rcxAdd(){
+  const R = invS().rc; if (!R) return;
+  drkPickOpen({ on: id => { const d = stkDrink(id); if (!d) return; const pu = d.pack_qty ? +d.pack_qty : 1;
+    R.lines.push({ kind: 'item', item_id: id, name_zh: d.name_zh, name_de: d.name_de, extra: true, unit_note: pu > 1 ? (d.pack_unit || '') : (d.unit || ''), per_unit: pu, cnt: 1, sure: true });
+    rcxSaveSoon(); keepScroll(renderInvRcx); } });
+}
+
+// ---------- 送货：饮料页最上面一块、「货到了」、「今天没送来」、任务里「去收货」 ----------
+function dlvShort(d){ return d.short || d.supplier || t('dlv_unknown'); }
+function dlvLine(d){
+  if (d.status === 'received' && !d.receipt_id && d.close_note) return t('dlv_st_rc', { n: d.closed_name || '', t: fmtDateTime(d.closed_at) }) + ' · ' + d.close_note;
+  if (d.status === 'received') return t('dlv_st_rc', { n: d.closed_name || '', t: fmtDateTime(d.closed_at) });
+  if (d.status === 'not_came') return t('dlv_st_none', { n: d.closed_name || '' }) + (d.close_note ? (state.lang === 'de' ? ': ' : '：') + d.close_note : '');
+  if (d.arrived_at) return t('dlv_st_here', { n: d.arrived_name || '', t: fmtDateTime(d.arrived_at) }) + (d.arrived_note ? ' · ' + d.arrived_note : '');
+  return d.day < bizToday() ? t('dlv_st_late') : t('dlv_st_plan');
+}
+function dlvBoxHTML(){
+  const D = invS().stock; if (!D) return '';
+  const st = curStore(), W = stkCanWrite(), L = (D.deliveries || []).filter(d => d.store === st);
+  const here = W ? `<button class="link" data-act="dlv-here" style="white-space:normal;text-align:left">${esc(t('dlv_here_btn'))}</button>` : '';
+  if (!L.length) return here ? `<div style="margin:0 0 10px">${here}</div>` : '';
+  const tag = d => d.status === 'received' ? `<span class="tag ok">${esc(t('dlv_tag_rc'))}</span>` : d.status === 'not_came' ? `<span class="tag off">${esc(t('dlv_tag_none'))}</span>`
+    : `<span class="tag ${d.arrived_at || d.day < bizToday() ? 'bad' : 'pend'}">${esc(t(d.arrived_at ? 'dlv_tag_here' : 'dlv_tag_open'))}</span>`;
+  return `<h3 style="margin-top:4px">${esc(t('dlv_h', { s: st }))}</h3><div class="list" style="margin-bottom:6px">${L.map(d => `<div class="item"${d.status === 'received' && d.receipt_id ? ` data-act="stk-rc-open" data-id="${d.receipt_id}" style="cursor:pointer"` : ''}>
+      <div><strong>${esc(dlvShort(d))}</strong> · ${esc(dayLabel(d.day))} ${tag(d)}</div><div class="meta">${esc(dlvLine(d))}</div>
+      ${d.status === 'open' && W ? `<div class="row" style="gap:8px;margin-top:8px"><button class="btn sm" data-act="dlv-go" data-id="${d.id}">${esc(t('dlv_go'))}</button>${d.can_skip ? `<button class="btn ghost sm" data-act="dlv-skip" data-id="${d.id}">${esc(t('dlv_skip'))}</button>` : ''}</div>${(D.sup_stores || []).includes(d.store) ? `<button class="link" data-act="dlv-done" data-id="${d.id}" style="margin-top:6px;white-space:normal;text-align:left">${esc(t('dlv_done'))}</button>` : ''}` : ''}</div>`).join('')}</div>
+    <div style="margin:0 0 10px">${here}</div>`;
+}
+// 从送货（饮料页 / 任务）开始收货：已经收了 → 打开那张单；已经开始收（这台手机上的、或者数据库记下的那张）→ 接着收；不然新单，门店、供应商先填好，收完连上这次送货
+async function dlvStock(id){ const S = invS(); if (!S.stock || (id && !(S.stock.deliveries || []).some(x => x.id === id))) S.stock = await soft(rpc('inv_stock_home', tok()), S.stock); return S.stock; }   // 不把页面换成「加载中」（从「今天」页点进来、取消时不会卡住）
+async function dlvGo(id){
+  const S = invS(); S.stock = await soft(rpc('inv_stock_home', tok()), S.stock); const D = S.stock, d = ((D || {}).deliveries || []).find(x => x.id === id);   // 每次读最新的（别的手机可能已经开始收了）
+  if (!d) return toast(t(D ? 'dlv_gone' : 'err_NETWORK'), true);
+  if (d.receipt_id) return stkRcOpen(d.receipt_id);
+  if (d.status !== 'open') return toast(t('err_INV_DLV_CLOSED'), true);
+  const R = S.rc;
+  if (R && R.dlv === d.id && R.id && R.status === 'open'){ if (R.finished_at) invGo('rc'); else rcxOpen('count'); return; }   // 这台手机上正在收的
+  if (d.draft_receipt_id){ await stkRcOpen(d.draft_receipt_id); if (S.rc && S.rc.id === d.draft_receipt_id) S.rc.dlv = d.id; return; }   // 换了手机 / 刷新过：打开那张接着收
+  const dr = stkRcDraft();
+  if (dr && dr.dlv === d.id){ invGo('rc'); return; }
+  if (dr && !confirm(t('stk_rc_leave_q'))) return;
+  if (storeOk(d.store) && d.store !== curStore()){ state.storeSel = { s: d.store, at: Date.now(), auto: autoStore() }; LS.set('curStore', d.store); }
+  S.rc = stkRcBlank(); S.rc.store = d.store; S.rc.supplier = d.supplier || ''; S.rc.dlv = d.id; invGo('rc');
+}
+function dlvSkip(id){
+  const S = invS(), d = (((S.stock || {}).deliveries) || []).find(x => x.id === id);
+  rsOpen({ title: t('dlv_skip_t', { s: d ? dlvShort(d) : '' }), hint: t('dlv_skip_hint'), ph: t('dlv_skip_ph'), btn: t('dlv_skip_go'),
+    send: async v => { await rpc('inv_delivery_skip', { ...tok(), p_id: id, p_note: v || null }); callPush('inv_due'); toast(t('dlv_skipped'));
+      S.stock = await soft(rpc('inv_stock_home', tok()), S.stock); await soft(loadTasks(), null); invTodoLoad().then(refreshInvBadge); if (state.tab === 'inv' && S.view === 'stock') keepScroll(renderInvStock); else render(); } });
+}
+// 「📦 货到了」：选门店、哪家送的（名单上的 / 别的写名字 / 不知道）、放在哪 → 这家店今天收货的人（吧台；没排吧台 = 服务员和 Runner）收到推送和任务
+async function dlvHereOpen(){
+  const D = await dlvStock(); if (!D) return toast(t('err_NETWORK'), true);
+  state.dlvH = state.dlvH && Date.now() - state.dlvH.at < 600e3 ? state.dlvH : { store: curStore(), sup: null, at: Date.now() };
+  dlvHereDraw();
+}
+function dlvHereKeep(){ const H = state.dlvH; if (!H) return; const a = $('#dlv-h-name'), b = $('#dlv-h-note'); if (a) H.name = a.value; if (b) H.note = b.value; }
+function dlvHereDraw(){
+  const H = state.dlvH, D = invS().stock || {}, dlg = $('#photoDlg'); if (!H) return;
+  const sups = D.suppliers || [], other = H.sup === '';
+  dlg.innerHTML = `<h2 style="margin-top:0;outline:0" tabindex="-1" autofocus>${esc(t('dlv_here_h'))}</h2><div class="small muted" style="margin-bottom:10px">${esc(t('dlv_here_hint'))}</div>
+    <div class="field"><label>${esc(t('inv_ib_store'))}</label><div class="seg sm">${STORES.map(s => `<button data-act="dlv-h-store" data-store="${s}" class="${H.store === s ? 'on' : ''}">${esc(s)}</button>`).join('')}</div></div>
+    <div class="field"><label>${esc(t('dlv_here_who'))}</label><div class="chips">${sups.map(s => `<button class="chip${H.sup === s.id ? ' on' : ''}" data-act="dlv-h-sup" data-id="${s.id}">${esc(s.short || s.name)}</button>`).join('')}<button class="chip${other ? ' on' : ''}" data-act="dlv-h-sup" data-id="">${esc(t('dlv_here_other'))}</button></div>
+      <input class="input" id="dlv-h-name" value="${esc(H.name || '')}" placeholder="${esc(t('dlv_here_name_ph'))}" maxlength="60" style="margin-top:8px"${other ? '' : ' hidden'}></div>
+    <div class="field"><label for="dlv-h-note">${esc(t('dlv_here_note'))}</label><input class="input" id="dlv-h-note" value="${esc(H.note || '')}" placeholder="${esc(t('dlv_here_note_ph'))}" maxlength="200"></div>
+    <div class="small" id="dlv-h-err" style="color:var(--copper);margin-bottom:8px" hidden></div>
+    <button class="btn" data-act="dlv-h-send" style="margin-bottom:8px">${esc(t('dlv_here_send'))}</button>
+    <button class="btn ghost" data-act="dlv-h-close">${esc(t('cancel'))}</button>`;
+  if (!dlg.open) dlg.showModal();
+}
+async function dlvHereSend(el){
+  const H = state.dlvH, S = invS(); if (!H || el.disabled) return;
+  const e = $('#dlv-h-err'), nm = ($('#dlv-h-name') || {}).value || '', note = ($('#dlv-h-note') || {}).value || '';
+  if (H.sup == null){ if (e){ e.hidden = false; e.textContent = t('dlv_here_pick'); } return; }
+  el.disabled = true;
+  try { const d = await rpc('inv_delivery_report', { ...tok(), p_store: H.store, p_supplier: H.sup || null, p_name: H.sup ? null : nm.trim() || null, p_note: note.trim() || null });
+    state.dlvH = null; const dlg = $('#photoDlg'); if (dlg.open) dlg.close();
+    callPush('task_due'); callPush('inv_due'); toast(t('dlv_here_sent', { s: dlvShort(d) }));
+    S.stock = await soft(rpc('inv_stock_home', tok()), S.stock); soft(loadTasks(), null);
+    if (state.tab === 'inv' && S.view === 'stock') keepScroll(renderInvStock); else if (state.tab === 'inv') render(); }
+  catch(x){ el.disabled = false; if (e){ e.hidden = false; e.textContent = errText(x); } }
+}
+// 任务里的收货任务（code = dlv_ + 送货的编号）：不能打勾，去收货；没送来就说一声
+const dlvTaskId = c => { const m = /^dlv_([0-9a-f]{32})$/.exec(c.code || ''); return m ? m[1].replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5') : null; };
+function dlvTaskActs(c){ const id = dlvTaskId(c);
+  return `<button class="btn" data-act="dlv-go" data-id="${id}" style="flex:1 1 100%">${esc(t('dlv_task_go'))}</button><button class="link" data-act="dlv-skip-t" data-id="${id}" style="white-space:normal;text-align:left">${esc(t('dlv_skip'))}</button>`; }
+
 // ---------- v188：送货单防重复（老板 2026-11-16：先挡住，点「不是重复」才入库；数据库 v131） ----------
 // 查这张单是不是已经登记过（编号一样；没编号的看日期 + 合计金额）。只提示，确认入库时数据库再挡一次
 async function stkRcDupCheck(R){
@@ -14658,7 +14937,7 @@ function openPinDialog(){
 }
 
 // v206：查看模式下点了只会被数据库挡住的动作（今天 / 录入 / 账本 / 周结 / 签收）；页面上大多已经不显示，这里兜底
-const VIEW_BLOCK = new Set(['notice-ok', 'msg-read', 'msg-ans', 'hint-ack', 'pin-open', 'bon-submit', 'bon-edit-save', 'entry-save', 'entry-edit', 'entry-del', 'bearer', 'dispute', 'resolve', 'adj-add', 'lock',
+const VIEW_BLOCK = new Set(['stk-rc-next', 'rcx-open', 'rcx-finish', 'dlv-go', 'dlv-skip', 'dlv-skip-t', 'dlv-here', 'dlv-h-send', 'dlv-done', 'sup-add', 'notice-ok', 'msg-read', 'msg-ans', 'hint-ack', 'pin-open', 'bon-submit', 'bon-edit-save', 'entry-save', 'entry-edit', 'entry-del', 'bearer', 'dispute', 'resolve', 'adj-add', 'lock',
   'rc-sign', 'rc-wrong', 'rc-paper', 'rc-admin-pay', 'settle-undo', 'arc-saved', 'count', 'cnt-ok', 'cnt-diff', 'rs-send']);
 // v206（网页 2/4）：核对、排班、物品的写入动作（plan-5 / inv-3）；页面上查看模式已经不显示这些按钮，这里兜底
 ['rep-save', 'rep-void', 'rep-new', 'rep-fix', 'rpp-start', 'recon-note', 'recon-complete', 'hrep-email-rep', 'hrep-start',
@@ -16986,6 +17265,33 @@ document.addEventListener('click', async ev => {
     case 'stk-rc-addline': { stkRcKeep(); const R = invS().rc; if (R){ R.dirty = true; R.lines.push({ kind: 'item', item_id: null, qty_note: '', unit_note: '', per_unit: '', open: true }); keepScroll(renderInvRc); } break; }
     case 'stk-rc-delline': { stkRcKeep(); const R = invS().rc; if (R){ const i = +el.dataset.i, v = R.lines.splice(i, 1)[0]; if (v){ R.dirty = true; R.undo = { kind: 'line', i, v }; } keepScroll(renderInvRc); if (v) toastAction(t('stk_del_line'), t('stk_undo'), { act: 'stk-rc-undo' }); } break; }   // v178：可以撤销
     case 'stk-rc-save': stkRcSave(el, false); break;
+    // v224：收货——数 → 对 → 放好 → 收完；送货
+    case 'stk-rc-next': rcxStart(el); break;
+    case 'rcx-open': rcxOpen('count'); break;
+    case 'rcx-back': { await rcxFlush().catch(() => {}); invGo('rc'); break; }
+    case 'rcx-go': { const k = el.dataset.k; if (k === 'photo'){ await rcxFlush().catch(() => {}); invGo('rc'); break; } invS().rcxStep = k; renderInvRcx(); window.scrollTo(0, 0); break; }
+    case 'rcx-step': { const i = +el.dataset.i, R = invS().rc, l = R && R.lines[i]; if (!l) break; const c = rcxCnt(l), pu = rcxPu(l), w0 = c == null ? null : Math.floor(c + 1e-9), lo = c == null ? 0 : c - w0;   // 没有「1 箱几瓶」的行（2,5 kg）零头也留着
+      const w = w0 == null ? (+el.dataset.d > 0 ? 1 : 0) : Math.max(0, w0 + (+el.dataset.d)); rcxSet(i, w + lo); keepScroll(renderInvRcx); break; }
+    case 'rcx-same': { const i = +el.dataset.i, R = invS().rc, l = R && R.lines[i]; if (!l) break; rcxSet(i, rcxDoc(l)); keepScroll(renderInvRcx); break; }
+    case 'rcx-del': { const R = invS().rc; if (!R || !R.lines[+el.dataset.i] || !R.lines[+el.dataset.i].extra) break; await rcxFlush().catch(() => {}); R.lines.splice(+el.dataset.i, 1); rcxSaveSoon(R); keepScroll(renderInvRcx); break; }   // 先存完正在存的（存回来的位置按行号对）
+    case 'rcx-add': rcxAdd(); break;
+    case 'rcx-put': { const R = invS().rc, l = R && R.lines[+el.dataset.i]; if (!l) break; if (Date.now() - (l.putAt || 0) < 500) break; l.putAt = Date.now();   /* 手指连点两下不会又取消 */ const inp = document.querySelector(`[data-rcx="put"][data-i="${el.dataset.i}"]`); if (inp) l.put_note = inp.value; l.placed = !l.placed; rcxSaveSoon(); keepScroll(renderInvRcx); break; }
+    case 'rcx-finish': rcxFinish(el); break;
+    case 'rcx-claim': { const m = rcxClaimText(invS().rc || {}); if (!m) break; try { await navigator.clipboard.writeText(m); toast(t('rcx_claim_copied')); } catch(e){ prompt(t('rcx_claim_btn'), m); } break; }
+    case 'dlv-go': await rcxFlush().catch(() => {}); dlvGo(el.dataset.id); break;
+    case 'dlv-done': rsOpen({ title: t('dlv_done_t'), hint: t('dlv_done_hint'), ph: t('dlv_done_ph'), btn: t('dlv_done_go'),
+      send: async v => { const S = invS(); await rpc('inv_delivery_done', { ...tok(), p_id: el.dataset.id, p_note: v || null }); toast(t('dlv_done_ok'));
+        S.stock = await soft(rpc('inv_stock_home', tok()), S.stock); invTodoLoad().then(refreshInvBadge); if (state.tab === 'inv' && S.view === 'stock') keepScroll(renderInvStock); else render(); } }); break;
+    case 'dlv-skip': case 'dlv-skip-t': dlvSkip(el.dataset.id); break;
+    case 'dlv-here': dlvHereOpen(); break;
+    case 'dlv-h-store': { const H = state.dlvH; if (!H) break; dlvHereKeep(); H.store = el.dataset.store; dlvHereDraw(); break; }
+    case 'dlv-h-sup': { const H = state.dlvH; if (!H) break; dlvHereKeep(); H.sup = el.dataset.id || ''; dlvHereDraw(); break; }
+    case 'dlv-h-send': dlvHereSend(el); break;
+    case 'dlv-h-close': { state.dlvH = null; const d = $('#photoDlg'); if (d && d.open) d.close(); break; }
+    case 'dlv-todo': { const S = invS(), x = el.dataset.store; if (storeOk(x) && x !== curStore()){ state.storeSel = { s: x, at: Date.now(), auto: autoStore() }; LS.set('curStore', x); }
+      await rcxFlush().catch(() => {}); S.stock = await soft(rpc('inv_stock_home', tok()), S.stock); if (!stkRcDraft()) S.rc = null; S.tr = null; invGo('stock'); break; }
+    case 'sup-add': rsOpen({ title: t('sup_add_t'), hint: t('sup_add_hint'), ph: 'Ueno Gourmet', btn: t('sup_add_go'), need: true,
+      send: async v => { const r = await rpc('inv_supplier_add', { ...tok(), p_name: v }); toast(t('sup_added', { s: r.name })); invS().ord = null; viewInvOrders(); } }); break;
     case 'stk-rc-confirm': stkRcSave(el, true); break;
     case 'stk-rc-cancel': stkRcCancel(); break;
     case 'stk-tr-new': stkTrNew(); break;
@@ -17130,7 +17436,7 @@ document.addEventListener('click', async ev => {
       try { await rpc('inv_order_boost_save', { ...tok(), p_store: el.dataset.store, p_day: el.dataset.day, p_factor: +f.value, p_note: n.value }); } catch(e){ el.disabled = false; toast(errText(e), true); break; }
       toast(t('ord_boost_saved')); S.ordBoostOpen = el.dataset.store; S.ord = null; await keepScroll(() => viewInvOrders()); break; }
     case 'ord-days-save': { const S = invS(), od = document.getElementById(`ord-do-${el.dataset.store}-${el.dataset.sup}`), dd = document.getElementById(`ord-dd-${el.dataset.store}-${el.dataset.sup}`); if (!od || !dd) break;
-      try { await rpc('inv_supplier_store_save', { ...tok(), p_supplier: el.dataset.sup, p_store: el.dataset.store, p_order_dow: od.value ? +od.value : null, p_delivery_dow: +dd.value }); } catch(e){ toast(errText(e), true); break; }
+      try { await rpc('inv_supplier_store_save', { ...tok(), p_supplier: el.dataset.sup, p_store: el.dataset.store, p_order_dow: od.value ? +od.value : null, p_delivery_dow: dd.value ? +dd.value : null }); } catch(e){ toast(errText(e), true); break; }
       toast(t('ord_days_saved')); S.ord = null; await viewInvOrders(); invTodoLoad().then(refreshInvBadge); break; }
     case 'ct-start': ctStart(el.dataset.store); break;
     case 'ct-frac': { const inp = document.querySelector(`[data-ct="${el.dataset.key}"]`); if (inp){ inp.value = drkNum(Math.floor(stkNum(inp.value) || 0) + (+el.dataset.f)); ctSave(inp); } break; }   // v168：开了的那一瓶 ¼ ½ ¾（整瓶数不变，换掉零头）
